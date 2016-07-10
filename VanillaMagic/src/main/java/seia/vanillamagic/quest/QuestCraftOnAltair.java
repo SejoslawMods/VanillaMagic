@@ -1,4 +1,4 @@
-package seia.vanillamagic.quest.craft;
+package seia.vanillamagic.quest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.utils.AltairChecker;
 
 public class QuestCraftOnAltair extends Quest

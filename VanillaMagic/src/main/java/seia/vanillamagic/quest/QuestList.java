@@ -11,10 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import seia.vanillamagic.quest.build.QuestBuildAltair;
-import seia.vanillamagic.quest.craft.QuestCraft;
-import seia.vanillamagic.quest.craft.QuestCraftOnAltair;
-import seia.vanillamagic.quest.mine.QuestMineBlock;
 import seia.vanillamagic.utils.ItemStackIngredientsHelper;
 
 public class QuestList 

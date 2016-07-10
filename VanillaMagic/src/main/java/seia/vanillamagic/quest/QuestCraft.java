@@ -1,11 +1,10 @@
-package seia.vanillamagic.quest.craft;
+package seia.vanillamagic.quest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import seia.vanillamagic.quest.Quest;
 
 public class QuestCraft extends Quest
 {

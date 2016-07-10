@@ -1,4 +1,4 @@
-package seia.vanillamagic.quest.mine;
+package seia.vanillamagic.quest;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.quest.Quest;
 
 public class QuestMineBlock extends Quest
 {
