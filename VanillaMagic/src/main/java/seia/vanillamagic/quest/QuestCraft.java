@@ -14,7 +14,7 @@ public class QuestCraft extends Quest
 	}
 	
 	@SubscribeEvent
-    public void onCrafting(PlayerEvent.ItemCraftedEvent event)
+	public void onCrafting(PlayerEvent.ItemCraftedEvent event)
 	{
 		EntityPlayer player = event.player;
 		if(!player.hasAchievement(achievement))
