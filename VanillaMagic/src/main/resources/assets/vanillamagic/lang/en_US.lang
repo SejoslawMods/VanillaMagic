@@ -1,0 +1,117 @@
+############################
+#Achievements
+############################
+
+achievement.craftStick=Craft Stick
+achievement.craftStick.desc=Craft stick
+
+
+
+achievement.craftBook=Craft Book
+achievement.craftBook.desc=Craft book
+
+achievement.craftBookshelf=Craft Bookshelf
+achievement.craftBookshelf.desc=Craft bookshelf
+
+achievement.mineDiamond=Mine Diamond
+achievement.mineDiamond.desc=Mine one more diamond
+
+achievement.mineObsidian=Mine Obsidian
+achievement.mineObsidian.desc=Mine obsidian
+
+achievement.craftEnchantingTable=Craft Enchanting Table
+achievement.craftEnchantingTable.desc=Craft enchnating table
+
+
+
+achievement.craftCauldron=Craft Cauldron
+achievement.craftCauldron.desc=Craft cauldron
+
+achievement.mineRedstone=Mine Redstone
+achievement.mineRedstone.desc=Mine at least one block of redstone
+
+achievement.buildAltairTier1=Build Altair Tier 1
+achievement.buildAltairTier1.desc=Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle
+
+achievement.craftGunpowder=Craft Gunpowder
+achievement.craftGunpowder.desc=Toss 1x Sugar and 1x Coal into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.craftSugar=Craft Sugar
+achievement.craftSugar.desc=Toss 1x Sugar Cane into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.craftDirt=Craft Dirt
+achievement.craftDirt.desc=Toss 1x Sand into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.craftSand=Craft Sand
+achievement.craftSand.desc=Toss 1x Cobblestone into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.craftGlass=Craft Glass
+achievement.craftGlass.desc=Toss 1x Sand and 1x Coal into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.craftCobblestone=Craft Cobblestone
+achievement.craftCobblestone.desc=Toss 1x Dirt into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.craftLeather=Craft Leather
+achievement.craftLeather.desc=Toss 1x Rotten Flesh into the Altair Tier 1 and right-click with a Stick in hand
+
+achievement.buildAltairTier2=Build Altair Tier 2
+achievement.buildAltairTier2.desc=Add 1 block of Iron on each corner of Altair Tier 1 but one layer lower than Cauldron, outside of the redstone circle and replace the Cauldron
+
+achievement.craftIronOre=Craft Iron Ore
+achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altair Tier 2 and right-click with a Stick in hand
+
+achievement.craftCactus=Craft Cactus
+achievement.craftCactus.desc=Toss 4x Sapling into the Altair Tier 2 and right-click with a Stick in hand
+
+achievement.buildAltairTier3=Build Altair Tier 3
+achievement.buildAltairTier3.desc=Add 1 block of Gold on each side of the Altair Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west)
+
+achievement.craftGoldIngot=Craft Gold Ingot
+achievement.craftGoldIngot.desc=Toss 8x Iron Ingot into the Altair Tier 3 and right-click with a Stick in hand
+
+achievement.buildAltairTier4=Build Altair Tier 4
+achievement.buildAltairTier4.desc=Add 1 block of Redstone on each corner of Altair Tier 3 but one layer lower than Cauldron and replace the Cauldron
+
+achievement.craftRottenFlesh=Craft Rotten Flesh
+achievement.craftRottenFlesh.desc=Toss 1x Leather into the Altair Tier 4 and right-click with a Stick in hand
+
+achievement.craftString=Craft String
+achievement.craftString.desc=Toss 2x Rotten Flesh into the Altair Tier 4 and right-click with a Stick in hand
+
+achievement.craftSpiderEye=Craft Spider Eye
+achievement.craftSpiderEye.desc=Toss 2x String into the Altair Tier 4 and right-click with a Stick in hand
+
+achievement.craftBone=Craft Bone
+achievement.craftBone.desc=Toss 2x Spider Eye into the Altair Tier 4 and right-click with a Stick in hand
+
+achievement.craftArrow=Craft Arrow
+achievement.craftArrow.desc=Toss 2x Bone into the Altair Tier 4 and right-click with a Stick in hand
+
+achievement.craftEnderPearl=Craft Ender Pearl
+achievement.craftEnderPearl.desc=Toss 2x Arrow into the Altair Tier 4 and right-click with a Stick in hand
+
+achievement.buildAltairTier5=Build Altair Tier 5
+achievement.buildAltairTier5.desc=Add 1 block of Lapis on each side of the Altair Tier 4 but one layer lower than Cauldron, 5 blocks away from the center (north, south, east, west)
+
+achievement.craftGlowstoneDust=Craft Glowstone Dust
+achievement.craftGlowstoneDust.desc=Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altair Tier 5 and right-click with a Stick in hand
+
+achievement.buildAltairTier6=Build Altair Tier 6
+achievement.buildAltairTier6.desc=Add 1 block of Diamond on each corner of Altair Tier 5 but one layer lower than Cauldron and replace the Cauldron
+
+achievement.craftDiamond=Craft Diamond
+achievement.craftDiamond.desc=Toss 8x Gold Ingot into the Altair Tier 6 and right-click with a Stick in hand
+
+achievement.buildAltairTier7=Build Altair Tier 7
+achievement.buildAltairTier7.desc=Add 1 block of Emerald on each side of the Altair Tier 4 but one layer lower than Cauldron, 7 blocks away from the center (north, south, east, west)
+
+achievement.craftEmerald=Craft Emerald
+achievement.craftEmerald.desc=Toss 8x Diamond into the Altair Tier 7 and right-click with a Stick in hand
+
+achievement.craftNetherStar=Craft Nether Star
+achievement.craftNetherStar.desc=Toss 4x Emerald Block into the Altair Tier 7 and right-click with a Stick in hand
+
+achievement.craftDragonEgg=Craft Dragon Egg
+achievement.craftDragonEgg.desc=Toss 4x Nether Star into the Altair Tier 7 and right-click with a Stick in hand
+
+

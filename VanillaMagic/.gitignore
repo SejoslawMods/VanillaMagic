@@ -1,0 +1,50 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+.txt
+
+__*
+*.bak
+*.xlsx
+
+/releases
+/test
+
+/.gradle
+/.settings
+/bin
+/build
+/gradle
+/run
+
+/.classpath
+/.project
+/gradlew
+/gradlew.bat
+/forge*.zip
+
+/build.properties
+/locations.gradle
+
+/todo.txt
+/changes.txt
+/changelog.txt

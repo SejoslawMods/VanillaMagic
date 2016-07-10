@@ -1,0 +1,16 @@
+[
+{
+  "modid": "vanillamagic",
+  "name": "Vanilla Magic",
+  "description": "",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Seia"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
