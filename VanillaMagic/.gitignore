@@ -32,7 +32,6 @@ __*
 /.gradle
 /.settings
 /bin
-/build
 /gradle
 /run
 
