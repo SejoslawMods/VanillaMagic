@@ -1,4 +1,4 @@
-package seia.vanillamagic.quest;
+package seia.vanillamagic.quest.spell;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -8,17 +8,21 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.utils.spell.EnumSpell;
 import seia.vanillamagic.utils.spell.EnumWand;
 import seia.vanillamagic.utils.spell.SpellHelper;
 
-//TODO: Fix the Items being taken twice 1 for each method when clicked on block
-public class QuestCastSpell extends Quest
+public abstract class QuestCastSpell extends Quest
 {
 	protected EnumSpell spell;
+	
+	public QuestCastSpell(Achievement required, int posX, int posY, 
+			EnumSpell spell)
+	{
+		this(required, posX, posY, spell.spellName, spell.spellUniqueName,
+				spell);
+	}
 	
 	public QuestCastSpell(Achievement required, int posX, int posY, String questName, String uniqueName, 
 			EnumSpell spell)
@@ -38,39 +42,11 @@ public class QuestCastSpell extends Quest
 	{
 		return spell;
 	}
-	
-	@SubscribeEvent
-	public void caseSpell(RightClickBlock event)
-	{
-		EntityPlayer player = event.getEntityPlayer();
-		EnumHand hand = event.getHand();
-		ItemStack inHand = event.getItemStack();
-		BlockPos pos = event.getPos();
-		EnumFacing face = event.getFace();
-		Vec3d hitVec = event.getHitVec();
-		
-		if(castSpell(player, hand, inHand, pos, face, hitVec))
-		{
-			event.setCanceled(true);
-		}
-	}
-	
-	@SubscribeEvent
-	public void castSpell(RightClickItem event)
-	{
-		EntityPlayer player = event.getEntityPlayer();
-		EnumHand hand = event.getHand();
-		ItemStack inHand = event.getItemStack();
-		
-		if(castSpell(player, hand, inHand, null, null, null))
-		{
-			event.setCanceled(true);
-		}
-	}
-	
+
 	/*
 	 * Method for checking the possibilities to cast spell
 	 */
+	int howManyTimesCasted = 1;
 	public boolean castSpell(EntityPlayer caster, EnumHand hand, ItemStack inHand, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
@@ -88,10 +64,21 @@ public class QuestCastSpell extends Quest
 					}
 					else
 					{
-						if(castRightSpell(caster, pos, face, hitVec))
+						if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
 						{
-							casterOffHand.stackSize--;
-							return true;
+							if(howManyTimesCasted == 1)
+							{
+								if(castRightSpell(caster, pos, face, hitVec))
+								{
+									casterOffHand.stackSize -= spell.itemOffHand.stackSize;
+									howManyTimesCasted++;
+									return true;
+								}
+							}
+							else
+							{
+								howManyTimesCasted = 1;
+							}
 						}
 					}
 				}

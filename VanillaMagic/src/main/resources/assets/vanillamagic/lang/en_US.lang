@@ -8,7 +8,13 @@ achievement.craftStick.desc=Craft stick
 
 
 achievement.spellFlintAndSteel=Flint and Steel Clone
-achievement.spellFlintAndSteel.desc=Hold Stick or heigher tier Wand in Your hand and a piece of Coal in the left hand and right-click on a block to put the block on fire
+achievement.spellFlintAndSteel.desc=Hold Stick or higher tier Wand in Your hand and 1x Coal in the left hand and right-click on a block to put the block on fire
+
+achievement.spellSmallFireball=Feel like Blaze
+achievement.spellSmallFireball.desc=Hold Blaze Rod in Your hand and at least 2x Redstone Dust in the left hand and right-click 
+
+achievement.spellLargeFireball=Feel like Ghast
+achievement.spellLargeFireball.desc=Hold Blaze Rod in Your hand and at least 1x Ghast Tear in the left hand and right-click 
 
 
 
@@ -25,7 +31,7 @@ achievement.mineObsidian=Mine Obsidian
 achievement.mineObsidian.desc=Mine obsidian
 
 achievement.craftEnchantingTable=Craft Enchanting Table
-achievement.craftEnchantingTable.desc=Craft enchnating table
+achievement.craftEnchantingTable.desc=Craft enchanting table
 
 
 

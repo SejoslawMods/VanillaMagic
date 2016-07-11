@@ -2,10 +2,17 @@ package seia.vanillamagic.utils.spell;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.utils.ItemStackHelper;
 
+/*
+ * TODO: Each costs 2x ????
+ * Currently -> Each spell Cost / 2 if > 2
+ */
 public enum EnumSpell
 {
-	LIGHTER(0, "Flint and Steel Clone", "spellFlintAndSteel", EnumWand.STICK, new ItemStack(Items.COAL));
+	LIGHTER(0, "Flint and Steel Clone", "spellFlintAndSteel", EnumWand.STICK, new ItemStack(Items.COAL)),
+	SMALL_FIREBALL(1, "Feel like Blaze", "spellSmallFireball", EnumWand.BLAZE_ROD, new ItemStack(Items.REDSTONE, 2)),
+	LARGE_FIREBALL(2, "Feel like Ghast", "spellLargeFireball", EnumWand.BLAZE_ROD, new ItemStack(Items.GHAST_TEAR));
 	
 	public final int spellID;
 	public final String spellName;

@@ -3,11 +3,14 @@ package seia.vanillamagic.utils.spell;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -27,8 +30,13 @@ public class SpellHelper
 		{
 			return spellLighter(caster, pos, face, hitVec);
 		}
-		//else if()
+		else if(spellID == EnumSpell.SMALL_FIREBALL.spellID)
 		{
+			return spellSmallFireball(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.LARGE_FIREBALL.spellID)
+		{
+			return spellLargeFireball(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -50,8 +58,62 @@ public class SpellHelper
 				return true;
 	        }
 		}
-		else // RightClickItem
+		return false;
+	}
+	
+	/*
+	 * caster, null, null, null
+	 */
+	public static boolean spellSmallFireball(EntityPlayer caster, 
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		World world = caster.worldObj;
+		if(pos == null) // casting while NOT looking at block
 		{
+			world.playEvent(caster, 1018, new BlockPos((int)caster.posX, (int)caster.posY, (int)caster.posZ), 0);
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntitySmallFireball fireball = new EntitySmallFireball(world, caster.posX, caster.posY + 1.5D, caster.posZ, accelX, accelY, accelZ);
+			fireball.shootingEntity = caster;
+			fireball.motionX = 0.0D;
+			fireball.motionY = 0.0D;
+			fireball.motionZ = 0.0D;
+			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+			fireball.accelerationX = accelX / d0 * 0.1D;
+			fireball.accelerationY = accelY / d0 * 0.1D;
+			fireball.accelerationZ = accelZ / d0 * 0.1D;
+			world.spawnEntityInWorld(fireball);
+			world.updateEntities();
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean spellLargeFireball(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		World world = caster.worldObj;
+		if(pos == null) // casting while NOT looking at block
+		{
+			world.playEvent(caster, 1016, new BlockPos((int)caster.posX, (int)caster.posY, (int)caster.posZ), 0);
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntityLargeFireball fireball = new EntityLargeFireball(world, caster.posX, caster.posY + 1.5D, caster.posZ, accelX, accelY, accelZ);
+			fireball.shootingEntity = caster;
+			fireball.motionX = 0.0D;
+			fireball.motionY = 0.0D;
+			fireball.motionZ = 0.0D;
+			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+			fireball.accelerationX = accelX / d0 * 0.1D;
+			fireball.accelerationY = accelY / d0 * 0.1D;
+			fireball.accelerationZ = accelZ / d0 * 0.1D;
+			world.spawnEntityInWorld(fireball);
+			world.updateEntities();
+			return true;
 		}
 		return false;
 	}

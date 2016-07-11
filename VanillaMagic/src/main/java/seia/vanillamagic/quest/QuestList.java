@@ -8,6 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
+import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
 import seia.vanillamagic.utils.ItemStackHelper;
 import seia.vanillamagic.utils.spell.EnumSpell;
 import seia.vanillamagic.utils.spell.EnumWand;
@@ -22,12 +24,22 @@ public class QuestList
 			Items.STICK, 
 			"Craft Stick", 
 			"craftStick");
-	public static final QuestCastSpell QUEST_CAST_SPELL_LIGHTER = new QuestCastSpell(QUEST_CRAFT_STICK.getAchievement(), 
+	public static final QuestCastSpellOnBlock QUEST_CAST_SPELL_LIGHTER = new QuestCastSpellOnBlock(QUEST_CRAFT_STICK.getAchievement(), 
 			QUEST_CRAFT_STICK.getPosX(), 
 			QUEST_CRAFT_STICK.getPosY() - 2, 
-			EnumSpell.LIGHTER.spellName, 
-			EnumSpell.LIGHTER.spellUniqueName, 
+			//EnumSpell.LIGHTER.spellName, 
+			//EnumSpell.LIGHTER.spellUniqueName, 
 			EnumSpell.LIGHTER);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_SMALL_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTER.getAchievement(), 
+			QUEST_CAST_SPELL_LIGHTER.getPosX() + 2, 
+			QUEST_CAST_SPELL_LIGHTER.getPosY(), 
+			//EnumSpell.SMALL_FIREBALL.spellName, 
+			//EnumSpell.SMALL_FIREBALL.spellUniqueName, 
+			EnumSpell.SMALL_FIREBALL);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LARGE_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL.getAchievement(), 
+			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosX() + 2, 
+			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosY(),
+			EnumSpell.LARGE_FIREBALL);
 	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK.getAchievement(), 
 			QUEST_CRAFT_STICK.getPosX(), 
