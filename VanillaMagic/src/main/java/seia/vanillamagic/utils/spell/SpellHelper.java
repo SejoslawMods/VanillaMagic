@@ -62,7 +62,7 @@ public class SpellHelper
 	}
 	
 	/*
-	 * caster, null, null, null
+	 * Feel like Blaze
 	 */
 	public static boolean spellSmallFireball(EntityPlayer caster, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
@@ -91,6 +91,9 @@ public class SpellHelper
 		return false;
 	}
 	
+	/*
+	 * Feel like Ghast
+	 */
 	public static boolean spellLargeFireball(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
