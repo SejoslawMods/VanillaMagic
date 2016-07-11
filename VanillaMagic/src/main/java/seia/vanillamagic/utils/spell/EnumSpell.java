@@ -4,10 +4,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import seia.vanillamagic.utils.ItemStackHelper;
 
-/*
- * TODO: Each costs 2x ????
- * Currently -> Each spell Cost / 2 if > 2
- */
 public enum EnumSpell
 {
 	LIGHTER(0, "Flint and Steel Clone", "spellFlintAndSteel", EnumWand.STICK, new ItemStack(Items.COAL)),
