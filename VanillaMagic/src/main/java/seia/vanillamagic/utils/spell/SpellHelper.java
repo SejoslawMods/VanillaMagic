@@ -52,11 +52,11 @@ public class SpellHelper
 		{
 			pos = pos.offset(face);
 			if (world.isAirBlock(pos))
-	        {
+			{
 				world.playSound(caster, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
 				world.setBlockState(pos, Blocks.FIRE.getDefaultState(), 11);
 				return true;
-	        }
+			}
 		}
 		return false;
 	}
