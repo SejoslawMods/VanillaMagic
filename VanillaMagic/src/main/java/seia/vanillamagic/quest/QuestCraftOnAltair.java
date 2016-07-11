@@ -20,7 +20,7 @@ import seia.vanillamagic.utils.AltairChecker;
 
 public class QuestCraftOnAltair extends Quest
 {
-	private ItemStack[] ingredients;
+	private ItemStack[] ingredients; // each ItemStack is a different Item
 	private ItemStack result;
 	private int requiredAltairTier;
 	
@@ -52,6 +52,26 @@ public class QuestCraftOnAltair extends Quest
 		return requiredAltairTier;
 	}
 	
+	public int getIngredientsStackSize()
+	{
+		int stackSize = 0;
+		for(int i = 0; i < ingredients.length; i++)
+		{
+			stackSize += ingredients[i].stackSize;
+		}
+		return stackSize;
+	}
+	
+	public int getIngredientsInCauldronStackSize(List<EntityItem> entitiesInCauldron)
+	{
+		int stackSize = 0;
+		for(int i = 0; i < entitiesInCauldron.size(); i++)
+		{
+			stackSize += entitiesInCauldron.get(i).getEntityItem().stackSize;
+		}
+		return stackSize;
+	}
+	
 	@SubscribeEvent
 	public void craftOnAltair(RightClickBlock event)
 	{
@@ -72,47 +92,66 @@ public class QuestCraftOnAltair extends Quest
 					{
 						// all entities on World
 						List<Entity> loadedEntities = world.loadedEntityList;
-						int howManyCorrect = 0;
-						List<EntityItem> itemsToDelete = new ArrayList<EntityItem>();
-						for(int i = 0; i < ingredients.length; i++)
+						// all items in cauldron
+						List<EntityItem> entitiesInCauldron = new ArrayList<EntityItem>();
+						// filtering all items in cauldron to check if the recipe is correct
+						for(int i = 0; i < loadedEntities.size(); i++)
 						{
-							for(int j = 0; j < loadedEntities.size(); j++)
+							if(loadedEntities.get(i) instanceof EntityItem)
 							{
-								if(loadedEntities.get(j) instanceof EntityItem)
+								EntityItem entityItemInWorld = (EntityItem) loadedEntities.get(i);
+								BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY, entityItemInWorld.posZ);
+								if((cauldronPos.getX() == entityItemInWorldPos.getX()) &&
+										(cauldronPos.getY() == entityItemInWorldPos.getY()) &&
+										(cauldronPos.getZ() == entityItemInWorldPos.getZ()))
 								{
-									int ingredientID = Item.getIdFromItem(ingredients[i].getItem());
-									EntityItem loadedEntityItem = (EntityItem) loadedEntities.get(j);
-									int entityItemID = Item.getIdFromItem(loadedEntityItem.getEntityItem().getItem());
-									if(ingredientID == entityItemID)
+									entitiesInCauldron.add(entityItemInWorld);
+								}
+							}
+						}
+						// there is a right amount of items in Cauldron but are they the right items ?
+						int ingredientsStackSize = getIngredientsStackSize();
+						int ingredientsInCauldronStackSize = getIngredientsInCauldronStackSize(entitiesInCauldron);
+						if(ingredientsStackSize == ingredientsInCauldronStackSize)
+						{
+							List<EntityItem> alreadyCheckedEntityItems = new ArrayList<EntityItem>(); // items to be deleted later
+							for(int i = 0; i < ingredients.length; i++)
+							{
+								ItemStack currentlyCheckedIngredient = ingredients[i];
+								for(int j = 0; j < entitiesInCauldron.size(); j++)
+								{
+									EntityItem currentlyCheckedEntityItem = entitiesInCauldron.get(j);
+									if(currentlyCheckedIngredient.getItem().equals(currentlyCheckedEntityItem.getEntityItem().getItem()))
 									{
-										BlockPos loadedEntityItemPos = new BlockPos(loadedEntityItem.posX, loadedEntityItem.posY, loadedEntityItem.posZ);
-										if((cauldronPos.getX() == loadedEntityItemPos.getX()) &&
-												(cauldronPos.getY() == loadedEntityItemPos.getY()) &&
-												(cauldronPos.getZ() == loadedEntityItemPos.getZ()))
+										if(currentlyCheckedIngredient.stackSize == currentlyCheckedEntityItem.getEntityItem().stackSize)
 										{
-											itemsToDelete.add(loadedEntityItem);
-											howManyCorrect++;
-											if(howManyCorrect == ingredients.length)
+											if(currentlyCheckedIngredient.getItemDamage() == currentlyCheckedEntityItem.getEntityItem().getItemDamage())
 											{
-												if(!player.hasAchievement(achievement))
-												{
-													player.addStat(achievement, 1);
-													return;
-												}
-												else if(player.hasAchievement(achievement))
-												{
-													for(int k = 0; k < itemsToDelete.size(); k++)
-													{
-														world.removeEntity(itemsToDelete.get(k));
-													}
-													BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
-													Block.spawnAsEntity(world, newItemPos, new ItemStack(result.getItem()));
-													world.updateEntities();
-													return;
-												}
+												alreadyCheckedEntityItems.add(currentlyCheckedEntityItem);
+												break;
 											}
 										}
 									}
+								}
+							}
+							// the amount of items in Cauldron was right and the items themselfs were right
+							if(ingredients.length == alreadyCheckedEntityItems.size())
+							{
+								if(!player.hasAchievement(achievement))
+								{
+									player.addStat(achievement, 1);
+									return;
+								}
+								else if(player.hasAchievement(achievement))
+								{
+									for(int i = 0; i < alreadyCheckedEntityItems.size(); i++)
+									{
+										world.removeEntity(alreadyCheckedEntityItems.get(i));
+									}
+									BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
+									Block.spawnAsEntity(world, newItemPos, new ItemStack(result.getItem()));
+									world.updateEntities();
+									return;
 								}
 							}
 						}
