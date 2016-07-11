@@ -17,24 +17,31 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.utils.AltairChecker;
+import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestCraftOnAltair extends Quest
 {
-	private ItemStack[] ingredients; // each ItemStack is a different Item
-	private ItemStack result;
-	private int requiredAltairTier;
+	protected ItemStack[] ingredients; // each ItemStack is a different Item
+	protected ItemStack result;
+	protected int requiredAltairTier;
+	protected EnumWand requiredMinimalWand;
 	
-	public QuestCraftOnAltair(Achievement required, int posX, int posY, String questName, String uniqueName, ItemStack[] ingredients, ItemStack result, int requiredAltairTier)
+	public QuestCraftOnAltair(Achievement required, int posX, int posY, String questName, String uniqueName, 
+			ItemStack[] ingredients, ItemStack result, int requiredAltairTier, EnumWand requiredMinimalWand)
 	{
-		this(required, posX, posY, result.getItem(), questName, uniqueName, ingredients, result, requiredAltairTier);
+		this(required, posX, posY, result.getItem(), questName, uniqueName, 
+				ingredients, result, requiredAltairTier, requiredMinimalWand);
 	}
 	
-	public QuestCraftOnAltair(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, ItemStack[] ingredients, ItemStack result, int requiredAltairTier) 
+	public QuestCraftOnAltair(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+			ItemStack[] ingredients, ItemStack result, int requiredAltairTier, EnumWand requiredMinimalWand) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.ingredients = ingredients;
 		this.result = result;
 		this.requiredAltairTier = requiredAltairTier;
+		this.requiredMinimalWand = requiredMinimalWand;
 	}
 	
 	public ItemStack[] getIngredients()
@@ -81,7 +88,8 @@ public class QuestCraftOnAltair extends Quest
 			BlockPos cauldronPos = event.getPos();
 			
 			// player has got stick in hand
-			if(Items.STICK.equals(player.getHeldItemMainhand().getItem()))
+			//if(Items.STICK.equals(player.getHeldItemMainhand().getItem()))
+			if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
 			{
 				World world = player.worldObj;
 				// is right-clicking on Cauldron
@@ -101,11 +109,17 @@ public class QuestCraftOnAltair extends Quest
 							{
 								EntityItem entityItemInWorld = (EntityItem) loadedEntities.get(i);
 								BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY, entityItemInWorld.posZ);
-								if((cauldronPos.getX() == entityItemInWorldPos.getX()) &&
-										(cauldronPos.getY() == entityItemInWorldPos.getY()) &&
-										(cauldronPos.getZ() == entityItemInWorldPos.getZ()))
+								//if((cauldronPos.getX() == entityItemInWorldPos.getX()) &&
+										//(cauldronPos.getY() == entityItemInWorldPos.getY()) &&
+										//(cauldronPos.getZ() == entityItemInWorldPos.getZ()))
+								if(BlockPosHelper.isSameBlockPos(cauldronPos, entityItemInWorldPos))
 								{
 									entitiesInCauldron.add(entityItemInWorld);
+									// lag stopper -> if there is more items in Cauldron then the recipe needs, return
+									if(entitiesInCauldron.size() > ingredients.length)
+									{
+										return;
+									}
 								}
 							}
 						}
@@ -121,6 +135,12 @@ public class QuestCraftOnAltair extends Quest
 								for(int j = 0; j < entitiesInCauldron.size(); j++)
 								{
 									EntityItem currentlyCheckedEntityItem = entitiesInCauldron.get(j);
+									if(ItemStack.areItemStacksEqual(currentlyCheckedIngredient, currentlyCheckedEntityItem.getEntityItem()))
+									{
+										alreadyCheckedEntityItems.add(currentlyCheckedEntityItem);
+										break;
+									}
+									/*
 									if(currentlyCheckedIngredient.getItem().equals(currentlyCheckedEntityItem.getEntityItem().getItem()))
 									{
 										if(currentlyCheckedIngredient.stackSize == currentlyCheckedEntityItem.getEntityItem().stackSize)
@@ -132,6 +152,7 @@ public class QuestCraftOnAltair extends Quest
 											}
 										}
 									}
+									*/
 								}
 							}
 							// the amount of items in Cauldron was right and the items themselfs were right

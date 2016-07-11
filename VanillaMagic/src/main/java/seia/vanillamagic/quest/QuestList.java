@@ -9,6 +9,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import seia.vanillamagic.utils.ItemStackHelper;
+import seia.vanillamagic.utils.spell.EnumSpell;
+import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestList 
 {
@@ -20,6 +22,13 @@ public class QuestList
 			Items.STICK, 
 			"Craft Stick", 
 			"craftStick");
+	public static final QuestCastSpell QUEST_CAST_SPELL_LIGHTER = new QuestCastSpell(QUEST_CRAFT_STICK.getAchievement(), 
+			QUEST_CRAFT_STICK.getPosX(), 
+			QUEST_CRAFT_STICK.getPosY() - 2, 
+			EnumSpell.LIGHTER.spellName, 
+			EnumSpell.LIGHTER.spellUniqueName, 
+			EnumSpell.LIGHTER);
+	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK.getAchievement(), 
 			QUEST_CRAFT_STICK.getPosX(), 
 			QUEST_CRAFT_STICK.getPosY() + 2, 
@@ -47,7 +56,8 @@ public class QuestList
 			"craftGunpowder", 
 			new ItemStack[]{new ItemStack(Items.SUGAR), new ItemStack(Items.COAL)}, 
 			new ItemStack(Items.GUNPOWDER), 
-			1);
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_SUGAR = new QuestCraftOnAltair(QUEST_CRAFT_GUNPOWDER.getAchievement(), 
 			QUEST_CRAFT_GUNPOWDER.getPosX() - 2, 
 			QUEST_CRAFT_GUNPOWDER.getPosY(),  
@@ -55,7 +65,8 @@ public class QuestList
 			"craftSugar", 
 			new ItemStack[]{ItemStackHelper.getSugarCane()}, 
 			new ItemStack(Items.SUGAR), 
-			1);
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_DIRT = new QuestCraftOnAltair(QUEST_CRAFT_SUGAR.getAchievement(), 
 			QUEST_CRAFT_SUGAR.getPosX() - 2, 
 			QUEST_CRAFT_SUGAR.getPosY(),  
@@ -63,7 +74,8 @@ public class QuestList
 			"craftDirt", 
 			new ItemStack[]{new ItemStack(Blocks.SAND)}, 
 			new ItemStack(Blocks.DIRT), 
-			1);
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_SAND = new QuestCraftOnAltair(QUEST_CRAFT_DIRT.getAchievement(), 
 			QUEST_CRAFT_DIRT.getPosX(), 
 			QUEST_CRAFT_DIRT.getPosY() - 2,  
@@ -71,7 +83,8 @@ public class QuestList
 			"craftSand", 
 			new ItemStack[]{new ItemStack(Blocks.COBBLESTONE)}, 
 			new ItemStack(Blocks.SAND), 
-			1);
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_COBBLESTONE = new QuestCraftOnAltair(QUEST_CRAFT_DIRT.getAchievement(), 
 			QUEST_CRAFT_DIRT.getPosX(), 
 			QUEST_CRAFT_DIRT.getPosY() + 2,  
@@ -79,7 +92,8 @@ public class QuestList
 			"craftCobblestone", 
 			new ItemStack[]{new ItemStack(Blocks.DIRT)}, 
 			new ItemStack(Blocks.COBBLESTONE), 
-			1);
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_LEATHER = new QuestCraftOnAltair(QUEST_BUILD_ALTAIR_TIER_1.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_1.getPosX() + 2, 
 			QUEST_BUILD_ALTAIR_TIER_1.getPosY() + 1,  
@@ -87,7 +101,8 @@ public class QuestList
 			"craftLeather", 
 			new ItemStack[]{new ItemStack(Items.ROTTEN_FLESH)}, 
 			new ItemStack(Items.LEATHER), 
-			1);
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_GLASS = new QuestCraftOnAltair(QUEST_CRAFT_SAND.getAchievement(), 
 			QUEST_CRAFT_SAND.getPosX() - 2, 
 			QUEST_CRAFT_SAND.getPosY(),  
@@ -95,7 +110,8 @@ public class QuestList
 			"craftGlass",
 			new ItemStack[]{new ItemStack(Blocks.SAND), new ItemStack(Items.COAL)},
 			new ItemStack(Blocks.GLASS),
-			1);
+			1,
+			EnumWand.STICK);
 	
 	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_2 = new QuestBuildAltair(QUEST_BUILD_ALTAIR_TIER_1.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_1.getPosX(), 
@@ -111,7 +127,8 @@ public class QuestList
 			"craftIronOre", 
 			new ItemStack[]{new ItemStack(Blocks.SAPLING, 10), new ItemStack(Blocks.COBBLESTONE, 10)}, 
 			new ItemStack(Blocks.IRON_ORE), 
-			2);
+			2,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_CACTUS = new QuestCraftOnAltair(QUEST_BUILD_ALTAIR_TIER_2.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_2.getPosX() - 2, 
 			QUEST_BUILD_ALTAIR_TIER_2.getPosY() + 1,  
@@ -119,7 +136,8 @@ public class QuestList
 			"craftCactus", 
 			new ItemStack[]{new ItemStack(Blocks.SAPLING, 4)}, 
 			new ItemStack(Blocks.CACTUS), 
-			2);
+			2,
+			EnumWand.STICK);
 	
 	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_3 = new QuestBuildAltair(QUEST_BUILD_ALTAIR_TIER_2.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_2.getPosX(), 
@@ -136,7 +154,8 @@ public class QuestList
 			"craftGoldIngot", 
 			new ItemStack[]{new ItemStack(Items.IRON_INGOT, 8)}, 
 			new ItemStack(Items.GOLD_INGOT), 
-			3);
+			3,
+			EnumWand.STICK);
 	
 	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_4 = new QuestBuildAltair(QUEST_BUILD_ALTAIR_TIER_3.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_3.getPosX(), 
@@ -153,7 +172,8 @@ public class QuestList
 			"craftRottenFlesh", 
 			new ItemStack[]{new ItemStack(Items.LEATHER)}, 
 			new ItemStack(Items.ROTTEN_FLESH), 
-			4);
+			4,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_STRING = new QuestCraftOnAltair(QUEST_CRAFT_ROTTEN_FLESH.getAchievement(), 
 			QUEST_CRAFT_ROTTEN_FLESH.getPosX() + 2, 
 			QUEST_CRAFT_ROTTEN_FLESH.getPosY(),  
@@ -161,7 +181,8 @@ public class QuestList
 			"craftString", 
 			new ItemStack[]{new ItemStack(Items.ROTTEN_FLESH, 2)}, 
 			new ItemStack(Items.STRING), 
-			4);
+			4,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_SPIDER_EYE = new QuestCraftOnAltair(QUEST_CRAFT_STRING.getAchievement(), 
 			QUEST_CRAFT_STRING.getPosX() + 2, 
 			QUEST_CRAFT_STRING.getPosY(),  
@@ -169,7 +190,8 @@ public class QuestList
 			"craftSpiderEye", 
 			new ItemStack[]{new ItemStack(Items.STRING, 2)}, 
 			new ItemStack(Items.SPIDER_EYE), 
-			4);
+			4,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_BONE = new QuestCraftOnAltair(QUEST_CRAFT_SPIDER_EYE.getAchievement(), 
 			QUEST_CRAFT_SPIDER_EYE.getPosX() + 2, 
 			QUEST_CRAFT_SPIDER_EYE.getPosY(),  
@@ -177,7 +199,8 @@ public class QuestList
 			"craftBone", 
 			new ItemStack[]{new ItemStack(Items.SPIDER_EYE, 2)}, 
 			new ItemStack(Items.BONE), 
-			4);
+			4,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_ARROW = new QuestCraftOnAltair(QUEST_CRAFT_BONE.getAchievement(), 
 			QUEST_CRAFT_BONE.getPosX() + 2, 
 			QUEST_CRAFT_BONE.getPosY(), 
@@ -185,7 +208,8 @@ public class QuestList
 			"craftArrow", 
 			new ItemStack[]{new ItemStack(Items.BONE, 2)}, 
 			new ItemStack(Items.ARROW), 
-			4);
+			4,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltair QUEST_CRAFT_ENDER_PEARL = new QuestCraftOnAltair(QUEST_CRAFT_ARROW.getAchievement(), 
 			QUEST_CRAFT_ARROW.getPosX() + 2, 
 			QUEST_CRAFT_ARROW.getPosY(),  
@@ -193,7 +217,8 @@ public class QuestList
 			"craftEnderPearl", 
 			new ItemStack[]{new ItemStack(Items.ARROW, 2)}, 
 			new ItemStack(Items.ENDER_PEARL), 
-			4);
+			4,
+			EnumWand.STICK);
 	
 	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_5 = new QuestBuildAltair(QUEST_BUILD_ALTAIR_TIER_4.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_4.getPosX(), 
@@ -209,11 +234,18 @@ public class QuestList
 			"craftGlowstoneDust", 
 			new ItemStack[]{new ItemStack(Items.REDSTONE, 2), new ItemStack(Items.COAL, 2), new ItemStack(Blocks.LAPIS_BLOCK)}, 
 			new ItemStack(Items.GLOWSTONE_DUST), 
-			5);
+			5,
+			EnumWand.STICK);
 	
-	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_6 = new QuestBuildAltair(QUEST_BUILD_ALTAIR_TIER_5.getAchievement(), 
+	public static final QuestPick QUEST_PICK_BLAZE_ROD = new QuestPick(QUEST_BUILD_ALTAIR_TIER_5.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_5.getPosX(), 
-			QUEST_BUILD_ALTAIR_TIER_5.getPosY() + 2,
+			QUEST_BUILD_ALTAIR_TIER_5.getPosY() + 2,  
+			"Pick Blaze Rod", 
+			"pickBlazeRod", 
+			new ItemStack(Items.BLAZE_ROD));
+	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_6 = new QuestBuildAltair(QUEST_PICK_BLAZE_ROD.getAchievement(), 
+			QUEST_PICK_BLAZE_ROD.getPosX(), 
+			QUEST_PICK_BLAZE_ROD.getPosY() + 2,
 			Items.CAULDRON, 
 			"Build Altair Tier 6", 
 			"buildAltairTier6", 
@@ -225,7 +257,8 @@ public class QuestList
 			"craftDiamond", 
 			new ItemStack[]{new ItemStack(Items.GOLD_INGOT, 8)}, 
 			new ItemStack(Items.DIAMOND), 
-			6);
+			6,
+			EnumWand.BLAZE_ROD);
 	
 	public static final QuestBuildAltair QUEST_BUILD_ALTAIR_TIER_7 = new QuestBuildAltair(QUEST_BUILD_ALTAIR_TIER_6.getAchievement(), 
 			QUEST_BUILD_ALTAIR_TIER_6.getPosX(), 
@@ -241,7 +274,8 @@ public class QuestList
 			"craftEmerald", 
 			new ItemStack[]{new ItemStack(Items.DIAMOND, 8)}, 
 			new ItemStack(Items.EMERALD), 
-			7);
+			7,
+			EnumWand.BLAZE_ROD);
 	public static final QuestCraftOnAltair QUEST_CRAFT_NETHER_STAR = new QuestCraftOnAltair(QUEST_CRAFT_EMERALD.getAchievement(), 
 			QUEST_CRAFT_EMERALD.getPosX() + 2, 
 			QUEST_CRAFT_EMERALD.getPosY(),  
@@ -249,7 +283,8 @@ public class QuestList
 			"craftNetherStar", 
 			new ItemStack[]{new ItemStack(Blocks.EMERALD_BLOCK, 4)},
 			new ItemStack(Items.NETHER_STAR), 
-			7);
+			7,
+			EnumWand.BLAZE_ROD);
 	public static final QuestCraftOnAltair QUEST_CRAFT_DRAGON_EGG = new QuestCraftOnAltair(QUEST_CRAFT_NETHER_STAR.getAchievement(), 
 			QUEST_CRAFT_NETHER_STAR.getPosX() + 2, 
 			QUEST_CRAFT_NETHER_STAR.getPosY(),  
@@ -257,7 +292,8 @@ public class QuestList
 			"craftDragonEgg", 
 			new ItemStack[]{new ItemStack(Items.NETHER_STAR, 4)}, 
 			new ItemStack(Blocks.DRAGON_EGG), 
-			7);
+			7,
+			EnumWand.BLAZE_ROD);
 	
 	//===================================================================================================
 	

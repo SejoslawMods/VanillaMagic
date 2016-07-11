@@ -12,15 +12,22 @@ public class QuestMineBlock extends Quest
 {
 	protected Block[] blocksToBeMine;
 	
-	public QuestMineBlock(Achievement required, int posX, int posY, String questName, String uniqueName, Block[] blocksToBeMine) 
+	public QuestMineBlock(Achievement required, int posX, int posY, String questName, String uniqueName, 
+			Block[] blocksToBeMine) 
 	{
 		this(required, posX, posY, Item.getItemFromBlock(blocksToBeMine[0]), questName, uniqueName, blocksToBeMine);
 	}
 	
-	public QuestMineBlock(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, Block[] blocksToBeMine) 
+	public QuestMineBlock(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+			Block[] blocksToBeMine) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.blocksToBeMine = blocksToBeMine;
+	}
+	
+	public Block[] getBlocksToBeMine()
+	{
+		return blocksToBeMine;
 	}
 	
 	@SubscribeEvent
@@ -35,6 +42,7 @@ public class QuestMineBlock extends Quest
 				if(Block.isEqualTo(block, blocksToBeMine[i]))
 				{
 					player.addStat(achievement, 1);
+					return;
 				}
 			}
 		}

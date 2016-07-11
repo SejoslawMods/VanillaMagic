@@ -15,7 +15,8 @@ public class QuestBuildAltair extends Quest
 {
 	protected int tier;
 	
-	public QuestBuildAltair(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, int tier)
+	public QuestBuildAltair(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+			int tier)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.tier = tier;
