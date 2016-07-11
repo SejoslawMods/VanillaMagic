@@ -88,7 +88,6 @@ public class QuestCraftOnAltair extends Quest
 			BlockPos cauldronPos = event.getPos();
 			
 			// player has got stick in hand
-			//if(Items.STICK.equals(player.getHeldItemMainhand().getItem()))
 			if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
 			{
 				World world = player.worldObj;
@@ -109,9 +108,6 @@ public class QuestCraftOnAltair extends Quest
 							{
 								EntityItem entityItemInWorld = (EntityItem) loadedEntities.get(i);
 								BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY, entityItemInWorld.posZ);
-								//if((cauldronPos.getX() == entityItemInWorldPos.getX()) &&
-										//(cauldronPos.getY() == entityItemInWorldPos.getY()) &&
-										//(cauldronPos.getZ() == entityItemInWorldPos.getZ()))
 								if(BlockPosHelper.isSameBlockPos(cauldronPos, entityItemInWorldPos))
 								{
 									entitiesInCauldron.add(entityItemInWorld);
@@ -140,19 +136,6 @@ public class QuestCraftOnAltair extends Quest
 										alreadyCheckedEntityItems.add(currentlyCheckedEntityItem);
 										break;
 									}
-									/*
-									if(currentlyCheckedIngredient.getItem().equals(currentlyCheckedEntityItem.getEntityItem().getItem()))
-									{
-										if(currentlyCheckedIngredient.stackSize == currentlyCheckedEntityItem.getEntityItem().stackSize)
-										{
-											if(currentlyCheckedIngredient.getItemDamage() == currentlyCheckedEntityItem.getEntityItem().getItemDamage())
-											{
-												alreadyCheckedEntityItems.add(currentlyCheckedEntityItem);
-												break;
-											}
-										}
-									}
-									*/
 								}
 							}
 							// the amount of items in Cauldron was right and the items themselfs were right

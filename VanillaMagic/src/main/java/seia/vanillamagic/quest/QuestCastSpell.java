@@ -104,8 +104,7 @@ public class QuestCastSpell extends Quest
 	}
 	
 	/*
-	 * Method for casting the right spell (if-else)
-	 * This method will take care for all the spell-related aspects
+	 * Method for casting the right spell
 	 */
 	public boolean castRightSpell(EntityPlayer caster, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
