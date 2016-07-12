@@ -8,7 +8,6 @@ import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -16,25 +15,25 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.utils.AltairChecker;
+import seia.vanillamagic.utils.AltarChecker;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
-public class QuestCraftOnAltair extends Quest
+public class QuestCraftOnAltar extends Quest
 {
 	protected ItemStack[] ingredients; // each ItemStack is a different Item
 	protected ItemStack result;
 	protected int requiredAltairTier;
 	protected EnumWand requiredMinimalWand;
 	
-	public QuestCraftOnAltair(Achievement required, int posX, int posY, String questName, String uniqueName, 
+	public QuestCraftOnAltar(Achievement required, int posX, int posY, String questName, String uniqueName, 
 			ItemStack[] ingredients, ItemStack result, int requiredAltairTier, EnumWand requiredMinimalWand)
 	{
 		this(required, posX, posY, result.getItem(), questName, uniqueName, 
 				ingredients, result, requiredAltairTier, requiredMinimalWand);
 	}
 	
-	public QuestCraftOnAltair(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+	public QuestCraftOnAltar(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
 			ItemStack[] ingredients, ItemStack result, int requiredAltairTier, EnumWand requiredMinimalWand) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
@@ -54,7 +53,7 @@ public class QuestCraftOnAltair extends Quest
 		return result;
 	}
 	
-	public int getRequiredAltairTier()
+	public int getRequiredAltarTier()
 	{
 		return requiredAltairTier;
 	}
@@ -95,7 +94,7 @@ public class QuestCraftOnAltair extends Quest
 				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
 					// is altair build correct
-					if(AltairChecker.checkAltairTier(world, cauldronPos, requiredAltairTier))
+					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltairTier))
 					{
 						// all entities on World
 						List<Entity> loadedEntities = world.loadedEntityList;

@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AltairChecker 
+public class AltarChecker 
 {
 	public static final Block BLOCK_TIER_1 = Blocks.REDSTONE_WIRE;
 	public static final Block BLOCK_TIER_2 = Blocks.IRON_BLOCK;
@@ -48,7 +48,7 @@ public class AltairChecker
 		return null;
 	}
 	
-	public static boolean checkAltairTier(World world, BlockPos midPos, int tier)
+	public static boolean checkAltarTier(World world, BlockPos midPos, int tier)
 	{
 		if(tier == 1)
 		{
