@@ -12,7 +12,8 @@ You won't be able to achieve the advanced recipe and powers without getting the 
 The mod adds the new Achievement Page with all the Achievements/Quests.
 
 
-Altair: </br>
+(WARNING!   Every time that You want to upgrade Altar / earn achievement, You must replace the Cauldron.)</br>
+Altar: </br>
 Tier 1 = Cauldron + Redstone around it </br>
 Tier 2 = Iron Blocks </br>
 Tier 3 = Gold Blocks </br>
