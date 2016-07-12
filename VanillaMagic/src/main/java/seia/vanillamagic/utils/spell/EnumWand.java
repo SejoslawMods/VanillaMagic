@@ -1,13 +1,16 @@
 package seia.vanillamagic.utils.spell;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public enum EnumWand 
 {
-	STICK(1, new ItemStack(Items.STICK)),
-	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD));
+	STICK(1, new ItemStack(Items.STICK)), // basic wand
+	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD)), // the most common wand
+	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR)), // used mainly for summoning and resurrecting
+	END_ROD(4, new ItemStack(Blocks.END_ROD)); // ???
 	
 	public final int wandTier;
 	public final ItemStack wandItemStack;

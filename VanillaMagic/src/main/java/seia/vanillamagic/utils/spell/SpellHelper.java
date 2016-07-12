@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.entity.EntitySpellTeleport;
+import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
 
 /*
  * The work of each spell.
@@ -38,6 +40,14 @@ public class SpellHelper
 		{
 			return spellLargeFireball(caster, pos, face, hitVec);
 		}
+		else if(spellID == EnumSpell.TELEPORT.spellID)
+		{
+			return spellTeleport(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.METEOR.spellID)
+		{
+			return spellSummonMeteor(caster, pos, face, hitVec);
+		}
 		return false;
 	}
 	
@@ -47,9 +57,9 @@ public class SpellHelper
 	public static boolean spellLighter(EntityPlayer caster, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
 		if(pos != null) // RightClickBlock
 		{
+			World world = caster.worldObj;
 			pos = pos.offset(face);
 			if (world.isAirBlock(pos))
 			{
@@ -67,20 +77,24 @@ public class SpellHelper
 	public static boolean spellSmallFireball(EntityPlayer caster, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
 		if(pos == null) // casting while NOT looking at block
 		{
+			World world = caster.worldObj;
 			world.playEvent(caster, 1018, new BlockPos((int)caster.posX, (int)caster.posY, (int)caster.posZ), 0);
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
-			EntitySmallFireball fireball = new EntitySmallFireball(world, caster.posX, caster.posY + 1.5D, caster.posZ, accelX, accelY, accelZ);
+			EntitySmallFireball fireball = new EntitySmallFireball(world, 
+					caster.posX, caster.posY + 1.5D, caster.posZ, 
+					accelX, accelY, accelZ);
 			fireball.shootingEntity = caster;
 			fireball.motionX = 0.0D;
 			fireball.motionY = 0.0D;
 			fireball.motionZ = 0.0D;
-			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + 
+					accelY * accelY + 
+					accelZ * accelZ);
 			fireball.accelerationX = accelX / d0 * 0.1D;
 			fireball.accelerationY = accelY / d0 * 0.1D;
 			fireball.accelerationZ = accelZ / d0 * 0.1D;
@@ -97,24 +111,72 @@ public class SpellHelper
 	public static boolean spellLargeFireball(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
 		if(pos == null) // casting while NOT looking at block
 		{
+			World world = caster.worldObj;
 			world.playEvent(caster, 1016, new BlockPos((int)caster.posX, (int)caster.posY, (int)caster.posZ), 0);
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
-			EntityLargeFireball fireball = new EntityLargeFireball(world, caster.posX, caster.posY + 1.5D, caster.posZ, accelX, accelY, accelZ);
+			EntityLargeFireball fireball = new EntityLargeFireball(world, 
+					caster.posX, caster.posY + 1.5D, caster.posZ, 
+					accelX, accelY, accelZ);
 			fireball.shootingEntity = caster;
 			fireball.motionX = 0.0D;
 			fireball.motionY = 0.0D;
 			fireball.motionZ = 0.0D;
-			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + 
+					accelY * accelY + 
+					accelZ * accelZ);
 			fireball.accelerationX = accelX / d0 * 0.1D;
 			fireball.accelerationY = accelY / d0 * 0.1D;
 			fireball.accelerationZ = accelZ / d0 * 0.1D;
 			world.spawnEntityInWorld(fireball);
+			world.updateEntities();
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * Teleportation !!!
+	 */
+	public static boolean spellTeleport(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		if(pos == null)
+		{
+			World world = caster.worldObj;
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntitySpellTeleport spellTeleport = new EntitySpellTeleport(world, caster, 
+					accelX, accelY, accelZ);
+			world.spawnEntityInWorld(spellTeleport);
+			world.updateEntities();
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * Meteor !!!
+	 */
+	public static boolean spellSummonMeteor(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		if(pos == null)
+		{
+			World world = caster.worldObj;
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntitySpellSummonMeteor spellMeteor = new EntitySpellSummonMeteor(world, caster, 
+					accelX, accelY, accelZ);
+			world.spawnEntityInWorld(spellMeteor);
 			world.updateEntities();
 			return true;
 		}
