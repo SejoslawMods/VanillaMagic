@@ -16,14 +16,20 @@ public class QuestCraft extends Quest
 	@SubscribeEvent
 	public void onCrafting(PlayerEvent.ItemCraftedEvent event)
 	{
-		EntityPlayer player = event.player;
-		if(!player.hasAchievement(achievement))
+		try
 		{
-			Item item = event.crafting.getItem();
-			if(item.equals(achievement.theItemStack.getItem()))
+			EntityPlayer player = event.player;
+			if(!player.hasAchievement(achievement))
 			{
-				player.addStat(achievement, 1);
+				Item item = event.crafting.getItem();
+				if(item.equals(achievement.theItemStack.getItem()))
+				{
+					player.addStat(achievement, 1);
+				}
 			}
+		}
+		catch(Exception e)
+		{
 		}
 	}
 }

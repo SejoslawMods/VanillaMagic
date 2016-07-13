@@ -17,9 +17,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntitySpell extends Entity
 {
-	private int xTile = -1;
-    private int yTile = -1;
-    private int zTile = -1;
+	private int xTile = 0;
+    private int yTile = 0;
+    private int zTile = 0;
     private Block inTile;
     private boolean inGround;
     public EntityLivingBase castingEntity;
@@ -35,7 +35,12 @@ public abstract class EntitySpell extends Entity
         super(world);
         this.castingEntity = caster;
         this.setSize(1.0F, 1.0F);
-        this.setLocationAndAngles(caster.posX, caster.posY, caster.posZ, caster.rotationYaw, caster.rotationPitch);
+        this.setLocationAndAngles(
+        		caster.posX + accelX, // in front of face = accelX
+        		caster.posY + 1.5D + accelY, // in front of face = accelY
+        		caster.posZ + accelZ, // in front of face = accelZ
+        		caster.rotationYaw, 
+        		caster.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
@@ -98,7 +103,7 @@ public abstract class EntitySpell extends Entity
             RayTraceResult rayTraceResult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.castingEntity);
             if (rayTraceResult != null)
             {
-                this.onImpact(rayTraceResult);
+            	this.onImpact(rayTraceResult);
             }
             this.posX += this.motionX;
             this.posY += this.motionY;

@@ -1,6 +1,7 @@
 package seia.vanillamagic.entity;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
@@ -19,11 +20,6 @@ public class EntitySpellTeleport extends EntitySpell
 			double accelX, double accelY, double accelZ) 
 	{
 		super(worldIn, caster, accelX, accelY, accelZ);
-	}
-	
-	public double getPlayerDistanceToGround()
-	{
-		return 0;
 	}
 
 	@Override
@@ -53,29 +49,34 @@ public class EntitySpellTeleport extends EntitySpell
         }
         if (!this.worldObj.isRemote)
         {
-            if (caster instanceof EntityPlayerMP)
-            {
-                EntityPlayerMP casterMP = (EntityPlayerMP)caster;
-                if (casterMP.connection.getNetworkManager().isChannelOpen() && casterMP.worldObj == this.worldObj && !casterMP.isPlayerSleeping())
+        	if(result.entityHit == null)
+        	{
+        		BlockPos blockpos = result.getBlockPos().offset(result.sideHit);
+        		if (this.worldObj.isAirBlock(blockpos))
                 {
-                    EnderTeleportEvent eventTeleport = new EnderTeleportEvent(casterMP, this.posX, this.posY, this.posZ, 5.0F);
-                    if (!MinecraftForge.EVENT_BUS.post(eventTeleport))
-                    { 
-                    	if (caster.isRiding())
-                    	{
-                    		caster.dismountRidingEntity();
-                    	}
-                    	caster.setPositionAndUpdate(eventTeleport.getTargetX(), eventTeleport.getTargetY() - getPlayerDistanceToGround(), eventTeleport.getTargetZ());
+        			if (caster instanceof EntityPlayerMP)
+        			{
+        				EntityPlayerMP casterMP = (EntityPlayerMP)caster;
+        				if (casterMP.connection.getNetworkManager().isChannelOpen() && 
+        						casterMP.worldObj == this.worldObj && 
+        						!casterMP.isPlayerSleeping())
+        				{
+        					if (caster.isRiding())
+                        	{
+                        		caster.dismountRidingEntity();
+                        	}
+                			caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
+                        	caster.fallDistance = 0.0F;
+        				}
+        			}
+        			else if(caster != null)
+        			{
+        				caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
                     	caster.fallDistance = 0.0F;
-                    }
+        			}
                 }
-            }
-            else if (caster != null)
-            {
-            	caster.setPositionAndUpdate(this.posX, this.posY - getPlayerDistanceToGround(), this.posZ);
-            	caster.fallDistance = 0.0F;
-            }
-            this.setDead();
+        	}
+        	this.setDead();
         }
 	}
 	

@@ -33,18 +33,24 @@ public class QuestMineBlock extends Quest
 	@SubscribeEvent
 	public void onBreakBlock(BlockEvent.BreakEvent event)
 	{
-		EntityPlayer player = event.getPlayer();
-		if(!player.hasAchievement(achievement))
+		try
 		{
-			Block block = event.getState().getBlock();
-			for(int i = 0; i < blocksToBeMine.length; i++)
+			EntityPlayer player = event.getPlayer();
+			if(!player.hasAchievement(achievement))
 			{
-				if(Block.isEqualTo(block, blocksToBeMine[i]))
+				Block block = event.getState().getBlock();
+				for(int i = 0; i < blocksToBeMine.length; i++)
 				{
-					player.addStat(achievement, 1);
-					return;
+					if(Block.isEqualTo(block, blocksToBeMine[i]))
+					{
+						player.addStat(achievement, 1);
+						return;
+					}
 				}
 			}
+		}
+		catch(Exception e)
+		{
 		}
 	}
 }

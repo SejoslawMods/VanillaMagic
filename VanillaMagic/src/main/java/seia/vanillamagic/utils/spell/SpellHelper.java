@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
 import seia.vanillamagic.entity.EntitySpellTeleport;
 import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
 
@@ -47,6 +48,10 @@ public class SpellHelper
 		else if(spellID == EnumSpell.METEOR.spellID)
 		{
 			return spellSummonMeteor(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.LIGHTNING_BOLT.spellID)
+		{
+			return spellSummonLightningBolt(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -86,7 +91,9 @@ public class SpellHelper
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
 			EntitySmallFireball fireball = new EntitySmallFireball(world, 
-					caster.posX, caster.posY + 1.5D, caster.posZ, 
+					caster.posX + accelX, 
+					caster.posY + 1.5D + accelY, 
+					caster.posZ + accelZ, 
 					accelX, accelY, accelZ);
 			fireball.shootingEntity = caster;
 			fireball.motionX = 0.0D;
@@ -120,7 +127,9 @@ public class SpellHelper
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
 			EntityLargeFireball fireball = new EntityLargeFireball(world, 
-					caster.posX, caster.posY + 1.5D, caster.posZ, 
+					caster.posX + accelX, 
+					caster.posY + 1.5D + accelY, 
+					caster.posZ + accelZ,
 					accelX, accelY, accelZ);
 			fireball.shootingEntity = caster;
 			fireball.motionX = 0.0D;
@@ -177,6 +186,28 @@ public class SpellHelper
 			EntitySpellSummonMeteor spellMeteor = new EntitySpellSummonMeteor(world, caster, 
 					accelX, accelY, accelZ);
 			world.spawnEntityInWorld(spellMeteor);
+			world.updateEntities();
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * Thunder !!!
+	 */
+	public static boolean spellSummonLightningBolt(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		if(pos == null)
+		{
+			World world = caster.worldObj;
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntitySpellSummonLightningBolt spellLightningBolt = new EntitySpellSummonLightningBolt(world,
+					caster, accelX, accelY, accelZ);
+			world.spawnEntityInWorld(spellLightningBolt);
 			world.updateEntities();
 			return true;
 		}

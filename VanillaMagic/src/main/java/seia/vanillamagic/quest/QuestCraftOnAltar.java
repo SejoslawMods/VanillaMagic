@@ -23,23 +23,23 @@ public class QuestCraftOnAltar extends Quest
 {
 	protected ItemStack[] ingredients; // each ItemStack is a different Item
 	protected ItemStack result;
-	protected int requiredAltairTier;
+	protected int requiredAltarTier;
 	protected EnumWand requiredMinimalWand;
 	
 	public QuestCraftOnAltar(Achievement required, int posX, int posY, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack result, int requiredAltairTier, EnumWand requiredMinimalWand)
+			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand)
 	{
 		this(required, posX, posY, result.getItem(), questName, uniqueName, 
-				ingredients, result, requiredAltairTier, requiredMinimalWand);
+				ingredients, result, requiredAltarTier, requiredMinimalWand);
 	}
 	
 	public QuestCraftOnAltar(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack result, int requiredAltairTier, EnumWand requiredMinimalWand) 
+			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.ingredients = ingredients;
 		this.result = result;
-		this.requiredAltairTier = requiredAltairTier;
+		this.requiredAltarTier = requiredAltarTier;
 		this.requiredMinimalWand = requiredMinimalWand;
 	}
 	
@@ -55,7 +55,7 @@ public class QuestCraftOnAltar extends Quest
 	
 	public int getRequiredAltarTier()
 	{
-		return requiredAltairTier;
+		return requiredAltarTier;
 	}
 	
 	public int getIngredientsStackSize()
@@ -79,7 +79,7 @@ public class QuestCraftOnAltar extends Quest
 	}
 	
 	@SubscribeEvent
-	public void craftOnAltair(RightClickBlock event)
+	public void craftOnAltar(RightClickBlock event)
 	{
 		try
 		{
@@ -94,7 +94,7 @@ public class QuestCraftOnAltar extends Quest
 				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
 					// is altair build correct
-					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltairTier))
+					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 					{
 						// all entities on World
 						List<Entity> loadedEntities = world.loadedEntityList;

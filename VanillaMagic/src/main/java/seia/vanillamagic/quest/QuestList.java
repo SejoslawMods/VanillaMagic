@@ -29,13 +29,17 @@ public class QuestList
 			QUEST_CRAFT_STICK.getPosY() - 2, 
 			EnumSpell.LIGHTER);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_SMALL_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTER.getAchievement(), 
-			QUEST_CAST_SPELL_LIGHTER.getPosX() + 2, 
-			QUEST_CAST_SPELL_LIGHTER.getPosY(), 
+			QUEST_CAST_SPELL_LIGHTER.getPosX(), 
+			QUEST_CAST_SPELL_LIGHTER.getPosY() - 2, 
 			EnumSpell.SMALL_FIREBALL);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LARGE_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL.getAchievement(), 
 			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosX() + 2, 
 			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosY(),
 			EnumSpell.LARGE_FIREBALL);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LIGHTNING_BOLT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL.getAchievement(), 
+			QUEST_CAST_SPELL_LARGE_FIREBALL.getPosX(), 
+			QUEST_CAST_SPELL_LARGE_FIREBALL.getPosY() + 2, 
+			EnumSpell.LIGHTNING_BOLT);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL.getAchievement(), 
 			QUEST_CAST_SPELL_LARGE_FIREBALL.getPosX(), 
 			QUEST_CAST_SPELL_LARGE_FIREBALL.getPosY() - 2, 
@@ -62,8 +66,8 @@ public class QuestList
 			QUEST_MINE_REDSTONE.getPosX(), 
 			QUEST_MINE_REDSTONE.getPosY() + 2, 
 			Items.CAULDRON, 
-			"Build ALTAR Tier 1", 
-			"buildALTARTier1", 
+			"Build Altar Tier 1", 
+			"buildAltarTier1", 
 			1);
 	public static final QuestCraftOnAltar QUEST_CRAFT_GUNPOWDER = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_1.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_1.getPosX() - 2, 
@@ -133,8 +137,8 @@ public class QuestList
 			QUEST_BUILD_ALTAR_TIER_1.getPosX(), 
 			QUEST_BUILD_ALTAR_TIER_1.getPosY() + 2, 
 			Items.CAULDRON, 
-			"Build ALTAR Tier 2", 
-			"buildALTARTier2", 
+			"Build Altar Tier 2", 
+			"buildAltarTier2", 
 			2);
 	public static final QuestCraftOnAltar QUEST_CRAFT_IRON_ORE = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_2.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_2.getPosX() + 2, 
@@ -159,8 +163,8 @@ public class QuestList
 			QUEST_BUILD_ALTAR_TIER_2.getPosX(), 
 			QUEST_BUILD_ALTAR_TIER_2.getPosY() + 2,
 			Items.CAULDRON, 
-			"Build ALTAR Tier 3", 
-			"buildALTARTier3", 
+			"Build Altar Tier 3", 
+			"buildAltarTier3", 
 			3);
 	public static final QuestCraftOnAltar QUEST_CRAFT_GOLD_INGOT = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_3.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_3.getPosX() + 2, 
@@ -177,8 +181,8 @@ public class QuestList
 			QUEST_BUILD_ALTAR_TIER_3.getPosX(), 
 			QUEST_BUILD_ALTAR_TIER_3.getPosY() + 2,
 			Items.CAULDRON, 
-			"Build ALTAR Tier 4", 
-			"buildALTARTier4", 
+			"Build Altar Tier 4", 
+			"buildAltarTier4", 
 			4);
 	public static final QuestCraftOnAltar QUEST_CRAFT_ROTTEN_FLESH = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_4.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_4.getPosX() + 2, 
@@ -240,8 +244,8 @@ public class QuestList
 			QUEST_BUILD_ALTAR_TIER_4.getPosX(), 
 			QUEST_BUILD_ALTAR_TIER_4.getPosY() + 2,
 			Items.CAULDRON, 
-			"Build ALTAR Tier 5", 
-			"buildALTARTier5", 
+			"Build Altar Tier 5", 
+			"buildAltarTier5", 
 			5);
 	public static final QuestCraftOnAltar QUEST_CRAFT_GLOWSTONE_DUST = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_5.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_5.getPosX() - 2, 
@@ -263,8 +267,8 @@ public class QuestList
 			QUEST_PICK_BLAZE_ROD.getPosX(), 
 			QUEST_PICK_BLAZE_ROD.getPosY() + 2,
 			Items.CAULDRON, 
-			"Build ALTAR Tier 6", 
-			"buildALTARTier6", 
+			"Build Altar Tier 6", 
+			"buildAltarTier6", 
 			6);
 	public static final QuestCraftOnAltar QUEST_CRAFT_DIAMOND = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_6.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_6.getPosX() + 2, 
@@ -280,8 +284,8 @@ public class QuestList
 			QUEST_BUILD_ALTAR_TIER_6.getPosX(), 
 			QUEST_BUILD_ALTAR_TIER_6.getPosY() + 2,
 			Items.CAULDRON, 
-			"Build ALTAR Tier 7", 
-			"buildALTARTier7", 
+			"Build Altar Tier 7", 
+			"buildAltarTier7", 
 			7);
 	public static final QuestCraftOnAltar QUEST_CRAFT_EMERALD = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_7.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_7.getPosX() + 2, 

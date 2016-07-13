@@ -30,19 +30,25 @@ public class QuestBuildAltar extends Quest
 	@SubscribeEvent
 	public void placeBlock(BlockEvent.PlaceEvent event)
 	{
-		EntityPlayer player = event.getPlayer();
-		BlockPos middlePos = event.getBlockSnapshot().getPos();
-		Block middleBlock = event.getPlacedBlock().getBlock();
-		if(!player.hasAchievement(achievement))
+		try
 		{
-			if(middleBlock instanceof BlockCauldron)
+			EntityPlayer player = event.getPlayer();
+			BlockPos middlePos = event.getBlockSnapshot().getPos();
+			Block middleBlock = event.getPlacedBlock().getBlock();
+			if(!player.hasAchievement(achievement))
 			{
-				BlockSnapshot block = event.getBlockSnapshot();
-				if(AltarChecker.checkAltarTier(block.getWorld(), block.getPos(), tier))
+				if(middleBlock instanceof BlockCauldron)
 				{
-					player.addStat(achievement, 1);
+					BlockSnapshot block = event.getBlockSnapshot();
+					if(AltarChecker.checkAltarTier(block.getWorld(), block.getPos(), tier))
+					{
+						player.addStat(achievement, 1);
+					}
 				}
 			}
+		}
+		catch(Exception e)
+		{
 		}
 	}
 }

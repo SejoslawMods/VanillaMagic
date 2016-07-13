@@ -15,7 +15,7 @@ import seia.vanillamagic.quest.QuestList;
 public class VanillaMagic 
 {
 	public static final String MODID = "vanillamagic";
-	public static final String VERSION = "1.10.2-0.0.4.0";
+	public static final String VERSION = "1.10.2-0.1.0.0";
 	public static final String NAME = "Vanilla Magic";
 	
 	@EventHandler
@@ -28,6 +28,7 @@ public class VanillaMagic
 			System.out.println("Registered event: [" + name + "]");
 		}
 		System.out.println("Registered events: " + VanillaMagicQuestHandler.INSTANCE.registeredEvents.size());
+		VanillaMagicDebug.INSTANCE.init();
 	}
 	
 	@EventHandler
