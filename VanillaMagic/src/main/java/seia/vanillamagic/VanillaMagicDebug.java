@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.stats.AchievementList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -46,6 +47,10 @@ public class VanillaMagicDebug
 			{
 				Achievement toAchieve = quest.getAchievement();
 				player.addStat(toAchieve, 1);
+			}
+			for(Achievement a : AchievementList.ACHIEVEMENTS)
+			{
+				player.addStat(a, 1);
 			}
 		}
 	}

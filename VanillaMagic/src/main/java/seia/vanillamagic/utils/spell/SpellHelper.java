@@ -2,6 +2,27 @@ package seia.vanillamagic.utils.spell;
 
 import java.util.Random;
 
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntityRabbit;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -52,6 +73,14 @@ public class SpellHelper
 		else if(spellID == EnumSpell.LIGHTNING_BOLT.spellID)
 		{
 			return spellSummonLightningBolt(caster, pos, face, hitVec);
+		}
+		else if(EnumSpell.isSpellSummonAnimal(spellID))
+		{
+			return spellSummonAnimal(caster, pos, face, hitVec, spellID);
+		}
+		else if(EnumSpell.isSpellSummonMob(spellID))
+		{
+			return spellSummonMob(caster, pos, face, hitVec, spellID);
 		}
 		return false;
 	}
@@ -210,6 +239,133 @@ public class SpellHelper
 			world.spawnEntityInWorld(spellLightningBolt);
 			world.updateEntities();
 			return true;
+		}
+		return false;
+	}
+	
+	public static boolean spellSummonAnimal(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec,
+			int spellID)
+	{
+		if(pos != null)
+		{
+			World world = caster.worldObj;
+			BlockPos spawnPos = pos.offset(face);
+			EntityAgeable entityAgeable = null;
+			if(spellID == EnumSpell.SUMMON_CHICKEN.spellID)
+			{
+				entityAgeable = new EntityChicken(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_PIG.spellID)
+			{
+				entityAgeable = new EntityPig(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_COW.spellID)
+			{
+				entityAgeable = new EntityCow(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_MOOSHROOM.spellID)
+			{
+				entityAgeable = new EntityMooshroom(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_SHEEP.spellID)
+			{
+				entityAgeable = new EntitySheep(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_WOLF.spellID)
+			{
+				entityAgeable = new EntityWolf(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_RABBIT.spellID)
+			{
+				entityAgeable = new EntityRabbit(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_HORSE.spellID)
+			{
+				entityAgeable = new EntityHorse(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_VILLAGER.spellID)
+			{
+				entityAgeable = new EntityVillager(world);
+			}
+			
+			if(entityAgeable != null)
+			{
+				entityAgeable.setGrowingAge(1);
+				entityAgeable.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+				world.spawnEntityInWorld(entityAgeable);
+				world.updateEntities();
+				return true;
+			}
+			else
+			{
+				System.out.println("Wrong spellID. (spellID = " + spellID + ")");
+			}
+		}
+		return false;
+	}
+	
+	public static boolean spellSummonMob(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec,
+			int spellID)
+	{
+		if(pos != null)
+		{
+			World world = caster.worldObj;
+			BlockPos spawnPos = pos.offset(face);
+			EntityLiving entityMob = null;
+			if(spellID == EnumSpell.SUMMON_ZOMBIE.spellID)
+			{
+				entityMob = new EntityZombie(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_CREEPER.spellID)
+			{
+				entityMob = new EntityCreeper(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_SKELETON.spellID)
+			{
+				entityMob = new EntitySkeleton(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_BLAZE.spellID)
+			{
+				entityMob = new EntityBlaze(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_MAGMA_CUBE.spellID)
+			{
+				entityMob = new EntityMagmaCube(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_GHAST.spellID)
+			{
+				entityMob = new EntityGhast(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_ENDERMAN.spellID)
+			{
+				entityMob = new EntityEnderman(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_SPIDER.spellID)
+			{
+				entityMob = new EntitySpider(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_SLIME.spellID)
+			{
+				entityMob = new EntitySlime(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_WITCH.spellID)
+			{
+				entityMob = new EntityWitch(world);
+			}
+			
+			if(entityMob != null)
+			{
+				entityMob.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+				world.spawnEntityInWorld(entityMob);
+				world.updateEntities();
+				return true;
+			}
+			else
+			{
+				System.out.println("Wrong spellID. (spellID = " + spellID + ")");
+			}
 		}
 		return false;
 	}

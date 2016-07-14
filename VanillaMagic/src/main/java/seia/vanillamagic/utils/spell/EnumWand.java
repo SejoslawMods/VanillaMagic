@@ -26,7 +26,7 @@ public enum EnumWand
 	 */
 	public boolean canWandDoWork(int requiredTier)
 	{
-		if(this.wandTier >= requiredTier)
+		if(this.wandTier == requiredTier) // TODO: If equal than we could have more combinations
 		{
 			return true;
 		}
@@ -110,6 +110,6 @@ public enum EnumWand
 
 	public static boolean isWandRightForSpell(EnumWand wandPlayerHand, EnumSpell spell) 
 	{
-		return wandPlayerHand.wandTier >= spell.minimalWandTier.wandTier;
+		return wandPlayerHand.canWandDoWork(spell.minimalWandTier.wandTier);
 	}
 }

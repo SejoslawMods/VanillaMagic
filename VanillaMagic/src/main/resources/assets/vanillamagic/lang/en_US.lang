@@ -27,6 +27,67 @@ achievement.spellSummonLightningBolt.desc=Hold Blaze Rod in Your hand and at lea
 
 
 
+achievement.spellSummonChicken=Summon Chicken
+achievement.spellSummonChicken.desc=Hold Nether Star in Your hand and 32x Chicken in Your left hand and right-click on block
+
+achievement.spellSummonPig=Summon Pig
+achievement.spellSummonPig.desc=Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block
+
+achievement.spellSummonCow=Summon Cow
+achievement.spellSummonCow.desc=Hold Nether Star in Your hand and 32x Beef in Your left hand and right-click on block
+
+achievement.spellSummonMooshroom=Summon Mooshroom
+achievement.spellSummonMooshroom.desc=Hold Nether Star in Your hand and 32x Cooked Beef in Your left hand and right-click on block
+
+achievement.spellSummonSheep=Summon Sheep
+achievement.spellSummonSheep.desc=Hold Nether Star in Your hand and 32x Mutton in Your left hand and right-click on block
+
+achievement.spellSummonWolf=Summon Wolf
+achievement.spellSummonWolf.desc=Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block
+
+achievement.spellSummonRabbit=Summon Rabbit
+achievement.spellSummonRabbit.desc=Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block
+
+achievement.spellSummonHorse=Summon Horse
+achievement.spellSummonHorse.desc=Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block
+
+achievement.spellSummonVillager=Summon Villager
+achievement.spellSummonVillager.desc=Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block
+
+
+
+achievement.spellSummonZombie=Summon Zombie
+achievement.spellSummonZombie.desc=Hold Nether Star in Your hand and 32x Rotten Flesh in Your left hand and right-click on block
+
+achievement.spellSummonCreeper=Summon Creeper
+achievement.spellSummonCreeper.desc=Hold Nether Star in Your hand and 32x Gunpowder in Your left hand and right-click on block
+
+achievement.spellSummonSkeleton=Summon Skeleton
+achievement.spellSummonSkeleton.desc=Hold Nether Star in Your hand and 32x Bone in Your left hand and right-click on block
+
+achievement.spellSummonBlaze=Summon Blaze
+achievement.spellSummonBlaze.desc=Hold Nether Star in Your hand and 32x Blaze Rod in Your left hand and right-click on block
+
+achievement.spellSummonMagmaCube=Summon Magma Cube
+achievement.spellSummonMagmaCube.desc=Hold Nether Star in Your hand and 32x Magma Cream in Your left hand and right-click on block
+
+achievement.spellSummonGhast=Summon Ghast
+achievement.spellSummonGhast.desc=Hold Nether Star in Your hand and 32x Ghast Tear in Your left hand and right-click on block
+
+achievement.spellSummonEnderman=Summon Enderman
+achievement.spellSummonEnderman.desc=Hold Nether Star in Your hand and 32x Blaze Powder in Your left hand and right-click on block
+
+achievement.spellSummonSpider=Summon Spider
+achievement.spellSummonSpider.desc=Hold Nether Star in Your hand and 32x String in Your left hand and right-click on block
+
+achievement.spellSummonSlime=Summon Slime
+achievement.spellSummonSlime.desc=Hold Nether Star in Your hand and 32x Slime Ball in Your left hand and right-click on block
+
+achievement.spellSummonWitch=Summon Witch
+achievement.spellSummonWitch.desc=Hold Nether Star in Your hand and 32x Glowstone Dust in Your left hand and right-click on block
+
+
+
 achievement.craftBook=Craft Book
 achievement.craftBook.desc=Craft book
 
@@ -136,5 +197,3 @@ achievement.craftNetherStar.desc=Toss 4x Emerald Block into the Altar Tier 7 and
 
 achievement.craftDragonEgg=Craft Dragon Egg
 achievement.craftDragonEgg.desc=Toss 4x Nether Star into the Altar Tier 7 and right-click with a Blaze Rod in hand
-
-

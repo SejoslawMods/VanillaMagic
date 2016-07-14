@@ -32,6 +32,89 @@ public class QuestList
 			QUEST_CAST_SPELL_LIGHTER.getPosX(), 
 			QUEST_CAST_SPELL_LIGHTER.getPosY() - 2, 
 			EnumSpell.SMALL_FIREBALL);
+	
+	// SUMMONS Passive Entities
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_CHICKEN = new QuestCastSpellOnBlock(QUEST_CAST_SPELL_SMALL_FIREBALL.getAchievement(), 
+			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosX() - 2, 
+			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosY(), 
+			EnumSpell.SUMMON_CHICKEN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_PIG = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN.getAchievement(), 
+			QUEST_SUMMON_CHICKEN.getPosX() - 2, 
+			QUEST_SUMMON_CHICKEN.getPosY(), 
+			EnumSpell.SUMMON_PIG);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_COW = new QuestCastSpellOnBlock(QUEST_SUMMON_PIG.getAchievement(), 
+			QUEST_SUMMON_PIG.getPosX() - 2, 
+			QUEST_SUMMON_PIG.getPosY(), 
+			EnumSpell.SUMMON_COW);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_MOOSHROOM = new QuestCastSpellOnBlock(QUEST_SUMMON_COW.getAchievement(), 
+			QUEST_SUMMON_COW.getPosX(), 
+			QUEST_SUMMON_COW.getPosY() + 2, 
+			EnumSpell.SUMMON_MOOSHROOM);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SHEEP = new QuestCastSpellOnBlock(QUEST_SUMMON_COW.getAchievement(), 
+			QUEST_SUMMON_COW.getPosX() - 2, 
+			QUEST_SUMMON_COW.getPosY(), 
+			EnumSpell.SUMMON_SHEEP);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_WOLF = new QuestCastSpellOnBlock(QUEST_SUMMON_SHEEP.getAchievement(), 
+			QUEST_SUMMON_SHEEP.getPosX(), 
+			QUEST_SUMMON_SHEEP.getPosY() + 2, 
+			EnumSpell.SUMMON_WOLF);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_RABBIT = new QuestCastSpellOnBlock(QUEST_SUMMON_SHEEP.getAchievement(), 
+			QUEST_SUMMON_SHEEP.getPosX() - 2, 
+			QUEST_SUMMON_SHEEP.getPosY(), 
+			EnumSpell.SUMMON_RABBIT);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_HORSE = new QuestCastSpellOnBlock(QUEST_SUMMON_RABBIT.getAchievement(), 
+			QUEST_SUMMON_RABBIT.getPosX() - 2, 
+			QUEST_SUMMON_RABBIT.getPosY(), 
+			EnumSpell.SUMMON_HORSE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_VILLAGER = new QuestCastSpellOnBlock(QUEST_SUMMON_HORSE.getAchievement(), 
+			QUEST_SUMMON_HORSE.getPosX() - 2, 
+			QUEST_SUMMON_HORSE.getPosY(), 
+			EnumSpell.SUMMON_VILLAGER);
+	// END SUMMONS Passive Entities
+	
+	//SUMMONS Monster
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_ZOMBIE = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN.getAchievement(), 
+			QUEST_SUMMON_CHICKEN.getPosX(), 
+			QUEST_SUMMON_CHICKEN.getPosY() - 2, 
+			EnumSpell.SUMMON_ZOMBIE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_CREEPER = new QuestCastSpellOnBlock(QUEST_SUMMON_ZOMBIE.getAchievement(), 
+			QUEST_SUMMON_ZOMBIE.getPosX() - 2, 
+			QUEST_SUMMON_ZOMBIE.getPosY(), 
+			EnumSpell.SUMMON_CREEPER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SKELETON = new QuestCastSpellOnBlock(QUEST_SUMMON_CREEPER.getAchievement(), 
+			QUEST_SUMMON_CREEPER.getPosX() - 2, 
+			QUEST_SUMMON_CREEPER.getPosY(), 
+			EnumSpell.SUMMON_SKELETON);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_BLAZE = new QuestCastSpellOnBlock(QUEST_SUMMON_SKELETON.getAchievement(), 
+			QUEST_SUMMON_SKELETON.getPosX() - 2, 
+			QUEST_SUMMON_SKELETON.getPosY(), 
+			EnumSpell.SUMMON_BLAZE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_MAGMA_CUBE = new QuestCastSpellOnBlock(QUEST_SUMMON_BLAZE.getAchievement(), 
+			QUEST_SUMMON_BLAZE.getPosX() - 2, 
+			QUEST_SUMMON_BLAZE.getPosY(), 
+			EnumSpell.SUMMON_MAGMA_CUBE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_GHAST = new QuestCastSpellOnBlock(QUEST_SUMMON_MAGMA_CUBE.getAchievement(), 
+			QUEST_SUMMON_MAGMA_CUBE.getPosX() - 2, 
+			QUEST_SUMMON_MAGMA_CUBE.getPosY(), 
+			EnumSpell.SUMMON_GHAST);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_ENDERMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_GHAST.getAchievement(), 
+			QUEST_SUMMON_GHAST.getPosX() - 2, 
+			QUEST_SUMMON_GHAST.getPosY(), 
+			EnumSpell.SUMMON_ENDERMAN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SPIDER = new QuestCastSpellOnBlock(QUEST_SUMMON_ENDERMAN.getAchievement(), 
+			QUEST_SUMMON_ENDERMAN.getPosX() - 2, 
+			QUEST_SUMMON_ENDERMAN.getPosY(), 
+			EnumSpell.SUMMON_SPIDER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SLIME = new QuestCastSpellOnBlock(QUEST_SUMMON_SPIDER.getAchievement(), 
+			QUEST_SUMMON_SPIDER.getPosX() - 2, 
+			QUEST_SUMMON_SPIDER.getPosY(), 
+			EnumSpell.SUMMON_SLIME);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITCH = new QuestCastSpellOnBlock(QUEST_SUMMON_SLIME.getAchievement(), 
+			QUEST_SUMMON_SLIME.getPosX() - 2, 
+			QUEST_SUMMON_SLIME.getPosY(), 
+			EnumSpell.SUMMON_WITCH);
+	// END SUMMONS Monster
+	
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LARGE_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL.getAchievement(), 
 			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosX() + 2, 
 			QUEST_CAST_SPELL_SMALL_FIREBALL.getPosY(),
