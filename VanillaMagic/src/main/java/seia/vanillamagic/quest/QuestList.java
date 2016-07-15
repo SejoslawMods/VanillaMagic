@@ -396,6 +396,11 @@ public class QuestList
 			new ItemStack(Items.NETHER_STAR), 
 			7,
 			EnumWand.BLAZE_ROD);
+	public static final QuestItemMagnet QUEST_MAGNET = new QuestItemMagnet(QUEST_CRAFT_NETHER_STAR.getAchievement(), 
+			QUEST_CRAFT_NETHER_STAR.getPosX(), 
+			QUEST_CRAFT_NETHER_STAR.getPosY() + 2, 
+			"Item Magnet", 
+			"itemMagnet");
 	public static final QuestCraftOnAltar QUEST_CRAFT_DRAGON_EGG = new QuestCraftOnAltar(QUEST_CRAFT_NETHER_STAR.getAchievement(), 
 			QUEST_CRAFT_NETHER_STAR.getPosX() + 2, 
 			QUEST_CRAFT_NETHER_STAR.getPosY(),  
