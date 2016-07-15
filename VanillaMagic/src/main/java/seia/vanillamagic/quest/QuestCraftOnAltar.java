@@ -21,10 +21,10 @@ import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestCraftOnAltar extends Quest
 {
-	protected ItemStack[] ingredients; // each ItemStack is a different Item
-	protected ItemStack result;
-	protected int requiredAltarTier;
-	protected EnumWand requiredMinimalWand;
+	public final ItemStack[] ingredients; // each ItemStack is a different Item
+	public final ItemStack result;
+	public final int requiredAltarTier;
+	public final EnumWand requiredMinimalWand;
 	
 	public QuestCraftOnAltar(Achievement required, int posX, int posY, String questName, String uniqueName, 
 			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand)
@@ -41,21 +41,6 @@ public class QuestCraftOnAltar extends Quest
 		this.result = result;
 		this.requiredAltarTier = requiredAltarTier;
 		this.requiredMinimalWand = requiredMinimalWand;
-	}
-	
-	public ItemStack[] getIngredients()
-	{
-		return ingredients;
-	}
-	
-	public ItemStack getResult()
-	{
-		return result;
-	}
-	
-	public int getRequiredAltarTier()
-	{
-		return requiredAltarTier;
 	}
 	
 	public int getIngredientsStackSize()
@@ -86,7 +71,7 @@ public class QuestCraftOnAltar extends Quest
 			EntityPlayer player = event.getEntityPlayer();
 			BlockPos cauldronPos = event.getPos();
 			
-			// player has got stick in hand
+			// player has got required wand in hand
 			if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
 			{
 				World world = player.worldObj;
@@ -96,7 +81,7 @@ public class QuestCraftOnAltar extends Quest
 					// is altair build correct
 					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 					{
-						// all entities on World
+						// all entities in World
 						List<Entity> loadedEntities = world.loadedEntityList;
 						// all items in cauldron
 						List<EntityItem> entitiesInCauldron = new ArrayList<EntityItem>();

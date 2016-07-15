@@ -249,6 +249,14 @@ public class QuestList
 			"Build Altar Tier 3", 
 			"buildAltarTier3", 
 			3);
+	public static final QuestSmeltOnAltar QUEST_SMELT_ON_ALTAR = new QuestSmeltOnAltar(QUEST_BUILD_ALTAR_TIER_3.getAchievement(), 
+			QUEST_BUILD_ALTAR_TIER_3.getPosX() - 2, 
+			QUEST_BUILD_ALTAR_TIER_3.getPosY() + 1, 
+			Item.getItemFromBlock(Blocks.FURNACE), 
+			"Smelt in Altar", 
+			"smeltInAltar", 
+			1, 
+			EnumWand.STICK);
 	public static final QuestCraftOnAltar QUEST_CRAFT_GOLD_INGOT = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_3.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_3.getPosX() + 2, 
 			QUEST_BUILD_ALTAR_TIER_3.getPosY() + 1, 

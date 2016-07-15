@@ -13,18 +13,13 @@ import seia.vanillamagic.utils.AltarChecker;
 
 public class QuestBuildAltar extends Quest
 {
-	protected int tier;
+	public final int tier;
 	
 	public QuestBuildAltar(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
 			int tier)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.tier = tier;
-	}
-	
-	public int getTier()
-	{
-		return tier;
 	}
 	
 	@SubscribeEvent

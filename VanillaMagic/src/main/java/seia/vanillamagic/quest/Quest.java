@@ -5,15 +5,21 @@ import net.minecraft.stats.Achievement;
 
 public abstract class Quest
 {
-	protected Achievement achievement;
-	protected Achievement required;
-	protected int posX, posY;
-	protected Item itemIcon;
-	protected String questName, uniqueName;
+	public final Achievement achievement;
+	public final Achievement required;
+	public final int posX, posY;
+	public final Item itemIcon;
+	public final String questName, uniqueName;
 	
-	@Deprecated
-	public Quest()
+	private Quest()
 	{
+		achievement = null;
+		required = null;
+		posX = 0;
+		posY = 0;
+		itemIcon = null;
+		questName = "";
+		uniqueName = "";
 	}
 	
 	public Quest(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName)

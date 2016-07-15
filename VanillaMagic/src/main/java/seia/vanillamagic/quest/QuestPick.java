@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 
 public class QuestPick extends Quest
 {
-	protected ItemStack whatToPick;
+	public final ItemStack whatToPick;
 	
 	public QuestPick(Achievement required, int posX, int posY, String questName, String uniqueName,
 			ItemStack whatToPick)
@@ -24,11 +24,6 @@ public class QuestPick extends Quest
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.whatToPick = whatToPick;
-	}
-	
-	public ItemStack getItemToPick()
-	{
-		return whatToPick;
 	}
 	
 	@SubscribeEvent

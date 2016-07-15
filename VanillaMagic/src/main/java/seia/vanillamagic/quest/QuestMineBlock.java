@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class QuestMineBlock extends Quest
 {
-	protected Block[] blocksToBeMine;
+	public final Block[] blocksToBeMine;
 	
 	public QuestMineBlock(Achievement required, int posX, int posY, String questName, String uniqueName, 
 			Block[] blocksToBeMine) 
@@ -23,11 +23,6 @@ public class QuestMineBlock extends Quest
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.blocksToBeMine = blocksToBeMine;
-	}
-	
-	public Block[] getBlocksToBeMine()
-	{
-		return blocksToBeMine;
 	}
 	
 	@SubscribeEvent
