@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
+import seia.vanillamagic.quest.quarry.QuestQuarry;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
 import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
 import seia.vanillamagic.utils.ItemStackHelper;
@@ -265,6 +266,11 @@ public class QuestList
 			Items.DIAMOND_AXE, 
 			"Full Tree Cut", 
 			"fullTreeCut");
+	public static final QuestQuarry QUEST_QUARRY = new QuestQuarry(QUEST_FULL_TREE_CUT.getAchievement(), 
+			QUEST_FULL_TREE_CUT.getPosX() - 2, 
+			QUEST_FULL_TREE_CUT.getPosY(), 
+			"Quarry !!!", 
+			"quarry");
 			*/
 	public static final QuestCraftOnAltar QUEST_CRAFT_GOLD_INGOT = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_3.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_3.getPosX() + 2, 
