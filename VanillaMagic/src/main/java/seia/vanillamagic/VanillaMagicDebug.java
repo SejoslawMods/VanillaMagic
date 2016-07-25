@@ -33,7 +33,7 @@ public class VanillaMagicDebug
 		}
 	}
 	
-	public void init()
+	public void preInit()
 	{
 	}
 	

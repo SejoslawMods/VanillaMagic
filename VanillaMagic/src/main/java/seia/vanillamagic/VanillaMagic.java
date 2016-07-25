@@ -1,11 +1,13 @@
 package seia.vanillamagic;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.quest.QuestList;
+import seia.vanillamagic.quest.quarry.QuarryHandler;
 
 @Mod(
 		modid = VanillaMagic.MODID, 
@@ -15,7 +17,7 @@ import seia.vanillamagic.quest.QuestList;
 public class VanillaMagic 
 {
 	public static final String MODID = "vanillamagic";
-	public static final String VERSION = "1.10.2-0.4.0.0";
+	public static final String VERSION = "1.10.2-0.5.0.0";
 	public static final String NAME = "Vanilla Magic";
 	
 	@EventHandler
@@ -28,7 +30,9 @@ public class VanillaMagic
 			System.out.println("Registered event: [" + name + "]");
 		}
 		System.out.println("Registered events: " + VanillaMagicQuestHandler.INSTANCE.registeredEvents.size());
-		VanillaMagicDebug.INSTANCE.init();
+		VanillaMagicDebug.INSTANCE.preInit();
+		VanillaMagicIntegration.INSTANCE.preInit();
+		MinecraftForge.EVENT_BUS.register(QuarryHandler.INSTANCE);
 	}
 	
 	@EventHandler
@@ -41,10 +45,12 @@ public class VanillaMagic
 			System.out.println("Registered achievement: [" + name + "]");
 		}
 		System.out.println("Registered achievements: " + VanillaMagicQuestHandler.INSTANCE.getAchievements().size());
+		VanillaMagicIntegration.INSTANCE.init();
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		VanillaMagicIntegration.INSTANCE.postInit();
 	}
 }

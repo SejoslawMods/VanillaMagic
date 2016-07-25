@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
 import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
 import seia.vanillamagic.utils.ItemStackHelper;
@@ -257,6 +258,14 @@ public class QuestList
 			"smeltInAltar", 
 			1, 
 			EnumWand.STICK);
+	/*
+	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_SMELT_ON_ALTAR.getAchievement(), 
+			QUEST_SMELT_ON_ALTAR.getPosX() - 2, 
+			QUEST_SMELT_ON_ALTAR.getPosY(), 
+			Items.DIAMOND_AXE, 
+			"Full Tree Cut", 
+			"fullTreeCut");
+			*/
 	public static final QuestCraftOnAltar QUEST_CRAFT_GOLD_INGOT = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_3.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_3.getPosX() + 2, 
 			QUEST_BUILD_ALTAR_TIER_3.getPosY() + 1, 
@@ -451,7 +460,5 @@ public class QuestList
 	{
 		// TODO: for each crafting create an QuestCraftOnAltar
 		//List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
-		
-		//TODO: for each smelting recipe create an QuestCraftOnAltar which is an input slot item + 1 Coal = output smelting
 	}
 }

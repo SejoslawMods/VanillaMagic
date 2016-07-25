@@ -1,6 +1,9 @@
 package seia.vanillamagic.utils;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class BlockPosHelper
 {
@@ -17,5 +20,29 @@ public class BlockPosHelper
 			}
 		}
 		return false;
+	}
+	
+	public static void printCoords(BlockPos pos)
+	{
+		System.out.println(" X = " + pos.getX());
+		System.out.println(" Y = " + pos.getY());
+		System.out.println(" Z = " + pos.getZ());
+	}
+	
+	public static void printCoords(Block block, BlockPos pos)
+	{
+		System.out.println(block.toString());
+		printCoords(pos);
+	}
+	
+	public static void printCoords(World world, BlockPos pos)
+	{
+		Block block = world.getBlockState(pos).getBlock();
+		printCoords(block, pos);
+	}
+	
+	public static void printCoords(EntityPlayer player, BlockPos pos)
+	{
+		printCoords(player.worldObj, pos);
 	}
 }
