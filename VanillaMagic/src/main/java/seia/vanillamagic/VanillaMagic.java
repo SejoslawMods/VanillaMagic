@@ -26,8 +26,7 @@ public class VanillaMagic
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
 			VanillaMagicQuestHandler.INSTANCE.registerEvent(QuestList.QUESTS.get(i));
-			String name = QuestList.QUESTS.get(i).getQuestName();
-			System.out.println("Registered event: [" + name + "]");
+			//System.out.println("Registered event: [" + QuestList.QUESTS.get(i).getQuestName() + "]");
 		}
 		System.out.println("Registered events: " + VanillaMagicQuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
@@ -43,8 +42,7 @@ public class VanillaMagic
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
 			VanillaMagicQuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).getAchievement());
-			String name = QuestList.QUESTS.get(i).getUniqueName();
-			System.out.println("Registered achievement: [" + name + "]");
+			//System.out.println("Registered achievement: [" + QuestList.QUESTS.get(i).getUniqueName() + "]");
 		}
 		System.out.println("Registered achievements: " + VanillaMagicQuestHandler.INSTANCE.getAchievements().size());
 		VanillaMagicIntegration.INSTANCE.init();

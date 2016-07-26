@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import seia.vanillamagic.utils.ToolHelper;
 
 public class TreeChopTask 
@@ -36,7 +36,7 @@ public class TreeChopTask
 	}
 
 	@SubscribeEvent
-	public void chopChop(TickEvent.WorldTickEvent event) 
+	public void chopChop(WorldTickEvent event)
 	{
 		if(event.side.isClient()) 
 		{

@@ -26,6 +26,8 @@ public class QuarryHandler implements Serializable
 	public void addNewQuerry(Quarry quarry)
 	{
 		quarryList.add(quarry);
+		System.out.println("Quarry registered at:");
+		BlockPosHelper.printCoords(quarry.quarryPos);
 	}
 	
 	public void removeQuarryFromList(BlockPos quarryPos)
@@ -36,9 +38,16 @@ public class QuarryHandler implements Serializable
 			if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.quarryPos))
 			{
 				quarryList.remove(i);
+				System.out.println("Quarry removed at:");
+				BlockPosHelper.printCoords(quarry.quarryPos);
 				return;
 			}
 		}
+	}
+	
+	public void killQuarry(Quarry quarry)
+	{
+		removeQuarryFromList(quarry.quarryPos);
 	}
 	
 	@SubscribeEvent

@@ -6,12 +6,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -31,15 +30,16 @@ public class Quarry implements Serializable
 	public final BlockCauldron cauldron;
 	public final BlockPos diamondBlockPos;
 	public final Block diamondBlock;
-	public final BlockPos chestBlockPos;
-	public final BlockChest chest;
+	public final BlockPos redstoneBlockPos;
+	public final Block redstoneBlock;
 	public final long id;
 	
 	private int ticks = 0;
 	private BlockPos diggingPos;
 	private Random rand = new Random();
 	
-	public Quarry(BlockPos quarryPos, EntityPlayer whoPlacedQuarry, ItemStack itemInHand)
+	public Quarry(BlockPos quarryPos, EntityPlayer whoPlacedQuarry, ItemStack itemInHand) 
+			throws Exception
 	{
 		this.quarryPos = quarryPos;
 		this.placedBy = whoPlacedQuarry;
@@ -48,11 +48,23 @@ public class Quarry implements Serializable
 		this.cauldron = (BlockCauldron) world.getBlockState(quarryPos).getBlock();
 		this.diamondBlockPos = new BlockPos(quarryPos.getX() + 1, quarryPos.getY(), quarryPos.getZ());
 		this.diamondBlock = world.getBlockState(diamondBlockPos).getBlock();
-		this.chestBlockPos = new BlockPos(quarryPos.getX(), quarryPos.getY(), quarryPos.getZ() - 1);
-		this.chest = (BlockChest) world.getBlockState(chestBlockPos).getBlock();
+		this.redstoneBlockPos = new BlockPos(quarryPos.getX(), quarryPos.getY(), quarryPos.getZ() - 1);
+		this.redstoneBlock = world.getBlockState(redstoneBlockPos).getBlock();
 		this.id = System.currentTimeMillis();
 		
-		this.diggingPos = new BlockPos(quarryPos.getX() - 1, quarryPos.getY(), quarryPos.getZ() + 1);
+		if(!Block.isEqualTo(diamondBlock, Blocks.DIAMOND_BLOCK))
+		{
+			throw new Exception("DiamondBlock is not in place.");
+		}
+		if(!Block.isEqualTo(redstoneBlock, Blocks.REDSTONE_BLOCK))
+		{
+			throw new Exception("RedstoneBlock is not in place.");
+		}
+		
+		this.diggingPos = new BlockPos(
+				quarryPos.getX() - 1, 
+				quarryPos.getY(), 
+				quarryPos.getZ() + 1);
 	}
 
 	/**
@@ -147,33 +159,49 @@ public class Quarry implements Serializable
 		}
 	}
 	
+	public void endWork()
+	{
+		QuarryHandler.INSTANCE.killQuarry(this);
+	}
+	
 	/*
 	 * TODO:
 	 * updating the quarry (dig block, place block in chest)
 	 */
 	public void doWork() // once a world tick
 	{
-		/*
-		if(world.isAirBlock(diggingPos)) 
+		if(diggingPos.getX() == getLeftPos().getX())
 		{
+			endWork();
 			return;
 		}
-		if(Block.isEqualTo(world.getBlockState(diggingPos).getBlock(), Blocks.BEDROCK))
+		
+		if(world.isAirBlock(diggingPos)) 
 		{
-			int x = 0;
-			int y = quarryPos.getY();
-			int z = 0;
-			if(diggingPos.getZ() + 1)
 		}
-		IBlockState diggingBlockState = world.getBlockState(diggingPos);
-		Block diggingBlock = diggingBlockState.getBlock();
+		else if(Block.isEqualTo(world.getBlockState(diggingPos).getBlock(), Blocks.BEDROCK))
 		{
-			// Block Digging
+			int nextCoordX = diggingPos.getX();
+			int nextCoordZ = diggingPos.getZ();
+			nextCoordZ++;
+			if(nextCoordZ >= getTopPos().getZ())
+			{
+				nextCoordX++;
+				nextCoordZ = quarryPos.getZ() + 1;
+			}
+			diggingPos = new BlockPos(nextCoordX, quarryPos.getY(), nextCoordZ);
 		}
+		else // dig something like stone, iron-ore, etc.
 		{
-			// Going to the next block
-			int y = diggingPos.
+			Block blockToDig = world.getBlockState(diggingPos).getBlock();
+			List<ItemStack> drops = blockToDig.getDrops(world, diggingPos, world.getBlockState(diggingPos), 0);
+			world.setBlockToAir(diggingPos);
+			for(ItemStack stack : drops)
+			{
+				Block.spawnAsEntity(world, quarryPos.offset(EnumFacing.UP), stack);
+			}
 		}
-		*/
+		// go down by 1 at the end of work in this tick
+		diggingPos = diggingPos.offset(EnumFacing.DOWN);
 	}
 }

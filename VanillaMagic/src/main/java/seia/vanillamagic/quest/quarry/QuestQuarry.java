@@ -2,9 +2,9 @@ package seia.vanillamagic.quest.quarry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -20,7 +20,7 @@ public class QuestQuarry extends Quest
 {
 	public QuestQuarry(Achievement required, int posX, int posY, String questName, String uniqueName) 
 	{
-		super(required, posX, posY, Item.getItemFromBlock(Blocks.CAULDRON), questName, uniqueName);
+		super(required, posX, posY, Items.CAULDRON, questName, uniqueName);
 	}
 
 	@SubscribeEvent
@@ -38,9 +38,9 @@ public class QuestQuarry extends Quest
 			}
 			else if(whoPlacedQuarry.hasAchievement(achievement))
 			{
-				if(Block.getBlockFromItem(itemInHand.getItem()) instanceof BlockCauldron)
+				//if(Block.getBlockFromItem(itemInHand.getItem()) instanceof BlockCauldron)
 				{
-					// Should now throw exception if casting in constructor is wrong.
+					// Should now throw exception from constructor if blocks are wrong.
 					Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
 					if(quarry.isComplete())
 					{
@@ -52,6 +52,8 @@ public class QuestQuarry extends Quest
 		}
 		catch(Exception e)
 		{
+			e.getMessage();
+			//e.printStackTrace();
 			System.out.println("Incorrect quarry placed on:");
 			BlockPosHelper.printCoords(quarryPos);
 		}
@@ -71,7 +73,7 @@ public class QuestQuarry extends Quest
 			{
 				cauldronPos = quarryPos;
 			}
-			else if(quarryBlock instanceof BlockChest)
+			else if(Block.isEqualTo(quarryBlock, Blocks.REDSTONE_BLOCK))
 			{
 				cauldronPos = new BlockPos(quarryPos.getX(), quarryPos.getY(), quarryPos.getZ() + 1);
 			}
@@ -82,9 +84,9 @@ public class QuestQuarry extends Quest
 			
 			if(cauldronPos != null)
 			{
-				BlockPos chestPos = new BlockPos(quarryPos.getX(), quarryPos.getY(), quarryPos.getZ() - 1);
-				Block chestBlock = world.getBlockState(chestPos).getBlock();
-				if(chestBlock instanceof BlockChest)
+				BlockPos redstonePos = new BlockPos(quarryPos.getX(), quarryPos.getY(), quarryPos.getZ() - 1);
+				Block redstoneBlock = world.getBlockState(redstonePos).getBlock();
+				if(Block.isEqualTo(redstoneBlock, Blocks.REDSTONE_BLOCK))
 				{
 					BlockPos diamondBlockPos = new BlockPos(quarryPos.getX() + 1, quarryPos.getY(), quarryPos.getZ());
 					Block diamondBlock = world.getBlockState(diamondBlockPos).getBlock();

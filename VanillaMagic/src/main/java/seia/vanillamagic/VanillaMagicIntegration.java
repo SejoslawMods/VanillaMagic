@@ -23,6 +23,7 @@ public class VanillaMagicIntegration
 			nbtTagCompound.setString("curseProjectName", "vanilla-magic");
 			nbtTagCompound.setString("curseFilenameParser", VanillaMagic.MODID + "-[].jar");
 			FMLInterModComms.sendRuntimeMessage(VanillaMagic.MODID, "VersionChecker", "addCurseCheck", nbtTagCompound);
+			System.out.println("VersionChecker integration enabled.");
 		}
 		catch(Exception e)
 		{
