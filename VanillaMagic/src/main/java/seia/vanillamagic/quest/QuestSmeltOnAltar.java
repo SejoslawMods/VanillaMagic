@@ -11,13 +11,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.stats.Achievement;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.utils.AltarChecker;
 import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.CauldronHelper;
+import seia.vanillamagic.utils.SmeltingHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestSmeltOnAltar extends Quest
@@ -50,7 +51,7 @@ public class QuestSmeltOnAltar extends Quest
 			{
 				// check if player has the "fuel" in offHand
 				ItemStack fuelOffHand = player.getHeldItemOffhand();
-				if(isItemFuel(fuelOffHand))
+				if(SmeltingHelper.isItemFuel(fuelOffHand))
 				{
 					World world = player.worldObj;
 					// is right-clicking on Cauldron
@@ -59,6 +60,8 @@ public class QuestSmeltOnAltar extends Quest
 						// is altair build correct
 						if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 						{
+							//List<EntityItem> entitiesInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
+							/*
 							// all entities in World
 							List<Entity> loadedEntities = world.loadedEntityList;
 							// all items in cauldron
@@ -76,6 +79,10 @@ public class QuestSmeltOnAltar extends Quest
 									}
 								}
 							}
+							*/
+							//List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(entitiesInCauldron);
+							List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(world, cauldronPos);
+							/*
 							// filtering the items that can be smelt
 							List<EntityItem> itemsToSmelt = new ArrayList<EntityItem>();
 							for(int i = 0; i < entitiesInCauldron.size(); i++)
@@ -88,6 +95,7 @@ public class QuestSmeltOnAltar extends Quest
 									itemsToSmelt.add(entityItemInCauldron);
 								}
 							}
+							*/
 							if(itemsToSmelt.size() > 0)
 							{
 								countAndSmelt(player, itemsToSmelt, cauldronPos);
@@ -115,7 +123,7 @@ public class QuestSmeltOnAltar extends Quest
 		{
 			World world = caster.worldObj;
 			int ticks = 0;
-			ticks += countTicks(caster.getHeldItemOffhand()); // value for the whole stack
+			ticks += SmeltingHelper.countTicks(caster.getHeldItemOffhand()); // value for the whole stack
 			caster.getHeldItemOffhand().stackSize = 0;
 			for(int i = 0; i < itemsToSmelt.size(); i++)
 			{
@@ -128,7 +136,7 @@ public class QuestSmeltOnAltar extends Quest
 				// will smelt whole stack
 				if(ticks >= ticksToSmeltStack)
 				{
-					smeltResult = getSmeltingResultAsNewStack(entityItemToSmeltStack);
+					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
 					smeltResult.stackSize = entityItemToSmeltStack.stackSize;
 					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ(), smeltResult);
 					world.removeEntity(entityItemToSmelt);
@@ -137,7 +145,7 @@ public class QuestSmeltOnAltar extends Quest
 				{
 					int howManyCanSmelt = ticks / ONE_ITEM_SMELT_TICKS;
 					entityItemToSmeltStack.stackSize -= howManyCanSmelt;
-					smeltResult = getSmeltingResultAsNewStack(entityItemToSmeltStack);
+					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
 					smeltResult.stackSize = howManyCanSmelt;
 					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ(), smeltResult);
 				}
@@ -148,39 +156,10 @@ public class QuestSmeltOnAltar extends Quest
 				world.spawnEntityInWorld(smeltResultEntityItem);
 				ticks -= ticksToSmeltStack;
 				//TODO: Fix the experience
-				int experienceToAdd = getExperienceToAddFromWholeStack(entityItemToSmeltStack);
+				int experienceToAdd = SmeltingHelper.getExperienceToAddFromWholeStack(entityItemToSmeltStack);
 				caster.addExperience(experienceToAdd);
 			}
 			world.updateEntities();
 		}
-	}
-	
-	public int countTicks(ItemStack stackOffHand)
-	{
-		return stackOffHand.stackSize * getItemBurnTimeTicks(stackOffHand);
-	}
-	
-	/*
-	 * e.g. will return 1600 if the item was Coal
-	 * Won't care about stackSize
-	 */
-	public int getItemBurnTimeTicks(ItemStack fuel)
-	{
-		return TileEntityFurnace.getItemBurnTime(fuel);
-	}
-	
-	public boolean isItemFuel(ItemStack stackInOffHand)
-	{
-		return TileEntityFurnace.isItemFuel(stackInOffHand);
-	}
-	
-	public ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt)
-	{
-		return FurnaceRecipes.instance().getSmeltingResult(stackToSmelt).copy();
-	}
-	
-	public int getExperienceToAddFromWholeStack(ItemStack entityItemToSmeltStack)
-	{
-		return ((int)(FurnaceRecipes.instance().getSmeltingExperience(entityItemToSmeltStack) * entityItemToSmeltStack.stackSize));
 	}
 }

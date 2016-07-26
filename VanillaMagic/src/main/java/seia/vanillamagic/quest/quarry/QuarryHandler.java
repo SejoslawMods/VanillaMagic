@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import seia.vanillamagic.utils.BlockPosHelper;
@@ -45,7 +46,31 @@ public class QuarryHandler implements Serializable
 	{
 		for(Quarry quarry : quarryList)
 		{
-			quarry.doWork();
+			World world = quarry.world;
+			if(world.getChunkFromBlockCoords(quarry.quarryPos).isLoaded())
+			{
+				//if(world.getChunkFromBlockCoords(quarry.chestBlockPos).isLoaded())
+				{
+					//if(world.getChunkFromBlockCoords(quarry.diamondBlockPos).isLoaded())
+					{
+						if(world.getChunkFromBlockCoords(quarry.getLeftPos()).isLoaded())
+						{
+							if(world.getChunkFromBlockCoords(quarry.getTopLeftPos()).isLoaded())
+							{
+								if(world.getChunkFromBlockCoords(quarry.getTopPos()).isLoaded())
+								{
+									quarry.showBoundingBox();
+									quarry.checkFuel();
+									if(quarry.canDig())
+									{
+										quarry.doWork();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
