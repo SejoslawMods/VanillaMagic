@@ -32,7 +32,9 @@ public class VanillaMagic
 		System.out.println("Registered events: " + VanillaMagicQuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicIntegration.INSTANCE.preInit();
-		MinecraftForge.EVENT_BUS.register(QuarryHandler.INSTANCE);
+		// TODO: For future. Add quarrys to be saved and load from file.
+		// TODO: Currently quarrys MUST BE replace each time the world is load
+		MinecraftForge.EVENT_BUS.register(QuarryHandler.INSTANCE); // WorldTickEvent
 	}
 	
 	@EventHandler

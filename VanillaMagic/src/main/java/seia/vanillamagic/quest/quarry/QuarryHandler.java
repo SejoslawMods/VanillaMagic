@@ -1,28 +1,25 @@
 package seia.vanillamagic.quest.quarry;
 
-import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import seia.vanillamagic.utils.BlockPosHelper;
 
-public class QuarryHandler implements Runnable
+public class QuarryHandler implements Serializable
 {
 	public static final QuarryHandler INSTANCE = new QuarryHandler();
 	
 	//======================================================================================
 	
 	public final ArrayList<Quarry> quarryList;
-	public final Thread thread;
-	public final File file;
-	
+
 	public QuarryHandler()
 	{
 		quarryList = new ArrayList<Quarry>();
-		thread = new Thread(this);
-		file = new File("vanilla_magic_quarrys_coords");
+		System.out.println("QuarryHandler registered");
 	}
 
 	public void addNewQuerry(Quarry quarry)
@@ -43,33 +40,12 @@ public class QuarryHandler implements Runnable
 		}
 	}
 	
-	/*
-	 * TODO:
-	 * Load Quarrys Coords from file
-	 * thread.start()
-	 */
 	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load event)
+	public void tick(WorldTickEvent event)
 	{
-	}
-	
-	/*
-	 * TODO:
-	 * Save Quarrys Coords to file
-	 */
-	@SubscribeEvent
-	public void onWorldSave(WorldEvent.Save event)
-	{
-	}
-	
-	@SubscribeEvent
-	public void onWorldUnload(WorldEvent.Unload event)
-	{
-	}
-	
-	//TODO:
-	@Override
-	public void run() 
-	{
+		for(Quarry quarry : quarryList)
+		{
+			quarry.doWork();
+		}
 	}
 }

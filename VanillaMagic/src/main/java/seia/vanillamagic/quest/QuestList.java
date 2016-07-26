@@ -259,6 +259,11 @@ public class QuestList
 			"smeltInAltar", 
 			1, 
 			EnumWand.STICK);
+	public static final QuestQuarry QUEST_QUARRY = new QuestQuarry(QUEST_SMELT_ON_ALTAR.getAchievement(), 
+			QUEST_SMELT_ON_ALTAR.getPosX() - 2, 
+			QUEST_SMELT_ON_ALTAR.getPosY(), 
+			"Quarry !!!", 
+			"quarry");
 	/*
 	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_SMELT_ON_ALTAR.getAchievement(), 
 			QUEST_SMELT_ON_ALTAR.getPosX() - 2, 
@@ -266,12 +271,8 @@ public class QuestList
 			Items.DIAMOND_AXE, 
 			"Full Tree Cut", 
 			"fullTreeCut");
-	public static final QuestQuarry QUEST_QUARRY = new QuestQuarry(QUEST_FULL_TREE_CUT.getAchievement(), 
-			QUEST_FULL_TREE_CUT.getPosX() - 2, 
-			QUEST_FULL_TREE_CUT.getPosY(), 
-			"Quarry !!!", 
-			"quarry");
 			*/
+			
 	public static final QuestCraftOnAltar QUEST_CRAFT_GOLD_INGOT = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_3.getAchievement(), 
 			QUEST_BUILD_ALTAR_TIER_3.getPosX() + 2, 
 			QUEST_BUILD_ALTAR_TIER_3.getPosY() + 1, 

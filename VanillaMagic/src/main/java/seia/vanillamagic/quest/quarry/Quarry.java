@@ -59,7 +59,7 @@ public class Quarry implements Serializable
 	 * TODO:
 	 * showing the rendered particles around the digging area
 	 */
-	public void showBoundingBox() 
+	public void showBoundingBox()
 	{
 	}
 	
@@ -67,7 +67,7 @@ public class Quarry implements Serializable
 	 * TODO:
 	 * updating the quarry (dig block, place block in chest)
 	 */
-	public void doWork()
+	public void doWork() // once a world tick
 	{
 	}
 }
