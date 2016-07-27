@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.utils.SmeltingHelper;
@@ -19,9 +18,9 @@ import seia.vanillamagic.utils.SmeltingHelper;
 public class Quarry implements Serializable
 {
 	// Cost for mining one block
-	public static final int ONE_OPERATION_COST = 100;
-	// It's 11x11 but 9x9 is for digging
-	public static final int BASIC_QUARRY_SIZE = 11;
+	public static final int ONE_OPERATION_COST = 400;
+	// It's (size)x(size) but (size-2)x(size-2) is for digging
+	public static final int BASIC_QUARRY_SIZE = 22;
 	
 	public final BlockPos quarryPos;
 	public final EntityPlayer placedBy;
@@ -91,6 +90,27 @@ public class Quarry implements Serializable
 	{
 		return new BlockPos(quarryPos.getX() - BASIC_QUARRY_SIZE + 1, quarryPos.getY(), quarryPos.getZ() + BASIC_QUARRY_SIZE - 1);
 	}
+	
+	public BlockPos getDiggingPos()
+	{
+		return new BlockPos(diggingPos.getX(), diggingPos.getY(), diggingPos.getZ());
+	}
+	
+	/*
+	 * Method for checking DiamondBlock and RedstoneBlock
+	 */
+	public boolean checkSurroundings()
+	{
+		if(!Block.isEqualTo(diamondBlock, world.getBlockState(diamondBlockPos).getBlock()))
+		{
+			return false;
+		}
+		if(!Block.isEqualTo(redstoneBlock, world.getBlockState(redstoneBlockPos).getBlock()))
+		{
+			return false;
+		}
+		return true;
+	}
 
 	/*
 	 * check if quarry has fuel to dig
@@ -108,6 +128,10 @@ public class Quarry implements Serializable
 			if(SmeltingHelper.isItemFuel(stack))
 			{
 				ticks += SmeltingHelper.countTicks(stack);
+				if(ticks >= ONE_OPERATION_COST)
+				{
+					world.removeEntity(entityItem);
+				}
 			}
 		}
 	}
@@ -130,26 +154,27 @@ public class Quarry implements Serializable
 	}
 
 	/*
+	 * TODO: fix bounding box
 	 * showing the rendered particles around the digging area
 	 */
 	public void showBoundingBox()
 	{
+		/*
 		int posX = quarryPos.getX();
 		int posZ = quarryPos.getZ();
 		for(int x = 0; x < BASIC_QUARRY_SIZE; x++)
 		{
 			for(int z = 0; z < BASIC_QUARRY_SIZE; z++)
 			{
-				if((x == posX) || // bottom line
-						(z == posZ) || // right line
-						(x == (posX - BASIC_QUARRY_SIZE - 1)) || // top line
-						(z == (posZ + BASIC_QUARRY_SIZE - 1))) // left line
+				if(((posX - x) == posX) || // bottom line
+						((posZ + z) == posZ) || // right line
+						((posX - x) == (posX - BASIC_QUARRY_SIZE - 1)) || // top line
+						((posZ + z) == (posZ + BASIC_QUARRY_SIZE - 1))) // left line
 				{
-					BlockPos particlePos = new BlockPos(x, quarryPos.getY(), z);
 					world.spawnParticle(EnumParticleTypes.END_ROD,
-							particlePos.getX(), 
-							particlePos.getY(), 
-							particlePos.getZ(), 
+							posX - x, 
+							quarryPos.getY(), 
+							posZ + z, 
 							rand.nextGaussian() * 0.005D, 
 							rand.nextGaussian() * 0.005D, 
 							rand.nextGaussian() * 0.005D, 
@@ -157,6 +182,7 @@ public class Quarry implements Serializable
 				}
 			}
 		}
+		*/
 	}
 	
 	public void endWork()
@@ -165,7 +191,6 @@ public class Quarry implements Serializable
 	}
 	
 	/*
-	 * TODO:
 	 * updating the quarry (dig block, place block in chest)
 	 */
 	public void doWork() // once a world tick
@@ -189,6 +214,12 @@ public class Quarry implements Serializable
 				nextCoordX++;
 				nextCoordZ = quarryPos.getZ() + 1;
 			}
+			// kill quarry because it's outside the rectangle
+			if(nextCoordX <= getLeftPos().getX() - 1)
+			{
+				endWork();
+				return;
+			}
 			diggingPos = new BlockPos(nextCoordX, quarryPos.getY(), nextCoordZ);
 		}
 		else // dig something like stone, iron-ore, etc.
@@ -198,7 +229,7 @@ public class Quarry implements Serializable
 			world.setBlockToAir(diggingPos);
 			for(ItemStack stack : drops)
 			{
-				Block.spawnAsEntity(world, quarryPos.offset(EnumFacing.UP), stack);
+				Block.spawnAsEntity(world, quarryPos.offset(EnumFacing.UP, 2), stack);
 			}
 		}
 		// go down by 1 at the end of work in this tick

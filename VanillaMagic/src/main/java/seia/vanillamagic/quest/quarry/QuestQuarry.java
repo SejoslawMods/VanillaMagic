@@ -5,7 +5,6 @@ import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
@@ -38,22 +37,21 @@ public class QuestQuarry extends Quest
 			}
 			else if(whoPlacedQuarry.hasAchievement(achievement))
 			{
-				//if(Block.getBlockFromItem(itemInHand.getItem()) instanceof BlockCauldron)
+				if(itemInHand.getItem().equals(Items.CAULDRON))//if(Block.getBlockFromItem(itemInHand.getItem()) instanceof BlockCauldron)
 				{
 					// Should now throw exception from constructor if blocks are wrong.
 					Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
 					if(quarry.isComplete())
 					{
 						quarry.showBoundingBox();
-						QuarryHandler.INSTANCE.addNewQuerry(quarry);
+						QuarryHandler.INSTANCE.addNewQuarry(quarry);
 					}
 				}
 			}
 		}
 		catch(Exception e)
 		{
-			e.getMessage();
-			//e.printStackTrace();
+			System.out.println(e.getMessage());
 			System.out.println("Incorrect quarry placed on:");
 			BlockPosHelper.printCoords(quarryPos);
 		}

@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.quest.quarry.QuarryHandler;
+import seia.vanillamagic.quest.quarry.QuestQuarryEvent;
 
 @Mod(
 		modid = VanillaMagic.MODID, 
@@ -33,7 +34,8 @@ public class VanillaMagic
 		VanillaMagicIntegration.INSTANCE.preInit();
 		// TODO: For future. Add quarrys to be saved and load from file.
 		// TODO: Currently quarrys MUST BE replace each time the world is load
-		MinecraftForge.EVENT_BUS.register(QuarryHandler.INSTANCE); // WorldTickEvent
+		MinecraftForge.EVENT_BUS.register(new QuestQuarryEvent()); // WorldTickEvent
+		QuarryHandler.INSTANCE.init();
 	}
 	
 	@EventHandler
