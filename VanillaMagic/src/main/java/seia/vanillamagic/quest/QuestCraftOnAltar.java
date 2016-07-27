@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.utils.AltarChecker;
 import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.CauldronHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestCraftOnAltar extends Quest
@@ -81,6 +82,7 @@ public class QuestCraftOnAltar extends Quest
 					// is altair build correct
 					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 					{
+						/*
 						// all entities in World
 						List<Entity> loadedEntities = world.loadedEntityList;
 						// all items in cauldron
@@ -103,6 +105,8 @@ public class QuestCraftOnAltar extends Quest
 								}
 							}
 						}
+						*/
+						List<EntityItem> entitiesInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
 						// there is a right amount of items in Cauldron but are they the right items ?
 						int ingredientsStackSize = getIngredientsStackSize();
 						int ingredientsInCauldronStackSize = getIngredientsInCauldronStackSize(entitiesInCauldron);

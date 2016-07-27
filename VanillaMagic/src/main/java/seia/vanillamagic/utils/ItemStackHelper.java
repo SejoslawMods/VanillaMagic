@@ -14,7 +14,7 @@ public class ItemStackHelper
 	
 	public static ItemStack getSugarCane()
 	{
-		return new ItemStack(Blocks.REEDS);
+		return new ItemStack(Items.REEDS);
 	}
 	
 	public static boolean checkItemsInHands(EntityPlayer player, 
