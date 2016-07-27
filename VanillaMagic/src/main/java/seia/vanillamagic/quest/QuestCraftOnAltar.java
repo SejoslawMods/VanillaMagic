@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.utils.AltarChecker;
-import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.CauldronHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
@@ -82,30 +80,6 @@ public class QuestCraftOnAltar extends Quest
 					// is altair build correct
 					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 					{
-						/*
-						// all entities in World
-						List<Entity> loadedEntities = world.loadedEntityList;
-						// all items in cauldron
-						List<EntityItem> entitiesInCauldron = new ArrayList<EntityItem>();
-						// filtering all items in cauldron to check if the recipe is correct
-						for(int i = 0; i < loadedEntities.size(); i++)
-						{
-							if(loadedEntities.get(i) instanceof EntityItem)
-							{
-								EntityItem entityItemInWorld = (EntityItem) loadedEntities.get(i);
-								BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY, entityItemInWorld.posZ);
-								if(BlockPosHelper.isSameBlockPos(cauldronPos, entityItemInWorldPos))
-								{
-									entitiesInCauldron.add(entityItemInWorld);
-									// lag stopper -> if there is more items in Cauldron then the recipe needs, return
-									if(entitiesInCauldron.size() > ingredients.length)
-									{
-										return;
-									}
-								}
-							}
-						}
-						*/
 						List<EntityItem> entitiesInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
 						// there is a right amount of items in Cauldron but are they the right items ?
 						int ingredientsStackSize = getIngredientsStackSize();

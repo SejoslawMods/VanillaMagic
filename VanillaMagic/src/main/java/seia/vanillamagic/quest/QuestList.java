@@ -8,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.quarry.QuestQuarry;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
 import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;

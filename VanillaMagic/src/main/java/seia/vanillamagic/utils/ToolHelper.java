@@ -97,7 +97,6 @@ public class ToolHelper
 				player.setHeldItem(EnumHand.MAIN_HAND, null);
 			}
 			// send an update to the server, so we get an update back
-			//if(PHConstruct.extraBlockUpdates)
 			Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, Minecraft
 					.getMinecraft().objectMouseOver.sideHit));
 		}

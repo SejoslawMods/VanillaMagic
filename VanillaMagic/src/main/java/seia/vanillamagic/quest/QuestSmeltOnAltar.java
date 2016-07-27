@@ -1,23 +1,18 @@
 package seia.vanillamagic.quest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.utils.AltarChecker;
-import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.CauldronHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
@@ -60,42 +55,7 @@ public class QuestSmeltOnAltar extends Quest
 						// is altair build correct
 						if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 						{
-							//List<EntityItem> entitiesInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
-							/*
-							// all entities in World
-							List<Entity> loadedEntities = world.loadedEntityList;
-							// all items in cauldron
-							List<EntityItem> entitiesInCauldron = new ArrayList<EntityItem>();
-							// filtering all items in cauldron to check if the recipe is correct
-							for(int i = 0; i < loadedEntities.size(); i++)
-							{
-								if(loadedEntities.get(i) instanceof EntityItem)
-								{
-									EntityItem entityItemInWorld = (EntityItem) loadedEntities.get(i);
-									BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY, entityItemInWorld.posZ);
-									if(BlockPosHelper.isSameBlockPos(cauldronPos, entityItemInWorldPos))
-									{
-										entitiesInCauldron.add(entityItemInWorld);
-									}
-								}
-							}
-							*/
-							//List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(entitiesInCauldron);
 							List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(world, cauldronPos);
-							/*
-							// filtering the items that can be smelt
-							List<EntityItem> itemsToSmelt = new ArrayList<EntityItem>();
-							for(int i = 0; i < entitiesInCauldron.size(); i++)
-							{
-								EntityItem entityItemInCauldron = entitiesInCauldron.get(i);
-								ItemStack smeltResult = FurnaceRecipes.instance().getSmeltingResult(entityItemInCauldron.getEntityItem());
-								// if null than item cannot be smelt
-								if(smeltResult != null)
-								{
-									itemsToSmelt.add(entityItemInCauldron);
-								}
-							}
-							*/
 							if(itemsToSmelt.size() > 0)
 							{
 								countAndSmelt(player, itemsToSmelt, cauldronPos);

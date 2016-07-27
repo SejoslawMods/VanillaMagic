@@ -25,19 +25,18 @@ public class QuestFullTreeCut extends Quest
 		EntityPlayer player = event.getPlayer();
 		try
 		{
-			if(!player.hasAchievement(achievement))
-			{
-				player.addStat(achievement, 1);
-				return;
-			}
-			else if(player.hasAchievement(achievement))
+			if(player.getHeldItemMainhand().getItem() instanceof ItemAxe)
 			{
 				if(ItemStack.areItemsEqual(player.getHeldItemOffhand(), new ItemStack(Items.BLAZE_ROD)))
 				{
-					if(player.getHeldItemMainhand().getItem() instanceof ItemAxe)
+					BlockPos origin = event.getPos();
+					if(TreeCutHelper.detectTree(player.worldObj, origin))
 					{
-						BlockPos origin = event.getPos();
-						if(TreeCutHelper.detectTree(player.worldObj, origin))
+						if(!player.hasAchievement(achievement))
+						{
+							player.addStat(achievement, 1);
+						}
+						if(player.hasAchievement(achievement))
 						{
 							TreeCutHelper.fellTree(player.getHeldItemMainhand(), origin, player);
 						}

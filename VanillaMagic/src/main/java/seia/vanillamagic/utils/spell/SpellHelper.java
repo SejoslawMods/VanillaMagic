@@ -243,6 +243,9 @@ public class SpellHelper
 		return false;
 	}
 	
+	/*
+	 * Summon Animal
+	 */
 	public static boolean spellSummonAnimal(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec,
 			int spellID)
@@ -305,6 +308,9 @@ public class SpellHelper
 		return false;
 	}
 	
+	/*
+	 * Summon Mob
+	 */
 	public static boolean spellSummonMob(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec,
 			int spellID)
