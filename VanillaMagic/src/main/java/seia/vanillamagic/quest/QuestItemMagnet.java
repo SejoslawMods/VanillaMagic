@@ -38,20 +38,27 @@ public class QuestItemMagnet extends Quest
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			if(playerHasRightItemsInInventory(player))
 			{
-				double x = player.posX;
-				double y = player.posY + 0.75;
-				double z = player.posZ;
-				List<EntityItem> items = player.worldObj.getEntitiesWithinAABB(EntityItem.class, 
-						new AxisAlignedBB(x - range, y - range, z - range, x + range, y + range, z + range));
-				int pulledItems = 0;
-				for(EntityItem item : items)
+				if(!player.hasAchievement(achievement))
 				{
-					if(pulledItems > maxPulledItems)
+					player.addStat(achievement, 1);
+				}
+				if(player.hasAchievement(achievement))
+				{
+					double x = player.posX;
+					double y = player.posY + 0.75;
+					double z = player.posZ;
+					List<EntityItem> items = player.worldObj.getEntitiesWithinAABB(EntityItem.class, 
+							new AxisAlignedBB(x - range, y - range, z - range, x + range, y + range, z + range));
+					int pulledItems = 0;
+					for(EntityItem item : items)
 					{
-						break;
+						if(pulledItems > maxPulledItems)
+						{
+							break;
+						}
+						setEntityMotionFromVector(item, new Vec3d(x, y, z), 0.45F);
+						pulledItems++;
 					}
-					setEntityMotionFromVector(item, new Vec3d(x, y, z), 0.45F);
-					pulledItems++;
 				}
 			}
 		}

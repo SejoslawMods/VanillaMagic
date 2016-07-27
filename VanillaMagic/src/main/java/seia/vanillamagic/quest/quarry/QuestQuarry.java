@@ -30,18 +30,17 @@ public class QuestQuarry extends Quest
 		ItemStack itemInHand = event.getItemInHand();
 		try
 		{
-			if(!whoPlacedQuarry.hasAchievement(achievement))
+			if(itemInHand.getItem().equals(Items.CAULDRON))
 			{
-				whoPlacedQuarry.addStat(achievement, 1);
-				return;
-			}
-			else if(whoPlacedQuarry.hasAchievement(achievement))
-			{
-				if(itemInHand.getItem().equals(Items.CAULDRON))//if(Block.getBlockFromItem(itemInHand.getItem()) instanceof BlockCauldron)
+				// Should now throw exception from constructor if blocks are wrong.
+				Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
+				if(quarry.isComplete())
 				{
-					// Should now throw exception from constructor if blocks are wrong.
-					Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
-					if(quarry.isComplete())
+					if(!whoPlacedQuarry.hasAchievement(achievement))
+					{
+						whoPlacedQuarry.addStat(achievement, 1);
+					}
+					if(whoPlacedQuarry.hasAchievement(achievement))
 					{
 						quarry.showBoundingBox();
 						QuarryHandler.INSTANCE.addNewQuarry(quarry);

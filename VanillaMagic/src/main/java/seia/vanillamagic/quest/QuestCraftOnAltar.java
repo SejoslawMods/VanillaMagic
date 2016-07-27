@@ -128,9 +128,8 @@ public class QuestCraftOnAltar extends Quest
 								if(!player.hasAchievement(achievement))
 								{
 									player.addStat(achievement, 1);
-									return;
 								}
-								else if(player.hasAchievement(achievement))
+								if(player.hasAchievement(achievement))
 								{
 									for(int i = 0; i < alreadyCheckedEntityItems.size(); i++)
 									{

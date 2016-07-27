@@ -117,9 +117,8 @@ public class QuestSmeltOnAltar extends Quest
 		if(!caster.hasAchievement(achievement))
 		{
 			caster.addStat(achievement, 1);
-			return;
 		}
-		else if(caster.hasAchievement(achievement))
+		if(caster.hasAchievement(achievement))
 		{
 			World world = caster.worldObj;
 			int ticks = 0;
