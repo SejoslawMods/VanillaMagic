@@ -1,6 +1,5 @@
 package seia.vanillamagic.quest.quarry;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
@@ -9,18 +8,23 @@ import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.utils.InventoryHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 
-public class Quarry implements Serializable
+public class Quarry
 {
 	// Cost for mining one block
 	public static final int ONE_OPERATION_COST = 400;
 	// It's (size)x(size) but (size-2)x(size-2) is for digging
 	public static final int BASIC_QUARRY_SIZE = 22;
+	// Input side from the Quarry into IInventory (argument in methods)
+	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
 	
 	public final BlockPos quarryPos;
 	public final EntityPlayer placedBy;
@@ -94,6 +98,21 @@ public class Quarry implements Serializable
 	public BlockPos getDiggingPos()
 	{
 		return new BlockPos(diggingPos.getX(), diggingPos.getY(), diggingPos.getZ());
+	}
+	
+	public BlockPos getInventoryOutputPos()
+	{
+		return new BlockPos(quarryPos.getX() - 1, quarryPos.getY(), quarryPos.getZ());
+	}
+	
+	public IInventory getInventoryOutput()
+	{
+		TileEntity output = world.getTileEntity(getInventoryOutputPos());
+		if(output instanceof IInventory)
+		{
+			return (IInventory) output;
+		}
+		return null;
 	}
 	
 	/*
@@ -191,10 +210,33 @@ public class Quarry implements Serializable
 	}
 	
 	/*
+	 * In theory we will use chest but it should be more flexible.
+	 */
+	public boolean isNextToInventory()
+	{
+		return getInventoryOutput() != null ? true : false;
+	}
+	
+	public boolean inventoryHasSpace()
+	{
+		return !InventoryHelper.isInventoryFull(getInventoryOutput(), INPUT_FACING);
+	}
+	
+	public void spawnDigged(ItemStack digged)
+	{
+		Block.spawnAsEntity(world, quarryPos.offset(EnumFacing.UP, 2), digged);
+	}
+	
+	/*
 	 * updating the quarry (dig block, place block in chest)
 	 */
 	public void doWork() // once a world tick
 	{
+		if(!canDig())
+		{
+			return;
+		}
+		
 		if(diggingPos.getX() == getLeftPos().getX())
 		{
 			endWork();
@@ -224,12 +266,30 @@ public class Quarry implements Serializable
 		}
 		else // dig something like stone, iron-ore, etc.
 		{
+			boolean hasChest = isNextToInventory(); // chest or any other IInventory
 			Block blockToDig = world.getBlockState(diggingPos).getBlock();
 			List<ItemStack> drops = blockToDig.getDrops(world, diggingPos, world.getBlockState(diggingPos), 0);
 			world.setBlockToAir(diggingPos);
 			for(ItemStack stack : drops)
 			{
-				Block.spawnAsEntity(world, quarryPos.offset(EnumFacing.UP, 2), stack);
+				if(!hasChest)
+				{
+					spawnDigged(stack);
+				}
+				else if(hasChest)
+				{
+					ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(getInventoryOutput(), stack, INPUT_FACING);
+					try
+					{
+						if(leftItems.stackSize > 0)
+						{
+							spawnDigged(leftItems);
+						}
+					}
+					catch(Exception e)
+					{
+					}
+				}
 			}
 		}
 		// go down by 1 at the end of work in this tick

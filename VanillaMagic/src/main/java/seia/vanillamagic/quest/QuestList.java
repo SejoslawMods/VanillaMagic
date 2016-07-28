@@ -263,10 +263,11 @@ public class QuestList
 			QUEST_SMELT_ON_ALTAR.getPosY(), 
 			"Quarry !!!", 
 			"quarry");
+	//TODO:
 	/*
-	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_SMELT_ON_ALTAR.getAchievement(), 
-			QUEST_SMELT_ON_ALTAR.getPosX() - 2, 
-			QUEST_SMELT_ON_ALTAR.getPosY(), 
+	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_QUARRY.getAchievement(), 
+			QUEST_QUARRY.getPosX() - 2, 
+			QUEST_QUARRY.getPosY(), 
 			Items.DIAMOND_AXE, 
 			"Full Tree Cut", 
 			"fullTreeCut");

@@ -25,7 +25,7 @@ public class ExtraBlockBreak extends Event
 	}
 	
 	public static ExtraBlockBreak fireEvent(ItemStack itemStack, EntityPlayer player, IBlockState state, 
-			int width, int height, int depth, int distance) 
+			int width, int height, int depth, int distance)
 	{
 		ExtraBlockBreak event = new ExtraBlockBreak(itemStack, player, state);
 		event.width = width;

@@ -36,7 +36,14 @@ public class QuestQuarryEvent
 					{
 						quarry.showBoundingBox();
 						quarry.checkFuel();
-						if(quarry.canDig())
+						if(quarry.isNextToInventory())
+						{
+							if(quarry.inventoryHasSpace())
+							{
+								quarry.doWork();
+							}
+						}
+						else
 						{
 							quarry.doWork();
 						}

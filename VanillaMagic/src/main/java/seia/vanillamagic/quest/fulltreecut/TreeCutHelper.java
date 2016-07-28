@@ -12,7 +12,7 @@ import seia.vanillamagic.event.ExtraBlockBreak;
 
 public class TreeCutHelper 
 {
-	public static boolean detectTree(World world, BlockPos origin) 
+	public static boolean detectTree(World world, BlockPos origin)
 	{
 		BlockPos pos = null;
 		Stack<BlockPos> candidates = new Stack<BlockPos>();
@@ -20,7 +20,7 @@ public class TreeCutHelper
 		while(!candidates.isEmpty()) 
 		{
 			BlockPos candidate = candidates.pop();
-			if((pos == null || candidate.getY() > pos.getY()) && isLog(world, candidate)) 
+			if(((pos == null) || (candidate.getY() > pos.getY())) && isLog(world, candidate))
 			{
 				pos = candidate.up();
 				// go up
@@ -79,7 +79,7 @@ public class TreeCutHelper
 		{
 			return true;
 		}
-		ExtraBlockBreak event = ExtraBlockBreak.fireEvent(itemstack, player, player.getEntityWorld().getBlockState(start), 3, 3, 3, -1);
+		ExtraBlockBreak event = ExtraBlockBreak.fireEvent(itemstack, player, player.getEntityWorld().getBlockState(start), 3, 3, 3, 1);
 		int speed = Math.round((event.width * event.height * event.depth) / 27f);
 		if(event.distance > 0) 
 		{

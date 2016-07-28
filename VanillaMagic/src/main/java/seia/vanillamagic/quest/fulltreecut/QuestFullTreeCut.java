@@ -7,6 +7,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.quest.Quest;
@@ -30,15 +31,19 @@ public class QuestFullTreeCut extends Quest
 				if(ItemStack.areItemsEqual(player.getHeldItemOffhand(), new ItemStack(Items.BLAZE_ROD)))
 				{
 					BlockPos origin = event.getPos();
-					if(TreeCutHelper.detectTree(player.worldObj, origin))
+					World world = event.getWorld();
+					if(TreeCutHelper.isLog(world, origin))
 					{
-						if(!player.hasAchievement(achievement))
+						if(TreeCutHelper.detectTree(player.worldObj, origin))
 						{
-							player.addStat(achievement, 1);
-						}
-						if(player.hasAchievement(achievement))
-						{
-							TreeCutHelper.fellTree(player.getHeldItemMainhand(), origin, player);
+							if(!player.hasAchievement(achievement))
+							{
+								player.addStat(achievement, 1);
+							}
+							if(player.hasAchievement(achievement))
+							{
+								TreeCutHelper.fellTree(player.getHeldItemMainhand(), origin, player);
+							}
 						}
 					}
 				}
