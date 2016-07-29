@@ -123,6 +123,26 @@ public class TileQuarry extends TileEntity implements ITickable
 		return null;
 	}
 	
+	public BlockPos getInputFuelChestPos()
+	{
+		return new BlockPos(quarryPos.getX(), quarryPos.getY() + 1, quarryPos.getZ());
+	}
+	
+	public IInventory getInputFuelChest()
+	{
+		TileEntity input = world.getTileEntity(getInputFuelChestPos());
+		if(input instanceof IInventory)
+		{
+			return (IInventory) input;
+		}
+		return null;
+	}
+	
+	public boolean hasInputFuelChest()
+	{
+		return getInputFuelChest() != null ? true : false;
+	}
+	
 	/*
 	 * Method for checking DiamondBlock and RedstoneBlock
 	 */
@@ -161,18 +181,27 @@ public class TileQuarry extends TileEntity implements ITickable
 			{
 				return;
 			}
-			List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(world, quarryPos);
-			if(fuelsInCauldron.size() == 0)
+			
+			if(hasInputFuelChest())
 			{
-				return;
+				ItemStack fuelToAdd = SmeltingHelper.getFuelFromInventoryAndDelete(getInputFuelChest());
+				ticks += SmeltingHelper.countTicks(fuelToAdd);
 			}
-			for(EntityItem entityItem : fuelsInCauldron)
+			else if(!hasInputFuelChest())
 			{
-				ItemStack stack = entityItem.getEntityItem();
-				ticks += SmeltingHelper.countTicks(stack);
-				if(ticks >= ONE_OPERATION_COST)
+				List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(world, quarryPos);
+				if(fuelsInCauldron.size() == 0)
 				{
-					world.removeEntity(entityItem);
+					return;
+				}
+				for(EntityItem entityItem : fuelsInCauldron)
+				{
+					ItemStack stack = entityItem.getEntityItem();
+					ticks += SmeltingHelper.countTicks(stack);
+					if(ticks >= ONE_OPERATION_COST)
+					{
+						world.removeEntity(entityItem);
+					}
 				}
 			}
 		}

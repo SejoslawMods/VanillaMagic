@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -12,6 +13,42 @@ import net.minecraft.world.World;
 
 public class SmeltingHelper 
 {
+	/**
+	 * Returns the all fuelStacks from the inventory
+	 */
+	public static List<ItemStack> getFuelFromInventory(IInventory inv)
+	{
+		List<ItemStack> fuels = new ArrayList<ItemStack>();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack stackInSlot = inv.getStackInSlot(i);
+			if(isItemFuel(stackInSlot))
+			{
+				fuels.add(stackInSlot);
+			}
+		}
+		return fuels;
+	}
+	
+	/**
+	 * Returns the first fuelStack from the inventory
+	 */
+	public static ItemStack getFuelFromInventoryAndDelete(IInventory inv)
+	{
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack stackInSlot = inv.getStackInSlot(i);
+			if(isItemFuel(stackInSlot))
+			{
+				return inv.removeStackFromSlot(i);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns the smeltables EntityItems from the ALL entities in cauldron BlockPos
+	 */
 	public static List<EntityItem> getSmeltable(List<EntityItem> entitiesInCauldron)
 	{
 		List<EntityItem> itemsToSmelt = new ArrayList<EntityItem>();
@@ -33,6 +70,9 @@ public class SmeltingHelper
 		return getSmeltable(CauldronHelper.getItemsInCauldron(world, cauldronPos));
 	}
 	
+	/**
+	 * Returns the all fuel from the Cauldron position
+	 */
 	public static List<EntityItem> getFuelFromCauldron(World world, BlockPos cauldronPos)
 	{
 		List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
@@ -58,8 +98,8 @@ public class SmeltingHelper
 		return stackOffHand.stackSize * getItemBurnTimeTicks(stackOffHand);
 	}
 	
-	/*
-	 * e.g. will return 1600 if the item was Coal
+	/**
+	 * e.g. will return 1600 if the item was Coal.
 	 * Won't care about stackSize
 	 */
 	public static int getItemBurnTimeTicks(ItemStack fuel)
