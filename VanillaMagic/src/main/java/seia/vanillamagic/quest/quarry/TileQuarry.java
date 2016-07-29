@@ -10,43 +10,47 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 
-/*
- * TODO; Old idea.
- * Now using TileQuarry.
- * Before version 0.5.4.0
- */
-public class Quarry
+public class TileQuarry extends TileEntity implements ITickable
 {
 	// Cost for mining one block
 	public static final int ONE_OPERATION_COST = 400;
+	// Max number of ticks that Quarry can have at a time
+	public static final int MAX_QUARRY_TICKS = 4000;
 	// It's (size)x(size) but (size-2)x(size-2) is for digging
-	public static final int BASIC_QUARRY_SIZE = 22;
+	// ChunkNumber * BlocksInChunk + 2 blocks bounding
+	public static final int BASIC_QUARRY_SIZE = 4 * 16 + 2;
 	// Input side from the Quarry into IInventory (argument in methods)
 	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
+
+	private final String quarryPosX = "quarryPosX", quarryPosY = "quarryPosY", quarryPosZ = "quarryPosZ";
+	private final String ticksNBT = "ticks";
+	private final String digPosX = "digPosX", digPosY = "digPosY", digPosZ = "digPosZ";
 	
-	public final BlockPos quarryPos;
-	public final EntityPlayer placedBy;
-	public final ItemStack itemInHand; // should be cauldron
-	public final World world;
-	public final BlockCauldron cauldron;
-	public final BlockPos diamondBlockPos;
-	public final Block diamondBlock;
-	public final BlockPos redstoneBlockPos;
-	public final Block redstoneBlock;
-	public final long id;
+	public BlockPos quarryPos;
+	public EntityPlayer placedBy;
+	public ItemStack itemInHand; // should be cauldron
+	public World world;
+	public BlockCauldron cauldron;
+	public BlockPos diamondBlockPos;
+	public Block diamondBlock;
+	public BlockPos redstoneBlockPos;
+	public Block redstoneBlock;
 	
 	private int ticks = 0;
 	private BlockPos diggingPos;
 	private Random rand = new Random();
 	
-	public Quarry(BlockPos quarryPos, EntityPlayer whoPlacedQuarry, ItemStack itemInHand) 
+	public TileQuarry(BlockPos quarryPos, EntityPlayer whoPlacedQuarry, ItemStack itemInHand) 
 			throws Exception
 	{
 		this.quarryPos = quarryPos;
@@ -58,7 +62,6 @@ public class Quarry
 		this.diamondBlock = world.getBlockState(diamondBlockPos).getBlock();
 		this.redstoneBlockPos = new BlockPos(quarryPos.getX(), quarryPos.getY(), quarryPos.getZ() - 1);
 		this.redstoneBlock = world.getBlockState(redstoneBlockPos).getBlock();
-		this.id = System.currentTimeMillis();
 		
 		if(!Block.isEqualTo(diamondBlock, Blocks.DIAMOND_BLOCK))
 		{
@@ -141,22 +144,40 @@ public class Quarry
 	 */
 	public void checkFuel()
 	{
-		List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(world, quarryPos);
-		if(fuelsInCauldron.size() == 0)
+		try
 		{
-			return;
-		}
-		for(EntityItem entityItem : fuelsInCauldron)
-		{
-			ItemStack stack = entityItem.getEntityItem();
-			if(SmeltingHelper.isItemFuel(stack))
+			if(isNextToInventory())
 			{
+				if(!inventoryHasSpace())
+				{
+					return;
+				}
+			}
+			if(ticks >= MAX_QUARRY_TICKS)
+			{
+				return;
+			}
+			if(ticks >= ONE_OPERATION_COST)
+			{
+				return;
+			}
+			List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(world, quarryPos);
+			if(fuelsInCauldron.size() == 0)
+			{
+				return;
+			}
+			for(EntityItem entityItem : fuelsInCauldron)
+			{
+				ItemStack stack = entityItem.getEntityItem();
 				ticks += SmeltingHelper.countTicks(stack);
 				if(ticks >= ONE_OPERATION_COST)
 				{
 					world.removeEntity(entityItem);
 				}
 			}
+		}
+		catch(Exception e)
+		{
 		}
 	}
 	
@@ -167,14 +188,14 @@ public class Quarry
 	{
 		if(ticks >= ONE_OPERATION_COST)
 		{
-			ticks -= ONE_OPERATION_COST;
-			if(ticks < 0)
-			{
-				ticks = 0;
-			}
 			return true;
 		}
 		return false;
+	}
+	
+	public void decreaseTicks()
+	{
+		ticks -= ONE_OPERATION_COST;
 	}
 
 	/*
@@ -211,7 +232,7 @@ public class Quarry
 	
 	public void endWork()
 	{
-		//QuarryHandler.INSTANCE.killQuarry(this);
+		QuarryHandler.INSTANCE.killQuarry(this);
 	}
 	
 	/*
@@ -242,14 +263,18 @@ public class Quarry
 			return;
 		}
 		
-		if(diggingPos.getX() == getLeftPos().getX())
-		{
-			endWork();
-			return;
-		}
+//		if(diggingPos.getX() == getLeftPos().getX())
+//		{
+//			endWork();
+//			return;
+//		}
 		
 		if(world.isAirBlock(diggingPos)) 
 		{
+			while(!world.isAirBlock(diggingPos))
+			{
+				diggingPos = diggingPos.offset(EnumFacing.DOWN);
+			}
 		}
 		else if(Block.isEqualTo(world.getBlockState(diggingPos).getBlock(), Blocks.BEDROCK))
 		{
@@ -262,15 +287,16 @@ public class Quarry
 				nextCoordZ = quarryPos.getZ() + 1;
 			}
 			// kill quarry because it's outside the rectangle
-			if(nextCoordX <= getLeftPos().getX() - 1)
-			{
-				endWork();
-				return;
-			}
+//			if(nextCoordX <= getLeftPos().getX() - 1)
+//			{
+//				endWork();
+//				return;
+//			}
 			diggingPos = new BlockPos(nextCoordX, quarryPos.getY(), nextCoordZ);
 		}
 		else // dig something like stone, iron-ore, etc.
 		{
+			decreaseTicks();
 			boolean hasChest = isNextToInventory(); // chest or any other IInventory
 			Block blockToDig = world.getBlockState(diggingPos).getBlock();
 			List<ItemStack> drops = blockToDig.getDrops(world, diggingPos, world.getBlockState(diggingPos), 0);
@@ -299,5 +325,79 @@ public class Quarry
 		}
 		// go down by 1 at the end of work in this tick
 		diggingPos = diggingPos.offset(EnumFacing.DOWN);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound compound)
+    {
+		try
+		{
+			this.ticks = compound.getInteger(ticksNBT);
+			int digPosX = compound.getInteger(this.digPosX);
+			int digPosY = compound.getInteger(this.digPosY);
+			int digPosZ = compound.getInteger(this.digPosZ);
+			BlockPos digPos = new BlockPos(digPosX, digPosY, digPosZ);
+			this.diggingPos = digPos;
+			int qPosX = compound.getInteger(this.quarryPosX);
+			int qPosY = compound.getInteger(this.quarryPosY);
+			int qPosZ = compound.getInteger(this.quarryPosZ);
+			BlockPos qPos = new BlockPos(qPosX, qPosY, qPosZ);
+			this.quarryPos = qPos;
+			QuarryHandler.INSTANCE.addNewQuarry(this);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error while reading NBT to TileQuarry at:");
+			BlockPosHelper.printCoords(quarryPos);
+		}
+    }
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+		try
+		{
+			compound.setInteger(ticksNBT, ticks);
+			compound.setInteger(digPosX, diggingPos.getX());
+			compound.setInteger(digPosY, diggingPos.getY());
+			compound.setInteger(digPosZ, diggingPos.getZ());
+			compound.setInteger(quarryPosX, quarryPos.getX());
+			compound.setInteger(quarryPosY, quarryPos.getY());
+			compound.setInteger(quarryPosZ, quarryPos.getZ());
+			return compound;
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error while writing NBT from TileQuarry at:");
+			BlockPosHelper.printCoords(quarryPos);
+		}
+		return null;
+    }
+	
+	@Override
+	public void update()
+	{
+		if(world.getChunkFromBlockCoords(quarryPos).isLoaded())
+		{
+			if(world.getChunkFromBlockCoords(getDiggingPos()).isLoaded())
+			{
+				if(checkSurroundings())
+				{
+					showBoundingBox();
+					checkFuel();
+					if(isNextToInventory())
+					{
+						if(inventoryHasSpace())
+						{
+							doWork();
+						}
+					}
+					else
+					{
+						doWork();
+					}
+				}
+			}
+		}
 	}
 }

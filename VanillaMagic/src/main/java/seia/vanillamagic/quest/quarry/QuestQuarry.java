@@ -28,13 +28,15 @@ public class QuestQuarry extends Quest
 		BlockPos quarryPos = event.getPos();
 		EntityPlayer whoPlacedQuarry = event.getPlayer();
 		ItemStack itemInHand = event.getItemInHand();
+		World world = whoPlacedQuarry.worldObj;
 		try
 		{
 			if(itemInHand.getItem().equals(Items.CAULDRON))
 			{
 				// Should now throw exception from constructor if blocks are wrong.
-				Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
-				if(quarry.isComplete())
+				//Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
+				TileQuarry tileQuarry = new TileQuarry(quarryPos, whoPlacedQuarry, itemInHand);
+				if(tileQuarry.isComplete())
 				{
 					if(!whoPlacedQuarry.hasAchievement(achievement))
 					{
@@ -42,8 +44,8 @@ public class QuestQuarry extends Quest
 					}
 					if(whoPlacedQuarry.hasAchievement(achievement))
 					{
-						quarry.showBoundingBox();
-						QuarryHandler.INSTANCE.addNewQuarry(quarry);
+						tileQuarry.showBoundingBox();
+						QuarryHandler.INSTANCE.addNewQuarry(tileQuarry);
 					}
 				}
 			}

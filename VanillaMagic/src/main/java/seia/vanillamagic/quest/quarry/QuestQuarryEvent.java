@@ -1,9 +1,11 @@
 package seia.vanillamagic.quest.quarry;
 
+import java.util.List;
+
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 
 public class QuestQuarryEvent
 {
@@ -23,8 +25,23 @@ public class QuestQuarryEvent
 	}
 	
 	@SubscribeEvent
-	public void tick(WorldTickEvent event)
+	public void onWorldLoad(WorldEvent.Load event)
 	{
+		World world = event.getWorld();
+		List<TileEntity> loadedTileEntities = world.tickableTileEntities;
+		for(TileEntity tile : loadedTileEntities)
+		{
+			if(tile instanceof TileQuarry)
+			{
+				QuarryHandler.INSTANCE.addNewQuarry((TileQuarry)tile);
+			}
+		}
+	}
+	
+//	@SubscribeEvent
+//	public void tick(WorldTickEvent event)
+//	{
+		/*
 		for(Quarry quarry : QuarryHandler.INSTANCE.quarryList)
 		{
 			World world = quarry.world;
@@ -51,5 +68,34 @@ public class QuestQuarryEvent
 				}
 			}
 		}
-	}
+		*/
+		/*
+		for(TileQuarry quarry : QuarryHandler.INSTANCE.tileQuarryList)
+		{
+			World world = quarry.world;
+			if(world.getChunkFromBlockCoords(quarry.quarryPos).isLoaded())
+			{
+				if(world.getChunkFromBlockCoords(quarry.getDiggingPos()).isLoaded())
+				{
+					if(quarry.checkSurroundings())
+					{
+						quarry.showBoundingBox();
+						quarry.checkFuel();
+						if(quarry.isNextToInventory())
+						{
+							if(quarry.inventoryHasSpace())
+							{
+								quarry.doWork();
+							}
+						}
+						else
+						{
+							quarry.doWork();
+						}
+					}
+				}
+			}
+		}
+		*/
+//	}
 }

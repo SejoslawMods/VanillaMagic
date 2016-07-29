@@ -1,22 +1,23 @@
 package seia.vanillamagic.quest.quarry;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.utils.BlockPosHelper;
 
-public class QuarryHandler implements Serializable
+public class QuarryHandler
 {
 	public static final QuarryHandler INSTANCE = new QuarryHandler();
 	
 	//======================================================================================
 	
-	public final ArrayList<Quarry> quarryList;
+	//public final ArrayList<Quarry> quarryList;
+	public final ArrayList<TileQuarry> tileQuarryList;
 
 	public QuarryHandler()
 	{
-		quarryList = new ArrayList<Quarry>();
+		//quarryList = new ArrayList<Quarry>();
+		tileQuarryList = new ArrayList<TileQuarry>();
 		System.out.println("QuarryHandler registered");
 	}
 	
@@ -27,37 +28,82 @@ public class QuarryHandler implements Serializable
 	
 	public void onWorldUnload()
 	{
-		quarryList.clear();
+		//quarryList.clear();
+		tileQuarryList.clear();
 	}
 	
 	public int countQuarrys()
 	{
-		return quarryList.size();
+		//return quarryList.size();
+		return tileQuarryList.size();
 	}
-
+	/*
 	public void addNewQuarry(Quarry quarry)
 	{
 		quarryList.add(quarry);
 		System.out.println("Quarry registered at:");
 		BlockPosHelper.printCoords(quarry.quarryPos);
 	}
+	*/
+	public void addNewQuarry(TileQuarry quarry)
+	{
+		tileQuarryList.add(quarry);
+		{
+			// Adding to world
+			quarry.placedBy.worldObj.addTileEntity(quarry);
+			quarry.placedBy.worldObj.setTileEntity(quarry.quarryPos, quarry);
+		}
+		System.out.println("Quarry registered at:");
+		BlockPosHelper.printCoords(quarry.quarryPos);
+	}
 	
 	public void removeQuarryFromList(BlockPos quarryPos)
 	{
-		for(int i = 0; i < quarryList.size(); i++)
+		/*
+		try
 		{
-			Quarry quarry = quarryList.get(i);
-			if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.quarryPos))
+			for(int i = 0; i < quarryList.size(); i++)
 			{
-				quarryList.remove(i);
-				System.out.println("Quarry removed at:");
-				BlockPosHelper.printCoords(quarry.quarryPos);
-				return;
+				Quarry quarry = quarryList.get(i);
+				if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.quarryPos))
+				{
+					quarryList.remove(i);
+					System.out.println("Quarry removed at:");
+					BlockPosHelper.printCoords(quarry.quarryPos);
+					return;
+				}
 			}
 		}
+		catch(Exception e) 
+		{
+		}
+		*/
+		try
+		{
+			for(int i = 0; i < tileQuarryList.size(); i++)
+			{
+				TileQuarry quarry = tileQuarryList.get(i);
+				if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.quarryPos))
+				{
+					tileQuarryList.remove(i);
+					quarry.placedBy.worldObj.removeTileEntity(quarryPos); // Removing from world
+					System.out.println("Quarry removed at:");
+					BlockPosHelper.printCoords(quarry.quarryPos);
+					return;
+				}
+			}
+		}
+		catch(Exception e) 
+		{
+		}
 	}
-	
+	/*
 	public void killQuarry(Quarry quarry)
+	{
+		removeQuarryFromList(quarry.quarryPos);
+	}
+	*/
+	public void killQuarry(TileQuarry quarry)
 	{
 		removeQuarryFromList(quarry.quarryPos);
 	}
