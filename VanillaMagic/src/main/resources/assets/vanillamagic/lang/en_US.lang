@@ -187,7 +187,7 @@ achievement.craftGlowstoneDust=Craft Glowstone Dust
 achievement.craftGlowstoneDust.desc=Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altar Tier 5 and right-click with a Stick in hand
 
 achievement.pickBlazeRod=Pick Blaze Rod
-achievement.pickBlazeRod.desc=Pick blaze rod
+achievement.pickBlazeRod.desc=Pick Blaze Rod from the ground
 
 achievement.buildAltarTier6=Build Altar Tier 6
 achievement.buildAltarTier6.desc=Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron
