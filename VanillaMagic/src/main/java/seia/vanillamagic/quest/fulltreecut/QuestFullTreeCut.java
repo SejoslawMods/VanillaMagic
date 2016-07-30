@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
@@ -14,7 +15,7 @@ import seia.vanillamagic.quest.Quest;
 
 public class QuestFullTreeCut extends Quest
 {
-	public QuestFullTreeCut(Achievement required, int posX, int posY, Item itemIcon, 
+	public QuestFullTreeCut(Achievement required, int posX, int posY, Item itemIcon,
 			String questName, String uniqueName)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
@@ -34,6 +35,7 @@ public class QuestFullTreeCut extends Quest
 					World world = event.getWorld();
 					if(TreeCutHelper.isLog(world, origin))
 					{
+						origin = origin.offset(EnumFacing.UP);
 						if(TreeCutHelper.detectTree(player.worldObj, origin))
 						{
 							if(!player.hasAchievement(achievement))

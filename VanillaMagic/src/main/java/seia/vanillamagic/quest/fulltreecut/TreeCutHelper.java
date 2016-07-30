@@ -12,6 +12,11 @@ import seia.vanillamagic.event.ExtraBlockBreak;
 
 public class TreeCutHelper 
 {
+	public static boolean isLog(World world, BlockPos pos)
+	{
+		return world.getBlockState(pos).getBlock().isWood(world, pos);
+	}
+	
 	public static boolean detectTree(World world, BlockPos origin)
 	{
 		BlockPos pos = null;
@@ -67,12 +72,7 @@ public class TreeCutHelper
 		// not enough leaves
 		return false;
 	}
-	
-	public static boolean isLog(World world, BlockPos pos) 
-	{
-		return world.getBlockState(pos).getBlock().isWood(world, pos);
-	}
-	
+
 	public static boolean fellTree(ItemStack itemstack, BlockPos start, EntityPlayer player)
 	{
 		if(player.worldObj.isRemote) 
