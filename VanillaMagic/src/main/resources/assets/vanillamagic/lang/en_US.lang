@@ -142,7 +142,22 @@ achievement.craftIronOre=Craft Iron Ore
 achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick in hand
 
 achievement.craftCactus=Craft Cactus
-achievement.craftCactus.desc=Toss 4x Sapling into the Altar Tier 2 and right-click with a Stick in hand
+achievement.craftCactus.desc=Toss 1x Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling=Craft Sapling
+achievement.craftSapling.desc=Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftPumpkin=Craft Pumpkin
+achievement.craftPumpkin.desc=Toss 2x Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftMelonBlock=Craft Melon Block
+achievement.craftMelonBlock.desc=Toss 2x Pumpkin into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftVine=Craft Vine
+achievement.craftVine.desc=Toss 2x Melon Block into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftLiyPad=Craft Lily Pad
+achievement.craftLiyPad.desc=Toss 2x Vine into the Altar Tier 2 and right-click with a Stick in right hand
 
 achievement.buildAltarTier3=Build Altar Tier 3
 achievement.buildAltarTier3.desc=Add 1 block of Gold on each side of the Altar Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west) and replace the Cauldron
@@ -155,6 +170,9 @@ achievement.fullTreeCut.desc=Take Blaze Rod to left hand and Axe-type weapon to 
 
 achievement.quarry=Vanilla Quarry !!!
 achievement.quarry.desc=Place Cauldron and than on the East side of the Cauldron place DiamondBlock and on the North side place RedstoneBlock. Than replace the Cauldron. Drop fuel into Cauldron. (check console for help) (output to IInventory on West, input fuel IInventory on Top)
+
+achievement.arrowMachineGun=Arrow Machine Gun
+achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to right hand and right-click
 
 achievement.craftGoldIngot=Craft Gold Ingot
 achievement.craftGoldIngot.desc=Toss 8x Iron Ingot into the Altar Tier 3 and right-click with a Stick in hand
@@ -198,6 +216,24 @@ achievement.craftDiamond.desc=Toss 8x Gold Ingot into the Altar Tier 6 and right
 achievement.buildAltarTier7=Build Altar Tier 7
 achievement.buildAltarTier7.desc=Add 1 block of Emerald on each side of the Altar Tier 4 but one layer lower than Cauldron, 7 blocks away from the center (north, south, east, west) and replace the Cauldron
 
+achievement.craftGoldOre=Craft Gold Ore
+achievement.craftGoldOre.desc=Toss 16x Iron Ore into Altar Tier 7 and right-click with Blaze Rod in right hand
+
+achievement.craftCoalOre=Craft 4x Coal Ore
+achievement.craftCoalOre.desc=Toss 1x Gold Ore into Altar Tier 7 and right-click with Blaze Rod in right hand
+
+achievement.craftRedstoneOre=Craft Redstone Ore
+achievement.craftRedstoneOre.desc=Toss 16x Gold Ore into Altar Tier 7 and right-click with Blaze Rod in right hand
+
+achievement.craftLapisOre=Craft Lapis Ore
+achievement.craftLapisOre.desc=Toss 16x Redstone Ore into Altar Tier 7 and right-click with Blaze Rod in right hand
+
+achievement.craftDiamondOre=Craft Diamond Ore
+achievement.craftDiamondOre.desc=Toss 16x Lapis Ore into Altar Tier 7 and right-click with Blaze Rod in right hand
+
+achievement.craftEmeraldOre=Craft Emerald Ore
+achievement.craftEmeraldOre.desc=Toss 8x Diamond Ore into Altar Tier 7 and right-click with Blaze Rod in right hand
+
 achievement.craftEmerald=Craft Emerald
 achievement.craftEmerald.desc=Toss 8x Diamond into the Altar Tier 7 and right-click with a Blaze Rod in hand
 
@@ -209,3 +245,6 @@ achievement.itemMagnet.desc=Hold 2 Nether Starts anywhere in Your inventory but 
 
 achievement.craftDragonEgg=Craft Dragon Egg
 achievement.craftDragonEgg.desc=Toss 4x Nether Star into the Altar Tier 7 and right-click with a Blaze Rod in hand
+
+achievement.craftEndCrystal=Craft End Crystal
+achievement.craftEndCrystal.desc=Toss 8x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Rod in hand

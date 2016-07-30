@@ -7,6 +7,10 @@ import net.minecraft.world.World;
 
 public class BlockHelper 
 {
+	private BlockHelper()
+	{
+	}
+	
 	public static int countBlocks(World world, BlockPos startPos, Block shouldBe, EnumFacing direction) 
 	{
 		int count = 0;

@@ -13,6 +13,10 @@ import net.minecraft.world.World;
 
 public class SmeltingHelper 
 {
+	private SmeltingHelper()
+	{
+	}
+	
 	/**
 	 * Returns the all fuelStacks from the inventory
 	 */

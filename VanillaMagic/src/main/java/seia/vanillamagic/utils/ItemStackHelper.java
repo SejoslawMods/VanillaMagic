@@ -2,10 +2,15 @@ package seia.vanillamagic.utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemStackHelper 
 {
+	private ItemStackHelper()
+	{
+	}
+	
 	public static ItemStack getLapis()
 	{
 		return new ItemStack(Items.DYE, 1, 4);
@@ -45,5 +50,22 @@ public class ItemStackHelper
 			}
 		}
 		return false;
+	}
+	
+	public static ItemStack getItemStackWithNextMetadata(ItemStack stack)
+	{
+		ItemStack stackWithNextMeta = null;
+		Item item = stack.getItem();
+		int amount = stack.stackSize;
+		int meta = stack.getItemDamage();
+		try
+		{
+			stackWithNextMeta = new ItemStack(item, amount, meta + 1);
+		}
+		catch(Exception e)
+		{
+			stackWithNextMeta = new ItemStack(item, amount, 0);
+		}
+		return stackWithNextMeta;
 	}
 }

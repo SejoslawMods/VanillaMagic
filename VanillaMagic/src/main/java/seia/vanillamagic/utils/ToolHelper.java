@@ -18,6 +18,10 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class ToolHelper 
 {
+	private ToolHelper()
+	{
+	}
+	
 	public static void breakExtraBlock(ItemStack stack, World world, EntityPlayer player, BlockPos pos, BlockPos refPos) 
 	{
 		// prevent calling that stuff for air blocks, could lead to unexpected behaviour since it fires events

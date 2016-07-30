@@ -27,6 +27,10 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class InventoryHelper 
 {
+	private InventoryHelper()
+	{
+	}
+	
 	public static void dropInventoryItems(World worldIn, BlockPos pos, IInventory inventory)
 	{
 		net.minecraft.inventory.InventoryHelper.dropInventoryItems(worldIn, pos, inventory);

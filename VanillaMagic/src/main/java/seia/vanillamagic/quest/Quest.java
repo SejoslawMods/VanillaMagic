@@ -39,6 +39,23 @@ public abstract class Quest
 		QuestList.QUESTS.add(this);
 	}
 	
+	public Quest(Quest required, int posX, int posY, Item itemIcon, String questName, String uniqueName)
+	{
+		this.required = required.getAchievement();
+		this.posX = posX;
+		this.posY = posY;
+		this.itemIcon = itemIcon;
+		this.questName = questName;
+		this.uniqueName = uniqueName;
+		
+		this.achievement = new Achievement(questName, uniqueName, posX, posY, 
+				itemIcon, 
+				required.getAchievement())
+				.registerStat();
+		
+		QuestList.QUESTS.add(this);
+	}
+	
 	public Achievement getAchievement()
 	{
 		return achievement;

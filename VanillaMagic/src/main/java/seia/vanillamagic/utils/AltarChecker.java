@@ -15,6 +15,10 @@ public class AltarChecker
 	public static final Block BLOCK_TIER_6 = Blocks.DIAMOND_BLOCK;
 	public static final Block BLOCK_TIER_7 = Blocks.EMERALD_BLOCK;
 	
+	private AltarChecker()
+	{
+	}
+	
 	public static Block getBlockByTier(int tier)
 	{
 		if(tier == 1)

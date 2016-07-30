@@ -114,7 +114,7 @@ public class QuestCraftOnAltar extends Quest
 										world.removeEntity(alreadyCheckedEntityItems.get(i));
 									}
 									BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
-									Block.spawnAsEntity(world, newItemPos, new ItemStack(result.getItem()));
+									Block.spawnAsEntity(world, newItemPos, result);
 									world.updateEntities();
 									return;
 								}

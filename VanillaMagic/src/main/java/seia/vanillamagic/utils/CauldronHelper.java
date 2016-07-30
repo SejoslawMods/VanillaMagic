@@ -10,6 +10,10 @@ import net.minecraft.world.World;
 
 public class CauldronHelper 
 {
+	private CauldronHelper()
+	{
+	}
+	
 	public static List<EntityItem> getItemsInCauldron(World world, BlockPos cauldronPos)
 	{
 		// all entities in World

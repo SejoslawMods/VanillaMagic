@@ -7,6 +7,10 @@ import net.minecraft.world.World;
 
 public class BlockPosHelper
 {
+	private BlockPosHelper()
+	{
+	}
+	
 	public static boolean isSameBlockPos(BlockPos pos1, BlockPos pos2)
 	{
 		if(pos1.getX() == pos2.getX())
