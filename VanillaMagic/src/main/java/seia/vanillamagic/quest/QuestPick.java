@@ -2,24 +2,22 @@ package seia.vanillamagic.quest;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 
 public class QuestPick extends Quest
 {
 	public final ItemStack whatToPick;
-	
-	public QuestPick(Achievement required, int posX, int posY, String questName, String uniqueName,
+
+	public QuestPick(Quest required, int posX, int posY, String questName, String uniqueName,
 			ItemStack whatToPick)
 	{
-		this(required, posX, posY, whatToPick.getItem(), questName, uniqueName,
+		this(required, posX, posY, whatToPick, questName, uniqueName,
 				whatToPick);
 	}
 	
-	public QuestPick(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName,
+	public QuestPick(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName,
 			ItemStack whatToPick)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);

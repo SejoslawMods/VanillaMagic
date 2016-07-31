@@ -2,13 +2,19 @@ package seia.vanillamagic.quest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class QuestCraft extends Quest
 {
-	public QuestCraft(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName) 
+	public QuestCraft(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
+	{
+		super(required, posX, posY, itemIcon, questName, uniqueName);
+	}
+	
+	public QuestCraft(Achievement required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 	}

@@ -2,18 +2,18 @@ package seia.vanillamagic.quest.spell;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.utils.spell.EnumSpell;
 
 public class QuestCastSpellOnBlock extends QuestCastSpell
 {
-	public QuestCastSpellOnBlock(Achievement required, int posX, int posY, EnumSpell spell) 
+	public QuestCastSpellOnBlock(Quest required, int posX, int posY, EnumSpell spell) 
 	{
 		super(required, posX, posY, spell);
 	}

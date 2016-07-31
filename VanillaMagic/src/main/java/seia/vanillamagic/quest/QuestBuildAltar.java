@@ -3,8 +3,8 @@ package seia.vanillamagic.quest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.stats.Achievement;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
@@ -15,7 +15,14 @@ public class QuestBuildAltar extends Quest
 {
 	public final int tier;
 	
-	public QuestBuildAltar(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+	public QuestBuildAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
+			int tier)
+	{
+		this(required, posX, posY, new ItemStack(Items.CAULDRON), questName, uniqueName,
+				tier);
+	}
+	
+	public QuestBuildAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
 			int tier)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);

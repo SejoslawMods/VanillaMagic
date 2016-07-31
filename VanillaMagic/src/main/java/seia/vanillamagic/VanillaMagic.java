@@ -43,7 +43,7 @@ public class VanillaMagic
 	{
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
-			VanillaMagicQuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).getAchievement());
+			VanillaMagicQuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).achievement);
 			//System.out.println("Registered achievement: [" + QuestList.QUESTS.get(i).getUniqueName() + "]");
 		}
 		System.out.println("Registered achievements: " + VanillaMagicQuestHandler.INSTANCE.getAchievements().size());

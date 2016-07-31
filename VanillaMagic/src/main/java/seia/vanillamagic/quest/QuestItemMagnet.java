@@ -6,9 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -19,13 +17,8 @@ public class QuestItemMagnet extends Quest
 	public final ItemStack star = new ItemStack(Items.NETHER_STAR);
 	public final int range = 6;
 	public final int maxPulledItems = 200;
-	
-	public QuestItemMagnet(Achievement required, int posX, int posY, String questName, String uniqueName) 
-	{
-		this(required, posX, posY, Items.NETHER_STAR, questName, uniqueName);
-	}
-	
-	public QuestItemMagnet(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName) 
+
+	public QuestItemMagnet(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 	}

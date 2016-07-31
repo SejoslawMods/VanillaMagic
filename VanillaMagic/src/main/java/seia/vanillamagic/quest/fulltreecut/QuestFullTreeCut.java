@@ -1,10 +1,8 @@
 package seia.vanillamagic.quest.fulltreecut;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,7 +13,7 @@ import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestFullTreeCut extends Quest
 {
-	public QuestFullTreeCut(Achievement required, int posX, int posY, Item itemIcon,
+	public QuestFullTreeCut(Quest required, int posX, int posY, ItemStack itemIcon,
 			String questName, String uniqueName)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);

@@ -45,7 +45,7 @@ public class VanillaMagicDebug
 		{
 			for(Quest quest : QuestList.QUESTS)
 			{
-				Achievement toAchieve = quest.getAchievement();
+				Achievement toAchieve = quest.achievement;
 				player.addStat(toAchieve, 1);
 			}
 			for(Achievement a : AchievementList.ACHIEVEMENTS)

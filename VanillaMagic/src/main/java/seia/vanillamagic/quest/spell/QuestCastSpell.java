@@ -1,9 +1,7 @@
 package seia.vanillamagic.quest.spell;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -16,22 +14,22 @@ import seia.vanillamagic.utils.spell.SpellHelper;
 public abstract class QuestCastSpell extends Quest
 {
 	protected EnumSpell spell;
-	
-	public QuestCastSpell(Achievement required, int posX, int posY, 
+
+	public QuestCastSpell(Quest required, int posX, int posY, 
 			EnumSpell spell)
 	{
-		this(required, posX, posY, spell.spellName, spell.spellUniqueName,
+		this(required, posX, posY, spell.spellName, spell.spellUniqueName, 
 				spell);
 	}
 	
-	public QuestCastSpell(Achievement required, int posX, int posY, String questName, String uniqueName, 
+	public QuestCastSpell(Quest required, int posX, int posY, String questName, String uniqueName, 
 			EnumSpell spell)
 	{
-		this(required, posX, posY, spell.itemOffHand.getItem(), questName, uniqueName, 
+		this(required, posX, posY, new ItemStack(spell.itemOffHand.getItem()), questName, uniqueName, 
 				spell);
 	}
 	
-	public QuestCastSpell(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+	public QuestCastSpell(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
 			EnumSpell spell)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);

@@ -2,15 +2,15 @@ package seia.vanillamagic.quest.spell;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.utils.spell.EnumSpell;
 
 public class QuestCastSpellInAir extends QuestCastSpell
 {
-	public QuestCastSpellInAir(Achievement required, int posX, int posY, EnumSpell spell) 
+	public QuestCastSpellInAir(Quest required, int posX, int posY, EnumSpell spell) 
 	{
 		super(required, posX, posY, spell);
 	}

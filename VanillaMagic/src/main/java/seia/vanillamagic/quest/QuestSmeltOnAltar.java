@@ -5,9 +5,7 @@ import java.util.List;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -24,8 +22,8 @@ public class QuestSmeltOnAltar extends Quest
 	public final int requiredAltarTier;
 	public final EnumWand requiredMinimalWand;
 	
-	public QuestSmeltOnAltar(Achievement required, int posX, int posY, 
-			Item itemIcon, String questName, String uniqueName,
+	public QuestSmeltOnAltar(Quest required, int posX, int posY, 
+			ItemStack itemIcon, String questName, String uniqueName,
 			int requiredAltarTier, EnumWand requiredMinimalWand)
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);

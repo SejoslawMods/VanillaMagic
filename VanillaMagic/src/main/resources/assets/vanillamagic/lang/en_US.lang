@@ -144,8 +144,26 @@ achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altar 
 achievement.craftCactus=Craft Cactus
 achievement.craftCactus.desc=Toss 1x Sapling into the Altar Tier 2 and right-click with a Stick in right hand
 
-achievement.craftSapling=Craft Sapling
-achievement.craftSapling.desc=Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick in right hand
+achievement.craftSapling0=Craft Oak Sapling from Cactus
+achievement.craftSapling0.desc=Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling1=Craft Spruce Sapling
+achievement.craftSapling1.desc=Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling2=Craft Birch Sapling
+achievement.craftSapling2.desc=Toss 1x Spruce Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling3=Craft Jungle Sapling
+achievement.craftSapling3.desc=Toss 1x Birch Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling4=Craft Acacia Sapling
+achievement.craftSapling4.desc=Toss 1x Jungle Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling5=Craft Dark Oak Sapling
+achievement.craftSapling5.desc=Toss 1x Acacia Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+
+achievement.craftSapling6=Craft Oak Sapling from Dark Oak
+achievement.craftSapling6.desc=Toss 1x Dark Oak Sapling into the Altar Tier 2 and right-click with a Stick in right hand
 
 achievement.craftPumpkin=Craft Pumpkin
 achievement.craftPumpkin.desc=Toss 2x Sapling into the Altar Tier 2 and right-click with a Stick in right hand

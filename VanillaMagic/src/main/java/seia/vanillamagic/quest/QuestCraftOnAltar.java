@@ -7,9 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -25,14 +23,14 @@ public class QuestCraftOnAltar extends Quest
 	public final int requiredAltarTier;
 	public final EnumWand requiredMinimalWand;
 	
-	public QuestCraftOnAltar(Achievement required, int posX, int posY, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand)
+	public QuestCraftOnAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
+			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand) 
 	{
-		this(required, posX, posY, result.getItem(), questName, uniqueName, 
+		this(required, posX, posY, result, questName, uniqueName,
 				ingredients, result, requiredAltarTier, requiredMinimalWand);
 	}
-	
-	public QuestCraftOnAltar(Achievement required, int posX, int posY, Item itemIcon, String questName, String uniqueName, 
+
+	public QuestCraftOnAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
 			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);

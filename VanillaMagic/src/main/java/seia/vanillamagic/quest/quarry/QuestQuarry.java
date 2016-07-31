@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
@@ -17,9 +16,9 @@ import seia.vanillamagic.utils.BlockPosHelper;
 
 public class QuestQuarry extends Quest
 {
-	public QuestQuarry(Achievement required, int posX, int posY, String questName, String uniqueName) 
+	public QuestQuarry(Quest required, int posX, int posY, String questName, String uniqueName) 
 	{
-		super(required, posX, posY, Items.CAULDRON, questName, uniqueName);
+		super(required, posX, posY, new ItemStack(Items.CAULDRON), questName, uniqueName);
 	}
 
 	@SubscribeEvent
