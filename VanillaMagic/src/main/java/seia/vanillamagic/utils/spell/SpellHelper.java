@@ -27,7 +27,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -331,6 +334,7 @@ public class SpellHelper
 			else if(spellID == EnumSpell.SUMMON_SKELETON.spellID)
 			{
 				entityMob = new EntitySkeleton(world);
+				entityMob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
 			}
 			else if(spellID == EnumSpell.SUMMON_BLAZE.spellID)
 			{

@@ -219,7 +219,27 @@ public class QuestList
 			new ItemStack[]{new ItemStack(Items.REDSTONE, 2), new ItemStack(Items.COAL, 2), new ItemStack(Blocks.LAPIS_BLOCK)}, 
 			new ItemStack(Items.GLOWSTONE_DUST), 
 			5,
-			EnumWand.STICK);
+			EnumWand.BLAZE_ROD);
+	public static final QuestCraftOnAltar QUEST_CRAFT_NETHERRACK = new QuestCraftOnAltar(QUEST_CRAFT_GLOWSTONE_DUST, -2, 0, "Craft Netherrack", "craftNetherrack", 
+			new ItemStack[]{new ItemStack(Blocks.STONE), new ItemStack(Items.COAL, 2)}, 
+			new ItemStack(Blocks.NETHERRACK), 
+			5, 
+			EnumWand.BLAZE_ROD);
+	public static final QuestCraftOnAltar QUEST_CRAFT_SOUL_SAND = new QuestCraftOnAltar(QUEST_CRAFT_NETHERRACK, -2, 0, "Craft Soul Sand", "craftSoulSand", 
+			new ItemStack[]{new ItemStack(Blocks.SAND), new ItemStack(Items.COAL, 2)}, 
+			new ItemStack(Blocks.SOUL_SAND), 
+			5, 
+			EnumWand.BLAZE_ROD);
+	public static final QuestCraftOnAltar QUEST_CRAFT_MAGMA_BLOCK = new QuestCraftOnAltar(QUEST_CRAFT_SOUL_SAND, -2, 0, "Craft Magma Block", "craftMagmaBlock", 
+			new ItemStack[]{new ItemStack(Blocks.NETHERRACK), new ItemStack(Items.MAGMA_CREAM)}, 
+			new ItemStack(Blocks.field_189877_df), 
+			5, 
+			EnumWand.BLAZE_ROD);
+	public static final QuestCraftOnAltar QUEST_CRAFT_NETHER_WART = new QuestCraftOnAltar(QUEST_CRAFT_MAGMA_BLOCK, -2, 0, "Craft Nether Wart", "craftNetherWart", 
+			new ItemStack[]{new ItemStack(Items.GUNPOWDER), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.SUGAR), new ItemStack(Items.REDSTONE)}, 
+			new ItemStack(Items.NETHER_WART), 
+			5, 
+			EnumWand.BLAZE_ROD);
 	
 	public static final QuestPick QUEST_PICK_BLAZE_ROD = new QuestPick(QUEST_BUILD_ALTAR_TIER_5, 0, +2,  "Pick Blaze Rod", "pickBlazeRod", new ItemStack(Items.BLAZE_ROD));
 	

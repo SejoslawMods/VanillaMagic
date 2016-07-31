@@ -3,7 +3,7 @@
 ############################
 
 achievement.craftStick=Craft Stick
-achievement.craftStick.desc=Craft stick
+achievement.craftStick.desc=Craft stick.
 
 
 
@@ -148,7 +148,7 @@ achievement.craftSapling0=Craft Oak Sapling from Cactus
 achievement.craftSapling0.desc=Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick in right hand
 
 achievement.craftSapling1=Craft Spruce Sapling
-achievement.craftSapling1.desc=Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick in right hand
+achievement.craftSapling1.desc=Toss 1x Oak Sapling into the Altar Tier 2 and right-click with a Stick in right hand
 
 achievement.craftSapling2=Craft Birch Sapling
 achievement.craftSapling2.desc=Toss 1x Spruce Sapling into the Altar Tier 2 and right-click with a Stick in right hand
@@ -220,7 +220,19 @@ achievement.buildAltarTier5=Build Altar Tier 5
 achievement.buildAltarTier5.desc=Add 1 block of Lapis on each side of the Altar Tier 4 but one layer lower than Cauldron, 5 blocks away from the center (north, south, east, west) and replace the Cauldron
 
 achievement.craftGlowstoneDust=Craft Glowstone Dust
-achievement.craftGlowstoneDust.desc=Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altar Tier 5 and right-click with a Stick in hand
+achievement.craftGlowstoneDust.desc=Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altar Tier 5 and right-click with a Blaze Rod in hand
+
+achievement.craftNetherrack=Craft Netherrack
+achievement.craftNetherrack.desc=Toss 1x Stone + 2x Coal into Altar Tier 5 and right-click with Blaze Rod in right hand
+
+achievement.craftSoulSand=Craft Soul Sand
+achievement.craftSoulSand.desc=Toss 1x Sand + 2x Coal into Altar Tier 5 and right-click with Blaze Rod in right hand
+
+achievement.craftMagmaBlock=Craft Magma Block
+achievement.craftMagmaBlock.desc=Toss 1x Netherrack + 1x Magma Cream into Altar Tier 5 and right-click with Blaze Rod in right hand
+
+achievement.craftNetherWart=Craft Nether Wart
+achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar + 1x RedstoneDust into Altar Tier 5 and right-click with Blaze Rod in right hand
 
 achievement.pickBlazeRod=Pick Blaze Rod
 achievement.pickBlazeRod.desc=Pick Blaze Rod from the ground
