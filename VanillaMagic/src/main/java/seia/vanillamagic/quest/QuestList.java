@@ -87,6 +87,11 @@ public class QuestList
 			new ItemStack(Blocks.COBBLESTONE), 
 			1,
 			EnumWand.STICK);
+	public static final QuestCraftOnAltar QUEST_CRAFT_GRAVEL = new QuestCraftOnAltar(QUEST_CRAFT_COBBLESTONE, -2, 0, "Craft Gravel", "craftGravel", 
+			new ItemStack[]{new ItemStack(Blocks.COBBLESTONE, 2)}, 
+			new ItemStack(Blocks.GRAVEL), 
+			1,
+			EnumWand.STICK);
 	public static final QuestCraftOnAltar QUEST_CRAFT_LEATHER = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_1, +2, +1, "Craft Leather", "craftLeather", 
 			new ItemStack[]{new ItemStack(Items.ROTTEN_FLESH)}, 
 			new ItemStack(Items.LEATHER), 
