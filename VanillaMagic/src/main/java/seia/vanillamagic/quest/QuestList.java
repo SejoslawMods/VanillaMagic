@@ -57,6 +57,7 @@ public class QuestList
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LIGHTNING_BOLT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, +2, EnumSpell.LIGHTNING_BOLT);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, -2, EnumSpell.TELEPORT);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_NETHER = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT, +2, 0, EnumSpell.TELEPORT_TO_NETHER);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_END = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT_TO_NETHER, +2, 0, EnumSpell.TELEPORT_TO_END);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_METEOR = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, +2, 0, EnumSpell.METEOR);
 	// END SPELLS
 	

@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -34,6 +35,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.AchievementList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -98,6 +100,10 @@ public class SpellHelper
 		else if(spellID == EnumSpell.TELEPORT_TO_NETHER.spellID)
 		{
 			return spellTeleportToNether(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.TELEPORT_TO_END.spellID)
+		{
+			return spellTeleportToEnd(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -440,6 +446,41 @@ public class SpellHelper
 			{
 				TeleportHelper.changePlayerDimensionWithoutPortal(caster, 0);
 				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static boolean spellTeleportToEnd(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		try
+		{
+			if(caster.dimension == 0)
+			{
+				caster.changeDimension(1);
+				return true;
+			}
+			else if(caster.dimension == 1)
+			{
+				if(caster.hasAchievement(AchievementList.THE_END2))
+				{
+					World world = caster.worldObj;
+					List<Entity> entities = world.loadedEntityList;
+					for(int i = 0; i < entities.size(); i++)
+					{
+						if(entities.get(i) instanceof EntityDragon)
+						{
+							return false;
+						}
+					}
+					TeleportHelper.changePlayerDimensionWithoutPortal(caster, 0);
+					return true;
+				}
 			}
 		}
 		catch(Exception e)

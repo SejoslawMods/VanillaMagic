@@ -24,6 +24,12 @@ public class TeleportHelper
 	{
 	}
 
+	/*
+	 * Try to use this method.
+	 * It will teleport You to:
+	 * CoordX = player.posX
+	 * etc.
+	 */
 	public static void changePlayerDimensionWithoutPortal(EntityPlayer player, int dimension)
 	{
 		int oldDimension = player.worldObj.provider.getDimension();
@@ -38,6 +44,7 @@ public class TeleportHelper
 			if(worldServer.customTeleporters.get(i) instanceof VMTeleporter)
 			{
 				has = true;
+				break;
 			}
 		}
 		if(!has)
@@ -49,6 +56,7 @@ public class TeleportHelper
 			if(worldServer.customTeleporters.get(i) instanceof VMTeleporter)
 			{
 				transferPlayerToDimension(playerMP, dimension, (VMTeleporter)worldServer.customTeleporters.get(i));
+				break;
 			}
 		}
 	}

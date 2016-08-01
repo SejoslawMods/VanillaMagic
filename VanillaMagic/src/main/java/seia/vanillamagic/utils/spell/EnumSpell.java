@@ -30,6 +30,9 @@ public enum EnumSpell
 	TELEPORT_TO_NETHER(7, "Teleport to Nether", "spellTeleportToNether",
 			EnumWand.BLAZE_ROD,
 			new ItemStack(Items.NETHER_WART, 2)),
+	TELEPORT_TO_END(8, "Teleport to End", "spellTeleportToEnd",
+			EnumWand.BLAZE_ROD,
+			new ItemStack(Items.END_CRYSTAL)),
 	
 	// EntityAnimal + EntityAgeable + EntityPassive Summons
 	SUMMON_CHICKEN(100, "Summon Chicken", "spellSummonChicken", 

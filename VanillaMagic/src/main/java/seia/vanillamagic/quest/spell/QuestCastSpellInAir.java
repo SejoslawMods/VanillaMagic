@@ -15,6 +15,11 @@ public class QuestCastSpellInAir extends QuestCastSpell
 		super(required, posX, posY, spell);
 	}
 	
+	public QuestCastSpellInAir(Quest required, int posX, int posY, ItemStack itemIcon, EnumSpell spell) 
+	{
+		super(required, posX, posY, itemIcon, spell.spellName, spell.spellUniqueName, spell);
+	}
+	
 	@SubscribeEvent
 	public void castSpell(RightClickItem event)
 	{

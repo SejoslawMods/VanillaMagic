@@ -13,7 +13,7 @@ import seia.vanillamagic.utils.spell.SpellHelper;
 
 public abstract class QuestCastSpell extends Quest
 {
-	protected EnumSpell spell;
+	public final EnumSpell spell;
 
 	public QuestCastSpell(Quest required, int posX, int posY, 
 			EnumSpell spell)
@@ -34,11 +34,6 @@ public abstract class QuestCastSpell extends Quest
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.spell = spell;
-	}
-	
-	public EnumSpell getSpell()
-	{
-		return spell;
 	}
 
 	/*
