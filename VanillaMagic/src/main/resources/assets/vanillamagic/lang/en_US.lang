@@ -23,7 +23,7 @@ achievement.spellTeleport=Teleportation !!!
 achievement.spellTeleport.desc=Hold Blaze Rod in Your right hand and at least 1x Magma Cream in the left hand and right-click 
 
 achievement.spellTeleportToNether=Teleport to Nether
-achievement.spellTeleportToNether.desc=Hold Blaze Rod in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is save...i think)
+achievement.spellTeleportToNether.desc=Hold Blaze Rod in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is safe...i think)
 
 achievement.spellTeleportToEnd=Teleport to End
 achievement.spellTeleportToEnd.desc=Hold Blaze Rod in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon)
@@ -289,7 +289,7 @@ achievement.craftNetherStar=Craft Nether Star
 achievement.craftNetherStar.desc=Toss 4x Emerald Block into the Altar Tier 7 and right-click with a Blaze Rod in hand
 
 achievement.itemMagnet=Item Magnet
-achievement.itemMagnet.desc=Hold 2 Nether Starts anywhere in Your inventory but as different stacks (1x Nether Star + 1x Nether Star)
+achievement.itemMagnet.desc=Hold 2 Nether Stars anywhere in Your inventory but as different stacks (1x Nether Star + 1x Nether Star)
 
 achievement.craftDragonEgg=Craft Dragon Egg
 achievement.craftDragonEgg.desc=Toss 4x Nether Star into the Altar Tier 7 and right-click with a Blaze Rod in hand
