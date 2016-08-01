@@ -1,9 +1,12 @@
 package seia.vanillamagic.utils.spell;
 
+import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -33,6 +36,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -40,6 +44,8 @@ import net.minecraft.world.World;
 import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
 import seia.vanillamagic.entity.EntitySpellTeleport;
 import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
+import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.utils.spell.teleport.TeleportHelper;
 
 /*
  * The work of each spell.
@@ -84,6 +90,14 @@ public class SpellHelper
 		else if(EnumSpell.isSpellSummonMob(spellID))
 		{
 			return spellSummonMob(caster, pos, face, hitVec, spellID);
+		}
+		else if(spellID == EnumSpell.FUS_RO_DAH.spellID)
+		{
+			return spellFusRoDah(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.TELEPORT_TO_NETHER.spellID)
+		{
+			return spellTeleportToNether(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -376,6 +390,61 @@ public class SpellHelper
 			{
 				System.out.println("Wrong spellID. (spellID = " + spellID + ")");
 			}
+		}
+		return false;
+	}
+	
+	/*
+	 * Fus-Ro-Dah !!!
+	 */
+	public static boolean spellFusRoDah(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		if(pos == null)
+		{
+			// it will be (2 *SIZE)x(2 *SIZE)x(2 * SIZE) area of effect
+			int SIZE = 8;
+			float strenght = 2.0f;
+			double casterX = caster.posX;
+			double casterY = caster.posY;
+			double casterZ = caster.posZ;
+			BlockPos casterPos = new BlockPos(casterX, casterY, casterZ);
+			AxisAlignedBB aabb = new AxisAlignedBB(casterPos);
+			aabb = aabb.expand(SIZE, SIZE, SIZE);
+			World world = caster.worldObj;
+			List<Entity> entitiesInAABB = world.getEntitiesWithinAABBExcludingEntity(caster, aabb);
+			// TODO: Currently will work on ALL EntityLivingBase
+			for(Entity entity : entitiesInAABB)
+			{
+				if(entity instanceof EntityLivingBase)
+				{
+					EntityHelper.knockBack(caster, entity, strenght);
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean spellTeleportToNether(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		try
+		{
+			if(caster.dimension == 0)
+			{
+				TeleportHelper.changePlayerDimensionWithoutPortal(caster, -1);
+				return true;
+			}
+			else if(caster.dimension == -1)
+			{
+				TeleportHelper.changePlayerDimensionWithoutPortal(caster, 0);
+				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 		return false;
 	}

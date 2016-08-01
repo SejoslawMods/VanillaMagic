@@ -18,20 +18,24 @@ import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestCraftOnAltar extends Quest
 {
-	public final ItemStack[] ingredients; // each ItemStack is a different Item
-	public final ItemStack result;
+	/*
+	 * Each ItemStack is a different Item
+	 * Instead of doing 1x Coal + 1x Coal, do 2x Coal -> 2 will be stackSize
+	 */
+	public final ItemStack[] ingredients;
+	public final ItemStack[] result;
 	public final int requiredAltarTier;
 	public final EnumWand requiredMinimalWand;
 	
 	public QuestCraftOnAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand) 
+			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
 	{
-		this(required, posX, posY, result, questName, uniqueName,
+		this(required, posX, posY, result[0], questName, uniqueName,
 				ingredients, result, requiredAltarTier, requiredMinimalWand);
 	}
 
 	public QuestCraftOnAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack result, int requiredAltarTier, EnumWand requiredMinimalWand) 
+			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
 	{
 		super(required, posX, posY, itemIcon, questName, uniqueName);
 		this.ingredients = ingredients;
@@ -112,7 +116,12 @@ public class QuestCraftOnAltar extends Quest
 										world.removeEntity(alreadyCheckedEntityItems.get(i));
 									}
 									BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
-									Block.spawnAsEntity(world, newItemPos, result);
+									//Block.spawnAsEntity(world, newItemPos, result);
+									// Spawn all the results
+									for(int i = 0; i < result.length; i++)
+									{
+										Block.spawnAsEntity(world, newItemPos, result[i]);
+									}
 									world.updateEntities();
 									return;
 								}

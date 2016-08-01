@@ -3,21 +3,27 @@
 ############################
 
 achievement.craftStick=Craft Stick
-achievement.craftStick.desc=Craft stick.
+achievement.craftStick.desc=Craft stick
 
 
 
 achievement.spellFlintAndSteel=Flint and Steel Clone
-achievement.spellFlintAndSteel.desc=Hold Stick in Your hand and 1x Coal in the left hand and right-click on a block to put the block on fire
+achievement.spellFlintAndSteel.desc=Hold Stick in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire
 
 achievement.spellSmallFireball=Feel like Blaze
-achievement.spellSmallFireball.desc=Hold Blaze Rod in Your hand and at least 2x Redstone Dust in the left hand and right-click 
+achievement.spellSmallFireball.desc=Hold Blaze Rod in Your right hand and at least 2x Redstone Dust in the left hand and right-click 
+
+achievement.spellFusRoDah=Fus-Ro-Dah !!!
+achievement.spellFusRoDah.desc=Hold Blaze Rod in Your right hand and at least 1x Dragon's Breath in the left hand and right-click 
 
 achievement.spellLargeFireball=Feel like Ghast
-achievement.spellLargeFireball.desc=Hold Blaze Rod in Your hand and at least 1x Ghast Tear in the left hand and right-click 
+achievement.spellLargeFireball.desc=Hold Blaze Rod in Your right hand and at least 1x Ghast Tear in the left hand and right-click 
 
 achievement.spellTeleport=Teleportation !!!
-achievement.spellTeleport.desc=Hold Blaze Rod in Your hand and at least 1x Magma Cream in the left hand and right-click 
+achievement.spellTeleport.desc=Hold Blaze Rod in Your right hand and at least 1x Magma Cream in the left hand and right-click 
+
+achievement.spellTeleportToNether=Teleport to Nether
+achievement.spellTeleportToNether.desc=Hold Blaze Rod in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is save...i think).
 
 achievement.spellSummonMeteor=Meteor !!!
 achievement.spellSummonMeteor.desc=Hold Nether Star in Your hand and at least 1x Gold Block in the left hand and right-click 
@@ -138,6 +144,9 @@ achievement.craftGravel.desc=Toss 2x Cobblestone into the Altar Tier 1 and right
 achievement.craftLeather=Craft Leather
 achievement.craftLeather.desc=Toss 1x Rotten Flesh into the Altar Tier 1 and right-click with a Stick in hand
 
+achievement.craftClay=Craft Clay
+achievement.craftClay.desc=Toss 1x Sugar + 1x Gunpowder into the Altar Tier 1 and right-click with a Stick in hand
+
 achievement.buildAltarTier2=Build Altar Tier 2
 achievement.buildAltarTier2.desc=Add 1 block of Iron on each corner of Altar Tier 1 but one layer lower than Cauldron, outside of the redstone circle and replace the Cauldron
 
@@ -239,6 +248,9 @@ achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar +
 
 achievement.pickBlazeRod=Pick Blaze Rod
 achievement.pickBlazeRod.desc=Pick Blaze Rod from the ground
+
+achievement.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
+achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Rod in hand
 
 achievement.buildAltarTier6=Build Altar Tier 6
 achievement.buildAltarTier6.desc=Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron

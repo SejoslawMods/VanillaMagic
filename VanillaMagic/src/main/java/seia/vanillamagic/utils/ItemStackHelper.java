@@ -1,6 +1,7 @@
 package seia.vanillamagic.utils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,14 +12,27 @@ public class ItemStackHelper
 	{
 	}
 	
-	public static ItemStack getLapis()
+	public static ItemStack getLapis(int amount)
 	{
-		return new ItemStack(Items.DYE, 1, 4);
+		return new ItemStack(Items.DYE, amount, 4);
 	}
 	
-	public static ItemStack getSugarCane()
+	public static ItemStack getSugarCane(int amount)
 	{
-		return new ItemStack(Items.REEDS);
+		return new ItemStack(Items.REEDS, amount);
+	}
+
+	/*
+	 * 0 - Skeleton
+	 * 1 - Wither Skeleton
+	 * 2 - Zombie
+	 * 3 - Steve
+	 * 4 - Creeper
+	 * 5 - Ender Dragon
+	 */
+	public static ItemStack getHead(int amount, int meta)
+	{
+		return new ItemStack(Blocks.SKULL, amount, meta);
 	}
 	
 	public static boolean checkItemsInHands(EntityPlayer player, 

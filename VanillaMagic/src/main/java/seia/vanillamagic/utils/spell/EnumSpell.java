@@ -24,6 +24,12 @@ public enum EnumSpell
 	LIGHTNING_BOLT(5, "Thunder !!!", "spellSummonLightningBolt", 
 			EnumWand.BLAZE_ROD, 
 			new ItemStack(Items.GUNPOWDER, 32)),
+	FUS_RO_DAH(6, "Fus-Ro-Dah !!!", "spellFusRoDah",
+			EnumWand.BLAZE_ROD,
+			new ItemStack(Items.DRAGON_BREATH)),
+	TELEPORT_TO_NETHER(7, "Teleport to Nether", "spellTeleportToNether",
+			EnumWand.BLAZE_ROD,
+			new ItemStack(Items.NETHER_WART, 2)),
 	
 	// EntityAnimal + EntityAgeable + EntityPassive Summons
 	SUMMON_CHICKEN(100, "Summon Chicken", "spellSummonChicken", 
