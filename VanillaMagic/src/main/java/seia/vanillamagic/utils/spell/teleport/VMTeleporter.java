@@ -33,8 +33,8 @@ public class VMTeleporter extends Teleporter
 	
 	@Override
 	public boolean placeInExistingPortal(Entity entity, float rotationYaw)
-    {
+	{
 		placeInPortal(entity, rotationYaw);
 		return true;
-    }
+	}
 }
