@@ -527,10 +527,6 @@ public class SpellHelper
 		double newPosX = caster.posX + casterLookVec.xCoord * distance;
 		double newPosY = caster.posY + casterLookVec.yCoord * distance;
 		double newPosZ = caster.posZ + casterLookVec.zCoord * distance;
-//		Vec3d endPos = new Vec3d(newPosX, newPosY, newPosZ);
-//		RayTraceResult rayTraceResult = world.rayTraceBlocks(casterLookVec, endPos, false, true, false);
-//		if(rayTraceResult.typeOfHit == RayTraceResult.Type.MISS)
-//		{
 		BlockPos newPos = new BlockPos(newPosX, newPosY, newPosZ);
 		BlockPos newPosHead = new BlockPos(newPosX, newPosY + 1, newPosZ);
 		IBlockState newState = world.getBlockState(newPos);
@@ -544,42 +540,6 @@ public class SpellHelper
 			return true;
 		}
 		return false;
-		
-//			caster.setPositionAndUpdate(newPosX, newPosY, newPosZ);
-//			caster.fallDistance = 0.0F;
-////			caster.motionX = casterLookVec.xCoord * distance;
-////			caster.motionY = casterLookVec.yCoord * distance;
-////			caster.motionZ = casterLookVec.zCoord * distance;
-//			return true;
-//		}
-//		return false;
-		
-		
-		
-		
-		
-//		World world = caster.worldObj;
-//		if(world.isRemote)
-//		{
-//			Vec3d vec = caster.getLookVec();
-//			double wantedVelocity = 1.7;
-//			Potion potionSpeed = Potion.getPotionById(1);
-//			if(caster.isPotionActive(potionSpeed)) // speed potion
-//			{
-//				int amplifier = caster.getActivePotionEffect(potionSpeed).getAmplifier();
-//				wantedVelocity += (1 + amplifier) * (0.35);
-//			}
-//			caster.motionX = vec.xCoord * wantedVelocity;
-//			caster.motionY = vec.yCoord * wantedVelocity;
-//			caster.motionZ = vec.zCoord * wantedVelocity;
-//			world.playSound(null, caster.posX, caster.posY, caster.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-//			return true;
-//		}
-//		if(!world.isRemote)
-//		{
-//			caster.fallDistance = 0;
-//		}
-//		return false;
 	}
 	
 	/*

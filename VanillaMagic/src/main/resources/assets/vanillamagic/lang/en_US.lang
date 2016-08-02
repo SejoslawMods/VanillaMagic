@@ -37,8 +37,8 @@ achievement.spellMoveInAir.desc=Hold Blaze Rod in Your right hand and at least 1
 achievement.spellPullEntityToPlayer=Pull Entity to Player (yes, ALL entities)
 achievement.spellPullEntityToPlayer.desc=Hold Blaze Rod in Your right hand and at least 4x String in the left hand and right-click 
 
-achievement.spellFreezeWater3x3=Freeze Water 3x3
-achievement.spellFreezeWater3x3.desc=Hold Blaze Rod in Your right hand and at least 1x Snow Block in the left hand and right-click 
+achievement.spellFreezeWater3x3=Freeze Water 3x3 (will freeze the middle block)
+achievement.spellFreezeWater3x3.desc=Hold Blaze Rod in Your right hand and at least 1x Snow Block in the left hand and right-click
 
 achievement.spellSummonLightningBolt=Thunder !!! (summon thunder)
 achievement.spellSummonLightningBolt.desc=Hold Blaze Rod in Your hand and at least 32x Gunpowder in the left hand and right-click 
