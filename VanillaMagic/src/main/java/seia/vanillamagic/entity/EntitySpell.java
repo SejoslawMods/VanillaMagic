@@ -28,6 +28,7 @@ public abstract class EntitySpell extends Entity
     public double accelerationX;
     public double accelerationY;
     public double accelerationZ;
+    public boolean spawnParticlesInWater = false;
 
     public EntitySpell(World world, EntityLivingBase caster, 
     		double accelX, double accelY, double accelZ)
@@ -37,7 +38,7 @@ public abstract class EntitySpell extends Entity
         this.setSize(1.0F, 1.0F);
         this.setLocationAndAngles(
         		caster.posX + accelX, // in front of face = accelX
-        		caster.posY + 1.5D + accelY, // in front of face = accelY
+        		caster.posY + 1.2D + accelY, // in front of face = accelY
         		caster.posZ + accelZ, // in front of face = accelZ
         		caster.rotationYaw, 
         		caster.rotationPitch);
@@ -75,15 +76,15 @@ public abstract class EntitySpell extends Entity
      */
     public void onUpdate()
     {
-        if (this.worldObj.isRemote || (this.castingEntity == null || !this.castingEntity.isDead) && this.worldObj.isBlockLoaded(new BlockPos(this)))
+        if(this.worldObj.isRemote || (this.castingEntity == null || !this.castingEntity.isDead) && this.worldObj.isBlockLoaded(new BlockPos(this)))
         {
             super.onUpdate();
-            if (this.inGround)
+            if(this.inGround)
             {
-                if (this.worldObj.getBlockState(new BlockPos(this.xTile, this.yTile, this.zTile)).getBlock() == this.inTile)
+                if(this.worldObj.getBlockState(new BlockPos(this.xTile, this.yTile, this.zTile)).getBlock() == this.inTile)
                 {
                     ++this.ticksAlive;
-                    if (this.ticksAlive == 600)
+                    if(this.ticksAlive == 600)
                     {
                         this.setDead();
                     }
@@ -99,9 +100,10 @@ public abstract class EntitySpell extends Entity
             else
             {
                 ++this.ticksInAir;
+                inAir();
             }
             RayTraceResult rayTraceResult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.castingEntity);
-            if (rayTraceResult != null)
+            if(rayTraceResult != null)
             {
             	this.onImpact(rayTraceResult);
             }
@@ -110,13 +112,17 @@ public abstract class EntitySpell extends Entity
             this.posZ += this.motionZ;
             ProjectileHelper.rotateTowardsMovement(this, 0.2F);
             float motionFactor = this.getMotionFactor();
-            if (this.isInWater())
+            if(this.isInWater())
             {
-                for (int i = 0; i < 4; ++i)
+                if(spawnParticlesInWater)
                 {
-                    float f1 = 0.25F;
-                    this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ, new int[0]);
+                	for(int i = 0; i < 4; ++i)
+                    {
+                        float f1 = 0.25F;
+                        this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ, new int[0]);
+                    }
                 }
+                inWater();
                 motionFactor = 0.8F;
             }
             this.motionX += this.accelerationX;
@@ -145,6 +151,14 @@ public abstract class EntitySpell extends Entity
      * Called when this EntitySpell hits a block or entity.
      */
     protected abstract void onImpact(RayTraceResult result);
+    
+    public void inWater()
+    {
+    }
+    
+    public void inAir()
+    {
+    }
     
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.

@@ -1,12 +1,41 @@
 package seia.vanillamagic.utils;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class EntityHelper 
 {
 	private EntityHelper()
 	{
+	}
+	
+	public static Vec3d getEyePosition(EntityPlayer player)
+	{
+		double posX = player.posX;
+		double posY = player.posY;
+		double posZ = player.posZ;
+		if (player.worldObj.isRemote) 
+		{
+			posY += player.getEyeHeight() - player.getDefaultEyeHeight();
+		} 
+		else 
+		{
+			posY += player.getEyeHeight();
+			if(player instanceof EntityPlayerMP && player.isSneaking()) 
+			{
+				posY -= 0.08;
+			}
+		}
+		return new Vec3d(posX, posY, posZ);
+	}
+	
+	public static Vec3d getLookVec(EntityPlayer player) 
+	{
+		Vec3d lv = player.getLookVec();
+		return new Vec3d(lv.xCoord, lv.yCoord, lv.zCoord);
 	}
 	
 	/**
@@ -20,11 +49,11 @@ public class EntityHelper
 		toKnockBack.motionZ /= 2.0D;
 		toKnockBack.motionX -= xRatio / (double)f * (double)strenght;
 		toKnockBack.motionZ -= zRatio / (double)f * (double)strenght;
-		if (toKnockBack.onGround)
+		if(toKnockBack.onGround)
 		{
 			toKnockBack.motionY /= 2.0D;
 			toKnockBack.motionY += (double)strenght;
-			if (toKnockBack.motionY > 0.4000000059604645D)
+			if(toKnockBack.motionY > 0.4000000059604645D)
 			{
 				toKnockBack.motionY = 0.4000000059604645D;
 			}

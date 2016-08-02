@@ -10,16 +10,16 @@ achievement.craftStick.desc=Craft stick
 achievement.spellFlintAndSteel=Flint and Steel Clone
 achievement.spellFlintAndSteel.desc=Hold Stick in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire
 
-achievement.spellSmallFireball=Feel like Blaze
+achievement.spellSmallFireball=Feel like Blaze (small fireball)
 achievement.spellSmallFireball.desc=Hold Blaze Rod in Your right hand and at least 2x Redstone Dust in the left hand and right-click 
 
-achievement.spellFusRoDah=Fus-Ro-Dah !!!
+achievement.spellFusRoDah=Fus-Ro-Dah !!! (repulse mobs and animals around player)
 achievement.spellFusRoDah.desc=Hold Blaze Rod in Your right hand and at least 1x Dragon's Breath in the left hand and right-click 
 
-achievement.spellLargeFireball=Feel like Ghast
+achievement.spellLargeFireball=Feel like Ghast (huge fireball + explosion)
 achievement.spellLargeFireball.desc=Hold Blaze Rod in Your right hand and at least 1x Ghast Tear in the left hand and right-click 
 
-achievement.spellTeleport=Teleportation !!!
+achievement.spellTeleport=Teleportation !!! (look and teleport)
 achievement.spellTeleport.desc=Hold Blaze Rod in Your right hand and at least 1x Magma Cream in the left hand and right-click 
 
 achievement.spellTeleportToNether=Teleport to Nether
@@ -28,13 +28,19 @@ achievement.spellTeleportToNether.desc=Hold Blaze Rod in Your right hand and at 
 achievement.spellTeleportToEnd=Teleport to End
 achievement.spellTeleportToEnd.desc=Hold Blaze Rod in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon)
 
-achievement.spellSummonMeteor=Meteor !!!
+achievement.spellSummonMeteor=Meteor !!! (summon meteor from heaven)
 achievement.spellSummonMeteor.desc=Hold Nether Star in Your hand and at least 1x Gold Block in the left hand and right-click 
 
-achievement.spellMoveInAir=Move in air (W.I.P.)
+achievement.spellMoveInAir=Move in air
 achievement.spellMoveInAir.desc=Hold Blaze Rod in Your right hand and at least 1x Feather in the left hand and right-click 
 
-achievement.spellSummonLightningBolt=Thunder !!!
+achievement.spellPullEntityToPlayer=Pull Entity to Player (yes, ALL entities)
+achievement.spellPullEntityToPlayer.desc=Hold Blaze Rod in Your right hand and at least 4x String in the left hand and right-click 
+
+achievement.spellFreezeWater3x3=Freeze Water 3x3
+achievement.spellFreezeWater3x3.desc=Hold Blaze Rod in Your right hand and at least 1x Snow Block in the left hand and right-click 
+
+achievement.spellSummonLightningBolt=Thunder !!! (summon thunder)
 achievement.spellSummonLightningBolt.desc=Hold Blaze Rod in Your hand and at least 32x Gunpowder in the left hand and right-click 
 
 

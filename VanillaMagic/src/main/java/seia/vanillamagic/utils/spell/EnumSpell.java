@@ -36,6 +36,12 @@ public enum EnumSpell
 	MOVE_IN_AIR(9, "Move in air", "spellMoveInAir",
 			EnumWand.BLAZE_ROD,
 			new ItemStack(Items.FEATHER)),
+	PULL_ENTITY_TO_PLAYER(10, "Pull Entity to Player", "spellPullEntityToPlayer",
+			EnumWand.BLAZE_ROD,
+			new ItemStack(Items.STRING, 4)),
+	WATER_FREEZE(11, "Freeze Water 3x3", "spellFreezeWater3x3",
+			EnumWand.BLAZE_ROD,
+			new ItemStack(Blocks.SNOW)),
 	
 	// EntityAnimal + EntityAgeable + EntityPassive Summons
 	SUMMON_CHICKEN(100, "Summon Chicken", "spellSummonChicken", 

@@ -22,7 +22,13 @@ public class EntitySpellTeleport extends EntitySpell
 	protected void onImpact(RayTraceResult result) 
 	{
 		EntityLivingBase caster = this.castingEntity;
-        if (result.typeOfHit == RayTraceResult.Type.BLOCK)
+		if(result.typeOfHit == RayTraceResult.Type.ENTITY)
+		{
+			caster.setPositionAndUpdate(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ);
+			caster.fallDistance = 0.0F;
+			return;
+		}
+        if(result.typeOfHit == RayTraceResult.Type.BLOCK)
         {
             BlockPos resultBlockPos = result.getBlockPos();
             TileEntity resultTileEntity = this.worldObj.getTileEntity(resultBlockPos);

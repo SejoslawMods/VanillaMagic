@@ -23,6 +23,11 @@ public class TeleportHelper
 	private TeleportHelper()
 	{
 	}
+	
+	public static void teleportEntity(Entity entityToBeTeleported, BlockPos teleportTo)
+	{
+		entityToBeTeleported.setPositionAndUpdate(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
+	}
 
 	/*
 	 * Try to use this method.

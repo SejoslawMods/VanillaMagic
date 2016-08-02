@@ -3,6 +3,9 @@ package seia.vanillamagic.utils.spell;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -44,6 +47,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.entity.EntitySpellFreezeLiquid;
+import seia.vanillamagic.entity.EntitySpellPull;
 import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
 import seia.vanillamagic.entity.EntitySpellTeleport;
 import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
@@ -109,6 +114,14 @@ public class SpellHelper
 		else if(spellID == EnumSpell.MOVE_IN_AIR.spellID)
 		{
 			return spellMoveInAir(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.PULL_ENTITY_TO_PLAYER.spellID)
+		{
+			return spellPullEntityToPlayer(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.WATER_FREEZE.spellID)
+		{
+			return spellFreezeWater3x3(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -503,25 +516,114 @@ public class SpellHelper
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
 		World world = caster.worldObj;
-		if(world.isRemote)
+		double distance = 10;
+		Vec3d casterLookVec = caster.getLookVec();
+		Potion potionSpeed = Potion.getPotionById(1);
+		if(caster.isPotionActive(potionSpeed)) // speed potion
 		{
-			Vec3d vec = caster.getLookVec();
-			double wantedVelocity = 1.7;
-			Potion potionSpeed = Potion.getPotionById(1);
-			if(caster.isPotionActive(potionSpeed)) // speed potion
-			{
-				int amplifier = caster.getActivePotionEffect(potionSpeed).getAmplifier();
-				wantedVelocity += (1 + amplifier) * (0.35);
-			}
-			caster.motionX = vec.xCoord * wantedVelocity;
-			caster.motionY = vec.yCoord * wantedVelocity;
-			caster.motionZ = vec.zCoord * wantedVelocity;
-			world.playSound(null, caster.posX, caster.posY, caster.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+			int amplifier = caster.getActivePotionEffect(potionSpeed).getAmplifier();
+			distance += (1 + amplifier) * (0.35);
+		}
+		double newPosX = caster.posX + casterLookVec.xCoord * distance;
+		double newPosY = caster.posY + casterLookVec.yCoord * distance;
+		double newPosZ = caster.posZ + casterLookVec.zCoord * distance;
+//		Vec3d endPos = new Vec3d(newPosX, newPosY, newPosZ);
+//		RayTraceResult rayTraceResult = world.rayTraceBlocks(casterLookVec, endPos, false, true, false);
+//		if(rayTraceResult.typeOfHit == RayTraceResult.Type.MISS)
+//		{
+		BlockPos newPos = new BlockPos(newPosX, newPosY, newPosZ);
+		BlockPos newPosHead = new BlockPos(newPosX, newPosY + 1, newPosZ);
+		IBlockState newState = world.getBlockState(newPos);
+		Block newBlock = newState.getBlock();
+		if(world.isAirBlock(newPos) && 
+				world.isAirBlock(newPosHead) &&
+				newPosY > 0)
+		{
+			caster.setPositionAndUpdate(newPosX, newPosY, newPosZ);
+			caster.fallDistance = 0.0F;
 			return true;
 		}
-		if(!world.isRemote)
+		return false;
+		
+//			caster.setPositionAndUpdate(newPosX, newPosY, newPosZ);
+//			caster.fallDistance = 0.0F;
+////			caster.motionX = casterLookVec.xCoord * distance;
+////			caster.motionY = casterLookVec.yCoord * distance;
+////			caster.motionZ = casterLookVec.zCoord * distance;
+//			return true;
+//		}
+//		return false;
+		
+		
+		
+		
+		
+//		World world = caster.worldObj;
+//		if(world.isRemote)
+//		{
+//			Vec3d vec = caster.getLookVec();
+//			double wantedVelocity = 1.7;
+//			Potion potionSpeed = Potion.getPotionById(1);
+//			if(caster.isPotionActive(potionSpeed)) // speed potion
+//			{
+//				int amplifier = caster.getActivePotionEffect(potionSpeed).getAmplifier();
+//				wantedVelocity += (1 + amplifier) * (0.35);
+//			}
+//			caster.motionX = vec.xCoord * wantedVelocity;
+//			caster.motionY = vec.yCoord * wantedVelocity;
+//			caster.motionZ = vec.zCoord * wantedVelocity;
+//			world.playSound(null, caster.posX, caster.posY, caster.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+//			return true;
+//		}
+//		if(!world.isRemote)
+//		{
+//			caster.fallDistance = 0;
+//		}
+//		return false;
+	}
+	
+	/*
+	 * Pull Entity to Player
+	 */
+	public static boolean spellPullEntityToPlayer(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		if(pos == null)
 		{
-			caster.fallDistance = 0;
+			World world = caster.worldObj;
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntitySpellPull spellLightningBolt = new EntitySpellPull(world,
+					caster, accelX, accelY, accelZ,
+					caster.getPosition());
+			world.spawnEntityInWorld(spellLightningBolt);
+			world.updateEntities();
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * Freeze Water 3x3
+	 */
+	public static boolean spellFreezeWater3x3(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		if(pos == null)
+		{
+			World world = caster.worldObj;
+			Vec3d lookingAt = caster.getLookVec();
+			double accelX = lookingAt.xCoord;
+			double accelY = lookingAt.yCoord;
+			double accelZ = lookingAt.zCoord;
+			EntitySpellFreezeLiquid spellLightningBolt = new EntitySpellFreezeLiquid(world,
+					caster, accelX, accelY, accelZ,
+					Blocks.ICE, new BlockLiquid[]{Blocks.WATER, Blocks.FLOWING_WATER}, 5);
+			world.spawnEntityInWorld(spellLightningBolt);
+			world.updateEntities();
+			return true;
 		}
 		return false;
 	}
