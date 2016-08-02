@@ -35,6 +35,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
@@ -104,6 +105,10 @@ public class SpellHelper
 		else if(spellID == EnumSpell.TELEPORT_TO_END.spellID)
 		{
 			return spellTeleportToEnd(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.MOVE_IN_AIR.spellID)
+		{
+			return spellMoveInAir(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -486,6 +491,37 @@ public class SpellHelper
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/*
+	 * TODO: Make it works
+	 * Move in air
+	 */
+	public static boolean spellMoveInAir(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		World world = caster.worldObj;
+		if(world.isRemote)
+		{
+			Vec3d vec = caster.getLookVec();
+			double wantedVelocity = 1.7;
+			Potion potionSpeed = Potion.getPotionById(1);
+			if(caster.isPotionActive(potionSpeed)) // speed potion
+			{
+				int amplifier = caster.getActivePotionEffect(potionSpeed).getAmplifier();
+				wantedVelocity += (1 + amplifier) * (0.35);
+			}
+			caster.motionX = vec.xCoord * wantedVelocity;
+			caster.motionY = vec.yCoord * wantedVelocity;
+			caster.motionZ = vec.zCoord * wantedVelocity;
+			world.playSound(null, caster.posX, caster.posY, caster.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+			return true;
+		}
+		if(!world.isRemote)
+		{
+			caster.fallDistance = 0;
 		}
 		return false;
 	}

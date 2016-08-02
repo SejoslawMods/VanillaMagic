@@ -57,8 +57,10 @@ public class QuestList
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LIGHTNING_BOLT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, +2, EnumSpell.LIGHTNING_BOLT);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, -2, EnumSpell.TELEPORT);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_NETHER = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT, +2, 0, EnumSpell.TELEPORT_TO_NETHER);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_END = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT_TO_NETHER, +2, 0, EnumSpell.TELEPORT_TO_END);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_END = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT_TO_NETHER, +2, 0, ItemStackHelper.getHead(1, 5), EnumSpell.TELEPORT_TO_END);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_METEOR = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, +2, 0, EnumSpell.METEOR);
+	// TODO: Make it works.
+	// public static final QuestCastSpellInAir QUEST_CAST_SPELL_MOVE_IN_AIR = new QuestCastSpellInAir(QUEST_CAST_SPELL_METEOR, +2, 0, EnumSpell.MOVE_IN_AIR);
 	// END SPELLS
 	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK, 0, +2, new ItemStack(Items.CAULDRON), "Craft Cauldron", "craftCauldron");

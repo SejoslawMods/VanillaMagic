@@ -33,6 +33,9 @@ public enum EnumSpell
 	TELEPORT_TO_END(8, "Teleport to End", "spellTeleportToEnd",
 			EnumWand.BLAZE_ROD,
 			new ItemStack(Items.END_CRYSTAL)),
+	MOVE_IN_AIR(9, "Move in air", "spellMoveInAir",
+			EnumWand.BLAZE_ROD,
+			new ItemStack(Items.FEATHER)),
 	
 	// EntityAnimal + EntityAgeable + EntityPassive Summons
 	SUMMON_CHICKEN(100, "Summon Chicken", "spellSummonChicken", 
@@ -113,7 +116,8 @@ public enum EnumSpell
 	
 	public boolean isItemOffHandRightForSpell(ItemStack stackOffHand)
 	{
-		return itemOffHand.getItem().equals(stackOffHand.getItem());
+		return (itemOffHand.getItem().equals(stackOffHand.getItem())) && 
+				(stackOffHand.stackSize >= itemOffHand.stackSize);
 	}
 
 	//================================================================================================

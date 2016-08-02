@@ -32,7 +32,7 @@ public class ItemStackHelper
 	 */
 	public static ItemStack getHead(int amount, int meta)
 	{
-		return new ItemStack(Blocks.SKULL, amount, meta);
+		return new ItemStack(Items.SKULL, amount, meta);
 	}
 	
 	public static boolean checkItemsInHands(EntityPlayer player, 

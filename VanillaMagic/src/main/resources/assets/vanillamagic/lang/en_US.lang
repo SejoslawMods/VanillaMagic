@@ -31,6 +31,9 @@ achievement.spellTeleportToEnd.desc=Hold Blaze Rod in Your right hand and at lea
 achievement.spellSummonMeteor=Meteor !!!
 achievement.spellSummonMeteor.desc=Hold Nether Star in Your hand and at least 1x Gold Block in the left hand and right-click 
 
+achievement.spellMoveInAir=Move in air (W.I.P.)
+achievement.spellMoveInAir.desc=Hold Blaze Rod in Your right hand and at least 1x Feather in the left hand and right-click 
+
 achievement.spellSummonLightningBolt=Thunder !!!
 achievement.spellSummonLightningBolt.desc=Hold Blaze Rod in Your hand and at least 32x Gunpowder in the left hand and right-click 
 
@@ -205,7 +208,7 @@ achievement.quarry=Vanilla Quarry !!!
 achievement.quarry.desc=Place Cauldron and than on the East side of the Cauldron place DiamondBlock and on the North side place RedstoneBlock. Than replace the Cauldron. Drop fuel into Cauldron. (check console for help) (output to IInventory on West, input fuel IInventory on Top)
 
 achievement.arrowMachineGun=Arrow Machine Gun
-achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to right hand and right-click
+achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to right hand and right-click (or hold)
 
 achievement.craftGoldIngot=Craft Gold Ingot
 achievement.craftGoldIngot.desc=Toss 8x Iron Ingot into the Altar Tier 3 and right-click with a Stick in hand
