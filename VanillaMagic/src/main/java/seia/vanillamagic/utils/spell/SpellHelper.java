@@ -509,7 +509,6 @@ public class SpellHelper
 	}
 	
 	/*
-	 * TODO: Make it works
 	 * Move in air
 	 */
 	public static boolean spellMoveInAir(EntityPlayer caster,
@@ -524,20 +523,24 @@ public class SpellHelper
 			int amplifier = caster.getActivePotionEffect(potionSpeed).getAmplifier();
 			distance += (1 + amplifier) * (0.35);
 		}
-		double newPosX = caster.posX + casterLookVec.xCoord * distance;
-		double newPosY = caster.posY + casterLookVec.yCoord * distance;
-		double newPosZ = caster.posZ + casterLookVec.zCoord * distance;
-		BlockPos newPos = new BlockPos(newPosX, newPosY, newPosZ);
-		BlockPos newPosHead = new BlockPos(newPosX, newPosY + 1, newPosZ);
-		IBlockState newState = world.getBlockState(newPos);
-		Block newBlock = newState.getBlock();
-		if(world.isAirBlock(newPos) && 
-				world.isAirBlock(newPosHead) &&
-				newPosY > 0)
+		// will teleport caster to the farthest blockPos between casterPos and 'distance'
+		for(double i = distance; i > 0; i -= 1.0D)
 		{
-			caster.setPositionAndUpdate(newPosX, newPosY, newPosZ);
-			caster.fallDistance = 0.0F;
-			return true;
+			double newPosX = caster.posX + casterLookVec.xCoord * i;
+			double newPosY = caster.posY + casterLookVec.yCoord * i;
+			double newPosZ = caster.posZ + casterLookVec.zCoord * i;
+			BlockPos newPos = new BlockPos(newPosX, newPosY, newPosZ);
+			BlockPos newPosHead = new BlockPos(newPosX, newPosY + 1, newPosZ);
+			if(newPosY > 0)
+			{
+				if(world.isAirBlock(newPos) && 
+						world.isAirBlock(newPosHead))
+				{
+					caster.setPositionAndUpdate(newPosX, newPosY, newPosZ);
+					caster.fallDistance = 0.0F;
+					return true;
+				}
+			}
 		}
 		return false;
 	}
