@@ -145,7 +145,7 @@ achievement.buildAltarTier1=Build Altar Tier 1
 achievement.buildAltarTier1.desc=Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle
 
 achievement.craftGunpowder=Craft Gunpowder
-achievement.craftGunpowder.desc=Toss 1x Sugar and 1x Coal into the Altar Tier 1 and right-click with a Stick in hand
+achievement.craftGunpowder.desc=Toss 1x Sugar + 1x Coal into the Altar Tier 1 and right-click with a Stick in hand
 
 achievement.craftSugar=Craft Sugar
 achievement.craftSugar.desc=Toss 1x Sugar Cane into the Altar Tier 1 and right-click with a Stick in hand
@@ -157,7 +157,7 @@ achievement.craftSand=Craft Sand
 achievement.craftSand.desc=Toss 1x Cobblestone into the Altar Tier 1 and right-click with a Stick in hand
 
 achievement.craftGlass=Craft Glass
-achievement.craftGlass.desc=Toss 1x Sand and 1x Coal into the Altar Tier 1 and right-click with a Stick in hand
+achievement.craftGlass.desc=Toss 1x Sand + 1x Coal into the Altar Tier 1 and right-click with a Stick in hand
 
 achievement.craftCobblestone=Craft Cobblestone
 achievement.craftCobblestone.desc=Toss 1x Dirt into the Altar Tier 1 and right-click with a Stick in hand
