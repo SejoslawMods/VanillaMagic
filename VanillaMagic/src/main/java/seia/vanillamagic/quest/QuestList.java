@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
+import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.quarry.QuestQuarry;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
@@ -334,6 +335,7 @@ public class QuestList
 	public static final QuestMineBlock QUEST_MINE_DIAMOND = new QuestMineBlock(QUEST_CRAFT_BOOKSHELF, +2, 0, new ItemStack(Items.DIAMOND), "Mine Diamond", "mineDiamond", new Block[]{Blocks.DIAMOND_ORE});
 	public static final QuestMineBlock QUEST_MINE_OBSIDIAN = new QuestMineBlock(QUEST_MINE_DIAMOND, +2, 0, new ItemStack(Blocks.OBSIDIAN), "Mine Obsidian", "mineObsidian", new Block[]{Blocks.OBSIDIAN});
 	public static final QuestCraft QUEST_CRAFT_ENCHANTING_TABLE = new QuestCraft(QUEST_MINE_OBSIDIAN, +2, 0, new ItemStack(Blocks.ENCHANTING_TABLE), "Craft Enchanting Table", "craftEnchantingTable");
+	public static final QuestChunkLoader QUEST_CHUNK_LOADER = new QuestChunkLoader(QUEST_CRAFT_ENCHANTING_TABLE, 0, +2, new ItemStack(Blocks.ENCHANTING_TABLE), "Build ChunkLoader", "chunkLoader");
 	//TODO: add quest for enchanting sanctuary
 	
 	//===================================================================================================

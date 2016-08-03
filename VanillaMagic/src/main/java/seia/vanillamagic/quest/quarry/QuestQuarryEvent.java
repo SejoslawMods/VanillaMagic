@@ -15,16 +15,6 @@ public class QuestQuarryEvent
 	}
 	
 	@SubscribeEvent
-	public void onWorldUnload(WorldEvent.Unload event)
-	{
-		if(QuarryHandler.INSTANCE.countQuarrys() > 0)
-		{
-			QuarryHandler.INSTANCE.onWorldUnload();
-			System.out.println("QuarryList cleared");
-		}
-	}
-	
-	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)
 	{
 		World world = event.getWorld();

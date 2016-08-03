@@ -31,6 +31,8 @@ public class TileQuarry extends TileEntity implements ITickable
 	public static final int BASIC_QUARRY_SIZE = 4 * 16 + 2;
 	// Input side from the Quarry into IInventory (argument in methods)
 	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
+	// The name for registry
+	public static final String TILE_QUARRY_NAME = "tileQuarry";
 
 	private final String quarryPosX = "quarryPosX", quarryPosY = "quarryPosY", quarryPosZ = "quarryPosZ";
 	private final String ticksNBT = "ticks";
@@ -361,6 +363,7 @@ public class TileQuarry extends TileEntity implements ITickable
     {
 		try
 		{
+			super.readFromNBT(compound);
 			this.ticks = compound.getInteger(ticksNBT);
 			int digPosX = compound.getInteger(this.digPosX);
 			int digPosY = compound.getInteger(this.digPosY);
@@ -393,7 +396,7 @@ public class TileQuarry extends TileEntity implements ITickable
 			compound.setInteger(quarryPosX, quarryPos.getX());
 			compound.setInteger(quarryPosY, quarryPos.getY());
 			compound.setInteger(quarryPosZ, quarryPos.getZ());
-			return compound;
+			return super.writeToNBT(compound);
 		}
 		catch(Exception e)
 		{

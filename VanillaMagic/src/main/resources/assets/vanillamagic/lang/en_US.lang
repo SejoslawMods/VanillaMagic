@@ -130,6 +130,9 @@ achievement.mineObsidian.desc=Mine obsidian
 achievement.craftEnchantingTable=Craft Enchanting Table
 achievement.craftEnchantingTable.desc=Craft enchanting table
 
+achievement.chunkLoader=Build ChunkLoader
+achievement.chunkLoader.desc=Place Enchanting Table. Place Obsidian in cross (3x3) under Enchanting Table. Place Torch on top of each Obsidian except the middle one. Replace Enchanting Table. Will load 3x3 chunks.
+
 
 
 achievement.craftCauldron=Craft Cauldron

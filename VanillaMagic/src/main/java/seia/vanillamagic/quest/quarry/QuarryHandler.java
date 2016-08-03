@@ -12,24 +12,17 @@ public class QuarryHandler
 	//======================================================================================
 	
 	//public final ArrayList<Quarry> quarryList;
-	public final ArrayList<TileQuarry> tileQuarryList;
+	public final ArrayList<TileQuarry> tileQuarryList = new ArrayList<TileQuarry>();
 
-	public QuarryHandler()
+	private QuarryHandler()
 	{
 		//quarryList = new ArrayList<Quarry>();
-		tileQuarryList = new ArrayList<TileQuarry>();
 		System.out.println("QuarryHandler registered");
 	}
 	
 	// method just to create static INSTANCE
 	public void init()
 	{
-	}
-	
-	public void onWorldUnload()
-	{
-		//quarryList.clear();
-		tileQuarryList.clear();
 	}
 	
 	public int countQuarrys()

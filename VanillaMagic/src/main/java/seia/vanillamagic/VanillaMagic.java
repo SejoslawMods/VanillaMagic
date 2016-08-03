@@ -1,11 +1,14 @@
 package seia.vanillamagic;
 
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
+import seia.vanillamagic.chunkloader.ChunkLoadingHelper;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.quest.quarry.QuarryHandler;
 import seia.vanillamagic.quest.quarry.QuestQuarryEvent;
@@ -18,8 +21,11 @@ import seia.vanillamagic.quest.quarry.QuestQuarryEvent;
 public class VanillaMagic 
 {
 	public static final String MODID = "vanillamagic";
-	public static final String VERSION = "1.10.2-0.9.0.0";
+	public static final String VERSION = "1.10.2-0.9.1.0";
 	public static final String NAME = "Vanilla Magic";
+	
+	@Mod.Instance
+	public static VanillaMagic INSTANCE;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -33,9 +39,12 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicIntegration.INSTANCE.preInit();
 		// TODO: For future. Add quarrys to be saved and load from file.
-		// TODO: Currently quarrys MUST BE replace each time the world is load
+		// TODO: Currently quarrys MUST BE replace each time the world is loaded ???
 		MinecraftForge.EVENT_BUS.register(new QuestQuarryEvent()); // WorldTickEvent
+		VanillaMagicRegistry.INSTANCE.preInit();
 		QuarryHandler.INSTANCE.init();
+		ChunkLoadingHelper.INSTANCE.init();
+		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 	}
 	
 	@EventHandler
