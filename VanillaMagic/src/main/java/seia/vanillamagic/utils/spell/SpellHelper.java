@@ -636,7 +636,7 @@ public class SpellHelper
 		worldInfo.setThunderTime(0);
 		worldInfo.setRaining(false);
 		worldInfo.setThundering(false);
-        return true;
+		return true;
 	}
 	
 	public static boolean spellWeatherThunderstorm(EntityPlayer caster,
@@ -649,6 +649,6 @@ public class SpellHelper
 		worldInfo.setThunderTime(1000);
 		worldInfo.setRaining(true);
 		worldInfo.setThundering(true);
-        return true;
+		return true;
 	}
 }

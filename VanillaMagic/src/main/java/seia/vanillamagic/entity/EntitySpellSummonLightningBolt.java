@@ -15,9 +15,9 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 {
 	public EntitySpellSummonLightningBolt(World world, EntityLivingBase caster, 
 			double accelX, double accelY, double accelZ)
-    {
-        super(world, caster, accelX, accelY, accelZ);
-    }
+	{
+		super(world, caster, accelX, accelY, accelZ);
+	}
 
 	@Override
 	protected void onImpact(RayTraceResult result) 
@@ -57,18 +57,18 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 	}
 	
 	/**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate()
-    {
-        EntityLivingBase caster = this.castingEntity;
-        if (caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
-        {
-            this.setDead();
-        }
-        else
-        {
-            super.onUpdate();
-        }
-    }
+	 * Called to update the entity's position/logic.
+	 */
+	public void onUpdate()
+	{
+		EntityLivingBase caster = this.castingEntity;
+		if (caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
+		{
+			this.setDead();
+		}
+		else
+		{
+			super.onUpdate();
+		}
+	}
 }

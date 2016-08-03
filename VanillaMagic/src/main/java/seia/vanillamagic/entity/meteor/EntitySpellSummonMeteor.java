@@ -48,19 +48,19 @@ public class EntitySpellSummonMeteor extends EntitySpell
 		this.setDead();
 	}
     
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate()
-    {
-        EntityLivingBase caster = this.castingEntity;
-        if (caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
-        {
-            this.setDead();
-        }
-        else
-        {
-            super.onUpdate();
-        }
-    }
+	/**
+	 * Called to update the entity's position/logic.
+	 */
+	public void onUpdate()
+	{
+		EntityLivingBase caster = this.castingEntity;
+		if (caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
+		{
+			this.setDead();
+		}
+		else
+		{
+			super.onUpdate();
+		}
+	}
 }

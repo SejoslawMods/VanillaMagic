@@ -22,31 +22,30 @@ public class EntityMeteor extends EntityLargeFireball
 		setSize(BASIC_METEOR_SIZE, BASIC_METEOR_SIZE);
 		explosionPower = BASIC_METEOR_EXPLOSION_POWER;
 		this.motionX = 0.0D;
-        this.motionY = 0.0D;
-        this.motionZ = 0.0D;
+		this.motionY = 0.0D;
+		this.motionZ = 0.0D;
 		shootingEntity = castingEntity;
-		motionY = 0.0D;
 		double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
-        this.accelerationX = 0;
-        this.accelerationY = accelY / d0 * 0.1D;
-        this.accelerationZ = 0;
+		this.accelerationX = 0;
+		this.accelerationY = accelY / d0 * 0.1D;
+		this.accelerationZ = 0;
 	}
 	
 	/**
-     * Called when this EntityMeteor hits a block or entity.
-     */
-    protected void onImpact(RayTraceResult result)
-    {
-        if (!this.worldObj.isRemote)
-        {
-            if (result.entityHit != null)
-            {
-                result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
-                this.applyEnchantments(this.shootingEntity, result.entityHit);
-            }
-            boolean flag = this.worldObj.getGameRules().getBoolean("mobGriefing");
-            this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
-            this.setDead();
-        }
-    }
+	 * Called when this EntityMeteor hits a block or entity.
+	 */
+	protected void onImpact(RayTraceResult result)
+	{
+		if (!this.worldObj.isRemote)
+		{
+			if (result.entityHit != null)
+			{
+				result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
+				this.applyEnchantments(this.shootingEntity, result.entityHit);
+			}
+			boolean flag = this.worldObj.getGameRules().getBoolean("mobGriefing");
+			this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+			this.setDead();
+		}
+	}
 }
