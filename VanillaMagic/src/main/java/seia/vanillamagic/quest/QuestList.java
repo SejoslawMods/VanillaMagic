@@ -62,6 +62,9 @@ public class QuestList
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_NETHER = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT, +2, 0, EnumSpell.TELEPORT_TO_NETHER);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_END = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT_TO_NETHER, +2, 0, ItemStackHelper.getHead(1, 5), EnumSpell.TELEPORT_TO_END);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_METEOR = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, +2, 0, EnumSpell.METEOR);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_RAIN = new QuestCastSpellInAir(QUEST_CAST_SPELL_METEOR, +2, 0, EnumSpell.WEATHER_RAIN);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_CLEAR = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_RAIN, +2, 0, EnumSpell.WEATHER_CLEAR);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_THUNDERSTORM = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_CLEAR, +2, 0, EnumSpell.WEATHER_THUNDERSTORM);
 	// END SPELLS
 	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK, 0, +2, new ItemStack(Items.CAULDRON), "Craft Cauldron", "craftCauldron");

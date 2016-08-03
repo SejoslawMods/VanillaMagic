@@ -3,9 +3,7 @@ package seia.vanillamagic.utils.spell;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -47,6 +45,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.WorldInfo;
 import seia.vanillamagic.entity.EntitySpellFreezeLiquid;
 import seia.vanillamagic.entity.EntitySpellPull;
 import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
@@ -58,9 +57,14 @@ import seia.vanillamagic.utils.spell.teleport.TeleportHelper;
 /*
  * The work of each spell.
  * When using any of those methods we are sure that the Caster has got the right wand in hand.
+ * Each spell has their own parameters, because maybe we want to cast spell from another spell or use spells somewhere else.
  */
 public class SpellHelper
 {
+	private SpellHelper()
+	{
+	}
+	
 	/**
 	 * @return True - if the spell was casted correctly
 	 */
@@ -122,6 +126,18 @@ public class SpellHelper
 		else if(spellID == EnumSpell.WATER_FREEZE.spellID)
 		{
 			return spellFreezeWater3x3(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.WEATHER_RAIN.spellID)
+		{
+			return spellWeatherRain(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.WEATHER_CLEAR.spellID)
+		{
+			return spellWeatherClear(caster, pos, face, hitVec);
+		}
+		else if(spellID == EnumSpell.WEATHER_THUNDERSTORM.spellID)
+		{
+			return spellWeatherThunderstorm(caster, pos, face, hitVec);
 		}
 		return false;
 	}
@@ -589,5 +605,50 @@ public class SpellHelper
 			return true;
 		}
 		return false;
+	}
+	
+	/*
+	 * Make rain
+	 */
+	public static boolean spellWeatherRain(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		World world = caster.worldObj;
+		WorldInfo worldInfo = world.getWorldInfo();
+		worldInfo.setCleanWeatherTime(0);
+		worldInfo.setRainTime(1000);
+		worldInfo.setThunderTime(1000);
+		worldInfo.setRaining(true);
+		worldInfo.setThundering(false);
+		return true;
+	}
+	
+	/*
+	 * Clear weather
+	 */
+	public static boolean spellWeatherClear(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		World world = caster.worldObj;
+		WorldInfo worldInfo = world.getWorldInfo();
+		worldInfo.setCleanWeatherTime(1000);
+		worldInfo.setRainTime(0);
+		worldInfo.setThunderTime(0);
+		worldInfo.setRaining(false);
+		worldInfo.setThundering(false);
+        return true;
+	}
+	
+	public static boolean spellWeatherThunderstorm(EntityPlayer caster,
+			BlockPos pos, EnumFacing face, Vec3d hitVec)
+	{
+		World world = caster.worldObj;
+		WorldInfo worldInfo = world.getWorldInfo();
+		worldInfo.setCleanWeatherTime(0);
+		worldInfo.setRainTime(1000);
+		worldInfo.setThunderTime(1000);
+		worldInfo.setRaining(true);
+		worldInfo.setThundering(true);
+        return true;
 	}
 }

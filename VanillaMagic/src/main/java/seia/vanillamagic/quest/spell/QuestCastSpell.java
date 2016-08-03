@@ -25,7 +25,7 @@ public abstract class QuestCastSpell extends Quest
 	public QuestCastSpell(Quest required, int posX, int posY, String questName, String uniqueName, 
 			EnumSpell spell)
 	{
-		this(required, posX, posY, new ItemStack(spell.itemOffHand.getItem()), questName, uniqueName, 
+		this(required, posX, posY, spell.itemOffHand, questName, uniqueName, 
 				spell);
 	}
 	
