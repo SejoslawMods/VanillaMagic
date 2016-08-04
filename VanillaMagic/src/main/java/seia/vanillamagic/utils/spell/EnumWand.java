@@ -43,24 +43,7 @@ public enum EnumWand
 	 */
 	public static EnumWand isWandInMainHand(EntityPlayer player)
 	{
-		ItemStack mainHand = player.getHeldItemMainhand();
-		EnumWand[] wands = values();
-		for(int i = 0; i < wands.length; i++)
-		{
-			EnumWand currentlyCheckingWand = wands[i];
-			if(mainHand.getItem().equals(currentlyCheckingWand.wandItemStack.getItem()))
-			{
-				if(mainHand.getItemDamage() == currentlyCheckingWand.wandItemStack.getItemDamage())
-				{
-					// Added checker for wand name.
-					if(mainHand.getDisplayName().equals(currentlyCheckingWand.wandName))
-					{
-						return currentlyCheckingWand;
-					}
-				}
-			}
-		}
-		return null;
+		return getWandByItemStack(player.getHeldItemMainhand());
 	}
 	
 	/**
