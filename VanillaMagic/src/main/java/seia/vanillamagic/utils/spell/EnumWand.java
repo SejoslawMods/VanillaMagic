@@ -7,18 +7,20 @@ import net.minecraft.item.ItemStack;
 
 public enum EnumWand 
 {
-	STICK(1, new ItemStack(Items.STICK)), // basic wand
-	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD)), // the most common wand
-	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR)), // used mainly for summoning and resurrecting
-	END_ROD(4, new ItemStack(Blocks.END_ROD)); // ???
+	STICK(1, new ItemStack(Items.STICK), "Stick Wand"), // basic wand
+	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD), "Blaze Wand"), // the most common wand
+	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR), "Nether Star"), // used mainly for summoning and resurrecting
+	END_ROD(4, new ItemStack(Blocks.END_ROD), "End Wand"); // ???
 	
 	public final int wandTier;
 	public final ItemStack wandItemStack;
+	public final String wandName;
 	
-	EnumWand(int wandTier, ItemStack wandItemStack)
+	EnumWand(int wandTier, ItemStack wandItemStack, String wandName)
 	{
 		this.wandTier = wandTier;
 		this.wandItemStack = wandItemStack;
+		this.wandName = wandName;
 	}
 	
 	/*
@@ -26,7 +28,7 @@ public enum EnumWand
 	 */
 	public boolean canWandDoWork(int requiredTier)
 	{
-		if(this.wandTier == requiredTier) // TODO: If equal than we could have more combinations
+		if(this.wandTier == requiredTier) // If equal than we could have more combinations
 		{
 			return true;
 		}
@@ -50,7 +52,11 @@ public enum EnumWand
 			{
 				if(mainHand.getItemDamage() == currentlyCheckingWand.wandItemStack.getItemDamage())
 				{
-					return currentlyCheckingWand;
+					// Added checker for wand name.
+					if(mainHand.getDisplayName().equals(currentlyCheckingWand.wandName))
+					{
+						return currentlyCheckingWand;
+					}
 				}
 			}
 		}
@@ -80,9 +86,13 @@ public enum EnumWand
 		{
 			EnumWand currentlyCheckingEnumWand = wands[i];
 			ItemStack currentlyCheckingWand = currentlyCheckingEnumWand.wandItemStack;
-			if(currentlyCheckingWand.getItem().equals(inHand.getItem()))
+			if(ItemStack.areItemsEqual(currentlyCheckingWand, inHand))
 			{
-				return currentlyCheckingEnumWand;
+				// Added checker for wand name.
+				if(currentlyCheckingEnumWand.wandName.equals(inHand.getDisplayName()))
+				{
+					return currentlyCheckingEnumWand;
+				}
 			}
 		}
 		return null;
