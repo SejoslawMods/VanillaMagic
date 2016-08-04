@@ -300,6 +300,9 @@ achievement.craftLapisOre.desc=Toss 16x Redstone Ore into Altar Tier 7 and right
 achievement.craftDiamondOre=Craft Diamond Ore
 achievement.craftDiamondOre.desc=Toss 16x Lapis Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
 
+achievement.oreDoubling=Ore Doubling
+achievement.oreDoubling.desc=Place Cauldron. On each side of the Cauldron place Furnace. Drop ores into Cauldron and right-click with Nether Star in right hand and fuel in left hand.
+
 achievement.craftEmeraldOre=Craft Emerald Ore
 achievement.craftEmeraldOre.desc=Toss 8x Diamond Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
 

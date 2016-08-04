@@ -304,6 +304,11 @@ public class QuestList
 			new ItemStack[]{new ItemStack(Blocks.DIAMOND_ORE)}, 
 			7,
 			EnumWand.BLAZE_ROD);
+	
+	public static final QuestOreMultiplier QUEST_ORE_MULTIPLY_2 = new QuestOreMultiplier(QUEST_CRAFT_DIAMOND_ORE, 0, +2, new ItemStack(Items.CAULDRON), "Ore Doubling", "oreDoubling", 
+			2, 
+			EnumWand.NETHER_STAR);
+	
 	public static final QuestCraftOnAltar QUEST_CRAFT_EMERALD = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_7, +2, +1, "Craft Emerald", "craftEmerald", 
 			new ItemStack[]{new ItemStack(Items.DIAMOND, 8)}, 
 			new ItemStack[]{new ItemStack(Items.EMERALD)}, 

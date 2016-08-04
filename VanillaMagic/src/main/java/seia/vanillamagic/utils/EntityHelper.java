@@ -1,6 +1,7 @@
 package seia.vanillamagic.utils;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
@@ -10,6 +11,11 @@ public class EntityHelper
 {
 	private EntityHelper()
 	{
+	}
+	
+	public static EntityItem copyItem(EntityItem original)
+	{
+		return new EntityItem(original.worldObj, original.posX, original.posY, original.posZ, original.getEntityItem().copy());
 	}
 	
 	public static Vec3d getEyePosition(EntityPlayer player)

@@ -6,6 +6,10 @@ import net.minecraft.util.math.Vec3d;
 
 public class VectorHelper 
 {
+	private VectorHelper()
+	{
+	}
+	
 	/*
 	 * 0 - xCoord
 	 * 1 - yCoord
