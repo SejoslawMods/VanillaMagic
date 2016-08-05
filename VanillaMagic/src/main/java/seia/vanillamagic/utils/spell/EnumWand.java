@@ -93,12 +93,8 @@ public enum EnumWand
 	
 	public static boolean areWandsEqual(ItemStack wand1, ItemStack wand2)
 	{
-		return wand1.getItem().equals(wand2.getItem());
-	}
-	
-	public static boolean areWandsEqualTotally(EnumWand wand1, EnumWand wand2)
-	{
-		return ItemStack.areItemsEqual(wand1.wandItemStack, wand2.wandItemStack);
+		return ItemStack.areItemsEqual(wand1, wand2) &&
+				(wand1.getDisplayName().equals(wand2.getDisplayName()));
 	}
 
 	public static boolean isWandRightForSpell(EnumWand wandPlayerHand, EnumSpell spell) 

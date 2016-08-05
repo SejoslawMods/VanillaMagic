@@ -263,6 +263,8 @@ public class QuestList
 	
 	public static final QuestPick QUEST_PICK_BLAZE_ROD = new QuestPick(QUEST_BUILD_ALTAR_TIER_5, 0, +2,  "Pick Blaze Rod", "pickBlazeRod", new ItemStack(Items.BLAZE_ROD));
 	
+	public static final QuestSaveBlockToItemStack QUEST_SAVE_BLOCK_TO_ITEMSTACK = new QuestSaveBlockToItemStack(QUEST_PICK_BLAZE_ROD, -2, +1, new ItemStack(Items.BOOK), "Hold block in Book", "questSaveBlockToItemStack", new ItemStack(Items.BOOK), EnumWand.BLAZE_ROD);
+	
 	public static final QuestCraftOnAltar QUEST_CRAFT_WITHER_SKELETON_HEAD = new QuestCraftOnAltar(QUEST_PICK_BLAZE_ROD, +2, +1, "Craft Wither Skeleton Skull", "craftWitherSkeletonSkull", 
 			new ItemStack[]{new ItemStack(Blocks.COAL_BLOCK), ItemStackHelper.getHead(1, 0)}, 
 			new ItemStack[]{ItemStackHelper.getHead(1, 1)}, 

@@ -55,7 +55,7 @@ public abstract class QuestCastSpell extends Quest
 					{
 						caster.addStat(achievement, 1);
 					}
-					else
+					if(caster.hasAchievement(achievement)) //else
 					{
 						if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
 						{

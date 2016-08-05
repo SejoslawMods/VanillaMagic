@@ -389,6 +389,7 @@ public class TileQuarry extends TileEntity implements ITickable
     {
 		try
 		{
+			super.writeToNBT(compound);
 			compound.setInteger(ticksNBT, ticks);
 			compound.setInteger(digPosX, diggingPos.getX());
 			compound.setInteger(digPosY, diggingPos.getY());
@@ -396,7 +397,7 @@ public class TileQuarry extends TileEntity implements ITickable
 			compound.setInteger(quarryPosX, quarryPos.getX());
 			compound.setInteger(quarryPosY, quarryPos.getY());
 			compound.setInteger(quarryPosZ, quarryPos.getZ());
-			return super.writeToNBT(compound);
+			return compound;
 		}
 		catch(Exception e)
 		{
