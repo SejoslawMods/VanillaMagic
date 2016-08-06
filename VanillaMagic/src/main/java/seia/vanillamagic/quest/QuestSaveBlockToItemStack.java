@@ -170,7 +170,7 @@ public class QuestSaveBlockToItemStack extends Quest
 			if(tileAfter instanceof INBTSerializable<?>)
 			{
 				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileAfter;
-				NBTHelper.readFromINBTSerializable(tileAfter, questTag);
+				NBTHelper.readFromINBTSerializable(serial, questTag);
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			newOffHand.stackSize = 1;

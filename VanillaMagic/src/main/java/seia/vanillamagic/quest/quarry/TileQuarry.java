@@ -361,12 +361,11 @@ public class TileQuarry extends TileEntity implements ITickable, INBTSerializabl
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound tagCompound)
+	public void readFromNBT(NBTTagCompound compound)
     {
 		try
 		{
-			super.readFromNBT(tagCompound);
-			NBTTagCompound compound = tagCompound.getCompoundTag(NBTHelper.NBT_SERIALIZABLE);
+			super.readFromNBT(compound);
 			deserializeNBT(compound);
 //			this.ticks = compound.getInteger(ticksNBT);
 //			int digPosX = compound.getInteger(this.digPosX);
@@ -391,9 +390,8 @@ public class TileQuarry extends TileEntity implements ITickable, INBTSerializabl
 		}
     }
 	
-	public void deserializeNBT(NBTTagCompound tagCompound)
+	public void deserializeNBT(NBTTagCompound compound)
 	{
-		NBTTagCompound compound = tagCompound.getCompoundTag(NBTHelper.NBT_SERIALIZABLE);
 		this.ticks = compound.getInteger(ticksNBT);
 		int digPosX = compound.getInteger(this.digPosX);
 		int digPosY = compound.getInteger(this.digPosY);

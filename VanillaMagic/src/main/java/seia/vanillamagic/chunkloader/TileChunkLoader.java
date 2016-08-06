@@ -7,13 +7,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.utils.BlockPosHelper;
 
-public class TileChunkLoader extends TileEntity
+public class TileChunkLoader extends TileEntity implements ITickable
 {
 	// Name for tile
 	public static final String TILE_CHUNK_LOADER_NAME = "tileChunkLoader";
@@ -98,5 +100,16 @@ public class TileChunkLoader extends TileEntity
 	public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) 
 	{
 		return super.writeToNBT(par1NBTTagCompound);
+	}
+
+	@Override
+	public void update() 
+	{
+		if(!ChunkLoadingHelper.INSTANCE.isChunkLoaderBuildCorrectly(worldObj, position))
+		{
+			invalidate();
+			System.out.println("Incorrect ChunkLoader placed on:");
+			BlockPosHelper.printCoords(position);
+		}
 	}
 }

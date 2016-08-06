@@ -3,7 +3,6 @@ package seia.vanillamagic.utils;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -110,9 +109,9 @@ public class NBTHelper
 		return nbt;
 	}
 	
-	public static TileEntity readFromINBTSerializable(TileEntity tile, NBTTagCompound nbt)
+	public static INBTSerializable<NBTTagCompound> readFromINBTSerializable(INBTSerializable<NBTTagCompound> nbtSerial, NBTTagCompound nbt)
 	{
-		((INBTSerializable<NBTTagCompound>) tile).deserializeNBT(nbt);
-		return tile;
+		nbtSerial.deserializeNBT(nbt.getCompoundTag(NBT_SERIALIZABLE));
+		return nbtSerial;
 	}
 }
