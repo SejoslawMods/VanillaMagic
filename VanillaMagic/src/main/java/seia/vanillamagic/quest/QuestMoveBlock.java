@@ -15,11 +15,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.items.IItemHandler;
 import seia.vanillamagic.utils.ItemStackHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
-public class QuestSaveBlockToItemStack extends Quest
+public class QuestMoveBlock extends Quest
 {
 	/*
 	 * Stack offHand must be an item that has maxStackSize = 1
@@ -28,7 +29,7 @@ public class QuestSaveBlockToItemStack extends Quest
 	public final ItemStack requiredStackOffHand;
 	public final EnumWand requiredWand;
 
-	public QuestSaveBlockToItemStack(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName, 
+	public QuestMoveBlock(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName, 
 			ItemStack requiredStackOffHand, EnumWand requiredWand)
 	{
 		super(required, posX, posY, icon, questName, uniqueName);
@@ -111,9 +112,7 @@ public class QuestSaveBlockToItemStack extends Quest
 			stackTagCompound.setTag(NBTHelper.NBT_TAG_COMPOUND_NAME, new NBTTagCompound());
 			NBTTagCompound questTag = stackTagCompound.getCompoundTag(NBTHelper.NBT_TAG_COMPOUND_NAME);
 			Block wantedBlock = world.getBlockState(wantedBlockPos).getBlock();
-			questTag.setInteger(NBTHelper.NBT_POSX, wantedBlockPos.getX());
-			questTag.setInteger(NBTHelper.NBT_POSY, wantedBlockPos.getY());
-			questTag.setInteger(NBTHelper.NBT_POSZ, wantedBlockPos.getZ());
+			questTag = NBTHelper.setBlockPosDataToNBT(wantedBlockPos, questTag);
 			stackOffHand.setStackDisplayName("Saved block: " + wantedBlock.getLocalizedName());
 			TileEntity tileEntity = world.getTileEntity(wantedBlockPos);
 			if(tileEntity != null)
@@ -126,15 +125,21 @@ public class QuestSaveBlockToItemStack extends Quest
 				IInventory inv = (IInventory) tileEntity;
 				questTag = NBTHelper.writeIInventoryToNBT(inv, questTag);
 			}
-			if(tileEntity instanceof INBTSerializable<?>)
+			else if(tileEntity instanceof INBTSerializable<?>)
 			{
 				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileEntity;
 				questTag = NBTHelper.writeToINBTSerializable(serial, questTag);
+			}
+			else if(tileEntity instanceof IItemHandler)
+			{
+				IItemHandler handler = (IItemHandler) tileEntity;
+				questTag = NBTHelper.writeToIItemHandler(handler, questTag);
 			}
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, stackOffHand);
 		}
 	}
 	
+	// TODO: Fix replacing TileEntity not always respond to right-click after move
 	public void handleLoad(World world, EntityPlayer player, BlockPos wantedBlockPos, EnumFacing hittedFace)
 	{
 		ItemStack stackOffHand = player.getHeldItemOffhand();
@@ -149,11 +154,26 @@ public class QuestSaveBlockToItemStack extends Quest
 		if(world.isAirBlock(wantedBlockPos))
 		{
 			BlockPos readdedPos = NBTHelper.getBlockPosDataFromNBT(questTag);
-			IBlockState readdedBlockSate = world.getBlockState(readdedPos);
-			Block readdedBlock = readdedBlockSate.getBlock();
+			IBlockState readdedBlockState = world.getBlockState(readdedPos);
+			Block readdedBlock = readdedBlockState.getBlock();
 			if(readdedBlock != null)
 			{
-				world.setBlockState(wantedBlockPos, readdedBlockSate);
+				world.setBlockState(wantedBlockPos, readdedBlockState);
+				// TODO: Fix bug with rendering after replacing double-chest
+				int renderDistance = 3;
+				{
+					world.markBlockRangeForRenderUpdate(readdedPos.getX() + renderDistance, readdedPos.getY() + renderDistance, readdedPos.getZ() + renderDistance, 
+							readdedPos.getX() - renderDistance, readdedPos.getY() - renderDistance, readdedPos.getZ() - renderDistance);
+					world.markBlockRangeForRenderUpdate(wantedBlockPos.getX() + renderDistance, wantedBlockPos.getY() + renderDistance, wantedBlockPos.getZ() + renderDistance, 
+							wantedBlockPos.getX() - renderDistance, wantedBlockPos.getY() - renderDistance, wantedBlockPos.getZ() - renderDistance);
+				}
+				{
+					world.markBlockRangeForRenderUpdate(readdedPos.getX() - renderDistance, readdedPos.getY() - renderDistance, readdedPos.getZ() - renderDistance, 
+							readdedPos.getX() + renderDistance, readdedPos.getY() + renderDistance, readdedPos.getZ() + renderDistance);
+					world.markBlockRangeForRenderUpdate(wantedBlockPos.getX() - renderDistance, wantedBlockPos.getY() - renderDistance, wantedBlockPos.getZ() - renderDistance, 
+							wantedBlockPos.getX() + renderDistance, wantedBlockPos.getY() + renderDistance, wantedBlockPos.getZ() + renderDistance);
+				}
+				world.updateEntities();
 			}
 			TileEntity readdedTile = world.getTileEntity(readdedPos);
 			if(readdedTile != null)
@@ -167,10 +187,15 @@ public class QuestSaveBlockToItemStack extends Quest
 				IInventory inv = (IInventory) tileAfter;
 				NBTHelper.readIInventoryFromNBT(inv, questTag);
 			}
-			if(tileAfter instanceof INBTSerializable<?>)
+			else if(tileAfter instanceof INBTSerializable<?>)
 			{
 				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileAfter;
 				NBTHelper.readFromINBTSerializable(serial, questTag);
+			}
+			else if(tileAfter instanceof IItemHandler)
+			{
+				IItemHandler handler = (IItemHandler) tileAfter;
+				NBTHelper.readFromIItemHandler(handler, questTag);
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			newOffHand.stackSize = 1;

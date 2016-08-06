@@ -366,7 +366,7 @@ public class TileQuarry extends TileEntity implements ITickable, INBTSerializabl
 		try
 		{
 			super.readFromNBT(compound);
-			deserializeNBT(compound);
+			NBTHelper.readFromINBTSerializable(this, compound);
 //			this.ticks = compound.getInteger(ticksNBT);
 //			int digPosX = compound.getInteger(this.digPosX);
 //			int digPosY = compound.getInteger(this.digPosY);
@@ -422,7 +422,7 @@ public class TileQuarry extends TileEntity implements ITickable, INBTSerializabl
 //			compound.setInteger(quarryPosX, quarryPos.getX());
 //			compound.setInteger(quarryPosY, quarryPos.getY());
 //			compound.setInteger(quarryPosZ, quarryPos.getZ());
-			compound.setTag(NBTHelper.NBT_SERIALIZABLE, serializeNBT());
+			compound = NBTHelper.writeToINBTSerializable(this, compound);
 			return compound;
 		}
 		catch(Exception e)

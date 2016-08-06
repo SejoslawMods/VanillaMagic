@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.items.IItemHandler;
 
 public class NBTHelper
 {
@@ -19,9 +20,11 @@ public class NBTHelper
 	public static final String NBT_POSZ = "posZ";
 	public static final String NBT_HAS_TILEENTITY = "hasTileEntity";
 	public static final String NBT_TAG_COMPOUND_NAME = "NBTQuestSaveBlock";
-	public static final String NBT_ITEMS = "Items";
-	public static final String NBT_SLOT = "Slot";
+	public static final String NBT_IINVENTORY_ITEMS = "IInventoryItems";
+	public static final String NBT_IINVENTORY_SLOT = "IInventorySlot";
 	public static final String NBT_SERIALIZABLE = "INBTSerializable";
+	public static final String NBT_IITEMHANDLER_SLOT = "IItemHandlerSlot";
+	public static final String NBT_IITEMHANDLER_ITEMS = "IItemHandlerItems";
 	
 	private NBTHelper()
 	{
@@ -40,6 +43,18 @@ public class NBTHelper
 	{
 		String blockName = getBlockNameFromNBT(nbt);
 		return Block.getBlockFromName(blockName);
+	}
+	
+	public static NBTTagCompound setBlockPosDataToNBT(BlockPos pos, NBTTagCompound nbt)
+	{
+		if(nbt == null)
+		{
+			nbt = new NBTTagCompound();
+		}
+		nbt.setInteger(NBTHelper.NBT_POSX, pos.getX());
+		nbt.setInteger(NBTHelper.NBT_POSY, pos.getY());
+		nbt.setInteger(NBTHelper.NBT_POSZ, pos.getZ());
+		return nbt;
 	}
 
 	public static BlockPos getBlockPosDataFromNBT(NBTTagCompound nbt)
@@ -70,17 +85,17 @@ public class NBTHelper
 			nbt = new NBTTagCompound();
 		}
 		NBTTagList nbtItemsList = new NBTTagList();
-		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			if(inv.getStackInSlot(i) != null)
 			{
 				NBTTagCompound nbtItemTagCompound = new NBTTagCompound();
-				nbtItemTagCompound.setByte(NBT_SLOT, (byte)i);
+				nbtItemTagCompound.setByte(NBT_IINVENTORY_SLOT, (byte)i);
 				inv.getStackInSlot(i).writeToNBT(nbtItemTagCompound);
 				nbtItemsList.appendTag(nbtItemTagCompound);
 			}
 		}
-		nbt.setTag(NBT_ITEMS, nbtItemsList);
+		nbt.setTag(NBT_IINVENTORY_ITEMS, nbtItemsList);
 		return nbt;
 	}
 	
@@ -90,12 +105,12 @@ public class NBTHelper
 		{
 			return null;
 		}
-		NBTTagList nbtItemsList = nbt.getTagList(NBT_ITEMS, 10);
+		NBTTagList nbtItemsList = nbt.getTagList(NBT_IINVENTORY_ITEMS, 10);
 		for(int i = 0; i < nbtItemsList.tagCount(); i++)
 		{
 			NBTTagCompound nbtItemTagCompound = nbtItemsList.getCompoundTagAt(i);
-			int gettedByte = nbtItemTagCompound.getByte(NBT_SLOT);
-			if (gettedByte >= 0 && gettedByte < inv.getSizeInventory())
+			int gettedByte = nbtItemTagCompound.getByte(NBT_IINVENTORY_SLOT);
+			if(gettedByte >= 0 && gettedByte < inv.getSizeInventory())
 			{
 				inv.setInventorySlotContents(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound));
 			}
@@ -113,5 +128,49 @@ public class NBTHelper
 	{
 		nbtSerial.deserializeNBT(nbt.getCompoundTag(NBT_SERIALIZABLE));
 		return nbtSerial;
+	}
+	
+	public static NBTTagCompound writeToIItemHandler(IItemHandler handler, NBTTagCompound nbt)
+	{
+		if(handler == null)
+		{
+			return null;
+		}
+		if(nbt == null)
+		{
+			nbt = new NBTTagCompound();
+		}
+		NBTTagList nbtItemsList = new NBTTagList();
+		for(int i = 0; i < handler.getSlots(); ++i)
+		{
+			if(handler.getStackInSlot(i) != null)
+			{
+				NBTTagCompound nbtItemTagCompound = new NBTTagCompound();
+				nbtItemTagCompound.setByte(NBT_IITEMHANDLER_SLOT, (byte)i);
+				handler.getStackInSlot(i).writeToNBT(nbtItemTagCompound);
+				nbtItemsList.appendTag(nbtItemTagCompound);
+			}
+		}
+		nbt.setTag(NBT_IITEMHANDLER_ITEMS, nbtItemsList);
+		return nbt;
+	}
+	
+	public static IItemHandler readFromIItemHandler(IItemHandler handler, NBTTagCompound nbt)
+	{
+		if((handler == null) || (nbt == null))
+		{
+			return null;
+		}
+		NBTTagList nbtItemsList = nbt.getTagList(NBT_IITEMHANDLER_ITEMS, 10);
+		for(int i = 0; i < nbtItemsList.tagCount(); i++)
+		{
+			NBTTagCompound nbtItemTagCompound = nbtItemsList.getCompoundTagAt(i);
+			int gettedByte = nbtItemTagCompound.getByte(NBT_IITEMHANDLER_SLOT);
+			if(gettedByte >= 0 && gettedByte < handler.getSlots())
+			{
+				handler.insertItem(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound), false);
+			}
+		}
+		return handler;
 	}
 }
