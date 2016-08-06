@@ -3,11 +3,13 @@ package seia.vanillamagic.utils;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.INBTSerializable;
 
 public class NBTHelper
 {
@@ -20,6 +22,7 @@ public class NBTHelper
 	public static final String NBT_TAG_COMPOUND_NAME = "NBTQuestSaveBlock";
 	public static final String NBT_ITEMS = "Items";
 	public static final String NBT_SLOT = "Slot";
+	public static final String NBT_SERIALIZABLE = "INBTSerializable";
 	
 	private NBTHelper()
 	{
@@ -99,5 +102,17 @@ public class NBTHelper
 			}
 		}
 		return inv;
+	}
+	
+	public static NBTTagCompound writeToINBTSerializable(INBTSerializable<NBTTagCompound> nbtSerial, NBTTagCompound nbt)
+	{
+		nbt.setTag(NBT_SERIALIZABLE, nbtSerial.serializeNBT());
+		return nbt;
+	}
+	
+	public static TileEntity readFromINBTSerializable(TileEntity tile, NBTTagCompound nbt)
+	{
+		((INBTSerializable<NBTTagCompound>) tile).deserializeNBT(nbt);
+		return tile;
 	}
 }

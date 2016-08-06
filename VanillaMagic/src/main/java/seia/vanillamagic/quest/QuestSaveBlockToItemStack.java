@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.utils.ItemStackHelper;
@@ -125,6 +126,11 @@ public class QuestSaveBlockToItemStack extends Quest
 				IInventory inv = (IInventory) tileEntity;
 				questTag = NBTHelper.writeIInventoryToNBT(inv, questTag);
 			}
+			if(tileEntity instanceof INBTSerializable<?>)
+			{
+				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileEntity;
+				questTag = NBTHelper.writeToINBTSerializable(serial, questTag);
+			}
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, stackOffHand);
 		}
 	}
@@ -160,6 +166,11 @@ public class QuestSaveBlockToItemStack extends Quest
 			{
 				IInventory inv = (IInventory) tileAfter;
 				NBTHelper.readIInventoryFromNBT(inv, questTag);
+			}
+			if(tileAfter instanceof INBTSerializable<?>)
+			{
+				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileAfter;
+				NBTHelper.readFromINBTSerializable(tileAfter, questTag);
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			newOffHand.stackSize = 1;

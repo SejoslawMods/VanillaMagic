@@ -16,11 +16,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
+import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 
-public class TileQuarry extends TileEntity implements ITickable
+public class TileQuarry extends TileEntity implements ITickable, INBTSerializable<NBTTagCompound>
 {
 	// Cost for mining one block
 	public static final int ONE_OPERATION_COST = 400;
@@ -359,23 +361,28 @@ public class TileQuarry extends TileEntity implements ITickable
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(NBTTagCompound tagCompound)
     {
 		try
 		{
-			super.readFromNBT(compound);
-			this.ticks = compound.getInteger(ticksNBT);
-			int digPosX = compound.getInteger(this.digPosX);
-			int digPosY = compound.getInteger(this.digPosY);
-			int digPosZ = compound.getInteger(this.digPosZ);
-			BlockPos digPos = new BlockPos(digPosX, digPosY, digPosZ);
-			this.diggingPos = digPos;
-			int qPosX = compound.getInteger(this.quarryPosX);
-			int qPosY = compound.getInteger(this.quarryPosY);
-			int qPosZ = compound.getInteger(this.quarryPosZ);
-			BlockPos qPos = new BlockPos(qPosX, qPosY, qPosZ);
-			this.quarryPos = qPos;
-			QuarryHandler.INSTANCE.addNewQuarry(this);
+			super.readFromNBT(tagCompound);
+			NBTTagCompound compound = tagCompound.getCompoundTag(NBTHelper.NBT_SERIALIZABLE);
+			deserializeNBT(compound);
+//			this.ticks = compound.getInteger(ticksNBT);
+//			int digPosX = compound.getInteger(this.digPosX);
+//			int digPosY = compound.getInteger(this.digPosY);
+//			int digPosZ = compound.getInteger(this.digPosZ);
+//			BlockPos digPos = new BlockPos(digPosX, digPosY, digPosZ);
+//			this.diggingPos = digPos;
+//			int qPosX = compound.getInteger(this.quarryPosX);
+//			int qPosY = compound.getInteger(this.quarryPosY);
+//			int qPosZ = compound.getInteger(this.quarryPosZ);
+//			BlockPos qPos = new BlockPos(qPosX, qPosY, qPosZ);
+//			this.quarryPos = qPos;
+//			if(quarryPos != null)
+//			{
+//				QuarryHandler.INSTANCE.addNewQuarry(this);
+//			}
 		}
 		catch(Exception e)
 		{
@@ -384,19 +391,40 @@ public class TileQuarry extends TileEntity implements ITickable
 		}
     }
 	
+	public void deserializeNBT(NBTTagCompound tagCompound)
+	{
+		NBTTagCompound compound = tagCompound.getCompoundTag(NBTHelper.NBT_SERIALIZABLE);
+		this.ticks = compound.getInteger(ticksNBT);
+		int digPosX = compound.getInteger(this.digPosX);
+		int digPosY = compound.getInteger(this.digPosY);
+		int digPosZ = compound.getInteger(this.digPosZ);
+		BlockPos digPos = new BlockPos(digPosX, digPosY, digPosZ);
+		this.diggingPos = digPos;
+		int qPosX = compound.getInteger(this.quarryPosX);
+		int qPosY = compound.getInteger(this.quarryPosY);
+		int qPosZ = compound.getInteger(this.quarryPosZ);
+		BlockPos qPos = new BlockPos(qPosX, qPosY, qPosZ);
+		this.quarryPos = qPos;
+		if(quarryPos != null)
+		{
+			QuarryHandler.INSTANCE.addNewQuarry(this);
+		}
+	}
+	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
 		try
 		{
 			super.writeToNBT(compound);
-			compound.setInteger(ticksNBT, ticks);
-			compound.setInteger(digPosX, diggingPos.getX());
-			compound.setInteger(digPosY, diggingPos.getY());
-			compound.setInteger(digPosZ, diggingPos.getZ());
-			compound.setInteger(quarryPosX, quarryPos.getX());
-			compound.setInteger(quarryPosY, quarryPos.getY());
-			compound.setInteger(quarryPosZ, quarryPos.getZ());
+//			compound.setInteger(ticksNBT, ticks);
+//			compound.setInteger(digPosX, diggingPos.getX());
+//			compound.setInteger(digPosY, diggingPos.getY());
+//			compound.setInteger(digPosZ, diggingPos.getZ());
+//			compound.setInteger(quarryPosX, quarryPos.getX());
+//			compound.setInteger(quarryPosY, quarryPos.getY());
+//			compound.setInteger(quarryPosZ, quarryPos.getZ());
+			compound.setTag(NBTHelper.NBT_SERIALIZABLE, serializeNBT());
 			return compound;
 		}
 		catch(Exception e)
@@ -406,6 +434,19 @@ public class TileQuarry extends TileEntity implements ITickable
 		}
 		return null;
     }
+	
+	public NBTTagCompound serializeNBT()
+	{
+		NBTTagCompound compound = new NBTTagCompound();
+		compound.setInteger(ticksNBT, ticks);
+		compound.setInteger(digPosX, diggingPos.getX());
+		compound.setInteger(digPosY, diggingPos.getY());
+		compound.setInteger(digPosZ, diggingPos.getZ());
+		compound.setInteger(quarryPosX, quarryPos.getX());
+		compound.setInteger(quarryPosY, quarryPos.getY());
+		compound.setInteger(quarryPosZ, quarryPos.getZ());
+		return compound;
+	}
 	
 	@Override
 	public void update()
