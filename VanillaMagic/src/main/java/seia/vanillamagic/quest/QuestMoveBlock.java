@@ -2,6 +2,7 @@ package seia.vanillamagic.quest;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -161,18 +162,20 @@ public class QuestMoveBlock extends Quest
 				world.setBlockState(wantedBlockPos, readdedBlockState);
 				// TODO: Fix bug with rendering after replacing double-chest
 				int renderDistance = 3;
+				world.scheduleUpdate(readdedPos, readdedBlock, renderDistance);
+				for(EnumFacing faceing : EnumFacing.values())
 				{
-					world.markBlockRangeForRenderUpdate(readdedPos.getX() + renderDistance, readdedPos.getY() + renderDistance, readdedPos.getZ() + renderDistance, 
-							readdedPos.getX() - renderDistance, readdedPos.getY() - renderDistance, readdedPos.getZ() - renderDistance);
-					world.markBlockRangeForRenderUpdate(wantedBlockPos.getX() + renderDistance, wantedBlockPos.getY() + renderDistance, wantedBlockPos.getZ() + renderDistance, 
-							wantedBlockPos.getX() - renderDistance, wantedBlockPos.getY() - renderDistance, wantedBlockPos.getZ() - renderDistance);
+					BlockPos checkingPos = readdedPos.offset(faceing);
+					Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance, 
+							checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance);
+					world.markBlockRangeForRenderUpdate(checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance, 
+							checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance);
+					Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance, 
+							checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance);
+					world.markBlockRangeForRenderUpdate(checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance, 
+							checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance);
 				}
-				{
-					world.markBlockRangeForRenderUpdate(readdedPos.getX() - renderDistance, readdedPos.getY() - renderDistance, readdedPos.getZ() - renderDistance, 
-							readdedPos.getX() + renderDistance, readdedPos.getY() + renderDistance, readdedPos.getZ() + renderDistance);
-					world.markBlockRangeForRenderUpdate(wantedBlockPos.getX() - renderDistance, wantedBlockPos.getY() - renderDistance, wantedBlockPos.getZ() - renderDistance, 
-							wantedBlockPos.getX() + renderDistance, wantedBlockPos.getY() + renderDistance, wantedBlockPos.getZ() + renderDistance);
-				}
+				world.scheduleUpdate(readdedPos, readdedBlock, renderDistance);
 				world.updateEntities();
 			}
 			TileEntity readdedTile = world.getTileEntity(readdedPos);
@@ -180,6 +183,7 @@ public class QuestMoveBlock extends Quest
 			{
 				world.setTileEntity(wantedBlockPos, readdedTile);
 				world.removeTileEntity(readdedPos);
+				//world.getTileEntity(readdedPos).setPos(wantedBlockPos);
 			}
 			TileEntity tileAfter = world.getTileEntity(wantedBlockPos);
 			if(tileAfter instanceof IInventory)
