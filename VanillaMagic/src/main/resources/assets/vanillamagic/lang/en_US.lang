@@ -7,6 +7,11 @@ achievement.craftStick.desc=Craft stick. Rename it in Anvil to 'Stick Wand'.
 
 
 
+achievement.portableCraftingTable=Portable Crafting Table
+achievement.portableCraftingTable.desc=Hold Crafting Table in right hand and right-click while pointing in air
+
+
+
 achievement.spellFlintAndSteel=Flint and Steel Clone
 achievement.spellFlintAndSteel.desc=Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire
 

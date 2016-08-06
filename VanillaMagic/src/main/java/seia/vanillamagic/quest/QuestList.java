@@ -11,6 +11,7 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
+import seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable;
 import seia.vanillamagic.quest.quarry.QuestQuarry;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
 import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
@@ -24,6 +25,9 @@ public class QuestList
 
 	private static Achievement START = AchievementList.OPEN_INVENTORY;
 	public static final QuestCraft QUEST_CRAFT_STICK = new QuestCraft(START, 0, 0, new ItemStack(Items.STICK), "Craft Stick", "craftStick");
+	
+	public static final QuestPortableCraftingTable QUEST_PORTABLE_CRAFTING_TABLE = new QuestPortableCraftingTable(QUEST_CRAFT_STICK, -2, 0, new ItemStack(Blocks.CRAFTING_TABLE), "Portable Crafting Table", "portableCraftingTable");
+	
 	public static final QuestCastSpellOnBlock QUEST_CAST_SPELL_LIGHTER = new QuestCastSpellOnBlock(QUEST_CRAFT_STICK, 0, -2, EnumSpell.LIGHTER);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_SMALL_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTER, 0, -2, EnumSpell.SMALL_FIREBALL);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_FUS_RO_DAH = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL, 0, -2, EnumSpell.FUS_RO_DAH);

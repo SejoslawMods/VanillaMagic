@@ -1,9 +1,12 @@
 package seia.vanillamagic.utils;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
@@ -11,6 +14,15 @@ public class EntityHelper
 {
 	private EntityHelper()
 	{
+	}
+	
+	public static boolean hasPlayerCraftingTableInMainHand(EntityPlayer player)
+	{
+		if(Block.isEqualTo(Block.getBlockFromItem(player.getHeldItemMainhand().getItem()), Blocks.CRAFTING_TABLE))
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	public static EntityItem copyItem(EntityItem original)

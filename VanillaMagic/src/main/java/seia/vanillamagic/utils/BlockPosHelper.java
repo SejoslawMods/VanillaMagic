@@ -13,11 +13,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockPosHelper
 {
+	public static final int SEARCH_RADIUS = 100;
+	
 	private BlockPosHelper()
 	{
 	}
