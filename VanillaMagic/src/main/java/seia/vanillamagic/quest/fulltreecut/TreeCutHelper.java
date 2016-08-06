@@ -12,6 +12,10 @@ import seia.vanillamagic.event.ExtraBlockBreak;
 
 public class TreeCutHelper 
 {
+	private TreeCutHelper()
+	{
+	}
+	
 	public static boolean isLog(World world, BlockPos pos)
 	{
 		return world.getBlockState(pos).getBlock().isWood(world, pos);

@@ -227,6 +227,9 @@ achievement.smeltInAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Al
 achievement.fullTreeCut=Full Tree Cut
 achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right
 
+achievement.mining3x3=Mining 3x3
+achievement.mining3x3.desc=
+
 achievement.quarry=Vanilla Quarry !!!
 achievement.quarry.desc=Place Cauldron and than on the East side of the Cauldron place DiamondBlock and on the North side place RedstoneBlock. Than replace the Cauldron. Drop fuel into Cauldron. (check console for help) (output to IInventory on West, input fuel IInventory on Top)
 

@@ -194,6 +194,8 @@ public class QuestList
 	public static final QuestSmeltOnAltar QUEST_SMELT_ON_ALTAR = new QuestSmeltOnAltar(QUEST_BUILD_ALTAR_TIER_3, -2, +1, new ItemStack(Blocks.FURNACE), "Smelt in Altar", "smeltInAltar", 1, EnumWand.STICK);
 	public static final QuestQuarry QUEST_QUARRY = new QuestQuarry(QUEST_SMELT_ON_ALTAR, 0, +2, "Quarry !!!", "quarry");
 	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_QUARRY, -2, 0, new ItemStack(Items.DIAMOND_AXE), "Full Tree Cut", "fullTreeCut");
+	//TODO: Fix QuestMineMulti and MineBlockTask
+	//public static final QuestMineMulti QUEST_MINE_3X3 = new QuestMineMulti(QUEST_FULL_TREE_CUT, -2, 0, new ItemStack(Items.DIAMOND_PICKAXE), "Mining 3x3", "mining3x3", 1, 1, EnumWand.BLAZE_ROD);
 	
 	public static final QuestCraftOnAltar QUEST_CRAFT_GOLD_INGOT = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_3, +2, +1, "Craft Gold Ingot", "craftGoldIngot", 
 			new ItemStack[]{new ItemStack(Items.IRON_INGOT, 8)}, 

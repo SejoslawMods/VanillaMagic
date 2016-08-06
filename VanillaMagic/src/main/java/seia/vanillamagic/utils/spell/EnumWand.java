@@ -47,6 +47,16 @@ public enum EnumWand
 	}
 	
 	/**
+	 * 
+	 * @param player - player we are checking
+	 * @return - the Wand which player has got in off hand - null if the item is not a Wand
+	 */
+	public static EnumWand isWandInOffHand(EntityPlayer player)
+	{
+		return getWandByItemStack(player.getHeldItemOffhand());
+	}
+	
+	/**
 	 * @param player - player we are checking
 	 * @param requiredWandMinimalTier - minimal tier of wark thet we want to finish
 	 * @return - true if the player has got in hand the Wand that can do the work
