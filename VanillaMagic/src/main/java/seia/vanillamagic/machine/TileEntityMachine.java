@@ -88,7 +88,7 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 		isActive = false;
 	}
 	
-	public TileEntity geTileEntity()
+	public TileEntity getTileEntity()
 	{
 		return this;
 	}
