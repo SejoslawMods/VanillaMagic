@@ -98,6 +98,11 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	void endWork();
 	
 	/**
+	 * Method to determine if a Machine has finished work.
+	 */
+	boolean finishedWork();
+	
+	/**
 	 * What Player should hold in left hand (off hand) to activate this Machine.
 	 * This usually should be set in Quest.
 	 */

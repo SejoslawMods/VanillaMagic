@@ -24,6 +24,7 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 	protected int ticks = 0;
 	protected int maxTicks = 4000;
 	protected boolean isActive = false;
+	protected boolean finished = false;
 	
 	private String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
 	private String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
@@ -48,7 +49,9 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 	public abstract void showBoundingBox();
 	
 	/**
-	 * This method is for a Machine work.
+	 * This method is for a Machine work. <br>
+	 * Each Machine have to know when to decrease ticks.
+	 * For instance: I don't want Quarry to decrease ticks if it hits Air or Bedrock.
 	 */
 	public abstract void doWork();
 	
@@ -91,6 +94,11 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 	public TileEntity getTileEntity()
 	{
 		return this;
+	}
+	
+	public boolean finishedWork()
+	{
+		return finished;
 	}
 
 	public boolean isNextToOutput()
@@ -148,6 +156,9 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 		return isActive;
 	}
 	
+	/**
+	 * Try to override serializeNBT instead of this method.
+	 */
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
 		try
@@ -181,6 +192,9 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 		return compound;
 	}
 	
+	/**
+	 * Try to override deserializeNBT instead of this method.
+	 */
 	public void readFromNBT(NBTTagCompound compound)
     {
 		try

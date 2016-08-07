@@ -198,9 +198,6 @@ public class TileQuarry extends TileEntityMachine
 		Block.spawnAsEntity(worldObj, machinePos.offset(EnumFacing.UP, 2), digged);
 	}
 	
-	/**
-	 * updating the quarry (dig block, place block in chest)
-	 */
 	public void doWork() // once a world tick
 	{
 		if(!canDig())
