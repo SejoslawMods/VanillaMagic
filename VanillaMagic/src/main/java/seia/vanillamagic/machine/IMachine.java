@@ -117,12 +117,4 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	 * Returns the inventory to which Machine should output.
 	 */
 	IInventory getOutputInventory();
-	
-	/**
-	 * Returns the Machine inventory is it has any.
-	 */
-	default IInventory getMachineInventory()
-	{
-		return null;
-	}
 }
