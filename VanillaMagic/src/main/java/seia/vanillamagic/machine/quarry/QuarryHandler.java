@@ -10,13 +10,11 @@ public class QuarryHandler
 	public static final QuarryHandler INSTANCE = new QuarryHandler();
 	
 	//======================================================================================
-	
-	//public final ArrayList<Quarry> quarryList;
+
 	public final ArrayList<TileQuarry> tileQuarryList = new ArrayList<TileQuarry>();
 
 	private QuarryHandler()
 	{
-		//quarryList = new ArrayList<Quarry>();
 		System.out.println("QuarryHandler registered");
 	}
 	
@@ -27,61 +25,33 @@ public class QuarryHandler
 	
 	public int countQuarrys()
 	{
-		//return quarryList.size();
 		return tileQuarryList.size();
 	}
-	/*
-	public void addNewQuarry(Quarry quarry)
-	{
-		quarryList.add(quarry);
-		System.out.println("Quarry registered at:");
-		BlockPosHelper.printCoords(quarry.quarryPos);
-	}
-	*/
+	
 	public void addNewQuarry(TileQuarry quarry)
 	{
 		tileQuarryList.add(quarry);
 		{
-			// Adding to world
-			quarry.placedBy.worldObj.addTileEntity(quarry);
-			quarry.placedBy.worldObj.setTileEntity(quarry.quarryPos, quarry);
+			quarry.getWorld().addTileEntity(quarry);
+			quarry.getWorld().setTileEntity(quarry.getMachinePos(), quarry);
 		}
 		System.out.println("Quarry registered at:");
-		BlockPosHelper.printCoords(quarry.quarryPos);
+		BlockPosHelper.printCoords(quarry.getMachinePos());
 	}
 	
 	public void removeQuarryFromList(BlockPos quarryPos)
 	{
-		/*
-		try
-		{
-			for(int i = 0; i < quarryList.size(); i++)
-			{
-				Quarry quarry = quarryList.get(i);
-				if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.quarryPos))
-				{
-					quarryList.remove(i);
-					System.out.println("Quarry removed at:");
-					BlockPosHelper.printCoords(quarry.quarryPos);
-					return;
-				}
-			}
-		}
-		catch(Exception e) 
-		{
-		}
-		*/
 		try
 		{
 			for(int i = 0; i < tileQuarryList.size(); i++)
 			{
 				TileQuarry quarry = tileQuarryList.get(i);
-				if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.quarryPos))
+				if(BlockPosHelper.isSameBlockPos(quarryPos, quarry.getMachinePos()))
 				{
 					tileQuarryList.remove(i);
-					quarry.placedBy.worldObj.removeTileEntity(quarryPos); // Removing from world
+					quarry.getWorld().removeTileEntity(quarryPos);
 					System.out.println("Quarry removed at:");
-					BlockPosHelper.printCoords(quarry.quarryPos);
+					BlockPosHelper.printCoords(quarry.getMachinePos());
 					return;
 				}
 			}
@@ -90,14 +60,9 @@ public class QuarryHandler
 		{
 		}
 	}
-	/*
-	public void killQuarry(Quarry quarry)
-	{
-		removeQuarryFromList(quarry.quarryPos);
-	}
-	*/
+	
 	public void killQuarry(TileQuarry quarry)
 	{
-		removeQuarryFromList(quarry.quarryPos);
+		removeQuarryFromList(quarry.getMachinePos());
 	}
 }

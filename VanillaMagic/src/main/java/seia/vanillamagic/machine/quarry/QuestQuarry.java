@@ -33,7 +33,6 @@ public class QuestQuarry extends Quest
 			if(itemInHand.getItem().equals(Items.CAULDRON))
 			{
 				// Should now throw exception from constructor if blocks are wrong.
-				//Quarry quarry = new Quarry(quarryPos, whoPlacedQuarry, itemInHand);
 				TileQuarry tileQuarry = new TileQuarry(quarryPos, whoPlacedQuarry, itemInHand);
 				if(tileQuarry.isComplete())
 				{
