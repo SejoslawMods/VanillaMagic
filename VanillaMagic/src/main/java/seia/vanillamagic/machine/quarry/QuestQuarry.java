@@ -1,4 +1,4 @@
-package seia.vanillamagic.quest.quarry;
+package seia.vanillamagic.machine.quarry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;

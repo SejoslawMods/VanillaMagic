@@ -2,7 +2,7 @@ package seia.vanillamagic;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.chunkloader.TileChunkLoader;
-import seia.vanillamagic.quest.quarry.TileQuarry;
+import seia.vanillamagic.machine.quarry.TileQuarry;
 
 public class VanillaMagicRegistry 
 {

@@ -23,7 +23,7 @@ public enum EnumWand
 		this.wandName = wandName;
 	}
 	
-	/*
+	/**
 	 * Method to check if the wand has got the required Tier to do the work
 	 */
 	public boolean canWandDoWork(int requiredTier)
@@ -47,7 +47,6 @@ public enum EnumWand
 	}
 	
 	/**
-	 * 
 	 * @param player - player we are checking
 	 * @return - the Wand which player has got in off hand - null if the item is not a Wand
 	 */

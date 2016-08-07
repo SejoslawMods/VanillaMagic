@@ -120,7 +120,7 @@ public class QuestCraftOnAltar extends Quest
 									// Spawn all the results
 									for(int i = 0; i < result.length; i++)
 									{
-										Block.spawnAsEntity(world, newItemPos, result[i]);
+										Block.spawnAsEntity(world, newItemPos, result[i].copy());
 									}
 									world.updateEntities();
 									return;

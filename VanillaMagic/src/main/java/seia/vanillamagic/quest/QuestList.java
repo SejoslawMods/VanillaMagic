@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
+import seia.vanillamagic.machine.quarry.QuestQuarry;
 import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable;
-import seia.vanillamagic.quest.quarry.QuestQuarry;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
 import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
 import seia.vanillamagic.utils.ItemStackHelper;
@@ -170,7 +170,7 @@ public class QuestList
 			2, 
 			EnumWand.STICK);
 	public static final QuestCraftOnAltar QUEST_CRAFT_PUMPKIN = new QuestCraftOnAltar(QUEST_CRAFT_SAPLING_0, -2, 0, "Craft Pumpkin", "craftPumpkin", 
-			new ItemStack[]{new ItemStack(Blocks.SAPLING, 2)}, 
+			new ItemStack[]{new ItemStack(Blocks.SAPLING, 3)}, 
 			new ItemStack[]{new ItemStack(Blocks.PUMPKIN)}, 
 			2, 
 			EnumWand.STICK);

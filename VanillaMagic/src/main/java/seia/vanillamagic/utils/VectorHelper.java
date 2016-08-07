@@ -10,10 +10,10 @@ public class VectorHelper
 	{
 	}
 	
-	/*
-	 * 0 - xCoord
-	 * 1 - yCoord
-	 * 2 - zCoord
+	/**
+	 * 0 - xCoord;
+	 * 1 - yCoord;
+	 * 2 - zCoord;
 	 */
 	public static double[] getLookVec(EntityLivingBase player)
 	{
@@ -21,10 +21,10 @@ public class VectorHelper
 		return new double[]{lookVec.xCoord, lookVec.yCoord, lookVec.zCoord};
 	}
 	
-	/*
-	 * 0 - motionX
-	 * 1 - motionY
-	 * 2 - motionZ
+	/**
+	 * 0 - motionX;
+	 * 1 - motionY;
+	 * 2 - motionZ;
 	 */
 	public static double[] getMotion(Entity entity)
 	{

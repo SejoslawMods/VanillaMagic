@@ -36,7 +36,7 @@ public abstract class QuestCastSpell extends Quest
 		this.spell = spell;
 	}
 
-	/*
+	/**
 	 * Method for checking the possibilities to cast spell
 	 */
 	int howManyTimesCasted = 1;
@@ -83,7 +83,7 @@ public abstract class QuestCastSpell extends Quest
 		return false;
 	}
 	
-	/*
+	/**
 	 * Method for casting the right spell
 	 */
 	public boolean castRightSpell(EntityPlayer caster, 

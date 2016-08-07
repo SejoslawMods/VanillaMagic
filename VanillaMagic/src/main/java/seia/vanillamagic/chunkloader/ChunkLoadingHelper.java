@@ -21,7 +21,7 @@ public class ChunkLoadingHelper
 		System.out.println("ChunkLoaderHelper registered");
 	}
 	
-	/*
+	/**
 	 * Just to init the static variables.
 	 */
 	public void init()

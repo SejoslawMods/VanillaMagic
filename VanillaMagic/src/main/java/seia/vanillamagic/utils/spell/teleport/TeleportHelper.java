@@ -29,7 +29,7 @@ public class TeleportHelper
 		entityToBeTeleported.setPositionAndUpdate(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
 	}
 
-	/*
+	/**
 	 * Try to use this method.
 	 * It will teleport You to:
 	 * CoordX = player.posX

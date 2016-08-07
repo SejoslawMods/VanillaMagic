@@ -1,4 +1,4 @@
-package seia.vanillamagic.quest.quarry;
+package seia.vanillamagic.machine.quarry;
 
 import java.util.ArrayList;
 

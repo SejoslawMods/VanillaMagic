@@ -54,7 +54,7 @@ import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
 import seia.vanillamagic.utils.EntityHelper;
 import seia.vanillamagic.utils.spell.teleport.TeleportHelper;
 
-/*
+/**
  * The work of each spell.
  * When using any of those methods we are sure that the Caster has got the right wand in hand.
  * Each spell has their own parameters, because maybe we want to cast spell from another spell or use spells somewhere else.
@@ -142,7 +142,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Flint and Steal Clone
 	 */
 	public static boolean spellLighter(EntityPlayer caster, 
@@ -162,7 +162,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Feel like Blaze
 	 */
 	public static boolean spellSmallFireball(EntityPlayer caster, 
@@ -198,7 +198,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Feel like Ghast
 	 */
 	public static boolean spellLargeFireball(EntityPlayer caster,
@@ -234,7 +234,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Teleportation !!!
 	 */
 	public static boolean spellTeleport(EntityPlayer caster,
@@ -256,7 +256,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Meteor !!!
 	 */
 	public static boolean spellSummonMeteor(EntityPlayer caster,
@@ -278,7 +278,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Thunder !!!
 	 */
 	public static boolean spellSummonLightningBolt(EntityPlayer caster,
@@ -300,7 +300,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Summon Animal
 	 */
 	public static boolean spellSummonAnimal(EntityPlayer caster,
@@ -365,7 +365,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Summon Mob
 	 */
 	public static boolean spellSummonMob(EntityPlayer caster,
@@ -434,7 +434,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Fus-Ro-Dah !!!
 	 */
 	public static boolean spellFusRoDah(EntityPlayer caster,
@@ -524,7 +524,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Move in air
 	 */
 	public static boolean spellMoveInAir(EntityPlayer caster,
@@ -561,7 +561,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Pull Entity to Player
 	 */
 	public static boolean spellPullEntityToPlayer(EntityPlayer caster,
@@ -584,7 +584,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Freeze Water 3x3
 	 */
 	public static boolean spellFreezeWater3x3(EntityPlayer caster,
@@ -607,7 +607,7 @@ public class SpellHelper
 		return false;
 	}
 	
-	/*
+	/**
 	 * Make rain
 	 */
 	public static boolean spellWeatherRain(EntityPlayer caster,
@@ -623,7 +623,7 @@ public class SpellHelper
 		return true;
 	}
 	
-	/*
+	/**
 	 * Clear weather
 	 */
 	public static boolean spellWeatherClear(EntityPlayer caster,

@@ -45,7 +45,7 @@ public abstract class Quest
 		QuestList.QUESTS.add(this);
 	}
 	
-	/*
+	/**
 	 * This is only for the first Achievement.
 	 * Try to use the other Constructor.
 	 */

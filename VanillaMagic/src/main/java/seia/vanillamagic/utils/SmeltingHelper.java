@@ -173,7 +173,7 @@ public class SmeltingHelper
 		return ((int)(FurnaceRecipes.instance().getSmeltingExperience(entityItemToSmeltStack) * entityItemToSmeltStack.stackSize));
 	}
 	
-	/*
+	/**
 	 * TODO: better idea
 	 * Currently will consume whole stack in offHand for 1 operation
 	 * Returns the list of smelted items

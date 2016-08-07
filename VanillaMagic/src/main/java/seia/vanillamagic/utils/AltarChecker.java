@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-/*
+/**
  * TODO: Find faster algorithm
  */
 public class AltarChecker 
@@ -88,7 +88,7 @@ public class AltarChecker
 		return false;
 	}
 	
-	/*
+	/**
 	 * Cauldron + redstone around
 	 */
 	public static boolean checkTier1(World world, BlockPos midPos)
@@ -130,7 +130,7 @@ public class AltarChecker
 		return false;
 	}
 
-	/*
+	/**
 	 * Iron on corners
 	 */
 	public static boolean checkTier2(World world, BlockPos midPos)
@@ -165,7 +165,7 @@ public class AltarChecker
 		return false;
 	}
 
-	/*
+	/**
 	 * Gold blocks 2 blocks away from cauldron up, down, left, right
 	 */
 	public static boolean checkTier3(World world, BlockPos midPos)
@@ -200,7 +200,7 @@ public class AltarChecker
 		return false;
 	}
 	
-	/*
+	/**
 	 * Redstone on corners after iron blocks
 	 */
 	public static boolean checkTier4(World world, BlockPos midPos)
@@ -235,7 +235,7 @@ public class AltarChecker
 		return false;
 	}
 	
-	/*
+	/**
 	 * Lapis blocks 4 blocks away from cauldron up, down, left, right
 	 */
 	public static boolean checkTier5(World world, BlockPos midPos)
@@ -270,7 +270,7 @@ public class AltarChecker
 		return false;
 	}
 	
-	/*
+	/**
 	 * Diamond blocks on corners after redstone blocks
 	 */
 	public static boolean checkTier6(World world, BlockPos midPos)
@@ -305,7 +305,7 @@ public class AltarChecker
 		return false;
 	}
 	
-	/*
+	/**
 	 * Emerald blocks 4 blocks away from cauldron up, down, left, right
 	 */
 	public static boolean checkTier7(World world, BlockPos midPos)

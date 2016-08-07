@@ -21,7 +21,7 @@ public class ItemStackHelper
 		return new ItemStack(Items.REEDS, amount);
 	}
 
-	/*
+	/**
 	 * 0 - Skeleton
 	 * 1 - Wither Skeleton
 	 * 2 - Zombie

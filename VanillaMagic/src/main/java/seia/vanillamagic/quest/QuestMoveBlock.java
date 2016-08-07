@@ -38,7 +38,7 @@ public class QuestMoveBlock extends Quest
 		this.requiredWand = requiredWand;
 	}
 	
-	/*
+	/**
 	 * This event is fired twice. And I want it to fire only once.
 	 */
 	int clickedTimes = 0;

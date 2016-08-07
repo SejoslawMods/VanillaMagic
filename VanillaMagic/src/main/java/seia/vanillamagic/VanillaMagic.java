@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.chunkloader.ChunkLoadingHelper;
+import seia.vanillamagic.machine.quarry.QuarryHandler;
+import seia.vanillamagic.machine.quarry.QuestQuarryEvent;
 import seia.vanillamagic.quest.QuestList;
-import seia.vanillamagic.quest.quarry.QuarryHandler;
-import seia.vanillamagic.quest.quarry.QuestQuarryEvent;
 
 @Mod(
 		modid = VanillaMagic.MODID, 
