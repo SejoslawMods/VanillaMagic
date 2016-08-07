@@ -20,13 +20,13 @@ public class QuestPortableCraftingTable extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
-		if(!player.hasAchievement(achievement))
+		if(EntityHelper.hasPlayerCraftingTableInMainHand(player))
 		{
-			player.addStat(achievement, 1);
-		}
-		if(player.hasAchievement(achievement))
-		{
-			if(EntityHelper.hasPlayerCraftingTableInMainHand(player))
+			if(!player.hasAchievement(achievement))
+			{
+				player.addStat(achievement, 1);
+			}
+			if(player.hasAchievement(achievement))
 			{
 				player.displayGui(new InterfacePortableCraftingTable(player));
 			}

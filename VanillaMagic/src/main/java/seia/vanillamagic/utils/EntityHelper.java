@@ -6,9 +6,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
 
 public class EntityHelper 
 {
@@ -18,7 +18,8 @@ public class EntityHelper
 	
 	public static boolean hasPlayerCraftingTableInMainHand(EntityPlayer player)
 	{
-		if(Block.isEqualTo(Block.getBlockFromItem(player.getHeldItemMainhand().getItem()), Blocks.CRAFTING_TABLE))
+		if((Block.isEqualTo(Block.getBlockFromItem(player.getHeldItemMainhand().getItem()), Blocks.CRAFTING_TABLE)) ||
+				(player.getHeldItemMainhand().getItem() instanceof ICraftingTable))
 		{
 			return true;
 		}
