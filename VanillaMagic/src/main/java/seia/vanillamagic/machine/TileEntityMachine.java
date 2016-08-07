@@ -73,16 +73,19 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 						{
 							isActive = true;
 							doWork();
+							return;
 						}
 					}
 					else
 					{
 						isActive = true;
 						doWork();
+						return;
 					}
 				}
 			}
 		}
+		isActive = false;
 	}
 	
 	public TileEntity geTileEntity()
