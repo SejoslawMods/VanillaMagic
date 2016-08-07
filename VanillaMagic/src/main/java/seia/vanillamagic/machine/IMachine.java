@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,6 +31,11 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	 * Returns the World on which Machine is.
 	 */
 	World getWorld();
+	
+	/**
+	 * Get TileEntity to which this interface is implemented into.
+	 */
+	TileEntity getTileEntity();
 	
 	/**
 	 * Get the actual position of the machine block.

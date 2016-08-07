@@ -84,6 +84,11 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 			}
 		}
 	}
+	
+	public TileEntity geTileEntity()
+	{
+		return this;
+	}
 
 	public boolean isNextToOutput()
 	{
