@@ -12,19 +12,23 @@ import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 
-public abstract class TileEntityMachine extends TileEntity implements IMachine
+public abstract class TileMachine extends TileEntity implements IMachine
 {
 	public static final String REGISTRY_NAME = "TileEntityMachine";
 	
-	protected EntityPlayer placedBy;
+	protected EntityPlayer player;
 	protected BlockPos machinePos;
 	protected BlockPos workingPos;
+	protected BlockPos startPos;
+	protected ItemStack shouldBeInLeftHand;
+	protected ItemStack shouldBeInRightHand;
 	protected int radius = 4;
 	protected int oneOperationCost = 400;
 	protected int ticks = 0;
 	protected int maxTicks = 4000;
 	protected boolean isActive = false;
 	protected boolean finished = false;
+	protected int delayInTicks = 0;
 	
 	private String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
 	private String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
@@ -44,56 +48,68 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 	public abstract boolean checkSurroundings();
 	
 	/**
-	 * Additional method for showing the box on which Machine is operating.
-	 */
-	public abstract void showBoundingBox();
-	
-	/**
-	 * This method is for a Machine work. <br>
+	 * This method is for a Machine work.
 	 * Each Machine have to know when to decrease ticks.
-	 * For instance: I don't want Quarry to decrease ticks if it hits Air or Bedrock.
+	 * For instance: I don't want Quarry to decrease ticks if it hits Air or Bedrock. <br>
+	 * In this method Machine should, for instance: move workingPos.
 	 */
 	public abstract void doWork();
 	
 	/**
 	 * This method is used to check if the output inventory has space for more items.
 	 */
-	public abstract boolean inventoryHasSpace();
+	public abstract boolean inventoryOutputHasSpace();
 	
-	public void update() 
+	int delay = 0;
+	public void update()
 	{
-		if(worldObj.getChunkFromBlockCoords(machinePos).isLoaded())
+		if(delay >= delayInTicks)
 		{
-			if(worldObj.getChunkFromBlockCoords(getWorkingPos()).isLoaded())
+			delay = 0;
+			if(worldObj.getChunkFromBlockCoords(machinePos).isLoaded())
 			{
-				if(checkSurroundings())
+				if(worldObj.getChunkFromBlockCoords(getWorkingPos()).isLoaded())
 				{
-					showBoundingBox();
-					checkFuel();
-					if(isNextToOutput())
+					if(checkSurroundings())
 					{
-						if(inventoryHasSpace())
+						showBoundingBox();
+						checkFuel();
+						if(isNextToOutput())
+						{
+							if(inventoryOutputHasSpace())
+							{
+								isActive = true;
+								doWork();
+								return;
+							}
+						}
+						else
 						{
 							isActive = true;
 							doWork();
 							return;
 						}
 					}
-					else
-					{
-						isActive = true;
-						doWork();
-						return;
-					}
 				}
 			}
+			isActive = false;
 		}
-		isActive = false;
+		else
+		{
+			delay++;
+		}
 	}
 	
 	public TileEntity getTileEntity()
 	{
 		return this;
+	}
+	
+	/**
+	 * Additional method for showing the box on which Machine is operating.
+	 */
+	public void showBoundingBox()
+	{
 	}
 	
 	public boolean finishedWork()
@@ -108,7 +124,7 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 
 	public EntityPlayer getPlayerWhoPlacedMachine() 
 	{
-		return placedBy;
+		return player;
 	}
 
 	public BlockPos getMachinePos() 
@@ -130,10 +146,25 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 	{
 		this.workingPos = newPos;
 	}
+	
+	public BlockPos getStartPos()
+	{
+		return startPos;
+	}
+	
+	public void setNewStartPos(BlockPos newStartPos)
+	{
+		this.startPos = newStartPos;
+	}
 
 	public int getWorkRadius() 
 	{
 		return radius;
+	}
+	
+	public void setWorkRadius(int newRadius)
+	{
+		this.radius = newRadius;
 	}
 
 	public int getOneOperationCost() 
@@ -244,7 +275,7 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 		{
 			if(isNextToOutput())
 			{
-				if(!inventoryHasSpace())
+				if(!inventoryOutputHasSpace())
 				{
 					return;
 				}
@@ -284,5 +315,29 @@ public abstract class TileEntityMachine extends TileEntity implements IMachine
 		catch(Exception e)
 		{
 		}
+	}
+	
+	public void endWork()
+	{
+	}
+	
+	public ItemStack getActivationStackLeftHand() 
+	{
+		return shouldBeInLeftHand;
+	}
+	
+	public void setActivationStackLeftHand(ItemStack stack) 
+	{
+		this.shouldBeInLeftHand = stack;
+	}
+	
+	public ItemStack getActivationStackRightHand() 
+	{
+		return shouldBeInRightHand;
+	}
+	
+	public void setActivationStackRightHand(ItemStack stack) 
+	{
+		this.shouldBeInRightHand = stack;
 	}
 }

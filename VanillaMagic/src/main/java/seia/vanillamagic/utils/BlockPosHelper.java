@@ -23,6 +23,11 @@ public class BlockPosHelper
 	{
 	}
 	
+	public static BlockPos copyPos(BlockPos toCopy)
+	{
+		return new BlockPos(toCopy.getX(), toCopy.getY(), toCopy.getZ());
+	}
+	
 	public static boolean isSameBlockPos(BlockPos pos1, BlockPos pos2)
 	{
 		if(pos1.getX() == pos2.getX())

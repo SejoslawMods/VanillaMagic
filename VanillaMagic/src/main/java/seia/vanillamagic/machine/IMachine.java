@@ -12,8 +12,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 /**
  * Machine is a TileEntity that perform some work on World.
- * This is made to unify some of the Machine works.
- * In ITickable You should put stuff like -> check fuel, do work, go to next position, etc.
+ * This interface is made to unify some of the Machine works.
  * <br>
  * <br>
  * TODO: Currently only supporting IInventory as input / output.
@@ -63,9 +62,25 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	void setWorkingPos(BlockPos newPos);
 	
 	/**
+	 * Returns the starting position at which the Machine will start to operate. 
+	 */
+	BlockPos getStartPos();
+	
+	/**
+	 * Set new Machine starting position. 
+	 * After this being set, the Machine should restart the work.
+	 */
+	void setNewStartPos(BlockPos newStartPos);
+	
+	/**
 	 * Get the Machine work radius (in blocks).
 	 */
 	int getWorkRadius();
+	
+	/**
+	 * Sets the new radius for this Machine.
+	 */
+	void setWorkRadius(int newRadius);
 	
 	/**
 	 * It will return the cost of performing one operation.
@@ -109,10 +124,20 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	ItemStack getActivationStackLeftHand();
 	
 	/**
+	 * Set the activation stack that should be in left hand (off hand).
+	 */
+	void setActivationStackLeftHand(ItemStack stack);
+	
+	/**
 	 * What Player should hold in right hand (main hand) to activate this Machine.
 	 * This usually should be set in Quest.
 	 */
 	ItemStack getActivationStackRightHand();
+	
+	/**
+	 * Set the activation stack that should be in right hand (main hand).
+	 */
+	void setActivationStackRightHand(ItemStack stack);
 	
 	/**
 	 * Simple method to detect if the Machine is active.

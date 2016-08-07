@@ -18,7 +18,7 @@ import seia.vanillamagic.utils.BlockPosHelper;
 public class TileChunkLoader extends TileEntity implements ITickable
 {
 	// Name for tile
-	public static final String TILE_CHUNK_LOADER_NAME = "tileChunkLoader";
+	public static final String REGISTRY_NAME = "tileChunkLoader";
 	
 	public final EntityPlayer placedBy;
 	public final BlockPos position;

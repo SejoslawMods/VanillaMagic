@@ -10,13 +10,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import seia.vanillamagic.machine.TileEntityMachine;
+import seia.vanillamagic.machine.TileMachine;
+import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
 
-public class TileQuarry extends TileEntityMachine
+public class TileQuarry extends TileMachine
 {
 	// It's (size)x(size) but (size-2)x(size-2) is for digging
 	// ChunkNumber * BlocksInChunk + 2 blocks bounding
@@ -24,7 +24,7 @@ public class TileQuarry extends TileEntityMachine
 	// Input side from the Quarry into IInventory (argument in methods)
 	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
 	// The name for registry
-	public static final String TILE_QUARRY_NAME = "tileQuarry";
+	public static final String REGISTRY_NAME = "tileQuarry";
 
 	public ItemStack itemInHand; // should be cauldron
 	public BlockCauldron cauldron;
@@ -39,9 +39,9 @@ public class TileQuarry extends TileEntityMachine
 			throws Exception
 	{
 		this.machinePos = machinePos;
-		this.placedBy = whoPlacedQuarry;
+		this.player = whoPlacedQuarry;
 		this.itemInHand = itemInHand;
-		this.worldObj = placedBy.worldObj;
+		this.worldObj = player.worldObj;
 		this.cauldron = (BlockCauldron) worldObj.getBlockState(machinePos).getBlock();
 		this.diamondBlockPos = new BlockPos(machinePos.getX() + 1, machinePos.getY(), machinePos.getZ());
 		this.diamondBlock = worldObj.getBlockState(diamondBlockPos).getBlock();
@@ -61,6 +61,9 @@ public class TileQuarry extends TileEntityMachine
 				machinePos.getX() - 1, 
 				machinePos.getY(), 
 				machinePos.getZ() + 1);
+		this.startPos = BlockPosHelper.copyPos(workingPos);
+		setActivationStackRightHand(itemInHand);
+		setActivationStackLeftHand(null);
 	}
 
 	/**
@@ -100,12 +103,7 @@ public class TileQuarry extends TileEntityMachine
 	
 	public IInventory getOutputInventory()
 	{
-		TileEntity output = worldObj.getTileEntity(getInventoryOutputPos());
-		if(output instanceof IInventory)
-		{
-			return (IInventory) output;
-		}
-		return null;
+		return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
 	}
 	
 	public BlockPos getInputFuelChestPos()
@@ -115,12 +113,7 @@ public class TileQuarry extends TileEntityMachine
 	
 	public IInventory getInputInventory()
 	{
-		TileEntity input = worldObj.getTileEntity(getInputFuelChestPos());
-		if(input instanceof IInventory)
-		{
-			return (IInventory) input;
-		}
-		return null;
+		return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));
 	}
 	
 	/**
@@ -150,45 +143,13 @@ public class TileQuarry extends TileEntityMachine
 		}
 		return false;
 	}
-
-	/**
-	 * TODO: fix bounding box
-	 * showing the rendered particles around the digging area
-	 */
-	public void showBoundingBox()
-	{
-		/*
-		int posX = machinePos.getX();
-		int posZ = machinePos.getZ();
-		for(int x = 0; x < BASIC_QUARRY_SIZE; x++)
-		{
-			for(int z = 0; z < BASIC_QUARRY_SIZE; z++)
-			{
-				if(((posX - x) == posX) || // bottom line
-						((posZ + z) == posZ) || // right line
-						((posX - x) == (posX - BASIC_QUARRY_SIZE - 1)) || // top line
-						((posZ + z) == (posZ + BASIC_QUARRY_SIZE - 1))) // left line
-				{
-					world.spawnParticle(EnumParticleTypes.END_ROD,
-							posX - x, 
-							machinePos.getY(), 
-							posZ + z, 
-							rand.nextGaussian() * 0.005D, 
-							rand.nextGaussian() * 0.005D, 
-							rand.nextGaussian() * 0.005D, 
-							new int[0]);
-				}
-			}
-		}
-		*/
-	}
 	
 	public void endWork()
 	{
 		QuarryHandler.INSTANCE.killQuarry(this);
 	}
 	
-	public boolean inventoryHasSpace()
+	public boolean inventoryOutputHasSpace()
 	{
 		return !InventoryHelper.isInventoryFull(getOutputInventory(), INPUT_FACING);
 	}
@@ -196,6 +157,11 @@ public class TileQuarry extends TileEntityMachine
 	public void spawnDigged(ItemStack digged)
 	{
 		Block.spawnAsEntity(worldObj, machinePos.offset(EnumFacing.UP, 2), digged);
+	}
+	
+	public BlockPos moveWorkingPosToNextPos()
+	{
+		return workingPos.offset(EnumFacing.DOWN);
 	}
 	
 	public void doWork() // once a world tick
@@ -215,7 +181,7 @@ public class TileQuarry extends TileEntityMachine
 		{
 			while(!worldObj.isAirBlock(workingPos))
 			{
-				workingPos = workingPos.offset(EnumFacing.DOWN);
+				workingPos = moveWorkingPosToNextPos();
 			}
 		}
 		else if(Block.isEqualTo(worldObj.getBlockState(workingPos).getBlock(), Blocks.BEDROCK))
@@ -266,7 +232,7 @@ public class TileQuarry extends TileEntityMachine
 			}
 		}
 		// go down by 1 at the end of work in this tick
-		workingPos = workingPos.offset(EnumFacing.DOWN);
+		workingPos = moveWorkingPosToNextPos();
 	}
     
 	public void deserializeNBT(NBTTagCompound compound)
@@ -275,15 +241,5 @@ public class TileQuarry extends TileEntityMachine
 		{
 			QuarryHandler.INSTANCE.addNewQuarry(this);
 		}
-	}
-	
-	public ItemStack getActivationStackLeftHand() 
-	{
-		return null;
-	}
-	
-	public ItemStack getActivationStackRightHand() 
-	{
-		return itemInHand;
 	}
 }
