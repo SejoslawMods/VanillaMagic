@@ -16,6 +16,11 @@ public class ItemStackHelper
 		return new ItemStack(Items.DYE, amount, 4);
 	}
 	
+	public static ItemStack getBonemeal(int amount)
+	{
+		return new ItemStack(Items.DYE, amount, 0);
+	}
+	
 	public static ItemStack getSugarCane(int amount)
 	{
 		return new ItemStack(Items.REEDS, amount);

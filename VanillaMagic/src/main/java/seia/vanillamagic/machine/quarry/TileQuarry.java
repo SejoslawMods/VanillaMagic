@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.machine.TileMachine;
@@ -26,7 +25,7 @@ public class TileQuarry extends TileMachine
 	// The name for registry
 	public static final String REGISTRY_NAME = "tileQuarry";
 
-	public ItemStack itemInHand; // should be cauldron
+	public ItemStack itemInHand;
 	public BlockCauldron cauldron;
 	public BlockPos diamondBlockPos;
 	public Block diamondBlock;
@@ -146,7 +145,7 @@ public class TileQuarry extends TileMachine
 	
 	public void endWork()
 	{
-		QuarryHandler.INSTANCE.killQuarry(this);
+		this.worldObj.removeTileEntity(this.machinePos);
 	}
 	
 	public boolean inventoryOutputHasSpace()
@@ -208,6 +207,19 @@ public class TileQuarry extends TileMachine
 			boolean hasChest = isNextToOutput(); // chest or any other IInventory
 			Block blockToDig = worldObj.getBlockState(workingPos).getBlock();
 			List<ItemStack> drops = blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
+			// Add drops from IInventory
+			if(blockToDig instanceof IInventory)
+			{
+				IInventory inv = (IInventory) blockToDig;
+				for(int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack stack = inv.getStackInSlot(i);
+					if(stack != null)
+					{
+						drops.add(stack);
+					}
+				}
+			}
 			worldObj.setBlockToAir(workingPos);
 			for(ItemStack stack : drops)
 			{
@@ -233,13 +245,5 @@ public class TileQuarry extends TileMachine
 		}
 		// go down by 1 at the end of work in this tick
 		workingPos = moveWorkingPosToNextPos();
-	}
-    
-	public void deserializeNBT(NBTTagCompound compound)
-	{
-		if(machinePos != null)
-		{
-			QuarryHandler.INSTANCE.addNewQuarry(this);
-		}
 	}
 }

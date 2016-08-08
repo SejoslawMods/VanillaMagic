@@ -227,11 +227,14 @@ achievement.smeltInAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Al
 achievement.fullTreeCut=Full Tree Cut
 achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right
 
+achievement.machineFarm=Automatic Farm (Must be restarted when logging in.)
+achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume Seed.
+
 achievement.mining3x3=Mining 3x3
 achievement.mining3x3.desc=
 
-achievement.quarry=Vanilla Quarry !!!
-achievement.quarry.desc=Place Cauldron and than on the East side of the Cauldron place DiamondBlock and on the North side place RedstoneBlock. Than replace the Cauldron. Drop fuel into Cauldron. (check console for help) (output to IInventory on West, input fuel IInventory on Top)
+achievement.quarry=Vanilla Quarry !!! (Must be restarted when logging in.)
+achievement.quarry.desc=Place Cauldron and than on the East side of the Cauldron place DiamondBlock and on the North side place RedstoneBlock. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry. Drop fuel into Cauldron. (check console for help) (output to IInventory on West, input fuel from IInventory on Top)
 
 achievement.arrowMachineGun=Arrow Machine Gun
 achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to right hand and right-click (or hold)

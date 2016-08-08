@@ -1,7 +1,6 @@
 package seia.vanillamagic;
 
 import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -9,8 +8,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.chunkloader.ChunkLoadingHelper;
-import seia.vanillamagic.machine.quarry.QuarryHandler;
-import seia.vanillamagic.machine.quarry.QuestQuarryEvent;
 import seia.vanillamagic.quest.QuestList;
 
 @Mod(
@@ -38,11 +35,7 @@ public class VanillaMagic
 		System.out.println("Registered events: " + VanillaMagicQuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicIntegration.INSTANCE.preInit();
-		// TODO: For future. Add quarrys to be saved and load from file.
-		// TODO: Currently quarrys MUST BE replace each time the world is loaded ???
-		MinecraftForge.EVENT_BUS.register(new QuestQuarryEvent()); // WorldTickEvent
 		VanillaMagicRegistry.INSTANCE.preInit();
-		QuarryHandler.INSTANCE.init();
 		ChunkLoadingHelper.INSTANCE.init();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 	}

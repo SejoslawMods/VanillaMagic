@@ -163,16 +163,16 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Pulls from the specified slot in the inventory and places in any available slot in the hopper. Returns true if
+	 * Pulls from the specified slot in the inventoryIn and places in any available slot in the inventoryOut. Returns true if
 	 * the entire stack was moved
 	 */
-	public static boolean pullItemFromSlot(IHopper hopper, IInventory inventoryIn, int index, EnumFacing direction)
+	public static boolean pullItemFromSlot(IInventory inventoryOut, IInventory inventoryIn, int index, EnumFacing direction)
 	{
 		ItemStack stack = inventoryIn.getStackInSlot(index);
 		if (stack != null && canExtractItemFromSlot(inventoryIn, stack, index, direction))
 		{
 			ItemStack stackCopy = stack.copy();
-			ItemStack leftItems = putStackInInventoryAllSlots(hopper, inventoryIn.decrStackSize(index, 1), (EnumFacing)null);
+			ItemStack leftItems = putStackInInventoryAllSlots(inventoryOut, inventoryIn.decrStackSize(index, 1), (EnumFacing)null);
 			if (leftItems == null || leftItems.stackSize == 0)
 			{
 				inventoryIn.markDirty();
@@ -242,7 +242,7 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Can this hopper insert the specified item from the specified slot on the specified side?
+	 * Can insert the specified item from the specified slot on the specified side?
 	 */
 	public static boolean canInsertItemInSlot(IInventory inventoryIn, ItemStack stack, int index, EnumFacing side)
 	{
@@ -252,7 +252,7 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Can this hopper extract the specified item from the specified slot on the specified side?
+	 * Can extract the specified item from the specified slot on the specified side?
 	 */
 	public static boolean canExtractItemFromSlot(IInventory inventoryIn, ItemStack stack, int index, EnumFacing side)
 	{

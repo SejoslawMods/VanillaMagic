@@ -201,6 +201,7 @@ public class QuestMoveBlock extends Quest
 				IItemHandler handler = (IItemHandler) tileAfter;
 				NBTHelper.readFromIItemHandler(handler, questTag);
 			}
+			tileAfter.markDirty();
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			newOffHand.stackSize = 1;
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
