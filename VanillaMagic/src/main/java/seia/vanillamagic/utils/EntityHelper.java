@@ -18,10 +18,13 @@ public class EntityHelper
 	
 	public static boolean hasPlayerCraftingTableInMainHand(EntityPlayer player)
 	{
-		if((Block.isEqualTo(Block.getBlockFromItem(player.getHeldItemMainhand().getItem()), Blocks.CRAFTING_TABLE)) ||
-				(player.getHeldItemMainhand().getItem() instanceof ICraftingTable))
+		if(Block.isEqualTo(Block.getBlockFromItem(player.getHeldItemMainhand().getItem()), Blocks.CRAFTING_TABLE))
 		{
 			return true;
+		}
+		else if(player.getHeldItemMainhand().getItem() instanceof ICraftingTable)
+		{
+			return ((ICraftingTable) player.getHeldItemMainhand().getItem()).canOpenGui(player);
 		}
 		return false;
 	}

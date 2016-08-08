@@ -80,8 +80,9 @@ public enum EnumWand
 			ItemStack currentlyCheckingWand = currentlyCheckingEnumWand.wandItemStack;
 			if(ItemStack.areItemsEqual(currentlyCheckingWand, inHand))
 			{
+				// TODO: Fox language issue with different languages.
 				// Added checker for wand name.
-				if(currentlyCheckingEnumWand.wandName.equals(inHand.getDisplayName()))
+				//if(currentlyCheckingEnumWand.wandName.equals(inHand.getDisplayName()))
 				{
 					return currentlyCheckingEnumWand;
 				}
@@ -100,10 +101,11 @@ public enum EnumWand
 		return areWandsEqual(wand1.wandItemStack, wand2.wandItemStack);
 	}
 	
+	// TODO: Fox language issue with different languages.
 	public static boolean areWandsEqual(ItemStack wand1, ItemStack wand2)
 	{
-		return ItemStack.areItemsEqual(wand1, wand2) &&
-				(wand1.getDisplayName().equals(wand2.getDisplayName()));
+		return ItemStack.areItemsEqual(wand1, wand2);// &&
+				//(wand1.getDisplayName().equals(wand2.getDisplayName()));
 	}
 
 	public static boolean isWandRightForSpell(EnumWand wandPlayerHand, EnumSpell spell) 
