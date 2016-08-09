@@ -4,13 +4,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.translation.I18n;
 
 public enum EnumWand 
 {
-	STICK(1, new ItemStack(Items.STICK), "Stick Wand"), // basic wand
-	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD), "Blaze Wand"), // the most common wand
-	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR), "Nether Star"), // used mainly for summoning and resurrecting
-	END_ROD(4, new ItemStack(Blocks.END_ROD), "End Wand"); // ???
+	STICK(1, new ItemStack(Items.STICK), I18n.translateToLocal("Stick Wand")), // basic wand
+	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD), I18n.translateToLocal("Blaze Wand")), // the most common wand
+	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR), I18n.translateToLocal("Nether Star")), // used mainly for summoning and resurrecting
+	END_ROD(4, new ItemStack(Blocks.END_ROD), I18n.translateToLocal("End Wand")); // ???
 	
 	public final int wandTier;
 	public final ItemStack wandItemStack;
