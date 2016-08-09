@@ -25,11 +25,11 @@ public class VanillaMagicDebug
 			ItemStackHelper.printItemStackInfo(DEBUG_OFF_HAND_ITEMSTACK, new String[]{"Left Hand"});
 			ItemStackHelper.printItemStackInfo(DEBUG_MAIN_HAND_ITEMSTACK, new String[]{"Right Hand"});
 			MinecraftForge.EVENT_BUS.register(this);
-			System.out.println("VanillaMagicDebug Registered");
+			System.out.println("VanillaMagicDebug registered");
 		}
 		catch(Exception e)
 		{
-			System.out.println("VanillaMagicDebug Not Registered");
+			System.out.println("VanillaMagicDebug not registered");
 		}
 	}
 	

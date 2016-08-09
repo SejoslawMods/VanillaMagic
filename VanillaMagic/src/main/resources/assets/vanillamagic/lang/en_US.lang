@@ -1,4 +1,15 @@
 ############################
+#Wand Names
+############################
+
+wand.stick=Stick Wand
+wand.blaze_rod=Blaze Wand
+wand.nether_star=Nether Star
+wand.end_rod=End Wand
+
+
+
+############################
 #Achievements
 ############################
 

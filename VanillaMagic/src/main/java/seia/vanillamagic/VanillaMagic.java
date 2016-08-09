@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.chunkloader.ChunkLoadingHelper;
+import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
 
 @Mod(
@@ -56,5 +57,6 @@ public class VanillaMagic
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		VanillaMagicIntegration.INSTANCE.postInit();
+		BookRegistry.INSTANCE.postInit();
 	}
 }
