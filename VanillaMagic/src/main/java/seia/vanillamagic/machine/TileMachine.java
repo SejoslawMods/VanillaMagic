@@ -125,27 +125,27 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		return getOutputInventory() != null ? true : false;
 	}
 
-	public EntityPlayer getPlayerWhoPlacedMachine() 
+	public EntityPlayer getPlayerWhoPlacedMachine()
 	{
 		return player;
 	}
 
-	public BlockPos getMachinePos() 
+	public BlockPos getMachinePos()
 	{
 		return machinePos;
 	}
 
-	public void setMachinePos(BlockPos newPos) 
+	public void setMachinePos(BlockPos newPos)
 	{
 		this.machinePos = newPos;
 	}
 
-	public BlockPos getWorkingPos() 
+	public BlockPos getWorkingPos()
 	{
 		return workingPos;
 	}
 
-	public void setWorkingPos(BlockPos newPos) 
+	public void setWorkingPos(BlockPos newPos)
 	{
 		this.workingPos = newPos;
 	}
@@ -160,7 +160,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.startPos = newStartPos;
 	}
 
-	public int getWorkRadius() 
+	public int getWorkRadius()
 	{
 		return radius;
 	}
@@ -170,22 +170,22 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.radius = newRadius;
 	}
 
-	public int getOneOperationCost() 
+	public int getOneOperationCost()
 	{
 		return oneOperationCost;
 	}
 
-	public int getCurrentTicks() 
+	public int getCurrentTicks()
 	{
 		return ticks;
 	}
 
-	public int getMaxTicks() 
+	public int getMaxTicks()
 	{
 		return maxTicks;
 	}
 
-	public boolean isActive() 
+	public boolean isActive()
 	{
 		return isActive;
 	}
@@ -324,7 +324,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	{
 	}
 	
-	public ItemStack getActivationStackLeftHand() 
+	public ItemStack getActivationStackLeftHand()
 	{
 		return shouldBeInLeftHand;
 	}
@@ -334,7 +334,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.shouldBeInLeftHand = stack;
 	}
 	
-	public ItemStack getActivationStackRightHand() 
+	public ItemStack getActivationStackRightHand()
 	{
 		return shouldBeInRightHand;
 	}
@@ -344,37 +344,37 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.shouldBeInRightHand = stack;
 	}
 	
-	public IBlockState getMachineState() 
+	public IBlockState getMachineState()
 	{
 		return this.worldObj.getBlockState(getMachinePos());
 	}
 	
-	public Block getMachineBlock() 
+	public Block getMachineBlock()
 	{
 		return getMachineState().getBlock();
 	}
 	
-	public TileEntity getNeighborTile(EnumFacing face) 
+	public TileEntity getNeighborTile(EnumFacing face)
 	{
 		return this.worldObj.getTileEntity(getNeighborPos(face));
 	}
 	
-	public IMachine getNeighborMachine(EnumFacing face) 
+	public IMachine getNeighborMachine(EnumFacing face)
 	{
 		return (IMachine) getNeighborTile(face);
 	}
 	
-	public BlockPos getNeighborPos(EnumFacing face) 
+	public BlockPos getNeighborPos(EnumFacing face)
 	{
 		return getMachinePos().offset(face);
 	}
 	
-	public IBlockState getNeighborState(EnumFacing face) 
+	public IBlockState getNeighborState(EnumFacing face)
 	{
 		return this.worldObj.getBlockState(getNeighborPos(face));
 	}
 	
-	public Block getNeighborBlock(EnumFacing face) 
+	public Block getNeighborBlock(EnumFacing face)
 	{
 		return getNeighborState(face).getBlock();
 	}

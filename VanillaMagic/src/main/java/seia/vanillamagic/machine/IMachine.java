@@ -107,6 +107,8 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	 * Ticks works like Furnace smelting ticks.
 	 * For instance Coal as fuel will return 1600 ticks.
 	 * It will return the current ticks in machine.
+	 * Dividing this by getOneOperationCost() will give You the amount of operations the Machine
+	 * can handle.
 	 */
 	int getCurrentTicks();
 	
