@@ -1,10 +1,15 @@
 package seia.vanillamagic.machine;
 
+import javax.annotation.Nullable;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -42,6 +47,16 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	 * In Vanilla Magic it usually will return Cauldron position.
 	 */
 	BlockPos getMachinePos();
+	
+	/**
+	 * Returns the state of this Machine.
+	 */
+	IBlockState getMachineState();
+	
+	/**
+	 * Returns the Machine block.
+	 */
+	Block getMachineBlock();
 	
 	/**
 	 * Set Machine position.
@@ -153,4 +168,33 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
 	 * Returns the inventory to which Machine should output.
 	 */
 	IInventory getOutputInventory();
+	
+	//=========================== NEIGHBOR =====================================================
+	
+	/**
+	 * Get neighbor TileEntity at given face.
+	 */
+	@Nullable
+	TileEntity getNeighborTile(EnumFacing face);
+	
+	/**
+	 * Get the Machine that is next to this Machine.
+	 */
+	@Nullable
+	IMachine getNeighborMachine(EnumFacing face);
+	
+	/**
+	 * Returns the neighbor position.
+	 */
+	BlockPos getNeighborPos(EnumFacing face);
+	
+	/**
+	 * Returns the state of the neighbor block.
+	 */
+	IBlockState getNeighborState(EnumFacing face);
+	
+	/**
+	 * Returns the neighbor block.
+	 */
+	Block getNeighborBlock(EnumFacing face);
 }

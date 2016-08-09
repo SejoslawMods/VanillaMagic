@@ -2,11 +2,14 @@ package seia.vanillamagic.machine;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.NBTHelper;
@@ -66,7 +69,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		if(delay >= delayInTicks)
 		{
 			delay = 0;
-			if(worldObj.getChunkFromBlockCoords(machinePos).isLoaded())
+			if(worldObj.getChunkFromBlockCoords(getMachinePos()).isLoaded())
 			{
 				if(worldObj.getChunkFromBlockCoords(getWorkingPos()).isLoaded())
 				{
@@ -201,7 +204,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		catch(Exception e)
 		{
 			System.out.println("Error while writing NBT from TileEntityMachine at:");
-			BlockPosHelper.printCoords(machinePos);
+			BlockPosHelper.printCoords(getMachinePos());
 		}
 		return null;
     }
@@ -236,7 +239,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		catch(Exception e)
 		{
 			System.out.println("Error while reading NBT to TileEntityMachine at:");
-			BlockPosHelper.printCoords(machinePos);
+			BlockPosHelper.printCoords(getMachinePos());
 		}
     }
 	
@@ -296,7 +299,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 			}
 			else if(!hasInputInventory())
 			{
-				List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(worldObj, machinePos);
+				List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(worldObj, getMachinePos());
 				if(fuelsInCauldron.size() == 0)
 				{
 					return;
@@ -339,5 +342,40 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public void setActivationStackRightHand(ItemStack stack) 
 	{
 		this.shouldBeInRightHand = stack;
+	}
+	
+	public IBlockState getMachineState() 
+	{
+		return this.worldObj.getBlockState(getMachinePos());
+	}
+	
+	public Block getMachineBlock() 
+	{
+		return getMachineState().getBlock();
+	}
+	
+	public TileEntity getNeighborTile(EnumFacing face) 
+	{
+		return this.worldObj.getTileEntity(getNeighborPos(face));
+	}
+	
+	public IMachine getNeighborMachine(EnumFacing face) 
+	{
+		return (IMachine) getNeighborTile(face);
+	}
+	
+	public BlockPos getNeighborPos(EnumFacing face) 
+	{
+		return getMachinePos().offset(face);
+	}
+	
+	public IBlockState getNeighborState(EnumFacing face) 
+	{
+		return this.worldObj.getBlockState(getNeighborPos(face));
+	}
+	
+	public Block getNeighborBlock(EnumFacing face) 
+	{
+		return getNeighborState(face).getBlock();
 	}
 }
