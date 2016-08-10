@@ -21,9 +21,9 @@ book.other.title=Other things
 ############################
 
 wand.stick=Stick Wand
-wand.blaze_rod=Blaze Wand
-wand.nether_star=Nether Star
-wand.end_rod=End Wand
+wand.blazeRod=Blaze Wand
+wand.netherStar=Nether Star
+wand.endRod=End Wand
 
 
 

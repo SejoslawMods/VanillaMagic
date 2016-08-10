@@ -9,9 +9,9 @@ import seia.vanillamagic.utils.TextHelper;
 public enum EnumWand 
 {
 	STICK(1, new ItemStack(Items.STICK), TextHelper.translateToLocal("wand.stick")), // basic wand - Stick Wand
-	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD), TextHelper.translateToLocal("wand.blaze_rod")), // the most common wand - Blaze Wand
-	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR), TextHelper.translateToLocal("wand.nether_star")), // used mainly for summoning and resurrecting - Nether Star
-	END_ROD(4, new ItemStack(Blocks.END_ROD), TextHelper.translateToLocal("wand.end_rod")); // ??? - End Wand
+	BLAZE_ROD(2, new ItemStack(Items.BLAZE_ROD), TextHelper.translateToLocal("wand.blazeRod")), // the most common wand - Blaze Wand
+	NETHER_STAR(3, new ItemStack(Items.NETHER_STAR), TextHelper.translateToLocal("wand.netherStar")), // used mainly for summoning and resurrecting - Nether Star
+	END_ROD(4, new ItemStack(Blocks.END_ROD), TextHelper.translateToLocal("wand.endRod")); // ??? - End Wand
 	
 	public final int wandTier;
 	public final ItemStack wandItemStack;
