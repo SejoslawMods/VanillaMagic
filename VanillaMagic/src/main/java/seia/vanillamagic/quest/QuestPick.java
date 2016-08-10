@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 public class QuestPick extends Quest
 {
 	public final ItemStack whatToPick;
-
+	
 	public QuestPick(Quest required, int posX, int posY, String questName, String uniqueName,
 			ItemStack whatToPick)
 	{

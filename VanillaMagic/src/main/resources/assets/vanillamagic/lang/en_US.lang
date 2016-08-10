@@ -44,7 +44,7 @@ achievement.portableCraftingTable.desc=Hold Crafting Table in right hand and rig
 achievement.spellFlintAndSteel=Flint and Steel Clone
 achievement.spellFlintAndSteel.desc=Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire
 
-achievement.spellSmallFireball=Feel like Blaze (small fireball)
+achievement.spellSmallFireball=Feel like Blaze (small fireball) (Require: Pick Blaze Rod)
 achievement.spellSmallFireball.desc=Hold Blaze Wand in Your right hand and at least 2x Redstone Dust in the left hand and right-click 
 
 achievement.spellFusRoDah=Fus-Ro-Dah !!! (repulse mobs and animals around player)

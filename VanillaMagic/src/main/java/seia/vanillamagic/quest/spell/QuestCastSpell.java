@@ -14,6 +14,12 @@ import seia.vanillamagic.utils.spell.SpellHelper;
 public abstract class QuestCastSpell extends Quest
 {
 	public final EnumSpell spell;
+	
+	public QuestCastSpell(Quest required, int posX, int posY, EnumSpell spell, Quest[] additionalRequiredQuests) 
+	{
+		this(required, posX, posY, spell);
+		this.additionalRequiredQuests = additionalRequiredQuests;
+	}
 
 	public QuestCastSpell(Quest required, int posX, int posY, 
 			EnumSpell spell)
@@ -45,6 +51,10 @@ public abstract class QuestCastSpell extends Quest
 	{
 		try
 		{
+			if(!finishedAdditionalQuests(caster))
+			{
+				return false;
+			}
 			EnumWand wandPlayerHand = EnumWand.getWandByItemStack(caster.getHeldItemMainhand());
 			if(EnumWand.isWandRightForSpell(wandPlayerHand, spell))
 			{

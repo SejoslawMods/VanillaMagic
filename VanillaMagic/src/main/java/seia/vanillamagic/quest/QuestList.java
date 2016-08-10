@@ -30,48 +30,6 @@ public class QuestList
 	public static final QuestPortableCraftingTable QUEST_PORTABLE_CRAFTING_TABLE = new QuestPortableCraftingTable(QUEST_CRAFT_STICK, -2, 0, new ItemStack(Blocks.CRAFTING_TABLE), "Portable Crafting Table", "portableCraftingTable");
 	
 	public static final QuestCastSpellOnBlock QUEST_CAST_SPELL_LIGHTER = new QuestCastSpellOnBlock(QUEST_CRAFT_STICK, 0, -2, EnumSpell.LIGHTER);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_SMALL_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTER, 0, -2, EnumSpell.SMALL_FIREBALL);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_FUS_RO_DAH = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL, 0, -2, EnumSpell.FUS_RO_DAH);
-	
-	// SUMMONS Passive Entities
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_CHICKEN = new QuestCastSpellOnBlock(QUEST_CAST_SPELL_SMALL_FIREBALL, -2, 0, EnumSpell.SUMMON_CHICKEN);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_PIG = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN, -2, 0, EnumSpell.SUMMON_PIG);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_COW = new QuestCastSpellOnBlock(QUEST_SUMMON_PIG, -2, 0, EnumSpell.SUMMON_COW);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_MOOSHROOM = new QuestCastSpellOnBlock(QUEST_SUMMON_COW, 0, +2, EnumSpell.SUMMON_MOOSHROOM);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_SHEEP = new QuestCastSpellOnBlock(QUEST_SUMMON_COW, -2, 0, EnumSpell.SUMMON_SHEEP);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_WOLF = new QuestCastSpellOnBlock(QUEST_SUMMON_SHEEP, 0, +2, EnumSpell.SUMMON_WOLF);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_RABBIT = new QuestCastSpellOnBlock(QUEST_SUMMON_SHEEP, -2, 0, EnumSpell.SUMMON_RABBIT);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_HORSE = new QuestCastSpellOnBlock(QUEST_SUMMON_RABBIT, -2, 0, EnumSpell.SUMMON_HORSE);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_VILLAGER = new QuestCastSpellOnBlock(QUEST_SUMMON_HORSE, -2, 0, EnumSpell.SUMMON_VILLAGER);
-	// END SUMMONS Passive Entities
-	
-	//SUMMONS Monster
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_ZOMBIE = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN, 0, -2, EnumSpell.SUMMON_ZOMBIE);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_CREEPER = new QuestCastSpellOnBlock(QUEST_SUMMON_ZOMBIE, -2, 0, EnumSpell.SUMMON_CREEPER);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_SKELETON = new QuestCastSpellOnBlock(QUEST_SUMMON_CREEPER, -2, 0, EnumSpell.SUMMON_SKELETON);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_BLAZE = new QuestCastSpellOnBlock(QUEST_SUMMON_SKELETON, -2, 0, EnumSpell.SUMMON_BLAZE);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_MAGMA_CUBE = new QuestCastSpellOnBlock(QUEST_SUMMON_BLAZE, -2, 0, EnumSpell.SUMMON_MAGMA_CUBE);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_GHAST = new QuestCastSpellOnBlock(QUEST_SUMMON_MAGMA_CUBE, -2, 0, EnumSpell.SUMMON_GHAST);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_ENDERMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_GHAST, -2, 0, EnumSpell.SUMMON_ENDERMAN);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_SPIDER = new QuestCastSpellOnBlock(QUEST_SUMMON_ENDERMAN, -2, 0, EnumSpell.SUMMON_SPIDER);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_SLIME = new QuestCastSpellOnBlock(QUEST_SUMMON_SPIDER, -2, 0, EnumSpell.SUMMON_SLIME);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITCH = new QuestCastSpellOnBlock(QUEST_SUMMON_SLIME, -2, 0, EnumSpell.SUMMON_WITCH);
-	// END SUMMONS Monster
-	
-	// SPELLS
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LARGE_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL, +2, 0, EnumSpell.LARGE_FIREBALL);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LIGHTNING_BOLT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, +2, EnumSpell.LIGHTNING_BOLT);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_PULL_ENTITY_TO_PLAYER = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTNING_BOLT, +2, 0, EnumSpell.PULL_ENTITY_TO_PLAYER);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WATER_FREEZE = new QuestCastSpellInAir(QUEST_CAST_SPELL_PULL_ENTITY_TO_PLAYER, +2, 0, EnumSpell.WATER_FREEZE);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_MOVE_IN_AIR = new QuestCastSpellInAir(QUEST_CAST_SPELL_WATER_FREEZE, +2, 0, EnumSpell.MOVE_IN_AIR);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, -2, EnumSpell.TELEPORT);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_NETHER = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT, +2, 0, EnumSpell.TELEPORT_TO_NETHER);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_END = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT_TO_NETHER, +2, 0, ItemStackHelper.getHead(1, 5), EnumSpell.TELEPORT_TO_END);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_METEOR = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, +2, 0, EnumSpell.METEOR);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_RAIN = new QuestCastSpellInAir(QUEST_CAST_SPELL_METEOR, +2, 0, EnumSpell.WEATHER_RAIN);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_CLEAR = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_RAIN, +2, 0, EnumSpell.WEATHER_CLEAR);
-	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_THUNDERSTORM = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_CLEAR, +2, 0, EnumSpell.WEATHER_THUNDERSTORM);
-	// END SPELLS
 	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK, 0, +2, new ItemStack(Items.CAULDRON), "Craft Cauldron", "craftCauldron");
 	public static final QuestMineBlock QUEST_MINE_REDSTONE = new QuestMineBlock(QUEST_CRAFT_CAULDRON, 0, +2,new ItemStack(Blocks.REDSTONE_ORE),"Mine Redstone", "mineRedstone", new Block[]{Blocks.REDSTONE_ORE, Blocks.LIT_REDSTONE_ORE});
@@ -356,9 +314,52 @@ public class QuestList
 	
 	//===================================================================================================
 	
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_SMALL_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTER, 0, -2, EnumSpell.SMALL_FIREBALL, new Quest[]{QUEST_PICK_BLAZE_ROD});
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_FUS_RO_DAH = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL, 0, -2, EnumSpell.FUS_RO_DAH);
+	
+	// SUMMONS Passive Entities
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_CHICKEN = new QuestCastSpellOnBlock(QUEST_CAST_SPELL_SMALL_FIREBALL, -2, 0, EnumSpell.SUMMON_CHICKEN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_PIG = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN, -2, 0, EnumSpell.SUMMON_PIG);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_COW = new QuestCastSpellOnBlock(QUEST_SUMMON_PIG, -2, 0, EnumSpell.SUMMON_COW);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_MOOSHROOM = new QuestCastSpellOnBlock(QUEST_SUMMON_COW, 0, +2, EnumSpell.SUMMON_MOOSHROOM);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SHEEP = new QuestCastSpellOnBlock(QUEST_SUMMON_COW, -2, 0, EnumSpell.SUMMON_SHEEP);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_WOLF = new QuestCastSpellOnBlock(QUEST_SUMMON_SHEEP, 0, +2, EnumSpell.SUMMON_WOLF);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_RABBIT = new QuestCastSpellOnBlock(QUEST_SUMMON_SHEEP, -2, 0, EnumSpell.SUMMON_RABBIT);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_HORSE = new QuestCastSpellOnBlock(QUEST_SUMMON_RABBIT, -2, 0, EnumSpell.SUMMON_HORSE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_VILLAGER = new QuestCastSpellOnBlock(QUEST_SUMMON_HORSE, -2, 0, EnumSpell.SUMMON_VILLAGER);
+	// END SUMMONS Passive Entities
+	
+	//SUMMONS Monster
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_ZOMBIE = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN, 0, -2, EnumSpell.SUMMON_ZOMBIE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_CREEPER = new QuestCastSpellOnBlock(QUEST_SUMMON_ZOMBIE, -2, 0, EnumSpell.SUMMON_CREEPER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SKELETON = new QuestCastSpellOnBlock(QUEST_SUMMON_CREEPER, -2, 0, EnumSpell.SUMMON_SKELETON);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_BLAZE = new QuestCastSpellOnBlock(QUEST_SUMMON_SKELETON, -2, 0, EnumSpell.SUMMON_BLAZE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_MAGMA_CUBE = new QuestCastSpellOnBlock(QUEST_SUMMON_BLAZE, -2, 0, EnumSpell.SUMMON_MAGMA_CUBE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_GHAST = new QuestCastSpellOnBlock(QUEST_SUMMON_MAGMA_CUBE, -2, 0, EnumSpell.SUMMON_GHAST);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_ENDERMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_GHAST, -2, 0, EnumSpell.SUMMON_ENDERMAN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SPIDER = new QuestCastSpellOnBlock(QUEST_SUMMON_ENDERMAN, -2, 0, EnumSpell.SUMMON_SPIDER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SLIME = new QuestCastSpellOnBlock(QUEST_SUMMON_SPIDER, -2, 0, EnumSpell.SUMMON_SLIME);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITCH = new QuestCastSpellOnBlock(QUEST_SUMMON_SLIME, -2, 0, EnumSpell.SUMMON_WITCH);
+	// END SUMMONS Monster
+	
+	// SPELLS
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LARGE_FIREBALL = new QuestCastSpellInAir(QUEST_CAST_SPELL_SMALL_FIREBALL, +2, 0, EnumSpell.LARGE_FIREBALL);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_LIGHTNING_BOLT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, +2, EnumSpell.LIGHTNING_BOLT);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_PULL_ENTITY_TO_PLAYER = new QuestCastSpellInAir(QUEST_CAST_SPELL_LIGHTNING_BOLT, +2, 0, EnumSpell.PULL_ENTITY_TO_PLAYER);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WATER_FREEZE = new QuestCastSpellInAir(QUEST_CAST_SPELL_PULL_ENTITY_TO_PLAYER, +2, 0, EnumSpell.WATER_FREEZE);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_MOVE_IN_AIR = new QuestCastSpellInAir(QUEST_CAST_SPELL_WATER_FREEZE, +2, 0, EnumSpell.MOVE_IN_AIR);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, 0, -2, EnumSpell.TELEPORT);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_NETHER = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT, +2, 0, EnumSpell.TELEPORT_TO_NETHER);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_TELEPORT_TO_END = new QuestCastSpellInAir(QUEST_CAST_SPELL_TELEPORT_TO_NETHER, +2, 0, ItemStackHelper.getHead(1, 5), EnumSpell.TELEPORT_TO_END);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_METEOR = new QuestCastSpellInAir(QUEST_CAST_SPELL_LARGE_FIREBALL, +2, 0, EnumSpell.METEOR);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_RAIN = new QuestCastSpellInAir(QUEST_CAST_SPELL_METEOR, +2, 0, EnumSpell.WEATHER_RAIN);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_CLEAR = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_RAIN, +2, 0, EnumSpell.WEATHER_CLEAR);
+	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_THUNDERSTORM = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_CLEAR, +2, 0, EnumSpell.WEATHER_THUNDERSTORM);
+	// END SPELLS
+	
 	static
 	{
-		// TODO: for each crafting create an QuestCraftOnAltar
+		// TODO: for each crafting create an Quest
 		//List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 	}
 }

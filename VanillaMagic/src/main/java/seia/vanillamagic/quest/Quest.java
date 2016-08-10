@@ -1,5 +1,8 @@
 package seia.vanillamagic.quest;
 
+import javax.annotation.Nullable;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 
@@ -12,6 +15,9 @@ public abstract class Quest
 	public final ItemStack icon;
 	public final String questName, uniqueName;
 	
+	@Nullable
+	public Quest[] additionalRequiredQuests;
+	
 	private Quest()
 	{
 		achievement = null;
@@ -22,9 +28,15 @@ public abstract class Quest
 		icon = null;
 		questName = "";
 		uniqueName = "";
+		additionalRequiredQuests = null;
 	}
 	
 	public Quest(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName)
+	{
+		this(required, posX, posY, icon, questName, uniqueName, null);
+	}
+	
+	public Quest(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName, Quest[] additionalRequiredQuests)
 	{
 		this.requiredQuest = required;
 		this.required = required.achievement;
@@ -33,6 +45,7 @@ public abstract class Quest
 		this.icon = icon;
 		this.questName = questName;
 		this.uniqueName = uniqueName;
+		this.additionalRequiredQuests = additionalRequiredQuests;
 		
 		this.achievement = new Achievement(this.questName, 
 				this.uniqueName, 
@@ -58,6 +71,7 @@ public abstract class Quest
 		this.icon = icon;
 		this.questName = questName;
 		this.uniqueName = uniqueName;
+		this.additionalRequiredQuests = null;
 		
 		this.achievement = new Achievement(this.questName, 
 				this.uniqueName, 
@@ -68,5 +82,45 @@ public abstract class Quest
 				.registerStat();
 		
 		QuestList.QUESTS.add(this);
+	}
+	
+	public boolean canPlayerGetAchievement(EntityPlayer player)
+	{
+		if(player.hasAchievement(required))
+		{
+			// Player need additional quests to be completed.
+			if(additionalRequiredQuests != null)
+			{
+				for(Quest quest : additionalRequiredQuests)
+				{
+					if(!player.hasAchievement(quest.achievement))
+					{
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean hasAdditionalQuests()
+	{
+		return this.additionalRequiredQuests != null;
+	}
+	
+	public boolean finishedAdditionalQuests(EntityPlayer player)
+	{
+		if(hasAdditionalQuests())
+		{
+			for(Quest quest : additionalRequiredQuests)
+			{
+				if(!player.hasAchievement(quest.achievement))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

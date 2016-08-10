@@ -32,18 +32,22 @@ public class BookSpells implements IBook
 			NBTTagList pages = new NBTTagList();
 			{
 				// Pages
-				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.spells.title") + " ====" + 
-						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
+				pages.appendTag(new NBTTagString(
+						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.spells.title") + " ====" + 
+						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
+						));
 				for(int i = 0; i < QuestList.QUESTS.size(); i++)
 				{
 					Quest quest = QuestList.QUESTS.get(i);
 					if(quest instanceof QuestCastSpell)
 					{
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc")));
+								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc")
+								));
 					}
 				}
 			}

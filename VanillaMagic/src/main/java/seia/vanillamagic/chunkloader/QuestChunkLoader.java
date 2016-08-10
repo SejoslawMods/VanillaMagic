@@ -47,9 +47,8 @@ public class QuestChunkLoader extends Quest
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
-			System.out.println("Incorrect ChunkLoader placed on:");
-			BlockPosHelper.printCoords(chunkLoaderPos);
+//			System.out.println("Incorrect ChunkLoader placed on:");
+//			BlockPosHelper.printCoords(chunkLoaderPos);
 		}
 	}
 	

@@ -33,13 +33,16 @@ public class BookBuildAltair implements IBook
 			NBTTagList pages = new NBTTagList();
 			{
 				// Pages
-				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.altarBuilding.title") + " ====" + 
-						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
+				pages.appendTag(new NBTTagString(
+						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.altarBuilding.title") + " ====" + 
+						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
+						));
 				{
 					// Tier 1
 					{
 						QuestBuildAltar quest1 = QuestList.QUEST_BUILD_ALTAR_TIER_1;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest1.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
@@ -53,12 +56,15 @@ public class BookBuildAltair implements IBook
 					// Tier 2
 					{
 						QuestBuildAltar quest2 = QuestList.QUEST_BUILD_ALTAR_TIER_2;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest2.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest2.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
-						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
+								TextHelper.translateToLocal("achievement." + quest2.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"
+								));
+						pages.appendTag(new NBTTagString(
+								TextHelper.getEnters(1) +
 								// How Altar should look
 								"§7I     I" + ENTER +
 								" §cRRR " + ENTER +
@@ -70,60 +76,69 @@ public class BookBuildAltair implements IBook
 					// Tier 3
 					{
 						QuestBuildAltar quest3 = QuestList.QUEST_BUILD_ALTAR_TIER_3;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest3.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest3.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
-						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
+								TextHelper.translateToLocal("achievement." + quest3.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"
+								));
+						pages.appendTag(new NBTTagString(
+								TextHelper.getEnters(1) +
 								// How Altar should look
-								"     §eG   " + ENTER +
+								"     §6G   " + ENTER +
 								"  §7I     I " + ENTER +
 								"   §cRRR  " + ENTER +
-								"§eG  §cR§0C§cR  §eG" + ENTER +
+								"§6G  §cR§0C§cR  §6G" + ENTER +
 								"   §cRRR  " + ENTER +
 								"  §7I     I " + ENTER +
-								"     §eG   "
+								"     §6G   "
 								));
 					}
 					// Tier 4
 					{
 						QuestBuildAltar quest4 = QuestList.QUEST_BUILD_ALTAR_TIER_4;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest4.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest4.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
-						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
+								TextHelper.translateToLocal("achievement." + quest4.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"
+								));
+						pages.appendTag(new NBTTagString(
+								TextHelper.getEnters(1) +
 								// How Altar should look
-								"§cR   §eG    §cR" + ENTER +
+								"§cR   §6G    §cR" + ENTER +
 								"  §7I     I " + ENTER +
 								"   §cRRR  " + ENTER +
-								"§eG  §cR§0C§cR  §eG" + ENTER +
+								"§6G  §cR§0C§cR  §6G" + ENTER +
 								"   §cRRR  " + ENTER +
 								"  §7I     I " + ENTER +
-								"§cR   §eG    §cR"
+								"§cR   §6G    §cR"
 								));
 					}
 					// Tier 5
 					{
 						QuestBuildAltar quest5 = QuestList.QUEST_BUILD_ALTAR_TIER_5;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest5.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest5.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
-						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
+								TextHelper.translateToLocal("achievement." + quest5.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"
+								));
+						pages.appendTag(new NBTTagString(
+								TextHelper.getEnters(1) +
 								// How Altar should look
 								"         §1L" + ENTER +
 								"                        " + ENTER +
-								"   §cR    §eG    §cR" + ENTER +
+								"   §cR    §6G    §cR" + ENTER +
 								"     §7I      I " + ENTER +
 								"       §cRRR  " + ENTER +
-								"§1L  §eG  §cR§0C§cR  §eG  §1L" + ENTER +
+								"§1L  §6G  §cR§0C§cR  §6G  §1L" + ENTER +
 								"       §cRRR  " + ENTER +
 								"     §7I      I " + ENTER +
-								"   §cR    §eG    §cR" + ENTER +
+								"   §cR    §6G    §cR" + ENTER +
 								"                        " + ENTER +
 								"         §1L"
 								));
@@ -131,22 +146,25 @@ public class BookBuildAltair implements IBook
 					// Tier 6
 					{
 						QuestBuildAltar quest6 = QuestList.QUEST_BUILD_ALTAR_TIER_6;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest6.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest6.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
-						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
+								TextHelper.translateToLocal("achievement." + quest6.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"
+								));
+						pages.appendTag(new NBTTagString(
+								TextHelper.getEnters(1) +
 								// How Altar should look
 								"          §1L" + ENTER +
 								"  §9D              D" + ENTER +
-								"    §cR    §eG    §cR" + ENTER +
+								"    §cR    §6G    §cR" + ENTER +
 								"      §7I      I " + ENTER +
 								"        §cRRR  " + ENTER +
-								"§1L   §eG  §cR§0C§cR   §eG    §1L" + ENTER +
+								"§1L   §6G  §cR§0C§cR   §6G    §1L" + ENTER +
 								"        §cRRR  " + ENTER +
 								"      §7I      I " + ENTER +
-								"    §cR    §eG    §cR" + ENTER +
+								"    §cR    §6G    §cR" + ENTER +
 								"  §9D              D" + ENTER +
 								"          §1L"
 								));
@@ -154,24 +172,26 @@ public class BookBuildAltair implements IBook
 					// Tier 7
 					{
 						QuestBuildAltar quest7 = QuestList.QUEST_BUILD_ALTAR_TIER_7;
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER + 
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest7.uniqueName) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest7.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
+								TextHelper.translateToLocal("achievement." + quest7.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"
+								));
 						pages.appendTag(new NBTTagString(
 								// How Altar should look
 								"              §aE" + ENTER +
 								"                       " + ENTER +
 								"              §1L" + ENTER +
 								"      §9D              D" + ENTER +
-								"        §cR    §eG    §cR" + ENTER +
+								"        §cR    §6G    §cR" + ENTER +
 								"          §7I      I " + ENTER +
 								"            §cRRR  " + ENTER +
-								"§aE  §1L   §eG  §cR§0C§cR   §eG   §1L  §aE" + ENTER +
+								"§aE  §1L   §6G  §cR§0C§cR   §6G   §1L  §aE" + ENTER +
 								"            §cRRR  " + ENTER +
 								"          §7I      I " + ENTER +
-								"        §cR    §eG    §cR" + ENTER +
+								"        §cR    §6G    §cR" + ENTER +
 								"      §9D              D" + ENTER +
 								"              §1L" + ENTER +
 								"                       " + ENTER +
