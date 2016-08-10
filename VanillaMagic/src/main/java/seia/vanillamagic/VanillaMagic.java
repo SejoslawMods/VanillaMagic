@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.chunkloader.ChunkLoaderHelper;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
-import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
 
@@ -21,7 +20,7 @@ import seia.vanillamagic.quest.QuestList;
 public class VanillaMagic 
 {
 	public static final String MODID = "vanillamagic";
-	public static final String VERSION = "1.10.2-0.11.1.1";
+	public static final String VERSION = "1.10.2-0.11.1.2";
 	public static final String NAME = "Vanilla Magic";
 	
 	@Mod.Instance
@@ -40,7 +39,7 @@ public class VanillaMagic
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ChunkLoaderHelper.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		WorldHandler.INSTANCE.preInit();
+		//WorldHandler.INSTANCE.preInit(); //TODO:
 	}
 	
 	@EventHandler
