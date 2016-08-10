@@ -10,13 +10,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.utils.BlockPosHelper;
 
-public class ChunkLoadingHelper 
+public class ChunkLoaderHelper 
 {
-	public static final ChunkLoadingHelper INSTANCE = new ChunkLoadingHelper();
+	public static final ChunkLoaderHelper INSTANCE = new ChunkLoaderHelper();
 	
 	public final List<TileChunkLoader> chunkLoaders = new ArrayList<TileChunkLoader>();
 	
-	private ChunkLoadingHelper()
+	private ChunkLoaderHelper()
 	{
 		System.out.println("ChunkLoaderHelper registered");
 	}
@@ -24,13 +24,8 @@ public class ChunkLoadingHelper
 	/**
 	 * Just to init the static variables.
 	 */
-	public void init()
+	public void preInit()
 	{
-	}
-	
-	public void onWorldUnload()
-	{
-		chunkLoaders.clear();
 	}
 	
 	public void addNewChunkLoader(TileChunkLoader tile)

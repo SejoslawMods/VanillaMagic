@@ -11,10 +11,6 @@ public class VanillaMagicIntegration
 	
 	public final NBTTagCompound nbtTagCompound = new NBTTagCompound();
 	
-	public void preInit()
-	{
-	}
-	
 	public void init()
 	{
 		try
@@ -23,16 +19,12 @@ public class VanillaMagicIntegration
 			nbtTagCompound.setString("curseProjectName", "vanilla-magic");
 			nbtTagCompound.setString("curseFilenameParser", VanillaMagic.MODID + "-[].jar");
 			FMLInterModComms.sendRuntimeMessage(VanillaMagic.MODID, "VersionChecker", "addCurseCheck", nbtTagCompound);
-			System.out.println("VersionChecker integration enabled.");
+			System.out.println("VersionChecker integration enabled");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Version Checker integration failed.");
+			System.out.println("Version Checker integration failed");
 			e.printStackTrace();
 		}
-	}
-	
-	public void postInit()
-	{
 	}
 }

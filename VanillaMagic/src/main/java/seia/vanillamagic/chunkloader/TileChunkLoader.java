@@ -18,7 +18,7 @@ import seia.vanillamagic.utils.BlockPosHelper;
 public class TileChunkLoader extends TileEntity implements ITickable
 {
 	// Name for tile
-	public static final String REGISTRY_NAME = "tileChunkLoader";
+	public static final String REGISTRY_NAME = "TileChunkLoader";
 	
 	public final EntityPlayer placedBy;
 	public final BlockPos position;
@@ -105,7 +105,7 @@ public class TileChunkLoader extends TileEntity implements ITickable
 	@Override
 	public void update() 
 	{
-		if(!ChunkLoadingHelper.INSTANCE.isChunkLoaderBuildCorrectly(worldObj, position))
+		if(!ChunkLoaderHelper.INSTANCE.isChunkLoaderBuildCorrectly(worldObj, position))
 		{
 			invalidate();
 			System.out.println("Incorrect ChunkLoader placed on:");

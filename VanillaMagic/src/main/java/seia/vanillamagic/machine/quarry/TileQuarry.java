@@ -23,7 +23,7 @@ public class TileQuarry extends TileMachine
 	// Input side from the Quarry into IInventory (argument in methods)
 	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
 	// The name for registry
-	public static final String REGISTRY_NAME = "tileQuarry";
+	public static final String REGISTRY_NAME = "TileQuarry";
 
 	public ItemStack itemInHand;
 	public BlockCauldron cauldron;

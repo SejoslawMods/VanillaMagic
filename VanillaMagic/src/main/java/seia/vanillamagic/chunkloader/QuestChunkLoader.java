@@ -32,7 +32,7 @@ public class QuestChunkLoader extends Quest
 			if(Block.isEqualTo(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE))
 			{
 				TileChunkLoader tileChunkLoader = new TileChunkLoader(chunkLoaderPos, placedBy, itemInHand);
-				if(ChunkLoadingHelper.INSTANCE.isChunkLoaderBuildCorrectly(world, tileChunkLoader.position))
+				if(ChunkLoaderHelper.INSTANCE.isChunkLoaderBuildCorrectly(world, tileChunkLoader.position))
 				{
 					if(!placedBy.hasAchievement(achievement))
 					{
@@ -40,7 +40,7 @@ public class QuestChunkLoader extends Quest
 					}
 					if(placedBy.hasAchievement(achievement))
 					{
-						ChunkLoadingHelper.INSTANCE.addNewChunkLoader(tileChunkLoader);
+						ChunkLoaderHelper.INSTANCE.addNewChunkLoader(tileChunkLoader);
 					}
 				}
 			}
@@ -60,9 +60,9 @@ public class QuestChunkLoader extends Quest
 		World world = breakBy.worldObj;
 		if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE))
 		{
-			if(ChunkLoadingHelper.INSTANCE.getChunkLoaderAtPos(destroyedBlockPos) != null)
+			if(ChunkLoaderHelper.INSTANCE.getChunkLoaderAtPos(destroyedBlockPos) != null)
 			{
-				ChunkLoadingHelper.INSTANCE.removeChunkLoaderFromList(destroyedBlockPos);
+				ChunkLoaderHelper.INSTANCE.removeChunkLoaderFromList(destroyedBlockPos);
 			}
 		}
 		else if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.TORCH))
@@ -72,9 +72,9 @@ public class QuestChunkLoader extends Quest
 				BlockPos chunkLoaderPos = destroyedBlockPos.offset(face);
 				if(Block.isEqualTo(world.getBlockState(chunkLoaderPos).getBlock(), Blocks.ENCHANTING_TABLE))
 				{
-					if(ChunkLoadingHelper.INSTANCE.getChunkLoaderAtPos(chunkLoaderPos) != null)
+					if(ChunkLoaderHelper.INSTANCE.getChunkLoaderAtPos(chunkLoaderPos) != null)
 					{
-						ChunkLoadingHelper.INSTANCE.removeChunkLoaderFromList(chunkLoaderPos);
+						ChunkLoaderHelper.INSTANCE.removeChunkLoaderFromList(chunkLoaderPos);
 						return;
 					}
 				}

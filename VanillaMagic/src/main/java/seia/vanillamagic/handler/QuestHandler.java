@@ -1,4 +1,4 @@
-package seia.vanillamagic;
+package seia.vanillamagic.handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,18 @@ import java.util.List;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.VanillaMagic;
 
-public class VanillaMagicQuestHandler
+public class QuestHandler
 {
-	public static final VanillaMagicQuestHandler INSTANCE = new VanillaMagicQuestHandler();
+	public static final QuestHandler INSTANCE = new QuestHandler();
 	
 	public final String PAGE_NAME = VanillaMagic.NAME;
 	public final List<Object> registeredEvents = new ArrayList<Object>();
 	
 	private final AchievementPage page;
 	
-	private VanillaMagicQuestHandler()
+	private QuestHandler()
 	{
 		page = new AchievementPage(PAGE_NAME);
 		AchievementPage.registerAchievementPage(page);

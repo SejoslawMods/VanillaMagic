@@ -6,8 +6,10 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import seia.vanillamagic.chunkloader.ChunkLoaderHelper;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
-import seia.vanillamagic.chunkloader.ChunkLoadingHelper;
+import seia.vanillamagic.handler.QuestHandler;
+import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
 
@@ -30,15 +32,15 @@ public class VanillaMagic
 	{
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
-			VanillaMagicQuestHandler.INSTANCE.registerEvent(QuestList.QUESTS.get(i));
+			QuestHandler.INSTANCE.registerEvent(QuestList.QUESTS.get(i));
 			//System.out.println("Registered event: [" + QuestList.QUESTS.get(i).getQuestName() + "]");
 		}
-		System.out.println("Registered events: " + VanillaMagicQuestHandler.INSTANCE.registeredEvents.size());
+		System.out.println("Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
-		VanillaMagicIntegration.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
-		ChunkLoadingHelper.INSTANCE.init();
+		ChunkLoaderHelper.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
+		WorldHandler.INSTANCE.preInit();
 	}
 	
 	@EventHandler
@@ -46,17 +48,16 @@ public class VanillaMagic
 	{
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
-			VanillaMagicQuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).achievement);
+			QuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).achievement);
 			//System.out.println("Registered achievement: [" + QuestList.QUESTS.get(i).getUniqueName() + "]");
 		}
-		System.out.println("Registered achievements: " + VanillaMagicQuestHandler.INSTANCE.getAchievements().size());
+		System.out.println("Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
 		VanillaMagicIntegration.INSTANCE.init();
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		VanillaMagicIntegration.INSTANCE.postInit();
 		BookRegistry.INSTANCE.postInit();
 	}
 }
