@@ -3,7 +3,7 @@ package seia.vanillamagic.items.book;
 import net.minecraft.item.ItemStack;
 
 /**
- * Books should added to BookRegistry before the PostInitialization.<br>
+ * Books should be added to BookRegistry before the PostInitialization.<br>
  * In PostInitialization books recipes will be registered.
  */
 public interface IBook 

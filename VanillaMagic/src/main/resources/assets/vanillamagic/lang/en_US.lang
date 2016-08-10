@@ -1,4 +1,22 @@
 ############################
+#Book Info
+############################
+
+book.altarCrafting.itemName=Vanilla Magic Altar Crafting
+book.altarCrafting.title=Altar Crafting
+
+book.spells.itemName=Vanilla Magic Spells
+book.spells.title=Spells
+
+book.altarBuilding.itemName=Vanilla Magic Altar Building
+book.altarBuilding.title=Altar Building
+
+book.other.itemName=Vanilla Magic Other Stuff
+book.other.title=Other things
+
+
+
+############################
 #Wand Names
 ############################
 

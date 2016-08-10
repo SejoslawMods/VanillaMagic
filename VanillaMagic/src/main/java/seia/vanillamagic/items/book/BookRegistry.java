@@ -16,10 +16,10 @@ public class BookRegistry
 	public static final String COLOR_HEADER = TextHelper.COLOR_RED;
 	public static final String AUTHOR = "Seia";
 	public static final String YEAR = "2016";
-	public static final String BOOK_NAME_SPELLS = "Vanilla Magic Spells";
-	public static final String BOOK_NAME_ALTAR_CRAFTING = "Vanilla Magic Altar Crafting";
-	public static final String BOOK_NAME_BUILD_ALTAR = "Vanilla Magic Altar Building";
-	public static final String BOOK_NAME_OTHER = "Vanilla Magic Other Stuff";
+	public static final String BOOK_NAME_SPELLS = TextHelper.translateToLocal("book.spells.itemName");
+	public static final String BOOK_NAME_ALTAR_CRAFTING = TextHelper.translateToLocal("book.altarCrafting.itemName");
+	public static final String BOOK_NAME_BUILD_ALTAR = TextHelper.translateToLocal("book.altarBuilding.itemName");
+	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
 	
 	public List<IBook> books = new ArrayList<IBook>();
 	

@@ -34,7 +34,7 @@ public class BookOther implements IBook
 			NBTTagList pages = new NBTTagList();
 			{
 				// Pages
-				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== Other things ====" + 
+				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.other.title") + " ====" + 
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 				for(int i = 0; i < QuestList.QUESTS.size(); i++)
 				{

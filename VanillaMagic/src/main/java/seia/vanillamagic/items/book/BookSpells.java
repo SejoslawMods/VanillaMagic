@@ -32,7 +32,7 @@ public class BookSpells implements IBook
 			NBTTagList pages = new NBTTagList();
 			{
 				// Pages
-				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== Spells ====" + 
+				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.spells.title") + " ====" + 
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 				for(int i = 0; i < QuestList.QUESTS.size(); i++)
 				{

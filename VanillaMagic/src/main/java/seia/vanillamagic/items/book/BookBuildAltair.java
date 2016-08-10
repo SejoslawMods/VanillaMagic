@@ -33,7 +33,7 @@ public class BookBuildAltair implements IBook
 			NBTTagList pages = new NBTTagList();
 			{
 				// Pages
-				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== Altar Building ====" + 
+				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.altarBuilding.title") + " ====" + 
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 				{
 					// Tier 1

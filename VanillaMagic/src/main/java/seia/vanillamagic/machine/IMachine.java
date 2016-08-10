@@ -1,5 +1,7 @@
 package seia.vanillamagic.machine;
 
+import java.io.Serializable;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -24,7 +26,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * 
  * @author Seia
  */
-public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>
+public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable
 {
 	/**
 	 * Returns the player who placed the Machine.
