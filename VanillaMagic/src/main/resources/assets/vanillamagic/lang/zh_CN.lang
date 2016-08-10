@@ -1,4 +1,33 @@
 ############################
+#Book Info
+############################
+
+book.altarCrafting.itemName=原生魔法炼造
+book.altarCrafting.title=魔法炼造
+
+book.spells.itemName=原生魔法释放
+book.spells.title=魔法释放
+
+book.altarBuilding.itemName=原生魔术结构
+book.altarBuilding.title=魔术结构
+
+book.other.itemName=原生魔术杂项
+book.other.title=杂项
+
+
+
+############################
+#Wand Names
+############################
+
+wand.stick=木质魔杖
+wand.blazeRod= 烈焰魔杖
+wand.netherStar=下界源质
+wand.endRod=End Wand
+
+
+
+############################
 #Achievements
 ############################
 
