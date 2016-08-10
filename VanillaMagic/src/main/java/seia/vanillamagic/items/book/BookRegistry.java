@@ -21,6 +21,7 @@ public class BookRegistry
 	public static final String BOOK_NAME_ALTAR_CRAFTING = TextHelper.translateToLocal("book.altarCrafting.itemName");
 	public static final String BOOK_NAME_BUILD_ALTAR = TextHelper.translateToLocal("book.altarBuilding.itemName");
 	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
+	public static final String BOOK_NBT_UID = "bookUID";
 	
 	private List<IBook> books = new ArrayList<IBook>();
 	
@@ -48,7 +49,7 @@ public class BookRegistry
 	 * 3 - Spells <br>
 	 * 4 - Other <br>
 	 */
-	public ItemStack getBook(int bookUID)
+	public ItemStack getBookByUID(int bookUID)
 	{
 		for(int i = 0; i < books.size(); i++)
 		{
@@ -58,5 +59,30 @@ public class BookRegistry
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Checks if the given ItemStack is a book. 
+	 */
+	public boolean isBook(ItemStack stack)
+	{
+		if(stack.getTagCompound() != null)
+		{
+			return stack.getTagCompound().hasKey(BOOK_NBT_UID);
+		}
+		return false;
+	}
+	
+	/**
+	 * This method will return the bookUID from the stack. <br>
+	 * If it returns -1, than it means that the given stack is not a book.
+	 */
+	public int getUIDByBook(ItemStack stack)
+	{
+		if(isBook(stack))
+		{
+			return stack.getTagCompound().getInteger(BOOK_NBT_UID);
+		}
+		return -1;
 	}
 }

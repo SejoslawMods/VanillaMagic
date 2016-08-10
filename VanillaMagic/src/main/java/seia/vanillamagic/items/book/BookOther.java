@@ -107,6 +107,7 @@ public class BookOther implements IBook
 			data.setTag("pages", pages);
 			data.setString("author", BookRegistry.AUTHOR);
 			data.setString("title", BookRegistry.BOOK_NAME_OTHER);
+			data.setInteger(BookRegistry.BOOK_NBT_UID, getUID());
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_OTHER);
