@@ -13,6 +13,11 @@ import seia.vanillamagic.utils.TextHelper;
 
 public class BookSpells implements IBook
 {
+	public int getUID() 
+	{
+		return 3;
+	}
+	
 	public void registerRecipe() 
 	{
 		GameRegistry.addRecipe(getBook(), new Object[]{

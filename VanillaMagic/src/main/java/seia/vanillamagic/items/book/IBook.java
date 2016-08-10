@@ -9,6 +9,11 @@ import net.minecraft.item.ItemStack;
 public interface IBook 
 {
 	/**
+	 * Returns the index of the book (for easier searching).
+	 */
+	public int getUID();
+	
+	/**
 	 * Add recipe to the GameRegistry.
 	 */
 	public void registerRecipe();

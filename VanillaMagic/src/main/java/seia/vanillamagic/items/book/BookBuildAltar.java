@@ -12,8 +12,13 @@ import seia.vanillamagic.quest.QuestBuildAltar;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.utils.TextHelper;
 
-public class BookBuildAltair implements IBook
+public class BookBuildAltar implements IBook
 {
+	public int getUID() 
+	{
+		return 2;
+	}
+	
 	public void registerRecipe() 
 	{
 		GameRegistry.addRecipe(getBook(), new Object[]{
