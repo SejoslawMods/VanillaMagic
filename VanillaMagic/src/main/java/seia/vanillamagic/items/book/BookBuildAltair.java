@@ -45,9 +45,9 @@ public class BookBuildAltair implements IBook
 								"§0" +
 								TextHelper.translateToLocal("achievement." + quest1.uniqueName + ".desc") + TextHelper.getEnters(2) +
 								// How Altar should look
-										"RRR" + ENTER +
-										"RCR" + ENTER +
-										"RRR"
+										"§cRRR" + ENTER +
+										"§cR§0C§cR" + ENTER +
+										"§cRRR"
 								));
 					}
 					// Tier 2
@@ -60,11 +60,11 @@ public class BookBuildAltair implements IBook
 								TextHelper.translateToLocal("achievement." + quest2.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
 						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
 								// How Altar should look
-								"I     I" + ENTER +
-								" RRR " + ENTER +
-								" RCR " + ENTER +
-								" RRR " + ENTER +
-								"I     I"
+								"§7I     I" + ENTER +
+								" §cRRR " + ENTER +
+								" §cR§0C§cR " + ENTER +
+								" §cRRR " + ENTER +
+								"§7I     I"
 								));
 					}
 					// Tier 3
@@ -77,13 +77,13 @@ public class BookBuildAltair implements IBook
 								TextHelper.translateToLocal("achievement." + quest3.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
 						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
 								// How Altar should look
-								"     G   " + ENTER +
-								"  I     I " + ENTER +
-								"   RRR  " + ENTER +
-								"G  RCR  G" + ENTER +
-								"   RRR  " + ENTER +
-								"  I     I " + ENTER +
-								"     G   "
+								"     §eG   " + ENTER +
+								"  §7I     I " + ENTER +
+								"   §cRRR  " + ENTER +
+								"§eG  §cR§0C§cR  §eG" + ENTER +
+								"   §cRRR  " + ENTER +
+								"  §7I     I " + ENTER +
+								"     §eG   "
 								));
 					}
 					// Tier 4
@@ -96,13 +96,13 @@ public class BookBuildAltair implements IBook
 								TextHelper.translateToLocal("achievement." + quest4.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
 						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
 								// How Altar should look
-								"R   G    R" + ENTER +
-								"  I     I " + ENTER +
-								"   RRR  " + ENTER +
-								"G  RCR  G" + ENTER +
-								"   RRR  " + ENTER +
-								"  I     I " + ENTER +
-								"R   G    R"
+								"§cR   §eG    §cR" + ENTER +
+								"  §7I     I " + ENTER +
+								"   §cRRR  " + ENTER +
+								"§eG  §cR§0C§cR  §eG" + ENTER +
+								"   §cRRR  " + ENTER +
+								"  §7I     I " + ENTER +
+								"§cR   §eG    §cR"
 								));
 					}
 					// Tier 5
@@ -115,17 +115,17 @@ public class BookBuildAltair implements IBook
 								TextHelper.translateToLocal("achievement." + quest5.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
 						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
 								// How Altar should look
-								"         L" + ENTER +
+								"         §1L" + ENTER +
 								"                        " + ENTER +
-								"   R    G    R" + ENTER +
-								"     I      I " + ENTER +
-								"       RRR  " + ENTER +
-								"L  G  RCR  G  L" + ENTER +
-								"       RRR  " + ENTER +
-								"     I      I " + ENTER +
-								"   R    G    R" + ENTER +
+								"   §cR    §eG    §cR" + ENTER +
+								"     §7I      I " + ENTER +
+								"       §cRRR  " + ENTER +
+								"§1L  §eG  §cR§0C§cR  §eG  §1L" + ENTER +
+								"       §cRRR  " + ENTER +
+								"     §7I      I " + ENTER +
+								"   §cR    §eG    §cR" + ENTER +
 								"                        " + ENTER +
-								"         L"
+								"         §1L"
 								));
 					}
 					// Tier 6
@@ -138,17 +138,17 @@ public class BookBuildAltair implements IBook
 								TextHelper.translateToLocal("achievement." + quest6.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
 						pages.appendTag(new NBTTagString(TextHelper.getEnters(1) +
 								// How Altar should look
-								"          L" + ENTER +
-								"  D              D" + ENTER +
-								"    R    G    R" + ENTER +
-								"      I      I " + ENTER +
-								"        RRR  " + ENTER +
-								"L   G  RCR   G    L" + ENTER +
-								"        RRR  " + ENTER +
-								"      I      I " + ENTER +
-								"    R    G    R" + ENTER +
-								"  D              D" + ENTER +
-								"          L"
+								"          §1L" + ENTER +
+								"  §9D              D" + ENTER +
+								"    §cR    §eG    §cR" + ENTER +
+								"      §7I      I " + ENTER +
+								"        §cRRR  " + ENTER +
+								"§1L   §eG  §cR§0C§cR   §eG    §1L" + ENTER +
+								"        §cRRR  " + ENTER +
+								"      §7I      I " + ENTER +
+								"    §cR    §eG    §cR" + ENTER +
+								"  §9D              D" + ENTER +
+								"          §1L"
 								));
 					}
 					// Tier 7
@@ -161,21 +161,21 @@ public class BookBuildAltair implements IBook
 								TextHelper.translateToLocal("achievement." + quest7.uniqueName + ".desc") + TextHelper.getEnters(2) + "--->"));
 						pages.appendTag(new NBTTagString(
 								// How Altar should look
-								"              E" + ENTER +
+								"              §aE" + ENTER +
 								"                       " + ENTER +
-								"              L" + ENTER +
-								"      D              D" + ENTER +
-								"        R    G    R" + ENTER +
-								"          I      I " + ENTER +
-								"            RRR  " + ENTER +
-								"E  L   G  RCR   G   L  E" + ENTER +
-								"            RRR  " + ENTER +
-								"          I      I " + ENTER +
-								"        R    G    R" + ENTER +
-								"      D              D" + ENTER +
-								"              L" + ENTER +
+								"              §1L" + ENTER +
+								"      §9D              D" + ENTER +
+								"        §cR    §eG    §cR" + ENTER +
+								"          §7I      I " + ENTER +
+								"            §cRRR  " + ENTER +
+								"§aE  §1L   §eG  §cR§0C§cR   §eG   §1L  §aE" + ENTER +
+								"            §cRRR  " + ENTER +
+								"          §7I      I " + ENTER +
+								"        §cR    §eG    §cR" + ENTER +
+								"      §9D              D" + ENTER +
+								"              §1L" + ENTER +
 								"                       " + ENTER +
-								"              E"
+								"              §aE"
 								));
 					}
 				}
