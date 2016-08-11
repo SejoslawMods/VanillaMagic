@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.machine.farm.farmer.Farmers;
@@ -30,27 +31,56 @@ public class TileFarm extends TileMachine
 	public BlockPos chestPosInput;
 	public BlockPos chestPosOutput;
 	
+	/*
 	public TileFarm(EntityPlayer player, BlockPos machinePos, int radius)
 	{
+		this(player.worldObj, machinePos, radius);
 		this.player = player;
 		this.worldObj = player.worldObj;
-		this.machinePos = machinePos;
+		this.dimension = player.dimension;
+	}
+	
+	public TileFarm(World world, BlockPos machinePos, int radius)
+	{
+		this.worldObj = world;
+		this.pos = machinePos;
 		this.radius = radius;
 		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
 		this.workingPos = BlockPosHelper.copyPos(startPos);
 		this.farmSize = radius; //this.farmSize = (2 * radius) + 1;
-		this.chestPosInput = this.machinePos.offset(EnumFacing.UP);
-		this.chestPosOutput = this.machinePos.offset(EnumFacing.DOWN);
+		this.chestPosInput = this.pos.offset(EnumFacing.UP);
+		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
+	}
+	*/
+	
+	public void init(EntityPlayer player, BlockPos machinePos, int radius)
+	{
+		init(player.worldObj, machinePos, radius);
+		this.player = player;
+		this.worldObj = player.worldObj;
+		this.dimension = player.dimension;
+	}
+	
+	public void init(World world, BlockPos machinePos, int radius)
+	{
+		this.worldObj = world;
+		this.pos = machinePos;
+		this.radius = radius;
+		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
+		this.workingPos = BlockPosHelper.copyPos(startPos);
+		this.farmSize = radius; //this.farmSize = (2 * radius) + 1;
+		this.chestPosInput = this.pos.offset(EnumFacing.UP);
+		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
 	}
 	
 	public IInventory getInputInventory() 
 	{
-		return ((IInventory) this.worldObj.getTileEntity(machinePos.offset(EnumFacing.UP)));
+		return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.UP)));
 	}
 	
 	public IInventory getOutputInventory() 
 	{
-		return ((IInventory) this.worldObj.getTileEntity(machinePos.offset(EnumFacing.DOWN)));
+		return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.DOWN)));
 	}
 	
 	public boolean checkSurroundings() 
@@ -165,18 +195,18 @@ public class TileFarm extends TileMachine
 	{
 		int nextX = workingPos.getX() + 1;
 		int nextZ = workingPos.getZ();
-		if (nextX > machinePos.getX() + farmSize) 
+		if (nextX > this.pos.getX() + farmSize) 
 		{
-			nextX = machinePos.getX() - farmSize;
+			nextX = this.pos.getX() - farmSize;
 			nextZ += 1;
-			if (nextZ > machinePos.getZ() + farmSize) 
+			if (nextZ > this.pos.getZ() + farmSize) 
 			{
-				nextX = machinePos.getX() - farmSize;
-				nextZ = machinePos.getZ() - farmSize;
+				nextX = this.pos.getX() - farmSize;
+				nextZ = this.pos.getZ() - farmSize;
 				workingPos = BlockPosHelper.copyPos(startPos);
 			}
 		}
-		return workingPos = new BlockPos(nextX, machinePos.getY(), nextZ);
+		return workingPos = new BlockPos(nextX, this.pos.getY(), nextZ);
 	}
 	
 	public ItemStack takeSeedFromInput()

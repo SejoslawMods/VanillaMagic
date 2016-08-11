@@ -6,9 +6,9 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import seia.vanillamagic.chunkloader.ChunkLoaderHelper;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
+import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
 
@@ -37,9 +37,8 @@ public class VanillaMagic
 		System.out.println("Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
-		ChunkLoaderHelper.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		//WorldHandler.INSTANCE.preInit(); //TODO:
+		WorldHandler.INSTANCE.preInit(); //TODO:
 	}
 	
 	@EventHandler

@@ -77,6 +77,12 @@ public class BlockPosHelper
 		System.out.println(" Z = " + pos.getZ());
 	}
 	
+	public static void printCoords(String text, BlockPos pos)
+	{
+		System.out.println(text);
+		printCoords(pos);
+	}
+	
 	public static void printCoords(Block block, BlockPos pos)
 	{
 		System.out.println(block.toString());

@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.utils.BlockPosHelper;
@@ -34,10 +35,9 @@ public class QuestMachineFarm extends QuestMachineActivate
 		if(startWorkWithCauldron(player, cauldronPos, achievement))
 		{
 			player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
-			TileFarm tileFarm = new TileFarm(player, cauldronPos, radius);
-			world.setTileEntity(cauldronPos, tileFarm);
-			System.out.println("Farm registered at:");
-			BlockPosHelper.printCoords(cauldronPos);
+			TileFarm tileFarm = new TileFarm();
+			tileFarm.init(player, cauldronPos, radius);
+			CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileFarm);
 		}
 	}
 	
@@ -57,10 +57,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 					{
 						if(BlockPosHelper.isSameBlockPos(tile.getPos(), cauldronPos))
 						{
-							world.tickableTileEntities.remove(i);
-							world.removeTileEntity(cauldronPos);
-							System.out.println("Farm removed at:");
-							BlockPosHelper.printCoords(((TileFarm) tile).getMachinePos());
+							CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, event.getPlayer().dimension);
 						}
 					}
 				}

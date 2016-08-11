@@ -1,6 +1,7 @@
 package seia.vanillamagic.chunkloader;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTorch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -10,8 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.utils.BlockPosHelper;
 
 public class QuestChunkLoader extends Quest
 {
@@ -29,18 +30,22 @@ public class QuestChunkLoader extends Quest
 		World world = placedBy.worldObj;
 		try
 		{
-			if(Block.isEqualTo(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE))
+			if(itemInHand.getItem() != null)
 			{
-				TileChunkLoader tileChunkLoader = new TileChunkLoader(chunkLoaderPos, placedBy, itemInHand);
-				if(ChunkLoaderHelper.INSTANCE.isChunkLoaderBuildCorrectly(world, tileChunkLoader.position))
+				if(Block.isEqualTo(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE))
 				{
-					if(!placedBy.hasAchievement(achievement))
+					TileChunkLoader tileChunkLoader = new TileChunkLoader();//(chunkLoaderPos, placedBy);
+					if(isChunkLoaderBuildCorrectly(world, chunkLoaderPos))
 					{
-						placedBy.addStat(achievement, 1);
-					}
-					if(placedBy.hasAchievement(achievement))
-					{
-						ChunkLoaderHelper.INSTANCE.addNewChunkLoader(tileChunkLoader);
+						if(!placedBy.hasAchievement(achievement))
+						{
+							placedBy.addStat(achievement, 1);
+						}
+						if(placedBy.hasAchievement(achievement))
+						{
+							tileChunkLoader.init(chunkLoaderPos, placedBy);
+							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader);
+						}
 					}
 				}
 			}
@@ -60,10 +65,7 @@ public class QuestChunkLoader extends Quest
 		World world = breakBy.worldObj;
 		if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE))
 		{
-			if(ChunkLoaderHelper.INSTANCE.getChunkLoaderAtPos(destroyedBlockPos) != null)
-			{
-				ChunkLoaderHelper.INSTANCE.removeChunkLoaderFromList(destroyedBlockPos);
-			}
+			CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, destroyedBlockPos, breakBy.dimension);
 		}
 		else if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.TORCH))
 		{
@@ -72,11 +74,8 @@ public class QuestChunkLoader extends Quest
 				BlockPos chunkLoaderPos = destroyedBlockPos.offset(face);
 				if(Block.isEqualTo(world.getBlockState(chunkLoaderPos).getBlock(), Blocks.ENCHANTING_TABLE))
 				{
-					if(ChunkLoaderHelper.INSTANCE.getChunkLoaderAtPos(chunkLoaderPos) != null)
-					{
-						ChunkLoaderHelper.INSTANCE.removeChunkLoaderFromList(chunkLoaderPos);
-						return;
-					}
+					CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, destroyedBlockPos, breakBy.dimension);
+					return;
 				}
 			}
 		}
@@ -85,5 +84,52 @@ public class QuestChunkLoader extends Quest
 			BlockPos upperPos = new BlockPos(destroyedBlockPos.getX(), destroyedBlockPos.getY() + 1, destroyedBlockPos.getZ());
 			chunkLoaderBreak(new BreakEvent(event.getWorld(), upperPos, event.getState(), event.getPlayer()));
 		}
+	}
+	
+	public static boolean isChunkLoaderBuildCorrectly(World world, BlockPos chunkLoaderPos)
+	{
+		BlockPos torchTop = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY(), chunkLoaderPos.getZ() + 1);
+		BlockPos torchLeft = new BlockPos(chunkLoaderPos.getX() - 1, chunkLoaderPos.getY(), chunkLoaderPos.getZ());
+		BlockPos torchRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY(), chunkLoaderPos.getZ());
+		BlockPos torchBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY(), chunkLoaderPos.getZ() - 1);
+		boolean areTorchesCorrrectly = false;
+		if(world.getBlockState(torchTop).getBlock() instanceof BlockTorch)
+		{
+			if(world.getBlockState(torchLeft).getBlock() instanceof BlockTorch)
+			{
+				if(world.getBlockState(torchRight).getBlock() instanceof BlockTorch)
+				{
+					if(world.getBlockState(torchBottom).getBlock() instanceof BlockTorch)
+					{
+						areTorchesCorrrectly = true;
+					}
+				}
+			}
+		}
+		if(areTorchesCorrrectly)
+		{
+			BlockPos obsidianUnder = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
+			BlockPos obsidianTop = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ() + 1);
+			BlockPos obsidianLeft = new BlockPos(chunkLoaderPos.getX() - 1, chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
+			BlockPos obsidianRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
+			BlockPos obsidianBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ() - 1);
+			if(Block.isEqualTo(world.getBlockState(obsidianUnder).getBlock(), Blocks.OBSIDIAN))
+			{
+				if(Block.isEqualTo(world.getBlockState(obsidianTop).getBlock(), Blocks.OBSIDIAN))
+				{
+					if(Block.isEqualTo(world.getBlockState(obsidianLeft).getBlock(), Blocks.OBSIDIAN))
+					{
+						if(Block.isEqualTo(world.getBlockState(obsidianRight).getBlock(), Blocks.OBSIDIAN))
+						{
+							if(Block.isEqualTo(world.getBlockState(obsidianBottom).getBlock(), Blocks.OBSIDIAN))
+							{
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

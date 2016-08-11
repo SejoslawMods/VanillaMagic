@@ -11,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
@@ -24,8 +25,7 @@ public class TileQuarry extends TileMachine
 	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
 	// The name for registry
 	public static final String REGISTRY_NAME = "TileQuarry";
-
-	public ItemStack itemInHand;
+	
 	public BlockCauldron cauldron;
 	public BlockPos diamondBlockPos;
 	public Block diamondBlock;
@@ -33,14 +33,20 @@ public class TileQuarry extends TileMachine
 	public Block redstoneBlock;
 
 	private Random rand = new Random();
-	
-	public TileQuarry(BlockPos machinePos, EntityPlayer whoPlacedQuarry, ItemStack itemInHand) 
+	/*
+	public TileQuarry(BlockPos machinePos, EntityPlayer whoPlacedQuarry) 
 			throws Exception
 	{
-		this.machinePos = machinePos;
+		this(machinePos, whoPlacedQuarry.worldObj);
 		this.player = whoPlacedQuarry;
-		this.itemInHand = itemInHand;
-		this.worldObj = player.worldObj;
+		this.setDimension(whoPlacedQuarry.dimension);
+	}
+	
+	public TileQuarry(BlockPos machinePos, World world)
+			throws Exception
+	{
+		this.pos = machinePos;
+		this.worldObj = world;
 		this.cauldron = (BlockCauldron) worldObj.getBlockState(machinePos).getBlock();
 		this.diamondBlockPos = new BlockPos(machinePos.getX() + 1, machinePos.getY(), machinePos.getZ());
 		this.diamondBlock = worldObj.getBlockState(diamondBlockPos).getBlock();
@@ -61,10 +67,42 @@ public class TileQuarry extends TileMachine
 				machinePos.getY(), 
 				machinePos.getZ() + 1);
 		this.startPos = BlockPosHelper.copyPos(workingPos);
-		setActivationStackRightHand(itemInHand);
-		setActivationStackLeftHand(null);
 	}
-
+	*/
+	
+	public void init(BlockPos machinePos, EntityPlayer whoPlacedQuarry) throws Exception
+	{
+		init(machinePos, whoPlacedQuarry.worldObj);
+		this.player = whoPlacedQuarry;
+		this.setDimension(whoPlacedQuarry.dimension);
+	}
+	
+	public void init(BlockPos machinePos, World world) throws Exception
+	{
+		this.pos = machinePos;
+		this.worldObj = world;
+		this.cauldron = (BlockCauldron) worldObj.getBlockState(machinePos).getBlock();
+		this.diamondBlockPos = new BlockPos(machinePos.getX() + 1, machinePos.getY(), machinePos.getZ());
+		this.diamondBlock = worldObj.getBlockState(diamondBlockPos).getBlock();
+		this.redstoneBlockPos = new BlockPos(machinePos.getX(), machinePos.getY(), machinePos.getZ() - 1);
+		this.redstoneBlock = worldObj.getBlockState(redstoneBlockPos).getBlock();
+		
+		if(!Block.isEqualTo(diamondBlock, Blocks.DIAMOND_BLOCK))
+		{
+			throw new Exception("DiamondBlock is not in place.");
+		}
+		if(!Block.isEqualTo(redstoneBlock, Blocks.REDSTONE_BLOCK))
+		{
+			throw new Exception("RedstoneBlock is not in place.");
+		}
+		
+		this.workingPos = new BlockPos(
+				machinePos.getX() - 1, 
+				machinePos.getY(), 
+				machinePos.getZ() + 1);
+		this.startPos = BlockPosHelper.copyPos(workingPos);
+	}
+	
 	/**
 	 * @return - true if quarry is complete and right, otherwise false 
 	 * (this should be achievable if the quarry isn't correctly build 
@@ -77,17 +115,17 @@ public class TileQuarry extends TileMachine
 	
 	public BlockPos getTopPos()
 	{
-		return new BlockPos(machinePos.getX(), machinePos.getY(), machinePos.getZ() + BASIC_QUARRY_SIZE - 1);
+		return new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ() + BASIC_QUARRY_SIZE - 1);
 	}
 	
 	public BlockPos getLeftPos()
 	{
-		return new BlockPos(machinePos.getX() - BASIC_QUARRY_SIZE + 1, machinePos.getY(), machinePos.getZ());
+		return new BlockPos(this.pos.getX() - BASIC_QUARRY_SIZE + 1, this.pos.getY(), this.pos.getZ());
 	}
 	
 	public BlockPos getTopLeftPos()
 	{
-		return new BlockPos(machinePos.getX() - BASIC_QUARRY_SIZE + 1, machinePos.getY(), machinePos.getZ() + BASIC_QUARRY_SIZE - 1);
+		return new BlockPos(this.pos.getX() - BASIC_QUARRY_SIZE + 1, this.pos.getY(), this.pos.getZ() + BASIC_QUARRY_SIZE - 1);
 	}
 	
 	public BlockPos getworkingPos()
@@ -97,7 +135,7 @@ public class TileQuarry extends TileMachine
 	
 	public BlockPos getInventoryOutputPos()
 	{
-		return new BlockPos(machinePos.getX() - 1, machinePos.getY(), machinePos.getZ());
+		return new BlockPos(this.pos.getX() - 1, this.pos.getY(), this.pos.getZ());
 	}
 	
 	public IInventory getOutputInventory()
@@ -107,7 +145,7 @@ public class TileQuarry extends TileMachine
 	
 	public BlockPos getInputFuelChestPos()
 	{
-		return new BlockPos(machinePos.getX(), machinePos.getY() + 1, machinePos.getZ());
+		return new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
 	}
 	
 	public IInventory getInputInventory()
@@ -120,15 +158,22 @@ public class TileQuarry extends TileMachine
 	 */
 	public boolean checkSurroundings()
 	{
-		if(!Block.isEqualTo(diamondBlock, worldObj.getBlockState(diamondBlockPos).getBlock()))
+		try
 		{
-			return false;
+			if(!Block.isEqualTo(diamondBlock, worldObj.getBlockState(diamondBlockPos).getBlock()))
+			{
+				return false;
+			}
+			if(!Block.isEqualTo(redstoneBlock, worldObj.getBlockState(redstoneBlockPos).getBlock()))
+			{
+				return false;
+			}
+			return true;
 		}
-		if(!Block.isEqualTo(redstoneBlock, worldObj.getBlockState(redstoneBlockPos).getBlock()))
+		catch(Exception e)
 		{
-			return false;
 		}
-		return true;
+		return false;
 	}
 	
 	/**
@@ -145,7 +190,7 @@ public class TileQuarry extends TileMachine
 	
 	public void endWork()
 	{
-		this.worldObj.removeTileEntity(this.machinePos);
+		this.worldObj.removeTileEntity(this.pos);
 	}
 	
 	public boolean inventoryOutputHasSpace()
@@ -155,7 +200,7 @@ public class TileQuarry extends TileMachine
 	
 	public void spawnDigged(ItemStack digged)
 	{
-		Block.spawnAsEntity(worldObj, machinePos.offset(EnumFacing.UP, 2), digged);
+		Block.spawnAsEntity(worldObj, this.pos.offset(EnumFacing.UP, 2), digged);
 	}
 	
 	public BlockPos moveWorkingPosToNextPos()
@@ -191,7 +236,7 @@ public class TileQuarry extends TileMachine
 			if(nextCoordZ >= getTopPos().getZ())
 			{
 				nextCoordX++;
-				nextCoordZ = machinePos.getZ() + 1;
+				nextCoordZ = this.pos.getZ() + 1;
 			}
 			// kill quarry because it's outside the rectangle
 //			if(nextCoordX <= getLeftPos().getX() - 1)
@@ -199,7 +244,7 @@ public class TileQuarry extends TileMachine
 //				endWork();
 //				return;
 //			}
-			workingPos = new BlockPos(nextCoordX, machinePos.getY(), nextCoordZ);
+			workingPos = new BlockPos(nextCoordX, this.pos.getY(), nextCoordZ);
 		}
 		else // dig something like stone, iron-ore, etc.
 		{

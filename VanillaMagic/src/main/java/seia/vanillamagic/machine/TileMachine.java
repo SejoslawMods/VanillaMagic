@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
@@ -20,7 +21,6 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public static final String REGISTRY_NAME = "TileEntityMachine";
 	
 	protected EntityPlayer player;
-	protected BlockPos machinePos;
 	protected BlockPos workingPos;
 	protected BlockPos startPos;
 	protected ItemStack shouldBeInLeftHand;
@@ -32,18 +32,20 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	protected boolean isActive = false;
 	protected boolean finished = false;
 	protected int delayInTicks = 0;
+	protected int dimension;
 	
-	private String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
-	private String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
-	private String NBT_MACHINE_POS_Z = "NBT_MACHINE_POS_Z";
-	private String NBT_WORKING_POS_X = "NBT_WORKING_POS_X";
-	private String NBT_WORKING_POS_Y = "NBT_WORKING_POS_Y";
-	private String NBT_WORKING_POS_Z = "NBT_WORKING_POS_Z";
-	private String NBT_RADIUS = "NBT_RADIUS";
-	private String NBT_ONE_OPERATION_COST = "NBT_ONE_OPERATION_COST";
-	private String NBT_TICKS = "NBT_TICKS";
-	private String NBT_MAX_TICKS = "NBT_MAX_TICKS";
-	private String NBT_IS_ACTIVE = "NBT_IS_ACTIVE";
+	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
+	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
+	public static final String NBT_MACHINE_POS_Z = "NBT_MACHINE_POS_Z";
+	public static final String NBT_WORKING_POS_X = "NBT_WORKING_POS_X";
+	public static final String NBT_WORKING_POS_Y = "NBT_WORKING_POS_Y";
+	public static final String NBT_WORKING_POS_Z = "NBT_WORKING_POS_Z";
+	public static final String NBT_RADIUS = "NBT_RADIUS";
+	public static final String NBT_ONE_OPERATION_COST = "NBT_ONE_OPERATION_COST";
+	public static final String NBT_TICKS = "NBT_TICKS";
+	public static final String NBT_MAX_TICKS = "NBT_MAX_TICKS";
+	public static final String NBT_IS_ACTIVE = "NBT_IS_ACTIVE";
+	public static final String NBT_DIMENSION = "NBT_DIMENSION";
 
 	/**
 	 * This should check if the Machine is build correctly.
@@ -62,6 +64,15 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	 * This method is used to check if the output inventory has space for more items.
 	 */
 	public abstract boolean inventoryOutputHasSpace();
+	
+	public void init(World world, BlockPos machinePos)
+	{
+		init(world, machinePos, 4);
+	}
+	
+	public void init(World world, BlockPos machinePos, int radius)
+	{
+	}
 	
 	int delay = 0;
 	public void update()
@@ -129,15 +140,25 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	{
 		return player;
 	}
+	
+	public void setPlayerWhoPlacedMachine(EntityPlayer player)
+	{
+		this.player = player;
+	}
+	
+	public void setWorld(World world)
+	{
+		this.worldObj = world;
+	}
 
 	public BlockPos getMachinePos()
 	{
-		return machinePos;
+		return this.pos;
 	}
 
 	public void setMachinePos(BlockPos newPos)
 	{
-		this.machinePos = newPos;
+		this.pos = newPos;
 	}
 
 	public BlockPos getWorkingPos()
@@ -212,9 +233,9 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound compound = new NBTTagCompound();
-		compound.setInteger(NBT_MACHINE_POS_X, machinePos.getX());
-		compound.setInteger(NBT_MACHINE_POS_Y, machinePos.getY());
-		compound.setInteger(NBT_MACHINE_POS_Z, machinePos.getZ());
+		compound.setInteger(NBT_MACHINE_POS_X, this.pos.getX());
+		compound.setInteger(NBT_MACHINE_POS_Y, this.pos.getY());
+		compound.setInteger(NBT_MACHINE_POS_Z, this.pos.getZ());
 		compound.setInteger(NBT_WORKING_POS_X, workingPos.getX());
 		compound.setInteger(NBT_WORKING_POS_Y, workingPos.getY());
 		compound.setInteger(NBT_WORKING_POS_Z, workingPos.getZ());
@@ -223,6 +244,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		compound.setInteger(NBT_TICKS, ticks);
 		compound.setInteger(NBT_MAX_TICKS, maxTicks);
 		compound.setBoolean(NBT_IS_ACTIVE, isActive);
+		compound.setInteger(NBT_DIMENSION, dimension);
 		return compound;
 	}
 	
@@ -249,7 +271,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		int machinePosY = compound.getInteger(NBT_MACHINE_POS_Y);
 		int machinePosZ = compound.getInteger(NBT_MACHINE_POS_Z);
 		BlockPos machinePos = new BlockPos(machinePosX, machinePosY, machinePosZ);
-		this.machinePos = machinePos;
+		this.pos = machinePos;
 		int workingPosX = compound.getInteger(NBT_WORKING_POS_X);
 		int workingPosY = compound.getInteger(NBT_WORKING_POS_Y);
 		int workingPosZ = compound.getInteger(NBT_WORKING_POS_Z);
@@ -260,6 +282,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.ticks = compound.getInteger(NBT_TICKS);
 		this.maxTicks = compound.getInteger(NBT_MAX_TICKS);
 		this.isActive = compound.getBoolean(NBT_IS_ACTIVE);
+		this.dimension = compound.getInteger(NBT_DIMENSION);
 	}
 	
 	public boolean hasInputInventory()
@@ -377,5 +400,20 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public Block getNeighborBlock(EnumFacing face)
 	{
 		return getNeighborState(face).getBlock();
+	}
+	
+	public void setDimension(int dimension)
+	{
+		this.dimension = dimension;
+	}
+	
+	public int getDimension()
+	{
+		return dimension;
+	}
+	
+	public TileEntity getCustomTileEntity()
+	{
+		return this;
 	}
 }

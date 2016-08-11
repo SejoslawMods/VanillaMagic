@@ -6,12 +6,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.utils.BlockPosHelper;
@@ -25,6 +25,7 @@ public class QuestQuarry extends QuestMachineActivate
 				null, EnumWand.BLAZE_ROD.wandItemStack.copy());
 	}
 
+	
 	@SubscribeEvent
 	public void startQuarry(RightClickBlock event)
 	{
@@ -50,7 +51,7 @@ public class QuestQuarry extends QuestMachineActivate
 					}
 				}
 				// Should now throw exception from constructor if blocks are wrong.
-				TileQuarry tileQuarry = new TileQuarry(quarryPos, player, this.mustHaveMainHand);
+				TileQuarry tileQuarry = new TileQuarry();//quarryPos, player);
 				if(tileQuarry.isComplete())
 				{
 					if(!player.hasAchievement(achievement))
@@ -60,14 +61,8 @@ public class QuestQuarry extends QuestMachineActivate
 					if(player.hasAchievement(achievement))
 					{
 						tileQuarry.showBoundingBox();
-						TileEntity exist = world.getTileEntity(quarryPos);
-						if(exist == null)
-						{
-							world.addTileEntity(tileQuarry);
-							world.setTileEntity(tileQuarry.getMachinePos(), tileQuarry);
-							System.out.println("Quarry registered at:");
-							BlockPosHelper.printCoords(tileQuarry.getMachinePos());
-						}
+						tileQuarry.init(quarryPos, player);
+						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry);
 					}
 				}
 			}
@@ -75,8 +70,7 @@ public class QuestQuarry extends QuestMachineActivate
 		catch(Exception e)
 		{
 			System.out.println(e.getMessage());
-			System.out.println("Incorrect Quarry placed on:");
-			BlockPosHelper.printCoords(quarryPos);
+			BlockPosHelper.printCoords("Incorrect Quarry placed on:", quarryPos);
 		}
 	}
 
@@ -113,20 +107,7 @@ public class QuestQuarry extends QuestMachineActivate
 					Block diamondBlock = world.getBlockState(diamondBlockPos).getBlock();
 					if(Block.isEqualTo(diamondBlock, Blocks.DIAMOND_BLOCK))
 					{
-						for(int i = 0; i < world.tickableTileEntities.size(); i++)
-						{
-							TileEntity tile = world.tickableTileEntities.get(i);
-							if(tile instanceof TileQuarry)
-							{
-								if(BlockPosHelper.isSameBlockPos(tile.getPos(), cauldronPos))
-								{
-									world.tickableTileEntities.remove(i);
-									world.removeTileEntity(cauldronPos);
-									System.out.println("Quarry removed at:");
-									BlockPosHelper.printCoords(cauldronPos);
-								}
-							}
-						}
+						CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, player.dimension);
 					}
 				}
 			}

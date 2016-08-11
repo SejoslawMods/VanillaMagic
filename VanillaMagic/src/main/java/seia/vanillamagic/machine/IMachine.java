@@ -16,6 +16,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
+import seia.vanillamagic.utils.IDimensionKeeper;
 
 /**
  * Machine is a TileEntity that perform some work on World.
@@ -26,17 +27,28 @@ import net.minecraftforge.common.util.INBTSerializable;
  * 
  * @author Seia
  */
-public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable
+public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable, IDimensionKeeper
 {
 	/**
 	 * Returns the player who placed the Machine.
 	 */
+	@Nullable
 	EntityPlayer getPlayerWhoPlacedMachine();
+	
+	/**
+	 * Set Player who placed the Machine.
+	 */
+	void setPlayerWhoPlacedMachine(EntityPlayer player);
 	
 	/**
 	 * Returns the World on which Machine is.
 	 */
 	World getWorld();
+	
+	/**
+	 * Set the Machine's World.
+	 */
+	void setWorld(World world);
 	
 	/**
 	 * Get TileEntity to which this interface is implemented into.

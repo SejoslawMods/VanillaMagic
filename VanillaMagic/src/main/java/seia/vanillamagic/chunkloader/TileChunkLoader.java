@@ -4,33 +4,56 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.IDimensionKeeper;
 
-public class TileChunkLoader extends TileEntity implements ITickable
+public class TileChunkLoader extends TileEntity implements ITickable, IDimensionKeeper
 {
 	// Name for tile
 	public static final String REGISTRY_NAME = "TileChunkLoader";
 	
-	public final EntityPlayer placedBy;
-	public final BlockPos position;
-	public ItemStack itemInHand;
+	public EntityPlayer placedBy;
 	
 	private Ticket chunkTicket;
+	private int dimension;
 	
-	public TileChunkLoader(BlockPos chunkLoaderPos, EntityPlayer placedBy, ItemStack itemInHand) 
+	/*
+	public TileChunkLoader(BlockPos chunkLoaderPos, EntityPlayer placedBy) 
 	{
+		this(chunkLoaderPos, placedBy.worldObj);
 		this.placedBy = placedBy;
+		this.dimension = placedBy.dimension;
+	}
+	
+	public TileChunkLoader(BlockPos chunkLoaderPos, World world) 
+	{
+		this.worldObj = world;
 		this.position = chunkLoaderPos;
-		this.itemInHand = itemInHand;
+	}
+	*/
+	
+	public void init(BlockPos chunkLoaderPos, EntityPlayer placedBy)
+	{
+		init(chunkLoaderPos, placedBy.worldObj);
+		this.placedBy = placedBy;
+		this.dimension = placedBy.dimension;
+	}
+	
+	public void init(BlockPos chunkLoaderPos, World world)
+	{
+		this.worldObj = world;
+		this.pos = chunkLoaderPos;
 	}
 	
 	public List<ChunkPos> getLoadArea()
@@ -91,25 +114,52 @@ public class TileChunkLoader extends TileEntity implements ITickable
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound par1NBTTagCompound) 
+	public void readFromNBT(NBTTagCompound tag) 
 	{
-		super.readFromNBT(par1NBTTagCompound);
+		super.readFromNBT(tag);
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) 
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) 
 	{
-		return super.writeToNBT(par1NBTTagCompound);
+		return super.writeToNBT(tag);
 	}
 
 	@Override
 	public void update() 
 	{
-		if(!ChunkLoaderHelper.INSTANCE.isChunkLoaderBuildCorrectly(worldObj, position))
+		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(worldObj, this.pos))
 		{
 			invalidate();
 			System.out.println("Incorrect ChunkLoader placed on:");
-			BlockPosHelper.printCoords(position);
+			BlockPosHelper.printCoords(this.pos);
 		}
+	}
+	
+	public void setDimension(int dimension) 
+	{
+		this.dimension = dimension;
+	}
+	
+	public int getDimension() 
+	{
+		return dimension;
+	}
+	
+	public TileEntity getCustomTileEntity() 
+	{
+		return this;
+	}
+	
+	public NBTTagCompound serializeNBT()
+	{
+		NBTTagCompound tag = new NBTTagCompound();
+		tag.setInteger(TileMachine.NBT_DIMENSION, dimension);
+		return tag;
+	}
+	
+	public void deserializeNBT(NBTTagCompound tag)
+	{
+		this.dimension = tag.getInteger(TileMachine.NBT_DIMENSION);
 	}
 }
