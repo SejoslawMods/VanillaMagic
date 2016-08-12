@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.handler.QuestHandler;
 import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.items.book.BookRegistry;
@@ -38,7 +39,7 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		WorldHandler.INSTANCE.preInit(); //TODO:
+		//WorldHandler.INSTANCE.preInit(); //TODO: FIX
 	}
 	
 	@EventHandler
@@ -57,5 +58,6 @@ public class VanillaMagic
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		BookRegistry.INSTANCE.postInit();
+		CustomTileEntityHandler.INSTANCE.postInit();
 	}
 }

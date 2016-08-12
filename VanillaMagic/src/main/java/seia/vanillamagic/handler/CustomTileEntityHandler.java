@@ -11,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.IDimensionKeeper;
 
@@ -21,14 +20,15 @@ public class CustomTileEntityHandler
 	
 	public static final int ERROR_DIMENSION_ID = -100;
 	
-	static
-	{
-		Integer[] dimIDs = DimensionManager.getIDs();
-		for(Integer i : dimIDs)
-		{
-			INSTANCE.tileEntities.put(i, new ArrayList<TileEntity>());
-		}
-	}
+//	static
+//	{
+//		Integer[] dimIDs = DimensionManager.getIDs();
+//		for(Integer i : dimIDs)
+//		{
+//			INSTANCE.tileEntities.put(i, new ArrayList<TileEntity>());
+//			System.out.println("Registered CustomTileEntityHandler for Dimension: " + i);
+//		}
+//	}
 	
 	//===============================================================================================
 	
@@ -46,13 +46,23 @@ public class CustomTileEntityHandler
 		System.out.println("CustomTileEntityHandler registered");
 	}
 	
+	public void clearTileEntities()
+	{
+		tileEntities.clear();
+	}
+	
+	public void clearTileEntitiesForDimension(int dimension)
+	{
+		tileEntities.get(dimension).clear();
+	}
+	
 	/**
 	 * customTileEntity MUST implements {@link IDimensionKeeper} <br>
 	 * customTileEntity MUST implements {@link ITickable}
 	 */
 	public boolean addCustomTileEntity(TileEntity customTileEntity)
 	{
-		BlockPosHelper.printCoords("Trying to add TileEntity (" + customTileEntity.getClass().getSimpleName() + ")...", customTileEntity.getPos());  // TODO:
+		//BlockPosHelper.printCoords("Trying to add TileEntity (" + customTileEntity.getClass().getSimpleName() + ")...", customTileEntity.getPos());  // TODO:
 		int dimension = ((IDimensionKeeper) customTileEntity).getDimension();
 		if(tileEntities.containsKey(dimension))
 		{
@@ -72,6 +82,7 @@ public class CustomTileEntityHandler
 		else
 		{
 			tileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
+			System.out.println("Registered CustomTileEntityHandler for Dimension: " + dimension);
 			tileEntities.get(dimension).add(customTileEntity);
 			add(customTileEntity);
 			return true;
@@ -145,6 +156,10 @@ public class CustomTileEntityHandler
 		return tileEntities.get(dimension);
 	}
 	
+	/**
+	 * If it returns ERROR_DIMENSION_ID (-100) it doesn't mean something is wrong.
+	 * It means that in this particular World there is no CustomTileEntities.
+	 */
 	public int getDimensionFromTickables(World world)
 	{
 		List<TileEntity> tickableTileEntities = world.tickableTileEntities;
