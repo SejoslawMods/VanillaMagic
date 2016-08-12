@@ -1,6 +1,7 @@
 package seia.vanillamagic.quest.autocrafting;
 
 import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.BlockWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -51,7 +52,7 @@ public class QuestAutocrafting extends Quest
 		{
 			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, 3)) instanceof IHopper)
 			{
-				if(world.isAirBlock(cauldronPos.offset(EnumFacing.DOWN)))
+				if(world.getBlockState(cauldronPos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockWorkbench)
 				{
 					checkBasics = true;
 				}

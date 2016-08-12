@@ -10,8 +10,8 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
+import seia.vanillamagic.utils.MatrixHelper;
 
 public class ContainerAutocrafting extends Container
 {
@@ -54,7 +54,7 @@ public class ContainerAutocrafting extends Container
 
 	public void rotateMatrix() 
 	{
-		this.stackMatrix = BlockPosHelper.rotateMatrixRight(this.stackMatrix);
+		this.stackMatrix = MatrixHelper.rotateMatrixRight(this.stackMatrix);
 		reloadCraftMatrix(this.stackMatrix);
 	}
 

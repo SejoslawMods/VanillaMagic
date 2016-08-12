@@ -112,7 +112,7 @@ public class AutocraftingHandler
 		BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - 2, cauldronPos.getZ() - 2);
 		BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - 2, cauldronPos.getZ() - 2);
 		BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - 2, cauldronPos.getZ());
-		BlockPos middle = cauldronPos.offset(EnumFacing.DOWN);
+		BlockPos middle = cauldronPos.offset(EnumFacing.DOWN, 2);
 		
 		return new BlockPos[][]{
 			new BlockPos[]{ leftTop, top, rightTop },
