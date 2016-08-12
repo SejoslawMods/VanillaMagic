@@ -36,10 +36,10 @@ public class BlockPosHelper
 	 * [5][1][7][3]<br>
 	 * [6][2][8][4]<br>
 	 */
-	public static BlockPos[][] rotateMatrixRight(BlockPos[][] matrix)
+	public static <T> T[][] rotateMatrixRight(T[][] matrix)
 	{
 		int size = matrix.length;
-		BlockPos[][] newMatrix = new BlockPos[size][size];
+		Object[][] newMatrix = new Object[size][size];
 		for (int i = 0; i < size; ++i) 
 		{
 			for (int j = 0; j < size; ++j) 
@@ -47,7 +47,7 @@ public class BlockPosHelper
 				newMatrix[i][j] = matrix[size - j - 1][i];
 			}
 		}
-		return newMatrix;
+		return (T[][])newMatrix;
 	}
 	
 	public static BlockPos copyPos(BlockPos toCopy)

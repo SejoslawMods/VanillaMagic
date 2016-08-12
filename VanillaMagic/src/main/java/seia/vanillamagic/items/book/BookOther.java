@@ -14,6 +14,7 @@ import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestBuildAltar;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
 import seia.vanillamagic.quest.QuestList;
+import seia.vanillamagic.quest.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.quest.spell.QuestCastSpell;
 import seia.vanillamagic.utils.TextHelper;
 
@@ -69,7 +70,7 @@ public class BookOther implements IBook
 								"  §5O "
 								));
 					}
-					if(quest instanceof QuestQuarry)
+					else if(quest instanceof QuestQuarry)
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
@@ -88,11 +89,47 @@ public class BookOther implements IBook
 								"           §aS"
 								));
 					}
-					if(!(quest instanceof QuestCraftOnAltar) &&
+					else if(quest instanceof QuestAutocrafting)
+					{
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
+								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.getEnters(2) + 
+								"§0" +
+								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								"--->"
+								));
+						pages.appendTag(new NBTTagString(
+								"§0Layer 1: (§7X-Empty space, §0C-Cauldron)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§0C§7XX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + TextHelper.getEnters(2) +
+								"§0Layer 2: (§7X-Empty space, §0C-CraftingTable)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§0C§7XX" + ENTER +
+								"§7XXXXX"
+								));
+						pages.appendTag(new NBTTagString(
+								"§0Layer 3: (§7X-Empty space, §6C-Chest§0)" + ENTER +
+								"§6C§7X§6C§7X§6C" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§6C§7X§6C§7X§6C" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§6C§7X§6C§7X§6C" + TextHelper.getEnters(2) +
+								"§0Layer 4: (§7X-Empty space, §0H-Hopper)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§0H§7XX" + ENTER +
+								"§7XXXXX"
+								));
+					}
+					// Others
+					else if(!(quest instanceof QuestCraftOnAltar) &&
 							!(quest instanceof QuestCastSpell) &&
-							!(quest instanceof QuestBuildAltar) &&
-							!(quest instanceof QuestChunkLoader) &&
-							!(quest instanceof QuestQuarry))
+							!(quest instanceof QuestBuildAltar))
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 

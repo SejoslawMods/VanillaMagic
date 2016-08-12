@@ -378,4 +378,16 @@ public class InventoryHelper
 										false : 
 											ItemStack.areItemStackTagsEqual(stack1, stack2)));
 	}
+
+	public static int getFirstNotNull(IInventory inv) 
+	{
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			if(inv.getStackInSlot(i) != null)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
 }

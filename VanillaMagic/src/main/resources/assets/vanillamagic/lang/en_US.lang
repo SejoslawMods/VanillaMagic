@@ -39,6 +39,9 @@ achievement.craftStick.desc=Craft stick. Rename it in Anvil to 'Stick Wand'.
 achievement.portableCraftingTable=Portable Crafting Table
 achievement.portableCraftingTable.desc=Hold Crafting Table in right hand and right-click while pointing in air
 
+achievement.autocrafting=Autocrafting !!!
+achievement.autocrafting.desc=Place Chests in 3x3 pattern but with 1 block empty space between them. Under the middle Chest place Hopper. On the middle Chest place Crafting Table and on that place Cauldron.
+
 
 
 achievement.spellFlintAndSteel=Flint and Steel Clone

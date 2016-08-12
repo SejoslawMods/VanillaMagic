@@ -12,6 +12,7 @@ import net.minecraft.stats.AchievementList;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.machine.farm.QuestMachineFarm;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
+import seia.vanillamagic.quest.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
@@ -28,6 +29,7 @@ public class QuestList
 	public static final QuestCraft QUEST_CRAFT_STICK = new QuestCraft(START, 0, 0, new ItemStack(Items.STICK), "Craft Stick", "craftStick");
 	
 	public static final QuestPortableCraftingTable QUEST_PORTABLE_CRAFTING_TABLE = new QuestPortableCraftingTable(QUEST_CRAFT_STICK, -2, 0, new ItemStack(Blocks.CRAFTING_TABLE), "Portable Crafting Table", "portableCraftingTable");
+	public static final QuestAutocrafting QUEST_AUTOCRAFTING = new QuestAutocrafting(QUEST_PORTABLE_CRAFTING_TABLE, -2, 0, new ItemStack(Blocks.CRAFTING_TABLE), "Autocrafting !!!", "autocrafting");
 	
 	public static final QuestCastSpellOnBlock QUEST_CAST_SPELL_LIGHTER = new QuestCastSpellOnBlock(QUEST_CRAFT_STICK, 0, -2, EnumSpell.LIGHTER);
 	
