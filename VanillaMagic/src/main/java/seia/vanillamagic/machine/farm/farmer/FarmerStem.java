@@ -8,10 +8,12 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import seia.vanillamagic.machine.farm.HarvestResult;
 import seia.vanillamagic.machine.farm.IHarvestResult;
 import seia.vanillamagic.machine.farm.TileFarm;
@@ -49,21 +51,40 @@ public class FarmerStem extends FarmerCustomSeed
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		World worldObj = farm.getWorld();
+		final EntityPlayerMP fakePlayer = farm.getFarmer();
+		final int fortune = farm.getMaxLootingValue();
 		HarvestResult result = new HarvestResult();
 		BlockPos harvestCoord = pos;
 		boolean done = false;
 		do
 		{
 			harvestCoord = harvestCoord.offset(EnumFacing.UP);
-			if(plantedBlock == farm.getWorld().getBlockState(harvestCoord).getBlock()) 
+			boolean hasHoe = farm.hasHoe();
+			if(plantedBlock == farm.getBlock(harvestCoord) && hasHoe) 
 			{
 				result.harvestedBlocks.add(harvestCoord);
-				List<ItemStack> drops = plantedBlock.getDrops(worldObj, harvestCoord, state, 0);
+				List<ItemStack> drops = plantedBlock.getDrops(worldObj, harvestCoord, state, fortune);
+				float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, harvestCoord, state, fortune, 1.0F, false, fakePlayer);
 				if(drops != null) 
 				{
 					for(ItemStack drop : drops) 
 					{
-						result.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
+						if (worldObj.rand.nextFloat() <= chance) 
+						{
+							result.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
+						}
+					}
+				}
+				farm.damageHoe(1, new BlockPos(harvestCoord));
+				ItemStack[] inv = fakePlayer.inventory.mainInventory;
+				for (int slot = 0; slot < inv.length; slot++) 
+				{
+					ItemStack stack = inv[slot];
+					if (stack != null) 
+					{
+						inv[slot] = null;
+						EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+						result.drops.add(entityitem);
 					}
 				}
 			} 
@@ -85,7 +106,7 @@ public class FarmerStem extends FarmerCustomSeed
 	protected boolean plantFromInventory(TileFarm farm, BlockPos pos) 
 	{
 		World worldObj = farm.getWorld();
-		if (canPlant(farm, worldObj, pos) && farm.takeSeedFromInput() != null) 
+		if (canPlant(farm, worldObj, pos) && farm.takeSeedFromSupplies(seeds, pos) != null)
 		{
 			return plant(farm, worldObj, pos);
 		}

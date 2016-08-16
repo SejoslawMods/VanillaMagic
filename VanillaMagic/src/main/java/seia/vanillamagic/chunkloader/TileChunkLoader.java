@@ -12,13 +12,11 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.IDimensionKeeper;
 
-public class TileChunkLoader extends TileEntity implements ITickable, IDimensionKeeper
+public class TileChunkLoader extends TileEntity implements ITickable
 {
 	// Name for tile
 	public static final String REGISTRY_NAME = "TileChunkLoader";
@@ -27,21 +25,6 @@ public class TileChunkLoader extends TileEntity implements ITickable, IDimension
 	
 	private Ticket chunkTicket;
 	private int dimension;
-	
-	/*
-	public TileChunkLoader(BlockPos chunkLoaderPos, EntityPlayer placedBy) 
-	{
-		this(chunkLoaderPos, placedBy.worldObj);
-		this.placedBy = placedBy;
-		this.dimension = placedBy.dimension;
-	}
-	
-	public TileChunkLoader(BlockPos chunkLoaderPos, World world) 
-	{
-		this.worldObj = world;
-		this.position = chunkLoaderPos;
-	}
-	*/
 	
 	public void init(BlockPos chunkLoaderPos, EntityPlayer placedBy)
 	{
@@ -134,21 +117,6 @@ public class TileChunkLoader extends TileEntity implements ITickable, IDimension
 			System.out.println("Incorrect ChunkLoader placed on:");
 			BlockPosHelper.printCoords(this.pos);
 		}
-	}
-	
-	public void setDimension(int dimension) 
-	{
-		this.dimension = dimension;
-	}
-	
-	public int getDimension() 
-	{
-		return dimension;
-	}
-	
-	public TileEntity getCustomTileEntity() 
-	{
-		return this;
 	}
 	
 	public NBTTagCompound serializeNBT()

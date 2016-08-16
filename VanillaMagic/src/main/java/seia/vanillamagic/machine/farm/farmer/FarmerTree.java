@@ -8,12 +8,14 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.event.ForgeEventFactory;
 import seia.vanillamagic.machine.farm.HarvestResult;
 import seia.vanillamagic.machine.farm.IHarvestResult;
 import seia.vanillamagic.machine.farm.TileFarm;
@@ -87,7 +89,7 @@ public class FarmerTree implements IFarmer
 		World worldObj = farm.getWorld();
 		if(canPlant(worldObj, pos)) 
 		{
-			ItemStack seed = farm.takeSeedFromInput();
+			ItemStack seed = farm.takeSeedFromSupplies(saplingItem, pos, false);
 			if(seed != null) 
 			{
 				return plant(farm, worldObj, pos, seed);
@@ -100,7 +102,7 @@ public class FarmerTree implements IFarmer
 	{
 		BlockPos grnPos = pos.down();
 		IBlockState bs = worldObj.getBlockState(grnPos);
-		Block ground =bs.getBlock(); 
+		Block ground = bs.getBlock(); 
 		IPlantable plantable = (IPlantable) sapling;
 		if(sapling.canPlaceBlockAt(worldObj, pos) &&        
 				ground.canSustainPlant(bs, worldObj, grnPos, EnumFacing.UP, plantable)) 
@@ -123,24 +125,32 @@ public class FarmerTree implements IFarmer
 	
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
+		boolean hasAxe = farm.hasAxe();
+		if(!hasAxe) 
+		{
+			return null;
+		}
 		World worldObj = farm.getWorld();
+		final EntityPlayerMP fakePlayer = farm.getFarmer();
+		final int fortune = farm.getMaxLootingValue();
 		HarvestResult res = new HarvestResult();
 		harvester.harvest(farm, this, pos, res);
 		Collections.sort(res.harvestedBlocks, comp);
 		List<BlockPos> actualHarvests = new ArrayList<BlockPos>();
 		// avoid calling this in a loop
-		boolean hasShears = (farm.getShearsFromInput() == null);
+		boolean hasShears = farm.hasShears();
+		int noShearingPercentage = farm.isLowOnSaplings(pos);
 		int shearCount = 0;
-		for (int i = 0; i < res.harvestedBlocks.size(); i++) 
+		for (int i = 0; i < res.harvestedBlocks.size() && hasAxe; i++) 
 		{
 			BlockPos coord = res.harvestedBlocks.get(i);
-			Block blk = worldObj.getBlockState(coord).getBlock();
+			Block blk = farm.getBlock(coord);
 			List<ItemStack> drops;
 			boolean wasSheared = false;
 			boolean wasAxed = false;
 			boolean wasWood = isWood(blk);
 			float chance = 1.0F;
-			if (blk instanceof IShearable && hasShears && ((shearCount / res.harvestedBlocks.size()) < 100)) 
+			if (blk instanceof IShearable && hasShears && ((shearCount / res.harvestedBlocks.size() + noShearingPercentage) < 100)) 
 			{
 				drops = ((IShearable) blk).onSheared(null, worldObj, coord, 0);
 				wasSheared = true;
@@ -148,7 +158,8 @@ public class FarmerTree implements IFarmer
 			} 
 			else 
 			{
-				drops = blk.getDrops(worldObj, coord, worldObj.getBlockState(coord), 0);
+				drops = blk.getDrops(worldObj, coord, farm.getBlockState(coord), fortune);
+				chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, coord, farm.getBlockState(coord), fortune, chance, false, fakePlayer);
 				wasAxed = true;
 			}
 			
@@ -156,11 +167,40 @@ public class FarmerTree implements IFarmer
 			{
 				for (ItemStack drop : drops) 
 				{
-					res.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
+					if (worldObj.rand.nextFloat() <= chance) 
+					{
+						res.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
+					}
 				}
+			}
+			if (wasAxed && !wasWood) 
+			{
+				wasAxed = true;
+			}
+	      
+			if(wasAxed) 
+			{
+				farm.damageAxe(blk, new BlockPos(coord));
+				hasAxe = farm.hasAxe();
+			} 
+			else if (wasSheared) 
+			{
+				farm.damageShears(blk, new BlockPos(coord));
+				hasShears = farm.hasShears();
 			}
 			farm.getWorld().setBlockToAir(coord);
 			actualHarvests.add(coord);
+		}
+		ItemStack[] inv = fakePlayer.inventory.mainInventory;
+		for (int slot = 0; slot < inv.length; slot++) 
+		{
+			ItemStack stack = inv[slot];
+			if (stack != null) 
+			{
+				inv[slot] = null;
+				EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+				res.drops.add(entityitem);
+			}
 		}
 		res.harvestedBlocks.clear();
 		res.harvestedBlocks.addAll(actualHarvests);

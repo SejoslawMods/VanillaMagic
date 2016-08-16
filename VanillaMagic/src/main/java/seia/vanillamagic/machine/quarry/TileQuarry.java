@@ -33,48 +33,11 @@ public class TileQuarry extends TileMachine
 	public Block redstoneBlock;
 
 	private Random rand = new Random();
-	/*
-	public TileQuarry(BlockPos machinePos, EntityPlayer whoPlacedQuarry) 
-			throws Exception
-	{
-		this(machinePos, whoPlacedQuarry.worldObj);
-		this.player = whoPlacedQuarry;
-		this.setDimension(whoPlacedQuarry.dimension);
-	}
-	
-	public TileQuarry(BlockPos machinePos, World world)
-			throws Exception
-	{
-		this.pos = machinePos;
-		this.worldObj = world;
-		this.cauldron = (BlockCauldron) worldObj.getBlockState(machinePos).getBlock();
-		this.diamondBlockPos = new BlockPos(machinePos.getX() + 1, machinePos.getY(), machinePos.getZ());
-		this.diamondBlock = worldObj.getBlockState(diamondBlockPos).getBlock();
-		this.redstoneBlockPos = new BlockPos(machinePos.getX(), machinePos.getY(), machinePos.getZ() - 1);
-		this.redstoneBlock = worldObj.getBlockState(redstoneBlockPos).getBlock();
-		
-		if(!Block.isEqualTo(diamondBlock, Blocks.DIAMOND_BLOCK))
-		{
-			throw new Exception("DiamondBlock is not in place.");
-		}
-		if(!Block.isEqualTo(redstoneBlock, Blocks.REDSTONE_BLOCK))
-		{
-			throw new Exception("RedstoneBlock is not in place.");
-		}
-		
-		this.workingPos = new BlockPos(
-				machinePos.getX() - 1, 
-				machinePos.getY(), 
-				machinePos.getZ() + 1);
-		this.startPos = BlockPosHelper.copyPos(workingPos);
-	}
-	*/
 	
 	public void init(BlockPos machinePos, EntityPlayer whoPlacedQuarry) throws Exception
 	{
 		init(machinePos, whoPlacedQuarry.worldObj);
 		this.player = whoPlacedQuarry;
-		this.setDimension(whoPlacedQuarry.dimension);
 	}
 	
 	public void init(BlockPos machinePos, World world) throws Exception

@@ -12,13 +12,11 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.IDimensionKeeper;
+import seia.vanillamagic.utils.WorldHelper;
 
 public class CustomTileEntityHandler 
 {
 	public static final CustomTileEntityHandler INSTANCE = new CustomTileEntityHandler();
-	
-	public static final int ERROR_DIMENSION_ID = -100;
 	
 //	static
 //	{
@@ -57,13 +55,10 @@ public class CustomTileEntityHandler
 	}
 	
 	/**
-	 * customTileEntity MUST implements {@link IDimensionKeeper} <br>
 	 * customTileEntity MUST implements {@link ITickable}
 	 */
-	public boolean addCustomTileEntity(TileEntity customTileEntity)
+	public boolean addCustomTileEntity(TileEntity customTileEntity, int dimension)
 	{
-		//BlockPosHelper.printCoords("Trying to add TileEntity (" + customTileEntity.getClass().getSimpleName() + ")...", customTileEntity.getPos());  // TODO:
-		int dimension = ((IDimensionKeeper) customTileEntity).getDimension();
 		if(tileEntities.containsKey(dimension))
 		{
 			List<TileEntity> entitiesInDim = tileEntities.get(dimension);
@@ -89,6 +84,14 @@ public class CustomTileEntityHandler
 		}
 	}
 	
+	/**
+	 * customTileEntity MUST implements {@link ITickable}
+	 */
+	public boolean addCustomTileEntity(TileEntity customTileEntity)
+	{
+		return addCustomTileEntity(customTileEntity, WorldHelper.getDimensionID(customTileEntity));
+	}
+	
 	private void add(TileEntity customTileEntity)
 	{
 		customTileEntity.getWorld().setTileEntity(customTileEntity.getPos(), customTileEntity);
@@ -101,26 +104,18 @@ public class CustomTileEntityHandler
 	 */
 	public void removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
-		TileEntity tile = world.getTileEntity(pos);
-		if(tile instanceof IDimensionKeeper)
+		int dimID = WorldHelper.getDimensionID(world);
+		Set<Entry<Integer, List<TileEntity>>> entrySet = tileEntities.entrySet();
+		if(entrySet.size() > 0) // should be 3 (Dims: -1, 0, 1, and more)
 		{
-			int dimID = ((IDimensionKeeper) tile).getDimension();
-			Set<Entry<Integer, List<TileEntity>>> entrySet = tileEntities.entrySet();
-			if(entrySet.size() > 0) // should be 3 (Dims: -1, 0, 1, and more)
+			for(Entry<Integer, List<TileEntity>> entry : entrySet)
 			{
-				for(Entry<Integer, List<TileEntity>> entry : entrySet)
+				if(entry.getKey().intValue() == dimID)
 				{
-					if(entry.getKey().intValue() == dimID)
-					{
-						removeCustomTileEntityAtPos(world, pos, dimID);
-					}
+					removeCustomTileEntityAtPos(world, pos, dimID);
 				}
-				BlockPosHelper.printCoords("Didn't found the TileEntity at pos:", pos);
 			}
-		}
-		else
-		{
-			BlockPosHelper.printCoords("Destroyed TileEntity is not a IDimensionKeeper", pos);
+			BlockPosHelper.printCoords("Didn't found the TileEntity at pos:", pos);
 		}
 	}
 	
@@ -154,22 +149,5 @@ public class CustomTileEntityHandler
 	public List<TileEntity> getCustomEntitiesInDimension(int dimension)
 	{
 		return tileEntities.get(dimension);
-	}
-	
-	/**
-	 * If it returns ERROR_DIMENSION_ID (-100) it doesn't mean something is wrong.
-	 * It means that in this particular World there is no CustomTileEntities.
-	 */
-	public int getDimensionFromTickables(World world)
-	{
-		List<TileEntity> tickableTileEntities = world.tickableTileEntities;
-		for(TileEntity tile : tickableTileEntities)
-		{
-			if(tile instanceof IDimensionKeeper)
-			{
-				return ((IDimensionKeeper) tile).getDimension();
-			}
-		}
-		return ERROR_DIMENSION_ID;
 	}
 }

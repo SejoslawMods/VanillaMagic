@@ -8,5 +8,6 @@ import net.minecraft.util.math.BlockPos;
 public interface IHarvestResult 
 {
 	List<EntityItem> getDrops();
+	
 	List<BlockPos> getHarvestedBlocks();
 }

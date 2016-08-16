@@ -19,11 +19,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.chunkloader.TileChunkLoader;
-import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.machine.farm.TileFarm;
 import seia.vanillamagic.machine.quarry.TileQuarry;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.NBTHelper;
+import seia.vanillamagic.utils.WorldHelper;
 
 /**
  * TODO: Fix Saving / Loading CustomTileEntities
@@ -48,47 +48,24 @@ public class WorldHandler
 		System.out.println("WorldHandler registered");
 	}
 	
-//	@SubscribeEvent
-//	public void worldUnload(WorldEvent.Unload event)
-//	{
-//		try
-//		{
-//			World world = event.getWorld();
-//			if(world.isRemote)
-//			{
-//				return;
-//			}
-//			int dimension = CustomTileEntityHandler.INSTANCE.getDimensionFromTickables(world);
-//			if(dimension == CustomTileEntityHandler.ERROR_DIMENSION_ID)
-//			{
-//				System.out.println("[World Unload] There is no CustomTileEntities for this World.");
-//				return;
-//			}
-//			else
-//			{
-//				worldSave(new WorldEvent.Save(world));
-//				CustomTileEntityHandler.INSTANCE.clearTileEntitiesForDimension(dimension);
-//			}
-//		}
-//		catch(Exception e)
-//		{
-//		}
-//	}
-	
 	@SubscribeEvent
 	public void worldLoad(WorldEvent.Load event)
 	{
-		if(event.getWorld().isRemote)
-		{
-			return;
-		}
 		File vmDirectory = getVanillaMagicRootDirectory();
 		if(!vmDirectory.exists())
 		{
 			vmDirectory.mkdirs();
 			return;
 		}
-		File[] dimFiles = vmDirectory.listFiles();
+		World world = event.getWorld();
+		int dimension = WorldHelper.getDimensionID(world);
+		File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
+		if(!folderDimension.exists())
+		{
+			folderDimension.mkdirs();
+			return;
+		}
+		File[] dimFiles = folderDimension.listFiles();
 		try
 		{
 			for(File dimFile : dimFiles)
@@ -108,9 +85,6 @@ public class WorldHandler
 						int tileEntityPosY = tileEntityTag.getInteger("y");
 						int tileEntityPosZ = tileEntityTag.getInteger("z");
 						BlockPos tileEntityPos = new BlockPos(tileEntityPosX, tileEntityPosY, tileEntityPosZ);
-						int dimension = tileEntityTag.getCompoundTag(NBTHelper.NBT_SERIALIZABLE).getInteger(TileMachine.NBT_DIMENSION);
-						World world = DimensionManager.getWorld(dimension);
-						//TileEntity tileEntity = NBTHelper.getTileEntityFromNBT(world, tileEntityTag);
 						TileEntity tileEntity = null;
 						if(tileEntityClassName.equals(TileQuarry.class.getSimpleName()))
 						{
@@ -130,7 +104,6 @@ public class WorldHandler
 						System.out.println("[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						try
 						{
-							BlockPosHelper.printCoords("[World Load] Setting pos at:", tileEntityPos);  // TODO:
 							tileEntity.setPos(tileEntityPos);
 							BlockPosHelper.printCoords("[World Load] Pos saved at:", tileEntity.getPos());  // TODO:
 						}
@@ -155,16 +128,18 @@ public class WorldHandler
 	@SubscribeEvent
 	public void worldSave(WorldEvent.Save event)
 	{
-		if(event.getWorld().isRemote)
-		{
-			return;
-		}
 		File vmDirectory = getVanillaMagicRootDirectory();
 		if(!vmDirectory.exists())
 		{
 			vmDirectory.mkdirs();
 		}
-		File fileTiles = new File(vmDirectory, FILE_NAME_TILES);
+		int dimension = WorldHelper.getDimensionID(event);
+		File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
+		if(!folderDimension.exists())
+		{
+			folderDimension.mkdirs();
+		}
+		File fileTiles = new File(folderDimension, FILE_NAME_TILES);
 		if(!fileTiles.exists())
 		{
 			try 
@@ -176,7 +151,7 @@ public class WorldHandler
 				e.printStackTrace();
 			}
 		}
-		File fileTilesOld = new File(vmDirectory, FILE_NAME_TILES_OLD);
+		File fileTilesOld = new File(folderDimension, FILE_NAME_TILES_OLD);
 		if(!fileTilesOld.exists())
 		{
 			try 
@@ -193,13 +168,6 @@ public class WorldHandler
 			//int dimension = i.intValue();
 			//World world = DimensionManager.getWorld(dimension);
 			//if(!world.isRemote)
-			World world = event.getWorld();
-			int dimension = CustomTileEntityHandler.INSTANCE.getDimensionFromTickables(world);
-			if(dimension == CustomTileEntityHandler.ERROR_DIMENSION_ID)
-			{
-				System.out.println("[World Save] There is no CustomTileEntities for this World.");
-				return;
-			}
 			try
 			{
 				try

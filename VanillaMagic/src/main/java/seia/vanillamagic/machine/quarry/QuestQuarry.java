@@ -62,7 +62,7 @@ public class QuestQuarry extends QuestMachineActivate
 					{
 						tileQuarry.showBoundingBox();
 						tileQuarry.init(quarryPos, player);
-						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry);
+						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry, player.dimension);
 					}
 				}
 			}

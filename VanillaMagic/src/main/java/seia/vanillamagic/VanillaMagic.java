@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.handler.QuestHandler;
+import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.quest.autocrafting.AutocraftingHandler;
@@ -39,7 +40,7 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		//WorldHandler.INSTANCE.preInit(); //TODO: FIX
+		WorldHandler.INSTANCE.preInit(); //TODO: FIX
 		AutocraftingHandler.INSTANCE.preInit();
 	}
 	

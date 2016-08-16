@@ -22,9 +22,8 @@ public class FarmerMelon extends FarmerCustomSeed
 		int zVal = farm.getMachinePos().getZ() & 1;
 		if ((pos.getX() & 1) != xVal || (pos.getZ() & 1) != zVal) 
 		{
-			// if we have melon seeds, we still want to return true here so they are not planted by the default plantable
-			//handlers
-			return canPlant(farm.takeSeedFromInput());
+			// if we have melon seeds, we still want to return true here so they are not planted by the default plantable handlers
+			return canPlant(farm.getSeedTypeInSuppliesFor(pos));
 		}
 		return super.prepareBlock(farm, pos, block, state);
 	}

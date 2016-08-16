@@ -34,10 +34,12 @@ public class QuestMachineFarm extends QuestMachineActivate
 		BlockPos cauldronPos = event.getPos();
 		if(startWorkWithCauldron(player, cauldronPos, achievement))
 		{
-			player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
 			TileFarm tileFarm = new TileFarm();
 			tileFarm.init(player, cauldronPos, radius);
-			CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileFarm);
+			if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileFarm, player.dimension))
+			{
+				player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
+			}
 		}
 	}
 	

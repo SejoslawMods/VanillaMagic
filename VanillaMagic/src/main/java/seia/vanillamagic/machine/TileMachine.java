@@ -32,7 +32,6 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	protected boolean isActive = false;
 	protected boolean finished = false;
 	protected int delayInTicks = 0;
-	protected int dimension;
 	
 	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
 	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
@@ -244,7 +243,6 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		compound.setInteger(NBT_TICKS, ticks);
 		compound.setInteger(NBT_MAX_TICKS, maxTicks);
 		compound.setBoolean(NBT_IS_ACTIVE, isActive);
-		compound.setInteger(NBT_DIMENSION, dimension);
 		return compound;
 	}
 	
@@ -282,7 +280,6 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.ticks = compound.getInteger(NBT_TICKS);
 		this.maxTicks = compound.getInteger(NBT_MAX_TICKS);
 		this.isActive = compound.getBoolean(NBT_IS_ACTIVE);
-		this.dimension = compound.getInteger(NBT_DIMENSION);
 	}
 	
 	public boolean hasInputInventory()
@@ -400,20 +397,5 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public Block getNeighborBlock(EnumFacing face)
 	{
 		return getNeighborState(face).getBlock();
-	}
-	
-	public void setDimension(int dimension)
-	{
-		this.dimension = dimension;
-	}
-	
-	public int getDimension()
-	{
-		return dimension;
-	}
-	
-	public TileEntity getCustomTileEntity()
-	{
-		return this;
 	}
 }
