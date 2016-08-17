@@ -19,21 +19,21 @@ import seia.vanillamagic.utils.BlockPosHelper;
 public class TileChunkLoader extends TileEntity implements ITickable
 {
 	// Name for tile
-	public static final String REGISTRY_NAME = "TileChunkLoader";
+	public static final String REGISTRY_NAME = TileChunkLoader.class.getSimpleName();
 	
 	public EntityPlayer placedBy;
 	
 	private Ticket chunkTicket;
 	private int dimension;
 	
-	public void init(BlockPos chunkLoaderPos, EntityPlayer placedBy)
+	public void init(EntityPlayer placedBy, BlockPos chunkLoaderPos)
 	{
-		init(chunkLoaderPos, placedBy.worldObj);
+		init(placedBy.worldObj, chunkLoaderPos);
 		this.placedBy = placedBy;
 		this.dimension = placedBy.dimension;
 	}
 	
-	public void init(BlockPos chunkLoaderPos, World world)
+	public void init(World world, BlockPos chunkLoaderPos)
 	{
 		this.worldObj = world;
 		this.pos = chunkLoaderPos;

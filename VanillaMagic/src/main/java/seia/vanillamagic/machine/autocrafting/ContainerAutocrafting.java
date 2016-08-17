@@ -1,4 +1,4 @@
-package seia.vanillamagic.quest.autocrafting;
+package seia.vanillamagic.machine.autocrafting;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -68,7 +68,7 @@ public class ContainerAutocrafting extends Container
 		return false;
 	}
 
-	public void removeStacks(IInventory[][] inventoryMatrix) 
+	public void removeStacks(IInventory[][] inventoryMatrix)
 	{
 		int size = inventoryMatrix.length;
 		for(int i = 0; i < size; i++)
@@ -80,7 +80,7 @@ public class ContainerAutocrafting extends Container
 		}
 	}
 
-	public void outputResult(IHopper iHopper) 
+	public void outputResult(IHopper iHopper)
 	{
 		ItemStack result = this.craftResult.getStackInSlot(0);
 		InventoryHelper.putStackInInventoryAllSlots(iHopper, result.copy(), EnumFacing.DOWN);

@@ -19,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.chunkloader.TileChunkLoader;
+import seia.vanillamagic.machine.autocrafting.TileAutocrafting;
 import seia.vanillamagic.machine.farm.TileFarm;
 import seia.vanillamagic.machine.quarry.TileQuarry;
 import seia.vanillamagic.utils.BlockPosHelper;
@@ -89,7 +90,7 @@ public class WorldHandler
 						if(tileEntityClassName.equals(TileQuarry.class.getSimpleName()))
 						{
 							tileEntity = new TileQuarry();
-							((TileQuarry) tileEntity).init(tileEntityPos, world);
+							((TileQuarry) tileEntity).init(world, tileEntityPos);
 						}
 						else if(tileEntityClassName.equals(TileFarm.class.getSimpleName()))
 						{
@@ -99,7 +100,12 @@ public class WorldHandler
 						else if(tileEntityClassName.equals(TileChunkLoader.class.getSimpleName()))
 						{
 							tileEntity = new TileChunkLoader();
-							((TileChunkLoader) tileEntity).init(tileEntityPos, world);
+							((TileChunkLoader) tileEntity).init(world, tileEntityPos);
+						}
+						else if(tileEntityClassName.equals(TileAutocrafting.class.getSimpleName()))
+						{
+							tileEntity = new TileAutocrafting();
+							((TileAutocrafting) tileEntity).init(world, tileEntityPos);
 						}
 						System.out.println("[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						try
@@ -163,48 +169,30 @@ public class WorldHandler
 				e.printStackTrace();
 			}
 		}
-		//for(Integer i : DimensionManager.getIDs())
+		try
 		{
-			//int dimension = i.intValue();
-			//World world = DimensionManager.getWorld(dimension);
-			//if(!world.isRemote)
 			try
 			{
-				try
-				{
-					Files.copy(fileTiles, fileTilesOld);
-				}
-				catch(Exception e)
-				{
-				}
-				NBTTagCompound data = new NBTTagCompound();
-				NBTTagList dataList = new NBTTagList();
-				List<TileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
-				for(int j = 0; j < tickables.size(); j++)
-				{
-					dataList.appendTag(tickables.get(j).writeToNBT(new NBTTagCompound()));
-				}
-				data.setTag(TILES, dataList);
-				FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
-				CompressedStreamTools.writeCompressed(data, fileOutputStream);
-				fileOutputStream.close();
-				System.out.println("[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
+				Files.copy(fileTiles, fileTilesOld);
 			}
 			catch(Exception e)
 			{
-//				System.out.println("Error while saving Vanilla Magic TileEntities for World with id: " + dimension);
-//				if(fileTiles.exists())
-//				{
-//					try
-//					{
-//						fileTiles.delete();
-//						
-//					}
-//					catch(Exception ex)
-//					{
-//					}
-//				}
 			}
+			NBTTagCompound data = new NBTTagCompound();
+			NBTTagList dataList = new NBTTagList();
+			List<TileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
+			for(int j = 0; j < tickables.size(); j++)
+			{
+				dataList.appendTag(tickables.get(j).writeToNBT(new NBTTagCompound()));
+			}
+			data.setTag(TILES, dataList);
+			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
+			CompressedStreamTools.writeCompressed(data, fileOutputStream);
+			fileOutputStream.close();
+			System.out.println("[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
+		}
+		catch(Exception e)
+		{
 		}
 	}
 

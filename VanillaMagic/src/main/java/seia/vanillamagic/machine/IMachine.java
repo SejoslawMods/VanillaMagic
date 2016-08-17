@@ -177,11 +177,13 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, S
 	/**
 	 * Returns the inventory from which Machine can take resources to work (fuel, etc.).
 	 */
+	@Nullable
 	IInventory getInputInventory();
 	
 	/**
 	 * Returns the inventory to which Machine should output.
 	 */
+	@Nullable
 	IInventory getOutputInventory();
 	
 	//=========================== NEIGHBOR =====================================================

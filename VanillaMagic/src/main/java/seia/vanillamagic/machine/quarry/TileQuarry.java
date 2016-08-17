@@ -24,7 +24,7 @@ public class TileQuarry extends TileMachine
 	// Input side from the Quarry into IInventory (argument in methods)
 	public static final EnumFacing INPUT_FACING = EnumFacing.NORTH;
 	// The name for registry
-	public static final String REGISTRY_NAME = "TileQuarry";
+	public static final String REGISTRY_NAME = TileQuarry.class.getSimpleName();
 	
 	public BlockCauldron cauldron;
 	public BlockPos diamondBlockPos;
@@ -34,16 +34,15 @@ public class TileQuarry extends TileMachine
 
 	private Random rand = new Random();
 	
-	public void init(BlockPos machinePos, EntityPlayer whoPlacedQuarry) throws Exception
+	public void init(EntityPlayer whoPlacedQuarry, BlockPos machinePos) throws Exception
 	{
-		init(machinePos, whoPlacedQuarry.worldObj);
+		super.init(whoPlacedQuarry.worldObj, machinePos);
 		this.player = whoPlacedQuarry;
 	}
 	
-	public void init(BlockPos machinePos, World world) throws Exception
+	public void init(World world, BlockPos machinePos) throws Exception
 	{
-		this.pos = machinePos;
-		this.worldObj = world;
+		super.init(world, machinePos);
 		this.cauldron = (BlockCauldron) worldObj.getBlockState(machinePos).getBlock();
 		this.diamondBlockPos = new BlockPos(machinePos.getX() + 1, machinePos.getY(), machinePos.getZ());
 		this.diamondBlock = worldObj.getBlockState(diamondBlockPos).getBlock();
@@ -253,5 +252,10 @@ public class TileQuarry extends TileMachine
 		}
 		// go down by 1 at the end of work in this tick
 		workingPos = moveWorkingPosToNextPos();
+	}
+	
+	public EnumFacing getOutputFacing() 
+	{
+		return INPUT_FACING;
 	}
 }

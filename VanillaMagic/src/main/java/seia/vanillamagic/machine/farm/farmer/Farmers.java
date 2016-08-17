@@ -29,9 +29,9 @@ public class Farmers implements IFarmer
 		farmers = new ArrayList<IFarmer>();
 		farmers.add(new FarmerStem(Blocks.REEDS, new ItemStack(Items.REEDS)));
 	    farmers.add(new FarmerStem(Blocks.CACTUS, new ItemStack(Blocks.CACTUS)));
-	    //farmers.add(new FarmerOreDictionary(SAPLINGS, WOODS)); //TODO:
-	    farmers.add(new FarmerTree(true,Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK));
-	    farmers.add(new FarmerTree(true,Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK));
+	    //farmers.add(new FarmerOreDictionary(SAPLINGS, WOODS)); //TODO: Currently disabled
+	    farmers.add(new FarmerTree(true, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK));
+	    farmers.add(new FarmerTree(true, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK));
 	    //special case of plantables to get spacing correct
 	    farmers.add(new FarmerMelon(Blocks.MELON_STEM, Blocks.MELON_BLOCK, new ItemStack(Items.MELON_SEEDS)));
 	    farmers.add(new FarmerMelon(Blocks.PUMPKIN_STEM, Blocks.PUMPKIN, new ItemStack(Items.PUMPKIN_SEEDS)));
@@ -39,7 +39,7 @@ public class Farmers implements IFarmer
 	    farmers.add(new FarmerNetherWart());
 	    //Cocoa is odd
 	    farmers.add(new FarmerCocoa());
-	    //farmers.add(new FarmerFlowerPicker(FLOWERS)); //TODO:
+	    //farmers.add(new FarmerFlowerPicker(FLOWERS)); //TODO: Currently disabled
 	    //Handles all 'vanilla' style crops
 	    farmers.add(DEFAULT_FARMER);
 	}

@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
 
-public class WorldHelper 
+public class WorldHelper
 {
 	private WorldHelper()
 	{

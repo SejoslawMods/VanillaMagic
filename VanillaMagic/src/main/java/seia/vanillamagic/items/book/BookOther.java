@@ -9,12 +9,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
+import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestBuildAltar;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
 import seia.vanillamagic.quest.QuestList;
-import seia.vanillamagic.quest.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.quest.spell.QuestCastSpell;
 import seia.vanillamagic.utils.TextHelper;
 

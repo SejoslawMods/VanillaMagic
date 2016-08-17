@@ -12,7 +12,6 @@ import seia.vanillamagic.handler.QuestHandler;
 import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
-import seia.vanillamagic.quest.autocrafting.AutocraftingHandler;
 
 @Mod(
 		modid = VanillaMagic.MODID, 
@@ -41,7 +40,6 @@ public class VanillaMagic
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 		WorldHandler.INSTANCE.preInit(); //TODO: FIX
-		AutocraftingHandler.INSTANCE.preInit();
 	}
 	
 	@EventHandler

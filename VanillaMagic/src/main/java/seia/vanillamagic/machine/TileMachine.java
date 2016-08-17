@@ -12,26 +12,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.InventoryHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 
 public abstract class TileMachine extends TileEntity implements IMachine
 {
 	public static final String REGISTRY_NAME = "TileEntityMachine";
-	
-	protected EntityPlayer player;
-	protected BlockPos workingPos;
-	protected BlockPos startPos;
-	protected ItemStack shouldBeInLeftHand;
-	protected ItemStack shouldBeInRightHand;
-	protected int radius = 4;
-	protected int oneOperationCost = 400;
-	protected int ticks = 0;
-	protected int maxTicks = 4000;
-	protected boolean isActive = false;
-	protected boolean finished = false;
-	protected int delayInTicks = 0;
 	
 	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
 	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
@@ -45,7 +32,22 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public static final String NBT_MAX_TICKS = "NBT_MAX_TICKS";
 	public static final String NBT_IS_ACTIVE = "NBT_IS_ACTIVE";
 	public static final String NBT_DIMENSION = "NBT_DIMENSION";
-
+	public static final String NBT_NEEDS_FUEL = "NBT_NEEDS_FUEL";
+	
+	protected EntityPlayer player;
+	protected BlockPos workingPos;
+	protected BlockPos startPos;
+	protected ItemStack shouldBeInLeftHand;
+	protected ItemStack shouldBeInRightHand;
+	protected int radius = 4;
+	protected int oneOperationCost = 400;
+	protected int ticks = 0;
+	protected int maxTicks = 4000;
+	protected boolean isActive = false;
+	protected boolean finished = false;
+	protected int delayInTicks = 0;
+	protected boolean needsFuel = true;
+	
 	/**
 	 * This should check if the Machine is build correctly.
 	 */
@@ -62,15 +64,29 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	/**
 	 * This method is used to check if the output inventory has space for more items.
 	 */
-	public abstract boolean inventoryOutputHasSpace();
+	public abstract EnumFacing getOutputFacing();
 	
-	public void init(World world, BlockPos machinePos)
+	public boolean inventoryOutputHasSpace() 
+	{
+		return !InventoryHelper.isInventoryFull(getOutputInventory(), getOutputFacing());
+	}
+	
+	public void init(EntityPlayer player, BlockPos machinePos) throws Exception
+	{
+		init(player.worldObj, machinePos);
+	}
+	
+	public void init(World world, BlockPos machinePos) throws Exception
 	{
 		init(world, machinePos, 4);
 	}
 	
-	public void init(World world, BlockPos machinePos, int radius)
+	public void init(World world, BlockPos machinePos, int radius) throws Exception
 	{
+		this.worldObj = world;
+		setMachinePos(machinePos);
+		setWorkRadius(radius);
+		setWorkingPos(machinePos);
 	}
 	
 	int delay = 0;
@@ -86,7 +102,11 @@ public abstract class TileMachine extends TileEntity implements IMachine
 					if(checkSurroundings())
 					{
 						showBoundingBox();
-						checkFuel();
+						if(needsFuel)
+						{
+							checkFuel();
+						}
+						
 						if(isNextToOutput())
 						{
 							if(inventoryOutputHasSpace())
@@ -215,18 +235,9 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	 */
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-		try
-		{
-			super.writeToNBT(compound);
-			compound = NBTHelper.writeToINBTSerializable(this, compound);
-			return compound;
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error while writing NBT from TileEntityMachine at:");
-			BlockPosHelper.printCoords(getMachinePos());
-		}
-		return null;
+		super.writeToNBT(compound);
+		compound = NBTHelper.writeToINBTSerializable(this, compound);
+		return compound;
     }
 	
 	public NBTTagCompound serializeNBT()
@@ -243,6 +254,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		compound.setInteger(NBT_TICKS, ticks);
 		compound.setInteger(NBT_MAX_TICKS, maxTicks);
 		compound.setBoolean(NBT_IS_ACTIVE, isActive);
+		compound.setBoolean(NBT_NEEDS_FUEL, needsFuel);
 		return compound;
 	}
 	
@@ -251,16 +263,8 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	 */
 	public void readFromNBT(NBTTagCompound compound)
     {
-		try
-		{
-			super.readFromNBT(compound);
-			NBTHelper.readFromINBTSerializable(this, compound);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error while reading NBT to TileEntityMachine at:");
-			BlockPosHelper.printCoords(getMachinePos());
-		}
+		super.readFromNBT(compound);
+		NBTHelper.readFromINBTSerializable(this, compound);
     }
 	
 	public void deserializeNBT(NBTTagCompound compound)
@@ -280,6 +284,7 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		this.ticks = compound.getInteger(NBT_TICKS);
 		this.maxTicks = compound.getInteger(NBT_MAX_TICKS);
 		this.isActive = compound.getBoolean(NBT_IS_ACTIVE);
+		this.needsFuel = compound.getBoolean(NBT_NEEDS_FUEL);
 	}
 	
 	public boolean hasInputInventory()
@@ -294,49 +299,47 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	
 	public void checkFuel()
 	{
-		try
+		if(isNextToOutput())
 		{
-			if(isNextToOutput())
-			{
-				if(!inventoryOutputHasSpace())
-				{
-					return;
-				}
-			}
-			if(ticks >= maxTicks)
+			if(!inventoryOutputHasSpace())
 			{
 				return;
-			}
-			if(ticks >= oneOperationCost)
-			{
-				return;
-			}
-			
-			if(hasInputInventory())
-			{
-				ItemStack fuelToAdd = SmeltingHelper.getFuelFromInventoryAndDelete(getInputInventory());
-				ticks += SmeltingHelper.countTicks(fuelToAdd);
-			}
-			else if(!hasInputInventory())
-			{
-				List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(worldObj, getMachinePos());
-				if(fuelsInCauldron.size() == 0)
-				{
-					return;
-				}
-				for(EntityItem entityItem : fuelsInCauldron)
-				{
-					ItemStack stack = entityItem.getEntityItem();
-					ticks += SmeltingHelper.countTicks(stack);
-					if(ticks >= oneOperationCost)
-					{
-						worldObj.removeEntity(entityItem);
-					}
-				}
 			}
 		}
-		catch(Exception e)
+		if(ticks >= maxTicks)
 		{
+			return;
+		}
+		if(ticks >= oneOperationCost)
+		{
+			return;
+		}
+		
+		if(hasInputInventory())
+		{
+			ItemStack fuelToAdd = SmeltingHelper.getFuelFromInventoryAndDelete(getInputInventory());
+			if(fuelToAdd == null)
+			{
+				return;
+			}
+			ticks += SmeltingHelper.countTicks(fuelToAdd);
+		}
+		else if(!hasInputInventory())
+		{
+			List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(worldObj, getMachinePos());
+			if(fuelsInCauldron.size() == 0)
+			{
+				return;
+			}
+			for(EntityItem entityItem : fuelsInCauldron)
+			{
+				ItemStack stack = entityItem.getEntityItem();
+				ticks += SmeltingHelper.countTicks(stack);
+				if(ticks >= oneOperationCost)
+				{
+					worldObj.removeEntity(entityItem);
+				}
+			}
 		}
 	}
 	

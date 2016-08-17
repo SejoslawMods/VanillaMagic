@@ -28,25 +28,22 @@ import seia.vanillamagic.utils.WorldHelper;
 
 public class TileFarm extends TileMachine
 {
-	public static final String REGISTRY_NAME = "TileFarm";
+	public static final String REGISTRY_NAME = TileFarm.class.getSimpleName();
 	
 	public int farmSize;
 	public BlockPos chestPosInput;
 	public BlockPos chestPosOutput;
 	public EntityPlayerMP farmer;
 	
-	public void init(EntityPlayer player, BlockPos machinePos, int radius)
+	public void init(EntityPlayer player, BlockPos machinePos, int radius) throws Exception
 	{
 		init(player.worldObj, machinePos, radius);
 		this.player = player;
-		this.worldObj = player.worldObj;
 	}
 	
-	public void init(World world, BlockPos machinePos, int radius)
+	public void init(World world, BlockPos machinePos, int radius) throws Exception
 	{
-		this.worldObj = world;
-		this.pos = machinePos;
-		this.radius = radius;
+		super.init(world, machinePos, radius);
 		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
 		this.workingPos = BlockPosHelper.copyPos(startPos);
 		this.farmSize = radius; //this.farmSize = (2 * radius) + 1;
@@ -430,7 +427,7 @@ public class TileFarm extends TileMachine
 
 	private boolean isOutputFull() 
 	{
-		return InventoryHelper.isInventoryFull(getOutputInventory(), EnumFacing.UP);
+		return this.inventoryOutputHasSpace();
 	}
 
 	public boolean hasSeed(ItemStack seeds, BlockPos pos) 
@@ -632,9 +629,9 @@ public class TileFarm extends TileMachine
 		}
 		return workingPos = new BlockPos(nextX, workingPos.getY(), nextZ);
 	}
-	  
-	public boolean inventoryOutputHasSpace() 
+	
+	public EnumFacing getOutputFacing() 
 	{
-		return !isOutputFull();
+		return EnumFacing.DOWN;
 	}
 }
