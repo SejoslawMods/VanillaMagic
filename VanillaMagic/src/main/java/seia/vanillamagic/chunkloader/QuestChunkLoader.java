@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.handler.CustomTileEntityHandler;
+import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 
 public class QuestChunkLoader extends Quest
@@ -44,7 +44,7 @@ public class QuestChunkLoader extends Quest
 						if(placedBy.hasAchievement(achievement))
 						{
 							tileChunkLoader.init(placedBy, chunkLoaderPos);
-							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader);
+							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension);
 						}
 					}
 				}

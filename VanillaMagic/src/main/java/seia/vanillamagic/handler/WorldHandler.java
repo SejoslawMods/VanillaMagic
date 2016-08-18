@@ -19,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.chunkloader.TileChunkLoader;
+import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.machine.autocrafting.TileAutocrafting;
 import seia.vanillamagic.machine.farm.TileFarm;
 import seia.vanillamagic.machine.quarry.TileQuarry;
@@ -120,7 +121,7 @@ public class WorldHandler
 						if(tileEntity != null)
 						{
 							NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
-							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity);
+							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity, dimension);
 						}
 					}
 				}

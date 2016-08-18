@@ -1,4 +1,4 @@
-package seia.vanillamagic.handler;
+package seia.vanillamagic.handler.customtileentity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,34 +14,13 @@ import net.minecraft.world.World;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.WorldHelper;
 
-public class CustomTileEntityHandler 
+public class CustomTileEntityOneSaveHandler
 {
-	public static final CustomTileEntityHandler INSTANCE = new CustomTileEntityHandler();
+	private final Map<Integer, List<TileEntity>> tileEntities;
 	
-//	static
-//	{
-//		Integer[] dimIDs = DimensionManager.getIDs();
-//		for(Integer i : dimIDs)
-//		{
-//			INSTANCE.tileEntities.put(i, new ArrayList<TileEntity>());
-//			System.out.println("Registered CustomTileEntityHandler for Dimension: " + i);
-//		}
-//	}
-	
-	//===============================================================================================
-	
-	private final Map<Integer, List<TileEntity>> tileEntities = new HashMap<Integer, List<TileEntity>>();
-	
-	public boolean loaded = false;
-	public boolean saved = false;
-	
-	private CustomTileEntityHandler()
+	public CustomTileEntityOneSaveHandler()
 	{
-	}
-	
-	public void postInit()
-	{
-		System.out.println("CustomTileEntityHandler registered");
+		tileEntities = new HashMap<Integer, List<TileEntity>>();
 	}
 	
 	public void clearTileEntities()
