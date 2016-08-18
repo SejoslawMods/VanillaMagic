@@ -14,10 +14,11 @@ public class CustomTileEntityHandler
 {
 	public static final CustomTileEntityHandler INSTANCE = new CustomTileEntityHandler();
 	
-	protected Map<String, CustomTileEntityOneSaveHandler> saveHandlers = new HashMap<String, CustomTileEntityOneSaveHandler>();
+	protected Map<String, CustomTileEntityOneSaveHandler> saveHandlers;
 	
 	private CustomTileEntityHandler()
 	{
+		saveHandlers = new HashMap<String, CustomTileEntityOneSaveHandler>();
 	}
 	
 	public void postInit()

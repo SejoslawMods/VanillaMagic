@@ -18,7 +18,7 @@ import seia.vanillamagic.utils.SmeltingHelper;
 
 public abstract class TileMachine extends TileEntity implements IMachine
 {
-	public static final String REGISTRY_NAME = "TileEntityMachine";
+	public static final String REGISTRY_NAME = TileMachine.class.getSimpleName();
 	
 	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
 	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
