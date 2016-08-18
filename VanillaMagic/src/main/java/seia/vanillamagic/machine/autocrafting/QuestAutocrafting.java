@@ -5,6 +5,7 @@ import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
@@ -16,8 +17,8 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.utils.EntityHelper;
 import seia.vanillamagic.utils.WorldHelper;
+import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestAutocrafting extends Quest
 {
@@ -31,35 +32,41 @@ public class QuestAutocrafting extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
-		if(EntityHelper.hasPlayerCraftingTableInMainHand(player))
+		if(player.getHeldItemOffhand() == null)
 		{
-			if(player.isSneaking())
+			return;
+		}
+		Block workbench = Block.getBlockFromItem(player.getHeldItemOffhand().getItem());
+		if(workbench == null)
+		{
+			return;
+		}
+		if(workbench instanceof BlockWorkbench)
+		{
+			if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, player.getHeldItemMainhand()))
 			{
-				BlockPos cauldronPos = event.getPos();
-				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
+				if(player.isSneaking())
 				{
-					if(isConstructionComplete(world, cauldronPos))
+					BlockPos cauldronPos = event.getPos();
+					if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 					{
-						if(!player.hasAchievement(achievement))
+						if(isConstructionComplete(world, cauldronPos))
 						{
-							player.addStat(achievement, 1);
-						}
-						if(player.hasAchievement(achievement))
-						{
-							try
+							if(!player.hasAchievement(achievement))
 							{
-								TileAutocrafting tile = new TileAutocrafting();
-								tile.init(player, cauldronPos);
-								if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
-								{
-									BlockPos[][] inventoryPosMatrix = buildInventoryMatrix(cauldronPos);
-									IInventory[][] inventoryMatrix = buildIInventoryMatrix(world, inventoryPosMatrix);
-									ItemStack[][] stackMatrix = buildStackMatrix(inventoryMatrix);
-									tile.addContainerAutocrafting(new ContainerAutocrafting(world, stackMatrix));
-								}
+								player.addStat(achievement, 1);
 							}
-							catch(Exception e)
+							if(player.hasAchievement(achievement))
 							{
+								try
+								{
+									TileAutocrafting tile = new TileAutocrafting();
+									tile.init(player, cauldronPos);
+									CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
+								}
+								catch(Exception e)
+								{
+								}
 							}
 						}
 					}

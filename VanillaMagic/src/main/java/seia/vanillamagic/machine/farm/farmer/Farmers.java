@@ -18,11 +18,11 @@ public class Farmers implements IFarmer
 {
 	public static final Farmers INSTANCE = new Farmers();
 	
-	public static final FarmerPlantable DEFAULT_FARMER = new FarmerPlantable();
-	
 	//====================================================================
 	
 	private List<IFarmer> farmers;
+	
+	public final FarmerPlantable DEFAULT_FARMER;
 	
 	private Farmers()
 	{
@@ -41,6 +41,7 @@ public class Farmers implements IFarmer
 	    farmers.add(new FarmerCocoa());
 	    //farmers.add(new FarmerFlowerPicker(FLOWERS)); //TODO: Currently disabled
 	    //Handles all 'vanilla' style crops
+	    DEFAULT_FARMER = new FarmerPlantable();
 	    farmers.add(DEFAULT_FARMER);
 	}
 	

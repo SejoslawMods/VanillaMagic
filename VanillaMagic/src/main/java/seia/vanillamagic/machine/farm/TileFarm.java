@@ -219,7 +219,7 @@ public class TileFarm extends TileMachine
 			{
 				markDirty();
 			}
-			else if(type.itemMatches(stack) && stack.stackSize > 1) // TODO: This will prevent item from being destroyed
+			else if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1) // TODO: This will prevent item from being destroyed
 			{
 				return stack;
 			}
@@ -334,43 +334,42 @@ public class TileFarm extends TileMachine
 
 	protected void doTick()
 	{
-		BlockPos pos = null;
 		int infiniteLoop = 20;
-		while(pos == null || pos.equals(getPos()) || !worldObj.isBlockLoaded(pos)) 
+		while(workingPos == null || workingPos.equals(getPos()) || !worldObj.isBlockLoaded(workingPos)) 
 		{
 			if(infiniteLoop-- <= 0) 
 			{
 				return;
 			}
-			pos = getNextCoord();
+			workingPos = getNextCoord();
 		}
-		IBlockState bs = getBlockState(pos);
+		IBlockState bs = getBlockState(workingPos);
 		Block block = bs.getBlock();
 		if(farmer == null) 
 		{
 			farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
 			System.out.println("Added Custom Farmer"); //TODO:
 		}
-		if(isOpen(pos)) 
+		if(isOpen(workingPos)) 
 		{
-			Farmers.INSTANCE.prepareBlock(this, pos, block, bs);
-			bs = getBlockState(pos);
+			Farmers.INSTANCE.prepareBlock(this, workingPos, block, bs);
+			bs = getBlockState(workingPos);
 			block = bs.getBlock();
 		}
 		if(isOutputFull())
 		{
 			return;
 		}
-		if(!isOpen(pos))
+		if(!isOpen(workingPos))
 		{
-			IHarvestResult harvest = Farmers.INSTANCE.harvestBlock(this, pos, block, bs);
+			IHarvestResult harvest = Farmers.INSTANCE.harvestBlock(this, workingPos, block, bs);
 			if(harvest != null && harvest.getDrops() != null) 
 			{
 				for(EntityItem ei : harvest.getDrops()) 
 				{
 					if(ei != null) 
 					{
-						insertHarvestDrop(ei, pos);
+						insertHarvestDrop(ei, workingPos);
 						if(!ei.isDead) 
 						{
 							worldObj.spawnEntityInWorld(ei);
@@ -387,11 +386,11 @@ public class TileFarm extends TileMachine
 			{
 				ItemStack stack = getInputInventory().getStackInSlot(i);
 				Fertilizer fertilizer = Fertilizer.getInstance(stack);
-				if ((fertilizer.applyOnPlant() != isOpen(pos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(pos))) 
+				if ((fertilizer.applyOnPlant() != isOpen(workingPos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(workingPos))) 
 				{
 					farmer.inventory.mainInventory[0] = stack;
 					farmer.inventory.currentItem = 0;
-					if(fertilizer.apply(stack, farmer, worldObj, new BlockPos(pos))) 
+					if(fertilizer.apply(stack, farmer, worldObj, new BlockPos(workingPos))) 
 					{
 						stack = farmer.inventory.mainInventory[0];
 						if(stack != null && stack.stackSize == 0) 
@@ -511,6 +510,8 @@ public class TileFarm extends TileMachine
 
 	public int getSupplySlotForCoord(BlockPos forBlock) 
 	{
+		return 0;
+		/*
 		int xCoord = getPos().getX();
 		int zCoord = getPos().getZ();
 		if (forBlock.getX() <= xCoord && forBlock.getZ() > zCoord) 
@@ -526,6 +527,7 @@ public class TileFarm extends TileMachine
 			return getMinSupplySlot() + 2;
 		}
 		return getMinSupplySlot() + 3;
+		*/
 	}
 
 	private void insertHarvestDrop(Entity entity, BlockPos pos) 

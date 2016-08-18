@@ -17,7 +17,7 @@ import seia.vanillamagic.machine.farm.TileFarm;
 
 public class FarmerCocoa extends FarmerCustomSeed 
 {
-	public FarmerCocoa() 
+	public FarmerCocoa()
 	{
 		super(Blocks.COCOA, new ItemStack(Items.DYE, 1, 3));
 		this.requiresFarmland = false;

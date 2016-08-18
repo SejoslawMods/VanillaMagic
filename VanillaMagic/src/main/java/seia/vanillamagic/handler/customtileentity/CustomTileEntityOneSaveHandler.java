@@ -16,7 +16,7 @@ import seia.vanillamagic.utils.WorldHelper;
 
 public class CustomTileEntityOneSaveHandler
 {
-	private final Map<Integer, List<TileEntity>> tileEntities;
+	protected final Map<Integer, List<TileEntity>> tileEntities;
 	
 	public CustomTileEntityOneSaveHandler()
 	{
@@ -61,14 +61,6 @@ public class CustomTileEntityOneSaveHandler
 			add(customTileEntity);
 			return true;
 		}
-	}
-	
-	/**
-	 * customTileEntity MUST implements {@link ITickable}
-	 */
-	public boolean addCustomTileEntity(TileEntity customTileEntity)
-	{
-		return addCustomTileEntity(customTileEntity, WorldHelper.getDimensionID(customTileEntity));
 	}
 	
 	private void add(TileEntity customTileEntity)

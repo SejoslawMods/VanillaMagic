@@ -1,10 +1,13 @@
 package seia.vanillamagic.machine.autocrafting;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import seia.vanillamagic.machine.TileMachine;
 
 public class TileAutocrafting extends TileMachine
@@ -13,9 +16,24 @@ public class TileAutocrafting extends TileMachine
 	
 	public ContainerAutocrafting container;
 	
-	public void addContainerAutocrafting(ContainerAutocrafting container)
+	public void init(EntityPlayer player, BlockPos machinePos) throws Exception
 	{
-		this.container = container;
+		super.init(player.worldObj, machinePos);
+		initContainer();
+	}
+	
+	public void init(World world, BlockPos machinePos) throws Exception
+	{
+		super.init(world, machinePos);
+		initContainer();
+	}
+	
+	public void initContainer()
+	{
+		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
+		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(worldObj, inventoryPosMatrix);
+		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix);
+		container = new ContainerAutocrafting(worldObj, stackMatrix);
 	}
 	
 	public IInventory getInputInventory() 

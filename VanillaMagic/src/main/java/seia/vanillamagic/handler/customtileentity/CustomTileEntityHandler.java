@@ -14,7 +14,7 @@ public class CustomTileEntityHandler
 {
 	public static final CustomTileEntityHandler INSTANCE = new CustomTileEntityHandler();
 	
-	protected Map<String, CustomTileEntityOneSaveHandler> saveHandlers;
+	protected final Map<String, CustomTileEntityOneSaveHandler> saveHandlers;
 	
 	private CustomTileEntityHandler()
 	{
