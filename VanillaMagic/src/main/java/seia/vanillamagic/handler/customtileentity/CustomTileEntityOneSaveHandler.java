@@ -16,21 +16,23 @@ import seia.vanillamagic.utils.WorldHelper;
 
 public class CustomTileEntityOneSaveHandler
 {
-	protected final Map<Integer, List<TileEntity>> tileEntities;
+	protected final Map<Integer, List<TileEntity>> loadedTileEntities;
+	public final Map<Integer, List<TileEntity>> readedTileEntities;
 	
 	public CustomTileEntityOneSaveHandler()
 	{
-		tileEntities = new HashMap<Integer, List<TileEntity>>();
+		loadedTileEntities = new HashMap<Integer, List<TileEntity>>();
+		readedTileEntities = new HashMap<Integer, List<TileEntity>>();
 	}
 	
 	public void clearTileEntities()
 	{
-		tileEntities.clear();
+		loadedTileEntities.clear();
 	}
 	
 	public void clearTileEntitiesForDimension(int dimension)
 	{
-		tileEntities.get(dimension).clear();
+		loadedTileEntities.get(dimension).clear();
 	}
 	
 	/**
@@ -38,9 +40,9 @@ public class CustomTileEntityOneSaveHandler
 	 */
 	public boolean addCustomTileEntity(TileEntity customTileEntity, int dimension)
 	{
-		if(tileEntities.containsKey(dimension))
+		if(loadedTileEntities.containsKey(dimension))
 		{
-			List<TileEntity> entitiesInDim = tileEntities.get(dimension);
+			List<TileEntity> entitiesInDim = loadedTileEntities.get(dimension);
 			for(TileEntity tile : entitiesInDim)
 			{
 				if(BlockPosHelper.isSameBlockPos(customTileEntity.getPos(), tile.getPos()))
@@ -55,9 +57,9 @@ public class CustomTileEntityOneSaveHandler
 		}
 		else
 		{
-			tileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
+			loadedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
 			System.out.println("Registered CustomTileEntityHandler for Dimension: " + dimension);
-			tileEntities.get(dimension).add(customTileEntity);
+			loadedTileEntities.get(dimension).add(customTileEntity);
 			add(customTileEntity);
 			return true;
 		}
@@ -68,6 +70,7 @@ public class CustomTileEntityOneSaveHandler
 		customTileEntity.getWorld().setTileEntity(customTileEntity.getPos(), customTileEntity);
 		customTileEntity.getWorld().tickableTileEntities.add(customTileEntity);
 		BlockPosHelper.printCoords("CustomTileEntity (" + customTileEntity.getClass().getSimpleName() + ") added at pos:", customTileEntity.getPos());
+		customTileEntity.getWorld().updateEntities();
 	}
 	
 	/**
@@ -76,7 +79,7 @@ public class CustomTileEntityOneSaveHandler
 	public void removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
 		int dimID = WorldHelper.getDimensionID(world);
-		Set<Entry<Integer, List<TileEntity>>> entrySet = tileEntities.entrySet();
+		Set<Entry<Integer, List<TileEntity>>> entrySet = loadedTileEntities.entrySet();
 		if(entrySet.size() > 0) // should be 3 (Dims: -1, 0, 1, and more)
 		{
 			for(Entry<Integer, List<TileEntity>> entry : entrySet)
@@ -92,7 +95,7 @@ public class CustomTileEntityOneSaveHandler
 	
 	public void removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
-		List<TileEntity> tilesInDimension = tileEntities.get(dimension);
+		List<TileEntity> tilesInDimension = loadedTileEntities.get(dimension);
 		for(int i = 0; i < tilesInDimension.size(); i++)
 		{
 			TileEntity tileInDim = tilesInDimension.get(i);
@@ -114,11 +117,57 @@ public class CustomTileEntityOneSaveHandler
 	
 	public Integer[] getIDs()
 	{
-		return tileEntities.keySet().toArray(new Integer[tileEntities.size()]);
+		return loadedTileEntities.keySet().toArray(new Integer[loadedTileEntities.size()]);
 	}
 	
 	public List<TileEntity> getCustomEntitiesInDimension(int dimension)
 	{
-		return tileEntities.get(dimension);
+		List<TileEntity> tiles = loadedTileEntities.get(dimension);
+		if(tiles == null)
+		{
+			loadedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
+		}
+		return loadedTileEntities.get(dimension);
+	}
+
+	public void moveTilesFromReadded(int dimension) 
+	{
+		loadedTileEntities.get(dimension).addAll(readedTileEntities.get(dimension));
+		readedTileEntities.get(dimension).clear();
+	}
+
+	public List<TileEntity> getReadedTileEntitiesForDimension(int dimension) 
+	{
+		List<TileEntity> tiles = readedTileEntities.get(dimension);
+		if(tiles == null)
+		{
+			readedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
+		}
+		return readedTileEntities.get(dimension);
+	}
+
+	public boolean addReadedTile(TileEntity tileEntity, int dimension) 
+	{
+		if(readedTileEntities.containsKey(dimension))
+		{
+			List<TileEntity> entitiesInDim = readedTileEntities.get(dimension);
+			for(TileEntity tile : entitiesInDim)
+			{
+				if(BlockPosHelper.isSameBlockPos(tileEntity.getPos(), tile.getPos()))
+				{
+					BlockPosHelper.printCoords("There is already ReadedTileEntity (" + tile.getClass().getSimpleName() + ") at pos:", tile.getPos());
+					return false;
+				}
+			}
+			entitiesInDim.add(tileEntity);
+			return true;
+		}
+		else
+		{
+			readedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
+			System.out.println("Registered ReadedTileEntityHandler for Dimension: " + dimension);
+			readedTileEntities.get(dimension).add(tileEntity);
+			return true;
+		}
 	}
 }

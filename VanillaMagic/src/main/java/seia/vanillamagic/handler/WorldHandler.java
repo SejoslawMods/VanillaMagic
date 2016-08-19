@@ -8,8 +8,6 @@ import java.util.List;
 
 import com.google.common.io.Files;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -22,8 +20,6 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.chunkloader.TileChunkLoader;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.machine.autocrafting.ContainerAutocrafting;
-import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.autocrafting.TileAutocrafting;
 import seia.vanillamagic.machine.farm.TileFarm;
 import seia.vanillamagic.machine.quarry.TileQuarry;
@@ -125,7 +121,8 @@ public class WorldHandler
 						if(tileEntity != null)
 						{
 							NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
-							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity, dimension);
+							//CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity, dimension);
+							CustomTileEntityHandler.INSTANCE.addReadedTile(tileEntity, dimension);
 						}
 					}
 				}
@@ -185,6 +182,7 @@ public class WorldHandler
 			}
 			NBTTagCompound data = new NBTTagCompound();
 			NBTTagList dataList = new NBTTagList();
+			CustomTileEntityHandler.INSTANCE.moveTilesFromReadded(dimension);
 			List<TileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
 			for(int j = 0; j < tickables.size(); j++)
 			{

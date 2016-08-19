@@ -1,6 +1,5 @@
 package seia.vanillamagic.handler.customtileentity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,23 +25,24 @@ public class CustomTileEntityHandler
 		System.out.println("CustomTileEntityHandler registered");
 	}
 	
+	public String getRootDir()
+	{
+		return WorldHandler.getVanillaMagicRootDirectory().getAbsolutePath();
+	}
+	
 	public boolean addCustomTileEntity(TileEntity customTileEntity, int dimensionID)
 	{
-		String rootDir = WorldHandler.getVanillaMagicRootDirectory().getAbsolutePath();
-		if(saveHandlers.containsKey(rootDir))
-		{
-			return saveHandlers.get(rootDir).addCustomTileEntity(customTileEntity, dimensionID);
-		}
-		else
+		String rootDir = getRootDir();
+		if(!saveHandlers.containsKey(rootDir))
 		{
 			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
-			return saveHandlers.get(rootDir).addCustomTileEntity(customTileEntity, dimensionID);
 		}
+		return saveHandlers.get(rootDir).addCustomTileEntity(customTileEntity, dimensionID);
 	}
 	
 	public void removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
-		String rootDir = WorldHandler.getVanillaMagicRootDirectory().getAbsolutePath();
+		String rootDir = getRootDir();
 		if(saveHandlers.containsKey(rootDir))
 		{
 			saveHandlers.get(rootDir).removeCustomTileEntityAtPos(world, pos, dimension);
@@ -51,11 +51,40 @@ public class CustomTileEntityHandler
 	
 	public List<TileEntity> getCustomEntitiesInDimension(int dimension)
 	{
-		String rootDir = WorldHandler.getVanillaMagicRootDirectory().getAbsolutePath();
+		String rootDir = getRootDir();
+		if(!saveHandlers.containsKey(rootDir))
+		{
+			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
+		}
+		return saveHandlers.get(rootDir).getCustomEntitiesInDimension(dimension);
+	}
+	
+	public List<TileEntity> getReaddedTileEntitiesForDimension(int dimension)
+	{
+		String rootDir = getRootDir();
+		if(!saveHandlers.containsKey(rootDir))
+		{
+			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
+		}
+		return saveHandlers.get(rootDir).getReadedTileEntitiesForDimension(dimension);
+	}
+
+	public void moveTilesFromReadded(int dimension) 
+	{
+		String rootDir = getRootDir();
 		if(saveHandlers.containsKey(rootDir))
 		{
-			return saveHandlers.get(rootDir).getCustomEntitiesInDimension(dimension);
+			saveHandlers.get(rootDir).moveTilesFromReadded(dimension);
 		}
-		return new ArrayList<TileEntity>();
+	}
+
+	public boolean addReadedTile(TileEntity tileEntity, int dimension) 
+	{
+		String rootDir = getRootDir();
+		if(!saveHandlers.containsKey(rootDir))
+		{
+			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
+		}
+		return saveHandlers.get(rootDir).addReadedTile(tileEntity, dimension);
 	}
 }

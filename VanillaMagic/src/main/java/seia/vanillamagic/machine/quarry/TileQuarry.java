@@ -38,6 +38,7 @@ public class TileQuarry extends TileMachine
 	{
 		super.init(whoPlacedQuarry.worldObj, machinePos);
 		this.player = whoPlacedQuarry;
+		this.init(worldObj, machinePos);
 	}
 	
 	public void init(World world, BlockPos machinePos) throws Exception
