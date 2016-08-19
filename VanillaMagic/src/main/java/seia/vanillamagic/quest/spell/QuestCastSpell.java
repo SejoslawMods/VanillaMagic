@@ -49,46 +49,48 @@ public abstract class QuestCastSpell extends Quest
 	public boolean castSpell(EntityPlayer caster, EnumHand hand, ItemStack inHand, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		try
+		if(!finishedAdditionalQuests(caster))
 		{
-			if(!finishedAdditionalQuests(caster))
+			return false;
+		}
+		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(caster.getHeldItemMainhand());
+		if(wandPlayerHand == null)
+		{
+			return false;
+		}
+		if(EnumWand.isWandRightForSpell(wandPlayerHand, spell))
+		{
+			ItemStack casterOffHand = caster.getHeldItemOffhand();
+			if(casterOffHand == null)
 			{
 				return false;
 			}
-			EnumWand wandPlayerHand = EnumWand.getWandByItemStack(caster.getHeldItemMainhand());
-			if(EnumWand.isWandRightForSpell(wandPlayerHand, spell))
+			if(spell.isItemOffHandRightForSpell(casterOffHand))
 			{
-				ItemStack casterOffHand = caster.getHeldItemOffhand();
-				if(spell.isItemOffHandRightForSpell(casterOffHand))
+				if(!caster.hasAchievement(achievement))
 				{
-					if(!caster.hasAchievement(achievement))
+					caster.addStat(achievement, 1);
+				}
+				if(caster.hasAchievement(achievement)) //else
+				{
+					if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
 					{
-						caster.addStat(achievement, 1);
-					}
-					if(caster.hasAchievement(achievement)) //else
-					{
-						if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
+						if(howManyTimesCasted == 1)
 						{
-							if(howManyTimesCasted == 1)
+							if(castRightSpell(caster, pos, face, hitVec))
 							{
-								if(castRightSpell(caster, pos, face, hitVec))
-								{
-									casterOffHand.stackSize -= spell.itemOffHand.stackSize;
-									howManyTimesCasted++;
-									return true;
-								}
+								casterOffHand.stackSize -= spell.itemOffHand.stackSize;
+								howManyTimesCasted++;
+								return true;
 							}
-							else
-							{
-								howManyTimesCasted = 1;
-							}
+						}
+						else
+						{
+							howManyTimesCasted = 1;
 						}
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 		return false;
 	}

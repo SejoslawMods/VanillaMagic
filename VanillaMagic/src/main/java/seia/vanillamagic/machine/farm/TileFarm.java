@@ -35,13 +35,13 @@ public class TileFarm extends TileMachine
 	public BlockPos chestPosOutput;
 	public EntityPlayerMP farmer;
 	
-	public void init(EntityPlayer player, BlockPos machinePos, int radius) throws Exception
+	public void init(EntityPlayer player, BlockPos machinePos, int radius)
 	{
 		init(player.worldObj, machinePos, radius);
 		this.player = player;
 	}
 	
-	public void init(World world, BlockPos machinePos, int radius) throws Exception
+	public void init(World world, BlockPos machinePos, int radius)
 	{
 		super.init(world, machinePos, radius);
 		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);

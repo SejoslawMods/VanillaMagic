@@ -28,32 +28,24 @@ public class QuestChunkLoader extends Quest
 		EntityPlayer placedBy = event.getPlayer();
 		ItemStack itemInHand = event.getItemInHand();
 		World world = placedBy.worldObj;
-		try
+		if(itemInHand.getItem() != null)
 		{
-			if(itemInHand.getItem() != null)
+			if(Block.isEqualTo(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE))
 			{
-				if(Block.isEqualTo(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE))
+				TileChunkLoader tileChunkLoader = new TileChunkLoader();
+				if(isChunkLoaderBuildCorrectly(world, chunkLoaderPos))
 				{
-					TileChunkLoader tileChunkLoader = new TileChunkLoader();//(chunkLoaderPos, placedBy);
-					if(isChunkLoaderBuildCorrectly(world, chunkLoaderPos))
+					if(!placedBy.hasAchievement(achievement))
 					{
-						if(!placedBy.hasAchievement(achievement))
-						{
-							placedBy.addStat(achievement, 1);
-						}
-						if(placedBy.hasAchievement(achievement))
-						{
-							tileChunkLoader.init(placedBy, chunkLoaderPos);
-							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension);
-						}
+						placedBy.addStat(achievement, 1);
+					}
+					if(placedBy.hasAchievement(achievement))
+					{
+						tileChunkLoader.init(placedBy, chunkLoaderPos);
+						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension);
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
-//			System.out.println("Incorrect ChunkLoader placed on:");
-//			BlockPosHelper.printCoords(chunkLoaderPos);
 		}
 	}
 	

@@ -16,18 +16,6 @@ public class TileAutocrafting extends TileMachine
 	
 	public ContainerAutocrafting container;
 	
-	public void init(EntityPlayer player, BlockPos machinePos) throws Exception
-	{
-		super.init(player.worldObj, machinePos);
-		initContainer();
-	}
-	
-	public void init(World world, BlockPos machinePos) throws Exception
-	{
-		super.init(world, machinePos);
-		initContainer();
-	}
-	
 	public void initContainer()
 	{
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
@@ -43,7 +31,7 @@ public class TileAutocrafting extends TileMachine
 	
 	public IInventory getOutputInventory() 
 	{
-		return ((IInventory) worldObj.getTileEntity(getMachinePos().down(4)));
+		return ((IInventory) worldObj.getTileEntity(getMachinePos().down(2)));
 	}
 	
 	public boolean checkSurroundings() 
@@ -55,6 +43,7 @@ public class TileAutocrafting extends TileMachine
 	{
 		if(inventoryOutputHasSpace())
 		{
+			initContainer();
 			for(int i = 0; i < 4; i++)
 			{
 				boolean crafted = container.craft();
@@ -78,7 +67,7 @@ public class TileAutocrafting extends TileMachine
 	
 	public IHopper getHopperForStructure()
 	{
-		BlockPos hopperPos = getMachinePos().down(4);
+		BlockPos hopperPos = getMachinePos().down(2);
 		TileEntity hopperTile = worldObj.getTileEntity(hopperPos);
 		if(hopperTile instanceof IHopper)
 		{

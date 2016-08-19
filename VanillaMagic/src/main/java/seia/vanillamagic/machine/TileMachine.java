@@ -71,17 +71,18 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		return !InventoryHelper.isInventoryFull(getOutputInventory(), getOutputFacing());
 	}
 	
-	public void init(EntityPlayer player, BlockPos machinePos) throws Exception
+	public void init(EntityPlayer player, BlockPos machinePos)
 	{
 		init(player.worldObj, machinePos);
+		setPlayerWhoPlacedMachine(player);
 	}
 	
-	public void init(World world, BlockPos machinePos) throws Exception
+	public void init(World world, BlockPos machinePos)
 	{
 		init(world, machinePos, 4);
 	}
 	
-	public void init(World world, BlockPos machinePos, int radius) throws Exception
+	public void init(World world, BlockPos machinePos, int radius)
 	{
 		this.worldObj = world;
 		setMachinePos(machinePos);
@@ -111,16 +112,12 @@ public abstract class TileMachine extends TileEntity implements IMachine
 						{
 							if(inventoryOutputHasSpace())
 							{
-								isActive = true;
-								doWork();
-								return;
+								tryWork();
 							}
 						}
 						else
 						{
-							isActive = true;
-							doWork();
-							return;
+							tryWork();
 						}
 					}
 				}
@@ -130,6 +127,21 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		else
 		{
 			delay++;
+		}
+	}
+	
+	private void tryWork()
+	{
+		if(ticks >= oneOperationCost)
+		{
+			isActive = true;
+			doWork();
+			ticks -= oneOperationCost;
+			if(ticks < oneOperationCost)
+			{
+				isActive = false;
+			}
+			return;
 		}
 	}
 	
@@ -290,11 +302,6 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public boolean hasInputInventory()
 	{
 		return getInputInventory() != null ? true : false;
-	}
-	
-	public void decreaseTicks()
-	{
-		ticks -= oneOperationCost;
 	}
 	
 	public void checkFuel()

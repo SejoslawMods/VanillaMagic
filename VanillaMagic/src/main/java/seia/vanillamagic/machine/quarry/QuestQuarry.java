@@ -50,20 +50,16 @@ public class QuestQuarry extends QuestMachineActivate
 						return;
 					}
 				}
-				// Should now throw exception from constructor if blocks are wrong.
-				TileQuarry tileQuarry = new TileQuarry();//quarryPos, player);
-				if(tileQuarry.isComplete())
+				TileQuarry tileQuarry = new TileQuarry();
+				if(!player.hasAchievement(achievement))
 				{
-					if(!player.hasAchievement(achievement))
-					{
-						player.addStat(achievement, 1);
-					}
-					if(player.hasAchievement(achievement))
-					{
-						tileQuarry.showBoundingBox();
-						tileQuarry.init(player, quarryPos);
-						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry, player.dimension);
-					}
+					player.addStat(achievement, 1);
+				}
+				if(player.hasAchievement(achievement))
+				{
+					tileQuarry.showBoundingBox();
+					tileQuarry.init(player, quarryPos);
+					CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry, player.dimension);
 				}
 			}
 		}

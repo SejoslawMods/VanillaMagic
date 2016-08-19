@@ -34,14 +34,14 @@ public class TileQuarry extends TileMachine
 
 	private Random rand = new Random();
 	
-	public void init(EntityPlayer whoPlacedQuarry, BlockPos machinePos) throws Exception
+	public void init(EntityPlayer whoPlacedQuarry, BlockPos machinePos)
 	{
 		super.init(whoPlacedQuarry.worldObj, machinePos);
 		this.player = whoPlacedQuarry;
 		this.init(worldObj, machinePos);
 	}
 	
-	public void init(World world, BlockPos machinePos) throws Exception
+	public void init(World world, BlockPos machinePos)
 	{
 		super.init(world, machinePos);
 		this.cauldron = (BlockCauldron) worldObj.getBlockState(machinePos).getBlock();
@@ -49,31 +49,8 @@ public class TileQuarry extends TileMachine
 		this.diamondBlock = worldObj.getBlockState(diamondBlockPos).getBlock();
 		this.redstoneBlockPos = new BlockPos(machinePos.getX(), machinePos.getY(), machinePos.getZ() - 1);
 		this.redstoneBlock = worldObj.getBlockState(redstoneBlockPos).getBlock();
-		
-		if(!Block.isEqualTo(diamondBlock, Blocks.DIAMOND_BLOCK))
-		{
-			throw new Exception("DiamondBlock is not in place.");
-		}
-		if(!Block.isEqualTo(redstoneBlock, Blocks.REDSTONE_BLOCK))
-		{
-			throw new Exception("RedstoneBlock is not in place.");
-		}
-		
-		this.workingPos = new BlockPos(
-				machinePos.getX() - 1, 
-				machinePos.getY(), 
-				machinePos.getZ() + 1);
+		this.workingPos = new BlockPos(machinePos.getX() - 1, machinePos.getY(), machinePos.getZ() + 1);
 		this.startPos = BlockPosHelper.copyPos(workingPos);
-	}
-	
-	/**
-	 * @return - true if quarry is complete and right, otherwise false 
-	 * (this should be achievable if the quarry isn't correctly build 
-	 * - exception should be thrown when the object is creating)
-	 */
-	public boolean isComplete() 
-	{
-		return true;
 	}
 	
 	public BlockPos getTopPos()
@@ -121,22 +98,15 @@ public class TileQuarry extends TileMachine
 	 */
 	public boolean checkSurroundings()
 	{
-		try
+		if(!Block.isEqualTo(diamondBlock, worldObj.getBlockState(diamondBlockPos).getBlock()))
 		{
-			if(!Block.isEqualTo(diamondBlock, worldObj.getBlockState(diamondBlockPos).getBlock()))
-			{
-				return false;
-			}
-			if(!Block.isEqualTo(redstoneBlock, worldObj.getBlockState(redstoneBlockPos).getBlock()))
-			{
-				return false;
-			}
-			return true;
+			return false;
 		}
-		catch(Exception e)
+		if(!Block.isEqualTo(redstoneBlock, worldObj.getBlockState(redstoneBlockPos).getBlock()))
 		{
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	/**
@@ -211,7 +181,6 @@ public class TileQuarry extends TileMachine
 		}
 		else // dig something like stone, iron-ore, etc.
 		{
-			decreaseTicks();
 			boolean hasChest = isNextToOutput(); // chest or any other IInventory
 			Block blockToDig = worldObj.getBlockState(workingPos).getBlock();
 			List<ItemStack> drops = blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);

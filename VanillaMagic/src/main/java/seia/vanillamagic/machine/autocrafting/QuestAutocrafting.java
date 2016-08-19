@@ -5,7 +5,6 @@ import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
@@ -22,6 +21,8 @@ import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestAutocrafting extends Quest
 {
+	private static int iinvDown = 3;
+	
 	public QuestAutocrafting(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
 	{
 		super(required, posX, posY, icon, questName, uniqueName);
@@ -32,22 +33,23 @@ public class QuestAutocrafting extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
-		if(player.getHeldItemOffhand() == null)
-		{
-			return;
-		}
-		Block workbench = Block.getBlockFromItem(player.getHeldItemOffhand().getItem());
-		if(workbench == null)
-		{
-			return;
-		}
-		if(workbench instanceof BlockWorkbench)
+//		if(player.getHeldItemOffhand() == null)
+//		{
+//			return;
+//		}
+//		Block workbench = Block.getBlockFromItem(player.getHeldItemOffhand().getItem());
+//		if(workbench == null)
+//		{
+//			return;
+//		}
+//		if(workbench instanceof BlockWorkbench)
 		{
 			if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, player.getHeldItemMainhand()))
 			{
 				if(player.isSneaking())
 				{
-					BlockPos cauldronPos = event.getPos();
+					BlockPos workbenchPos = event.getPos();
+					BlockPos cauldronPos = workbenchPos.up();
 					if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 					{
 						if(isConstructionComplete(world, cauldronPos))
@@ -58,15 +60,9 @@ public class QuestAutocrafting extends Quest
 							}
 							if(player.hasAchievement(achievement))
 							{
-								try
-								{
-									TileAutocrafting tile = new TileAutocrafting();
-									tile.init(player, cauldronPos);
-									CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
-								}
-								catch(Exception e)
-								{
-								}
+								TileAutocrafting tile = new TileAutocrafting();
+								tile.init(player, cauldronPos);
+								CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
 							}
 						}
 					}
@@ -127,15 +123,15 @@ public class QuestAutocrafting extends Quest
 
 	public static BlockPos[][] buildInventoryMatrix(BlockPos cauldronPos) 
 	{
-		BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - 2, cauldronPos.getZ() + 2);
-		BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - 2, cauldronPos.getZ() + 2);
-		BlockPos rightTop = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - 2, cauldronPos.getZ() + 2);
-		BlockPos right = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - 2, cauldronPos.getZ());
-		BlockPos rightBottom = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - 2, cauldronPos.getZ() - 2);
-		BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - 2, cauldronPos.getZ() - 2);
-		BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - 2, cauldronPos.getZ() - 2);
-		BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - 2, cauldronPos.getZ());
-		BlockPos middle = cauldronPos.offset(EnumFacing.DOWN, 2);
+		BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
+		BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
+		BlockPos rightTop = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
+		BlockPos right = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ());
+		BlockPos rightBottom = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
+		BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
+		BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
+		BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ());
+		BlockPos middle = cauldronPos.offset(EnumFacing.DOWN, iinvDown);
 		
 		return new BlockPos[][]{
 			new BlockPos[]{ leftTop, top, rightTop },
@@ -147,10 +143,9 @@ public class QuestAutocrafting extends Quest
 	public static boolean isConstructionComplete(World world, BlockPos cauldronPos)
 	{
 		boolean checkBasics = false;
-		int iinvDown = 3;
 		if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, iinvDown)) instanceof IInventory)
 		{
-			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, 4)) instanceof IHopper)
+			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, 2)) instanceof IHopper)
 			{
 				if(world.getBlockState(cauldronPos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockWorkbench)
 				{
