@@ -16,6 +16,12 @@ public class TileAutocrafting extends TileMachine
 	
 	public ContainerAutocrafting container;
 	
+	public void init(World world, BlockPos machinePos)
+	{
+		super.init(world, machinePos);
+		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
+	}
+	
 	public void initContainer()
 	{
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
