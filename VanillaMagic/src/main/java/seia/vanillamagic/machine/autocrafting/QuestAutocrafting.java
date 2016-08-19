@@ -33,37 +33,25 @@ public class QuestAutocrafting extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
-//		if(player.getHeldItemOffhand() == null)
-//		{
-//			return;
-//		}
-//		Block workbench = Block.getBlockFromItem(player.getHeldItemOffhand().getItem());
-//		if(workbench == null)
-//		{
-//			return;
-//		}
-//		if(workbench instanceof BlockWorkbench)
+		if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, player.getHeldItemMainhand()))
 		{
-			if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, player.getHeldItemMainhand()))
+			if(player.isSneaking())
 			{
-				if(player.isSneaking())
+				BlockPos workbenchPos = event.getPos();
+				BlockPos cauldronPos = workbenchPos.up();
+				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
-					BlockPos workbenchPos = event.getPos();
-					BlockPos cauldronPos = workbenchPos.up();
-					if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
+					if(isConstructionComplete(world, cauldronPos))
 					{
-						if(isConstructionComplete(world, cauldronPos))
+						if(!player.hasAchievement(achievement))
 						{
-							if(!player.hasAchievement(achievement))
-							{
-								player.addStat(achievement, 1);
-							}
-							if(player.hasAchievement(achievement))
-							{
-								TileAutocrafting tile = new TileAutocrafting();
-								tile.init(player, cauldronPos);
-								CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
-							}
+							player.addStat(achievement, 1);
+						}
+						if(player.hasAchievement(achievement))
+						{
+							TileAutocrafting tile = new TileAutocrafting();
+							tile.init(player, cauldronPos);
+							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
 						}
 					}
 				}
