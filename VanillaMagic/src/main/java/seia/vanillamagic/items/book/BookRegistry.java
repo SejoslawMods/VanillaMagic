@@ -23,14 +23,26 @@ public class BookRegistry
 	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
 	public static final String BOOK_NBT_UID = "bookUID";
 	
+	public final BookSpells bookSpells;
+	public final BookAltarCrafting bookAltarCrafting;
+	public final BookBuildAltar bookBuildAltar;
+	public final BookOther bookOther;
+	
 	private List<IBook> books = new ArrayList<IBook>();
 	
 	private BookRegistry()
 	{
-		books.add(new BookSpells());
-		books.add(new BookAltarCrafting());
-		books.add(new BookBuildAltar());
-		books.add(new BookOther());
+		bookSpells = new BookSpells();
+		books.add(bookSpells);
+		
+		bookAltarCrafting = new BookAltarCrafting();
+		books.add(bookAltarCrafting);
+		
+		bookBuildAltar = new BookBuildAltar();
+		books.add(bookBuildAltar);
+		
+		bookOther = new BookOther();
+		books.add(bookOther);
 	}
 	
 	public void postInit()
