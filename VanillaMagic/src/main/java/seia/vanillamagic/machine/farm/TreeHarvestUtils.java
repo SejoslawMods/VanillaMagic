@@ -28,7 +28,7 @@ public class TreeHarvestUtils
 
 	public void harvest(TileFarm farm, FarmerTree farmer, BlockPos pos, HarvestResult res) 
 	{
-		horizontalRange = farm.farmSize + 7;
+		horizontalRange = farm.radius + 7;
 		verticalRange = 30;
 		harvest(farm.getWorld(), farm.getMachinePos(), pos, res, farmer.getIgnoreMeta());
 	}

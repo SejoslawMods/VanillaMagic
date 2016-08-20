@@ -34,12 +34,12 @@ public class TileFarm extends TileMachine
 	public BlockPos chestPosOutput;
 	public EntityPlayerMP farmer;
 	
-	public void init(World world, BlockPos machinePos, int radius)
+	public void init(World world, BlockPos machinePos)
 	{
-		super.init(world, machinePos, radius);
+		super.init(world, machinePos);
 		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
 		this.workingPos = BlockPosHelper.copyPos(startPos);
-		this.radius = radius; //this.farmSize = (2 * radius) + 1;
+		//this.radius = radius; //this.farmSize = (2 * radius) + 1;
 		this.chestPosInput = this.pos.offset(EnumFacing.UP);
 		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
 	}
