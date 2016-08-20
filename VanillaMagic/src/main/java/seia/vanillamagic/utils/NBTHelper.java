@@ -25,6 +25,8 @@ public class NBTHelper
 	public static final String NBT_SERIALIZABLE = "INBTSerializable";
 	public static final String NBT_IITEMHANDLER_SLOT = "IItemHandlerSlot";
 	public static final String NBT_IITEMHANDLER_ITEMS = "IItemHandlerItems";
+	public static final String NBT_BLOCK_ID = "BlockID";
+	public static final String NBT_BLOCK_META = "BlockMeta";
 	
 	private NBTHelper()
 	{

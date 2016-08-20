@@ -1,22 +1,17 @@
 package seia.vanillamagic.quest;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.items.IItemHandler;
 import seia.vanillamagic.utils.ItemStackHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
@@ -110,9 +105,12 @@ public class QuestMoveBlock extends Quest
 		// Save to ItemStack
 		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
 		{
-			stackTagCompound.setTag(NBTHelper.NBT_TAG_COMPOUND_NAME, new NBTTagCompound());
-			NBTTagCompound questTag = stackTagCompound.getCompoundTag(NBTHelper.NBT_TAG_COMPOUND_NAME);
+			NBTTagCompound questTag = new NBTTagCompound();
 			Block wantedBlock = world.getBlockState(wantedBlockPos).getBlock();
+			int blockID = Block.REGISTRY.getIDForObject(wantedBlock);
+			int meta = wantedBlock.getMetaFromState(world.getBlockState(wantedBlockPos));
+			questTag.setInteger(NBTHelper.NBT_BLOCK_ID, blockID);
+			questTag.setInteger(NBTHelper.NBT_BLOCK_META, meta);
 			questTag = NBTHelper.setBlockPosDataToNBT(wantedBlockPos, questTag);
 			stackOffHand.setStackDisplayName("Saved block: " + wantedBlock.getLocalizedName());
 			TileEntity tileEntity = world.getTileEntity(wantedBlockPos);
@@ -121,30 +119,24 @@ public class QuestMoveBlock extends Quest
 				questTag = tileEntity.writeToNBT(questTag);
 				stackOffHand.setStackDisplayName("[TileEntity] " + stackOffHand.getDisplayName());
 			}
-			if(tileEntity instanceof IInventory)
-			{
-				IInventory inv = (IInventory) tileEntity;
-				questTag = NBTHelper.writeIInventoryToNBT(inv, questTag);
-			}
-			else if(tileEntity instanceof INBTSerializable<?>)
-			{
-				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileEntity;
-				questTag = NBTHelper.writeToINBTSerializable(serial, questTag);
-			}
-			else if(tileEntity instanceof IItemHandler)
-			{
-				IItemHandler handler = (IItemHandler) tileEntity;
-				questTag = NBTHelper.writeToIItemHandler(handler, questTag);
-			}
+			world.removeTileEntity(wantedBlockPos);
+			questTag.removeTag("x");
+			questTag.removeTag("y");
+			questTag.removeTag("z");
+			stackTagCompound.setTag(NBTHelper.NBT_TAG_COMPOUND_NAME, questTag);
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, stackOffHand);
+			world.setBlockToAir(wantedBlockPos);
 		}
 	}
 	
-	// TODO: Fix replacing TileEntity not always respond to right-click after move
 	public void handleLoad(World world, EntityPlayer player, BlockPos wantedBlockPos, EnumFacing hittedFace)
 	{
 		ItemStack stackOffHand = player.getHeldItemOffhand();
 		NBTTagCompound stackTagCompound = stackOffHand.getTagCompound();
+		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
+		{
+			return;
+		}
 		NBTTagCompound questTag = stackTagCompound.getCompoundTag(NBTHelper.NBT_TAG_COMPOUND_NAME);
 		/*
 		 * Unload from ItemStack 
@@ -154,58 +146,24 @@ public class QuestMoveBlock extends Quest
 		wantedBlockPos = wantedBlockPos.offset(hittedFace);
 		if(world.isAirBlock(wantedBlockPos))
 		{
-			BlockPos readdedPos = NBTHelper.getBlockPosDataFromNBT(questTag);
-			IBlockState readdedBlockState = world.getBlockState(readdedPos);
-			Block readdedBlock = readdedBlockState.getBlock();
+			Block readdedBlock = Block.REGISTRY.getObjectById(questTag.getInteger(NBTHelper.NBT_BLOCK_ID));
 			if(readdedBlock != null)
 			{
-				world.setBlockState(wantedBlockPos, readdedBlockState);
-				// TODO: Fix bug with rendering after replacing double-chest
-				int renderDistance = 3;
-				world.scheduleUpdate(readdedPos, readdedBlock, renderDistance);
-				for(EnumFacing faceing : EnumFacing.values())
-				{
-					BlockPos checkingPos = readdedPos.offset(faceing);
-					Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance, 
-							checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance);
-					world.markBlockRangeForRenderUpdate(checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance, 
-							checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance);
-					Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance, 
-							checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance);
-					world.markBlockRangeForRenderUpdate(checkingPos.getX() - renderDistance, checkingPos.getY() - renderDistance, checkingPos.getZ() - renderDistance, 
-							checkingPos.getX() + renderDistance, checkingPos.getY() + renderDistance, checkingPos.getZ() + renderDistance);
-				}
-				world.scheduleUpdate(readdedPos, readdedBlock, renderDistance);
-				world.updateEntities();
+				world.setBlockState(wantedBlockPos, readdedBlock.getStateFromMeta(questTag.getInteger(NBTHelper.NBT_BLOCK_META)));
+				world.notifyBlockOfStateChange(wantedBlockPos, readdedBlock);
 			}
-			TileEntity readdedTile = world.getTileEntity(readdedPos);
-			if(readdedTile != null)
+			TileEntity tile = world.getTileEntity(wantedBlockPos);
+			if(tile != null)
 			{
-				world.setTileEntity(wantedBlockPos, readdedTile);
-				world.removeTileEntity(readdedPos);
-				//world.getTileEntity(readdedPos).setPos(wantedBlockPos);
+				questTag.setInteger("x", wantedBlockPos.getX());
+				questTag.setInteger("y", wantedBlockPos.getY());
+				questTag.setInteger("z", wantedBlockPos.getZ());
+				tile.readFromNBT(questTag);
 			}
-			TileEntity tileAfter = world.getTileEntity(wantedBlockPos);
-			if(tileAfter instanceof IInventory)
-			{
-				IInventory inv = (IInventory) tileAfter;
-				NBTHelper.readIInventoryFromNBT(inv, questTag);
-			}
-			else if(tileAfter instanceof INBTSerializable<?>)
-			{
-				INBTSerializable<NBTTagCompound> serial = (INBTSerializable<NBTTagCompound>) tileAfter;
-				NBTHelper.readFromINBTSerializable(serial, questTag);
-			}
-			else if(tileAfter instanceof IItemHandler)
-			{
-				IItemHandler handler = (IItemHandler) tileAfter;
-				NBTHelper.readFromIItemHandler(handler, questTag);
-			}
-			tileAfter.markDirty();
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			newOffHand.stackSize = 1;
+			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
-			world.setBlockToAir(readdedPos);
 			return;
 		}
 	}
