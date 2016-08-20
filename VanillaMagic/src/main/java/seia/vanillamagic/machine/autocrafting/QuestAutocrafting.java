@@ -49,8 +49,12 @@ public class QuestAutocrafting extends Quest
 						}
 						if(player.hasAchievement(achievement))
 						{
+							if(player.getHeldItemOffhand() != null)
+							{
+								return;
+							}
 							TileAutocrafting tile = new TileAutocrafting();
-							tile.init(player, cauldronPos);
+							tile.init(world, cauldronPos);
 							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
 						}
 					}

@@ -5,36 +5,21 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.utils.CustomTileEntity;
 import seia.vanillamagic.utils.InventoryHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
 
-public abstract class TileMachine extends TileEntity implements IMachine
+public abstract class TileMachine extends CustomTileEntity implements IMachine
 {
 	public static final String REGISTRY_NAME = TileMachine.class.getSimpleName();
 	
-	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
-	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
-	public static final String NBT_MACHINE_POS_Z = "NBT_MACHINE_POS_Z";
-	public static final String NBT_WORKING_POS_X = "NBT_WORKING_POS_X";
-	public static final String NBT_WORKING_POS_Y = "NBT_WORKING_POS_Y";
-	public static final String NBT_WORKING_POS_Z = "NBT_WORKING_POS_Z";
-	public static final String NBT_RADIUS = "NBT_RADIUS";
-	public static final String NBT_ONE_OPERATION_COST = "NBT_ONE_OPERATION_COST";
-	public static final String NBT_TICKS = "NBT_TICKS";
-	public static final String NBT_MAX_TICKS = "NBT_MAX_TICKS";
-	public static final String NBT_IS_ACTIVE = "NBT_IS_ACTIVE";
-	public static final String NBT_DIMENSION = "NBT_DIMENSION";
-	public static final String NBT_NEEDS_FUEL = "NBT_NEEDS_FUEL";
-	
-	protected EntityPlayer player;
 	protected BlockPos workingPos;
 	protected BlockPos startPos;
 	protected ItemStack shouldBeInLeftHand;
@@ -71,21 +56,9 @@ public abstract class TileMachine extends TileEntity implements IMachine
 		return !InventoryHelper.isInventoryFull(getOutputInventory(), getOutputFacing());
 	}
 	
-	public void init(EntityPlayer player, BlockPos machinePos)
-	{
-		init(player.worldObj, machinePos);
-		setPlayerWhoPlacedMachine(player);
-	}
-	
 	public void init(World world, BlockPos machinePos)
 	{
-		init(world, machinePos, 4);
-	}
-	
-	public void init(World world, BlockPos machinePos, int radius)
-	{
-		this.worldObj = world;
-		setMachinePos(machinePos);
+		super.init(world, machinePos);
 		setWorkRadius(radius);
 		setWorkingPos(machinePos);
 	}
@@ -166,16 +139,6 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	{
 		return getOutputInventory() != null ? true : false;
 	}
-
-	public EntityPlayer getPlayerWhoPlacedMachine()
-	{
-		return player;
-	}
-	
-	public void setPlayerWhoPlacedMachine(EntityPlayer player)
-	{
-		this.player = player;
-	}
 	
 	public void setWorld(World world)
 	{
@@ -255,18 +218,18 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound compound = new NBTTagCompound();
-		compound.setInteger(NBT_MACHINE_POS_X, this.pos.getX());
-		compound.setInteger(NBT_MACHINE_POS_Y, this.pos.getY());
-		compound.setInteger(NBT_MACHINE_POS_Z, this.pos.getZ());
-		compound.setInteger(NBT_WORKING_POS_X, workingPos.getX());
-		compound.setInteger(NBT_WORKING_POS_Y, workingPos.getY());
-		compound.setInteger(NBT_WORKING_POS_Z, workingPos.getZ());
-		compound.setInteger(NBT_RADIUS, radius);
-		compound.setInteger(NBT_ONE_OPERATION_COST, oneOperationCost);
-		compound.setInteger(NBT_TICKS, ticks);
-		compound.setInteger(NBT_MAX_TICKS, maxTicks);
-		compound.setBoolean(NBT_IS_ACTIVE, isActive);
-		compound.setBoolean(NBT_NEEDS_FUEL, needsFuel);
+		compound.setInteger(NBTHelper.NBT_MACHINE_POS_X, this.pos.getX());
+		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Y, this.pos.getY());
+		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Z, this.pos.getZ());
+		compound.setInteger(NBTHelper.NBT_WORKING_POS_X, workingPos.getX());
+		compound.setInteger(NBTHelper.NBT_WORKING_POS_Y, workingPos.getY());
+		compound.setInteger(NBTHelper.NBT_WORKING_POS_Z, workingPos.getZ());
+		compound.setInteger(NBTHelper.NBT_RADIUS, radius);
+		compound.setInteger(NBTHelper.NBT_ONE_OPERATION_COST, oneOperationCost);
+		compound.setInteger(NBTHelper.NBT_TICKS, ticks);
+		compound.setInteger(NBTHelper.NBT_MAX_TICKS, maxTicks);
+		compound.setBoolean(NBTHelper.NBT_IS_ACTIVE, isActive);
+		compound.setBoolean(NBTHelper.NBT_NEEDS_FUEL, needsFuel);
 		return compound;
 	}
 	
@@ -281,22 +244,22 @@ public abstract class TileMachine extends TileEntity implements IMachine
 	
 	public void deserializeNBT(NBTTagCompound compound)
 	{
-		int machinePosX = compound.getInteger(NBT_MACHINE_POS_X);
-		int machinePosY = compound.getInteger(NBT_MACHINE_POS_Y);
-		int machinePosZ = compound.getInteger(NBT_MACHINE_POS_Z);
+		int machinePosX = compound.getInteger(NBTHelper.NBT_MACHINE_POS_X);
+		int machinePosY = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Y);
+		int machinePosZ = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Z);
 		BlockPos machinePos = new BlockPos(machinePosX, machinePosY, machinePosZ);
 		this.pos = machinePos;
-		int workingPosX = compound.getInteger(NBT_WORKING_POS_X);
-		int workingPosY = compound.getInteger(NBT_WORKING_POS_Y);
-		int workingPosZ = compound.getInteger(NBT_WORKING_POS_Z);
+		int workingPosX = compound.getInteger(NBTHelper.NBT_WORKING_POS_X);
+		int workingPosY = compound.getInteger(NBTHelper.NBT_WORKING_POS_Y);
+		int workingPosZ = compound.getInteger(NBTHelper.NBT_WORKING_POS_Z);
 		BlockPos workingPos = new BlockPos(workingPosX, workingPosY, workingPosZ);
 		this.workingPos = workingPos;
-		this.radius = compound.getInteger(NBT_RADIUS);
-		this.oneOperationCost = compound.getInteger(NBT_ONE_OPERATION_COST);
-		this.ticks = compound.getInteger(NBT_TICKS);
-		this.maxTicks = compound.getInteger(NBT_MAX_TICKS);
-		this.isActive = compound.getBoolean(NBT_IS_ACTIVE);
-		this.needsFuel = compound.getBoolean(NBT_NEEDS_FUEL);
+		this.radius = compound.getInteger(NBTHelper.NBT_RADIUS);
+		this.oneOperationCost = compound.getInteger(NBTHelper.NBT_ONE_OPERATION_COST);
+		this.ticks = compound.getInteger(NBTHelper.NBT_TICKS);
+		this.maxTicks = compound.getInteger(NBTHelper.NBT_MAX_TICKS);
+		this.isActive = compound.getBoolean(NBTHelper.NBT_IS_ACTIVE);
+		this.needsFuel = compound.getBoolean(NBTHelper.NBT_NEEDS_FUEL);
 	}
 	
 	public boolean hasInputInventory()

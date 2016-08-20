@@ -53,17 +53,13 @@ public class QuestMoveBlock extends Quest
 					ItemStack stackOffHand = player.getHeldItemOffhand();
 					if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
 					{
-						if(!player.hasAchievement(achievement))
+						if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
 						{
-							player.addStat(achievement, 1);
-						}
-						if(player.hasAchievement(achievement))
-						{
-							/*
-							 * can be write to ONLY one item
-							 * IGNORES THE offHandRequiredStack.stackSize
-							 */
-							if(stackOffHand.stackSize == 1)
+							if(!player.hasAchievement(achievement))
+							{
+								player.addStat(achievement, 1);
+							}
+							if(player.hasAchievement(achievement))
 							{
 								if(clickedTimes > 0)
 								{
@@ -161,10 +157,8 @@ public class QuestMoveBlock extends Quest
 				tile.readFromNBT(questTag);
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
-			newOffHand.stackSize = 1;
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
-			return;
 		}
 	}
 }

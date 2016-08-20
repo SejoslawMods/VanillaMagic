@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,17 +27,6 @@ import net.minecraftforge.common.util.INBTSerializable;
  */
 public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable
 {
-	/**
-	 * Returns the player who placed the Machine.
-	 */
-	@Nullable
-	EntityPlayer getPlayerWhoPlacedMachine();
-	
-	/**
-	 * Set Player who placed the Machine.
-	 */
-	void setPlayerWhoPlacedMachine(EntityPlayer player);
-	
 	/**
 	 * Returns the World on which Machine is.
 	 */

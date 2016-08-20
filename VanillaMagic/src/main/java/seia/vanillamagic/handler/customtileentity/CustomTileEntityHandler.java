@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -86,5 +88,16 @@ public class CustomTileEntityHandler
 			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
 		}
 		return saveHandlers.get(rootDir).addReadedTile(tileEntity, dimension);
+	}
+	
+	@Nullable
+	public TileEntity getCustomTileEntity(BlockPos tilePos, int dimension)
+	{
+		String rootDir = getRootDir();
+		if(!saveHandlers.containsKey(rootDir))
+		{
+			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
+		}
+		return saveHandlers.get(rootDir).getCustomTileEntity(tilePos, dimension);
 	}
 }

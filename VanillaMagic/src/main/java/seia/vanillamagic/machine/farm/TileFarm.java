@@ -7,7 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
@@ -30,23 +29,17 @@ public class TileFarm extends TileMachine
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getSimpleName();
 	
-	public int farmSize;
+	public int radius;
 	public BlockPos chestPosInput;
 	public BlockPos chestPosOutput;
 	public EntityPlayerMP farmer;
-	
-	public void init(EntityPlayer player, BlockPos machinePos, int radius)
-	{
-		init(player.worldObj, machinePos, radius);
-		this.player = player;
-	}
 	
 	public void init(World world, BlockPos machinePos, int radius)
 	{
 		super.init(world, machinePos, radius);
 		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
 		this.workingPos = BlockPosHelper.copyPos(startPos);
-		this.farmSize = radius; //this.farmSize = (2 * radius) + 1;
+		this.radius = radius; //this.farmSize = (2 * radius) + 1;
 		this.chestPosInput = this.pos.offset(EnumFacing.UP);
 		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
 	}
@@ -611,7 +604,7 @@ public class TileFarm extends TileMachine
 	@Nonnull
 	private BlockPos getNextCoord() 
 	{
-		int size = farmSize;
+		int size = radius;
 		BlockPos loc = getPos();
 		if(workingPos == null) 
 		{

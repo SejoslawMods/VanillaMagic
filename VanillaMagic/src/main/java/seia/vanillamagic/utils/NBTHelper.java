@@ -13,6 +13,20 @@ import net.minecraftforge.items.IItemHandler;
 
 public class NBTHelper
 {
+	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
+	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
+	public static final String NBT_MACHINE_POS_Z = "NBT_MACHINE_POS_Z";
+	public static final String NBT_WORKING_POS_X = "NBT_WORKING_POS_X";
+	public static final String NBT_WORKING_POS_Y = "NBT_WORKING_POS_Y";
+	public static final String NBT_WORKING_POS_Z = "NBT_WORKING_POS_Z";
+	public static final String NBT_RADIUS = "NBT_RADIUS";
+	public static final String NBT_ONE_OPERATION_COST = "NBT_ONE_OPERATION_COST";
+	public static final String NBT_TICKS = "NBT_TICKS";
+	public static final String NBT_MAX_TICKS = "NBT_MAX_TICKS";
+	public static final String NBT_IS_ACTIVE = "NBT_IS_ACTIVE";
+	public static final String NBT_DIMENSION = "NBT_DIMENSION";
+	public static final String NBT_NEEDS_FUEL = "NBT_NEEDS_FUEL";
+	
 	public static final String NBT_LOCALIZED_NAME_BLOCK = "localizedNameBlock";
 	public static final String NBT_UNLOCALIZED_NAME_BLOCK = "unlocalizedNameBlock";
 	public static final String NBT_POSX = "posX";
@@ -27,6 +41,7 @@ public class NBTHelper
 	public static final String NBT_IITEMHANDLER_ITEMS = "IItemHandlerItems";
 	public static final String NBT_BLOCK_ID = "BlockID";
 	public static final String NBT_BLOCK_META = "BlockMeta";
+	public static final String NBT_CLASS_NAME = "ClassName";
 	
 	private NBTHelper()
 	{

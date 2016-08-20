@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -68,7 +70,7 @@ public class CustomTileEntityOneSaveHandler
 	private void add(TileEntity customTileEntity)
 	{
 		customTileEntity.getWorld().setTileEntity(customTileEntity.getPos(), customTileEntity);
-		customTileEntity.getWorld().tickableTileEntities.add(customTileEntity);
+		//customTileEntity.getWorld().tickableTileEntities.add(customTileEntity); // TODO:
 		BlockPosHelper.printCoords("CustomTileEntity (" + customTileEntity.getClass().getSimpleName() + ") added at pos:", customTileEntity.getPos());
 		customTileEntity.getWorld().updateEntities();
 	}
@@ -169,5 +171,19 @@ public class CustomTileEntityOneSaveHandler
 			readedTileEntities.get(dimension).add(tileEntity);
 			return true;
 		}
+	}
+
+	@Nullable
+	public TileEntity getCustomTileEntity(BlockPos tilePos, int dimension) 
+	{
+		List<TileEntity> tiles = loadedTileEntities.get(dimension);
+		for(TileEntity tile : tiles)
+		{
+			if(BlockPosHelper.isSameBlockPos(tilePos, tile.getPos()))
+			{
+				return tile;
+			}
+		}
+		return null;
 	}
 }

@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -33,13 +32,6 @@ public class TileQuarry extends TileMachine
 	public Block redstoneBlock;
 
 	private Random rand = new Random();
-	
-	public void init(EntityPlayer whoPlacedQuarry, BlockPos machinePos)
-	{
-		super.init(whoPlacedQuarry.worldObj, machinePos);
-		this.player = whoPlacedQuarry;
-		this.init(worldObj, machinePos);
-	}
 	
 	public void init(World world, BlockPos machinePos)
 	{
