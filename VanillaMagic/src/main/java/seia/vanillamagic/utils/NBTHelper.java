@@ -11,6 +11,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 
+/**
+ * Stores all the Vanilla Magic NBT tags.
+ */
 public class NBTHelper
 {
 	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
@@ -42,6 +45,9 @@ public class NBTHelper
 	public static final String NBT_BLOCK_ID = "BlockID";
 	public static final String NBT_BLOCK_META = "BlockMeta";
 	public static final String NBT_CLASS_NAME = "ClassName";
+	
+	public static final String NBT_TAG_COMPOUND_ENTITY = "NBTQuestCaptureEntity";
+	public static final String NBT_ENTITY_TYPE = "EntityType";
 	
 	private NBTHelper()
 	{
