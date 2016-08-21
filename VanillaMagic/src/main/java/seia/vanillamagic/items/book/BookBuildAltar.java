@@ -21,7 +21,7 @@ public class BookBuildAltar implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getBook(), new Object[]{
+		GameRegistry.addRecipe(getItem(), new Object[]{
 				"   ",
 				"BBB",
 				"   ",
@@ -29,7 +29,7 @@ public class BookBuildAltar implements IBook
 		});
 	}
 	
-	public ItemStack getBook()
+	public ItemStack getItem()
 	{
 		ItemStack infoBook = new ItemStack(BookRegistry.BOOK_ITEM);
 		NBTTagCompound data = new NBTTagCompound();
@@ -213,5 +213,10 @@ public class BookBuildAltar implements IBook
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_BUILD_ALTAR);
 		return infoBook.copy();
+	}
+	
+	public String getUniqueNBTName() 
+	{
+		return BookRegistry.BOOK_NBT_UID;
 	}
 }

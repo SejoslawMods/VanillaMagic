@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
+import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.farm.QuestMachineFarm;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
@@ -240,6 +241,8 @@ public class QuestList
 			new ItemStack[]{ItemStackHelper.getHead(1, 1)}, 
 			5, 
 			EnumWand.BLAZE_ROD);
+	
+	public static final QuestAccelerationCrystal QUEST_ACCELERATION_CRYSTAL = new QuestAccelerationCrystal(QUEST_CRAFT_WITHER_SKELETON_HEAD, +2, 0, new ItemStack(Items.NETHER_STAR), "Acceleration Crystal", "accelerationCrystal");
 	
 	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_6 = new QuestBuildAltar(QUEST_PICK_BLAZE_ROD, 0, +2, "Build Altar Tier 6", "buildAltarTier6", 6);
 	

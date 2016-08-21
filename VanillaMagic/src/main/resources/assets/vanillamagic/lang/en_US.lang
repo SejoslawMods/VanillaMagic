@@ -325,6 +325,9 @@ achievement.captureEntity.desc=Hold Nether Wand in right hand and 1x Book in lef
 achievement.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
 achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand
 
+achievement.accelerationCrystal=Acceleration Crystal
+achievement.accelerationCrystal.desc=Craft it with Nether Star in the middle and Books on top, bottom, left and right. Shift-right-click on block to speed it's ticks. (For instance: speed up Furnace)
+
 achievement.buildAltarTier6=Build Altar Tier 6
 achievement.buildAltarTier6.desc=Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron
 

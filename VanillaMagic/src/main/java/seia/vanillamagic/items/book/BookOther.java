@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
+import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
 import seia.vanillamagic.quest.Quest;
@@ -27,7 +28,7 @@ public class BookOther implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getBook(), new Object[]{
+		GameRegistry.addRecipe(getItem(), new Object[]{
 				"   ",
 				"   ",
 				"BBB",
@@ -35,7 +36,7 @@ public class BookOther implements IBook
 		});
 	}
 	
-	public ItemStack getBook() 
+	public ItemStack getItem() 
 	{
 		ItemStack infoBook = new ItemStack(BookRegistry.BOOK_ITEM);
 		NBTTagCompound data = new NBTTagCompound();
@@ -78,7 +79,7 @@ public class BookOther implements IBook
 								TextHelper.getEnters(2) + 
 								"§0" +
 								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc"
-										)));
+								)));
 						pages.appendTag(new NBTTagString(
 								"Quarry from top:" + ENTER +
 								"           §aN           " + ENTER +
@@ -89,43 +90,70 @@ public class BookOther implements IBook
 								"           §aS"
 								));
 					}
-//					else if(quest instanceof QuestAutocrafting)
-//					{
-//						pages.appendTag(new NBTTagString(
-//								BookRegistry.COLOR_HEADER + 
-//								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
-//								TextHelper.getEnters(2) + 
-//								"§0" +
-//								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
-//								"--->"
-//								));
-//						pages.appendTag(new NBTTagString(
-//								"§0Layer 1: (§7X-Empty space, §0C-Cauldron)" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XX§0C§7XX" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XXXXX" + TextHelper.getEnters(2) +
-//								"§0Layer 2: (§7X-Empty space, §0C-CraftingTable)" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XX§0C§7XX" + ENTER +
-//								"§7XXXXX"
-//								));
-//						pages.appendTag(new NBTTagString(
-//								"§0Layer 3: (§7X-Empty space, §6C-Chest§0)" + ENTER +
-//								"§6C§7X§6C§7X§6C" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§6C§7X§6C§7X§6C" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§6C§7X§6C§7X§6C" + TextHelper.getEnters(2) +
-//								"§0Layer 4: (§7X-Empty space, §0H-Hopper)" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XXXXX" + ENTER +
-//								"§7XX§0H§7XX" + ENTER +
-//								"§7XXXXX"
-//								));
-//					}
+					else if(quest instanceof QuestAccelerationCrystal)
+					{
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
+								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.getEnters(2) + 
+								"§0" +
+								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								"--->"
+								));
+						pages.appendTag(new NBTTagString(
+								"Crafting:" + TextHelper.getEnters(2) +
+								"[ ][§6B§0][ ]" + ENTER +
+								"[§6B§0][§8NS§0][§6B§0]" + ENTER +
+								"[ ][§6B§0][ ]"
+								));
+					}
+					else if(quest instanceof QuestAutocrafting)
+					{
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
+								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.getEnters(2) + 
+								"§0" +
+								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								"--->"
+								));
+						pages.appendTag(new NBTTagString(
+								"§0Layer 1: (§7X-Empty space, §6C-Chest§0)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§6C§7XX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + TextHelper.getEnters(2) +
+								"§0Layer 2: (§7X-Empty space, §0C-Cauldron§0)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§0C§7XX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX"
+								));
+						pages.appendTag(new NBTTagString(
+								"§0Layer 3: (§7X-Empty space, §6C-CraftingTable§0)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§6C§7XX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + TextHelper.getEnters(2) +
+								"§0Layer 4: (§7X-Empty space, §0H-Hopper§0)" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XX§0H§7XX" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§7XXXXX"
+								));
+						pages.appendTag(new NBTTagString(
+								"§0Layer 5: (§7X-Empty space, §6C-Chest§0)" + ENTER +
+								"§6C§7X§6C§7X§6C" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§6C§7X§6C§7X§6C" + ENTER +
+								"§7XXXXX" + ENTER +
+								"§6C§7X§6C§7X§6C"
+								));
+					}
 					// Others
 					else if(!(quest instanceof QuestCraftOnAltar) &&
 							!(quest instanceof QuestCastSpell) &&
@@ -149,5 +177,10 @@ public class BookOther implements IBook
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_OTHER);
 		return infoBook.copy();
+	}
+	
+	public String getUniqueNBTName() 
+	{
+		return BookRegistry.BOOK_NBT_UID;
 	}
 }

@@ -20,7 +20,7 @@ public class BookSpells implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getBook(), new Object[]{
+		GameRegistry.addRecipe(getItem(), new Object[]{
 				" B ",
 				" B ",
 				" B ",
@@ -28,7 +28,7 @@ public class BookSpells implements IBook
 		});
 	}
 	
-	public ItemStack getBook() 
+	public ItemStack getItem() 
 	{
 		ItemStack infoBook = new ItemStack(BookRegistry.BOOK_ITEM);
 		NBTTagCompound data = new NBTTagCompound();
@@ -64,5 +64,10 @@ public class BookSpells implements IBook
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_SPELLS);
 		return infoBook.copy();
+	}
+	
+	public String getUniqueNBTName() 
+	{
+		return BookRegistry.BOOK_NBT_UID;
 	}
 }

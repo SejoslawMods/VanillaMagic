@@ -10,6 +10,7 @@ import seia.vanillamagic.chunkloader.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
 import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
+import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.quest.QuestList;
 
@@ -59,5 +60,6 @@ public class VanillaMagic
 	{
 		BookRegistry.INSTANCE.postInit();
 		CustomTileEntityHandler.INSTANCE.postInit();
+		VanillaMagicItems.INSTANCE.postInit();
 	}
 }

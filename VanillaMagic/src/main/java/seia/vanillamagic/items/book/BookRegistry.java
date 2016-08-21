@@ -67,7 +67,7 @@ public class BookRegistry
 		{
 			if(books.get(i).getUID() == bookUID)
 			{
-				return books.get(i).getBook();
+				return books.get(i).getItem();
 			}
 		}
 		return null;
