@@ -6,6 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 
+/** 
+ * Base class for all the quests.
+ */
 public abstract class Quest
 {
 	public final Achievement achievement;
