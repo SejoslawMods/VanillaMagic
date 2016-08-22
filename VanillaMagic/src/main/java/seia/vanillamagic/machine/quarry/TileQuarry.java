@@ -199,7 +199,7 @@ public class TileQuarry extends TileMachine
 		return startFace;
 	}
 	
-	public void goToNextPosAfterHitBedrock() //TODO:
+	public void goToNextPosAfterHitBedrock()
 	{
 		workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosFacing);
 		if(BlockPosHelper.distanceInLine(workingPos, startPos) > BASIC_QUARRY_SIZE)

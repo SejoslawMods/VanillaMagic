@@ -266,7 +266,7 @@ achievement.mining3x3=Mining 3x3
 achievement.mining3x3.desc=
 
 achievement.quarry=Vanilla Quarry !!! (Must be restarted when logging in.)
-achievement.quarry.desc=Place Cauldron and than on the East side of the Cauldron place DiamondBlock and on the North side place RedstoneBlock. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry. Drop fuel into Cauldron. (check console for help) (output to IInventory on West, input fuel from IInventory on Top)
+achievement.quarry.desc=Place Cauldron and than on the Left side of the Cauldron place DiamondBlock and on the Back place RedstoneBlock. On Top place inventory (Chest) as input (with fuel). On Right place inventory (Chest) as output. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry.
 
 achievement.arrowMachineGun=Arrow Machine Gun
 achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to right hand and right-click (or hold)
