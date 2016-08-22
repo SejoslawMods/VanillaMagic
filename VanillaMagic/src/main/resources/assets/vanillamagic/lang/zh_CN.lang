@@ -2,17 +2,17 @@
 #Book Info
 ############################
 
-book.altarCrafting.itemName=原生魔法炼造
-book.altarCrafting.title=魔法炼造
+book.altarCrafting.itemName=原生魔法-炼金
+book.altarCrafting.title=魔法炼金的小知识。
 
-book.spells.itemName=原生魔法释放
-book.spells.title=魔法释放
+book.spells.itemName=原生魔法-施放
+book.spells.title=魔法施放的小知识。
 
-book.altarBuilding.itemName=原生魔术结构
-book.altarBuilding.title=魔术结构
+book.altarBuilding.itemName=原生魔法-结构
+book.altarBuilding.title=魔法多方块结构的小知识。
 
-book.other.itemName=原生魔术杂项
-book.other.title=杂项
+book.other.itemName=原生魔法-杂项
+book.other.title=一些小小的杂物。
 
 
 
@@ -20,9 +20,9 @@ book.other.title=杂项
 #Wand Names
 ############################
 
-wand.stick=木质魔杖
-wand.blazeRod= 烈焰魔杖
-wand.netherStar=下界源质
+wand.stick=木棍魔杖
+wand.blazeRod=烈焰魔杖
+wand.netherStar=下界之星
 wand.endRod=末影魔杖
 
 
@@ -31,280 +31,302 @@ wand.endRod=末影魔杖
 #Achievements
 ############################
 
-achievement.craftStick=木棍！该怎么变成魔杖呢？
-achievement.craftStick.desc=啊哈，一根木棍！不过你还应该在铁砧上把它命名为'Stick Wand'，也就是所谓的魔杖啦
-
-achievement.portableCraftingTable=便捷工作台
-achievement.portableCraftingTable.desc=工作台似乎还有其他用途，比方说右手拿着它对空气右击？
-
-achievement.spellFlintAndSteel=想玩火吗？少年
-achievement.spellFlintAndSteel.desc=右手拿着你的魔杖，左手拿着煤炭，右键方块，看看会发生什么？
-
-achievement.spellSmallFireball=FFF团晋级法师？
-achievement.spellSmallFireball.desc=右手拿着烈焰魔杖，左手有至少2个红石时右键，看看会发生什么？
-
-achievement.spellFusRoDah=Fus-Ro-Dah !!!
-achievement.spellFusRoDah.desc=右手拿着烈焰魔杖，左手有至少一个龙息时右键，看看会发生什么？
-
-achievement.spellLargeFireball=爆炸吧XX 
-achievement.spellLargeFireball.desc=右手拿着烈焰魔杖，左手有至少一个恶魂之泪时右键，看看会发生什么？
-
-achievement.spellTeleport=传送 !!! 
-achievement.spellTeleport.desc=右手拿着烈焰魔杖，左手有至少一个岩浆膏时右键，看看会发生什么？
-
-achievement.spellTeleportToNether=下地狱吧
-achievement.spellTeleportToNether.desc=右手拿着烈焰魔杖，左手有至少两个地狱疣时右键，看看会发生什么？
-
-achievement.spellTeleportToEnd=再临末界
-achievement.spellTeleportToEnd.desc=右手拿着烈焰魔杖，左手有至少一个末影水晶时右键，看看会发生什么？
-
-achievement.spellSummonMeteor=陨石 !!! 
-achievement.spellSummonMeteor.desc=右手拿着下界之星，左手有至少一个金块时右键，看看会发生什么？
-
-achievement.spellWeatherRain=来点雨水
-achievement.spellWeatherRain.desc=右手拿着烈焰魔杖，左手有至少一个水桶时右键，看看会发生什么？
-
-achievement.spellWeatherClear=晴空万里
-achievement.spellWeatherClear.desc=右手拿着烈焰魔杖，左手有至少一个空桶时右键，看看会发生什么？
-
-achievement.spellWeatherThunderstorm=让雷雨来得更猛烈些吧
-achievement.spellWeatherThunderstorm.desc=右手拿着烈焰魔杖，左手有至少一个苦力怕头时右键，看看会发生什么？
-
-achievement.spellMoveInAir=看我凌云步
-achievement.spellMoveInAir.desc=右手拿着烈焰魔杖，左手有至少一个羽毛时右键，看看会发生什么？
-
-achievement.spellPullEntityToPlayer=嘿！你们，过来些
-achievement.spellPullEntityToPlayer.desc=右手拿着烈焰魔杖，左手有至少4个线时右键，看看会发生什么？
-
-achievement.spellFreezeWater3x3=我的脚下有寒冰！
-achievement.spellFreezeWater3x3.desc=右手拿着烈焰魔杖，左手有至少一个雪块时右键，看看会发生什么？
-
-achievement.spellSummonLightningBolt=天降正义！
-achievement.spellSummonLightningBolt.desc=右手拿着烈焰魔杖，左手有至少32个火药时右键，看看会发生什么？
+achievement.craftStick=制作魔杖
+achievement.craftStick.desc=制作一根木棍！然后将它用铁砧命名为“木棍魔杖”。最初的魔杖制作完成DA☆ZE。
 
 
 
-achievement.spellSummonChicken=召唤鸡
-achievement.spellSummonChicken.desc=右手拿着下界之星，左手有至少32个鸡肉时右键
+achievement.portableCraftingTable=便携式工作台
+achievement.portableCraftingTable.desc=右手高举工作台并对着空气右键。感受便携式工作台的快感吧！
 
-achievement.spellSummonPig=召唤猪
-achievement.spellSummonPig.desc=右手拿着下界之星，左手有至少32个猪肉时右键
-
-achievement.spellSummonCow=召唤牛
-achievement.spellSummonCow.desc=右手拿着下界之星，左手有至少32个牛肉时右键
-
-achievement.spellSummonMooshroom=召唤牟菇
-achievement.spellSummonMooshroom.desc=右手拿着下界之星，左手有至少32个熟牛肉时右键
-
-achievement.spellSummonSheep=召唤羊
-achievement.spellSummonSheep.desc=右手拿着下界之星，左手有至少32个羊肉时右键
-
-achievement.spellSummonWolf=召唤狼
-achievement.spellSummonWolf.desc=右手拿着下界之星，左手有至少32个熟羊肉时右键
-
-achievement.spellSummonRabbit=召唤兔子
-achievement.spellSummonRabbit.desc=右手拿着下界之星，左手有至少32个兔肉时右键
-
-achievement.spellSummonHorse=召唤马
-achievement.spellSummonHorse.desc=右手拿着下界之星，左手有至少1个鞍时右键
-
-achievement.spellSummonVillager召唤村民
-achievement.spellSummonVillager.desc=右手拿着下界之星，左手有至少32本书时右键
+achievement.autocrafting=自动工作台!!!
+achievement.autocrafting.desc=请在平地放置3x3箱子并且保证每两个之间有1方块空间. 在正中间箱子上方放置漏斗.漏斗上方放置工作台,再在工作台上方放置坩埚。坩埚上方再放置一个箱子（最后这个箱子用于提供燃料）。右手持烈焰魔杖，左手留空，Shift+右键工作台可激活该结构。在有燃料的前提下，该结构会从每个箱子的第一格读取物品用于合成，也就是说南面所有箱子的第一格对应合成台的最上一行，以此类推。漏斗用于输出成品，可以用其他箱子接收漏斗中的成品
 
 
 
-achievement.spellSummonZombie=召唤僵尸
-achievement.spellSummonZombie.desc=右手拿着下界之星，左手有至少32个腐肉时右键
+achievement.spellFlintAndSteel=魔法打火石
+achievement.spellFlintAndSteel.desc=右持木棍魔杖，左持煤炭，右键方块。火焰将升腾而起。[施法消耗：煤炭×1]
 
-achievement.spellSummonCreeper=召唤苦力怕
-achievement.spellSummonCreeper.desc=右手拿着下界之星，左手有至少32个火药时右键
+achievement.spellSmallFireball=火焰之触
+achievement.spellSmallFireball.desc=右持烈焰魔杖，左持红石，右键敌人。让火焰净化一切污秽！[施法消耗：红石×2]
 
-achievement.spellSummonSkeleton=骷髅
-achievement.spellSummonSkeleton.desc=右手拿着下界之星，左手有至少32个骨头时右键
+achievement.spellFusRoDah=Fus-Ro-Dah!!!
+achievement.spellFusRoDah.desc=右持烈焰魔杖，左持龙息，右键空气。把包围你的敌人全部推开！[施法消耗：龙息×1]
 
-achievement.spellSummonBlaze=召唤烈焰人
-achievement.spellSummonBlaze.desc=右手拿着下界之星，左手有至少32个烈焰魔杖时右键
+achievement.spellLargeFireball=炎爆
+achievement.spellLargeFireball.desc=右持烈焰魔杖，左持恶魂之泪，右键敌人。爆炸、燃烧、哀嚎吧！在绝望中逝去吧！[施法消耗：恶魂之泪×1]
 
-achievement.spellSummonMagmaCube=召唤岩浆怪
-achievement.spellSummonMagmaCube.desc=右手拿着下界之星，左手有至少32个岩浆膏时右键
+achievement.spellTeleport=空间裂隙行者
+achievement.spellTeleport.desc=右持烈焰魔杖，左持岩浆膏，右键你想前往之地。目光可视之处，皆可瞬息抵达。[施法消耗：岩浆膏×1]
 
-achievement.spellSummonGhast=召唤恶魂
-achievement.spellSummonGhast.desc=右手拿着下界之星，左手有至少32个恶魂之泪时右键
+achievement.spellTeleportToNether=地狱裂隙行者
+achievement.spellTeleportToNether.desc=右持烈焰魔杖，左持地狱疣，右键空气。主世界和地狱之间再无屏障！[施法消耗：地狱疣×2]
 
-achievement.spellSummonEnderman=召唤末影人
-achievement.spellSummonEnderman.desc=右手拿着下界之星，左手有至少32个烈焰粉时右键
+achievement.spellTeleportToEnd=末界裂隙行者
+achievement.spellTeleportToEnd.desc=右持烈焰魔杖，左持末影水晶，右键空气。穿行在末界和主世界之间！[施法消耗：末影水晶×1]
 
-achievement.spellSummonSpider=召唤蜘蛛
-achievement.spellSummonSpider.desc=右手拿着下界之星，左手有至少32个线时右键
+achievement.spellSummonMeteor=艺术创造者
+achievement.spellSummonMeteor.desc=右持下界之星，左持金块，右键空气。艺术从天而降，终结一切！[施法消耗：金块×1]
 
-achievement.spellSummonSlime=召唤史莱姆
-achievement.spellSummonSlime.desc=右手拿着下界之星，左手有至少32个史莱姆球时右键
+achievement.spellWeatherRain=祈雨术
+achievement.spellWeatherRain.desc=右持烈焰魔杖，左持水桶，右键空气。召唤细雨滋润万物。[施法消耗：水桶×1]
 
-achievement.spellSummonWitch=召唤女巫
-achievement.spellSummonWitch.desc=右手拿着下界之星，左手有至少32个萤石粉时右键
+achievement.spellWeatherClear=逐雨术
+achievement.spellWeatherClear.desc=右持烈焰魔杖，左持空桶，右键空气。召唤阳光普照大地。[施法消耗：空桶×1]
 
+achievement.spellWeatherThunderstorm=雷暴
+achievement.spellWeatherThunderstorm.desc=右持烈焰魔杖，左持苦力怕头，右键空气。召唤雷云覆盖一切。[施法消耗：苦力怕头×1]
 
+achievement.spellMoveInAir=裂空
+achievement.spellMoveInAir.desc=右持烈焰魔杖，左持羽毛，右键空气。Weeeee!!!!!![施法消耗：羽毛×1]
 
-achievement.craftBook=书，也许有传承的知识？
-achievement.craftBook.desc=做一本书
+achievement.spellPullEntityToPlayer=法师之手
+achievement.spellPullEntityToPlayer.desc=右持烈焰魔杖，左持线，右键敌人。嘿，过来，我给你看个宝贝。[施法消耗：线×4]
 
-achievement.craftBookshelf=书架，也许需要一个大图书馆？
-achievement.craftBookshelf.desc=做一个书架
+achievement.spellFreezeWater3x3=寒冰之径
+achievement.spellFreezeWater3x3.desc=右持烈焰魔杖，左持雪块，右键水面。冰雪的力量，让人难以忍受但绝对公平。[施法消耗：雪块×1]
 
-achievement.mineDiamond=好像找到了些值钱的东西
-achievement.mineDiamond.desc=挖到一个钻石
-
-achievement.mineObsidian=没有更硬一点的玩意了吗？
-achievement.mineObsidian.desc=挖一个黑曜石
-
-achievement.craftEnchantingTable=附！魔！台！
-achievement.craftEnchantingTable.desc=制作附魔台
-
-achievement.chunkLoader=我相信客体永久性！就算我看不到，那些东西也应该一直在动！
-achievement.chunkLoader.desc=用5个黑曜石组成在同一平面十字架，正中心上方摆上附魔台，其余上方插上火把。以该结构为中心3x3的区块将被保持加载
+achievement.spellSummonLightningBolt=雷霆之怒
+achievement.spellSummonLightningBolt.desc=右持烈焰魔杖，左持火药，右键空气。雷霆啊，眼前的敌人值得一战！[施法消耗：火药×32]
 
 
 
-achievement.craftCauldron=坩埚！魔法怎能少了这玩意？
-achievement.craftCauldron.desc=制作一个坩埚吧
+achievement.spellSummonChicken=献祭誓约-鸡
+achievement.spellSummonChicken.desc=右持下界之星，左持鸡肉，右键空气。[祭品消耗：鸡肉×32]
 
-achievement.mineRedstone=红石！有点神秘的东西
-achievement.mineRedstone.desc=挖掘至少一个红石矿
+achievement.spellSummonPig=献祭誓约-猪
+achievement.spellSummonPig.desc=右持下界之星，左持猪肉，右键空气。[祭品消耗：猪肉×32]
+
+achievement.spellSummonCow=献祭誓约-牛
+achievement.spellSummonCow.desc=右持下界之星，左持牛肉，右键空气。[祭品消耗：牛肉×32]
+
+achievement.spellSummonMooshroom=献祭誓约-牟菇
+achievement.spellSummonMooshroom.desc=右持下界之星，左持熟牛肉，右键空气。[祭品消耗：熟牛肉×32]
+
+achievement.spellSummonSheep=献祭誓约-羊
+achievement.spellSummonSheep.desc=右持下界之星，左持羊肉，右键空气。[祭品消耗：羊肉×32]
+
+achievement.spellSummonWolf=献祭誓约-狼
+achievement.spellSummonWolf.desc=右持下界之星，左持熟羊肉，右键空气。[祭品消耗：熟羊肉×32]
+
+achievement.spellSummonRabbit=献祭誓约-兔子
+achievement.spellSummonRabbit.desc=右持下界之星，左持兔肉，右键空气。[祭品消耗：兔肉×32]
+
+achievement.spellSummonHorse=献祭誓约-马
+achievement.spellSummonHorse.desc=右持下界之星，左持鞍，右键空气。[祭品消耗：鞍×1]
+
+achievement.spellSummonVillager=献祭誓约-召唤村民
+achievement.spellSummonVillager.desc=右持下界之星，左持书，右键空气。[祭品消耗：书×32]
+
+
+
+achievement.spellSummonZombie=献祭誓约-僵尸
+achievement.spellSummonZombie.desc=右持下界之星，左持腐肉，右键空气。[祭品消耗：腐肉×32]
+
+achievement.spellSummonCreeper=献祭誓约-苦力怕
+achievement.spellSummonCreeper.desc=右持下界之星，左持火药，右键空气。[祭品消耗：火药×32]
+
+achievement.spellSummonSkeleton=献祭誓约-骷髅
+achievement.spellSummonSkeleton.desc=右持下界之星，左持骨头，右键空气。[祭品消耗：骨头×32]
+
+achievement.spellSummonBlaze=献祭誓约-烈焰人
+achievement.spellSummonBlaze.desc=右持下界之星，左持烈焰棒，右键空气。[祭品消耗：烈焰棒×32]
+
+achievement.spellSummonMagmaCube=献祭誓约-岩浆怪
+achievement.spellSummonMagmaCube.desc=右持下界之星，左持岩浆膏，右键空气。[祭品消耗：岩浆膏×32]
+
+achievement.spellSummonGhast=献祭誓约-恶魂
+achievement.spellSummonGhast.desc=右持下界之星，左持恶魂之泪，右键空气。[祭品消耗：恶魂之泪×32]
+
+achievement.spellSummonEnderman=献祭誓约-末影人
+achievement.spellSummonEnderman.desc=右持下界之星，左持烈焰粉，右键空气。[祭品消耗：烈焰粉×32]
+
+achievement.spellSummonSpider=献祭誓约-蜘蛛
+achievement.spellSummonSpider.desc=右持下界之星，左持线，右键空气。[祭品消耗：线×32]
+
+achievement.spellSummonSlime=献祭誓约-史莱姆
+achievement.spellSummonSlime.desc=右持下界之星，左持史莱姆球，右键空气。[祭品消耗：史莱姆球×32]
+
+achievement.spellSummonWitch=献祭誓约-女巫
+achievement.spellSummonWitch.desc=右持下界之星，左持萤石粉，右键空气。[祭品消耗：萤石粉×32]
+
+
+
+achievement.craftBook=法师的自我修养
+achievement.craftBook.desc=制作一本书。
+
+achievement.craftBookshelf=法师的实验日志
+achievement.craftBookshelf.desc=制作一个书架。
+
+achievement.mineDiamond=法师的宝石收藏
+achievement.mineDiamond.desc=挖一个钻石。
+
+achievement.mineObsidian=法师的建筑素材
+achievement.mineObsidian.desc=挖一个黑曜石。
+
+achievement.craftEnchantingTable=法师的炼金工坊
+achievement.craftEnchantingTable.desc=制作附魔台。
+
+achievement.chunkLoader=衔尾之蛇
+achievement.chunkLoader.desc=用5个黑曜石组成在同一平面十字架，正中心黑曜石上方摆上附魔台，其余黑曜石上方插上火把。以该结构为中心3x3的区块将被保持加载。
+
+
+
+achievement.craftCauldron=炼金之釜
+achievement.craftCauldron.desc=制作一个坩埚。
+
+achievement.mineRedstone=红石之力
+achievement.mineRedstone.desc=挖掘至少一个红石矿。
 
 achievement.buildAltarTier1=初级祭坛
-achievement.buildAltarTier1.desc=用红石摆成边长为3的正方形，中间放置你的坩埚
+achievement.buildAltarTier1.desc=放置你的坩埚，并在周围围上一圈红石粉。
 
-achievement.craftGunpowder=火药！看起来有点高级的炼金术？
-achievement.craftGunpowder.desc=投掷一个糖和一个煤炭到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftGunpowder=火药炼成
+achievement.craftGunpowder.desc=投掷一个糖和一个煤炭到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSugar=糖炼成
-achievement.craftSugar.desc=投掷一个甘蔗到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftSugar.desc=投掷一个甘蔗到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftDirt=泥土炼成
-achievement.craftDirt.desc=投掷一个沙到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftDirt.desc=投掷一个沙到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSand=沙炼成
-achievement.craftSand.desc=投掷一个圆石到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftSand.desc=投掷一个圆石到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftGlass=玻璃炼成
-achievement.craftGlass.desc=投掷一个沙子和一个煤炭到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftGlass.desc=投掷一个沙子和一个煤炭到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftCobblestone=圆石炼成
-achievement.craftCobblestone.desc=投掷一个泥土到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftCobblestone.desc=投掷一个泥土到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftGravel=砂砾炼成
-achievement.craftGravel.desc=投掷两个圆石到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftGravel.desc=投掷两个圆石到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftLeather=皮革炼成
-achievement.craftLeather.desc=投掷一个腐肉到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftLeather.desc=投掷一个腐肉到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftClay=粘土炼成
-achievement.craftClay.desc=投掷一个糖和一个火药到你的初级祭坛里，用魔杖右击祭坛
+achievement.craftClay.desc=投掷一个糖和一个火药到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.buildAltarTier2=二级祭坛
-achievement.buildAltarTier2.desc=在你的初级祭坛的四个角外（也就是红石的外围）放上铁块，不过这些铁块应该在低于坩埚一个方块的高度。摆放完铁块后别忘了把坩埚重新放置一下
+achievement.buildAltarTier2.desc=在你的初级祭坛的四个角外（也就是红石的外围）放上铁块，不过这些铁块应该在低于坩埚一个方块的高度。摆放完铁块后别忘了把坩埚重新放置一下。
 
 achievement.craftIronOre=铁矿炼成
-achievement.craftIronOre.desc=投掷10个树苗和10个圆石到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftIronOre.desc=投掷10个树苗和10个圆石到你的二级祭坛里，用用魔杖右击祭坛。
 
-achievement.craftCactus=Craft 仙人掌炼成
-achievement.craftCactus.desc=投掷2个橡树树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftCactus=仙人掌炼成
+achievement.craftCactus.desc=投掷2个橡树树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling0=橡树树苗炼成
-achievement.craftSapling0.desc=投掷2个仙人掌到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling0.desc=投掷2个仙人掌到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling1=云杉树苗炼成
-achievement.craftSapling1.desc=投掷1个橡树树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling1.desc=投掷1个橡树树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling2=桦木树苗炼成
-achievement.craftSapling2.desc=投掷1个云杉树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling2.desc=投掷1个云杉树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling3=丛林树苗炼成
-achievement.craftSapling3.desc=投掷1个桦木树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling3.desc=投掷1个桦木树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling4=金合欢树苗炼成
-achievement.craftSapling4.desc=投掷1个丛林树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling4.desc=投掷1个丛林树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling5=黑橡树树苗炼成
-achievement.craftSapling5.desc=投掷1个金合欢树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling5.desc=投掷1个金合欢树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSapling6=黑橡树树苗炼成
-achievement.craftSapling6.desc=投掷1个金合欢树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftSapling6.desc=投掷1个金合欢树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftPumpkin=南瓜炼成
-achievement.craftPumpkin.desc=投掷3个橡树树苗到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftPumpkin.desc=投掷3个橡树树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftMelonBlock=西瓜炼成
-achievement.craftMelonBlock.desc=投掷2个南瓜到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftMelonBlock.desc=投掷2个南瓜到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftVine=藤蔓炼成
-achievement.craftVine.desc=投掷2个西瓜到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftVine.desc=投掷2个西瓜到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftLiyPad=荷叶炼成
-achievement.craftLiyPad.desc=投掷2个藤蔓到你的二级祭坛里，用魔杖右击祭坛
+achievement.craftLiyPad.desc=投掷2个藤蔓到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.buildAltarTier3=三级祭坛
 achievement.buildAltarTier3.desc=在你的二级祭坛的四个边外（也就是将铁块的外围）放上金块，不过这些金块应该在低于坩埚一个方块的高度。摆放完金块后别忘了把坩埚重新放置一下
 
 achievement.smeltInAltar=熔炼
-achievement.smeltInAltar.desc=投掷需要熔炼的物品到三级祭坛里，左手拿着燃料的情况下用魔杖右击祭坛（左手所有的燃料都会被使用）
+achievement.smeltInAltar.desc=投掷需要熔炼的物品到三级祭坛里，左手拿着燃料的情况下用魔杖右击祭坛。（左手所有的燃料都会被使用）
 
 achievement.fullTreeCut=砍下一整棵树
-achievement.fullTreeCut.desc=左手有烈焰魔杖的情况下，用斧头类的工具砍树
+achievement.fullTreeCut.desc=左手有烈焰魔杖的情况下，用斧头类的工具砍树。
 
-achievement.quarry=采石场
-achievement.quarry.desc=放置坩埚，然后在坩埚的东边放置钻石块，北面放置红石块。再重新放置一次坩埚，将燃料丢进坩埚采矿场就可以运行了。坩埚的西面可以输出采掘的物品，坩埚顶部可以接收燃料
+achievement.machineFarm=自动化农场（未实现，暂不汉化）
+achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume Seed.
 
-achievement.arrowMachineGun=人肉机关枪！
-achievement.arrowMachineGun.desc=右手拿着下界之星，左手拿着箭时右键（你也可以一直按住）
+achievement.mining3x3=采矿 3x3
+achievement.mining3x3.desc=
+
+achievement.quarry=自动化采石场
+achievement.quarry.desc=放置坩埚，然后在坩埚的东边放置钻石块，北面放置红石块。再重新放置一次坩埚，将燃料丢进坩埚采矿场就可以运行了。坩埚的西面可以输出采掘的物品，坩埚顶部可以接收燃料。
+
+achievement.arrowMachineGun=箭雨术
+achievement.arrowMachineGun.desc=右持下界之星，左手拿着箭，右键空气。（你也可以一直按住）。
 
 achievement.craftGoldIngot=金锭炼成
-achievement.craftGoldIngot.desc=投掷8个铁锭到你的三级祭坛里，用魔杖右击祭坛
+achievement.craftGoldIngot.desc=投掷8个铁锭到你的三级祭坛里，用魔杖右击祭坛。
 
 achievement.buildAltarTier4=四级祭坛
-achievement.buildAltarTier4.desc=在你的三级祭坛的四个角（与金块同层）放上红石块，不过这些红石块应该在低于坩埚一个方块的高度。摆放完红石块后别忘了把坩埚重新放置一下
+achievement.buildAltarTier4.desc=在你的三级祭坛的四个角（与金块同层）放上红石块，不过这些红石块应该在低于坩埚一个方块的高度。摆放完红石块后别忘了把坩埚重新放置一下。
 
 achievement.craftRottenFlesh=腐肉炼成
-achievement.craftRottenFlesh.desc=投掷1个皮革到你的四级祭坛里，用魔杖右击祭坛
+achievement.craftRottenFlesh.desc=投掷1个皮革到你的四级祭坛里，用魔杖右击祭坛。
 
 achievement.craftString=线炼成
-achievement.craftString.desc=投掷2个腐肉到你的四级祭坛里，用魔杖右击祭坛
+achievement.craftString.desc=投掷2个腐肉到你的四级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSpiderEye=蜘蛛眼炼成
-achievement.craftSpiderEye.desc=投掷2个线到你的四级祭坛里，用魔杖右击祭坛
+achievement.craftSpiderEye.desc=投掷2个线到你的四级祭坛里，用魔杖右击祭坛。
 
 achievement.craftBone=骨头炼成
-achievement.craftBone.desc=投掷2个蜘蛛眼到你的四级祭坛里，用魔杖右击祭坛
+achievement.craftBone.desc=投掷2个蜘蛛眼到你的四级祭坛里，用魔杖右击祭坛。
 
 achievement.craftArrow=箭炼成
-achievement.craftArrow.desc=投掷2个骨头到你的四级祭坛里，用魔杖右击祭坛
+achievement.craftArrow.desc=投掷2个骨头到你的四级祭坛里，用魔杖右击祭坛。
 
 achievement.craftEnderPearl=末影珍珠炼成
-achievement.craftEnderPearl.desc=投掷2个箭到你的四级祭坛里，用魔杖右击祭坛
+achievement.craftEnderPearl.desc=投掷2个箭到你的四级祭坛里，用魔杖右击祭坛。
 
 achievement.buildAltarTier5=五级祭坛
-achievement.buildAltarTier5.desc=在你的四级祭坛的四个边往外数第二层（也就是红石块层往外数的第二层）放上青金石块，不过这些青金石块应该在低于坩埚一个方块的高度。摆放完青金石块后别忘了把坩埚重新放置一下
+achievement.buildAltarTier5.desc=在你的四级祭坛的四个边往外数第二层（也就是红石块层往外数的第二层）放上青金石块，不过这些青金石块应该在低于坩埚一个方块的高度。摆放完青金石块后别忘了把坩埚重新放置一下。
 
 achievement.craftGlowstoneDust=萤石粉炼成
-achievement.craftGlowstoneDust.desc=投掷2个红石粉末、2个煤炭和1个青金石到你的五级祭坛里，用烈焰魔杖右击祭坛
+achievement.craftGlowstoneDust.desc=投掷2个红石粉末、2个煤炭和1个青金石到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
 achievement.craftNetherrack=地狱岩炼成
-achievement.craftNetherrack.desc=投掷1个石头和2个煤炭到你的五级祭坛里，用烈焰魔杖右击祭坛
+achievement.craftNetherrack.desc=投掷1个石头和2个煤炭到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
 achievement.craftSoulSand=灵魂沙炼成
-achievement.craftSoulSand.desc=投掷1个沙子和2个煤炭到你的五级祭坛里，用烈焰魔杖右击祭坛
+achievement.craftSoulSand.desc=投掷1个沙子和2个煤炭到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
 achievement.craftMagmaBlock=岩浆方块炼成
-achievement.craftMagmaBlock.desc=投掷1个地狱岩和1个岩浆膏到你的五级祭坛里，用烈焰魔杖右击祭坛
+achievement.craftMagmaBlock.desc=投掷1个地狱岩和1个岩浆膏到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
 achievement.craftNetherWart=地狱疣炼成
-achievement.craftNetherWart.desc=投掷1个火药、1个岩浆膏、1个糖和1个红石粉末到你的五级祭坛里，用烈焰魔杖右击祭坛
+achievement.craftNetherWart.desc=投掷1个火药、1个岩浆膏、1个糖和1个红石粉末到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
-achievement.pickBlazeRod=烈焰棒！也许可以用来做更高级的魔杖？
-achievement.pickBlazeRod.desc=捡起一个烈焰棒，不过你还应该在铁砧上把它命名为'Blaze Wand'，也就是所谓的烈焰法杖啦
+achievement.pickBlazeRod=更好的魔杖
+achievement.pickBlazeRod.desc=获取一根烈焰棒！然后将它用铁砧命名为“烈焰魔杖”。更好的的魔杖制作完成DA☆ZE。
 
-achievement.craftWitherSkeletonSkull=凋零骷髅炼成
-achievement.craftWitherSkeletonSkull.desc=投掷1个煤炭方块和1个骷髅头颅到你的五级祭坛里，用烈焰魔杖右击祭坛
+achievement.questMoveBlock=用书来储存方块
+achievement.questMoveBlock.desc=右持烈焰魔杖，左手仅拿1本书的情况下按住shift右击一个方块。同样的操作去释放该方块。
+
+achievement.captureEntity=生物捕获
+achievement.captureEntity.desc=右持末影魔杖，左手仅拿1本书的情况下按住shift右击一个生物。同样的操作去释放该生物。
+
+achievement.craftWitherSkeletonSkull=凋零骷髅头颅炼成
+achievement.craftWitherSkeletonSkull.desc=投掷1个煤炭方块和1个骷髅头颅到你的五级祭坛里，用烈焰魔杖右击祭坛。
+
+achievement.accelerationCrystal=加速水晶
+achievement.accelerationCrystal.desc=在合成台正中间放置一个下界之心，上下左右各放一本书，可制作加速水晶。 用加速水晶Shift+右键方块可以加速它的时间流动 (比方说，对着熔炉来一发？当然，持续按住也是可以的)
 
 achievement.buildAltarTier6=六级祭坛
 achievement.buildAltarTier6.desc=在你的四级祭坛的四个角外（也就是青金石块的内围）放上钻石块，不过这些钻石块应该在低于坩埚一个方块的高度。摆放完钻石块后别忘了把坩埚重新放置一下
@@ -331,7 +353,7 @@ achievement.craftDiamondOre=钻石矿石炼成
 achievement.craftDiamondOre.desc=投掷16个青金石矿石到你的七级祭坛里，用烈焰魔杖右击祭坛
 
 achievement.oreDoubling=矿物翻倍
-achievement.oreDoubling.desc=放置一个坩埚，在坩埚的四个边上放置熔炉，将矿石投掷入坩埚，右手拿着下界之星，左手拿着燃料的情况下右键坩埚。
+achievement.oreDoubling.desc=放置一个坩埚，在坩埚的四个边上放置熔炉，将矿石投掷入坩埚，右持下界之星，左手拿着燃料的情况下右键坩埚。
 
 achievement.craftEmeraldOre=绿宝石矿石炼成
 achievement.craftEmeraldOre.desc=投掷8个钻石矿石到你的七级祭坛里，用烈焰魔杖右击祭坛
@@ -350,6 +372,3 @@ achievement.craftDragonEgg.desc=投掷4个下界之星到你的七级祭坛里�
 
 achievement.craftEndCrystal=末影水晶炼成
 achievement.craftEndCrystal.desc=投掷8个龙蛋到你的七级祭坛里，用烈焰魔杖右击祭坛
-
-achievement.questMoveBlock=用书来储存方块
-achievement.questMoveBlock.desc=右手拿着烈焰魔杖，左手仅拿1本书的情况下按住shift右击一个方块。同样的操作去释放一个方块。
