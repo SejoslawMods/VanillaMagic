@@ -92,6 +92,7 @@ public class WorldHandler
 						{
 							tileEntity = new TileQuarry();
 							((TileQuarry) tileEntity).init(world, tileEntityPos);
+							((TileQuarry) tileEntity).checkSurroundings();
 						}
 						else if(tileEntityClassName.equals(TileFarm.class.getSimpleName()))
 						{

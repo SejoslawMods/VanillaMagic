@@ -124,7 +124,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	}
 	
 	/**
-	 * Additional method for showing the box on which Machine is operating.
+	 * Additional method for showing the box on which Machine operates.
 	 */
 	public void showBoundingBox()
 	{

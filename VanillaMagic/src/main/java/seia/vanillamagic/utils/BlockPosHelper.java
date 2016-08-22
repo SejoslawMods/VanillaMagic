@@ -23,6 +23,22 @@ public class BlockPosHelper
 	{
 	}
 	
+	public static int distanceInLine(BlockPos pos1, BlockPos pos2)
+	{
+		if((pos1.getX() == pos2.getX()) && (pos1.getY() == pos2.getY()))
+		{
+			return Math.max(pos1.getZ(), pos2.getZ()) - Math.min(pos1.getZ(), pos2.getZ());
+		}
+		else if((pos1.getZ() == pos2.getZ()) && (pos1.getY() == pos2.getY()))
+		{
+			return Math.max(pos1.getX(), pos2.getX()) - Math.min(pos1.getX(), pos2.getX());
+		}
+		else
+		{
+			return Math.max(pos1.getY(), pos2.getY()) - Math.min(pos1.getY(), pos2.getY());
+		}
+	}
+	
 	public static BlockPos copyPos(BlockPos toCopy)
 	{
 		return new BlockPos(toCopy.getX(), toCopy.getY(), toCopy.getZ());

@@ -15,6 +15,10 @@ public class TileAutocrafting extends TileMachine
 	
 	public ContainerAutocrafting container;
 	
+	private int currentlyCraftingSlot = 0;
+	
+	private final int defaultCraftingSlot = 0;
+	
 	public void init(World world, BlockPos machinePos)
 	{
 		super.init(world, machinePos);
@@ -25,7 +29,7 @@ public class TileAutocrafting extends TileMachine
 	{
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
 		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(worldObj, inventoryPosMatrix);
-		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix);
+		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, currentlyCraftingSlot);
 		container = new ContainerAutocrafting(worldObj, stackMatrix);
 	}
 	

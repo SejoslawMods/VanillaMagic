@@ -81,7 +81,7 @@ public class QuestAutocrafting extends Quest
 		}
 	}
 	
-	public static ItemStack[][] buildStackMatrix(IInventory[][] inventoryMatrix) 
+	public static ItemStack[][] buildStackMatrix(IInventory[][] inventoryMatrix, int slot) 
 	{
 		int size = inventoryMatrix.length;
 		ItemStack[][] stackMat = new ItemStack[size][size];
@@ -89,7 +89,7 @@ public class QuestAutocrafting extends Quest
 		{
 			for(int j = 0; j < size; j++)
 			{
-				stackMat[i][j] = inventoryMatrix[i][j].getStackInSlot(0);
+				stackMat[i][j] = inventoryMatrix[i][j].getStackInSlot(slot);
 			}
 		}
 		return stackMat;

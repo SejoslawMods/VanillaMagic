@@ -89,6 +89,7 @@ public class CustomTileEntityOneSaveHandler
 				if(entry.getKey().intValue() == dimID)
 				{
 					removeCustomTileEntityAtPos(world, pos, dimID);
+					return;
 				}
 			}
 			BlockPosHelper.printCoords("Didn't found the TileEntity at pos:", pos);
@@ -110,9 +111,9 @@ public class CustomTileEntityOneSaveHandler
 					if(BlockPosHelper.isSameBlockPos(world.tickableTileEntities.get(j).getPos(), tileInDim.getPos()))
 					{
 						world.tickableTileEntities.remove(j);
+						return;
 					}
 				}
-				return;
 			}
 		}
 	}
