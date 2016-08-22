@@ -1,10 +1,6 @@
 package seia.vanillamagic.chunkloader;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.VanillaMagic;
@@ -15,16 +11,6 @@ public class TileChunkLoader extends CustomTileEntity implements ITickable
 {
 	// Name for tile
 	public static final String REGISTRY_NAME = TileChunkLoader.class.getSimpleName();
-	
-	private Ticket chunkTicket;
-	
-	public List<ChunkPos> getLoadArea()
-	{
-		List<ChunkPos> loadArea = new LinkedList();
-		ChunkPos chunkCoords = new ChunkPos((this.getPos().getX() >> 4), (this.getPos().getZ() >> 4));
-		loadArea.add(chunkCoords);
-		return loadArea;
-	}
 	
 	@Override
 	public void validate() 
@@ -45,16 +31,6 @@ public class TileChunkLoader extends CustomTileEntity implements ITickable
 	{
 		super.invalidate();
 		stopChunkLoading();
-	}
-
-	public void forceChunkLoading(Ticket ticket) 
-	{
-		//stopChunkLoading();
-		this.chunkTicket = ticket;
-		for(ChunkPos coord : getLoadArea()) 
-		{
-			ForgeChunkManager.forceChunk(this.chunkTicket, coord);
-		}
 	}
 	/*
 	public void unforceChunkLoading() 

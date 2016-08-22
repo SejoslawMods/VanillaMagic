@@ -1,9 +1,7 @@
 package seia.vanillamagic.machine.quarry;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -224,12 +222,7 @@ public class TileQuarry extends TileMachine
 
 	public void forceChunkLoading(Ticket ticket)
 	{
-		if(chunkTicket == null)
-		{
-			chunkTicket = ticket;
-		}
-		ChunkPos quarryChunk = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
-		ForgeChunkManager.forceChunk(ticket, quarryChunk);
+		super.forceChunkLoading(ticket);
 		ChunkPos startChunk = new ChunkPos(startPos.getX() >> 4, startPos.getZ() >> 4);
 		ForgeChunkManager.forceChunk(ticket, startChunk);
 		ChunkPos workingChunk = new ChunkPos(workingPos.getX() >> 4, workingPos.getZ() >> 4);

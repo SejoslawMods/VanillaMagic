@@ -1,4 +1,4 @@
-package seia.vanillamagic.machine.quarry;
+package seia.vanillamagic.handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.OrderedLoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.utils.CustomTileEntity;
 
-public class QuarryChunkLoadingHandler implements OrderedLoadingCallback
+public class ChunkLoadingHandler implements OrderedLoadingCallback
 {
-	public void ticketsLoaded(List<Ticket> tickets, World world) 
+	public void ticketsLoaded(List<Ticket> tickets, World world)
 	{
 		for(Ticket ticket : tickets)
 		{
@@ -22,14 +23,14 @@ public class QuarryChunkLoadingHandler implements OrderedLoadingCallback
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity te = world.getTileEntity(pos);
-			if(te instanceof TileQuarry)
+			if(te instanceof CustomTileEntity)
 			{
-				((TileQuarry) te).forceChunkLoading(ticket);
+				((CustomTileEntity) te).forceChunkLoading(ticket);
 			}
 		}
 	}
 	
-	public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount) 
+	public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount)
 	{
 		List<Ticket> validTickets = new ArrayList<Ticket>();
 		for(Ticket ticket : tickets)
@@ -40,7 +41,7 @@ public class QuarryChunkLoadingHandler implements OrderedLoadingCallback
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity te = world.getTileEntity(pos);
-			if(te instanceof TileQuarry)
+			if(te instanceof CustomTileEntity)
 			{
 				validTickets.add(ticket);
 			}
