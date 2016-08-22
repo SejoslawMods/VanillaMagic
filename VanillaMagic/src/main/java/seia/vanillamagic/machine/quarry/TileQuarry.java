@@ -20,7 +20,7 @@ public class TileQuarry extends TileMachine
 {
 	// It's (size)x(size) but (size-2)x(size-2) is for digging
 	// ChunkNumber * BlocksInChunk
-	public static final int BASIC_QUARRY_SIZE = 4 * 16;
+	public static final int BASIC_QUARRY_SIZE = 8 * 16;
 	// The name for registry
 	public static final String REGISTRY_NAME = TileQuarry.class.getSimpleName();
 	
