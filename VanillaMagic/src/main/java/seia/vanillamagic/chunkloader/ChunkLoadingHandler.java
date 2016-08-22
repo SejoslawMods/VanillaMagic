@@ -11,19 +11,14 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
 public class ChunkLoadingHandler implements LoadingCallback 
 {
-	public ChunkLoadingHandler()
-	{
-	}
-	
-	@Override
 	public void ticketsLoaded(List<Ticket> tickets, World world) 
 	{
 		for(Ticket ticket : tickets)
 		{
 			NBTTagCompound modData = ticket.getModData();
-			int posX = modData.getInteger("xCoord");
-			int posY = modData.getInteger("yCoord");
-			int posZ = modData.getInteger("zCoord");
+			int posX = modData.getInteger("x");
+			int posY = modData.getInteger("y");
+			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity te = world.getTileEntity(pos);
 			if(te instanceof TileChunkLoader)

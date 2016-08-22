@@ -1,7 +1,9 @@
 package seia.vanillamagic.machine.quarry;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -9,6 +11,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
@@ -25,6 +30,8 @@ public class TileQuarry extends TileMachine
 	private BlockPos redstoneBlockPos;
 	private Random rand = new Random();
 	private EnumFacing startPosFacing;
+	
+	public Ticket chunkTicket;
 	
 	/**
 	 * Method for checking DiamondBlock and RedstoneBlock
@@ -213,5 +220,19 @@ public class TileQuarry extends TileMachine
 	public EnumFacing getOutputFacing() 
 	{
 		return startPosFacing.rotateY();
+	}
+
+	public void forceChunkLoading(Ticket ticket)
+	{
+		if(chunkTicket == null)
+		{
+			chunkTicket = ticket;
+		}
+		ChunkPos quarryChunk = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
+		ForgeChunkManager.forceChunk(ticket, quarryChunk);
+		ChunkPos startChunk = new ChunkPos(startPos.getX() >> 4, startPos.getZ() >> 4);
+		ForgeChunkManager.forceChunk(ticket, startChunk);
+		ChunkPos workingChunk = new ChunkPos(workingPos.getX() >> 4, workingPos.getZ() >> 4);
+		ForgeChunkManager.forceChunk(ticket, workingChunk);
 	}
 }

@@ -12,6 +12,7 @@ import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.items.book.BookRegistry;
+import seia.vanillamagic.machine.quarry.QuarryChunkLoadingHandler;
 import seia.vanillamagic.quest.QuestList;
 
 @Mod(
@@ -40,6 +41,7 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
+		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new QuarryChunkLoadingHandler());
 		WorldHandler.INSTANCE.preInit(); //TODO: FIX
 	}
 	
