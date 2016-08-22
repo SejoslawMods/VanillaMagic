@@ -109,12 +109,16 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		{
 			isActive = true;
 			doWork();
-			ticks -= oneOperationCost;
-			if(ticks < oneOperationCost)
-			{
-				isActive = false;
-			}
 			return;
+		}
+	}
+	
+	protected void decreaseTicks()
+	{
+		ticks -= oneOperationCost;
+		if(ticks < oneOperationCost)
+		{
+			isActive = false;
 		}
 	}
 	

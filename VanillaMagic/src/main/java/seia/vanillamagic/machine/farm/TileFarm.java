@@ -73,6 +73,7 @@ public class TileFarm extends TileMachine
 	public void doWork() 
 	{
 		doTick();
+		decreaseTicks();
 		/*
 		try
 		{

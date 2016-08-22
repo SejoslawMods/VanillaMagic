@@ -185,6 +185,7 @@ public class TileQuarry extends TileMachine
 					}
 				}
 			}
+			decreaseTicks();
 		}
 		// go down by 1 at the end of work in this tick
 		workingPos = moveWorkingPosToNextPos();

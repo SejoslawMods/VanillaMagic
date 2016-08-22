@@ -66,6 +66,7 @@ public class TileAutocrafting extends TileMachine
 				}
 				container.rotateMatrix();
 			}
+			decreaseTicks();
 		}
 	}
 	
