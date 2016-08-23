@@ -7,12 +7,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class EnchantedBucketLava implements IEnchantedBucket
 {
-	public Fluid getFluidInBucket() 
+	public Fluid getFluidInBucket()
 	{
 		return FluidRegistry.LAVA;
 	}
 	
-	public ItemStack getBucket() 
+	public ItemStack getBucket()
 	{
 		return new ItemStack(Items.LAVA_BUCKET);
 	}

@@ -12,7 +12,7 @@ public class EnchantedBucketWater implements IEnchantedBucket
 		return FluidRegistry.WATER;
 	}
 	
-	public ItemStack getBucket() 
+	public ItemStack getBucket()
 	{
 		return new ItemStack(Items.WATER_BUCKET);
 	}
