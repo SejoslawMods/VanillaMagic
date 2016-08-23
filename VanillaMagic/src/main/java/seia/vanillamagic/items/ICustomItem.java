@@ -22,5 +22,8 @@ public interface ICustomItem
 	/**
 	 * Returns the unique tag of this "item".
 	 */
-	String getUniqueNBTName();
+	default String getUniqueNBTName()
+	{
+		return "NBT_" + this.getClass().getSimpleName();
+	}
 }

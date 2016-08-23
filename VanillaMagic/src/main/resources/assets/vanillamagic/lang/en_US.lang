@@ -322,6 +322,9 @@ achievement.questMoveBlock.desc=Take Blaze Wand to right hand and exactly 1x Boo
 achievement.captureEntity=Capture Entity
 achievement.captureEntity.desc=Hold Nether Wand in right hand and 1x Book in left hand. Shift-right-click on Entity to capture it and than on block to respawn it.
 
+achievement.enchantedBucket=Enchanted Bucket
+achievement.enchantedBucket.desc=Combine, in Crafting Table, any full bucket with Nether Star to get the Enchanted version of that Bucket. (Get the infinite amount of liquid.)
+
 achievement.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
 achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand
 

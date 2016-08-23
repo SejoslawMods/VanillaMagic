@@ -11,6 +11,7 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
+import seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.farm.QuestMachineFarm;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
@@ -235,6 +236,7 @@ public class QuestList
 	
 	public static final QuestMoveBlock QUEST_MOVE_BLOCK = new QuestMoveBlock(QUEST_PICK_BLAZE_ROD, -2, +1, new ItemStack(Items.BOOK), "Move block by book", "questMoveBlock", new ItemStack(Items.BOOK), EnumWand.BLAZE_ROD);
 	public static final QuestCaptureEntity QUEST_CAPTURE_ENTITY = new QuestCaptureEntity(QUEST_MOVE_BLOCK, -2, 0, new ItemStack(Items.BOOK), "Capture Entity", "captureEntity", new ItemStack(Items.BOOK), EnumWand.NETHER_STAR);
+	public static final QuestEnchantedBucket QUEST_ENCHANTED_BUCKET = new QuestEnchantedBucket(QUEST_CAPTURE_ENTITY, -2, 0, new ItemStack(Items.BUCKET), "Enchanted Bucket", "enchantedBucket");
 	
 	public static final QuestCraftOnAltar QUEST_CRAFT_WITHER_SKELETON_HEAD = new QuestCraftOnAltar(QUEST_PICK_BLAZE_ROD, +2, +1, "Craft Wither Skeleton Skull", "craftWitherSkeletonSkull", 
 			new ItemStack[]{new ItemStack(Blocks.COAL_BLOCK), ItemStackHelper.getHead(1, 0)}, 

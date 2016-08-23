@@ -8,7 +8,7 @@ import seia.vanillamagic.items.ICustomItem;
 
 public class ItemAccelerationCrystal implements ICustomItem
 {
-	public void registerRecipe() 
+	public void registerRecipe()
 	{
 		GameRegistry.addRecipe(getItem(), new Object[]{
 				" B ",
@@ -19,17 +19,12 @@ public class ItemAccelerationCrystal implements ICustomItem
 		});
 	}
 	
-	public ItemStack getItem() 
+	public ItemStack getItem()
 	{
 		ItemStack stack = new ItemStack(Items.NETHER_STAR);
 		stack.setStackDisplayName("Acceleration Crystal");
 		NBTTagCompound stackTag = stack.getTagCompound();
 		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
 		return stack.copy();
-	}
-	
-	public String getUniqueNBTName() 
-	{
-		return "NBT_ItemAccelerationCrystal";
 	}
 }
