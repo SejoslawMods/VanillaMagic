@@ -266,7 +266,7 @@ achievement.mining3x3=采矿 3x3
 achievement.mining3x3.desc=
 
 achievement.quarry=自动化采石场
-achievement.quarry.desc=放置坩埚，然后在坩埚的东边放置钻石块，北面放置红石块。再重新放置一次坩埚，将燃料丢进坩埚采矿场就可以运行了。坩埚的西面可以输出采掘的物品，坩埚顶部可以接收燃料。
+achievement.quarry.desc=地面挖掘倒T型空间，中间放置坩埚，左箱子，右钻石块，上红石，无左持并右持烈焰魔杖时shift+右键坩埚激活采石场。向坩埚投掷燃料即可开始挖掘，产出物将自动放入左侧箱子。坩埚上方也可放置箱子，用于输送燃料。
 
 achievement.arrowMachineGun=箭雨术
 achievement.arrowMachineGun.desc=右持下界之星，左手拿着箭，右键空气。（你也可以一直按住）。
