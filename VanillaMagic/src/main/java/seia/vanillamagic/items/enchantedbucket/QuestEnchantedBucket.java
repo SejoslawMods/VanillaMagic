@@ -49,14 +49,21 @@ public class QuestEnchantedBucket extends Quest
 		}
 		if(stackTag.hasKey(IEnchantedBucket.NBT_ENCHANTED_BUCKET))
 		{
-			for(IEnchantedBucket bucket : IEnchantedBucket.enchantedBuckets)
+			if(!player.hasAchievement(achievement))
 			{
-				NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
-				String bucketUnique = bucketTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-				String stackUnique = stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-				if(bucketUnique.equals(stackUnique))
+				player.addStat(achievement, 1);
+			}
+			if(player.hasAchievement(achievement))
+			{
+				for(IEnchantedBucket bucket : IEnchantedBucket.enchantedBuckets)
 				{
-					onItemUse(event, bucket);
+					NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
+					String bucketUnique = bucketTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
+					String stackUnique = stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
+					if(bucketUnique.equals(stackUnique))
+					{
+						onItemUse(event, bucket);
+					}
 				}
 			}
 		}
@@ -111,14 +118,21 @@ public class QuestEnchantedBucket extends Quest
 		}
 		if(stackTag.hasKey(IEnchantedBucket.NBT_ENCHANTED_BUCKET))
 		{
-			for(IEnchantedBucket bucket : IEnchantedBucket.enchantedBuckets)
+			if(!player.hasAchievement(achievement))
 			{
-				NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
-				String bucketUnique = bucketTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-				String stackUnique = stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-				if(bucketUnique.equals(stackUnique))
+				player.addStat(achievement, 1);
+			}
+			if(player.hasAchievement(achievement))
+			{
+				for(IEnchantedBucket bucket : IEnchantedBucket.enchantedBuckets)
 				{
-					onItemRightClick(event, bucket);
+					NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
+					String bucketUnique = bucketTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
+					String stackUnique = stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
+					if(bucketUnique.equals(stackUnique))
+					{
+						onItemRightClick(event, bucket);
+					}
 				}
 			}
 		}
