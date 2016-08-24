@@ -6,14 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.items.ICustomItem;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
 
@@ -41,18 +39,13 @@ public class QuestAccelerationCrystal extends Quest
 		if(!world.isAirBlock(clickedPos))
 		{
 			ItemStack rightHand = player.getHeldItemMainhand();
-			if(rightHand != null)
+			if(VanillaMagicItems.INSTANCE.isCustomItem(rightHand, VanillaMagicItems.INSTANCE.itemAccelerationCrystal))
 			{
-				NBTTagCompound stackTag = rightHand.getTagCompound();
-				if(stackTag == null)
+				if(!player.hasAchievement(achievement))
 				{
-					return;
+					player.addStat(achievement, 1);
 				}
-				if(!stackTag.hasKey(ICustomItem.NBT_UNIQUE_NAME))
-				{
-					return;
-				}
-				if(stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(VanillaMagicItems.INSTANCE.itemAccelerationCrystal.getUniqueNBTName()))
+				if(player.hasAchievement(achievement))
 				{
 					TileEntity tile = world.getTileEntity(clickedPos);
 					Random rand = new Random();

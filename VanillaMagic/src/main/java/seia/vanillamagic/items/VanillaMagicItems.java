@@ -3,6 +3,8 @@ package seia.vanillamagic.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.items.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.EnchantedBucketLava;
 import seia.vanillamagic.items.enchantedbucket.EnchantedBucketWater;
@@ -36,5 +38,29 @@ public class VanillaMagicItems
 			customItem.registerRecipe();
 		}
 		System.out.println("Custom items registered");
+	}
+	
+	/**
+	 * Returns true ONLY if the given stack is a given custom item.
+	 */
+	public boolean isCustomItem(ItemStack checkingStack, ICustomItem customItem)
+	{
+		if(checkingStack == null || customItem == null)
+		{
+			return false;
+		}
+		NBTTagCompound stackTag = checkingStack.getTagCompound();
+		if(stackTag == null)
+		{
+			return false;
+		}
+		if(stackTag.hasKey(ICustomItem.NBT_UNIQUE_NAME))
+		{
+			if(stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }
