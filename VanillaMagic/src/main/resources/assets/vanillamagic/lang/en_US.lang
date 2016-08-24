@@ -325,8 +325,8 @@ achievement.questMoveBlock.desc=Take Blaze Wand to right hand and exactly 1x Boo
 achievement.captureEntity=Capture Entity
 achievement.captureEntity.desc=Hold Nether Wand in right hand and 1x Book in left hand. Shift-right-click on Entity to capture it and than on block to respawn it.
 
-achievement.enchantedBucket=Enchanted Bucket
-achievement.enchantedBucket.desc=Combine, in Crafting Table, any full bucket with Nether Star to get the Enchanted version of that Bucket. (Get the infinite amount of liquid.)
+achievement.enchantedBucket=Enchanted Bucket (WARNING: Right-click will remove fluid.)
+achievement.enchantedBucket.desc=Drop 1x Bucket with fluid + 1x Nether Star to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted bucket. Shift-left-click to spawn fluid from bucket, right-click in distance to spawn fluid in distance.
 
 achievement.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
 achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand

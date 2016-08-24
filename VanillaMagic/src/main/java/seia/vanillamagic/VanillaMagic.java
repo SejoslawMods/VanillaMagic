@@ -17,6 +17,7 @@ import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.integration.VanillaMagicIntegration;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.items.book.BookRegistry;
+import seia.vanillamagic.items.enchantedbucket.EnchantedBucketHelper;
 import seia.vanillamagic.quest.QuestList;
 
 @Mod(
@@ -71,6 +72,7 @@ public class VanillaMagic
 	{
 		BookRegistry.INSTANCE.postInit();
 		CustomTileEntityHandler.INSTANCE.postInit();
+		EnchantedBucketHelper.registerFluids();
 		VanillaMagicItems.INSTANCE.postInit();
 		VanillaMagicIntegration.INSTANCE.postInit();
 	}

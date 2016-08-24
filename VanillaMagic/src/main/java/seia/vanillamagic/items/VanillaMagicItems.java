@@ -9,29 +9,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.items.accelerationcrystal.ItemAccelerationCrystal;
-import seia.vanillamagic.items.enchantedbucket.EnchantedBucketLava;
-import seia.vanillamagic.items.enchantedbucket.EnchantedBucketWater;
+import seia.vanillamagic.items.enchantedbucket.IEnchantedBucket;
 
 public class VanillaMagicItems 
 {
 	public static final VanillaMagicItems INSTANCE = new VanillaMagicItems();
 	
-	private List<ICustomItem> customItems = new ArrayList<ICustomItem>();
+	private final List<ICustomItem> customItems;
+	public final List<IEnchantedBucket> enchantedBuckets;
 	
-	public final ICustomItem itemAccelerationCrystal;
-	public final ICustomItem itemEnchantedBucketWater;
-	public final ICustomItem itemEnchantedBucketLava;
+	public ICustomItem itemAccelerationCrystal;
 	
 	private VanillaMagicItems()
 	{
+		customItems = new ArrayList<ICustomItem>();
+		enchantedBuckets = new ArrayList<IEnchantedBucket>();
+		
 		itemAccelerationCrystal = new ItemAccelerationCrystal();
 		customItems.add(itemAccelerationCrystal);
-		
-		itemEnchantedBucketWater = new EnchantedBucketWater();
-		customItems.add(itemEnchantedBucketWater);
-		
-		itemEnchantedBucketLava = new EnchantedBucketLava();
-		customItems.add(itemEnchantedBucketLava);
 	}
 	
 	public void postInit()
@@ -40,7 +35,7 @@ public class VanillaMagicItems
 		{
 			customItem.registerRecipe();
 		}
-		VanillaMagic.logger.log(Level.INFO, "Custom items registered");
+		VanillaMagic.logger.log(Level.INFO, "Custom items registered: " + customItems.size());
 	}
 	
 	/**
@@ -60,6 +55,27 @@ public class VanillaMagicItems
 		if(stackTag.hasKey(ICustomItem.NBT_UNIQUE_NAME))
 		{
 			if(stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isCustomBucket(ItemStack checkingStack, IEnchantedBucket customBucket)
+	{
+		if(checkingStack == null || customBucket == null)
+		{
+			return false;
+		}
+		NBTTagCompound stackTag = checkingStack.getTagCompound();
+		if(stackTag == null)
+		{
+			return false;
+		}
+		if(stackTag.hasKey(IEnchantedBucket.NBT_ENCHANTED_BUCKET))
+		{
+			if(stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET).equals(customBucket.getUniqueNBTName()))
 			{
 				return true;
 			}

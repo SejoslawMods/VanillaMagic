@@ -1,5 +1,7 @@
 package seia.vanillamagic.utils;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -9,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
 
 public class EntityHelper 
@@ -106,5 +109,13 @@ public class EntityHelper
 	public static void addChatComponentMessage(EntityPlayer player, String msg)
 	{
 		player.addChatComponentMessage(new TextComponentString(msg));
+	}
+
+	public static void removeEntities(World world, List<EntityItem> itemsInCauldron)
+	{
+		for(EntityItem ei : itemsInCauldron)
+		{
+			world.removeEntity(ei);
+		}
 	}
 }

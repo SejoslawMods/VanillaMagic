@@ -1,10 +1,14 @@
 package seia.vanillamagic.items.enchantedbucket;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,13 +21,20 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.utils.CauldronHelper;
+import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestEnchantedBucket extends Quest
 {
@@ -33,63 +44,137 @@ public class QuestEnchantedBucket extends Quest
 		super(required, posX, posY, icon, questName, uniqueName);
 	}
 	
+	// Craft new Enchanted Bucket
+	int countTicks = 0;
 	@SubscribeEvent
-	public void placeLiquid(RightClickBlock event) // onItemUse
+	public void craftEnchantedBucket(RightClickBlock event) // onItemUse
 	{
+		World world = event.getWorld();
 		EntityPlayer player = event.getEntityPlayer();
+		BlockPos clickedPos = event.getPos();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
+		if(countTicks == 0)
+		{
+			countTicks++;
+		}
+		else
+		{
+			countTicks = 0;
+			return;
+		}
+		
 		if(stackRightHand == null)
 		{
 			return;
 		}
-		NBTTagCompound stackTag = stackRightHand.getTagCompound();
-		if(stackTag == null)
+		if(!player.isSneaking())
 		{
 			return;
 		}
-		if(stackTag.hasKey(IEnchantedBucket.NBT_ENCHANTED_BUCKET))
+		if(EnumWand.areWandsEqual(stackRightHand, EnumWand.BLAZE_ROD.wandItemStack))
 		{
-			if(!player.hasAchievement(achievement))
+			if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 			{
-				player.addStat(achievement, 1);
-			}
-			if(player.hasAchievement(achievement))
-			{
-				for(IEnchantedBucket bucket : IEnchantedBucket.enchantedBuckets)
+				if(!player.hasAchievement(achievement))
 				{
-					NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
-					String bucketUnique = bucketTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-					String stackUnique = stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-					if(bucketUnique.equals(stackUnique))
+					player.addStat(achievement, 1);
+				}
+				if(player.hasAchievement(achievement))
+				{
+					List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, clickedPos);
+					if(itemsInCauldron.size() == 0)
 					{
-						onItemUse(event, bucket);
+						return;
+					}
+					else if(itemsInCauldron.size() == 2)
+					{
+						boolean ns = false;
+						for(EntityItem item : itemsInCauldron)
+						{
+							if(item.getEntityItem().getItem().equals(Items.NETHER_STAR))
+							{
+								ns = true;
+								break;
+							}
+						}
+						IEnchantedBucket bucket = EnchantedBucketHelper.getEnchantedBucketFromCauldron(world, clickedPos);
+						if(ns == true && bucket != null)
+						{
+							EntityItem newEI = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), bucket.getItem().copy());
+							world.spawnEntityInWorld(newEI);
+							EntityHelper.removeEntities(world, itemsInCauldron);
+						}
 					}
 				}
 			}
 		}
 	}
 	
-	public void onItemUse(RightClickBlock event, IEnchantedBucket bucket) 
+	@SubscribeEvent
+	public void spawnLiquid(LeftClickBlock event)
+	{
+		World world = event.getWorld();
+		EntityPlayer player = event.getEntityPlayer();
+		BlockPos clickedPos = event.getPos();
+		ItemStack stackRightHand = player.getHeldItemMainhand();
+		if(stackRightHand == null)
+		{
+			return;
+		}
+		if(!player.isSneaking())
+		{
+			return;
+		}
+		NBTTagCompound stackTag = stackRightHand.getTagCompound();
+		if(stackTag != null)
+		{
+			if(stackTag.hasKey(IEnchantedBucket.NBT_ENCHANTED_BUCKET))
+			{
+				if(!player.hasAchievement(achievement))
+				{
+					player.addStat(achievement, 1);
+				}
+				if(player.hasAchievement(achievement))
+				{
+					for(IEnchantedBucket bucket : VanillaMagicItems.INSTANCE.enchantedBuckets)
+					{
+						NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
+						String bucketFluid = bucketTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
+						String stackFluid = stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
+						if(bucketFluid.equals(stackFluid))
+						{
+							onItemUse(event, bucket);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void onItemUse(LeftClickBlock event, IEnchantedBucket bucket) 
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = event.getWorld();
 		BlockPos blockPos = event.getPos();
-		if(world.isRemote || player.isSneaking())
-		{
-			return;
-		}
-		if(!world.canMineBlockBody(player, blockPos))
-		{
-			return;
-		}
 		TileEntity tile = world.getTileEntity(blockPos);
 		if(tile instanceof IFluidHandler)
 		{
-			FluidStack fluid = new FluidStack(bucket.getFluidInBucket(), 1000);
+			FluidStack fluid = new FluidStack(bucket.getFluidInBucket(), Fluid.BUCKET_VOLUME);
 			int amount = ((IFluidHandler) tile).fill(fluid, false);
 			if(amount > 0)
 			{
 				((IFluidHandler) tile).fill(fluid, true);
+			}
+			return;
+		}
+		if(tile instanceof IFluidTank)
+		{
+			FluidStack fluid = new FluidStack(bucket.getFluidInBucket(), Fluid.BUCKET_VOLUME);
+			int amount = ((IFluidTank) tile).fill(fluid, false);
+			if(amount > 0)
+			{
+				((IFluidTank) tile).fill(fluid, true);
 			}
 			return;
 		}
@@ -98,12 +183,16 @@ public class QuestEnchantedBucket extends Quest
 			if(world.getBlockState(blockPos).getBlock() == Blocks.CAULDRON)
 			{
 				world.setBlockState(blockPos, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3));
+				return;
 			}
 		}
+		blockPos = blockPos.offset(event.getFace());
+		world.setBlockState(blockPos, bucket.getFluidInBucket().getBlock().getDefaultState());
 	}
 
+	// Shoot
 	@SubscribeEvent
-	public void placeLiquid(RightClickItem event) // onItemRightClick
+	public void shootLiquid(RightClickItem event) // onItemRightClick
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
@@ -124,20 +213,22 @@ public class QuestEnchantedBucket extends Quest
 			}
 			if(player.hasAchievement(achievement))
 			{
-				for(IEnchantedBucket bucket : IEnchantedBucket.enchantedBuckets)
+				for(IEnchantedBucket bucket : VanillaMagicItems.INSTANCE.enchantedBuckets)
 				{
 					NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
-					String bucketUnique = bucketTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-					String stackUnique = stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET);
-					if(bucketUnique.equals(stackUnique))
+					String bucketFluid = bucketTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
+					String stackFluid = stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
+					if(bucketFluid.equals(stackFluid))
 					{
 						onItemRightClick(event, bucket);
+						return;
 					}
 				}
 			}
 		}
 	}
 
+	// Shoot
 	public void onItemRightClick(RightClickItem event, IEnchantedBucket bucket) 
 	{
 		EntityPlayer player = event.getEntityPlayer();
@@ -153,6 +244,10 @@ public class QuestEnchantedBucket extends Quest
 				BlockPos hittedBlock = rayTrace.getBlockPos();
 				hittedBlock = hittedBlock.offset(rayTrace.sideHit);
 				Block fluidBlock = bucket.getFluidInBucket().getBlock();
+				if(fluidBlock == null)
+				{
+					return;
+				}
 				world.setBlockState(hittedBlock, fluidBlock.getDefaultState());
 				world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
 			}
