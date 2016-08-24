@@ -33,6 +33,10 @@ public class QuestQuarry extends QuestMachineActivate
 		{
 			return;
 		}
+		if(itemInHand == null)
+		{
+			return;
+		}
 		if(itemInHand.getItem().equals(EnumWand.BLAZE_ROD.wandItemStack.getItem()))
 		{
 			if(!player.hasAchievement(achievement))
