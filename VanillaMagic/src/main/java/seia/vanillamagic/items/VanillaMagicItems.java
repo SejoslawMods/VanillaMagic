@@ -77,7 +77,10 @@ public class VanillaMagicItems
 		{
 			if(stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET).equals(customBucket.getUniqueNBTName()))
 			{
-				return true;
+				if(stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME).equals(customBucket.getFluidInBucket().getName()))
+				{
+					return true;
+				}
 			}
 		}
 		return false;
