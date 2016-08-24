@@ -2,9 +2,15 @@ package seia.vanillamagic.integration;
 
 public interface IIntegration 
 {
-	void preInit();
+	default void preInit()
+	{
+	}
 	
-	void init();
+	default void init()
+	{
+	}
 	
-	void postInit();
+	default void postInit()
+	{
+	}
 }
