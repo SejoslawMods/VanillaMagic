@@ -4,18 +4,15 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -28,6 +25,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.items.VanillaMagicItems;
@@ -158,6 +156,7 @@ public class QuestEnchantedBucket extends Quest
 		World world = event.getWorld();
 		BlockPos blockPos = event.getPos();
 		TileEntity tile = world.getTileEntity(blockPos);
+		EnumFacing face = event.getFace();
 		if(tile instanceof IFluidHandler)
 		{
 			FluidStack fluid = new FluidStack(bucket.getFluidInBucket(), Fluid.BUCKET_VOLUME);
@@ -177,6 +176,20 @@ public class QuestEnchantedBucket extends Quest
 				((IFluidTank) tile).fill(fluid, true);
 			}
 			return;
+		}
+		if(tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, face))
+		{
+			IFluidHandler fh = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, face);
+			if(fh != null)
+			{
+				FluidStack fluid = new FluidStack(bucket.getFluidInBucket(), Fluid.BUCKET_VOLUME);
+				int amount = fh.fill(fluid, false);
+				if(amount > 0)
+				{
+					fh.fill(fluid, true);
+				}
+				return;
+			}
 		}
 		if(bucket.getFluidInBucket() == FluidRegistry.WATER)
 		{
