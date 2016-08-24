@@ -3,7 +3,7 @@ package seia.vanillamagic.quest.portablecraftingtable;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
- * Interface to tell the QuestPortableCraftingTable that the welding item is an kind of Crafting Table.
+ * Interface to tell the QuestPortableCraftingTable that the held item is an kind of Crafting Table.
  * 
  * @author Seia
  */

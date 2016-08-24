@@ -9,10 +9,13 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.WorldHelper;
 
@@ -49,7 +52,7 @@ public class CustomTileEntityOneSaveHandler
 			{
 				if(BlockPosHelper.isSameBlockPos(customTileEntity.getPos(), tile.getPos()))
 				{
-					BlockPosHelper.printCoords("There is already CustomTileEntity (" + tile.getClass().getSimpleName() + ") at pos:", tile.getPos());
+					BlockPosHelper.printCoords(Level.WARN, "There is already CustomTileEntity (" + tile.getClass().getSimpleName() + ") at pos:", tile.getPos());
 					return false;
 				}
 			}
@@ -60,7 +63,7 @@ public class CustomTileEntityOneSaveHandler
 		else
 		{
 			loadedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
-			System.out.println("Registered CustomTileEntityHandler for Dimension: " + dimension);
+			VanillaMagic.logger.log(Level.INFO, "Registered CustomTileEntityHandler for Dimension: " + dimension);
 			loadedTileEntities.get(dimension).add(customTileEntity);
 			add(customTileEntity);
 			return true;
@@ -71,14 +74,14 @@ public class CustomTileEntityOneSaveHandler
 	{
 		customTileEntity.getWorld().setTileEntity(customTileEntity.getPos(), customTileEntity);
 		//customTileEntity.getWorld().tickableTileEntities.add(customTileEntity); // TODO:
-		BlockPosHelper.printCoords("CustomTileEntity (" + customTileEntity.getClass().getSimpleName() + ") added at pos:", customTileEntity.getPos());
+		BlockPosHelper.printCoords(Level.INFO, "CustomTileEntity (" + customTileEntity.getClass().getSimpleName() + ") added at pos:", customTileEntity.getPos());
 		customTileEntity.getWorld().updateEntities();
 	}
 	
 	/**
 	 * TileEntity at position "pos" MUST implements {@link IDimensionKeeper}
 	 */
-	public void removeCustomTileEntityAtPos(World world, BlockPos pos)
+	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
 		int dimID = WorldHelper.getDimensionID(world);
 		Set<Entry<Integer, List<TileEntity>>> entrySet = loadedTileEntities.entrySet();
@@ -88,15 +91,15 @@ public class CustomTileEntityOneSaveHandler
 			{
 				if(entry.getKey().intValue() == dimID)
 				{
-					removeCustomTileEntityAtPos(world, pos, dimID);
-					return;
+					return removeCustomTileEntityAtPos(world, pos, dimID);
 				}
 			}
-			BlockPosHelper.printCoords("Didn't found the TileEntity at pos:", pos);
+			BlockPosHelper.printCoords(Level.WARN, "Didn't found the TileEntity at pos:", pos);
 		}
+		return false;
 	}
 	
-	public void removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
+	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
 		List<TileEntity> tilesInDimension = loadedTileEntities.get(dimension);
 		for(int i = 0; i < tilesInDimension.size(); i++)
@@ -104,18 +107,19 @@ public class CustomTileEntityOneSaveHandler
 			TileEntity tileInDim = tilesInDimension.get(i);
 			if(BlockPosHelper.isSameBlockPos(tileInDim.getPos(), pos))
 			{
-				BlockPosHelper.printCoords("Removed CustomTileEntity (" + tileInDim.getClass().getSimpleName() + ") at:", pos);
+				BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + tileInDim.getClass().getSimpleName() + ") at:", pos);
 				tilesInDimension.remove(i);
 				for(int j = 0; j < world.tickableTileEntities.size(); j++)
 				{
 					if(BlockPosHelper.isSameBlockPos(world.tickableTileEntities.get(j).getPos(), tileInDim.getPos()))
 					{
 						world.tickableTileEntities.remove(j);
-						return;
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 	
 	public Integer[] getIDs()
@@ -158,7 +162,7 @@ public class CustomTileEntityOneSaveHandler
 			{
 				if(BlockPosHelper.isSameBlockPos(tileEntity.getPos(), tile.getPos()))
 				{
-					BlockPosHelper.printCoords("There is already ReadedTileEntity (" + tile.getClass().getSimpleName() + ") at pos:", tile.getPos());
+					BlockPosHelper.printCoords(Level.WARN, "There is already ReadedTileEntity (" + tile.getClass().getSimpleName() + ") at pos:", tile.getPos());
 					return false;
 				}
 			}
@@ -168,7 +172,7 @@ public class CustomTileEntityOneSaveHandler
 		else
 		{
 			readedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
-			System.out.println("Registered ReadedTileEntityHandler for Dimension: " + dimension);
+			VanillaMagic.logger.log(Level.INFO, "Registered ReadedTileEntityHandler for Dimension: " + dimension);
 			readedTileEntities.get(dimension).add(tileEntity);
 			return true;
 		}

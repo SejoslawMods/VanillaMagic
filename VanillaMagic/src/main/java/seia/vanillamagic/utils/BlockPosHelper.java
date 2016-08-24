@@ -3,6 +3,8 @@ package seia.vanillamagic.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -14,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.VanillaMagic;
 
 public class BlockPosHelper
 {
@@ -61,32 +64,32 @@ public class BlockPosHelper
 	
 	public static void printCoords(BlockPos pos)
 	{
-		System.out.println(" X = " + pos.getX());
-		System.out.println(" Y = " + pos.getY());
-		System.out.println(" Z = " + pos.getZ());
+		VanillaMagic.logger.log(Level.INFO, " X = " + pos.getX());
+		VanillaMagic.logger.log(Level.INFO, " Y = " + pos.getY());
+		VanillaMagic.logger.log(Level.INFO, " Z = " + pos.getZ());
 	}
 	
-	public static void printCoords(String text, BlockPos pos)
+	public static void printCoords(Level level, String text, BlockPos pos)
 	{
-		System.out.println(text);
+		VanillaMagic.logger.log(level, text);
 		printCoords(pos);
 	}
 	
-	public static void printCoords(Block block, BlockPos pos)
+	public static void printCoords(Level level, Block block, BlockPos pos)
 	{
-		System.out.println(block.toString());
+		VanillaMagic.logger.log(level, block.toString());
 		printCoords(pos);
 	}
 	
-	public static void printCoords(World world, BlockPos pos)
+	public static void printCoords(Level level, World world, BlockPos pos)
 	{
 		Block block = world.getBlockState(pos).getBlock();
-		printCoords(block, pos);
+		printCoords(level, block, pos);
 	}
 	
-	public static void printCoords(EntityPlayer player, BlockPos pos)
+	public static void printCoords(Level level, EntityPlayer player, BlockPos pos)
 	{
-		printCoords(player.worldObj, pos);
+		printCoords(level, player.worldObj, pos);
 	}
 	
 	public static void freezeNearby(Entity entity, World world, BlockPos pos, int size)

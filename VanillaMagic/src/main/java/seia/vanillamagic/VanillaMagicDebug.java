@@ -1,5 +1,7 @@
 package seia.vanillamagic;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -25,11 +27,11 @@ public class VanillaMagicDebug
 			ItemStackHelper.printItemStackInfo(DEBUG_OFF_HAND_ITEMSTACK, new String[]{"Left Hand"});
 			ItemStackHelper.printItemStackInfo(DEBUG_MAIN_HAND_ITEMSTACK, new String[]{"Right Hand"});
 			MinecraftForge.EVENT_BUS.register(this);
-			System.out.println("VanillaMagicDebug registered");
+			VanillaMagic.logger.log(Level.INFO, "VanillaMagicDebug registered");
 		}
 		catch(Exception e)
 		{
-			System.out.println("VanillaMagicDebug not registered");
+			VanillaMagic.logger.log(Level.INFO, "VanillaMagicDebug not registered");
 		}
 	}
 	

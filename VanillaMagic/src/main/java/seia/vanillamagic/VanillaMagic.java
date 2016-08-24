@@ -1,5 +1,8 @@
 package seia.vanillamagic;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -33,16 +36,18 @@ public class VanillaMagic
 	@Mod.Metadata
 	public static ModMetadata modMetadata;
 	
+	public static Logger logger;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		logger = event.getModLog();
 		modMetadata = VanillaMagicMetadata.INSTANCE.preInit(modMetadata);
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
 			QuestHandler.INSTANCE.registerEvent(QuestList.QUESTS.get(i));
-			//System.out.println("Registered event: [" + QuestList.QUESTS.get(i).getQuestName() + "]");
 		}
-		System.out.println("Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
+		logger.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
@@ -56,9 +61,8 @@ public class VanillaMagic
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
 			QuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).achievement);
-			//System.out.println("Registered achievement: [" + QuestList.QUESTS.get(i).getUniqueName() + "]");
 		}
-		System.out.println("Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
+		logger.log(Level.INFO, "Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
 		VanillaMagicIntegration.INSTANCE.init();
 	}
 	

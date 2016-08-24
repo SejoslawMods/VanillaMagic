@@ -1,9 +1,12 @@
 package seia.vanillamagic.utils;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.VanillaMagic;
 
 public class ItemStackHelper 
 {
@@ -58,13 +61,13 @@ public class ItemStackHelper
 	{
 		if(stack != null)
 		{
-			System.out.println("ItemStack Info");
-			System.out.println("Item = " + stack.getItem().toString());
-			System.out.println("StackSize = " + stack.stackSize);
-			System.out.println("ItemDamage = " + stack.getItemDamage());
+			VanillaMagic.logger.log(Level.INFO, "ItemStack Info");
+			VanillaMagic.logger.log(Level.INFO, "Item = " + stack.getItem().toString());
+			VanillaMagic.logger.log(Level.INFO, "StackSize = " + stack.stackSize);
+			VanillaMagic.logger.log(Level.INFO, "ItemDamage = " + stack.getItemDamage());
 			for(int i = 0; i < additionalInfo.length; i++)
 			{
-				System.out.println("Additional Info #" + i + " = " + additionalInfo[i]);
+				VanillaMagic.logger.log(Level.INFO, "Additional Info #" + i + " = " + additionalInfo[i]);
 			}
 		}
 		return false;

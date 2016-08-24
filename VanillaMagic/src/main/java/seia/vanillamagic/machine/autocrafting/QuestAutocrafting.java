@@ -16,6 +16,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.utils.EntityHelper;
 import seia.vanillamagic.utils.WorldHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
@@ -55,7 +56,10 @@ public class QuestAutocrafting extends Quest
 							}
 							TileAutocrafting tile = new TileAutocrafting();
 							tile.init(world, cauldronPos);
-							CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world));
+							if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
+							{
+								EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
+							}
 						}
 					}
 				}
@@ -76,7 +80,10 @@ public class QuestAutocrafting extends Quest
 			Block workbench = world.getBlockState(workbenchPos).getBlock();
 			if(workbench instanceof BlockWorkbench)
 			{
-				CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, WorldHelper.getDimensionID(world));
+				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, WorldHelper.getDimensionID(world)))
+				{
+					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
+				}
 			}
 		}
 	}

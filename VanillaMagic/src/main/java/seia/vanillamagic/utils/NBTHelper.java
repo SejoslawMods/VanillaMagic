@@ -13,6 +13,7 @@ import net.minecraftforge.items.IItemHandler;
 
 /**
  * Stores all the Vanilla Magic NBT tags.
+ * Additional tags are stored in interfaces.
  */
 public class NBTHelper
 {
@@ -48,6 +49,8 @@ public class NBTHelper
 	
 	public static final String NBT_TAG_COMPOUND_ENTITY = "NBTQuestCaptureEntity";
 	public static final String NBT_ENTITY_TYPE = "EntityType";
+	
+	public static final String NBT_SPEEDY_TICKS = "NBT_SPEEDY_TICKS";
 	
 	private NBTHelper()
 	{

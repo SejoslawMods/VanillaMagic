@@ -262,6 +262,9 @@ achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to
 achievement.machineFarm=Automatic Farm (Must be restarted when logging in.)
 achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume Seed.
 
+achievement.speedy=Speedy (speed up ticks in range 9x3x9)
+achievement.speedy.desc=Place Cauldron and on top place Chest with Acceleration Crystal inside. Take second Acceleration Crystal to left hand and Blaze Wand to right hand. Shift-right-click the Cauldron.
+
 achievement.mining3x3=Mining 3x3
 achievement.mining3x3.desc=
 

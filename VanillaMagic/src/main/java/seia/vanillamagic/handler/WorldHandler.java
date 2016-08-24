@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
 import com.google.common.io.Files;
 
 import net.minecraft.nbt.CompressedStreamTools;
@@ -18,12 +20,10 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.chunkloader.TileChunkLoader;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.machine.autocrafting.TileAutocrafting;
-import seia.vanillamagic.machine.farm.TileFarm;
-import seia.vanillamagic.machine.quarry.TileQuarry;
 import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.CustomTileEntity;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.WorldHelper;
 
@@ -47,7 +47,7 @@ public class WorldHandler
 	public void preInit()
 	{
 		MinecraftForge.EVENT_BUS.register(this);
-		System.out.println("WorldHandler registered");
+		VanillaMagic.logger.log(Level.INFO, "WorldHandler registered");
 	}
 	
 	@SubscribeEvent
@@ -87,37 +87,50 @@ public class WorldHandler
 						int tileEntityPosY = tileEntityTag.getInteger("y");
 						int tileEntityPosZ = tileEntityTag.getInteger("z");
 						BlockPos tileEntityPos = new BlockPos(tileEntityPosX, tileEntityPosY, tileEntityPosZ);
-						TileEntity tileEntity = null;
-						if(tileEntityClassName.equals(TileQuarry.class.getSimpleName()))
-						{
-							tileEntity = new TileQuarry();
-							((TileQuarry) tileEntity).init(world, tileEntityPos);
-							((TileQuarry) tileEntity).checkSurroundings();
-						}
-						else if(tileEntityClassName.equals(TileFarm.class.getSimpleName()))
-						{
-							tileEntity = new TileFarm();
-							((TileFarm) tileEntity).init(world, tileEntityPos);
-						}
-						else if(tileEntityClassName.equals(TileChunkLoader.class.getSimpleName()))
-						{
-							tileEntity = new TileChunkLoader();
-							((TileChunkLoader) tileEntity).init(world, tileEntityPos);
-						}
-						else if(tileEntityClassName.equals(TileAutocrafting.class.getSimpleName()))
-						{
-							tileEntity = new TileAutocrafting();
-							((TileAutocrafting) tileEntity).init(world, tileEntityPos);
-						}
-						System.out.println("[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
+						CustomTileEntity tileEntity = null;
 						try
 						{
-							tileEntity.setPos(tileEntityPos);
-							BlockPosHelper.printCoords("[World Load] Pos saved at:", tileEntity.getPos());  // TODO:
+							tileEntity = (CustomTileEntity) Class.forName(tileEntityClassName).newInstance();
+							tileEntity.init(world, tileEntityPos);
 						}
 						catch(Exception e)
 						{
-							BlockPosHelper.printCoords("[World Load] Can't set position for tile: " + tileEntity.getClass().getSimpleName(), tileEntityPos);
+							VanillaMagic.logger.log(Level.ERROR, "Error while reading class for CustomTileEntity");
+						}
+//						if(tileEntityClassName.equals(TileQuarry.class.getSimpleName()))
+//						{
+//							tileEntity = new TileQuarry();
+//							((TileQuarry) tileEntity).init(world, tileEntityPos);
+//						}
+//						else if(tileEntityClassName.equals(TileFarm.class.getSimpleName()))
+//						{
+//							tileEntity = new TileFarm();
+//							((TileFarm) tileEntity).init(world, tileEntityPos);
+//						}
+//						else if(tileEntityClassName.equals(TileChunkLoader.class.getSimpleName()))
+//						{
+//							tileEntity = new TileChunkLoader();
+//							((TileChunkLoader) tileEntity).init(world, tileEntityPos);
+//						}
+//						else if(tileEntityClassName.equals(TileAutocrafting.class.getSimpleName()))
+//						{
+//							tileEntity = new TileAutocrafting();
+//							((TileAutocrafting) tileEntity).init(world, tileEntityPos);
+//						}
+//						else if(tileEntityClassName.equals(TileSpeedy.class.getSimpleName()))
+//						{
+//							tileEntity = new TileSpeedy();
+//							((TileSpeedy) tileEntity).init(world, tileEntityPos);
+//						}
+						VanillaMagic.logger.log(Level.INFO, "[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
+						try
+						{
+							tileEntity.setPos(tileEntityPos);
+							BlockPosHelper.printCoords(Level.INFO, "[World Load] Pos saved at:", tileEntity.getPos());  // TODO:
+						}
+						catch(Exception e)
+						{
+							BlockPosHelper.printCoords(Level.WARN, "[World Load] Can't set position for tile: " + tileEntity.getClass().getSimpleName(), tileEntityPos);
 						}
 						if(tileEntity != null)
 						{
@@ -193,7 +206,7 @@ public class WorldHandler
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
 			CompressedStreamTools.writeCompressed(data, fileOutputStream);
 			fileOutputStream.close();
-			System.out.println("[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
+			VanillaMagic.logger.log(Level.INFO, "[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
 		}
 		catch(Exception e)
 		{

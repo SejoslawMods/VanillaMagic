@@ -3,9 +3,12 @@ package seia.vanillamagic.items.book;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.utils.TextHelper;
 
 public class BookRegistry 
@@ -51,7 +54,7 @@ public class BookRegistry
 		{
 			book.registerRecipe();
 		}
-		System.out.println("Books registered");
+		VanillaMagic.logger.log(Level.INFO, "Books registered");
 	}
 	
 	/**

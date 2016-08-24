@@ -1,5 +1,7 @@
 package seia.vanillamagic.chunkloader;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
@@ -57,7 +59,7 @@ public class TileChunkLoader extends CustomTileEntity implements ITickable
 		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(worldObj, this.pos))
 		{
 			invalidate();
-			System.out.println("Incorrect ChunkLoader placed on:");
+			VanillaMagic.logger.log(Level.WARN, "Incorrect ChunkLoader placed on:");
 			BlockPosHelper.printCoords(this.pos);
 		}
 	}

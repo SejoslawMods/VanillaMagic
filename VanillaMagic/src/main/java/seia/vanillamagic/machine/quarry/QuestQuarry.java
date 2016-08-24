@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestMachineActivate;
+import seia.vanillamagic.utils.EntityHelper;
 import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestQuarry extends QuestMachineActivate
@@ -49,7 +50,10 @@ public class QuestQuarry extends QuestMachineActivate
 				tileQuarry.init(world, quarryPos);
 				if(tileQuarry.checkSurroundings())
 				{
-					CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry, player.dimension);
+					if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry, player.dimension))
+					{
+						EntityHelper.addChatComponentMessage(player, tileQuarry.getClass().getSimpleName() + " added");
+					}
 				}
 			}
 		}
@@ -63,7 +67,10 @@ public class QuestQuarry extends QuestMachineActivate
 		World world = player.worldObj;
 		if(world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
 		{
-			CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, quarryPos, player.dimension);
+			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, quarryPos, player.dimension))
+			{
+				EntityHelper.addChatComponentMessage(player, "TileEntity removed");
+			}
 		}
 	}
 }

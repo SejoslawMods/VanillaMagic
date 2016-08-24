@@ -6,9 +6,12 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.handler.WorldHandler;
 
 public class CustomTileEntityHandler 
@@ -24,7 +27,7 @@ public class CustomTileEntityHandler
 	
 	public void postInit()
 	{
-		System.out.println("CustomTileEntityHandler registered");
+		VanillaMagic.logger.log(Level.INFO, "CustomTileEntityHandler registered");
 	}
 	
 	public String getRootDir()
@@ -42,13 +45,14 @@ public class CustomTileEntityHandler
 		return saveHandlers.get(rootDir).addCustomTileEntity(customTileEntity, dimensionID);
 	}
 	
-	public void removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
+	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
 		String rootDir = getRootDir();
 		if(saveHandlers.containsKey(rootDir))
 		{
-			saveHandlers.get(rootDir).removeCustomTileEntityAtPos(world, pos, dimension);
+			return saveHandlers.get(rootDir).removeCustomTileEntityAtPos(world, pos, dimension);
 		}
+		return false;
 	}
 	
 	public List<TileEntity> getCustomEntitiesInDimension(int dimension)

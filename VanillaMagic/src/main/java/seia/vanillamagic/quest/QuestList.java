@@ -15,6 +15,7 @@ import seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.farm.QuestMachineFarm;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
+import seia.vanillamagic.machine.speedy.QuestSpeedy;
 import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
@@ -158,6 +159,7 @@ public class QuestList
 	public static final QuestQuarry QUEST_QUARRY = new QuestQuarry(QUEST_SMELT_ON_ALTAR, 0, +2, "Quarry !!!", "quarry");
 	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_QUARRY, -2, 0, new ItemStack(Items.DIAMOND_AXE), "Full Tree Cut", "fullTreeCut");
 	public static final QuestMachineFarm QUEST_MACHINE_FARM = new QuestMachineFarm(QUEST_FULL_TREE_CUT, -2, 0, new ItemStack(Items.CAULDRON), "Automatic Farm", "machineFarm", new ItemStack(Items.WHEAT_SEEDS, 1), EnumWand.BLAZE_ROD.wandItemStack.copy(), 4);
+	public static final QuestSpeedy QUEST_SPEEDY = new QuestSpeedy(QUEST_MACHINE_FARM, -2, 0, new ItemStack(Items.FEATHER), "Speedy", "speedy");
 	
 	//TODO: Fix QuestMineMulti and MineBlockTask
 	//public static final QuestMineMulti QUEST_MINE_3X3 = new QuestMineMulti(QUEST_FULL_TREE_CUT, -2, 0, new ItemStack(Items.DIAMOND_PICKAXE), "Mining 3x3", "mining3x3", 1, 1, EnumWand.BLAZE_ROD);

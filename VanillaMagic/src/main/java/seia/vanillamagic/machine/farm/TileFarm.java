@@ -2,6 +2,8 @@ package seia.vanillamagic.machine.farm;
 
 import javax.annotation.Nonnull;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -19,6 +21,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.machine.farm.farmer.Farmers;
 import seia.vanillamagic.utils.BlockPosHelper;
@@ -342,7 +345,7 @@ public class TileFarm extends TileMachine
 		if(farmer == null) 
 		{
 			farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
-			System.out.println("Added Custom Farmer"); //TODO:
+			VanillaMagic.logger.log(Level.INFO, "Added Custom Farmer");
 		}
 		if(isOpen(workingPos)) 
 		{
@@ -502,7 +505,7 @@ public class TileFarm extends TileMachine
 		return null;
 	}
 
-	public int getSupplySlotForCoord(BlockPos forBlock) 
+	public int getSupplySlotForCoord(BlockPos forBlock) // TODO:
 	{
 		return 0;
 		/*

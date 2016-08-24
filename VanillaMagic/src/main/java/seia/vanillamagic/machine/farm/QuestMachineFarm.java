@@ -14,6 +14,7 @@ import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.utils.EntityHelper;
 
 public class QuestMachineFarm extends QuestMachineActivate
 {
@@ -40,6 +41,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 			if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileFarm, player.dimension))
 			{
 				player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
+				EntityHelper.addChatComponentMessage(player, tileFarm.getClass().getSimpleName() + " added");
 			}
 		}
 	}
@@ -47,6 +49,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 	@SubscribeEvent
 	public void stopFarm(BreakEvent event)
 	{
+		EntityPlayer player = event.getPlayer();
 		World world = event.getWorld();
 		BlockPos cauldronPos = event.getPos();
 		if(world.getTileEntity(cauldronPos.offset(EnumFacing.UP)) instanceof IInventory)
@@ -60,7 +63,10 @@ public class QuestMachineFarm extends QuestMachineActivate
 					{
 						if(BlockPosHelper.isSameBlockPos(tile.getPos(), cauldronPos))
 						{
-							CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, event.getPlayer().dimension);
+							if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, event.getPlayer().dimension))
+							{
+								EntityHelper.addChatComponentMessage(player, "TileEntity removed");
+							}
 						}
 					}
 				}

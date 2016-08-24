@@ -3,8 +3,11 @@ package seia.vanillamagic.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.items.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.EnchantedBucketLava;
 import seia.vanillamagic.items.enchantedbucket.EnchantedBucketWater;
@@ -37,7 +40,7 @@ public class VanillaMagicItems
 		{
 			customItem.registerRecipe();
 		}
-		System.out.println("Custom items registered");
+		VanillaMagic.logger.log(Level.INFO, "Custom items registered");
 	}
 	
 	/**
