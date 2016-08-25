@@ -24,6 +24,9 @@ version = "1.10.2-0.13.1.0"
 group= "seia.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "vanillamagic"
 
+srcCompat = JavaVersion.VERSION_1_8
+targetCompat = JavaVersion.VERSION_1_8
+
 minecraft {
     version = "1.10.2-12.18.1.2070"
     runDir = "run"
