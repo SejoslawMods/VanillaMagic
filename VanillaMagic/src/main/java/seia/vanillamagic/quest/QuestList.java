@@ -85,6 +85,11 @@ public class QuestList
 			new ItemStack[]{new ItemStack(Blocks.GLASS)},
 			1,
 			EnumWand.STICK);
+	public static final QuestCraftOnAltar QUEST_CRAFT_SNOW = new QuestCraftOnAltar(QUEST_CRAFT_GLASS, -2, 0, "Craft Snow", "craftSnow", 
+			new ItemStack[]{new ItemStack(Blocks.WOOL, 1, 0), new ItemStack(Items.WATER_BUCKET)}, 
+			new ItemStack[]{new ItemStack(Blocks.SNOW), new ItemStack(Items.BUCKET)}, 
+			1, 
+			EnumWand.STICK);
 	
 	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_2 = new QuestBuildAltar(QUEST_BUILD_ALTAR_TIER_1, 0, +2,"Build Altar Tier 2", "buildAltarTier2", 2);
 	
@@ -151,6 +156,11 @@ public class QuestList
 	public static final QuestCraftOnAltar QUEST_CRAFT_LILY_PAD = new QuestCraftOnAltar(QUEST_CRAFT_VINES, -2, 0, "Craft Lily Pad", "craftLiyPad", 
 			new ItemStack[]{new ItemStack(Blocks.VINE, 2)}, 
 			new ItemStack[]{new ItemStack(Blocks.WATERLILY)}, 
+			2, 
+			EnumWand.STICK);
+	public static final QuestCraftOnAltar QUEST_CRAFT_SLIME_BALL = new QuestCraftOnAltar(QUEST_CRAFT_LILY_PAD, -2, 0, "Craft Slime Ball", "craftSlimeBall", 
+			new ItemStack[]{new ItemStack(Blocks.LEAVES, 5), new ItemStack(Items.WATER_BUCKET)}, 
+			new ItemStack[]{new ItemStack(Items.SLIME_BALL), new ItemStack(Items.BUCKET)}, 
 			2, 
 			EnumWand.STICK);
 	
@@ -231,6 +241,11 @@ public class QuestList
 	public static final QuestCraftOnAltar QUEST_CRAFT_NETHER_WART = new QuestCraftOnAltar(QUEST_CRAFT_MAGMA_BLOCK, -2, 0, "Craft Nether Wart", "craftNetherWart", 
 			new ItemStack[]{new ItemStack(Items.GUNPOWDER), new ItemStack(Items.MAGMA_CREAM), new ItemStack(Items.SUGAR), new ItemStack(Items.REDSTONE)}, 
 			new ItemStack[]{new ItemStack(Items.NETHER_WART)}, 
+			5, 
+			EnumWand.BLAZE_ROD);
+	public static final QuestCraftOnAltar QUEST_CRAFT_GHAST_TEAR = new QuestCraftOnAltar(QUEST_CRAFT_NETHER_WART, -2, 0, "Craft Ghast Tear", "craftGhastTear", 
+			new ItemStack[]{new ItemStack(Items.QUARTZ, 16), new ItemStack(Items.WATER_BUCKET)}, 
+			new ItemStack[]{new ItemStack(Items.GHAST_TEAR), new ItemStack(Items.BUCKET)}, 
 			5, 
 			EnumWand.BLAZE_ROD);
 	

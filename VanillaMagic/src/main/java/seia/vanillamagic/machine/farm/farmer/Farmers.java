@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.oredict.OreDictionary;
 import seia.vanillamagic.machine.farm.IHarvestResult;
 import seia.vanillamagic.machine.farm.TileFarm;
 
@@ -29,7 +30,7 @@ public class Farmers implements IFarmer
 		farmers = new ArrayList<IFarmer>();
 		farmers.add(new FarmerStem(Blocks.REEDS, new ItemStack(Items.REEDS)));
 	    farmers.add(new FarmerStem(Blocks.CACTUS, new ItemStack(Blocks.CACTUS)));
-	    //farmers.add(new FarmerOreDictionary(SAPLINGS, WOODS)); //TODO: Currently disabled
+	    farmers.add(new FarmerOreDictionary(OreDictionary.getOres("treeSapling"), OreDictionary.getOres("logWood")));
 	    farmers.add(new FarmerTree(true, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK));
 	    farmers.add(new FarmerTree(true, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK));
 	    //special case of plantables to get spacing correct

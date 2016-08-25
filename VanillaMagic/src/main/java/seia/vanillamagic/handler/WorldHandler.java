@@ -29,6 +29,7 @@ import seia.vanillamagic.utils.WorldHelper;
 
 /**
  * TODO: Fix Saving / Loading CustomTileEntities
+ * TODO: Maybe remade to WorldSpecificSaveHandler ???
  */
 public class WorldHandler
 {
@@ -56,7 +57,6 @@ public class WorldHandler
 		File vmDirectory = getVanillaMagicRootDirectory();
 		if(!vmDirectory.exists())
 		{
-			vmDirectory.mkdirs();
 			return;
 		}
 		World world = event.getWorld();
@@ -64,7 +64,6 @@ public class WorldHandler
 		File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
 		if(!folderDimension.exists())
 		{
-			folderDimension.mkdirs();
 			return;
 		}
 		File[] dimFiles = folderDimension.listFiles();

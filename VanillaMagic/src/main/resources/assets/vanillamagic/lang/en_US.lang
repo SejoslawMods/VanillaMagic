@@ -196,6 +196,9 @@ achievement.craftSand.desc=Toss 1x Cobblestone into the Altar Tier 1 and right-c
 achievement.craftGlass=Craft Glass
 achievement.craftGlass.desc=Toss 1x Sand + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand
 
+achievement.craftSnow=Craft Snow
+achievement.craftSnow.desc=Toss 1x White Wool + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand
+
 achievement.craftCobblestone=Craft Cobblestone
 achievement.craftCobblestone.desc=Toss 1x Dirt into the Altar Tier 1 and right-click with a Stick Wand in hand
 
@@ -250,6 +253,9 @@ achievement.craftVine.desc=Toss 2x Melon Block into the Altar Tier 2 and right-c
 achievement.craftLiyPad=Craft Lily Pad
 achievement.craftLiyPad.desc=Toss 2x Vine into the Altar Tier 2 and right-click with a Stick Wand in right hand
 
+achievement.craftSlimeBall=Craft Slime Ball
+achievement.craftSlimeBall.desc=Toss 5x Leaves + 1x Water Bucket into the Altar Tier 2 and right-click with a Stick Wand in right hand
+
 achievement.buildAltarTier3=Build Altar Tier 3
 achievement.buildAltarTier3.desc=Add 1 block of Gold on each side of the Altar Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west) and replace the Cauldron
 
@@ -259,7 +265,7 @@ achievement.smeltInAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Al
 achievement.fullTreeCut=Full Tree Cut
 achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right
 
-achievement.machineFarm=Automatic Farm (Must be restarted when logging in.)
+achievement.machineFarm=Automatic Farm (Must be restarted when logging in.) (W.I.P)
 achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume Seed.
 
 achievement.speedy=Speedy (speed up ticks in range 9x3x9)
@@ -315,6 +321,9 @@ achievement.craftMagmaBlock.desc=Toss 1x Netherrack + 1x Magma Cream into Altar 
 
 achievement.craftNetherWart=Craft Nether Wart
 achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar + 1x RedstoneDust into Altar Tier 5 and right-click with Blaze Wand in right hand
+
+achievement.craftGhastTear=Craft Ghast Tear
+achievement.craftGhastTear.desc=Toss 16x Nether Quartz + 1x Water Bucket into Altar Tier 5 and right-click with Blaze Wand in right hand
 
 achievement.pickBlazeRod=Pick Blaze Rod
 achievement.pickBlazeRod.desc=Pick Blaze Rod from the ground. Rename it in Anvil to 'Blaze Wand'.
