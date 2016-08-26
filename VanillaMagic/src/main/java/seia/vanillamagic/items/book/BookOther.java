@@ -120,9 +120,9 @@ public class BookOther implements IBook
 								));
 						pages.appendTag(new NBTTagString(
 								"Crafting:" + TextHelper.getEnters(2) +
-								"[§6B§0][§6B§0][§6B§0]" + ENTER +
-								"[§6B§0][§8NS§0][§6B§0]" + ENTER +
-								"[§6B§0][§6B§0][§6B§0]"
+								"[§7B§0][§7B§0][§7B§0]" + ENTER +
+								"[§7B§0][§8NS§0][§7B§0]" + ENTER +
+								"[§7B§0][§7B§0][§7B§0]"
 								));
 					}
 					else if(quest instanceof QuestAutocrafting)
