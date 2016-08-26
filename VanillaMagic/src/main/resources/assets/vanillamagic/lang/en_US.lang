@@ -337,6 +337,9 @@ achievement.captureEntity.desc=Hold Nether Wand in right hand and 1x Book in lef
 achievement.enchantedBucket=Enchanted Bucket (WARNING: Right-click will remove fluid.)
 achievement.enchantedBucket.desc=Drop 1x Bucket with fluid + 1x Nether Star to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted bucket. Shift-left-click to spawn fluid from bucket or fill tank, right-click in distance to spawn fluid in distance.
 
+achievement.liquidSuppressionCrystal=Liquid Suppression Crystal
+achievement.liquidSuppressionCrystal.desc=Crafting: Place Nether Star in the middle and surround it with buckets (8x in total). Take it to left hand. Liquid will vanish around You and after some time will appear.
+
 achievement.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
 achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand
 

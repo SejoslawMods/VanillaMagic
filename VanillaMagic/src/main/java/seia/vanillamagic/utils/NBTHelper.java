@@ -31,26 +31,29 @@ public class NBTHelper
 	public static final String NBT_DIMENSION = "NBT_DIMENSION";
 	public static final String NBT_NEEDS_FUEL = "NBT_NEEDS_FUEL";
 	
-	public static final String NBT_LOCALIZED_NAME_BLOCK = "localizedNameBlock";
-	public static final String NBT_UNLOCALIZED_NAME_BLOCK = "unlocalizedNameBlock";
-	public static final String NBT_POSX = "posX";
-	public static final String NBT_POSY = "posY";
-	public static final String NBT_POSZ = "posZ";
-	public static final String NBT_HAS_TILEENTITY = "hasTileEntity";
-	public static final String NBT_TAG_COMPOUND_NAME = "NBTQuestSaveBlock";
-	public static final String NBT_IINVENTORY_ITEMS = "IInventoryItems";
-	public static final String NBT_IINVENTORY_SLOT = "IInventorySlot";
-	public static final String NBT_SERIALIZABLE = "INBTSerializable";
-	public static final String NBT_IITEMHANDLER_SLOT = "IItemHandlerSlot";
-	public static final String NBT_IITEMHANDLER_ITEMS = "IItemHandlerItems";
-	public static final String NBT_BLOCK_ID = "BlockID";
-	public static final String NBT_BLOCK_META = "BlockMeta";
-	public static final String NBT_CLASS_NAME = "ClassName";
+	public static final String NBT_LOCALIZED_NAME_BLOCK = "NBT_LOCALIZED_NAME_BLOCK";
+	public static final String NBT_UNLOCALIZED_NAME_BLOCK = "NBT_UNLOCALIZED_NAME_BLOCK";
+	public static final String NBT_POSX = "NBT_POSX";
+	public static final String NBT_POSY = "NBT_POSY";
+	public static final String NBT_POSZ = "NBT_POSZ";
+	public static final String NBT_HAS_TILEENTITY = "NBT_HAS_TILEENTITY";
+	public static final String NBT_TAG_COMPOUND_NAME = "NBT_TAG_COMPOUND_NAME";
+	public static final String NBT_IINVENTORY_ITEMS = "NBT_IINVENTORY_ITEMS";
+	public static final String NBT_IINVENTORY_SLOT = "NBT_IINVENTORY_SLOT";
+	public static final String NBT_SERIALIZABLE = "NBT_SERIALIZABLE";
+	public static final String NBT_IITEMHANDLER_SLOT = "NBT_IITEMHANDLER_SLOT";
+	public static final String NBT_IITEMHANDLER_ITEMS = "NBT_IITEMHANDLER_ITEMS";
+	public static final String NBT_CLASS_NAME = "NBT_CLASS_NAME";
 	
 	public static final String NBT_TAG_COMPOUND_ENTITY = "NBTQuestCaptureEntity";
 	public static final String NBT_ENTITY_TYPE = "EntityType";
 	
 	public static final String NBT_SPEEDY_TICKS = "NBT_SPEEDY_TICKS";
+	
+	public static final String NBT_TICKS_REMAINING = "NBT_TICKS_REMAINING";
+	public static final String NBT_BLOCK_NAME = "NBT_BLOCK_NAME";
+	public static final String NBT_BLOCK_META = "NBT_BLOCK_META";
+	public static final String NBT_BLOCK_ID = "NBT_BLOCK_ID";
 	
 	private NBTHelper()
 	{

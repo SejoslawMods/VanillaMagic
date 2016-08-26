@@ -43,4 +43,9 @@ public abstract class CustomTileEntity extends TileEntity implements ITickable
 		super.onDataPacket(net, pkt);
 		this.readFromNBT(pkt.getNbtCompound());
 	}
+	
+	public NBTTagCompound getUpdateTag()
+	{
+		return writeToNBT(new NBTTagCompound());
+	}
 }

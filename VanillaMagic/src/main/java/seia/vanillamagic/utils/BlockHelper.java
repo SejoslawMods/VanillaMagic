@@ -1,9 +1,11 @@
 package seia.vanillamagic.utils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.IFluidBlock;
 
 public class BlockHelper 
 {
@@ -23,5 +25,10 @@ public class BlockHelper
 			nextBlock = world.getBlockState(next).getBlock();
 		}
 		return count;
+	}
+	
+	public static boolean isBlockLiquid(IBlockState state)
+	{
+		return (state instanceof IFluidBlock || state.getMaterial().isLiquid());
 	}
 }

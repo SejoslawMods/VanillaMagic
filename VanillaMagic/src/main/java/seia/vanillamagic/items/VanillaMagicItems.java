@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.items.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.IEnchantedBucket;
+import seia.vanillamagic.items.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
 
 public class VanillaMagicItems 
 {
@@ -19,6 +20,7 @@ public class VanillaMagicItems
 	public final List<IEnchantedBucket> enchantedBuckets;
 	
 	public ICustomItem itemAccelerationCrystal;
+	public ICustomItem itemLiquidSuppressionCrystal;
 	
 	private VanillaMagicItems()
 	{
@@ -27,6 +29,9 @@ public class VanillaMagicItems
 		
 		itemAccelerationCrystal = new ItemAccelerationCrystal();
 		customItems.add(itemAccelerationCrystal);
+		
+		itemLiquidSuppressionCrystal = new ItemLiquidSuppressionCrystal();
+		customItems.add(itemLiquidSuppressionCrystal);
 	}
 	
 	public void postInit()

@@ -73,30 +73,30 @@ public class QuestEnchantedBucket extends Quest
 		{
 			if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 			{
-				if(!player.hasAchievement(achievement))
+				List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, clickedPos);
+				if(itemsInCauldron.size() == 0)
 				{
-					player.addStat(achievement, 1);
+					return;
 				}
-				if(player.hasAchievement(achievement))
+				else if(itemsInCauldron.size() == 2)
 				{
-					List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, clickedPos);
-					if(itemsInCauldron.size() == 0)
+					boolean ns = false;
+					for(EntityItem item : itemsInCauldron)
 					{
-						return;
-					}
-					else if(itemsInCauldron.size() == 2)
-					{
-						boolean ns = false;
-						for(EntityItem item : itemsInCauldron)
+						if(item.getEntityItem().getItem().equals(Items.NETHER_STAR))
 						{
-							if(item.getEntityItem().getItem().equals(Items.NETHER_STAR))
-							{
-								ns = true;
-								break;
-							}
+							ns = true;
+							break;
 						}
-						IEnchantedBucket bucket = EnchantedBucketHelper.getEnchantedBucketFromCauldron(world, clickedPos);
-						if(ns == true && bucket != null)
+					}
+					IEnchantedBucket bucket = EnchantedBucketHelper.getEnchantedBucketFromCauldron(world, clickedPos);
+					if(ns == true && bucket != null)
+					{
+						if(!player.hasAchievement(achievement))
+						{
+							player.addStat(achievement, 1);
+						}
+						if(player.hasAchievement(achievement))
 						{
 							EntityItem newEI = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), bucket.getItem().copy());
 							world.spawnEntityInWorld(newEI);

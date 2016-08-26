@@ -2,6 +2,7 @@ package seia.vanillamagic;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.chunkloader.TileChunkLoader;
+import seia.vanillamagic.items.liquidsuppressioncrystal.TileLiquidSuppression;
 import seia.vanillamagic.machine.autocrafting.TileAutocrafting;
 import seia.vanillamagic.machine.farm.TileFarm;
 import seia.vanillamagic.machine.quarry.TileQuarry;
@@ -23,5 +24,6 @@ public class VanillaMagicRegistry
 		GameRegistry.registerTileEntity(TileFarm.class, TileFarm.REGISTRY_NAME);
 		GameRegistry.registerTileEntity(TileAutocrafting.class, TileAutocrafting.REGISTRY_NAME);
 		GameRegistry.registerTileEntity(TileSpeedy.class, TileSpeedy.REGISTRY_NAME);
+		GameRegistry.registerTileEntity(TileLiquidSuppression.class, TileLiquidSuppression.REGISTRY_NAME);
 	}
 }
