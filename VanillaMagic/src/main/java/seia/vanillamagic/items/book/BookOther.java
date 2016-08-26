@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
+import seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
 import seia.vanillamagic.quest.Quest;
@@ -105,6 +106,23 @@ public class BookOther implements IBook
 								"[ ][§6B§0][ ]" + ENTER +
 								"[§6B§0][§8NS§0][§6B§0]" + ENTER +
 								"[ ][§6B§0][ ]"
+								));
+					}
+					else if(quest instanceof QuestLiquidSuppressionCrystal)
+					{
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
+								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.getEnters(2) + 
+								"§0" +
+								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								"--->"
+								));
+						pages.appendTag(new NBTTagString(
+								"Crafting:" + TextHelper.getEnters(2) +
+								"[§6B§0][§6B§0][§6B§0]" + ENTER +
+								"[§6B§0][§8NS§0][§6B§0]" + ENTER +
+								"[§6B§0][§6B§0][§6B§0]"
 								));
 					}
 					else if(quest instanceof QuestAutocrafting)
