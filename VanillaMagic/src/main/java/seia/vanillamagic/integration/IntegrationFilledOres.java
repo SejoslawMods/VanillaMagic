@@ -19,13 +19,11 @@ public class IntegrationFilledOres implements IIntegration
 		// Start the right work
 		Class<?> clazzRedstone = Class.forName("mod.mcreator.mcreator_fred");
 		Field fieldRedstoneOre = clazzRedstone.getField("block"); // BlockFred which extends Block
-		Block redstoneOreBlock = (Block) fieldRedstoneOre.get(null); // static field
-		CustomOre.INSTANCE.customOreRedstone.add(redstoneOreBlock);	
+		CustomOre.INSTANCE.customOreRedstone.add((Block) fieldRedstoneOre.get(null)); // static field
 		
 		Class<?> clazzDiamond = Class.forName("mod.mcreator.mcreator_fdiamondD");
 		Field fieldDiamondOre = clazzDiamond.getField("block");
-		Block diamondOreBlock = (Block) fieldDiamondOre.get(null);
-		CustomOre.INSTANCE.customOreDiamond.add(diamondOreBlock);
+		CustomOre.INSTANCE.customOreDiamond.add((Block) fieldDiamondOre.get(null));
 		
 		return true;
 	}
