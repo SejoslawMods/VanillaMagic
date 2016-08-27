@@ -28,7 +28,7 @@ import seia.vanillamagic.quest.QuestList;
 public class VanillaMagic
 {
 	public static final String MODID = "vanillamagic";
-	public static final String VERSION = "1.10.2-0.13.2.1";
+	public static final String VERSION = "1.10.2-0.13.2.2";
 	public static final String NAME = "Vanilla Magic";
 	
 	@Mod.Instance
@@ -52,7 +52,7 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		WorldHandler.INSTANCE.preInit(); //TODO: FIX
+		//WorldHandler.INSTANCE.preInit(); //TODO: FIX
 		VanillaMagicIntegration.INSTANCE.preInit();
 	}
 	
