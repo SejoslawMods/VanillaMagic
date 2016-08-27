@@ -11,21 +11,24 @@ import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.items.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.IEnchantedBucket;
 import seia.vanillamagic.items.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
+import seia.vanillamagic.items.potionedcrystal.IPotionedCrystal;
 
 public class VanillaMagicItems 
 {
 	public static final VanillaMagicItems INSTANCE = new VanillaMagicItems();
 	
 	private final List<ICustomItem> customItems;
-	public final List<IEnchantedBucket> enchantedBuckets;
 	
-	public ICustomItem itemAccelerationCrystal;
-	public ICustomItem itemLiquidSuppressionCrystal;
+	public final List<IEnchantedBucket> enchantedBuckets;
+	public final List<IPotionedCrystal> potionedCrystals;
+	public final ICustomItem itemAccelerationCrystal;
+	public final ICustomItem itemLiquidSuppressionCrystal;
 	
 	private VanillaMagicItems()
 	{
 		customItems = new ArrayList<ICustomItem>();
 		enchantedBuckets = new ArrayList<IEnchantedBucket>();
+		potionedCrystals = new ArrayList<IPotionedCrystal>();
 		
 		itemAccelerationCrystal = new ItemAccelerationCrystal();
 		customItems.add(itemAccelerationCrystal);

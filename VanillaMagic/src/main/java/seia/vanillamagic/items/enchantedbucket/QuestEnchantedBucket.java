@@ -49,10 +49,6 @@ public class QuestEnchantedBucket extends Quest
 	@SubscribeEvent
 	public void craftEnchantedBucket(RightClickBlock event) // onItemUse
 	{
-		World world = event.getWorld();
-		EntityPlayer player = event.getEntityPlayer();
-		BlockPos clickedPos = event.getPos();
-		ItemStack stackRightHand = player.getHeldItemMainhand();
 		if(countTicks == 0)
 		{
 			countTicks++;
@@ -62,7 +58,10 @@ public class QuestEnchantedBucket extends Quest
 			countTicks = 0;
 			return;
 		}
-		
+		World world = event.getWorld();
+		EntityPlayer player = event.getEntityPlayer();
+		BlockPos clickedPos = event.getPos();
+		ItemStack stackRightHand = player.getHeldItemMainhand();
 		if(stackRightHand == null)
 		{
 			return;

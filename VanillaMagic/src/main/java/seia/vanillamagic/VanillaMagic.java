@@ -12,12 +12,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
-import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.integration.VanillaMagicIntegration;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.items.enchantedbucket.EnchantedBucketHelper;
+import seia.vanillamagic.items.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.quest.QuestList;
 
 @Mod(
@@ -73,6 +73,7 @@ public class VanillaMagic
 		BookRegistry.INSTANCE.postInit();
 		CustomTileEntityHandler.INSTANCE.postInit();
 		EnchantedBucketHelper.registerFluids();
+		PotionedCrystalHelper.registerRecipes();
 		VanillaMagicItems.INSTANCE.postInit();
 		VanillaMagicIntegration.INSTANCE.postInit();
 	}

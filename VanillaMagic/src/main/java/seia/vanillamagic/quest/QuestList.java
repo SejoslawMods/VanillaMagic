@@ -13,6 +13,7 @@ import seia.vanillamagic.integration.CustomOre;
 import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket;
 import seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
+import seia.vanillamagic.items.potionedcrystal.QuestPotionedCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.farm.QuestMachineFarm;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
@@ -256,6 +257,7 @@ public class QuestList
 	public static final QuestCaptureEntity QUEST_CAPTURE_ENTITY = new QuestCaptureEntity(QUEST_MOVE_BLOCK, -2, 0, new ItemStack(Items.BOOK), "Capture Entity", "captureEntity", new ItemStack(Items.BOOK), EnumWand.NETHER_STAR);
 	public static final QuestEnchantedBucket QUEST_ENCHANTED_BUCKET = new QuestEnchantedBucket(QUEST_CAPTURE_ENTITY, -2, 0, new ItemStack(Items.BUCKET), "Enchanted Bucket", "enchantedBucket");
 	public static final QuestLiquidSuppressionCrystal QUEST_LIQUID_SUPPRESSION_CRYSTAL = new QuestLiquidSuppressionCrystal(QUEST_ENCHANTED_BUCKET, -2, 0, new ItemStack(Items.NETHER_STAR), "Liquid Suppression Crystal", "liquidSuppressionCrystal");
+	public static final QuestPotionedCrystal QUEST_POTIONED_CRYSTAL = new QuestPotionedCrystal(QUEST_LIQUID_SUPPRESSION_CRYSTAL, -2, 0, new ItemStack(Items.POTIONITEM), "Potioned Crystal", "potionedCrystal");
 	
 	public static final QuestCraftOnAltar QUEST_CRAFT_WITHER_SKELETON_HEAD = new QuestCraftOnAltar(QUEST_PICK_BLAZE_ROD, +2, +1, "Craft Wither Skeleton Skull", "craftWitherSkeletonSkull", 
 			new ItemStack[]{new ItemStack(Blocks.COAL_BLOCK), ItemStackHelper.getHead(1, 0)}, 
