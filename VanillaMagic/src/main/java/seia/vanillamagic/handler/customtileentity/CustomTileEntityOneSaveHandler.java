@@ -102,6 +102,14 @@ public class CustomTileEntityOneSaveHandler
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
 		List<TileEntity> tilesInDimension = loadedTileEntities.get(dimension);
+		if(tilesInDimension == null)
+		{
+			return false;
+		}
+		if(tilesInDimension.size() == 0)
+		{
+			return false;
+		}
 		for(int i = 0; i < tilesInDimension.size(); i++)
 		{
 			TileEntity tileInDim = tilesInDimension.get(i);
