@@ -23,34 +23,38 @@ public class QuestFullTreeCut extends Quest
 	public void onTreeCut(BreakEvent event)
 	{
 		EntityPlayer player = event.getPlayer();
-		try
+		ItemStack rightHand = player.getHeldItemMainhand();
+		if(rightHand == null)
 		{
-			if(player.getHeldItemMainhand().getItem() instanceof ItemAxe)
+			return;
+		}
+		if(rightHand.getItem() instanceof ItemAxe)
+		{
+			ItemStack leftHand = player.getHeldItemOffhand();
+			if(leftHand == null)
 			{
-				if(ItemStack.areItemsEqual(player.getHeldItemOffhand(), EnumWand.BLAZE_ROD.wandItemStack))
+				return;
+			}
+			if(ItemStack.areItemsEqual(leftHand, EnumWand.BLAZE_ROD.wandItemStack))
+			{
+				BlockPos origin = event.getPos();
+				World world = event.getWorld();
+				if(TreeCutHelper.isLog(world, origin))
 				{
-					BlockPos origin = event.getPos();
-					World world = event.getWorld();
-					if(TreeCutHelper.isLog(world, origin))
+					origin = origin.offset(EnumFacing.UP);
+					if(TreeCutHelper.detectTree(player.worldObj, origin))
 					{
-						origin = origin.offset(EnumFacing.UP);
-						if(TreeCutHelper.detectTree(player.worldObj, origin))
+						if(!player.hasAchievement(achievement))
 						{
-							if(!player.hasAchievement(achievement))
-							{
-								player.addStat(achievement, 1);
-							}
-							if(player.hasAchievement(achievement))
-							{
-								TreeCutHelper.fellTree(player.getHeldItemMainhand(), origin, player);
-							}
+							player.addStat(achievement, 1);
+						}
+						if(player.hasAchievement(achievement))
+						{
+							TreeCutHelper.fellTree(player.getHeldItemMainhand(), origin, player);
 						}
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 }

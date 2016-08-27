@@ -43,51 +43,58 @@ public class QuestMoveBlock extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos wantedBlockPos = event.getPos();
 		World world = player.worldObj;
-		try
+		ItemStack mainHand = player.getHeldItemMainhand();
+		if(mainHand == null)
 		{
-			EnumWand wandPlayerHand = EnumWand.getWandByItemStack(player.getHeldItemMainhand());
-			if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+			return;
+		}
+		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(mainHand);
+		if(wandPlayerHand == null)
+		{
+			return;
+		}
+		if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+		{
+			if(player.isSneaking())
 			{
-				if(player.isSneaking())
+				ItemStack stackOffHand = player.getHeldItemOffhand();
+				if(stackOffHand == null)
 				{
-					ItemStack stackOffHand = player.getHeldItemOffhand();
-					if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
+					return;
+				}
+				if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
+				{
+					if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
 					{
-						if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
+						if(!player.hasAchievement(achievement))
 						{
-							if(!player.hasAchievement(achievement))
-							{
-								player.addStat(achievement, 1);
-							}
-							if(player.hasAchievement(achievement))
-							{
-								if(clickedTimes > 0)
-								{
-									clickedTimes = 0;
-									return;
-								}
-								handleSave(world, player, wantedBlockPos, event.getFace());
-								clickedTimes++;
-							}
+							player.addStat(achievement, 1);
 						}
+						if(player.hasAchievement(achievement))
+						{
+							if(clickedTimes > 0)
+							{
+								clickedTimes = 0;
+								return;
+							}
+							handleSave(world, player, wantedBlockPos, event.getFace());
+							clickedTimes++;
+						}
+					}
+					return;
+				}
+				NBTTagCompound stackTag = stackOffHand.getTagCompound();
+				if(stackTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
+				{
+					if(clickedTimes > 0)
+					{
+						clickedTimes = 0;
 						return;
 					}
-					NBTTagCompound stackTag = stackOffHand.getTagCompound();
-					if(stackTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
-					{
-						if(clickedTimes > 0)
-						{
-							clickedTimes = 0;
-							return;
-						}
-						handleLoad(world, player, wantedBlockPos, event.getFace());
-						clickedTimes++;
-					}
+					handleLoad(world, player, wantedBlockPos, event.getFace());
+					clickedTimes++;
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 	

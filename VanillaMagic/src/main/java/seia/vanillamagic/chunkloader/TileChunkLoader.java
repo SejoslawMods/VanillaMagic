@@ -2,19 +2,16 @@ package seia.vanillamagic.chunkloader;
 
 import org.apache.logging.log4j.Level;
 
-import net.minecraft.util.ITickable;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.CustomTileEntity;
 
-public class TileChunkLoader extends CustomTileEntity implements ITickable
+public class TileChunkLoader extends CustomTileEntity
 {
-	// Name for tile
 	public static final String REGISTRY_NAME = TileChunkLoader.class.getSimpleName();
 	
-	@Override
 	public void validate() 
 	{
 		super.validate();
@@ -27,8 +24,7 @@ public class TileChunkLoader extends CustomTileEntity implements ITickable
 			}
 		}
 	}
-
-	@Override
+	
 	public void invalidate() 
 	{
 		super.invalidate();
@@ -52,8 +48,7 @@ public class TileChunkLoader extends CustomTileEntity implements ITickable
 			this.chunkTicket = null;
 		}
 	}
-
-	@Override
+	
 	public void update() 
 	{
 		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(worldObj, this.pos))

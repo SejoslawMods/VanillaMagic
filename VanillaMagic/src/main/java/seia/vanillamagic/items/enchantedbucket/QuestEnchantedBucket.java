@@ -2,6 +2,8 @@ package seia.vanillamagic.items.enchantedbucket;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
@@ -267,6 +269,7 @@ public class QuestEnchantedBucket extends Quest
 		}
 	}
 	
+	@Nullable
 	public RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids)
 	{
 		float pitch = playerIn.rotationPitch;

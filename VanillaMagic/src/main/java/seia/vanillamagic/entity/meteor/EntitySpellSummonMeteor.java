@@ -18,7 +18,6 @@ public class EntitySpellSummonMeteor extends EntitySpell
         super(world, caster, accelX, accelY, accelZ);
     }
 	
-	@Override
 	public void onImpact(RayTraceResult result)
 	{
 		double spawnMeteorX = 0;

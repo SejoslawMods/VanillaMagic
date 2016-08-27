@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStem;
 import net.minecraft.block.IGrowable;
@@ -125,6 +127,7 @@ public class FarmerPlantable implements IFarmer
 		return false;
 	}
 	
+	@Nullable
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos bc, Block block, IBlockState meta) 
 	{
 		if(!canHarvest(farm, bc, block, meta)) 

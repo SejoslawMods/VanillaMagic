@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.entity.item.EntityItem;
@@ -44,6 +46,7 @@ public class EnchantedBucketHelper
 		return getResult(new ItemStack(Items.BUCKET), fluid);
 	}
 	
+	@Nullable
 	public static IEnchantedBucket getEnchantedBucket(ItemStack stack) // ItemBucket
 	{
 		for(IEnchantedBucket enchantedBucket : VanillaMagicItems.INSTANCE.enchantedBuckets)
@@ -59,6 +62,7 @@ public class EnchantedBucketHelper
 	/**
 	 * Returns the first IEnchantedBucket from Cauldron at the given position.
 	 */
+	@Nullable
 	public static IEnchantedBucket getEnchantedBucketFromCauldron(World world, BlockPos cauldronPos)
 	{
 		List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);

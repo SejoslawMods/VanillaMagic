@@ -1,5 +1,7 @@
 package seia.vanillamagic.utils.spell;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -71,6 +73,7 @@ public enum EnumSpell
 
 	//================================================================================================
 	
+	@Nullable
 	public static EnumSpell getSpellById(int id)
 	{
 		EnumSpell[] spells = values();

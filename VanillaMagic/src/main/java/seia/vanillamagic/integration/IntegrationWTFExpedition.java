@@ -13,6 +13,9 @@ public class IntegrationWTFExpedition implements IIntegration
 	
 	public boolean postInit() throws Exception
 	{
+		// Check if we have installed right mod
+		Class<?> clazzCore = Class.forName("wtf.core.Core");
+		
 		Class<?> clazzDenseRedstone = Class.forName("wtf.blocks.redstone.DenseRedstoneOre");
 		Field fieldDenseRedstoneOn = clazzDenseRedstone.getField("denseRedstone_on");
 		CustomOre.INSTANCE.customOreRedstone.add((Block) fieldDenseRedstoneOn.get(null));

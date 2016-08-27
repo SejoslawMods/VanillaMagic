@@ -3,6 +3,8 @@ package seia.vanillamagic.machine.farm.farmer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -172,6 +174,7 @@ public class FarmerCustomSeed implements IFarmer
 		return false;
 	}
 	
+	@Nullable
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		if(!canHarvest(farm, pos, block, state)) 

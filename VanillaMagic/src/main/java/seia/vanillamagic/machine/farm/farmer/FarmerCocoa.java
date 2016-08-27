@@ -2,6 +2,8 @@ package seia.vanillamagic.machine.farm.farmer;
 
 import static net.minecraft.block.BlockHorizontal.FACING;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.BlockOldLog;
@@ -48,6 +50,7 @@ public class FarmerCocoa extends FarmerCustomSeed
 		return getPlantDirection(worldObj, pos) != null;
 	}
 
+	@Nullable
 	private EnumFacing getPlantDirection(World worldObj, BlockPos pos) 
 	{
 		if(!worldObj.isAirBlock(pos)) 

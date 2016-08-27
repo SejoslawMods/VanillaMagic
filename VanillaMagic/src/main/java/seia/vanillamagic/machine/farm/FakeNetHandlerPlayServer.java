@@ -1,5 +1,7 @@
 package seia.vanillamagic.machine.farm;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -37,6 +39,7 @@ public class FakeNetHandlerPlayServer extends NetHandlerPlayServer
 		super(FMLCommonHandler.instance().getMinecraftServerInstance(), new NetworkManager(EnumPacketDirection.CLIENTBOUND), playerMP);
 	}
 	
+	@Nullable
 	public NetworkManager getNetworkManager() 
 	{
 		return null;

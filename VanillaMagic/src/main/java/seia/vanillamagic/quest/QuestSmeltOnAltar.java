@@ -35,37 +35,34 @@ public class QuestSmeltOnAltar extends Quest
 	@SubscribeEvent
 	public void smeltOnAltar(RightClickBlock event)
 	{
-		try
+		EntityPlayer player = event.getEntityPlayer();
+		BlockPos cauldronPos = event.getPos();
+		// player has got required wand in hand
+		if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
 		{
-			EntityPlayer player = event.getEntityPlayer();
-			BlockPos cauldronPos = event.getPos();
-			
-			// player has got required wand in hand
-			if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
+			// check if player has the "fuel" in offHand
+			ItemStack fuelOffHand = player.getHeldItemOffhand();
+			if(fuelOffHand == null)
 			{
-				// check if player has the "fuel" in offHand
-				ItemStack fuelOffHand = player.getHeldItemOffhand();
-				if(SmeltingHelper.isItemFuel(fuelOffHand))
+				return;
+			}
+			if(SmeltingHelper.isItemFuel(fuelOffHand))
+			{
+				World world = player.worldObj;
+				// is right-clicking on Cauldron
+				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
-					World world = player.worldObj;
-					// is right-clicking on Cauldron
-					if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
+					// is altair build correct
+					if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
 					{
-						// is altair build correct
-						if(AltarChecker.checkAltarTier(world, cauldronPos, requiredAltarTier))
+						List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(world, cauldronPos);
+						if(itemsToSmelt.size() > 0)
 						{
-							List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(world, cauldronPos);
-							if(itemsToSmelt.size() > 0)
-							{
-								SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
-							}
+							SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
 						}
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 }

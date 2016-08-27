@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -36,45 +38,47 @@ public class QuestCaptureEntity extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
 		Entity target = event.getTarget();
-		try
+		ItemStack rightHand = player.getHeldItemMainhand();
+		if(rightHand == null)
 		{
-			EnumWand wandPlayerHand = EnumWand.getWandByItemStack(player.getHeldItemMainhand());
-			if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+			return;
+		}
+		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(rightHand);
+		if(wandPlayerHand == null)
+		{
+			return;
+		}
+		if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+		{
+			if(player.isSneaking())
 			{
-				if(player.isSneaking())
+				ItemStack stackOffHand = player.getHeldItemOffhand();
+				if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
 				{
-					ItemStack stackOffHand = player.getHeldItemOffhand();
-					if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
+					if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
 					{
-						if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
+						if(!player.hasAchievement(achievement))
 						{
-							if(!player.hasAchievement(achievement))
-							{
-								player.addStat(achievement, 1);
-							}
-							if(player.hasAchievement(achievement))
-							{
-								if(clickedTimes > 0)
-								{
-									clickedTimes = 0;
-									return;
-								}
-								if(target instanceof EntityPlayer)
-								{
-									event.setCanceled(true);
-									return;
-								}
-								handleCapture(world, player, target);
-								clickedTimes++;
-							}
+							player.addStat(achievement, 1);
 						}
-						return;
+						if(player.hasAchievement(achievement))
+						{
+							if(clickedTimes > 0)
+							{
+								clickedTimes = 0;
+								return;
+							}
+							if(target instanceof EntityPlayer)
+							{
+								event.setCanceled(true);
+								return;
+							}
+							handleCapture(world, player, target);
+							clickedTimes++;
+						}
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 	
@@ -85,30 +89,33 @@ public class QuestCaptureEntity extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
 		BlockPos respawnPos = event.getPos();
-		try
+		ItemStack rightHand = player.getHeldItemMainhand();
+		if(rightHand == null)
 		{
-			EnumWand wandPlayerHand = EnumWand.getWandByItemStack(player.getHeldItemMainhand());
-			if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+			return;
+		}
+		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(rightHand);
+		if(wandPlayerHand == null)
+		{
+			return;
+		}
+		if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+		{
+			if(player.isSneaking())
 			{
-				if(player.isSneaking())
+				ItemStack stackOffHand = player.getHeldItemOffhand();
+				NBTTagCompound stackTag = stackOffHand.getTagCompound();
+				if(stackTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))
 				{
-					ItemStack stackOffHand = player.getHeldItemOffhand();
-					NBTTagCompound stackTag = stackOffHand.getTagCompound();
-					if(stackTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))
+					if(clickedTimesFree > 0)
 					{
-						if(clickedTimesFree > 0)
-						{
-							clickedTimesFree = 0;
-							return;
-						}
-						handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
-						clickedTimesFree++;
+						clickedTimesFree = 0;
+						return;
 					}
+					handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
+					clickedTimesFree++;
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 	
@@ -162,6 +169,7 @@ public class QuestCaptureEntity extends Quest
 		}
 	}
 	
+	@Nullable
 	public Entity createEntity(EntityPlayer player, World world, String type)
 	{
 		Entity entity = null;

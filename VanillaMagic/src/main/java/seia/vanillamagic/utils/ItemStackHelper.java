@@ -1,5 +1,7 @@
 package seia.vanillamagic.utils;
 
+import javax.annotation.Nullable;
+
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,6 +39,7 @@ public class ItemStackHelper
 	 * 4 - Creeper
 	 * 5 - Ender Dragon
 	 */
+	@Nullable
 	public static ItemStack getHead(int amount, int meta)
 	{
 		return new ItemStack(Items.SKULL, amount, meta);
@@ -73,6 +76,7 @@ public class ItemStackHelper
 		return false;
 	}
 	
+	@Nullable
 	public static ItemStack getItemStackWithNextMetadata(ItemStack stack)
 	{
 		ItemStack stackWithNextMeta = null;

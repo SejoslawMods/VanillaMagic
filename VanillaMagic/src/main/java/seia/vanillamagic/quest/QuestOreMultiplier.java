@@ -32,37 +32,34 @@ public class QuestOreMultiplier extends Quest
 	@SubscribeEvent
 	public void doubleOre(RightClickBlock event)
 	{
-		try
+		EntityPlayer player = event.getEntityPlayer();
+		BlockPos cauldronPos = event.getPos();
+		// player has got required wand in hand
+		if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
 		{
-			EntityPlayer player = event.getEntityPlayer();
-			BlockPos cauldronPos = event.getPos();
-			
-			// player has got required wand in hand
-			if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
+			// check if player has the "fuel" in offHand
+			ItemStack fuelOffHand = player.getHeldItemOffhand();
+			if(fuelOffHand == null)
 			{
-				// check if player has the "fuel" in offHand
-				ItemStack fuelOffHand = player.getHeldItemOffhand();
-				if(SmeltingHelper.isItemFuel(fuelOffHand))
+				return;
+			}
+			if(SmeltingHelper.isItemFuel(fuelOffHand))
+			{
+				World world = player.worldObj;
+				// is right-clicking on Cauldron
+				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
-					World world = player.worldObj;
-					// is right-clicking on Cauldron
-					if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
+					// is altair build correct
+					if(OreMultiplierChecker.check(world, cauldronPos))
 					{
-						// is altair build correct
-						if(OreMultiplierChecker.check(world, cauldronPos))
+						List<EntityItem> oresInCauldron = SmeltingHelper.getOresInCauldron(world, cauldronPos);
+						if(oresInCauldron.size() > 0)
 						{
-							List<EntityItem> oresInCauldron = SmeltingHelper.getOresInCauldron(world, cauldronPos);
-							if(oresInCauldron.size() > 0)
-							{
-								multiply(player, oresInCauldron, cauldronPos);
-							}
+							multiply(player, oresInCauldron, cauldronPos);
 						}
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 	

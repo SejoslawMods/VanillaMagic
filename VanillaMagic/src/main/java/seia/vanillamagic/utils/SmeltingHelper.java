@@ -3,6 +3,8 @@ package seia.vanillamagic.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -84,6 +86,7 @@ public class SmeltingHelper
 	/**
 	 * Returns the first fuelStack from the inventory
 	 */
+	@Nullable
 	public static ItemStack getFuelFromInventoryAndDelete(IInventory inv)
 	{
 		for(int i = 0; i < inv.getSizeInventory(); i++)
@@ -179,6 +182,7 @@ public class SmeltingHelper
 	 * Returns the list of smelted items
 	 * oneItemSmeltTicks = default is QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS
 	 */
+	@Nullable
 	public static List<EntityItem> countAndSmelt(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
 			Quest requiredQuest, boolean spawnSmelted)
 	{

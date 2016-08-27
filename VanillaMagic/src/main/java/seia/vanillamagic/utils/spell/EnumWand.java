@@ -1,5 +1,7 @@
 package seia.vanillamagic.utils.spell;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -42,6 +44,7 @@ public enum EnumWand
 	 * @param player - player we are checking
 	 * @return - the Wand which player has got in main hand - null if the item is not a Wand
 	 */
+	@Nullable
 	public static EnumWand isWandInMainHand(EntityPlayer player)
 	{
 		return getWandByItemStack(player.getHeldItemMainhand());
@@ -51,6 +54,7 @@ public enum EnumWand
 	 * @param player - player we are checking
 	 * @return - the Wand which player has got in off hand - null if the item is not a Wand
 	 */
+	@Nullable
 	public static EnumWand isWandInOffHand(EntityPlayer player)
 	{
 		return getWandByItemStack(player.getHeldItemOffhand());
@@ -64,14 +68,14 @@ public enum EnumWand
 	public static boolean isWandInMainHandRight(EntityPlayer player, int requiredWandMinimalTier)
 	{
 		EnumWand wandInMainHand = isWandInMainHand(player);
-		// player has got wand in hand
-		if(wandInMainHand != null)
+		if(wandInMainHand == null)
 		{
-			return wandInMainHand.canWandDoWork(requiredWandMinimalTier);
+			return false;
 		}
-		return false;
+		return wandInMainHand.canWandDoWork(requiredWandMinimalTier);
 	}
 	
+	@Nullable
 	public static EnumWand getWandByItemStack(ItemStack inHand)
 	{
 		EnumWand[] wands = EnumWand.values();
@@ -92,6 +96,7 @@ public enum EnumWand
 		return null;
 	}
 
+	@Nullable
 	public static EnumWand getCasterWand(EntityPlayer caster)
 	{
 		return getWandByItemStack(caster.getHeldItemMainhand());

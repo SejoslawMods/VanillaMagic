@@ -27,20 +27,14 @@ public class QuestPick extends Quest
 	@SubscribeEvent
 	public void pickItem(ItemPickupEvent event)
 	{
-		try
+		EntityPlayer player = event.player;
+		if(!player.hasAchievement(achievement))
 		{
-			EntityPlayer player = event.player;
-			if(!player.hasAchievement(achievement))
+			EntityItem onGround = event.pickedUp;
+			if(whatToPick.getItem().equals(onGround.getEntityItem().getItem()))
 			{
-				EntityItem onGround = event.pickedUp;
-				if(whatToPick.getItem().equals(onGround.getEntityItem().getItem()))
-				{
-					player.addStat(achievement, 1);
-				}
+				player.addStat(achievement, 1);
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 }

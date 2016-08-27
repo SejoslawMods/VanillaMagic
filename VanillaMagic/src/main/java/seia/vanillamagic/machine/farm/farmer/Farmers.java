@@ -3,6 +3,8 @@ package seia.vanillamagic.machine.farm.farmer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -63,6 +65,7 @@ public class Farmers implements IFarmer
 		return false;
 	}
 
+	@Nullable
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
 		for(IFarmer farmer : farmers) 
@@ -112,6 +115,7 @@ public class Farmers implements IFarmer
 		}
 	}
 
+	@Nullable
 	public static FarmerCustomSeed addSeed(String mod, String blockName, String itemName, Block... extraFarmland) 
 	{
 		if (Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 

@@ -121,45 +121,6 @@ public class TileSpeedy extends CustomTileEntity
 				}
 			}
 		}
-//		IBlockState blockState = this.worldObj.getBlockState(pos);
-//		Block block = blockState.getBlock();
-//		if(block == null)
-//		{
-//			return;
-//		}
-//		if(block instanceof BlockFluidBase)
-//		{
-//			return;
-//		}
-//		if(block.getTickRandomly()) 
-//		{
-//			for(int i = 0; i < this.ticks; i++) 
-//			{
-//				if(getWorld().getBlockState(pos) != blockState)
-//				{
-//					break;
-//				}
-//				block.updateTick(this.worldObj, pos, blockState, this.rand);
-//			}
-//		}
-//		if(block.hasTileEntity(this.worldObj.getBlockState(pos))) 
-//		{
-//			TileEntity tile = this.worldObj.getTileEntity(pos);
-//			if(tile != null && !tile.isInvalid()) 
-//			{
-//				for(int i = 0; i < this.ticks; i++) 
-//				{
-//					if(tile.isInvalid())
-//					{
-//						break;
-//					}
-//					if(tile instanceof ITickable) 
-//					{
-//						((ITickable) tile).update();
-//					}
-//				}
-//			}
-//		}
 	}
     
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)

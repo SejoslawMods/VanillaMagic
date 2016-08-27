@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest.portablecraftingtable;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -67,6 +69,7 @@ public class ContainerPortableCraftingTable extends Container
 		return player.isEntityEqual(entityPlayer);
 	}
 	
+	@Nullable
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int index)
 	{
 		ItemStack itemstack = null;

@@ -20,8 +20,7 @@ public class EntitySpellPull extends EntitySpell
 		super(world, caster, accelX, accelY, accelZ);
 		this.casterPosWhileCasting = casterPosWhileCasting;
 	}
-
-	@Override
+	
 	protected void onImpact(RayTraceResult result) 
 	{
 		if(result.typeOfHit == Type.BLOCK)

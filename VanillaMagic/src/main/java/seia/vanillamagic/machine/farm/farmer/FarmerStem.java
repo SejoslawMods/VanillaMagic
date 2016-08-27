@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -47,7 +49,8 @@ public class FarmerStem extends FarmerCustomSeed
 	{
 		return seeds.isItemEqual(stack);
 	}
-	  
+	
+	@Nullable
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		World worldObj = farm.getWorld();

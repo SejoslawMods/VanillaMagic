@@ -214,6 +214,7 @@ public class InventoryHelper
 	/**
 	 * Attempts to place the passed stack in the inventory, using as many slots as required. Returns leftover items
 	 */
+	@Nullable
 	public static ItemStack putStackInInventoryAllSlots(IInventory inventoryIn, ItemStack stack, @Nullable EnumFacing side)
 	{
 		if (inventoryIn instanceof ISidedInventory && side != null)
@@ -262,6 +263,7 @@ public class InventoryHelper
 	/**
 	 * Insert the specified stack to the specified inventory and return any leftover items
 	 */
+	@Nullable
 	public static ItemStack insertStack(IInventory inventoryIn, ItemStack stack, int index, EnumFacing side)
 	{
 		ItemStack stackInSlot = inventoryIn.getStackInSlot(index);
@@ -320,6 +322,7 @@ public class InventoryHelper
 		return getInventoryAtPosition(hopper.getWorld(), hopper.getXPos(), hopper.getYPos() + 1.0D, hopper.getZPos());
 	}
 
+	@Nullable
 	public static List<EntityItem> getCaptureItems(World worldIn, double x, double y, double z)
 	{
 		return worldIn.<EntityItem>getEntitiesWithinAABB(EntityItem.class, 
@@ -327,6 +330,7 @@ public class InventoryHelper
 				EntitySelectors.IS_ALIVE);
 	}
     
+	@Nullable
 	public static IInventory getInventoryAtPosition(World world, BlockPos pos)
 	{
 		return getInventoryAtPosition(world, pos.getX(), pos.getY(), pos.getZ());
@@ -335,6 +339,7 @@ public class InventoryHelper
 	/**
 	 * Returns the IInventory (if applicable) of the TileEntity at the specified position
 	 */
+	@Nullable
 	public static IInventory getInventoryAtPosition(World worldIn, double x, double y, double z)
 	{
 		IInventory iInventory = null;

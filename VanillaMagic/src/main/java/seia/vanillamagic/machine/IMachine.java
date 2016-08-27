@@ -139,6 +139,7 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, S
 	 * What Player should hold in left hand (off hand) to activate this Machine.
 	 * This usually should be set in Quest.
 	 */
+	@Nullable
 	ItemStack getActivationStackLeftHand();
 	
 	/**
@@ -150,6 +151,7 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, S
 	 * What Player should hold in right hand (main hand) to activate this Machine.
 	 * This usually should be set in Quest.
 	 */
+	@Nullable
 	ItemStack getActivationStackRightHand();
 	
 	/**

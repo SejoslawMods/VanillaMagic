@@ -18,6 +18,7 @@ public class BowHelper
 		return stack != null && stack.getItem() instanceof ItemArrow;
 	}
 	
+	@Nullable
 	public static ItemStack findAmmo(EntityPlayer player)
 	{
 		if (isArrow(player.getHeldItem(EnumHand.OFF_HAND)))

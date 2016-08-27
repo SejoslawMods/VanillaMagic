@@ -17,8 +17,7 @@ public class EntitySpellTeleport extends EntitySpell
 	{
 		super(worldIn, caster, accelX, accelY, accelZ);
 	}
-
-	@Override
+	
 	protected void onImpact(RayTraceResult result) 
 	{
 		EntityLivingBase caster = this.castingEntity;

@@ -28,13 +28,11 @@ public class EntitySpellFreezeLiquid extends EntitySpell
 		this.toReplace = toReplace;
 		this.circleRadius = circleRadius;
 	}
-
-	@Override
+	
 	protected void onImpact(RayTraceResult result) 
 	{
 	}
 	
-	@Override
 	public void inWater()
 	{
 		if(circleCenter == null)

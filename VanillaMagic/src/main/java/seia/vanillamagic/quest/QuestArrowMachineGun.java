@@ -30,66 +30,63 @@ public class QuestArrowMachineGun extends Quest
 		ItemStack leftHand = player.getHeldItemOffhand();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		World world = player.worldObj;
-		try
+		if(leftHand == null)
 		{
-			if(leftHand.getItem().equals(Items.ARROW) ||
-					leftHand.getItem().equals(Items.TIPPED_ARROW))
+			return;
+		}
+		if(leftHand.getItem().equals(Items.ARROW) || leftHand.getItem().equals(Items.TIPPED_ARROW))
+		{
+			if(rightHand.getItem().equals(EnumWand.NETHER_STAR.wandItemStack.getItem()))
 			{
-				if(rightHand.getItem().equals(EnumWand.NETHER_STAR.wandItemStack.getItem()))
+				if(!player.hasAchievement(achievement))
 				{
-					if(!player.hasAchievement(achievement))
+					player.addStat(achievement, 1);
+				}
+				else if(player.hasAchievement(achievement))
+				{
+					EntityTippedArrow entityTippedArrow = new EntityTippedArrow(world, player);
+					entityTippedArrow.setPotionEffect(leftHand);
+					entityTippedArrow.setAim(player, 
+							player.rotationPitch,
+							player.rotationYaw,
+							0.0F,
+							3.0F,
+							1.0F);
+					entityTippedArrow.setIsCritical(true);
+					int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, leftHand);
+					if (j > 0)
 					{
-						player.addStat(achievement, 1);
+						entityTippedArrow.setDamage(entityTippedArrow.getDamage() + (double)j * 0.5D + 0.5D);
 					}
-					else if(player.hasAchievement(achievement))
+					int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, leftHand);
+					if (k > 0)
 					{
-						EntityTippedArrow entityTippedArrow = new EntityTippedArrow(world, player);
-						entityTippedArrow.setPotionEffect(leftHand);
-						entityTippedArrow.setAim(player, 
-								player.rotationPitch,
-								player.rotationYaw,
-								0.0F,
-								3.0F,
-								1.0F);
-						entityTippedArrow.setIsCritical(true);
-						int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, leftHand);
-						if (j > 0)
+						entityTippedArrow.setKnockbackStrength(k);
+					}
+					if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, leftHand) > 0)
+					{
+						entityTippedArrow.setFire(100);
+					}
+					leftHand.damageItem(1, player);
+					world.spawnEntityInWorld(entityTippedArrow);
+					world.playSound((EntityPlayer)null, 
+							player.posX, 
+							player.posY, 
+							player.posZ, 
+							SoundEvents.ENTITY_ARROW_SHOOT, 
+							SoundCategory.NEUTRAL, 
+							1.0F, 
+							1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
+					if(leftHand.stackSize > 0)
+					{
+						--leftHand.stackSize;
+						if(leftHand.stackSize == 0)
 						{
-							entityTippedArrow.setDamage(entityTippedArrow.getDamage() + (double)j * 0.5D + 0.5D);
-						}
-						int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, leftHand);
-						if (k > 0)
-						{
-							entityTippedArrow.setKnockbackStrength(k);
-						}
-						if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, leftHand) > 0)
-						{
-							entityTippedArrow.setFire(100);
-						}
-						leftHand.damageItem(1, player);
-						world.spawnEntityInWorld(entityTippedArrow);
-						world.playSound((EntityPlayer)null, 
-								player.posX, 
-								player.posY, 
-								player.posZ, 
-								SoundEvents.ENTITY_ARROW_SHOOT, 
-								SoundCategory.NEUTRAL, 
-								1.0F, 
-								1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
-						if(leftHand.stackSize > 0)
-						{
-							--leftHand.stackSize;
-							if(leftHand.stackSize == 0)
-							{
-								player.inventory.deleteStack(leftHand);
-							}
+							player.inventory.deleteStack(leftHand);
 						}
 					}
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 }

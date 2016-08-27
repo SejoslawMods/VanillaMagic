@@ -3,6 +3,8 @@ package seia.vanillamagic.machine.quarry;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -28,8 +30,6 @@ public class TileQuarry extends TileMachine
 	private BlockPos redstoneBlockPos;
 	private Random rand = new Random();
 	private EnumFacing startPosFacing;
-	
-	public Ticket chunkTicket;
 	
 	/**
 	 * Method for checking DiamondBlock and RedstoneBlock
@@ -91,6 +91,7 @@ public class TileQuarry extends TileMachine
 		return pos.offset(getOutputFacing());
 	}
 	
+	@Nullable
 	public IInventory getOutputInventory()
 	{
 		return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
@@ -101,6 +102,7 @@ public class TileQuarry extends TileMachine
 		return new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
 	}
 	
+	@Nullable
 	public IInventory getInputInventory()
 	{
 		return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));

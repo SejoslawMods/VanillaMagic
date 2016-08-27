@@ -18,8 +18,7 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 	{
 		super(world, caster, accelX, accelY, accelZ);
 	}
-
-	@Override
+	
 	protected void onImpact(RayTraceResult result) 
 	{
 		double spawnLightningBoltX = 0;

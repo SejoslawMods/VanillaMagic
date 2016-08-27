@@ -19,7 +19,6 @@ public class VMTeleporter extends Teleporter
 		this.posZ = posZ;
 	}
 	
-	@Override
 	public void placeInPortal(Entity entity, float rotationYaw)
 	{
 		BlockPos entityPos = new BlockPos(posX, posY, posZ);
@@ -30,8 +29,6 @@ public class VMTeleporter extends Teleporter
 		entity.motionZ = 0.0f;
 	}
 	
-	
-	@Override
 	public boolean placeInExistingPortal(Entity entity, float rotationYaw)
 	{
 		placeInPortal(entity, rotationYaw);

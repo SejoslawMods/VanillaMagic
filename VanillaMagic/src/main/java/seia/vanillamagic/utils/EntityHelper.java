@@ -8,6 +8,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
@@ -22,23 +23,24 @@ public class EntityHelper
 	
 	public static boolean hasPlayerCraftingTableInMainHand(EntityPlayer player)
 	{
-		try
+		ItemStack mainHand = player.getHeldItemMainhand();
+		if(mainHand == null)
 		{
-			if(player.getHeldItemMainhand().getItem() != null)
-			{
-				if(Block.isEqualTo(Block.getBlockFromItem(player.getHeldItemMainhand().getItem()), Blocks.CRAFTING_TABLE))
-				{
-					return true;
-				}
-				else if(player.getHeldItemMainhand().getItem() instanceof ICraftingTable)
-				{
-					return ((ICraftingTable) player.getHeldItemMainhand().getItem()).canOpenGui(player);
-				}
-				return false;
-			}
+			return false;
 		}
-		catch(Exception e)
+		Block ct = Block.getBlockFromItem(mainHand.getItem());
+		if(ct == null)
 		{
+			return false;
+		}
+		
+		if(Block.isEqualTo(ct, Blocks.CRAFTING_TABLE))
+		{
+			return true;
+		}
+		else if(player.getHeldItemMainhand().getItem() instanceof ICraftingTable)
+		{
+			return ((ICraftingTable) mainHand.getItem()).canOpenGui(player);
 		}
 		return false;
 	}

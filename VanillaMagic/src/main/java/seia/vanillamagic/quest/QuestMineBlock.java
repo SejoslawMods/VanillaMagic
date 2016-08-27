@@ -22,24 +22,22 @@ public class QuestMineBlock extends Quest
 	@SubscribeEvent
 	public void onBreakBlock(BlockEvent.BreakEvent event)
 	{
-		try
+		EntityPlayer player = event.getPlayer();
+		if(!player.hasAchievement(achievement))
 		{
-			EntityPlayer player = event.getPlayer();
-			if(!player.hasAchievement(achievement))
+			Block block = event.getState().getBlock();
+			if(block == null) // this should never happen, right ?
 			{
-				Block block = event.getState().getBlock();
-				for(int i = 0; i < blocksToBeMine.size(); i++)
+				return;
+			}
+			for(int i = 0; i < blocksToBeMine.size(); i++)
+			{
+				if(Block.isEqualTo(block, blocksToBeMine.get(i)))
 				{
-					if(Block.isEqualTo(block, blocksToBeMine.get(i)))
-					{
-						player.addStat(achievement, 1);
-						return;
-					}
+					player.addStat(achievement, 1);
+					return;
 				}
 			}
-		}
-		catch(Exception e)
-		{
 		}
 	}
 }

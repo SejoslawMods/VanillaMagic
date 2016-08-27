@@ -1,5 +1,7 @@
 package seia.vanillamagic.utils;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -68,6 +70,7 @@ public class NBTHelper
 		return "";
 	}
 	
+	@Nullable
 	public static Block getBlockFromNBT(NBTTagCompound nbt)
 	{
 		String blockName = getBlockNameFromNBT(nbt);
@@ -86,6 +89,7 @@ public class NBTHelper
 		return nbt;
 	}
 
+	@Nullable
 	public static BlockPos getBlockPosDataFromNBT(NBTTagCompound nbt)
 	{
 		if(nbt.hasKey(NBT_POSX) && nbt.hasKey(NBT_POSY) && nbt.hasKey(NBT_POSZ))
@@ -98,6 +102,7 @@ public class NBTHelper
 		return null;
 	}
 
+	@Nullable
 	public static TileEntity getTileEntityFromNBT(World world, NBTTagCompound nbt)
 	{
 		return TileEntity.func_190200_a(world, nbt);

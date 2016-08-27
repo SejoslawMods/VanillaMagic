@@ -2,6 +2,8 @@ package seia.vanillamagic.machine;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -321,6 +323,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	{
 	}
 	
+	@Nullable
 	public ItemStack getActivationStackLeftHand()
 	{
 		return shouldBeInLeftHand;
@@ -331,6 +334,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		this.shouldBeInLeftHand = stack;
 	}
 	
+	@Nullable
 	public ItemStack getActivationStackRightHand()
 	{
 		return shouldBeInRightHand;
@@ -351,11 +355,13 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		return getMachineState().getBlock();
 	}
 	
+	@Nullable
 	public TileEntity getNeighborTile(EnumFacing face)
 	{
 		return this.worldObj.getTileEntity(getNeighborPos(face));
 	}
 	
+	@Nullable
 	public IMachine getNeighborMachine(EnumFacing face)
 	{
 		return (IMachine) getNeighborTile(face);

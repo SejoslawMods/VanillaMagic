@@ -1,5 +1,7 @@
 package seia.vanillamagic.machine.autocrafting;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
@@ -33,11 +35,13 @@ public class TileAutocrafting extends TileMachine
 		container = new ContainerAutocrafting(worldObj, stackMatrix);
 	}
 	
+	@Nullable
 	public IInventory getInputInventory() 
 	{
 		return ((IInventory) worldObj.getTileEntity(getMachinePos().up()));
 	}
 	
+	@Nullable
 	public IInventory getOutputInventory() 
 	{
 		return ((IInventory) worldObj.getTileEntity(getMachinePos().down(2)));
@@ -75,6 +79,7 @@ public class TileAutocrafting extends TileMachine
 		return EnumFacing.DOWN;
 	}
 	
+	@Nullable
 	public IHopper getHopperForStructure()
 	{
 		BlockPos hopperPos = getMachinePos().down(2);

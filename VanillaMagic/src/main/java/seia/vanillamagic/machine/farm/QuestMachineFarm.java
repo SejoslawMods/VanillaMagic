@@ -56,19 +56,9 @@ public class QuestMachineFarm extends QuestMachineActivate
 		{
 			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)
 			{
-				for(int i = 0; i < world.tickableTileEntities.size(); i++)
+				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, event.getPlayer().dimension))
 				{
-					TileEntity tile = world.tickableTileEntities.get(i);
-					if(tile instanceof TileFarm)
-					{
-						if(BlockPosHelper.isSameBlockPos(tile.getPos(), cauldronPos))
-						{
-							if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, event.getPlayer().dimension))
-							{
-								EntityHelper.addChatComponentMessage(player, "TileEntity removed");
-							}
-						}
-					}
+					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
 				}
 			}
 		}
