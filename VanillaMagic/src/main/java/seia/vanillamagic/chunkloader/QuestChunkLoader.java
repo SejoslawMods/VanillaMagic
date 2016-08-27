@@ -28,6 +28,10 @@ public class QuestChunkLoader extends Quest
 		EntityPlayer placedBy = event.getPlayer();
 		ItemStack itemInHand = event.getItemInHand();
 		World world = placedBy.worldObj;
+		if(itemInHand == null)
+		{
+			return;
+		}
 		if(itemInHand.getItem() != null)
 		{
 			if(Block.isEqualTo(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE))
