@@ -3,8 +3,14 @@ package seia.vanillamagic.integration;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.nbt.NBTTagCompound;
+import org.apache.logging.log4j.Level;
 
+import net.minecraft.nbt.NBTTagCompound;
+import seia.vanillamagic.VanillaMagic;
+
+/**
+ * Integration is always done at the end of each phase (PreInit, Init, PostInit).
+ */
 public class VanillaMagicIntegration 
 {
 	public static final VanillaMagicIntegration INSTANCE = new VanillaMagicIntegration();
@@ -18,13 +24,23 @@ public class VanillaMagicIntegration
 	{
 		integrations.add(new IntegrationVersionChecker());
 		integrations.add(new IntegrationBetterAchievements());
+		integrations.add(new IntegrationWTFExpedition());
+		integrations.add(new IntegrationFilledOres());
 	}
 	
 	public void preInit()
 	{
 		for(IIntegration i : integrations)
 		{
-			i.preInit();
+			try
+			{
+				i.preInit();
+				VanillaMagic.logger.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - enabled");
+			}
+			catch(Exception e)
+			{
+				VanillaMagic.logger.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - failed");
+			}
 		}
 	}
 	
@@ -32,7 +48,15 @@ public class VanillaMagicIntegration
 	{
 		for(IIntegration i : integrations)
 		{
-			i.init();
+			try
+			{
+				i.init();
+				VanillaMagic.logger.log(Level.INFO, "[INIT] " + i.getModName() + " integration - enabled");
+			}
+			catch(Exception e)
+			{
+				VanillaMagic.logger.log(Level.INFO, "[INIT] " + i.getModName() + " integration - failed");
+			}
 		}
 	}
 	
@@ -40,7 +64,15 @@ public class VanillaMagicIntegration
 	{
 		for(IIntegration i : integrations)
 		{
-			i.postInit();
+			try
+			{
+				i.postInit();
+				VanillaMagic.logger.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - enabled");
+			}
+			catch(Exception e)
+			{
+				VanillaMagic.logger.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - failed");
+			}
 		}
 	}
 }

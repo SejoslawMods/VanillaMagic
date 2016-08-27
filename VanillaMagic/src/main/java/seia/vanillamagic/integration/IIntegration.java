@@ -1,16 +1,21 @@
 package seia.vanillamagic.integration;
 
-public interface IIntegration 
+/**
+ * Exceptions are only thrown if the mod can't be load in selected phase.
+ */
+public interface IIntegration
 {
-	default void preInit()
+	String getModName();
+	
+	default void preInit() throws Exception
 	{
 	}
 	
-	default void init()
+	default void init() throws Exception
 	{
 	}
 	
-	default void postInit()
+	default void postInit() throws Exception
 	{
 	}
 }

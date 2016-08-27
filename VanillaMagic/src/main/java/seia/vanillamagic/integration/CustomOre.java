@@ -16,23 +16,11 @@ public class CustomOre
 	
 	private CustomOre()
 	{
-		getCustomRedstoneOre();
-		getCustomDiamondOre();
-	}
-	
-	private void getCustomRedstoneOre()
-	{
 		customOreRedstone.add(Blocks.REDSTONE_ORE);
 		customOreRedstone.add(Blocks.LIT_REDSTONE_ORE); // OreDictionary don't add this as oreRedstone
-	}
-	
-	private void getCustomDiamondOre()
-	{
+		
 		customOreDiamond.add(Blocks.DIAMOND_ORE);
-	}
-	
-	private void getCustomObsidian()
-	{
+		
 		customObsidian.add(Blocks.OBSIDIAN);
 	}
 }
