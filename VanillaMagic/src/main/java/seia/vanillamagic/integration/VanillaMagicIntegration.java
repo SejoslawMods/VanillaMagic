@@ -11,7 +11,7 @@ import seia.vanillamagic.VanillaMagic;
 /**
  * Integration is always done at the end of each phase (PreInit, Init, PostInit).
  */
-public class VanillaMagicIntegration 
+public class VanillaMagicIntegration
 {
 	public static final VanillaMagicIntegration INSTANCE = new VanillaMagicIntegration();
 	
@@ -34,8 +34,10 @@ public class VanillaMagicIntegration
 		{
 			try
 			{
-				i.preInit();
-				VanillaMagic.logger.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - enabled");
+				if(i.preInit())
+				{
+					VanillaMagic.logger.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - enabled");
+				}
 			}
 			catch(Exception e)
 			{
@@ -50,8 +52,10 @@ public class VanillaMagicIntegration
 		{
 			try
 			{
-				i.init();
-				VanillaMagic.logger.log(Level.INFO, "[INIT] " + i.getModName() + " integration - enabled");
+				if(i.init())
+				{
+					VanillaMagic.logger.log(Level.INFO, "[INIT] " + i.getModName() + " integration - enabled");
+				}
 			}
 			catch(Exception e)
 			{
@@ -66,8 +70,10 @@ public class VanillaMagicIntegration
 		{
 			try
 			{
-				i.postInit();
-				VanillaMagic.logger.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - enabled");
+				if(i.postInit())
+				{
+					VanillaMagic.logger.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - enabled");
+				}
 			}
 			catch(Exception e)
 			{

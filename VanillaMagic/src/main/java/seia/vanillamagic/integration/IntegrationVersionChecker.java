@@ -10,11 +10,13 @@ public class IntegrationVersionChecker implements IIntegration
 		return "VersionChecker";
 	}
 	
-	public void init() throws Exception
+	public boolean init() throws Exception
 	{
 		// Version Checker integration
 		VanillaMagicIntegration.INSTANCE.tagCompound.setString("curseProjectName", "vanilla-magic");
 		VanillaMagicIntegration.INSTANCE.tagCompound.setString("curseFilenameParser", VanillaMagic.MODID + "-[].jar");
 		FMLInterModComms.sendRuntimeMessage(VanillaMagic.MODID, "VersionChecker", "addCurseCheck", VanillaMagicIntegration.INSTANCE.tagCompound);
+		
+		return true;
 	}
 }

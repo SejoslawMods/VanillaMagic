@@ -7,7 +7,8 @@ public class IntegrationWTFExpedition implements IIntegration
 		return "WTF-Expedition";
 	}
 	
-	public void postInit() throws Exception
+	public boolean postInit() throws Exception
 	{
+		return false;
 	}
 }
