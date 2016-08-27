@@ -3,13 +3,13 @@ package seia.vanillamagic.quest;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
+import seia.vanillamagic.integration.CustomOre;
 import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket;
 import seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
@@ -38,7 +38,7 @@ public class QuestList
 	public static final QuestCastSpellOnBlock QUEST_CAST_SPELL_LIGHTER = new QuestCastSpellOnBlock(QUEST_CRAFT_STICK, 0, -2, EnumSpell.LIGHTER);
 	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK, 0, +2, new ItemStack(Items.CAULDRON), "Craft Cauldron", "craftCauldron");
-	public static final QuestMineBlock QUEST_MINE_REDSTONE = new QuestMineBlock(QUEST_CRAFT_CAULDRON, 0, +2,new ItemStack(Blocks.REDSTONE_ORE),"Mine Redstone", "mineRedstone", new Block[]{Blocks.REDSTONE_ORE, Blocks.LIT_REDSTONE_ORE});
+	public static final QuestMineBlock QUEST_MINE_REDSTONE = new QuestMineBlock(QUEST_CRAFT_CAULDRON, 0, +2,new ItemStack(Blocks.REDSTONE_ORE),"Mine Redstone", "mineRedstone", CustomOre.INSTANCE.customOreRedstone);
 	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_1 = new QuestBuildAltar(QUEST_MINE_REDSTONE, 0, +2, "Build Altar Tier 1", "buildAltarTier1", 1);
 	
 	public static final QuestCraftOnAltar QUEST_CRAFT_GUNPOWDER = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_1, -2, +1, "Craft Gunpowder", "craftGunpowder", 
@@ -333,8 +333,8 @@ public class QuestList
 	
 	public static final QuestCraft QUEST_CRAFT_BOOK = new QuestCraft(QUEST_CRAFT_STICK, +2, 0, new ItemStack(Items.BOOK), "Craft Book", "craftBook");
 	public static final QuestCraft QUEST_CRAFT_BOOKSHELF = new QuestCraft(QUEST_CRAFT_BOOK, +2, 0, new ItemStack(Blocks.BOOKSHELF), "Craft Bookshelf", "craftBookshelf");
-	public static final QuestMineBlock QUEST_MINE_DIAMOND = new QuestMineBlock(QUEST_CRAFT_BOOKSHELF, +2, 0, new ItemStack(Items.DIAMOND), "Mine Diamond", "mineDiamond", new Block[]{Blocks.DIAMOND_ORE});
-	public static final QuestMineBlock QUEST_MINE_OBSIDIAN = new QuestMineBlock(QUEST_MINE_DIAMOND, +2, 0, new ItemStack(Blocks.OBSIDIAN), "Mine Obsidian", "mineObsidian", new Block[]{Blocks.OBSIDIAN});
+	public static final QuestMineBlock QUEST_MINE_DIAMOND = new QuestMineBlock(QUEST_CRAFT_BOOKSHELF, +2, 0, new ItemStack(Items.DIAMOND), "Mine Diamond", "mineDiamond", CustomOre.INSTANCE.customOreDiamond);
+	public static final QuestMineBlock QUEST_MINE_OBSIDIAN = new QuestMineBlock(QUEST_MINE_DIAMOND, +2, 0, new ItemStack(Blocks.OBSIDIAN), "Mine Obsidian", "mineObsidian", CustomOre.INSTANCE.customObsidian);
 	public static final QuestCraft QUEST_CRAFT_ENCHANTING_TABLE = new QuestCraft(QUEST_MINE_OBSIDIAN, +2, 0, new ItemStack(Blocks.ENCHANTING_TABLE), "Craft Enchanting Table", "craftEnchantingTable");
 	public static final QuestChunkLoader QUEST_CHUNK_LOADER = new QuestChunkLoader(QUEST_CRAFT_ENCHANTING_TABLE, 0, +2, new ItemStack(Blocks.ENCHANTING_TABLE), "Build ChunkLoader", "chunkLoader");
 	//TODO: add quest for enchanting sanctuary
