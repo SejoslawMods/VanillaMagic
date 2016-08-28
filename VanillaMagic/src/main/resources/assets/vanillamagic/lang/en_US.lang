@@ -197,7 +197,10 @@ achievement.craftGlass=Craft Glass
 achievement.craftGlass.desc=Toss 1x Sand + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand
 
 achievement.craftSnow=Craft Snow
-achievement.craftSnow.desc=Toss 8x Ice Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftSnow.desc=Toss 1x Ice Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand
+
+achievement.craftIce=Craft Ice
+achievement.craftIce.desc=Toss 1x Snow Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand
 
 achievement.craftCobblestone=Craft Cobblestone
 achievement.craftCobblestone.desc=Toss 1x Dirt into the Altar Tier 1 and right-click with a Stick Wand in hand
@@ -326,7 +329,7 @@ achievement.craftNetherWart=Craft Nether Wart
 achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar + 1x RedstoneDust into Altar Tier 5 and right-click with Blaze Wand in right hand
 
 achievement.craftGhastTear=Craft Ghast Tear
-achievement.craftGhastTear.desc=Toss 8x TNT into Altar Tier 5 and right-click with Blaze Wand in right hand
+achievement.craftGhastTear.desc=Toss 4x Gunpowder + 4x Blaze Powder + 1x Lava Bucket into Altar Tier 5 and right-click with Blaze Wand in right hand
 
 achievement.pickBlazeRod=Pick Blaze Rod
 achievement.pickBlazeRod.desc=Pick Blaze Rod from the ground. Rename it in Anvil to 'Blaze Wand'.

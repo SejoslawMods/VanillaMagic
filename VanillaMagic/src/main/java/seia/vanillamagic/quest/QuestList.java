@@ -89,8 +89,13 @@ public class QuestList
 			1,
 			EnumWand.STICK);
 	public static final QuestCraftOnAltar QUEST_CRAFT_SNOW = new QuestCraftOnAltar(QUEST_CRAFT_GLASS, -2, 0, "Craft Snow", "craftSnow", 
-			new ItemStack[]{new ItemStack(Blocks.ICE, 8), new ItemStack(Items.WATER_BUCKET)}, 
+			new ItemStack[]{new ItemStack(Blocks.ICE), new ItemStack(Items.WATER_BUCKET)}, 
 			new ItemStack[]{new ItemStack(Blocks.SNOW), new ItemStack(Items.BUCKET)}, 
+			1, 
+			EnumWand.STICK);
+	public static final QuestCraftOnAltar QUEST_CRAFT_ICE = new QuestCraftOnAltar(QUEST_CRAFT_SNOW, -2, 0, "Craft Ice", "craftIce", 
+			new ItemStack[]{new ItemStack(Blocks.SNOW), new ItemStack(Items.WATER_BUCKET)}, 
+			new ItemStack[]{new ItemStack(Blocks.ICE), new ItemStack(Items.BUCKET)}, 
 			1, 
 			EnumWand.STICK);
 	
@@ -248,8 +253,8 @@ public class QuestList
 			5, 
 			EnumWand.BLAZE_ROD);
 	public static final QuestCraftOnAltar QUEST_CRAFT_GHAST_TEAR = new QuestCraftOnAltar(QUEST_CRAFT_NETHER_WART, -2, 0, "Craft Ghast Tear", "craftGhastTear", 
-			new ItemStack[]{new ItemStack(Blocks.TNT, 8)}, 
-			new ItemStack[]{new ItemStack(Items.GHAST_TEAR)}, 
+			new ItemStack[]{new ItemStack(Items.GUNPOWDER, 4), new ItemStack(Items.BLAZE_POWDER, 4), new ItemStack(Items.LAVA_BUCKET)}, 
+			new ItemStack[]{new ItemStack(Items.GHAST_TEAR), new ItemStack(Items.BUCKET)}, 
 			5, 
 			EnumWand.BLAZE_ROD);
 	
