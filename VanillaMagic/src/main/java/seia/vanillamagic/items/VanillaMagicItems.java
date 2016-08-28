@@ -12,6 +12,7 @@ import seia.vanillamagic.items.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.IEnchantedBucket;
 import seia.vanillamagic.items.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
 import seia.vanillamagic.items.potionedcrystal.IPotionedCrystal;
+import seia.vanillamagic.items.thecrystalofmothernature.ItemMotherNatureCrystal;
 
 public class VanillaMagicItems 
 {
@@ -23,6 +24,7 @@ public class VanillaMagicItems
 	public final List<IPotionedCrystal> potionedCrystals;
 	public final ICustomItem itemAccelerationCrystal;
 	public final ICustomItem itemLiquidSuppressionCrystal;
+	public final ICustomItem itemMotherNatureCrystal;
 	
 	private VanillaMagicItems()
 	{
@@ -35,6 +37,9 @@ public class VanillaMagicItems
 		
 		itemLiquidSuppressionCrystal = new ItemLiquidSuppressionCrystal();
 		customItems.add(itemLiquidSuppressionCrystal);
+		
+		itemMotherNatureCrystal = new ItemMotherNatureCrystal();
+		customItems.add(itemMotherNatureCrystal);
 	}
 	
 	public void postInit()

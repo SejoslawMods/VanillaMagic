@@ -14,6 +14,7 @@ import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket;
 import seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
 import seia.vanillamagic.items.potionedcrystal.QuestPotionedCrystal;
+import seia.vanillamagic.items.thecrystalofmothernature.QuestMotherNatureCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.farm.QuestMachineFarm;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
@@ -172,6 +173,7 @@ public class QuestList
 	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_QUARRY, -2, 0, new ItemStack(Items.DIAMOND_AXE), "Full Tree Cut", "fullTreeCut");
 	public static final QuestMachineFarm QUEST_MACHINE_FARM = new QuestMachineFarm(QUEST_FULL_TREE_CUT, -2, 0, new ItemStack(Items.CAULDRON), "Automatic Farm", "machineFarm", new ItemStack(Items.WHEAT_SEEDS, 1), EnumWand.BLAZE_ROD.wandItemStack.copy(), 4);
 	public static final QuestSpeedy QUEST_SPEEDY = new QuestSpeedy(QUEST_MACHINE_FARM, -2, 0, new ItemStack(Items.FEATHER), "Speedy", "speedy");
+	public static final QuestMotherNatureCrystal QUEST_MOTHER_NATURE_CRYSTAL = new QuestMotherNatureCrystal(QUEST_SPEEDY, -2, 0, new ItemStack(Items.NETHER_STAR), "The Crystal of Mother Nature", "motherNatureCrystal");
 	
 	//TODO: Fix QuestMineMulti and MineBlockTask
 	//public static final QuestMineMulti QUEST_MINE_3X3 = new QuestMineMulti(QUEST_FULL_TREE_CUT, -2, 0, new ItemStack(Items.DIAMOND_PICKAXE), "Mining 3x3", "mining3x3", 1, 1, EnumWand.BLAZE_ROD);

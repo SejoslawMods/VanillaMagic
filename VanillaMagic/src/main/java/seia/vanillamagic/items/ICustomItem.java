@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
  */
 public interface ICustomItem
 {
-	public static final String NBT_UNIQUE_NAME = "NBT_CustomItemName";
+	public static final String NBT_UNIQUE_NAME = "NBT_UNIQUE_NAME";
 	
 	/**
 	 * Add recipe to the GameRegistry.

@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
+import seia.vanillamagic.items.thecrystalofmothernature.QuestMotherNatureCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
 import seia.vanillamagic.quest.Quest;
@@ -123,6 +124,23 @@ public class BookOther implements IBook
 								"[§7B§0][§7B§0][§7B§0]" + ENTER +
 								"[§7B§0][§8NS§0][§7B§0]" + ENTER +
 								"[§7B§0][§7B§0][§7B§0]"
+								));
+					}
+					else if(quest instanceof QuestMotherNatureCrystal)
+					{
+						pages.appendTag(new NBTTagString(
+								BookRegistry.COLOR_HEADER + 
+								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.getEnters(2) + 
+								"§0" +
+								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								"--->"
+								));
+						pages.appendTag(new NBTTagString(
+								"Crafting:" + TextHelper.getEnters(2) +
+								"[§2M§0][§aS§0][§2M§0]" + ENTER +
+								"[§aS§0][§8NS§0][§aS§0]" + ENTER +
+								"[§6P§0][§aS§0][§6P§0]"
 								));
 					}
 					else if(quest instanceof QuestAutocrafting)

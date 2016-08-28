@@ -271,6 +271,9 @@ achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hop
 achievement.speedy=Speedy (speed up ticks in range 9x3x9)
 achievement.speedy.desc=Place Cauldron and on top place Chest with Acceleration Crystal inside. Take second Acceleration Crystal to left hand and Blaze Wand to right hand. Shift-right-click the Cauldron.
 
+achievement.motherNatureCrystal=The Crystal of Mother Nature
+achievement.motherNatureCrystal.desc=Crafting: Nether Star (middle), Wheet Seeds (up, down, left, right), Pumpkin Block (bottom corners), Item Melon (upper corners). In right hand - Infinite Bonemeal. In left hand - plants around You will grow automatically.
+
 achievement.mining3x3=Mining 3x3
 achievement.mining3x3.desc=
 
