@@ -32,9 +32,9 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.CauldronHelper;
 import seia.vanillamagic.utils.EntityHelper;
-import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestEnchantedBucket extends Quest
 {

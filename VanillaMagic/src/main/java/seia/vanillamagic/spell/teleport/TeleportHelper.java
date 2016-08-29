@@ -1,4 +1,4 @@
-package seia.vanillamagic.utils.spell.teleport;
+package seia.vanillamagic.spell.teleport;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

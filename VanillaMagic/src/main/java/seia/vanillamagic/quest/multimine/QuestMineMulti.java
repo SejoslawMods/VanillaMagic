@@ -12,7 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.utils.spell.EnumWand;
+import seia.vanillamagic.spell.EnumWand;
 
 public class QuestMineMulti extends Quest
 {

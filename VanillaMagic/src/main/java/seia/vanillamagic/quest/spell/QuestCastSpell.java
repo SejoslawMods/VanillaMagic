@@ -7,9 +7,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.utils.spell.EnumSpell;
-import seia.vanillamagic.utils.spell.EnumWand;
-import seia.vanillamagic.utils.spell.SpellHelper;
+import seia.vanillamagic.spell.EnumSpell;
+import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.spell.SpellHelper;
 
 public abstract class QuestCastSpell extends Quest
 {

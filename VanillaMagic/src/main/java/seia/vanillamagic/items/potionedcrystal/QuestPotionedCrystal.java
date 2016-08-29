@@ -15,9 +15,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.CauldronHelper;
 import seia.vanillamagic.utils.EntityHelper;
-import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestPotionedCrystal extends Quest
 {

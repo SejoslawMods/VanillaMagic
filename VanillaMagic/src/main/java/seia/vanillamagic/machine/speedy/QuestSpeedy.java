@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.EntityHelper;
 import seia.vanillamagic.utils.WorldHelper;
-import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestSpeedy extends Quest
 {

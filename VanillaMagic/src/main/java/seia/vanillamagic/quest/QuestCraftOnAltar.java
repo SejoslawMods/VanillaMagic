@@ -12,9 +12,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.AltarChecker;
 import seia.vanillamagic.utils.CauldronHelper;
-import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestCraftOnAltar extends Quest
 {

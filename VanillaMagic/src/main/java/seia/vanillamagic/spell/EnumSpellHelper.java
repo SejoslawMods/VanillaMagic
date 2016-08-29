@@ -1,4 +1,4 @@
-package seia.vanillamagic.utils.spell;
+package seia.vanillamagic.spell;
 
 public class EnumSpellHelper 
 {

@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.utils.spell.EnumSpell;
+import seia.vanillamagic.spell.EnumSpell;
 
 public class QuestCastSpellOnBlock extends QuestCastSpell
 {

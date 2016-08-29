@@ -13,7 +13,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.utils.spell.EnumWand;
+import seia.vanillamagic.spell.EnumWand;
 
 public class QuestArrowMachineGun extends Quest
 {

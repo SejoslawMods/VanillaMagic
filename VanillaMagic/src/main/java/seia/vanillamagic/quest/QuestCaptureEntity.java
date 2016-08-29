@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.ItemStackHelper;
 import seia.vanillamagic.utils.NBTHelper;
-import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestCaptureEntity extends Quest
 {

@@ -23,9 +23,9 @@ import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
 import seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable;
 import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
 import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
+import seia.vanillamagic.spell.EnumSpell;
+import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.ItemStackHelper;
-import seia.vanillamagic.utils.spell.EnumSpell;
-import seia.vanillamagic.utils.spell.EnumWand;
 
 public class QuestList 
 {

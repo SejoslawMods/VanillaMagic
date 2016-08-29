@@ -1,4 +1,4 @@
-package seia.vanillamagic.utils.spell;
+package seia.vanillamagic.spell;
 
 import java.util.List;
 import java.util.Random;
@@ -51,8 +51,8 @@ import seia.vanillamagic.entity.EntitySpellPull;
 import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
 import seia.vanillamagic.entity.EntitySpellTeleport;
 import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
+import seia.vanillamagic.spell.teleport.TeleportHelper;
 import seia.vanillamagic.utils.EntityHelper;
-import seia.vanillamagic.utils.spell.teleport.TeleportHelper;
 
 /**
  * The work of each spell.
