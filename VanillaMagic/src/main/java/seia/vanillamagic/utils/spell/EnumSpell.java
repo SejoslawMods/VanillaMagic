@@ -89,7 +89,7 @@ public enum EnumSpell
 	
 	public static boolean isSpellSummonAnimal(int spellID)
 	{
-		if((100 <= spellID) && (spellID <= 108)) // TODO: Change if added an Passive Mob e.g. Pig, Cow, etc.
+		if((100 <= spellID) && (spellID < 200))
 		{
 			return true;
 		}
@@ -98,7 +98,7 @@ public enum EnumSpell
 	
 	public static boolean isSpellSummonMob(int spellID)
 	{
-		if((200 <= spellID) && (spellID <= 209)) // TODO: Change if added a Monster e.g. Skeleton, Creeper
+		if((200 <= spellID) && (spellID < 300))
 		{
 			return true;
 		}
