@@ -12,7 +12,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityGhast;
@@ -62,6 +64,7 @@ import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
 import seia.vanillamagic.entity.EntitySpellTeleport;
 import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
 import seia.vanillamagic.spell.teleport.TeleportHelper;
+import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.EntityHelper;
 
 /**
@@ -416,9 +419,44 @@ public class SpellHelper
 			{
 				entityMob = new EntityEnderman(world);
 			}
+			else if(spellID == EnumSpell.SUMMON_SPIDER_JOCKEY.spellID)
+			{
+				ItemStack boneStack = new ItemStack(Items.BONE);
+				BlockPos bonePos = pos.offset(face);
+				List<Entity> entities = world.getLoadedEntityList();
+				for(Entity entity : entities)
+				{
+					if(entity instanceof EntityItem)
+					{
+						if(BlockPosHelper.isSameBlockPos(entity.getPosition(), bonePos))
+						{
+							if(ItemStack.areItemsEqual(boneStack, ((EntityItem) entity).getEntityItem()))
+							{
+								// We clicked the right block
+								entityMob = new EntitySpider(world);
+								EntitySkeleton skeleton = new EntitySkeleton(world);
+								skeleton.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+								skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+								world.spawnEntityInWorld(skeleton);
+								skeleton.startRiding(entityMob);
+								world.removeEntity(entity);
+								break;
+							}
+						}
+					}
+				}
+			}
 			else if(spellID == EnumSpell.SUMMON_SPIDER.spellID)
 			{
-				entityMob = new EntitySpider(world);
+				int percent = new Random().nextInt(100);
+				if(percent < 50)
+				{
+					entityMob = new EntitySpider(world);
+				}
+				else
+				{
+					entityMob = new EntityCaveSpider(world);
+				}
 			}
 			else if(spellID == EnumSpell.SUMMON_SLIME.spellID)
 			{

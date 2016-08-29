@@ -1,13 +1,37 @@
 package seia.vanillamagic.utils;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGiantZombie;
+import net.minecraft.entity.monster.EntityGuardian;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityPolarBear;
+import net.minecraft.entity.monster.EntityShulker;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -119,5 +143,68 @@ public class EntityHelper
 		{
 			world.removeEntity(ei);
 		}
+	}
+	
+	public static List<EntityLiving> getHostileMobs(World world)
+	{
+		List<EntityLiving> mobs = new ArrayList<EntityLiving>();
+		mobs.add(new EntityZombie(world));
+		mobs.add(new EntityCreeper(world));
+		mobs.add(new EntityBlaze(world));
+		mobs.add(new EntityMagmaCube(world));
+		mobs.add(new EntityGhast(world));
+		mobs.add(new EntityEnderman(world));
+		mobs.add(new EntitySpider(world));
+		mobs.add(new EntitySlime(world));
+		mobs.add(new EntityWitch(world));
+		mobs.add(new EntityPolarBear(world));
+		mobs.add(new EntityShulker(world));
+		mobs.add(new EntitySilverfish(world));
+		mobs.add(new EntityWither(world));
+		mobs.add(new EntityGiantZombie(world));
+		mobs.add(new EntityGuardian(world));
+		EntitySkeleton skeleton = new EntitySkeleton(world);
+		skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+		mobs.add(skeleton);
+		EntityPigZombie pigZombie = new EntityPigZombie(world);
+		pigZombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+		mobs.add(pigZombie);
+		EntityGuardian elder = new EntityGuardian(world);
+		elder.setElder();
+		mobs.add(elder);
+		return mobs;
+	}
+	
+	public static EntityLiving getRandomHostileMob(World world)
+	{
+		List<EntityLiving> mobs = getHostileMobs(world);
+		return ListHelper.getRandomObjectFromlist(mobs);
+	}
+
+	@Nullable
+	public static ItemStack getRandomItemForSlot(EntityEquipmentSlot slot) 
+	{
+		Item item = null;
+		if(slot == EntityEquipmentSlot.MAINHAND || slot == EntityEquipmentSlot.OFFHAND)
+		{
+			item = ListHelper.getRandomObjectFromlist(EquipmentHelper.INSTANCE.weapons);
+		}
+		else if(slot == EntityEquipmentSlot.CHEST)
+		{
+			item = ListHelper.getRandomObjectFromlist(EquipmentHelper.INSTANCE.chestplates);
+		}
+		else if(slot == EntityEquipmentSlot.FEET)
+		{
+			item = ListHelper.getRandomObjectFromlist(EquipmentHelper.INSTANCE.boots);
+		}
+		else if(slot == EntityEquipmentSlot.HEAD)
+		{
+			item = ListHelper.getRandomObjectFromlist(EquipmentHelper.INSTANCE.helmets);
+		}
+		else if(slot == EntityEquipmentSlot.LEGS)
+		{
+			item = ListHelper.getRandomObjectFromlist(EquipmentHelper.INSTANCE.leggings);
+		}
+		return new ItemStack(item);
 	}
 }

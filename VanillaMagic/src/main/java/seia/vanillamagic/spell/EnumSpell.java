@@ -53,7 +53,8 @@ public enum EnumSpell
 	SUMMON_SHULKER(214, "Summon Shulker", "spellSummonShulker",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Blocks.END_ROD, 1)),
 	SUMMON_SILVERFISH(215, "Summon Silverfish", "spellSummonSilverfish",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Blocks.STONEBRICK, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
 	SUMMON_WITHER(216, "Summon Wither", "spellSummonWither",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Blocks.EMERALD_BLOCK, 1)),
-	SUMMON_GIANT(217, "Summon Giant", "spellSummonGiant", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.ARMOR_STAND, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK))
+	SUMMON_GIANT(217, "Summon Giant", "spellSummonGiant", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.ARMOR_STAND, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_SPIDER_JOCKEY(218, "Summon Spider Jockey", "spellSummonSpiderJockey", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.SPIDER_EYE, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK))
 	;
 
 	public final int spellID;

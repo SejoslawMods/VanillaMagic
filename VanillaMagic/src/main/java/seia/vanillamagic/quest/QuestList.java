@@ -374,6 +374,7 @@ public class QuestList
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_POLAR_BEAR = new QuestCastSpellOnBlock(QUEST_SUMMON_ENDERMAN, -2, 0, EnumSpell.SUMMON_POLAR_BEAR);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_SLIME = new QuestCastSpellOnBlock(QUEST_SUMMON_POLAR_BEAR, -2, 0, EnumSpell.SUMMON_SLIME);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITCH = new QuestCastSpellOnBlock(QUEST_SUMMON_SLIME, -2, 0, EnumSpell.SUMMON_WITCH);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SPIDER_JOCKEY = new QuestCastSpellOnBlock(QUEST_SUMMON_WITCH, -2, 0, EnumSpell.SUMMON_SPIDER_JOCKEY);
 	
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_PIGMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_ZOMBIE, 0, -2, EnumSpell.SUMMON_PIGMAN);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_BLAZE = new QuestCastSpellOnBlock(QUEST_SUMMON_PIGMAN, -2, 0, EnumSpell.SUMMON_BLAZE);
@@ -385,6 +386,10 @@ public class QuestList
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_SHULKER = new QuestCastSpellOnBlock(QUEST_SUMMON_GUARDIAN, -2, 0, EnumSpell.SUMMON_SHULKER);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITHER = new QuestCastSpellOnBlock(QUEST_SUMMON_SHULKER, -2, 0, EnumSpell.SUMMON_WITHER);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_GIANT = new QuestCastSpellOnBlock(QUEST_SUMMON_WITHER, -2, 0, EnumSpell.SUMMON_GIANT);
+	
+	public static final QuestSummonHorde QUEST_SUMMON_HORDE = new QuestSummonHorde(QUEST_SUMMON_SILVERFISH, 0, -2, "Summon Horde Lvl: 1", "summonHordeLvl1", 
+			1, 
+			new ItemStack(Items.END_CRYSTAL));
 	// END SUMMONS Monster
 	
 	// SPELLS
