@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -56,6 +57,13 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	public boolean inventoryOutputHasSpace() 
 	{
 		return !InventoryHelper.isInventoryFull(getOutputInventory(), getOutputFacing());
+	}
+	
+	public void init(EntityPlayer player, BlockPos machinePos)
+	{
+		super.init(player, machinePos);
+		setWorkRadius(radius);
+		setWorkingPos(machinePos);
 	}
 	
 	public void init(World world, BlockPos machinePos)

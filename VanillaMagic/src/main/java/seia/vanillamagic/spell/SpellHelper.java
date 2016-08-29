@@ -3,17 +3,26 @@ package seia.vanillamagic.spell;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGiantZombie;
+import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityPolarBear;
+import net.minecraft.entity.monster.EntityShulker;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySpider;
@@ -46,6 +55,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.entity.EntitySpellFreezeLiquid;
 import seia.vanillamagic.entity.EntitySpellPull;
 import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
@@ -359,7 +369,7 @@ public class SpellHelper
 			}
 			else
 			{
-				System.out.println("Wrong spellID. (spellID = " + spellID + ")");
+				VanillaMagic.logger.log(Level.INFO, "Wrong spellID. (spellID = " + spellID + ")");
 			}
 		}
 		return false;
@@ -418,6 +428,41 @@ public class SpellHelper
 			{
 				entityMob = new EntityWitch(world);
 			}
+			else if(spellID == EnumSpell.SUMMON_PIGMAN.spellID)
+			{
+				entityMob = new EntityPigZombie(world);
+				entityMob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+			}
+			else if(spellID == EnumSpell.SUMMON_GUARDIAN.spellID)
+			{
+				entityMob = new EntityGuardian(world);
+				Random rand = new Random();
+				int percent = rand.nextInt(100); // 100%
+				if(percent < 30) // percent with which this Guardian will be an Elder
+				{
+					((EntityGuardian) entityMob).setElder();
+				}
+			}
+			else if(spellID == EnumSpell.SUMMON_POLAR_BEAR.spellID)
+			{
+				entityMob = new EntityPolarBear(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_SHULKER.spellID)
+			{
+				entityMob = new EntityShulker(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_SILVERFISH.spellID)
+			{
+				entityMob = new EntitySilverfish(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_WITHER.spellID)
+			{
+				entityMob = new EntityWither(world);
+			}
+			else if(spellID == EnumSpell.SUMMON_GIANT.spellID)
+			{
+				entityMob = new EntityGiantZombie(world);
+			}
 			
 			if(entityMob != null)
 			{
@@ -428,7 +473,7 @@ public class SpellHelper
 			}
 			else
 			{
-				System.out.println("Wrong spellID. (spellID = " + spellID + ")");
+				VanillaMagic.logger.log(Level.INFO, "Wrong spellID. (spellID = " + spellID + ")");
 			}
 		}
 		return false;

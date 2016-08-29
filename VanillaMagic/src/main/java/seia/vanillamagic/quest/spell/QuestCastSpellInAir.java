@@ -32,9 +32,6 @@ public class QuestCastSpellInAir extends QuestCastSpell
 		EnumHand hand = event.getHand();
 		ItemStack inHand = event.getItemStack();
 		
-		if(castSpell(player, hand, inHand, null, null, null))
-		{
-			event.setCanceled(true);
-		}
+		castSpell(player, hand, inHand, null, null, null);
 	}
 }

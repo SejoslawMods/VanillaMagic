@@ -1,5 +1,6 @@
 package seia.vanillamagic.utils;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -14,6 +15,13 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 public abstract class CustomTileEntity extends TileEntity implements ITickable
 {
 	protected Ticket chunkTicket;
+	protected String playerName;
+	
+	public void init(EntityPlayer player, BlockPos pos)
+	{
+		this.init(player.worldObj, pos);
+		this.playerName = player.getDisplayNameString();
+	}
 	
 	public void init(World world, BlockPos pos)
 	{
@@ -29,6 +37,19 @@ public abstract class CustomTileEntity extends TileEntity implements ITickable
 		}
 		ChunkPos tilePos = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
 		ForgeChunkManager.forceChunk(ticket, tilePos);
+	}
+	
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		this.playerName = tag.getString(NBTHelper.NBT_PLAYER_NAME);
+	}
+	
+	public NBTTagCompound writeToNBT(NBTTagCompound tag)
+	{
+		super.writeToNBT(tag);
+		tag.setString(NBTHelper.NBT_PLAYER_NAME, playerName);
+		return tag;
 	}
 	
 	public SPacketUpdateTileEntity getUpdatePacket()

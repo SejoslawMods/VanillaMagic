@@ -32,7 +32,6 @@ public class NBTHelper
 	public static final String NBT_IS_ACTIVE = "NBT_IS_ACTIVE";
 	public static final String NBT_DIMENSION = "NBT_DIMENSION";
 	public static final String NBT_NEEDS_FUEL = "NBT_NEEDS_FUEL";
-	
 	public static final String NBT_LOCALIZED_NAME_BLOCK = "NBT_LOCALIZED_NAME_BLOCK";
 	public static final String NBT_UNLOCALIZED_NAME_BLOCK = "NBT_UNLOCALIZED_NAME_BLOCK";
 	public static final String NBT_POSX = "NBT_POSX";
@@ -46,16 +45,14 @@ public class NBTHelper
 	public static final String NBT_IITEMHANDLER_SLOT = "NBT_IITEMHANDLER_SLOT";
 	public static final String NBT_IITEMHANDLER_ITEMS = "NBT_IITEMHANDLER_ITEMS";
 	public static final String NBT_CLASS_NAME = "NBT_CLASS_NAME";
-	
 	public static final String NBT_TAG_COMPOUND_ENTITY = "NBTQuestCaptureEntity";
 	public static final String NBT_ENTITY_TYPE = "EntityType";
-	
 	public static final String NBT_SPEEDY_TICKS = "NBT_SPEEDY_TICKS";
-	
 	public static final String NBT_TICKS_REMAINING = "NBT_TICKS_REMAINING";
 	public static final String NBT_BLOCK_NAME = "NBT_BLOCK_NAME";
 	public static final String NBT_BLOCK_META = "NBT_BLOCK_META";
 	public static final String NBT_BLOCK_ID = "NBT_BLOCK_ID";
+	public static final String NBT_PLAYER_NAME = "NBT_PLAYER_NAME";
 	
 	private NBTHelper()
 	{

@@ -32,7 +32,7 @@ public class QuestList
 	public static List<Quest> QUESTS = new ArrayList<Quest>();
 
 	private static Achievement START = AchievementList.OPEN_INVENTORY;
-	public static final QuestCraft QUEST_CRAFT_STICK = new QuestCraft(START, 0, 0, new ItemStack(Items.STICK), "Craft Stick", "craftStick");
+	public static final QuestCraft QUEST_CRAFT_STICK = new QuestCraft(START, 0, 6, new ItemStack(Items.STICK), "Craft Stick", "craftStick");
 	
 	public static final QuestPortableCraftingTable QUEST_PORTABLE_CRAFTING_TABLE = new QuestPortableCraftingTable(QUEST_CRAFT_STICK, -2, 0, new ItemStack(Blocks.CRAFTING_TABLE), "Portable Crafting Table", "portableCraftingTable");
 	public static final QuestAutocrafting QUEST_AUTOCRAFTING = new QuestAutocrafting(QUEST_PORTABLE_CRAFTING_TABLE, -2, 0, new ItemStack(Blocks.CRAFTING_TABLE), "Autocrafting !!!", "autocrafting");
@@ -369,13 +369,22 @@ public class QuestList
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_ZOMBIE = new QuestCastSpellOnBlock(QUEST_SUMMON_CHICKEN, 0, -2, EnumSpell.SUMMON_ZOMBIE);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_CREEPER = new QuestCastSpellOnBlock(QUEST_SUMMON_ZOMBIE, -2, 0, EnumSpell.SUMMON_CREEPER);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_SKELETON = new QuestCastSpellOnBlock(QUEST_SUMMON_CREEPER, -2, 0, EnumSpell.SUMMON_SKELETON);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_BLAZE = new QuestCastSpellOnBlock(QUEST_SUMMON_SKELETON, -2, 0, EnumSpell.SUMMON_BLAZE);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SPIDER = new QuestCastSpellOnBlock(QUEST_SUMMON_SKELETON, -2, 0, EnumSpell.SUMMON_SPIDER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_ENDERMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_SPIDER, -2, 0, EnumSpell.SUMMON_ENDERMAN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_POLAR_BEAR = new QuestCastSpellOnBlock(QUEST_SUMMON_ENDERMAN, -2, 0, EnumSpell.SUMMON_POLAR_BEAR);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SLIME = new QuestCastSpellOnBlock(QUEST_SUMMON_POLAR_BEAR, -2, 0, EnumSpell.SUMMON_SLIME);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITCH = new QuestCastSpellOnBlock(QUEST_SUMMON_SLIME, -2, 0, EnumSpell.SUMMON_WITCH);
+	
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_PIGMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_ZOMBIE, 0, -2, EnumSpell.SUMMON_PIGMAN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_BLAZE = new QuestCastSpellOnBlock(QUEST_SUMMON_PIGMAN, -2, 0, EnumSpell.SUMMON_BLAZE);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_MAGMA_CUBE = new QuestCastSpellOnBlock(QUEST_SUMMON_BLAZE, -2, 0, EnumSpell.SUMMON_MAGMA_CUBE);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_GHAST = new QuestCastSpellOnBlock(QUEST_SUMMON_MAGMA_CUBE, -2, 0, EnumSpell.SUMMON_GHAST);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_ENDERMAN = new QuestCastSpellOnBlock(QUEST_SUMMON_GHAST, -2, 0, EnumSpell.SUMMON_ENDERMAN);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_SPIDER = new QuestCastSpellOnBlock(QUEST_SUMMON_ENDERMAN, -2, 0, EnumSpell.SUMMON_SPIDER);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_SLIME = new QuestCastSpellOnBlock(QUEST_SUMMON_SPIDER, -2, 0, EnumSpell.SUMMON_SLIME);
-	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITCH = new QuestCastSpellOnBlock(QUEST_SUMMON_SLIME, -2, 0, EnumSpell.SUMMON_WITCH);
+	
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SILVERFISH = new QuestCastSpellOnBlock(QUEST_SUMMON_PIGMAN, 0, -2, EnumSpell.SUMMON_SILVERFISH);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_GUARDIAN = new QuestCastSpellOnBlock(QUEST_SUMMON_SILVERFISH, -2, 0, EnumSpell.SUMMON_GUARDIAN);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_SHULKER = new QuestCastSpellOnBlock(QUEST_SUMMON_GUARDIAN, -2, 0, EnumSpell.SUMMON_SHULKER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITHER = new QuestCastSpellOnBlock(QUEST_SUMMON_SHULKER, -2, 0, EnumSpell.SUMMON_WITHER);
+	public static final QuestCastSpellOnBlock QUEST_SUMMON_GIANT = new QuestCastSpellOnBlock(QUEST_SUMMON_WITHER, -2, 0, EnumSpell.SUMMON_GIANT);
 	// END SUMMONS Monster
 	
 	// SPELLS

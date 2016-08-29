@@ -45,7 +45,7 @@ public class QuestChunkLoader extends Quest
 					}
 					if(placedBy.hasAchievement(achievement))
 					{
-						tileChunkLoader.init(world, chunkLoaderPos);
+						tileChunkLoader.init(placedBy, chunkLoaderPos);
 						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension);
 					}
 				}

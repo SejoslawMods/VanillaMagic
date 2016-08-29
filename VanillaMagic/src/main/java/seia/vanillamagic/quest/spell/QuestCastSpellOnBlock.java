@@ -28,9 +28,6 @@ public class QuestCastSpellOnBlock extends QuestCastSpell
 		EnumFacing face = event.getFace();
 		Vec3d hitVec = event.getHitVec();
 		
-		if(castSpell(player, hand, inHand, pos, face, hitVec))
-		{
-			event.setCanceled(true);
-		}
+		castSpell(player, hand, inHand, pos, face, hitVec);
 	}
 }

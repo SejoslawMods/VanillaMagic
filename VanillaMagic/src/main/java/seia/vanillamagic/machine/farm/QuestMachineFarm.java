@@ -36,7 +36,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 		if(startWorkWithCauldron(player, cauldronPos, achievement))
 		{
 			TileFarm tileFarm = new TileFarm();
-			tileFarm.init(world, cauldronPos);
+			tileFarm.init(player, cauldronPos);
 			tileFarm.radius = radius;
 			if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileFarm, player.dimension))
 			{

@@ -42,7 +42,7 @@ public class QuestSpeedy extends Quest
 						if(player.hasAchievement(achievement))
 						{
 							TileSpeedy speedy = new TileSpeedy();
-							speedy.init(world, event.getPos());
+							speedy.init(player, event.getPos());
 							if(speedy.containsCrystal())
 							{
 								if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(speedy, WorldHelper.getDimensionID(world)))

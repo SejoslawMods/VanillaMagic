@@ -44,9 +44,16 @@ public enum EnumSpell
 	SUMMON_MAGMA_CUBE(204, "Summon Magma Cube", "spellSummonMagmaCube", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.MAGMA_CREAM, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
 	SUMMON_GHAST(205, "Summon Ghast", "spellSummonGhast", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.GHAST_TEAR, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
 	SUMMON_ENDERMAN(206, "Summon Enderman", "spellSummonEnderman", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_POWDER, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
-	SUMMON_SPIDER(207, "Summon Spider", "spellSummonSpider", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.STRING, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_SPIDER(207, "Summon Spider", "spellSummonSpider", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.SPIDER_EYE, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
 	SUMMON_SLIME(208, "Summon Slime", "spellSummonSlime", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.SLIME_BALL, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
-	SUMMON_WITCH(209, "Summon With", "spellSummonWitch", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.GLOWSTONE_DUST, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_WITCH(209, "Summon Witch", "spellSummonWitch", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.GLOWSTONE_DUST, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_PIGMAN(210, "Summon Pigman", "spellSummonPigman",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.GOLD_NUGGET, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_GUARDIAN(212, "Summon Guardian", "spellSummonGuardian",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.PRISMARINE_SHARD, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_POLAR_BEAR(213, "Summon Polar Bear", "spellSummonPolarBear",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.FISH, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_SHULKER(214, "Summon Shulker", "spellSummonShulker",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Blocks.END_ROD, 1)),
+	SUMMON_SILVERFISH(215, "Summon Silverfish", "spellSummonSilverfish",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Blocks.STONEBRICK, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK)),
+	SUMMON_WITHER(216, "Summon Wither", "spellSummonWither",  EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Blocks.EMERALD_BLOCK, 1)),
+	SUMMON_GIANT(217, "Summon Giant", "spellSummonGiant", EnumSpellHelper.SUMMON_REQUIRED_WAND, new ItemStack(Items.ARMOR_STAND, EnumSpellHelper.SUMMON_HOSTILE_COST_ITEMSTACK))
 	;
 
 	public final int spellID;

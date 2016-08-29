@@ -142,13 +142,34 @@ achievement.spellSummonEnderman=Summon Enderman
 achievement.spellSummonEnderman.desc=Hold Nether Star in Your hand and 8x Blaze Powder in Your left hand and right-click on block
 
 achievement.spellSummonSpider=Summon Spider
-achievement.spellSummonSpider.desc=Hold Nether Star in Your hand and 8x String in Your left hand and right-click on block
+achievement.spellSummonSpider.desc=Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block
 
 achievement.spellSummonSlime=Summon Slime
 achievement.spellSummonSlime.desc=Hold Nether Star in Your hand and 8x Slime Ball in Your left hand and right-click on block
 
 achievement.spellSummonWitch=Summon Witch
 achievement.spellSummonWitch.desc=Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block
+
+achievement.spellSummonPigman=Summon Pigman
+achievement.spellSummonPigman.desc=Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block
+
+achievement.spellSummonGuardian=Summon Guardian (30% to be an Elder)
+achievement.spellSummonGuardian.desc=Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block
+
+achievement.spellSummonPolarBear=Summon Polar Bear
+achievement.spellSummonPolarBear.desc=Hold Nether Star in Your hand and 8x Fish in Your left hand and right-click on block
+
+achievement.spellSummonShulker=Summon Shulker
+achievement.spellSummonShulker.desc=Hold Nether Star in Your hand and 1x End Rod in Your left hand and right-click on block
+
+achievement.spellSummonSilverfish=Summon Silverfish
+achievement.spellSummonSilverfish.desc=Hold Nether Star in Your hand and 8x Stone Brick in Your left hand and right-click on block
+
+achievement.spellSummonWither=Summon Wither
+achievement.spellSummonWither.desc=Hold Nether Star in Your hand and 1x Emerald Block in Your left hand and right-click on block
+
+achievement.spellSummonGiant=Summon Giant
+achievement.spellSummonGiant.desc=Hold Nether Star in Your hand and 8x Armor Stand in Your left hand and right-click on block
 
 
 
