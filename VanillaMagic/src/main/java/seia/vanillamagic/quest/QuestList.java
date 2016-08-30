@@ -387,9 +387,14 @@ public class QuestList
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_WITHER = new QuestCastSpellOnBlock(QUEST_SUMMON_SHULKER, -2, 0, EnumSpell.SUMMON_WITHER);
 	public static final QuestCastSpellOnBlock QUEST_SUMMON_GIANT = new QuestCastSpellOnBlock(QUEST_SUMMON_WITHER, -2, 0, EnumSpell.SUMMON_GIANT);
 	
-	public static final QuestSummonHorde QUEST_SUMMON_HORDE = new QuestSummonHorde(QUEST_SUMMON_SILVERFISH, 0, -2, "Summon Horde Lvl: 1", "summonHordeLvl1", 
+	public static final QuestSummonHorde QUEST_SUMMON_HORDE_1 = new QuestSummonHorde(QUEST_SUMMON_SILVERFISH, 0, -2, "Summon Horde Lvl: 1", "summonHordeLvl1", 
 			1, 
-			new ItemStack(Items.END_CRYSTAL));
+			new ItemStack(Items.END_CRYSTAL),
+			new Quest[]{QUEST_SUMMON_GIANT});
+	public static final QuestSummonHorde QUEST_SUMMON_HORDE_10 = new QuestSummonHorde(QUEST_SUMMON_HORDE_1, -2, 0, "Summon Horde Lvl: 10", "summonHordeLvl10", 
+			10, 
+			new ItemStack(Items.END_CRYSTAL, 2),
+			null);
 	// END SUMMONS Monster
 	
 	// SPELLS

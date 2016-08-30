@@ -153,7 +153,7 @@ achievement.spellSummonWitch.desc=Hold Nether Star in Your hand and 8x Glowstone
 achievement.spellSummonPigman=Summon Pigman
 achievement.spellSummonPigman.desc=Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block
 
-achievement.spellSummonGuardian=Summon Guardian (30% to be an Elder)
+achievement.spellSummonGuardian=Summon Guardian
 achievement.spellSummonGuardian.desc=Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block
 
 achievement.spellSummonPolarBear=Summon Polar Bear
@@ -176,8 +176,11 @@ achievement.spellSummonSpiderJockey.desc=Hold Nether Star in Your hand and 8x Sp
 
 
 
-achievement.summonHordeLvl1=Summon Horde Lvl: 1
-achievement.summonHordeLvl1.desc=
+achievement.summonHordeLvl1=Summon Horde Lvl: 1 (Requires: Summon Giant)
+achievement.summonHordeLvl1.desc=Hold 1x End Crystal in left hand and Nether Star in right hand. Right-click block to spawn Horde. Prepare to battle !
+
+achievement.summonHordeLvl10=Summon Horde Lvl: 10 (Apocalypse !!!)
+achievement.summonHordeLvl10.desc=Hold 2x End Crystal in left hand and Nether Star in right hand. Right-click block to spawn Horde. Prepare to battle !!
 
 
 

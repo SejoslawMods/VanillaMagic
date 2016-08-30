@@ -1,29 +1,31 @@
 package seia.vanillamagic.quest;
 
-import java.util.Random;
-
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.spell.EnumSpell;
 import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.spell.SpellHelper;
 import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.utils.ListHelper;
 
 public class QuestSummonHorde extends Quest
 {
-	protected int range = 30; // range in blocks
-	protected int verticalRange = 3; // vertical range in blocks
 	protected int level; // it will tell how many monsters will be summoned
-	protected ItemStack requiredLeftHand;
+	protected int range = 10; // range in blocks
+	protected int verticalRange = 1; // vertical range in blocks
+	// the number is amount of blocks in which the enemy can spawn, requiredDistanceToPlayer away from Player
+	protected double requiredDistanceToPlayer = range - 2; 
+	protected final ItemStack requiredLeftHand;
 	
 	public QuestSummonHorde(Quest required, int posX, int posY, String questName, String uniqueName,
-			int level, ItemStack requiredLeftHand) 
+			int level, ItemStack requiredLeftHand, Quest[] requiredQuests) 
 	{
-		super(required, posX, posY, requiredLeftHand, questName, uniqueName);
+		super(required, posX, posY, requiredLeftHand, questName, uniqueName, requiredQuests);
 		this.level = level;
 		this.requiredLeftHand = requiredLeftHand;
 	}
@@ -32,7 +34,7 @@ public class QuestSummonHorde extends Quest
 	public void spawnHorde(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = event.getWorld();
+		World world = player.worldObj;
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(rightHand == null)
 		{
@@ -55,7 +57,7 @@ public class QuestSummonHorde extends Quest
 					}
 					if(player.hasAchievement(achievement))
 					{
-						EntityHelper.addChatComponentMessage(player, player.getDisplayNameString() + " summoned hord lvl: " + this.level);
+						EntityHelper.addChatComponentMessage(player, player.getDisplayNameString() + " summoned horde lvl: " + this.level + ". Prepare to DIE !!!");
 						spawnHorde(player, world);
 						leftHand.stackSize -= requiredLeftHand.stackSize;
 					}
@@ -69,31 +71,27 @@ public class QuestSummonHorde extends Quest
 		int posX = (int) Math.round(player.posX - 0.5f);
 		int posY = (int) player.posY;
 		int posZ = (int) Math.round(player.posZ - 0.5f);
-		int spawnX = 0;
-		int spawnY = 0;
-		int spawnZ = 0;
 		for(int i = 0; i < level; i++)
 		{
-			spawnX = countNewPos(posX, range);
-			spawnY = countNewPos(posY, verticalRange);
-			spawnZ = countNewPos(posZ, range);
-			BlockPos spawnPos = new BlockPos(spawnX, spawnY, spawnZ);
-			spawn(player, world, spawnPos);
+			for(int ix = posX - range; ix <= posX + range; ix++)
+			{
+				for(int iz = posZ - range; iz <= posZ + range; iz++)
+				{
+					for(int iy = posY - verticalRange; iy <= posY + verticalRange; iy++)
+					{
+						BlockPos spawnPos = new BlockPos(ix, iy, iz);
+						double distanceToPlayer = spawnPos.getDistance(posX, posY, posZ);
+						if(distanceToPlayer >= requiredDistanceToPlayer)
+						{
+							if(world.rand.nextInt(50) == 0)
+							{
+								spawn(player, world, spawnPos);
+							}
+						}
+					}
+				}
+			}
 		}
-	}
-	
-	Random rand = new Random();
-	public int countNewPos(int pos, int range) 
-	{
-		if(rand.nextInt(100) > 50) // spawn on coord positive or negative
-		{
-			pos += rand.nextInt(range);
-		}
-		else
-		{
-			pos -= rand.nextInt(range);
-		}
-		return pos;
 	}
 	
 	/**
@@ -101,18 +99,7 @@ public class QuestSummonHorde extends Quest
 	 */
 	public void spawn(EntityPlayer player, World world, BlockPos spawnPos) 
 	{
-		EntityLiving entity = EntityHelper.getRandomHostileMob(world);
-		entity = addRandomItemToSlot(entity, EntityEquipmentSlot.CHEST);
-		entity = addRandomItemToSlot(entity, EntityEquipmentSlot.FEET);
-		entity = addRandomItemToSlot(entity, EntityEquipmentSlot.HEAD);
-		entity = addRandomItemToSlot(entity, EntityEquipmentSlot.LEGS);
-		entity = addRandomItemToSlot(entity, EntityEquipmentSlot.MAINHAND);
-		world.spawnEntityInWorld(entity);
-	}
-
-	public EntityLiving addRandomItemToSlot(EntityLiving entity, EntityEquipmentSlot slot) 
-	{
-		entity.setItemStackToSlot(slot, EntityHelper.getRandomItemForSlot(slot));
-		return entity;
+		int randID = ListHelper.getRandomObjectFromTab(EnumSpell.getSummonMobSpellIDsWithoutSpecific(EnumSpell.SUMMON_WITHER.spellID));
+		SpellHelper.spellSummonMob(player, spawnPos, EnumFacing.UP, null, randID, true);
 	}
 }

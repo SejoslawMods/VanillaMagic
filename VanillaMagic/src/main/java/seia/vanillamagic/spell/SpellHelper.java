@@ -114,7 +114,7 @@ public class SpellHelper
 		}
 		else if(EnumSpell.isSpellSummonMob(spellID))
 		{
-			return spellSummonMob(caster, pos, face, hitVec, spellID);
+			return spellSummonMob(caster, pos, face, hitVec, spellID, false);
 		}
 		else if(spellID == EnumSpell.FUS_RO_DAH.spellID)
 		{
@@ -383,7 +383,7 @@ public class SpellHelper
 	 */
 	public static boolean spellSummonMob(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec,
-			int spellID)
+			int spellID, boolean spawnWithArmor)
 	{
 		if(pos != null)
 		{
@@ -505,6 +505,10 @@ public class SpellHelper
 			if(entityMob != null)
 			{
 				entityMob.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+				if(spawnWithArmor)
+				{
+					EntityHelper.addRandomArmorToEntity(entityMob);
+				}
 				world.spawnEntityInWorld(entityMob);
 				world.updateEntities();
 				return true;

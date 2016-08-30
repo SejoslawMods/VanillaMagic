@@ -26,6 +26,11 @@ public class BlockPosHelper
 	{
 	}
 	
+	public static BlockPos getEntityBlockPos(Entity entity)
+	{
+		return new BlockPos(entity.posX, entity.posY, entity.posZ);
+	}
+	
 	public static int distanceInLine(BlockPos pos1, BlockPos pos2)
 	{
 		if((pos1.getX() == pos2.getX()) && (pos1.getY() == pos2.getY()))

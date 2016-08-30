@@ -104,6 +104,10 @@ public class QuestCaptureEntity extends Quest
 			if(player.isSneaking())
 			{
 				ItemStack stackOffHand = player.getHeldItemOffhand();
+				if(stackOffHand == null)
+				{
+					return;
+				}
 				NBTTagCompound stackTag = stackOffHand.getTagCompound();
 				if(stackTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))
 				{
