@@ -26,8 +26,10 @@ public class VanillaMagicIntegration
 		integrations.add(new IntegrationBetterAchievements());
 		integrations.add(new IntegrationWTFExpedition());
 		integrations.add(new IntegrationFilledOres());
+		
 		integrations.add(new IntegrationNetherMetals());
 		integrations.add(new IntegrationEndMetals());
+		integrations.add(new IntegrationDenseMetals());
 	}
 	
 	public void preInit()
