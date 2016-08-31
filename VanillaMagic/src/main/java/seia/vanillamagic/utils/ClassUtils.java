@@ -53,7 +53,8 @@ public class ClassUtils
 	
 	@Nullable
 	public static Object getMethodReturn(String className, String methodName, Class[] params, Object[] args, boolean isStatic)
-			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, 
+			IllegalArgumentException, InvocationTargetException
 	{
 		Class<?> clazz = Class.forName(className);
 		Object instance = clazz.newInstance();
@@ -66,5 +67,12 @@ public class ClassUtils
 		{
 			return method.invoke(instance, args);
 		}
+	}
+	
+	public static boolean isClassImplementingInterface(String className, String interfaceName) 
+			throws ClassNotFoundException
+	{
+		Class<?> clazz = Class.forName(className);
+		return clazz.isAssignableFrom(Class.forName(interfaceName));
 	}
 }
