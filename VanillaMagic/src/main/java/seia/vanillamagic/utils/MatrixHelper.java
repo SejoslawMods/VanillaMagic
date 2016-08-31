@@ -4,6 +4,10 @@ import net.minecraft.item.ItemStack;
 
 public class MatrixHelper 
 {
+	private MatrixHelper()
+	{
+	}
+	
 	/**
 	 * It must be a quad matrix. <br>
 	 * From:<br>

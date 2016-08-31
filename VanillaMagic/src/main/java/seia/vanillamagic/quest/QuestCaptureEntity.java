@@ -109,6 +109,10 @@ public class QuestCaptureEntity extends Quest
 					return;
 				}
 				NBTTagCompound stackTag = stackOffHand.getTagCompound();
+				if(stackTag == null)
+				{
+					return;
+				}
 				if(stackTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))
 				{
 					if(clickedTimesFree > 0)
