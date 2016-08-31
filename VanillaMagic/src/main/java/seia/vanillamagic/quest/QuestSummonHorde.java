@@ -45,12 +45,7 @@ public class QuestSummonHorde extends Quest
 		{
 			return;
 		}
-		EnumWand wandRightHand = EnumWand.getWandByItemStack(rightHand);
-		if(wandRightHand == null)
-		{
-			return;
-		}
-		if(EnumWand.areWandsEqual(wandRightHand, EnumWand.NETHER_STAR))
+		if(EnumWand.areWandsEqual(rightHand, EnumWand.NETHER_STAR.wandItemStack))
 		{
 			if(ItemStack.areItemsEqual(leftHand, requiredLeftHand))
 			{
