@@ -169,7 +169,7 @@ public class QuestCaptureEntity extends Quest
 				return;
 			}
 			entity.readFromNBT(entityTag);
-			entity.setLocationAndAngles(respawnPos.getX() + 0.5d, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5d, 0, 0);
+			entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
 			world.spawnEntityInWorld(entity);
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
