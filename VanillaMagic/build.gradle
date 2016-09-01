@@ -23,7 +23,7 @@ plugins
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = mc_version + '-' + version_major + '.' + version_minor + '.' + version_patch + '.' + version_build
-group= "seia.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "seia.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "vanillamagic"
 
 srcCompat = JavaVersion.VERSION_1_8
@@ -59,4 +59,25 @@ processResources
     {
         exclude 'mcmod.info'
     }
+}
+
+//========================================================================================================
+
+task sourcesJar(type: Jar, dependsOn: 'sourceMainJava') 
+{
+    from "build/sources/main"
+    from "build/resources/main"
+    classifier "sources"
+    destinationDir = file (rootProject.getRootDir().getPath() + '/javaSources')
+}
+
+curseforge 
+{
+  apiKey = api_key
+  project 
+  {
+    id = curse_project_id
+    changelog = file('changelog.txt')
+    releaseType = release_type
+  }
 }
