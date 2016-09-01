@@ -61,19 +61,8 @@ processResources
     }
 }
 
-//========================================================================================================
-
-task sourcesJar(type: Jar, dependsOn: 'sourceMainJava') 
-{
-    from "build/sources/main"
-    from "build/resources/main"
-    classifier "sources"
-    destinationDir = file (rootProject.getRootDir().getPath() + '/javaSources')
-}
-
 curseforge 
 {
-  apiKey = api_key
   project 
   {
     id = curse_project_id
