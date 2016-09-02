@@ -365,7 +365,7 @@ public class SpellHelper
 			if(entityAgeable != null)
 			{
 				entityAgeable.setGrowingAge(1);
-				entityAgeable.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+				entityAgeable.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw, 0.0F);
 				world.spawnEntityInWorld(entityAgeable);
 				world.updateEntities();
 				return true;
@@ -504,7 +504,7 @@ public class SpellHelper
 			
 			if(entityMob != null)
 			{
-				entityMob.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+				entityMob.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw, 0.0F);
 				if(spawnWithArmor)
 				{
 					EntityHelper.addRandomArmorToEntity(entityMob);
