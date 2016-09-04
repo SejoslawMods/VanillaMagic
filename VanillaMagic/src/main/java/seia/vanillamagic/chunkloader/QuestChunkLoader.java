@@ -16,10 +16,10 @@ import seia.vanillamagic.quest.Quest;
 
 public class QuestChunkLoader extends Quest
 {
-	public QuestChunkLoader(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
-	{
-		super(required, posX, posY, icon, questName, uniqueName);
-	}
+//	public QuestChunkLoader(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//	}
 	
 	@SubscribeEvent
 	public void chunkLoaderPlaced(PlaceEvent event)

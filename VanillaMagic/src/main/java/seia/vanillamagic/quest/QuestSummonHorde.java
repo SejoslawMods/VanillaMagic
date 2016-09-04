@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -11,6 +13,7 @@ import seia.vanillamagic.spell.EnumSpell;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.spell.SpellHelper;
 import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.utils.ItemStackHelper;
 import seia.vanillamagic.utils.ListHelper;
 
 public class QuestSummonHorde extends Quest
@@ -20,14 +23,20 @@ public class QuestSummonHorde extends Quest
 	protected int verticalRange = 1; // vertical range in blocks
 	// the number is amount of blocks in which the enemy can spawn, requiredDistanceToPlayer away from Player
 	protected double requiredDistanceToPlayer = range - 2; 
-	protected final ItemStack requiredLeftHand;
+	protected ItemStack requiredLeftHand;
 	
-	public QuestSummonHorde(Quest required, int posX, int posY, String questName, String uniqueName,
-			int level, ItemStack requiredLeftHand, Quest[] requiredQuests) 
+//	public QuestSummonHorde(Quest required, int posX, int posY, String questName, String uniqueName,
+//			int level, ItemStack requiredLeftHand, Quest[] requiredQuests) 
+//	{
+//		super(required, posX, posY, requiredLeftHand, questName, uniqueName, requiredQuests);
+//		this.level = level;
+//		this.requiredLeftHand = requiredLeftHand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, requiredLeftHand, questName, uniqueName, requiredQuests);
-		this.level = level;
-		this.requiredLeftHand = requiredLeftHand;
+		super.readData(jo);
+		this.requiredLeftHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredLeftHand").getAsJsonObject());
 	}
 	
 	@SubscribeEvent

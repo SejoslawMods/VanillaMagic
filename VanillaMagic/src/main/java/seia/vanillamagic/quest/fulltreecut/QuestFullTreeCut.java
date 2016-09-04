@@ -13,11 +13,11 @@ import seia.vanillamagic.spell.EnumWand;
 
 public class QuestFullTreeCut extends Quest
 {
-	public QuestFullTreeCut(Quest required, int posX, int posY, ItemStack itemIcon,
-			String questName, String uniqueName)
-	{
-		super(required, posX, posY, itemIcon, questName, uniqueName);
-	}
+//	public QuestFullTreeCut(Quest required, int posX, int posY, ItemStack itemIcon,
+//			String questName, String uniqueName)
+//	{
+//		super(required, posX, posY, itemIcon, questName, uniqueName);
+//	}
 	
 	@SubscribeEvent
 	public void onTreeCut(BreakEvent event)

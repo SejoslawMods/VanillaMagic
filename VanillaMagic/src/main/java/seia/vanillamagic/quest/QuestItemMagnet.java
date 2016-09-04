@@ -18,10 +18,10 @@ public class QuestItemMagnet extends Quest
 	public final int range = 6;
 	public final int maxPulledItems = 200;
 
-	public QuestItemMagnet(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
-	{
-		super(required, posX, posY, itemIcon, questName, uniqueName);
-	}
+//	public QuestItemMagnet(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
+//	{
+//		super(required, posX, posY, itemIcon, questName, uniqueName);
+//	}
 	
 	@SubscribeEvent
 	public void playerTick(LivingUpdateEvent event)

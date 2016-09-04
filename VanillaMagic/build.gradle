@@ -49,6 +49,7 @@ processResources
     from(sourceSets.main.resources.srcDirs) 
     {
         include 'mcmod.info'
+        include 'achievements.json'
                 
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version

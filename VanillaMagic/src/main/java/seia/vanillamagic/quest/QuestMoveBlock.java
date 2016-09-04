@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -22,15 +24,22 @@ public class QuestMoveBlock extends Quest
 	 * Stack offHand must be an item that has maxStackSize = 1
 	 * If it is a book, it must be a renamed book.
 	 */
-	public final ItemStack requiredStackOffHand;
-	public final EnumWand requiredWand;
+	public ItemStack requiredStackOffHand;
+	public EnumWand requiredWand;
 
-	public QuestMoveBlock(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName, 
-			ItemStack requiredStackOffHand, EnumWand requiredWand)
+//	public QuestMoveBlock(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName, 
+//			ItemStack requiredStackOffHand, EnumWand requiredWand)
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//		this.requiredStackOffHand = requiredStackOffHand;
+//		this.requiredWand = requiredWand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, icon, questName, uniqueName);
-		this.requiredStackOffHand = requiredStackOffHand;
-		this.requiredWand = requiredWand;
+		super.readData(jo);
+		this.requiredStackOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredStackOffHand").getAsJsonObject());
+		this.requiredWand = EnumWand.getWandByTier(jo.get("requiredWand").getAsInt());
 	}
 	
 	/**

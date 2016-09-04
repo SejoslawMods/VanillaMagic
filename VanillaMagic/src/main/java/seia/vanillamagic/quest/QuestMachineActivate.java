@@ -1,22 +1,32 @@
 package seia.vanillamagic.quest;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
+import seia.vanillamagic.utils.ItemStackHelper;
 
 public abstract class QuestMachineActivate extends Quest
 {
-	public final ItemStack mustHaveOffHand;
-	public final ItemStack mustHaveMainHand;
+	public ItemStack mustHaveOffHand;
+	public ItemStack mustHaveMainHand;
+//	
+//	public QuestMachineActivate(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
+//			ItemStack mustHaveOffHand, ItemStack mustHaveMainHand) 
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//		this.mustHaveOffHand = mustHaveOffHand;
+//		this.mustHaveMainHand = mustHaveMainHand;
+//	}
 	
-	public QuestMachineActivate(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-			ItemStack mustHaveOffHand, ItemStack mustHaveMainHand) 
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, icon, questName, uniqueName);
-		this.mustHaveOffHand = mustHaveOffHand;
-		this.mustHaveMainHand = mustHaveMainHand;
+		super.readData(jo);
+		this.mustHaveOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveOffHand").getAsJsonObject());
+		this.mustHaveMainHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveMainHand").getAsJsonObject());
 	}
 	
 	public boolean canActivate(EntityPlayer player)

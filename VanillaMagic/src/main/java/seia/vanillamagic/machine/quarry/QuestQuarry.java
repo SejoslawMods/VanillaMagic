@@ -17,11 +17,11 @@ import seia.vanillamagic.utils.EntityHelper;
 
 public class QuestQuarry extends QuestMachineActivate
 {
-	public QuestQuarry(Quest required, int posX, int posY, String questName, String uniqueName) 
-	{
-		super(required, posX, posY, new ItemStack(Items.CAULDRON), questName, uniqueName,
-				null, EnumWand.BLAZE_ROD.wandItemStack);
-	}
+//	public QuestQuarry(Quest required, int posX, int posY, String questName, String uniqueName) 
+//	{
+//		super(required, posX, posY, new ItemStack(Items.CAULDRON), questName, uniqueName,
+//				null, EnumWand.BLAZE_ROD.wandItemStack);
+//	}
 	
 	@SubscribeEvent
 	public void startQuarry(RightClickBlock event)

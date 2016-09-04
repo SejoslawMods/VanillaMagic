@@ -21,11 +21,11 @@ import seia.vanillamagic.quest.Quest;
 
 public class QuestMotherNatureCrystal extends Quest
 {
-	public QuestMotherNatureCrystal(Quest required, int posX, int posY, ItemStack icon, String questName,
-			String uniqueName) 
-	{
-		super(required, posX, posY, icon, questName, uniqueName);
-	}
+//	public QuestMotherNatureCrystal(Quest required, int posX, int posY, ItemStack icon, String questName,
+//			String uniqueName) 
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//	}
 	
 	@SubscribeEvent
 	public void onHoldInLeftHandTick(PlayerTickEvent event) // left hand

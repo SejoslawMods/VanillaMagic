@@ -4,6 +4,11 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -99,5 +104,54 @@ public class ItemStackHelper
 		ItemStack newStack = stack.copy();
 		newStack.setItem(item);
 		return newStack;
+	}
+	
+	@Nullable
+	public static ItemStack getItemStackFromJSON(JsonObject jo)
+	{
+		try
+		{
+			int id = jo.get("id").getAsInt();
+			int stackSize = jo.get("stackSize").getAsInt();
+			int meta = jo.get("meta").getAsInt();
+			Item item = null;
+			Block block = null;
+			try
+			{
+				item = Item.getItemById(id);
+			}
+			catch(Exception e)
+			{
+				block = Block.getBlockById(id);
+			}
+			
+			if(item == null)
+			{
+				return new ItemStack(block, stackSize, meta);
+			}
+			else
+			{
+				return new ItemStack(item, stackSize, meta);
+			}
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
+	
+	public static ItemStack[] getItemStackArrayFromJSON(JsonObject jo, String key)
+	{
+		JsonArray ja = jo.get(key).getAsJsonArray();
+		ItemStack[] tab = new ItemStack[ja.size()];
+		int index = 0;
+		ItemStack stack = null;
+		for(JsonElement je : ja)
+		{
+			stack = getItemStackFromJSON(je.getAsJsonObject());
+			tab[index] = stack;
+			index++;
+		}
+		return tab;
 	}
 }

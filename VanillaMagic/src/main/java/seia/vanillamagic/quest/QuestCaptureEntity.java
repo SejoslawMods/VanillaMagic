@@ -2,6 +2,8 @@ package seia.vanillamagic.quest;
 
 import javax.annotation.Nullable;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,15 +22,22 @@ import seia.vanillamagic.utils.NBTHelper;
 
 public class QuestCaptureEntity extends Quest
 {
-	public final ItemStack requiredStackOffHand;
-	public final EnumWand requiredWand;
+	public ItemStack requiredStackOffHand;
+	public EnumWand requiredWand;
 	
-	public QuestCaptureEntity(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-			ItemStack requiredStackOffHand, EnumWand requiredWand)
+//	public QuestCaptureEntity(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
+//			ItemStack requiredStackOffHand, EnumWand requiredWand)
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//		this.requiredStackOffHand = requiredStackOffHand;
+//		this.requiredWand = requiredWand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, icon, questName, uniqueName);
-		this.requiredStackOffHand = requiredStackOffHand;
-		this.requiredWand = requiredWand;
+		super.readData(jo);
+		this.requiredStackOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredStackOffHand").getAsJsonObject());
+		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	int clickedTimes = 0;

@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest.spell;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -13,33 +15,39 @@ import seia.vanillamagic.spell.SpellHelper;
 
 public abstract class QuestCastSpell extends Quest
 {
-	public final EnumSpell spell;
+	public EnumSpell spell;
 	
-	public QuestCastSpell(Quest required, int posX, int posY, EnumSpell spell, Quest[] additionalRequiredQuests) 
-	{
-		this(required, posX, posY, spell);
-		this.additionalRequiredQuests = additionalRequiredQuests;
-	}
-
-	public QuestCastSpell(Quest required, int posX, int posY, 
-			EnumSpell spell)
-	{
-		this(required, posX, posY, spell.spellName, spell.spellUniqueName, 
-				spell);
-	}
+//	public QuestCastSpell(Quest required, int posX, int posY, EnumSpell spell, Quest[] additionalRequiredQuests) 
+//	{
+//		this(required, posX, posY, spell);
+//		this.additionalRequiredQuests = additionalRequiredQuests;
+//	}
+//
+//	public QuestCastSpell(Quest required, int posX, int posY, 
+//			EnumSpell spell)
+//	{
+//		this(required, posX, posY, spell.spellName, spell.spellUniqueName, 
+//				spell);
+//	}
+//	
+//	public QuestCastSpell(Quest required, int posX, int posY, String questName, String uniqueName, 
+//			EnumSpell spell)
+//	{
+//		this(required, posX, posY, spell.itemOffHand, questName, uniqueName, 
+//				spell);
+//	}
+//	
+//	public QuestCastSpell(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
+//			EnumSpell spell)
+//	{
+//		super(required, posX, posY, itemIcon, questName, uniqueName);
+//		this.spell = spell;
+//	}
 	
-	public QuestCastSpell(Quest required, int posX, int posY, String questName, String uniqueName, 
-			EnumSpell spell)
+	public void readData(JsonObject jo)
 	{
-		this(required, posX, posY, spell.itemOffHand, questName, uniqueName, 
-				spell);
-	}
-	
-	public QuestCastSpell(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-			EnumSpell spell)
-	{
-		super(required, posX, posY, itemIcon, questName, uniqueName);
-		this.spell = spell;
+		super.readData(jo);
+		this.spell = EnumSpell.getSpellById(jo.get("spellID").getAsInt());
 	}
 
 	/**

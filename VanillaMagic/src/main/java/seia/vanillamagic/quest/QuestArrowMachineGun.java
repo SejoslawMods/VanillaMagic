@@ -17,11 +17,11 @@ import seia.vanillamagic.spell.EnumWand;
 
 public class QuestArrowMachineGun extends Quest
 {
-	public QuestArrowMachineGun(Quest required, int posX, int posY, ItemStack itemIcon, String questName,
-			String uniqueName) 
-	{
-		super(required, posX, posY, itemIcon, questName, uniqueName);
-	}
+//	public QuestArrowMachineGun(Quest required, int posX, int posY, ItemStack itemIcon, String questName,
+//			String uniqueName) 
+//	{
+//		super(required, posX, posY, itemIcon, questName, uniqueName);
+//	}
 	
 	@SubscribeEvent
 	public void onRightClick(RightClickItem event)

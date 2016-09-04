@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest.multimine;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
@@ -16,17 +18,25 @@ import seia.vanillamagic.spell.EnumWand;
 
 public class QuestMineMulti extends Quest
 {
-	public final int radius;
-	public final int depth;
-	public final EnumWand requiredWand;
+	public int radius;
+	public int depth;
+	public EnumWand requiredWand;
 	
-	public QuestMineMulti(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-			int radius, int depth, EnumWand requiredWand) 
+//	public QuestMineMulti(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
+//			int radius, int depth, EnumWand requiredWand) 
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//		this.radius = radius;
+//		this.depth = depth;
+//		this.requiredWand = requiredWand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, icon, questName, uniqueName);
-		this.radius = radius;
-		this.depth = depth;
-		this.requiredWand = requiredWand;
+		super.readData(jo);
+		this.radius = jo.get("radius").getAsInt();
+		this.depth = jo.get("depth").getAsInt();
+		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	public int getMaxDestroyedBlocks()

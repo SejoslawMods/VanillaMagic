@@ -2,6 +2,8 @@ package seia.vanillamagic.quest;
 
 import java.util.List;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,16 +22,23 @@ public class QuestSmeltOnAltar extends Quest
 	// in 200 ticks You will smelt 1 item in Furnace
 	public static final int ONE_ITEM_SMELT_TICKS = 200;
 	
-	public final int requiredAltarTier;
-	public final EnumWand requiredMinimalWand;
+	public int requiredAltarTier;
+	public EnumWand requiredMinimalWand;
 	
-	public QuestSmeltOnAltar(Quest required, int posX, int posY, 
-			ItemStack itemIcon, String questName, String uniqueName,
-			int requiredAltarTier, EnumWand requiredMinimalWand)
+//	public QuestSmeltOnAltar(Quest required, int posX, int posY, 
+//			ItemStack itemIcon, String questName, String uniqueName,
+//			int requiredAltarTier, EnumWand requiredMinimalWand)
+//	{
+//		super(required, posX, posY, itemIcon, questName, uniqueName);
+//		this.requiredAltarTier = requiredAltarTier;
+//		this.requiredMinimalWand = requiredMinimalWand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, itemIcon, questName, uniqueName);
-		this.requiredAltarTier = requiredAltarTier;
-		this.requiredMinimalWand = requiredMinimalWand;
+		super.readData(jo);
+		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
+		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	@SubscribeEvent

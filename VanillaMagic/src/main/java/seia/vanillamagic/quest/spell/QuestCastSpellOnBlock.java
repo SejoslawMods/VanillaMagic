@@ -13,10 +13,10 @@ import seia.vanillamagic.spell.EnumSpell;
 
 public class QuestCastSpellOnBlock extends QuestCastSpell
 {
-	public QuestCastSpellOnBlock(Quest required, int posX, int posY, EnumSpell spell) 
-	{
-		super(required, posX, posY, spell);
-	}
+//	public QuestCastSpellOnBlock(Quest required, int posX, int posY, EnumSpell spell) 
+//	{
+//		super(required, posX, posY, spell);
+//	}
 	
 	@SubscribeEvent
 	public void caseSpell(RightClickBlock event)

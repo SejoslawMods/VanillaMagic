@@ -10,10 +10,10 @@ import seia.vanillamagic.utils.EntityHelper;
 
 public class QuestPortableCraftingTable extends Quest
 {
-	public QuestPortableCraftingTable(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
-	{
-		super(required, posX, posY, icon, questName, uniqueName);
-	}
+//	public QuestPortableCraftingTable(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//	}
 	
 	@SubscribeEvent
 	public void openCrafting(RightClickItem event)

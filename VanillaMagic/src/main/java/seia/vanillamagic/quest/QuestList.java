@@ -1,7 +1,9 @@
 package seia.vanillamagic.quest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -30,7 +32,15 @@ import seia.vanillamagic.utils.ItemStackHelper;
 public class QuestList 
 {
 	public static List<Quest> QUESTS = new ArrayList<Quest>();
-
+	public static Map<String, Quest> QUESTS_MAP = new HashMap<String, Quest>();
+	
+	public static void addQuest(Quest q)
+	{
+		QuestList.QUESTS.add(q);
+		QuestList.QUESTS_MAP.put(q.questName, q);
+	}
+	
+	/*
 	private static Achievement START = AchievementList.OPEN_INVENTORY;
 	public static final QuestCraft QUEST_CRAFT_STICK = new QuestCraft(START, 0, 6, new ItemStack(Items.STICK), "Craft Stick", "craftStick");
 	
@@ -411,7 +421,7 @@ public class QuestList
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_CLEAR = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_RAIN, +2, 0, EnumSpell.WEATHER_CLEAR);
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_THUNDERSTORM = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_CLEAR, +2, 0, EnumSpell.WEATHER_THUNDERSTORM);
 	// END SPELLS
-	
+	*/
 	static
 	{
 		// TODO: for each crafting create an Quest

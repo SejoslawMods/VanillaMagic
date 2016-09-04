@@ -118,4 +118,19 @@ public enum EnumWand
 	{
 		return wandPlayerHand.canWandDoWork(spell.minimalWandTier.wandTier);
 	}
+	
+	@Nullable
+	public static EnumWand getWandByTier(int tier)
+	{
+		EnumWand[] wands = EnumWand.values();
+		for(int i = 0; i < wands.length; i++)
+		{
+			EnumWand currentlyCheckingEnumWand = wands[i];
+			if(currentlyCheckingEnumWand.wandTier == tier)
+			{
+				return currentlyCheckingEnumWand;
+			}
+		}
+		return null;
+	}
 }

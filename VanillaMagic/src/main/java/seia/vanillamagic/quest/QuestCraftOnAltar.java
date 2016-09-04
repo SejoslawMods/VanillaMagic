@@ -3,6 +3,8 @@ package seia.vanillamagic.quest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.AltarChecker;
 import seia.vanillamagic.utils.CauldronHelper;
+import seia.vanillamagic.utils.ItemStackHelper;
 
 public class QuestCraftOnAltar extends Quest
 {
@@ -22,26 +25,35 @@ public class QuestCraftOnAltar extends Quest
 	 * Each ItemStack is a different Item
 	 * Instead of doing 1x Coal + 1x Coal, do 2x Coal -> 2 will be stackSize
 	 */
-	public final ItemStack[] ingredients;
-	public final ItemStack[] result;
-	public final int requiredAltarTier;
-	public final EnumWand requiredMinimalWand;
+	public ItemStack[] ingredients;
+	public ItemStack[] result;
+	public int requiredAltarTier;
+	public EnumWand requiredMinimalWand;
 	
-	public QuestCraftOnAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
+//	public QuestCraftOnAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
+//			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
+//	{
+//		this(required, posX, posY, result[0], questName, uniqueName,
+//				ingredients, result, requiredAltarTier, requiredMinimalWand);
+//	}
+//
+//	public QuestCraftOnAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
+//			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
+//	{
+//		super(required, posX, posY, itemIcon, questName, uniqueName);
+//		this.ingredients = ingredients;
+//		this.result = result;
+//		this.requiredAltarTier = requiredAltarTier;
+//		this.requiredMinimalWand = requiredMinimalWand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		this(required, posX, posY, result[0], questName, uniqueName,
-				ingredients, result, requiredAltarTier, requiredMinimalWand);
-	}
-
-	public QuestCraftOnAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
-	{
-		super(required, posX, posY, itemIcon, questName, uniqueName);
-		this.ingredients = ingredients;
-		this.result = result;
-		this.requiredAltarTier = requiredAltarTier;
-		this.requiredMinimalWand = requiredMinimalWand;
+		super.readData(jo);
+		this.ingredients = ItemStackHelper.getItemStackArrayFromJSON(jo, "ingredients");
+		this.result = ItemStackHelper.getItemStackArrayFromJSON(jo, "result");
+		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
+		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	public int getIngredientsStackSize()

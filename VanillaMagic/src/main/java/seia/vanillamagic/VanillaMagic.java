@@ -1,5 +1,7 @@
 package seia.vanillamagic;
 
+import java.io.File;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +12,7 @@ import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import seia.vanillamagic.config.achievement.ConfigAchievements;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
@@ -38,11 +41,13 @@ public class VanillaMagic
 	public static ModMetadata modMetadata;
 	
 	public static Logger logger;
+	public static ConfigAchievements configAchievements;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
+		configAchievements = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
 		modMetadata = VanillaMagicMetadata.INSTANCE.preInit(modMetadata);
 		for(int i = 0; i < QuestList.QUESTS.size(); i++)
 		{
@@ -70,7 +75,7 @@ public class VanillaMagic
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		BookRegistry.INSTANCE.postInit();
+		BookRegistry.INSTANCE.postInit(); // TODO:
 		CustomTileEntityHandler.INSTANCE.postInit();
 		EnchantedBucketHelper.registerFluids();
 		PotionedCrystalHelper.registerRecipes();

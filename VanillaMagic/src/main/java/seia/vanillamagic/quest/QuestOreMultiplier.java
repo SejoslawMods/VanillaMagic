@@ -2,6 +2,8 @@ package seia.vanillamagic.quest;
 
 import java.util.List;
 
+import com.google.gson.JsonObject;
+
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,15 +20,22 @@ import seia.vanillamagic.utils.SmeltingHelper;
 
 public class QuestOreMultiplier extends Quest
 {
-	public final int multiplier;
-	public final EnumWand requiredMinimalWand;
+	public int multiplier;
+	public EnumWand requiredMinimalWand;
 	
-	public QuestOreMultiplier(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-			int multiplier, EnumWand requiredMinimalWand) 
+//	public QuestOreMultiplier(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
+//			int multiplier, EnumWand requiredMinimalWand) 
+//	{
+//		super(required, posX, posY, icon, questName, uniqueName);
+//		this.multiplier = multiplier;
+//		this.requiredMinimalWand = requiredMinimalWand;
+//	}
+	
+	public void readData(JsonObject jo)
 	{
-		super(required, posX, posY, icon, questName, uniqueName);
-		this.multiplier = multiplier;
-		this.requiredMinimalWand = requiredMinimalWand;
+		super.readData(jo);
+		this.multiplier = jo.get("multiplier").getAsInt();
+		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	@SubscribeEvent
