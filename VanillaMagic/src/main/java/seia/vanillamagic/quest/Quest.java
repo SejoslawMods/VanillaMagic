@@ -33,7 +33,7 @@ public abstract class Quest
 	
 	public void readData(JsonObject jo)
 	{
-		this.requiredQuest = QuestList.QUESTS_MAP.get(jo.get("requiredQuest"));
+		this.requiredQuest = QuestList.QUESTS_MAP.get(jo.get("requiredQuest").getAsString());
 		this.required = (this.requiredQuest == null ? null : this.requiredQuest.achievement);
 		this.questName = jo.get("questName").getAsString();
 		this.uniqueName = jo.get("uniqueName").getAsString();
@@ -44,33 +44,7 @@ public abstract class Quest
 			int tmpY = jo.get("posY").getAsInt();
 			this.posY = (this.requiredQuest != null ? (this.requiredQuest.posY + tmpY) : tmpY);
 		}
-		{
-			// Quest icon
-//			JsonObject icon = jo.get("icon").getAsJsonObject();
-			this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
-//			int id = icon.get("id").getAsInt();
-//			int stackSize = icon.get("stackSize").getAsInt();
-//			int meta = icon.get("meta").getAsInt();
-//			Item item = null;
-//			Block block = null;
-//			try
-//			{
-//				item = Item.getItemById(id);
-//			}
-//			catch(Exception e)
-//			{
-//				block = Block.getBlockById(id);
-//			}
-//			
-//			if(item == null)
-//			{
-//				this.icon = new ItemStack(block, stackSize, meta);
-//			}
-//			else
-//			{
-//				this.icon = new ItemStack(item, stackSize, meta);
-//			}
-		}
+		this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
 		// Additional Quests
 		if(jo.has("additionalRequiredQuests"))
 		{
@@ -93,7 +67,7 @@ public abstract class Quest
 				this.icon, 
 				this.required)
 				.registerStat();
-		// Registering Quest
+		// Registering Quest - this method should ONLY be called here
 		QuestList.addQuest(this);
 	}
 	

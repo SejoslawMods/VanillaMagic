@@ -1,7 +1,6 @@
 [
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraft",
-	"questName":"QUEST_CRAFT_STICK",
 	"requiredQuest":"",
 	"posX":0,
 	"posY":6,
@@ -13,5 +12,19 @@
 	},
 	"questName":"Craft Stick",
 	"uniqueName":"craftStick"
+},
+{
+	"questClass":"seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable",
+	"requiredQuest":"craftStick",
+	"posX":-2,
+	"posY":0,
+	"icon":
+	{
+		"id":58,
+		"stackSize":1,
+		"meta":0
+	},
+	"questName":"Portable Crafting Table",
+	"uniqueName":"portableCraftingTable"
 }
 ]

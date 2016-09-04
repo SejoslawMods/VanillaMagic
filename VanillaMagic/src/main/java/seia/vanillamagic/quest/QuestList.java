@@ -37,7 +37,7 @@ public class QuestList
 	public static void addQuest(Quest q)
 	{
 		QuestList.QUESTS.add(q);
-		QuestList.QUESTS_MAP.put(q.questName, q);
+		QuestList.QUESTS_MAP.put(q.uniqueName, q);
 	}
 	
 	/*
@@ -422,9 +422,9 @@ public class QuestList
 	public static final QuestCastSpellInAir QUEST_CAST_SPELL_WEATHER_THUNDERSTORM = new QuestCastSpellInAir(QUEST_CAST_SPELL_WEATHER_CLEAR, +2, 0, EnumSpell.WEATHER_THUNDERSTORM);
 	// END SPELLS
 	*/
-	static
-	{
-		// TODO: for each crafting create an Quest
-		//List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
-	}
+//	static
+//	{
+//		// TODO: for each crafting create an Quest
+//		//List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
+//	}
 }

@@ -126,10 +126,7 @@ public class ConfigAchievements
 					JsonObject jo = je.getAsJsonObject();
 					Class<?> className = Class.forName(jo.get("questClass").getAsString());
 					Quest quest = (Quest) className.newInstance();
-					if(!QuestList.QUESTS_MAP.containsKey(jo.get("questName").getAsString()))
-					{
-						quest.readData(jo);
-					}
+					quest.readData(jo);
 				}
 				VanillaMagic.logger.log(Level.WARN, "VanillaMagic achievements readded from JSON file");
 			}
