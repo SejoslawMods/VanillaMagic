@@ -26,5 +26,429 @@
 	},
 	"questName":"Portable Crafting Table",
 	"uniqueName":"portableCraftingTable"
-}
+},
+{
+	"questClass":"seia.vanillamagic.machine.autocrafting.QuestAutocrafting",
+	"requiredQuest":"portableCraftingTable",
+	"posX":-2,
+	"posY":0,
+	"icon":
+	{
+		"id":58,
+		"stackSize":1,
+		"meta":0
+	},
+	"questName":"Autocrafting !!!",
+	"uniqueName":"autocrafting"
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"craftStick",
+	"posX":0,
+	"posY":-2,
+	"icon":
+	{
+		"id":263,
+		"stackSize":1,
+		"meta":0
+	},
+	"questName":"Flint and Steel Clone",
+	"uniqueName":"spellFlintAndSteel",
+	"spellID":0
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraft",
+	"requiredQuest":"craftStick",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":380,
+		"stackSize":1,
+		"meta":0
+	},
+	"questName":"Craft Cauldron",
+	"uniqueName":"craftCauldron"
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestMineBlock",
+	"requiredQuest":"craftCauldron",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":73,
+		"stackSize":1,
+		"meta":0
+	},
+	"questName":"Mine Redstone",
+	"uniqueName":"mineRedstone",
+	"blocksToBeMineClass":"seia.vanillamagic.integration.CustomOre",
+	"blocksToBeMineList":"customOreRedstone"
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"mineRedstone",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":380,
+		"stackSize":1,
+		"meta":0
+	},
+	"questName":"Build Altar Tier 1",
+	"uniqueName":"buildAltarTier1",
+	"tier":1
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":,
+		"stackSize":,
+		"meta":
+	},
+	"questName":"",
+	"uniqueName":""
+},
 ]

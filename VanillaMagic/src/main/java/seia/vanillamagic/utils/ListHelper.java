@@ -5,6 +5,10 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.google.gson.JsonObject;
+
+import net.minecraft.block.Block;
+
 public class ListHelper 
 {
 	private ListHelper()
@@ -30,5 +34,17 @@ public class ListHelper
 	{
 		int randIndex = new Random().nextInt(tab.length - 1);
 		return tab[randIndex];
+	}
+
+	public static List<Block> getList(String className, String field) 
+	{
+		try
+		{
+			return (List<Block>) ClassUtils.getFieldFromStaticInstance(className, field);
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 }

@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.utils.ListHelper;
 
 public class QuestMineBlock extends Quest
 {
@@ -27,12 +28,23 @@ public class QuestMineBlock extends Quest
 	{
 		super.readData(jo);
 		List<Block> blocksToBeMine = new ArrayList<Block>();
-		JsonArray ja = jo.get("blocksToBeMine").getAsJsonArray();
-		for(JsonElement je : ja)
+		JsonElement listJSON = jo.get("blocksToBeMine");
+		if(listJSON != null)
 		{
-			blocksToBeMine.add(Block.getBlockById(je.getAsInt()));
+			if(listJSON.isJsonArray())
+			{
+				JsonArray ja = listJSON.getAsJsonArray();
+				for(JsonElement je : ja)
+				{
+					blocksToBeMine.add(Block.getBlockById(je.getAsInt()));
+				}
+				this.blocksToBeMine = blocksToBeMine;
+			}
 		}
-		this.blocksToBeMine = blocksToBeMine;
+		else
+		{
+			this.blocksToBeMine = ListHelper.getList(jo.get("blocksToBeMineClass").getAsString(), jo.get("blocksToBeMineList").getAsString());
+		}
 	}
 	
 	@SubscribeEvent

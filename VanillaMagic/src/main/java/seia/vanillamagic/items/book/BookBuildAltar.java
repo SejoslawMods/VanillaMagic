@@ -46,7 +46,7 @@ public class BookBuildAltar implements IBook
 					// Tier 1
 					{
 						//QuestBuildAltar quest1 = QuestList.QUEST_BUILD_ALTAR_TIER_1;
-						QuestBuildAltar quest1 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_1");
+						QuestBuildAltar quest1 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier1");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest1.uniqueName) + 
@@ -62,7 +62,7 @@ public class BookBuildAltar implements IBook
 					// Tier 2
 					{
 						//QuestBuildAltar quest2 = QuestList.QUEST_BUILD_ALTAR_TIER_2;
-						QuestBuildAltar quest2 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_2");
+						QuestBuildAltar quest2 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier2");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest2.uniqueName) + 
@@ -83,7 +83,7 @@ public class BookBuildAltar implements IBook
 					// Tier 3
 					{
 						//QuestBuildAltar quest3 = QuestList.QUEST_BUILD_ALTAR_TIER_3;
-						QuestBuildAltar quest3 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_3");
+						QuestBuildAltar quest3 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier3");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest3.uniqueName) + 
@@ -106,7 +106,7 @@ public class BookBuildAltar implements IBook
 					// Tier 4
 					{
 						//QuestBuildAltar quest4 = QuestList.QUEST_BUILD_ALTAR_TIER_4;
-						QuestBuildAltar quest4 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_4");
+						QuestBuildAltar quest4 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier4");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest4.uniqueName) + 
@@ -129,7 +129,7 @@ public class BookBuildAltar implements IBook
 					// Tier 5
 					{
 						//QuestBuildAltar quest5 = QuestList.QUEST_BUILD_ALTAR_TIER_5;
-						QuestBuildAltar quest5 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_5");
+						QuestBuildAltar quest5 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier5");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest5.uniqueName) + 
@@ -156,7 +156,7 @@ public class BookBuildAltar implements IBook
 					// Tier 6
 					{
 						//QuestBuildAltar quest6 = QuestList.QUEST_BUILD_ALTAR_TIER_6;
-						QuestBuildAltar quest6 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_6");
+						QuestBuildAltar quest6 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier6");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest6.uniqueName) + 
@@ -183,7 +183,7 @@ public class BookBuildAltar implements IBook
 					// Tier 7
 					{
 						//QuestBuildAltar quest7 = QuestList.QUEST_BUILD_ALTAR_TIER_7;
-						QuestBuildAltar quest7 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("QUEST_BUILD_ALTAR_TIER_7");
+						QuestBuildAltar quest7 = (QuestBuildAltar) QuestList.QUESTS_MAP.get("buildAltarTier7");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								TextHelper.translateToLocal("achievement." + quest7.uniqueName) + 

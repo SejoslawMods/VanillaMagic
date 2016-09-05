@@ -75,4 +75,12 @@ public class ClassUtils
 		Class<?> clazz = Class.forName(className);
 		return clazz.isAssignableFrom(Class.forName(interfaceName));
 	}
+	
+	public static Object getFieldFromStaticInstance(String className, String fieldName) 
+			throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
+	{
+		Class<?> clazz = Class.forName(className);
+		Object INSTANCE = clazz.getField("INSTANCE").get(null);
+		return clazz.getField(fieldName).get(INSTANCE);
+	}
 }

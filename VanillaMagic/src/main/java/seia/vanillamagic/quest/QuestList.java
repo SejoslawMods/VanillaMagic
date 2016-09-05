@@ -50,7 +50,7 @@ public class QuestList
 	public static final QuestCastSpellOnBlock QUEST_CAST_SPELL_LIGHTER = new QuestCastSpellOnBlock(QUEST_CRAFT_STICK, 0, -2, EnumSpell.LIGHTER);
 	
 	public static final QuestCraft QUEST_CRAFT_CAULDRON = new QuestCraft(QUEST_CRAFT_STICK, 0, +2, new ItemStack(Items.CAULDRON), "Craft Cauldron", "craftCauldron");
-	public static final QuestMineBlock QUEST_MINE_REDSTONE = new QuestMineBlock(QUEST_CRAFT_CAULDRON, 0, +2,new ItemStack(Blocks.REDSTONE_ORE),"Mine Redstone", "mineRedstone", CustomOre.INSTANCE.customOreRedstone);
+	public static final QuestMineBlock QUEST_MINE_REDSTONE = new QuestMineBlock(QUEST_CRAFT_CAULDRON, 0, +2, new ItemStack(Blocks.REDSTONE_ORE), "Mine Redstone", "mineRedstone", CustomOre.INSTANCE.customOreRedstone);
 	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_1 = new QuestBuildAltar(QUEST_MINE_REDSTONE, 0, +2, "Build Altar Tier 1", "buildAltarTier1", 1);
 	
 	public static final QuestCraftOnAltar QUEST_CRAFT_GUNPOWDER = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_1, -2, +1, "Craft Gunpowder", "craftGunpowder", 
