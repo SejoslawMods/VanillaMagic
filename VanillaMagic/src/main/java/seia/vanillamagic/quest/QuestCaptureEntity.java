@@ -35,9 +35,10 @@ public class QuestCaptureEntity extends Quest
 	
 	public void readData(JsonObject jo)
 	{
-		super.readData(jo);
 		this.requiredStackOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredStackOffHand").getAsJsonObject());
 		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		this.icon = requiredStackOffHand.copy();
+		super.readData(jo);
 	}
 	
 	int clickedTimes = 0;

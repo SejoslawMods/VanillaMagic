@@ -1271,99 +1271,77 @@
 	}
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	[{
-	}],
-	"result":
-	[{
-	}],
-	"requiredAltarTier":,
-	"wandTier":
+	"questClass":"seia.vanillamagic.quest.QuestMoveBlock",
+	"requiredQuest":"pickBlazeRod",
+	"posX":-2,
+	"posY":1,
+	"questName":"Move block by book",
+	"uniqueName":"questMoveBlock",
+	"requiredStackOffHand":
+	{
+		"id":340
+	},
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCaptureEntity",
+	"requiredQuest":"questMoveBlock",
+	"posX":-2,
+	"posY":0,
+	"questName":"Capture Entity",
+	"uniqueName":"captureEntity",
+	"requiredStackOffHand":
+	{
+		"id":340
+	},
+	"wandTier":3
+},
+{
+	"questClass":"seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket",
+	"requiredQuest":"captureEntity",
+	"posX":-2,
+	"posY":0,
+	"icon":
+	{
+		"id":325
+	},
+	"questName":"Enchanted Bucket",
+	"uniqueName":"enchantedBucket"
+},
+{
+	"questClass":"seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
+	"requiredQuest":"enchantedBucket",
+	"posX":-2,
+	"posY":0,
+	"icon":
+	{
+		"id":399
+	},
+	"questName":"Liquid Suppression Crystal",
+	"uniqueName":"liquidSuppressionCrystal"
+},
+{
+	"questClass":"seia.vanillamagic.items.potionedcrystal.QuestPotionedCrystal",
+	"requiredQuest":"liquidSuppressionCrystal",
+	"posX":-2,
+	"posY":0,
+	"icon":
+	{
+		"id":373
+	},
+	"questName":"Potioned Crystal",
+	"uniqueName":"potionedCrystal"
 },
 {
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
+	"icon":
+	{
+		"id":
+	},
 	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	[{
-	}],
-	"result":
-	[{
-	}],
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	[{
-	}],
-	"result":
-	[{
-	}],
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	[{
-	}],
-	"result":
-	[{
-	}],
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	[{
-	}],
-	"result":
-	[{
-	}],
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	[{
-	}],
-	"result":
-	[{
-	}],
-	"requiredAltarTier":,
-	"wandTier":
+	"uniqueName":""
 }
 ]
