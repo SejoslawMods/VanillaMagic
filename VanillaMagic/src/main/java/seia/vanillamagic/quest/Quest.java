@@ -8,9 +8,7 @@ import javax.annotation.Nullable;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import seia.vanillamagic.utils.ItemStackHelper;
@@ -35,16 +33,20 @@ public abstract class Quest
 	{
 		this.requiredQuest = QuestList.QUESTS_MAP.get(jo.get("requiredQuest").getAsString());
 		this.required = (this.requiredQuest == null ? null : this.requiredQuest.achievement);
-		this.questName = jo.get("questName").getAsString();
-		this.uniqueName = jo.get("uniqueName").getAsString();
+		if(jo.has("questName"))
 		{
-			// Quest position on the screen
-			int tmpX = jo.get("posX").getAsInt();
-			this.posX = (this.requiredQuest != null ? (this.requiredQuest.posX + tmpX) : tmpX);
-			int tmpY = jo.get("posY").getAsInt();
-			this.posY = (this.requiredQuest != null ? (this.requiredQuest.posY + tmpY) : tmpY);
+			this.questName = jo.get("questName").getAsString();
 		}
-		if(jo.get("icon") != null)
+		if(jo.has("uniqueName"))
+		{
+			this.uniqueName = jo.get("uniqueName").getAsString();
+		}
+		// Quest position on the screen
+		int tmpX = jo.get("posX").getAsInt();
+		this.posX = (this.requiredQuest != null ? (this.requiredQuest.posX + tmpX) : tmpX);
+		int tmpY = jo.get("posY").getAsInt();
+		this.posY = (this.requiredQuest != null ? (this.requiredQuest.posY + tmpY) : tmpY);
+		if(jo.has("icon"))
 		{
 			this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
 		}

@@ -40,12 +40,7 @@
 	"requiredQuest":"craftStick",
 	"posX":0,
 	"posY":-2,
-	"icon":
-	{
-		"id":263
-	},
 	"questName":"Flint and Steel Clone",
-	"uniqueName":"spellFlintAndSteel",
 	"spellID":0
 },
 {
@@ -1752,111 +1747,103 @@
 	"uniqueName":"chunkLoader"
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellFlintAndSteel",
+	"posX":0,
+	"posY":-2,
+	"questName":"Feel like Blaze"
+	"spellID":1,
+	"additionalRequiredQuests":
 	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
+		"quest_1":"pickBlazeRod"
+	}
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellSmallFireball",
+	"posX":0,
+	"posY":-2,
+	"questName":"Fus-Ro-Dah !!!",
+	"spellID":6
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSmallFireball",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Chicken",
+	"spellID":100
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonChicken",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Pig",
+	"spellID":101
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonPig",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Cow",
+	"spellID":102
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonCow",
+	"posX":0,
+	"posY":2,
+	"questName":"Summon Mooshroom",
+	"spellID":103
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonCow",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Sheep",
+	"spellID":104
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonSheep",
+	"posX":0,
+	"posY":2,
+	"questName":"Summon Wolf",
+	"spellID":105
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonSheep",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Rabbit",
+	"spellID":106
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonRabbit",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Horse",
+	"spellID":107
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonHorse",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Villager",
+	"spellID":108
 },
 {
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
-	"icon":
-	{
-		"id":
-	},
 	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
+	"spellID":
 }
 ]

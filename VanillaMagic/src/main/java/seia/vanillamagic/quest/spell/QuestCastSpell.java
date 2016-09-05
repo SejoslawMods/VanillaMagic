@@ -46,8 +46,11 @@ public abstract class QuestCastSpell extends Quest
 	
 	public void readData(JsonObject jo)
 	{
-		super.readData(jo);
 		this.spell = EnumSpell.getSpellById(jo.get("spellID").getAsInt());
+		this.icon = spell.itemOffHand.copy();
+		this.questName = spell.spellName;
+		this.uniqueName = spell.spellUniqueName;
+		super.readData(jo);
 	}
 
 	/**
