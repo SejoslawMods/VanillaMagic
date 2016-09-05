@@ -1839,6 +1839,182 @@
 	"spellID":108
 },
 {
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonChicken",
+	"posX":0,
+	"posY":-2,
+	"questName":"Summon Zombie",
+	"spellID":200
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonZombie",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Creeper",
+	"spellID":201
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonCreeper",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Skeleton",
+	"spellID":202
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonSkeleton",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Spider",
+	"spellID":207
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonSpider",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Enderman",
+	"spellID":206
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonEnderman",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Polar Bear",
+	"spellID":212
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonPolarBear",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Slime",
+	"spellID":208
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonSlime",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Witch",
+	"spellID":209
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonWitch",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Spider Jockey",
+	"spellID":217
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"spellID":
+},
+{
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
