@@ -95,7 +95,7 @@
 	"questName":"Craft Gunpowder",
 	"uniqueName":"craftGunpowder",
 	"ingredients":
-	{
+	[{
 		"sugar_cane":
 		{
 			"id":338
@@ -103,15 +103,15 @@
 		"coal":
 		{
 			"id":263
-		},
-	},
+		}
+	}],
 	"result":
-	{
+	[{
 		"gunpowder":
 		{
 			"id":289
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -123,19 +123,19 @@
 	"questName":"Craft Sugar",
 	"uniqueName":"craftSugar",
 	"ingredients":
-	{
+	[{
 		"sugar_cane":
 		{
 			"id":338
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sugar":
 		{
 			"id":353
-		},
-	},
+		}
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -147,19 +147,19 @@
 	"questName":"Craft Dirt",
 	"uniqueName":"craftDirt",
 	"ingredients":
-	{
+	[{
 		"sand":
 		{
 			"id":12
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"dirt":
 		{
 			"id":3
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -171,19 +171,19 @@
 	"questName":"Craft Sand",
 	"uniqueName":"craftSand",
 	"ingredients":
-	{
+	[{
 		"cobblestone":
 		{
 			"id":4
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sand":
 		{
 			"id":12
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -195,19 +195,19 @@
 	"questName":"Craft Cobblestone",
 	"uniqueName":"craftCobblestone",
 	"ingredients":
-	{
+	[{
 		"dirt":
 		{
 			"id":3
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"cobblestone":
 		{
 			"id":4
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -219,20 +219,20 @@
 	"questName":"Craft Gravel",
 	"uniqueName":"craftGravel",
 	"ingredients":
-	{
+	[{
 		"cobblestone":
 		{
 			"id":4,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"gravel":
 		{
 			"id":13
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -244,19 +244,19 @@
 	"questName":"Craft Leather",
 	"uniqueName":"craftLeather",
 	"ingredients":
-	{
+	[{
 		"rotten_flesh":
 		{
 			"id":367
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"leather":
 		{
 			"id":334
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -268,7 +268,7 @@
 	"questName":"Craft Clay",
 	"uniqueName":"craftClay",
 	"ingredients":
-	{
+	[{
 		"sugar":
 		{
 			"id":353
@@ -277,14 +277,14 @@
 		{
 			"id":289
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"clay_ball":
 		{
 			"id":337
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -296,7 +296,7 @@
 	"questName":"Craft Glass",
 	"uniqueName":"craftGlass",
 	"ingredients":
-	{
+	[{
 		"sand":
 		{
 			"id":12
@@ -305,14 +305,14 @@
 		{
 			"id":263
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"glass":
 		{
 			"id":20
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -324,7 +324,7 @@
 	"questName":"Craft Snow",
 	"uniqueName":"craftSnow",
 	"ingredients":
-	{
+	[{
 		"ice":
 		{
 			"id":79
@@ -333,9 +333,9 @@
 		{
 			"id":326
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"snow":
 		{
 			"id":78
@@ -344,7 +344,7 @@
 		{
 			"id":325
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -356,7 +356,7 @@
 	"questName":"Craft Ice",
 	"uniqueName":"craftIce",
 	"ingredients":
-	{
+	[{
 		"snow":
 		{
 			"id":78
@@ -365,9 +365,9 @@
 		{
 			"id":326
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"ice":
 		{
 			"id":79
@@ -376,7 +376,7 @@
 		{
 			"id":325
 		}
-	},
+	}],
 	"requiredAltarTier":1,
 	"wandTier":1
 },
@@ -401,7 +401,7 @@
 	"questName":"Craft Iron Ore",
 	"uniqueName":"craftIronOre",
 	"ingredients":
-	{
+	[{
 		"sapling":
 		{
 			"id":6,
@@ -412,14 +412,14 @@
 			"id":4,
 			"stackSize":10
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"iron_ore":
 		{
 			"id":15
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -431,20 +431,20 @@
 	"questName":"Craft Cactus",
 	"uniqueName":"craftCactus",
 	"ingredients":
-	{
+	[{
 		"sapling":
 		{
 			"id":6,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"cactus":
 		{
 			"id":81
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -456,20 +456,20 @@
 	"questName":"Craft Oak Sapling from Cactus",
 	"uniqueName":"craftSapling0",
 	"ingredients":
-	{
+	[{
 		"cactus":
 		{
 			"id":81,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_0":
 		{
 			"id":6
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -481,20 +481,20 @@
 	"questName":"Craft Spruce Sapling",
 	"uniqueName":"craftSapling1",
 	"ingredients":
-	{
+	[{
 		"sapling_0":
 		{
 			"id":6
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_1":
 		{
 			"id":6,
 			"meta":1
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -506,21 +506,21 @@
 	"questName":"Craft Birch Sapling",
 	"uniqueName":"craftSapling2",
 	"ingredients":
-	{
+	[{
 		"sapling_1":
 		{
 			"id":6,
 			"meta":1
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_2":
 		{
 			"id":6,
 			"meta":2
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -532,21 +532,21 @@
 	"questName":"Craft Jungle Sapling",
 	"uniqueName":"craftSapling3",
 	"ingredients":
-	{
+	[{
 		"sapling_2":
 		{
 			"id":6,
 			"meta":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_3":
 		{
 			"id":6,
 			"meta":3
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -558,21 +558,21 @@
 	"questName":"Craft Acacia Sapling",
 	"uniqueName":"craftSapling4",
 	"ingredients":
-	{
+	[{
 		"sapling_3":
 		{
 			"id":6,
 			"meta":3
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_4":
 		{
 			"id":6,
 			"meta":4
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -584,21 +584,21 @@
 	"questName":"Craft Dark Oak Sapling",
 	"uniqueName":"craftSapling5",
 	"ingredients":
-	{
+	[{
 		"sapling_4":
 		{
 			"id":6,
 			"meta":4
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_5":
 		{
 			"id":6,
 			"meta":5
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -610,20 +610,20 @@
 	"questName":"Craft Oak Sapling from Dark Oak",
 	"uniqueName":"craftSapling6",
 	"ingredients":
-	{
+	[{
 		"sapling_5":
 		{
 			"id":6,
 			"meta":5
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"sapling_0":
 		{
 			"id":6
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -635,20 +635,20 @@
 	"questName":"Craft Pumpkin",
 	"uniqueName":"craftPumpkin",
 	"ingredients":
-	{
+	[{
 		"sapling_0":
 		{
 			"id":6,
 			"stackSize":3
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"pumpkin":
 		{
 			"id":86
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -660,20 +660,20 @@
 	"questName":"Craft Melon Block",
 	"uniqueName":"craftMelonBlock",
 	"ingredients":
-	{
+	[{
 		"pumpkin":
 		{
 			"id":86,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"melon_block":
 		{
 			"id":103
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -685,20 +685,20 @@
 	"questName":"Craft Vine",
 	"uniqueName":"craftVine",
 	"ingredients":
-	{
+	[{
 		"melon_block":
 		{
 			"id":103,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"vine":
 		{
 			"id":106
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -710,20 +710,20 @@
 	"questName":"Craft Lily Pad",
 	"uniqueName":"craftLiyPad",
 	"ingredients":
-	{
+	[{
 		"vine":
 		{
 			"id":106,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"water_lily":
 		{
 			"id":111
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -735,20 +735,20 @@
 	"questName":"Craft Slime Ball",
 	"uniqueName":"craftSlimeBall",
 	"ingredients":
-	{
+	[{
 		"magma_cream":
 		{
 			"id":378,
 			"stackSize":8
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"slime_ball":
 		{
 			"id":341
 		}
-	},
+	}],
 	"requiredAltarTier":2,
 	"wandTier":1
 },
@@ -789,7 +789,7 @@
 		"id":380
 	},
 	"questName":"Quarry !!!",
-	"uniqueName":"quarry"
+	"uniqueName":"quarry",
 	"mustHaveMainHand":
 	{
 		"id":369
@@ -860,20 +860,20 @@
 	"questName":"Craft Gold Ingot",
 	"uniqueName":"craftGoldIngot",
 	"ingredients":
-	{
+	[{
 		"iron_ingot":
 		{
 			"id":265,
 			"stackSize":8
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"gold_ingot":
 		{
 			"id":266
 		}
-	},
+	}],
 	"requiredAltarTier":3,
 	"wandTier":1
 },
@@ -898,19 +898,19 @@
 	"questName":"Craft Rotten Flesh",
 	"uniqueName":"craftRottenFlesh",
 	"ingredients":
-	{
+	[{
 		"leather":
 		{
 			"id":334
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"rotten_flesh":
 		{
 			"id":367
 		}
-	},
+	}],
 	"requiredAltarTier":4,
 	"wandTier":1
 },
@@ -922,20 +922,20 @@
 	"questName":"Craft String",
 	"uniqueName":"craftString",
 	"ingredients":
-	{
+	[{
 		"rotten_flesh":
 		{
 			"id":367,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"string":
 		{
 			"id":287
 		}
-	},
+	}],
 	"requiredAltarTier":4,
 	"wandTier":1
 },
@@ -947,20 +947,20 @@
 	"questName":"Craft Spider Eye",
 	"uniqueName":"craftSpiderEye",
 	"ingredients":
-	{
+	[{
 		"string":
 		{
 			"id":287,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"spider_eye":
 		{
 			"id":375
 		}
-	},
+	}],
 	"requiredAltarTier":4,
 	"wandTier":1
 },
@@ -972,20 +972,20 @@
 	"questName":"Craft Bone",
 	"uniqueName":"craftBone",
 	"ingredients":
-	{
+	[{
 		"spider_eye":
 		{
 			"id":375,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"bone":
 		{
 			"id":352
 		}
-	},
+	}],
 	"requiredAltarTier":4,
 	"wandTier":1
 },
@@ -997,20 +997,20 @@
 	"questName":"Craft Arrow",
 	"uniqueName":"craftArrow",
 	"ingredients":
-	{
+	[{
 		"bone":
 		{
 			"id":352,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"arrow":
 		{
 			"id":262
 		}
-	},
+	}],
 	"requiredAltarTier":4,
 	"wandTier":1
 },
@@ -1034,20 +1034,20 @@
 	"questName":"Craft Ender Pearl",
 	"uniqueName":"craftEnderPearl",
 	"ingredients":
-	{
+	[{
 		"arrow":
 		{
 			"id":262,
 			"stackSize":2
 		}
-	},
+	}],
 	"result":
-	{
+	[{
 		"ender_pearl":
 		{
 			"id":368
 		}
-	},
+	}],
 	"requiredAltarTier":4,
 	"wandTier":1
 },
@@ -1065,18 +1065,154 @@
 	"tier":5
 },
 {
-	"questClass":"",
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier5",
+	"posX":-2,
+	"posY":1,
+	"questName":"Craft Glowstone Dust",
+	"uniqueName":"craftGlowstoneDust",
+	"ingredients":
+	[{
+		"redstone_dust":
+		{
+			"id":55,
+			"stackSize":2
+		},
+		"coal":
+		{
+			"id":263,
+			"stackSize":2
+		},
+		"lapis_block":
+		{
+			"id":22
+		}
+	}],
+	"result":
+	[{
+		"glowstone_dust":
+		{
+			"id":348
+		}
+	}],
+	"requiredAltarTier":5,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftGlowstoneDust",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Netherrack",
+	"uniqueName":"craftNetherrack",
+	"ingredients":
+	[{
+		"stone":
+		{
+			"id":1
+		},
+		"coal":
+		{
+			"id":263,
+			"stackSize":2
+		}
+	}],
+	"result":
+	[{
+		"netherrack":
+		{
+			"id":87
+		}
+	}],
+	"requiredAltarTier":5,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftNetherrack",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Soul Sand",
+	"uniqueName":"craftSoulSand",
+	"ingredients":
+	[{
+		"sand":
+		{
+			"id":12
+		},
+		"coal":
+		{
+			"id":263,
+			"stackSize":2
+		}
+	}],
+	"result":
+	[{
+		"soul_sand":
+		{
+			"id":88
+		}
+	}],
+	"requiredAltarTier":5,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSoulSand",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Magma Block",
+	"uniqueName":"craftMagmaBlock",
+	"ingredients":
+	[{
+		"netherrack":
+		{
+			"id":87
+		},
+		"magma_cream":
+		{
+			"id":378
+		}
+	}],
+	"result":
+	[{
+		"magma_block":
+		{
+			"id":213
+		}
+	}],
+	"requiredAltarTier":5,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	[{
+	}],
+	"result":
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1088,11 +1224,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1104,11 +1240,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1120,11 +1256,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1136,11 +1272,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1152,11 +1288,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1168,11 +1304,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 },
@@ -1184,91 +1320,11 @@
 	"questName":"",
 	"uniqueName":"",
 	"ingredients":
-	{
-	},
+	[{
+	}],
 	"result":
-	{
-	},
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	{
-	},
-	"result":
-	{
-	},
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	{
-	},
-	"result":
-	{
-	},
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	{
-	},
-	"result":
-	{
-	},
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	{
-	},
-	"result":
-	{
-	},
-	"requiredAltarTier":,
-	"wandTier":
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
-	"ingredients":
-	{
-	},
-	"result":
-	{
-	},
+	[{
+	}],
 	"requiredAltarTier":,
 	"wandTier":
 }
