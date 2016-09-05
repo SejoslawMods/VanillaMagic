@@ -1425,6 +1425,353 @@
 	"tier":7
 },
 {
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier7",
+	"posX":-2,
+	"posY":1,
+	"questName":"Craft Gold Ore",
+	"uniqueName":"craftGoldOre",
+	"ingredients":
+	[{
+		"iron_ore":
+		{
+			"id":15,
+			"stackSize":16
+		}
+	}],
+	"result":
+	[{
+		"gold_ore":
+		{
+			"id":14
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftGoldOre",
+	"posX":0,
+	"posY":2,
+	"questName":"Craft Coal Ore",
+	"uniqueName":"craftCoalOre",
+	"ingredients":
+	[{
+		"gold_ore":
+		{
+			"id":14
+		}
+	}],
+	"result":
+	[{
+		"coal_ore":
+		{
+			"id":16,
+			"stackSize":4
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftGoldOre",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Redstone Ore",
+	"uniqueName":"craftRedstoneOre",
+	"ingredients":
+	[{
+		"gold_ore":
+		{
+			"id":14,
+			"stackSize":16
+		}
+	}],
+	"result":
+	[{
+		"redstone_ore":
+		{
+			"id":73
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftRedstoneOre",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Lapis Ore",
+	"uniqueName":"craftLapisOre",
+	"ingredients":
+	[{
+		"redstone_ore":
+		{
+			"id":73,
+			"stackSize":16
+		}
+	}],
+	"result":
+	[{
+		"lapis_ore":
+		{
+			"id":21
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftLapisOre",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Diamond Ore",
+	"uniqueName":"craftDiamondOre",
+	"ingredients":
+	[{
+		"lapis_ore":
+		{
+			"id":21,
+			"stackSize":16
+		}
+	}],
+	"result":
+	[{
+		"diamond_ore":
+		{
+			"id":56
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestOreMultiplier",
+	"requiredQuest":"craftDiamondOre",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":380
+	},
+	"questName":"Ore Doubling",
+	"uniqueName":"oreDoubling",
+	"multiplier":2,
+	"wandTier":3
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier7",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Emerald",
+	"uniqueName":"craftEmerald",
+	"ingredients":
+	[{
+		"diamond":
+		{
+			"id":264,
+			"stackSize":8
+		}
+	}],
+	"result":
+	[{
+		"emerald":
+		{
+			"id":388
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftEmerald",
+	"posX":0,
+	"posY":2,
+	"questName":"Craft Emerald Ore",
+	"uniqueName":"craftEmeraldOre",
+	"ingredients":
+	[{
+		"diamond_ore":
+		{
+			"id":56,
+			"stackSize":8
+		}
+	}],
+	"result":
+	[{
+		"emerald_ore":
+		{
+			"id":129
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftEmerald",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Nether Star",
+	"uniqueName":"craftNetherStar",
+	"ingredients":
+	[{
+		"emerald_block":
+		{
+			"id":133,
+			"stackSize":4
+		}
+	}],
+	"result":
+	[{
+		"nether_star":
+		{
+			"id":399
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestItemMagnet",
+	"requiredQuest":"craftNetherStar",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":399
+	},
+	"questName":"Item Magnet",
+	"uniqueName":"itemMagnet"
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftNetherStar",
+	"posX":0,
+	"posY":2,
+	"questName":"Craft Dragon Egg",
+	"uniqueName":"craftDragonEgg",
+	"ingredients":
+	[{
+		"nether_star":
+		{
+			"id":399,
+			"stackSize":4
+		}
+	}],
+	"result":
+	[{
+		"dragon_egg":
+		{
+			"id":122
+		}
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
