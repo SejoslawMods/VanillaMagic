@@ -49,11 +49,12 @@ public class QuestCraftOnAltar extends Quest
 	
 	public void readData(JsonObject jo)
 	{
-		super.readData(jo);
 		this.ingredients = ItemStackHelper.getItemStackArrayFromJSON(jo, "ingredients");
 		this.result = ItemStackHelper.getItemStackArrayFromJSON(jo, "result");
+		this.icon = result[0].copy();
 		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
 		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		super.readData(jo);
 	}
 	
 	public int getIngredientsStackSize()

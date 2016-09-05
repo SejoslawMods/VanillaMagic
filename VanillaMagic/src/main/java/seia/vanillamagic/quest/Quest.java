@@ -44,7 +44,10 @@ public abstract class Quest
 			int tmpY = jo.get("posY").getAsInt();
 			this.posY = (this.requiredQuest != null ? (this.requiredQuest.posY + tmpY) : tmpY);
 		}
-		this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
+		if(this.icon == null)
+		{
+			this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
+		}
 		// Additional Quests
 		if(jo.has("additionalRequiredQuests"))
 		{

@@ -102,340 +102,675 @@
 	"tier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier1",
+	"posX":-2,
+	"posY":1,
+	"questName":"Craft Gunpowder",
+	"uniqueName":"craftGunpowder",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sugar_cane":
+		{
+			"id":338,
+			"stackSize":1,
+			"meta":0,
+		},
+		"coal":
+		{
+			"id":263,
+			"stackSize":1,
+			"meta":0,
+		},
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"gunpowder":
+		{
+			"id":289,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftGunpowder",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Sugar",
+	"uniqueName":"craftSugar",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sugar_cane":
+		{
+			"id":338,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sugar":
+		{
+			"id":353,
+			"stackSize":1,
+			"meta":0,
+		},
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSugar",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Dirt",
+	"uniqueName":"craftDirt",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sand":
+		{
+			"id":12,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"dirt":
+		{
+			"id":3,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftDirt",
+	"posX":0,
+	"posY":-2,
+	"questName":"Craft Sand",
+	"uniqueName":"craftSand",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"cobblestone":
+		{
+			"id":4,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sand":
+		{
+			"id":12,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftDirt",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Cobblestone",
+	"uniqueName":"craftCobblestone",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"dirt":
+		{
+			"id":3,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"cobblestone":
+		{
+			"id":4,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftCobblestone",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Gravel",
+	"uniqueName":"craftGravel",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"cobblestone":
+		{
+			"id":4,
+			"stackSize":2,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"gravel":
+		{
+			"id":13,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier1",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Leather",
+	"uniqueName":"craftLeather",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"rotten_flesh":
+		{
+			"id":367,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"leather":
+		{
+			"id":334,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftLeather",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Clay",
+	"uniqueName":"craftClay",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sugar":
+		{
+			"id":353,
+			"stackSize":1,
+			"meta":0,
+		},
+		"gunpowder":
+		{
+			"id":289,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"clay_ball":
+		{
+			"id":337,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSand",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Glass",
+	"uniqueName":"craftGlass",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sand":
+		{
+			"id":12,
+			"stackSize":1,
+			"meta":0,
+		},
+		"coal":
+		{
+			"id":263,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"glass":
+		{
+			"id":20,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftGlass",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Snow",
+	"uniqueName":"craftSnow",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"ice":
+		{
+			"id":79,
+			"stackSize":1,
+			"meta":0,
+		},
+		"water_bucket":
+		{
+			"id":326,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"snow":
+		{
+			"id":78,
+			"stackSize":1,
+			"meta":0,
+		},
+		"bucket":
+		{
+			"id":325,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSnow",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Ice",
+	"uniqueName":"craftIce",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"snow":
+		{
+			"id":78,
+			"stackSize":1,
+			"meta":0,
+		},
+		"water_bucket":
+		{
+			"id":326,
+			"stackSize":1,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"ice":
+		{
+			"id":79,
+			"stackSize":1,
+			"meta":0,
+		},
+		"bucket":
+		{
+			"id":325,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"buildAltarTier1",
+	"posX":0,
+	"posY":2,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":380,
+		"stackSize":1,
+		"meta":0
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Build Altar Tier 2",
+	"uniqueName":"buildAltarTier2",
+	"tier":2
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier2",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Iron Ore",
+	"uniqueName":"craftIronOre",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling":
+		{
+			"id":6,
+			"stackSize":10,
+			"meta":0
+		},
+		"cobblestone":
+		{
+			"id":4,
+			"stackSize":10,
+			"meta":0,
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"iron_ore":
+		{
+			"id":15,
+			"stackSize":1,
+			"meta":0,
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier2",
+	"posX":-2,
+	"posY":1,
+	"questName":"Craft Cactus",
+	"uniqueName":"craftCactus",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling":
+		{
+			"id":6,
+			"stackSize":2,
+			"meta":0
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"cactus":
+		{
+			"id":81,
+			"stackSize":1,
+			"meta":0
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftCactus",
+	"posX":-2,
+	"posY":1,
+	"questName":"Craft Oak Sapling from Cactus",
+	"uniqueName":"craftSapling0",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"cactus":
+		{
+			"id":81,
+			"stackSize":2,
+			"meta":0
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_0":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":0
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSapling0",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Spruce Sapling",
+	"uniqueName":"craftSapling1",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling_0":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":0
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_1":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":1
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSapling1",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Birch Sapling",
+	"uniqueName":"craftSapling2",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling_1":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":1
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_2":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":2
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSapling2",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Jungle Sapling",
+	"uniqueName":"craftSapling3",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling_2":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":2
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_3":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":3
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSapling3",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Acacia Sapling",
+	"uniqueName":"craftSapling4",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling_3":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":3
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_4":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":4
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSapling4",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Dark Oak Sapling",
+	"uniqueName":"craftSapling5",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling_4":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":4
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_5":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":5
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSapling5",
+	"posX":-2,
+	"posY":0,
+	"questName":"Craft Oak Sapling from Dark Oak",
+	"uniqueName":"craftSapling6",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"sapling_5":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":5
+		}
 	},
-	"questName":"",
-	"uniqueName":""
+	"result":
+	{
+		"sapling_0":
+		{
+			"id":6,
+			"stackSize":1,
+			"meta":0
+		}
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
-	"icon":
-	{
-		"id":,
-		"stackSize":,
-		"meta":
-	},
 	"questName":"",
-	"uniqueName":""
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
-	"icon":
-	{
-		"id":,
-		"stackSize":,
-		"meta":
-	},
 	"questName":"",
-	"uniqueName":""
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
-	"questClass":"",
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
-	"icon":
-	{
-		"id":,
-		"stackSize":,
-		"meta":
-	},
 	"questName":"",
-	"uniqueName":""
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":2,
+	"wandTier":1
 },
 {
 	"questClass":"",

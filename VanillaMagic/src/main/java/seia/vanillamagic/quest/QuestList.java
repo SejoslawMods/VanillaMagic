@@ -109,7 +109,7 @@ public class QuestList
 			1, 
 			EnumWand.STICK);
 	
-	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_2 = new QuestBuildAltar(QUEST_BUILD_ALTAR_TIER_1, 0, +2,"Build Altar Tier 2", "buildAltarTier2", 2);
+	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_2 = new QuestBuildAltar(QUEST_BUILD_ALTAR_TIER_1, 0, +2, "Build Altar Tier 2", "buildAltarTier2", 2);
 	
 	public static final QuestCraftOnAltar QUEST_CRAFT_IRON_ORE = new QuestCraftOnAltar(QUEST_BUILD_ALTAR_TIER_2, +2, +1, "Craft Iron Ore", "craftIronOre", 
 			new ItemStack[]{new ItemStack(Blocks.SAPLING, 10), new ItemStack(Blocks.COBBLESTONE, 10)}, 
