@@ -91,21 +91,17 @@
 	"uniqueName":"craftGunpowder",
 	"ingredients":
 	[{
-		"sugar_cane":
-		{
-			"id":338
-		},
-		"coal":
-		{
-			"id":263
-		}
+		"just_to_know_what_it_is":"sugar_cane",
+		"id":338
+	},
+	{
+		"just_to_know_what_it_is":"coal",
+		"id":263
 	}],
 	"result":
 	[{
-		"gunpowder":
-		{
-			"id":289
-		}
+		"just_to_know_what_it_is":"gunpowder",
+		"id":289
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -119,17 +115,13 @@
 	"uniqueName":"craftSugar",
 	"ingredients":
 	[{
-		"sugar_cane":
-		{
-			"id":338
-		}
+		"just_to_know_what_it_is":"sugar_cane",
+		"id":338
 	}],
 	"result":
 	[{
-		"sugar":
-		{
-			"id":353
-		}
+		"just_to_know_what_it_is":"sugar",
+		"id":353
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -143,17 +135,13 @@
 	"uniqueName":"craftDirt",
 	"ingredients":
 	[{
-		"sand":
-		{
-			"id":12
-		}
+		"just_to_know_what_it_is":"sand",
+		"id":12
 	}],
 	"result":
 	[{
-		"dirt":
-		{
-			"id":3
-		}
+		"just_to_know_what_it_is":"dirt",
+		"id":3
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -167,17 +155,13 @@
 	"uniqueName":"craftSand",
 	"ingredients":
 	[{
-		"cobblestone":
-		{
-			"id":4
-		}
+		"just_to_know_what_it_is":"cobblestone",
+		"id":4
 	}],
 	"result":
 	[{
-		"sand":
-		{
-			"id":12
-		}
+		"just_to_know_what_it_is":"sand",
+		"id":12
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -191,17 +175,13 @@
 	"uniqueName":"craftCobblestone",
 	"ingredients":
 	[{
-		"dirt":
-		{
-			"id":3
-		}
+		"just_to_know_what_it_is":"dirt",
+		"id":3
 	}],
 	"result":
 	[{
-		"cobblestone":
-		{
-			"id":4
-		}
+		"just_to_know_what_it_is":"cobblestone",
+		"id":4
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -215,18 +195,14 @@
 	"uniqueName":"craftGravel",
 	"ingredients":
 	[{
-		"cobblestone":
-		{
-			"id":4,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"cobblestone",
+		"id":4,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"gravel":
-		{
-			"id":13
-		}
+		"just_to_know_what_it_is":"gravel",
+		"id":13
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -240,17 +216,13 @@
 	"uniqueName":"craftLeather",
 	"ingredients":
 	[{
-		"rotten_flesh":
-		{
-			"id":367
-		}
+		"just_to_know_what_it_is":"rotten_flesh",
+		"id":367
 	}],
 	"result":
 	[{
-		"leather":
-		{
-			"id":334
-		}
+		"just_to_know_what_it_is":"leather",
+		"id":334
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -264,21 +236,17 @@
 	"uniqueName":"craftClay",
 	"ingredients":
 	[{
-		"sugar":
-		{
-			"id":353
-		},
-		"gunpowder":
-		{
-			"id":289
-		}
+		"just_to_know_what_it_is":"suger",
+		"id":353
+	},
+	{
+		"just_to_know_what_it_is":"gunpowder",
+		"id":289
 	}],
 	"result":
 	[{
-		"clay_ball":
-		{
-			"id":337
-		}
+		"just_to_know_what_it_is":"clay_ball",
+		"id":337
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -292,21 +260,17 @@
 	"uniqueName":"craftGlass",
 	"ingredients":
 	[{
-		"sand":
-		{
-			"id":12
-		},
-		"coal":
-		{
-			"id":263
-		}
+		"just_to_know_what_it_is":"sand",
+		"id":12
+	},
+	{
+		"just_to_know_what_it_is":"coal",
+		"id":263
 	}],
 	"result":
 	[{
-		"glass":
-		{
-			"id":20
-		}
+		"just_to_know_what_it_is":"glass",
+		"id":20
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -320,25 +284,21 @@
 	"uniqueName":"craftSnow",
 	"ingredients":
 	[{
-		"ice":
-		{
-			"id":79
-		},
-		"water_bucket":
-		{
-			"id":326
-		}
+		"just_to_know_what_it_is":"ice",
+		"id":79
+	},
+	{
+		"just_to_know_what_it_is":"water_bucket",
+		"id":326
 	}],
 	"result":
 	[{
-		"snow":
-		{
-			"id":78
-		},
-		"bucket":
-		{
-			"id":325
-		}
+		"just_to_know_what_it_is":"snow",
+		"id":78
+	},
+	{
+		"just_to_know_what_it_is":"bucket",
+		"id":325
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -352,25 +312,20 @@
 	"uniqueName":"craftIce",
 	"ingredients":
 	[{
-		"snow":
-		{
-			"id":78
-		},
-		"water_bucket":
-		{
-			"id":326
-		}
+		"just_to_know_what_it_is":"snow",
+		"id":78
+	},
+	{
+		"id":326
 	}],
 	"result":
 	[{
-		"ice":
-		{
-			"id":79
-		},
-		"bucket":
-		{
-			"id":325
-		}
+		"just_to_know_what_it_is":"ice",
+		"id":79
+	},
+	{
+		"just_to_know_what_it_is":"bucket",
+		"id":325
 	}],
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -397,23 +352,19 @@
 	"uniqueName":"craftIronOre",
 	"ingredients":
 	[{
-		"sapling":
-		{
-			"id":6,
-			"stackSize":10
-		},
-		"cobblestone":
-		{
-			"id":4,
-			"stackSize":10
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"stackSize":10
+	},
+	{
+		"just_to_know_what_it_is":"cobblestone",
+		"id":4,
+		"stackSize":10
 	}],
 	"result":
 	[{
-		"iron_ore":
-		{
-			"id":15
-		}
+		"just_to_know_what_it_is":"iron_ore",
+		"id":15
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -427,18 +378,14 @@
 	"uniqueName":"craftCactus",
 	"ingredients":
 	[{
-		"sapling":
-		{
-			"id":6,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"cactus":
-		{
-			"id":81
-		}
+		"just_to_know_what_it_is":"cactus",
+		"id":81
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -452,18 +399,14 @@
 	"uniqueName":"craftSapling0",
 	"ingredients":
 	[{
-		"cactus":
-		{
-			"id":81,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"cactus",
+		"id":81,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"sapling_0":
-		{
-			"id":6
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -477,18 +420,14 @@
 	"uniqueName":"craftSapling1",
 	"ingredients":
 	[{
-		"sapling_0":
-		{
-			"id":6
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6
 	}],
 	"result":
 	[{
-		"sapling_1":
-		{
-			"id":6,
-			"meta":1
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":1
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -502,19 +441,15 @@
 	"uniqueName":"craftSapling2",
 	"ingredients":
 	[{
-		"sapling_1":
-		{
-			"id":6,
-			"meta":1
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":1
 	}],
 	"result":
 	[{
-		"sapling_2":
-		{
-			"id":6,
-			"meta":2
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":2
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -528,19 +463,15 @@
 	"uniqueName":"craftSapling3",
 	"ingredients":
 	[{
-		"sapling_2":
-		{
-			"id":6,
-			"meta":2
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":2
 	}],
 	"result":
 	[{
-		"sapling_3":
-		{
-			"id":6,
-			"meta":3
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":3
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -554,19 +485,15 @@
 	"uniqueName":"craftSapling4",
 	"ingredients":
 	[{
-		"sapling_3":
-		{
-			"id":6,
-			"meta":3
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":3
 	}],
 	"result":
 	[{
-		"sapling_4":
-		{
-			"id":6,
-			"meta":4
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":4
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -580,19 +507,15 @@
 	"uniqueName":"craftSapling5",
 	"ingredients":
 	[{
-		"sapling_4":
-		{
-			"id":6,
-			"meta":4
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":4
 	}],
 	"result":
 	[{
-		"sapling_5":
-		{
-			"id":6,
-			"meta":5
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":5
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -606,18 +529,14 @@
 	"uniqueName":"craftSapling6",
 	"ingredients":
 	[{
-		"sapling_5":
-		{
-			"id":6,
-			"meta":5
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"meta":5
 	}],
 	"result":
 	[{
-		"sapling_0":
-		{
-			"id":6
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -631,18 +550,14 @@
 	"uniqueName":"craftPumpkin",
 	"ingredients":
 	[{
-		"sapling_0":
-		{
-			"id":6,
-			"stackSize":3
-		}
+		"just_to_know_what_it_is":"sapling",
+		"id":6,
+		"stackSize":3
 	}],
 	"result":
 	[{
-		"pumpkin":
-		{
-			"id":86
-		}
+		"just_to_know_what_it_is":"pumpkin",
+		"id":86
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -656,18 +571,14 @@
 	"uniqueName":"craftMelonBlock",
 	"ingredients":
 	[{
-		"pumpkin":
-		{
-			"id":86,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"pumpkin",
+		"id":86,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"melon_block":
-		{
-			"id":103
-		}
+		"just_to_know_what_it_is":"melon_block",
+		"id":103
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -681,18 +592,14 @@
 	"uniqueName":"craftVine",
 	"ingredients":
 	[{
-		"melon_block":
-		{
-			"id":103,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"melon_block",
+		"id":103,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"vine":
-		{
-			"id":106
-		}
+		"just_to_know_what_it_is":"vine",
+		"id":106
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -706,18 +613,14 @@
 	"uniqueName":"craftLiyPad",
 	"ingredients":
 	[{
-		"vine":
-		{
-			"id":106,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"vine",
+		"id":106,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"water_lily":
-		{
-			"id":111
-		}
+		"just_to_know_what_it_is":"water_lily",
+		"id":111
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -731,18 +634,14 @@
 	"uniqueName":"craftSlimeBall",
 	"ingredients":
 	[{
-		"magma_cream":
-		{
-			"id":378,
-			"stackSize":8
-		}
+		"just_to_know_what_it_is":"magma_cream",
+		"id":378,
+		"stackSize":8
 	}],
 	"result":
 	[{
-		"slime_ball":
-		{
-			"id":341
-		}
+		"just_to_know_what_it_is":"slime_ball",
+		"id":341
 	}],
 	"requiredAltarTier":2,
 	"wandTier":1
@@ -856,18 +755,14 @@
 	"uniqueName":"craftGoldIngot",
 	"ingredients":
 	[{
-		"iron_ingot":
-		{
-			"id":265,
-			"stackSize":8
-		}
+		"just_to_know_what_it_is":"iron_ingot",
+		"id":265,
+		"stackSize":8
 	}],
 	"result":
 	[{
-		"gold_ingot":
-		{
-			"id":266
-		}
+		"just_to_know_what_it_is":"gold_ingot",
+		"id":266
 	}],
 	"requiredAltarTier":3,
 	"wandTier":1
@@ -894,17 +789,13 @@
 	"uniqueName":"craftRottenFlesh",
 	"ingredients":
 	[{
-		"leather":
-		{
-			"id":334
-		}
+		"just_to_know_what_it_is":"leather",
+		"id":334
 	}],
 	"result":
 	[{
-		"rotten_flesh":
-		{
-			"id":367
-		}
+		"just_to_know_what_it_is":"rotten_flesh",
+		"id":367
 	}],
 	"requiredAltarTier":4,
 	"wandTier":1
@@ -918,18 +809,14 @@
 	"uniqueName":"craftString",
 	"ingredients":
 	[{
-		"rotten_flesh":
-		{
-			"id":367,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"rotten_flesh",
+		"id":367,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"string":
-		{
-			"id":287
-		}
+		"just_to_know_what_it_is":"string",
+		"id":287
 	}],
 	"requiredAltarTier":4,
 	"wandTier":1
@@ -943,18 +830,14 @@
 	"uniqueName":"craftSpiderEye",
 	"ingredients":
 	[{
-		"string":
-		{
-			"id":287,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"string",
+		"id":287,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"spider_eye":
-		{
-			"id":375
-		}
+		"just_to_know_what_it_is":"spider_eye",
+		"id":375
 	}],
 	"requiredAltarTier":4,
 	"wandTier":1
@@ -968,18 +851,14 @@
 	"uniqueName":"craftBone",
 	"ingredients":
 	[{
-		"spider_eye":
-		{
-			"id":375,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"spider_eye",
+		"id":375,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"bone":
-		{
-			"id":352
-		}
+		"just_to_know_what_it_is":"bone",
+		"id":352
 	}],
 	"requiredAltarTier":4,
 	"wandTier":1
@@ -993,18 +872,14 @@
 	"uniqueName":"craftArrow",
 	"ingredients":
 	[{
-		"bone":
-		{
-			"id":352,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"bone",
+		"id":352,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"arrow":
-		{
-			"id":262
-		}
+		"just_to_know_what_it_is":"arrow",
+		"id":262
 	}],
 	"requiredAltarTier":4,
 	"wandTier":1
@@ -1030,18 +905,14 @@
 	"uniqueName":"craftEnderPearl",
 	"ingredients":
 	[{
-		"arrow":
-		{
-			"id":262,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"arrow",
+		"id":262,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"ender_pearl":
-		{
-			"id":368
-		}
+		"just_to_know_what_it_is":"ender_pearl",
+		"id":368
 	}],
 	"requiredAltarTier":4,
 	"wandTier":1
@@ -1068,27 +939,23 @@
 	"uniqueName":"craftGlowstoneDust",
 	"ingredients":
 	[{
-		"redstone_dust":
-		{
-			"id":55,
-			"stackSize":2
-		},
-		"coal":
-		{
-			"id":263,
-			"stackSize":2
-		},
-		"lapis_block":
-		{
-			"id":22
-		}
+		"just_to_know_what_it_is":"redstone_dust",
+		"id":55,
+		"stackSize":2
+	},
+	{
+		"just_to_know_what_it_is":"coal",
+		"id":263,
+		"stackSize":2
+	},
+	{
+		"just_to_know_what_it_is":"lapis_block",
+		"id":22
 	}],
 	"result":
 	[{
-		"glowstone_dust":
-		{
-			"id":348
-		}
+		"just_to_know_what_it_is":"glowstone_dust",
+		"id":348
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1102,22 +969,18 @@
 	"uniqueName":"craftNetherrack",
 	"ingredients":
 	[{
-		"stone":
-		{
-			"id":1
-		},
-		"coal":
-		{
-			"id":263,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"stone",
+		"id":1
+	},
+	{
+		"just_to_know_what_it_is":"coal",
+		"id":263,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"netherrack":
-		{
-			"id":87
-		}
+		"just_to_know_what_it_is":"netherrack",
+		"id":87
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1131,22 +994,18 @@
 	"uniqueName":"craftSoulSand",
 	"ingredients":
 	[{
-		"sand":
-		{
-			"id":12
-		},
-		"coal":
-		{
-			"id":263,
-			"stackSize":2
-		}
+		"just_to_know_what_it_is":"sand",
+		"id":12
+	},
+	{
+		"just_to_know_what_it_is":"coal",
+		"id":263,
+		"stackSize":2
 	}],
 	"result":
 	[{
-		"soul_sand":
-		{
-			"id":88
-		}
+		"just_to_know_what_it_is":"soul_sand",
+		"id":88
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1160,21 +1019,17 @@
 	"uniqueName":"craftMagmaBlock",
 	"ingredients":
 	[{
-		"netherrack":
-		{
-			"id":87
-		},
-		"magma_cream":
-		{
-			"id":378
-		}
+		"just_to_know_what_it_is":"netherrack",
+		"id":87
+	},
+	{
+		"just_to_know_what_it_is":"magma_cream",
+		"id":378
 	}],
 	"result":
 	[{
-		"magma_block":
-		{
-			"id":213
-		}
+		"just_to_know_what_it_is":"magma_block",
+		"id":213
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1188,29 +1043,25 @@
 	"uniqueName":"craftNetherWart",
 	"ingredients":
 	[{
-		"gunpowder":
-		{
-			"id":289
-		},
-		"magma_cream":
-		{
-			"id":378
-		},
-		"sugar":
-		{
-			"id":353
-		},
-		"redstone_dust":
-		{
-			"id":55
-		}
+		"just_to_know_what_it_is":"gunpowder",
+		"id":289
+	},
+	{
+		"just_to_know_what_it_is":"magma_cream",
+		"id":378
+	},
+	{
+		"just_to_know_what_it_is":"sugar",
+		"id":353
+	},
+	{
+		"just_to_know_what_it_is":"redstone_dust",
+		"id":55
 	}],
 	"result":
 	[{
-		"nether_wart":
-		{
-			"id":115
-		}
+		"just_to_know_what_it_is":"nether_wart",
+		"id":115
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1224,31 +1075,27 @@
 	"uniqueName":"craftGhastTear",
 	"ingredients":
 	[{
-		"gunpowder":
-		{
-			"id":289,
-			"stackSize":4
-		},
-		"blaze_powder":
-		{
-			"id":377,
-			"stackSize":4
-		},
-		"lava_bucket":
-		{
-			"id":327,
-		}
+		"just_to_know_what_it_is":"gunpowder",
+		"id":289,
+		"stackSize":4
+	},
+	{
+		"just_to_know_what_it_is":"blaze_powder",
+		"id":377,
+		"stackSize":4
+	},
+	{
+		"just_to_know_what_it_is":"lava_bucket",
+		"id":327
 	}],
 	"result":
 	[{
-		"ghast_tear":
-		{
-			"id":370,
-		},
-		"bucket":
-		{
-			"id":325,
-		}
+		"just_to_know_what_it_is":"ghast_tear",
+		"id":370
+	},
+	{
+		"just_to_know_what_it_is":"bucket",
+		"id":325
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1336,22 +1183,18 @@
 	"uniqueName":"craftWitherSkeletonSkull",
 	"ingredients":
 	[{
-		"coal_block":
-		{
-			"id":173
-		},
-		"skull":
-		{
-			"id":397
-		}
+		"just_to_know_what_it_is":"coal_block",
+		"id":173
+	},
+	{
+		"just_to_know_what_it_is":"skull",
+		"id":397
 	}],
 	"result":
 	[{
-		"skull":
-		{
-			"id":397,
-			"meta":1
-		}
+		"just_to_know_what_it_is":"skull",
+		"id":397,
+		"meta":1
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
@@ -1390,18 +1233,14 @@
 	"uniqueName":"craftDiamond",
 	"ingredients":
 	[{
-		"gold_ingot":
-		{
-			"id":266,
-			"stackSize":8
-		}
+		"just_to_know_what_it_is":"gold_ingot",
+		"id":266,
+		"stackSize":8
 	}],
 	"result":
 	[{
-		"diamond":
-		{
-			"id":264
-		}
+		"just_to_know_what_it_is":"diamond",
+		"id":264
 	}],
 	"requiredAltarTier":6,
 	"wandTier":2
@@ -1428,18 +1267,14 @@
 	"uniqueName":"craftGoldOre",
 	"ingredients":
 	[{
-		"iron_ore":
-		{
-			"id":15,
-			"stackSize":16
-		}
+		"just_to_know_what_it_is":"iron_ore",
+		"id":15,
+		"stackSize":16
 	}],
 	"result":
 	[{
-		"gold_ore":
-		{
-			"id":14
-		}
+		"just_to_know_what_it_is":"gold_ore",
+		"id":14
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1453,18 +1288,14 @@
 	"uniqueName":"craftCoalOre",
 	"ingredients":
 	[{
-		"gold_ore":
-		{
-			"id":14
-		}
+		"just_to_know_what_it_is":"gold_ore",
+		"id":14
 	}],
 	"result":
 	[{
-		"coal_ore":
-		{
-			"id":16,
-			"stackSize":4
-		}
+		"just_to_know_what_it_is":"coal_ore",
+		"id":16,
+		"stackSize":4
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1478,18 +1309,14 @@
 	"uniqueName":"craftRedstoneOre",
 	"ingredients":
 	[{
-		"gold_ore":
-		{
-			"id":14,
-			"stackSize":16
-		}
+		"just_to_know_what_it_is":"gold_ore",
+		"id":14,
+		"stackSize":16
 	}],
 	"result":
 	[{
-		"redstone_ore":
-		{
-			"id":73
-		}
+		"just_to_know_what_it_is":"redstone_ore",
+		"id":73
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1503,18 +1330,14 @@
 	"uniqueName":"craftLapisOre",
 	"ingredients":
 	[{
-		"redstone_ore":
-		{
-			"id":73,
-			"stackSize":16
-		}
+		"just_to_know_what_it_is":"redstone_ore",
+		"id":73,
+		"stackSize":16
 	}],
 	"result":
 	[{
-		"lapis_ore":
-		{
-			"id":21
-		}
+		"just_to_know_what_it_is":"lapis_ore",
+		"id":21
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1528,18 +1351,14 @@
 	"uniqueName":"craftDiamondOre",
 	"ingredients":
 	[{
-		"lapis_ore":
-		{
-			"id":21,
-			"stackSize":16
-		}
+		"just_to_know_what_it_is":"lapis_ore",
+		"id":21,
+		"stackSize":16
 	}],
 	"result":
 	[{
-		"diamond_ore":
-		{
-			"id":56
-		}
+		"just_to_know_what_it_is":"diamond_ore",
+		"id":56
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1567,18 +1386,14 @@
 	"uniqueName":"craftEmerald",
 	"ingredients":
 	[{
-		"diamond":
-		{
-			"id":264,
-			"stackSize":8
-		}
+		"just_to_know_what_it_is":"diamond",
+		"id":264,
+		"stackSize":8
 	}],
 	"result":
 	[{
-		"emerald":
-		{
-			"id":388
-		}
+		"just_to_know_what_it_is":"emerald",
+		"id":388
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1592,18 +1407,14 @@
 	"uniqueName":"craftEmeraldOre",
 	"ingredients":
 	[{
-		"diamond_ore":
-		{
-			"id":56,
-			"stackSize":8
-		}
+		"just_to_know_what_it_is":"diamond_ore",
+		"id":56,
+		"stackSize":8
 	}],
 	"result":
 	[{
-		"emerald_ore":
-		{
-			"id":129
-		}
+		"just_to_know_what_it_is":"emerald_ore",
+		"id":129
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1617,18 +1428,14 @@
 	"uniqueName":"craftNetherStar",
 	"ingredients":
 	[{
-		"emerald_block":
-		{
-			"id":133,
-			"stackSize":4
-		}
+		"just_to_know_what_it_is":"emerald_ore",
+		"id":133,
+		"stackSize":4
 	}],
 	"result":
 	[{
-		"nether_star":
-		{
-			"id":399
-		}
+		"just_to_know_what_it_is":"emerald_ore",
+		"id":399
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1654,18 +1461,14 @@
 	"uniqueName":"craftDragonEgg",
 	"ingredients":
 	[{
-		"nether_star":
-		{
-			"id":399,
-			"stackSize":4
-		}
+		"just_to_know_what_it_is":"nether_star",
+		"id":399,
+		"stackSize":4
 	}],
 	"result":
 	[{
-		"dragon_egg":
-		{
-			"id":122
-		}
+		"just_to_know_what_it_is":"dragon_egg",
+		"id":122
 	}],
 	"requiredAltarTier":7,
 	"wandTier":2
@@ -1751,7 +1554,7 @@
 	"requiredQuest":"spellFlintAndSteel",
 	"posX":0,
 	"posY":-2,
-	"questName":"Feel like Blaze"
+	"questName":"Feel like Blaze",
 	"spellID":1,
 	"additionalRequiredQuests":
 	{

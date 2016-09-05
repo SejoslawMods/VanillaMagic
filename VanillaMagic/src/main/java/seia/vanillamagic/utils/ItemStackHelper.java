@@ -144,13 +144,11 @@ public class ItemStackHelper
 	{
 		JsonArray ja = jo.get(key).getAsJsonArray();
 		ItemStack[] tab = new ItemStack[ja.size()];
-		int index = 0;
-		ItemStack stack = null;
-		for(JsonElement je : ja)
+		for(int i = 0; i < tab.length; i++)
 		{
-			stack = getItemStackFromJSON(je.getAsJsonObject());
-			tab[index] = stack;
-			index++;
+			JsonElement je = ja.get(i);
+			ItemStack stack = getItemStackFromJSON(je.getAsJsonObject());
+			tab[i] = stack;
 		}
 		return tab;
 	}

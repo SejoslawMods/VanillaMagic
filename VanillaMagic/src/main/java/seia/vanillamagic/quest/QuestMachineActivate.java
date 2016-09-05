@@ -25,8 +25,14 @@ public abstract class QuestMachineActivate extends Quest
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
-		this.mustHaveOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveOffHand").getAsJsonObject());
-		this.mustHaveMainHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveMainHand").getAsJsonObject());
+		if(jo.has("mustHaveOffHand"))
+		{
+			this.mustHaveOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveOffHand").getAsJsonObject());
+		}
+		if(jo.has("mustHaveMainHand"))
+		{
+			this.mustHaveMainHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveMainHand").getAsJsonObject());
+		}
 	}
 	
 	public boolean canActivate(EntityPlayer player)
