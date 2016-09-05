@@ -19,7 +19,6 @@ import com.google.gson.JsonParser;
 import jline.internal.InputStreamReader;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.quest.QuestList;
 
 public class ConfigAchievements 
 {
@@ -29,8 +28,10 @@ public class ConfigAchievements
 	public File modFile;
 	
 	private final String achievements = "achievements.json";
+	private final String aboutAchievements = "About achievements.txt";
 	
 	private File fileAchievements;
+	private File fileAboutAchievements;
 	
 	/**
 	 * modConfigurationDirectory - config/VanillaMagic/ <br>
@@ -46,19 +47,20 @@ public class ConfigAchievements
 			VanillaMagic.logger.log(Level.INFO, "VanillaMagic config directory created");
 		}
 		VanillaMagic.logger.log(Level.INFO, "VanillaMagic config directory loaded");
-		unzipAchievementsJSON();
+		fileAchievements = unzip(achievements, fileAchievements);
+		fileAboutAchievements = unzip(aboutAchievements, fileAboutAchievements);
 		readAchievements();
 	}
 
 	@SuppressWarnings("resource")
-	public void unzipAchievementsJSON() 
+	public File unzip(String fileName, File localFile) 
 	{
-		this.fileAchievements = new File(modConfigurationDirectory, achievements);
-		if(!this.fileAchievements.exists())
+		localFile = new File(modConfigurationDirectory, fileName);
+		if(!localFile.exists())
 		{
 			try 
 			{
-				this.fileAchievements.createNewFile();
+				localFile.createNewFile();
 				if(!this.modFile.isDirectory())
 				{
 					JarFile jarFile = new JarFile(this.modFile);
@@ -66,18 +68,18 @@ public class ConfigAchievements
 					while(enumeration.hasMoreElements())
 					{
 						JarEntry file = (JarEntry) enumeration.nextElement();
-						if(file.getName().equals(this.achievements))
+						if(file.getName().equals(fileName))
 						{
 							InputStream is = jarFile.getInputStream(file);
-							FileOutputStream fos = new FileOutputStream(this.fileAchievements);
+							FileOutputStream fos = new FileOutputStream(localFile);
 							while(is.available() > 0)
 							{
 								fos.write(is.read());
 							}
 							fos.close();
 							is.close();
-							VanillaMagic.logger.log(Level.INFO, "Achievements.json created");
-							return;
+							VanillaMagic.logger.log(Level.INFO, fileName + " created");
+							return localFile;
 						}
 					}
 				}
@@ -86,18 +88,18 @@ public class ConfigAchievements
 					File[] files = this.modFile.listFiles();
 					for(File f : files)
 					{
-						if(f.getName().contains(achievements))
+						if(f.getName().contains(fileName))
 						{
 							FileInputStream is = new FileInputStream(f);
-							FileOutputStream fos = new FileOutputStream(this.fileAchievements);
+							FileOutputStream fos = new FileOutputStream(localFile);
 							while(is.available() > 0)
 							{
 								fos.write(is.read());
 							}
 							fos.close();
 							is.close();
-							VanillaMagic.logger.log(Level.INFO, "Achievements.json created");
-							return;
+							VanillaMagic.logger.log(Level.INFO, fileName + " created");
+							return localFile;
 						}
 					}
 				}
@@ -105,9 +107,10 @@ public class ConfigAchievements
 			catch(IOException e) 
 			{
 				e.printStackTrace();
-				VanillaMagic.logger.log(Level.INFO, "Error while creating Achievements.json");
+				VanillaMagic.logger.log(Level.INFO, "Error while creating " + fileName);
 			}
 		}
+		return null;
 	}
 	
 	public void readAchievements()

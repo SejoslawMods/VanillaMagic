@@ -1,7 +1,5 @@
 package seia.vanillamagic.quest;
 
-import com.google.gson.JsonObject;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

@@ -2,7 +2,6 @@ package seia.vanillamagic.machine.quarry;
 
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,7 +9,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.utils.EntityHelper;

@@ -5,30 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
-import net.minecraft.stats.AchievementList;
-import seia.vanillamagic.chunkloader.QuestChunkLoader;
-import seia.vanillamagic.integration.CustomOre;
-import seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal;
-import seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket;
-import seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
-import seia.vanillamagic.items.potionedcrystal.QuestPotionedCrystal;
-import seia.vanillamagic.items.thecrystalofmothernature.QuestMotherNatureCrystal;
-import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
-import seia.vanillamagic.machine.farm.QuestMachineFarm;
-import seia.vanillamagic.machine.quarry.QuestQuarry;
-import seia.vanillamagic.machine.speedy.QuestSpeedy;
-import seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut;
-import seia.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable;
-import seia.vanillamagic.quest.spell.QuestCastSpellInAir;
-import seia.vanillamagic.quest.spell.QuestCastSpellOnBlock;
-import seia.vanillamagic.spell.EnumSpell;
-import seia.vanillamagic.spell.EnumWand;
-import seia.vanillamagic.utils.ItemStackHelper;
-
 public class QuestList 
 {
 	public static List<Quest> QUESTS = new ArrayList<Quest>();

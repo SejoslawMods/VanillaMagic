@@ -5,8 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumSpell;
 
 public class QuestCastSpellInAir extends QuestCastSpell
 {
