@@ -841,74 +841,86 @@
 	"uniqueName":"speedy"
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.items.thecrystalofmothernature.QuestMotherNatureCrystal",
+	"requiredQuest":"speedy",
+	"posX":-2,
+	"posY":0,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":399
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"The Crystal of Mother Nature",
+	"uniqueName":"motherNatureCrystal"
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier3",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Gold Ingot",
+	"uniqueName":"craftGoldIngot",
+	"ingredients":
+	{
+		"iron_ingot":
+		{
+			"id":265,
+			"stackSize":8
+		}
+	},
+	"result":
+	{
+		"gold_ingot":
+		{
+			"id":266
+		}
+	},
+	"requiredAltarTier":3,
+	"wandTier":1
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"buildAltarTier3",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":380
+	},
+	"questName":"Build Altar Tier 4",
+	"uniqueName":"buildAltarTier4",
+	"tier":4
 },
 {
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
-	"icon":
-	{
-		"id":,
-		"stackSize":,
-		"meta":
-	},
 	"questName":"",
-	"uniqueName":""
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
 },
 {
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
 	"posY":,
-	"icon":
-	{
-		"id":,
-		"stackSize":,
-		"meta":
-	},
 	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"uniqueName":"",
+	"ingredients":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
 	},
-	"questName":"",
-	"uniqueName":""
-},
-{
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
+	"result":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
 	},
-	"questName":"",
-	"uniqueName":""
+	"requiredAltarTier":,
+	"wandTier":
 },
 {
 	"questClass":"",
