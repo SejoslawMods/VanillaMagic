@@ -183,7 +183,7 @@ public class QuestList
 			EnumWand.STICK);
 	
 	public static final QuestBuildAltar QUEST_BUILD_ALTAR_TIER_3 = new QuestBuildAltar(QUEST_BUILD_ALTAR_TIER_2, 0, +2, "Build Altar Tier 3", "buildAltarTier3", 3);
-	public static final QuestSmeltOnAltar QUEST_SMELT_ON_ALTAR = new QuestSmeltOnAltar(QUEST_BUILD_ALTAR_TIER_3, -2, +1, new ItemStack(Blocks.FURNACE), "Smelt in Altar", "smeltInAltar", 1, EnumWand.STICK);
+	public static final QuestSmeltOnAltar QUEST_SMELT_ON_ALTAR = new QuestSmeltOnAltar(QUEST_BUILD_ALTAR_TIER_3, -2, +1, new ItemStack(Blocks.FURNACE), "Smelt on Altar", "smeltOnAltar", 1, EnumWand.STICK);
 	public static final QuestQuarry QUEST_QUARRY = new QuestQuarry(QUEST_SMELT_ON_ALTAR, 0, +2, "Quarry !!!", "quarry");
 	public static final QuestFullTreeCut QUEST_FULL_TREE_CUT = new QuestFullTreeCut(QUEST_QUARRY, -2, 0, new ItemStack(Items.DIAMOND_AXE), "Full Tree Cut", "fullTreeCut");
 	public static final QuestMachineFarm QUEST_MACHINE_FARM = new QuestMachineFarm(QUEST_FULL_TREE_CUT, -2, 0, new ItemStack(Items.CAULDRON), "Automatic Farm", "machineFarm", new ItemStack(Items.WHEAT_SEEDS, 1), EnumWand.BLAZE_ROD.wandItemStack.copy(), 4);

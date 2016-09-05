@@ -112,8 +112,8 @@ public class ItemStackHelper
 		try
 		{
 			int id = jo.get("id").getAsInt();
-			int stackSize = jo.get("stackSize").getAsInt();
-			int meta = jo.get("meta").getAsInt();
+			int stackSize = (jo.get("stackSize") != null ? jo.get("stackSize").getAsInt() : 1);
+			int meta = (jo.get("meta") != null ? jo.get("meta").getAsInt() : 0);
 			Item item = null;
 			Block block = null;
 			try
@@ -129,15 +129,15 @@ public class ItemStackHelper
 			{
 				return new ItemStack(block, stackSize, meta);
 			}
-			else
+			else if(block == null)
 			{
 				return new ItemStack(item, stackSize, meta);
 			}
 		}
 		catch(Exception e)
 		{
-			return null;
 		}
+		return null;
 	}
 	
 	public static ItemStack[] getItemStackArrayFromJSON(JsonObject jo, String key)

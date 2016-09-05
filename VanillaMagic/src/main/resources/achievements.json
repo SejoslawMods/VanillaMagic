@@ -6,9 +6,7 @@
 	"posY":6,
 	"icon":
 	{
-		"id":280,
-		"stackSize":1,
-		"meta":0
+		"id":280
 	},
 	"questName":"Craft Stick",
 	"uniqueName":"craftStick"
@@ -20,9 +18,7 @@
 	"posY":0,
 	"icon":
 	{
-		"id":58,
-		"stackSize":1,
-		"meta":0
+		"id":58
 	},
 	"questName":"Portable Crafting Table",
 	"uniqueName":"portableCraftingTable"
@@ -34,9 +30,7 @@
 	"posY":0,
 	"icon":
 	{
-		"id":58,
-		"stackSize":1,
-		"meta":0
+		"id":58
 	},
 	"questName":"Autocrafting !!!",
 	"uniqueName":"autocrafting"
@@ -48,9 +42,7 @@
 	"posY":-2,
 	"icon":
 	{
-		"id":263,
-		"stackSize":1,
-		"meta":0
+		"id":263
 	},
 	"questName":"Flint and Steel Clone",
 	"uniqueName":"spellFlintAndSteel",
@@ -63,9 +55,7 @@
 	"posY":2,
 	"icon":
 	{
-		"id":380,
-		"stackSize":1,
-		"meta":0
+		"id":380
 	},
 	"questName":"Craft Cauldron",
 	"uniqueName":"craftCauldron"
@@ -77,9 +67,7 @@
 	"posY":2,
 	"icon":
 	{
-		"id":73,
-		"stackSize":1,
-		"meta":0
+		"id":73
 	},
 	"questName":"Mine Redstone",
 	"uniqueName":"mineRedstone",
@@ -93,9 +81,7 @@
 	"posY":2,
 	"icon":
 	{
-		"id":380,
-		"stackSize":1,
-		"meta":0
+		"id":380
 	},
 	"questName":"Build Altar Tier 1",
 	"uniqueName":"buildAltarTier1",
@@ -112,24 +98,18 @@
 	{
 		"sugar_cane":
 		{
-			"id":338,
-			"stackSize":1,
-			"meta":0,
+			"id":338
 		},
 		"coal":
 		{
-			"id":263,
-			"stackSize":1,
-			"meta":0,
+			"id":263
 		},
 	},
 	"result":
 	{
 		"gunpowder":
 		{
-			"id":289,
-			"stackSize":1,
-			"meta":0,
+			"id":289
 		}
 	},
 	"requiredAltarTier":1,
@@ -146,18 +126,14 @@
 	{
 		"sugar_cane":
 		{
-			"id":338,
-			"stackSize":1,
-			"meta":0,
+			"id":338
 		}
 	},
 	"result":
 	{
 		"sugar":
 		{
-			"id":353,
-			"stackSize":1,
-			"meta":0,
+			"id":353
 		},
 	},
 	"requiredAltarTier":1,
@@ -174,18 +150,14 @@
 	{
 		"sand":
 		{
-			"id":12,
-			"stackSize":1,
-			"meta":0,
+			"id":12
 		}
 	},
 	"result":
 	{
 		"dirt":
 		{
-			"id":3,
-			"stackSize":1,
-			"meta":0,
+			"id":3
 		}
 	},
 	"requiredAltarTier":1,
@@ -202,18 +174,14 @@
 	{
 		"cobblestone":
 		{
-			"id":4,
-			"stackSize":1,
-			"meta":0,
+			"id":4
 		}
 	},
 	"result":
 	{
 		"sand":
 		{
-			"id":12,
-			"stackSize":1,
-			"meta":0,
+			"id":12
 		}
 	},
 	"requiredAltarTier":1,
@@ -230,18 +198,14 @@
 	{
 		"dirt":
 		{
-			"id":3,
-			"stackSize":1,
-			"meta":0,
+			"id":3
 		}
 	},
 	"result":
 	{
 		"cobblestone":
 		{
-			"id":4,
-			"stackSize":1,
-			"meta":0,
+			"id":4
 		}
 	},
 	"requiredAltarTier":1,
@@ -259,17 +223,14 @@
 		"cobblestone":
 		{
 			"id":4,
-			"stackSize":2,
-			"meta":0,
+			"stackSize":2
 		}
 	},
 	"result":
 	{
 		"gravel":
 		{
-			"id":13,
-			"stackSize":1,
-			"meta":0,
+			"id":13
 		}
 	},
 	"requiredAltarTier":1,
@@ -286,18 +247,14 @@
 	{
 		"rotten_flesh":
 		{
-			"id":367,
-			"stackSize":1,
-			"meta":0,
+			"id":367
 		}
 	},
 	"result":
 	{
 		"leather":
 		{
-			"id":334,
-			"stackSize":1,
-			"meta":0,
+			"id":334
 		}
 	},
 	"requiredAltarTier":1,
@@ -314,24 +271,18 @@
 	{
 		"sugar":
 		{
-			"id":353,
-			"stackSize":1,
-			"meta":0,
+			"id":353
 		},
 		"gunpowder":
 		{
-			"id":289,
-			"stackSize":1,
-			"meta":0,
+			"id":289
 		}
 	},
 	"result":
 	{
 		"clay_ball":
 		{
-			"id":337,
-			"stackSize":1,
-			"meta":0,
+			"id":337
 		}
 	},
 	"requiredAltarTier":1,
@@ -348,24 +299,18 @@
 	{
 		"sand":
 		{
-			"id":12,
-			"stackSize":1,
-			"meta":0,
+			"id":12
 		},
 		"coal":
 		{
-			"id":263,
-			"stackSize":1,
-			"meta":0,
+			"id":263
 		}
 	},
 	"result":
 	{
 		"glass":
 		{
-			"id":20,
-			"stackSize":1,
-			"meta":0,
+			"id":20
 		}
 	},
 	"requiredAltarTier":1,
@@ -382,30 +327,22 @@
 	{
 		"ice":
 		{
-			"id":79,
-			"stackSize":1,
-			"meta":0,
+			"id":79
 		},
 		"water_bucket":
 		{
-			"id":326,
-			"stackSize":1,
-			"meta":0,
+			"id":326
 		}
 	},
 	"result":
 	{
 		"snow":
 		{
-			"id":78,
-			"stackSize":1,
-			"meta":0,
+			"id":78
 		},
 		"bucket":
 		{
-			"id":325,
-			"stackSize":1,
-			"meta":0,
+			"id":325
 		}
 	},
 	"requiredAltarTier":1,
@@ -422,30 +359,22 @@
 	{
 		"snow":
 		{
-			"id":78,
-			"stackSize":1,
-			"meta":0,
+			"id":78
 		},
 		"water_bucket":
 		{
-			"id":326,
-			"stackSize":1,
-			"meta":0,
+			"id":326
 		}
 	},
 	"result":
 	{
 		"ice":
 		{
-			"id":79,
-			"stackSize":1,
-			"meta":0,
+			"id":79
 		},
 		"bucket":
 		{
-			"id":325,
-			"stackSize":1,
-			"meta":0,
+			"id":325
 		}
 	},
 	"requiredAltarTier":1,
@@ -458,9 +387,7 @@
 	"posY":2,
 	"icon":
 	{
-		"id":380,
-		"stackSize":1,
-		"meta":0
+		"id":380
 	},
 	"questName":"Build Altar Tier 2",
 	"uniqueName":"buildAltarTier2",
@@ -478,23 +405,19 @@
 		"sapling":
 		{
 			"id":6,
-			"stackSize":10,
-			"meta":0
+			"stackSize":10
 		},
 		"cobblestone":
 		{
 			"id":4,
-			"stackSize":10,
-			"meta":0,
+			"stackSize":10
 		}
 	},
 	"result":
 	{
 		"iron_ore":
 		{
-			"id":15,
-			"stackSize":1,
-			"meta":0,
+			"id":15
 		}
 	},
 	"requiredAltarTier":2,
@@ -512,17 +435,14 @@
 		"sapling":
 		{
 			"id":6,
-			"stackSize":2,
-			"meta":0
+			"stackSize":2
 		}
 	},
 	"result":
 	{
 		"cactus":
 		{
-			"id":81,
-			"stackSize":1,
-			"meta":0
+			"id":81
 		}
 	},
 	"requiredAltarTier":2,
@@ -540,17 +460,14 @@
 		"cactus":
 		{
 			"id":81,
-			"stackSize":2,
-			"meta":0
+			"stackSize":2
 		}
 	},
 	"result":
 	{
 		"sapling_0":
 		{
-			"id":6,
-			"stackSize":1,
-			"meta":0
+			"id":6
 		}
 	},
 	"requiredAltarTier":2,
@@ -567,9 +484,7 @@
 	{
 		"sapling_0":
 		{
-			"id":6,
-			"stackSize":1,
-			"meta":0
+			"id":6
 		}
 	},
 	"result":
@@ -577,7 +492,6 @@
 		"sapling_1":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":1
 		}
 	},
@@ -596,7 +510,6 @@
 		"sapling_1":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":1
 		}
 	},
@@ -605,7 +518,6 @@
 		"sapling_2":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":2
 		}
 	},
@@ -624,7 +536,6 @@
 		"sapling_2":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":2
 		}
 	},
@@ -633,7 +544,6 @@
 		"sapling_3":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":3
 		}
 	},
@@ -652,7 +562,6 @@
 		"sapling_3":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":3
 		}
 	},
@@ -661,7 +570,6 @@
 		"sapling_4":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":4
 		}
 	},
@@ -680,7 +588,6 @@
 		"sapling_4":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":4
 		}
 	},
@@ -689,7 +596,6 @@
 		"sapling_5":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":5
 		}
 	},
@@ -708,7 +614,6 @@
 		"sapling_5":
 		{
 			"id":6,
-			"stackSize":1,
 			"meta":5
 		}
 	},
@@ -716,9 +621,7 @@
 	{
 		"sapling_0":
 		{
-			"id":6,
-			"stackSize":1,
-			"meta":0
+			"id":6
 		}
 	},
 	"requiredAltarTier":2,
@@ -736,17 +639,14 @@
 		"sapling_0":
 		{
 			"id":6,
-			"stackSize":3,
-			"meta":0
+			"stackSize":3
 		}
 	},
 	"result":
 	{
 		"pumpkin":
 		{
-			"id":86,
-			"stackSize":1,
-			"meta":0
+			"id":86
 		}
 	},
 	"requiredAltarTier":2,
@@ -764,17 +664,14 @@
 		"pumpkin":
 		{
 			"id":86,
-			"stackSize":2,
-			"meta":0
+			"stackSize":2
 		}
 	},
 	"result":
 	{
 		"melon_block":
 		{
-			"id":103,
-			"stackSize":1,
-			"meta":0
+			"id":103
 		}
 	},
 	"requiredAltarTier":2,
@@ -792,17 +689,14 @@
 		"melon_block":
 		{
 			"id":103,
-			"stackSize":2,
-			"meta":0
+			"stackSize":2
 		}
 	},
 	"result":
 	{
 		"vine":
 		{
-			"id":106,
-			"stackSize":1,
-			"meta":0
+			"id":106
 		}
 	},
 	"requiredAltarTier":2,
@@ -820,17 +714,14 @@
 		"vine":
 		{
 			"id":106,
-			"stackSize":2,
-			"meta":0
+			"stackSize":2
 		}
 	},
 	"result":
 	{
 		"water_lily":
 		{
-			"id":111,
-			"stackSize":1,
-			"meta":0
+			"id":111
 		}
 	},
 	"requiredAltarTier":2,
@@ -848,105 +739,106 @@
 		"magma_cream":
 		{
 			"id":378,
-			"stackSize":8,
-			"meta":0
+			"stackSize":8
 		}
 	},
 	"result":
 	{
 		"slime_ball":
 		{
-			"id":341,
-			"stackSize":1,
-			"meta":0
+			"id":341
 		}
 	},
 	"requiredAltarTier":2,
 	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"buildAltarTier2",
+	"posX":0,
+	"posY":2,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":380
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Build Altar Tier 3",
+	"uniqueName":"buildAltarTier3",
+	"tier":3
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.quest.QuestSmeltOnAltar",
+	"requiredQuest":"buildAltarTier3",
+	"posX":-2,
+	"posY":1,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":61
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Smelt on Altar",
+	"uniqueName":"smeltOnAltar",
+	"requiredAltarTier":1,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.machine.quarry.QuestQuarry",
+	"requiredQuest":"smeltOnAltar",
+	"posX":0,
+	"posY":2,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":380
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Quarry !!!",
+	"uniqueName":"quarry"
+	"mustHaveMainHand":
+	{
+		"id":369
+	}
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.quest.fulltreecut.QuestFullTreeCut",
+	"requiredQuest":"quarry",
+	"posX":-2,
+	"posY":0,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":279
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Full Tree Cut",
+	"uniqueName":"fullTreeCut"
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.machine.farm.QuestMachineFarm",
+	"requiredQuest":"fullTreeCut",
+	"posX":-2,
+	"posY":0,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":380
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Automatic Farm",
+	"uniqueName":"machineFarm",
+	"mustHaveOffHand":
+	{
+		"id":295
+	},
+	"mustHaveMainHand":
+	{
+		"id":369
+	},
+	"radius":4
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.machine.speedy.QuestSpeedy",
+	"requiredQuest":"machineFarm",
+	"posX":-2,
+	"posY":0,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":288
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Speedy",
+	"uniqueName":"speedy"
 },
 {
 	"questClass":"",

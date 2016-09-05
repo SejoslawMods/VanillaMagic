@@ -294,8 +294,8 @@ achievement.craftSlimeBall.desc=Toss 8x Magma Cream into the Altar Tier 2 and ri
 achievement.buildAltarTier3=Build Altar Tier 3
 achievement.buildAltarTier3.desc=Add 1 block of Gold on each side of the Altar Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west) and replace the Cauldron
 
-achievement.smeltInAltar=Smelting
-achievement.smeltInAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Altar Tier 3 and right-click with Stick Wand in Right Hand and fuel (e.g. Coal) in Left Hand (WILL USE WHOLE STACK FROM LEFT HAND)
+achievement.smeltOnAltar=Smelting
+achievement.smeltOnAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Altar Tier 3 and right-click with Stick Wand in Right Hand and fuel (e.g. Coal) in Left Hand (WILL USE WHOLE STACK FROM LEFT HAND)
 
 achievement.fullTreeCut=Full Tree Cut
 achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right
