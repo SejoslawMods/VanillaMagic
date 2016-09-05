@@ -1943,44 +1943,44 @@
 	"spellID":205
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonPigman",
+	"posX":0,
+	"posY":-2,
+	"questName":"Summon Silverfish",
+	"spellID":214
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonSilverfish",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Guardian",
+	"spellID":211
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonGuardian",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Shulker",
+	"spellID":213
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonShulker",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Wither",
+	"spellID":215
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonWither",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Giant",
+	"spellID":216
 },
 {
 	"questClass":"",
