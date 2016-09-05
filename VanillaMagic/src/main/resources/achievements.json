@@ -293,8 +293,8 @@
 	}],
 	"result":
 	[{
-		"just_to_know_what_it_is":"snow",
-		"id":78
+		"just_to_know_what_it_is":"snow_block",
+		"id":80
 	},
 	{
 		"just_to_know_what_it_is":"bucket",
@@ -312,8 +312,8 @@
 	"uniqueName":"craftIce",
 	"ingredients":
 	[{
-		"just_to_know_what_it_is":"snow",
-		"id":78
+		"just_to_know_what_it_is":"snow_block",
+		"id":80
 	},
 	{
 		"id":326
@@ -394,7 +394,7 @@
 	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"craftCactus",
 	"posX":-2,
-	"posY":1,
+	"posY":0,
 	"questName":"Craft Oak Sapling from Cactus",
 	"uniqueName":"craftSapling0",
 	"ingredients":
@@ -414,8 +414,8 @@
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"craftSapling0",
-	"posX":-2,
-	"posY":0,
+	"posX":0,
+	"posY":2,
 	"questName":"Craft Spruce Sapling",
 	"uniqueName":"craftSapling1",
 	"ingredients":
@@ -1061,7 +1061,7 @@
 	"result":
 	[{
 		"just_to_know_what_it_is":"nether_wart",
-		"id":115
+		"id":372
 	}],
 	"requiredAltarTier":5,
 	"wandTier":2
