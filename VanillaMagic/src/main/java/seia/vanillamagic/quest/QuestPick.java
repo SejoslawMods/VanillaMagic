@@ -29,8 +29,9 @@ public class QuestPick extends Quest
 	
 	public void readData(JsonObject jo)
 	{
-		super.readData(jo);
 		this.whatToPick = ItemStackHelper.getItemStackFromJSON(jo.get("whatToPick").getAsJsonObject());
+		this.icon = whatToPick.copy();
+		super.readData(jo);
 	}
 	
 	@SubscribeEvent
