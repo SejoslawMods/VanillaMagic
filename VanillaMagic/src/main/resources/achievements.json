@@ -1983,20 +1983,35 @@
 	"spellID":216
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.QuestSummonHorde",
+	"requiredQuest":"spellSummonSilverfish",
+	"posX":0,
+	"posY":-2,
+	"questName":"Summon Horde Lvl: 1",
+	"uniqueName":"summonHordeLvl1",
+	"level":1,
+	"requiredLeftHand":
+	{
+		"id":426
+	},
+	"additionalRequiredQuests":
+	{
+		"quest_1":"spellSummonGiant"
+	}
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.QuestSummonHorde",
+	"requiredQuest":"summonHordeLvl1",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Horde Lvl: 10",
+	"uniqueName":"summonHordeLvl10",
+	"level":10,
+	"requiredLeftHand":
+	{
+		"id":426,
+		"stackSize":2
+	}
 },
 {
 	"questClass":"",

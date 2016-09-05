@@ -35,8 +35,10 @@ public class QuestSummonHorde extends Quest
 	
 	public void readData(JsonObject jo)
 	{
-		super.readData(jo);
+		this.level = jo.get("level").getAsInt();
 		this.requiredLeftHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredLeftHand").getAsJsonObject());
+		this.icon = requiredLeftHand.copy();
+		super.readData(jo);
 	}
 	
 	@SubscribeEvent
