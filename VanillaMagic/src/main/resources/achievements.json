@@ -1333,6 +1333,156 @@
 	"uniqueName":"potionedCrystal"
 },
 {
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"pickBlazeRod",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Wither Skeleton Skull",
+	"uniqueName":"craftWitherSkeletonSkull",
+	"ingredients":
+	[{
+		"coal_block":
+		{
+			"id":173
+		},
+		"skull":
+		{
+			"id":397
+		}
+	}],
+	"result":
+	[{
+		"skull":
+		{
+			"id":397,
+			"meta":1
+		}
+	}],
+	"requiredAltarTier":5,
+	"wandTier":2
+},
+{
+	"questClass":"seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal",
+	"requiredQuest":"craftWitherSkeletonSkull",
+	"posX":2,
+	"posY":0,
+	"icon":
+	{
+		"id":399
+	},
+	"questName":"Acceleration Crystal",
+	"uniqueName":"accelerationCrystal"
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"pickBlazeRod",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":380
+	},
+	"questName":"Build Altar Tier 6",
+	"uniqueName":"buildAltarTier6",
+	"tier":6
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"icon":
+	{
+		"id":
+	},
+	"questName":"",
+	"uniqueName":""
+},
+{
 	"questClass":"",
 	"requiredQuest":"",
 	"posX":,
