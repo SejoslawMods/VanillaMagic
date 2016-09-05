@@ -891,49 +891,385 @@
 	"tier":4
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier4",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Rotten Flesh",
+	"uniqueName":"craftRottenFlesh",
 	"ingredients":
 	{
+		"leather":
+		{
+			"id":334
+		}
 	},
 	"result":
 	{
+		"rotten_flesh":
+		{
+			"id":367
+		}
 	},
-	"requiredAltarTier":,
-	"wandTier":
+	"requiredAltarTier":4,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"uniqueName":"",
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftRottenFlesh",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft String",
+	"uniqueName":"craftString",
 	"ingredients":
 	{
+		"rotten_flesh":
+		{
+			"id":367,
+			"stackSize":2
+		}
 	},
 	"result":
 	{
+		"string":
+		{
+			"id":287
+		}
 	},
-	"requiredAltarTier":,
-	"wandTier":
+	"requiredAltarTier":4,
+	"wandTier":1
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftString",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Spider Eye",
+	"uniqueName":"craftSpiderEye",
+	"ingredients":
+	{
+		"string":
+		{
+			"id":287,
+			"stackSize":2
+		}
+	},
+	"result":
+	{
+		"spider_eye":
+		{
+			"id":375
+		}
+	},
+	"requiredAltarTier":4,
+	"wandTier":1
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftSpiderEye",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Bone",
+	"uniqueName":"craftBone",
+	"ingredients":
+	{
+		"spider_eye":
+		{
+			"id":375,
+			"stackSize":2
+		}
+	},
+	"result":
+	{
+		"bone":
+		{
+			"id":352
+		}
+	},
+	"requiredAltarTier":4,
+	"wandTier":1
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftBone",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Arrow",
+	"uniqueName":"craftArrow",
+	"ingredients":
+	{
+		"bone":
+		{
+			"id":352,
+			"stackSize":2
+		}
+	},
+	"result":
+	{
+		"arrow":
+		{
+			"id":262
+		}
+	},
+	"requiredAltarTier":4,
+	"wandTier":1
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestArrowMachineGun",
+	"requiredQuest":"craftArrow",
+	"posX":0,
+	"posY":-2,
 	"icon":
 	{
-		"id":,
-		"stackSize":,
-		"meta":
+		"id":262
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Arrow Machine Gun",
+	"uniqueName":"arrowMachineGun"
 },
+{
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftArrow",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Ender Pearl",
+	"uniqueName":"craftEnderPearl",
+	"ingredients":
+	{
+		"arrow":
+		{
+			"id":262,
+			"stackSize":2
+		}
+	},
+	"result":
+	{
+		"ender_pearl":
+		{
+			"id":368
+		}
+	},
+	"requiredAltarTier":4,
+	"wandTier":1
+},
+{
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"buildAltarTier4",
+	"posX":0,
+	"posY":2,
+	"icon":
+	{
+		"id":380
+	},
+	"questName":"Build Altar Tier 5",
+	"uniqueName":"buildAltarTier5",
+	"tier":5
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+},
+{
+	"questClass":"",
+	"requiredQuest":"",
+	"posX":,
+	"posY":,
+	"questName":"",
+	"uniqueName":"",
+	"ingredients":
+	{
+	},
+	"result":
+	{
+	},
+	"requiredAltarTier":,
+	"wandTier":
+}
 ]
