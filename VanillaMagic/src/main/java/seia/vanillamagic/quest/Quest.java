@@ -44,7 +44,7 @@ public abstract class Quest
 			int tmpY = jo.get("posY").getAsInt();
 			this.posY = (this.requiredQuest != null ? (this.requiredQuest.posY + tmpY) : tmpY);
 		}
-		if(this.icon == null)
+		if(jo.get("icon") != null)
 		{
 			this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
 		}

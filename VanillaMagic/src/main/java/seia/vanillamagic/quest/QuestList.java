@@ -356,7 +356,6 @@ public class QuestList
 	public static final QuestMineBlock QUEST_MINE_OBSIDIAN = new QuestMineBlock(QUEST_MINE_DIAMOND, +2, 0, new ItemStack(Blocks.OBSIDIAN), "Mine Obsidian", "mineObsidian", CustomOre.INSTANCE.customObsidian);
 	public static final QuestCraft QUEST_CRAFT_ENCHANTING_TABLE = new QuestCraft(QUEST_MINE_OBSIDIAN, +2, 0, new ItemStack(Blocks.ENCHANTING_TABLE), "Craft Enchanting Table", "craftEnchantingTable");
 	public static final QuestChunkLoader QUEST_CHUNK_LOADER = new QuestChunkLoader(QUEST_CRAFT_ENCHANTING_TABLE, 0, +2, new ItemStack(Blocks.ENCHANTING_TABLE), "Build ChunkLoader", "chunkLoader");
-	//TODO: add quest for enchanting sanctuary
 	
 	//===================================================================================================
 	
