@@ -1387,28 +1387,42 @@
 	"tier":6
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"icon":
-	{
-		"id":
-	},
-	"questName":"",
-	"uniqueName":""
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"buildAltarTier6",
+	"posX":2,
+	"posY":1,
+	"questName":"Craft Diamond",
+	"uniqueName":"craftDiamond",
+	"ingredients":
+	[{
+		"gold_ingot":
+		{
+			"id":266,
+			"stackSize":8
+		}
+	}],
+	"result":
+	[{
+		"diamond":
+		{
+			"id":264
+		}
+	}],
+	"requiredAltarTier":6,
+	"wandTier":2
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
+	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
+	"requiredQuest":"buildAltarTier6",
+	"posX":0,
+	"posY":2,
 	"icon":
 	{
-		"id":
+		"id":380
 	},
-	"questName":"",
-	"uniqueName":""
+	"questName":"Build Altar Tier 7",
+	"uniqueName":"buildAltarTier7",
+	"tier":7
 },
 {
 	"questClass":"",
