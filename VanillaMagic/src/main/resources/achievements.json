@@ -1911,36 +1911,36 @@
 	"spellID":217
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonZombie",
+	"posX":0,
+	"posY":-2,
+	"questName":"Summon Pigman",
+	"spellID":210
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonPigman",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Blaze",
+	"spellID":203
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonBlaze",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Magma Cube",
+	"spellID":204
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+	"requiredQuest":"spellSummonMagmaCube",
+	"posX":-2,
+	"posY":0,
+	"questName":"Summon Ghast",
+	"spellID":205
 },
 {
 	"questClass":"",
