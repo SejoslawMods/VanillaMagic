@@ -2014,27 +2014,99 @@
 	}
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellSmallFireball",
+	"posX":2,
+	"posY":0,
+	"questName":"Feel like Ghast",
+	"spellID":2
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellLargeFireball",
+	"posX":0,
+	"posY":2,
+	"questName":"Thunder !!!",
+	"spellID":5
 },
 {
-	"questClass":"",
-	"requiredQuest":"",
-	"posX":,
-	"posY":,
-	"questName":"",
-	"spellID":
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellSummonLightningBolt",
+	"posX":2,
+	"posY":0,
+	"questName":"Pull Entity to Player",
+	"spellID":10
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellPullEntityToPlayer",
+	"posX":2,
+	"posY":0,
+	"questName":"Freeze Water 3x3",
+	"spellID":11
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellFreezeWater3x3",
+	"posX":2,
+	"posY":0,
+	"questName":"Move in air",
+	"spellID":9
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellLargeFireball",
+	"posX":0,
+	"posY":-2,
+	"questName":"Teleportation !!!",
+	"spellID":3
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellTeleport",
+	"posX":2,
+	"posY":0,
+	"questName":"Teleport to Nether",
+	"spellID":7
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellTeleportToNether",
+	"posX":2,
+	"posY":0,
+	"questName":"Teleport to End",
+	"spellID":8
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellLargeFireball",
+	"posX":2,
+	"posY":0,
+	"questName":"Meteor !!!",
+	"spellID":4
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellSummonMeteor",
+	"posX":2,
+	"posY":0,
+	"questName":"Make rain",
+	"spellID":12
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellWeatherRain",
+	"posX":2,
+	"posY":0,
+	"questName":"Clear weather",
+	"spellID":13
+},
+{
+	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
+	"requiredQuest":"spellWeatherClear",
+	"posX":2,
+	"posY":0,
+	"questName":"Make thunderstorm",
+	"spellID":14
 }
 ]
