@@ -50,6 +50,7 @@ processResources
     {
         include 'mcmod.info'
         include 'achievements.json'
+        include 'About achievements.txt'
                 
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
