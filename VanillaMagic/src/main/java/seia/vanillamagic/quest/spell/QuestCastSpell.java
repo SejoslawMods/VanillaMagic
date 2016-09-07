@@ -8,6 +8,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import seia.vanillamagic.event.EventCastSpell;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumSpell;
 import seia.vanillamagic.spell.EnumWand;
@@ -120,6 +121,7 @@ public abstract class QuestCastSpell extends Quest
 				{
 					if(spell.minimalWandTier.wandTier == es.minimalWandTier.wandTier)
 					{
+						EventCastSpell event = new EventCastSpell(caster, pos, face, hitVec, es);
 						return SpellHelper.castSpellById(spell.spellID, caster, pos, face, hitVec);
 					}
 				}

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-public class ExtraBlockBreak extends Event
+public class EventExtraBlockBreak extends Event
 {
 	public final ItemStack itemStack;
 	public final EntityPlayer player;
@@ -17,17 +17,17 @@ public class ExtraBlockBreak extends Event
 	public int depth;
 	public int distance;
 
-	public ExtraBlockBreak(ItemStack itemStack, EntityPlayer player, IBlockState state) 
+	public EventExtraBlockBreak(ItemStack itemStack, EntityPlayer player, IBlockState state) 
 	{
 		this.itemStack = itemStack;
 		this.player = player;
 		this.state = state;
 	}
 	
-	public static ExtraBlockBreak fireEvent(ItemStack itemStack, EntityPlayer player, IBlockState state, 
+	public static EventExtraBlockBreak fireEvent(ItemStack itemStack, EntityPlayer player, IBlockState state, 
 			int width, int height, int depth, int distance)
 	{
-		ExtraBlockBreak event = new ExtraBlockBreak(itemStack, player, state);
+		EventExtraBlockBreak event = new EventExtraBlockBreak(itemStack, player, state);
 		event.width = width;
 		event.height = height;
 		event.depth = depth;

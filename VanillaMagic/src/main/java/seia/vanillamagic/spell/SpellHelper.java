@@ -68,8 +68,8 @@ import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.EntityHelper;
 
 /**
- * The work of each spell.
- * When using any of those methods we are sure that the Caster has got the right wand in hand.
+ * The work of each spell. <br>
+ * When using any of those methods we are sure that the Caster has got the right wand in hand. <br>
  * Each spell has their own parameters, because maybe we want to cast spell from another spell or use spells somewhere else.
  */
 public class SpellHelper

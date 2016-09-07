@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import seia.vanillamagic.event.EventQuest.EventAddQuest;
+
 public class QuestList 
 {
 	public static List<Quest> QUESTS = new ArrayList<Quest>();
@@ -12,6 +14,7 @@ public class QuestList
 	
 	public static void addQuest(Quest q)
 	{
+		EventAddQuest event = new EventAddQuest(q);
 		QuestList.QUESTS.add(q);
 		QuestList.QUESTS_MAP.put(q.uniqueName, q);
 	}

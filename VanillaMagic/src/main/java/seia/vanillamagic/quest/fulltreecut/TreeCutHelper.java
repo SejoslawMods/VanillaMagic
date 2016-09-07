@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import seia.vanillamagic.event.ExtraBlockBreak;
+import seia.vanillamagic.event.EventExtraBlockBreak;
 
 public class TreeCutHelper 
 {
@@ -83,7 +83,7 @@ public class TreeCutHelper
 		{
 			return true;
 		}
-		ExtraBlockBreak event = ExtraBlockBreak.fireEvent(itemstack, player, player.getEntityWorld().getBlockState(start), 3, 3, 3, 1);
+		EventExtraBlockBreak event = EventExtraBlockBreak.fireEvent(itemstack, player, player.getEntityWorld().getBlockState(start), 3, 3, 3, 1);
 		int speed = Math.round((event.width * event.height * event.depth) / 27f);
 		if(event.distance > 0) 
 		{

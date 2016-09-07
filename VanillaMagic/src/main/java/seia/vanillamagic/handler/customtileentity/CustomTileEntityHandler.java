@@ -12,6 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.event.EventCustomTile.EventAddCustomTile;
+import seia.vanillamagic.event.EventCustomTile.EventRemoveCustomTile;
 import seia.vanillamagic.handler.WorldHandler;
 
 public class CustomTileEntityHandler 
@@ -37,6 +39,7 @@ public class CustomTileEntityHandler
 	
 	public boolean addCustomTileEntity(TileEntity customTileEntity, int dimensionID)
 	{
+		EventAddCustomTile event = new EventAddCustomTile(customTileEntity, dimensionID);
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))
 		{
@@ -47,6 +50,7 @@ public class CustomTileEntityHandler
 	
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
+		EventRemoveCustomTile event = new EventRemoveCustomTile(world, pos, dimension);
 		String rootDir = getRootDir();
 		if(saveHandlers.containsKey(rootDir))
 		{

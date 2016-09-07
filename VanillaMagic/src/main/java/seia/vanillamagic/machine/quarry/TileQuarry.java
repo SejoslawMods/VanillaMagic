@@ -180,15 +180,9 @@ public class TileQuarry extends TileMachine
 				else if(hasChest)
 				{
 					ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory(), stack, getOutputFacing());
-					try
+					if(leftItems.stackSize > 0)
 					{
-						if(leftItems.stackSize > 0)
-						{
-							spawnDigged(leftItems);
-						}
-					}
-					catch(Exception e)
-					{
+						spawnDigged(leftItems);
 					}
 				}
 			}

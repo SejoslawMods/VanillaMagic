@@ -14,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.event.EventMachineWork;
 import seia.vanillamagic.utils.CustomTileEntity;
 import seia.vanillamagic.utils.InventoryHelper;
 import seia.vanillamagic.utils.NBTHelper;
@@ -117,9 +118,9 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	{
 		if(ticks >= oneOperationCost)
 		{
+			EventMachineWork event = new EventMachineWork(this);
 			isActive = true;
 			doWork();
-			return;
 		}
 	}
 	
