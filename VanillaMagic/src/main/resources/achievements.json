@@ -1455,8 +1455,8 @@
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"craftNetherStar",
-	"posX":0,
-	"posY":2,
+	"posX":2,
+	"posY":0,
 	"questName":"Craft Dragon Egg",
 	"uniqueName":"craftDragonEgg",
 	"ingredients":

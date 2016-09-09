@@ -49,9 +49,9 @@ public class VanillaMagic
 		logger = event.getModLog();
 		configAchievements = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
 		modMetadata = VanillaMagicMetadata.INSTANCE.preInit(modMetadata);
-		for(int i = 0; i < QuestList.QUESTS.size(); i++)
+		for(int i = 0; i < QuestList.size(); i++)
 		{
-			QuestHandler.INSTANCE.registerEvent(QuestList.QUESTS.get(i));
+			QuestHandler.INSTANCE.registerEvent(QuestList.get(i));
 		}
 		logger.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
@@ -64,9 +64,9 @@ public class VanillaMagic
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		for(int i = 0; i < QuestList.QUESTS.size(); i++)
+		for(int i = 0; i < QuestList.size(); i++)
 		{
-			QuestHandler.INSTANCE.addAchievement(QuestList.QUESTS.get(i).achievement);
+			QuestHandler.INSTANCE.addAchievement(QuestList.get(i).achievement);
 		}
 		logger.log(Level.INFO, "Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
 		VanillaMagicIntegration.INSTANCE.init();

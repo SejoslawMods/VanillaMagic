@@ -31,7 +31,7 @@ public abstract class Quest
 	
 	public void readData(JsonObject jo)
 	{
-		this.requiredQuest = QuestList.QUESTS_MAP.get(jo.get("requiredQuest").getAsString());
+		this.requiredQuest = QuestList.get(jo.get("requiredQuest").getAsString());
 		this.required = (this.requiredQuest == null ? null : this.requiredQuest.achievement);
 		if(jo.has("questName"))
 		{
@@ -59,7 +59,7 @@ public abstract class Quest
 			int index = 0;
 			for(Entry<String, JsonElement> q : set)
 			{
-				requiredQuestsTable[index] = QuestList.QUESTS_MAP.get(q.getValue().getAsString());
+				requiredQuestsTable[index] = QuestList.get(q.getValue().getAsString());
 				index++;
 			}
 			this.additionalRequiredQuests = requiredQuestsTable;

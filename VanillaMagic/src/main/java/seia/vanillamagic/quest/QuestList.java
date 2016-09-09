@@ -5,18 +5,69 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.Level;
+
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.event.EventQuest.EventAddQuest;
 
 public class QuestList 
 {
-	public static List<Quest> QUESTS = new ArrayList<Quest>();
-	public static Map<String, Quest> QUESTS_MAP = new HashMap<String, Quest>();
+	private static List<Quest> QUESTS = new ArrayList<Quest>();
+	private static Map<String, Quest> QUESTS_MAP = new HashMap<String, Quest>();
 	
+	/**
+	 * Main method for adding Quests.
+	 */
 	public static void addQuest(Quest q)
 	{
 		EventAddQuest event = new EventAddQuest(q);
 		QuestList.QUESTS.add(q);
 		QuestList.QUESTS_MAP.put(q.uniqueName, q);
+	}
+	
+	/**
+	 * Returns Quest from the Map.
+	 */
+	public static Quest get(String key)
+	{
+		Quest q = QUESTS_MAP.get(key);
+		if(q == null)
+		{
+			VanillaMagic.logger.log(Level.ERROR, "Can't find Quest for key: " + key);
+		}
+		return q;
+	}
+	
+	/**
+	 * Returns Quest from the List.
+	 */
+	public static Quest get(int index)
+	{
+		return QUESTS.get(index);
+	}
+	
+	/**
+	 * Returns Quest List size.
+	 */
+	public static int size()
+	{
+		return QUESTS.size();
+	}
+	
+	/**
+	 * Returns Quests as List.
+	 */
+	public static List<Quest> getQuests()
+	{
+		return QUESTS;
+	}
+	
+	/**
+	 * Returns Quests as Map.
+	 */
+	public static Map<String, Quest> getQuestsMap()
+	{
+		return QUESTS_MAP;
 	}
 	
 	/*

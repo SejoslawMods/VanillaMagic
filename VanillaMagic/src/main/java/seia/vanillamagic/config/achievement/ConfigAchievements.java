@@ -110,7 +110,7 @@ public class ConfigAchievements
 				VanillaMagic.logger.log(Level.INFO, "Error while creating " + fileName);
 			}
 		}
-		return null;
+		return localFile;
 	}
 	
 	public void readAchievements()

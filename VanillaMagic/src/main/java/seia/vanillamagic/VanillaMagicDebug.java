@@ -45,7 +45,7 @@ public class VanillaMagicDebug
 		EntityPlayer player = event.getEntityPlayer();
 		if(ItemStackHelper.checkItemsInHands(player, DEBUG_OFF_HAND_ITEMSTACK, DEBUG_MAIN_HAND_ITEMSTACK))
 		{
-			for(Quest quest : QuestList.QUESTS)
+			for(Quest quest : QuestList.getQuests())
 			{
 				Achievement toAchieve = quest.achievement;
 				player.addStat(toAchieve, 1);
