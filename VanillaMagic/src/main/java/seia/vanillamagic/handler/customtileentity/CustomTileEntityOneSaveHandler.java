@@ -190,6 +190,10 @@ public class CustomTileEntityOneSaveHandler
 	public TileEntity getCustomTileEntity(BlockPos tilePos, int dimension) 
 	{
 		List<TileEntity> tiles = loadedTileEntities.get(dimension);
+		if(tiles == null)
+		{
+			return null;
+		}
 		for(TileEntity tile : tiles)
 		{
 			if(BlockPosHelper.isSameBlockPos(tilePos, tile.getPos()))
