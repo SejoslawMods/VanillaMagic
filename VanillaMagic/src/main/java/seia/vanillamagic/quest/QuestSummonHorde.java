@@ -25,14 +25,6 @@ public class QuestSummonHorde extends Quest
 	protected double requiredDistanceToPlayer = range - 2; 
 	protected ItemStack requiredLeftHand;
 	
-//	public QuestSummonHorde(Quest required, int posX, int posY, String questName, String uniqueName,
-//			int level, ItemStack requiredLeftHand, Quest[] requiredQuests) 
-//	{
-//		super(required, posX, posY, requiredLeftHand, questName, uniqueName, requiredQuests);
-//		this.level = level;
-//		this.requiredLeftHand = requiredLeftHand;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		this.level = jo.get("level").getAsInt();
@@ -64,7 +56,10 @@ public class QuestSummonHorde extends Quest
 				{
 					if(!player.hasAchievement(achievement))
 					{
-						player.addStat(achievement, 1);
+						if(canPlayerGetAchievement(player))
+						{
+							player.addStat(achievement, 1);
+						}
 					}
 					if(player.hasAchievement(achievement))
 					{

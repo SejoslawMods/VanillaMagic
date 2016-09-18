@@ -30,23 +30,6 @@ public class QuestCraftOnAltar extends Quest
 	public int requiredAltarTier;
 	public EnumWand requiredMinimalWand;
 	
-//	public QuestCraftOnAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
-//			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
-//	{
-//		this(required, posX, posY, result[0], questName, uniqueName,
-//				ingredients, result, requiredAltarTier, requiredMinimalWand);
-//	}
-//
-//	public QuestCraftOnAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-//			ItemStack[] ingredients, ItemStack[] result, int requiredAltarTier, EnumWand requiredMinimalWand) 
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//		this.ingredients = ingredients;
-//		this.result = result;
-//		this.requiredAltarTier = requiredAltarTier;
-//		this.requiredMinimalWand = requiredMinimalWand;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		this.ingredients = ItemStackHelper.getItemStackArrayFromJSON(jo, "ingredients");
@@ -115,7 +98,7 @@ public class QuestCraftOnAltar extends Quest
 						// the amount of items in Cauldron was right and the items themselfs were right
 						if(ingredients.length == alreadyCheckedEntityItems.size())
 						{
-							if(!player.hasAchievement(achievement))
+							if(canPlayerGetAchievement(player))
 							{
 								player.addStat(achievement, 1);
 							}

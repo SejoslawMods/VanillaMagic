@@ -16,11 +16,6 @@ import seia.vanillamagic.quest.Quest;
 
 public class QuestChunkLoader extends Quest
 {
-//	public QuestChunkLoader(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void chunkLoaderPlaced(PlaceEvent event)
 	{
@@ -39,7 +34,7 @@ public class QuestChunkLoader extends Quest
 				TileChunkLoader tileChunkLoader = new TileChunkLoader();
 				if(isChunkLoaderBuildCorrectly(world, chunkLoaderPos))
 				{
-					if(!placedBy.hasAchievement(achievement))
+					if(canPlayerGetAchievement(placedBy))
 					{
 						placedBy.addStat(achievement, 1);
 					}

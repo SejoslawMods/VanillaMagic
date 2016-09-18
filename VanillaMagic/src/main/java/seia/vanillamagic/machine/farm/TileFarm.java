@@ -216,7 +216,7 @@ public class TileFarm extends TileMachine
 			{
 				markDirty();
 			}
-			else if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1) // TODO: This will prevent item from being destroyed
+			else if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1)
 			{
 				return stack;
 			}

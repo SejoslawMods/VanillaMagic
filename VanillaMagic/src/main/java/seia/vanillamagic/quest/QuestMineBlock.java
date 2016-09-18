@@ -16,13 +16,6 @@ import seia.vanillamagic.utils.ListHelper;
 public class QuestMineBlock extends Quest
 {
 	public List<Block> blocksToBeMine;
-
-//	public QuestMineBlock(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-//			List<Block> blocksToBeMine) 
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//		this.blocksToBeMine = blocksToBeMine;
-//	}
 	
 	public void readData(JsonObject jo)
 	{
@@ -51,7 +44,7 @@ public class QuestMineBlock extends Quest
 	public void onBreakBlock(BlockEvent.BreakEvent event)
 	{
 		EntityPlayer player = event.getPlayer();
-		if(!player.hasAchievement(achievement))
+		if(canPlayerGetAchievement(player))
 		{
 			Block block = event.getState().getBlock();
 			if(block == null) // this should never happen, right ?

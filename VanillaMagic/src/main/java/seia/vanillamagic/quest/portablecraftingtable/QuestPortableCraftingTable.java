@@ -9,11 +9,6 @@ import seia.vanillamagic.utils.EntityHelper;
 
 public class QuestPortableCraftingTable extends Quest
 {
-//	public QuestPortableCraftingTable(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void openCrafting(RightClickItem event)
 	{
@@ -21,7 +16,7 @@ public class QuestPortableCraftingTable extends Quest
 		World world = player.worldObj;
 		if(EntityHelper.hasPlayerCraftingTableInMainHand(player))
 		{
-			if(!player.hasAchievement(achievement))
+			if(canPlayerGetAchievement(player))
 			{
 				player.addStat(achievement, 1);
 			}

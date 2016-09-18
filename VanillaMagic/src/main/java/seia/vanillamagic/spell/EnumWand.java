@@ -107,7 +107,7 @@ public enum EnumWand
 		return areWandsEqual(wand1.wandItemStack, wand2.wandItemStack);
 	}
 	
-	// TODO: Fox language issue with different languages.
+	// TODO: Fix language issue with different languages.
 	public static boolean areWandsEqual(ItemStack wand1, ItemStack wand2)
 	{
 		return ItemStack.areItemsEqual(wand1, wand2);// &&

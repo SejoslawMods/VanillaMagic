@@ -22,15 +22,6 @@ public class QuestMineMulti extends Quest
 	public int depth;
 	public EnumWand requiredWand;
 	
-//	public QuestMineMulti(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-//			int radius, int depth, EnumWand requiredWand) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//		this.radius = radius;
-//		this.depth = depth;
-//		this.requiredWand = requiredWand;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
@@ -50,7 +41,7 @@ public class QuestMineMulti extends Quest
 		EntityPlayer player = event.getPlayer();
 		World world = player.worldObj;
 		BlockPos miningPos = event.getPos();
-		if(!player.hasAchievement(achievement))
+		if(canPlayerGetAchievement(player))
 		{
 			player.addStat(achievement, 1);
 		}

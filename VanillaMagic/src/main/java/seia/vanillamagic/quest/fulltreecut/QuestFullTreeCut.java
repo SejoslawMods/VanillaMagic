@@ -13,12 +13,6 @@ import seia.vanillamagic.spell.EnumWand;
 
 public class QuestFullTreeCut extends Quest
 {
-//	public QuestFullTreeCut(Quest required, int posX, int posY, ItemStack itemIcon,
-//			String questName, String uniqueName)
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void onTreeCut(BreakEvent event)
 	{
@@ -44,7 +38,7 @@ public class QuestFullTreeCut extends Quest
 					origin = origin.offset(EnumFacing.UP);
 					if(TreeCutHelper.detectTree(player.worldObj, origin))
 					{
-						if(!player.hasAchievement(achievement))
+						if(canPlayerGetAchievement(player))
 						{
 							player.addStat(achievement, 1);
 						}

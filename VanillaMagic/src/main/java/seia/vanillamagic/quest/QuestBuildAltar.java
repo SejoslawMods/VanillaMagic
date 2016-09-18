@@ -14,20 +14,6 @@ public class QuestBuildAltar extends Quest
 {
 	public int tier;
 	
-//	public QuestBuildAltar(Quest required, int posX, int posY, String questName, String uniqueName, 
-//			int tier)
-//	{
-//		this(required, posX, posY, new ItemStack(Items.CAULDRON), questName, uniqueName,
-//				tier);
-//	}
-//	
-//	public QuestBuildAltar(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-//			int tier)
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//		this.tier = tier;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
@@ -40,7 +26,7 @@ public class QuestBuildAltar extends Quest
 		EntityPlayer player = event.getPlayer();
 		BlockPos middlePos = event.getBlockSnapshot().getPos();
 		Block middleBlock = event.getPlacedBlock().getBlock();
-		if(!player.hasAchievement(achievement))
+		if(canPlayerGetAchievement(player))
 		{
 			if(middleBlock instanceof BlockCauldron)
 			{

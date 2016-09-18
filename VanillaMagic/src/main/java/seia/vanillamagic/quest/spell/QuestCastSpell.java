@@ -18,33 +18,6 @@ public abstract class QuestCastSpell extends Quest
 {
 	public EnumSpell spell;
 	
-//	public QuestCastSpell(Quest required, int posX, int posY, EnumSpell spell, Quest[] additionalRequiredQuests) 
-//	{
-//		this(required, posX, posY, spell);
-//		this.additionalRequiredQuests = additionalRequiredQuests;
-//	}
-//
-//	public QuestCastSpell(Quest required, int posX, int posY, 
-//			EnumSpell spell)
-//	{
-//		this(required, posX, posY, spell.spellName, spell.spellUniqueName, 
-//				spell);
-//	}
-//	
-//	public QuestCastSpell(Quest required, int posX, int posY, String questName, String uniqueName, 
-//			EnumSpell spell)
-//	{
-//		this(required, posX, posY, spell.itemOffHand, questName, uniqueName, 
-//				spell);
-//	}
-//	
-//	public QuestCastSpell(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName, 
-//			EnumSpell spell)
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//		this.spell = spell;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		this.spell = EnumSpell.getSpellById(jo.get("spellID").getAsInt());
@@ -81,7 +54,10 @@ public abstract class QuestCastSpell extends Quest
 			{
 				if(!caster.hasAchievement(achievement))
 				{
-					caster.addStat(achievement, 1);
+					if(canPlayerGetAchievement(caster))
+					{
+						caster.addStat(achievement, 1);
+					}
 				}
 				if(caster.hasAchievement(achievement)) //else
 				{

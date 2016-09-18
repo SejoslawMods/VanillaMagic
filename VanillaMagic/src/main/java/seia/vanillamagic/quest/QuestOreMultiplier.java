@@ -23,14 +23,6 @@ public class QuestOreMultiplier extends Quest
 	public int multiplier;
 	public EnumWand requiredMinimalWand;
 	
-//	public QuestOreMultiplier(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-//			int multiplier, EnumWand requiredMinimalWand) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//		this.multiplier = multiplier;
-//		this.requiredMinimalWand = requiredMinimalWand;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
@@ -64,7 +56,14 @@ public class QuestOreMultiplier extends Quest
 						List<EntityItem> oresInCauldron = SmeltingHelper.getOresInCauldron(world, cauldronPos);
 						if(oresInCauldron.size() > 0)
 						{
-							multiply(player, oresInCauldron, cauldronPos);
+							if(canPlayerGetAchievement(player))
+							{
+								player.addStat(achievement, 1);
+							}
+							if(player.hasAchievement(achievement))
+							{
+								multiply(player, oresInCauldron, cauldronPos);
+							}
 						}
 					}
 				}

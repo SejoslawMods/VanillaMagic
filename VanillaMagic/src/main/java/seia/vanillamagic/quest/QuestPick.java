@@ -13,20 +13,6 @@ public class QuestPick extends Quest
 {
 	public ItemStack whatToPick;
 	
-//	public QuestPick(Quest required, int posX, int posY, String questName, String uniqueName,
-//			ItemStack whatToPick)
-//	{
-//		this(required, posX, posY, whatToPick, questName, uniqueName,
-//				whatToPick);
-//	}
-//	
-//	public QuestPick(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName,
-//			ItemStack whatToPick)
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//		this.whatToPick = whatToPick;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		this.whatToPick = ItemStackHelper.getItemStackFromJSON(jo.get("whatToPick").getAsJsonObject());
@@ -38,7 +24,7 @@ public class QuestPick extends Quest
 	public void pickItem(ItemPickupEvent event)
 	{
 		EntityPlayer player = event.player;
-		if(!player.hasAchievement(achievement))
+		if(canPlayerGetAchievement(player))
 		{
 			EntityItem onGround = event.pickedUp;
 			if(whatToPick.getItem().equals(onGround.getEntityItem().getItem()))

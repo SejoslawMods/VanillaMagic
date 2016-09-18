@@ -17,12 +17,6 @@ import seia.vanillamagic.spell.EnumWand;
 
 public class QuestArrowMachineGun extends Quest
 {
-//	public QuestArrowMachineGun(Quest required, int posX, int posY, ItemStack itemIcon, String questName,
-//			String uniqueName) 
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void onRightClick(RightClickItem event)
 	{
@@ -38,11 +32,11 @@ public class QuestArrowMachineGun extends Quest
 		{
 			if(rightHand.getItem().equals(EnumWand.NETHER_STAR.wandItemStack.getItem()))
 			{
-				if(!player.hasAchievement(achievement))
+				if(canPlayerGetAchievement(player))
 				{
 					player.addStat(achievement, 1);
 				}
-				else if(player.hasAchievement(achievement))
+				if(player.hasAchievement(achievement))
 				{
 					EntityTippedArrow entityTippedArrow = new EntityTippedArrow(world, player);
 					entityTippedArrow.setPotionEffect(leftHand);

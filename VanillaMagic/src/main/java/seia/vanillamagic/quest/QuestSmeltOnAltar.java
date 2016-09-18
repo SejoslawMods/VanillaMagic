@@ -25,15 +25,6 @@ public class QuestSmeltOnAltar extends Quest
 	public int requiredAltarTier;
 	public EnumWand requiredMinimalWand;
 	
-//	public QuestSmeltOnAltar(Quest required, int posX, int posY, 
-//			ItemStack itemIcon, String questName, String uniqueName,
-//			int requiredAltarTier, EnumWand requiredMinimalWand)
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//		this.requiredAltarTier = requiredAltarTier;
-//		this.requiredMinimalWand = requiredMinimalWand;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
@@ -67,7 +58,14 @@ public class QuestSmeltOnAltar extends Quest
 						List<EntityItem> itemsToSmelt = SmeltingHelper.getSmeltable(world, cauldronPos);
 						if(itemsToSmelt.size() > 0)
 						{
-							SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+							if(canPlayerGetAchievement(player))
+							{
+								player.addStat(achievement, 1);
+							}
+							if(player.hasAchievement(achievement))
+							{
+								SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+							}
 						}
 					}
 				}

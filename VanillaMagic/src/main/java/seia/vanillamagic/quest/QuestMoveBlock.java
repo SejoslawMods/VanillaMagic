@@ -26,14 +26,6 @@ public class QuestMoveBlock extends Quest
 	 */
 	public ItemStack requiredStackOffHand;
 	public EnumWand requiredWand;
-
-//	public QuestMoveBlock(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName, 
-//			ItemStack requiredStackOffHand, EnumWand requiredWand)
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//		this.requiredStackOffHand = requiredStackOffHand;
-//		this.requiredWand = requiredWand;
-//	}
 	
 	public void readData(JsonObject jo)
 	{
@@ -76,7 +68,7 @@ public class QuestMoveBlock extends Quest
 				{
 					if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
 					{
-						if(!player.hasAchievement(achievement))
+						if(canPlayerGetAchievement(player))
 						{
 							player.addStat(achievement, 1);
 						}

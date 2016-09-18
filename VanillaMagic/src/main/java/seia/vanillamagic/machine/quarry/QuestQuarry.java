@@ -16,12 +16,6 @@ import seia.vanillamagic.utils.EntityHelper;
 
 public class QuestQuarry extends QuestMachineActivate
 {
-//	public QuestQuarry(Quest required, int posX, int posY, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, new ItemStack(Items.CAULDRON), questName, uniqueName,
-//				null, EnumWand.BLAZE_ROD.wandItemStack);
-//	}
-	
 	@SubscribeEvent
 	public void startQuarry(RightClickBlock event)
 	{
@@ -39,7 +33,7 @@ public class QuestQuarry extends QuestMachineActivate
 		}
 		if(itemInHand.getItem().equals(EnumWand.BLAZE_ROD.wandItemStack.getItem()))
 		{
-			if(!player.hasAchievement(achievement))
+			if(canPlayerGetAchievement(player))
 			{
 				player.addStat(achievement, 1);
 			}

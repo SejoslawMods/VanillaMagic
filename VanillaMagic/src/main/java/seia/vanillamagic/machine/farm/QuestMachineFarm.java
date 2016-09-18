@@ -19,13 +19,6 @@ public class QuestMachineFarm extends QuestMachineActivate
 {
 	protected int radius;
 	
-//	public QuestMachineFarm(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-//			ItemStack mustHaveOffHand, ItemStack mustHaveMainHand, int radius) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName, mustHaveOffHand, mustHaveMainHand);
-//		this.radius = radius;
-//	}
-	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);

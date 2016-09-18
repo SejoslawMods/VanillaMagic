@@ -15,6 +15,10 @@ public class QuestList
 	private static List<Quest> QUESTS = new ArrayList<Quest>();
 	private static Map<String, Quest> QUESTS_MAP = new HashMap<String, Quest>();
 	
+	private QuestList()
+	{
+	}
+	
 	/**
 	 * Main method for adding Quests.
 	 */

@@ -15,11 +15,6 @@ import seia.vanillamagic.utils.WorldHelper;
 
 public class QuestSpeedy extends Quest
 {
-//	public QuestSpeedy(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName)
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void placeSpeedy(RightClickBlock event)
 	{
@@ -35,7 +30,7 @@ public class QuestSpeedy extends Quest
 				{
 					if(player.isSneaking())
 					{
-						if(!player.hasAchievement(achievement))
+						if(canPlayerGetAchievement(player))
 						{
 							player.addStat(achievement, 1);
 						}

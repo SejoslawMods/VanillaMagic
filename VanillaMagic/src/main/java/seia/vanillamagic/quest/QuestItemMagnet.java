@@ -17,11 +17,6 @@ public class QuestItemMagnet extends Quest
 	public final ItemStack star = new ItemStack(Items.NETHER_STAR);
 	public final int range = 6;
 	public final int maxPulledItems = 200;
-
-//	public QuestItemMagnet(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//	}
 	
 	@SubscribeEvent
 	public void playerTick(LivingUpdateEvent event)
@@ -31,7 +26,7 @@ public class QuestItemMagnet extends Quest
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			if(playerHasRightItemsInInventory(player))
 			{
-				if(!player.hasAchievement(achievement))
+				if(canPlayerGetAchievement(player))
 				{
 					player.addStat(achievement, 1);
 				}

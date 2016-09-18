@@ -940,7 +940,7 @@
 	"ingredients":
 	[{
 		"just_to_know_what_it_is":"redstone_dust",
-		"id":55,
+		"id":331,
 		"stackSize":2
 	},
 	{
@@ -1056,7 +1056,7 @@
 	},
 	{
 		"just_to_know_what_it_is":"redstone_dust",
-		"id":55
+		"id":331
 	}],
 	"result":
 	[{
@@ -1477,7 +1477,7 @@
 	"questClass":"seia.vanillamagic.quest.QuestCraft",
 	"requiredQuest":"craftStick",
 	"posX":2,
-	"posY":0,
+	"posY":1,
 	"icon":
 	{
 		"id":340
@@ -1499,9 +1499,9 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestMineBlock",
-	"requiredQuest":"craftBookshelf",
+	"requiredQuest":"craftBook",
 	"posX":2,
-	"posY":0,
+	"posY":-2,
 	"icon":
 	{
 		"id":264
@@ -1513,9 +1513,9 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestMineBlock",
-	"requiredQuest":"mineDiamond",
+	"requiredQuest":"craftBook",
 	"posX":2,
-	"posY":0,
+	"posY":1,
 	"icon":
 	{
 		"id":49
@@ -1527,21 +1527,26 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraft",
-	"requiredQuest":"mineObsidian",
+	"requiredQuest":"craftBookshelf",
 	"posX":2,
 	"posY":0,
 	"icon":
 	{
 		"id":116
 	},
-	"questName":"Craft Enchanting Table",
-	"uniqueName":"craftEnchantingTable"
+	"questName":"Craft Enchanting Table (Require: all 3 earlier)",
+	"uniqueName":"craftEnchantingTable",
+	"additionalRequiredQuests":
+	{
+		"quest_1":"mineDiamond",
+		"quest_2":"mineObsidian"
+	}
 },
 {
 	"questClass":"seia.vanillamagic.chunkloader.QuestChunkLoader",
 	"requiredQuest":"craftEnchantingTable",
-	"posX":0,
-	"posY":2,
+	"posX":2,
+	"posY":0,
 	"icon":
 	{
 		"id":116

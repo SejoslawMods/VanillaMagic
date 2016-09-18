@@ -24,11 +24,6 @@ public class QuestAutocrafting extends Quest
 {
 	private static int iinvDown = 3;
 	
-//	public QuestAutocrafting(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void addAutocrafting(RightClickBlock event)
 	{
@@ -44,7 +39,7 @@ public class QuestAutocrafting extends Quest
 				{
 					if(isConstructionComplete(world, cauldronPos))
 					{
-						if(!player.hasAchievement(achievement))
+						if(canPlayerGetAchievement(player))
 						{
 							player.addStat(achievement, 1);
 						}

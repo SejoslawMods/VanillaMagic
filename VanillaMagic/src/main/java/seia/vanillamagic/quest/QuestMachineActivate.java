@@ -13,14 +13,6 @@ public abstract class QuestMachineActivate extends Quest
 {
 	public ItemStack mustHaveOffHand;
 	public ItemStack mustHaveMainHand;
-//	
-//	public QuestMachineActivate(Quest required, int posX, int posY, ItemStack icon, String questName, String uniqueName,
-//			ItemStack mustHaveOffHand, ItemStack mustHaveMainHand) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//		this.mustHaveOffHand = mustHaveOffHand;
-//		this.mustHaveMainHand = mustHaveMainHand;
-//	}
 	
 	public void readData(JsonObject jo)
 	{
@@ -65,9 +57,9 @@ public abstract class QuestMachineActivate extends Quest
 		{
 			if(canActivate(player))
 			{
-				if(!player.hasAchievement(requiredToWork))
+				if(canPlayerGetAchievement(player))
 				{
-					player.addStat(requiredToWork, 1);
+					player.addStat(achievement, 1);
 				}
 				if(player.hasAchievement(requiredToWork))
 				{

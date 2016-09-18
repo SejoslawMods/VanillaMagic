@@ -7,16 +7,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class QuestCraft extends Quest
 {
-//	public QuestCraft(Quest required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//	}
-//	
-//	public QuestCraft(Achievement required, int posX, int posY, ItemStack itemIcon, String questName, String uniqueName) 
-//	{
-//		super(required, posX, posY, itemIcon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void onCrafting(PlayerEvent.ItemCraftedEvent event)
 	{
@@ -26,7 +16,10 @@ public class QuestCraft extends Quest
 			Item item = event.crafting.getItem();
 			if(item.equals(achievement.theItemStack.getItem()))
 			{
-				player.addStat(achievement, 1);
+				if(canPlayerGetAchievement(player))
+				{
+					player.addStat(achievement, 1);
+				}
 			}
 		}
 	}
