@@ -57,7 +57,7 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		VanillaMagicRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		//WorldHandler.INSTANCE.preInit(); //TODO: FIX
+		//WorldHandler.INSTANCE.preInit(); //TODO: Fix World saving / loading
 		VanillaMagicIntegration.INSTANCE.preInit();
 	}
 	

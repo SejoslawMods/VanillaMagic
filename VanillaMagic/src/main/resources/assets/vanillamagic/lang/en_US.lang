@@ -196,7 +196,7 @@ achievement.mineDiamond.desc=Mine one more diamond
 achievement.mineObsidian=Mine Obsidian
 achievement.mineObsidian.desc=Mine obsidian
 
-achievement.craftEnchantingTable=Craft Enchanting Table
+achievement.craftEnchantingTable=Craft Enchanting Table (Require: all 3 earlier)
 achievement.craftEnchantingTable.desc=Craft enchanting table
 
 achievement.chunkLoader=Build ChunkLoader
@@ -210,7 +210,7 @@ achievement.craftCauldron.desc=Craft cauldron
 achievement.mineRedstone=Mine Redstone
 achievement.mineRedstone.desc=Mine at least one block of redstone
 
-achievement.buildAltarTier1=Build Altar Tier 1
+achievement.buildAltarTier1=Build Altar Tier 1 (Require: both earlier)
 achievement.buildAltarTier1.desc=Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle
 
 achievement.craftGunpowder=Craft Gunpowder

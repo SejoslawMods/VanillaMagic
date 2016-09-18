@@ -46,7 +46,7 @@
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraft",
 	"requiredQuest":"craftStick",
-	"posX":0,
+	"posX":1,
 	"posY":2,
 	"icon":
 	{
@@ -57,8 +57,8 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestMineBlock",
-	"requiredQuest":"craftCauldron",
-	"posX":0,
+	"requiredQuest":"craftStick",
+	"posX":-1,
 	"posY":2,
 	"icon":
 	{
@@ -71,16 +71,21 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"mineRedstone",
+	"requiredQuest":"craftStick",
 	"posX":0,
-	"posY":2,
+	"posY":3,
 	"icon":
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 1",
+	"questName":"Build Altar Tier 1 (Require: both earlier)",
 	"uniqueName":"buildAltarTier1",
-	"tier":1
+	"tier":1,
+	"additionalRequiredQuests":
+	{
+		"quest_1":"craftCauldron",
+		"quest_2":"mineRedstone"
+	}
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
@@ -1534,7 +1539,7 @@
 	{
 		"id":116
 	},
-	"questName":"Craft Enchanting Table - Require: all 3 earlier",
+	"questName":"Craft Enchanting Table (Require: all 3 earlier)",
 	"uniqueName":"craftEnchantingTable",
 	"additionalRequiredQuests":
 	{
