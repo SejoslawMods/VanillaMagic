@@ -1501,7 +1501,7 @@
 	"questClass":"seia.vanillamagic.quest.QuestMineBlock",
 	"requiredQuest":"craftBook",
 	"posX":2,
-	"posY":-2,
+	"posY":-1,
 	"icon":
 	{
 		"id":264
@@ -1534,7 +1534,7 @@
 	{
 		"id":116
 	},
-	"questName":"Craft Enchanting Table (Require: all 3 earlier)",
+	"questName":"Craft Enchanting Table - Require: all 3 earlier",
 	"uniqueName":"craftEnchantingTable",
 	"additionalRequiredQuests":
 	{
