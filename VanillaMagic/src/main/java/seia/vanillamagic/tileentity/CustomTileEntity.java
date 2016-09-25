@@ -1,4 +1,4 @@
-package seia.vanillamagic.utils;
+package seia.vanillamagic.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,8 +11,9 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.utils.NBTHelper;
 
-public abstract class CustomTileEntity extends TileEntity implements ITickable
+public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
 {
 	protected Ticket chunkTicket;
 	protected String playerName;
@@ -68,5 +69,15 @@ public abstract class CustomTileEntity extends TileEntity implements ITickable
 	public NBTTagCompound getUpdateTag()
 	{
 		return writeToNBT(new NBTTagCompound());
+	}
+	
+	public Ticket getChunkTicket()
+	{
+		return chunkTicket;
+	}
+	
+	public String getPlayerName()
+	{
+		return playerName;
 	}
 }

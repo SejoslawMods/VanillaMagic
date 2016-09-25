@@ -39,7 +39,14 @@ public class CustomTileEntityHandler
 	
 	public boolean addCustomTileEntity(TileEntity customTileEntity, int dimensionID)
 	{
-		EventAddCustomTile event = new EventAddCustomTile(customTileEntity, dimensionID);
+		try
+		{
+			EventAddCustomTile event = new EventAddCustomTile(customTileEntity, dimensionID);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))
 		{
@@ -50,7 +57,14 @@ public class CustomTileEntityHandler
 	
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
-		EventRemoveCustomTile event = new EventRemoveCustomTile(world, pos, dimension);
+		try
+		{
+			EventRemoveCustomTile event = new EventRemoveCustomTile(world, pos, dimension);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		String rootDir = getRootDir();
 		if(saveHandlers.containsKey(rootDir))
 		{

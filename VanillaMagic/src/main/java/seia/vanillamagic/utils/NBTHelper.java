@@ -14,7 +14,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 
 /**
- * Stores all the Vanilla Magic NBT tags.
+ * Stores all the Vanilla Magic NBT tags. <br>
  * Additional tags are stored in interfaces.
  */
 public class NBTHelper

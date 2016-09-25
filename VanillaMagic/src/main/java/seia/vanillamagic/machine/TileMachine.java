@@ -15,7 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.event.EventMachineWork;
-import seia.vanillamagic.utils.CustomTileEntity;
+import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.utils.InventoryHelper;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.SmeltingHelper;
@@ -120,8 +120,17 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		{
 			EventMachineWork event = new EventMachineWork(this);
 			isActive = true;
+			performAdditionalOperations();
 			doWork();
 		}
+	}
+	
+	/**
+	 * Method which is execute before the right doWork()
+	 * @see seia.vanillamagic.machine.TileMachine#doWork()
+	 */
+	protected void performAdditionalOperations()
+	{
 	}
 	
 	protected void decreaseTicks()

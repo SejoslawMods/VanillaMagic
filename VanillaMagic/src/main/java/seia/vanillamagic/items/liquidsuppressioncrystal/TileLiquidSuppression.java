@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.utils.CustomTileEntity;
+import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.WorldHelper;
 

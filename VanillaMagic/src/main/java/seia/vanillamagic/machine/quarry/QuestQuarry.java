@@ -57,7 +57,7 @@ public class QuestQuarry extends QuestMachineActivate
 	{
 		BlockPos quarryPos = event.getPos();
 		EntityPlayer player = event.getPlayer();
-		World world = player.worldObj;
+		World world = event.getWorld();
 		if(world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
 		{
 			TileEntity quarryTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(quarryPos, player.dimension);

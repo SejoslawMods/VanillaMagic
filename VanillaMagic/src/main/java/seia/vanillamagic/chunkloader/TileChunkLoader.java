@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Level;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.CustomTileEntity;
 
 public class TileChunkLoader extends CustomTileEntity
 {

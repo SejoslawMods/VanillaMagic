@@ -22,8 +22,8 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
+import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.CustomTileEntity;
 import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.WorldHelper;
 

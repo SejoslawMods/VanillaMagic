@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.OrderedLoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.utils.CustomTileEntity;
+import seia.vanillamagic.tileentity.CustomTileEntity;
 
 public class ChunkLoadingHandler implements OrderedLoadingCallback
 {

@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -20,16 +21,24 @@ import seia.vanillamagic.utils.InventoryHelper;
 
 public class TileQuarry extends TileMachine
 {
-	// It's (size)x(size) but (size-2)x(size-2) is for digging
-	// ChunkNumber * BlocksInChunk
-	public static final int BASIC_QUARRY_SIZE = 8 * 16;
 	// The name for registry
 	public static final String REGISTRY_NAME = TileQuarry.class.getSimpleName();
 	
 	private BlockPos diamondBlockPos;
 	private BlockPos redstoneBlockPos;
 	private Random rand = new Random();
+	/**
+	 * It is not final, but should never be changed. <br>
+	 * It is set in the checkSurroundings().
+	 */
 	private EnumFacing startPosFacing;
+	private EnumFacing diamondFacing;
+	/**
+	 * It's (size)x(size) but (size-2)x(size-2) is for digging
+	 * BlocksInChunk
+	 * Only multiply this
+	 */
+	private int quarrySize = QuarrySizeHelper.BASIC_SIZE;
 	
 	/**
 	 * Method for checking DiamondBlock and RedstoneBlock
@@ -63,7 +72,8 @@ public class TileQuarry extends TileMachine
 					{
 						if(startPos == null)
 						{
-							startPosFacing = diamondFacing.rotateY();
+							this.diamondFacing = diamondFacing;
+							this.startPosFacing = diamondFacing.rotateY();
 							restartDefaultStartPos();
 						}
 						return true;
@@ -133,6 +143,27 @@ public class TileQuarry extends TileMachine
 	public BlockPos moveWorkingPosToNextPos()
 	{
 		return workingPos.offset(EnumFacing.DOWN);
+	}
+	
+	/**
+	 * Here I want to check for the number of diamond blocks next to the Quarry. <br>
+	 * Count them and change the Quarry size.
+	 * 
+	 * @see seia.vanillamagic.machine.TileMachine#performAdditionalOperations()
+	 */
+	protected void performAdditionalOperations()
+	{
+		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
+		cauldronPos = cauldronPos.offset(diamondFacing);
+		int diamondBlocks = 0;
+		IBlockState checkingBlock = this.getWorld().getBlockState(cauldronPos);
+		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK))
+		{
+			diamondBlocks++;
+			cauldronPos = cauldronPos.offset(diamondFacing);
+			checkingBlock = this.getWorld().getBlockState(cauldronPos);
+		}
+		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
 	}
 	
 	public void doWork() // once a world tick
@@ -208,7 +239,7 @@ public class TileQuarry extends TileMachine
 	public void goToNextPosAfterHitBedrock()
 	{
 		workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosFacing);
-		if(BlockPosHelper.distanceInLine(workingPos, startPos) > BASIC_QUARRY_SIZE)
+		if(BlockPosHelper.distanceInLine(workingPos, startPos) > quarrySize)
 		{
 			startPos = startPos.offset(rotateY(startPosFacing, 3));
 			workingPos = BlockPosHelper.copyPos(startPos);
