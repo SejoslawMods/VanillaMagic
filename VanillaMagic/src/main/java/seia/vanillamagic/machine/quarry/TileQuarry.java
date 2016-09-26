@@ -145,6 +145,7 @@ public class TileQuarry extends TileMachine
 		return workingPos.offset(EnumFacing.DOWN);
 	}
 	
+	int diamondBlocks = 0;
 	/**
 	 * Here I want to check for the number of diamond blocks next to the Quarry. <br>
 	 * Count them and change the Quarry size.
@@ -155,7 +156,7 @@ public class TileQuarry extends TileMachine
 	{
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(diamondFacing);
-		int diamondBlocks = 0;
+		diamondBlocks = 0;
 		IBlockState checkingBlock = this.getWorld().getBlockState(cauldronPos);
 		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK))
 		{
