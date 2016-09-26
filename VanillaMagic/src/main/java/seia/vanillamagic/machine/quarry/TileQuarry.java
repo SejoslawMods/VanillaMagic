@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.machine.TileMachine;
@@ -61,12 +62,12 @@ public class TileQuarry extends TileMachine
 		}
 		if(redstoneBlockPos == null || diamondBlockPos == null)
 		{
-			for(EnumFacing facing : facings())
+			for(EnumFacing redstoneFacing : facings())
 			{
-				redstoneBlockPos = pos.offset(facing);
+				redstoneBlockPos = pos.offset(redstoneFacing);
 				if(Block.isEqualTo(worldObj.getBlockState(redstoneBlockPos).getBlock(), Blocks.REDSTONE_BLOCK))
 				{
-					EnumFacing diamondFacing = facing.rotateY();
+					EnumFacing diamondFacing = redstoneFacing.rotateY();
 					diamondBlockPos = pos.offset(diamondFacing);
 					if(Block.isEqualTo(worldObj.getBlockState(diamondBlockPos).getBlock(), Blocks.DIAMOND_BLOCK))
 					{
@@ -152,7 +153,7 @@ public class TileQuarry extends TileMachine
 	 * 
 	 * @see seia.vanillamagic.machine.TileMachine#performAdditionalOperations()
 	 */
-	protected void performAdditionalOperations()
+	protected void performAdditionalOperations() // TODO: Count different blocks -> get the list of the QuarryUpgrades
 	{
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(diamondFacing);
@@ -165,6 +166,14 @@ public class TileQuarry extends TileMachine
 			checkingBlock = this.getWorld().getBlockState(cauldronPos);
 		}
 		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
+	}
+	
+	/**
+	 * Returns the list of the drops from the block.
+	 */
+	public List<ItemStack> getDrops(Block block, IBlockAccess world, BlockPos pos, IBlockState state) // TODO: Count drops from the QuarryUpgrades
+	{
+		return block.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
 	}
 	
 	public void doWork() // once a world tick
@@ -188,7 +197,7 @@ public class TileQuarry extends TileMachine
 		{
 			boolean hasChest = isNextToOutput(); // chest or any other IInventory
 			Block blockToDig = worldObj.getBlockState(workingPos).getBlock();
-			List<ItemStack> drops = blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
+			List<ItemStack> drops = getDrops(blockToDig, worldObj, workingPos, worldObj.getBlockState(workingPos)); // blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
 			// Add drops from IInventory
 			if(blockToDig instanceof IInventory)
 			{
