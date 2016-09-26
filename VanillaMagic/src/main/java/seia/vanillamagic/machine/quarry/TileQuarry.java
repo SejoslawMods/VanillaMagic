@@ -34,6 +34,7 @@ public class TileQuarry extends TileMachine
 	 */
 	private EnumFacing startPosFacing;
 	private EnumFacing diamondFacing;
+	private EnumFacing redstoneFacing;
 	/**
 	 * It's (size)x(size) but (size-2)x(size-2) is for digging
 	 * BlocksInChunk
@@ -73,6 +74,7 @@ public class TileQuarry extends TileMachine
 					{
 						if(startPos == null)
 						{
+							this.redstoneFacing = redstoneFacing;
 							this.diamondFacing = diamondFacing;
 							this.startPosFacing = diamondFacing.rotateY();
 							restartDefaultStartPos();
@@ -171,12 +173,45 @@ public class TileQuarry extends TileMachine
 	/**
 	 * Returns the list of the drops from the block.
 	 */
-	public List<ItemStack> getDrops(Block block, IBlockAccess world, BlockPos pos, IBlockState state) // TODO: Count drops from the QuarryUpgrades
+	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) // TODO: Count drops from the QuarryUpgrades
 	{
-		return block.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
+		return blockToDig.getDrops(world, workingPos, workingPosState, 0);
 	}
 	
 	public void doWork() // once a world tick
+	{
+		// Counting the number of blocks
+		countRedstoneBlocks();
+		// Memory efficiency.
+		int redstoneBlocks = this.redstoneBlocks;
+		for(int i = 0; i < redstoneBlocks; i++)
+		{
+			performOneOperation();
+		}
+	}
+	
+	int redstoneBlocks = 0;
+	/**
+	 * Counts the number of RedstoneBlocks in line.
+	 */
+	public void countRedstoneBlocks()
+	{
+		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
+		cauldronPos = cauldronPos.offset(redstoneFacing);
+		redstoneBlocks = 0;
+		IBlockState checkingBlock = this.getWorld().getBlockState(cauldronPos);
+		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.REDSTONE_BLOCK))
+		{
+			redstoneBlocks++;
+			cauldronPos = cauldronPos.offset(redstoneFacing);
+			checkingBlock = this.getWorld().getBlockState(cauldronPos);
+		}
+	}
+	
+	/**
+	 * One Quarry operation.
+	 */
+	public void performOneOperation()
 	{
 		if(!canDig())
 		{
