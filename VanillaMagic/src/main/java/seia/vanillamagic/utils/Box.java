@@ -1,6 +1,6 @@
 package seia.vanillamagic.utils;
 
-public class Box 
+public class Box
 {
 	public int xMin = 0;
 	public int yMin = 0;

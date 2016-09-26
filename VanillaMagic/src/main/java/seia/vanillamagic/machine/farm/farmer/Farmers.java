@@ -102,7 +102,7 @@ public class Farmers implements IFarmer
 		return false;
 	}
 	
-	public static void addPickable(String mod, String blockName, String itemName) 
+	public void addPickable(String mod, String blockName, String itemName) 
 	{    
 		if (Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 
 		{
@@ -110,13 +110,13 @@ public class Farmers implements IFarmer
 			Item seedItem = Item.REGISTRY.getObject(new ResourceLocation(mod, itemName));
 			if(seedItem != null) 
 			{
-				Farmers.INSTANCE.addFarmer(new FarmerPickable(cropBlock, new ItemStack(seedItem)));
+				addFarmer(new FarmerPickable(cropBlock, new ItemStack(seedItem)));
 			}
 		}
 	}
 
 	@Nullable
-	public static FarmerCustomSeed addSeed(String mod, String blockName, String itemName, Block... extraFarmland) 
+	public FarmerCustomSeed addSeed(String mod, String blockName, String itemName, Block... extraFarmland) 
 	{
 		if (Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 
 		{
@@ -135,7 +135,7 @@ public class Farmers implements IFarmer
 						}
 					}
 				}
-				Farmers.INSTANCE.addFarmer(farmer);
+				addFarmer(farmer);
 				return farmer;
 			}
 		}
