@@ -20,10 +20,12 @@ import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.utils.BlockPosHelper;
 import seia.vanillamagic.utils.InventoryHelper;
 
-public class TileQuarry extends TileMachine
+public class TileQuarry extends TileMachine implements IQuarry
 {
 	// The name for registry
 	public static final String REGISTRY_NAME = TileQuarry.class.getSimpleName();
+	
+	private QuarryUpgradeHelper upgradeHelper = new QuarryUpgradeHelper(this); // TODO:
 	
 	private BlockPos diamondBlockPos;
 	private BlockPos redstoneBlockPos;
@@ -41,6 +43,16 @@ public class TileQuarry extends TileMachine
 	 * Only multiply this
 	 */
 	private int quarrySize = QuarrySizeHelper.BASIC_SIZE;
+	
+	public int getQuarrySize()
+	{
+		return quarrySize;
+	}
+	
+	public EnumFacing getStartPosFacing()
+	{
+		return startPosFacing;
+	}
 	
 	/**
 	 * Method for checking DiamondBlock and RedstoneBlock
@@ -150,20 +162,27 @@ public class TileQuarry extends TileMachine
 	
 	int diamondBlocks = 0;
 	/**
-	 * Here I want to check for the number of diamond blocks next to the Quarry. <br>
+	 * Here I want to check for the number of IQuarryUpgrades next to the Quarry. <br>
 	 * Count them and change the Quarry size.
-	 * 
-	 * @see seia.vanillamagic.machine.TileMachine#performAdditionalOperations()
 	 */
-	protected void performAdditionalOperations() // TODO: Count different blocks -> get the list of the QuarryUpgrades
+	protected void performAdditionalOperations()
 	{
+		upgradeHelper.modifyQuarry(this);
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(diamondFacing);
 		diamondBlocks = 0;
 		IBlockState checkingBlock = this.getWorld().getBlockState(cauldronPos);
-		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK))
+		while((Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK)) // quarry resizing is not an actual upgrade, it's easier to count it here
+				|| (QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock())))
 		{
-			diamondBlocks++;
+			if(Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK))
+			{
+				diamondBlocks++;
+			}
+			else // if(QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock()))
+			{
+				upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock()); // TODO:
+			}
 			cauldronPos = cauldronPos.offset(diamondFacing);
 			checkingBlock = this.getWorld().getBlockState(cauldronPos);
 		}
@@ -173,9 +192,10 @@ public class TileQuarry extends TileMachine
 	/**
 	 * Returns the list of the drops from the block.
 	 */
-	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) // TODO: Count drops from the QuarryUpgrades
+	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
 	{
-		return blockToDig.getDrops(world, workingPos, workingPosState, 0);
+		//return blockToDig.getDrops(world, workingPos, workingPosState, 0);
+		return upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState); // TODO;
 	}
 	
 	public void doWork() // once a world tick
@@ -188,6 +208,7 @@ public class TileQuarry extends TileMachine
 		{
 			performOneOperation();
 		}
+		upgradeHelper.clearUpgrades(); // TODO:
 	}
 	
 	int redstoneBlocks = 0;
@@ -272,6 +293,12 @@ public class TileQuarry extends TileMachine
 		workingPos = moveWorkingPosToNextPos();
 	}
 	
+	/**
+	 * Rotates the given facing the number of given times and returns this facing after rotation. <br>
+	 * This will only rotate Horizontally.
+	 * 
+	 * @see {@link net.minecraft.util.EnumFacing.Plane#HORIZONTAL}
+	 */
 	public EnumFacing rotateY(EnumFacing startFace, int times)
 	{
 		for(int i = 0; i < times; i++)

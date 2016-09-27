@@ -2,8 +2,10 @@ package seia.vanillamagic.entity.meteor;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 
@@ -47,5 +49,10 @@ public class EntityMeteor extends EntityLargeFireball
 			this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
 			this.setDead();
 		}
+	}
+	
+	public static void fixData(DataFixer dataFixer)
+	{
+		EntityFireball.func_189743_a(dataFixer, "Meteor");
 	}
 }

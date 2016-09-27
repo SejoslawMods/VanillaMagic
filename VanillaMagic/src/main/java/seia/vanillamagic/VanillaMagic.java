@@ -21,6 +21,7 @@ import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.items.book.BookRegistry;
 import seia.vanillamagic.items.enchantedbucket.EnchantedBucketHelper;
 import seia.vanillamagic.items.potionedcrystal.PotionedCrystalHelper;
+import seia.vanillamagic.machine.quarry.QuarryUpgradeRegistry;
 import seia.vanillamagic.quest.QuestList;
 
 @Mod(
@@ -81,5 +82,6 @@ public class VanillaMagic
 		PotionedCrystalHelper.registerRecipes();
 		VanillaMagicItems.INSTANCE.postInit();
 		VanillaMagicIntegration.INSTANCE.postInit();
+		logger.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
 	}
 }
