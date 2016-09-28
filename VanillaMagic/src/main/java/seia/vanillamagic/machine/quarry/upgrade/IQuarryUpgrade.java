@@ -46,7 +46,8 @@ public interface IQuarryUpgrade
 	
 	/**
 	 * Returns the upgrade that must be placed BEFORE this upgrade is placed. (talking about blocks) <br>
-	 * For instance: block with fortune 1 must be placed before block with fortune 2.
+	 * For instance: block with fortune 1 must be placed before block with fortune 2. <br>
+	 * If null than this will be skipped.
 	 */
 	default public Class<? extends IQuarryUpgrade> requiredUpgrade()
 	{
