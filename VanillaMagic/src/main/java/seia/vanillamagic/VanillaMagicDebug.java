@@ -1,18 +1,29 @@
 package seia.vanillamagic;
 
+import java.util.List;
+
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestList;
+import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.utils.IAdditionalInfoProvider;
 import seia.vanillamagic.utils.ItemStackHelper;
+import seia.vanillamagic.utils.WorldHelper;
 
 public class VanillaMagicDebug 
 {
@@ -53,6 +64,52 @@ public class VanillaMagicDebug
 			for(Achievement a : AchievementList.ACHIEVEMENTS)
 			{
 				player.addStat(a, 1);
+			}
+		}
+	}
+	
+	int showTime = 1; // hue hue
+	/**
+	 * Method used for showing additional information of the CustomTileEntitys. <br>
+	 * Right-click with Clock on IAdditionalInfoProvider.
+	 */
+	@SubscribeEvent
+	public void showTileEntityInfo(RightClickBlock event)
+	{
+		World world = event.getWorld();
+		if(world.isRemote)
+		{
+			return;
+		}
+		
+		if(showTime == 1)
+		{
+			showTime++;
+		}
+		else
+		{
+			showTime = 1;
+			return;
+		}
+		
+		EntityPlayer player = event.getEntityPlayer();
+		ItemStack stackRightHand = player.getHeldItemMainhand();
+		if(stackRightHand == null)
+		{
+			return;
+		}
+		if(stackRightHand.getItem().equals(Items.CLOCK))
+		{
+			// show info
+			BlockPos tilePos = event.getPos();
+			TileEntity tile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(tilePos, WorldHelper.getDimensionID(player));
+			if(tile instanceof IAdditionalInfoProvider)
+			{
+				List<String> info = ((IAdditionalInfoProvider) tile).getAdditionalInfo();
+				for(String message : info)
+				{
+					EntityHelper.addChatComponentMessage(player, message);
+				}
 			}
 		}
 	}

@@ -16,7 +16,14 @@ import seia.vanillamagic.machine.quarry.IQuarry;
 public interface IQuarryUpgrade
 {
 	/**
-	 * Returns the Block to which this upgrade is connected.
+	 * Readable upgrade name like: "My upgrade" or "Silk-Touch".
+	 */
+	public String getUpgradeName();
+	
+	/**
+	 * Returns the Block to which this upgrade is connected. <br>
+	 * <br>
+	 * Each upgrade MUST HAVE a different block !!!
 	 */
 	public Block getBlock();
 	
@@ -31,16 +38,15 @@ public interface IQuarryUpgrade
 	
 	/**
 	 * This method is fired before the Quarry starts to count anything. <br>
-	 * Here is where You should modify the Quarry itself. <br>
-	 * <br>
-	 * This method is fired once a tick !!!
+	 * Here is where You should modify the Quarry itself.
 	 */
 	default public void modifyQuarry(IQuarry quarry)
 	{
 	}
 	
 	/**
-	 * Returns the upgrade that must be placed BEFORE this upgrade is placed.
+	 * Returns the upgrade that must be placed BEFORE this upgrade is placed. (talking about blocks) <br>
+	 * For instance: block with fortune 1 must be placed before block with fortune 2.
 	 */
 	default public Class<? extends IQuarryUpgrade> requiredUpgrade()
 	{

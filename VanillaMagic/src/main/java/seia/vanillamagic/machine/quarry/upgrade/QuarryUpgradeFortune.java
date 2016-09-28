@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -12,8 +13,14 @@ public class QuarryUpgradeFortune
 {
 	public static class One extends QuarryUpgradeFortune implements IQuarryUpgrade
 	{
+		public String getUpgradeName()
+		{
+			return "Fortune 1";
+		}
+		
 		public Block getBlock() 
 		{
+			return Blocks.LAPIS_BLOCK;
 		}
 		
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 
@@ -24,8 +31,14 @@ public class QuarryUpgradeFortune
 	
 	public static class Two extends QuarryUpgradeFortune implements IQuarryUpgrade
 	{
+		public String getUpgradeName()
+		{
+			return "Fortune 2";
+		}
+		
 		public Block getBlock() 
 		{
+			return Blocks.IRON_BLOCK;
 		}
 		
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 
@@ -41,8 +54,14 @@ public class QuarryUpgradeFortune
 	
 	public static class Three extends QuarryUpgradeFortune implements IQuarryUpgrade
 	{
+		public String getUpgradeName()
+		{
+			return "Fortune 3";
+		}
+		
 		public Block getBlock() 
 		{
+			return Blocks.GOLD_BLOCK;
 		}
 		
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 

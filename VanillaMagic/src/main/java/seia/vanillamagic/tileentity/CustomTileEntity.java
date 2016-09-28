@@ -5,12 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.utils.NBTHelper;
 
 public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
@@ -28,6 +28,34 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	{
 		this.worldObj = world;
 		this.pos = pos;
+	}
+	
+	public void validate() 
+	{
+		super.validate();
+		if((!this.worldObj.isRemote) && (this.chunkTicket == null)) 
+		{
+			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.worldObj, ForgeChunkManager.Type.NORMAL);
+			if(ticket != null) 
+			{
+				forceChunkLoading(ticket);
+			}
+		}
+	}
+	
+	public void invalidate() 
+	{
+		super.invalidate();
+		stopChunkLoading();
+	}
+	
+	public void stopChunkLoading() 
+	{
+		if(this.chunkTicket != null) 
+		{
+			ForgeChunkManager.releaseTicket(this.chunkTicket);
+			this.chunkTicket = null;
+		}
 	}
 	
 	public void forceChunkLoading(Ticket ticket)

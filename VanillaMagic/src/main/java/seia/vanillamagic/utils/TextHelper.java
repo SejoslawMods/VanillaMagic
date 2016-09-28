@@ -48,4 +48,9 @@ public class TextHelper
 	{
 		return I18n.translateToLocal(text);
 	}
+	
+	public static String getVanillaMagicInfo(String s)
+	{
+		return "§a[VanillaMagic] §f" + s;
+	}
 }

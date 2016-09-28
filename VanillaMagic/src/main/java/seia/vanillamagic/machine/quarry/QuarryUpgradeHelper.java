@@ -29,10 +29,10 @@ public class QuarryUpgradeHelper
 	public void addUpgradeFromBlock(Block block)
 	{
 		IQuarryUpgrade iqu = QuarryUpgradeRegistry.getUpgradeFromBlock(block);
-		if(!hasRegisteredRequireUpgrade(iqu))
-		{
-			return;
-		}
+//		if(!hasRegisteredRequireUpgrade(iqu)) // TODO;
+//		{
+//			return;
+//		}
 		if(canAddUpgrade(iqu))
 		{
 			upgrades.add(iqu);
@@ -44,6 +44,10 @@ public class QuarryUpgradeHelper
 	 */
 	private boolean hasRegisteredRequireUpgrade(IQuarryUpgrade iqu) 
 	{
+		if(iqu.requiredUpgrade() == null)
+		{
+			return true;
+		}
 		IQuarryUpgrade required = null;
 		for(IQuarryUpgrade registeredUpgrade : upgrades)
 		{
@@ -83,6 +87,8 @@ public class QuarryUpgradeHelper
 			drops.addAll(upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
 		}
 		// If there is no upgrades mine the old-fashion way.
+		boolean b = drops.isEmpty();
+		System.out.println(b);
 		if(drops.isEmpty())
 		{
 			drops.addAll(blockToDig.getDrops(world, workingPos, workingPosState, 0));
@@ -107,5 +113,18 @@ public class QuarryUpgradeHelper
 		{
 			upgrade.modifyQuarry(quarry);
 		}
+	}
+
+	/**
+	 * Method in which all upgrades info will be added.
+	 */
+	public List<String> addAdditionalInfo(List<String> baseInfo)
+	{
+		baseInfo.add("Upgrades:");
+		for(int i = 0; i < upgrades.size(); i++)
+		{
+			baseInfo.add("   " + (i+1) + ") " + upgrades.get(i).getUpgradeName());
+		}
+		return baseInfo;
 	}
 }

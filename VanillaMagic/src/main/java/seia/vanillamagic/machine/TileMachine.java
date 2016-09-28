@@ -1,5 +1,6 @@
 package seia.vanillamagic.machine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -371,6 +372,19 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	public Block getMachineBlock()
 	{
 		return getMachineState().getBlock();
+	}
+	
+	public List<String> getAdditionalInfo()
+	{
+		List<String> list = new ArrayList<String>();
+		list.add("Machine name: " + getClass().getSimpleName());
+		list.add("Machine position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
+		list.add("Start position: X=" + startPos.getX() + ", Y=" + startPos.getY() + ", Z=" + startPos.getZ());
+		list.add("Working position: X=" + workingPos.getX() + ", Y=" + workingPos.getY() + ", Z=" + workingPos.getZ());
+		list.add("One operation cost: " + oneOperationCost);
+		list.add("Fuel left: " + ticks);
+		list.add("Max fuel: " + maxTicks);
+		return list;
 	}
 	
 	@Nullable

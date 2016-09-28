@@ -15,6 +15,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
+import seia.vanillamagic.utils.IAdditionalInfoProvider;
 
 /**
  * Machine is a TileEntity that perform some work on World.
@@ -25,7 +26,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * 
  * @author Seia
  */
-public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable
+public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable, IAdditionalInfoProvider
 {
 	/**
 	 * Returns the World on which Machine is.

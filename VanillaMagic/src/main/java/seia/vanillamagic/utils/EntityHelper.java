@@ -113,7 +113,8 @@ public class EntityHelper
 	
 	public static void addChatComponentMessage(EntityPlayer player, String msg)
 	{
-		player.addChatComponentMessage(new TextComponentString(msg));
+		//player.addChatComponentMessage(new TextComponentString("§a[VanillaMagic] §f" + msg));
+		player.addChatComponentMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)));
 	}
 
 	public static void removeEntities(World world, List<EntityItem> itemsInCauldron)

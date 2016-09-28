@@ -181,12 +181,22 @@ public class TileQuarry extends TileMachine implements IQuarry
 			}
 			else // if(QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock()))
 			{
-				upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock()); // TODO:
+				upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock());
 			}
 			cauldronPos = cauldronPos.offset(diamondFacing);
 			checkingBlock = this.getWorld().getBlockState(cauldronPos);
 		}
 		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
+	}
+	
+	public List<String> getAdditionalInfo()
+	{
+		List<String> baseInfo = super.getAdditionalInfo();
+		baseInfo.add("Quarry Size: " + quarrySize + " blocks");
+		performAdditionalOperations();
+		List<String> withUpgrades = upgradeHelper.addAdditionalInfo(baseInfo);
+		upgradeHelper.clearUpgrades();
+		return withUpgrades;
 	}
 	
 	/**
@@ -195,7 +205,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
 	{
 		//return blockToDig.getDrops(world, workingPos, workingPosState, 0);
-		return upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState); // TODO;
+		return upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState);
 	}
 	
 	public void doWork() // once a world tick
@@ -208,7 +218,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		{
 			performOneOperation();
 		}
-		upgradeHelper.clearUpgrades(); // TODO:
+		upgradeHelper.clearUpgrades();
 	}
 	
 	int redstoneBlocks = 0;
@@ -322,7 +332,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	{
 		return startPosFacing.rotateY();
 	}
-
+	
 	public void forceChunkLoading(Ticket ticket)
 	{
 		super.forceChunkLoading(ticket);

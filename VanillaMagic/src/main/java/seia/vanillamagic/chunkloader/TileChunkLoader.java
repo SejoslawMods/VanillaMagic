@@ -12,24 +12,24 @@ public class TileChunkLoader extends CustomTileEntity
 {
 	public static final String REGISTRY_NAME = TileChunkLoader.class.getSimpleName();
 	
-	public void validate() 
-	{
-		super.validate();
-		if ((!this.worldObj.isRemote) && (this.chunkTicket == null)) 
-		{
-			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.worldObj, ForgeChunkManager.Type.NORMAL);
-			if (ticket != null) 
-			{
-				forceChunkLoading(ticket);
-			}
-		}
-	}
+//	public void validate() 
+//	{
+//		super.validate();
+//		if ((!this.worldObj.isRemote) && (this.chunkTicket == null)) 
+//		{
+//			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.worldObj, ForgeChunkManager.Type.NORMAL);
+//			if (ticket != null) 
+//			{
+//				forceChunkLoading(ticket);
+//			}
+//		}
+//	}
 	
-	public void invalidate() 
-	{
-		super.invalidate();
-		stopChunkLoading();
-	}
+//	public void invalidate() 
+//	{
+//		super.invalidate();
+//		stopChunkLoading();
+//	}
 	/*
 	public void unforceChunkLoading() 
 	{
@@ -40,14 +40,14 @@ public class TileChunkLoader extends CustomTileEntity
 		}
 	}
 	*/
-	public void stopChunkLoading() 
-	{
-		if (this.chunkTicket != null) 
-		{
-			ForgeChunkManager.releaseTicket(this.chunkTicket);
-			this.chunkTicket = null;
-		}
-	}
+//	public void stopChunkLoading() 
+//	{
+//		if (this.chunkTicket != null) 
+//		{
+//			ForgeChunkManager.releaseTicket(this.chunkTicket);
+//			this.chunkTicket = null;
+//		}
+//	}
 	
 	public void update() 
 	{

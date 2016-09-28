@@ -12,6 +12,11 @@ import net.minecraft.world.IBlockAccess;
 
 public class QuarryUpgradeSilkTouch implements IQuarryUpgrade
 {
+	public String getUpgradeName()
+	{
+		return "Silk-Touch";
+	}
+	
 	public Block getBlock() 
 	{
 		return Blocks.QUARTZ_BLOCK;

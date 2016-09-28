@@ -98,7 +98,7 @@ public class QuarryUpgradeRegistry
 	 */
 	public static int countUpgrades()
 	{
-		return MAP_BLOCK_CLASS.size();
+		return MAP_CLASS_UPGRADE.size();
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class QuarryUpgradeRegistry
 	/**
 	 * Returns TRUE if the given upgrades are the same upgrade.
 	 */
-	public static boolean isTheSameUpgrade(IQuarryUpgrade iqu1, IQuarryUpgrade iqu2) 
+	public static boolean isTheSameUpgrade(IQuarryUpgrade iqu1, IQuarryUpgrade iqu2)
 	{
 		return Block.isEqualTo(iqu1.getBlock(), iqu2.getBlock());
 	}
