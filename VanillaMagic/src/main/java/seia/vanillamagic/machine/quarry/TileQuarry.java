@@ -196,6 +196,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 		performAdditionalOperations();
 		List<String> withUpgrades = upgradeHelper.addAdditionalInfo(baseInfo);
 		upgradeHelper.clearUpgrades();
+		countRedstoneBlocks();
+		baseInfo.add("Mining blocks per tick: " + redstoneBlocks);
 		return withUpgrades;
 	}
 	
