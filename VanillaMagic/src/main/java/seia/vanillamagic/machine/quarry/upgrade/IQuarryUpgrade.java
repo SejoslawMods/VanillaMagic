@@ -11,7 +11,13 @@ import net.minecraft.world.IBlockAccess;
 import seia.vanillamagic.machine.quarry.IQuarry;
 
 /**
- * Every method except getBlock() is fired once a tick.
+ * Every method except getBlock() is fired once a tick. <br>
+ * <br>
+ * To create a working Quarry upgrade You must: <br>
+ * 1 - Create a class which implements this interface. <br>
+ * 2 - Register Your class in QuarryUpgradeRegistry using QuarryUpgradeRegistry.addUpgrade(YourClass.class); <br>
+ * 3 - Place a block which You declared in getBlock() method next to the Quarry. <br>
+ * If You want to check if Quarry can see Your upgrade, right-click Quarry with Clock and look at "Upgrades:" section.
  */
 public interface IQuarryUpgrade
 {
