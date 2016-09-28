@@ -1,19 +1,26 @@
 package seia.vanillamagic.machine.quarry.upgrade;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class QuarryUpgradeFortune
 {
+	Random rand = new Random();
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState, int fortune) 
 	{
-		return blockToDig.getDrops(world, workingPos, workingPosState, fortune);
+		List<ItemStack> list = new ArrayList<ItemStack>();
+		Item item = blockToDig.getItemDropped(workingPosState, rand, fortune);
+		list.add(new ItemStack(item, blockToDig.quantityDropped(rand) * fortune, blockToDig.damageDropped(workingPosState)));
+		return list;
 	}
 	
 	public static class One extends QuarryUpgradeFortune implements IQuarryUpgrade
@@ -50,11 +57,6 @@ public class QuarryUpgradeFortune
 		{
 			return super.getDrops(blockToDig, world, workingPos, workingPosState, 2);
 		}
-		
-		public Class<? extends IQuarryUpgrade> requiredUpgrade()
-		{
-			return One.class;
-		}
 	}
 	
 	public static class Three extends QuarryUpgradeFortune implements IQuarryUpgrade
@@ -72,11 +74,6 @@ public class QuarryUpgradeFortune
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 
 		{
 			return super.getDrops(blockToDig, world, workingPos, workingPosState, 3);
-		}
-		
-		public Class<? extends IQuarryUpgrade> requiredUpgrade()
-		{
-			return Two.class;
 		}
 	}
 }

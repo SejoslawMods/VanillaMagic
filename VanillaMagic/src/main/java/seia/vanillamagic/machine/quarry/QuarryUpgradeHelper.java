@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import seia.vanillamagic.machine.quarry.upgrade.IQuarryUpgrade;
+import seia.vanillamagic.utils.ListHelper;
 
 /**
  * Each Quarry has it's own helper to handler the upgrades.
@@ -29,10 +30,10 @@ public class QuarryUpgradeHelper
 	public void addUpgradeFromBlock(Block block)
 	{
 		IQuarryUpgrade iqu = QuarryUpgradeRegistry.getUpgradeFromBlock(block);
-//		if(!hasRegisteredRequireUpgrade(iqu)) // TODO;
-//		{
-//			return;
-//		}
+		if(!hasRegisteredRequireUpgrade(iqu)) // TODO;
+		{
+			return;
+		}
 		if(canAddUpgrade(iqu))
 		{
 			upgrades.add(iqu);
@@ -84,12 +85,12 @@ public class QuarryUpgradeHelper
 		List<ItemStack> drops = new ArrayList<ItemStack>();
 		for(IQuarryUpgrade upgrade : upgrades)
 		{
-			drops.addAll(upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
+			//drops.addAll(upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
+			drops = ListHelper.<ItemStack>combineLists(drops, upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
 		}
 		// If there is no upgrades mine the old-fashion way.
 		if(drops.isEmpty())
 		{
-			//drops.addAll(blockToDig.getDrops(world, workingPos, workingPosState, 0));
 			return blockToDig.getDrops(world, workingPos, workingPosState, 0);
 		}
 		return drops;

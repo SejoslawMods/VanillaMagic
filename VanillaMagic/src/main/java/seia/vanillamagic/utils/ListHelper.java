@@ -1,11 +1,10 @@
 package seia.vanillamagic.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
-
-import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 
@@ -46,5 +45,17 @@ public class ListHelper
 		{
 			return null;
 		}
+	}
+	
+	/**
+	 * Returns the combined lists.
+	 */
+	public static <T> List<T> combineLists(List<T> l1, List<T> l2)
+	{
+		for(T element : l2)
+		{
+			l1.add(element);
+		}
+		return l1;
 	}
 }
