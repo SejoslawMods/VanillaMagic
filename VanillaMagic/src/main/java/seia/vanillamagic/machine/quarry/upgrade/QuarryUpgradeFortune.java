@@ -11,6 +11,11 @@ import net.minecraft.world.IBlockAccess;
 
 public class QuarryUpgradeFortune
 {
+	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState, int fortune) 
+	{
+		return blockToDig.getDrops(world, workingPos, workingPosState, fortune);
+	}
+	
 	public static class One extends QuarryUpgradeFortune implements IQuarryUpgrade
 	{
 		public String getUpgradeName()
@@ -25,7 +30,7 @@ public class QuarryUpgradeFortune
 		
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 
 		{
-			return blockToDig.getDrops(world, workingPos, workingPosState, 1);
+			return super.getDrops(blockToDig, world, workingPos, workingPosState, 1);
 		}
 	}
 	
@@ -43,7 +48,7 @@ public class QuarryUpgradeFortune
 		
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 
 		{
-			return blockToDig.getDrops(world, workingPos, workingPosState, 2);
+			return super.getDrops(blockToDig, world, workingPos, workingPosState, 2);
 		}
 		
 		public Class<? extends IQuarryUpgrade> requiredUpgrade()
@@ -66,7 +71,7 @@ public class QuarryUpgradeFortune
 		
 		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState) 
 		{
-			return blockToDig.getDrops(world, workingPos, workingPosState, 3);
+			return super.getDrops(blockToDig, world, workingPos, workingPosState, 3);
 		}
 		
 		public Class<? extends IQuarryUpgrade> requiredUpgrade()

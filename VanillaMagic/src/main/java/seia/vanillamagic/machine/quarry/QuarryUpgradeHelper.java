@@ -87,11 +87,10 @@ public class QuarryUpgradeHelper
 			drops.addAll(upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
 		}
 		// If there is no upgrades mine the old-fashion way.
-		boolean b = drops.isEmpty();
-		System.out.println(b);
 		if(drops.isEmpty())
 		{
-			drops.addAll(blockToDig.getDrops(world, workingPos, workingPosState, 0));
+			//drops.addAll(blockToDig.getDrops(world, workingPos, workingPosState, 0));
+			return blockToDig.getDrops(world, workingPos, workingPosState, 0);
 		}
 		return drops;
 	}
