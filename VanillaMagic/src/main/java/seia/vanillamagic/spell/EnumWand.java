@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import seia.vanillamagic.utils.TextHelper;
+import seia.vanillamagic.util.TextHelper;
 
 public enum EnumWand 
 {

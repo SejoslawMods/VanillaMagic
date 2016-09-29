@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
-import seia.vanillamagic.utils.ToolHelper;
+import seia.vanillamagic.util.ToolHelper;
 
 public class MineBlockTask 
 {

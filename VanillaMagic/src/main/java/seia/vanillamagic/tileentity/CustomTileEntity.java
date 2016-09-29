@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.utils.NBTHelper;
+import seia.vanillamagic.util.NBTHelper;
 
 public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
 {

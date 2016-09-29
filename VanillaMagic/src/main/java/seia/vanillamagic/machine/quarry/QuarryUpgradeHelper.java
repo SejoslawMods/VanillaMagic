@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import seia.vanillamagic.machine.quarry.upgrade.IQuarryUpgrade;
-import seia.vanillamagic.utils.ListHelper;
+import seia.vanillamagic.util.ListHelper;
 
 /**
  * Each Quarry has it's own helper to handler the upgrades.

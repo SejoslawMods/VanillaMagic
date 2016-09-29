@@ -15,7 +15,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
-import seia.vanillamagic.utils.IAdditionalInfoProvider;
+import seia.vanillamagic.util.IAdditionalInfoProvider;
 
 /**
  * Machine is a TileEntity that perform some work on World.

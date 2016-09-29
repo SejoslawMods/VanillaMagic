@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.utils.AltarChecker;
+import seia.vanillamagic.util.AltarChecker;
 
 public class QuestBuildAltar extends Quest
 {

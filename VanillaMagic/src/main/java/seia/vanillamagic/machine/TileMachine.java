@@ -17,9 +17,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.event.EventMachineWork;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.utils.InventoryHelper;
-import seia.vanillamagic.utils.NBTHelper;
-import seia.vanillamagic.utils.SmeltingHelper;
+import seia.vanillamagic.util.InventoryHelper;
+import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.SmeltingHelper;
 
 public abstract class TileMachine extends CustomTileEntity implements IMachine
 {

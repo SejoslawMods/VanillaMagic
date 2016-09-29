@@ -17,8 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.machine.TileMachine;
-import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.InventoryHelper;
+import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.InventoryHelper;
 
 public class TileQuarry extends TileMachine implements IQuarry
 {

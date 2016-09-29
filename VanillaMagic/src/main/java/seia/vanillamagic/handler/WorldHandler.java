@@ -23,9 +23,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.NBTHelper;
-import seia.vanillamagic.utils.WorldHelper;
+import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 /**
  * TODO: Fix Saving / Loading CustomTileEntities, Maybe remade to WorldSpecificSaveHandler ???

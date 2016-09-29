@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import seia.vanillamagic.utils.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public enum EnumSpell
 {

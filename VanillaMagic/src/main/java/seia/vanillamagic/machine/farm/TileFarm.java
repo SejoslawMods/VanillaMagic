@@ -24,9 +24,9 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.machine.farm.farmer.Farmers;
-import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.InventoryHelper;
-import seia.vanillamagic.utils.WorldHelper;
+import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.InventoryHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public class TileFarm extends TileMachine
 {

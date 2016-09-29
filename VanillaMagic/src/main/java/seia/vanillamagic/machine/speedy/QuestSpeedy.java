@@ -7,11 +7,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.items.VanillaMagicItems;
+import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
-import seia.vanillamagic.utils.EntityHelper;
-import seia.vanillamagic.utils.WorldHelper;
+import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public class QuestSpeedy extends Quest
 {

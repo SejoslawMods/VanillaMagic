@@ -17,10 +17,10 @@ import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.integration.VanillaMagicIntegration;
-import seia.vanillamagic.items.VanillaMagicItems;
-import seia.vanillamagic.items.book.BookRegistry;
-import seia.vanillamagic.items.enchantedbucket.EnchantedBucketHelper;
-import seia.vanillamagic.items.potionedcrystal.PotionedCrystalHelper;
+import seia.vanillamagic.item.VanillaMagicItems;
+import seia.vanillamagic.item.book.BookRegistry;
+import seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper;
+import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.machine.quarry.QuarryUpgradeRegistry;
 import seia.vanillamagic.quest.QuestList;
 

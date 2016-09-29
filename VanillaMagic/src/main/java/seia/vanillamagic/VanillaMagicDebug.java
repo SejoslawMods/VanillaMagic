@@ -20,10 +20,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestList;
-import seia.vanillamagic.utils.EntityHelper;
-import seia.vanillamagic.utils.IAdditionalInfoProvider;
-import seia.vanillamagic.utils.ItemStackHelper;
-import seia.vanillamagic.utils.WorldHelper;
+import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.IAdditionalInfoProvider;
+import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public class VanillaMagicDebug 
 {

@@ -16,8 +16,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.WorldHelper;
+import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public class CustomTileEntityOneSaveHandler
 {

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.spell.EnumWand;
-import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.util.EntityHelper;
 
 public class QuestQuarry extends QuestMachineActivate
 {

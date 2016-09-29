@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.utils.ListHelper;
+import seia.vanillamagic.util.ListHelper;
 
 public class QuestMineBlock extends Quest
 {

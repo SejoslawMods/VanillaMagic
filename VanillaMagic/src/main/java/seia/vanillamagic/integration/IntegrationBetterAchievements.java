@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import seia.vanillamagic.handler.QuestHandler;
-import seia.vanillamagic.utils.ClassUtils;
+import seia.vanillamagic.util.ClassUtils;
 
 public class IntegrationBetterAchievements implements IIntegration
 {

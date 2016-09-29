@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-import seia.vanillamagic.utils.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 /** 
  * Base class for all the quests.<br>

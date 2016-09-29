@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import seia.vanillamagic.utils.BlockPosHelper;
+import seia.vanillamagic.util.BlockPosHelper;
 
 public class EntitySpellFreezeLiquid extends EntitySpell
 {

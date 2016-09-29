@@ -1,7 +1,7 @@
 package seia.vanillamagic.integration;
 
 import net.minecraft.block.Block;
-import seia.vanillamagic.utils.ClassUtils;
+import seia.vanillamagic.util.ClassUtils;
 
 public class IntegrationDenseMetals implements IIntegration
 {

@@ -13,10 +13,10 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import seia.vanillamagic.items.VanillaMagicItems;
+import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.utils.Box;
-import seia.vanillamagic.utils.NBTHelper;
+import seia.vanillamagic.util.Box;
+import seia.vanillamagic.util.NBTHelper;
 
 public class TileSpeedy extends CustomTileEntity
 {

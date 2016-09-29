@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.spell.EnumWand;
-import seia.vanillamagic.utils.AltarChecker;
-import seia.vanillamagic.utils.SmeltingHelper;
+import seia.vanillamagic.util.AltarChecker;
+import seia.vanillamagic.util.SmeltingHelper;
 
 public class QuestSmeltOnAltar extends Quest
 {

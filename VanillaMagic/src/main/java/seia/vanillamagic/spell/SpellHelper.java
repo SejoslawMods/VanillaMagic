@@ -64,8 +64,8 @@ import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;
 import seia.vanillamagic.entity.EntitySpellTeleport;
 import seia.vanillamagic.entity.meteor.EntitySpellSummonMeteor;
 import seia.vanillamagic.spell.teleport.TeleportHelper;
-import seia.vanillamagic.utils.BlockPosHelper;
-import seia.vanillamagic.utils.EntityHelper;
+import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.EntityHelper;
 
 /**
  * The work of each spell. <br>

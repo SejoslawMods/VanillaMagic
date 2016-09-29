@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.spell.EnumSpell;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.spell.SpellHelper;
-import seia.vanillamagic.utils.EntityHelper;
-import seia.vanillamagic.utils.ItemStackHelper;
-import seia.vanillamagic.utils.ListHelper;
+import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ListHelper;
 
 public class QuestSummonHorde extends Quest
 {

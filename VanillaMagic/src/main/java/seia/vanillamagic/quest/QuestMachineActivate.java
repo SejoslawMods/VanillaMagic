@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.math.BlockPos;
-import seia.vanillamagic.utils.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public abstract class QuestMachineActivate extends Quest
 {

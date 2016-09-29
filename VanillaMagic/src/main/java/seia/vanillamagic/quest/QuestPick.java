@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
-import seia.vanillamagic.utils.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestPick extends Quest
 {
