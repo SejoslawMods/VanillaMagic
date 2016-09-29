@@ -52,7 +52,6 @@ public class QuestItemMagnet extends Quest
 		}
 	}
 	
-	// TODO: Currently only for 1x Nether Star + 1x Nether Star
 	public boolean playerHasRightItemsInInventory(EntityPlayer player)
 	{
 		boolean star1 = false;

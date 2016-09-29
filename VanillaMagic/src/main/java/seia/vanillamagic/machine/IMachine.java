@@ -20,9 +20,6 @@ import seia.vanillamagic.utils.IAdditionalInfoProvider;
 /**
  * Machine is a TileEntity that perform some work on World.
  * This interface is made to unify some of the Machine work.
- * <br>
- * <br>
- * TODO: Currently only supporting IInventory as input / output.
  * 
  * @author Seia
  */

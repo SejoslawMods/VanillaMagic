@@ -73,7 +73,7 @@ public class CustomTileEntityOneSaveHandler
 	private void add(TileEntity customTileEntity)
 	{
 		customTileEntity.getWorld().setTileEntity(customTileEntity.getPos(), customTileEntity);
-		//customTileEntity.getWorld().tickableTileEntities.add(customTileEntity); // TODO:
+		//customTileEntity.getWorld().tickableTileEntities.add(customTileEntity); // TODO: CustomTileEntity should be added to List<ITickable> in World.
 		BlockPosHelper.printCoords(Level.INFO, "CustomTileEntity (" + customTileEntity.getClass().getSimpleName() + ") added at pos:", customTileEntity.getPos());
 		customTileEntity.getWorld().updateEntities();
 	}

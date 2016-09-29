@@ -85,7 +85,7 @@ public enum EnumWand
 			ItemStack currentlyCheckingWand = currentlyCheckingEnumWand.wandItemStack;
 			if(ItemStack.areItemsEqual(currentlyCheckingWand, inHand))
 			{
-				// TODO: Fox language issue with different languages.
+				// TODO: Fix language issue with different languages.
 				// Added checker for wand name.
 				//if(currentlyCheckingEnumWand.wandName.equals(inHand.getDisplayName()))
 				{

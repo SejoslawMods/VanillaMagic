@@ -8,21 +8,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class QuestCastSpellInAir extends QuestCastSpell
 {
-//	public QuestCastSpellInAir(Quest required, int posX, int posY, EnumSpell spell, Quest[] additionalRequiredQuests) 
-//	{
-//		super(required, posX, posY, spell, additionalRequiredQuests);
-//	}
-//	
-//	public QuestCastSpellInAir(Quest required, int posX, int posY, EnumSpell spell) 
-//	{
-//		super(required, posX, posY, spell);
-//	}
-//	
-//	public QuestCastSpellInAir(Quest required, int posX, int posY, ItemStack itemIcon, EnumSpell spell) 
-//	{
-//		super(required, posX, posY, itemIcon, spell.spellName, spell.spellUniqueName, spell);
-//	}
-	
 	@SubscribeEvent
 	public void castSpell(RightClickItem event)
 	{

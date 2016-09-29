@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.items.VanillaMagicItems;
 import seia.vanillamagic.utils.CauldronHelper;
@@ -76,9 +77,25 @@ public class EnchantedBucketHelper
 				{
 					if(fh.getTankProperties() != null)
 					{
-						if(fh.getTankProperties()[0].getContents().isFluidEqual(getFluidStack(eb.getFluidInBucket())))
+						Fluid fluidInBucket = eb.getFluidInBucket();
+						if(fluidInBucket != null)
 						{
-							return eb;
+							FluidStack fluidStackInBucket = getFluidStack(fluidInBucket);
+							if(fluidStackInBucket != null)
+							{
+								IFluidTankProperties prop0 = fh.getTankProperties()[0];
+								if(prop0 != null)
+								{
+									FluidStack prop0Stack = prop0.getContents();
+									if(prop0Stack != null)
+									{
+										if(prop0Stack.isFluidEqual(fluidStackInBucket))
+										{
+											return eb;
+										}
+									}
+								}
+							}
 						}
 					}
 				}

@@ -1479,6 +1479,27 @@
 	"wandTier":2
 },
 {
+	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
+	"requiredQuest":"craftDragonEgg",
+	"posX":2,
+	"posY":0,
+	"questName":"Craft Dragon Head",
+	"uniqueName":"craftDragonHead",
+	"ingredients":
+	[{
+		"just_to_know_what_it_is":"dragon_egg",
+		"id":122
+	}],
+	"result":
+	[{
+		"just_to_know_what_it_is":"dragon_skull",
+		"id":397,
+		"meta":5
+	}],
+	"requiredAltarTier":7,
+	"wandTier":2
+},
+{
 	"questClass":"seia.vanillamagic.quest.QuestCraft",
 	"requiredQuest":"craftStick",
 	"posX":2,

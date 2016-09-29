@@ -22,10 +22,9 @@ import seia.vanillamagic.utils.InventoryHelper;
 
 public class TileQuarry extends TileMachine implements IQuarry
 {
-	// The name for registry
 	public static final String REGISTRY_NAME = TileQuarry.class.getSimpleName();
 	
-	private QuarryUpgradeHelper upgradeHelper = new QuarryUpgradeHelper(this); // TODO:
+	private QuarryUpgradeHelper upgradeHelper = new QuarryUpgradeHelper(this);
 	
 	private BlockPos diamondBlockPos;
 	private BlockPos redstoneBlockPos;

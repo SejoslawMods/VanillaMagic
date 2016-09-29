@@ -11,11 +11,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class QuestCastSpellOnBlock extends QuestCastSpell
 {
-//	public QuestCastSpellOnBlock(Quest required, int posX, int posY, EnumSpell spell) 
-//	{
-//		super(required, posX, posY, spell);
-//	}
-	
 	@SubscribeEvent
 	public void caseSpell(RightClickBlock event)
 	{

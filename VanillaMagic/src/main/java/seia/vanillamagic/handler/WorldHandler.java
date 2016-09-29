@@ -28,8 +28,7 @@ import seia.vanillamagic.utils.NBTHelper;
 import seia.vanillamagic.utils.WorldHelper;
 
 /**
- * TODO: Fix Saving / Loading CustomTileEntities
- * TODO: Maybe remade to WorldSpecificSaveHandler ???
+ * TODO: Fix Saving / Loading CustomTileEntities, Maybe remade to WorldSpecificSaveHandler ???
  */
 public class WorldHandler
 {
@@ -96,36 +95,11 @@ public class WorldHandler
 						{
 							VanillaMagic.logger.log(Level.ERROR, "Error while reading class for CustomTileEntity");
 						}
-//						if(tileEntityClassName.equals(TileQuarry.class.getSimpleName()))
-//						{
-//							tileEntity = new TileQuarry();
-//							((TileQuarry) tileEntity).init(world, tileEntityPos);
-//						}
-//						else if(tileEntityClassName.equals(TileFarm.class.getSimpleName()))
-//						{
-//							tileEntity = new TileFarm();
-//							((TileFarm) tileEntity).init(world, tileEntityPos);
-//						}
-//						else if(tileEntityClassName.equals(TileChunkLoader.class.getSimpleName()))
-//						{
-//							tileEntity = new TileChunkLoader();
-//							((TileChunkLoader) tileEntity).init(world, tileEntityPos);
-//						}
-//						else if(tileEntityClassName.equals(TileAutocrafting.class.getSimpleName()))
-//						{
-//							tileEntity = new TileAutocrafting();
-//							((TileAutocrafting) tileEntity).init(world, tileEntityPos);
-//						}
-//						else if(tileEntityClassName.equals(TileSpeedy.class.getSimpleName()))
-//						{
-//							tileEntity = new TileSpeedy();
-//							((TileSpeedy) tileEntity).init(world, tileEntityPos);
-//						}
 						VanillaMagic.logger.log(Level.INFO, "[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						try
 						{
 							tileEntity.setPos(tileEntityPos);
-							BlockPosHelper.printCoords(Level.INFO, "[World Load] Pos saved at:", tileEntity.getPos());  // TODO:
+							BlockPosHelper.printCoords(Level.INFO, "[World Load] Pos saved at:", tileEntity.getPos());
 						}
 						catch(Exception e)
 						{

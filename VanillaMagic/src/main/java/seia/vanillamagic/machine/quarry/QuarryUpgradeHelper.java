@@ -30,7 +30,7 @@ public class QuarryUpgradeHelper
 	public void addUpgradeFromBlock(Block block)
 	{
 		IQuarryUpgrade iqu = QuarryUpgradeRegistry.getUpgradeFromBlock(block);
-		if(!hasRegisteredRequireUpgrade(iqu)) // TODO;
+		if(!hasRegisteredRequireUpgrade(iqu))
 		{
 			return;
 		}

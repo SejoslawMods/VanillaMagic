@@ -540,7 +540,6 @@ public class SpellHelper
 			aabb = aabb.expand(SIZE, SIZE, SIZE);
 			World world = caster.worldObj;
 			List<Entity> entitiesInAABB = world.getEntitiesWithinAABBExcludingEntity(caster, aabb);
-			// TODO: Currently will work on ALL EntityLivingBase
 			for(Entity entity : entitiesInAABB)
 			{
 				if(entity instanceof EntityLivingBase)

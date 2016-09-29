@@ -25,9 +25,7 @@ public class EntitySpellPull extends EntitySpell
 	{
 		if(result.typeOfHit == Type.BLOCK)
 		{
-			// TODO:
-			// what should happened if hit a block
-			// maybe pull block ???
+			// TODO: EntitySpellPull -> what should happened if hit a block, maybe pull block ???
 		}
 		else if(result.typeOfHit == Type.ENTITY)
 		{

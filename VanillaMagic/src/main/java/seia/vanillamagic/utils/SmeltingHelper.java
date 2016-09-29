@@ -177,7 +177,7 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * TODO: better idea
+	 * TODO: Better Idea for counting and smelting items in Cauldron.
 	 * Currently will consume whole stack in offHand for 1 operation
 	 * Returns the list of smelted items
 	 * oneItemSmeltTicks = default is QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS
@@ -232,7 +232,7 @@ public class SmeltingHelper
 				}
 				smelted.add(smeltResultEntityItem);
 				ticks -= ticksToSmeltStack;
-				//TODO: Fix the experience
+				//TODO: Fix the experience after smelting.
 				int experienceToAdd = SmeltingHelper.getExperienceToAddFromWholeStack(entityItemToSmeltStack);
 				player.addExperience(experienceToAdd);
 			}

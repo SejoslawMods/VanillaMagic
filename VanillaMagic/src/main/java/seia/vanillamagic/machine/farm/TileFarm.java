@@ -505,7 +505,7 @@ public class TileFarm extends TileMachine
 		return null;
 	}
 
-	public int getSupplySlotForCoord(BlockPos forBlock) // TODO:
+	public int getSupplySlotForCoord(BlockPos forBlock) // TODO: Fix TileFarm -> getSupplySlotForCoord
 	{
 		return 0;
 		/*
