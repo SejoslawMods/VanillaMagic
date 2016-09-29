@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -112,25 +111,9 @@ public class EnchantedBucketHelper
 		{
 			VanillaMagicItems.INSTANCE.enchantedBuckets.add(new IEnchantedBucket()
 			{
-				public ItemStack getItem()
-				{
-					ItemStack stack = getBucket().copy();
-					stack.setStackDisplayName("Enchanted Bucket: " + getFluidInBucket().getName());
-					NBTTagCompound stackTag = stack.getTagCompound();
-					stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-					stackTag.setString(NBT_ENCHANTED_BUCKET, getUniqueNBTName()); // to let Quest know that we want EnchantedBucket
-					stackTag.setString(NBT_FLUID_NAME, getFluidInBucket().getName());
-					return stack;
-				}
-
 				public Fluid getFluidInBucket()
 				{
 					return fluid;
-				}
-				
-				public ItemStack getBucket()
-				{
-					return getResult(getFluidInBucket());
 				}
 			});
 			VanillaMagic.logger.log(Level.INFO, "Added Enchanted Bucket: " + fluid.getName());
