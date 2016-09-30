@@ -63,7 +63,7 @@ public class BookAltarCrafting implements IBook
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_ALTAR_CRAFTING);
-		return infoBook.copy();
+		return infoBook;
 	}
 	
 	public String getUniqueNBTName() 

@@ -63,7 +63,7 @@ public class BookSpells implements IBook
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_SPELLS);
-		return infoBook.copy();
+		return infoBook;
 	}
 	
 	public String getUniqueNBTName() 

@@ -212,7 +212,7 @@ public class BookOther implements IBook
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_OTHER);
-		return infoBook.copy();
+		return infoBook;
 	}
 	
 	public String getUniqueNBTName() 

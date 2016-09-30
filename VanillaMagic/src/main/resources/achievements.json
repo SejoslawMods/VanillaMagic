@@ -740,7 +740,7 @@
 	"uniqueName":"speedy"
 },
 {
-	"questClass":"seia.vanillamagic.items.thecrystalofmothernature.QuestMotherNatureCrystal",
+	"questClass":"seia.vanillamagic.item.thecrystalofmothernature.QuestMotherNatureCrystal",
 	"requiredQuest":"speedy",
 	"posX":-2,
 	"posY":0,
@@ -1144,7 +1144,7 @@
 	"wandTier":3
 },
 {
-	"questClass":"seia.vanillamagic.items.enchantedbucket.QuestEnchantedBucket",
+	"questClass":"seia.vanillamagic.item.enchantedbucket.QuestEnchantedBucket",
 	"requiredQuest":"captureEntity",
 	"posX":-2,
 	"posY":0,
@@ -1156,7 +1156,7 @@
 	"uniqueName":"enchantedBucket"
 },
 {
-	"questClass":"seia.vanillamagic.items.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
+	"questClass":"seia.vanillamagic.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
 	"requiredQuest":"enchantedBucket",
 	"posX":-2,
 	"posY":0,
@@ -1168,7 +1168,7 @@
 	"uniqueName":"liquidSuppressionCrystal"
 },
 {
-	"questClass":"seia.vanillamagic.items.potionedcrystal.QuestPotionedCrystal",
+	"questClass":"seia.vanillamagic.item.potionedcrystal.QuestPotionedCrystal",
 	"requiredQuest":"liquidSuppressionCrystal",
 	"posX":-2,
 	"posY":0,
@@ -1205,7 +1205,7 @@
 	"wandTier":2
 },
 {
-	"questClass":"seia.vanillamagic.items.accelerationcrystal.QuestAccelerationCrystal",
+	"questClass":"seia.vanillamagic.item.accelerationcrystal.QuestAccelerationCrystal",
 	"requiredQuest":"craftWitherSkeletonSkull",
 	"posX":2,
 	"posY":0,

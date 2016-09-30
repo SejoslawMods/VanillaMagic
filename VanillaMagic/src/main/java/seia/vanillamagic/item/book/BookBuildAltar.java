@@ -219,7 +219,7 @@ public class BookBuildAltar implements IBook
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_BUILD_ALTAR);
-		return infoBook.copy();
+		return infoBook;
 	}
 	
 	public String getUniqueNBTName() 
