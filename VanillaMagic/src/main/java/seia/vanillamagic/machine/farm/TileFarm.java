@@ -28,6 +28,7 @@ import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.InventoryHelper;
 import seia.vanillamagic.util.WorldHelper;
 
+// TODO: Fix TileFarm
 public class TileFarm extends TileMachine
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getSimpleName();
