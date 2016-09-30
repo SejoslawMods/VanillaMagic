@@ -1,0 +1,10 @@
+General ideas not yet started to be implemented:
+
+1 - Item upgrades
+    Unique NBT tag for each upgrade
+    Dynamic item with upgrade registration
+    Items will be combined with upgrade in Cauldron
+    
+2 - New Quarry Upgrade
+    Module which will automatically place new IInventory from Input
+    Optional sorting digged items

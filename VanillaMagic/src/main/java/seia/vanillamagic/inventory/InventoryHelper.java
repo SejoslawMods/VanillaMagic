@@ -1,4 +1,4 @@
-package seia.vanillamagic.util;
+package seia.vanillamagic.inventory;
 
 import java.util.List;
 

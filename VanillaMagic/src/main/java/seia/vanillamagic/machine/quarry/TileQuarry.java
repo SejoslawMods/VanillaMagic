@@ -16,9 +16,11 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.inventory.IInventoryWrapper;
+import seia.vanillamagic.inventory.InventoryHelper;
+import seia.vanillamagic.inventory.InventoryWrapper;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosHelper;
-import seia.vanillamagic.util.InventoryHelper;
 
 public class TileQuarry extends TileMachine implements IQuarry
 {
@@ -116,9 +118,10 @@ public class TileQuarry extends TileMachine implements IQuarry
 	}
 	
 	@Nullable
-	public IInventory getOutputInventory()
+	public IInventoryWrapper getOutputInventory()
 	{
-		return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
+		//return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
+		return new InventoryWrapper(worldObj, getInventoryOutputPos());
 	}
 	
 	public BlockPos getInputFuelChestPos()
@@ -127,9 +130,10 @@ public class TileQuarry extends TileMachine implements IQuarry
 	}
 	
 	@Nullable
-	public IInventory getInputInventory()
+	public IInventoryWrapper getInputInventory()
 	{
-		return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));
+		//return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));
+		return new InventoryWrapper(worldObj, getInputFuelChestPos());
 	}
 	
 	/**
@@ -146,7 +150,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public boolean inventoryOutputHasSpace()
 	{
-		return !InventoryHelper.isInventoryFull(getOutputInventory(), getOutputFacing());
+		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
 	}
 	
 	public void spawnDigged(ItemStack digged)
@@ -287,7 +291,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 				}
 				else if(hasChest)
 				{
-					ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory(), stack, getOutputFacing());
+					ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, getOutputFacing());
 					if(leftItems == null)
 					{
 						break;

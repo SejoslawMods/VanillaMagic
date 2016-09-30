@@ -9,6 +9,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.inventory.IInventoryWrapper;
+import seia.vanillamagic.inventory.InventoryWrapper;
 import seia.vanillamagic.machine.TileMachine;
 
 public class TileAutocrafting extends TileMachine
@@ -36,15 +38,17 @@ public class TileAutocrafting extends TileMachine
 	}
 	
 	@Nullable
-	public IInventory getInputInventory() 
+	public IInventoryWrapper getInputInventory() 
 	{
-		return ((IInventory) worldObj.getTileEntity(getMachinePos().up()));
+		//return ((IInventory) worldObj.getTileEntity(getMachinePos().up()));
+		return new InventoryWrapper(worldObj, getMachinePos().up());
 	}
 	
 	@Nullable
-	public IInventory getOutputInventory() 
+	public IInventoryWrapper getOutputInventory() 
 	{
-		return ((IInventory) worldObj.getTileEntity(getMachinePos().down(2)));
+		//return ((IInventory) worldObj.getTileEntity(getMachinePos().down(2)));
+		return new InventoryWrapper(worldObj, getMachinePos().down(2));
 	}
 	
 	public boolean checkSurroundings() 

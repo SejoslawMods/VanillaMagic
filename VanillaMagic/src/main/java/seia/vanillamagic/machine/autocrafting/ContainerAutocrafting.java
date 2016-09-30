@@ -10,7 +10,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import seia.vanillamagic.util.InventoryHelper;
+import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.util.MatrixHelper;
 
 public class ContainerAutocrafting extends Container

@@ -16,8 +16,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.event.EventMachineWork;
+import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.InventoryHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.SmeltingHelper;
 
@@ -58,7 +58,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	
 	public boolean inventoryOutputHasSpace() 
 	{
-		return !InventoryHelper.isInventoryFull(getOutputInventory(), getOutputFacing());
+		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
 	}
 	
 	public void init(EntityPlayer player, BlockPos machinePos)
@@ -312,7 +312,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		
 		if(hasInputInventory())
 		{
-			ItemStack fuelToAdd = SmeltingHelper.getFuelFromInventoryAndDelete(getInputInventory());
+			ItemStack fuelToAdd = SmeltingHelper.getFuelFromInventoryAndDelete(getInputInventory().getInventory());
 			if(fuelToAdd == null)
 			{
 				return;

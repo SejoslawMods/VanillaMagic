@@ -22,10 +22,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.inventory.IInventoryWrapper;
+import seia.vanillamagic.inventory.InventoryHelper;
+import seia.vanillamagic.inventory.InventoryWrapper;
 import seia.vanillamagic.machine.TileMachine;
 import seia.vanillamagic.machine.farm.farmer.Farmers;
 import seia.vanillamagic.util.BlockPosHelper;
-import seia.vanillamagic.util.InventoryHelper;
 import seia.vanillamagic.util.WorldHelper;
 
 // TODO: Fix TileFarm
@@ -48,9 +50,10 @@ public class TileFarm extends TileMachine
 		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
 	}
 	
-	public IInventory getInputInventory() 
+	public IInventoryWrapper getInputInventory() 
 	{
-		return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.UP)));
+		//return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.UP)));
+		return new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.UP));
 	}
 	
 	public BlockPos getInputPos()
@@ -58,9 +61,10 @@ public class TileFarm extends TileMachine
 		return this.getMachinePos().offset(EnumFacing.UP);
 	}
 	
-	public IInventory getOutputInventory() 
+	public IInventoryWrapper getOutputInventory() 
 	{
-		return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.DOWN)));
+		//return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.DOWN)));
+		return new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.DOWN));
 	}
 	
 	public BlockPos getOutputPos()
@@ -116,7 +120,7 @@ public class TileFarm extends TileMachine
 	
 	public int getMaxSupplySlot()
 	{
-		return getInputInventory().getSizeInventory();
+		return getInputInventory().getInventory().getSizeInventory();
 	}
 	
 	public boolean tillBlock(BlockPos plantingLocation) 
@@ -145,7 +149,7 @@ public class TileFarm extends TileMachine
 	public int getMaxLootingValue() 
 	{
 		int result = 0;
-		IInventory inv = getInputInventory();
+		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
@@ -209,7 +213,7 @@ public class TileFarm extends TileMachine
 	public ItemStack getTool(ToolType type) 
 	{
 		int result = 0;
-		IInventory inv = getInputInventory();
+		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
@@ -265,7 +269,7 @@ public class TileFarm extends TileMachine
 
 	private void destroyTool(ToolType type) 
 	{
-		IInventory inv = getInputInventory();
+		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
@@ -379,10 +383,10 @@ public class TileFarm extends TileMachine
 		}
 		if (hasBonemeal() && bonemealCooldown-- <= 0) 
 		{
-			IInventory inv = getInputInventory();
+			IInventory inv = getInputInventory().getInventory();
 			for(int i = 0; i < inv.getSizeInventory(); i++)
 			{
-				ItemStack stack = getInputInventory().getStackInSlot(i);
+				ItemStack stack = getInputInventory().getInventory().getStackInSlot(i);
 				Fertilizer fertilizer = Fertilizer.getInstance(stack);
 				if ((fertilizer.applyOnPlant() != isOpen(workingPos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(workingPos))) 
 				{
@@ -393,7 +397,7 @@ public class TileFarm extends TileMachine
 						stack = farmer.inventory.mainInventory[0];
 						if(stack != null && stack.stackSize == 0) 
 						{
-							getInputInventory().setInventorySlotContents(i, null);
+							getInputInventory().getInventory().setInventorySlotContents(i, null);
 						}
 						bonemealCooldown = 20;
 					} 
@@ -411,7 +415,7 @@ public class TileFarm extends TileMachine
 	  
 	private boolean hasBonemeal() 
 	{
-		IInventory inv = getInputInventory();
+		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			if(Fertilizer.getInstance(inv.getStackInSlot(i)) != Fertilizer.NONE)
@@ -430,7 +434,7 @@ public class TileFarm extends TileMachine
 	public boolean hasSeed(ItemStack seeds, BlockPos pos) 
 	{
 		int slot = getSupplySlotForCoord(pos);
-		ItemStack inv = getInputInventory().getStackInSlot(slot);
+		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
 		return inv != null && inv.stackSize > 1 && inv.isItemEqual(seeds);
 	}
 
@@ -445,7 +449,7 @@ public class TileFarm extends TileMachine
 	public int isLowOnSaplings(BlockPos pos) 
 	{
 		int slot = getSupplySlotForCoord(pos);
-		ItemStack inv = getInputInventory().getStackInSlot(slot);
+		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
 		return 90 * (farmSaplingReserveAmount - (inv == null ? 0 : inv.stackSize)) / farmSaplingReserveAmount;
 	}
 
@@ -461,7 +465,7 @@ public class TileFarm extends TileMachine
 			return null;
 		}
 		int slot = getSupplySlotForCoord(forBlock);
-		ItemStack inv = getInputInventory().getStackInSlot(slot);
+		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
 		if(inv != null) 
 		{
 			if(matchMetadata ? inv.isItemEqual(stack) : inv.getItem() == stack.getItem()) 
@@ -478,7 +482,7 @@ public class TileFarm extends TileMachine
 				{
 					inv = null;
 				}
-				getInputInventory().setInventorySlotContents(slot, inv);
+				getInputInventory().getInventory().setInventorySlotContents(slot, inv);
 				return result;
 			}
 		}
@@ -498,7 +502,7 @@ public class TileFarm extends TileMachine
 
 	public ItemStack getSeedTypeInSuppliesFor(int slot) 
 	{
-		ItemStack inv = getInputInventory().getStackInSlot(slot);
+		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
 		if(inv != null && (inv.stackSize > 1)) 
 		{
 			return inv.copy();
@@ -549,7 +553,7 @@ public class TileFarm extends TileMachine
 
 	private int insertResult(ItemStack stack, BlockPos pos) 
 	{
-		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory(), stack, EnumFacing.DOWN);
+		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.DOWN);
 		return left.stackSize;
 		
 		/*

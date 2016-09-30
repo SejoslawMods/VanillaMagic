@@ -11,23 +11,23 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
 public interface ICustomTileEntity extends ITickable
 {
-	public void init(EntityPlayer player, BlockPos pos);
+	void init(EntityPlayer player, BlockPos pos);
 	
-	public void init(World world, BlockPos pos);
+	void init(World world, BlockPos pos);
 	
-	public void forceChunkLoading(Ticket ticket);
+	void forceChunkLoading(Ticket ticket);
 	
-	public void readFromNBT(NBTTagCompound tag);
+	void readFromNBT(NBTTagCompound tag);
 	
-	public NBTTagCompound writeToNBT(NBTTagCompound tag);
+	NBTTagCompound writeToNBT(NBTTagCompound tag);
 	
-	public SPacketUpdateTileEntity getUpdatePacket();
+	SPacketUpdateTileEntity getUpdatePacket();
 	
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt);
+	void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt);
 	
-	public NBTTagCompound getUpdateTag();
+	NBTTagCompound getUpdateTag();
 	
-	public Ticket getChunkTicket();
+	Ticket getChunkTicket();
 	
-	public String getPlayerName();
+	String getPlayerName();
 }
