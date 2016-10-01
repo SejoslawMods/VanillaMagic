@@ -2,6 +2,7 @@ package seia.vanillamagic.item.itemupgrade.upgrade;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry;
 
 /**
@@ -23,7 +24,15 @@ public interface IItemUpgrade
 	 */
 	void register();
 	
-	ItemStack getResult(ItemStack base);
+	default ItemStack getResult(ItemStack base)
+	{
+		ItemStack result = base.copy();
+		result.setStackDisplayName(result.getDisplayName() + " + Upgrade: " + getUpgradeName());
+		NBTTagCompound stackTag = result.getTagCompound();
+		stackTag.setString(NBT_ITEM_UPGRADE_NAME, getUniqueNBTTag());
+		stackTag.setBoolean(NBT_ITEM_CONTAINS_UPGRADE, true);
+		return result;
+	}
 	
 	/**
 	 * Ingredient which must be in Cauldron with the required Item.
