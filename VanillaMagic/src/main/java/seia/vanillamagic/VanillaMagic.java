@@ -23,6 +23,7 @@ import seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper;
 import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.machine.quarry.QuarryUpgradeRegistry;
 import seia.vanillamagic.quest.QuestList;
+import seia.vanillamagic.tileentity.TileEntityRegistry;
 
 @Mod(
 		modid = VanillaMagic.MODID, 
@@ -56,7 +57,7 @@ public class VanillaMagic
 		}
 		logger.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
-		VanillaMagicRegistry.INSTANCE.preInit();
+		TileEntityRegistry.INSTANCE.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 		//WorldHandler.INSTANCE.preInit(); //TODO: Fix World Saving / Loading
 		VanillaMagicIntegration.INSTANCE.preInit();
