@@ -41,12 +41,12 @@ public class VanillaMagicIntegration
 			{
 				if(i.preInit())
 				{
-					VanillaMagic.logger.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - enabled");
+					VanillaMagic.LOGGER.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - enabled");
 				}
 			}
 			catch(Exception e)
 			{
-				VanillaMagic.logger.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - failed");
+				VanillaMagic.LOGGER.log(Level.INFO, "[PRE-INIT] " + i.getModName() + " integration - failed");
 			}
 		}
 	}
@@ -59,12 +59,12 @@ public class VanillaMagicIntegration
 			{
 				if(i.init())
 				{
-					VanillaMagic.logger.log(Level.INFO, "[INIT] " + i.getModName() + " integration - enabled");
+					VanillaMagic.LOGGER.log(Level.INFO, "[INIT] " + i.getModName() + " integration - enabled");
 				}
 			}
 			catch(Exception e)
 			{
-				VanillaMagic.logger.log(Level.INFO, "[INIT] " + i.getModName() + " integration - failed");
+				VanillaMagic.LOGGER.log(Level.INFO, "[INIT] " + i.getModName() + " integration - failed");
 			}
 		}
 	}
@@ -77,12 +77,12 @@ public class VanillaMagicIntegration
 			{
 				if(i.postInit())
 				{
-					VanillaMagic.logger.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - enabled");
+					VanillaMagic.LOGGER.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - enabled");
 				}
 			}
 			catch(Exception e)
 			{
-				VanillaMagic.logger.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - failed");
+				VanillaMagic.LOGGER.log(Level.INFO, "[POST-INIT] " + i.getModName() + " integration - failed");
 			}
 		}
 	}

@@ -221,9 +221,4 @@ public class BookBuildAltar implements IBook
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_BUILD_ALTAR);
 		return infoBook;
 	}
-	
-	public String getUniqueNBTName() 
-	{
-		return BookRegistry.BOOK_NBT_UID;
-	}
 }

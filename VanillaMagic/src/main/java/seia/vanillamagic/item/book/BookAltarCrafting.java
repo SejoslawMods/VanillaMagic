@@ -65,9 +65,4 @@ public class BookAltarCrafting implements IBook
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_ALTAR_CRAFTING);
 		return infoBook;
 	}
-	
-	public String getUniqueNBTName() 
-	{
-		return BookRegistry.BOOK_NBT_UID;
-	}
 }

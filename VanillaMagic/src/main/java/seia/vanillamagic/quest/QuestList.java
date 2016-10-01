@@ -37,7 +37,7 @@ public class QuestList
 		Quest q = QUESTS_MAP.get(key);
 		if(q == null)
 		{
-			VanillaMagic.logger.log(Level.ERROR, "Can't find Quest for key: " + key);
+			VanillaMagic.LOGGER.log(Level.ERROR, "Can't find Quest for key: " + key);
 		}
 		return q;
 	}

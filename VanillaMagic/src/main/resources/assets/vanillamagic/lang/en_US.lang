@@ -14,6 +14,9 @@ book.altarBuilding.title=Altar Building
 book.other.itemName=Vanilla Magic Other Stuff
 book.other.title=Other things
 
+book.itemUpgrades.itemName=Vanilla Magic Item Upgrades
+book.itemUpgrades.title=Item Upgrades
+
 
 
 ############################
@@ -251,6 +254,9 @@ achievement.buildAltarTier2.desc=Add 1 block of Iron on each corner of Altar Tie
 
 achievement.craftIronOre=Craft Iron Ore
 achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick Wand in hand
+
+achievement.itemUpgrades=Item Upgrades
+achievement.itemUpgrades.desc=Toss 1x Item that can be upgraded + 1x ingredient into Cauldron and right-click with Blaze Wand
 
 achievement.craftCactus=Craft Cactus
 achievement.craftCactus.desc=Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand

@@ -22,12 +22,14 @@ public class BookRegistry
 	public static final String BOOK_NAME_ALTAR_CRAFTING = TextHelper.translateToLocal("book.altarCrafting.itemName");
 	public static final String BOOK_NAME_BUILD_ALTAR = TextHelper.translateToLocal("book.altarBuilding.itemName");
 	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
+	public static final String BOOK_ITEM_UPGRADES = TextHelper.translateToLocal("book.itemUpgrades.itemName");
 	public static final String BOOK_NBT_UID = "bookUID";
 	
-	public static final BookSpells bookSpells;
-	public static final BookAltarCrafting bookAltarCrafting;
-	public static final BookBuildAltar bookBuildAltar;
-	public static final BookOther bookOther;
+	public static final IBook bookSpells;
+	public static final IBook bookAltarCrafting;
+	public static final IBook bookBuildAltar;
+	public static final IBook bookOther;
+	public static final IBook bookItemUpgrade;
 	
 	private static List<IBook> books = new ArrayList<IBook>();
 	
@@ -44,6 +46,9 @@ public class BookRegistry
 		
 		bookOther = new BookOther();
 		books.add(bookOther);
+		
+		bookItemUpgrade = new BookItemUpgrade();
+		books.add(bookItemUpgrade);
 	}
 	
 	private BookRegistry()
@@ -56,7 +61,7 @@ public class BookRegistry
 		{
 			book.registerRecipe();
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Books registered");
+		VanillaMagic.LOGGER.log(Level.INFO, "Books registered (" + books.size() + ")");
 	}
 	
 	/**

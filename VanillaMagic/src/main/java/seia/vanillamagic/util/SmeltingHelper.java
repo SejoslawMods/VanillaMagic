@@ -166,6 +166,7 @@ public class SmeltingHelper
 		return TileEntityFurnace.isItemFuel(stackInOffHand);
 	}
 	
+	@Nullable
 	public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt)
 	{
 		return FurnaceRecipes.instance().getSmeltingResult(stackToSmelt).copy();

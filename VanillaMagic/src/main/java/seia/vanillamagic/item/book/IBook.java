@@ -12,4 +12,9 @@ public interface IBook extends ICustomItem
 	 * Returns the index of the book (for easier searching).
 	 */
 	int getUID();
+	
+	default public String getUniqueNBTName() 
+	{
+		return BookRegistry.BOOK_NBT_UID;
+	}
 }

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.item.itemupgrade.upgrade.IItemUpgrade;
@@ -38,8 +39,25 @@ public class ItemUpgradeRegistry
 		}
 	}
 	
+	/**
+	 * Mapping itemName to list of available items with the same name.<br>
+	 * For instance: "_pickaxe" -> all pickaxes
+	 */
 	private final Map<String, List<ItemEntry>> MAPPING_ITEMNAME_ITEMENTRY = new HashMap<String, List<ItemEntry>>();
+	/**
+	 * Mapping itemName to list of IItemUpgrades for that mapping.<br>
+	 * For instance: "_pickaxe" -> all upgrades for pickaxes
+	 */
 	private final Map<String, List<IItemUpgrade>> MAPPING_ITEMNAME_UPGRADE = new HashMap<String, List<IItemUpgrade>>();
+	/**
+	 * Registered upgrades with events.
+	 */
+	private final List<IItemUpgrade> EVENT_BUS_REGISTERED_UPGRADES = new ArrayList<IItemUpgrade>();
+	/**
+	 * All items to which we can add upgrade.<br>
+	 * For instance: all pickaxes, all axes, etc.
+	 */
+	private final List<ItemEntry> BASE_ITEMS = new ArrayList<ItemEntry>();
 	private final List<Item> ITEMS = ForgeRegistries.ITEMS.getValues();
 	
 	private ItemUpgradeRegistry()
@@ -51,6 +69,14 @@ public class ItemUpgradeRegistry
 		addItemMapping("_shovel");
 		
 		addUpgradeMapping("_pickaxe", UpgradeAutosmelt.class);
+	}
+	
+	/**
+	 * This method is just to start the static.
+	 */
+	public void start()
+	{
+		VanillaMagic.LOGGER.log(Level.INFO, "ItemUpgradeRegistry started...");
 	}
 	
 	/**
@@ -66,6 +92,7 @@ public class ItemUpgradeRegistry
 			if(MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName))
 			{
 				MAPPING_ITEMNAME_UPGRADE.get(mappingName).add(clazz.newInstance());
+				VanillaMagic.LOGGER.log(Level.INFO, "Added upgrade: " + clazz.getSimpleName() + ", for key: " + mappingName);
 			}
 			else
 			{
@@ -88,20 +115,24 @@ public class ItemUpgradeRegistry
 	 */
 	public void addItemToMapping(String mappingName, Item item)
 	{
+		ItemEntry itemEntry = new ItemEntry(mappingName, item);
 		if(MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName))
 		{
-			MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(new ItemEntry(mappingName, item));
+			MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+			BASE_ITEMS.add(itemEntry);
 		}
 		else
 		{
 			MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
-			VanillaMagic.LOGGER.log(Level.ERROR, "Created mapping for key: " + mappingName);
-			MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(new ItemEntry(mappingName, item));
+			VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for key: " + mappingName);
+			MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+			BASE_ITEMS.add(itemEntry);
 		}
 		// Add upgrade map only if it doesn't exists for the given mappingName
 		if(!MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName))
 		{
 			MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
+			VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for upgrades for key: " + mappingName);
 		}
 	}
 	
@@ -118,17 +149,15 @@ public class ItemUpgradeRegistry
 			return;
 		}
 		MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
-		VanillaMagic.LOGGER.log(Level.ERROR, "Created mapping for key: " + mappingName);
+		MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
+		VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for key: " + mappingName);
 		for(Item item : ITEMS)
 		{
 			if(item.getUnlocalizedName().contains(mappingName))
 			{
-				MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(new ItemEntry(mappingName, item));
-				// register mapping for given key
-				if(!MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName))
-				{
-					MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
-				}
+				ItemEntry itemEntry = new ItemEntry(mappingName, item);
+				MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+				BASE_ITEMS.add(itemEntry);
 			}
 		}
 	}
@@ -174,5 +203,38 @@ public class ItemUpgradeRegistry
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Returns the list of all the currently registered "base" items. <br>
+	 * For instance: swords, axes, pickaxes, etc.
+	 */
+	public List<ItemEntry> getBaseItems()
+	{
+		return BASE_ITEMS;
+	}
+	
+	/**
+	 * Returns the map of category names for upgrades. <br>
+	 * For instance (mapping): "_pickaxe" -> the list of all available pickaxes upgrades.
+	 */
+	public Map<String, List<IItemUpgrade>> getUpgradesMap()
+	{
+		return MAPPING_ITEMNAME_UPGRADE;
+	}
+	
+	public void registerEvents()
+	{
+		int registered = 0;
+		for(Entry<String, List<IItemUpgrade>> itemCategory : MAPPING_ITEMNAME_UPGRADE.entrySet())
+		{
+			for(IItemUpgrade upgrade : itemCategory.getValue())
+			{
+				MinecraftForge.EVENT_BUS.register(upgrade);
+				EVENT_BUS_REGISTERED_UPGRADES.add(upgrade);
+				registered++;
+			}
+		}
+		VanillaMagic.LOGGER.log(Level.INFO, "Registered Upgrade Events: " + registered);
 	}
 }

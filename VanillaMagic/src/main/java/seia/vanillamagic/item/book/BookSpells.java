@@ -65,9 +65,4 @@ public class BookSpells implements IBook
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_SPELLS);
 		return infoBook;
 	}
-	
-	public String getUniqueNBTName() 
-	{
-		return BookRegistry.BOOK_NBT_UID;
-	}
 }

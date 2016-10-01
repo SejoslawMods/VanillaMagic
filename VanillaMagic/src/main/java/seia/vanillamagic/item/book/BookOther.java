@@ -214,9 +214,4 @@ public class BookOther implements IBook
 		infoBook.setStackDisplayName(BookRegistry.BOOK_NAME_OTHER);
 		return infoBook;
 	}
-	
-	public String getUniqueNBTName() 
-	{
-		return BookRegistry.BOOK_NBT_UID;
-	}
 }
