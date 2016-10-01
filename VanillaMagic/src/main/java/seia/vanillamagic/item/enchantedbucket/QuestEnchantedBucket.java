@@ -38,12 +38,6 @@ import seia.vanillamagic.util.EntityHelper;
 
 public class QuestEnchantedBucket extends Quest
 {
-//	public QuestEnchantedBucket(Quest required, int posX, int posY, ItemStack icon, String questName,
-//			String uniqueName)
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	// Craft new Enchanted Bucket
 	int countTicks = 0;
 	@SubscribeEvent

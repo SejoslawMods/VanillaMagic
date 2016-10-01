@@ -372,7 +372,7 @@ public class SpellHelper
 			}
 			else
 			{
-				VanillaMagic.logger.log(Level.INFO, "Wrong spellID. (spellID = " + spellID + ")");
+				VanillaMagic.LOGGER.log(Level.INFO, "Wrong spellID. (spellID = " + spellID + ")");
 			}
 		}
 		return false;
@@ -515,7 +515,7 @@ public class SpellHelper
 			}
 			else
 			{
-				VanillaMagic.logger.log(Level.INFO, "Wrong spellID. (spellID = " + spellID + ")");
+				VanillaMagic.LOGGER.log(Level.INFO, "Wrong spellID. (spellID = " + spellID + ")");
 			}
 		}
 		return false;

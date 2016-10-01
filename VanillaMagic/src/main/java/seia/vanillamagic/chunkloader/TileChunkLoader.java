@@ -54,7 +54,7 @@ public class TileChunkLoader extends CustomTileEntity
 		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(worldObj, this.pos))
 		{
 			invalidate();
-			VanillaMagic.logger.log(Level.WARN, "Incorrect ChunkLoader placed on:");
+			VanillaMagic.LOGGER.log(Level.WARN, "Incorrect ChunkLoader placed on:");
 			BlockPosHelper.printCoords(this.pos);
 		}
 	}

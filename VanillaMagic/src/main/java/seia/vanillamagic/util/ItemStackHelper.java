@@ -69,13 +69,13 @@ public class ItemStackHelper
 	{
 		if(stack != null)
 		{
-			VanillaMagic.logger.log(Level.INFO, "ItemStack Info");
-			VanillaMagic.logger.log(Level.INFO, "Item = " + stack.getItem().toString());
-			VanillaMagic.logger.log(Level.INFO, "StackSize = " + stack.stackSize);
-			VanillaMagic.logger.log(Level.INFO, "ItemDamage = " + stack.getItemDamage());
+			VanillaMagic.LOGGER.log(Level.INFO, "ItemStack Info");
+			VanillaMagic.LOGGER.log(Level.INFO, "Item = " + stack.getItem().toString());
+			VanillaMagic.LOGGER.log(Level.INFO, "StackSize = " + stack.stackSize);
+			VanillaMagic.LOGGER.log(Level.INFO, "ItemDamage = " + stack.getItemDamage());
 			for(int i = 0; i < additionalInfo.length; i++)
 			{
-				VanillaMagic.logger.log(Level.INFO, "Additional Info #" + i + " = " + additionalInfo[i]);
+				VanillaMagic.LOGGER.log(Level.INFO, "Additional Info #" + i + " = " + additionalInfo[i]);
 			}
 		}
 		return false;

@@ -69,20 +69,20 @@ public class BlockPosHelper
 	
 	public static void printCoords(BlockPos pos)
 	{
-		VanillaMagic.logger.log(Level.INFO, " X = " + pos.getX());
-		VanillaMagic.logger.log(Level.INFO, " Y = " + pos.getY());
-		VanillaMagic.logger.log(Level.INFO, " Z = " + pos.getZ());
+		VanillaMagic.LOGGER.log(Level.INFO, " X = " + pos.getX());
+		VanillaMagic.LOGGER.log(Level.INFO, " Y = " + pos.getY());
+		VanillaMagic.LOGGER.log(Level.INFO, " Z = " + pos.getZ());
 	}
 	
 	public static void printCoords(Level level, String text, BlockPos pos)
 	{
-		VanillaMagic.logger.log(level, text);
+		VanillaMagic.LOGGER.log(level, text);
 		printCoords(pos);
 	}
 	
 	public static void printCoords(Level level, Block block, BlockPos pos)
 	{
-		VanillaMagic.logger.log(level, block.toString());
+		VanillaMagic.LOGGER.log(level, block.toString());
 		printCoords(pos);
 	}
 	

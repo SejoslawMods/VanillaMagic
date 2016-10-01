@@ -29,7 +29,7 @@ public class CustomTileEntityHandler
 	
 	public void postInit()
 	{
-		VanillaMagic.logger.log(Level.INFO, "CustomTileEntityHandler registered");
+		VanillaMagic.LOGGER.log(Level.INFO, "CustomTileEntityHandler registered");
 	}
 	
 	public String getRootDir()

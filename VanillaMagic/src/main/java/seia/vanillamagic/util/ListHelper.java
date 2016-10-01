@@ -1,6 +1,5 @@
 package seia.vanillamagic.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +27,6 @@ public class ListHelper
 		return tab[randIndex];
 	}
 	
-	@Nullable
 	public static int getRandomObjectFromTab(int[] tab)
 	{
 		int randIndex = new Random().nextInt(tab.length - 1);

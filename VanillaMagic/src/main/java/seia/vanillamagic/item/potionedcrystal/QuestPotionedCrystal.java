@@ -21,12 +21,6 @@ import seia.vanillamagic.util.EntityHelper;
 
 public class QuestPotionedCrystal extends Quest
 {
-//	public QuestPotionedCrystal(Quest required, int posX, int posY, ItemStack icon, String questName,
-//			String uniqueName) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	int countTicks = 0;
 	@SubscribeEvent
 	public void craftPotionedCrystal(RightClickBlock event)

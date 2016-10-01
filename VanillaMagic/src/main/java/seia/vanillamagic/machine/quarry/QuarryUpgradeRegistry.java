@@ -59,7 +59,7 @@ public class QuarryUpgradeRegistry
 		}
 		catch(Exception e)
 		{
-			VanillaMagic.logger.log(Level.WARN, "Couldn't register Quarry upgrade: " + quarryUpgradeClass.getSimpleName());
+			VanillaMagic.LOGGER.log(Level.WARN, "Couldn't register Quarry upgrade: " + quarryUpgradeClass.getSimpleName());
 			e.printStackTrace();
 			return false;
 		}

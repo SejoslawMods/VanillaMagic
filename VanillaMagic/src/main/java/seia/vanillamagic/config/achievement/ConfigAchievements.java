@@ -44,9 +44,9 @@ public class ConfigAchievements
 		if(!this.modConfigurationDirectory.exists())
 		{
 			this.modConfigurationDirectory.mkdirs();
-			VanillaMagic.logger.log(Level.INFO, "VanillaMagic config directory created");
+			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagic config directory created");
 		}
-		VanillaMagic.logger.log(Level.INFO, "VanillaMagic config directory loaded");
+		VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagic config directory loaded");
 		fileAchievements = unzip(achievements, fileAchievements);
 		fileAboutAchievements = unzip(aboutAchievements, fileAboutAchievements);
 		readAchievements();
@@ -78,7 +78,7 @@ public class ConfigAchievements
 							}
 							fos.close();
 							is.close();
-							VanillaMagic.logger.log(Level.INFO, fileName + " created");
+							VanillaMagic.LOGGER.log(Level.INFO, fileName + " created");
 							return localFile;
 						}
 					}
@@ -98,7 +98,7 @@ public class ConfigAchievements
 							}
 							fos.close();
 							is.close();
-							VanillaMagic.logger.log(Level.INFO, fileName + " created");
+							VanillaMagic.LOGGER.log(Level.INFO, fileName + " created");
 							return localFile;
 						}
 					}
@@ -107,7 +107,7 @@ public class ConfigAchievements
 			catch(IOException e) 
 			{
 				e.printStackTrace();
-				VanillaMagic.logger.log(Level.INFO, "Error while creating " + fileName);
+				VanillaMagic.LOGGER.log(Level.INFO, "Error while creating " + fileName);
 			}
 		}
 		return localFile;
@@ -131,17 +131,17 @@ public class ConfigAchievements
 					Quest quest = (Quest) className.newInstance();
 					quest.readData(jo);
 				}
-				VanillaMagic.logger.log(Level.WARN, "VanillaMagic achievements readded from JSON file");
+				VanillaMagic.LOGGER.log(Level.WARN, "VanillaMagic achievements readded from JSON file");
 			}
 			else
 			{
-				VanillaMagic.logger.log(Level.WARN, "Can't load VanillaMagic achievements from JSON file");
+				VanillaMagic.LOGGER.log(Level.WARN, "Can't load VanillaMagic achievements from JSON file");
 			}
 		} 
 		catch(Exception e) 
 		{
 			e.printStackTrace();
-			VanillaMagic.logger.log(Level.INFO, "Error while loading Achievements.json");
+			VanillaMagic.LOGGER.log(Level.INFO, "Error while loading Achievements.json");
 		}
 	}
 }

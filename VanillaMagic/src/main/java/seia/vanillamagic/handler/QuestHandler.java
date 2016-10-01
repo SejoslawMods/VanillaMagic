@@ -12,14 +12,14 @@ public class QuestHandler
 {
 	public static final QuestHandler INSTANCE = new QuestHandler();
 	
-	public final String PAGE_NAME = VanillaMagic.NAME;
+	public final String pageName = VanillaMagic.NAME;
 	public final List<Object> registeredEvents = new ArrayList<Object>();
 	
 	private final AchievementPage page;
 	
 	private QuestHandler()
 	{
-		page = new AchievementPage(PAGE_NAME);
+		page = new AchievementPage(pageName);
 		AchievementPage.registerAchievementPage(page);
 	}
 	

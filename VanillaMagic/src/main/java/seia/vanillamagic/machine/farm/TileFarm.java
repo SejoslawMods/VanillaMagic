@@ -350,7 +350,7 @@ public class TileFarm extends TileMachine
 		if(farmer == null) 
 		{
 			farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
-			VanillaMagic.logger.log(Level.INFO, "Added Custom Farmer");
+			VanillaMagic.LOGGER.log(Level.INFO, "Added Custom Farmer");
 		}
 		if(isOpen(workingPos)) 
 		{

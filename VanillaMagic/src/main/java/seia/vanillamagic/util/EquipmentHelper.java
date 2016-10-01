@@ -11,56 +11,58 @@ import seia.vanillamagic.VanillaMagic;
 
 public class EquipmentHelper 
 {
-	public static final EquipmentHelper INSTANCE = new EquipmentHelper();
-	
-	public List<Item> helmets = new ArrayList<Item>();
-	public List<Item> chestplates = new ArrayList<Item>();
-	public List<Item> leggings = new ArrayList<Item>();
-	public List<Item> boots = new ArrayList<Item>();
-	public List<Item> weapons = new ArrayList<Item>();
+	public static final List<Item> HELMETS = new ArrayList<Item>();
+	public static final List<Item> CHESTPLATES = new ArrayList<Item>();
+	public static final List<Item> LEGGINGS = new ArrayList<Item>();
+	public static final List<Item> BOOTS = new ArrayList<Item>();
+	public static final List<Item> WEAPONS = new ArrayList<Item>();
 	
 	private EquipmentHelper()
+	{
+	}
+	
+	static
 	{
 		List<Item> items = ForgeRegistries.ITEMS.getValues();
 		for(Item item : items)
 		{
 			if(item.getUnlocalizedName().contains("helmet") || item.getUnlocalizedName().contains("hat"))
 			{
-				helmets.add(item);
+				HELMETS.add(item);
 			}
 		}
-		VanillaMagic.logger.log(Level.INFO, "Readded helmets: " + helmets.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Readded helmets: " + HELMETS.size());
 		for(Item item : items)
 		{
 			if(item.getUnlocalizedName().contains("chestplate"))
 			{
-				chestplates.add(item);
+				CHESTPLATES.add(item);
 			}
 		}
-		VanillaMagic.logger.log(Level.INFO, "Readded chestplates: " + chestplates.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Readded chestplates: " + CHESTPLATES.size());
 		for(Item item : items)
 		{
 			if(item.getUnlocalizedName().contains("leggings"))
 			{
-				leggings.add(item);
+				LEGGINGS.add(item);
 			}
 		}
-		VanillaMagic.logger.log(Level.INFO, "Readded leggings: " + leggings.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Readded leggings: " + LEGGINGS.size());
 		for(Item item : items)
 		{
 			if(item.getUnlocalizedName().contains("boots"))
 			{
-				boots.add(item);
+				BOOTS.add(item);
 			}
 		}
-		VanillaMagic.logger.log(Level.INFO, "Readded boots: " + boots.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Readded boots: " + BOOTS.size());
 		for(Item item : items)
 		{
 			if(item.getUnlocalizedName().contains("sword") || item.getUnlocalizedName().contains("bow"))
 			{
-				weapons.add(item);
+				WEAPONS.add(item);
 			}
 		}
-		VanillaMagic.logger.log(Level.INFO, "Readded weapons: " + weapons.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Readded weapons: " + WEAPONS.size());
 	}
 }

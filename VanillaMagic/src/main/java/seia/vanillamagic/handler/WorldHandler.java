@@ -47,7 +47,7 @@ public class WorldHandler
 	public void preInit()
 	{
 		MinecraftForge.EVENT_BUS.register(this);
-		VanillaMagic.logger.log(Level.INFO, "WorldHandler registered");
+		VanillaMagic.LOGGER.log(Level.INFO, "WorldHandler registered");
 	}
 	
 	@SubscribeEvent
@@ -93,9 +93,9 @@ public class WorldHandler
 						}
 						catch(Exception e)
 						{
-							VanillaMagic.logger.log(Level.ERROR, "Error while reading class for CustomTileEntity");
+							VanillaMagic.LOGGER.log(Level.ERROR, "Error while reading class for CustomTileEntity");
 						}
-						VanillaMagic.logger.log(Level.INFO, "[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
+						VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						try
 						{
 							tileEntity.setPos(tileEntityPos);
@@ -179,7 +179,7 @@ public class WorldHandler
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
 			CompressedStreamTools.writeCompressed(data, fileOutputStream);
 			fileOutputStream.close();
-			VanillaMagic.logger.log(Level.INFO, "[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
+			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
 		}
 		catch(Exception e)
 		{

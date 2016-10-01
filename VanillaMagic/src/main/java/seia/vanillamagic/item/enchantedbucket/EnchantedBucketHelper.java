@@ -116,8 +116,8 @@ public class EnchantedBucketHelper
 					return fluid;
 				}
 			});
-			VanillaMagic.logger.log(Level.INFO, "Added Enchanted Bucket: " + fluid.getName());
+			VanillaMagic.LOGGER.log(Level.INFO, "Added Enchanted Bucket: " + fluid.getName());
 		}
-		VanillaMagic.logger.log(Level.INFO, "Registered Enchanted Buckets: " + VanillaMagicItems.INSTANCE.enchantedBuckets.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Registered Enchanted Buckets: " + VanillaMagicItems.INSTANCE.enchantedBuckets.size());
 	}
 }

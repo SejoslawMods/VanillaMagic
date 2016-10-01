@@ -145,23 +145,23 @@ public class EntityHelper
 		Item item = null;
 		if(slot == EntityEquipmentSlot.MAINHAND || slot == EntityEquipmentSlot.OFFHAND)
 		{
-			item = ListHelper.getRandomObjectFromList(EquipmentHelper.INSTANCE.weapons);
+			item = ListHelper.getRandomObjectFromList(EquipmentHelper.WEAPONS);
 		}
 		else if(slot == EntityEquipmentSlot.CHEST)
 		{
-			item = ListHelper.getRandomObjectFromList(EquipmentHelper.INSTANCE.chestplates);
+			item = ListHelper.getRandomObjectFromList(EquipmentHelper.CHESTPLATES);
 		}
 		else if(slot == EntityEquipmentSlot.FEET)
 		{
-			item = ListHelper.getRandomObjectFromList(EquipmentHelper.INSTANCE.boots);
+			item = ListHelper.getRandomObjectFromList(EquipmentHelper.BOOTS);
 		}
 		else if(slot == EntityEquipmentSlot.HEAD)
 		{
-			item = ListHelper.getRandomObjectFromList(EquipmentHelper.INSTANCE.helmets);
+			item = ListHelper.getRandomObjectFromList(EquipmentHelper.HELMETS);
 		}
 		else if(slot == EntityEquipmentSlot.LEGS)
 		{
-			item = ListHelper.getRandomObjectFromList(EquipmentHelper.INSTANCE.leggings);
+			item = ListHelper.getRandomObjectFromList(EquipmentHelper.LEGGINGS);
 		}
 		return new ItemStack(item);
 	}

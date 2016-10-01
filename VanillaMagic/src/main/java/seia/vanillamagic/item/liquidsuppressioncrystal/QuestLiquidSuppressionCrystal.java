@@ -14,12 +14,6 @@ import seia.vanillamagic.util.BlockHelper;
 
 public class QuestLiquidSuppressionCrystal extends Quest
 {
-//	public QuestLiquidSuppressionCrystal(Quest required, int posX, int posY, ItemStack icon, String questName,
-//			String uniqueName) 
-//	{
-//		super(required, posX, posY, icon, questName, uniqueName);
-//	}
-	
 	@SubscribeEvent
 	public void onItemHeld(PlayerTickEvent event)
 	{

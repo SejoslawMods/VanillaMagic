@@ -63,7 +63,7 @@ public class CustomTileEntityOneSaveHandler
 		else
 		{
 			loadedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
-			VanillaMagic.logger.log(Level.INFO, "Registered CustomTileEntityHandler for Dimension: " + dimension);
+			VanillaMagic.LOGGER.log(Level.INFO, "Registered CustomTileEntityHandler for Dimension: " + dimension);
 			loadedTileEntities.get(dimension).add(customTileEntity);
 			add(customTileEntity);
 			return true;
@@ -180,7 +180,7 @@ public class CustomTileEntityOneSaveHandler
 		else
 		{
 			readedTileEntities.put(new Integer(dimension), new ArrayList<TileEntity>());
-			VanillaMagic.logger.log(Level.INFO, "Registered ReadedTileEntityHandler for Dimension: " + dimension);
+			VanillaMagic.LOGGER.log(Level.INFO, "Registered ReadedTileEntityHandler for Dimension: " + dimension);
 			readedTileEntities.get(dimension).add(tileEntity);
 			return true;
 		}

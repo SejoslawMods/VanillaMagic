@@ -48,7 +48,7 @@ public class VanillaMagicItems
 		{
 			customItem.registerRecipe();
 		}
-		VanillaMagic.logger.log(Level.INFO, "Custom items registered: " + customItems.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Custom items registered: " + customItems.size());
 	}
 	
 	/**

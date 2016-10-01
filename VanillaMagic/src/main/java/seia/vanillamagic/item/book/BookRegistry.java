@@ -13,8 +13,6 @@ import seia.vanillamagic.util.TextHelper;
 
 public class BookRegistry 
 {
-	public static final BookRegistry INSTANCE = new BookRegistry();
-	
 	public static final Item BOOK_ITEM = Items.WRITABLE_BOOK;
 	public static final String COLOR_TITLE = TextHelper.COLOR_BLUE;
 	public static final String COLOR_HEADER = TextHelper.COLOR_RED;
@@ -26,14 +24,14 @@ public class BookRegistry
 	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
 	public static final String BOOK_NBT_UID = "bookUID";
 	
-	public final BookSpells bookSpells;
-	public final BookAltarCrafting bookAltarCrafting;
-	public final BookBuildAltar bookBuildAltar;
-	public final BookOther bookOther;
+	public static final BookSpells bookSpells;
+	public static final BookAltarCrafting bookAltarCrafting;
+	public static final BookBuildAltar bookBuildAltar;
+	public static final BookOther bookOther;
 	
-	private List<IBook> books = new ArrayList<IBook>();
+	private static List<IBook> books = new ArrayList<IBook>();
 	
-	private BookRegistry()
+	static
 	{
 		bookSpells = new BookSpells();
 		books.add(bookSpells);
@@ -48,13 +46,17 @@ public class BookRegistry
 		books.add(bookOther);
 	}
 	
-	public void postInit()
+	private BookRegistry()
+	{
+	}
+	
+	public static void postInit()
 	{
 		for(IBook book : books)
 		{
 			book.registerRecipe();
 		}
-		VanillaMagic.logger.log(Level.INFO, "Books registered");
+		VanillaMagic.LOGGER.log(Level.INFO, "Books registered");
 	}
 	
 	/**
@@ -64,7 +66,7 @@ public class BookRegistry
 	 * 3 - Spells <br>
 	 * 4 - Other <br>
 	 */
-	public ItemStack getBookByUID(int bookUID)
+	public static ItemStack getBookByUID(int bookUID)
 	{
 		for(int i = 0; i < books.size(); i++)
 		{
@@ -79,7 +81,7 @@ public class BookRegistry
 	/**
 	 * Checks if the given ItemStack is a book. 
 	 */
-	public boolean isBook(ItemStack stack)
+	public static boolean isBook(ItemStack stack)
 	{
 		if(stack.getTagCompound() != null)
 		{
@@ -92,7 +94,7 @@ public class BookRegistry
 	 * This method will return the bookUID from the stack. <br>
 	 * If it returns -1, than it means that the given stack is not a book.
 	 */
-	public int getUIDByBook(ItemStack stack)
+	public static int getUIDByBook(ItemStack stack)
 	{
 		if(isBook(stack))
 		{

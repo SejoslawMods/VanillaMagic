@@ -40,24 +40,24 @@ public class VanillaMagic
 	public static VanillaMagic INSTANCE;
 	
 	@Mod.Metadata
-	public static ModMetadata modMetadata;
+	public static ModMetadata METADATA;
 	
-	public static Logger logger;
-	public static ConfigAchievements configAchievements;
+	public static Logger LOGGER;
+	public static ConfigAchievements CONFIG_ACHIEVEMENTS;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		logger = event.getModLog();
-		configAchievements = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
-		modMetadata = VanillaMagicMetadata.INSTANCE.preInit(modMetadata);
+		LOGGER = event.getModLog();
+		CONFIG_ACHIEVEMENTS = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
+		METADATA = VanillaMagicMetadata.INSTANCE.preInit(METADATA);
 		for(int i = 0; i < QuestList.size(); i++)
 		{
 			QuestHandler.INSTANCE.registerEvent(QuestList.get(i));
 		}
-		logger.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
+		LOGGER.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
 		VanillaMagicDebug.INSTANCE.preInit();
-		TileEntityRegistry.INSTANCE.preInit();
+		TileEntityRegistry.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 		//WorldHandler.INSTANCE.preInit(); //TODO: Fix World Saving / Loading
 		VanillaMagicIntegration.INSTANCE.preInit();
@@ -70,19 +70,19 @@ public class VanillaMagic
 		{
 			QuestHandler.INSTANCE.addAchievement(QuestList.get(i).achievement);
 		}
-		logger.log(Level.INFO, "Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
+		LOGGER.log(Level.INFO, "Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
 		VanillaMagicIntegration.INSTANCE.init();
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		BookRegistry.INSTANCE.postInit();
+		BookRegistry.postInit();
 		CustomTileEntityHandler.INSTANCE.postInit();
 		EnchantedBucketHelper.registerFluids();
 		PotionedCrystalHelper.registerRecipes();
 		VanillaMagicItems.INSTANCE.postInit();
 		VanillaMagicIntegration.INSTANCE.postInit();
-		logger.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
+		LOGGER.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
 	}
 }

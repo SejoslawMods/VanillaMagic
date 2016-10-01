@@ -100,6 +100,6 @@ public class PotionedCrystalHelper
 				}
 			});
 		}
-		VanillaMagic.logger.log(Level.INFO, "Registered Potioned Crystals: " + VanillaMagicItems.INSTANCE.potionedCrystals.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Registered Potioned Crystals: " + VanillaMagicItems.INSTANCE.potionedCrystals.size());
 	}
 }
