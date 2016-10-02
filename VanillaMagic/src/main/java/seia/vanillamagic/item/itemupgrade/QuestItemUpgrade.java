@@ -1,16 +1,19 @@
 package seia.vanillamagic.item.itemupgrade;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -23,12 +26,28 @@ import seia.vanillamagic.util.CauldronHelper;
 
 public class QuestItemUpgrade extends Quest
 {
+	int times = 0;
 	// TODO: Fix crafting upgrade
 	@SubscribeEvent
 	public void craftUpgrade(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = event.getWorld();
+		if(world.isRemote)
+		{
+			return;
+		}
+		
+		if(times == 0)
+		{
+			times++;
+		}
+		else
+		{
+			times = 0;
+			return;
+		}
+		
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(rightHand == null)
@@ -38,7 +57,7 @@ public class QuestItemUpgrade extends Quest
 		if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, rightHand))
 		{
 			IBlockState clickedBlock = world.getBlockState(clickedPos);
-			if(Block.isEqualTo(clickedBlock.getBlock(), Blocks.CAULDRON))
+			if(clickedBlock.getBlock() instanceof BlockCauldron)
 			{
 				List<EntityItem> inCauldron = CauldronHelper.getItemsInCauldron(world, clickedPos);
 				ItemStack base = getBaseStack(inCauldron);
@@ -72,6 +91,23 @@ public class QuestItemUpgrade extends Quest
 					}
 					EntityItem craftingResultEntity = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), craftingResult);
 					world.spawnEntityInWorld(craftingResultEntity);
+					// Particle + sound
+					{
+						world.playSound((double)clickedPos.getX() + 0.5D, (double)clickedPos.getY(), (double)clickedPos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+						Random rand = new Random();
+						double particleX = (double)clickedPos.getX() + 0.5D;
+						double particleY = (double)clickedPos.getY() + rand.nextDouble() * 6.0D / 16.0D;
+						double particleZ = (double)clickedPos.getZ() + 0.5D;
+						double randomPos = rand.nextDouble() * 0.6D - 0.3D;
+						world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, particleX - 0.52D, particleY, particleZ + randomPos, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.FLAME, particleX - 0.52D, particleY, particleZ + randomPos, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, particleX + 0.52D, particleY, particleZ + randomPos, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.FLAME, particleX + 0.52D, particleY, particleZ + randomPos, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, particleX + randomPos, particleY, particleZ - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.FLAME, particleX + randomPos, particleY, particleZ - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, particleX + randomPos, particleY, particleZ + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+						world.spawnParticle(EnumParticleTypes.FLAME, particleX + randomPos, particleY, particleZ + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+					}
 				}
 			}
 		}
@@ -79,6 +115,7 @@ public class QuestItemUpgrade extends Quest
 
 	public boolean canGetUpgrade(ItemStack base) 
 	{
+		base.setStackDisplayName(base.getDisplayName() + " ");
 		NBTTagCompound tag = base.getTagCompound();
 		if(tag == null)
 		{

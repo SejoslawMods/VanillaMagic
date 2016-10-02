@@ -151,15 +151,18 @@ public class ItemUpgradeRegistry
 		MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
 		MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
 		VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for key: " + mappingName);
+		int registeredItems = 0;
 		for(Item item : ITEMS)
 		{
-			if(item.getUnlocalizedName().contains(mappingName))
+			if(item.getRegistryName().getResourcePath().contains(mappingName))
 			{
 				ItemEntry itemEntry = new ItemEntry(mappingName, item);
 				MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
 				BASE_ITEMS.add(itemEntry);
+				registeredItems++;
 			}
 		}
+		VanillaMagic.LOGGER.log(Level.INFO, "Registered items: " + registeredItems + " for key: " + mappingName);
 	}
 	
 	/**

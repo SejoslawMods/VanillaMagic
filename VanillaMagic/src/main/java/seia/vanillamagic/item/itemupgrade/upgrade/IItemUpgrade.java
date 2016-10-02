@@ -21,7 +21,7 @@ public interface IItemUpgrade
 	default ItemStack getResult(ItemStack base)
 	{
 		ItemStack result = base.copy();
-		result.setStackDisplayName(result.getDisplayName() + " + Upgrade: " + getUpgradeName());
+		result.setStackDisplayName(result.getDisplayName() + "+ Upgrade: " + getUpgradeName());
 		NBTTagCompound stackTag = result.getTagCompound();
 		stackTag.setString(NBT_ITEM_UPGRADE_TAG, getUniqueNBTTag());
 		stackTag.setBoolean(NBT_ITEM_CONTAINS_UPGRADE, true);
