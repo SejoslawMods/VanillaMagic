@@ -27,7 +27,6 @@ import seia.vanillamagic.util.CauldronHelper;
 public class QuestItemUpgrade extends Quest
 {
 	int times = 0;
-	// TODO: Fix crafting upgrade
 	@SubscribeEvent
 	public void craftUpgrade(RightClickBlock event)
 	{
