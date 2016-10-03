@@ -38,6 +38,11 @@ public class TileQuarry extends TileMachine implements IQuarry
 	private EnumFacing startPosFacing;
 	private EnumFacing diamondFacing;
 	private EnumFacing redstoneFacing;
+	
+	/**
+	 * Forces Quarry to stop working.
+	 */
+	private boolean forceStop = false;
 	/**
 	 * It's (size)x(size) but (size-2)x(size-2) is for digging
 	 * BlocksInChunk
@@ -53,6 +58,16 @@ public class TileQuarry extends TileMachine implements IQuarry
 	public EnumFacing getStartPosFacing()
 	{
 		return startPosFacing;
+	}
+	
+	public void forceQuarryStop()
+	{
+		forceStop = true;
+	}
+	
+	public void forceQuarryStart()
+	{
+		forceStop = false;
 	}
 	
 	/**
@@ -215,6 +230,11 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public void doWork() // once a world tick
 	{
+		// If forced to stop, stop.
+		if(forceStop)
+		{
+			return;
+		}
 		// Counting the number of blocks
 		countRedstoneBlocks();
 		// Memory efficiency.

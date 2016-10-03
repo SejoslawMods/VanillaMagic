@@ -14,7 +14,7 @@ public interface IQuarry extends IMachine
 	/**
 	 * Returns Quarry size in blocks.
 	 */
-	public int getQuarrySize();
+	int getQuarrySize();
 	
 	/**
 	 * Returns the Quarry mining direction. Facing from Cauldron to the start mining position. <br>
@@ -25,38 +25,38 @@ public interface IQuarry extends IMachine
 	 * 
 	 * @see {@link #rotateY(EnumFacing, int)}
 	 */
-	public EnumFacing getStartPosFacing();
+	EnumFacing getStartPosFacing();
 	
 	/**
 	 * In short, this will restart the Quarry mining position.
 	 */
-	public void restartDefaultStartPos();
+	void restartDefaultStartPos();
 	
 	/**
 	 * Facings around the Quarry;
 	 */
-	public EnumFacing[] facings();
+	EnumFacing[] facings();
 	
 	/**
 	 * Returns TRUE if the Quarry can mine next block.
 	 */
-	public boolean canDig();
+	boolean canDig();
 	
 	/**
 	 * Spawns the given ItemStack.
 	 */
-	public void spawnDigged(ItemStack digged);
+	void spawnDigged(ItemStack digged);
 	
 	/**
 	 * Moves the working position to the next position and returns it.
 	 */
-	public BlockPos moveWorkingPosToNextPos();
+	BlockPos moveWorkingPosToNextPos();
 	
 	/**
 	 * One Quarry operation. <br>
 	 * Check if Air Block OR check if Bedrock OR mine block, etc.
 	 */
-	public void performOneOperation();
+	void performOneOperation();
 	
 	/**
 	 * Rotates the given facing the number of given times and returns this facing after rotation. <br>
@@ -64,5 +64,16 @@ public interface IQuarry extends IMachine
 	 * 
 	 * @see {@link net.minecraft.util.EnumFacing.Plane#HORIZONTAL}
 	 */
-	public EnumFacing rotateY(EnumFacing startFace, int times);
+	EnumFacing rotateY(EnumFacing startFace, int times);
+	
+	/**
+	 * Forces Quarry to stop it's work. <br>
+	 * Quarry won't start until You use {@link #forceQuarryStart()}.
+	 */
+	void forceQuarryStop();
+	
+	/**
+	 * Forces Quarry to start it's work.
+	 */
+	void forceQuarryStart();
 }

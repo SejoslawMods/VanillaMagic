@@ -3,3 +3,10 @@ General ideas not yet started to be implemented:
 1 - New Quarry Upgrade
     Module which will automatically place new IInventory from Input
     Optional sorting digged items
+    If current output is destroyed, go back to original output position
+    
+2 - Bridge between 2 IInventorys
+    One Inventory -> Input
+    Second Inventory -> Output
+    Transfer items from Input to Output
+    TileEntityInventoryBridge -> holds information about second TEIB
