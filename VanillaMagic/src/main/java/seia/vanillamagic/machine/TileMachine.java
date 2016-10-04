@@ -16,6 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.event.EventMachineWork;
+import seia.vanillamagic.inventory.IInventoryWrapper;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.NBTHelper;
@@ -37,6 +38,11 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	protected boolean finished = false;
 	protected int delayInTicks = 0;
 	protected boolean needsFuel = true;
+	
+	@Nullable
+	protected IInventoryWrapper inventoryInput;
+	@Nullable
+	protected IInventoryWrapper inventoryOutput;
 	
 	/**
 	 * This should check if the Machine is build correctly.
@@ -124,6 +130,26 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 			performAdditionalOperations();
 			doWork();
 		}
+	}
+	
+	public IInventoryWrapper getInputInventory()
+	{
+		return inventoryInput;
+	}
+	
+	public void setInputInventory(IInventoryWrapper inv)
+	{
+		this.inventoryInput = inv;
+	}
+	
+	public IInventoryWrapper getOutputInventory()
+	{
+		return inventoryOutput;
+	}
+	
+	public void setOutputInventory(IInventoryWrapper inv)
+	{
+		this.inventoryOutput = inv;
 	}
 	
 	/**

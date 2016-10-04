@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.inventory.IInventoryWrapper;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.inventory.InventoryWrapper;
 import seia.vanillamagic.machine.TileMachine;
@@ -48,23 +47,13 @@ public class TileFarm extends TileMachine
 		//this.radius = radius; //this.farmSize = (2 * radius) + 1;
 		this.chestPosInput = this.pos.offset(EnumFacing.UP);
 		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
-	}
-	
-	public IInventoryWrapper getInputInventory() 
-	{
-		//return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.UP)));
-		return new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.UP));
+		this.inventoryInput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.UP));
+		this.inventoryOutput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.DOWN));
 	}
 	
 	public BlockPos getInputPos()
 	{
 		return this.getMachinePos().offset(EnumFacing.UP);
-	}
-	
-	public IInventoryWrapper getOutputInventory() 
-	{
-		//return ((IInventory) this.worldObj.getTileEntity(this.pos.offset(EnumFacing.DOWN)));
-		return new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.DOWN));
 	}
 	
 	public BlockPos getOutputPos()

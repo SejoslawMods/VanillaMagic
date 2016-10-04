@@ -3,8 +3,6 @@ package seia.vanillamagic.machine.quarry;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -16,7 +14,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.inventory.IInventoryWrapper;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.inventory.InventoryWrapper;
 import seia.vanillamagic.machine.TileMachine;
@@ -106,6 +103,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 							this.diamondFacing = diamondFacing;
 							this.startPosFacing = diamondFacing.rotateY();
 							restartDefaultStartPos();
+							this.inventoryInput = new InventoryWrapper(worldObj, new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
+							this.inventoryOutput = new InventoryWrapper(worldObj, pos.offset(getOutputFacing()));
 						}
 						return true;
 					}
@@ -127,29 +126,29 @@ public class TileQuarry extends TileMachine implements IQuarry
 		return EnumFacing.Plane.HORIZONTAL.facings();
 	}
 	
-	public BlockPos getInventoryOutputPos()
-	{
-		return pos.offset(getOutputFacing());
-	}
+//	public BlockPos getInventoryOutputPos()
+//	{
+//		return pos.offset(getOutputFacing());
+//	}
 	
-	@Nullable
-	public IInventoryWrapper getOutputInventory()
-	{
-		//return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
-		return new InventoryWrapper(worldObj, getInventoryOutputPos());
-	}
+//	@Nullable
+//	public IInventoryWrapper getOutputInventory()
+//	{
+//		//return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
+//		return new InventoryWrapper(worldObj, getInventoryOutputPos());
+//	}
 	
-	public BlockPos getInputFuelChestPos()
-	{
-		return new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
-	}
+//	public BlockPos getInputFuelChestPos()
+//	{
+//		return new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
+//	}
 	
-	@Nullable
-	public IInventoryWrapper getInputInventory()
-	{
-		//return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));
-		return new InventoryWrapper(worldObj, getInputFuelChestPos());
-	}
+//	@Nullable
+//	public IInventoryWrapper getInputInventory()
+//	{
+//		//return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));
+//		return new InventoryWrapper(worldObj, getInputFuelChestPos());
+//	}
 	
 	/**
 	 * will return if quarry can dig next block

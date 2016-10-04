@@ -1,7 +1,5 @@
 package seia.vanillamagic.machine;
 
-import java.io.Serializable;
-
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -10,11 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.inventory.IInventoryWrapper;
+import seia.vanillamagic.tileentity.ICustomTileEntity;
 import seia.vanillamagic.util.IAdditionalInfoProvider;
 
 /**
@@ -23,7 +21,7 @@ import seia.vanillamagic.util.IAdditionalInfoProvider;
  * 
  * @author Seia
  */
-public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, Serializable, IAdditionalInfoProvider
+public interface IMachine extends ICustomTileEntity, INBTSerializable<NBTTagCompound>, IAdditionalInfoProvider
 {
 	/**
 	 * Returns the World on which Machine is.
@@ -169,10 +167,20 @@ public interface IMachine extends ITickable, INBTSerializable<NBTTagCompound>, S
 	IInventoryWrapper getInputInventory();
 	
 	/**
+	 * Sets the new input inventory.
+	 */
+	void setInputInventory(IInventoryWrapper inv);
+	
+	/**
 	 * Returns the inventory to which Machine should output.
 	 */
 	@Nullable
 	IInventoryWrapper getOutputInventory();
+	
+	/**
+	 * Sets the new output inventory.
+	 */
+	void setOutputInventory(IInventoryWrapper inv);
 	
 	//=========================== NEIGHBOR =====================================================
 	
