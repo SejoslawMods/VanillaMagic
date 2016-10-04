@@ -182,6 +182,11 @@ public interface IMachine extends ICustomTileEntity, INBTSerializable<NBTTagComp
 	 */
 	void setOutputInventory(IInventoryWrapper inv);
 	
+	/**
+	 * This method is used to check if the output inventory has space for more items.
+	 */
+	EnumFacing getOutputFacing();
+	
 	//=========================== NEIGHBOR =====================================================
 	
 	/**

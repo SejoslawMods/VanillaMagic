@@ -13,13 +13,15 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.block.Block;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.machine.quarry.upgrade.IQuarryUpgrade;
+import seia.vanillamagic.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
 import seia.vanillamagic.machine.quarry.upgrade.QuarryUpgradeFortune;
 import seia.vanillamagic.machine.quarry.upgrade.QuarryUpgradeSilkTouch;
 
 /**
- * This class is used for holding the single instances of the upgrades.
+ * This class is used for holding the single instances of the upgrades.<br>
+ * This is the main registry for ALL the Quarry upgrades.
  */
-public class QuarryUpgradeRegistry 
+public class QuarryUpgradeRegistry
 {
 	private static List<Block> LIST_BLOCK = new ArrayList<Block>();
 	private static List<IQuarryUpgrade> LIST_UPGRADE = new ArrayList<IQuarryUpgrade>();
@@ -39,6 +41,7 @@ public class QuarryUpgradeRegistry
 		addUpgrade(QuarryUpgradeFortune.One.class);
 		addUpgrade(QuarryUpgradeFortune.Two.class);
 		addUpgrade(QuarryUpgradeFortune.Three.class);
+		addUpgrade(QuarryUpgradeAutoInventoryOutputPlacer.class);
 	}
 	
 	/**

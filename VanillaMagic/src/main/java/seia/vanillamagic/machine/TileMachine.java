@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +20,7 @@ import seia.vanillamagic.event.EventMachineWork;
 import seia.vanillamagic.inventory.IInventoryWrapper;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.SmeltingHelper;
 
@@ -57,11 +59,6 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	 */
 	public abstract void doWork();
 	
-	/**
-	 * This method is used to check if the output inventory has space for more items.
-	 */
-	public abstract EnumFacing getOutputFacing();
-	
 	public boolean inventoryOutputHasSpace() 
 	{
 		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
@@ -98,18 +95,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 						{
 							checkFuel();
 						}
-						
-						if(isNextToOutput())
-						{
-							if(inventoryOutputHasSpace())
-							{
-								tryWork();
-							}
-						}
-						else
-						{
-							tryWork();
-						}
+						tryWork();
 					}
 				}
 			}
@@ -320,13 +306,6 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	
 	public void checkFuel()
 	{
-		if(isNextToOutput())
-		{
-			if(!inventoryOutputHasSpace())
-			{
-				return;
-			}
-		}
 		if(ticks >= maxTicks)
 		{
 			return;
@@ -338,9 +317,16 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		
 		if(hasInputInventory())
 		{
-			ItemStack fuelToAdd = SmeltingHelper.getFuelFromInventoryAndDelete(getInputInventory().getInventory());
-			if(fuelToAdd == null)
+			IInventory invInput = getInputInventory().getInventory();
+			Object[] returnedStack = SmeltingHelper.getFuelFromInventoryAndDelete(invInput);
+			if(returnedStack == null)
 			{
+				return;
+			}
+			ItemStack fuelToAdd = (ItemStack) returnedStack[0];
+			if(ItemStackHelper.isIInventory(fuelToAdd))
+			{
+				InventoryHelper.insertStack(invInput, fuelToAdd, (int) returnedStack[1], EnumFacing.DOWN);
 				return;
 			}
 			ticks += SmeltingHelper.countTicks(fuelToAdd);

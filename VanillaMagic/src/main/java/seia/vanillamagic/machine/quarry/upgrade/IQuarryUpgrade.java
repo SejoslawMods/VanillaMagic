@@ -43,7 +43,6 @@ public interface IQuarryUpgrade
 	}
 	
 	/**
-	 * This method is fired before the Quarry starts to count anything. <br>
 	 * Here is where You should modify the Quarry itself.
 	 */
 	default public void modifyQuarry(IQuarry quarry)

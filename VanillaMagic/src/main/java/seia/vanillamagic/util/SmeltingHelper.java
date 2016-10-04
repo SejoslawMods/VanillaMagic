@@ -84,17 +84,21 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * Returns the first fuelStack from the inventory
+	 * Returns the first fuelStack from the inventory.<br>
+	 * Indexes:<br>
+	 * 0 - ItemStack<br>
+	 * 1 - index (slot)
 	 */
 	@Nullable
-	public static ItemStack getFuelFromInventoryAndDelete(IInventory inv)
+	public static Object[] getFuelFromInventoryAndDelete(IInventory inv)
 	{
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stackInSlot = inv.getStackInSlot(i);
 			if(isItemFuel(stackInSlot))
 			{
-				return inv.removeStackFromSlot(i);
+				//return inv.removeStackFromSlot(i);
+				return new Object[]{inv.removeStackFromSlot(i), i};
 			}
 		}
 		return null;

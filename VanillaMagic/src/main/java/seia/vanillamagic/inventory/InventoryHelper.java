@@ -6,10 +6,12 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
@@ -51,14 +53,14 @@ public class InventoryHelper
 	 */
 	public static boolean isInventoryFull(IInventory inventoryIn, EnumFacing side)
 	{
-		if (inventoryIn instanceof ISidedInventory)
+		if(inventoryIn instanceof ISidedInventory)
 		{
 			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
 			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for (int k : slots)
+			for(int k : slots)
 			{
 				ItemStack stack = iSidedInventory.getStackInSlot(k);
-				if (stack == null || stack.stackSize != stack.getMaxStackSize())
+				if(stack == null || stack.stackSize != stack.getMaxStackSize())
 				{
 					return false;
 				}
@@ -67,10 +69,10 @@ public class InventoryHelper
 		else
 		{
 			int size = inventoryIn.getSizeInventory();
-			for (int j = 0; j < size; ++j)
+			for(int j = 0; j < size; ++j)
 			{
 				ItemStack stack = inventoryIn.getStackInSlot(j);
-				if (stack == null || stack.stackSize != stack.getMaxStackSize())
+				if(stack == null || stack.stackSize != stack.getMaxStackSize())
 				{
 					return false;
 				}
@@ -78,19 +80,52 @@ public class InventoryHelper
 		}
 		return true;
 	}
+	
+	/**
+	 * Returns true if the given inventory has free slot.
+	 */
+	public static boolean hasInventoryFreeSpace(IInventory inventoryIn, EnumFacing side)
+	{
+		if(inventoryIn instanceof ISidedInventory)
+		{
+			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
+			int[] slots = iSidedInventory.getSlotsForFace(side);
+			for(int k : slots)
+			{
+				ItemStack stack = iSidedInventory.getStackInSlot(k);
+				if(stack == null)
+				{
+					return true;
+				}
+			}
+		}
+		else
+		{
+			int size = inventoryIn.getSizeInventory();
+			for(int j = 0; j < size; ++j)
+			{
+				ItemStack stack = inventoryIn.getStackInSlot(j);
+				if(stack == null)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Returns false if the specified IInventory contains any items
 	 */
 	public static boolean isInventoryEmpty(IInventory inventoryIn, EnumFacing side)
 	{
-		if (inventoryIn instanceof ISidedInventory)
+		if(inventoryIn instanceof ISidedInventory)
 		{
 			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
 			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for (int i : slots)
+			for(int i : slots)
 			{
-				if (iSidedInventory.getStackInSlot(i) != null)
+				if(iSidedInventory.getStackInSlot(i) != null)
 				{
 					return false;
 				}
@@ -99,9 +134,9 @@ public class InventoryHelper
 		else
 		{
 			int size = inventoryIn.getSizeInventory();
-			for (int k = 0; k < size; ++k)
+			for(int k = 0; k < size; ++k)
 			{
-				if (inventoryIn.getStackInSlot(k) != null)
+				if(inventoryIn.getStackInSlot(k) != null)
 				{
 					return false;
 				}
@@ -113,25 +148,25 @@ public class InventoryHelper
 	public static boolean captureDroppedItems(IHopper hopper)
 	{
 		Boolean ret = VanillaInventoryCodeHooks.extractHook(hopper);
-		if (ret != null)
+		if(ret != null)
 		{
 			return ret;
 		}
 		IInventory iInventory = getHopperInventory(hopper);
-		if (iInventory != null)
+		if(iInventory != null)
 		{
 			EnumFacing facing = EnumFacing.DOWN;
-			if (isInventoryEmpty(iInventory, facing))
+			if(isInventoryEmpty(iInventory, facing))
 			{
 				return false;
 			}
-			if (iInventory instanceof ISidedInventory)
+			if(iInventory instanceof ISidedInventory)
 			{
 				ISidedInventory iSidedInventory = (ISidedInventory)iInventory;
 				int[] slots = iSidedInventory.getSlotsForFace(facing);
-				for (int i : slots)
+				for(int i : slots)
 				{
-					if (pullItemFromSlot(hopper, iInventory, i, facing))
+					if(pullItemFromSlot(hopper, iInventory, i, facing))
 					{
 						return true;
 					}
@@ -140,9 +175,9 @@ public class InventoryHelper
 			else
 			{
 				int size = iInventory.getSizeInventory();
-				for (int k = 0; k < size; ++k)
+				for(int k = 0; k < size; ++k)
 				{
-					if (pullItemFromSlot(hopper, iInventory, k, facing))
+					if(pullItemFromSlot(hopper, iInventory, k, facing))
 					{
 						return true;
 					}
@@ -151,9 +186,9 @@ public class InventoryHelper
 		}
 		else
 		{
-			for (EntityItem entityItem : getCaptureItems(hopper.getWorld(), hopper.getXPos(), hopper.getYPos(), hopper.getZPos()))
+			for(EntityItem entityItem : getCaptureItems(hopper.getWorld(), hopper.getXPos(), hopper.getYPos(), hopper.getZPos()))
 			{
-				if (putDropInInventoryAllSlots(hopper, entityItem))
+				if(putDropInInventoryAllSlots(hopper, entityItem))
 				{
 					return true;
 				}
@@ -391,6 +426,37 @@ public class InventoryHelper
 			if(inv.getStackInSlot(i) != null)
 			{
 				return i;
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * Returns the slot number of the first found inventory.<br>
+	 * If there is no inventory block, will return -1
+	 */
+	public static int containsAnotherInventoryBlock(IInventoryWrapper wrapper)
+	{
+		IInventory inv = wrapper.getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack checkingStack = inv.getStackInSlot(i);
+			if(checkingStack != null)
+			{
+				Item checkingItem = checkingStack.getItem();
+				Block blockFromItem = Block.getBlockFromItem(checkingItem);
+				if(blockFromItem != null)
+				{
+					IBlockState blockFromItemState = blockFromItem.getDefaultState();
+					if(blockFromItem.hasTileEntity(blockFromItemState))
+					{
+						TileEntity tileFromBlock = blockFromItem.createTileEntity(wrapper.getWorld(), blockFromItemState);
+						if(tileFromBlock instanceof IInventory)
+						{
+							return i;
+						}
+					}
+				}
 			}
 		}
 		return -1;

@@ -2,6 +2,8 @@ package seia.vanillamagic.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,5 +32,18 @@ public class BlockHelper
 	public static boolean isBlockLiquid(IBlockState state)
 	{
 		return (state instanceof IFluidBlock || state.getMaterial().isLiquid());
+	}
+
+	public static void placeBlockFromStack(World world, BlockPos placePosition, ItemStack stack) 
+	{
+		Item itemFromStack = stack.getItem();
+		if(itemFromStack != null)
+		{
+			Block blockFromStack = Block.getBlockFromItem(itemFromStack);
+			if(blockFromStack != null)
+			{
+				world.setBlockState(placePosition, blockFromStack.getDefaultState());
+			}
+		}
 	}
 }

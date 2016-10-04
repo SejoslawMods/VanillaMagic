@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.machine.IMachine;
 
 /**
- * This is connection to the TileQuarry.
+ * This is the connection to the TileQuarry.
  */
 public interface IQuarry extends IMachine
 {

@@ -9,10 +9,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.items.IItemHandler;
 import seia.vanillamagic.VanillaMagic;
 
 public class ItemStackHelper 
@@ -151,5 +156,30 @@ public class ItemStackHelper
 			tab[i] = stack;
 		}
 		return tab;
+	}
+
+	public static boolean isIInventory(ItemStack stack) 
+	{
+		if(stack == null)
+		{
+			return false;
+		}
+		Item itemFromStack = stack.getItem();
+		Block blockFromStack = Block.getBlockFromItem(itemFromStack);
+		if(blockFromStack == null)
+		{
+			return false;
+		}
+		if(blockFromStack instanceof ITileEntityProvider)
+		{
+			IBlockState blockFromStackState = blockFromStack.getDefaultState();
+			TileEntity tileFromStack = blockFromStack.createTileEntity(null, blockFromStackState);
+			if((tileFromStack instanceof IInventory) ||
+					(tileFromStack instanceof IItemHandler))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

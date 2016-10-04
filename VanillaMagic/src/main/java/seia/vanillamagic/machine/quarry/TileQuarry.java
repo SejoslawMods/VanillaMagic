@@ -126,30 +126,6 @@ public class TileQuarry extends TileMachine implements IQuarry
 		return EnumFacing.Plane.HORIZONTAL.facings();
 	}
 	
-//	public BlockPos getInventoryOutputPos()
-//	{
-//		return pos.offset(getOutputFacing());
-//	}
-	
-//	@Nullable
-//	public IInventoryWrapper getOutputInventory()
-//	{
-//		//return ((IInventory) worldObj.getTileEntity(getInventoryOutputPos()));
-//		return new InventoryWrapper(worldObj, getInventoryOutputPos());
-//	}
-	
-//	public BlockPos getInputFuelChestPos()
-//	{
-//		return new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
-//	}
-	
-//	@Nullable
-//	public IInventoryWrapper getInputInventory()
-//	{
-//		//return ((IInventory) worldObj.getTileEntity(getInputFuelChestPos()));
-//		return new InventoryWrapper(worldObj, getInputFuelChestPos());
-//	}
-	
 	/**
 	 * will return if quarry can dig next block
 	 */
@@ -184,7 +160,6 @@ public class TileQuarry extends TileMachine implements IQuarry
 	 */
 	protected void performAdditionalOperations()
 	{
-		upgradeHelper.modifyQuarry(this);
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(diamondFacing);
 		diamondBlocks = 0;
@@ -203,6 +178,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 			cauldronPos = cauldronPos.offset(diamondFacing);
 			checkingBlock = this.getWorld().getBlockState(cauldronPos);
 		}
+		upgradeHelper.modifyQuarry(this);
 		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
 	}
 	
@@ -223,7 +199,6 @@ public class TileQuarry extends TileMachine implements IQuarry
 	 */
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
 	{
-		//return blockToDig.getDrops(world, workingPos, workingPosState, 0);
 		return upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState);
 	}
 	
