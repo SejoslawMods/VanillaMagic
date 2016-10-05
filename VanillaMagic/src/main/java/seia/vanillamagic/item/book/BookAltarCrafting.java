@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.quest.IQuest;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.TextHelper;
@@ -43,15 +43,15 @@ public class BookAltarCrafting implements IBook
 						));
 				for(int i = 0; i < QuestList.size(); i++)
 				{
-					Quest quest = QuestList.get(i);
+					IQuest quest = QuestList.get(i);
 					if(quest instanceof QuestCraftOnAltar)
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc"
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc"
 										)));
 					}
 				}

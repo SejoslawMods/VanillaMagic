@@ -18,7 +18,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.quest.IQuest;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.IAdditionalInfoProvider;
@@ -56,9 +56,9 @@ public class VanillaMagicDebug
 		EntityPlayer player = event.getEntityPlayer();
 		if(ItemStackHelper.checkItemsInHands(player, DEBUG_OFF_HAND_ITEMSTACK, DEBUG_MAIN_HAND_ITEMSTACK))
 		{
-			for(Quest quest : QuestList.getQuests())
+			for(IQuest quest : QuestList.getQuests())
 			{
-				Achievement toAchieve = quest.achievement;
+				Achievement toAchieve = quest.getAchievement();
 				player.addStat(toAchieve, 1);
 			}
 			for(Achievement a : AchievementList.ACHIEVEMENTS)

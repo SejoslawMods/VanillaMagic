@@ -14,7 +14,7 @@ import seia.vanillamagic.item.liquidsuppressioncrystal.QuestLiquidSuppressionCry
 import seia.vanillamagic.item.thecrystalofmothernature.QuestMotherNatureCrystal;
 import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.machine.quarry.QuestQuarry;
-import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.quest.IQuest;
 import seia.vanillamagic.quest.QuestBuildAltar;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
 import seia.vanillamagic.quest.QuestList;
@@ -51,15 +51,15 @@ public class BookOther implements IBook
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 				for(int i = 0; i < QuestList.size(); i++)
 				{
-					Quest quest = QuestList.get(i);
+					IQuest quest = QuestList.get(i);
 					if(quest instanceof QuestChunkLoader)
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextHelper.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -77,10 +77,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc"
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc"
 								)));
 						pages.appendTag(new NBTTagString(
 								"Quarry from top:" + ENTER +
@@ -96,10 +96,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextHelper.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -113,10 +113,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextHelper.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -130,10 +130,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextHelper.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -147,10 +147,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc") + TextHelper.getEnters(2) +
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextHelper.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -197,10 +197,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.uniqueName) + 
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
 								TextHelper.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.uniqueName + ".desc"
+								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc"
 										)));
 					}
 				}

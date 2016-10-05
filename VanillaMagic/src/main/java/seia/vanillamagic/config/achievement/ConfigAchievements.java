@@ -18,7 +18,7 @@ import com.google.gson.JsonParser;
 
 import jline.internal.InputStreamReader;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.quest.IQuest;
 
 public class ConfigAchievements 
 {
@@ -128,7 +128,7 @@ public class ConfigAchievements
 				{
 					JsonObject jo = je.getAsJsonObject();
 					Class<?> className = Class.forName(jo.get("questClass").getAsString());
-					Quest quest = (Quest) className.newInstance();
+					IQuest quest = (IQuest) className.newInstance();
 					quest.readData(jo);
 				}
 				VanillaMagic.LOGGER.log(Level.WARN, "VanillaMagic achievements readded from JSON file");
