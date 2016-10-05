@@ -8,12 +8,13 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.util.IAdditionalInfoProvider;
 
 /**
  * This is the base definition for CustomTileEntity.<br>
  * Each CustomTileEntity is self-chunkloading.
  */
-public interface ICustomTileEntity extends ITickable
+public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider
 {
 	/**
 	 * This initialization is used when Player place a TileEntity for the first time.

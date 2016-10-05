@@ -1,5 +1,8 @@
 package seia.vanillamagic.tileentity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -97,6 +100,14 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	public NBTTagCompound getUpdateTag()
 	{
 		return writeToNBT(new NBTTagCompound());
+	}
+	
+	public List<String> getAdditionalInfo()
+	{
+		List<String> list = new ArrayList<String>();
+		list.add("CustomTileEntity name: " + getClass().getSimpleName());
+		list.add("CustomTileEntity position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
+		return list;
 	}
 	
 	public Ticket getChunkTicket()

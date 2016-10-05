@@ -8,17 +8,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.item.accelerationcrystal.QuestAccelerationCrystal;
 import seia.vanillamagic.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.QuestMotherNatureCrystal;
-import seia.vanillamagic.machine.autocrafting.QuestAutocrafting;
-import seia.vanillamagic.machine.quarry.QuestQuarry;
 import seia.vanillamagic.quest.IQuest;
 import seia.vanillamagic.quest.QuestBuildAltar;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.quest.spell.QuestCastSpell;
+import seia.vanillamagic.tileentity.chunkloader.QuestChunkLoader;
+import seia.vanillamagic.tileentity.machine.autocrafting.QuestAutocrafting;
+import seia.vanillamagic.tileentity.machine.quarry.QuestQuarry;
 import seia.vanillamagic.util.TextHelper;
 
 public class BookOther implements IBook

@@ -24,7 +24,7 @@
 	"uniqueName":"portableCraftingTable"
 },
 {
-	"questClass":"seia.vanillamagic.machine.autocrafting.QuestAutocrafting",
+	"questClass":"seia.vanillamagic.tileentity.machine.autocrafting.QuestAutocrafting",
 	"requiredQuest":"portableCraftingTable",
 	"posX":-2,
 	"posY":0,
@@ -691,7 +691,7 @@
 	"wandTier":1
 },
 {
-	"questClass":"seia.vanillamagic.machine.quarry.QuestQuarry",
+	"questClass":"seia.vanillamagic.tileentity.machine.quarry.QuestQuarry",
 	"requiredQuest":"smeltOnAltar",
 	"posX":0,
 	"posY":2,
@@ -719,7 +719,7 @@
 	"uniqueName":"fullTreeCut"
 },
 {
-	"questClass":"seia.vanillamagic.machine.farm.QuestMachineFarm",
+	"questClass":"seia.vanillamagic.tileentity.machine.farm.QuestMachineFarm",
 	"requiredQuest":"fullTreeCut",
 	"posX":-2,
 	"posY":0,
@@ -740,7 +740,7 @@
 	"radius":4
 },
 {
-	"questClass":"seia.vanillamagic.machine.speedy.QuestSpeedy",
+	"questClass":"seia.vanillamagic.tileentity.machine.speedy.QuestSpeedy",
 	"requiredQuest":"machineFarm",
 	"posX":-2,
 	"posY":0,
@@ -1581,7 +1581,7 @@
 	}
 },
 {
-	"questClass":"seia.vanillamagic.chunkloader.QuestChunkLoader",
+	"questClass":"seia.vanillamagic.tileentity.chunkloader.QuestChunkLoader",
 	"requiredQuest":"craftEnchantingTable",
 	"posX":2,
 	"posY":0,

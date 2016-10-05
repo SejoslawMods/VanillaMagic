@@ -22,9 +22,9 @@ import seia.vanillamagic.item.book.BookRegistry;
 import seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper;
 import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry;
 import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
-import seia.vanillamagic.machine.quarry.QuarryUpgradeRegistry;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.tileentity.TileEntityRegistry;
+import seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry;
 
 @Mod(
 		modid = VanillaMagic.MODID, 
