@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import org.apache.logging.log4j.Level;
 
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.event.EventQuest.EventAddQuest;
 
 public class QuestList
@@ -22,16 +25,18 @@ public class QuestList
 	/**
 	 * Main method for adding Quests.
 	 */
-	public static void addQuest(Quest q)
+	public static void addQuest(IQuest q)
 	{
 		EventAddQuest event = new EventAddQuest(q);
 		QuestList.QUESTS.add(q);
-		QuestList.QUESTS_MAP.put(q.uniqueName, q);
+		QuestList.QUESTS_MAP.put(q.getUniqueName(), q);
 	}
 	
 	/**
-	 * Returns Quest from the Map.
+	 * Returns Quest from the Map, where "key" is a uniqueName of the Quest.<br>
+	 * Returns NULL if there is no Quest registered at the given "key".
 	 */
+	@Nullable
 	public static IQuest get(String key)
 	{
 		IQuest q = QUESTS_MAP.get(key);

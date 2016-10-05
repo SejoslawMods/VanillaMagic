@@ -1,6 +1,5 @@
 package seia.vanillamagic.quest;
 
-
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -12,8 +11,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import seia.vanillamagic.api.quest.IQuest;
+import seia.vanillamagic.api.util.Point;
 import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.Point;
 
 /** 
  * Base class for all the quests.<br>

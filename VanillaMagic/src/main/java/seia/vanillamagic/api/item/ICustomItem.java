@@ -1,4 +1,4 @@
-package seia.vanillamagic.item;
+package seia.vanillamagic.api.item;
 
 import net.minecraft.item.ItemStack;
 

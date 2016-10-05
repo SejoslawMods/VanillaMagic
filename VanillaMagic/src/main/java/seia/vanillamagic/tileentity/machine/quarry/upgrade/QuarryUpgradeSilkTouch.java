@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 
 public class QuarryUpgradeSilkTouch implements IQuarryUpgrade
 {

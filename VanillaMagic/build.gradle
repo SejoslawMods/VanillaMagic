@@ -21,6 +21,7 @@ plugins
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven'
 
 version = mc_version + '-' + version_major + '.' + version_minor + '.' + version_patch + '.' + version_build
 group = "seia.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -37,6 +38,12 @@ minecraft
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     replaceIn "VanillaMagic.java"
     replace "@VERSION@", project.version
+}
+
+configurations 
+{
+    api
+    compile.extendsFrom api
 }
 
 processResources
@@ -60,7 +67,32 @@ processResources
     from(sourceSets.main.resources.srcDirs) 
     {
         exclude 'mcmod.info'
+        exclude '**/*.md'
     }
+}
+
+task sourcesJarCode(type: Jar) {
+    from sourceSets.main.allSource
+    include 'seia/vanillamagic/**'
+    classifier = 'sourcesCode'
+}
+
+task sourcesJarDeobf(type: Jar) {
+    from zipTree('build/retromapping/retromappedReplacedMain.jar')
+    classifier = 'sourcesDeobf'
+}
+
+task apiJar(type: Jar) {
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+    include 'seia/vanillamagic/api/**'
+    classifier = 'api'
+}
+
+artifacts {
+    archives sourcesJarCode
+    archives sourcesJarDeobf
+    archives apiJar
 }
 
 curseforge 

@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.VanillaInventoryCodeHooks;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import seia.vanillamagic.api.inventory.IInventoryWrapper;
 
 public class InventoryHelper 
 {

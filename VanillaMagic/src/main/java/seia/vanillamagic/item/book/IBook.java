@@ -1,6 +1,6 @@
 package seia.vanillamagic.item.book;
 
-import seia.vanillamagic.item.ICustomItem;
+import seia.vanillamagic.api.item.ICustomItem;
 
 /**
  * Books should be added to BookRegistry before the PostInitialization.<br>

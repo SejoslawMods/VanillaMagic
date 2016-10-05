@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.quest.IQuest;
+import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.TextHelper;

@@ -14,8 +14,9 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.api.inventory.InventoryWrapper;
+import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.inventory.InventoryHelper;
-import seia.vanillamagic.inventory.InventoryWrapper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosHelper;
 

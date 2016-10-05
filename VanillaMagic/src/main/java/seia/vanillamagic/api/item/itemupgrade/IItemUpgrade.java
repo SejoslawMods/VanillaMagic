@@ -1,13 +1,12 @@
-package seia.vanillamagic.item.itemupgrade.upgrade;
+package seia.vanillamagic.api.item.itemupgrade;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
-import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry;
 
 /**
  * This is the base of the Upgrade System. <br>
- * After registration in {@link ItemUpgradeRegistry} each upgrade is registered in {@link MinecraftForge#EVENT_BUS}. <br>
+ * After registration in ItemUpgradeRegistry each upgrade is registered in {@link MinecraftForge#EVENT_BUS}. <br>
  * This is made to simplify the Events implementing. You can write Your Events in class that implements IItemUpgrade.
  */
 public interface IItemUpgrade

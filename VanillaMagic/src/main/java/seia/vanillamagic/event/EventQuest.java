@@ -1,7 +1,7 @@
 package seia.vanillamagic.event;
 
 import net.minecraftforge.fml.common.eventhandler.Event;
-import seia.vanillamagic.quest.IQuest;
+import seia.vanillamagic.api.quest.IQuest;
 
 /**
  * Base class for all the Quest based events.

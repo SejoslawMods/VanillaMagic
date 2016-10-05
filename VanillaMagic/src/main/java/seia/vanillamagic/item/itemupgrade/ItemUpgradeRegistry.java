@@ -16,13 +16,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.item.itemupgrade.upgrade.IItemUpgrade;
+import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
+import seia.vanillamagic.api.item.itemupgrade.IItemUpgradeRegistry;
 import seia.vanillamagic.item.itemupgrade.upgrade.UpgradeAutosmelt;
 
 /**
  * This is the base registry which will hold ALL the upgrades for different items.
  */
-public class ItemUpgradeRegistry
+public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 {
 	public static final ItemUpgradeRegistry INSTANCE = new ItemUpgradeRegistry();
 	
@@ -80,12 +81,6 @@ public class ItemUpgradeRegistry
 		VanillaMagic.LOGGER.log(Level.INFO, "ItemUpgradeRegistry started...");
 	}
 	
-	/**
-	 * Main method for registering the upgrades.
-	 * 
-	 * @param itemMappingName -> For instance: "_pickaxe" or "_sword" or "_axe" or "_myNewMapping" itd.
-	 * @param clazz -> MyUpgradeClass.class
-	 */
 	public void addUpgradeMapping(String mappingName, Class<? extends IItemUpgrade> clazz)
 	{
 		try
@@ -108,12 +103,6 @@ public class ItemUpgradeRegistry
 		}
 	}
 	
-	/**
-	 * Add a single value to the mapping. If mapping doesn't exists it will add a new mapping. <br>
-	 * For instance: addItemToMapping("_pickaxe", new MyItemPickaxe()); <br>
-	 * or <br>
-	 * addItemToMapping("_myMapping", new MyItem());
-	 */
 	public void addItemToMapping(String mappingName, Item item)
 	{
 		ItemEntry itemEntry = new ItemEntry(mappingName, item);
@@ -137,11 +126,6 @@ public class ItemUpgradeRegistry
 		}
 	}
 	
-	/**
-	 * Add a new mapping. <br>
-	 * In VanillaMagic mapping will start with "_" so "pickaxe" will be -> "_pickaxe". <br>
-	 * It was made this was to prevent "pickaxe" and "axe" being counted as one mapping.
-	 */
 	public void addItemMapping(String mappingName)
 	{
 		// we want to register mapping only once for given key
@@ -166,11 +150,6 @@ public class ItemUpgradeRegistry
 		VanillaMagic.LOGGER.log(Level.INFO, "Registered items: " + registeredItems + " for key: " + mappingName);
 	}
 	
-	/**
-	 * @param base -> Basic item. For instance: pickaxe
-	 * @param ingredient -> Item needed to upgrade.
-	 * @return ItemStack with upgrade and written NBT data.
-	 */
 	@Nullable
 	public ItemStack getResult(ItemStack base, ItemStack ingredient)
 	{
@@ -192,8 +171,7 @@ public class ItemUpgradeRegistry
 		}
 		return null;
 	}
-
-	@Nullable
+	
 	public String getMappingNameFromItemStack(ItemStack stack) 
 	{
 		for(Entry<String, List<ItemEntry>> mappingEntry : MAPPING_ITEMNAME_ITEMENTRY.entrySet())
@@ -206,7 +184,7 @@ public class ItemUpgradeRegistry
 				}
 			}
 		}
-		return null;
+		return "";
 	}
 	
 	/**

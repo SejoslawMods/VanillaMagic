@@ -191,11 +191,11 @@ public class SmeltingHelper
 	public static List<EntityItem> countAndSmelt(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
 			Quest requiredQuest, boolean spawnSmelted)
 	{
-		if(!player.hasAchievement(requiredQuest.achievement))
+		if(!player.hasAchievement(requiredQuest.getAchievement()))
 		{
-			player.addStat(requiredQuest.achievement, 1);
+			player.addStat(requiredQuest.getAchievement(), 1);
 		}
-		if(player.hasAchievement(requiredQuest.achievement))
+		if(player.hasAchievement(requiredQuest.getAchievement()))
 		{
 			List<EntityItem> smelted = new ArrayList<EntityItem>();
 			World world = player.worldObj;

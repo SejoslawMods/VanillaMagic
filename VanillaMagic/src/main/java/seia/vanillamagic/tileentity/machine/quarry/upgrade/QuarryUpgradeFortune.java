@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 
 public class QuarryUpgradeFortune
 {

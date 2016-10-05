@@ -1,7 +1,7 @@
 package seia.vanillamagic.event;
 
 import net.minecraftforge.fml.common.eventhandler.Event;
-import seia.vanillamagic.tileentity.machine.IMachine;
+import seia.vanillamagic.api.tileentity.machine.IMachine;
 
 /**
  * This {@link Event} is fired BEFORE the given {@link IMachine} performs it's work.

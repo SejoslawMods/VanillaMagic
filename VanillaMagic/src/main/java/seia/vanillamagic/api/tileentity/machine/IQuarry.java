@@ -1,10 +1,9 @@
-package seia.vanillamagic.tileentity.machine.quarry;
+package seia.vanillamagic.api.tileentity.machine;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import seia.vanillamagic.tileentity.machine.IMachine;
 
 /**
  * This is the connection to the TileQuarry.

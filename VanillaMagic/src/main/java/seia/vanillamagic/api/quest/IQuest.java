@@ -1,21 +1,21 @@
-package seia.vanillamagic.quest;
+package seia.vanillamagic.api.quest;
 
 import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-import seia.vanillamagic.util.Point;
+import seia.vanillamagic.api.util.Point;
 
 /**
  * This is the base of the Quest System.<br>
  * Each Quest must implements this interface to be registered from achievements.json file.
  */
-public interface IQuest 
+public interface IQuest
 {
 	/**
 	 * This method is used to read data from the achievements.json<br>
-	 * It will create an instance of this Quest and add it to {@link QuestList}
+	 * It will create an instance of this Quest and add it to QuestList.
 	 */
 	void readData(JsonObject jo);
 	

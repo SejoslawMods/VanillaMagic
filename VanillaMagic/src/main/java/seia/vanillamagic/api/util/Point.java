@@ -1,5 +1,11 @@
-package seia.vanillamagic.util;
+package seia.vanillamagic.api.util;
 
+import seia.vanillamagic.api.quest.IQuest;
+
+/**
+ * Simple presentation of 2D Point. <br>
+ * Used in {@link IQuest}
+ */
 public class Point 
 {
 	protected int x, y;

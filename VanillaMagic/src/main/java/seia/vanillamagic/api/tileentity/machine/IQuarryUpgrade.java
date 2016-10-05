@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine.quarry.upgrade;
+package seia.vanillamagic.api.tileentity.machine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import seia.vanillamagic.tileentity.machine.quarry.IQuarry;
 
 /**
  * Every method except getBlock() is fired once a tick. <br>
@@ -50,9 +49,10 @@ public interface IQuarryUpgrade
 	}
 	
 	/**
+	 * W.I.P. <br><br>
 	 * Returns the upgrade that must be placed BEFORE this upgrade is placed. (talking about blocks) <br>
 	 * For instance: block with fortune 1 must be placed before block with fortune 2. <br>
-	 * If null than this will be skipped.
+	 * If null than this will be skipped. <br>
 	 */
 	default public Class<? extends IQuarryUpgrade> requiredUpgrade()
 	{

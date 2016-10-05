@@ -17,11 +17,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.quest.IQuest;
+import seia.vanillamagic.api.util.IAdditionalInfoProvider;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.quest.IQuest;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.IAdditionalInfoProvider;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.WorldHelper;
 
@@ -33,17 +33,15 @@ public class VanillaMagicDebug
 	
 	private VanillaMagicDebug()
 	{
-		try
-		{
-			ItemStackHelper.printItemStackInfo(DEBUG_OFF_HAND_ITEMSTACK, new String[]{"Left Hand"});
-			ItemStackHelper.printItemStackInfo(DEBUG_MAIN_HAND_ITEMSTACK, new String[]{"Right Hand"});
+//		try
+//		{
 			MinecraftForge.EVENT_BUS.register(this);
 			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug registered");
-		}
-		catch(Exception e)
-		{
-			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug not registered");
-		}
+//		}
+//		catch(Exception e)
+//		{
+//			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug not registered");
+//		}
 	}
 	
 	public void preInit()

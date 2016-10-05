@@ -10,9 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import seia.vanillamagic.inventory.IInventoryWrapper;
+import seia.vanillamagic.api.inventory.IInventoryWrapper;
+import seia.vanillamagic.api.tileentity.machine.IQuarry;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.inventory.InventoryHelper;
-import seia.vanillamagic.tileentity.machine.quarry.IQuarry;
 import seia.vanillamagic.util.BlockHelper;
 
 public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade

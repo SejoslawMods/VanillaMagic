@@ -4,7 +4,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.item.ICustomItem;
+import seia.vanillamagic.api.item.ICustomItem;
 
 public class ItemLiquidSuppressionCrystal implements ICustomItem
 {

@@ -2,8 +2,6 @@ package seia.vanillamagic.util;
 
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.Level;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -18,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
-import seia.vanillamagic.VanillaMagic;
 
 public class ItemStackHelper 
 {
@@ -65,22 +62,6 @@ public class ItemStackHelper
 			if(ItemStack.areItemStacksEqual(mainHand, shouldHaveInMainHand))
 			{
 				return true;
-			}
-		}
-		return false;
-	}
-	
-	public static boolean printItemStackInfo(ItemStack stack, String[] additionalInfo)
-	{
-		if(stack != null)
-		{
-			VanillaMagic.LOGGER.log(Level.INFO, "ItemStack Info");
-			VanillaMagic.LOGGER.log(Level.INFO, "Item = " + stack.getItem().toString());
-			VanillaMagic.LOGGER.log(Level.INFO, "StackSize = " + stack.stackSize);
-			VanillaMagic.LOGGER.log(Level.INFO, "ItemDamage = " + stack.getItemDamage());
-			for(int i = 0; i < additionalInfo.length; i++)
-			{
-				VanillaMagic.LOGGER.log(Level.INFO, "Additional Info #" + i + " = " + additionalInfo[i]);
 			}
 		}
 		return false;

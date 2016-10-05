@@ -8,13 +8,15 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.item.ICustomItem;
+import seia.vanillamagic.api.item.IEnchantedBucket;
+import seia.vanillamagic.api.item.IVanillaMagicItems;
 import seia.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
-import seia.vanillamagic.item.enchantedbucket.IEnchantedBucket;
 import seia.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
 import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
 
-public class VanillaMagicItems 
+public class VanillaMagicItems implements IVanillaMagicItems
 {
 	public static final VanillaMagicItems INSTANCE = new VanillaMagicItems();
 	
@@ -42,6 +44,11 @@ public class VanillaMagicItems
 		customItems.add(itemMotherNatureCrystal);
 	}
 	
+	public void addCustomItem(ICustomItem item)
+	{
+		customItems.add(item);
+	}
+	
 	public void postInit()
 	{
 		for(ICustomItem customItem : customItems)
@@ -51,9 +58,6 @@ public class VanillaMagicItems
 		VanillaMagic.LOGGER.log(Level.INFO, "Custom items registered: " + customItems.size());
 	}
 	
-	/**
-	 * Returns true ONLY if the given stack is a given custom item.
-	 */
 	public boolean isCustomItem(ItemStack checkingStack, ICustomItem customItem)
 	{
 		if(checkingStack == null || customItem == null)

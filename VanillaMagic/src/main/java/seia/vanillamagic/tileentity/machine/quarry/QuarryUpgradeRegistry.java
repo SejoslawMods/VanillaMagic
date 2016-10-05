@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.block.Block;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.tileentity.machine.quarry.upgrade.IQuarryUpgrade;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeFortune;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeSilkTouch;

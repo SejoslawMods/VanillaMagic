@@ -1,10 +1,13 @@
-package seia.vanillamagic.inventory;
+package seia.vanillamagic.api.inventory;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * Basic implementation of the {@link IInventoryWrapper}
+ */
 public class InventoryWrapper implements IInventoryWrapper
 {
 	private IInventory inventory;

@@ -20,10 +20,11 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.CauldronHelper;
 
-public class EnchantedBucketHelper 
+public class EnchantedBucketHelper
 {
 	private EnchantedBucketHelper()
 	{

@@ -18,7 +18,7 @@ import com.google.gson.JsonParser;
 
 import jline.internal.InputStreamReader;
 import seia.vanillamagic.VanillaMagic;
-import seia.vanillamagic.quest.IQuest;
+import seia.vanillamagic.api.quest.IQuest;
 
 public class ConfigAchievements 
 {

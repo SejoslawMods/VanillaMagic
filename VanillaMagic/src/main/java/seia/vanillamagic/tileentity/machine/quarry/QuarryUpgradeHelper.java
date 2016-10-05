@@ -8,7 +8,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import seia.vanillamagic.tileentity.machine.quarry.upgrade.IQuarryUpgrade;
+import seia.vanillamagic.api.tileentity.machine.IQuarry;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.util.ListHelper;
 
 /**

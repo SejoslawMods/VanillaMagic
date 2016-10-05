@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity;
+package seia.vanillamagic.api.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,7 +8,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.util.IAdditionalInfoProvider;
+import seia.vanillamagic.api.util.IAdditionalInfoProvider;
 
 /**
  * This is the base definition for CustomTileEntity.<br>

@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import seia.vanillamagic.inventory.InventoryWrapper;
+import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 
 public class TileAutocrafting extends TileMachine

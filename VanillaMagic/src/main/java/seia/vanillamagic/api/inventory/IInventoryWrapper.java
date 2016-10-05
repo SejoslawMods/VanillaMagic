@@ -1,4 +1,4 @@
-package seia.vanillamagic.inventory;
+package seia.vanillamagic.api.inventory;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
@@ -31,7 +31,7 @@ public interface IInventoryWrapper
 	BlockPos getPos();
 	
 	/**
-	 * Returns the current state of the inventory block.
+	 * Returns the current state of the {@link IInventory} block.
 	 */
 	IBlockState getBlockState();
 }

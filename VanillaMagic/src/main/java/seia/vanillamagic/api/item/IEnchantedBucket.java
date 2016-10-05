@@ -1,9 +1,12 @@
-package seia.vanillamagic.item.enchantedbucket;
+package seia.vanillamagic.api.item;
+
+import java.lang.reflect.Method;
+
+import javax.annotation.Nullable;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
-import seia.vanillamagic.item.ICustomItem;
 
 /**
  * Interface implemented to any class that should be read as Enchanted Bucket.
@@ -32,9 +35,20 @@ public interface IEnchantedBucket extends ICustomItem
 	/**
 	 * Crafting ingredient bucket with fluid.
 	 */
+	@Nullable
 	default public ItemStack getBucket()
 	{
-		return EnchantedBucketHelper.getResult(getFluidInBucket());
+		try
+		{
+			Class<?> clazz = Class.forName("seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper");
+			Method method = clazz.getMethod("getResult", Fluid.class);
+			return (ItemStack) method.invoke(null, getFluidInBucket());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	default void registerRecipe()

@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine;
+package seia.vanillamagic.api.tileentity.machine;
 
 import javax.annotation.Nullable;
 
@@ -11,8 +11,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
-import seia.vanillamagic.inventory.IInventoryWrapper;
-import seia.vanillamagic.tileentity.ICustomTileEntity;
+import seia.vanillamagic.api.inventory.IInventoryWrapper;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 
 /**
  * Machine is a TileEntity that perform some work on World.
