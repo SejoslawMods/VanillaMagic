@@ -6,13 +6,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.util.AltarChecker;
 
 public class QuestBuildAltar extends Quest
 {
-	public int tier;
+	protected int tier;
 	
 	public void readData(JsonObject jo)
 	{
@@ -20,8 +20,16 @@ public class QuestBuildAltar extends Quest
 		this.tier = jo.get("tier").getAsInt();
 	}
 	
+	/**
+	 * Returns the Tier of the Altar connected to this Quest.
+	 */
+	public int getTier()
+	{
+		return tier;
+	}
+	
 	@SubscribeEvent
-	public void placeBlock(BlockEvent.PlaceEvent event)
+	public void placeBlock(PlaceEvent event)
 	{
 		EntityPlayer player = event.getPlayer();
 		BlockPos middlePos = event.getBlockSnapshot().getPos();
@@ -30,8 +38,7 @@ public class QuestBuildAltar extends Quest
 		{
 			if(middleBlock instanceof BlockCauldron)
 			{
-				//BlockSnapshot block = event.getBlockSnapshot();
-				if(AltarChecker.checkAltarTier(player.worldObj, event.getPos(), tier))//if(AltarChecker.checkAltarTier(block.getWorld(), block.getPos(), tier))
+				if(AltarChecker.checkAltarTier(player.worldObj, event.getPos(), tier))
 				{
 					player.addStat(achievement, 1);
 				}

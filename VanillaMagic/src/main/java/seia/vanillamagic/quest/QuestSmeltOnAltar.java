@@ -22,14 +22,24 @@ public class QuestSmeltOnAltar extends Quest
 	// in 200 ticks You will smelt 1 item in Furnace
 	public static final int ONE_ITEM_SMELT_TICKS = 200;
 	
-	public int requiredAltarTier;
-	public EnumWand requiredMinimalWand;
+	protected int requiredAltarTier;
+	protected EnumWand requiredMinimalWand;
 	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
 		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
 		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+	}
+	
+	public int getRequiredAltarTier()
+	{
+		return requiredAltarTier;
+	}
+	
+	public EnumWand getRequiredWand()
+	{
+		return requiredMinimalWand;
 	}
 	
 	@SubscribeEvent

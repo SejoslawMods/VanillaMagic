@@ -1,5 +1,6 @@
 package seia.vanillamagic.quest;
 
+import java.awt.Point;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -19,15 +20,15 @@ import seia.vanillamagic.util.ItemStackHelper;
  */
 public abstract class Quest
 {
-	public Achievement achievement;
-	public Achievement required;
-	public Quest requiredQuest;
-	public int posX, posY;
-	public ItemStack icon;
-	public String questName, uniqueName;
+	protected Achievement achievement;
+	protected Achievement required;
+	protected Quest requiredQuest;
+	protected int posX, posY;
+	protected ItemStack icon;
+	protected String questName, uniqueName;
 	
 	@Nullable
-	public Quest[] additionalRequiredQuests;
+	protected Quest[] additionalRequiredQuests;
 	
 	public void readData(JsonObject jo)
 	{
@@ -108,5 +109,74 @@ public abstract class Quest
 			}
 		}
 		return true;
+	}
+	
+	/*
+	 * =============================================================== GETTERS ================================================================
+	 */
+	
+	/**
+	 * Returns the {@link Achievement} connected to this Quest.
+	 */
+	public Achievement getAchievement()
+	{
+		return achievement;
+	}
+	
+	/**
+	 * Returns the {@link Achievement} that s required before this one.
+	 */
+	public Achievement getRequiredAchievement()
+	{
+		return required;
+	}
+	
+	/**
+	 * Returns the full Quest that is required before this one.
+	 */
+	public Quest getRequiredQuest()
+	{
+		return requiredQuest;
+	}
+	
+	/**
+	 * Returns position as {@link Point} in 2D.<br>
+	 * Any changes to this point will NOT affect the position.
+	 */
+	public Point getPosition()
+	{
+		return new Point(posX, posY);
+	}
+	
+	/**
+	 * Returns the {@link ItemStack} that will be displayed as Icon for this Achievement.
+	 */
+	public ItemStack getIcon()
+	{
+		return icon;
+	}
+	
+	/**
+	 * Returns the Quest name as a readable string.
+	 */
+	public String getQuestName()
+	{
+		return questName;
+	}
+	
+	/**
+	 * Returns the Quest unique name.
+	 */
+	public String getUniqueName()
+	{
+		return uniqueName;
+	}
+	
+	/**
+	 * Returns an array of Quests that must be achieved before this Quest can be achieve.
+	 */
+	public Quest[] getAdditionalRequiredQuests()
+	{
+		return additionalRequiredQuests;
 	}
 }

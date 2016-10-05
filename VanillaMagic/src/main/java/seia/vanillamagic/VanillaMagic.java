@@ -71,7 +71,7 @@ public class VanillaMagic
 	{
 		for(int i = 0; i < QuestList.size(); i++)
 		{
-			QuestHandler.INSTANCE.addAchievement(QuestList.get(i).achievement);
+			QuestHandler.INSTANCE.addAchievement(QuestList.get(i).getAchievement());
 		}
 		LOGGER.log(Level.INFO, "Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
 		VanillaMagicIntegration.INSTANCE.init();

@@ -11,13 +11,18 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestPick extends Quest
 {
-	public ItemStack whatToPick;
+	protected ItemStack whatToPick;
 	
 	public void readData(JsonObject jo)
 	{
 		this.whatToPick = ItemStackHelper.getItemStackFromJSON(jo.get("whatToPick").getAsJsonObject());
 		this.icon = whatToPick.copy();
 		super.readData(jo);
+	}
+	
+	public ItemStack getWhatToPick()
+	{
+		return whatToPick;
 	}
 	
 	@SubscribeEvent

@@ -25,10 +25,10 @@ public class QuestCraftOnAltar extends Quest
 	 * Each ItemStack is a different Item
 	 * Instead of doing 1x Coal + 1x Coal, do 2x Coal -> 2 will be stackSize
 	 */
-	public ItemStack[] ingredients;
-	public ItemStack[] result;
-	public int requiredAltarTier;
-	public EnumWand requiredMinimalWand;
+	protected ItemStack[] ingredients;
+	protected ItemStack[] result;
+	protected int requiredAltarTier;
+	protected EnumWand requiredMinimalWand;
 	
 	public void readData(JsonObject jo)
 	{
@@ -38,6 +38,26 @@ public class QuestCraftOnAltar extends Quest
 		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
 		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 		super.readData(jo);
+	}
+	
+	public ItemStack[] getIngredients()
+	{
+		return ingredients;
+	}
+	
+	public ItemStack[] getResult()
+	{
+		return result;
+	}
+	
+	public int getRequiredAltarTier()
+	{
+		return requiredAltarTier;
+	}
+	
+	public EnumWand getRequiredWand()
+	{
+		return requiredMinimalWand;
 	}
 	
 	public int getIngredientsStackSize()

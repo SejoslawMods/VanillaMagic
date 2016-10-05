@@ -15,7 +15,7 @@ import seia.vanillamagic.util.ListHelper;
 
 public class QuestMineBlock extends Quest
 {
-	public List<Block> blocksToBeMine;
+	protected List<Block> blocksToBeMine;
 	
 	public void readData(JsonObject jo)
 	{
@@ -38,6 +38,11 @@ public class QuestMineBlock extends Quest
 		{
 			this.blocksToBeMine = ListHelper.getList(jo.get("blocksToBeMineClass").getAsString(), jo.get("blocksToBeMineList").getAsString());
 		}
+	}
+	
+	public List<Block> getBlocksToBeMine()
+	{
+		return blocksToBeMine;
 	}
 	
 	@SubscribeEvent

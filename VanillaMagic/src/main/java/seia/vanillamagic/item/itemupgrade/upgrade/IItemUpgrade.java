@@ -45,4 +45,21 @@ public interface IItemUpgrade
 	 * For instance: "My Upgrade" or "Awesome Hyper World-Destroying Upgrade".
 	 */
 	String getUpgradeName();
+	
+	/**
+	 * This method is used to check if the given stack is an upgrade.
+	 */
+	default public boolean containsTag(ItemStack stack)
+	{
+		if(stack == null)
+		{
+			return false;
+		}
+		NBTTagCompound tag = stack.getTagCompound();
+		if(tag == null)
+		{
+			return false;
+		}
+		return tag.getString(NBT_ITEM_UPGRADE_TAG).equals(getUniqueNBTTag());
+	}
 }

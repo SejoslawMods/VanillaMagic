@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.VanillaMagic;

@@ -24,8 +24,8 @@ public class QuestMoveBlock extends Quest
 	 * Stack offHand must be an item that has maxStackSize = 1
 	 * If it is a book, it must be a renamed book.
 	 */
-	public ItemStack requiredStackOffHand;
-	public EnumWand requiredWand;
+	protected ItemStack requiredStackOffHand;
+	protected EnumWand requiredWand;
 	
 	public void readData(JsonObject jo)
 	{
@@ -33,6 +33,16 @@ public class QuestMoveBlock extends Quest
 		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 		this.icon = requiredStackOffHand.copy();
 		super.readData(jo);
+	}
+	
+	public ItemStack getRequiredStackOffHand()
+	{
+		return requiredStackOffHand;
+	}
+	
+	public EnumWand getRequiredWand()
+	{
+		return requiredWand;
 	}
 	
 	/**

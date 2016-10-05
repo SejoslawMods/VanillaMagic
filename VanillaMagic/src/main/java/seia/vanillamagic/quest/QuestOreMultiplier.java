@@ -20,14 +20,24 @@ import seia.vanillamagic.util.SmeltingHelper;
 
 public class QuestOreMultiplier extends Quest
 {
-	public int multiplier;
-	public EnumWand requiredMinimalWand;
+	protected int multiplier;
+	protected EnumWand requiredMinimalWand;
 	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
 		this.multiplier = jo.get("multiplier").getAsInt();
 		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+	}
+	
+	public int getMultiplier()
+	{
+		return multiplier;
+	}
+	
+	public EnumWand getRequiredWand()
+	{
+		return requiredMinimalWand;
 	}
 	
 	@SubscribeEvent

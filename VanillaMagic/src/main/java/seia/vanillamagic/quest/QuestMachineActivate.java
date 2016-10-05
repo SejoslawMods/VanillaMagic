@@ -11,8 +11,8 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public abstract class QuestMachineActivate extends Quest
 {
-	public ItemStack mustHaveOffHand;
-	public ItemStack mustHaveMainHand;
+	protected ItemStack mustHaveOffHand;
+	protected ItemStack mustHaveMainHand;
 	
 	public void readData(JsonObject jo)
 	{
@@ -25,6 +25,16 @@ public abstract class QuestMachineActivate extends Quest
 		{
 			this.mustHaveMainHand = ItemStackHelper.getItemStackFromJSON(jo.get("mustHaveMainHand").getAsJsonObject());
 		}
+	}
+	
+	public ItemStack getRequiredStackOffHand()
+	{
+		return mustHaveOffHand;
+	}
+	
+	public ItemStack getRequiredStackMainHand()
+	{
+		return mustHaveMainHand;
 	}
 	
 	public boolean canActivate(EntityPlayer player)

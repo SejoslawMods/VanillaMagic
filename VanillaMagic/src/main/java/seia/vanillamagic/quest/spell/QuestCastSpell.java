@@ -16,7 +16,7 @@ import seia.vanillamagic.spell.SpellHelper;
 
 public abstract class QuestCastSpell extends Quest
 {
-	public EnumSpell spell;
+	protected EnumSpell spell;
 	
 	public void readData(JsonObject jo)
 	{
@@ -25,6 +25,11 @@ public abstract class QuestCastSpell extends Quest
 		this.questName = spell.spellName;
 		this.uniqueName = spell.spellUniqueName;
 		super.readData(jo);
+	}
+	
+	public EnumSpell getSpell()
+	{
+		return spell;
 	}
 
 	/**

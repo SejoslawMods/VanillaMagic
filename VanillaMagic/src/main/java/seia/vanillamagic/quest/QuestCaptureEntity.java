@@ -22,8 +22,8 @@ import seia.vanillamagic.util.NBTHelper;
 
 public class QuestCaptureEntity extends Quest
 {
-	public ItemStack requiredStackOffHand;
-	public EnumWand requiredWand;
+	protected ItemStack requiredStackOffHand;
+	protected EnumWand requiredWand;
 	
 	public void readData(JsonObject jo)
 	{
@@ -31,6 +31,16 @@ public class QuestCaptureEntity extends Quest
 		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
 		this.icon = requiredStackOffHand.copy();
 		super.readData(jo);
+	}
+	
+	public ItemStack getRequiredStackOffHand()
+	{
+		return requiredStackOffHand;
+	}
+	
+	public EnumWand getRequirdWand()
+	{
+		return requiredWand;
 	}
 	
 	int clickedTimes = 0;
