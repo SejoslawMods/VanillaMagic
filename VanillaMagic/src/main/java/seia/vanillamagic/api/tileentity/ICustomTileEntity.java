@@ -9,13 +9,14 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.api.util.IAdditionalInfoProvider;
 
 /**
  * This is the base definition for CustomTileEntity.<br>
  * Each CustomTileEntity is self-chunkloading.
  */
-public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider
+public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>
 {
 	/**
 	 * This initialization is used when Player place a TileEntity for the first time.
@@ -23,12 +24,12 @@ public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider
 	void init(EntityPlayer player, BlockPos pos);
 	
 	/**
-	 * This initialization will be used for placing the CustomTileEntity on the right World on the right position.
+	 * This initialization will be used for placing the ICustomTileEntity on the right World on the right position.
 	 */
 	void init(World world, BlockPos pos);
 	
 	/**
-	 * Get TileEntity to which this interface is implemented into.
+	 * Returns TileEntity to which this interface is implemented into.
 	 */
 	TileEntity getTileEntity();
 	
@@ -38,7 +39,7 @@ public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider
 	World getWorld();
 	
 	/**
-	 * Set the ICustomTileEntity's World.
+	 * Sets the ICustomTileEntity's World.
 	 */
 	void setWorld(World world);
 	

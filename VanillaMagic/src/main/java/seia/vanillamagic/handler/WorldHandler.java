@@ -13,7 +13,6 @@ import com.google.common.io.Files;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -21,8 +20,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.WorldHelper;
@@ -85,10 +84,10 @@ public class WorldHandler
 						int tileEntityPosY = tileEntityTag.getInteger("y");
 						int tileEntityPosZ = tileEntityTag.getInteger("z");
 						BlockPos tileEntityPos = new BlockPos(tileEntityPosX, tileEntityPosY, tileEntityPosZ);
-						CustomTileEntity tileEntity = null;
+						ICustomTileEntity tileEntity = null;
 						try
 						{
-							tileEntity = (CustomTileEntity) Class.forName(tileEntityClassName).newInstance();
+							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
 							tileEntity.init(world, tileEntityPos);
 						}
 						catch(Exception e)
@@ -98,8 +97,8 @@ public class WorldHandler
 						VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						try
 						{
-							tileEntity.setPos(tileEntityPos);
-							BlockPosHelper.printCoords(Level.INFO, "[World Load] Pos saved at:", tileEntity.getPos());
+							tileEntity.getTileEntity().setPos(tileEntityPos);
+							BlockPosHelper.printCoords(Level.INFO, "[World Load] Pos saved at:", tileEntity.getTileEntity().getPos());
 						}
 						catch(Exception e)
 						{
@@ -170,7 +169,7 @@ public class WorldHandler
 			NBTTagCompound data = new NBTTagCompound();
 			NBTTagList dataList = new NBTTagList();
 			CustomTileEntityHandler.INSTANCE.moveTilesFromReadded(dimension);
-			List<TileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
+			List<ICustomTileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
 			for(int j = 0; j < tickables.size(); j++)
 			{
 				dataList.appendTag(tickables.get(j).writeToNBT(new NBTTagCompound()));

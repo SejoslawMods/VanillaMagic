@@ -130,4 +130,17 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	{
 		return playerName;
 	}
+	
+	public void update()
+	{
+	}
+	
+	public NBTTagCompound serializeNBT()
+	{
+		return this.writeToNBT(new NBTTagCompound());
+	}
+    public void deserializeNBT(NBTTagCompound tag)
+    {
+    	this.readFromNBT(tag);
+    }
 }

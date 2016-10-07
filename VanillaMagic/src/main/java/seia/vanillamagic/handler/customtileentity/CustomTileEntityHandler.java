@@ -8,10 +8,10 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.event.EventCustomTile.EventAddCustomTile;
 import seia.vanillamagic.event.EventCustomTile.EventRemoveCustomTile;
 import seia.vanillamagic.handler.WorldHandler;
@@ -37,7 +37,7 @@ public class CustomTileEntityHandler
 		return WorldHandler.getVanillaMagicRootDirectory().getAbsolutePath();
 	}
 	
-	public boolean addCustomTileEntity(TileEntity customTileEntity, int dimensionID)
+	public boolean addCustomTileEntity(ICustomTileEntity customTileEntity, int dimensionID)
 	{
 		try
 		{
@@ -73,7 +73,7 @@ public class CustomTileEntityHandler
 		return false;
 	}
 	
-	public List<TileEntity> getCustomEntitiesInDimension(int dimension)
+	public List<ICustomTileEntity> getCustomEntitiesInDimension(int dimension)
 	{
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))
@@ -83,7 +83,7 @@ public class CustomTileEntityHandler
 		return saveHandlers.get(rootDir).getCustomEntitiesInDimension(dimension);
 	}
 	
-	public List<TileEntity> getReaddedTileEntitiesForDimension(int dimension)
+	public List<ICustomTileEntity> getReaddedTileEntitiesForDimension(int dimension)
 	{
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))
@@ -102,7 +102,7 @@ public class CustomTileEntityHandler
 		}
 	}
 
-	public boolean addReadedTile(TileEntity tileEntity, int dimension) 
+	public boolean addReadedTile(ICustomTileEntity tileEntity, int dimension)
 	{
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))
@@ -113,7 +113,7 @@ public class CustomTileEntityHandler
 	}
 	
 	@Nullable
-	public TileEntity getCustomTileEntity(BlockPos tilePos, int dimension)
+	public ICustomTileEntity getCustomTileEntity(BlockPos tilePos, int dimension)
 	{
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))

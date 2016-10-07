@@ -1,19 +1,19 @@
 package seia.vanillamagic.event;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 
 /**
  * Events based on this {@link WorldEvent} are generally fired BEFORE the specialized action.
  */
 public class EventCustomTile extends WorldEvent
 {
-	public final TileEntity customTileEntity;
+	public final ICustomTileEntity customTileEntity;
 	public final int dimensionID;
 	
-	public EventCustomTile(TileEntity customTileEntity, int dimensionID) 
+	public EventCustomTile(ICustomTileEntity customTileEntity, int dimensionID) 
 	{
 		super(customTileEntity.getWorld());
 		this.customTileEntity = customTileEntity;
@@ -21,18 +21,18 @@ public class EventCustomTile extends WorldEvent
 	}
 	
 	/**
-	 * This {@link WorldEvent} is fired BEFORE the {@link TileEntity} is added to World and WorldHandler.
+	 * This {@link WorldEvent} is fired BEFORE the {@link ICustomTileEntity} is added to World and WorldHandler.
 	 */
 	public static class EventAddCustomTile extends EventCustomTile
 	{
-		public EventAddCustomTile(TileEntity customTileEntity, int dimensionID) 
+		public EventAddCustomTile(ICustomTileEntity customTileEntity, int dimensionID) 
 		{
 			super(customTileEntity, dimensionID);
 		}
 	}
 	
 	/**
-	 * This {@link WorldEvent} is fired BEFORE the {@link TileEntity} at given position is removed from World and WorldHandler.
+	 * This {@link WorldEvent} is fired BEFORE the {@link ICustomTileEntity} at given position is removed from World and WorldHandler.
 	 */
 	public static class EventRemoveCustomTile extends EventCustomTile
 	{
@@ -40,7 +40,7 @@ public class EventCustomTile extends WorldEvent
 		
 		public EventRemoveCustomTile(World world, BlockPos pos, int dimension) 
 		{
-			super(world.getTileEntity(pos), dimension);
+			super((ICustomTileEntity)world.getTileEntity(pos), dimension);
 			this.removePos = pos;
 		}
 	}

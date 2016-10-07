@@ -5,11 +5,9 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 
@@ -19,7 +17,7 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
  * 
  * @author Seia
  */
-public interface IMachine extends ICustomTileEntity, INBTSerializable<NBTTagCompound>
+public interface IMachine extends ICustomTileEntity
 {
 	/**
 	 * Get the actual position of the machine block.
