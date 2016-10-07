@@ -1,10 +1,5 @@
 General ideas not yet started to be implemented:
     
-1 - New Quarry Upgrade
-    Module which will automatically place new IInventory from Input
-    Optional sorting digged items
-    If current output is destroyed, go back to original output position
-    
 2 - Bridge between 2 IInventorys
     One Inventory -> Input
     Second Inventory -> Output
@@ -12,3 +7,11 @@ General ideas not yet started to be implemented:
     TileEntityInventoryBridge -> holds information about second TEIB
     
 3 - Dragon Breath Spell
+
+4 - Book Quarry Upgrades
+
+5 - Killer
+
+6 - Breeder
+
+7 - PluginJEI
