@@ -34,6 +34,16 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 		this.pos = pos;
 	}
 	
+	public TileEntity getTileEntity()
+	{
+		return this;
+	}
+	
+	public void setWorld(World world)
+	{
+		this.worldObj = world;
+	}
+	
 	public void validate() 
 	{
 		super.validate();

@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
@@ -22,21 +21,6 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
  */
 public interface IMachine extends ICustomTileEntity, INBTSerializable<NBTTagCompound>
 {
-	/**
-	 * Returns the World on which Machine is.
-	 */
-	World getWorld();
-	
-	/**
-	 * Set the Machine's World.
-	 */
-	void setWorld(World world);
-	
-	/**
-	 * Get TileEntity to which this interface is implemented into.
-	 */
-	TileEntity getTileEntity();
-	
 	/**
 	 * Get the actual position of the machine block.
 	 * By MachinePosition we understand the core of the Machine.

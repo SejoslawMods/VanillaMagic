@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,6 +26,21 @@ public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider
 	 * This initialization will be used for placing the CustomTileEntity on the right World on the right position.
 	 */
 	void init(World world, BlockPos pos);
+	
+	/**
+	 * Get TileEntity to which this interface is implemented into.
+	 */
+	TileEntity getTileEntity();
+	
+	/**
+	 * Returns the World on which ICustomTileEntity is.
+	 */
+	World getWorld();
+	
+	/**
+	 * Set the ICustomTileEntity's World.
+	 */
+	void setWorld(World world);
 	
 	/**
 	 * Forcing chunks to be loaded on this ticket.

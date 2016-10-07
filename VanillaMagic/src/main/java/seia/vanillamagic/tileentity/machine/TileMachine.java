@@ -156,11 +156,6 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		}
 	}
 	
-	public TileEntity getTileEntity()
-	{
-		return this;
-	}
-	
 	/**
 	 * Additional method for showing the box on which Machine operates.
 	 */
@@ -178,11 +173,6 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		return getOutputInventory() != null ? true : false;
 	}
 	
-	public void setWorld(World world)
-	{
-		this.worldObj = world;
-	}
-
 	public BlockPos getMachinePos()
 	{
 		return this.pos;
