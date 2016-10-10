@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
@@ -75,7 +76,7 @@ public class QuestAutocrafting extends Quest
 			Block workbench = world.getBlockState(workbenchPos).getBlock();
 			if(workbench instanceof BlockWorkbench)
 			{
-				TileEntity autocraftingTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(cauldronPos, player.dimension);
+				ICustomTileEntity autocraftingTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(cauldronPos, player.dimension);
 				if(autocraftingTile == null)
 				{
 					return;

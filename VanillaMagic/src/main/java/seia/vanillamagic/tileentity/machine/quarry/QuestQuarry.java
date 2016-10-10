@@ -3,12 +3,12 @@ package seia.vanillamagic.tileentity.machine.quarry;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.spell.EnumWand;
@@ -60,7 +60,7 @@ public class QuestQuarry extends QuestMachineActivate
 		World world = event.getWorld();
 		if(world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
 		{
-			TileEntity quarryTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(quarryPos, player.dimension);
+			ICustomTileEntity quarryTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(quarryPos, player.dimension);
 			if(quarryTile == null)
 			{
 				return;

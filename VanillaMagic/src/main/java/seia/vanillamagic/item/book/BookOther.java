@@ -25,7 +25,7 @@ public class BookOther implements IBook
 {
 	public int getUID() 
 	{
-		return 4;
+		return BookRegistry.BOOK_OTHER_UID;
 	}
 	
 	public void registerRecipe() 

@@ -73,7 +73,7 @@ public class QuestItemUpgrade extends Quest
 				{
 					return;
 				}
-				ItemStack craftingResult = ItemUpgradeRegistry.INSTANCE.getResult(base, ingredient);
+				ItemStack craftingResult = ItemUpgradeRegistry.getResult(base, ingredient);
 				if(craftingResult == null)
 				{
 					return;
@@ -151,7 +151,7 @@ public class QuestItemUpgrade extends Quest
 
 	public boolean isBaseItem(ItemStack entityItem) 
 	{
-		for(ItemEntry ie : ItemUpgradeRegistry.INSTANCE.getBaseItems())
+		for(ItemEntry ie : ItemUpgradeRegistry.getBaseItems())
 		{
 			if(entityItem.getItem() == ie.item)
 			{

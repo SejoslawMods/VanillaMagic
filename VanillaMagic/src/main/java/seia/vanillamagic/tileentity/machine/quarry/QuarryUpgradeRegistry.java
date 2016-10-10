@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.block.Block;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
+import seia.vanillamagic.api.tileentity.machine.QuarryUpgradeAPI;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeFortune;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeSilkTouch;
@@ -45,8 +46,7 @@ public class QuarryUpgradeRegistry
 	}
 	
 	/**
-	 * Main method to register new IQuarryUpgrade. <br>
-	 * Returns TRUE if the upgrade was successfully registered.
+	 * @see QuarryUpgradeAPI#addUpgrade(Class)
 	 */
 	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass)
 	{
@@ -69,7 +69,7 @@ public class QuarryUpgradeRegistry
 	}
 
 	/**
-	 * Returns TRUE if the given block is an Block connected to any IQuarryUpgrade
+	 * @see QuarryUpgradeAPI#isUpgradeBlock(Block)
 	 */
 	public static boolean isUpgradeBlock(Block block)
 	{
@@ -83,6 +83,9 @@ public class QuarryUpgradeRegistry
 		return false;
 	}
 
+	/**
+	 * @see QuarryUpgradeAPI#getUpgradeFromBlock(Block)
+	 */
 	@Nullable
 	public static IQuarryUpgrade getUpgradeFromBlock(Block block) 
 	{
@@ -105,7 +108,7 @@ public class QuarryUpgradeRegistry
 	}
 
 	/**
-	 * Returns the required upgrade for the given upgrade.
+	 * @see QuarryUpgradeAPI#getReguiredUpgrade(IQuarryUpgrade)
 	 */
 	@Nullable
 	public static IQuarryUpgrade getReguiredUpgrade(IQuarryUpgrade iqu) 
@@ -114,10 +117,23 @@ public class QuarryUpgradeRegistry
 	}
 
 	/**
-	 * Returns TRUE if the given upgrades are the same upgrade.
+	 * @see QuarryUpgradeAPI#isTheSameUpgrade(IQuarryUpgrade, IQuarryUpgrade)
 	 */
 	public static boolean isTheSameUpgrade(IQuarryUpgrade iqu1, IQuarryUpgrade iqu2)
 	{
 		return Block.isEqualTo(iqu1.getBlock(), iqu2.getBlock());
+	}
+	
+	/**
+	 * @see QuarryUpgradeAPI#getUpgrades()
+	 */
+	public static List<IQuarryUpgrade> getUpgrades()
+	{
+		List<IQuarryUpgrade> upgrades = new ArrayList<IQuarryUpgrade>();
+		for(IQuarryUpgrade iqu : MAP_CLASS_UPGRADE.values())
+		{
+			upgrades.add(iqu);
+		}
+		return upgrades;
 	}
 }

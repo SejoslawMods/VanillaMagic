@@ -15,7 +15,7 @@ public class BookAltarCrafting implements IBook
 {
 	public int getUID() 
 	{
-		return 1;
+		return BookRegistry.BOOK_ALTAR_CRAFTING_UID;
 	}
 	
 	public void registerRecipe() 

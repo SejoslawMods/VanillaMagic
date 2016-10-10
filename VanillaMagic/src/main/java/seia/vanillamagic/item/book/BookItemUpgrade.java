@@ -22,7 +22,7 @@ public class BookItemUpgrade implements IBook
 {
 	public int getUID() 
 	{
-		return 5;
+		return BookRegistry.BOOK_ITEM_UPGRADES_UID;
 	}
 	
 	public void registerRecipe() 
@@ -48,7 +48,7 @@ public class BookItemUpgrade implements IBook
 						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.itemUpgrades.title") + " ====" + 
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
-				Map<String, List<IItemUpgrade>> map = ItemUpgradeRegistry.INSTANCE.getUpgradesMap();
+				Map<String, List<IItemUpgrade>> map = ItemUpgradeRegistry.getUpgradesMap();
 				Set<Entry<String, List<IItemUpgrade>>> set = map.entrySet();
 				Iterator<Entry<String, List<IItemUpgrade>>> iterator = set.iterator();
 				while(iterator.hasNext())
@@ -72,11 +72,11 @@ public class BookItemUpgrade implements IBook
 			}
 			data.setTag("pages", pages);
 			data.setString("author", BookRegistry.AUTHOR);
-			data.setString("title", BookRegistry.BOOK_NAME_ALTAR_CRAFTING);
+			data.setString("title", BookRegistry.BOOK_NAME_ITEM_UPGRADES);
 			data.setInteger(BookRegistry.BOOK_NBT_UID, getUID());
 		}
 		book.setTagCompound(data);
-		book.setStackDisplayName(BookRegistry.BOOK_ITEM_UPGRADES);
+		book.setStackDisplayName(BookRegistry.BOOK_NAME_ITEM_UPGRADES);
 		return book;
 	}
 }

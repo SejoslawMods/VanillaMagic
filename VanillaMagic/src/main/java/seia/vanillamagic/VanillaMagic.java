@@ -50,7 +50,7 @@ public class VanillaMagic
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		LOGGER = event.getModLog();
-		ItemUpgradeRegistry.INSTANCE.start();
+		ItemUpgradeRegistry.start();
 		CONFIG_ACHIEVEMENTS = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
 		METADATA = VanillaMagicMetadata.INSTANCE.preInit(METADATA);
 		for(int i = 0; i < QuestList.size(); i++)
@@ -62,7 +62,7 @@ public class VanillaMagic
 		TileEntityRegistry.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 		//WorldHandler.INSTANCE.preInit(); //TODO: Fix World Saving / Loading
-		ItemUpgradeRegistry.INSTANCE.registerEvents();
+		ItemUpgradeRegistry.registerEvents();
 		VanillaMagicIntegration.INSTANCE.preInit();
 	}
 	

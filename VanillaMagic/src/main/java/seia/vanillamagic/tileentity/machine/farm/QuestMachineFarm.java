@@ -4,13 +4,13 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.util.EntityHelper;
@@ -54,7 +54,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 		{
 			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)
 			{
-				TileEntity farmTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(cauldronPos, player.dimension);
+				ICustomTileEntity farmTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(cauldronPos, player.dimension);
 				if(farmTile == null)
 				{
 					return;

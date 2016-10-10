@@ -12,22 +12,19 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
-import seia.vanillamagic.api.item.itemupgrade.IItemUpgradeRegistry;
+import seia.vanillamagic.api.item.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.item.itemupgrade.upgrade.UpgradeAutosmelt;
 
 /**
  * This is the base registry which will hold ALL the upgrades for different items.
  */
-public class ItemUpgradeRegistry implements IItemUpgradeRegistry
+public class ItemUpgradeRegistry
 {
-	public static final ItemUpgradeRegistry INSTANCE = new ItemUpgradeRegistry();
-	
-	final class ItemEntry
+	static final class ItemEntry
 	{
 		public final String mappingName;
 		public final Item item;
@@ -45,24 +42,28 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 	 * Mapping itemName to list of available items with the same name.<br>
 	 * For instance: "_pickaxe" -> all pickaxes
 	 */
-	private final Map<String, List<ItemEntry>> MAPPING_ITEMNAME_ITEMENTRY = new HashMap<String, List<ItemEntry>>();
+	private static final Map<String, List<ItemEntry>> MAPPING_ITEMNAME_ITEMENTRY = new HashMap<String, List<ItemEntry>>();
 	/**
 	 * Mapping itemName to list of IItemUpgrades for that mapping.<br>
 	 * For instance: "_pickaxe" -> all upgrades for pickaxes
 	 */
-	private final Map<String, List<IItemUpgrade>> MAPPING_ITEMNAME_UPGRADE = new HashMap<String, List<IItemUpgrade>>();
+	private static final Map<String, List<IItemUpgrade>> MAPPING_ITEMNAME_UPGRADE = new HashMap<String, List<IItemUpgrade>>();
 	/**
 	 * Registered upgrades with events.
 	 */
-	private final List<IItemUpgrade> EVENT_BUS_REGISTERED_UPGRADES = new ArrayList<IItemUpgrade>();
+	private static final List<IItemUpgrade> EVENT_BUS_REGISTERED_UPGRADES = new ArrayList<IItemUpgrade>();
 	/**
 	 * All items to which we can add upgrade.<br>
 	 * For instance: all pickaxes, all axes, etc.
 	 */
-	private final List<ItemEntry> BASE_ITEMS = new ArrayList<ItemEntry>();
-	private final List<Item> ITEMS = ForgeRegistries.ITEMS.getValues();
+	private static final List<ItemEntry> BASE_ITEMS = new ArrayList<ItemEntry>();
+	private static final List<Item> ITEMS = ForgeRegistries.ITEMS.getValues();
 	
 	private ItemUpgradeRegistry()
+	{
+	}
+	
+	static 
 	{
 		addItemMapping("_pickaxe");
 		addItemMapping("_axe");
@@ -76,12 +77,15 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 	/**
 	 * This method is just to start the static.
 	 */
-	public void start()
+	public static void start()
 	{
 		VanillaMagic.LOGGER.log(Level.INFO, "ItemUpgradeRegistry started...");
 	}
 	
-	public void addUpgradeMapping(String mappingName, Class<? extends IItemUpgrade> clazz)
+	/**
+	 * @see ItemUpgradeAPI#addUpgradeMapping(String, Class)
+	 */
+	public static void addUpgradeMapping(String mappingName, Class<? extends IItemUpgrade> clazz)
 	{
 		try
 		{
@@ -103,7 +107,10 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 		}
 	}
 	
-	public void addItemToMapping(String mappingName, Item item)
+	/**
+	 * @see ItemUpgradeAPI#addItemToMapping(String, Item)
+	 */
+	public static void addItemToMapping(String mappingName, Item item)
 	{
 		ItemEntry itemEntry = new ItemEntry(mappingName, item);
 		if(MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName))
@@ -126,7 +133,10 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 		}
 	}
 	
-	public void addItemMapping(String mappingName)
+	/**
+	 * @see ItemUpgradeAPI#addItemMapping(String)
+	 */
+	public static void addItemMapping(String mappingName)
 	{
 		// we want to register mapping only once for given key
 		if(MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName))
@@ -150,8 +160,11 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 		VanillaMagic.LOGGER.log(Level.INFO, "Registered items: " + registeredItems + " for key: " + mappingName);
 	}
 	
+	/**
+	 * @see ItemUpgradeAPI#getResult(ItemStack, ItemStack)
+	 */
 	@Nullable
-	public ItemStack getResult(ItemStack base, ItemStack ingredient)
+	public static ItemStack getResult(ItemStack base, ItemStack ingredient)
 	{
 		String mappingName = getMappingNameFromItemStack(base);
 		if(mappingName == null)
@@ -172,7 +185,7 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 		return null;
 	}
 	
-	public String getMappingNameFromItemStack(ItemStack stack) 
+	public static String getMappingNameFromItemStack(ItemStack stack) 
 	{
 		for(Entry<String, List<ItemEntry>> mappingEntry : MAPPING_ITEMNAME_ITEMENTRY.entrySet())
 		{
@@ -191,7 +204,7 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 	 * Returns the list of all the currently registered "base" items. <br>
 	 * For instance: swords, axes, pickaxes, etc.
 	 */
-	public List<ItemEntry> getBaseItems()
+	public static List<ItemEntry> getBaseItems()
 	{
 		return BASE_ITEMS;
 	}
@@ -200,12 +213,12 @@ public class ItemUpgradeRegistry implements IItemUpgradeRegistry
 	 * Returns the map of category names for upgrades. <br>
 	 * For instance (mapping): "_pickaxe" -> the list of all available pickaxes upgrades.
 	 */
-	public Map<String, List<IItemUpgrade>> getUpgradesMap()
+	public static Map<String, List<IItemUpgrade>> getUpgradesMap()
 	{
 		return MAPPING_ITEMNAME_UPGRADE;
 	}
 	
-	public void registerEvents()
+	public static void registerEvents()
 	{
 		int registered = 0;
 		for(Entry<String, List<IItemUpgrade>> itemCategory : MAPPING_ITEMNAME_UPGRADE.entrySet())

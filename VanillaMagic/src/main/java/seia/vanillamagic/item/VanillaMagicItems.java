@@ -20,10 +20,19 @@ public class VanillaMagicItems implements IVanillaMagicItems
 {
 	public static final VanillaMagicItems INSTANCE = new VanillaMagicItems();
 	
-	private final List<ICustomItem> customItems;
-	
+	/**
+	 * All VanillaMagic items except these with additional lists.
+	 */
+	public final List<ICustomItem> customItems;
+	/**
+	 * All EnchantedBuckets list.
+	 */
 	public final List<IEnchantedBucket> enchantedBuckets;
+	/**
+	 * All PotionedCrystals list.
+	 */
 	public final List<IPotionedCrystal> potionedCrystals;
+	
 	public final ICustomItem itemAccelerationCrystal;
 	public final ICustomItem itemLiquidSuppressionCrystal;
 	public final ICustomItem itemMotherNatureCrystal;
@@ -101,5 +110,35 @@ public class VanillaMagicItems implements IVanillaMagicItems
 			}
 		}
 		return false;
+	}
+	
+	public List<ItemStack> getCustomItemsStacks() 
+	{
+		List<ItemStack> stacks = new ArrayList<ItemStack>();
+		for(ICustomItem ci : customItems)
+		{
+			stacks.add(ci.getItem());
+		}
+		return stacks;
+	}
+
+	public List<ItemStack> getEnchantedBucketsStacks() 
+	{
+		List<ItemStack> stacks = new ArrayList<ItemStack>();
+		for(IEnchantedBucket eb : enchantedBuckets)
+		{
+			stacks.add(eb.getItem());
+		}
+		return stacks;
+	}
+	
+	public List<ItemStack> getPotionedCrystalsStacks() 
+	{
+		List<ItemStack> stacks = new ArrayList<ItemStack>();
+		for(IPotionedCrystal pc : potionedCrystals)
+		{
+			stacks.add(pc.getItem());
+		}
+		return stacks;
 	}
 }

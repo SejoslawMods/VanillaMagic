@@ -1,6 +1,7 @@
 package seia.vanillamagic.api.tileentity.machine;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -102,6 +103,25 @@ public class QuarryUpgradeAPI
 		{
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	/**
+	 * Returns the new {@link List}, so changes will no affect the registry.
+	 */
+	@Nullable
+	public static List<IQuarryUpgrade> getUpgrades()
+	{
+		try
+		{
+			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Method method = clazz.getMethod("getUpgrades");
+			return (List<IQuarryUpgrade>) method.invoke(null);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

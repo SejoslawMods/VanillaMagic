@@ -22,33 +22,45 @@ public class BookRegistry
 	public static final String BOOK_NAME_ALTAR_CRAFTING = TextHelper.translateToLocal("book.altarCrafting.itemName");
 	public static final String BOOK_NAME_BUILD_ALTAR = TextHelper.translateToLocal("book.altarBuilding.itemName");
 	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
-	public static final String BOOK_ITEM_UPGRADES = TextHelper.translateToLocal("book.itemUpgrades.itemName");
+	public static final String BOOK_NAME_ITEM_UPGRADES = TextHelper.translateToLocal("book.itemUpgrades.itemName");
+	public static final String BOOK_NAME_QUARRY_UPGRADES = TextHelper.translateToLocal("book.quarryUpgrades.itemName");
 	public static final String BOOK_NBT_UID = "bookUID";
 	
-	public static final IBook bookSpells;
-	public static final IBook bookAltarCrafting;
-	public static final IBook bookBuildAltar;
-	public static final IBook bookOther;
-	public static final IBook bookItemUpgrade;
+	public static final int BOOK_ALTAR_CRAFTING_UID = 1;
+	public static final int BOOK_BUILD_ALTAR_UID = 2;
+	public static final int BOOK_SPELLS_UID = 3;
+	public static final int BOOK_OTHER_UID = 4;
+	public static final int BOOK_ITEM_UPGRADES_UID = 5;
+	public static final int BOOK_QUARRY_UPGRADES_UID = 6;
+	
+	public static final IBook BOOK_ALTAR_CRAFTING;
+	public static final IBook BOOK_BUILD_ALTAR;
+	public static final IBook BOOK_SPELLS;
+	public static final IBook BOOK_OTHER;
+	public static final IBook BOOK_ITEM_UPGRADES;
+	public static final IBook BOOK_QUARRY_UPGRADES;
 	
 	private static List<IBook> books = new ArrayList<IBook>();
 	
 	static
 	{
-		bookSpells = new BookSpells();
-		books.add(bookSpells);
+		BOOK_SPELLS = new BookSpells();
+		books.add(BOOK_SPELLS);
 		
-		bookAltarCrafting = new BookAltarCrafting();
-		books.add(bookAltarCrafting);
+		BOOK_ALTAR_CRAFTING = new BookAltarCrafting();
+		books.add(BOOK_ALTAR_CRAFTING);
 		
-		bookBuildAltar = new BookBuildAltar();
-		books.add(bookBuildAltar);
+		BOOK_BUILD_ALTAR = new BookBuildAltar();
+		books.add(BOOK_BUILD_ALTAR);
 		
-		bookOther = new BookOther();
-		books.add(bookOther);
+		BOOK_OTHER = new BookOther();
+		books.add(BOOK_OTHER);
 		
-		bookItemUpgrade = new BookItemUpgrade();
-		books.add(bookItemUpgrade);
+		BOOK_ITEM_UPGRADES = new BookItemUpgrade();
+		books.add(BOOK_ITEM_UPGRADES);
+		
+		BOOK_QUARRY_UPGRADES = new BookQuarryUpgrades();
+		books.add(BOOK_QUARRY_UPGRADES);
 	}
 	
 	private BookRegistry()
@@ -70,6 +82,8 @@ public class BookRegistry
 	 * 2 - Altar Building <br>
 	 * 3 - Spells <br>
 	 * 4 - Other <br>
+	 * 5 - Item Upgrades <br>
+	 * 6 - Quarry Upgrades <br>
 	 */
 	public static ItemStack getBookByUID(int bookUID)
 	{

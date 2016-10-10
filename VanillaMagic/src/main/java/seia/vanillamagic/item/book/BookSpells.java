@@ -15,7 +15,7 @@ public class BookSpells implements IBook
 {
 	public int getUID() 
 	{
-		return 3;
+		return BookRegistry.BOOK_SPELLS_UID;
 	}
 	
 	public void registerRecipe() 

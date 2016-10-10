@@ -22,6 +22,9 @@ public class VanillaMagicIntegration
 	
 	private VanillaMagicIntegration()
 	{
+		/*
+		 * Comment any of the following to disable integration.
+		 */
 		integrations.add(new IntegrationVersionChecker());
 		integrations.add(new IntegrationBetterAchievements());
 		integrations.add(new IntegrationWTFExpedition());
@@ -31,6 +34,8 @@ public class VanillaMagicIntegration
 		integrations.add(new IntegrationNetherMetals());
 		integrations.add(new IntegrationEndMetals());
 		integrations.add(new IntegrationDenseMetals());
+		
+		integrations.add(new IntegrationJEI());
 	}
 	
 	public void preInit()
