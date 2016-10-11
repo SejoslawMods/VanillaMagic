@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
@@ -47,8 +48,15 @@ public class TileFarm extends TileMachine
 		//this.radius = radius; //this.farmSize = (2 * radius) + 1;
 		this.chestPosInput = this.pos.offset(EnumFacing.UP);
 		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
-		this.inventoryInput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.UP));
-		this.inventoryOutput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.DOWN));
+		try
+		{
+			this.inventoryInput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.UP));
+			this.inventoryOutput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.DOWN));
+		}
+		catch(NotInventoryException e)
+		{
+			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
+		}
 	}
 	
 	public BlockPos getInputPos()

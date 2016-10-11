@@ -2,6 +2,8 @@ package seia.vanillamagic.tileentity.machine.autocrafting;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
@@ -9,6 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 
@@ -26,8 +30,15 @@ public class TileAutocrafting extends TileMachine
 	{
 		super.init(world, machinePos);
 		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
-		this.inventoryInput = new InventoryWrapper(worldObj, getMachinePos().up());
-		this.inventoryOutput = new InventoryWrapper(worldObj, getMachinePos().down(2));
+		try
+		{
+			this.inventoryInput = new InventoryWrapper(worldObj, getMachinePos().up());
+			this.inventoryOutput = new InventoryWrapper(worldObj, getMachinePos().down(2));
+		}
+		catch(NotInventoryException e)
+		{
+			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
+		}
 	}
 	
 	public void initContainer()

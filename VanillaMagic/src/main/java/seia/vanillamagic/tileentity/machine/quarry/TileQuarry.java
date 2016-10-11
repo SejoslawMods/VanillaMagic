@@ -3,6 +3,8 @@ package seia.vanillamagic.tileentity.machine.quarry;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -14,6 +16,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.inventory.InventoryHelper;
@@ -104,8 +108,15 @@ public class TileQuarry extends TileMachine implements IQuarry
 							this.diamondFacing = diamondFacing;
 							this.startPosFacing = diamondFacing.rotateY();
 							restartDefaultStartPos();
-							this.inventoryInput = new InventoryWrapper(worldObj, new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
-							this.inventoryOutput = new InventoryWrapper(worldObj, pos.offset(getOutputFacing()));
+							try
+							{
+								this.inventoryInput = new InventoryWrapper(worldObj, new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
+								this.inventoryOutput = new InventoryWrapper(worldObj, pos.offset(getOutputFacing()));
+							}
+							catch(NotInventoryException e)
+							{
+								VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
+							}
 						}
 						return true;
 					}
