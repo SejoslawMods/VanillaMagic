@@ -7,8 +7,7 @@ import net.minecraft.world.World;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 
 /**
- * This Exception will be thrown if the {@link IInventoryWrapper} 
- * couldn't convert the {@link TileEntity}, at given {@link BlockPos}, to {@link IInventory}
+ * This Exception will be thrown if the {@link TileEntity} couldn't be convert to {@link IInventory}
  * 
  * @see {@link IInventoryWrapper#setNewInventory(World, BlockPos)}
  */
