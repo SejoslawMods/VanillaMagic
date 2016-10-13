@@ -13,3 +13,5 @@ General ideas not yet started to be implemented:
 6 - Breeder
 
 7 - PluginJEI ???
+
+8 - QuarryUpgradeEnergy - should Quarry support additional Power API ??? (for instance: RF, EU, Tesla, Joules, Forge Power, etc.)
