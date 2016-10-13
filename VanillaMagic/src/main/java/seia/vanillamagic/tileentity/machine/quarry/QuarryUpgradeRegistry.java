@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.block.Block;
 import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.api.exception.MappingExistsException;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.api.tileentity.machine.QuarryUpgradeAPI;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
@@ -38,24 +39,37 @@ public class QuarryUpgradeRegistry
 	static
 	{
 		// Register Vanilla Magic Quarry Upgrades
-		addUpgrade(QuarryUpgradeSilkTouch.class);
-		addUpgrade(QuarryUpgradeFortune.One.class);
-		addUpgrade(QuarryUpgradeFortune.Two.class);
-		addUpgrade(QuarryUpgradeFortune.Three.class);
-		addUpgrade(QuarryUpgradeAutoInventoryOutputPlacer.class);
+		try
+		{
+			addUpgrade(QuarryUpgradeSilkTouch.class);
+			addUpgrade(QuarryUpgradeFortune.One.class);
+			addUpgrade(QuarryUpgradeFortune.Two.class);
+			addUpgrade(QuarryUpgradeFortune.Three.class);
+			addUpgrade(QuarryUpgradeAutoInventoryOutputPlacer.class);
+		}
+		catch(MappingExistsException e)
+		{
+			e.printStackTrace();
+			VanillaMagic.LOGGER.log(Level.ERROR, "Error while registering QuarryUpgrade for block: " + e.checkingKey);
+		}
 	}
 	
 	/**
 	 * @see QuarryUpgradeAPI#addUpgrade(Class)
 	 */
-	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass)
+	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) throws MappingExistsException
 	{
 		try
 		{
 			IQuarryUpgrade instance = quarryUpgradeClass.newInstance();
+			if(MAP_BLOCK_UPGRADE.get(instance.getBlock()) != null) // there is already mapping for this Block
+			{
+				throw new MappingExistsException(instance.getBlock(), MAP_BLOCK_UPGRADE.get(instance.getBlock()));
+			}
 			LIST_BLOCK.add(instance.getBlock());
 			LIST_UPGRADE.add(instance);
 			MAP_BLOCK_UPGRADE.put(instance.getBlock(), instance);
+			MAP_UPGRADE_BLOCK.put(instance, instance.getBlock());
 			MAP_BLOCK_CLASS.put(instance.getBlock(), quarryUpgradeClass);
 			MAP_CLASS_UPGRADE.put(quarryUpgradeClass, instance);
 			return true;

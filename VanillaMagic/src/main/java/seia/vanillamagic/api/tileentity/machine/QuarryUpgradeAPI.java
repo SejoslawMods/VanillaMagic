@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import seia.vanillamagic.api.exception.MappingExistsException;
 
 public class QuarryUpgradeAPI 
 {
@@ -16,21 +17,28 @@ public class QuarryUpgradeAPI
 	/**
 	 * Main method to register new IQuarryUpgrade. <br>
 	 * Returns TRUE if the upgrade was successfully registered.
+	 * 
+	 * @throws MappingExistsException this {@link Exception} will be thrown if there is already registered upgrade with this Block 
+	 * (solve: change this Upgrade's Block in "getBlock" method)
 	 */
-	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass)
+	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) throws MappingExistsException
 	{
-		try
+		try 
 		{
 			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
 			Method method = clazz.getMethod("addUpgrade", IQuarryUpgrade.class);
 			Boolean b = (Boolean) method.invoke(null, quarryUpgradeClass);
 			return b.booleanValue();
-		}
-		catch(Exception e)
+		} 
+		catch(ReflectiveOperationException e) 
 		{
 			e.printStackTrace();
-			return false;
-		}
+		} 
+		catch(RuntimeException e) 
+		{
+			e.printStackTrace();
+		} 
+		return false;
 	}
 	
 	/**
