@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
@@ -51,7 +52,14 @@ public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade
 				{
 					TileEntity createdTileEntity = placedBlock.createTileEntity(worldOutput, placedBlockState);
 					worldOutput.setTileEntity(nextPos, createdTileEntity);
-					invOutputWrapper.setNewInventory(worldOutput, nextPos);
+					try 
+					{
+						invOutputWrapper.setNewInventory(worldOutput, nextPos);
+					} 
+					catch(NotInventoryException e)
+					{
+						e.printStackTrace();
+					}
 				}
 			}
 		}
