@@ -91,6 +91,14 @@ public interface IMachine extends ICustomTileEntity
 	int getCurrentTicks();
 	
 	/**
+	 * Each Machine uses ticks.
+	 * Ticks works like Furnace smelting ticks.
+	 * For instance Coal as fuel will return 1600 ticks.
+	 * It will set the current ticks to the given value.
+	 */
+	void setCurrentTicks(int ticks);
+	
+	/**
 	 * It should return the max number of ticks that Machine can contain.
 	 * It's efficient to make it: 10 * getOneOperationCost().
 	 * If that made, the Machine won't use the infinite amount of resources.

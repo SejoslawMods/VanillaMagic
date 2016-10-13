@@ -222,6 +222,11 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	{
 		return ticks;
 	}
+	
+	public void setCurrentTicks(int ticks)
+	{
+		this.ticks = ticks;
+	}
 
 	public int getMaxTicks()
 	{
