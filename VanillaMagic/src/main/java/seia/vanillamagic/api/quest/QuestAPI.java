@@ -29,7 +29,7 @@ public class QuestAPI
 	
 	/**
 	 * Returns Quest from the Map, where "key" is a uniqueName of the Quest.<br>
-	 * Returns NULL if there is no Quest registered at the given "key".
+	 * Returns NULL if there is no Quest registered for the given "key".
 	 */
 	@Nullable
 	public static IQuest get(String key)
