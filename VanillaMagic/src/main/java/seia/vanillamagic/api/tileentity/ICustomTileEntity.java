@@ -18,7 +18,8 @@ import seia.vanillamagic.api.world.IWorldWrapper;
  * Each CustomTileEntity is self-chunkloading.
  */
 public interface ICustomTileEntity extends 
-		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, IWorldWrapper, ITileEntityNBT
+		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, 
+		IWorldWrapper, ITileEntityNBT, ITileEntityWrapper
 {
 	/**
 	 * This initialization is used when Player place a {@link TileEntity} for the first time.
@@ -31,12 +32,7 @@ public interface ICustomTileEntity extends
 	void init(World world, BlockPos pos);
 	
 	/**
-	 * Returns TileEntity to which this interface is implemented into.
-	 */
-	TileEntity getTileEntity();
-	
-	/**
-	 * Forcing chunks to be loaded on this ticket.
+	 * Forcing chunks to be loaded on this {@link Ticket}.
 	 */
 	void forceChunkLoading(Ticket ticket);
 	
