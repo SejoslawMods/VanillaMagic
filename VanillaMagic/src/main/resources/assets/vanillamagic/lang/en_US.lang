@@ -220,7 +220,7 @@ achievement.buildAltarTier1=Build Altar Tier 1 (Require: both earlier)
 achievement.buildAltarTier1.desc=Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle
 
 achievement.craftGunpowder=Craft Gunpowder
-achievement.craftGunpowder.desc=Toss 1x Sugar + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftGunpowder.desc=Toss 1x Sugar Cane + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand
 
 achievement.craftSugar=Craft Sugar
 achievement.craftSugar.desc=Toss 1x Sugar Cane into the Altar Tier 1 and right-click with a Stick Wand in hand
