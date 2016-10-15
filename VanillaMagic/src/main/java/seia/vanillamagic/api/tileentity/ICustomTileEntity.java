@@ -11,20 +11,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.api.util.IAdditionalInfoProvider;
+import seia.vanillamagic.api.world.IWorldWrapper;
 
 /**
  * This is the base definition for CustomTileEntity.<br>
  * Each CustomTileEntity is self-chunkloading.
  */
-public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>
+public interface ICustomTileEntity extends 
+		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, IWorldWrapper
 {
 	/**
-	 * This initialization is used when Player place a TileEntity for the first time.
+	 * This initialization is used when Player place a {@link TileEntity} for the first time.
 	 */
 	void init(EntityPlayer player, BlockPos pos);
 	
 	/**
-	 * This initialization will be used for placing the ICustomTileEntity on the right World on the right position.
+	 * This initialization will be used for placing the ICustomTileEntity on the right {@link World} on the right position.
 	 */
 	void init(World world, BlockPos pos);
 	
@@ -34,23 +36,9 @@ public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider, I
 	TileEntity getTileEntity();
 	
 	/**
-	 * Returns the World on which ICustomTileEntity is.
-	 */
-	World getWorld();
-	
-	/**
-	 * Sets the ICustomTileEntity's World.
-	 */
-	void setWorld(World world);
-	
-	/**
 	 * Forcing chunks to be loaded on this ticket.
 	 */
 	void forceChunkLoading(Ticket ticket);
-	
-	void readFromNBT(NBTTagCompound tag);
-	
-	NBTTagCompound writeToNBT(NBTTagCompound tag);
 	
 	SPacketUpdateTileEntity getUpdatePacket();
 	
