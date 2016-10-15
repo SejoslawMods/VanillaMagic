@@ -18,7 +18,7 @@ import seia.vanillamagic.api.world.IWorldWrapper;
  * Each CustomTileEntity is self-chunkloading.
  */
 public interface ICustomTileEntity extends 
-		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, IWorldWrapper
+		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, IWorldWrapper, ITileEntityNBT
 {
 	/**
 	 * This initialization is used when Player place a {@link TileEntity} for the first time.
