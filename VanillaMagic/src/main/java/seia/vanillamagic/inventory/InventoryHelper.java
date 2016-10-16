@@ -205,11 +205,11 @@ public class InventoryHelper
 	public static boolean pullItemFromSlot(IInventory inventoryOut, IInventory inventoryIn, int index, EnumFacing direction)
 	{
 		ItemStack stack = inventoryIn.getStackInSlot(index);
-		if (stack != null && canExtractItemFromSlot(inventoryIn, stack, index, direction))
+		if(stack != null && canExtractItemFromSlot(inventoryIn, stack, index, direction))
 		{
 			ItemStack stackCopy = stack.copy();
 			ItemStack leftItems = putStackInInventoryAllSlots(inventoryOut, inventoryIn.decrStackSize(index, 1), (EnumFacing)null);
-			if (leftItems == null || leftItems.stackSize == 0)
+			if(leftItems == null || leftItems.stackSize == 0)
 			{
 				inventoryIn.markDirty();
 				return true;
@@ -226,7 +226,7 @@ public class InventoryHelper
 	public static boolean putDropInInventoryAllSlots(IInventory inventoryIn, EntityItem itemIn)
 	{
 		boolean flag = false;
-		if (itemIn == null)
+		if(itemIn == null)
 		{
 			return false;
 		}
@@ -234,7 +234,7 @@ public class InventoryHelper
 		{
 			ItemStack stack = itemIn.getEntityItem().copy();
 			ItemStack leftItems = putStackInInventoryAllSlots(inventoryIn, stack, (EnumFacing)null);
-			if (leftItems != null && leftItems.stackSize != 0)
+			if(leftItems != null && leftItems.stackSize != 0)
 			{
 				itemIn.setEntityItemStack(leftItems);
 			}
@@ -253,11 +253,11 @@ public class InventoryHelper
 	@Nullable
 	public static ItemStack putStackInInventoryAllSlots(IInventory inventoryIn, ItemStack stack, @Nullable EnumFacing side)
 	{
-		if (inventoryIn instanceof ISidedInventory && side != null)
+		if(inventoryIn instanceof ISidedInventory && side != null)
 		{
 			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
 			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for (int k = 0; k < slots.length && stack != null && stack.stackSize > 0; ++k)
+			for(int k = 0; k < slots.length && stack != null && stack.stackSize > 0; ++k)
 			{
 				stack = insertStack(inventoryIn, stack, slots[k], side);
 			}
@@ -265,13 +265,13 @@ public class InventoryHelper
 		else
 		{
 			int size = inventoryIn.getSizeInventory();
-			for (int j = 0; j < size && stack != null && stack.stackSize > 0; ++j)
+			for(int j = 0; j < size && stack != null && stack.stackSize > 0; ++j)
 			{
 				stack = insertStack(inventoryIn, stack, j, side);
 			}
 		}
 		
-		if (stack != null && stack.stackSize == 0)
+		if(stack != null && stack.stackSize == 0)
 		{
 			stack = null;
 		}
@@ -303,13 +303,13 @@ public class InventoryHelper
 	public static ItemStack insertStack(IInventory inventoryIn, ItemStack stack, int index, EnumFacing side)
 	{
 		ItemStack stackInSlot = inventoryIn.getStackInSlot(index);
-		if (canInsertItemInSlot(inventoryIn, stack, index, side))
+		if(canInsertItemInSlot(inventoryIn, stack, index, side))
 		{
 			boolean isHopper = false;
-			if (stackInSlot == null)
+			if(stackInSlot == null)
 			{
 				int max = Math.min(stack.getMaxStackSize(), inventoryIn.getInventoryStackLimit());
-				if (max >= stack.stackSize)
+				if(max >= stack.stackSize)
 				{
 					inventoryIn.setInventorySlotContents(index, stack);
 					stack = null;
@@ -320,10 +320,10 @@ public class InventoryHelper
 				}
 				isHopper = true;
 			}
-			else if (canCombine(stackInSlot, stack))
+			else if(canCombine(stackInSlot, stack))
 			{
 				int max = Math.min(stack.getMaxStackSize(), inventoryIn.getInventoryStackLimit());
-				if (max > stackInSlot.stackSize)
+				if(max > stackInSlot.stackSize)
 				{
 					int i = max - stackInSlot.stackSize;
 					int j = Math.min(stack.stackSize, i);
@@ -333,12 +333,12 @@ public class InventoryHelper
 				}
 			}
 			
-			if (isHopper)
+			if(isHopper)
 			{
-				if (inventoryIn instanceof TileEntityHopper)
+				if(inventoryIn instanceof TileEntityHopper)
 				{
 					TileEntityHopper tileEntityHopper = (TileEntityHopper)inventoryIn;
-					if (tileEntityHopper.mayTransfer())
+					if(tileEntityHopper.mayTransfer())
 					{
 						tileEntityHopper.setTransferCooldown(8);
 					}
@@ -384,24 +384,24 @@ public class InventoryHelper
 		int k = MathHelper.floor_double(z);
 		BlockPos blockPos = new BlockPos(i, j, k);
 		Block block = worldIn.getBlockState(blockPos).getBlock();
-		if (block.hasTileEntity())
+		if(block.hasTileEntity())
 		{
 			TileEntity tileEntity = worldIn.getTileEntity(blockPos);
-			if (tileEntity instanceof IInventory)
+			if(tileEntity instanceof IInventory)
 			{
 				iInventory = (IInventory)tileEntity;
-				if (iInventory instanceof TileEntityChest && block instanceof BlockChest)
+				if(iInventory instanceof TileEntityChest && block instanceof BlockChest)
 				{
 					iInventory = ((BlockChest)block).getContainer(worldIn, blockPos, true);
 				}
 			}
 		}
-		if (iInventory == null)
+		if(iInventory == null)
 		{
 			List<Entity> list = worldIn.getEntitiesInAABBexcluding((Entity)null, 
 					new AxisAlignedBB(x - 0.5D, y - 0.5D, z - 0.5D, x + 0.5D, y + 0.5D, z + 0.5D), 
 					EntitySelectors.HAS_INVENTORY);
-			if (!list.isEmpty())
+			if(!list.isEmpty())
 			{
 				iInventory = (IInventory)list.get(worldIn.rand.nextInt(list.size()));
 			}

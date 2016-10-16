@@ -330,6 +330,9 @@ achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to 
 achievement.craftGoldIngot=Craft Gold Ingot
 achievement.craftGoldIngot.desc=Toss 8x Iron Ingot into the Altar Tier 3 and right-click with a Stick Wand in hand
 
+achievement.blockAbsorber=Block Absorber
+achievement.blockAbsorber.desc=Take Blaze Wand in right hand and 1x Glass in left hand. Shift-right-click the Hopper. On top of the Hopper it will create a TileEntity that will absorb any Block which it detect on it's position and transport this Block to Hopper if possible.
+
 achievement.buildAltarTier4=Build Altar Tier 4
 achievement.buildAltarTier4.desc=Add 1 block of Redstone on each corner of Altar Tier 3 but one layer lower than Cauldron and replace the Cauldron
 

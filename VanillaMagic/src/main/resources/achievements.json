@@ -785,6 +785,19 @@
 	"wandTier":1
 },
 {
+	"questClass":"seia.vanillamagic.tileentity.blockabsorber.QuestBlockAbsorber",
+	"requiredQuest":"craftGoldIngot",
+	"posX":2,
+	"posY":0,
+	"icon":
+	{
+		"just_to_know_what_it_is":"item_hopper",
+		"id":154
+	},
+	"questName":"Block Absorber",
+	"uniqueName":"blockAbsorber"
+},
+{
 	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
 	"requiredQuest":"buildAltarTier3",
 	"posX":0,
