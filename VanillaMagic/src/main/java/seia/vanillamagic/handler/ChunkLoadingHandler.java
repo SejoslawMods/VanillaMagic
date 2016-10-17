@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.OrderedLoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 
 public class ChunkLoadingHandler implements OrderedLoadingCallback
@@ -22,19 +23,19 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posY = modData.getInteger("y");
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
-//			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
-//			if(customTile != null)
-//			{
-//				((ICustomTileEntity) customTile).forceChunkLoading(ticket);
-//			}
-//			else
-//			{
-				TileEntity tile = world.getTileEntity(pos);
-				if(tile instanceof CustomTileEntity)
-				{
-					((CustomTileEntity) tile).forceChunkLoading(ticket);
-				}
-//			}
+			TileEntity tile = world.getTileEntity(pos);
+			if(tile instanceof CustomTileEntity)
+			{
+				((CustomTileEntity) tile).forceChunkLoading(ticket);
+			}
+			else if(tile instanceof ICustomTileEntity)
+			{
+				/*
+				 * If it reaches here it means that it's not a VanillaMagic custom Tile 
+				 * but a custom Tile from different mod which use custom Tile API
+				 */
+				((ICustomTileEntity) tile).forceChunkLoading(ticket);
+			}
 		}
 	}
 	
@@ -48,19 +49,18 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posY = modData.getInteger("y");
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
-//			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
-//			if(customTile != null)
-//			{
-//				validTickets.add(ticket);
-//			}
-//			else
-//			{
-				TileEntity tile = world.getTileEntity(pos);
-				if(tile instanceof CustomTileEntity)
-				{
-					validTickets.add(ticket);
-				}
-//			}
+			TileEntity tile = world.getTileEntity(pos);
+			if(tile instanceof CustomTileEntity)
+			{
+				validTickets.add(ticket);
+			}
+			else if(tile instanceof ICustomTileEntity)
+			{
+				/*
+				 * Same as in method above.
+				 */
+				validTickets.add(ticket);
+			}
 		}
 		return validTickets;
 	}
