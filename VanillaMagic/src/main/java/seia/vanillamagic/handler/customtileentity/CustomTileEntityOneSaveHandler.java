@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -84,19 +82,19 @@ public class CustomTileEntityOneSaveHandler
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
 		int dimID = WorldHelper.getDimensionID(world);
-		Set<Entry<Integer, List<ICustomTileEntity>>> entrySet = loadedTileEntities.entrySet();
-		if(entrySet.size() > 0) // should be 3 (Dims: -1, 0, 1, and more)
-		{
-			for(Entry<Integer, List<ICustomTileEntity>> entry : entrySet)
-			{
-				if(entry.getKey().intValue() == dimID)
-				{
+//		Set<Entry<Integer, List<ICustomTileEntity>>> entrySet = loadedTileEntities.entrySet();
+//		if(entrySet.size() > 0) // should be 3 (Dims: -1, 0, 1, and more)
+//		{
+//			for(Entry<Integer, List<ICustomTileEntity>> entry : entrySet)
+//			{
+//				if(entry.getKey().intValue() == dimID)
+//				{
 					return removeCustomTileEntityAtPos(world, pos, dimID);
-				}
-			}
-			BlockPosHelper.printCoords(Level.WARN, "Didn't found the TileEntity at pos:", pos);
-		}
-		return false;
+//				}
+//			}
+//			BlockPosHelper.printCoords(Level.WARN, "Didn't found the TileEntity at pos:", pos);
+//		}
+//		return false;
 	}
 	
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
@@ -116,12 +114,13 @@ public class CustomTileEntityOneSaveHandler
 			if(BlockPosHelper.isSameBlockPos(tileInDim.getTileEntity().getPos(), pos))
 			{
 				BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + tileInDim.getClass().getSimpleName() + ") at:", pos);
-				tilesInDimension.remove(i);
+				// tilesInDimension.remove(i);
 				for(int j = 0; j < world.tickableTileEntities.size(); j++)
 				{
 					if(BlockPosHelper.isSameBlockPos(world.tickableTileEntities.get(j).getPos(), tileInDim.getTileEntity().getPos()))
 					{
 						world.tickableTileEntities.remove(j);
+						tilesInDimension.remove(i);
 						return true;
 					}
 				}

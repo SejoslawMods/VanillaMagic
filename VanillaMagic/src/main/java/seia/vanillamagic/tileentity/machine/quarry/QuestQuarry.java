@@ -65,7 +65,7 @@ public class QuestQuarry extends QuestMachineActivate
 			{
 				return;
 			}
-			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, quarryPos, player.dimension))
+			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, quarryPos))
 			{
 				EntityHelper.addChatComponentMessage(player, quarryTile.getClass().getSimpleName() + " removed");
 			}

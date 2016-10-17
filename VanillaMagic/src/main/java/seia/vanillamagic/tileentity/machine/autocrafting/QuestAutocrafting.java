@@ -81,7 +81,7 @@ public class QuestAutocrafting extends Quest
 				{
 					return;
 				}
-				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, player.dimension))
+				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos))
 				{
 					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
 				}

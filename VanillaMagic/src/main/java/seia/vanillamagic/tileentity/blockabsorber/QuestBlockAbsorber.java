@@ -109,7 +109,7 @@ public class QuestBlockAbsorber extends Quest
 			{
 				return;
 			}
-			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, customTilePos, WorldHelper.getDimensionID(world)))
+			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, customTilePos))
 			{
 				EntityHelper.addChatComponentMessage(event.getPlayer(), customTile.getClass().getSimpleName() + " removed");
 			}

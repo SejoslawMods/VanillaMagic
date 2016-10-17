@@ -59,7 +59,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 				{
 					return;
 				}
-				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos, player.dimension))
+				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos))
 				{
 					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
 				}

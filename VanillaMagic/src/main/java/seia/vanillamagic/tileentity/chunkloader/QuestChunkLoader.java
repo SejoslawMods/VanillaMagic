@@ -11,8 +11,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public class QuestChunkLoader extends Quest
 {
@@ -41,7 +44,10 @@ public class QuestChunkLoader extends Quest
 					if(placedBy.hasAchievement(achievement))
 					{
 						tileChunkLoader.init(placedBy, chunkLoaderPos);
-						CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension);
+						if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension))
+						{
+							EntityHelper.addChatComponentMessage(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");
+						}
 					}
 				}
 			}
@@ -56,7 +62,7 @@ public class QuestChunkLoader extends Quest
 		World world = breakBy.worldObj;
 		if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE))
 		{
-			CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, destroyedBlockPos, breakBy.dimension);
+			remove(world, destroyedBlockPos, breakBy);
 		}
 		else if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.TORCH))
 		{
@@ -65,7 +71,7 @@ public class QuestChunkLoader extends Quest
 				BlockPos chunkLoaderPos = destroyedBlockPos.offset(face);
 				if(Block.isEqualTo(world.getBlockState(chunkLoaderPos).getBlock(), Blocks.ENCHANTING_TABLE))
 				{
-					CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, destroyedBlockPos, breakBy.dimension);
+					remove(world, destroyedBlockPos.offset(face), breakBy);
 					return;
 				}
 			}
@@ -74,6 +80,19 @@ public class QuestChunkLoader extends Quest
 		{
 			BlockPos upperPos = new BlockPos(destroyedBlockPos.getX(), destroyedBlockPos.getY() + 1, destroyedBlockPos.getZ());
 			chunkLoaderBreak(new BreakEvent(event.getWorld(), upperPos, event.getState(), event.getPlayer()));
+		}
+	}
+	
+	private void remove(World world, BlockPos pos, EntityPlayer player)
+	{
+		ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
+		if(customTile == null)
+		{
+			return;
+		}
+		if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, pos))
+		{
+			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
 		}
 	}
 	

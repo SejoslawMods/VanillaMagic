@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.OrderedLoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.tileentity.CustomTileEntity;
+import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 
 public class ChunkLoadingHandler implements OrderedLoadingCallback
 {
@@ -23,9 +23,9 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity te = world.getTileEntity(pos);
-			if(te instanceof CustomTileEntity)
+			if(te instanceof ICustomTileEntity)
 			{
-				((CustomTileEntity) te).forceChunkLoading(ticket);
+				((ICustomTileEntity) te).forceChunkLoading(ticket);
 			}
 		}
 	}
@@ -41,7 +41,7 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity te = world.getTileEntity(pos);
-			if(te instanceof CustomTileEntity)
+			if(te instanceof ICustomTileEntity)
 			{
 				validTickets.add(ticket);
 			}

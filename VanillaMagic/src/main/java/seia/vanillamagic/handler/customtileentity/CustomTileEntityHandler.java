@@ -12,8 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
-import seia.vanillamagic.event.EventCustomTile.EventAddCustomTile;
-import seia.vanillamagic.event.EventCustomTile.EventRemoveCustomTile;
 import seia.vanillamagic.handler.WorldHandler;
 
 public class CustomTileEntityHandler 
@@ -39,14 +37,6 @@ public class CustomTileEntityHandler
 	
 	public boolean addCustomTileEntity(ICustomTileEntity customTileEntity, int dimensionID)
 	{
-		try
-		{
-			EventAddCustomTile event = new EventAddCustomTile(customTileEntity, dimensionID);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 		String rootDir = getRootDir();
 		if(!saveHandlers.containsKey(rootDir))
 		{
@@ -55,16 +45,22 @@ public class CustomTileEntityHandler
 		return saveHandlers.get(rootDir).addCustomTileEntity(customTileEntity, dimensionID);
 	}
 	
+	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos)
+	{
+		String rootDir = getRootDir();
+		if(saveHandlers.containsKey(rootDir))
+		{
+			return saveHandlers.get(rootDir).removeCustomTileEntityAtPos(world, pos);
+		}
+		return false;
+	}
+	
+	/**
+	 * @see CustomTileEntityHandler#removeCustomTileEntityAtPos(World, BlockPos)
+	 */
+	@Deprecated
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
-		try
-		{
-			EventRemoveCustomTile event = new EventRemoveCustomTile(world, pos, dimension);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 		String rootDir = getRootDir();
 		if(saveHandlers.containsKey(rootDir))
 		{
