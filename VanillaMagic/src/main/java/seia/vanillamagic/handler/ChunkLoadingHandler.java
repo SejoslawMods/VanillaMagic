@@ -9,10 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.OrderedLoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.api.tileentity.ICustomTileEntity;
-import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.WorldHelper;
 
 public class ChunkLoadingHandler implements OrderedLoadingCallback
 {
@@ -25,19 +22,19 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posY = modData.getInteger("y");
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
-			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
-			if(customTile != null)
-			{
-				((ICustomTileEntity) customTile).forceChunkLoading(ticket);
-			}
-			else
-			{
+//			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
+//			if(customTile != null)
+//			{
+//				((ICustomTileEntity) customTile).forceChunkLoading(ticket);
+//			}
+//			else
+//			{
 				TileEntity tile = world.getTileEntity(pos);
 				if(tile instanceof CustomTileEntity)
 				{
 					((CustomTileEntity) tile).forceChunkLoading(ticket);
 				}
-			}
+//			}
 		}
 	}
 	
@@ -51,19 +48,19 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posY = modData.getInteger("y");
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
-			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
-			if(customTile != null)
-			{
-				validTickets.add(ticket);
-			}
-			else
-			{
+//			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
+//			if(customTile != null)
+//			{
+//				validTickets.add(ticket);
+//			}
+//			else
+//			{
 				TileEntity tile = world.getTileEntity(pos);
 				if(tile instanceof CustomTileEntity)
 				{
 					validTickets.add(ticket);
 				}
-			}
+//			}
 		}
 		return validTickets;
 	}
