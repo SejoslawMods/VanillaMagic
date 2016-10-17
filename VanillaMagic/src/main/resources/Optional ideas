@@ -4,7 +4,8 @@ General ideas not yet started to be implemented:
     One Inventory -> Input
     Second Inventory -> Output
     Transfer items from Input to Output
-    TileEntityInventoryBridge -> holds information about second TEIB
+    TileInventoryBridge -> holds information about second TIB
+    If Inventory contains Item Filter transfer only items after Filter that match the filter.
     
 3 - Dragon Breath Spell
 
@@ -16,7 +17,7 @@ General ideas not yet started to be implemented:
 
 9 - Item Filter. Paper with NBT TagList.
     TagList will contains the names of the Items / Blocks 
-    that can be transfered or absorbed by InventoryBridge or Absorber.
+    that can be transfered by InventoryBridge.
     Crafted in Cauldron. Paper in left hand and Stick in right hand. 
     Shift-right-click the Cauldron with items inside will save items names on filter 
     and rename the Paper to Item Filter.
