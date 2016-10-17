@@ -13,3 +13,13 @@ General ideas not yet started to be implemented:
 6 - Breeder
 
 7 - PluginJEI ???
+
+9 - Item Filter. Paper with NBT TagList.
+    TagList will contains the names of the Items / Blocks 
+    that can be transfered or absorbed by InventoryBridge or Absorber.
+    Crafted in Cauldron. Paper in left hand and Stick in right hand. 
+    Shift-right-click the Cauldron with items inside will save items names on filter 
+    and rename the Paper to Item Filter.
+    OR
+    Save the filter to JSON file with unique ID. ???
+    Reading the names from list -> Shift-right-click Air with only Item Filter in left hand.
