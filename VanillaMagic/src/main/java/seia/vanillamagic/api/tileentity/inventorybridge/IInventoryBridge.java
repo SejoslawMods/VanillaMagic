@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
@@ -39,10 +38,10 @@ public interface IInventoryBridge extends ICustomTileEntity
 	/**
 	 * @see #setPositionFromSelector(EntityPlayer)
 	 */
-	public void setPositionFromSelector(InventoryPlayer invPlayer, World world) throws NotInventoryException;
+	public void setPositionFromSelector(InventoryPlayer invPlayer) throws NotInventoryException;
 	
 	/**
 	 * @see #setPositionFromSelector(EntityPlayer)
 	 */
-	public void setPositionFromSelector(ItemStack[] mainInventory, World world) throws NotInventoryException;
+	public void setPositionFromSelector(ItemStack[] mainInventory) throws NotInventoryException;
 }

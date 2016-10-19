@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
@@ -51,15 +52,15 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	 */
 	public void setPositionFromSelector(EntityPlayer player) throws NotInventoryException 
 	{
-		setPositionFromSelector(player.inventory, player.worldObj);
+		setPositionFromSelector(player.inventory);
 	}
 	
-	public void setPositionFromSelector(InventoryPlayer invPlayer, World world) throws NotInventoryException 
+	public void setPositionFromSelector(InventoryPlayer invPlayer) throws NotInventoryException 
 	{
-		setPositionFromSelector(invPlayer.mainInventory, world);
+		setPositionFromSelector(invPlayer.mainInventory);
 	}
 	
-	public void setPositionFromSelector(ItemStack[] mainInventory, World world) throws NotInventoryException 
+	public void setPositionFromSelector(ItemStack[] mainInventory) throws NotInventoryException 
 	{
 		for(ItemStack currentCheckingStack : mainInventory)
 		{
@@ -69,6 +70,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 				if(currentCheckingStackTag != null)
 				{
 					BlockPos savedPosition = NBTHelper.getBlockPosDataFromNBT(currentCheckingStackTag);
+					World world = DimensionManager.getWorld(NBTHelper.getDimensionFromNBT(currentCheckingStackTag));
 					inputInvWrapper = new InventoryWrapper(world, savedPosition);
 				}
 			}

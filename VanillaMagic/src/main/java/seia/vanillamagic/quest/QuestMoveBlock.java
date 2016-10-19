@@ -130,7 +130,7 @@ public class QuestMoveBlock extends Quest
 			int meta = wantedBlock.getMetaFromState(world.getBlockState(wantedBlockPos));
 			questTag.setInteger(NBTHelper.NBT_BLOCK_ID, blockID);
 			questTag.setInteger(NBTHelper.NBT_BLOCK_META, meta);
-			questTag = NBTHelper.setBlockPosDataToNBT(wantedBlockPos, questTag);
+			questTag = NBTHelper.setBlockPosDataToNBT(questTag, wantedBlockPos, world);
 			stackOffHand.setStackDisplayName("Saved block: " + wantedBlock.getLocalizedName());
 			TileEntity tileEntity = world.getTileEntity(wantedBlockPos);
 			if(tileEntity != null)

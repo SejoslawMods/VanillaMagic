@@ -87,7 +87,12 @@ public class NBTHelper
 		return null;
 	}
 	
-	public static NBTTagCompound setBlockPosDataToNBT(NBTTagCompound nbt, BlockPos pos)
+	public static int getDimensionFromNBT(NBTTagCompound nbt)
+	{
+		return nbt.getInteger(NBT_DIMENSION);
+	}
+	
+	public static NBTTagCompound setBlockPosDataToNBT(NBTTagCompound nbt, BlockPos pos, World world)
 	{
 		if(nbt == null)
 		{
@@ -100,6 +105,7 @@ public class NBTHelper
 		nbt.setInteger(NBT_POSX, pos.getX());
 		nbt.setInteger(NBT_POSY, pos.getY());
 		nbt.setInteger(NBT_POSZ, pos.getZ());
+		nbt.setInteger(NBT_DIMENSION, WorldHelper.getDimensionID(world));
 		return nbt;
 	}
 

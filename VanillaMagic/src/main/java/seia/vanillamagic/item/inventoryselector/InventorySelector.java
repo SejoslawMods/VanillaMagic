@@ -16,6 +16,7 @@ import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public class InventorySelector
 {
@@ -59,10 +60,10 @@ public class InventorySelector
 				return;
 			}
 			NBTTagCompound rightHandTagOld = rightHand.getTagCompound();
-			NBTTagCompound rightHandTagNew = NBTHelper.setBlockPosDataToNBT(rightHandTagOld, clickedPos);
+			NBTTagCompound rightHandTagNew = NBTHelper.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world);
 			rightHand.setTagCompound(rightHandTagNew);
 			EntityHelper.addChatComponentMessage(player, "Registered Inventory at: X=" + clickedPos.getX() + 
-					", Y=" + clickedPos.getY() + ", Z=" + clickedPos.getZ());
+					", Y=" + clickedPos.getY() + ", Z=" + clickedPos.getZ() + ", Dim=" + WorldHelper.getDimensionID(world));
 		}
 	}
 	
@@ -104,7 +105,7 @@ public class InventorySelector
 					return;
 				}
 				EntityHelper.addChatComponentMessage(player, "Saved position: X=" + savedPos.getX() + 
-						", Y=" + savedPos.getY() + ", Z=" + savedPos.getZ());
+						", Y=" + savedPos.getY() + ", Z=" + savedPos.getZ() + ", Dim=" + WorldHelper.getDimensionID(world));
 			}
 		}
 	}
