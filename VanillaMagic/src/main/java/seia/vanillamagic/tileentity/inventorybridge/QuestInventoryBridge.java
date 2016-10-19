@@ -75,6 +75,7 @@ public class QuestInventoryBridge extends Quest
 			{
 				TileInventoryBridge tile = new TileInventoryBridge();
 				tile.init(player, clickedPos.offset(EnumFacing.UP));
+				tile.setWorld(world);
 				try
 				{
 					tile.setPositionFromSelector(player);
@@ -82,6 +83,7 @@ public class QuestInventoryBridge extends Quest
 				catch(NotInventoryException e)
 				{
 					e.printStackTrace();
+					System.out.println(e.position.toString());
 				}
 				try 
 				{
