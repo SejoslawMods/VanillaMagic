@@ -1,11 +1,6 @@
 General ideas not yet started to be implemented:
     
-2 - Bridge between 2 IInventorys
-    One Inventory -> Input
-    Second Inventory -> Output
-    Transfer items from Input to Output
-    TileInventoryBridge -> holds information about second TIB
-    If Inventory contains Item Filter transfer only items after Filter that match the filter.
+2 - If Inventory contains Item Filter transfer only items after Filter that match the filter.
     
 3 - Dragon Breath Spell
 

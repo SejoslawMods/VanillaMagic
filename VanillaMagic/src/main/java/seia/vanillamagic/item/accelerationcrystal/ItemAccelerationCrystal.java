@@ -25,6 +25,6 @@ public class ItemAccelerationCrystal implements ICustomItem
 		stack.setStackDisplayName("Acceleration Crystal");
 		NBTTagCompound stackTag = stack.getTagCompound();
 		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		return stack.copy();
+		return stack;
 	}
 }

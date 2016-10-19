@@ -1255,6 +1255,19 @@
 	"tier":6
 },
 {
+	"questClass":"seia.vanillamagic.tileentity.inventorybridge.QuestInventoryBridge",
+	"requiredQuest":"buildAltarTier6",
+	"posX":-2,
+	"posY":1,
+	"icon":
+	{
+		"it_is":"vanilla_chest",
+		"id":54
+	},
+	"questName":"Inventory Bridge",
+	"uniqueName":"inventoryBridge"
+},
+{
 	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
 	"requiredQuest":"buildAltarTier6",
 	"posX":2,

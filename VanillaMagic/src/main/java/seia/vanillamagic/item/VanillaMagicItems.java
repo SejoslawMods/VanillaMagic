@@ -12,6 +12,7 @@ import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.api.item.IVanillaMagicItems;
 import seia.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
+import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
 import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
@@ -36,6 +37,7 @@ public class VanillaMagicItems implements IVanillaMagicItems
 	public final ICustomItem itemAccelerationCrystal;
 	public final ICustomItem itemLiquidSuppressionCrystal;
 	public final ICustomItem itemMotherNatureCrystal;
+	public final ICustomItem itemInventorySelector;
 	
 	private VanillaMagicItems()
 	{
@@ -51,6 +53,9 @@ public class VanillaMagicItems implements IVanillaMagicItems
 		
 		itemMotherNatureCrystal = new ItemMotherNatureCrystal();
 		customItems.add(itemMotherNatureCrystal);
+		
+		itemInventorySelector = new ItemInventorySelector();
+		customItems.add(itemInventorySelector);
 	}
 	
 	public void addCustomItem(ICustomItem item)
@@ -112,33 +117,33 @@ public class VanillaMagicItems implements IVanillaMagicItems
 		return false;
 	}
 	
-	public List<ItemStack> getCustomItemsStacks() 
-	{
-		List<ItemStack> stacks = new ArrayList<ItemStack>();
-		for(ICustomItem ci : customItems)
-		{
-			stacks.add(ci.getItem());
-		}
-		return stacks;
-	}
-
-	public List<ItemStack> getEnchantedBucketsStacks() 
-	{
-		List<ItemStack> stacks = new ArrayList<ItemStack>();
-		for(IEnchantedBucket eb : enchantedBuckets)
-		{
-			stacks.add(eb.getItem());
-		}
-		return stacks;
-	}
-	
-	public List<ItemStack> getPotionedCrystalsStacks() 
-	{
-		List<ItemStack> stacks = new ArrayList<ItemStack>();
-		for(IPotionedCrystal pc : potionedCrystals)
-		{
-			stacks.add(pc.getItem());
-		}
-		return stacks;
-	}
+//	public List<ItemStack> getCustomItemsStacks() 
+//	{
+//		List<ItemStack> stacks = new ArrayList<ItemStack>();
+//		for(ICustomItem ci : customItems)
+//		{
+//			stacks.add(ci.getItem());
+//		}
+//		return stacks;
+//	}
+//
+//	public List<ItemStack> getEnchantedBucketsStacks() 
+//	{
+//		List<ItemStack> stacks = new ArrayList<ItemStack>();
+//		for(IEnchantedBucket eb : enchantedBuckets)
+//		{
+//			stacks.add(eb.getItem());
+//		}
+//		return stacks;
+//	}
+//	
+//	public List<ItemStack> getPotionedCrystalsStacks() 
+//	{
+//		List<ItemStack> stacks = new ArrayList<ItemStack>();
+//		for(IPotionedCrystal pc : potionedCrystals)
+//		{
+//			stacks.add(pc.getItem());
+//		}
+//		return stacks;
+//	}
 }

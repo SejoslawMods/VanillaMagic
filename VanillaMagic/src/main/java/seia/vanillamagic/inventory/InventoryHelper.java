@@ -5,9 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -15,16 +13,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.VanillaInventoryCodeHooks;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 
@@ -32,6 +25,11 @@ public class InventoryHelper
 {
 	private InventoryHelper()
 	{
+	}
+	
+	public static boolean isInventory(World world, BlockPos pos) 
+	{
+		return world.getTileEntity(pos) instanceof IInventory;
 	}
 	
 	public static void dropInventoryItems(World worldIn, BlockPos pos, IInventory inventory)
@@ -148,54 +146,56 @@ public class InventoryHelper
 
 	public static boolean captureDroppedItems(IHopper hopper)
 	{
-		Boolean ret = VanillaInventoryCodeHooks.extractHook(hopper);
-		if(ret != null)
-		{
-			return ret;
-		}
-		IInventory iInventory = getHopperInventory(hopper);
-		if(iInventory != null)
-		{
-			EnumFacing facing = EnumFacing.DOWN;
-			if(isInventoryEmpty(iInventory, facing))
-			{
-				return false;
-			}
-			if(iInventory instanceof ISidedInventory)
-			{
-				ISidedInventory iSidedInventory = (ISidedInventory)iInventory;
-				int[] slots = iSidedInventory.getSlotsForFace(facing);
-				for(int i : slots)
-				{
-					if(pullItemFromSlot(hopper, iInventory, i, facing))
-					{
-						return true;
-					}
-				}
-			}
-			else
-			{
-				int size = iInventory.getSizeInventory();
-				for(int k = 0; k < size; ++k)
-				{
-					if(pullItemFromSlot(hopper, iInventory, k, facing))
-					{
-						return true;
-					}
-				}
-			}
-		}
-		else
-		{
-			for(EntityItem entityItem : getCaptureItems(hopper.getWorld(), hopper.getXPos(), hopper.getYPos(), hopper.getZPos()))
-			{
-				if(putDropInInventoryAllSlots(hopper, entityItem))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
+		return TileEntityHopper.captureDroppedItems(hopper);
+		
+//		Boolean ret = VanillaInventoryCodeHooks.extractHook(hopper);
+//		if(ret != null)
+//		{
+//			return ret;
+//		}
+//		IInventory iInventory = getHopperInventory(hopper);
+//		if(iInventory != null)
+//		{
+//			EnumFacing facing = EnumFacing.DOWN;
+//			if(isInventoryEmpty(iInventory, facing))
+//			{
+//				return false;
+//			}
+//			if(iInventory instanceof ISidedInventory)
+//			{
+//				ISidedInventory iSidedInventory = (ISidedInventory)iInventory;
+//				int[] slots = iSidedInventory.getSlotsForFace(facing);
+//				for(int i : slots)
+//				{
+//					if(pullItemFromSlot(hopper, iInventory, i, facing))
+//					{
+//						return true;
+//					}
+//				}
+//			}
+//			else
+//			{
+//				int size = iInventory.getSizeInventory();
+//				for(int k = 0; k < size; ++k)
+//				{
+//					if(pullItemFromSlot(hopper, iInventory, k, facing))
+//					{
+//						return true;
+//					}
+//				}
+//			}
+//		}
+//		else
+//		{
+//			for(EntityItem entityItem : getCaptureItems(hopper.getWorld(), hopper.getXPos(), hopper.getYPos(), hopper.getZPos()))
+//			{
+//				if(putDropInInventoryAllSlots(hopper, entityItem))
+//				{
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
 	}
 
 	/**
@@ -225,26 +225,28 @@ public class InventoryHelper
 	 */
 	public static boolean putDropInInventoryAllSlots(IInventory inventoryIn, EntityItem itemIn)
 	{
-		boolean flag = false;
-		if(itemIn == null)
-		{
-			return false;
-		}
-		else
-		{
-			ItemStack stack = itemIn.getEntityItem().copy();
-			ItemStack leftItems = putStackInInventoryAllSlots(inventoryIn, stack, (EnumFacing)null);
-			if(leftItems != null && leftItems.stackSize != 0)
-			{
-				itemIn.setEntityItemStack(leftItems);
-			}
-			else
-			{
-				flag = true;
-				itemIn.setDead();
-			}
-			return flag;
-		}
+		return TileEntityHopper.putDropInInventoryAllSlots(inventoryIn, itemIn);
+		
+//		boolean flag = false;
+//		if(itemIn == null)
+//		{
+//			return false;
+//		}
+//		else
+//		{
+//			ItemStack stack = itemIn.getEntityItem().copy();
+//			ItemStack leftItems = putStackInInventoryAllSlots(inventoryIn, stack, (EnumFacing)null);
+//			if(leftItems != null && leftItems.stackSize != 0)
+//			{
+//				itemIn.setEntityItemStack(leftItems);
+//			}
+//			else
+//			{
+//				flag = true;
+//				itemIn.setDead();
+//			}
+//			return flag;
+//		}
 	}
 
 	/**
@@ -253,29 +255,31 @@ public class InventoryHelper
 	@Nullable
 	public static ItemStack putStackInInventoryAllSlots(IInventory inventoryIn, ItemStack stack, @Nullable EnumFacing side)
 	{
-		if(inventoryIn instanceof ISidedInventory && side != null)
-		{
-			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
-			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for(int k = 0; k < slots.length && stack != null && stack.stackSize > 0; ++k)
-			{
-				stack = insertStack(inventoryIn, stack, slots[k], side);
-			}
-		}
-		else
-		{
-			int size = inventoryIn.getSizeInventory();
-			for(int j = 0; j < size && stack != null && stack.stackSize > 0; ++j)
-			{
-				stack = insertStack(inventoryIn, stack, j, side);
-			}
-		}
+		return TileEntityHopper.putStackInInventoryAllSlots(inventoryIn, stack, side);
 		
-		if(stack != null && stack.stackSize == 0)
-		{
-			stack = null;
-		}
-		return stack;
+//		if(inventoryIn instanceof ISidedInventory && side != null)
+//		{
+//			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
+//			int[] slots = iSidedInventory.getSlotsForFace(side);
+//			for(int k = 0; k < slots.length && stack != null && stack.stackSize > 0; ++k)
+//			{
+//				stack = insertStack(inventoryIn, stack, slots[k], side);
+//			}
+//		}
+//		else
+//		{
+//			int size = inventoryIn.getSizeInventory();
+//			for(int j = 0; j < size && stack != null && stack.stackSize > 0; ++j)
+//			{
+//				stack = insertStack(inventoryIn, stack, j, side);
+//			}
+//		}
+//		
+//		if(stack != null && stack.stackSize == 0)
+//		{
+//			stack = null;
+//		}
+//		return stack;
 	}
 
 	/**
@@ -361,9 +365,11 @@ public class InventoryHelper
 	@Nullable
 	public static List<EntityItem> getCaptureItems(World worldIn, double x, double y, double z)
 	{
-		return worldIn.<EntityItem>getEntitiesWithinAABB(EntityItem.class, 
-				new AxisAlignedBB(x - 0.5D, y, z - 0.5D, x + 0.5D, y + 1.5D, z + 0.5D), 
-				EntitySelectors.IS_ALIVE);
+		return TileEntityHopper.getCaptureItems(worldIn, x, y, z);
+		
+//		return worldIn.<EntityItem>getEntitiesWithinAABB(EntityItem.class, 
+//				new AxisAlignedBB(x - 0.5D, y, z - 0.5D, x + 0.5D, y + 1.5D, z + 0.5D), 
+//				EntitySelectors.IS_ALIVE);
 	}
     
 	@Nullable
@@ -378,35 +384,37 @@ public class InventoryHelper
 	@Nullable
 	public static IInventory getInventoryAtPosition(World worldIn, double x, double y, double z)
 	{
-		IInventory iInventory = null;
-		int i = MathHelper.floor_double(x);
-		int j = MathHelper.floor_double(y);
-		int k = MathHelper.floor_double(z);
-		BlockPos blockPos = new BlockPos(i, j, k);
-		Block block = worldIn.getBlockState(blockPos).getBlock();
-		if(block.hasTileEntity())
-		{
-			TileEntity tileEntity = worldIn.getTileEntity(blockPos);
-			if(tileEntity instanceof IInventory)
-			{
-				iInventory = (IInventory)tileEntity;
-				if(iInventory instanceof TileEntityChest && block instanceof BlockChest)
-				{
-					iInventory = ((BlockChest)block).getContainer(worldIn, blockPos, true);
-				}
-			}
-		}
-		if(iInventory == null)
-		{
-			List<Entity> list = worldIn.getEntitiesInAABBexcluding((Entity)null, 
-					new AxisAlignedBB(x - 0.5D, y - 0.5D, z - 0.5D, x + 0.5D, y + 0.5D, z + 0.5D), 
-					EntitySelectors.HAS_INVENTORY);
-			if(!list.isEmpty())
-			{
-				iInventory = (IInventory)list.get(worldIn.rand.nextInt(list.size()));
-			}
-		}
-		return iInventory;
+		return TileEntityHopper.getInventoryAtPosition(worldIn, x, y, z);
+		
+//		IInventory iInventory = null;
+//		int i = MathHelper.floor_double(x);
+//		int j = MathHelper.floor_double(y);
+//		int k = MathHelper.floor_double(z);
+//		BlockPos blockPos = new BlockPos(i, j, k);
+//		Block block = worldIn.getBlockState(blockPos).getBlock();
+//		if(block.hasTileEntity())
+//		{
+//			TileEntity tileEntity = worldIn.getTileEntity(blockPos);
+//			if(tileEntity instanceof IInventory)
+//			{
+//				iInventory = (IInventory)tileEntity;
+//				if(iInventory instanceof TileEntityChest && block instanceof BlockChest)
+//				{
+//					iInventory = ((BlockChest)block).getContainer(worldIn, blockPos, true);
+//				}
+//			}
+//		}
+//		if(iInventory == null)
+//		{
+//			List<Entity> list = worldIn.getEntitiesInAABBexcluding((Entity)null, 
+//					new AxisAlignedBB(x - 0.5D, y - 0.5D, z - 0.5D, x + 0.5D, y + 0.5D, z + 0.5D), 
+//					EntitySelectors.HAS_INVENTORY);
+//			if(!list.isEmpty())
+//			{
+//				iInventory = (IInventory)list.get(worldIn.rand.nextInt(list.size()));
+//			}
+//		}
+//		return iInventory;
 	}
 
 	public static boolean canCombine(ItemStack stack1, ItemStack stack2)

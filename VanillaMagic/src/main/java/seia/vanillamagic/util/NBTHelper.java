@@ -73,18 +73,6 @@ public class NBTHelper
 		String blockName = getBlockNameFromNBT(nbt);
 		return Block.getBlockFromName(blockName);
 	}
-	
-	public static NBTTagCompound setBlockPosDataToNBT(BlockPos pos, NBTTagCompound nbt)
-	{
-		if(nbt == null)
-		{
-			nbt = new NBTTagCompound();
-		}
-		nbt.setInteger(NBTHelper.NBT_POSX, pos.getX());
-		nbt.setInteger(NBTHelper.NBT_POSY, pos.getY());
-		nbt.setInteger(NBTHelper.NBT_POSZ, pos.getZ());
-		return nbt;
-	}
 
 	@Nullable
 	public static BlockPos getBlockPosDataFromNBT(NBTTagCompound nbt)
@@ -97,6 +85,22 @@ public class NBTHelper
 			return new BlockPos(posX, posY, posZ);
 		}
 		return null;
+	}
+	
+	public static NBTTagCompound setBlockPosDataToNBT(NBTTagCompound nbt, BlockPos pos)
+	{
+		if(nbt == null)
+		{
+			nbt = new NBTTagCompound();
+		}
+		if(pos == null)
+		{
+			return nbt;
+		}
+		nbt.setInteger(NBT_POSX, pos.getX());
+		nbt.setInteger(NBT_POSY, pos.getY());
+		nbt.setInteger(NBT_POSZ, pos.getZ());
+		return nbt;
 	}
 
 	@Nullable

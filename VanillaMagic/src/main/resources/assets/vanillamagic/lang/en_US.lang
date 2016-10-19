@@ -402,6 +402,9 @@ achievement.accelerationCrystal.desc=Craft it with Nether Star in the middle and
 achievement.buildAltarTier6=Build Altar Tier 6
 achievement.buildAltarTier6.desc=Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron
 
+achievement.inventoryBridge=Inventory Bridge
+achievement.inventoryBridge.desc=Save Inventory position into Inventory Selector and hold that item somewhere in main inventory. Hold Blaze Rod in right hand and 1x Stained Glass in left hand and Shift-Right-Click the inventory to place the end of the bridge. Items will be transfered from Inventory Selector's saved inventory to new clicked inventory.
+
 achievement.craftDiamond=Craft Diamond
 achievement.craftDiamond.desc=Toss 8x Gold Ingot into the Altar Tier 6 and right-click with a Blaze Wand in hand
 

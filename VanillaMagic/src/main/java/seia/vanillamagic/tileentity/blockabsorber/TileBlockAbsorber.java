@@ -1,5 +1,9 @@
 package seia.vanillamagic.tileentity.blockabsorber;
 
+import java.lang.reflect.Method;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -77,5 +81,24 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 	public TileEntityHopper getConnectedHopper()
 	{
 		return connectedHopper;
+	}
+	
+	/**
+	 * Returns NULL if there is no inventory for Hopper to transfer into.
+	 */
+	@Nullable
+	public IInventory getInventoryForHopperTransfer()
+	{
+		try
+		{
+			Method thisMethod = getConnectedHopper().getClass().getMethod("getInventoryForHopperTransfer");
+			thisMethod.setAccessible(true);
+			return (IInventory) thisMethod.invoke(getConnectedHopper());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

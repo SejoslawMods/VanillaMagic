@@ -113,7 +113,6 @@ public class CustomTileEntityOneSaveHandler
 			ICustomTileEntity tileInDim = tilesInDimension.get(i);
 			if(BlockPosHelper.isSameBlockPos(tileInDim.getTileEntity().getPos(), pos))
 			{
-				BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + tileInDim.getClass().getSimpleName() + ") at:", pos);
 				// tilesInDimension.remove(i);
 				for(int j = 0; j < world.tickableTileEntities.size(); j++)
 				{
@@ -121,6 +120,7 @@ public class CustomTileEntityOneSaveHandler
 					{
 						world.tickableTileEntities.remove(j);
 						tilesInDimension.remove(i);
+						BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + tileInDim.getClass().getSimpleName() + ") at:", pos);
 						return true;
 					}
 				}

@@ -20,6 +20,7 @@ import seia.vanillamagic.integration.VanillaMagicIntegration;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.book.BookRegistry;
 import seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper;
+import seia.vanillamagic.item.inventoryselector.InventorySelector;
 import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry;
 import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.quest.QuestList;
@@ -58,6 +59,7 @@ public class VanillaMagic
 			QuestHandler.INSTANCE.registerEvent(QuestList.get(i));
 		}
 		LOGGER.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
+		InventorySelector.preInit();
 		VanillaMagicDebug.INSTANCE.preInit();
 		TileEntityRegistry.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());

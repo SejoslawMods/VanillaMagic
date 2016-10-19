@@ -28,6 +28,6 @@ public class ItemMotherNatureCrystal implements ICustomItem
 		stack.setStackDisplayName("The Crystal of Mother Nature");
 		NBTTagCompound stackTag = stack.getTagCompound();
 		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		return stack.copy();
+		return stack;
 	}
 }

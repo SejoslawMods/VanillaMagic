@@ -204,6 +204,17 @@ public class BookOther implements IBook
 										)));
 					}
 				}
+				// Item Selector
+				pages.appendTag(new NBTTagString(
+						BookRegistry.COLOR_HEADER + 
+						"Inventory Selector" + 
+						TextHelper.getEnters(2) + 
+						"§0" +
+						"Crafting (shapeless): 1x Blaze Rod + 1x Chest" + ENTER +
+						"Right-Click on Block = Save position" + ENTER +
+						"Right-Click on Air = Show saved position" + ENTER +
+						"Shift-Right-Click on Air = Clear saved position"
+						));
 			}
 			data.setTag("pages", pages);
 			data.setString("author", BookRegistry.AUTHOR);
