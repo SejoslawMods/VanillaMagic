@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.item.liquidsuppressioncrystal.TileLiquidSuppression;
 import seia.vanillamagic.tileentity.blockabsorber.TileBlockAbsorber;
 import seia.vanillamagic.tileentity.chunkloader.TileChunkLoader;
+import seia.vanillamagic.tileentity.inventorybridge.TileInventoryBridge;
 import seia.vanillamagic.tileentity.machine.autocrafting.TileAutocrafting;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 import seia.vanillamagic.tileentity.machine.quarry.TileQuarry;
@@ -31,6 +32,7 @@ public class TileEntityRegistry
 		register(TileSpeedy.class, TileSpeedy.REGISTRY_NAME);
 		register(TileLiquidSuppression.class, TileLiquidSuppression.REGISTRY_NAME);
 		register(TileBlockAbsorber.class, TileBlockAbsorber.REGISTRY_NAME);
+		register(TileInventoryBridge.class, TileInventoryBridge.REGISTRY_NAME);
 	}
 	
 	private static void register(Class<? extends TileEntity> tileEntityClass, String id)
