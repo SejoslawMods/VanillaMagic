@@ -172,7 +172,7 @@ public class WorldHandler
 			List<ICustomTileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
 			for(int j = 0; j < tickables.size(); j++)
 			{
-				dataList.appendTag(tickables.get(j).writeToNBT(new NBTTagCompound()));
+				dataList.appendTag(tickables.get(j).getTileEntity().writeToNBT(new NBTTagCompound()));
 			}
 			data.setTag(TILES, dataList);
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);

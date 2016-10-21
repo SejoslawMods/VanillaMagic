@@ -33,15 +33,8 @@ public class VanillaMagicDebug
 	
 	private VanillaMagicDebug()
 	{
-//		try
-//		{
-			MinecraftForge.EVENT_BUS.register(this);
-			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug registered");
-//		}
-//		catch(Exception e)
-//		{
-//			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug not registered");
-//		}
+		MinecraftForge.EVENT_BUS.register(this);
+		VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug registered");
 	}
 	
 	public void preInit()
@@ -101,6 +94,10 @@ public class VanillaMagicDebug
 			// show info
 			BlockPos tilePos = event.getPos();
 			ICustomTileEntity tile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(tilePos, WorldHelper.getDimensionID(player));
+			if(tile == null)
+			{
+				return;
+			}
 			if(tile.getTileEntity() instanceof IAdditionalInfoProvider)
 			{
 				List<String> info = ((IAdditionalInfoProvider) tile.getTileEntity()).getAdditionalInfo();

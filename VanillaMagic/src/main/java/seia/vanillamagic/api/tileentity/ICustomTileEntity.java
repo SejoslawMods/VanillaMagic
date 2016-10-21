@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.INBTSerializable;
 import seia.vanillamagic.api.util.IAdditionalInfoProvider;
-import seia.vanillamagic.api.world.IWorldWrapper;
 
 /**
  * This is the base definition for CustomTileEntity.<br>
@@ -19,7 +18,7 @@ import seia.vanillamagic.api.world.IWorldWrapper;
  */
 public interface ICustomTileEntity extends 
 		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, 
-		IWorldWrapper, ITileEntityNBT, ITileEntityWrapper
+		ITileEntityWrapper
 {
 	/**
 	 * This initialization is used when Player place a {@link TileEntity} for the first time.

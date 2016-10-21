@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 public interface ITileEntityWrapper 
 {
 	/**
-	 * Returns TileEntity to which this interface is implemented into.
+	 * Returns {@link TileEntity} to which this interface is implemented into.
 	 */
 	TileEntity getTileEntity();
 }

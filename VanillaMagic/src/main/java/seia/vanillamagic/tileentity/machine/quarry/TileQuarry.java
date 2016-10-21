@@ -175,7 +175,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(diamondFacing);
 		diamondBlocks = 0;
-		IBlockState checkingBlock = this.getWorld().getBlockState(cauldronPos);
+		IBlockState checkingBlock = worldObj.getBlockState(cauldronPos);
 		while((Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK)) // quarry resizing is not an actual upgrade, it's easier to count it here
 				|| (QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock())))
 		{
@@ -188,7 +188,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 				upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock());
 			}
 			cauldronPos = cauldronPos.offset(diamondFacing);
-			checkingBlock = this.getWorld().getBlockState(cauldronPos);
+			checkingBlock = worldObj.getBlockState(cauldronPos);
 		}
 		upgradeHelper.modifyQuarry(this);
 		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
@@ -241,12 +241,12 @@ public class TileQuarry extends TileMachine implements IQuarry
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(redstoneFacing);
 		redstoneBlocks = 0;
-		IBlockState checkingBlock = this.getWorld().getBlockState(cauldronPos);
+		IBlockState checkingBlock = worldObj.getBlockState(cauldronPos);
 		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.REDSTONE_BLOCK))
 		{
 			redstoneBlocks++;
 			cauldronPos = cauldronPos.offset(redstoneFacing);
-			checkingBlock = this.getWorld().getBlockState(cauldronPos);
+			checkingBlock = worldObj.getBlockState(cauldronPos);
 		}
 	}
 	
