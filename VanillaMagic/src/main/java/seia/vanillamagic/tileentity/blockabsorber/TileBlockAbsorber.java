@@ -61,6 +61,10 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 		// If it's not an Inventory than it must be a Block
 		// For normal Block
 		ItemStack thisBlock = new ItemStack(thisState.getBlock());
+		if(thisBlock.getItem() == null)
+		{
+			return;
+		}
 		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
 		if(leftItems == null)
 		{
