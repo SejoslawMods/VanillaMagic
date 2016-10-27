@@ -18,18 +18,18 @@ public class EntityMeteor extends EntityLargeFireball
 			double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ,
 			double accelX, double accelY, double accelZ) 
 	{
-		super(castingEntity.worldObj,
-				spawnMeteorX, spawnMeteorY, spawnMeteorZ,
-				0, accelY, 0);
+		super(castingEntity.worldObj);
+		setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
+        setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
 		setSize(BASIC_METEOR_SIZE, BASIC_METEOR_SIZE);
 		explosionPower = BASIC_METEOR_EXPLOSION_POWER;
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
 		shootingEntity = castingEntity;
-		double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+		double accel = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
 		this.accelerationX = 0;
-		this.accelerationY = accelY / d0 * 0.1D;
+		this.accelerationY = accelY / accel * 0.1D;
 		this.accelerationZ = 0;
 	}
 	
