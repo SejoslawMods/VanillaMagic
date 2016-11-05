@@ -1,8 +1,7 @@
 package seia.vanillamagic.tileentity.machine.farm;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +31,7 @@ public enum Fertilizer
 		}
 	},
 
-	BONEMEAL(new ItemStack(Items.DYE, 1, 15)) 
+	BONEMEAL(new ItemStack(Items.DYE, 1, 15))
 	{
 		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
 		{
@@ -113,17 +112,17 @@ public enum Fertilizer
 	private Fertilizer(ItemStack stack) 
 	{
 		this.stack = stack == null || stack.getItem() == null ? null : stack;
-		if (this.stack != null) 
-		{
-			//FarmStationContainer.slotItemsFertilizer.add(this.stack);
-		}
+//		if(this.stack != null) 
+//		{
+//			FarmStationContainer.slotItemsFertilizer.add(this.stack);
+//		}
 	}
 
-	private static final List<Fertilizer> validFertilizers = Lists.newArrayList();
+	private static final List<Fertilizer> validFertilizers = new ArrayList();
 	
 	static 
 	{
-		for (Fertilizer f : values()) 
+		for(Fertilizer f : values()) 
 		{
 			if(f.stack != null) 
 			{
@@ -139,7 +138,7 @@ public enum Fertilizer
 	 */
 	public static Fertilizer getInstance(ItemStack stack) 
 	{
-		for (Fertilizer fertilizer : validFertilizers) 
+		for(Fertilizer fertilizer : validFertilizers) 
 		{
 			if(fertilizer.matches(stack)) 
 			{

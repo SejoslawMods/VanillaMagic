@@ -33,7 +33,7 @@ public class FarmerCustomSeed implements IFarmer
 	public boolean ignoreSustainCheck = false;
 	public boolean checkGroundForFarmland = false;
 	public boolean disableTreeFarm;
-	public List<ItemStack> seedList = new ArrayList<ItemStack>();
+//	public List<ItemStack> seedList = new ArrayList<ItemStack>();
 
 	public FarmerCustomSeed(Block plantedBlock, ItemStack seeds)
 	{
@@ -53,16 +53,16 @@ public class FarmerCustomSeed implements IFarmer
 		this.seeds = seeds;
 		addTilledBlock(Blocks.FARMLAND);
 		
-		seedList.add(new ItemStack(Items.WHEAT_SEEDS));
-		seedList.add(new ItemStack(Items.CARROT));
-		seedList.add(new ItemStack(Items.POTATO));
-		seedList.add(new ItemStack(Blocks.RED_MUSHROOM));
-		seedList.add(new ItemStack(Blocks.BROWN_MUSHROOM));
-		seedList.add(new ItemStack(Items.NETHER_WART));
-		seedList.add(new ItemStack(Blocks.SAPLING));
-		seedList.add(new ItemStack(Items.REEDS));
-		seedList.add(new ItemStack(Items.MELON_SEEDS));
-		seedList.add(new ItemStack(Items.PUMPKIN_SEEDS));
+//		seedList.add(new ItemStack(Items.WHEAT_SEEDS));
+//		seedList.add(new ItemStack(Items.CARROT));
+//		seedList.add(new ItemStack(Items.POTATO));
+//		seedList.add(new ItemStack(Blocks.RED_MUSHROOM));
+//		seedList.add(new ItemStack(Blocks.BROWN_MUSHROOM));
+//		seedList.add(new ItemStack(Items.NETHER_WART));
+//		seedList.add(new ItemStack(Blocks.SAPLING));
+//		seedList.add(new ItemStack(Items.REEDS));
+//		seedList.add(new ItemStack(Items.MELON_SEEDS));
+//		seedList.add(new ItemStack(Items.PUMPKIN_SEEDS));
 	}
 	  
 	public void clearTilledBlocks() 
@@ -132,7 +132,7 @@ public class FarmerCustomSeed implements IFarmer
 	
 	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
-		if (!farm.isOpen(pos)) 
+		if(!farm.isOpen(pos)) 
 		{
 			return false;
 		}
@@ -167,7 +167,7 @@ public class FarmerCustomSeed implements IFarmer
 	protected boolean plantFromInventory(TileFarm farm, BlockPos pos) 
 	{
 		World worldObj = farm.getWorld();
-		if (canPlant(farm, worldObj, pos) && farm.takeSeedFromSupplies(getSeeds(), pos) != null) 
+		if(canPlant(farm, worldObj, pos) && farm.takeSeedFromSupplies(getSeeds(), pos) != null) 
 		{
 			return plant(farm, worldObj, pos);
 		}
@@ -195,15 +195,15 @@ public class FarmerCustomSeed implements IFarmer
 		boolean removed = false;
 		if(drops != null) 
 		{
-			for (ItemStack stack : drops) 
+			for(ItemStack stack : drops) 
 			{
-				if (worldObj.rand.nextFloat() <= chance) 
+				if(worldObj.rand.nextFloat() <= chance) 
 				{
-					if (!removed && stack.isItemEqual(getSeeds())) 
+					if(!removed && stack.isItemEqual(getSeeds())) 
 					{
 						stack.stackSize--;
 						removed = true;
-						if (stack.stackSize > 0) 
+						if(stack.stackSize > 0) 
 						{
 							result.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy()));
 						}
@@ -216,10 +216,10 @@ public class FarmerCustomSeed implements IFarmer
 			}
 		}
 		ItemStack[] inv = fakePlayer.inventory.mainInventory;
-		for (int slot = 0; slot < inv.length; slot++) 
+		for(int slot = 0; slot < inv.length; slot++) 
 		{
 			ItemStack stack = inv[slot];
-			if (stack != null) 
+			if(stack != null) 
 			{
 				inv[slot] = null;
 				EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);

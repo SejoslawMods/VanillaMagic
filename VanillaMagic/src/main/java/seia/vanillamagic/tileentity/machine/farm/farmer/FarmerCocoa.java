@@ -33,12 +33,12 @@ public class FarmerCocoa extends FarmerCustomSeed
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos) 
 	{
 		EnumFacing dir = getPlantDirection(worldObj, pos);
-		if (dir == null) 
+		if(dir == null) 
 		{
 			return false;
 		}
 		IBlockState iBlockState = getPlantedBlock().getDefaultState().withProperty(FACING, dir);
-		if (worldObj.setBlockState(pos, iBlockState, 1 | 2)) 
+		if(worldObj.setBlockState(pos, iBlockState, 1 | 2)) 
 		{
 			return true;
 		}
@@ -61,7 +61,7 @@ public class FarmerCocoa extends FarmerCustomSeed
 		for(EnumFacing dir : EnumFacing.HORIZONTALS) 
 		{
 			BlockPos p = pos.offset(dir);
-			if (validBlock(worldObj.getBlockState(p)))
+			if(validBlock(worldObj.getBlockState(p)))
 			{
 				return dir;
 			}

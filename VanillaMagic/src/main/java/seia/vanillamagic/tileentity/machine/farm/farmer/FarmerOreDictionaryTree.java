@@ -12,12 +12,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 
-public class FarmerOreDictionary extends FarmerTree
+public class FarmerOreDictionaryTree extends FarmerTree
 {
 	protected List<ItemStack> saplings;
 	protected List<ItemStack> woodBlocks;
 	
-	public FarmerOreDictionary(List<ItemStack> saplings, List<ItemStack> woods) 
+	public FarmerOreDictionaryTree(List<ItemStack> saplings, List<ItemStack> woods) 
 	{
 	    super(null);
 	    this.saplings = saplings;
@@ -36,7 +36,7 @@ public class FarmerOreDictionary extends FarmerTree
 	
 	public boolean prepareBlock(TileFarm farm, BlockPos bc, Block block, IBlockState meta) 
 	{
-		if (saplings.contains(block)) 
+		if(saplings.contains(block)) 
 		{
 			return true;
 		}
@@ -47,7 +47,7 @@ public class FarmerOreDictionary extends FarmerTree
 	{
 		World worldObj = farm.getWorld();
 		final ItemStack sapling = farm.getSeedTypeInSuppliesFor(bc);
-		if (canPlant(worldObj, bc, sapling)) 
+		if(canPlant(worldObj, bc, sapling)) 
 		{
 			ItemStack seed = farm.takeSeedFromSupplies(sapling, bc, false);
 			if(seed != null) 
@@ -60,7 +60,7 @@ public class FarmerOreDictionary extends FarmerTree
 
 	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack sapling) 
 	{
-		if (!saplings.contains(sapling)) 
+		if(!saplings.contains(sapling)) 
 		{
 			return false;
 		}
@@ -68,13 +68,13 @@ public class FarmerOreDictionary extends FarmerTree
 		IBlockState bs = worldObj.getBlockState(grnPos);
 		Block ground = bs.getBlock();
 		Block saplingBlock = Block.getBlockFromItem(sapling.getItem());
-		if (saplingBlock == null) 
+		if(saplingBlock == null) 
 		{
 			return false;
 		}
-		if (saplingBlock.canPlaceBlockAt(worldObj, bc)) 
+		if(saplingBlock.canPlaceBlockAt(worldObj, bc)) 
 		{
-			if (saplingBlock instanceof IPlantable) 
+			if(saplingBlock instanceof IPlantable) 
 			{
 				return ground.canSustainPlant(bs, worldObj, grnPos, EnumFacing.UP, (IPlantable) saplingBlock);
 			}

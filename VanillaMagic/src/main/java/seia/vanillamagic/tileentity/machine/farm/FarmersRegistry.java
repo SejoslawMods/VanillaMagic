@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine.farm.farmer;
+package seia.vanillamagic.tileentity.machine.farm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +14,41 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.oredict.OreDictionary;
-import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
-import seia.vanillamagic.tileentity.machine.farm.TileFarm;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerCocoa;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerCustomSeed;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerFlowerPicker;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerMelon;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerNetherWart;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerOreDictionaryTree;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerPickable;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerPlantable;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerStem;
+import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerTree;
+import seia.vanillamagic.tileentity.machine.farm.farmer.IFarmer;
 
-public class Farmers implements IFarmer
+public class FarmersRegistry implements IFarmer
 {
-	public static final Farmers INSTANCE = new Farmers();
+	public static final FarmersRegistry INSTANCE = new FarmersRegistry();
 	
 	//====================================================================
 	
 	private List<IFarmer> farmers;
+	private List<ItemStack> saplings = OreDictionary.getOres("treeSapling");
+	private List<ItemStack> woods = OreDictionary.getOres("logWood");
+	private List<ItemStack> flowers = new ArrayList<ItemStack>();
 	
-	public final FarmerPlantable DEFAULT_FARMER;
+	public final FarmerPlantable DEFAULT_FARMER = new FarmerPlantable();
 	
-	private Farmers()
+	private FarmersRegistry()
 	{
+		flowers.add(new ItemStack(Blocks.YELLOW_FLOWER));
+		flowers.add(new ItemStack(Blocks.RED_FLOWER));
+		
 		farmers = new ArrayList<IFarmer>();
+		farmers.add(new FarmerFlowerPicker(flowers));
 		farmers.add(new FarmerStem(Blocks.REEDS, new ItemStack(Items.REEDS)));
 	    farmers.add(new FarmerStem(Blocks.CACTUS, new ItemStack(Blocks.CACTUS)));
-	    farmers.add(new FarmerOreDictionary(OreDictionary.getOres("treeSapling"), OreDictionary.getOres("logWood")));
+	    farmers.add(new FarmerOreDictionaryTree(saplings, woods));
 	    farmers.add(new FarmerTree(true, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK));
 	    farmers.add(new FarmerTree(true, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK));
 	    //special case of plantables to get spacing correct
@@ -42,9 +58,7 @@ public class Farmers implements IFarmer
 	    farmers.add(new FarmerNetherWart());
 	    //Cocoa is odd
 	    farmers.add(new FarmerCocoa());
-	    //farmers.add(new FarmerFlowerPicker(FLOWERS)); //TODO: Currently disabled
-	    //Handles all 'vanilla' style crops
-	    DEFAULT_FARMER = new FarmerPlantable();
+	    //Handles all 'Vanilla' style crops
 	    farmers.add(DEFAULT_FARMER);
 	}
 	

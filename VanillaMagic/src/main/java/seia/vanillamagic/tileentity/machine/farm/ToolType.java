@@ -17,6 +17,7 @@ public enum ToolType
 	{
 		boolean match(ItemStack item) 
 		{
+			// return (item.getItem() instanceof ItemAxe);
 			return item.getItem().getHarvestLevel(item, "axe") >= 0;
 		}
 	},
@@ -37,7 +38,7 @@ public enum ToolType
 
 	public final boolean itemMatches(ItemStack item) 
 	{
-		if (item == null) 
+		if(item == null) 
 		{
 			return false;
 		}
@@ -53,9 +54,9 @@ public enum ToolType
 
 	public static boolean isTool(ItemStack stack) 
 	{
-		for (ToolType type : values()) 
+		for(ToolType type : values()) 
 		{
-			if (type.itemMatches(stack)) 
+			if(type.itemMatches(stack)) 
 			{
 				return true;
 			}
@@ -65,9 +66,9 @@ public enum ToolType
 
 	public static ToolType getToolType(ItemStack stack) 
 	{
-		for (ToolType type : values()) 
+		for(ToolType type : values()) 
 		{
-			if (type.itemMatches(stack)) 
+			if(type.itemMatches(stack)) 
 			{
 				return type;
 			}

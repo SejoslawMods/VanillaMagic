@@ -19,8 +19,13 @@ import seia.vanillamagic.tileentity.machine.farm.ToolType;
 
 public class FarmerFlowerPicker implements IFarmer
 {
-	protected List<ItemStack> flowers = new ArrayList<ItemStack>();
+	protected final List<ItemStack> flowers;
 	
+	public FarmerFlowerPicker(List<ItemStack> flowers) 
+	{
+		this.flowers = flowers;
+	}
+
 	public FarmerFlowerPicker add(ItemStack flowers) 
 	{
 		this.flowers.add(flowers);
@@ -47,14 +52,14 @@ public class FarmerFlowerPicker implements IFarmer
 	{
 		World worldObj = farm.getWorld();
 		List<ItemStack> drops = null;
-		if (block instanceof IShearable) 
+		if(block instanceof IShearable) 
 		{
-			if (!farm.hasShears()) 
+			if(!farm.hasShears()) 
 			{
 				return null;
 			}
 			ItemStack shears = farm.getTool(ToolType.SHEARS);
-			if (!((IShearable) block).isShearable(shears, worldObj, pos)) 
+			if(!((IShearable) block).isShearable(shears, worldObj, pos)) 
 			{
 				return null;
 			}
@@ -63,7 +68,7 @@ public class FarmerFlowerPicker implements IFarmer
 		} 
 		else 
 		{
-			if (!farm.hasHoe()) 
+			if(!farm.hasHoe()) 
 			{
 				return null;
 			}
@@ -73,7 +78,7 @@ public class FarmerFlowerPicker implements IFarmer
 		List<EntityItem> result = new ArrayList<EntityItem>();
 		if(drops != null) 
 		{
-			for (ItemStack stack : drops) 
+			for(ItemStack stack : drops) 
 			{
 				result.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy()));
 			}

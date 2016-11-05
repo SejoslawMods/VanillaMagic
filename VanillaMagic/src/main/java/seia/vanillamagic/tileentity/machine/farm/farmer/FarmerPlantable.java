@@ -149,17 +149,17 @@ public class FarmerPlantable implements IFarmer
 		boolean removed = false;
 		if(drops != null) 
 		{
-			for (ItemStack stack : drops) 
+			for(ItemStack stack : drops) 
 			{
-				if (stack != null && stack.stackSize > 0 && worldObj.rand.nextFloat() <= chance) 
+				if(stack != null && stack.stackSize > 0 && worldObj.rand.nextFloat() <= chance) 
 				{
-					if (!removed && isPlantableForBlock(stack, block)) 
+					if(!removed && isPlantableForBlock(stack, block)) 
 					{
 						removed = true;
 						removedPlantable = stack.copy();
 						removedPlantable.stackSize = 1;
 						stack.stackSize--;
-						if (stack.stackSize > 0) 
+						if(stack.stackSize > 0) 
 						{
 							result.add(new EntityItem(worldObj, bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, stack.copy()));
 						}
@@ -172,10 +172,10 @@ public class FarmerPlantable implements IFarmer
 			}
 		}
 		ItemStack[] inv = fakePlayer.inventory.mainInventory;
-		for (int slot = 0; slot < inv.length; slot++) 
+		for(int slot = 0; slot < inv.length; slot++) 
 		{
 			ItemStack stack = inv[slot];
-			if (stack != null) 
+			if(stack != null) 
 			{
 				inv[slot] = null;
 				EntityItem entityitem = new EntityItem(worldObj, bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, stack);

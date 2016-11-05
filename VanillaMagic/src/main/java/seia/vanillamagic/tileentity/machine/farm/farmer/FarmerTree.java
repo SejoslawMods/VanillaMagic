@@ -144,7 +144,7 @@ public class FarmerTree implements IFarmer
 		boolean hasShears = farm.hasShears();
 		int noShearingPercentage = farm.isLowOnSaplings(pos);
 		int shearCount = 0;
-		for (int i = 0; i < res.harvestedBlocks.size() && hasAxe; i++) 
+		for(int i = 0; i < res.harvestedBlocks.size() && hasAxe; i++) 
 		{
 			BlockPos coord = res.harvestedBlocks.get(i);
 			Block blk = farm.getBlock(coord);
@@ -153,7 +153,7 @@ public class FarmerTree implements IFarmer
 			boolean wasAxed = false;
 			boolean wasWood = isWood(blk);
 			float chance = 1.0F;
-			if (blk instanceof IShearable && hasShears && ((shearCount / res.harvestedBlocks.size() + noShearingPercentage) < 100)) 
+			if(blk instanceof IShearable && hasShears && ((shearCount / res.harvestedBlocks.size() + noShearingPercentage) < 100)) 
 			{
 				drops = ((IShearable) blk).onSheared(null, worldObj, coord, 0);
 				wasSheared = true;
@@ -168,25 +168,25 @@ public class FarmerTree implements IFarmer
 			
 			if(drops != null) 
 			{
-				for (ItemStack drop : drops) 
+				for(ItemStack drop : drops) 
 				{
-					if (worldObj.rand.nextFloat() <= chance) 
+					if(worldObj.rand.nextFloat() <= chance) 
 					{
 						res.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
 					}
 				}
 			}
-			if (wasAxed && !wasWood) 
+			if(wasAxed && !wasWood) 
 			{
 				wasAxed = true;
 			}
-	      
+			
 			if(wasAxed) 
 			{
 				farm.damageAxe(blk, new BlockPos(coord));
 				hasAxe = farm.hasAxe();
 			} 
-			else if (wasSheared) 
+			else if(wasSheared) 
 			{
 				farm.damageShears(blk, new BlockPos(coord));
 				hasShears = farm.hasShears();
@@ -195,10 +195,10 @@ public class FarmerTree implements IFarmer
 			actualHarvests.add(coord);
 		}
 		ItemStack[] inv = fakePlayer.inventory.mainInventory;
-		for (int slot = 0; slot < inv.length; slot++) 
+		for(int slot = 0; slot < inv.length; slot++) 
 		{
 			ItemStack stack = inv[slot];
-			if (stack != null) 
+			if(stack != null) 
 			{
 				inv[slot] = null;
 				EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);

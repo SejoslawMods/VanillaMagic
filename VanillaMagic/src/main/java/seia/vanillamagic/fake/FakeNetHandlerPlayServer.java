@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine.farm;
+package seia.vanillamagic.fake;
 
 import javax.annotation.Nullable;
 

@@ -72,7 +72,7 @@ public class FarmerStem extends FarmerCustomSeed
 				{
 					for(ItemStack drop : drops) 
 					{
-						if (worldObj.rand.nextFloat() <= chance) 
+						if(worldObj.rand.nextFloat() <= chance) 
 						{
 							result.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
 						}
@@ -80,10 +80,10 @@ public class FarmerStem extends FarmerCustomSeed
 				}
 				farm.damageHoe(1, new BlockPos(harvestCoord));
 				ItemStack[] inv = fakePlayer.inventory.mainInventory;
-				for (int slot = 0; slot < inv.length; slot++) 
+				for(int slot = 0; slot < inv.length; slot++) 
 				{
 					ItemStack stack = inv[slot];
-					if (stack != null) 
+					if(stack != null) 
 					{
 						inv[slot] = null;
 						EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
@@ -99,7 +99,7 @@ public class FarmerStem extends FarmerCustomSeed
 		while(!done);
 		List<BlockPos> toClear = new ArrayList<BlockPos>(result.getHarvestedBlocks());
 		Collections.sort(toClear, COMP);
-		for (BlockPos coord : toClear) 
+		for(BlockPos coord : toClear) 
 		{
 			farm.getWorld().setBlockToAir(coord);
 		}
@@ -109,7 +109,7 @@ public class FarmerStem extends FarmerCustomSeed
 	protected boolean plantFromInventory(TileFarm farm, BlockPos pos) 
 	{
 		World worldObj = farm.getWorld();
-		if (canPlant(farm, worldObj, pos) && farm.takeSeedFromSupplies(seeds, pos) != null)
+		if(canPlant(farm, worldObj, pos) && farm.takeSeedFromSupplies(seeds, pos) != null)
 		{
 			return plant(farm, worldObj, pos);
 		}
@@ -118,9 +118,9 @@ public class FarmerStem extends FarmerCustomSeed
 
 	private static class HeightCompatator implements Comparator<BlockPos> 
 	{
-		public int compare(BlockPos o1, BlockPos o2) 
+		public int compare(BlockPos pos1, BlockPos pos2) 
 		{
-			return -compare(o1.getY(), o2.getY());
+			return -compare(pos1.getY(), pos2.getY());
 		}
 		
 		public static int compare(int x, int y) 

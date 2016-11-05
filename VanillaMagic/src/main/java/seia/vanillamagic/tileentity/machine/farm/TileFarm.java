@@ -1,8 +1,12 @@
 package seia.vanillamagic.tileentity.machine.farm;
 
+import java.util.UUID;
+
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.Level;
+
+import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,16 +28,17 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
+import seia.vanillamagic.fake.FakePlayerVM;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
-import seia.vanillamagic.tileentity.machine.farm.farmer.Farmers;
 import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.WorldHelper;
 
-// TODO: Fix TileFarm
 public class TileFarm extends TileMachine
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getSimpleName();
+	
+	private static GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
 	public int radius;
 	public BlockPos chestPosInput;
@@ -55,7 +60,9 @@ public class TileFarm extends TileMachine
 		}
 		catch(NotInventoryException e)
 		{
-			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
+			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + 
+					" - error when converting to IInventory at position: " + 
+					e.position.toString());
 		}
 	}
 	
@@ -132,7 +139,8 @@ public class TileFarm extends TileMachine
 			}
 			damageHoe(1, dirtLoc);
 			worldObj.setBlockState(dirtLoc, Blocks.FARMLAND.getDefaultState());
-			worldObj.playSound(dirtLoc.getX() + 0.5F, dirtLoc.getY() + 0.5F, dirtLoc.getZ() + 0.5F, SoundEvents.BLOCK_GRASS_STEP, SoundCategory.BLOCKS,
+			worldObj.playSound(dirtLoc.getX() + 0.5F, dirtLoc.getY() + 0.5F, dirtLoc.getZ() + 0.5F, 
+					SoundEvents.BLOCK_GRASS_STEP, SoundCategory.BLOCKS,
 					(Blocks.FARMLAND.getSoundType().getVolume() + 1.0F) / 2.0F, Blocks.FARMLAND.getSoundType().getPitch() * 0.8F, false);
 			return true;
 		} 
@@ -346,12 +354,13 @@ public class TileFarm extends TileMachine
 		Block block = bs.getBlock();
 		if(farmer == null) 
 		{
-			farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
+			//farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
+			farmer = new FakePlayerVM(worldObj, chestPosInput, FARMER_PROFILE);
 			VanillaMagic.LOGGER.log(Level.INFO, "Added Custom Farmer");
 		}
 		if(isOpen(workingPos)) 
 		{
-			Farmers.INSTANCE.prepareBlock(this, workingPos, block, bs);
+			FarmersRegistry.INSTANCE.prepareBlock(this, workingPos, block, bs);
 			bs = getBlockState(workingPos);
 			block = bs.getBlock();
 		}
@@ -361,7 +370,7 @@ public class TileFarm extends TileMachine
 		}
 		if(!isOpen(workingPos))
 		{
-			IHarvestResult harvest = Farmers.INSTANCE.harvestBlock(this, workingPos, block, bs);
+			IHarvestResult harvest = FarmersRegistry.INSTANCE.harvestBlock(this, workingPos, block, bs);
 			if(harvest != null && harvest.getDrops() != null) 
 			{
 				for(EntityItem ei : harvest.getDrops()) 
@@ -378,23 +387,24 @@ public class TileFarm extends TileMachine
 				return;
 			}
 		}
-		if (hasBonemeal() && bonemealCooldown-- <= 0) 
+		if(hasBonemeal() && bonemealCooldown-- <= 0) 
 		{
 			IInventory inv = getInputInventory().getInventory();
 			for(int i = 0; i < inv.getSizeInventory(); i++)
 			{
-				ItemStack stack = getInputInventory().getInventory().getStackInSlot(i);
+				ItemStack stack = inv.getStackInSlot(i);
 				Fertilizer fertilizer = Fertilizer.getInstance(stack);
-				if ((fertilizer.applyOnPlant() != isOpen(workingPos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(workingPos))) 
+				if((fertilizer.applyOnPlant() != isOpen(workingPos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(workingPos))) 
 				{
 					farmer.inventory.mainInventory[0] = stack;
 					farmer.inventory.currentItem = 0;
 					if(fertilizer.apply(stack, farmer, worldObj, new BlockPos(workingPos))) 
 					{
-						stack = farmer.inventory.mainInventory[0];
-						if(stack != null && stack.stackSize == 0) 
+						//stack = farmer.inventory.mainInventory[0];
+						inv.setInventorySlotContents(i, farmer.inventory.mainInventory[0]);
+						if(inv.getStackInSlot(i) != null && inv.getStackInSlot(i).stackSize == 0)//if(stack != null && stack.stackSize == 0) 
 						{
-							getInputInventory().getInventory().setInventorySlotContents(i, null);
+							inv.setInventorySlotContents(i, null);
 						}
 						bonemealCooldown = 20;
 					} 
@@ -415,17 +425,22 @@ public class TileFarm extends TileMachine
 		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
-			if(Fertilizer.getInstance(inv.getStackInSlot(i)) != Fertilizer.NONE)
+			ItemStack stack = inv.getStackInSlot(i);
+			if(Fertilizer.getInstance(stack) == Fertilizer.BONEMEAL)
 			{
 				return true;
 			}
+//			if(Fertilizer.getInstance(inv.getStackInSlot(i)) != Fertilizer.NONE)
+//			{
+//				return true;
+//			}
 		}
 		return false;
 	}
 
 	private boolean isOutputFull() 
 	{
-		return this.inventoryOutputHasSpace();
+		return !this.inventoryOutputHasSpace();
 	}
 
 	public boolean hasSeed(ItemStack seeds, BlockPos pos) 
@@ -435,6 +450,7 @@ public class TileFarm extends TileMachine
 		return inv != null && inv.stackSize > 1 && inv.isItemEqual(seeds);
 	}
 
+	int farmSaplingReserveAmount = 32;
 	/*
 	 * Returns a fuzzy boolean:
 	 * 
@@ -442,7 +458,6 @@ public class TileFarm extends TileMachine
 	 *  50 - break half the leaves for saplings
 	 *  90 - break 90% of the leaves for saplings
 	 */
-	int farmSaplingReserveAmount = 32;
 	public int isLowOnSaplings(BlockPos pos) 
 	{
 		int slot = getSupplySlotForCoord(pos);
@@ -467,7 +482,7 @@ public class TileFarm extends TileMachine
 		{
 			if(matchMetadata ? inv.isItemEqual(stack) : inv.getItem() == stack.getItem()) 
 			{
-				if (inv.stackSize <= 1) 
+				if(inv.stackSize <= 1) 
 				{
 					return null;
 				}
@@ -509,24 +524,22 @@ public class TileFarm extends TileMachine
 
 	public int getSupplySlotForCoord(BlockPos forBlock) // TODO: Fix TileFarm -> getSupplySlotForCoord
 	{
-		return 0;
-		/*
+		//return 0;
 		int xCoord = getPos().getX();
 		int zCoord = getPos().getZ();
-		if (forBlock.getX() <= xCoord && forBlock.getZ() > zCoord) 
+		if(forBlock.getX() <= xCoord && forBlock.getZ() > zCoord) 
 		{
-			return getMinSupplySlot();
+			return 0;//getMinSupplySlot();
 		} 
-		else if (forBlock.getX() > xCoord && forBlock.getZ() > zCoord - 1) 
+		else if(forBlock.getX() > xCoord && forBlock.getZ() > zCoord - 1) 
 		{
-			return getMinSupplySlot() + 1;
+			return 1;//getMinSupplySlot() + 1;
 		} 
-		else if (forBlock.getX() < xCoord && forBlock.getZ() <= zCoord) 
+		else if(forBlock.getX() < xCoord && forBlock.getZ() <= zCoord) 
 		{
-			return getMinSupplySlot() + 2;
+			return 2;//getMinSupplySlot() + 2;
 		}
-		return getMinSupplySlot() + 3;
-		*/
+		return 3;//getMinSupplySlot() + 3;
 	}
 
 	private void insertHarvestDrop(Entity entity, BlockPos pos) 
@@ -552,23 +565,22 @@ public class TileFarm extends TileMachine
 	{
 		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.DOWN);
 		return left.stackSize;
-		
 		/*
 		int slot = pos != null ? getminSupplySlotForCoord(pos) : minSupplySlot;
 		int[] slots = new int[NUM_SUPPLY_SLOTS];
 		int k = 0;
-		for (int j = slot; j <= maxSupplySlot; j++)
+		for(int j = slot; j <= maxSupplySlot; j++)
 		{
 			slots[k++] = j;
 		}
-		for (int j = minSupplySlot; j < slot; j++) 
+		for(int j = minSupplySlot; j < slot; j++) 
 		{
 			slots[k++] = j;
 		}	    
 		int origSize = stack.stackSize;
 		stack = stack.copy();
 		int inserted = 0;
-		for (int j = 0; j < slots.length && inserted < stack.stackSize; j++) 
+		for(int j = 0; j < slots.length && inserted < stack.stackSize; j++) 
 		{
 			int i = slots[j];
 			ItemStack curStack = inventory[i];
