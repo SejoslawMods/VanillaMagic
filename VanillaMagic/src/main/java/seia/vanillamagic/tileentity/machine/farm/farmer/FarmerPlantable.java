@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -49,16 +50,27 @@ public class FarmerPlantable implements IFarmer
 		{
 			return false;
 		}
-		int slot = farm.getSupplySlotForCoord(bc);
-		ItemStack seedStack = farm.getSeedTypeInSuppliesFor(slot);
+//		int slot = farm.getSupplySlotForCoord(bc); // TODO:
+		ItemStack seedStack = null;//farm.getSeedTypeInSuppliesFor(slot);
+		
+		IInventory inv = farm.getInputInventory().getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack invStack = inv.getStackInSlot(i);
+			if((invStack != null) && (invStack.getItem() instanceof IPlantable))
+			{
+				seedStack = invStack.copy();
+			}
+		}
+		
 		if(seedStack == null) 
 		{
 			return false;
 		}
-		if(!(seedStack.getItem() instanceof IPlantable)) 
-		{
-			return false;
-		}
+//		if(!(seedStack.getItem() instanceof IPlantable)) 
+//		{
+//			return false;
+//		}
 		IPlantable plantable = (IPlantable) seedStack.getItem();
 		EnumPlantType type = plantable.getPlantType(farm.getWorld(), bc);
 		if(type == null) 
@@ -89,7 +101,7 @@ public class FarmerPlantable implements IFarmer
 	protected boolean plantFromInventory(TileFarm farm, BlockPos bc, IPlantable plantable) 
 	{
 		World worldObj = farm.getWorld();
-		if(canPlant(worldObj, bc, plantable) && farm.takeSeedFromSupplies(bc) != null) 
+		if(canPlant(worldObj, bc, plantable) /* && farm.takeSeedFromSupplies(bc) != null */) // TODO:
 		{
 			return plant(farm, worldObj, bc, plantable);
 		}

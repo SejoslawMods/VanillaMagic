@@ -11,6 +11,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.IShearable;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
@@ -39,7 +40,7 @@ public class FarmerFlowerPicker implements IFarmer
 	
 	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
-		return flowers.contains(block) || block instanceof IShearable;
+		return flowers.contains(block) || block instanceof IShearable || block instanceof IPlantable;
 	}
 	
 	public boolean canPlant(ItemStack stack) 
@@ -65,7 +66,20 @@ public class FarmerFlowerPicker implements IFarmer
 			}
 			drops = ((IShearable) block).onSheared(shears, worldObj, pos, farm.getMaxLootingValue());
 			farm.damageShears(block, pos);
-		} 
+		}
+		else if(block instanceof IPlantable) // TODO:
+		{
+			if(!farm.hasShears()) 
+			{
+				return null;
+			}
+			ItemStack shears = farm.getTool(ToolType.SHEARS);
+			drops = new ArrayList();
+			IBlockState flowerState = ((IPlantable) block).getPlant(worldObj, pos);
+			Block flowerBlock = flowerState.getBlock();
+			drops.add(new ItemStack(flowerBlock));
+			farm.damageShears(block, pos);
+		}
 		else 
 		{
 			if(!farm.hasHoe()) 

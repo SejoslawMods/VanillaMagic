@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Level;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -24,7 +25,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
@@ -32,13 +32,11 @@ import seia.vanillamagic.fake.FakePlayerVM;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosHelper;
-import seia.vanillamagic.util.WorldHelper;
 
 public class TileFarm extends TileMachine
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getSimpleName();
-	
-	private static GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
+	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
 	public int radius;
 	public BlockPos chestPosInput;
@@ -49,14 +47,14 @@ public class TileFarm extends TileMachine
 	{
 		super.init(world, machinePos);
 		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
-		this.workingPos = BlockPosHelper.copyPos(startPos);
+		this.workingPos = null;//BlockPosHelper.copyPos(startPos);
 		//this.radius = radius; //this.farmSize = (2 * radius) + 1;
 		this.chestPosInput = this.pos.offset(EnumFacing.UP);
 		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
 		try
 		{
-			this.inventoryInput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.UP));
-			this.inventoryOutput = new InventoryWrapper(worldObj, this.pos.offset(EnumFacing.DOWN));
+			this.inventoryInput = new InventoryWrapper(worldObj, this.chestPosInput);
+			this.inventoryOutput = new InventoryWrapper(worldObj, this.chestPosOutput);
 		}
 		catch(NotInventoryException e)
 		{
@@ -66,15 +64,15 @@ public class TileFarm extends TileMachine
 		}
 	}
 	
-	public BlockPos getInputPos()
-	{
-		return this.getMachinePos().offset(EnumFacing.UP);
-	}
+//	public BlockPos getInputPos()
+//	{
+//		return this.getMachinePos().offset(EnumFacing.UP);
+//	}
 	
-	public BlockPos getOutputPos()
-	{
-		return this.getMachinePos().offset(EnumFacing.DOWN);
-	}
+//	public BlockPos getOutputPos()
+//	{
+//		return this.getMachinePos().offset(EnumFacing.DOWN);
+//	}
 	
 	public boolean checkSurroundings() 
 	{
@@ -82,10 +80,15 @@ public class TileFarm extends TileMachine
 				(this.worldObj.getTileEntity(chestPosOutput) instanceof IInventory);
 	}
 	
+	boolean shouldDecreaseTicks = false;
 	public void doWork() 
 	{
+		shouldDecreaseTicks = false;
 		doTick();
-		decreaseTicks();
+		if(shouldDecreaseTicks)
+		{
+			decreaseTicks();
+		}
 		/*
 		try
 		{
@@ -117,15 +120,15 @@ public class TileFarm extends TileMachine
 		*/
 	}
 	
-	public int getMinSupplySlot()
-	{
-		return 0;
-	}
-	
-	public int getMaxSupplySlot()
-	{
-		return getInputInventory().getInventory().getSizeInventory();
-	}
+//	public int getMinSupplySlot()
+//	{
+//		return 0;
+//	}
+//	
+//	public int getMaxSupplySlot()
+//	{
+//		return getInputInventory().getInventory().getSizeInventory();
+//	}
 	
 	public boolean tillBlock(BlockPos plantingLocation) 
 	{
@@ -321,14 +324,14 @@ public class TileFarm extends TileMachine
 		return block.isAir(bs, worldObj, pos) || block.isReplaceable(worldObj, pos);
 	}
 	  
-	protected boolean isMachineItemValidForSlot(int slot, ItemStack stack) 
-	{
-		if(stack == null) 
-		{
-			return false;
-		}
-		return true;
-	}
+//	protected boolean isMachineItemValidForSlot(int slot, ItemStack stack) 
+//	{
+//		if(stack == null) 
+//		{
+//			return false;
+//		}
+//		return true;
+//	}
 	  
 	protected boolean checkProgress(boolean redstoneChecksPassed) 
 	{
@@ -341,15 +344,16 @@ public class TileFarm extends TileMachine
 
 	protected void doTick()
 	{
-		int infiniteLoop = 20;
-		while(workingPos == null || workingPos.equals(getPos()) || !worldObj.isBlockLoaded(workingPos)) 
-		{
-			if(infiniteLoop-- <= 0) 
-			{
-				return;
-			}
-			workingPos = getNextCoord();
-		}
+//		int infiniteLoop = 20;
+//		while(workingPos == null || workingPos.equals(getPos()) || !worldObj.isBlockLoaded(workingPos)) 
+//		{
+//			if(infiniteLoop-- <= 0) 
+//			{
+//				return;
+//			}
+//			workingPos = getNextCoord();
+//		}
+		workingPos = getNextCoord();
 		IBlockState bs = getBlockState(workingPos);
 		Block block = bs.getBlock();
 		if(farmer == null) 
@@ -384,6 +388,7 @@ public class TileFarm extends TileMachine
 						}
 					}
 				}
+				shouldDecreaseTicks = true;
 				return;
 			}
 		}
@@ -445,9 +450,20 @@ public class TileFarm extends TileMachine
 
 	public boolean hasSeed(ItemStack seeds, BlockPos pos) 
 	{
-		int slot = getSupplySlotForCoord(pos);
-		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-		return inv != null && inv.stackSize > 1 && inv.isItemEqual(seeds);
+//		int slot = getSupplySlotForCoord(pos);
+//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
+//		return inv != null && inv.stackSize > 1 && inv.isItemEqual(seeds);
+		
+		IInventory inv = getInputInventory().getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack stack = inv.getStackInSlot(i);
+			if((stack != null) && (stack.stackSize > 1) && (stack.isItemEqual(seeds)))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	int farmSaplingReserveAmount = 32;
@@ -460,9 +476,27 @@ public class TileFarm extends TileMachine
 	 */
 	public int isLowOnSaplings(BlockPos pos) 
 	{
-		int slot = getSupplySlotForCoord(pos);
-		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-		return 90 * (farmSaplingReserveAmount - (inv == null ? 0 : inv.stackSize)) / farmSaplingReserveAmount;
+//		int slot = getSupplySlotForCoord(pos);
+//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
+//		return 90 * (farmSaplingReserveAmount - (inv == null ? 0 : inv.stackSize)) / farmSaplingReserveAmount;
+		
+		IInventory inv = getInputInventory().getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack stack = inv.getStackInSlot(i);
+			if(stack != null)
+			{
+				Block blockSapling = Block.getBlockFromItem(stack.getItem());
+				if(blockSapling != null)
+				{
+					if(blockSapling instanceof BlockSapling)
+					{
+						return 90 * (farmSaplingReserveAmount - (stack == null ? 0 : stack.stackSize)) / farmSaplingReserveAmount;
+					}
+				}
+			}
+		}
+		return 0;
 	}
 
 	public ItemStack takeSeedFromSupplies(ItemStack stack, BlockPos forBlock) 
@@ -476,71 +510,102 @@ public class TileFarm extends TileMachine
 		{
 			return null;
 		}
-		int slot = getSupplySlotForCoord(forBlock);
-		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-		if(inv != null) 
+		
+		IInventory inv = getInputInventory().getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
-			if(matchMetadata ? inv.isItemEqual(stack) : inv.getItem() == stack.getItem()) 
+			ItemStack invStack = inv.getStackInSlot(i);
+			if(stack != null)
 			{
-				if(inv.stackSize <= 1) 
+				if(matchMetadata ? invStack.isItemEqual(stack) : invStack.getItem() == stack.getItem())
 				{
-					return null;
+					if(stack.stackSize > 1)
+					{
+						ItemStack result = stack.copy();
+						result.stackSize = 1;
+						stack = stack.copy();
+						stack.stackSize--;
+						if(stack.stackSize == 0)
+						{
+							stack = null;
+						}
+						getInputInventory().getInventory().setInventorySlotContents(i, stack);
+						return result;
+					}
 				}
-				ItemStack result = inv.copy();
-				result.stackSize = 1;
-				inv = inv.copy();
-				inv.stackSize--;
-				if(inv.stackSize == 0) 
-				{
-					inv = null;
-				}
-				getInputInventory().getInventory().setInventorySlotContents(slot, inv);
-				return result;
 			}
 		}
 		return null;
+		
+//		int slot = getSupplySlotForCoord(forBlock);
+//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
+//		if(inv != null) 
+//		{
+//			if(matchMetadata ? inv.isItemEqual(stack) : inv.getItem() == stack.getItem()) 
+//			{
+//				if(inv.stackSize <= 1) 
+//				{
+//					return null;
+//				}
+//				ItemStack result = inv.copy();
+//				result.stackSize = 1;
+//				inv = inv.copy();
+//				inv.stackSize--;
+//				if(inv.stackSize == 0) 
+//				{
+//					inv = null;
+//				}
+//				getInputInventory().getInventory().setInventorySlotContents(slot, inv);
+//				return result;
+//			}
+//		}
+//		return null;
 	}
 
-	public ItemStack takeSeedFromSupplies(BlockPos pos) 
-	{
-		return takeSeedFromSupplies(getSeedTypeInSuppliesFor(pos), pos);
-	}
+//	public ItemStack takeSeedFromSupplies(BlockPos pos) 
+//	{
+//		return takeSeedFromSupplies(getSeedTypeInSuppliesFor(pos), pos);
+//	}
+//
+//	public ItemStack getSeedTypeInSuppliesFor(BlockPos pos) 
+//	{
+//		int slot = getSupplySlotForCoord(pos);
+//		return getSeedTypeInSuppliesFor(slot);
+//	}
+//
+//	public ItemStack getSeedTypeInSuppliesFor(int slot) 
+//	{
+//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
+//		if(inv != null && (inv.stackSize > 1)) 
+//		{
+//			return inv.copy();
+//		}
+//		return null;
+//	}
 
-	public ItemStack getSeedTypeInSuppliesFor(BlockPos pos) 
-	{
-		int slot = getSupplySlotForCoord(pos);
-		return getSeedTypeInSuppliesFor(slot);
-	}
-
-	public ItemStack getSeedTypeInSuppliesFor(int slot) 
-	{
-		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-		if(inv != null && (inv.stackSize > 1)) 
-		{
-			return inv.copy();
-		}
-		return null;
-	}
-
-	public int getSupplySlotForCoord(BlockPos forBlock) // TODO: Fix TileFarm -> getSupplySlotForCoord
-	{
-		//return 0;
-		int xCoord = getPos().getX();
-		int zCoord = getPos().getZ();
-		if(forBlock.getX() <= xCoord && forBlock.getZ() > zCoord) 
-		{
-			return 0;//getMinSupplySlot();
-		} 
-		else if(forBlock.getX() > xCoord && forBlock.getZ() > zCoord - 1) 
-		{
-			return 1;//getMinSupplySlot() + 1;
-		} 
-		else if(forBlock.getX() < xCoord && forBlock.getZ() <= zCoord) 
-		{
-			return 2;//getMinSupplySlot() + 2;
-		}
-		return 3;//getMinSupplySlot() + 3;
-	}
+//	public int getSupplySlotForCoord(BlockPos forBlock) // TODO: Fix TileFarm -> getSupplySlotForCoord
+//	{
+//		//return 0;
+//		int xCoord = getPos().getX();
+//		int zCoord = getPos().getZ();
+//		if(forBlock.getX() <= xCoord && forBlock.getZ() > zCoord) 
+//		{
+//			System.out.println(0);
+//			return 0;//getMinSupplySlot();
+//		} 
+//		else if(forBlock.getX() > xCoord && forBlock.getZ() > zCoord - 1) 
+//		{
+//			System.out.println(1);
+//			return 1;//getMinSupplySlot() + 1;
+//		} 
+//		else if(forBlock.getX() < xCoord && forBlock.getZ() <= zCoord) 
+//		{
+//			System.out.println(2);
+//			return 2;//getMinSupplySlot() + 2;
+//		}
+//		System.out.println(3);
+//		return 3;//getMinSupplySlot() + 3;
+//	}
 
 	private void insertHarvestDrop(Entity entity, BlockPos pos) 
 	{
@@ -630,11 +695,11 @@ public class TileFarm extends TileMachine
 		}
 		int nextX = workingPos.getX() + 1;
 		int nextZ = workingPos.getZ();
-		if (nextX > loc.getX() + size) 
+		if(nextX > loc.getX() + size) 
 		{
 			nextX = loc.getX() - size;
 			nextZ += 1;
-			if (nextZ > loc.getZ() + size) 
+			if(nextZ > loc.getZ() + size) 
 			{
 				nextX = loc.getX() - size;
 				nextZ = loc.getZ() - size;

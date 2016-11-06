@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -46,7 +47,18 @@ public class FarmerOreDictionaryTree extends FarmerTree
 	protected boolean plantFromInventory(TileFarm farm, BlockPos bc, Block block, IBlockState meta) 
 	{
 		World worldObj = farm.getWorld();
-		final ItemStack sapling = farm.getSeedTypeInSuppliesFor(bc);
+		ItemStack sapling = null; //farm.getSeedTypeInSuppliesFor(bc); // TODO:
+		
+		IInventory inv = farm.getInputInventory().getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack invStack = inv.getStackInSlot(i);
+			if((invStack != null) && saplings.contains(invStack))
+			{
+				sapling = invStack.copy();
+			}
+		}
+		
 		if(canPlant(worldObj, bc, sapling)) 
 		{
 			ItemStack seed = farm.takeSeedFromSupplies(sapling, bc, false);

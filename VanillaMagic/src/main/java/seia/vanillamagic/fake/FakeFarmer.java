@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine.farm;
+package seia.vanillamagic.fake;
 
 import java.util.UUID;
 
@@ -17,13 +17,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import seia.vanillamagic.fake.FakeNetHandlerPlayServer;
 
 public class FakeFarmer extends EntityPlayerMP
 {
-	private static final UUID uuid = UUID.fromString("c1ddfd7f-120a-4437-8b64-38660d3ec62c");
-	
-	private static GameProfile DUMMY_PROFILE = new GameProfile(uuid, "[FakeFarmer]");
+	private static final UUID uuid = UUID.fromString("c1ddfd7f-120a-4437-8b64-38660d3ec64c");
+	private static final GameProfile DUMMY_PROFILE = new GameProfile(uuid, "[VMFakeFarmer]");
 	
 	public FakeFarmer(WorldServer world) 
 	{

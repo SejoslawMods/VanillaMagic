@@ -18,7 +18,8 @@ public enum ToolType
 		boolean match(ItemStack item) 
 		{
 			// return (item.getItem() instanceof ItemAxe);
-			return item.getItem().getHarvestLevel(item, "axe") >= 0;
+			// return item.getItem().getHarvestLevel(item, "axe") >= 0;
+			return item.getItem().getHarvestLevel(item, "axe", null, null) >= 0;
 		}
 	},
 	SHEARS  

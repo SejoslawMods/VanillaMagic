@@ -41,8 +41,8 @@ public class FarmerStem extends FarmerCustomSeed
 	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		BlockPos up = pos.offset(EnumFacing.UP);
-		Block upBLock = farm.getWorld().getBlockState(up).getBlock();
-		return upBLock == plantedBlock;
+		Block upBlock = farm.getWorld().getBlockState(up).getBlock();
+		return upBlock == plantedBlock;
 	}
 	  
 	public boolean canPlant(ItemStack stack) 
