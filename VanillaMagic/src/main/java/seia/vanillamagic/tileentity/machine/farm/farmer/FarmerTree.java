@@ -134,7 +134,7 @@ public class FarmerTree implements IFarmer
 			return null;
 		}
 		World worldObj = farm.getWorld();
-		final EntityPlayerMP fakePlayer = farm.getFarmer();
+//		final EntityPlayerMP fakePlayer = farm.getFarmer();
 		final int fortune = farm.getMaxLootingValue();
 		HarvestResult res = new HarvestResult();
 		harvester.harvest(farm, this, pos, res);
@@ -162,7 +162,7 @@ public class FarmerTree implements IFarmer
 			else 
 			{
 				drops = blk.getDrops(worldObj, coord, farm.getBlockState(coord), fortune);
-				chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, coord, farm.getBlockState(coord), fortune, chance, false, fakePlayer);
+				chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, coord, farm.getBlockState(coord), fortune, chance, false, null/*fakePlayer*/);
 				wasAxed = true;
 			}
 			
@@ -194,17 +194,17 @@ public class FarmerTree implements IFarmer
 			farm.getWorld().setBlockToAir(coord);
 			actualHarvests.add(coord);
 		}
-		ItemStack[] inv = fakePlayer.inventory.mainInventory;
-		for(int slot = 0; slot < inv.length; slot++) 
-		{
-			ItemStack stack = inv[slot];
-			if(stack != null) 
-			{
-				inv[slot] = null;
-				EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
-				res.drops.add(entityitem);
-			}
-		}
+//		ItemStack[] inv = fakePlayer.inventory.mainInventory;
+//		for(int slot = 0; slot < inv.length; slot++) 
+//		{
+//			ItemStack stack = inv[slot];
+//			if(stack != null) 
+//			{
+//				inv[slot] = null;
+//				EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+//				res.drops.add(entityitem);
+//			}
+//		}
 		res.harvestedBlocks.clear();
 		res.harvestedBlocks.addAll(actualHarvests);
 		//try replant    

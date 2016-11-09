@@ -98,8 +98,12 @@ public class FarmerOreDictionaryTree extends FarmerTree
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, ItemStack seed) 
 	{    
 		worldObj.setBlockToAir(bc);
-		final Item item = seed.getItem();
+		Item item = seed.getItem();
 		worldObj.setBlockState(bc, Block.getBlockFromItem(item).getStateFromMeta(item.getMetadata(seed.getMetadata())), 1 | 2);
+		if(seed != null)
+		{
+			seed.stackSize--;
+		}
 		return true;
 	}
 }

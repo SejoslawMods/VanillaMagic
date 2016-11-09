@@ -57,7 +57,6 @@ public class FarmerCocoa extends FarmerCustomSeed
 		{
 			return null;
 		}
-
 		for(EnumFacing dir : EnumFacing.HORIZONTALS) 
 		{
 			BlockPos p = pos.offset(dir);

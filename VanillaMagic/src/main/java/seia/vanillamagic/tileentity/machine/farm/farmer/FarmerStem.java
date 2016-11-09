@@ -54,7 +54,7 @@ public class FarmerStem extends FarmerCustomSeed
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		World worldObj = farm.getWorld();
-		final EntityPlayerMP fakePlayer = farm.getFarmer();
+//		final EntityPlayerMP fakePlayer = farm.getFarmer();
 		final int fortune = farm.getMaxLootingValue();
 		HarvestResult result = new HarvestResult();
 		BlockPos harvestCoord = pos;
@@ -67,7 +67,7 @@ public class FarmerStem extends FarmerCustomSeed
 			{
 				result.harvestedBlocks.add(harvestCoord);
 				List<ItemStack> drops = plantedBlock.getDrops(worldObj, harvestCoord, state, fortune);
-				float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, harvestCoord, state, fortune, 1.0F, false, fakePlayer);
+				float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, harvestCoord, state, fortune, 1.0F, false, null/*fakePlayer*/);
 				if(drops != null) 
 				{
 					for(ItemStack drop : drops) 
@@ -79,17 +79,17 @@ public class FarmerStem extends FarmerCustomSeed
 					}
 				}
 				farm.damageHoe(1, new BlockPos(harvestCoord));
-				ItemStack[] inv = fakePlayer.inventory.mainInventory;
-				for(int slot = 0; slot < inv.length; slot++) 
-				{
-					ItemStack stack = inv[slot];
-					if(stack != null) 
-					{
-						inv[slot] = null;
-						EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
-						result.drops.add(entityitem);
-					}
-				}
+//				ItemStack[] inv = fakePlayer.inventory.mainInventory;
+//				for(int slot = 0; slot < inv.length; slot++) 
+//				{
+//					ItemStack stack = inv[slot];
+//					if(stack != null) 
+//					{
+//						inv[slot] = null;
+//						EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+//						result.drops.add(entityitem);
+//					}
+//				}
 			} 
 			else 
 			{
@@ -109,9 +109,10 @@ public class FarmerStem extends FarmerCustomSeed
 	protected boolean plantFromInventory(TileFarm farm, BlockPos pos) 
 	{
 		World worldObj = farm.getWorld();
-		if(canPlant(farm, worldObj, pos) && farm.takeSeedFromSupplies(seeds, pos) != null)
+		ItemStack seed = farm.takeSeedFromSupplies(seeds, pos);
+		if(canPlant(farm, worldObj, pos) && seed != null)
 		{
-			return plant(farm, worldObj, pos);
+			return plant(farm, worldObj, pos, seed);
 		}
 		return false;
 	}

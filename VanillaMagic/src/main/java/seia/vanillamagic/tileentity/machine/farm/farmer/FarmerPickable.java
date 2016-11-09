@@ -46,21 +46,21 @@ public class FarmerPickable extends FarmerCustomSeed
 		{
 			return null;
 		}
-		EntityPlayerMP player = farm.getFarmer();
+		//EntityPlayerMP player = farm.getFarmer();
 		World world = farm.getWorld();        
-		player.interactionManager.processRightClickBlock(player, player.worldObj, null, EnumHand.MAIN_HAND, pos, EnumFacing.DOWN, 0, 0, 0);
+		//player.interactionManager.processRightClickBlock(player, player.worldObj, null, EnumHand.MAIN_HAND, pos, EnumFacing.DOWN, 0, 0, 0);
 		List<EntityItem> drops = new ArrayList<EntityItem>();
-		ItemStack[] inv = player.inventory.mainInventory;
-		for(int slot = 0; slot < inv.length; slot++) 
-		{
-			ItemStack stack = inv[slot];
-			if(stack != null) 
-			{
-				inv[slot] = null;        
-				EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
-				drops.add(entityitem);
-			}
-		}
+//		ItemStack[] inv = player.inventory.mainInventory;
+//		for(int slot = 0; slot < inv.length; slot++) 
+//		{
+//			ItemStack stack = inv[slot];
+//			if(stack != null) 
+//			{
+//				inv[slot] = null;        
+//				EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
+//				drops.add(entityitem);
+//			}
+//		}
 		farm.damageHoe(1, pos);
 		return new HarvestResult(drops, pos);
 	}

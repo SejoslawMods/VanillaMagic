@@ -21,7 +21,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.world.BlockEvent;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
@@ -59,7 +61,7 @@ public class FarmerPlantable implements IFarmer
 			ItemStack invStack = inv.getStackInSlot(i);
 			if((invStack != null) && (invStack.getItem() instanceof IPlantable))
 			{
-				seedStack = invStack.copy();
+				seedStack = invStack;
 			}
 		}
 		
@@ -84,21 +86,21 @@ public class FarmerPlantable implements IFarmer
 			{
 				return false;
 			}
-			return plantFromInventory(farm, bc, plantable);
+			return plantFromInventory(farm, bc, seedStack);
 		}
 		if(type == EnumPlantType.Crop) 
 		{
 			farm.tillBlock(bc);        
-			return plantFromInventory(farm, bc, plantable);
+			return plantFromInventory(farm, bc, seedStack);
 		}
 		if (type == EnumPlantType.Water) 
 		{
-			return plantFromInventory(farm, bc, plantable);
+			return plantFromInventory(farm, bc, seedStack);
 		}
 		return false;
 	}
 
-	protected boolean plantFromInventory(TileFarm farm, BlockPos bc, IPlantable plantable) 
+	protected boolean plantFromInventory(TileFarm farm, BlockPos bc, ItemStack plantable) 
 	{
 		World worldObj = farm.getWorld();
 		if(canPlant(worldObj, bc, plantable) /* && farm.takeSeedFromSupplies(bc) != null */) // TODO:
@@ -108,22 +110,26 @@ public class FarmerPlantable implements IFarmer
 		return false;
 	}
 
-	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, IPlantable plantable) 
+	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, ItemStack plantable) 
 	{
 		worldObj.setBlockState(bc, Blocks.AIR.getDefaultState(), 1 | 2);
-		IBlockState target = plantable.getPlant(null, new BlockPos(0, 0, 0));    
+		IBlockState target = ((IPlantable) plantable.getItem()).getPlant(null, new BlockPos(0, 0, 0));    
 		worldObj.setBlockState(bc, target, 1 | 2);
+		if(plantable != null)
+		{
+			plantable.stackSize--;
+		}
 		return true;
 	}
 
-	protected boolean canPlant(World worldObj, BlockPos bc, IPlantable plantable) 
+	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack plantable) 
 	{
-		IBlockState target = plantable.getPlant(null, new BlockPos(0, 0, 0));
+		IBlockState target = ((IPlantable) plantable.getItem()).getPlant(null, new BlockPos(0, 0, 0));
 		BlockPos groundPos = bc.down();
 		IBlockState groundBS = worldObj.getBlockState(groundPos);
 		Block ground = groundBS.getBlock();
 		if(target != null && target.getBlock().canPlaceBlockAt(worldObj, bc) &&        
-				ground.canSustainPlant(groundBS, worldObj, groundPos, EnumFacing.UP, plantable)) 
+				ground.canSustainPlant(groundBS, worldObj, groundPos, EnumFacing.UP, ((IPlantable) plantable.getItem()))) 
 		{
 			return true;
 		}
@@ -152,11 +158,11 @@ public class FarmerPlantable implements IFarmer
 		}
 		World worldObj = farm.getWorld();
 		List<EntityItem> result = new ArrayList<EntityItem>();
-		final EntityPlayerMP fakePlayer = farm.getFarmer();
+//		final EntityPlayerMP fakePlayer = farm.getFarmer(); // TODO:
 		final int fortune = farm.getMaxLootingValue();
 		ItemStack removedPlantable = null;
 		List<ItemStack> drops = block.getDrops(worldObj, bc, meta, fortune);
-		float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, bc, meta, fortune, 1.0F, false, fakePlayer);
+		float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, bc, meta, fortune, 1.0F, false, null/*fakePlayer*/); // TODO:
 		farm.damageHoe(1, bc);
 		boolean removed = false;
 		if(drops != null) 
@@ -183,20 +189,20 @@ public class FarmerPlantable implements IFarmer
 				}
 			}
 		}
-		ItemStack[] inv = fakePlayer.inventory.mainInventory;
-		for(int slot = 0; slot < inv.length; slot++) 
-		{
-			ItemStack stack = inv[slot];
-			if(stack != null) 
-			{
-				inv[slot] = null;
-				EntityItem entityitem = new EntityItem(worldObj, bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, stack);
-				result.add(entityitem);
-			}
-		}
+//		ItemStack[] inv = fakePlayer.inventory.mainInventory; // TODO:
+//		for(int slot = 0; slot < inv.length; slot++) 
+//		{
+//			ItemStack stack = inv[slot];
+//			if(stack != null) 
+//			{
+//				inv[slot] = null;
+//				EntityItem entityitem = new EntityItem(worldObj, bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, stack);
+//				result.add(entityitem);
+//			}
+//		}
 		if(removed) 
 		{
-			if(!plant(farm, worldObj, bc, (IPlantable) removedPlantable.getItem())) 
+			if(!plant(farm, worldObj, bc, removedPlantable)) 
 			{
 				result.add(new EntityItem(worldObj,bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, removedPlantable.copy()));
 				worldObj.setBlockState(bc, Blocks.AIR.getDefaultState(), 1 | 2);

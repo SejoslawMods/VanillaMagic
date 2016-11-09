@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Level;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -20,6 +21,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -41,7 +43,7 @@ public class TileFarm extends TileMachine
 	public int radius;
 	public BlockPos chestPosInput;
 	public BlockPos chestPosOutput;
-	public EntityPlayerMP farmer;
+//	public EntityPlayerMP farmer;
 	
 	public void init(World world, BlockPos machinePos)
 	{
@@ -248,20 +250,55 @@ public class TileFarm extends TileMachine
 		boolean canDamage = canDamage(tool);
 		if(type == ToolType.AXE) 
 		{
-			tool.getItem().onBlockDestroyed(tool, worldObj, bs, pos, farmer);
+//			tool.getItem().onBlockDestroyed(tool, worldObj, bs, pos, farmer);
+			tool.damageItem(1, null);
 		} 
 		else if(type == ToolType.HOE) 
 		{
-			int origDamage = tool.getItemDamage();
-			tool.getItem().onItemUse(tool, farmer, worldObj, pos, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
-			if(origDamage == tool.getItemDamage() && canDamage) 
+//			int origDamage = tool.getItemDamage();
+//			tool.getItem().onItemUse(tool, farmer, worldObj, pos, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
+//			if(origDamage == tool.getItemDamage() && canDamage) 
+//			{
+//				tool.damageItem(1, farmer);
+//			}
 			{
-				tool.damageItem(1, farmer);
+				IBlockState iblockstate = worldObj.getBlockState(pos);
+	            Block block = iblockstate.getBlock();
+	            if(worldObj.isAirBlock(pos.up()))
+	            {
+	                if(block == Blocks.GRASS || block == Blocks.GRASS_PATH)
+	                {
+	                    if(!worldObj.isRemote)
+	                    {
+	                    	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
+	                    	tool.damageItem(1, null);
+	                    }
+	                }
+	                if(block == Blocks.DIRT)
+	                {
+	                    switch((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT))
+	                    {
+	                        case DIRT:
+	                            if(!worldObj.isRemote)
+	                            {
+	                            	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
+	                            	tool.damageItem(1, null);
+	                            }
+	                        case COARSE_DIRT:
+	                            if(!worldObj.isRemote)
+	                            {
+	                            	worldObj.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
+	                            	tool.damageItem(1, null);
+	                            }
+	                    }
+	                }
+	            }
 			}
 		} 
 		else if(canDamage) 
 		{
-			tool.damageItem(1, farmer);
+//			tool.damageItem(1, farmer);
+			tool.damageItem(1, null);
 		}
 		
 		if(tool.stackSize == 0 || (canDamage && tool.getItemDamage() >= tool.getMaxDamage())) 
@@ -297,10 +334,10 @@ public class TileFarm extends TileMachine
 				EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
 	}
 
-	public EntityPlayerMP getFarmer() 
-	{
-		return farmer;
-	}
+//	public EntityPlayerMP getFarmer() 
+//	{
+//		return farmer;
+//	}
 
 	public Block getBlock(int x, int y, int z) 
 	{
@@ -356,15 +393,19 @@ public class TileFarm extends TileMachine
 		workingPos = getNextCoord();
 		IBlockState bs = getBlockState(workingPos);
 		Block block = bs.getBlock();
-		if(farmer == null) 
-		{
-			//farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
-			farmer = new FakePlayerVM(worldObj, chestPosInput, FARMER_PROFILE);
-			VanillaMagic.LOGGER.log(Level.INFO, "Added Custom Farmer");
-		}
+//		if(farmer == null) 
+//		{
+//			//farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
+//			farmer = new FakePlayerVM(worldObj, chestPosInput, FARMER_PROFILE);
+//			VanillaMagic.LOGGER.log(Level.INFO, "Added Custom Farmer");
+//		}
 		if(isOpen(workingPos)) 
 		{
-			FarmersRegistry.INSTANCE.prepareBlock(this, workingPos, block, bs);
+			boolean prepared = FarmersRegistry.INSTANCE.prepareBlock(this, workingPos, block, bs);
+			if(prepared)
+			{
+				shouldDecreaseTicks = true;
+			}
 			bs = getBlockState(workingPos);
 			block = bs.getBlock();
 		}
@@ -392,56 +433,56 @@ public class TileFarm extends TileMachine
 				return;
 			}
 		}
-		if(hasBonemeal() && bonemealCooldown-- <= 0) 
-		{
-			IInventory inv = getInputInventory().getInventory();
-			for(int i = 0; i < inv.getSizeInventory(); i++)
-			{
-				ItemStack stack = inv.getStackInSlot(i);
-				Fertilizer fertilizer = Fertilizer.getInstance(stack);
-				if((fertilizer.applyOnPlant() != isOpen(workingPos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(workingPos))) 
-				{
-					farmer.inventory.mainInventory[0] = stack;
-					farmer.inventory.currentItem = 0;
-					if(fertilizer.apply(stack, farmer, worldObj, new BlockPos(workingPos))) 
-					{
-						//stack = farmer.inventory.mainInventory[0];
-						inv.setInventorySlotContents(i, farmer.inventory.mainInventory[0]);
-						if(inv.getStackInSlot(i) != null && inv.getStackInSlot(i).stackSize == 0)//if(stack != null && stack.stackSize == 0) 
-						{
-							inv.setInventorySlotContents(i, null);
-						}
-						bonemealCooldown = 20;
-					} 
-					else 
-					{
-						bonemealCooldown = 5;
-					}
-					farmer.inventory.mainInventory[0] = null;
-				}
-			}
-		}
+//		if(hasBonemeal() && bonemealCooldown-- <= 0) 
+//		{
+//			IInventory inv = getInputInventory().getInventory();
+//			for(int i = 0; i < inv.getSizeInventory(); i++)
+//			{
+//				ItemStack stack = inv.getStackInSlot(i);
+//				Fertilizer fertilizer = Fertilizer.getInstance(stack);
+//				if((fertilizer.applyOnPlant() != isOpen(workingPos)) || (fertilizer.applyOnAir() == worldObj.isAirBlock(workingPos))) 
+//				{
+//					farmer.inventory.mainInventory[0] = stack;
+//					farmer.inventory.currentItem = 0;
+//					if(fertilizer.apply(stack, farmer, worldObj, new BlockPos(workingPos))) 
+//					{
+//						//stack = farmer.inventory.mainInventory[0];
+//						inv.setInventorySlotContents(i, farmer.inventory.mainInventory[0]);
+//						if(inv.getStackInSlot(i) != null && inv.getStackInSlot(i).stackSize == 0)//if(stack != null && stack.stackSize == 0) 
+//						{
+//							inv.setInventorySlotContents(i, null);
+//						}
+//						bonemealCooldown = 20;
+//					} 
+//					else 
+//					{
+//						bonemealCooldown = 5;
+//					}
+//					farmer.inventory.mainInventory[0] = null;
+//				}
+//			}
+//		}
 	}
 
-	private int bonemealCooldown = 5; // no need to persist this
+//	private int bonemealCooldown = 5; // no need to persist this
 	  
-	private boolean hasBonemeal() 
-	{
-		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
-		{
-			ItemStack stack = inv.getStackInSlot(i);
-			if(Fertilizer.getInstance(stack) == Fertilizer.BONEMEAL)
-			{
-				return true;
-			}
+//	private boolean hasBonemeal() 
+//	{
+//		IInventory inv = getInputInventory().getInventory();
+//		for(int i = 0; i < inv.getSizeInventory(); i++)
+//		{
+//			ItemStack stack = inv.getStackInSlot(i);
+//			if(Fertilizer.getInstance(stack) == Fertilizer.BONEMEAL)
+//			{
+//				return true;
+//			}
 //			if(Fertilizer.getInstance(inv.getStackInSlot(i)) != Fertilizer.NONE)
 //			{
 //				return true;
 //			}
-		}
-		return false;
-	}
+//		}
+//		return false;
+//	}
 
 	private boolean isOutputFull() 
 	{
@@ -515,7 +556,7 @@ public class TileFarm extends TileMachine
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack invStack = inv.getStackInSlot(i);
-			if(stack != null)
+			if(invStack != null)
 			{
 				if(matchMetadata ? invStack.isItemEqual(stack) : invStack.getItem() == stack.getItem())
 				{
