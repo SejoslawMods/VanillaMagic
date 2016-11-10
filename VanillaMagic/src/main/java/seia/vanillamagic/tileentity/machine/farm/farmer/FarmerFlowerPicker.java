@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -40,7 +41,21 @@ public class FarmerFlowerPicker implements IFarmer
 	
 	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
-		return flowers.contains(block) || block instanceof IShearable || block instanceof IPlantable;
+		if(block instanceof BlockFlower)
+		{
+			return true;
+		}
+//		ItemStack blockStack = new ItemStack(block);
+//		for(int i = 0; i < flowers.size(); i++)
+//		{
+//			ItemStack stack = flowers.get(i);
+//			if(ItemStack.areItemsEqual(blockStack, stack))
+//			{
+//				return true;
+//			}
+//		}
+		return /*flowers.contains(blockStack) ||*/ block instanceof IShearable || block instanceof IPlantable;
+//		return flowers.contains(block) || block instanceof IShearable || block instanceof IPlantable;
 	}
 	
 	public boolean canPlant(ItemStack stack) 
@@ -65,6 +80,12 @@ public class FarmerFlowerPicker implements IFarmer
 				return null;
 			}
 			drops = ((IShearable) block).onSheared(shears, worldObj, pos, farm.getMaxLootingValue());
+			farm.damageShears(block, pos);
+		}
+		else if(block instanceof BlockFlower)
+		{
+			drops = new ArrayList();
+			drops.add(new ItemStack(block));
 			farm.damageShears(block, pos);
 		}
 		else if(block instanceof IPlantable) // TODO:

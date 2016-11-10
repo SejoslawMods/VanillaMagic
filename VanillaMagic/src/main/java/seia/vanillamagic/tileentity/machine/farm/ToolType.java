@@ -1,5 +1,6 @@
 package seia.vanillamagic.tileentity.machine.farm;
 
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
@@ -17,9 +18,19 @@ public enum ToolType
 	{
 		boolean match(ItemStack item) 
 		{
-			// return (item.getItem() instanceof ItemAxe);
+			if(item.getItem() instanceof ItemAxe)
+			{
+				return true;
+			}
+			else if(item.getItem().getHarvestLevel(item, "axe", null, null) >= 0)
+			{
+				return true;
+			}
+			return false;
+			
+			//return (item.getItem() instanceof ItemAxe);
 			// return item.getItem().getHarvestLevel(item, "axe") >= 0;
-			return item.getItem().getHarvestLevel(item, "axe", null, null) >= 0;
+			// return item.getItem().getHarvestLevel(item, "axe", null, null) >= 0;
 		}
 	},
 	SHEARS  
@@ -43,13 +54,13 @@ public enum ToolType
 		{
 			return false;
 		}
-		return match(item) && !isBrokenTinkerTool(item);
+		return match(item) /*&& !isBrokenTinkerTool(item)*/;
 	}
 
-	public static boolean isBrokenTinkerTool(ItemStack item) 
-	{
-		return item != null && item.hasTagCompound() && item.getTagCompound().hasKey("Stats") && item.getTagCompound().getCompoundTag("Stats").getBoolean("Broken");
-	}
+//	public static boolean isBrokenTinkerTool(ItemStack item) 
+//	{
+//		return item != null && item.hasTagCompound() && item.getTagCompound().hasKey("Stats") && item.getTagCompound().getCompoundTag("Stats").getBoolean("Broken");
+//	}
 
 	abstract boolean match(ItemStack item);
 

@@ -227,11 +227,11 @@ public class TileFarm extends TileMachine
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if(ToolType.isBrokenTinkerTool(stack))
-			{
-				markDirty();
-			}
-			else if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1)
+//			if(ToolType.isBrokenTinkerTool(stack))
+//			{
+//				markDirty();
+//			}
+			if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1)
 			{
 				return stack;
 			}
@@ -669,7 +669,11 @@ public class TileFarm extends TileMachine
 
 	private int insertResult(ItemStack stack, BlockPos pos) 
 	{
-		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.DOWN);
+		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.UP);
+		if(left == null)
+		{
+			return 0;
+		}
 		return left.stackSize;
 		/*
 		int slot = pos != null ? getminSupplySlotForCoord(pos) : minSupplySlot;
