@@ -116,6 +116,7 @@ public class WorldHandler
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 		}
 	}
 	
@@ -182,6 +183,7 @@ public class WorldHandler
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 		}
 	}
 
