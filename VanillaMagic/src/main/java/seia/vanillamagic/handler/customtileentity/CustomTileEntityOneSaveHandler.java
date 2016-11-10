@@ -76,9 +76,6 @@ public class CustomTileEntityOneSaveHandler
 		customTileEntity.getTileEntity().getWorld().updateEntities();
 	}
 	
-	/**
-	 * TileEntity at position "pos" MUST implements {@link IDimensionKeeper}
-	 */
 	public boolean removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
 		int dimID = WorldHelper.getDimensionID(world);
