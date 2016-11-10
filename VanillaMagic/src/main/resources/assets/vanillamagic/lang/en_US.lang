@@ -309,8 +309,8 @@ achievement.smeltOnAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Al
 achievement.fullTreeCut=Full Tree Cut
 achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right
 
-achievement.machineFarm=Automatic Farm (W.I.P)
-achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume Seed.
+achievement.machineFarm=Automatic Farm (You must plant first seed) (W.I.P)
+achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume 1x Wheat Seed.
 
 achievement.speedy=Speedy (speed up ticks in range 9x3x9)
 achievement.speedy.desc=Place Cauldron and on top place Chest with Acceleration Crystal inside. Take second Acceleration Crystal to left hand and Blaze Wand to right hand. Shift-right-click the Cauldron.

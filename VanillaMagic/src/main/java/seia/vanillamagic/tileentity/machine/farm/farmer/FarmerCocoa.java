@@ -27,7 +27,16 @@ public class FarmerCocoa extends FarmerCustomSeed
 	  
 	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
-		return block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2;
+//		return block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2;
+		if(block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2)
+		{
+			return true;
+		}
+		else if(block instanceof BlockCocoa && state.getValue(BlockCocoa.AGE) == 2)
+		{
+			return true;
+		}
+		return false;
 	}
 	  
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos) 

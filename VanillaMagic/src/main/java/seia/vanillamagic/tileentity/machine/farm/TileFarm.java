@@ -258,8 +258,8 @@ public class TileFarm extends TileMachine
 		if(type == ToolType.AXE) 
 		{
 //			tool.getItem().onBlockDestroyed(tool, worldObj, bs, pos, farmer);
-			tool.damageItem(1, null);
-			//tool.setItemDamage(tool.getItemDamage() + 1);
+//			tool.damageItem(1, null);
+			tool.setItemDamage(tool.getItemDamage() + 1);
 		} 
 		else if(type == ToolType.HOE) 
 		{
