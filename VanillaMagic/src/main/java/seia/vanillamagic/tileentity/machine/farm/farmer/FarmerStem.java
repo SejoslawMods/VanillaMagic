@@ -42,7 +42,13 @@ public class FarmerStem extends FarmerCustomSeed
 	{
 		BlockPos up = pos.offset(EnumFacing.UP);
 		Block upBlock = farm.getWorld().getBlockState(up).getBlock();
-		return upBlock == plantedBlock;
+		//return upBlock == plantedBlock;
+		
+		if(Block.isEqualTo(upBlock, plantedBlock))
+		{
+			return true;
+		}
+		return false;
 	}
 	  
 	public boolean canPlant(ItemStack stack) 
@@ -55,7 +61,7 @@ public class FarmerStem extends FarmerCustomSeed
 	{
 		World worldObj = farm.getWorld();
 //		final EntityPlayerMP fakePlayer = farm.getFarmer();
-		final int fortune = farm.getMaxLootingValue();
+		int fortune = farm.getMaxLootingValue();
 		HarvestResult result = new HarvestResult();
 		BlockPos harvestCoord = pos;
 		boolean done = false;
@@ -66,16 +72,16 @@ public class FarmerStem extends FarmerCustomSeed
 			if(plantedBlock == farm.getBlock(harvestCoord) && hasHoe) 
 			{
 				result.harvestedBlocks.add(harvestCoord);
-				List<ItemStack> drops = plantedBlock.getDrops(worldObj, harvestCoord, state, fortune);
-				float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, harvestCoord, state, fortune, 1.0F, false, null/*fakePlayer*/);
+				List<ItemStack> drops = plantedBlock.getDrops(worldObj, harvestCoord, state, 0); // TODO: FarmerStem -> Currently disabled fortune.
+//				float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, harvestCoord, state, fortune, 1.0F, false, null/*fakePlayer*/);
 				if(drops != null) 
 				{
 					for(ItemStack drop : drops) 
 					{
-						if(worldObj.rand.nextFloat() <= chance) 
-						{
+//						if(worldObj.rand.nextFloat() <= chance) 
+//						{
 							result.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
-						}
+//						}
 					}
 				}
 				farm.damageHoe(1, new BlockPos(harvestCoord));

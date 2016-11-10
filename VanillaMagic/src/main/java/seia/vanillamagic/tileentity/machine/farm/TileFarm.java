@@ -227,14 +227,21 @@ public class TileFarm extends TileMachine
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
+			if(stack != null)
+			{
+				if(type.itemMatches(stack) && stack.stackSize > 0 /*&& stack.getItemDamage() > 1*/)
+				{
+					return stack;
+				}
+			}
 //			if(ToolType.isBrokenTinkerTool(stack))
 //			{
 //				markDirty();
 //			}
-			if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1)
-			{
-				return stack;
-			}
+//			if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1)
+//			{
+//				return stack;
+//			}
 		}
 		return null;
 	}
@@ -252,6 +259,7 @@ public class TileFarm extends TileMachine
 		{
 //			tool.getItem().onBlockDestroyed(tool, worldObj, bs, pos, farmer);
 			tool.damageItem(1, null);
+			//tool.setItemDamage(tool.getItemDamage() + 1);
 		} 
 		else if(type == ToolType.HOE) 
 		{
@@ -271,7 +279,8 @@ public class TileFarm extends TileMachine
 	                    if(!worldObj.isRemote)
 	                    {
 	                    	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
-	                    	tool.damageItem(1, null);
+//	                    	tool.damageItem(1, null);
+	                    	tool.setItemDamage(tool.getItemDamage() + 1);
 	                    }
 	                }
 	                if(block == Blocks.DIRT)
@@ -282,13 +291,15 @@ public class TileFarm extends TileMachine
 	                            if(!worldObj.isRemote)
 	                            {
 	                            	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
-	                            	tool.damageItem(1, null);
+//	                            	tool.damageItem(1, null);
+	                            	tool.setItemDamage(tool.getItemDamage() + 1);
 	                            }
 	                        case COARSE_DIRT:
 	                            if(!worldObj.isRemote)
 	                            {
 	                            	worldObj.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
-	                            	tool.damageItem(1, null);
+//	                            	tool.damageItem(1, null);
+	                            	tool.setItemDamage(tool.getItemDamage() + 1);
 	                            }
 	                    }
 	                }
@@ -298,7 +309,8 @@ public class TileFarm extends TileMachine
 		else if(canDamage) 
 		{
 //			tool.damageItem(1, farmer);
-			tool.damageItem(1, null);
+//			tool.damageItem(1, null);
+			tool.setItemDamage(tool.getItemDamage() + 1);
 		}
 		
 		if(tool.stackSize == 0 || (canDamage && tool.getItemDamage() >= tool.getMaxDamage())) 
@@ -669,7 +681,7 @@ public class TileFarm extends TileMachine
 
 	private int insertResult(ItemStack stack, BlockPos pos) 
 	{
-		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.UP);
+		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.DOWN);
 		if(left == null)
 		{
 			return 0;

@@ -45,6 +45,7 @@ public class FarmerFlowerPicker implements IFarmer
 		{
 			return true;
 		}
+		return false;
 //		ItemStack blockStack = new ItemStack(block);
 //		for(int i = 0; i < flowers.size(); i++)
 //		{
@@ -54,7 +55,7 @@ public class FarmerFlowerPicker implements IFarmer
 //				return true;
 //			}
 //		}
-		return /*flowers.contains(blockStack) ||*/ block instanceof IShearable || block instanceof IPlantable;
+//		return /*flowers.contains(blockStack) ||*/ block instanceof IShearable || block instanceof IPlantable;
 //		return flowers.contains(block) || block instanceof IShearable || block instanceof IPlantable;
 	}
 	
@@ -68,39 +69,39 @@ public class FarmerFlowerPicker implements IFarmer
 	{
 		World worldObj = farm.getWorld();
 		List<ItemStack> drops = null;
-		if(block instanceof IShearable) 
-		{
-			if(!farm.hasShears()) 
-			{
-				return null;
-			}
-			ItemStack shears = farm.getTool(ToolType.SHEARS);
-			if(!((IShearable) block).isShearable(shears, worldObj, pos)) 
-			{
-				return null;
-			}
-			drops = ((IShearable) block).onSheared(shears, worldObj, pos, farm.getMaxLootingValue());
-			farm.damageShears(block, pos);
-		}
-		else if(block instanceof BlockFlower)
+//		if(block instanceof IShearable) 
+//		{
+//			if(!farm.hasShears()) 
+//			{
+//				return null;
+//			}
+//			ItemStack shears = farm.getTool(ToolType.SHEARS);
+//			if(!((IShearable) block).isShearable(shears, worldObj, pos)) 
+//			{
+//				return null;
+//			}
+//			drops = ((IShearable) block).onSheared(shears, worldObj, pos, farm.getMaxLootingValue());
+//			farm.damageShears(block, pos);
+//		}
+		if(block instanceof BlockFlower)
 		{
 			drops = new ArrayList();
 			drops.add(new ItemStack(block));
 			farm.damageShears(block, pos);
 		}
-		else if(block instanceof IPlantable) // TODO:
-		{
-			if(!farm.hasShears()) 
-			{
-				return null;
-			}
-			ItemStack shears = farm.getTool(ToolType.SHEARS);
-			drops = new ArrayList();
-			IBlockState flowerState = ((IPlantable) block).getPlant(worldObj, pos);
-			Block flowerBlock = flowerState.getBlock();
-			drops.add(new ItemStack(flowerBlock));
-			farm.damageShears(block, pos);
-		}
+//		else if(block instanceof IPlantable) // TODO:
+//		{
+//			if(!farm.hasShears()) 
+//			{
+//				return null;
+//			}
+//			ItemStack shears = farm.getTool(ToolType.SHEARS);
+//			drops = new ArrayList();
+//			IBlockState flowerState = ((IPlantable) block).getPlant(worldObj, pos);
+//			Block flowerBlock = flowerState.getBlock();
+//			drops.add(new ItemStack(flowerBlock));
+//			farm.damageShears(block, pos);
+//		}
 		else 
 		{
 			if(!farm.hasHoe()) 
