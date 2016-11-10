@@ -20,7 +20,6 @@ import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerFlowerPicker;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerMelon;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerNetherWart;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerOreDictionaryTree;
-import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerPickable;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerPlantable;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerStem;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerTree;
@@ -114,19 +113,6 @@ public class FarmersRegistry implements IFarmer
 			}
 		}
 		return false;
-	}
-	
-	public void addPickable(String mod, String blockName, String itemName) 
-	{    
-		if(Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 
-		{
-			Block cropBlock = Block.REGISTRY.getObject(new ResourceLocation(mod, blockName));
-			Item seedItem = Item.REGISTRY.getObject(new ResourceLocation(mod, itemName));
-			if(seedItem != null) 
-			{
-				addFarmer(new FarmerPickable(cropBlock, new ItemStack(seedItem)));
-			}
-		}
 	}
 
 	@Nullable

@@ -435,10 +435,11 @@ public class TileFarm extends TileMachine
 					if(ei != null) 
 					{
 						insertHarvestDrop(ei, workingPos);
-						if(!ei.isDead) 
-						{
-							worldObj.spawnEntityInWorld(ei);
-						}
+						//TODO: TileFarm -> Fix if output chest is full. Stop working.
+//						if(!ei.isDead) 
+//						{
+//							worldObj.spawnEntityInWorld(ei);
+//						}
 					}
 				}
 				shouldDecreaseTicks = true;
