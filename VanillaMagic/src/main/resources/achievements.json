@@ -740,7 +740,7 @@
 	"radius":4
 },
 {
-	"questClass":"seia.vanillamagic.tileentity.machine.speedy.QuestSpeedy",
+	"questClass":"seia.vanillamagic.tileentity.speedy.QuestSpeedy",
 	"requiredQuest":"machineFarm",
 	"posX":-2,
 	"posY":0,

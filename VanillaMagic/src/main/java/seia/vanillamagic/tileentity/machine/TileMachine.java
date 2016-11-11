@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -18,9 +20,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IMachine;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.event.EventMachineWork;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
+import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.SmeltingHelper;
@@ -41,10 +45,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	protected boolean finished = false;
 	protected int delayInTicks = 0;
 	protected boolean needsFuel = true;
-	
-	@Nullable
 	protected IInventoryWrapper inventoryInput;
-	@Nullable
 	protected IInventoryWrapper inventoryOutput;
 	
 	/**
@@ -69,14 +70,14 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	{
 		super.init(player, machinePos);
 		setWorkRadius(radius);
-		setWorkingPos(machinePos);
+		setWorkingPos(BlockPosHelper.copyPos(machinePos));
 	}
 	
 	public void init(World world, BlockPos machinePos)
 	{
 		super.init(world, machinePos);
 		setWorkRadius(radius);
-		setWorkingPos(machinePos);
+		setWorkingPos(BlockPosHelper.copyPos(machinePos));
 	}
 	
 	int delay = 0;
@@ -251,9 +252,9 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound compound = new NBTTagCompound();
-		compound.setInteger(NBTHelper.NBT_MACHINE_POS_X, this.pos.getX());
-		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Y, this.pos.getY());
-		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Z, this.pos.getZ());
+		compound.setInteger(NBTHelper.NBT_MACHINE_POS_X, pos.getX());
+		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Y, pos.getY());
+		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Z, pos.getZ());
 		compound.setInteger(NBTHelper.NBT_WORKING_POS_X, workingPos.getX());
 		compound.setInteger(NBTHelper.NBT_WORKING_POS_Y, workingPos.getY());
 		compound.setInteger(NBTHelper.NBT_WORKING_POS_Z, workingPos.getZ());
@@ -280,13 +281,11 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		int machinePosX = compound.getInteger(NBTHelper.NBT_MACHINE_POS_X);
 		int machinePosY = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Y);
 		int machinePosZ = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Z);
-		BlockPos machinePos = new BlockPos(machinePosX, machinePosY, machinePosZ);
-		this.pos = machinePos;
+		this.pos = new BlockPos(machinePosX, machinePosY, machinePosZ);
 		int workingPosX = compound.getInteger(NBTHelper.NBT_WORKING_POS_X);
 		int workingPosY = compound.getInteger(NBTHelper.NBT_WORKING_POS_Y);
 		int workingPosZ = compound.getInteger(NBTHelper.NBT_WORKING_POS_Z);
-		BlockPos workingPos = new BlockPos(workingPosX, workingPosY, workingPosZ);
-		this.workingPos = workingPos;
+		this.workingPos = new BlockPos(workingPosX, workingPosY, workingPosZ);
 		this.radius = compound.getInteger(NBTHelper.NBT_RADIUS);
 		this.oneOperationCost = compound.getInteger(NBTHelper.NBT_ONE_OPERATION_COST);
 		this.ticks = compound.getInteger(NBTHelper.NBT_TICKS);
@@ -385,13 +384,20 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	public List<String> getAdditionalInfo()
 	{
 		List<String> list = new ArrayList<String>();
-		list.add("Machine name: " + getClass().getSimpleName());
-		list.add("Machine position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
-		list.add("Start position: X=" + startPos.getX() + ", Y=" + startPos.getY() + ", Z=" + startPos.getZ());
-		list.add("Working position: X=" + workingPos.getX() + ", Y=" + workingPos.getY() + ", Z=" + workingPos.getZ());
-		list.add("One operation cost: " + oneOperationCost);
-		list.add("Fuel left: " + ticks);
-		list.add("Max fuel: " + maxTicks);
+		try
+		{
+			list.add("Machine name: " + getClass().getSimpleName());
+			list.add("Machine position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
+			list.add("Start position: X=" + startPos.getX() + ", Y=" + startPos.getY() + ", Z=" + startPos.getZ());
+			list.add("Working position: X=" + workingPos.getX() + ", Y=" + workingPos.getY() + ", Z=" + workingPos.getZ());
+			list.add("One operation cost: " + oneOperationCost);
+			list.add("Fuel left: " + ticks);
+			list.add("Max fuel: " + maxTicks);
+		}
+		catch(Exception e)
+		{
+			VanillaMagic.LOGGER.log(Level.ERROR, "Error while reading Additional Information from TileMachine.");
+		}
 		return list;
 	}
 	

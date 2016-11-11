@@ -90,11 +90,13 @@ public class BlockPosHelper
 	{
 		Block block = world.getBlockState(pos).getBlock();
 		printCoords(level, block, pos);
+		VanillaMagic.LOGGER.log(Level.INFO, " Dimension = " + WorldHelper.getDimensionID(world));
 	}
 	
 	public static void printCoords(Level level, EntityPlayer player, BlockPos pos)
 	{
 		printCoords(level, player.worldObj, pos);
+		VanillaMagic.LOGGER.log(Level.INFO, " Dimension = " + WorldHelper.getDimensionID(player));
 	}
 	
 	public static void freezeNearby(Entity entity, World world, BlockPos pos, int size)

@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine.speedy;
+package seia.vanillamagic.tileentity.speedy;
 
 import java.util.List;
 import java.util.Random;
@@ -21,7 +21,7 @@ import seia.vanillamagic.util.NBTHelper;
 
 public class TileSpeedy extends CustomTileEntity
 {
-	public static final String REGISTRY_NAME = TileSpeedy.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileSpeedy.class.getName();
 	
 	public int ticks;
 	public Random rand;

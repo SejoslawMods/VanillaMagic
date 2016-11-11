@@ -1,5 +1,6 @@
 package seia.vanillamagic.handler;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,6 +14,9 @@ import com.google.common.io.Files;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityHopper;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -22,6 +26,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
+import seia.vanillamagic.tileentity.blockabsorber.TileBlockAbsorber;
+import seia.vanillamagic.tileentity.inventorybridge.TileInventoryBridge;
+import seia.vanillamagic.tileentity.machine.farm.QuestMachineFarm.FarmRadiusReader;
+import seia.vanillamagic.tileentity.machine.farm.TileFarm;
+import seia.vanillamagic.tileentity.machine.quarry.TileQuarry;
+import seia.vanillamagic.tileentity.speedy.TileSpeedy;
 import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.WorldHelper;
@@ -72,10 +82,21 @@ public class WorldHandler
 				String fileExtension = Files.getFileExtension(dimFile.getAbsolutePath());
 				if(fileExtension.equals("dat"))
 				{
-					FileInputStream fileInputStream = new FileInputStream(dimFile);
-					NBTTagCompound data = CompressedStreamTools.readCompressed(fileInputStream);
-					fileInputStream.close();
+					FileInputStream fis = new FileInputStream(dimFile);
+					NBTTagCompound data = null;
+					try
+					{
+						data = CompressedStreamTools.readCompressed(fis);
+					}
+					catch(EOFException eof)
+					{
+						VanillaMagic.LOGGER.log(Level.ERROR, 
+								"[World Load] Error while reading CustomTileEntities data from file for Dimension: " + dimension);
+						return;
+					}
+					fis.close();
 					NBTTagList tagList = data.getTagList(TILES, 10);
+					boolean canAdd = true;
 					for(int i = 0; i < tagList.tagCount(); i++)
 					{
 						NBTTagCompound tileEntityTag = tagList.getCompoundTagAt(i);
@@ -89,33 +110,65 @@ public class WorldHandler
 						{
 							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
 							tileEntity.init(world, tileEntityPos);
+							tileEntity.getTileEntity().func_190200_a(world, tileEntityTag);
+							// Additional parameters for different CustomTileEntities
+							if(tileEntity instanceof TileBlockAbsorber)
+							{
+								// TODO: Currently Disabled
+								canAdd = false;
+							}
+							else if(tileEntity instanceof TileInventoryBridge)
+							{
+								// TODO:
+								canAdd = false;
+							}
+							else if(tileEntity instanceof TileFarm)
+							{
+								TileFarm tileFarm = (TileFarm) tileEntity;
+								tileFarm.radius = FarmRadiusReader.getRadius();
+							}
+							else if(tileEntity instanceof TileQuarry)
+							{
+								TileQuarry tileQuarry = (TileQuarry) tileEntity;
+								if(!tileQuarry.checkSurroundings())
+								{
+									canAdd = false;
+								}
+							}
+							else if(tileEntity instanceof TileSpeedy)
+							{
+								TileSpeedy speedy = (TileSpeedy) tileEntity;
+								if(!speedy.containsCrystal())
+								{
+									canAdd = false;
+								}
+							}
 						}
 						catch(Exception e)
 						{
-							VanillaMagic.LOGGER.log(Level.ERROR, "Error while reading class for CustomTileEntity");
+							VanillaMagic.LOGGER.log(Level.ERROR, "[World Load] Error while reading class for CustomTileEntity: " + tileEntityClassName);
 						}
-						VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Created TileEntity (" + tileEntity.getClass().getSimpleName() + ")");
-						try
-						{
-							tileEntity.getTileEntity().setPos(tileEntityPos);
-							BlockPosHelper.printCoords(Level.INFO, "[World Load] Pos saved at:", tileEntity.getTileEntity().getPos());
-						}
-						catch(Exception e)
-						{
-							BlockPosHelper.printCoords(Level.WARN, "[World Load] Can't set position for tile: " + tileEntity.getClass().getSimpleName(), tileEntityPos);
-						}
+						VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						if(tileEntity != null)
 						{
-							NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
-							//CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity, dimension);
-							CustomTileEntityHandler.INSTANCE.addReadedTile(tileEntity, dimension);
+							if(canAdd)
+							{
+								if(!BlockPosHelper.isSameBlockPos(tileEntityPos, new BlockPos(0, 0, 0)))
+								{
+									NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
+									CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity, dimension);
+								}
+							}
+							canAdd = true;
 						}
 					}
+					CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, new BlockPos(0, 0, 0));
 				}
 			}
 		}
 		catch(Exception e)
 		{
+			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] Error while loading CustomTileEntities for Dimension: " + dimension);
 			e.printStackTrace();
 		}
 	}
@@ -169,7 +222,6 @@ public class WorldHandler
 			}
 			NBTTagCompound data = new NBTTagCompound();
 			NBTTagList dataList = new NBTTagList();
-			CustomTileEntityHandler.INSTANCE.moveTilesFromReadded(dimension);
 			List<ICustomTileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
 			for(int j = 0; j < tickables.size(); j++)
 			{
@@ -179,16 +231,22 @@ public class WorldHandler
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
 			CompressedStreamTools.writeCompressed(data, fileOutputStream);
 			fileOutputStream.close();
-			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] Vanilla Magic TileEntities saved for Dimension: " + dimension);
+			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] VanillaMagic CustomTileEntities saved for Dimension: " + dimension);
 		}
 		catch(Exception e)
 		{
+			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] Error while saving CustomTileEntities for Dimension: " + dimension);
 			e.printStackTrace();
 		}
 	}
 
 	public static File getVanillaMagicRootDirectory()
 	{
-		return new File(DimensionManager.getCurrentSaveRootDirectory(), VM_DIRECTORY + "/");
+		File file = new File(DimensionManager.getCurrentSaveRootDirectory(), VM_DIRECTORY + "/");
+		if(!file.exists())
+		{
+			file.mkdirs();
+		}
+		return file;
 	}
 }

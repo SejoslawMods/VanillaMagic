@@ -15,17 +15,15 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
 {
 	protected Ticket chunkTicket;
-	protected String playerName;
 	
 	public void init(EntityPlayer player, BlockPos pos)
 	{
 		this.init(player.worldObj, pos);
-		this.playerName = player.getDisplayNameString();
 	}
 	
 	public void init(World world, BlockPos pos)
@@ -85,13 +83,11 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		this.playerName = tag.getString(NBTHelper.NBT_PLAYER_NAME);
 	}
 	
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setString(NBTHelper.NBT_PLAYER_NAME, playerName);
 		return tag;
 	}
 	
@@ -124,11 +120,6 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	public Ticket getChunkTicket()
 	{
 		return chunkTicket;
-	}
-	
-	public String getPlayerName()
-	{
-		return playerName;
 	}
 	
 	public void update()

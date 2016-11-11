@@ -45,9 +45,4 @@ public interface ICustomTileEntity extends
 	 * Returns the {@link Ticket} for this CustomTileEntity.
 	 */
 	Ticket getChunkTicket();
-	
-	/**
-	 * Returns the name of the Player who placed this CustomTileEntity.
-	 */
-	String getPlayerName();
 }

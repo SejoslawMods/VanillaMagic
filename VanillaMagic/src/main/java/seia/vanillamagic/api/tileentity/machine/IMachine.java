@@ -18,7 +18,7 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
  * @author Seia
  */
 public interface IMachine extends ICustomTileEntity
-{
+{	
 	/**
 	 * Get the actual position of the machine block.
 	 * By MachinePosition we understand the core of the Machine.

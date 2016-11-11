@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.config.achievement.ConfigAchievements;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.QuestHandler;
+import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.integration.VanillaMagicIntegration;
 import seia.vanillamagic.item.VanillaMagicItems;
@@ -63,7 +64,7 @@ public class VanillaMagic
 		VanillaMagicDebug.INSTANCE.preInit();
 		TileEntityRegistry.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
-		//WorldHandler.INSTANCE.preInit(); //TODO: Fix World Saving / Loading
+		WorldHandler.INSTANCE.preInit();
 		ItemUpgradeRegistry.registerEvents();
 		VanillaMagicIntegration.INSTANCE.preInit();
 	}

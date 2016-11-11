@@ -17,7 +17,7 @@ import seia.vanillamagic.util.WorldHelper;
 
 public class TileLiquidSuppression extends CustomTileEntity
 {
-	public static final String REGISTRY_NAME = TileLiquidSuppression.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileLiquidSuppression.class.getName();
 	
 	public int ticksRemaining;
 	public String containedBlockName;

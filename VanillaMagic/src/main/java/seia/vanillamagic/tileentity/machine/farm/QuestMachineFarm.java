@@ -17,12 +17,35 @@ import seia.vanillamagic.util.EntityHelper;
 
 public class QuestMachineFarm extends QuestMachineActivate
 {
+	public static class FarmRadiusReader
+	{
+		private static int _RADIUS = -1;
+		
+		public static void setRadius(int radius)
+		{
+			if(radius >= 0)
+			{
+				_RADIUS = radius;
+			}
+		}
+		
+		public static int getRadius()
+		{
+			return _RADIUS;
+		}
+	}
+	
 	protected int radius;
 	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
-		this.radius = jo.get("radius").getAsInt();
+		radius = jo.get("radius").getAsInt();
+		if(radius < 0)
+		{
+			radius = -radius;
+		}
+		FarmRadiusReader.setRadius(radius);
 	}
 	
 	@SubscribeEvent

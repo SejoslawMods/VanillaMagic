@@ -79,35 +79,6 @@ public class CustomTileEntityHandler
 		return saveHandlers.get(rootDir).getCustomEntitiesInDimension(dimension);
 	}
 	
-	public List<ICustomTileEntity> getReaddedTileEntitiesForDimension(int dimension)
-	{
-		String rootDir = getRootDir();
-		if(!saveHandlers.containsKey(rootDir))
-		{
-			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
-		}
-		return saveHandlers.get(rootDir).getReadedTileEntitiesForDimension(dimension);
-	}
-
-	public void moveTilesFromReadded(int dimension) 
-	{
-		String rootDir = getRootDir();
-		if(saveHandlers.containsKey(rootDir))
-		{
-			saveHandlers.get(rootDir).moveTilesFromReadded(dimension);
-		}
-	}
-
-	public boolean addReadedTile(ICustomTileEntity tileEntity, int dimension)
-	{
-		String rootDir = getRootDir();
-		if(!saveHandlers.containsKey(rootDir))
-		{
-			saveHandlers.put(rootDir, new CustomTileEntityOneSaveHandler());
-		}
-		return saveHandlers.get(rootDir).addReadedTile(tileEntity, dimension);
-	}
-	
 	@Nullable
 	public ICustomTileEntity getCustomTileEntity(BlockPos tilePos, int dimension)
 	{

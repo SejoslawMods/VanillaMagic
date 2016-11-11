@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,15 +15,30 @@ import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import seia.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
+import seia.vanillamagic.util.BlockPosHelper;
 
 public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorber
 {
-	public static final String REGISTRY_NAME = TileBlockAbsorber.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileBlockAbsorber.class.getName();
 	
 	protected TileEntityHopper connectedHopper;
+	
+	public void init(World world, BlockPos pos)
+	{
+		super.init(world, pos);
+		this.connectedHopper = getConnectedHopper();
+		if(connectedHopper == null)
+		{
+			VanillaMagic.LOGGER.log(Level.ERROR, "Connected Hopper is null.");
+			BlockPosHelper.printCoords(Level.ERROR, "TileBlockAbsorber position:", this.pos);
+		}
+	}
 	
 	/**
 	 * On each update this {@link TileEntity} will check for block which is on this position and try to place it in bottom {@link IHopper}
@@ -30,6 +47,10 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 	 */
 	public void update()
 	{
+		if(connectedHopper == null)
+		{
+			connectedHopper = getConnectedHopper();
+		}
 		IBlockState thisState = worldObj.getBlockState(pos);
 		if(Block.isEqualTo(thisState.getBlock(), Blocks.AIR)) // We don't want to put Air into Hopper
 		{
@@ -71,20 +92,15 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 			worldObj.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 	}
-	
+
 	public EnumFacing getInputFacing()
 	{
 		return EnumFacing.UP;
 	}
-
-	public void setConnectedHopper(TileEntityHopper clickedHopper) 
-	{
-		this.connectedHopper = clickedHopper;
-	}
 	
 	public TileEntityHopper getConnectedHopper()
 	{
-		return connectedHopper;
+		return (TileEntityHopper) worldObj.getTileEntity(pos.offset(EnumFacing.DOWN));
 	}
 	
 	/**

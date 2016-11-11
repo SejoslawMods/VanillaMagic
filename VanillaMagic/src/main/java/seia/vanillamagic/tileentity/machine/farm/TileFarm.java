@@ -15,29 +15,25 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.fake.FakePlayerVM;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
-import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.tileentity.machine.farm.QuestMachineFarm.FarmRadiusReader;
 
 public class TileFarm extends TileMachine
 {
-	public static final String REGISTRY_NAME = TileFarm.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileFarm.class.getName();
 	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
 	public int radius;
@@ -48,11 +44,14 @@ public class TileFarm extends TileMachine
 	public void init(World world, BlockPos machinePos)
 	{
 		super.init(world, machinePos);
-		this.startPos = new BlockPos(machinePos.getX() + radius, machinePos.getY(), machinePos.getZ() + radius);
-		this.workingPos = null;//BlockPosHelper.copyPos(startPos);
-		//this.radius = radius; //this.farmSize = (2 * radius) + 1;
-		this.chestPosInput = this.pos.offset(EnumFacing.UP);
-		this.chestPosOutput = this.pos.offset(EnumFacing.DOWN);
+		this.startPos = new BlockPos(pos.getX() + radius, pos.getY(), pos.getZ() + radius);
+		this.workingPos = null;
+		this.chestPosInput = pos.offset(EnumFacing.UP);
+		this.chestPosOutput = pos.offset(EnumFacing.DOWN);
+		if(radius == 0)
+		{
+			this.radius = FarmRadiusReader.getRadius();
+		}
 		try
 		{
 			this.inventoryInput = new InventoryWrapper(worldObj, this.chestPosInput);
@@ -78,8 +77,24 @@ public class TileFarm extends TileMachine
 	
 	public boolean checkSurroundings() 
 	{
-		return (this.worldObj.getTileEntity(chestPosInput) instanceof IInventory) &&
-				(this.worldObj.getTileEntity(chestPosOutput) instanceof IInventory);
+		try
+		{
+			if(chestPosInput == null)
+			{
+				chestPosInput = pos.offset(EnumFacing.UP);
+			}
+			if(chestPosOutput == null)
+			{
+				chestPosOutput = pos.offset(EnumFacing.DOWN);
+			}
+			return (this.worldObj.getTileEntity(chestPosInput) instanceof IInventory) &&
+					(this.worldObj.getTileEntity(chestPosOutput) instanceof IInventory);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	boolean shouldDecreaseTicks = false;
@@ -749,7 +764,8 @@ public class TileFarm extends TileMachine
 		BlockPos loc = getPos();
 		if(workingPos == null) 
 		{
-			return workingPos = new BlockPos(loc.getX() - size, loc.getY(), loc.getZ() - size);
+			workingPos = new BlockPos(loc.getX() - size, loc.getY(), loc.getZ() - size);
+			return workingPos;
 		}
 		int nextX = workingPos.getX() + 1;
 		int nextZ = workingPos.getZ();

@@ -1,4 +1,4 @@
-package seia.vanillamagic.tileentity.machine.speedy;
+package seia.vanillamagic.tileentity.speedy;
 
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;

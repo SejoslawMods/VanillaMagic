@@ -9,7 +9,7 @@ import seia.vanillamagic.util.BlockPosHelper;
 
 public class TileChunkLoader extends CustomTileEntity implements IChunkLoader
 {
-	public static final String REGISTRY_NAME = TileChunkLoader.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileChunkLoader.class.getName();
 	
 	public void update() 
 	{

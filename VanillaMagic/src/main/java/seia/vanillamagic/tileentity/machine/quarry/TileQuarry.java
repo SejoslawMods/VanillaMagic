@@ -26,7 +26,7 @@ import seia.vanillamagic.util.BlockPosHelper;
 
 public class TileQuarry extends TileMachine implements IQuarry
 {
-	public static final String REGISTRY_NAME = TileQuarry.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileQuarry.class.getName();
 	
 	private QuarryUpgradeHelper upgradeHelper = new QuarryUpgradeHelper(this);
 	
@@ -115,7 +115,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 							}
 							catch(NotInventoryException e)
 							{
-								VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
+								VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + 
+										" - error when converting to IInventory at position: " + e.position.toString());
 							}
 						}
 						return true;

@@ -18,7 +18,7 @@ import seia.vanillamagic.tileentity.machine.TileMachine;
 
 public class TileAutocrafting extends TileMachine
 {
-	public static final String REGISTRY_NAME = TileAutocrafting.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileAutocrafting.class.getName();
 	
 	public ContainerAutocrafting container;
 	

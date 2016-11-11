@@ -23,7 +23,7 @@ import seia.vanillamagic.util.NBTHelper;
 
 public class TileInventoryBridge extends CustomTileEntity implements IInventoryBridge
 {
-	public static final String REGISTRY_NAME = TileInventoryBridge.class.getSimpleName();
+	public static final String REGISTRY_NAME = TileInventoryBridge.class.getName();
 	
 	/*
 	 * Input Inventory.
