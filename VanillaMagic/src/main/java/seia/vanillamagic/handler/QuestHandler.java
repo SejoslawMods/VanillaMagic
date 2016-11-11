@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 
 public class QuestHandler
 {

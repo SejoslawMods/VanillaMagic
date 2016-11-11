@@ -15,7 +15,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.CauldronHelper;
 

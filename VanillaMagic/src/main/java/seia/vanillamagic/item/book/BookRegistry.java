@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.util.TextHelper;
 
 public class BookRegistry 

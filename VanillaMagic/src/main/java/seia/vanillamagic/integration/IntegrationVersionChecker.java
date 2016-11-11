@@ -1,7 +1,7 @@
 package seia.vanillamagic.integration;
 
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 
 public class IntegrationVersionChecker implements IIntegration
 {

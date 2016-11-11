@@ -9,8 +9,8 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.quest.IQuest;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.event.EventQuest.EventAddQuest;
 
 public class QuestList

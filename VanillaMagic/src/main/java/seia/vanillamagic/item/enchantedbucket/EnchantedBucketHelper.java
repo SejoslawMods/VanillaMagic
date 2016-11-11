@@ -19,8 +19,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.item.IEnchantedBucket;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.CauldronHelper;
 

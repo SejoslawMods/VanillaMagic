@@ -2,8 +2,8 @@ package seia.vanillamagic.tileentity.chunkloader;
 
 import org.apache.logging.log4j.Level;
 
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.tileentity.chunkloader.IChunkLoader;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.BlockPosHelper;
 

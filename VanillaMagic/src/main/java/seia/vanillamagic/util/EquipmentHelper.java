@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 
 public class EquipmentHelper 
 {

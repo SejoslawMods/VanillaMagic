@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.nbt.NBTTagCompound;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 
 /**
  * Integration is always done at the end of each phase (PreInit, Init, PostInit).

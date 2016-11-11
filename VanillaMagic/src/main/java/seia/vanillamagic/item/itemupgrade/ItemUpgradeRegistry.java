@@ -14,9 +14,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.api.item.itemupgrade.ItemUpgradeAPI;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.itemupgrade.upgrade.UpgradeAutosmelt;
 
 /**

@@ -11,10 +11,10 @@ import javax.annotation.Nullable;
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.block.Block;
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.exception.MappingExistsException;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.api.tileentity.machine.QuarryUpgradeAPI;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeFortune;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeSilkTouch;

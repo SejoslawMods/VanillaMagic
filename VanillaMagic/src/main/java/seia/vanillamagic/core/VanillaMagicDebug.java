@@ -1,4 +1,4 @@
-package seia.vanillamagic;
+package seia.vanillamagic.core;
 
 import java.util.List;
 

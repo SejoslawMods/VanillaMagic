@@ -7,10 +7,10 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.api.item.IVanillaMagicItems;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;

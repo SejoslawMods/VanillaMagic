@@ -57,7 +57,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
-import seia.vanillamagic.VanillaMagic;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.entity.EntitySpellFreezeLiquid;
 import seia.vanillamagic.entity.EntitySpellPull;
 import seia.vanillamagic.entity.EntitySpellSummonLightningBolt;

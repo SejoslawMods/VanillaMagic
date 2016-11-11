@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.handler.WorldHandler;
 
 public class CustomTileEntityHandler 

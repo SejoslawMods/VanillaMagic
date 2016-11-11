@@ -13,8 +13,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.VanillaMagic;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
+import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.util.NBTHelper;
 
 public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
