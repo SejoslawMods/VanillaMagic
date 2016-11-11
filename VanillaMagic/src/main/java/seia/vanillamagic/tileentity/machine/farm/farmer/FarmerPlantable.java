@@ -39,7 +39,11 @@ public class FarmerPlantable implements IFarmer
 	
 	public boolean canPlant(ItemStack stack)
 	{
-		if(stack == null) 
+		if(stack == null)
+		{
+			return false;
+		}
+		if(stack.stackSize <= 0)
 		{
 			return false;
 		}
@@ -112,18 +116,30 @@ public class FarmerPlantable implements IFarmer
 
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, ItemStack plantable) 
 	{
+		if(plantable.stackSize <= 0)
+		{
+			return false;
+		}
 		worldObj.setBlockState(bc, Blocks.AIR.getDefaultState(), 1 | 2);
 		IBlockState target = ((IPlantable) plantable.getItem()).getPlant(null, new BlockPos(0, 0, 0));    
 		worldObj.setBlockState(bc, target, 1 | 2);
 		if(plantable != null)
 		{
 			plantable.stackSize--;
+			if(plantable.stackSize == 0)
+			{
+				farm.clearZeroStackSizeInventorySlots();
+			}
 		}
 		return true;
 	}
 
 	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack plantable) 
 	{
+		if(plantable.stackSize <= 0)
+		{
+			return false;
+		}
 		IBlockState target = ((IPlantable) plantable.getItem()).getPlant(null, new BlockPos(0, 0, 0));
 		BlockPos groundPos = bc.down();
 		IBlockState groundBS = worldObj.getBlockState(groundPos);
@@ -159,7 +175,7 @@ public class FarmerPlantable implements IFarmer
 		World worldObj = farm.getWorld();
 		List<EntityItem> result = new ArrayList<EntityItem>();
 //		final EntityPlayerMP fakePlayer = farm.getFarmer(); // TODO:
-		final int fortune = farm.getMaxLootingValue();
+		int fortune = farm.getMaxLootingValue();
 		ItemStack removedPlantable = null;
 		List<ItemStack> drops = block.getDrops(worldObj, bc, meta, fortune);
 		float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, bc, meta, fortune, 1.0F, false, null/*fakePlayer*/); // TODO:

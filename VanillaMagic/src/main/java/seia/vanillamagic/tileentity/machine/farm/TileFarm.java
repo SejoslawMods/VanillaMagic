@@ -770,4 +770,20 @@ public class TileFarm extends TileMachine
 	{
 		return EnumFacing.DOWN;
 	}
+
+	public void clearZeroStackSizeInventorySlots() 
+	{
+		IInventory inv = getInputInventory().getInventory();
+		for(int i = 0; i < inv.getSizeInventory(); i++)
+		{
+			ItemStack stack = inv.getStackInSlot(i);
+			if(stack != null)
+			{
+				if(stack.stackSize <= 0)
+				{
+					inv.setInventorySlotContents(i, null);
+				}
+			}
+		}
+	}
 }
