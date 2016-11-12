@@ -74,8 +74,7 @@ public class QuestInventoryBridge extends Quest
 			if(player.hasAchievement(achievement))
 			{
 				TileInventoryBridge tile = new TileInventoryBridge();
-				tile.init(player, clickedPos.offset(EnumFacing.UP));
-				tile.setWorld(world);
+				tile.init(player.worldObj, clickedPos.offset(EnumFacing.UP));
 				try
 				{
 					tile.setPositionFromSelector(player);
@@ -84,16 +83,18 @@ public class QuestInventoryBridge extends Quest
 				{
 					e.printStackTrace();
 					System.out.println(e.position.toString());
+					return;
 				}
-				try 
+				try
 				{
 					tile.setOutputInventory(world, clickedPos);
 				} 
 				catch(NotInventoryException e)
 				{
 					e.printStackTrace();
+					return;
 				}
-				if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, player.dimension))
+				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
 					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
 					leftHand.stackSize--;
@@ -115,12 +116,12 @@ public class QuestInventoryBridge extends Quest
 		if(inventoryTile instanceof IInventory)
 		{
 			BlockPos customTilePos = inventoryPos.offset(EnumFacing.UP);
-			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
+			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
 			if(customTile == null)
 			{
 				return;
 			}
-			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, customTilePos))
+			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, customTilePos))
 			{
 				EntityHelper.addChatComponentMessage(event.getPlayer(), customTile.getClass().getSimpleName() + " removed");
 			}

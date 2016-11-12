@@ -6,13 +6,11 @@ import net.minecraftforge.fml.common.ModMetadata;
 
 public class VanillaMagicMetadata 
 {
-	public static final VanillaMagicMetadata INSTANCE = new VanillaMagicMetadata();
-	
 	private VanillaMagicMetadata()
 	{
 	}
 
-	public ModMetadata preInit(ModMetadata modMetadata) 
+	public static ModMetadata preInit(ModMetadata modMetadata) 
 	{
 		modMetadata.modId = VanillaMagic.MODID;
 		modMetadata.name = VanillaMagic.NAME;

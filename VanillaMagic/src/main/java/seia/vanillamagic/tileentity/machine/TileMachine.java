@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -64,13 +63,6 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	public boolean inventoryOutputHasSpace() 
 	{
 		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
-	}
-	
-	public void init(EntityPlayer player, BlockPos machinePos)
-	{
-		super.init(player, machinePos);
-		setWorkRadius(radius);
-		setWorkingPos(BlockPosHelper.copyPos(machinePos));
 	}
 	
 	public void init(World world, BlockPos machinePos)

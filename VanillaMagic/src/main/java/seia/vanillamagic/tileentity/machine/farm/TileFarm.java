@@ -1,5 +1,6 @@
 package seia.vanillamagic.tileentity.machine.farm;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
@@ -801,5 +802,12 @@ public class TileFarm extends TileMachine
 				}
 			}
 		}
+	}
+	
+	public List<String> getAdditionalInfo()
+	{
+		List<String> list = super.getAdditionalInfo();
+		list.add("Radius: " + radius);
+		return list;
 	}
 }

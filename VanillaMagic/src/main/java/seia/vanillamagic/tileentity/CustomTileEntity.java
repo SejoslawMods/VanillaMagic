@@ -3,7 +3,6 @@ package seia.vanillamagic.tileentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -15,16 +14,10 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.util.WorldHelper;
 
 public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
 {
 	protected Ticket chunkTicket;
-	
-	public void init(EntityPlayer player, BlockPos pos)
-	{
-		this.init(player.worldObj, pos);
-	}
 	
 	public void init(World world, BlockPos pos)
 	{
@@ -120,10 +113,6 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	public Ticket getChunkTicket()
 	{
 		return chunkTicket;
-	}
-	
-	public void update()
-	{
 	}
 	
 	public NBTTagCompound serializeNBT()

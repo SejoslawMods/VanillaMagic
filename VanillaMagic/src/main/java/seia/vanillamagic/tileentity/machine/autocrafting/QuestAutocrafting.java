@@ -51,7 +51,7 @@ public class QuestAutocrafting extends Quest
 								return;
 							}
 							TileAutocrafting tile = new TileAutocrafting();
-							tile.init(player, cauldronPos);
+							tile.init(player.worldObj, cauldronPos);
 							if(CustomTileEntityHandler.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
 							{
 								EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");

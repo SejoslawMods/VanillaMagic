@@ -20,6 +20,10 @@ import seia.vanillamagic.util.WorldHelper;
 
 public class CustomTileEntityOneSaveHandler
 {
+	/**
+	 * Key - Dimension ID <br>
+	 * Value - List of {@link ICustomTileEntity} in this dimension
+	 */
 	protected Map<Integer, List<ICustomTileEntity>> loadedTileEntities;
 	
 	public CustomTileEntityOneSaveHandler()

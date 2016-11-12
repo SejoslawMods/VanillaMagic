@@ -94,7 +94,7 @@ public class WorldHandler
 					for(int i = 0; i < tagList.tagCount(); i++)
 					{
 						NBTTagCompound tileEntityTag = tagList.getCompoundTagAt(i);
-						String tileEntityClassName = tileEntityTag.getString("id");
+						String tileEntityClassName = tileEntityTag.getString("id"); // This must be the class -> class.getName();
 						int tileEntityPosX = tileEntityTag.getInteger("x");
 						int tileEntityPosY = tileEntityTag.getInteger("y");
 						int tileEntityPosZ = tileEntityTag.getInteger("z");
@@ -106,15 +106,10 @@ public class WorldHandler
 							tileEntity.init(world, tileEntityPos);
 							tileEntity.getTileEntity().func_190200_a(world, tileEntityTag);
 							// Additional parameters for different CustomTileEntities
-							if(tileEntity instanceof TileBlockAbsorber)
+							if(tileEntity instanceof TileInventoryBridge)
 							{
-								// TODO: Currently Disabled
-//								canAdd = false;
-							}
-							else if(tileEntity instanceof TileInventoryBridge)
-							{
-								// TODO: Currently Disabled
-								canAdd = false;
+								TileInventoryBridge tileInvBridge = (TileInventoryBridge) tileEntity;
+								tileInvBridge.addToTickable();
 							}
 							else if(tileEntity instanceof TileFarm)
 							{

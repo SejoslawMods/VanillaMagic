@@ -8,12 +8,21 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.VanillaMagicAPI;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 
 /**
  * CustomTileEntityHandler is used to hold all {@link ICustomTileEntity}s.
- * It is mainly use to Save / Load {@link ICustomTileEntity}s.
+ * Also it is use to Save / Load {@link ICustomTileEntity}s. <br>
+ * <br>
+ * To make Your CustomTile saving / loading properly You must register Your tile using full class name:<br>
+ * GameRegistry.registerTileEntity(MyCustomTile.class, "my.package.with.tile.MyCustomTile");<br>
+ * <br>
+ * Adding / removing should be register after some action happened. 
+ * See description of methods for more information.
+ * 
+ * @see GameRegistry#registerTileEntity(Class, String)
  */
 public class CustomTileEntityHandlerAPI 
 {
@@ -22,31 +31,33 @@ public class CustomTileEntityHandlerAPI
 	}
 	
 	/**
-	 * This method should be use to register {@link ICustomTileEntity} into the CustomTileEntityHandler.
+	 * This method should be use to register {@link ICustomTileEntity} into the CustomTileEntityHandler.<br>
+	 * For instance VanillaMagic CustomTiles are registered after clicked on block (mainly).
 	 * 
 	 * @param customTileEntity ICustomTileEntity which should be added
-	 * @param dimensionID dimension to which this tile should be added. It should be - customTileEntity.getTileEntity().getWorld().provider.getDimension();
+	 * @param dimensionID dimension to which this tile should be added. It should be - customTileEntity.getTileEntity().getWorld().provider.getDimension(); (Overworld is 0)
 	 * @return TRUE if the tile was added successfully
 	 */
-	public static boolean addCustomTileEntity(ICustomTileEntity customTileEntity, int dimensionID)
+	public static boolean addCustomTileEntity(ICustomTileEntity customTileEntity, int dimension)
 	{
 		try
 		{
 			Class<?> clazz = Class.forName("seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler");
 			Method method = clazz.getMethod("addCustomTileEntity", ICustomTileEntity.class, int.class);
-			return (boolean) method.invoke(null, customTileEntity, dimensionID);
+			return (boolean) method.invoke(null, customTileEntity, dimension);
 		}
 		catch(Exception e)
 		{
 			VanillaMagicAPI.LOGGER.log(Level.ERROR, 
-					"Error while adding ICustomTileEntity to World. (Class: " + customTileEntity.getClass().getName() + "), Dimension: " +
-					dimensionID);
+					"Error while adding ICustomTileEntity to World. (Class: " + customTileEntity.getClass().getName() + "), Dimension: " + 
+					dimension);
 			return false;
 		}
 	}
 	
 	/**
-	 * This method should be use to delete the {@link ICustomTileEntity} at the specified position.
+	 * This method should be use to delete the {@link ICustomTileEntity} at the specified position.<br>
+	 * For instance VanillaMagic CustomTiles are removed if the block was destroyed (mainly).
 	 * 
 	 * @param world world from which we will delete the tile
 	 * @param pos position of the deleting tile

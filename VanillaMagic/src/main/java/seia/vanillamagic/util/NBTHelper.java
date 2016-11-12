@@ -167,7 +167,10 @@ public class NBTHelper
 	
 	public static INBTSerializable<NBTTagCompound> readFromINBTSerializable(INBTSerializable<NBTTagCompound> nbtSerial, NBTTagCompound nbt)
 	{
-		nbtSerial.deserializeNBT(nbt.getCompoundTag(NBT_SERIALIZABLE));
+		if(nbt.hasKey(NBT_SERIALIZABLE))
+		{
+			nbtSerial.deserializeNBT(nbt.getCompoundTag(NBT_SERIALIZABLE));
+		}
 		return nbtSerial;
 	}
 	

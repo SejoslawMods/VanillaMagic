@@ -54,7 +54,7 @@ public class VanillaMagic
 		LOGGER = event.getModLog();
 		ItemUpgradeRegistry.start();
 		CONFIG_ACHIEVEMENTS = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
-		METADATA = VanillaMagicMetadata.INSTANCE.preInit(METADATA);
+		METADATA = VanillaMagicMetadata.preInit(METADATA);
 		for(int i = 0; i < QuestList.size(); i++)
 		{
 			QuestHandler.INSTANCE.registerEvent(QuestList.get(i));

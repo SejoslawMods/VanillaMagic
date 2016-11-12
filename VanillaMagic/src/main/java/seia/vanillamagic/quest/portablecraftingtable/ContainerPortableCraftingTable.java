@@ -22,21 +22,21 @@ public class ContainerPortableCraftingTable extends Container
 	{
 		this.player = player;
 		this.addSlotToContainer(new SlotCrafting(player, this.craftMatrix, this.craftResult, 0, 124, 35));
-		for (int x = 0; x < 3; ++x)
+		for(int x = 0; x < 3; ++x)
 		{
-			for (int y = 0; y < 3; ++y)
+			for(int y = 0; y < 3; ++y)
 			{
 				this.addSlotToContainer(new Slot(this.craftMatrix, y + x * 3, 30 + y * 18, 17 + x * 18));
 			}
 		}
-		for (int x = 0; x < 3; ++x)
+		for(int x = 0; x < 3; ++x)
 		{
-			for (int y = 0; y < 9; ++y)
+			for(int y = 0; y < 9; ++y)
 			{
 				this.addSlotToContainer(new Slot(player.inventory, y + x * 9 + 9, 8 + y * 18, 84 + x * 18));
 			}
 		}
-		for (int x = 0; x < 9; ++x)
+		for(int x = 0; x < 9; ++x)
 		{
 			this.addSlotToContainer(new Slot(player.inventory, x, 8 + x * 18, 142));
 		}
@@ -51,12 +51,12 @@ public class ContainerPortableCraftingTable extends Container
 	public void onContainerClosed(EntityPlayer player)
 	{
 		super.onContainerClosed(player);
-		if (!player.worldObj.isRemote)
+		if(!player.worldObj.isRemote)
 		{
-			for (int i = 0; i < 9; ++i)
+			for(int i = 0; i < 9; ++i)
 			{
 				ItemStack stack = this.craftMatrix.removeStackFromSlot(i);
-				if (stack != null)
+				if(stack != null)
 				{
 					player.dropItem(stack, false);
 				}
@@ -74,38 +74,38 @@ public class ContainerPortableCraftingTable extends Container
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)this.inventorySlots.get(index);
-		if (slot != null && slot.getHasStack())
+		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-			if (index == 0)
+			if(index == 0)
 			{
-				if (!this.mergeItemStack(itemstack1, 10, 46, true))
+				if(!this.mergeItemStack(itemstack1, 10, 46, true))
 				{
 					return null;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else if (index >= 10 && index < 37)
+			else if(index >= 10 && index < 37)
 			{
-				if (!this.mergeItemStack(itemstack1, 37, 46, false))
+				if(!this.mergeItemStack(itemstack1, 37, 46, false))
 				{
 					return null;
 				}
 			}
-			else if (index >= 37 && index < 46)
+			else if(index >= 37 && index < 46)
 			{
-				if (!this.mergeItemStack(itemstack1, 10, 37, false))
+				if(!this.mergeItemStack(itemstack1, 10, 37, false))
 				{
 					return null;
 				}
 			}
-			else if (!this.mergeItemStack(itemstack1, 10, 46, false))
+			else if(!this.mergeItemStack(itemstack1, 10, 46, false))
 			{
 				return null;
 			}
 			
-			if (itemstack1.stackSize == 0)
+			if(itemstack1.stackSize == 0)
 			{
 				slot.putStack((ItemStack)null);
 			}
@@ -114,7 +114,7 @@ public class ContainerPortableCraftingTable extends Container
 				slot.onSlotChanged();
 			}
 			
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if(itemstack1.stackSize == itemstack.stackSize)
 			{
 				return null;
 			}

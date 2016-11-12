@@ -15,6 +15,9 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.handler.WorldHandler;
 
+/**
+ * Try to use it via API with {@link CustomTileEntityHandlerAPI}
+ */
 public class CustomTileEntityHandler 
 {
 	/**

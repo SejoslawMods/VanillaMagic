@@ -93,7 +93,7 @@ public class VanillaMagicDebug
 		{
 			// show info
 			BlockPos tilePos = event.getPos();
-			ICustomTileEntity tile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(tilePos, WorldHelper.getDimensionID(player));
+			ICustomTileEntity tile = CustomTileEntityHandler.getCustomTileEntity(tilePos, WorldHelper.getDimensionID(player));
 			if(tile == null)
 			{
 				return;

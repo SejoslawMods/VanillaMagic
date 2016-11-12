@@ -43,7 +43,7 @@ public class QuestChunkLoader extends Quest
 					}
 					if(placedBy.hasAchievement(achievement))
 					{
-						tileChunkLoader.init(placedBy, chunkLoaderPos);
+						tileChunkLoader.init(placedBy.worldObj, chunkLoaderPos);
 						if(CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, placedBy.dimension))
 						{
 							EntityHelper.addChatComponentMessage(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");

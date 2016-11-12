@@ -40,7 +40,7 @@ public class QuestQuarry extends QuestMachineActivate
 			if(player.hasAchievement(achievement))
 			{
 				TileQuarry tileQuarry = new TileQuarry();
-				tileQuarry.init(player, quarryPos);
+				tileQuarry.init(player.worldObj, quarryPos);
 				if(tileQuarry.checkSurroundings())
 				{
 					if(CustomTileEntityHandler.addCustomTileEntity(tileQuarry, player.dimension))
