@@ -40,7 +40,7 @@ public class QuestSpeedy extends Quest
 							speedy.init(player, event.getPos());
 							if(speedy.containsCrystal())
 							{
-								if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(speedy, WorldHelper.getDimensionID(world)))
+								if(CustomTileEntityHandler.addCustomTileEntity(speedy, WorldHelper.getDimensionID(world)))
 								{
 									EntityHelper.addChatComponentMessage(player, speedy.getClass().getSimpleName() + " added");
 								}

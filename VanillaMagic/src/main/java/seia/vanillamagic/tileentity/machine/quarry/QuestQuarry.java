@@ -43,7 +43,7 @@ public class QuestQuarry extends QuestMachineActivate
 				tileQuarry.init(player, quarryPos);
 				if(tileQuarry.checkSurroundings())
 				{
-					if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileQuarry, player.dimension))
+					if(CustomTileEntityHandler.addCustomTileEntity(tileQuarry, player.dimension))
 					{
 						EntityHelper.addChatComponentMessage(player, tileQuarry.getClass().getSimpleName() + " added");
 					}
@@ -60,12 +60,12 @@ public class QuestQuarry extends QuestMachineActivate
 		World world = event.getWorld();
 		if(world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
 		{
-			ICustomTileEntity quarryTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(quarryPos, player.dimension);
+			ICustomTileEntity quarryTile = CustomTileEntityHandler.getCustomTileEntity(quarryPos, player.dimension);
 			if(quarryTile == null)
 			{
 				return;
 			}
-			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, quarryPos))
+			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, quarryPos))
 			{
 				EntityHelper.addChatComponentMessage(player, quarryTile.getClass().getSimpleName() + " removed");
 			}

@@ -81,7 +81,7 @@ public class QuestBlockAbsorber extends Quest
 			{
 				TileBlockAbsorber tile = new TileBlockAbsorber();
 				tile.init(player.worldObj, clickedPos.offset(EnumFacing.UP));
-				if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, player.dimension))
+				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
 					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
 					leftHand.stackSize--;
@@ -103,12 +103,12 @@ public class QuestBlockAbsorber extends Quest
 		if(Block.isEqualTo(hopperState.getBlock(), Blocks.HOPPER)) // if You broke Hopper
 		{
 			BlockPos customTilePos = hopperPos.offset(EnumFacing.UP);
-			ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
+			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
 			if(customTile == null)
 			{
 				return;
 			}
-			if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, customTilePos))
+			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, customTilePos))
 			{
 				EntityHelper.addChatComponentMessage(event.getPlayer(), customTile.getClass().getSimpleName() + " removed");
 			}

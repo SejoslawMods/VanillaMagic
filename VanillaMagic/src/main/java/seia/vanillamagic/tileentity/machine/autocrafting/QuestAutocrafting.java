@@ -52,7 +52,7 @@ public class QuestAutocrafting extends Quest
 							}
 							TileAutocrafting tile = new TileAutocrafting();
 							tile.init(player, cauldronPos);
-							if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
+							if(CustomTileEntityHandler.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
 							{
 								EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
 							}
@@ -76,12 +76,12 @@ public class QuestAutocrafting extends Quest
 			Block workbench = world.getBlockState(workbenchPos).getBlock();
 			if(workbench instanceof BlockWorkbench)
 			{
-				ICustomTileEntity autocraftingTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(cauldronPos, player.dimension);
+				ICustomTileEntity autocraftingTile = CustomTileEntityHandler.getCustomTileEntity(cauldronPos, player.dimension);
 				if(autocraftingTile == null)
 				{
 					return;
 				}
-				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos))
+				if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, cauldronPos))
 				{
 					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
 				}

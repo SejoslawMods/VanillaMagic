@@ -46,7 +46,7 @@ public class TileLiquidSuppression extends CustomTileEntity
 		if(block != null && worldObj.setBlockState(pos, block.getStateFromMeta(containedBlockMeta)))
 		{
 			getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
-			CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(worldObj, getPos(), WorldHelper.getDimensionID(worldObj));
+			CustomTileEntityHandler.removeCustomTileEntityAtPos(worldObj, getPos(), WorldHelper.getDimensionID(worldObj));
 		}
 	}
 	

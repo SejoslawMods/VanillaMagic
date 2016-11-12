@@ -84,7 +84,7 @@ public class VanillaMagic
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		BookRegistry.postInit();
-		CustomTileEntityHandler.INSTANCE.postInit();
+		CustomTileEntityHandler.postInit();
 		EnchantedBucketHelper.registerFluids();
 		PotionedCrystalHelper.registerRecipes();
 		VanillaMagicItems.INSTANCE.postInit();

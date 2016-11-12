@@ -49,7 +49,8 @@ public class CustomTileEntityOneSaveHandler
 			{
 				if(BlockPosHelper.isSameBlockPos(customTileEntity.getTileEntity().getPos(), tile.getTileEntity().getPos()))
 				{
-					BlockPosHelper.printCoords(Level.WARN, "There is already CustomTileEntity (" + tile.getClass().getSimpleName() + ") at pos:", tile.getTileEntity().getPos());
+					BlockPosHelper.printCoords(Level.WARN, "There is already CustomTileEntity (" + 
+												tile.getClass().getSimpleName() + ") at pos:", tile.getTileEntity().getPos());
 					return false;
 				}
 			}
@@ -70,13 +71,14 @@ public class CustomTileEntityOneSaveHandler
 	private void add(ICustomTileEntity customTileEntity)
 	{
 		TileEntity tile = customTileEntity.getTileEntity();
-		if(BlockPosHelper.isSameBlockPos(tile.getPos(), new BlockPos(0, 0, 0)))
+		if(BlockPosHelper.isSameBlockPos(tile.getPos(), CustomTileEntityHandler.EMPTY_SPACE))
 		{
 			return;
 		}
 		World world = tile.getWorld();
 		world.addTileEntity(tile);
-		BlockPosHelper.printCoords(Level.INFO, "CustomTileEntity (" + customTileEntity.getClass().getSimpleName() + ") added at pos:", tile.getPos());
+		BlockPosHelper.printCoords(Level.INFO, "CustomTileEntity (" + 
+									customTileEntity.getClass().getSimpleName() + ") added at pos:", tile.getPos());
 		world.updateEntities();
 	}
 	
@@ -108,10 +110,23 @@ public class CustomTileEntityOneSaveHandler
 					{
 						world.tickableTileEntities.remove(j);
 						tilesInDimension.remove(i);
-						BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + tileInDim.getClass().getSimpleName() + ") at:", pos);
+						BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + 
+													tileInDim.getClass().getSimpleName() + ") at:", pos);
 						return true;
 					}
 				}
+			}
+		}
+		// Tile is not on list - added after loading
+		for(int i = 0; i < tilesInDimension.size(); i++)
+		{
+			ICustomTileEntity tileInDim = tilesInDimension.get(i);
+			if(BlockPosHelper.isSameBlockPos(tileInDim.getTileEntity().getPos(), pos))
+			{
+				tilesInDimension.remove(i);
+				BlockPosHelper.printCoords(Level.INFO, "Removed CustomTileEntity (" + 
+											tileInDim.getClass().getSimpleName() + ") at:", pos);
+				return true;
 			}
 		}
 		return false;

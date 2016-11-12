@@ -14,9 +14,6 @@ import com.google.common.io.Files;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -36,9 +33,6 @@ import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.WorldHelper;
 
-/**
- * TODO: Fix Saving / Loading CustomTileEntities, Maybe remade to WorldSpecificSaveHandler ???
- */
 public class WorldHandler
 {
 	public static final WorldHandler INSTANCE = new WorldHandler();
@@ -115,11 +109,11 @@ public class WorldHandler
 							if(tileEntity instanceof TileBlockAbsorber)
 							{
 								// TODO: Currently Disabled
-								canAdd = false;
+//								canAdd = false;
 							}
 							else if(tileEntity instanceof TileInventoryBridge)
 							{
-								// TODO:
+								// TODO: Currently Disabled
 								canAdd = false;
 							}
 							else if(tileEntity instanceof TileFarm)
@@ -146,23 +140,25 @@ public class WorldHandler
 						}
 						catch(Exception e)
 						{
-							VanillaMagic.LOGGER.log(Level.ERROR, "[World Load] Error while reading class for CustomTileEntity: " + tileEntityClassName);
+							VanillaMagic.LOGGER.log(Level.ERROR, 
+									"[World Load] Error while reading class for CustomTileEntity: " + tileEntityClassName);
 						}
-						VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
+						VanillaMagic.LOGGER.log(Level.INFO, 
+								"[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						if(tileEntity != null)
 						{
 							if(canAdd)
 							{
-								if(!BlockPosHelper.isSameBlockPos(tileEntityPos, new BlockPos(0, 0, 0)))
+								if(!BlockPosHelper.isSameBlockPos(tileEntityPos, CustomTileEntityHandler.EMPTY_SPACE))
 								{
 									NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
-									CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileEntity, dimension);
+									CustomTileEntityHandler.addCustomTileEntity(tileEntity, dimension);
 								}
 							}
 							canAdd = true;
 						}
 					}
-					CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, new BlockPos(0, 0, 0));
+					CustomTileEntityHandler.removeCustomTileEntityAtPos(world, CustomTileEntityHandler.EMPTY_SPACE);
 				}
 			}
 		}
@@ -222,7 +218,7 @@ public class WorldHandler
 			}
 			NBTTagCompound data = new NBTTagCompound();
 			NBTTagList dataList = new NBTTagList();
-			List<ICustomTileEntity> tickables = CustomTileEntityHandler.INSTANCE.getCustomEntitiesInDimension(dimension);
+			List<ICustomTileEntity> tickables = CustomTileEntityHandler.getCustomEntitiesInDimension(dimension);
 			for(int j = 0; j < tickables.size(); j++)
 			{
 				dataList.appendTag(tickables.get(j).getTileEntity().writeToNBT(new NBTTagCompound()));

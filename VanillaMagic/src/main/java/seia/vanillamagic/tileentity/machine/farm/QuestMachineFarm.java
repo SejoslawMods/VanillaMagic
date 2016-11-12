@@ -59,7 +59,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 			TileFarm tileFarm = new TileFarm();
 			tileFarm.init(player, cauldronPos);
 			tileFarm.radius = radius;
-			if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileFarm, player.dimension))
+			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{
 				player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
 				EntityHelper.addChatComponentMessage(player, tileFarm.getClass().getSimpleName() + " added");
@@ -77,12 +77,12 @@ public class QuestMachineFarm extends QuestMachineActivate
 		{
 			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)
 			{
-				ICustomTileEntity farmTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(cauldronPos, player.dimension);
+				ICustomTileEntity farmTile = CustomTileEntityHandler.getCustomTileEntity(cauldronPos, player.dimension);
 				if(farmTile == null)
 				{
 					return;
 				}
-				if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, cauldronPos))
+				if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, cauldronPos))
 				{
 					EntityHelper.addChatComponentMessage(player, farmTile.getClass().getSimpleName() + " removed");
 				}

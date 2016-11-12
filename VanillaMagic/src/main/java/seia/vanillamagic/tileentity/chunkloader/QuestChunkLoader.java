@@ -44,7 +44,7 @@ public class QuestChunkLoader extends Quest
 					if(placedBy.hasAchievement(achievement))
 					{
 						tileChunkLoader.init(placedBy, chunkLoaderPos);
-						if(CustomTileEntityHandler.INSTANCE.addCustomTileEntity(tileChunkLoader, placedBy.dimension))
+						if(CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, placedBy.dimension))
 						{
 							EntityHelper.addChatComponentMessage(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");
 						}
@@ -85,12 +85,12 @@ public class QuestChunkLoader extends Quest
 	
 	private void remove(World world, BlockPos pos, EntityPlayer player)
 	{
-		ICustomTileEntity customTile = CustomTileEntityHandler.INSTANCE.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
+		ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
 		if(customTile == null)
 		{
 			return;
 		}
-		if(CustomTileEntityHandler.INSTANCE.removeCustomTileEntityAtPos(world, pos))
+		if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, pos))
 		{
 			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
 		}
