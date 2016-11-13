@@ -42,7 +42,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
 			Method method = clazz.getMethod("addCustomTileEntity", ICustomTileEntity.class, int.class);
 			return (boolean) method.invoke(null, customTileEntity, dimension);
 		}
@@ -67,7 +67,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
 			Method method = clazz.getMethod("removeCustomTileEntityAtPos", World.class, BlockPos.class);
 			return (boolean) method.invoke(null, world, pos);
 		}
@@ -89,7 +89,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
 			Method method = clazz.getMethod("getCustomTileEntity", BlockPos.class, int.class);
 			return (ICustomTileEntity) method.invoke(null, tilePos, dimension);
 		}
