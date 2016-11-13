@@ -15,7 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import seia.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
@@ -23,12 +22,6 @@ import seia.vanillamagic.tileentity.CustomTileEntity;
 public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorber
 {
 	public static final String REGISTRY_NAME = TileBlockAbsorber.class.getName();
-	
-//	public void init(World world, BlockPos pos)
-//	{
-//		super.init(world, pos);
-//		worldObj.tickableTileEntities.add(this);
-//	}
 	
 	public List<String> getAdditionalInfo()
 	{

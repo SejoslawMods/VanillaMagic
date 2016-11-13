@@ -37,8 +37,6 @@ public class TileFarm extends TileMachine implements IFarm
 	public static final String REGISTRY_NAME = TileFarm.class.getName();
 	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
-//	public EntityPlayerMP farmer;
-	
 	public void init(World world, BlockPos machinePos)
 	{
 		super.init(world, machinePos);
@@ -46,7 +44,6 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			this.startPos = new BlockPos(pos.getX() + radius, pos.getY(), pos.getZ() + radius);
 		}
-//		this.workingPos = null;
 		if(chestPosInput == null)
 		{
 			chestPosInput = pos.offset(EnumFacing.UP);
@@ -55,10 +52,7 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			this.chestPosOutput = pos.offset(EnumFacing.DOWN);
 		}
-//		if(radius == 0)
-//		{
-//			this.radius = FarmRadiusReader.getRadius();
-//		}
+		
 		try
 		{
 			if(inventoryInput == null)
@@ -77,16 +71,6 @@ public class TileFarm extends TileMachine implements IFarm
 					e.position.toString());
 		}
 	}
-	
-//	public BlockPos getInputPos()
-//	{
-//		return this.getMachinePos().offset(EnumFacing.UP);
-//	}
-	
-//	public BlockPos getOutputPos()
-//	{
-//		return this.getMachinePos().offset(EnumFacing.DOWN);
-//	}
 	
 	public boolean checkSurroundings() 
 	{
@@ -119,46 +103,7 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			decreaseTicks();
 		}
-		/*
-		try
-		{
-			workingPos = getNextCoord();
-			IBlockState state = this.worldObj.getBlockState(workingPos);
-			Block block = state.getBlock();
-			Farmers.INSTANCE.prepareBlock(this, workingPos, block, state);
-			state = this.worldObj.getBlockState(workingPos);
-			block = state.getBlock();
-			IHarvestResult harvest = Farmers.INSTANCE.harvestBlock(this, workingPos, block, state);
-			if(harvest != null && harvest.getDrops() != null) 
-			{
-				for (EntityItem ei : harvest.getDrops()) 
-				{
-					if(ei != null) 
-					{
-						insertHarvestDrop(ei, getOutputPos());
-						if(!ei.isDead) 
-						{
-							worldObj.spawnEntityInWorld(ei);
-						}
-					}
-				}
-			}
-		}
-		catch(Exception e)
-		{
-		}
-		*/
 	}
-	
-//	public int getMinSupplySlot()
-//	{
-//		return 0;
-//	}
-//	
-//	public int getMaxSupplySlot()
-//	{
-//		return getInputInventory().getInventory().getSizeInventory();
-//	}
 	
 	public boolean tillBlock(BlockPos plantingLocation) 
 	{
@@ -262,14 +207,6 @@ public class TileFarm extends TileMachine implements IFarm
 					return stack;
 				}
 			}
-//			if(ToolType.isBrokenTinkerTool(stack))
-//			{
-//				markDirty();
-//			}
-//			if(type.itemMatches(stack) && stack.stackSize > 0 && stack.getItemDamage() > 1)
-//			{
-//				return stack;
-//			}
 		}
 		return null;
 	}
@@ -285,59 +222,44 @@ public class TileFarm extends TileMachine implements IFarm
 		boolean canDamage = canDamage(tool);
 		if(type == ToolType.AXE) 
 		{
-//			tool.getItem().onBlockDestroyed(tool, worldObj, bs, pos, farmer);
-//			tool.damageItem(1, null);
 			tool.setItemDamage(tool.getItemDamage() + 1);
 		} 
 		else if(type == ToolType.HOE) 
 		{
-//			int origDamage = tool.getItemDamage();
-//			tool.getItem().onItemUse(tool, farmer, worldObj, pos, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
-//			if(origDamage == tool.getItemDamage() && canDamage) 
-//			{
-//				tool.damageItem(1, farmer);
-//			}
-			{
-				IBlockState iblockstate = worldObj.getBlockState(pos);
-	            Block block = iblockstate.getBlock();
-	            if(worldObj.isAirBlock(pos.up()))
-	            {
-	                if(block == Blocks.GRASS || block == Blocks.GRASS_PATH)
-	                {
-	                    if(!worldObj.isRemote)
-	                    {
-	                    	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
-//	                    	tool.damageItem(1, null);
-	                    	tool.setItemDamage(tool.getItemDamage() + 1);
-	                    }
-	                }
-	                if(block == Blocks.DIRT)
-	                {
-	                    switch((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT))
-	                    {
-	                        case DIRT:
-	                            if(!worldObj.isRemote)
-	                            {
-	                            	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
-//	                            	tool.damageItem(1, null);
-	                            	tool.setItemDamage(tool.getItemDamage() + 1);
-	                            }
-	                        case COARSE_DIRT:
-	                            if(!worldObj.isRemote)
-	                            {
-	                            	worldObj.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
-//	                            	tool.damageItem(1, null);
-	                            	tool.setItemDamage(tool.getItemDamage() + 1);
-	                            }
-	                    }
-	                }
-	            }
-			}
+			IBlockState iblockstate = worldObj.getBlockState(pos);
+            Block block = iblockstate.getBlock();
+            if(worldObj.isAirBlock(pos.up()))
+            {
+                if(block == Blocks.GRASS || block == Blocks.GRASS_PATH)
+                {
+                    if(!worldObj.isRemote)
+                    {
+                    	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
+                    	tool.setItemDamage(tool.getItemDamage() + 1);
+                    }
+                }
+                if(block == Blocks.DIRT)
+                {
+                    switch((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT))
+                    {
+                        case DIRT:
+                            if(!worldObj.isRemote)
+                            {
+                            	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
+                            	tool.setItemDamage(tool.getItemDamage() + 1);
+                            }
+                        case COARSE_DIRT:
+                            if(!worldObj.isRemote)
+                            {
+                            	worldObj.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
+                            	tool.setItemDamage(tool.getItemDamage() + 1);
+                            }
+                    }
+                }
+            }
 		} 
 		else if(canDamage) 
 		{
-//			tool.damageItem(1, farmer);
-//			tool.damageItem(1, null);
 			tool.setItemDamage(tool.getItemDamage() + 1);
 		}
 		
@@ -373,12 +295,7 @@ public class TileFarm extends TileMachine implements IFarm
 				EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack),
 				EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
 	}
-
-//	public EntityPlayerMP getFarmer() 
-//	{
-//		return farmer;
-//	}
-
+	
 	public Block getBlock(int x, int y, int z) 
 	{
 		return getBlock(new BlockPos(x, y, z));
@@ -400,16 +317,7 @@ public class TileFarm extends TileMachine implements IFarm
 		IBlockState bs = getBlockState(pos);
 		return block.isAir(bs, worldObj, pos) || block.isReplaceable(worldObj, pos);
 	}
-	  
-//	protected boolean isMachineItemValidForSlot(int slot, ItemStack stack) 
-//	{
-//		if(stack == null) 
-//		{
-//			return false;
-//		}
-//		return true;
-//	}
-	  
+	
 	protected boolean checkProgress(boolean redstoneChecksPassed) 
 	{
 		if(redstoneChecksPassed) 
@@ -421,24 +329,9 @@ public class TileFarm extends TileMachine implements IFarm
 
 	protected void doTick()
 	{
-//		int infiniteLoop = 20;
-//		while(workingPos == null || workingPos.equals(getPos()) || !worldObj.isBlockLoaded(workingPos)) 
-//		{
-//			if(infiniteLoop-- <= 0) 
-//			{
-//				return;
-//			}
-//			workingPos = getNextCoord();
-//		}
 		workingPos = getNextCoord();
 		IBlockState bs = getBlockState(workingPos);
 		Block block = bs.getBlock();
-//		if(farmer == null) 
-//		{
-//			//farmer = new FakeFarmer(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(WorldHelper.getDimensionID(this.worldObj)));
-//			farmer = new FakePlayerVM(worldObj, chestPosInput, FARMER_PROFILE);
-//			VanillaMagic.LOGGER.log(Level.INFO, "Added Custom Farmer");
-//		}
 		if(isOpen(workingPos)) 
 		{
 			boolean prepared = FarmersRegistry.INSTANCE.prepareBlock(this, workingPos, block, bs);
@@ -530,12 +423,8 @@ public class TileFarm extends TileMachine implements IFarm
 		return !this.inventoryOutputHasSpace();
 	}
 
-	public boolean hasSeed(ItemStack seeds/*, BlockPos pos*/) 
+	public boolean hasSeed(ItemStack seeds) 
 	{
-//		int slot = getSupplySlotForCoord(pos);
-//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-//		return inv != null && inv.stackSize > 1 && inv.isItemEqual(seeds);
-		
 		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
@@ -558,10 +447,6 @@ public class TileFarm extends TileMachine implements IFarm
 	 */
 	public int isLowOnSaplings(BlockPos pos) 
 	{
-//		int slot = getSupplySlotForCoord(pos);
-//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-//		return 90 * (farmSaplingReserveAmount - (inv == null ? 0 : inv.stackSize)) / farmSaplingReserveAmount;
-		
 		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
@@ -592,7 +477,6 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			return null;
 		}
-		
 		IInventory inv = getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
@@ -618,77 +502,8 @@ public class TileFarm extends TileMachine implements IFarm
 			}
 		}
 		return null;
-		
-//		int slot = getSupplySlotForCoord(forBlock);
-//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-//		if(inv != null) 
-//		{
-//			if(matchMetadata ? inv.isItemEqual(stack) : inv.getItem() == stack.getItem()) 
-//			{
-//				if(inv.stackSize <= 1) 
-//				{
-//					return null;
-//				}
-//				ItemStack result = inv.copy();
-//				result.stackSize = 1;
-//				inv = inv.copy();
-//				inv.stackSize--;
-//				if(inv.stackSize == 0) 
-//				{
-//					inv = null;
-//				}
-//				getInputInventory().getInventory().setInventorySlotContents(slot, inv);
-//				return result;
-//			}
-//		}
-//		return null;
 	}
-
-//	public ItemStack takeSeedFromSupplies(BlockPos pos) 
-//	{
-//		return takeSeedFromSupplies(getSeedTypeInSuppliesFor(pos), pos);
-//	}
-//
-//	public ItemStack getSeedTypeInSuppliesFor(BlockPos pos) 
-//	{
-//		int slot = getSupplySlotForCoord(pos);
-//		return getSeedTypeInSuppliesFor(slot);
-//	}
-//
-//	public ItemStack getSeedTypeInSuppliesFor(int slot) 
-//	{
-//		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
-//		if(inv != null && (inv.stackSize > 1)) 
-//		{
-//			return inv.copy();
-//		}
-//		return null;
-//	}
-
-//	public int getSupplySlotForCoord(BlockPos forBlock)
-//	{
-//		//return 0;
-//		int xCoord = getPos().getX();
-//		int zCoord = getPos().getZ();
-//		if(forBlock.getX() <= xCoord && forBlock.getZ() > zCoord) 
-//		{
-//			System.out.println(0);
-//			return 0;//getMinSupplySlot();
-//		} 
-//		else if(forBlock.getX() > xCoord && forBlock.getZ() > zCoord - 1) 
-//		{
-//			System.out.println(1);
-//			return 1;//getMinSupplySlot() + 1;
-//		} 
-//		else if(forBlock.getX() < xCoord && forBlock.getZ() <= zCoord) 
-//		{
-//			System.out.println(2);
-//			return 2;//getMinSupplySlot() + 2;
-//		}
-//		System.out.println(3);
-//		return 3;//getMinSupplySlot() + 3;
-//	}
-
+	
 	private void insertHarvestDrop(Entity entity, BlockPos pos) 
 	{
 		if(!worldObj.isRemote) 
@@ -716,58 +531,6 @@ public class TileFarm extends TileMachine implements IFarm
 			return 0;
 		}
 		return left.stackSize;
-		/*
-		int slot = pos != null ? getminSupplySlotForCoord(pos) : minSupplySlot;
-		int[] slots = new int[NUM_SUPPLY_SLOTS];
-		int k = 0;
-		for(int j = slot; j <= maxSupplySlot; j++)
-		{
-			slots[k++] = j;
-		}
-		for(int j = minSupplySlot; j < slot; j++) 
-		{
-			slots[k++] = j;
-		}	    
-		int origSize = stack.stackSize;
-		stack = stack.copy();
-		int inserted = 0;
-		for(int j = 0; j < slots.length && inserted < stack.stackSize; j++) 
-		{
-			int i = slots[j];
-			ItemStack curStack = inventory[i];
-			int inventoryStackLimit = getInventoryStackLimit(i);
-			if(isItemValidForSlot(i, stack) && (curStack == null || curStack.stackSize < inventoryStackLimit)) 
-			{
-				if(curStack == null) 
-				{
-					if (stack.stackSize < inventoryStackLimit) 
-					{
-						inventory[i] = stack.copy();
-						inserted = stack.stackSize;
-					} 
-					else 
-					{
-						inventory[i] = stack.copy();
-						inserted = inventoryStackLimit;
-						inventory[i].stackSize = inserted;
-					}
-				} 
-				else if(curStack.isItemEqual(stack)) 
-				{
-					inserted = Math.min(inventoryStackLimit - curStack.stackSize, stack.stackSize);
-					inventory[i].stackSize += inserted;
-				}
-			}
-		}
-		stack.stackSize -= inserted;
-		if(inserted >= origSize) 
-		{
-			return origSize;
-		}
-		ResultStack[] in = new ResultStack[] { new ResultStack(stack) };
-		mergeResults(in);
-		return origSize - (in[0].item == null ? 0 : in[0].item.stackSize);
-		*/
 	}
 
 	@Nonnull

@@ -86,7 +86,6 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	
 	public void deserializeNBT(NBTTagCompound tag)
     {
-//    	this.readFromNBT(tag);
     }
 	
 	/**
@@ -103,7 +102,7 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound tag = new NBTTagCompound();
-		return tag;//this.writeToNBT(tag);
+		return tag;
 	}
 	
 	public SPacketUpdateTileEntity getUpdatePacket()

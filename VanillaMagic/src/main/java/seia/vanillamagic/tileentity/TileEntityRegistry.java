@@ -13,8 +13,6 @@ import seia.vanillamagic.tileentity.speedy.TileSpeedy;
 
 public class TileEntityRegistry 
 {
-//	public static final List<Class<? extends TileEntity>> REGISTERED_CLASSES = new ArrayList<Class<? extends TileEntity>>();
-	
 	private TileEntityRegistry()
 	{
 	}
@@ -35,6 +33,5 @@ public class TileEntityRegistry
 	private static void register(Class<? extends TileEntity> tileEntityClass, String id)
 	{
 		GameRegistry.registerTileEntity(tileEntityClass, id);
-//		REGISTERED_CLASSES.add(tileEntityClass);
 	}
 }
