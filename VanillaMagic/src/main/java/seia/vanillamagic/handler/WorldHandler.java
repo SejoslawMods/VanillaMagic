@@ -147,7 +147,7 @@ public class WorldHandler
 		}
 		catch(Exception e)
 		{
-			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] Error while loading CustomTileEntities for Dimension: " + dimension);
+			VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Error while loading CustomTileEntities for Dimension: " + dimension);
 			e.printStackTrace();
 		}
 	}
