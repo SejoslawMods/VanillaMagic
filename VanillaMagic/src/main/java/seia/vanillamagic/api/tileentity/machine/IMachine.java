@@ -14,8 +14,6 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 /**
  * Machine is a TileEntity that perform some work on World.
  * This interface is made to unify some of the Machine work.
- * 
- * @author Seia
  */
 public interface IMachine extends ICustomTileEntity
 {	
