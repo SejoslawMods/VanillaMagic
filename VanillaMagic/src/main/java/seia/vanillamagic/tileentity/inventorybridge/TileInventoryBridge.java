@@ -46,14 +46,6 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	protected int inputInvX, inputInvY, inputInvZ, inputInvDim;
 	protected int outputInvX, outputInvY, outputInvZ, outputInvDim;
 	
-	/**
-	 * Used ONLY in loading from file.
-	 */
-	public void addToTickable()
-	{
-		worldObj.tickableTileEntities.add(this);
-	}
-	
 	@Nullable
 	public IInventoryWrapper getInputInventory()
 	{

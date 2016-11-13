@@ -30,14 +30,12 @@ import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
-import seia.vanillamagic.tileentity.machine.farm.QuestMachineFarm.FarmRadiusReader;
 
 public class TileFarm extends TileMachine
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getName();
 	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
-	public int radius;
 	public BlockPos chestPosInput;
 	public BlockPos chestPosOutput;
 //	public EntityPlayerMP farmer;
@@ -46,13 +44,13 @@ public class TileFarm extends TileMachine
 	{
 		super.init(world, machinePos);
 		this.startPos = new BlockPos(pos.getX() + radius, pos.getY(), pos.getZ() + radius);
-		this.workingPos = null;
+//		this.workingPos = null;
 		this.chestPosInput = pos.offset(EnumFacing.UP);
 		this.chestPosOutput = pos.offset(EnumFacing.DOWN);
-		if(radius == 0)
-		{
-			this.radius = FarmRadiusReader.getRadius();
-		}
+//		if(radius == 0)
+//		{
+//			this.radius = FarmRadiusReader.getRadius();
+//		}
 		try
 		{
 			this.inventoryInput = new InventoryWrapper(worldObj, this.chestPosInput);
@@ -653,7 +651,7 @@ public class TileFarm extends TileMachine
 //		return null;
 //	}
 
-//	public int getSupplySlotForCoord(BlockPos forBlock) // TODO: Fix TileFarm -> getSupplySlotForCoord
+//	public int getSupplySlotForCoord(BlockPos forBlock)
 //	{
 //		//return 0;
 //		int xCoord = getPos().getX();

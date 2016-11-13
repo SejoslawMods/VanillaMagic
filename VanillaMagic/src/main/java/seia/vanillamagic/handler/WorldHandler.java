@@ -23,10 +23,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
-import seia.vanillamagic.tileentity.blockabsorber.TileBlockAbsorber;
-import seia.vanillamagic.tileentity.inventorybridge.TileInventoryBridge;
-import seia.vanillamagic.tileentity.machine.farm.QuestMachineFarm.FarmRadiusReader;
-import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 import seia.vanillamagic.tileentity.machine.quarry.TileQuarry;
 import seia.vanillamagic.tileentity.speedy.TileSpeedy;
 import seia.vanillamagic.util.BlockPosHelper;
@@ -105,18 +101,8 @@ public class WorldHandler
 							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
 							tileEntity.init(world, tileEntityPos);
 							tileEntity.getTileEntity().func_190200_a(world, tileEntityTag);
-							// Additional parameters for different CustomTileEntities
-							if(tileEntity instanceof TileInventoryBridge)
-							{
-								TileInventoryBridge tileInvBridge = (TileInventoryBridge) tileEntity;
-								tileInvBridge.addToTickable();
-							}
-							else if(tileEntity instanceof TileFarm)
-							{
-								TileFarm tileFarm = (TileFarm) tileEntity;
-								tileFarm.radius = FarmRadiusReader.getRadius();
-							}
-							else if(tileEntity instanceof TileQuarry)
+							// Additional parameters for different CustomTileEntities (only if MUST be)
+							if(tileEntity instanceof TileQuarry)
 							{
 								TileQuarry tileQuarry = (TileQuarry) tileEntity;
 								if(!tileQuarry.checkSurroundings())
@@ -146,6 +132,8 @@ public class WorldHandler
 							{
 								if(!BlockPosHelper.isSameBlockPos(tileEntityPos, CustomTileEntityHandler.EMPTY_SPACE))
 								{
+									// TODO: Currently to make sure that out CustomTile will be added to tickables after rejoining world.
+									world.tickableTileEntities.add(tileEntity.getTileEntity());
 									NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
 									CustomTileEntityHandler.addCustomTileEntity(tileEntity, dimension);
 								}
@@ -222,7 +210,7 @@ public class WorldHandler
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
 			CompressedStreamTools.writeCompressed(data, fileOutputStream);
 			fileOutputStream.close();
-			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] VanillaMagic CustomTileEntities saved for Dimension: " + dimension);
+			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] CustomTileEntities saved for Dimension: " + dimension);
 		}
 		catch(Exception e)
 		{

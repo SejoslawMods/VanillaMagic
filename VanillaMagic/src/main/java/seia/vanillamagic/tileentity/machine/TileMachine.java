@@ -62,7 +62,12 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	
 	public boolean inventoryOutputHasSpace() 
 	{
-		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
+		IInventoryWrapper outInv = getOutputInventory();
+		if(outInv == null)
+		{
+			return false;
+		}
+		return !InventoryHelper.isInventoryFull(outInv.getInventory(), getOutputFacing());
 	}
 	
 	public void init(World world, BlockPos machinePos)
@@ -80,6 +85,10 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 			delay = 0;
 			if(worldObj.getChunkFromBlockCoords(getMachinePos()).isLoaded())
 			{
+				if(getWorkingPos() == null)
+				{
+					return;
+				}
 				if(worldObj.getChunkFromBlockCoords(getWorkingPos()).isLoaded())
 				{
 					if(checkSurroundings())
@@ -88,6 +97,10 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 						if(needsFuel)
 						{
 							checkFuel();
+						}
+						if(getInputInventory() == null || getOutputInventory() == null)
+						{
+							return;
 						}
 						tryWork();
 					}

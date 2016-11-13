@@ -17,23 +17,23 @@ import seia.vanillamagic.util.EntityHelper;
 
 public class QuestMachineFarm extends QuestMachineActivate
 {
-	public static class FarmRadiusReader
-	{
-		private static int _RADIUS = -1;
-		
-		public static void setRadius(int radius)
-		{
-			if(radius >= 0)
-			{
-				_RADIUS = radius;
-			}
-		}
-		
-		public static int getRadius()
-		{
-			return _RADIUS;
-		}
-	}
+//	public static class FarmRadiusReader
+//	{
+//		private static int _RADIUS = -1;
+//		
+//		public static void setRadius(int radius)
+//		{
+//			if(radius >= 0)
+//			{
+//				_RADIUS = radius;
+//			}
+//		}
+//		
+//		public static int getRadius()
+//		{
+//			return _RADIUS;
+//		}
+//	}
 	
 	protected int radius;
 	
@@ -45,7 +45,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 		{
 			radius = -radius;
 		}
-		FarmRadiusReader.setRadius(radius);
+//		FarmRadiusReader.setRadius(radius);
 	}
 	
 	@SubscribeEvent
@@ -58,7 +58,8 @@ public class QuestMachineFarm extends QuestMachineActivate
 		{
 			TileFarm tileFarm = new TileFarm();
 			tileFarm.init(player.worldObj, cauldronPos);
-			tileFarm.radius = radius;
+//			tileFarm.radius = radius;
+			tileFarm.setWorkRadius(radius);
 			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{
 				player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
