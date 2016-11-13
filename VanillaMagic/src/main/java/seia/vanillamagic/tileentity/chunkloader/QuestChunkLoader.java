@@ -12,7 +12,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
-import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.WorldHelper;

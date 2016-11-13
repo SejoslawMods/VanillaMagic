@@ -17,7 +17,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
+import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
+import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IMachine;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.event.EventMachineWork;
@@ -27,6 +31,7 @@ import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.SmeltingHelper;
+import seia.vanillamagic.util.WorldHelper;
 
 public abstract class TileMachine extends CustomTileEntity implements IMachine
 {
@@ -46,6 +51,8 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	protected boolean needsFuel = true;
 	protected IInventoryWrapper inventoryInput;
 	protected IInventoryWrapper inventoryOutput;
+	protected BlockPos chestPosInput;
+	protected BlockPos chestPosOutput;
 	
 	/**
 	 * This should check if the Machine is build correctly.
@@ -244,15 +251,15 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		return isActive;
 	}
 	
-	/**
-	 * Try to override serializeNBT instead of this method.
-	 */
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
-    {
-		super.writeToNBT(compound);
-		compound = NBTHelper.writeToINBTSerializable(this, compound);
-		return compound;
-    }
+//	/**
+//	 * Try to override serializeNBT instead of this method.
+//	 */
+//	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+//    {
+//		super.writeToNBT(compound);
+//		compound = NBTHelper.writeToINBTSerializable(this, compound);
+//		return compound;
+//    }
 	
 	public NBTTagCompound serializeNBT()
 	{
@@ -260,6 +267,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		compound.setInteger(NBTHelper.NBT_MACHINE_POS_X, pos.getX());
 		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Y, pos.getY());
 		compound.setInteger(NBTHelper.NBT_MACHINE_POS_Z, pos.getZ());
+		compound.setInteger(NBTHelper.NBT_DIMENSION, WorldHelper.getDimensionID(this));
 		compound.setInteger(NBTHelper.NBT_WORKING_POS_X, workingPos.getX());
 		compound.setInteger(NBTHelper.NBT_WORKING_POS_Y, workingPos.getY());
 		compound.setInteger(NBTHelper.NBT_WORKING_POS_Z, workingPos.getZ());
@@ -269,20 +277,35 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		compound.setInteger(NBTHelper.NBT_MAX_TICKS, maxTicks);
 		compound.setBoolean(NBTHelper.NBT_IS_ACTIVE, isActive);
 		compound.setBoolean(NBTHelper.NBT_NEEDS_FUEL, needsFuel);
+		compound.setInteger(NBTHelper.NBT_START_POS_X, startPos.getX());
+		compound.setInteger(NBTHelper.NBT_START_POS_Y, startPos.getY());
+		compound.setInteger(NBTHelper.NBT_START_POS_Z, startPos.getZ());
+		compound.setInteger(NBTHelper.NBT_CHEST_POS_INPUT_X, chestPosInput.getX());
+		compound.setInteger(NBTHelper.NBT_CHEST_POS_INPUT_Y, chestPosInput.getY());
+		compound.setInteger(NBTHelper.NBT_CHEST_POS_INPUT_Z, chestPosInput.getZ());
+		compound.setInteger(NBTHelper.NBT_CHEST_POS_OUTPUT_X, chestPosOutput.getX());
+		compound.setInteger(NBTHelper.NBT_CHEST_POS_OUTPUT_Y, chestPosOutput.getY());
+		compound.setInteger(NBTHelper.NBT_CHEST_POS_OUTPUT_Z, chestPosOutput.getZ());
 		return compound;
 	}
 	
-	/**
-	 * Try to override deserializeNBT instead of this method.
-	 */
-	public void readFromNBT(NBTTagCompound compound)
-    {
-		super.readFromNBT(compound);
-		NBTHelper.readFromINBTSerializable(this, compound);
-    }
+//	/**
+//	 * Try to override deserializeNBT instead of this method.
+//	 */
+//	public void readFromNBT(NBTTagCompound compound)
+//    {
+//		super.readFromNBT(compound);
+//		NBTHelper.readFromINBTSerializable(this, compound);
+//    }
 	
 	public void deserializeNBT(NBTTagCompound compound)
 	{
+		if(this.worldObj == null)
+		{
+			int dimension = compound.getInteger(NBTHelper.NBT_DIMENSION);
+			WorldServer world = DimensionManager.getWorld(dimension);
+			this.worldObj = world;
+		}
 		int machinePosX = compound.getInteger(NBTHelper.NBT_MACHINE_POS_X);
 		int machinePosY = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Y);
 		int machinePosZ = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Z);
@@ -297,6 +320,36 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		this.maxTicks = compound.getInteger(NBTHelper.NBT_MAX_TICKS);
 		this.isActive = compound.getBoolean(NBTHelper.NBT_IS_ACTIVE);
 		this.needsFuel = compound.getBoolean(NBTHelper.NBT_NEEDS_FUEL);
+		int startPosX = compound.getInteger(NBTHelper.NBT_START_POS_X);
+		int startPosY = compound.getInteger(NBTHelper.NBT_START_POS_Y);
+		int startPosZ = compound.getInteger(NBTHelper.NBT_START_POS_Z);
+		this.startPos = new BlockPos(startPosX, startPosY, startPosZ);
+		
+		int chestPosInputX = compound.getInteger(NBTHelper.NBT_CHEST_POS_INPUT_X);
+		int chestPosInputY = compound.getInteger(NBTHelper.NBT_CHEST_POS_INPUT_Y);
+		int chestPosInputZ = compound.getInteger(NBTHelper.NBT_CHEST_POS_INPUT_Z);
+		this.chestPosInput = new BlockPos(chestPosInputX, chestPosInputY, chestPosInputZ);
+		int chestPosOutputX = compound.getInteger(NBTHelper.NBT_CHEST_POS_OUTPUT_X);
+		int chestPosOutputY = compound.getInteger(NBTHelper.NBT_CHEST_POS_OUTPUT_Y);
+		int chestPosOutputZ = compound.getInteger(NBTHelper.NBT_CHEST_POS_OUTPUT_Z);
+		this.chestPosOutput = new BlockPos(chestPosOutputX, chestPosOutputY, chestPosOutputZ);
+		try
+		{
+			if(inventoryInput == null)
+			{
+				inventoryInput = new InventoryWrapper(worldObj, chestPosInput);
+			}
+			if(inventoryOutput == null)
+			{
+				inventoryOutput = new InventoryWrapper(worldObj, chestPosOutput);
+			}
+		}
+		catch(NotInventoryException e)
+		{
+			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + 
+					" - error when converting to IInventory at position: " + 
+					e.position.toString());
+		}
 	}
 	
 	public boolean hasInputInventory()

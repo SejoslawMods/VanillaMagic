@@ -14,7 +14,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
-import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;

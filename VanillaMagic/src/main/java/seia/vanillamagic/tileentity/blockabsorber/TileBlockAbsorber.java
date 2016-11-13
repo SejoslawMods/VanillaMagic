@@ -24,11 +24,11 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 {
 	public static final String REGISTRY_NAME = TileBlockAbsorber.class.getName();
 	
-	public void init(World world, BlockPos pos)
-	{
-		super.init(world, pos);
-		worldObj.tickableTileEntities.add(this);
-	}
+//	public void init(World world, BlockPos pos)
+//	{
+//		super.init(world, pos);
+//		worldObj.tickableTileEntities.add(this);
+//	}
 	
 	public List<String> getAdditionalInfo()
 	{

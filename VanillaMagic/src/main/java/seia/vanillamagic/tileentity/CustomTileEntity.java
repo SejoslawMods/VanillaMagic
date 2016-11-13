@@ -14,6 +14,7 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
+import seia.vanillamagic.util.NBTHelper;
 
 public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
 {
@@ -73,15 +74,36 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 		ForgeChunkManager.forceChunk(ticket, tilePos);
 	}
 	
+	/**
+	 * Try to override {@link #deserializeNBT(NBTTagCompound)} instead of this method.
+	 */
+	@Deprecated
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
+		NBTHelper.readFromINBTSerializable(this, tag);
 	}
 	
+	public void deserializeNBT(NBTTagCompound tag)
+    {
+//    	this.readFromNBT(tag);
+    }
+	
+	/**
+	 * Try to override {@link #serializeNBT()} instead of this method.
+	 */
+	@Deprecated
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
+		tag = NBTHelper.writeToINBTSerializable(this, tag);
 		return tag;
+	}
+	
+	public NBTTagCompound serializeNBT()
+	{
+		NBTTagCompound tag = new NBTTagCompound();
+		return tag;//this.writeToNBT(tag);
 	}
 	
 	public SPacketUpdateTileEntity getUpdatePacket()
@@ -114,13 +136,4 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	{
 		return chunkTicket;
 	}
-	
-	public NBTTagCompound serializeNBT()
-	{
-		return this.writeToNBT(new NBTTagCompound());
-	}
-    public void deserializeNBT(NBTTagCompound tag)
-    {
-    	this.readFromNBT(tag);
-    }
 }

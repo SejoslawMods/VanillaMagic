@@ -10,6 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,11 +20,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.api.util.IAdditionalInfoProvider;
-import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
+import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.WorldHelper;
 
 public class VanillaMagicDebug 
 {
@@ -93,17 +93,21 @@ public class VanillaMagicDebug
 		{
 			// show info
 			BlockPos tilePos = event.getPos();
-			ICustomTileEntity tile = CustomTileEntityHandler.getCustomTileEntity(tilePos, WorldHelper.getDimensionID(player));
-			if(tile == null)
+			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(tilePos, world);
+			if(customTile == null)
 			{
 				return;
 			}
-			if(tile.getTileEntity() instanceof IAdditionalInfoProvider)
+			TileEntity tile = customTile.getTileEntity();
+			if(tile instanceof ICustomTileEntity)
 			{
-				List<String> info = ((IAdditionalInfoProvider) tile.getTileEntity()).getAdditionalInfo();
-				for(String message : info)
+				if(customTile.getTileEntity() instanceof IAdditionalInfoProvider)
 				{
-					EntityHelper.addChatComponentMessage(player, message);
+					List<String> info = ((IAdditionalInfoProvider) customTile.getTileEntity()).getAdditionalInfo();
+					for(String message : info)
+					{
+						EntityHelper.addChatComponentMessage(player, message);
+					}
 				}
 			}
 		}

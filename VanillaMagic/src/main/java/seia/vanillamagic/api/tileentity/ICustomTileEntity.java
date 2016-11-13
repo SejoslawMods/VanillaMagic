@@ -19,7 +19,9 @@ public interface ICustomTileEntity extends
 		ITileEntityWrapper
 {
 	/**
-	 * This initialization will be used for placing the ICustomTileEntity on the right {@link World} on the right position.
+	 * This initialization will be used for placing the ICustomTileEntity FOR THE FIRST TIME on the right position.<br>
+	 * Loading / Saving will be done by {@link INBTSerializable}<br>
+	 * Any variables that should be saved must be read / write by {@link INBTSerializable}'s methods.
 	 */
 	void init(World world, BlockPos pos);
 	

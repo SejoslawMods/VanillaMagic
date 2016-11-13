@@ -108,10 +108,12 @@ public class TileQuarry extends TileMachine implements IQuarry
 							this.diamondFacing = diamondFacing;
 							this.startPosFacing = diamondFacing.rotateY();
 							restartDefaultStartPos();
+							this.chestPosInput = new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
+							this.chestPosOutput = pos.offset(getOutputFacing());
 							try
 							{
-								this.inventoryInput = new InventoryWrapper(worldObj, new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
-								this.inventoryOutput = new InventoryWrapper(worldObj, pos.offset(getOutputFacing()));
+								this.inventoryInput = new InventoryWrapper(worldObj, chestPosInput);
+								this.inventoryOutput = new InventoryWrapper(worldObj, chestPosOutput);
 							}
 							catch(NotInventoryException e)
 							{

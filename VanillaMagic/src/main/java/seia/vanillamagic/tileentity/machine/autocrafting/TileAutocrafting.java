@@ -30,10 +30,12 @@ public class TileAutocrafting extends TileMachine
 	{
 		super.init(world, machinePos);
 		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
+		this.chestPosInput = getMachinePos().up();
+		this.chestPosOutput = getMachinePos().down(2);
 		try
 		{
-			this.inventoryInput = new InventoryWrapper(worldObj, getMachinePos().up());
-			this.inventoryOutput = new InventoryWrapper(worldObj, getMachinePos().down(2));
+			this.inventoryInput = new InventoryWrapper(worldObj, chestPosInput);
+			this.inventoryOutput = new InventoryWrapper(worldObj, chestPosOutput);
 		}
 		catch(NotInventoryException e)
 		{

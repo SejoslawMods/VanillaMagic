@@ -22,7 +22,6 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.handler.customtileentity.CustomTileEntityHandler;
 import seia.vanillamagic.tileentity.machine.quarry.TileQuarry;
 import seia.vanillamagic.tileentity.speedy.TileSpeedy;
 import seia.vanillamagic.util.BlockPosHelper;
@@ -99,7 +98,8 @@ public class WorldHandler
 						try
 						{
 							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
-							tileEntity.init(world, tileEntityPos);
+							tileEntity.getTileEntity().setWorldObj(world);
+							tileEntity.getTileEntity().setPos(tileEntityPos);
 							tileEntity.getTileEntity().func_190200_a(world, tileEntityTag);
 							// Additional parameters for different CustomTileEntities (only if MUST be)
 							if(tileEntity instanceof TileQuarry)
@@ -132,8 +132,6 @@ public class WorldHandler
 							{
 								if(!BlockPosHelper.isSameBlockPos(tileEntityPos, CustomTileEntityHandler.EMPTY_SPACE))
 								{
-									// TODO: Currently to make sure that out CustomTile will be added to tickables after rejoining world.
-									world.tickableTileEntities.add(tileEntity.getTileEntity());
 									NBTHelper.readFromINBTSerializable(tileEntity, tileEntityTag);
 									CustomTileEntityHandler.addCustomTileEntity(tileEntity, dimension);
 								}
@@ -141,7 +139,6 @@ public class WorldHandler
 							canAdd = true;
 						}
 					}
-					CustomTileEntityHandler.removeCustomTileEntityAtPos(world, CustomTileEntityHandler.EMPTY_SPACE);
 				}
 			}
 		}

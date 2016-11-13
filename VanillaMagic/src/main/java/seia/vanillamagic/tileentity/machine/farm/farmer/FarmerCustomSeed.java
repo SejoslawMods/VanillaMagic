@@ -142,7 +142,7 @@ public class FarmerCustomSeed implements IFarmer
 			{
 				return plantFromInventory(farm, pos);
 			}
-			if(farm.hasSeed(getSeeds(), pos)) 
+			if(farm.hasSeed(getSeeds()/*, pos*/)) 
 			{
 				boolean tilled = tillBlock(farm, pos);
 				if(!tilled) 

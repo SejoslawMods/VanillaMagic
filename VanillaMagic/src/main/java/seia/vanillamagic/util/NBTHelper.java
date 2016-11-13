@@ -25,6 +25,15 @@ public class NBTHelper
 	public static final String NBT_WORKING_POS_X = "NBT_WORKING_POS_X";
 	public static final String NBT_WORKING_POS_Y = "NBT_WORKING_POS_Y";
 	public static final String NBT_WORKING_POS_Z = "NBT_WORKING_POS_Z";
+	public static final String NBT_START_POS_X = "NBT_START_POS_X";
+	public static final String NBT_START_POS_Y = "NBT_START_POS_Y";
+	public static final String NBT_START_POS_Z = "NBT_START_POS_Z";
+	public static final String NBT_CHEST_POS_INPUT_X = "NBT_CHEST_POS_INPUT_X";
+	public static final String NBT_CHEST_POS_INPUT_Y = "NBT_CHEST_POS_INPUT_Y";
+	public static final String NBT_CHEST_POS_INPUT_Z = "NBT_CHEST_POS_INPUT_Z";
+	public static final String NBT_CHEST_POS_OUTPUT_X = "NBT_CHEST_POS_OUTPUT_X";
+	public static final String NBT_CHEST_POS_OUTPUT_Y = "NBT_CHEST_POS_OUTPUT_Y";
+	public static final String NBT_CHEST_POS_OUTPUT_Z = "NBT_CHEST_POS_OUTPUT_Z";
 	public static final String NBT_RADIUS = "NBT_RADIUS";
 	public static final String NBT_ONE_OPERATION_COST = "NBT_ONE_OPERATION_COST";
 	public static final String NBT_TICKS = "NBT_TICKS";

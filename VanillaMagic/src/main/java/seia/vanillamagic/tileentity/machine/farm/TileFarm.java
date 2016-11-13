@@ -27,34 +27,48 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
+import seia.vanillamagic.api.tileentity.machine.IFarm;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 
-public class TileFarm extends TileMachine
+public class TileFarm extends TileMachine implements IFarm
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getName();
 	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
-	public BlockPos chestPosInput;
-	public BlockPos chestPosOutput;
 //	public EntityPlayerMP farmer;
 	
 	public void init(World world, BlockPos machinePos)
 	{
 		super.init(world, machinePos);
-		this.startPos = new BlockPos(pos.getX() + radius, pos.getY(), pos.getZ() + radius);
+		if(this.startPos == null)
+		{
+			this.startPos = new BlockPos(pos.getX() + radius, pos.getY(), pos.getZ() + radius);
+		}
 //		this.workingPos = null;
-		this.chestPosInput = pos.offset(EnumFacing.UP);
-		this.chestPosOutput = pos.offset(EnumFacing.DOWN);
+		if(chestPosInput == null)
+		{
+			chestPosInput = pos.offset(EnumFacing.UP);
+		}
+		if(chestPosOutput == null)
+		{
+			this.chestPosOutput = pos.offset(EnumFacing.DOWN);
+		}
 //		if(radius == 0)
 //		{
 //			this.radius = FarmRadiusReader.getRadius();
 //		}
 		try
 		{
-			this.inventoryInput = new InventoryWrapper(worldObj, this.chestPosInput);
-			this.inventoryOutput = new InventoryWrapper(worldObj, this.chestPosOutput);
+			if(inventoryInput == null)
+			{
+				this.inventoryInput = new InventoryWrapper(worldObj, this.chestPosInput);
+			}
+			if(inventoryOutput == null)
+			{
+				inventoryOutput = new InventoryWrapper(worldObj, this.chestPosOutput);
+			}
 		}
 		catch(NotInventoryException e)
 		{
@@ -213,15 +227,15 @@ public class TileFarm extends TileMachine
 		}
 		return getLooting(tool);
 	}
+	
+	public void damageHoe(int damage, BlockPos pos) 
+	{
+		damageTool(ToolType.HOE, null, pos, damage);
+	}
 
 	public void damageAxe(Block blk, BlockPos pos) 
 	{
 		damageTool(ToolType.AXE, blk, pos, 1);
-	}
-
-	public void damageHoe(int i, BlockPos pos) 
-	{
-		damageTool(ToolType.HOE, null, pos, i);
 	}
 
 	public void damageShears(Block blk, BlockPos pos) 
@@ -516,7 +530,7 @@ public class TileFarm extends TileMachine
 		return !this.inventoryOutputHasSpace();
 	}
 
-	public boolean hasSeed(ItemStack seeds, BlockPos pos) 
+	public boolean hasSeed(ItemStack seeds/*, BlockPos pos*/) 
 	{
 //		int slot = getSupplySlotForCoord(pos);
 //		ItemStack inv = getInputInventory().getInventory().getStackInSlot(slot);
