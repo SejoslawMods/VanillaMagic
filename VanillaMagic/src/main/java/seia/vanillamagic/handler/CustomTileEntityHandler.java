@@ -134,10 +134,6 @@ public class CustomTileEntityHandler
 				{
 					return (ICustomTileEntity) tile;
 				}
-				else
-				{
-					return null;
-				}
 			}
 		}
 		return null;
