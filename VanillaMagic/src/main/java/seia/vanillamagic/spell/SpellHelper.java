@@ -16,6 +16,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityElderGuardian;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityGiantZombie;
@@ -473,12 +474,15 @@ public class SpellHelper
 			}
 			else if(spellID == EnumSpell.SUMMON_GUARDIAN.spellID)
 			{
-				entityMob = new EntityGuardian(world);
 				Random rand = new Random();
 				int percent = rand.nextInt(100); // 100%
 				if(percent < 30) // percent with which this Guardian will be an Elder
 				{
-					((EntityGuardian) entityMob).setElder();
+					entityMob = new EntityElderGuardian(world);
+				}
+				else
+				{
+					entityMob = new EntityGuardian(world);
 				}
 			}
 			else if(spellID == EnumSpell.SUMMON_POLAR_BEAR.spellID)

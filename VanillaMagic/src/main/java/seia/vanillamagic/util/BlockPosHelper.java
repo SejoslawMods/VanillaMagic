@@ -113,7 +113,8 @@ public class BlockPosHelper
 					IBlockState blockAroundState = world.getBlockState(blockPosAround);
 					if(blockAroundState.getMaterial() == Material.WATER && 
 							((Integer)blockAroundState.getValue(BlockLiquid.LEVEL)).intValue() == 0 && 
-							world.canBlockBePlaced(Blocks.ICE, blockPosAround, false, EnumFacing.DOWN, (Entity)null, (ItemStack)null))
+							//world.canBlockBePlaced(Blocks.ICE, blockPosAround, false, EnumFacing.DOWN, (Entity)null, (ItemStack)null))
+									Blocks.ICE.canPlaceBlockAt(world, blockPosAround.toImmutable())) // TODO; What else ?
 					{
 						world.setBlockState(blockPosAround, Blocks.ICE.getDefaultState());
 					}

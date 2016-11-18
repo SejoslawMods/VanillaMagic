@@ -9,6 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -90,7 +91,7 @@ public class QuestPotionedCrystal extends Quest
 	{
 		EntityPlayer player = event.player;
 		InventoryPlayer inventory = player.inventory;
-		ItemStack[] mainInv = inventory.mainInventory;
+		NonNullList<ItemStack> mainInv = inventory.mainInventory;
 		for(ItemStack stack : mainInv)
 		{
 			if(stack != null)

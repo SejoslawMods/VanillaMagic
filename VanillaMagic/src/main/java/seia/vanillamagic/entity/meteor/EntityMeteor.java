@@ -53,6 +53,6 @@ public class EntityMeteor extends EntityLargeFireball
 	
 	public static void fixData(DataFixer dataFixer)
 	{
-		EntityFireball.func_189743_a(dataFixer, "Meteor");
+		EntityFireball.registerFixesFireball(dataFixer, "Meteor");
 	}
 }

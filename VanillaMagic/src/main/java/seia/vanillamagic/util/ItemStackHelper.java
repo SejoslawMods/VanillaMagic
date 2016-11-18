@@ -85,10 +85,10 @@ public class ItemStackHelper
 		return stackWithNextMeta;
 	}
 	
-	public static ItemStack replaceItemInStack(ItemStack stack, Item item)
+	public static ItemStack replaceItemInStack(ItemStack stack, Item newItem)
 	{
 		ItemStack newStack = stack.copy();
-		newStack.setItem(item);
+		newStack.setItem(newItem);
 		return newStack;
 	}
 	

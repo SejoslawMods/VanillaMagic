@@ -118,7 +118,8 @@ public class ContainerPortableCraftingTable extends Container
 			{
 				return null;
 			}
-			slot.onPickupFromSlot(entityPlayer, itemstack1);
+			//slot.onPickupFromSlot(entityPlayer, itemstack1);
+			slot.func_190901_a(entityPlayer, itemstack1); // TODO:
 		}
 		return itemstack;
 	}

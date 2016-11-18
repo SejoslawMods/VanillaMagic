@@ -12,6 +12,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -146,7 +147,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 		setPositionFromSelector(invPlayer.mainInventory);
 	}
 	
-	public void setPositionFromSelector(ItemStack[] mainInventory) throws NotInventoryException 
+	public void setPositionFromSelector(NonNullList<ItemStack> mainInventory) throws NotInventoryException 
 	{
 		for(ItemStack currentCheckingStack : mainInventory)
 		{

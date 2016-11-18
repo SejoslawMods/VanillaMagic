@@ -7,6 +7,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -56,10 +57,10 @@ public class QuestItemMagnet extends Quest
 	{
 		boolean star1 = false;
 		boolean star2 = false;
-		ItemStack[] inventory = player.inventory.mainInventory;
-		for(int i = 0; i < inventory.length; i++)
+		NonNullList<ItemStack> inventory = player.inventory.mainInventory;
+		for(int i = 0; i < inventory.size(); i++)
 		{
-			if(ItemStack.areItemStacksEqual(star, inventory[i]))
+			if(ItemStack.areItemStacksEqual(star, inventory.get(i)))
 			{
 				if(star1 == true)
 				{

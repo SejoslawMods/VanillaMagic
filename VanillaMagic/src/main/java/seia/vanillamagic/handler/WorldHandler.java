@@ -100,7 +100,7 @@ public class WorldHandler
 							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
 							tileEntity.getTileEntity().setWorldObj(world);
 							tileEntity.getTileEntity().setPos(tileEntityPos);
-							tileEntity.getTileEntity().func_190200_a(world, tileEntityTag);
+							tileEntity.getTileEntity().create(world, tileEntityTag); // TODO: Was -> func_190200_a
 							// Additional parameters for different CustomTileEntities (only if MUST be)
 							if(tileEntity instanceof TileQuarry)
 							{

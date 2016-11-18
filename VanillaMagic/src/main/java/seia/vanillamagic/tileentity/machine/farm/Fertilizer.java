@@ -35,7 +35,7 @@ public enum Fertilizer
 	{
 		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
 		{
-			EnumActionResult res = stack.getItem().onItemUse(stack, player, world, bc, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
+			EnumActionResult res = stack.getItem().onItemUse(player, world, bc, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
 			return res != null && res != EnumActionResult.PASS; 
 		}
 	},
@@ -56,7 +56,7 @@ public enum Fertilizer
 			Block belowBlock = world.getBlockState(below).getBlock();
 			if(belowBlock == Blocks.DIRT || belowBlock == Blocks.GRASS) 
 			{
-				EnumActionResult res = stack.getItem().onItemUse(stack, player, world, below, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
+				EnumActionResult res = stack.getItem().onItemUse(player, world, below, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
 				return res != null && res != EnumActionResult.PASS; 
 			}
 			return false;

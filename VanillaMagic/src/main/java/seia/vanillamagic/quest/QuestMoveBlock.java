@@ -169,7 +169,8 @@ public class QuestMoveBlock extends Quest
 			if(readdedBlock != null)
 			{
 				world.setBlockState(wantedBlockPos, readdedBlock.getStateFromMeta(questTag.getInteger(NBTHelper.NBT_BLOCK_META)));
-				world.notifyBlockOfStateChange(wantedBlockPos, readdedBlock);
+				//world.notifyBlockOfStateChange(wantedBlockPos, readdedBlock);
+				world.notifyNeighborsOfStateChange(wantedBlockPos, readdedBlock, true); // TODO: ???
 			}
 			TileEntity tile = world.getTileEntity(wantedBlockPos);
 			if(tile != null)

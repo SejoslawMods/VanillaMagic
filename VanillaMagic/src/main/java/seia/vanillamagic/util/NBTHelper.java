@@ -121,7 +121,7 @@ public class NBTHelper
 	@Nullable
 	public static TileEntity getTileEntityFromNBT(World world, NBTTagCompound nbt)
 	{
-		return TileEntity.func_190200_a(world, nbt);
+		return TileEntity.create(world, nbt);
 	}
 	
 	public static NBTTagCompound writeIInventoryToNBT(IInventory inv, NBTTagCompound nbt)
@@ -162,7 +162,7 @@ public class NBTHelper
 			int gettedByte = nbtItemTagCompound.getByte(NBT_IINVENTORY_SLOT);
 			if(gettedByte >= 0 && gettedByte < inv.getSizeInventory())
 			{
-				inv.setInventorySlotContents(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound));
+				inv.setInventorySlotContents(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound)); // TODO: Add method for reading ItemStack from NBT
 			}
 		}
 		return inv;
@@ -221,7 +221,7 @@ public class NBTHelper
 			int gettedByte = nbtItemTagCompound.getByte(NBT_IITEMHANDLER_SLOT);
 			if(gettedByte >= 0 && gettedByte < handler.getSlots())
 			{
-				handler.insertItem(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound), false);
+				handler.insertItem(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound), false); // TODO: Add method for reading ItemStack from NBT
 			}
 		}
 		return handler;

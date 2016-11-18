@@ -25,6 +25,11 @@ public class PotionedCrystalHelper
 	{
 	}
 	
+	public static String getPotionTypeName(PotionType pt)
+	{
+		return ForgeRegistries.POTION_TYPES.getKey(pt).getResourcePath();
+	}
+	
 	/**
 	 * Returns the IPotionedCrystal from ItemPotion.
 	 */
@@ -46,12 +51,12 @@ public class PotionedCrystalHelper
 			if(stack.getItem() instanceof ItemPotion)
 			{
 				PotionType pt = PotionUtils.getPotionFromItem(stack);
-				int ptID = PotionType.getID(pt);
-				for(IPotionedCrystal ipc : VanillaMagicItems.INSTANCE.potionedCrystals)
+				String ptName = getPotionTypeName(pt);
+				for(IPotionedCrystal pc : VanillaMagicItems.INSTANCE.potionedCrystals)
 				{
-					if(ipc.getPotionTypeID() == ptID)
+					if(pc.getPotionName().equals(ptName))
 					{
-						return ipc;
+						return pc;
 					}
 				}
 			}
@@ -74,14 +79,14 @@ public class PotionedCrystalHelper
 		{
 			return null;
 		}
-		if(stackTag.hasKey(IPotionedCrystal.NBT_POTION_TYPE_ID))
+		if(stackTag.hasKey(IPotionedCrystal.NBT_POTION_TYPE_NAME))
 		{
-			int id = stackTag.getInteger(IPotionedCrystal.NBT_POTION_TYPE_ID);
-			for(IPotionedCrystal ipc : VanillaMagicItems.INSTANCE.potionedCrystals)
+			String name = stackTag.getString(IPotionedCrystal.NBT_POTION_TYPE_NAME);
+			for(IPotionedCrystal pc : VanillaMagicItems.INSTANCE.potionedCrystals)
 			{
-				if(id == ipc.getPotionTypeID())
+				if(name.equals(pc.getPotionName()))
 				{
-					return ipc;
+					return pc;
 				}
 			}
 		}

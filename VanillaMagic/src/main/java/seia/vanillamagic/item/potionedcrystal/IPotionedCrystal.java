@@ -9,7 +9,7 @@ import seia.vanillamagic.api.item.ICustomItem;
 
 public interface IPotionedCrystal extends ICustomItem
 {
-	public static final String NBT_POTION_TYPE_ID = "NBT_POTION_TYPE_ID";
+	public static final String NBT_POTION_TYPE_NAME = "NBT_POTION_TYPE_NAME";
 	
 	PotionType getPotionType();
 	
@@ -19,18 +19,14 @@ public interface IPotionedCrystal extends ICustomItem
 		stack.setStackDisplayName("Potioned Crystal: " + getPotionName());
 		NBTTagCompound stackTag = stack.getTagCompound();
 		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		stackTag.setInteger(NBT_POTION_TYPE_ID, getPotionTypeID());
+		stackTag.setString(NBT_POTION_TYPE_NAME, getPotionName());
 		return stack;
 	}
 	
 	default String getPotionName()
 	{
-		return ForgeRegistries.POTION_TYPES.getKey(getPotionType()).getResourcePath();
-	}
-	
-	default int getPotionTypeID()
-	{
-		return PotionType.getID(getPotionType());
+		//return ForgeRegistries.POTION_TYPES.getKey(getPotionType()).getResourcePath();
+		return PotionedCrystalHelper.getPotionTypeName(getPotionType());
 	}
 	
 	default void registerRecipe()
