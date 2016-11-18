@@ -35,7 +35,8 @@ public class VanillaMagicIntegration
 		integrations.add(new IntegrationEndMetals());
 		integrations.add(new IntegrationDenseMetals());
 		
-		integrations.add(new IntegrationJEI());
+		// TODO: Currently disabled JEI Integration. Is it even necessary to have this integration ???
+		//integrations.add(new IntegrationJEI()); 
 	}
 	
 	public void preInit()
