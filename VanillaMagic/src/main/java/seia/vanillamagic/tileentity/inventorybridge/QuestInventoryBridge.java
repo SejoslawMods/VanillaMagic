@@ -18,6 +18,7 @@ import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.WorldHelper;
 
 public class QuestInventoryBridge extends Quest
@@ -97,8 +98,10 @@ public class QuestInventoryBridge extends Quest
 				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
 					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
-					leftHand.stackSize--;
-					if(leftHand.stackSize == 0)
+					//leftHand.stackSize--;
+					ItemStackHelper.decreaseStackSize(leftHand, 1);
+					//if(leftHand.stackSize == 0)
+					if(ItemStackHelper.getStackSize(leftHand) == 0)
 					{
 						player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
 					}

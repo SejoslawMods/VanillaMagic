@@ -27,6 +27,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class FarmerPlantable implements IFarmer
 {
@@ -39,11 +40,13 @@ public class FarmerPlantable implements IFarmer
 	
 	public boolean canPlant(ItemStack stack)
 	{
-		if(stack == null)
+		//if(stack == null)
+		if(ItemStackHelper.isNullStack(stack))
 		{
 			return false;
 		}
-		if(stack.stackSize <= 0)
+		//if(stack.stackSize <= 0)
+		if(ItemStackHelper.getStackSize(stack) <= 0)
 		{
 			return false;
 		}
@@ -116,7 +119,8 @@ public class FarmerPlantable implements IFarmer
 
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, ItemStack plantable) 
 	{
-		if(plantable.stackSize <= 0)
+		//if(plantable.stackSize <= 0)
+		if(ItemStackHelper.getStackSize(plantable) <= 0)
 		{
 			return false;
 		}
@@ -125,8 +129,10 @@ public class FarmerPlantable implements IFarmer
 		worldObj.setBlockState(bc, target, 1 | 2);
 		if(plantable != null)
 		{
-			plantable.stackSize--;
-			if(plantable.stackSize == 0)
+			//plantable.stackSize--;
+			ItemStackHelper.decreaseStackSize(plantable, 1);
+			//if(plantable.stackSize == 0)
+			if(ItemStackHelper.getStackSize(plantable) == 0)
 			{
 				farm.clearZeroStackSizeInventorySlots();
 			}
@@ -136,7 +142,8 @@ public class FarmerPlantable implements IFarmer
 
 	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack plantable) 
 	{
-		if(plantable.stackSize <= 0)
+		//if(plantable.stackSize <= 0)
+		if(ItemStackHelper.getStackSize(plantable) <= 0)
 		{
 			return false;
 		}
@@ -185,15 +192,18 @@ public class FarmerPlantable implements IFarmer
 		{
 			for(ItemStack stack : drops) 
 			{
-				if(stack != null && stack.stackSize > 0 && worldObj.rand.nextFloat() <= chance) 
+				if(stack != null && /*stack.stackSize*/ ItemStackHelper.getStackSize(stack)  > 0 && worldObj.rand.nextFloat() <= chance) 
 				{
 					if(!removed && isPlantableForBlock(stack, block)) 
 					{
 						removed = true;
 						removedPlantable = stack.copy();
-						removedPlantable.stackSize = 1;
-						stack.stackSize--;
-						if(stack.stackSize > 0) 
+						//removedPlantable.stackSize = 1;
+						ItemStackHelper.setStackSize(removedPlantable, 1);
+						//stack.stackSize--;
+						ItemStackHelper.decreaseStackSize(stack, 1);
+						//if(stack.stackSize > 0) 
+						if(ItemStackHelper.getStackSize(stack) > 0)
 						{
 							result.add(new EntityItem(worldObj, bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, stack.copy()));
 						}

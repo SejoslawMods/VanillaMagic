@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class FarmerOreDictionaryTree extends FarmerTree
 {
@@ -102,7 +103,8 @@ public class FarmerOreDictionaryTree extends FarmerTree
 		worldObj.setBlockState(bc, Block.getBlockFromItem(item).getStateFromMeta(item.getMetadata(seed.getMetadata())), 1 | 2);
 		if(seed != null)
 		{
-			seed.stackSize--;
+			//seed.stackSize--;
+			ItemStackHelper.decreaseStackSize(seed, 1);
 		}
 		return true;
 	}

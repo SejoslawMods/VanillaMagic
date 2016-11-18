@@ -14,6 +14,7 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestMachineFarm extends QuestMachineActivate
 {
@@ -42,7 +43,8 @@ public class QuestMachineFarm extends QuestMachineActivate
 			tileFarm.setWorkRadius(radius);
 			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{
-				player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
+				//player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
+				ItemStackHelper.decreaseStackSize(player.getHeldItemOffhand(), ItemStackHelper.getStackSize(mustHaveOffHand));
 				EntityHelper.addChatComponentMessage(player, tileFarm.getClass().getSimpleName() + " added");
 			}
 		}

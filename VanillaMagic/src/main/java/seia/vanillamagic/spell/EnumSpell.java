@@ -76,7 +76,8 @@ public enum EnumSpell
 	{
 		return (itemOffHand.getItem().equals(stackOffHand.getItem())) && 
 				(itemOffHand.getMetadata() == stackOffHand.getMetadata()) &&
-				(itemOffHand.stackSize <= stackOffHand.stackSize);
+				//(itemOffHand.stackSize <= stackOffHand.stackSize);
+				(ItemStackHelper.getStackSize(itemOffHand) <= ItemStackHelper.getStackSize(stackOffHand));
 	}
 
 	//================================================================================================

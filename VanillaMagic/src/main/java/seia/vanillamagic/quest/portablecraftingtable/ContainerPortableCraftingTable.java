@@ -11,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class ContainerPortableCraftingTable extends Container
 {
@@ -82,7 +83,7 @@ public class ContainerPortableCraftingTable extends Container
 			{
 				if(!this.mergeItemStack(itemstack1, 10, 46, true))
 				{
-					return null;
+					return ItemStackHelper.NULL_STACK;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			}
@@ -90,33 +91,35 @@ public class ContainerPortableCraftingTable extends Container
 			{
 				if(!this.mergeItemStack(itemstack1, 37, 46, false))
 				{
-					return null;
+					return ItemStackHelper.NULL_STACK;
 				}
 			}
 			else if(index >= 37 && index < 46)
 			{
 				if(!this.mergeItemStack(itemstack1, 10, 37, false))
 				{
-					return null;
+					return ItemStackHelper.NULL_STACK;
 				}
 			}
 			else if(!this.mergeItemStack(itemstack1, 10, 46, false))
 			{
-				return null;
+				return ItemStackHelper.NULL_STACK;
 			}
 			
-			if(itemstack1.stackSize == 0)
+			//if(itemstack1.stackSize == 0)
+			if(ItemStackHelper.getStackSize(itemstack1) == 0)
 			{
-				slot.putStack((ItemStack)null);
+				slot.putStack(ItemStackHelper.NULL_STACK);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 			
-			if(itemstack1.stackSize == itemstack.stackSize)
+			//if(itemstack1.stackSize == itemstack.stackSize)
+			if(ItemStackHelper.getStackSize(itemstack1) == ItemStackHelper.getStackSize(itemstack))
 			{
-				return null;
+				return ItemStackHelper.NULL_STACK;
 			}
 			//slot.onPickupFromSlot(entityPlayer, itemstack1);
 			slot.func_190901_a(entityPlayer, itemstack1); // TODO:

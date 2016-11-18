@@ -95,7 +95,7 @@ public class ToolHelper
 			}
 			// callback to the tool
 			stack.onBlockDestroyed(world, state, pos, player);
-			if(stack.stackSize == 0 && stack == player.getHeldItemMainhand()) 
+			if(/*stack.stackSize == 0*/ ItemStackHelper.getStackSize(stack) == 0 && stack == player.getHeldItemMainhand()) 
 			{
 				ForgeEventFactory.onPlayerDestroyItem(player, stack, EnumHand.MAIN_HAND);
 				player.setHeldItem(EnumHand.MAIN_HAND, null);

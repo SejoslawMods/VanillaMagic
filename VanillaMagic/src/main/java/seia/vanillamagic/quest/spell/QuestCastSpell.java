@@ -13,6 +13,7 @@ import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumSpell;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.spell.SpellHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public abstract class QuestCastSpell extends Quest
 {
@@ -66,13 +67,16 @@ public abstract class QuestCastSpell extends Quest
 				}
 				if(caster.hasAchievement(achievement)) //else
 				{
-					if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
+					//if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
+					if(ItemStackHelper.getStackSize(casterOffHand) >= 
+							ItemStackHelper.getStackSize(spell.itemOffHand))
 					{
 						if(howManyTimesCasted == 1)
 						{
 							if(castRightSpell(caster, pos, face, hitVec))
 							{
-								casterOffHand.stackSize -= spell.itemOffHand.stackSize;
+								//casterOffHand.stackSize -= spell.itemOffHand.stackSize;
+								ItemStackHelper.decreaseStackSize(casterOffHand, ItemStackHelper.getStackSize(spell.itemOffHand));
 								howManyTimesCasted++;
 								return true;
 							}

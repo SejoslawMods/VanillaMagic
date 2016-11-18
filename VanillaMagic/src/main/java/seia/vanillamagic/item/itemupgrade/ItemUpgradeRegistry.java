@@ -18,6 +18,7 @@ import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.api.item.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.itemupgrade.upgrade.UpgradeAutosmelt;
+import seia.vanillamagic.util.ItemStackHelper;
 
 /**
  * This is the base registry which will hold ALL the upgrades for different items.
@@ -176,7 +177,9 @@ public class ItemUpgradeRegistry
 		{
 			if(upgrade.getIngredient().getItem() == ingredient.getItem())
 			{
-				if(upgrade.getIngredient().stackSize == ingredient.stackSize)
+				//if(upgrade.getIngredient().stackSize == ingredient.stackSize)
+				if(ItemStackHelper.getStackSize(upgrade.getIngredient()) == 
+						ItemStackHelper.getStackSize(ingredient))
 				{
 					return upgrade.getResult(base);
 				}

@@ -31,6 +31,7 @@ import seia.vanillamagic.api.tileentity.machine.IFarm;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class TileFarm extends TileMachine implements IFarm
 {
@@ -202,7 +203,7 @@ public class TileFarm extends TileMachine implements IFarm
 			ItemStack stack = inv.getStackInSlot(i);
 			if(stack != null)
 			{
-				if(type.itemMatches(stack) && stack.stackSize > 0 /*&& stack.getItemDamage() > 1*/)
+				if(type.itemMatches(stack) && /*stack.stackSize*/ ItemStackHelper.getStackSize(stack)  > 0 /*&& stack.getItemDamage() > 1*/)
 				{
 					return stack;
 				}
@@ -263,7 +264,7 @@ public class TileFarm extends TileMachine implements IFarm
 			tool.setItemDamage(tool.getItemDamage() + 1);
 		}
 		
-		if(tool.stackSize == 0 || (canDamage && tool.getItemDamage() >= tool.getMaxDamage())) 
+		if(/*tool.stackSize*/ ItemStackHelper.getStackSize(tool) == 0 || (canDamage && tool.getItemDamage() >= tool.getMaxDamage())) 
 		{
 			destroyTool(type);
 		}
@@ -280,7 +281,7 @@ public class TileFarm extends TileMachine implements IFarm
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if(type.itemMatches(stack) && stack.stackSize == 0)
+			if(type.itemMatches(stack) && /*stack.stackSize*/ ItemStackHelper.getStackSize(stack) == 0)
 			{
 				inv.setInventorySlotContents(i, null);
 				markDirty();
@@ -429,7 +430,7 @@ public class TileFarm extends TileMachine implements IFarm
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if((stack != null) && (stack.stackSize > 1) && (stack.isItemEqual(seeds)))
+			if((stack != null) && (/*stack.stackSize*/ ItemStackHelper.getStackSize(stack) > 1) && (stack.isItemEqual(seeds)))
 			{
 				return true;
 			}
@@ -458,7 +459,7 @@ public class TileFarm extends TileMachine implements IFarm
 				{
 					if(blockSapling instanceof BlockSapling)
 					{
-						return 90 * (farmSaplingReserveAmount - (stack == null ? 0 : stack.stackSize)) / farmSaplingReserveAmount;
+						return 90 * (farmSaplingReserveAmount - (stack == null ? 0 : /*stack.stackSize*/ ItemStackHelper.getStackSize(stack))) / farmSaplingReserveAmount;
 					}
 				}
 			}
@@ -485,15 +486,19 @@ public class TileFarm extends TileMachine implements IFarm
 			{
 				if(matchMetadata ? invStack.isItemEqual(stack) : invStack.getItem() == stack.getItem())
 				{
-					if(stack.stackSize > 1)
+					//if(stack.stackSize > 1)
+					if(ItemStackHelper.getStackSize(stack) > 1)
 					{
 						ItemStack result = stack.copy();
-						result.stackSize = 1;
+						//result.stackSize = 1;
+						ItemStackHelper.setStackSize(result, 1);
 						stack = stack.copy();
-						stack.stackSize--;
-						if(stack.stackSize == 0)
+						//stack.stackSize--;
+						ItemStackHelper.decreaseStackSize(stack, 1);
+						//if(stack.stackSize == 0)
+						if(ItemStackHelper.getStackSize(stack) == 0)
 						{
-							stack = null;
+							stack = ItemStackHelper.NULL_STACK;
 						}
 						getInputInventory().getInventory().setInventorySlotContents(i, stack);
 						return result;
@@ -513,9 +518,11 @@ public class TileFarm extends TileMachine implements IFarm
 				EntityItem item = (EntityItem) entity;
 				ItemStack stack = item.getEntityItem().copy();
 				int numInserted = insertResult(stack, pos);
-				stack.stackSize -= numInserted;
+				//stack.stackSize -= numInserted;
+				ItemStackHelper.decreaseStackSize(stack, numInserted);
 				item.setEntityItemStack(stack);
-				if(stack.stackSize == 0) 
+				//if(stack.stackSize == 0) 
+				if(ItemStackHelper.getStackSize(stack) == 0)
 				{
 					item.setDead();
 				}
@@ -530,7 +537,8 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			return 0;
 		}
-		return left.stackSize;
+		//return left.stackSize;
+		return ItemStackHelper.getStackSize(left);
 	}
 
 	@Nonnull
@@ -571,7 +579,8 @@ public class TileFarm extends TileMachine implements IFarm
 			ItemStack stack = inv.getStackInSlot(i);
 			if(stack != null)
 			{
-				if(stack.stackSize <= 0)
+				//if(stack.stackSize <= 0)
+				if(ItemStackHelper.getStackSize(stack) <= 0)
 				{
 					inv.setInventorySlotContents(i, null);
 				}

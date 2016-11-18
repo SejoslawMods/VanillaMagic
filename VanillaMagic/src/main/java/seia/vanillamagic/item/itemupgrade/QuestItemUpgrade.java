@@ -23,6 +23,7 @@ import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry.ItemEntry;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestItemUpgrade extends Quest
 {
@@ -155,7 +156,8 @@ public class QuestItemUpgrade extends Quest
 		{
 			if(entityItem.getItem() == ie.item)
 			{
-				if(entityItem.stackSize == ie.stack.stackSize)
+				//if(entityItem.stackSize == ie.stack.stackSize)
+				if(ItemStackHelper.getStackSize(entityItem) == ItemStackHelper.getStackSize(ie.stack))
 				{
 					return true;
 				}

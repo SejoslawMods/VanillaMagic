@@ -1,11 +1,13 @@
 package seia.vanillamagic.inventory;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -20,11 +22,26 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class InventoryHelper 
 {
+	private static Class<?> CLASS_TILE_HOPPER = null;
+	
 	private InventoryHelper()
 	{
+	}
+	
+	static
+	{
+		try 
+		{
+			CLASS_TILE_HOPPER = Class.forName("net.minecraft.tileentity.TileEntityHopper");
+		} 
+		catch(ClassNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public static boolean isInventory(World world, BlockPos pos) 
@@ -35,6 +52,11 @@ public class InventoryHelper
 	public static void dropInventoryItems(World worldIn, BlockPos pos, IInventory inventory)
 	{
 		net.minecraft.inventory.InventoryHelper.dropInventoryItems(worldIn, pos, inventory);
+	}
+	
+	public static void dropInventoryItems(World worldIn, Entity entityAt, IInventory inventory)
+	{
+		net.minecraft.inventory.InventoryHelper.dropInventoryItems(worldIn, entityAt, inventory);
 	}
 	
 	public static void spawnItemStack(World worldIn, BlockPos pos, ItemStack stack)
@@ -51,33 +73,11 @@ public class InventoryHelper
 	 * Returns false if the inventory has any room to place items in
 	 */
 	public static boolean isInventoryFull(IInventory inventoryIn, EnumFacing side)
+			throws ReflectiveOperationException
 	{
-		if(inventoryIn instanceof ISidedInventory)
-		{
-			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
-			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for(int k : slots)
-			{
-				ItemStack stack = iSidedInventory.getStackInSlot(k);
-				if(stack == null || stack.stackSize != stack.getMaxStackSize())
-				{
-					return false;
-				}
-			}
-		}
-		else
-		{
-			int size = inventoryIn.getSizeInventory();
-			for(int j = 0; j < size; ++j)
-			{
-				ItemStack stack = inventoryIn.getStackInSlot(j);
-				if(stack == null || stack.stackSize != stack.getMaxStackSize())
-				{
-					return false;
-				}
-			}
-		}
-		return true;
+		Method method = CLASS_TILE_HOPPER.getMethod("isInventoryFull", IInventory.class, EnumFacing.class);
+		method.setAccessible(true);
+		return (boolean) method.invoke(null, inventoryIn, side);
 	}
 	
 	/**
@@ -117,85 +117,16 @@ public class InventoryHelper
 	 * Returns false if the specified IInventory contains any items
 	 */
 	public static boolean isInventoryEmpty(IInventory inventoryIn, EnumFacing side)
+			throws ReflectiveOperationException
 	{
-		if(inventoryIn instanceof ISidedInventory)
-		{
-			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
-			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for(int i : slots)
-			{
-				if(iSidedInventory.getStackInSlot(i) != null)
-				{
-					return false;
-				}
-			}
-		}
-		else
-		{
-			int size = inventoryIn.getSizeInventory();
-			for(int k = 0; k < size; ++k)
-			{
-				if(inventoryIn.getStackInSlot(k) != null)
-				{
-					return false;
-				}
-			}
-		}
-		return true;
+		Method method = CLASS_TILE_HOPPER.getMethod("isInventoryEmpty", IInventory.class, EnumFacing.class);
+		method.setAccessible(true);
+		return (boolean) method.invoke(null, inventoryIn, side);
 	}
 
 	public static boolean captureDroppedItems(IHopper hopper)
 	{
 		return TileEntityHopper.captureDroppedItems(hopper);
-		
-//		Boolean ret = VanillaInventoryCodeHooks.extractHook(hopper);
-//		if(ret != null)
-//		{
-//			return ret;
-//		}
-//		IInventory iInventory = getHopperInventory(hopper);
-//		if(iInventory != null)
-//		{
-//			EnumFacing facing = EnumFacing.DOWN;
-//			if(isInventoryEmpty(iInventory, facing))
-//			{
-//				return false;
-//			}
-//			if(iInventory instanceof ISidedInventory)
-//			{
-//				ISidedInventory iSidedInventory = (ISidedInventory)iInventory;
-//				int[] slots = iSidedInventory.getSlotsForFace(facing);
-//				for(int i : slots)
-//				{
-//					if(pullItemFromSlot(hopper, iInventory, i, facing))
-//					{
-//						return true;
-//					}
-//				}
-//			}
-//			else
-//			{
-//				int size = iInventory.getSizeInventory();
-//				for(int k = 0; k < size; ++k)
-//				{
-//					if(pullItemFromSlot(hopper, iInventory, k, facing))
-//					{
-//						return true;
-//					}
-//				}
-//			}
-//		}
-//		else
-//		{
-//			for(EntityItem entityItem : getCaptureItems(hopper.getWorld(), hopper.getXPos(), hopper.getYPos(), hopper.getZPos()))
-//			{
-//				if(putDropInInventoryAllSlots(hopper, entityItem))
-//				{
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
 	}
 
 	/**
@@ -209,7 +140,7 @@ public class InventoryHelper
 		{
 			ItemStack stackCopy = stack.copy();
 			ItemStack leftItems = putStackInInventoryAllSlots(inventoryOut, inventoryIn.decrStackSize(index, 1), (EnumFacing)null);
-			if(leftItems == null || leftItems.stackSize == 0)
+			if(leftItems == null || /*leftItems.stackSize*/ ItemStackHelper.getStackSize(leftItems)  == 0)
 			{
 				inventoryIn.markDirty();
 				return true;
@@ -225,28 +156,7 @@ public class InventoryHelper
 	 */
 	public static boolean putDropInInventoryAllSlots(IInventory inventoryIn, EntityItem itemIn)
 	{
-		return TileEntityHopper.putDropInInventoryAllSlots(inventoryIn, itemIn);
-		
-//		boolean flag = false;
-//		if(itemIn == null)
-//		{
-//			return false;
-//		}
-//		else
-//		{
-//			ItemStack stack = itemIn.getEntityItem().copy();
-//			ItemStack leftItems = putStackInInventoryAllSlots(inventoryIn, stack, (EnumFacing)null);
-//			if(leftItems != null && leftItems.stackSize != 0)
-//			{
-//				itemIn.setEntityItemStack(leftItems);
-//			}
-//			else
-//			{
-//				flag = true;
-//				itemIn.setDead();
-//			}
-//			return flag;
-//		}
+		return TileEntityHopper.putDropInInventoryAllSlots(null, inventoryIn, itemIn);
 	}
 
 	/**
@@ -255,31 +165,7 @@ public class InventoryHelper
 	@Nullable
 	public static ItemStack putStackInInventoryAllSlots(IInventory inventoryIn, ItemStack stack, @Nullable EnumFacing side)
 	{
-		return TileEntityHopper.putStackInInventoryAllSlots(inventoryIn, stack, side);
-		
-//		if(inventoryIn instanceof ISidedInventory && side != null)
-//		{
-//			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
-//			int[] slots = iSidedInventory.getSlotsForFace(side);
-//			for(int k = 0; k < slots.length && stack != null && stack.stackSize > 0; ++k)
-//			{
-//				stack = insertStack(inventoryIn, stack, slots[k], side);
-//			}
-//		}
-//		else
-//		{
-//			int size = inventoryIn.getSizeInventory();
-//			for(int j = 0; j < size && stack != null && stack.stackSize > 0; ++j)
-//			{
-//				stack = insertStack(inventoryIn, stack, j, side);
-//			}
-//		}
-//		
-//		if(stack != null && stack.stackSize == 0)
-//		{
-//			stack = null;
-//		}
-//		return stack;
+		return TileEntityHopper.putStackInInventoryAllSlots(null, inventoryIn, stack, side);
 	}
 
 	/**
@@ -304,54 +190,12 @@ public class InventoryHelper
 	 * Insert the specified stack to the specified inventory and return any leftover items
 	 */
 	@Nullable
-	public static ItemStack insertStack(IInventory inventoryIn, ItemStack stack, int index, EnumFacing side)
+	public static ItemStack insertStack(IInventory inventoryIn, IInventory stack, ItemStack index, int side, EnumFacing facing)
+			throws ReflectiveOperationException
 	{
-		ItemStack stackInSlot = inventoryIn.getStackInSlot(index);
-		if(canInsertItemInSlot(inventoryIn, stack, index, side))
-		{
-			boolean isHopper = false;
-			if(stackInSlot == null)
-			{
-				int max = Math.min(stack.getMaxStackSize(), inventoryIn.getInventoryStackLimit());
-				if(max >= stack.stackSize)
-				{
-					inventoryIn.setInventorySlotContents(index, stack);
-					stack = null;
-				}
-				else
-				{
-					inventoryIn.setInventorySlotContents(index, stack.splitStack(max));
-				}
-				isHopper = true;
-			}
-			else if(canCombine(stackInSlot, stack))
-			{
-				int max = Math.min(stack.getMaxStackSize(), inventoryIn.getInventoryStackLimit());
-				if(max > stackInSlot.stackSize)
-				{
-					int i = max - stackInSlot.stackSize;
-					int j = Math.min(stack.stackSize, i);
-					stack.stackSize -= j;
-					stackInSlot.stackSize += j;
-					isHopper = j > 0;
-				}
-			}
-			
-			if(isHopper)
-			{
-				if(inventoryIn instanceof TileEntityHopper)
-				{
-					TileEntityHopper tileEntityHopper = (TileEntityHopper)inventoryIn;
-					if(tileEntityHopper.mayTransfer())
-					{
-						tileEntityHopper.setTransferCooldown(8);
-					}
-					inventoryIn.markDirty();
-				}
-				inventoryIn.markDirty();
-			}
-		}
-		return stack;
+		Method method = CLASS_TILE_HOPPER.getMethod("insertStack", IInventory.class, IInventory.class, ItemStack.class, int.class, EnumFacing.class);
+		method.setAccessible(true);
+		return (ItemStack) method.invoke(null, inventoryIn, stack, index, side, facing);
 	}
 
 	/**
@@ -366,10 +210,6 @@ public class InventoryHelper
 	public static List<EntityItem> getCaptureItems(World worldIn, double x, double y, double z)
 	{
 		return TileEntityHopper.getCaptureItems(worldIn, x, y, z);
-		
-//		return worldIn.<EntityItem>getEntitiesWithinAABB(EntityItem.class, 
-//				new AxisAlignedBB(x - 0.5D, y, z - 0.5D, x + 0.5D, y + 1.5D, z + 0.5D), 
-//				EntitySelectors.IS_ALIVE);
 	}
     
 	@Nullable
@@ -385,54 +225,21 @@ public class InventoryHelper
 	public static IInventory getInventoryAtPosition(World worldIn, double x, double y, double z)
 	{
 		return TileEntityHopper.getInventoryAtPosition(worldIn, x, y, z);
-		
-//		IInventory iInventory = null;
-//		int i = MathHelper.floor_double(x);
-//		int j = MathHelper.floor_double(y);
-//		int k = MathHelper.floor_double(z);
-//		BlockPos blockPos = new BlockPos(i, j, k);
-//		Block block = worldIn.getBlockState(blockPos).getBlock();
-//		if(block.hasTileEntity())
-//		{
-//			TileEntity tileEntity = worldIn.getTileEntity(blockPos);
-//			if(tileEntity instanceof IInventory)
-//			{
-//				iInventory = (IInventory)tileEntity;
-//				if(iInventory instanceof TileEntityChest && block instanceof BlockChest)
-//				{
-//					iInventory = ((BlockChest)block).getContainer(worldIn, blockPos, true);
-//				}
-//			}
-//		}
-//		if(iInventory == null)
-//		{
-//			List<Entity> list = worldIn.getEntitiesInAABBexcluding((Entity)null, 
-//					new AxisAlignedBB(x - 0.5D, y - 0.5D, z - 0.5D, x + 0.5D, y + 0.5D, z + 0.5D), 
-//					EntitySelectors.HAS_INVENTORY);
-//			if(!list.isEmpty())
-//			{
-//				iInventory = (IInventory)list.get(worldIn.rand.nextInt(list.size()));
-//			}
-//		}
-//		return iInventory;
 	}
 
-	public static boolean canCombine(ItemStack stack1, ItemStack stack2)
+	public static boolean canCombine(ItemStack stack1, ItemStack stack2) 
+			throws ReflectiveOperationException
 	{
-		return stack1.getItem() != stack2.getItem() ? 
-				false : 
-					(stack1.getMetadata() != stack2.getMetadata() ? 
-							false : 
-								(stack1.stackSize > stack1.getMaxStackSize() ? 
-										false : 
-											ItemStack.areItemStackTagsEqual(stack1, stack2)));
+		Method method = CLASS_TILE_HOPPER.getMethod("canCombine", ItemStack.class, ItemStack.class);
+		method.setAccessible(true);
+		return (boolean) method.invoke(null, stack1, stack2);
 	}
 
 	public static int getFirstNotNull(IInventory inv) 
 	{
 		for(int i = 0; i < inv.getSizeInventory(); i++)
 		{
-			if(inv.getStackInSlot(i) != null)
+			if(!ItemStackHelper.isNullStack(inv.getStackInSlot(i)))
 			{
 				return i;
 			}

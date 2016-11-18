@@ -81,7 +81,7 @@ public class ItemStackHelper
 	{
 		ItemStack stackWithNextMeta = null;
 		Item item = stack.getItem();
-		int amount = stack.stackSize;
+		int amount = getStackSize(stack); // stackSize
 		int meta = stack.getItemDamage();
 		try
 		{
@@ -94,12 +94,12 @@ public class ItemStackHelper
 		return stackWithNextMeta;
 	}
 	
-	public static ItemStack replaceItemInStack(ItemStack stack, Item newItem)
-	{
-		ItemStack newStack = stack.copy();
-		newStack.setItem(newItem);
-		return newStack;
-	}
+//	public static ItemStack replaceItemInStack(ItemStack stack, Item newItem) // TODO:
+//	{
+//		ItemStack newStack = stack.copy();
+//		newStack.setItem(newItem);
+//		return newStack;
+//	}
 	
 	@Nullable
 	public static ItemStack getItemStackFromJSON(JsonObject jo)
@@ -173,6 +173,8 @@ public class ItemStackHelper
 		return false;
 	}
 	
+	//================================== StackSize Operations ====================================
+	
 	/**
 	 * Will return {@link ItemStackHelper#NULL_STACK} 
 	 * if the {@link ItemStack} should be understand as Empty.
@@ -185,5 +187,48 @@ public class ItemStackHelper
 			return NULL_STACK;
 		}
 		return stack;
+	}
+	
+	/**
+	 * This method will returns the old ItemStack.stackSize
+	 */
+	public static int getStackSize(ItemStack stack)
+	{
+		return stack.func_190916_E();
+	}
+	
+	/**
+	 * This method will sets the ItemStack.stackSize to the given value.<br>
+	 * Returns the given stack.
+	 */
+	public static void setStackSize(ItemStack stack, int value)
+	{
+		stack.func_190920_e(value);
+	}
+	
+	/**
+	 * This method will increase the ItemStack.stackSize of the given stack.<br>
+	 * Returns the given stack.
+	 */
+	public static void increaseStackSize(ItemStack stack, int value)
+	{
+		stack.func_190917_f(value);
+	}
+	
+	/**
+	 * This method will decrease the ItemStack.stackSize of the given stack.<br>
+	 * Returns the given stack.
+	 */
+	public static void decreaseStackSize(ItemStack stack, int value)
+	{
+		stack.func_190918_g(value);
+	}
+	
+	/**
+	 * Returns true if the given ItemStack is {@link #NULL_STACK}
+	 */
+	public static boolean isNullStack(ItemStack stack)
+	{
+		return stack.func_190926_b();
 	}
 }

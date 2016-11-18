@@ -52,7 +52,8 @@ public class QuestSummonHorde extends Quest
 		{
 			if(ItemStack.areItemsEqual(leftHand, requiredLeftHand))
 			{
-				if(leftHand.stackSize == requiredLeftHand.stackSize)
+				//if(leftHand.stackSize == requiredLeftHand.stackSize)
+				if(ItemStackHelper.getStackSize(leftHand) == ItemStackHelper.getStackSize(requiredLeftHand))
 				{
 					if(!player.hasAchievement(achievement))
 					{
@@ -65,7 +66,8 @@ public class QuestSummonHorde extends Quest
 					{
 						EntityHelper.addChatComponentMessage(player, player.getDisplayNameString() + " summoned horde lvl: " + this.level + ". Prepare to DIE !!!");
 						spawnHorde(player, world);
-						leftHand.stackSize -= requiredLeftHand.stackSize;
+						//leftHand.stackSize -= requiredLeftHand.stackSize;
+						ItemStackHelper.decreaseStackSize(leftHand, ItemStackHelper.getStackSize(requiredLeftHand));
 					}
 				}
 			}

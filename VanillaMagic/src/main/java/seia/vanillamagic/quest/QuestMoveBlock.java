@@ -76,7 +76,8 @@ public class QuestMoveBlock extends Quest
 				}
 				if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
 				{
-					if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
+					//if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
+					if(ItemStackHelper.getStackSize(stackOffHand) == ItemStackHelper.getStackSize(requiredStackOffHand))
 					{
 						if(canPlayerGetAchievement(player))
 						{
@@ -119,7 +120,8 @@ public class QuestMoveBlock extends Quest
 		// changing name just to force Minecraft to let this item have NBTTagCompound
 		player.getHeldItemOffhand().setStackDisplayName("QuestBook");
 		// any item will be replaced to Enchanted Book
-		ItemStack stackOffHand = ItemStackHelper.replaceItemInStack(player.getHeldItemOffhand(), Items.ENCHANTED_BOOK);
+		//ItemStack stackOffHand = ItemStackHelper.replaceItemInStack(player.getHeldItemOffhand(), Items.ENCHANTED_BOOK);
+		ItemStack stackOffHand = new ItemStack(Items.ENCHANTED_BOOK);
 		NBTTagCompound stackTagCompound = stackOffHand.getTagCompound();
 		// Save to ItemStack
 		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))

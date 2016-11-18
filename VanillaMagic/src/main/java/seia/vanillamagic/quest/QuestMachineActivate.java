@@ -47,11 +47,13 @@ public abstract class QuestMachineActivate extends Quest
 		}
 		if(ItemStack.areItemsEqual(offHand, mustHaveOffHand))
 		{
-			if(offHand.stackSize >= mustHaveOffHand.stackSize)
+			//if(offHand.stackSize >= mustHaveOffHand.stackSize)
+			if(ItemStackHelper.getStackSize(offHand) >= ItemStackHelper.getStackSize(mustHaveOffHand))
 			{
 				if(ItemStack.areItemsEqual(mainHand, mustHaveMainHand))
 				{
-					if(mainHand.stackSize >= mustHaveMainHand.stackSize)
+					//if(mainHand.stackSize >= mustHaveMainHand.stackSize)
+					if(ItemStackHelper.getStackSize(mainHand) >= ItemStackHelper.getStackSize(mustHaveMainHand))
 					{
 						return true;
 					}

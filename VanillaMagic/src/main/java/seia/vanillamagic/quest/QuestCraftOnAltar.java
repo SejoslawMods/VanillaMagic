@@ -65,7 +65,8 @@ public class QuestCraftOnAltar extends Quest
 		int stackSize = 0;
 		for(int i = 0; i < ingredients.length; i++)
 		{
-			stackSize += ingredients[i].stackSize;
+			//stackSize += ingredients[i].stackSize;
+			stackSize += ItemStackHelper.getStackSize(ingredients[i]);
 		}
 		return stackSize;
 	}
@@ -75,7 +76,8 @@ public class QuestCraftOnAltar extends Quest
 		int stackSize = 0;
 		for(int i = 0; i < entitiesInCauldron.size(); i++)
 		{
-			stackSize += entitiesInCauldron.get(i).getEntityItem().stackSize;
+			//stackSize += entitiesInCauldron.get(i).getEntityItem().stackSize;
+			stackSize += ItemStackHelper.getStackSize(entitiesInCauldron.get(i).getEntityItem());
 		}
 		return stackSize;
 	}

@@ -23,6 +23,7 @@ import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class TileQuarry extends TileMachine implements IQuarry
 {
@@ -155,7 +156,14 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public boolean inventoryOutputHasSpace()
 	{
-		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
+		try
+		{
+			return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 	
 	public void spawnDigged(ItemStack digged)
@@ -305,7 +313,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 					{
 						break;
 					}
-					if(leftItems.stackSize > 0)
+					//if(leftItems.stackSize > 0)
+					if(ItemStackHelper.getStackSize(leftItems) > 0)
 					{
 						spawnDigged(leftItems);
 					}

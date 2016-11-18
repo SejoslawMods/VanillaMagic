@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestArrowMachineGun extends Quest
 {
@@ -71,10 +72,13 @@ public class QuestArrowMachineGun extends Quest
 							SoundCategory.NEUTRAL, 
 							1.0F, 
 							1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
-					if(leftHand.stackSize > 0)
+					//if(leftHand.stackSize > 0)
+					if(ItemStackHelper.getStackSize(leftHand) > 0)
 					{
-						--leftHand.stackSize;
-						if(leftHand.stackSize == 0)
+						//--leftHand.stackSize;
+						ItemStackHelper.decreaseStackSize(leftHand, 1);
+						//if(leftHand.stackSize == 0)
+						if(ItemStackHelper.getStackSize(leftHand) > 0)
 						{
 							player.inventory.deleteStack(leftHand);
 						}

@@ -67,7 +67,8 @@ public class QuestCaptureEntity extends Quest
 				ItemStack stackOffHand = player.getHeldItemOffhand();
 				if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
 				{
-					if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
+					//if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
+					if(ItemStackHelper.getStackSize(stackOffHand) == ItemStackHelper.getStackSize(requiredStackOffHand))
 					{
 						if(canPlayerGetAchievement(player))
 						{
@@ -148,7 +149,8 @@ public class QuestCaptureEntity extends Quest
 		// changing name just to force Minecraft to let this item have NBTTagCompound
 		player.getHeldItemOffhand().setStackDisplayName("EntityBook");
 		// any item will be replaced to Enchanted Book
-		ItemStack stackOffHand = ItemStackHelper.replaceItemInStack(player.getHeldItemOffhand(), Items.ENCHANTED_BOOK);
+		//ItemStack stackOffHand = ItemStackHelper.replaceItemInStack(player.getHeldItemOffhand(), Items.ENCHANTED_BOOK);
+		ItemStack stackOffHand = new ItemStack(Items.ENCHANTED_BOOK);
 		NBTTagCompound stackTagCompound = stackOffHand.getTagCompound();
 		// Save to ItemStack
 		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))

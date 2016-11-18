@@ -21,6 +21,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class FarmerCustomSeed implements IFarmer
 {
@@ -202,9 +203,11 @@ public class FarmerCustomSeed implements IFarmer
 				{
 					if(!removed && stack.isItemEqual(getSeeds())) 
 					{
-						stack.stackSize--;
+						//stack.stackSize--;
+						ItemStackHelper.decreaseStackSize(stack, 1);
 						removed = true;
-						if(stack.stackSize > 0) 
+						//if(stack.stackSize > 0) 
+						if(ItemStackHelper.getStackSize(stack) > 0)
 						{
 							result.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy()));
 						}
@@ -287,7 +290,8 @@ public class FarmerCustomSeed implements IFarmer
 			worldObj.setBlockState(pos, getPlantedBlock().getStateFromMeta(getPlantedBlockMeta()), 1 | 2);
 			if(seed != null)
 			{
-				seed.stackSize--;
+				//seed.stackSize--;
+				ItemStackHelper.decreaseStackSize(seed, 1);
 			}
 			return true;
 		}
