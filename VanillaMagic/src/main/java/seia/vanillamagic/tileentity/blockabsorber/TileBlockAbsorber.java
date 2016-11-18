@@ -56,18 +56,34 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 			if(tileAtThisPos instanceof IInventory)
 			{
 				IInventory inv = (IInventory) tileAtThisPos;
-				if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // First call to absorb items from Inventory
+				try
 				{
-					for(int i = 0; i < inv.getSizeInventory(); i++)
+					if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // First call to absorb items from Inventory
 					{
-						ItemStack stackInSlot = inv.getStackInSlot(i);
-						ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, stackInSlot, getInputFacing());
-						inv.setInventorySlotContents(i, leftItems);
+						for(int i = 0; i < inv.getSizeInventory(); i++)
+						{
+							ItemStack stackInSlot = inv.getStackInSlot(i);
+							ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, stackInSlot, getInputFacing());
+							inv.setInventorySlotContents(i, leftItems);
+						}
 					}
 				}
-				if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // Second call to check if all items were absorbed after first call
+				catch(ReflectiveOperationException e)
 				{
-					return; // If it's not possible to absorb all, return
+					e.printStackTrace();
+					return;
+				}
+				
+				try
+				{
+					if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // Second call to check if all items were absorbed after first call
+					{
+						return; // If it's not possible to absorb all, return
+					}
+				}
+				catch(ReflectiveOperationException e)
+				{
+					e.printStackTrace();
 				}
 			}
 		}

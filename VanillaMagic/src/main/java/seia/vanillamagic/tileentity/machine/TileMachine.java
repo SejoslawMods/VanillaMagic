@@ -74,7 +74,16 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		{
 			return false;
 		}
-		return !InventoryHelper.isInventoryFull(outInv.getInventory(), getOutputFacing());
+		
+		try
+		{
+			return !InventoryHelper.isInventoryFull(outInv.getInventory(), getOutputFacing());
+		}
+		catch(ReflectiveOperationException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public void init(World world, BlockPos machinePos)
@@ -379,7 +388,14 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 			ItemStack fuelToAdd = (ItemStack) returnedStack[0];
 			if(ItemStackHelper.isIInventory(fuelToAdd))
 			{
-				InventoryHelper.insertStack(invInput, fuelToAdd, (int) returnedStack[1], EnumFacing.DOWN);
+				try
+				{
+					InventoryHelper.insertStack(null, invInput, fuelToAdd, (int) returnedStack[1], EnumFacing.DOWN);
+				}
+				catch(ReflectiveOperationException e)
+				{
+					e.printStackTrace();
+				}
 				return;
 			}
 			ticks += SmeltingHelper.countTicks(fuelToAdd);
