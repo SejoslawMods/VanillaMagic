@@ -74,16 +74,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		{
 			return false;
 		}
-		
-		try
-		{
-			return !InventoryHelper.isInventoryFull(outInv.getInventory(), getOutputFacing());
-		}
-		catch(ReflectiveOperationException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
+		return !InventoryHelper.isInventoryFull(outInv.getInventory(), getOutputFacing());
 	}
 	
 	public void init(World world, BlockPos machinePos)

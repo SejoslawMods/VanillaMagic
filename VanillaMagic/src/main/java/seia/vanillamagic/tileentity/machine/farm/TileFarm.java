@@ -582,7 +582,7 @@ public class TileFarm extends TileMachine implements IFarm
 				//if(stack.stackSize <= 0)
 				if(ItemStackHelper.getStackSize(stack) <= 0)
 				{
-					inv.setInventorySlotContents(i, null);
+					inv.setInventorySlotContents(i, ItemStackHelper.NULL_STACK);
 				}
 			}
 		}

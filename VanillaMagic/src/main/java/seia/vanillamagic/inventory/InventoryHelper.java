@@ -73,11 +73,33 @@ public class InventoryHelper
 	 * Returns false if the inventory has any room to place items in
 	 */
 	public static boolean isInventoryFull(IInventory inventoryIn, EnumFacing side)
-			throws ReflectiveOperationException
 	{
-		Method method = CLASS_TILE_HOPPER.getMethod("isInventoryFull", IInventory.class, EnumFacing.class);
-		method.setAccessible(true);
-		return (boolean) method.invoke(null, inventoryIn, side);
+		if(inventoryIn instanceof ISidedInventory)
+		{
+			ISidedInventory isidedinventory = (ISidedInventory)inventoryIn;
+			int[] slots = isidedinventory.getSlotsForFace(side);
+			for(int slot : slots)
+			{
+				ItemStack stack = isidedinventory.getStackInSlot(slot);
+				if(ItemStackHelper.isNullStack(stack) || ItemStackHelper.getStackSize(stack) != stack.getMaxStackSize())
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			int slots = inventoryIn.getSizeInventory();
+			for(int slot = 0; slot < slots; ++slot)
+			{
+				ItemStack stack = inventoryIn.getStackInSlot(slot);
+				if(ItemStackHelper.isNullStack(stack) || ItemStackHelper.getStackSize(stack) != stack.getMaxStackSize())
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	/**
