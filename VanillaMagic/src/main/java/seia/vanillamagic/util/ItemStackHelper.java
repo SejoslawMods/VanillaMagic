@@ -18,6 +18,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 
+/**
+ * TODO: Wait for ForgeTeam to remap name ItemStack.func_190916_E() to something like "getStackSize()"
+ */
 public class ItemStackHelper 
 {
 	/**
