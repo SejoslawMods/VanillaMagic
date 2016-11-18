@@ -14,11 +14,17 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 
 public class ItemStackHelper 
 {
+	/**
+	 * new ItemStack((Item)null);
+	 */
+	public static final ItemStack NULL_STACK = ItemStack.field_190927_a;
+	
 	private ItemStackHelper()
 	{
 	}
@@ -162,5 +168,19 @@ public class ItemStackHelper
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Will return {@link ItemStackHelper#NULL_STACK} 
+	 * if the {@link ItemStack} should be understand as Empty.
+	 */
+	public static ItemStack loadItemStackFromNBT(NBTTagCompound tag)
+	{
+		ItemStack stack = new ItemStack(tag);
+		if(stack.func_190926_b())
+		{
+			return NULL_STACK;
+		}
+		return stack;
 	}
 }

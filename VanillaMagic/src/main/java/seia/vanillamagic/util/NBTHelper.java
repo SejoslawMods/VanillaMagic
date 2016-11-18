@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -162,7 +161,8 @@ public class NBTHelper
 			int gettedByte = nbtItemTagCompound.getByte(NBT_IINVENTORY_SLOT);
 			if(gettedByte >= 0 && gettedByte < inv.getSizeInventory())
 			{
-				inv.setInventorySlotContents(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound)); // TODO: Add method for reading ItemStack from NBT
+				//inv.setInventorySlotContents(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound)); // TODO: Add method for reading ItemStack from NBT
+				inv.setInventorySlotContents(gettedByte, ItemStackHelper.loadItemStackFromNBT(nbtItemTagCompound));
 			}
 		}
 		return inv;
@@ -221,7 +221,8 @@ public class NBTHelper
 			int gettedByte = nbtItemTagCompound.getByte(NBT_IITEMHANDLER_SLOT);
 			if(gettedByte >= 0 && gettedByte < handler.getSlots())
 			{
-				handler.insertItem(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound), false); // TODO: Add method for reading ItemStack from NBT
+				//handler.insertItem(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound), false); // TODO: Add method for reading ItemStack from NBT
+				handler.insertItem(gettedByte, ItemStackHelper.loadItemStackFromNBT(nbtItemTagCompound), false);
 			}
 		}
 		return handler;
