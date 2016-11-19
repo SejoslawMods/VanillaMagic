@@ -9,8 +9,7 @@ buildscript
             url = "http://files.minecraftforge.net/maven"
         }
     }
-    dependencies 
-    {
+    dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
