@@ -96,6 +96,7 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	{
 		super.writeToNBT(tag);
 		tag = NBTHelper.writeToINBTSerializable(this, tag);
+		tag.setString(NBTHelper.NBT_CLASS, this.getClass().getName());
 		return tag;
 	}
 	

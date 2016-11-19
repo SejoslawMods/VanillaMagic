@@ -115,30 +115,30 @@ public class FarmersRegistry implements IFarmer
 		return false;
 	}
 
-	@Nullable
-	public FarmerCustomSeed addSeed(String mod, String blockName, String itemName, Block... extraFarmland) 
-	{
-		if(Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 
-		{
-			Block cropBlock = Block.REGISTRY.getObject(new ResourceLocation(mod, blockName));
-			Item seedItem = Item.REGISTRY.getObject(new ResourceLocation(mod, itemName));
-			if(seedItem != null) 
-			{
-				FarmerCustomSeed farmer = new FarmerCustomSeed(cropBlock, new ItemStack(seedItem));
-				if(extraFarmland != null) 
-				{
-					for(Block farmland : extraFarmland) 
-					{
-						if(farmland != null) 
-						{
-							farmer.addTilledBlock(farmland);
-						}
-					}
-				}
-				addFarmer(farmer);
-				return farmer;
-			}
-		}
-		return null;
-	}
+//	@Nullable
+//	public FarmerCustomSeed addSeed(String mod, String blockName, String itemName, Block... extraFarmland) 
+//	{
+//		if(Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 
+//		{
+//			Block cropBlock = Block.REGISTRY.getObject(new ResourceLocation(mod, blockName));
+//			Item seedItem = Item.REGISTRY.getObject(new ResourceLocation(mod, itemName));
+//			if(seedItem != null) 
+//			{
+//				FarmerCustomSeed farmer = new FarmerCustomSeed(cropBlock, new ItemStack(seedItem));
+//				if(extraFarmland != null) 
+//				{
+//					for(Block farmland : extraFarmland) 
+//					{
+//						if(farmland != null) 
+//						{
+//							farmer.addTilledBlock(farmland);
+//						}
+//					}
+//				}
+//				addFarmer(farmer);
+//				return farmer;
+//			}
+//		}
+//		return null;
+//	}
 }

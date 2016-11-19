@@ -49,7 +49,7 @@ public class BookOther implements IBook
 				// Pages
 				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.other.title") + " ====" + 
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
-				for(int i = 0; i < QuestList.size(); i++)
+				for(int i = 0; i < QuestList.size(); ++i)
 				{
 					IQuest quest = QuestList.get(i);
 					if(quest instanceof QuestChunkLoader)

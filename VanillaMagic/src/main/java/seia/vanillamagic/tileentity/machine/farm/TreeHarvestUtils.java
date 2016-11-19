@@ -46,7 +46,7 @@ public class TreeHarvestUtils
 	{
 		this.origin = new BlockPos(origin);
 		IBlockState wood = world.getBlockState(bc);
-		if (ignoreMeta) 
+		if(ignoreMeta) 
 		{
 			harvestUp(world, bc, res, new BaseHarvestTarget(wood.getBlock()));
 		} 
@@ -58,18 +58,18 @@ public class TreeHarvestUtils
 
 	protected void harvestUp(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) 
 	{
-		if (!isInHarvestBounds(bc) || res.harvestedBlocks.contains(bc)) 
+		if(!isInHarvestBounds(bc) || res.harvestedBlocks.contains(bc)) 
 		{
 			return;
 		}
 		IBlockState bs = world.getBlockState(bc);    
 		boolean isLeaves = isLeaves(bs);
-		if (target.isTarget(bs) || isLeaves) 
+		if(target.isTarget(bs) || isLeaves) 
 		{
 			res.harvestedBlocks.add(bc);
-			for (EnumFacing dir : EnumFacing.VALUES) 
+			for(EnumFacing dir : EnumFacing.VALUES) 
 			{
-				if (dir != EnumFacing.DOWN) 
+				if(dir != EnumFacing.DOWN) 
 				{
 					harvestUp(world, bc.offset(dir), res, target);
 				}
@@ -85,7 +85,7 @@ public class TreeHarvestUtils
 			{
 				BlockPos loc = bc.offset(dir);
 				IBlockState locBS = world.getBlockState(loc);        
-				if (isLeaves(locBS)) 
+				if(isLeaves(locBS)) 
 				{
 					harvestAdjacentWood(world, loc, res, target);
 				}
@@ -113,17 +113,17 @@ public class TreeHarvestUtils
 	private boolean isInHarvestBounds(BlockPos bc) 
 	{
 		int dist = Math.abs(origin.getX() - bc.getX());
-		if (dist > horizontalRange) 
+		if(dist > horizontalRange) 
 		{
 			return false;
 		}
 		dist = Math.abs(origin.getZ() - bc.getZ());
-		if (dist > horizontalRange) 
+		if(dist > horizontalRange) 
 		{
 			return false;
 		}
 		dist = Math.abs(origin.getY() - bc.getY());
-		if (dist > verticalRange) 
+		if(dist > verticalRange) 
 		{
 			return false;
 		}
@@ -150,16 +150,19 @@ public class TreeHarvestUtils
 				v = bs.getValue(BlockNewLog.VARIANT);
 			} 
 			catch(Exception e) 
-			{        
+			{
+				e.printStackTrace();
 			}
-			if (v == null) 
+			
+			if(v == null) 
 			{
 				try 
 				{
 					v = bs.getValue(BlockOldLog.VARIANT);
 				} 
 				catch(Exception e) 
-				{        
+				{
+					e.printStackTrace();
 				}
 			}
 			return v;
@@ -167,7 +170,7 @@ public class TreeHarvestUtils
 		
 		boolean isTarget(IBlockState bs) 
 		{
-			if (variant == null) 
+			if(variant == null) 
 			{
 				return super.isTarget(bs);
 			}

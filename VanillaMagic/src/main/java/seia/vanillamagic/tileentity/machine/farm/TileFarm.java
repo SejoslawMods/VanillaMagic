@@ -134,7 +134,7 @@ public class TileFarm extends TileMachine implements IFarm
 	{
 		int result = 0;
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
 			if(stack != null)
@@ -167,7 +167,7 @@ public class TileFarm extends TileMachine implements IFarm
 	public int getAxeLootingValue() 
 	{
 		ItemStack tool = getTool(ToolType.AXE);
-		if(tool == null) 
+		if(ItemStackHelper.isNullStack(tool)) 
 		{
 			return 0;
 		}
@@ -198,12 +198,12 @@ public class TileFarm extends TileMachine implements IFarm
 	{
 		int result = 0;
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if(stack != null)
+			if(!ItemStackHelper.isNullStack(stack))
 			{
-				if(type.itemMatches(stack) && /*stack.stackSize*/ ItemStackHelper.getStackSize(stack)  > 0 /*&& stack.getItemDamage() > 1*/)
+				if(type.itemMatches(stack) && ItemStackHelper.getStackSize(stack)  > 0 /*&& stack.getItemDamage() > 1*/)
 				{
 					return stack;
 				}
@@ -215,7 +215,7 @@ public class TileFarm extends TileMachine implements IFarm
 	public void damageTool(ToolType type, Block blk, BlockPos pos, int damage) 
 	{
 		ItemStack tool = getTool(type);
-		if(tool == null) 
+		if(ItemStackHelper.isNullStack(tool)) 
 		{
 			return;
 		}
@@ -264,7 +264,7 @@ public class TileFarm extends TileMachine implements IFarm
 			tool.setItemDamage(tool.getItemDamage() + 1);
 		}
 		
-		if(/*tool.stackSize*/ ItemStackHelper.getStackSize(tool) == 0 || (canDamage && tool.getItemDamage() >= tool.getMaxDamage())) 
+		if(ItemStackHelper.getStackSize(tool) == 0 || (canDamage && tool.getItemDamage() >= tool.getMaxDamage())) 
 		{
 			destroyTool(type);
 		}
@@ -272,18 +272,18 @@ public class TileFarm extends TileMachine implements IFarm
 
 	private boolean canDamage(ItemStack stack) 
 	{
-		return stack != null && stack.isItemStackDamageable() && stack.getItem().isDamageable();
+		return !ItemStackHelper.isNullStack(stack) && stack.isItemStackDamageable() && stack.getItem().isDamageable();
 	}
 
 	private void destroyTool(ToolType type) 
 	{
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if(type.itemMatches(stack) && /*stack.stackSize*/ ItemStackHelper.getStackSize(stack) == 0)
+			if(type.itemMatches(stack) && ItemStackHelper.getStackSize(stack) == 0)
 			{
-				inv.setInventorySlotContents(i, null);
+				inv.setInventorySlotContents(i, ItemStackHelper.NULL_STACK);
 				markDirty();
 				return;
 			}
@@ -427,10 +427,10 @@ public class TileFarm extends TileMachine implements IFarm
 	public boolean hasSeed(ItemStack seeds) 
 	{
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if((stack != null) && (/*stack.stackSize*/ ItemStackHelper.getStackSize(stack) > 1) && (stack.isItemEqual(seeds)))
+			if((!ItemStackHelper.isNullStack(stack)) && (ItemStackHelper.getStackSize(stack) > 1) && (stack.isItemEqual(seeds)))
 			{
 				return true;
 			}
@@ -449,17 +449,17 @@ public class TileFarm extends TileMachine implements IFarm
 	public int isLowOnSaplings(BlockPos pos) 
 	{
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if(stack != null)
+			if(!ItemStackHelper.isNullStack(stack))
 			{
 				Block blockSapling = Block.getBlockFromItem(stack.getItem());
 				if(blockSapling != null)
 				{
 					if(blockSapling instanceof BlockSapling)
 					{
-						return 90 * (farmSaplingReserveAmount - (stack == null ? 0 : /*stack.stackSize*/ ItemStackHelper.getStackSize(stack))) / farmSaplingReserveAmount;
+						return 90 * (farmSaplingReserveAmount - (ItemStackHelper.isNullStack(stack) ? 0 : ItemStackHelper.getStackSize(stack))) / farmSaplingReserveAmount;
 					}
 				}
 			}
@@ -474,28 +474,24 @@ public class TileFarm extends TileMachine implements IFarm
 
 	public ItemStack takeSeedFromSupplies(ItemStack stack, BlockPos forBlock, boolean matchMetadata) 
 	{
-		if(stack == null || forBlock == null) 
+		if(ItemStackHelper.isNullStack(stack) || forBlock == null) 
 		{
-			return null;
+			return ItemStackHelper.NULL_STACK;
 		}
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack invStack = inv.getStackInSlot(i);
-			if(invStack != null)
+			if(!ItemStackHelper.isNullStack(invStack))
 			{
 				if(matchMetadata ? invStack.isItemEqual(stack) : invStack.getItem() == stack.getItem())
 				{
-					//if(stack.stackSize > 1)
 					if(ItemStackHelper.getStackSize(stack) > 1)
 					{
 						ItemStack result = stack.copy();
-						//result.stackSize = 1;
 						ItemStackHelper.setStackSize(result, 1);
 						stack = stack.copy();
-						//stack.stackSize--;
 						ItemStackHelper.decreaseStackSize(stack, 1);
-						//if(stack.stackSize == 0)
 						if(ItemStackHelper.getStackSize(stack) == 0)
 						{
 							stack = ItemStackHelper.NULL_STACK;
@@ -506,7 +502,7 @@ public class TileFarm extends TileMachine implements IFarm
 				}
 			}
 		}
-		return null;
+		return ItemStackHelper.NULL_STACK;
 	}
 	
 	private void insertHarvestDrop(Entity entity, BlockPos pos) 
@@ -518,10 +514,8 @@ public class TileFarm extends TileMachine implements IFarm
 				EntityItem item = (EntityItem) entity;
 				ItemStack stack = item.getEntityItem().copy();
 				int numInserted = insertResult(stack, pos);
-				//stack.stackSize -= numInserted;
 				ItemStackHelper.decreaseStackSize(stack, numInserted);
 				item.setEntityItemStack(stack);
-				//if(stack.stackSize == 0) 
 				if(ItemStackHelper.getStackSize(stack) == 0)
 				{
 					item.setDead();
@@ -533,11 +527,10 @@ public class TileFarm extends TileMachine implements IFarm
 	private int insertResult(ItemStack stack, BlockPos pos) 
 	{
 		ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, EnumFacing.DOWN);
-		if(left == null)
+		if(ItemStackHelper.isNullStack(left))
 		{
 			return 0;
 		}
-		//return left.stackSize;
 		return ItemStackHelper.getStackSize(left);
 	}
 
@@ -574,12 +567,11 @@ public class TileFarm extends TileMachine implements IFarm
 	public void clearZeroStackSizeInventorySlots() 
 	{
 		IInventory inv = getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stack = inv.getStackInSlot(i);
-			if(stack != null)
+			if(!ItemStackHelper.isNullStack(stack))
 			{
-				//if(stack.stackSize <= 0)
 				if(ItemStackHelper.getStackSize(stack) <= 0)
 				{
 					inv.setInventorySlotContents(i, ItemStackHelper.NULL_STACK);

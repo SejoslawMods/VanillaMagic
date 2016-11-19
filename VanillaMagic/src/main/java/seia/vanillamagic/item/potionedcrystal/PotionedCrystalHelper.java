@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.CauldronHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class PotionedCrystalHelper 
 {
@@ -44,7 +45,7 @@ public class PotionedCrystalHelper
 		for(EntityItem ei : itemsInCauldron)
 		{
 			ItemStack stack = ei.getEntityItem();
-			if(stack == null)
+			if(ItemStackHelper.isNullStack(stack))
 			{
 				return null;
 			}
@@ -70,7 +71,7 @@ public class PotionedCrystalHelper
 	@Nullable
 	public static IPotionedCrystal getPotionedCrystal(ItemStack netherStarStack)
 	{
-		if(netherStarStack == null)
+		if(ItemStackHelper.isNullStack(netherStarStack))
 		{
 			return null;
 		}

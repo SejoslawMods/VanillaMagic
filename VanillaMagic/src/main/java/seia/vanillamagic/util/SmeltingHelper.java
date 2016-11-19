@@ -56,7 +56,7 @@ public class SmeltingHelper
 	{
 		List<String> oreNames = new ArrayList<String>();
 		String[] all = OreDictionary.getOreNames();
-		for(int i = 0; i < all.length; i++)
+		for(int i = 0; i < all.length; ++i)
 		{
 			if(all[i].contains("ore"))
 			{
@@ -72,7 +72,7 @@ public class SmeltingHelper
 	public static List<ItemStack> getFuelFromInventory(IInventory inv)
 	{
 		List<ItemStack> fuels = new ArrayList<ItemStack>();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stackInSlot = inv.getStackInSlot(i);
 			if(isItemFuel(stackInSlot))
@@ -92,12 +92,11 @@ public class SmeltingHelper
 	@Nullable
 	public static Object[] getFuelFromInventoryAndDelete(IInventory inv)
 	{
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack stackInSlot = inv.getStackInSlot(i);
 			if(isItemFuel(stackInSlot))
 			{
-				//return inv.removeStackFromSlot(i);
 				return new Object[]{inv.removeStackFromSlot(i), i};
 			}
 		}
@@ -110,12 +109,12 @@ public class SmeltingHelper
 	public static List<EntityItem> getSmeltable(List<EntityItem> entitiesInCauldron)
 	{
 		List<EntityItem> itemsToSmelt = new ArrayList<EntityItem>();
-		for(int i = 0; i < entitiesInCauldron.size(); i++)
+		for(int i = 0; i < entitiesInCauldron.size(); ++i)
 		{
 			EntityItem entityItemInCauldron = entitiesInCauldron.get(i);
 			ItemStack smeltResult = FurnaceRecipes.instance().getSmeltingResult(entityItemInCauldron.getEntityItem());
 			// if null than item cannot be smelt
-			if(smeltResult != null)
+			if(!ItemStackHelper.isNullStack(smeltResult))
 			{
 				itemsToSmelt.add(entityItemInCauldron);
 			}
@@ -139,7 +138,7 @@ public class SmeltingHelper
 		{
 			return fuels;
 		}
-		for(int i = 0; i < itemsInCauldron.size(); i++)
+		for(int i = 0; i < itemsInCauldron.size(); ++i)
 		{
 			EntityItem entityItemInCauldron = itemsInCauldron.get(i);
 			ItemStack stack = entityItemInCauldron.getEntityItem();
@@ -153,7 +152,6 @@ public class SmeltingHelper
 	
 	public static int countTicks(ItemStack stackOffHand)
 	{
-		//return stackOffHand.stackSize * getItemBurnTimeTicks(stackOffHand);
 		return ItemStackHelper.getStackSize(stackOffHand) * getItemBurnTimeTicks(stackOffHand);
 	}
 	
@@ -179,7 +177,6 @@ public class SmeltingHelper
 	
 	public static int getExperienceToAddFromWholeStack(ItemStack entityItemToSmeltStack)
 	{
-		//return ((int)(FurnaceRecipes.instance().getSmeltingExperience(entityItemToSmeltStack) * entityItemToSmeltStack.stackSize));
 		return ((int)(FurnaceRecipes.instance().getSmeltingExperience(entityItemToSmeltStack) * 
 				ItemStackHelper.getStackSize(entityItemToSmeltStack)));
 	}
@@ -204,13 +201,11 @@ public class SmeltingHelper
 			World world = player.worldObj;
 			int ticks = 0;
 			ticks += SmeltingHelper.countTicks(player.getHeldItemOffhand()); // value for the whole stack
-			//player.getHeldItemOffhand().stackSize = 0;
 			ItemStackHelper.setStackSize(player.getHeldItemOffhand(), 0);
-			for(int i = 0; i < itemsToSmelt.size(); i++)
+			for(int i = 0; i < itemsToSmelt.size(); ++i)
 			{
 				EntityItem entityItemToSmelt = itemsToSmelt.get(i);
 				ItemStack entityItemToSmeltStack = entityItemToSmelt.getEntityItem();
-				//int entityItemToSmeltStackSize = entityItemToSmeltStack.stackSize;
 				int entityItemToSmeltStackSize = ItemStackHelper.getStackSize(entityItemToSmeltStack);
 				int ticksToSmeltStack = entityItemToSmeltStackSize * QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
 				ItemStack smeltResult = null;
@@ -219,7 +214,6 @@ public class SmeltingHelper
 				if(ticks >= ticksToSmeltStack)
 				{
 					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
-					//smeltResult.stackSize = entityItemToSmeltStack.stackSize;
 					ItemStackHelper.setStackSize(smeltResult, ItemStackHelper.getStackSize(entityItemToSmeltStack));
 					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX(), cauldronPos.getY(), cauldronPos.getZ(), smeltResult);
 					world.removeEntity(entityItemToSmelt);
@@ -227,10 +221,8 @@ public class SmeltingHelper
 				else if(ticks >= QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS)// won't smelt whole stack, we need to count how many we can smelt
 				{
 					int howManyCanSmelt = ticks / QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
-					//entityItemToSmeltStack.stackSize -= howManyCanSmelt;
 					ItemStackHelper.decreaseStackSize(entityItemToSmeltStack, howManyCanSmelt);
 					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
-					//smeltResult.stackSize = howManyCanSmelt;
 					ItemStackHelper.setStackSize(smeltResult, howManyCanSmelt);
 					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX(), cauldronPos.getY(), cauldronPos.getZ(), smeltResult);
 				}

@@ -41,7 +41,7 @@ public class BookSpells implements IBook
 						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.spells.title") + " ====" + 
 						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
-				for(int i = 0; i < QuestList.size(); i++)
+				for(int i = 0; i < QuestList.size(); ++i)
 				{
 					IQuest quest = QuestList.get(i);
 					if(quest instanceof QuestCastSpell)

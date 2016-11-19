@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public enum Fertilizer 
 {
@@ -111,7 +112,7 @@ public enum Fertilizer
 
 	private Fertilizer(ItemStack stack) 
 	{
-		this.stack = stack == null || stack.getItem() == null ? null : stack;
+		this.stack = ItemStackHelper.isNullStack(stack) || stack.getItem() == null ? null : stack;
 //		if(this.stack != null) 
 //		{
 //			FarmStationContainer.slotItemsFertilizer.add(this.stack);
@@ -124,7 +125,7 @@ public enum Fertilizer
 	{
 		for(Fertilizer f : values()) 
 		{
-			if(f.stack != null) 
+			if(!ItemStackHelper.isNullStack(f.stack)) 
 			{
 				validFertilizers.add(f);
 			}

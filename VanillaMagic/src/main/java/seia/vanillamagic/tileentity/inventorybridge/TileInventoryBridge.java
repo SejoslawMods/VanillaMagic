@@ -25,6 +25,7 @@ import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.WorldHelper;
 
@@ -194,7 +195,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 			slotNumber = 0;
 		}
 		ItemStack transportingStack = inv.getStackInSlot(slotNumber);
-		if(transportingStack == null)
+		if(ItemStackHelper.isNullStack(transportingStack))
 		{
 			slotNumber++;
 			return;

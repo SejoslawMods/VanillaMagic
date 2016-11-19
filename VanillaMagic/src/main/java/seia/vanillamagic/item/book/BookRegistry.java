@@ -87,7 +87,7 @@ public class BookRegistry
 	 */
 	public static ItemStack getBookByUID(int bookUID)
 	{
-		for(int i = 0; i < books.size(); i++)
+		for(int i = 0; i < books.size(); ++i)
 		{
 			if(books.get(i).getUID() == bookUID)
 			{

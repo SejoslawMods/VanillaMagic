@@ -10,6 +10,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestFullTreeCut extends Quest
 {
@@ -18,14 +19,14 @@ public class QuestFullTreeCut extends Quest
 	{
 		EntityPlayer player = event.getPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}
 		if(rightHand.getItem() instanceof ItemAxe)
 		{
 			ItemStack leftHand = player.getHeldItemOffhand();
-			if(leftHand == null)
+			if(ItemStackHelper.isNullStack(leftHand))
 			{
 				return;
 			}

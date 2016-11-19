@@ -63,7 +63,7 @@ public abstract class EntitySpell extends Entity
 	public boolean isInRangeToRenderDist(double distance)
 	{
 		double d0 = this.getEntityBoundingBox().getAverageEdgeLength() * 4.0D;
-		if (Double.isNaN(d0))
+		if(Double.isNaN(d0))
 		{
 			d0 = 4.0D;
 		}
@@ -85,9 +85,9 @@ public abstract class EntitySpell extends Entity
 				{
 					++this.ticksAlive;
 					if(this.ticksAlive == 600)
-	                   {
+					{
 						this.setDead();
-	                   }
+					}
 					return;
 				}
 				this.inGround = false;
@@ -184,7 +184,7 @@ public abstract class EntitySpell extends Entity
 		this.xTile = compound.getInteger("xTile");
 		this.yTile = compound.getInteger("yTile");
 		this.zTile = compound.getInteger("zTile");
-		if (compound.hasKey("inTile", 8))
+		if(compound.hasKey("inTile", 8))
 		{
 			this.inTile = Block.getBlockFromName(compound.getString("inTile"));
 		}
@@ -193,10 +193,10 @@ public abstract class EntitySpell extends Entity
 			this.inTile = Block.getBlockById(compound.getByte("inTile") & 255);
 		}
 		this.inGround = compound.getByte("inGround") == 1;
-		if (compound.hasKey("power", 9))
+		if(compound.hasKey("power", 9))
 		{
 			NBTTagList nbtTagListPower = compound.getTagList("power", 6);
-			if (nbtTagListPower.tagCount() == 3)
+			if(nbtTagListPower.tagCount() == 3)
 			{
 				this.accelerationX = nbtTagListPower.getDoubleAt(0);
 				this.accelerationY = nbtTagListPower.getDoubleAt(1);
@@ -204,7 +204,7 @@ public abstract class EntitySpell extends Entity
 			}
 		}
 		this.ticksAlive = compound.getInteger("life");
-		if (compound.hasKey("direction", 9) && compound.getTagList("direction", 6).tagCount() == 3)
+		if(compound.hasKey("direction", 9) && compound.getTagList("direction", 6).tagCount() == 3)
 		{
 			NBTTagList nbtTagListDirection = compound.getTagList("direction", 6);
 			this.motionX = nbtTagListDirection.getDoubleAt(0);

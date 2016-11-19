@@ -43,7 +43,6 @@ public class QuestMachineFarm extends QuestMachineActivate
 			tileFarm.setWorkRadius(radius);
 			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{
-				//player.getHeldItemOffhand().stackSize -= mustHaveOffHand.stackSize;
 				ItemStackHelper.decreaseStackSize(player.getHeldItemOffhand(), ItemStackHelper.getStackSize(mustHaveOffHand));
 				EntityHelper.addChatComponentMessage(player, tileFarm.getClass().getSimpleName() + " added");
 			}

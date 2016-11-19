@@ -41,18 +41,16 @@ public abstract class QuestMachineActivate extends Quest
 	{
 		ItemStack offHand = player.getHeldItemOffhand();
 		ItemStack mainHand = player.getHeldItemMainhand();
-		if(offHand == null || mainHand == null)
+		if(ItemStackHelper.isNullStack(offHand) || ItemStackHelper.isNullStack(mainHand))
 		{
 			return false;
 		}
 		if(ItemStack.areItemsEqual(offHand, mustHaveOffHand))
 		{
-			//if(offHand.stackSize >= mustHaveOffHand.stackSize)
 			if(ItemStackHelper.getStackSize(offHand) >= ItemStackHelper.getStackSize(mustHaveOffHand))
 			{
 				if(ItemStack.areItemsEqual(mainHand, mustHaveMainHand))
 				{
-					//if(mainHand.stackSize >= mustHaveMainHand.stackSize)
 					if(ItemStackHelper.getStackSize(mainHand) >= ItemStackHelper.getStackSize(mustHaveMainHand))
 					{
 						return true;

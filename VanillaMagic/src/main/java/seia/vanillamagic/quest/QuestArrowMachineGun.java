@@ -25,7 +25,7 @@ public class QuestArrowMachineGun extends Quest
 		ItemStack leftHand = player.getHeldItemOffhand();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		World world = player.worldObj;
-		if(leftHand == null)
+		if(ItemStackHelper.isNullStack(leftHand))
 		{
 			return;
 		}
@@ -49,16 +49,16 @@ public class QuestArrowMachineGun extends Quest
 							1.0F);
 					entityTippedArrow.setIsCritical(true);
 					int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, leftHand);
-					if (j > 0)
+					if(j > 0)
 					{
 						entityTippedArrow.setDamage(entityTippedArrow.getDamage() + (double)j * 0.5D + 0.5D);
 					}
 					int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, leftHand);
-					if (k > 0)
+					if(k > 0)
 					{
 						entityTippedArrow.setKnockbackStrength(k);
 					}
-					if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, leftHand) > 0)
+					if(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, leftHand) > 0)
 					{
 						entityTippedArrow.setFire(100);
 					}
@@ -72,12 +72,9 @@ public class QuestArrowMachineGun extends Quest
 							SoundCategory.NEUTRAL, 
 							1.0F, 
 							1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
-					//if(leftHand.stackSize > 0)
 					if(ItemStackHelper.getStackSize(leftHand) > 0)
 					{
-						//--leftHand.stackSize;
 						ItemStackHelper.decreaseStackSize(leftHand, 1);
-						//if(leftHand.stackSize == 0)
 						if(ItemStackHelper.getStackSize(leftHand) > 0)
 						{
 							player.inventory.deleteStack(leftHand);

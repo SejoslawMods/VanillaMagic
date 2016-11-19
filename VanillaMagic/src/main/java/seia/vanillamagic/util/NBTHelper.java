@@ -61,6 +61,7 @@ public class NBTHelper
 	public static final String NBT_BLOCK_META = "NBT_BLOCK_META";
 	public static final String NBT_BLOCK_ID = "NBT_BLOCK_ID";
 	public static final String NBT_PLAYER_NAME = "NBT_PLAYER_NAME";
+	public static final String NBT_CLASS = "NBT_CLASS";
 	
 	private NBTHelper()
 	{
@@ -161,7 +162,6 @@ public class NBTHelper
 			int gettedByte = nbtItemTagCompound.getByte(NBT_IINVENTORY_SLOT);
 			if(gettedByte >= 0 && gettedByte < inv.getSizeInventory())
 			{
-				//inv.setInventorySlotContents(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound)); // TODO: Add method for reading ItemStack from NBT
 				inv.setInventorySlotContents(gettedByte, ItemStackHelper.loadItemStackFromNBT(nbtItemTagCompound));
 			}
 		}
@@ -215,13 +215,12 @@ public class NBTHelper
 			return null;
 		}
 		NBTTagList nbtItemsList = nbt.getTagList(NBT_IITEMHANDLER_ITEMS, 10);
-		for(int i = 0; i < nbtItemsList.tagCount(); i++)
+		for(int i = 0; i < nbtItemsList.tagCount(); ++i)
 		{
 			NBTTagCompound nbtItemTagCompound = nbtItemsList.getCompoundTagAt(i);
 			int gettedByte = nbtItemTagCompound.getByte(NBT_IITEMHANDLER_SLOT);
 			if(gettedByte >= 0 && gettedByte < handler.getSlots())
 			{
-				//handler.insertItem(gettedByte, ItemStack.loadItemStackFromNBT(nbtItemTagCompound), false); // TODO: Add method for reading ItemStack from NBT
 				handler.insertItem(gettedByte, ItemStackHelper.loadItemStackFromNBT(nbtItemTagCompound), false);
 			}
 		}

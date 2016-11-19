@@ -15,6 +15,7 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.WorldHelper;
 
 public class QuestChunkLoader extends Quest
@@ -26,7 +27,7 @@ public class QuestChunkLoader extends Quest
 		EntityPlayer placedBy = event.getPlayer();
 		ItemStack itemInHand = event.getItemInHand();
 		World world = placedBy.worldObj;
-		if(itemInHand == null)
+		if(ItemStackHelper.isNullStack(itemInHand))
 		{
 			return;
 		}

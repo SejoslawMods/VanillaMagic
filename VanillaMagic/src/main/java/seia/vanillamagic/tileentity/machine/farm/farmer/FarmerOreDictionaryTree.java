@@ -48,13 +48,13 @@ public class FarmerOreDictionaryTree extends FarmerTree
 	protected boolean plantFromInventory(TileFarm farm, BlockPos bc, Block block, IBlockState meta) 
 	{
 		World worldObj = farm.getWorld();
-		ItemStack sapling = null; //farm.getSeedTypeInSuppliesFor(bc); // TODO:
+		ItemStack sapling = new ItemStack((Item)null); //farm.getSeedTypeInSuppliesFor(bc); // TODO:
 		
 		IInventory inv = farm.getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack invStack = inv.getStackInSlot(i);
-			if((invStack != null) && saplings.contains(invStack))
+			if((!ItemStackHelper.isNullStack(invStack)) && saplings.contains(invStack))
 			{
 				sapling = invStack.copy();
 			}
@@ -63,7 +63,7 @@ public class FarmerOreDictionaryTree extends FarmerTree
 		if(canPlant(worldObj, bc, sapling)) 
 		{
 			ItemStack seed = farm.takeSeedFromSupplies(sapling, bc, false);
-			if(seed != null) 
+			if(!ItemStackHelper.isNullStack(seed)) 
 			{
 				return plant(farm, worldObj, bc, seed);
 			}
@@ -74,6 +74,10 @@ public class FarmerOreDictionaryTree extends FarmerTree
 	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack sapling) 
 	{
 		if(!saplings.contains(sapling)) 
+		{
+			return false;
+		}
+		if(ItemStackHelper.isNullStack(sapling))
 		{
 			return false;
 		}
@@ -101,9 +105,8 @@ public class FarmerOreDictionaryTree extends FarmerTree
 		worldObj.setBlockToAir(bc);
 		Item item = seed.getItem();
 		worldObj.setBlockState(bc, Block.getBlockFromItem(item).getStateFromMeta(item.getMetadata(seed.getMetadata())), 1 | 2);
-		if(seed != null)
+		if(!ItemStackHelper.isNullStack(seed))
 		{
-			//seed.stackSize--;
 			ItemStackHelper.decreaseStackSize(seed, 1);
 		}
 		return true;

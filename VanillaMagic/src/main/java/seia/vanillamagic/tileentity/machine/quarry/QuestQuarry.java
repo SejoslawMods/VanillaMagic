@@ -13,6 +13,7 @@ import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestQuarry extends QuestMachineActivate
 {
@@ -27,7 +28,7 @@ public class QuestQuarry extends QuestMachineActivate
 		{
 			return;
 		}
-		if(itemInHand == null)
+		if(ItemStackHelper.isNullStack(itemInHand))
 		{
 			return;
 		}

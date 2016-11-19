@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorber
 {
@@ -60,7 +61,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 				{
 					if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // First call to absorb items from Inventory
 					{
-						for(int i = 0; i < inv.getSizeInventory(); i++)
+						for(int i = 0; i < inv.getSizeInventory(); ++i)
 						{
 							ItemStack stackInSlot = inv.getStackInSlot(i);
 							ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, stackInSlot, getInputFacing());
@@ -95,7 +96,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 			return;
 		}
 		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
-		if(leftItems == null)
+		if(ItemStackHelper.isNullStack(leftItems))
 		{
 			worldObj.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}

@@ -94,7 +94,6 @@ public class TileLiquidSuppression extends CustomTileEntity
 		}
 		IBlockState cachedState = world.getBlockState(blockPos);
 		world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
-		//TileLiquidSuppression tile = (TileLiquidSuppression) world.getTileEntity(blockPos);
 		TileLiquidSuppression tile = new TileLiquidSuppression();
 		tile.init(world, blockPos);
 		tile.setContainedBlockInfo(cachedState);

@@ -28,7 +28,7 @@ public class FarmerMelon extends FarmerCustomSeed
 			
 			// check for melon seeds
 			IInventory inv = farm.getInputInventory().getInventory();
-			for(int i = 0; i < inv.getSizeInventory(); i++)
+			for(int i = 0; i < inv.getSizeInventory(); ++i)
 			{
 				ItemStack invSeeds = inv.getStackInSlot(i);
 				if((invSeeds != null) && canPlant(invSeeds))

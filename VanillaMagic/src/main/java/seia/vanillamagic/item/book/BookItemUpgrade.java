@@ -56,7 +56,7 @@ public class BookItemUpgrade implements IBook
 					Entry<String, List<IItemUpgrade>> entry = iterator.next();
 					String key = entry.getKey();
 					List<IItemUpgrade> values = entry.getValue();
-					for(int i = 0; i < values.size(); i++)
+					for(int i = 0; i < values.size(); ++i)
 					{
 						IItemUpgrade upgrade = values.get(i);
 						pages.appendTag(new NBTTagString(

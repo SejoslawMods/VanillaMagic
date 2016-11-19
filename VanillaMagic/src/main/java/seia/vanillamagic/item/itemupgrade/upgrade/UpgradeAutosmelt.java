@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.SmeltingHelper;
 
 public class UpgradeAutosmelt implements IItemUpgrade
@@ -45,11 +46,11 @@ public class UpgradeAutosmelt implements IItemUpgrade
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		List<ItemStack> drops = event.getDrops();
-		for(int i = 0; i < drops.size(); i++)
+		for(int i = 0; i < drops.size(); ++i)
 		{
 			ItemStack dropStack = drops.get(i);
 			ItemStack afterSmelt = SmeltingHelper.getSmeltingResultAsNewStack(dropStack);
-			if(afterSmelt != null)
+			if(!ItemStackHelper.isNullStack(afterSmelt))
 			{
 				EntityItem afterSmeltEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), afterSmelt);
 				world.spawnEntityInWorld(afterSmeltEntity);

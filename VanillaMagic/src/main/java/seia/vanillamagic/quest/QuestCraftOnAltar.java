@@ -63,9 +63,8 @@ public class QuestCraftOnAltar extends Quest
 	public int getIngredientsStackSize()
 	{
 		int stackSize = 0;
-		for(int i = 0; i < ingredients.length; i++)
+		for(int i = 0; i < ingredients.length; ++i)
 		{
-			//stackSize += ingredients[i].stackSize;
 			stackSize += ItemStackHelper.getStackSize(ingredients[i]);
 		}
 		return stackSize;
@@ -74,9 +73,8 @@ public class QuestCraftOnAltar extends Quest
 	public int getIngredientsInCauldronStackSize(List<EntityItem> entitiesInCauldron)
 	{
 		int stackSize = 0;
-		for(int i = 0; i < entitiesInCauldron.size(); i++)
+		for(int i = 0; i < entitiesInCauldron.size(); ++i)
 		{
-			//stackSize += entitiesInCauldron.get(i).getEntityItem().stackSize;
 			stackSize += ItemStackHelper.getStackSize(entitiesInCauldron.get(i).getEntityItem());
 		}
 		return stackSize;
@@ -104,10 +102,10 @@ public class QuestCraftOnAltar extends Quest
 					if(ingredientsStackSize == ingredientsInCauldronStackSize)
 					{
 						List<EntityItem> alreadyCheckedEntityItems = new ArrayList<EntityItem>(); // items to be deleted later
-						for(int i = 0; i < ingredients.length; i++)
+						for(int i = 0; i < ingredients.length; ++i)
 						{
 							ItemStack currentlyCheckedIngredient = ingredients[i];
-							for(int j = 0; j < entitiesInCauldron.size(); j++)
+							for(int j = 0; j < entitiesInCauldron.size(); ++j)
 							{
 								EntityItem currentlyCheckedEntityItem = entitiesInCauldron.get(j);
 								if(ItemStack.areItemStacksEqual(currentlyCheckedIngredient, currentlyCheckedEntityItem.getEntityItem()))
@@ -126,13 +124,13 @@ public class QuestCraftOnAltar extends Quest
 							}
 							if(player.hasAchievement(achievement))
 							{
-								for(int i = 0; i < alreadyCheckedEntityItems.size(); i++)
+								for(int i = 0; i < alreadyCheckedEntityItems.size(); ++i)
 								{
 									world.removeEntity(alreadyCheckedEntityItems.get(i));
 								}
 								BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
 								// Spawn all the results
-								for(int i = 0; i < result.length; i++)
+								for(int i = 0; i < result.length; ++i)
 								{
 									Block.spawnAsEntity(world, newItemPos, result[i].copy());
 								}

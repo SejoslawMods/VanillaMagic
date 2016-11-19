@@ -51,7 +51,7 @@ public class QuestCaptureEntity extends Quest
 		World world = player.worldObj;
 		Entity target = event.getTarget();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}
@@ -67,7 +67,6 @@ public class QuestCaptureEntity extends Quest
 				ItemStack stackOffHand = player.getHeldItemOffhand();
 				if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
 				{
-					//if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
 					if(ItemStackHelper.getStackSize(stackOffHand) == ItemStackHelper.getStackSize(requiredStackOffHand))
 					{
 						if(canPlayerGetAchievement(player))
@@ -103,7 +102,7 @@ public class QuestCaptureEntity extends Quest
 		World world = player.worldObj;
 		BlockPos respawnPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}

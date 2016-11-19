@@ -76,7 +76,6 @@ public enum EnumSpell
 	{
 		return (itemOffHand.getItem().equals(stackOffHand.getItem())) && 
 				(itemOffHand.getMetadata() == stackOffHand.getMetadata()) &&
-				//(itemOffHand.stackSize <= stackOffHand.stackSize);
 				(ItemStackHelper.getStackSize(itemOffHand) <= ItemStackHelper.getStackSize(stackOffHand));
 	}
 
@@ -86,7 +85,7 @@ public enum EnumSpell
 	public static EnumSpell getSpellById(int id)
 	{
 		EnumSpell[] spells = values();
-		for(int i = 0; i < spells.length; i++)
+		for(int i = 0; i < spells.length; ++i)
 		{
 			if(spells[i].spellID == id)
 			{
@@ -120,7 +119,7 @@ public enum EnumSpell
 		int min = SUMMON_ZOMBIE.spellID;
 		int[] tab = new int[max - min + 1];
 		int index = 0;
-		for(int i = min; i <= max; i++)
+		for(int i = min; i <= max; ++i)
 		{
 			tab[index] = i;
 			index++;
@@ -133,7 +132,7 @@ public enum EnumSpell
 		int[] all = getSummonMobSpellIDs();
 		int[] without = new int[all.length - 1];
 		int index = 0;
-		for(int i = 0; i < all.length; i++)
+		for(int i = 0; i < all.length; ++i)
 		{
 			if(all[i] != summonSpellID)
 			{

@@ -27,7 +27,7 @@ public class EntityHelper
 	public static boolean hasPlayerCraftingTableInMainHand(EntityPlayer player)
 	{
 		ItemStack mainHand = player.getHeldItemMainhand();
-		if(mainHand == null)
+		if(ItemStackHelper.isNullStack(mainHand))
 		{
 			return false;
 		}
@@ -58,7 +58,7 @@ public class EntityHelper
 		double posX = player.posX;
 		double posY = player.posY;
 		double posZ = player.posZ;
-		if (player.worldObj.isRemote) 
+		if(player.worldObj.isRemote) 
 		{
 			posY += player.getEyeHeight() - player.getDefaultEyeHeight();
 		} 
@@ -114,7 +114,7 @@ public class EntityHelper
 	public static void addChatComponentMessage(EntityPlayer player, String msg)
 	{
 		//player.addChatComponentMessage(new TextComponentString("§a[VanillaMagic] §f" + msg));
-		player.addChatComponentMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)), true); // TODO: What is this boolean ?
+		player.addChatComponentMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)), false); // TODO: What is this boolean ?
 	}
 
 	public static void removeEntities(World world, List<EntityItem> itemsInCauldron)

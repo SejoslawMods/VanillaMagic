@@ -15,7 +15,6 @@ public class IntegrationSuperOres implements IIntegration
 		Class<?> mainClass = Class.forName("abused_master.SuperOres.SuperOres");
 		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject("abused_master.SuperOres.ModBlocks", "blockSuperRedstone", true));
 		CustomOre.INSTANCE.customOreDiamond.add((Block) ClassUtils.getFieldObject("abused_master.SuperOres.ModBlocks", "blockSuperDiamond", true));
-		
 		return true;
 	}
 }

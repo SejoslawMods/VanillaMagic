@@ -82,11 +82,11 @@ public class QuestMineMulti extends Quest
 					int z = miningPos.getZ();
 					int count = 0;
 					int max = getMaxDestroyedBlocks();
-					for(int xPos = x - xRange; xPos <= x + xRange; xPos++)
+					for(int xPos = x - xRange; xPos <= x + xRange; ++xPos)
 					{
-						for(int yPos = y - yRange; yPos <= y + yRange; yPos++)
+						for(int yPos = y - yRange; yPos <= y + yRange; ++yPos)
 						{
-							for(int zPos = z - zRange; zPos <= z + zRange; zPos++)
+							for(int zPos = z - zRange; zPos <= z + zRange; ++zPos)
 							{
 								if(count > max)
 								{

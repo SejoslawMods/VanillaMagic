@@ -33,7 +33,7 @@ public class QuestInventoryBridge extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}
@@ -42,7 +42,7 @@ public class QuestInventoryBridge extends Quest
 			return;
 		}
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(leftHand == null)
+		if(ItemStackHelper.isNullStack(leftHand))
 		{
 			return;
 		}
@@ -98,9 +98,7 @@ public class QuestInventoryBridge extends Quest
 				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
 					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
-					//leftHand.stackSize--;
 					ItemStackHelper.decreaseStackSize(leftHand, 1);
-					//if(leftHand.stackSize == 0)
 					if(ItemStackHelper.getStackSize(leftHand) == 0)
 					{
 						player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);

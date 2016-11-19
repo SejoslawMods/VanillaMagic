@@ -86,10 +86,11 @@ public class WorldHandler
 					fis.close();
 					NBTTagList tagList = data.getTagList(TILES, 10);
 					boolean canAdd = true;
-					for(int i = 0; i < tagList.tagCount(); i++)
+					for(int i = 0; i < tagList.tagCount(); ++i)
 					{
 						NBTTagCompound tileEntityTag = tagList.getCompoundTagAt(i);
-						String tileEntityClassName = tileEntityTag.getString("id"); // This must be the class -> class.getName();
+						//String tileEntityClassName = tileEntityTag.getString("id"); // This must be the class -> class.getName();
+						String tileEntityClassName = tileEntityTag.getString(NBTHelper.NBT_CLASS);
 						int tileEntityPosX = tileEntityTag.getInteger("x");
 						int tileEntityPosY = tileEntityTag.getInteger("y");
 						int tileEntityPosZ = tileEntityTag.getInteger("z");
@@ -199,7 +200,7 @@ public class WorldHandler
 			NBTTagCompound data = new NBTTagCompound();
 			NBTTagList dataList = new NBTTagList();
 			List<ICustomTileEntity> tickables = CustomTileEntityHandler.getCustomEntitiesInDimension(dimension);
-			for(int j = 0; j < tickables.size(); j++)
+			for(int j = 0; j < tickables.size(); ++j)
 			{
 				dataList.appendTag(tickables.get(j).getTileEntity().writeToNBT(new NBTTagCompound()));
 			}

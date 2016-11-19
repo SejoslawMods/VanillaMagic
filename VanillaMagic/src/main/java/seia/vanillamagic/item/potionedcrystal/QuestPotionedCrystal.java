@@ -19,6 +19,7 @@ import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestPotionedCrystal extends Quest
 {
@@ -39,7 +40,7 @@ public class QuestPotionedCrystal extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos clickedPos = event.getPos();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(stackRightHand == null)
+		if(ItemStackHelper.isNullStack(stackRightHand))
 		{
 			return;
 		}
@@ -94,7 +95,7 @@ public class QuestPotionedCrystal extends Quest
 		NonNullList<ItemStack> mainInv = inventory.mainInventory;
 		for(ItemStack stack : mainInv)
 		{
-			if(stack != null)
+			if(!ItemStackHelper.isNullStack(stack))
 			{
 				IPotionedCrystal ipc = PotionedCrystalHelper.getPotionedCrystal(stack);
 				if(ipc != null)

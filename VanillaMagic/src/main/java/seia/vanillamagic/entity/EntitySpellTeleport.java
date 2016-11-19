@@ -31,10 +31,10 @@ public class EntitySpellTeleport extends EntitySpell
 		{
 			BlockPos resultBlockPos = result.getBlockPos();
 			TileEntity resultTileEntity = this.worldObj.getTileEntity(resultBlockPos);
-			if (resultTileEntity instanceof TileEntityEndGateway)
+			if(resultTileEntity instanceof TileEntityEndGateway)
 			{
 				TileEntityEndGateway tileEntityEndGate = (TileEntityEndGateway)resultTileEntity;
-				if (caster != null)
+				if(caster != null)
 				{
 					tileEntityEndGate.teleportEntity(caster);
 					this.setDead();
@@ -44,25 +44,25 @@ public class EntitySpellTeleport extends EntitySpell
 				return;
 			}
 		}
-		for (int i = 0; i < 32; ++i)
+		for(int i = 0; i < 32; ++i)
 		{
 			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, this.posX, this.posY + this.rand.nextDouble() * 2.0D, this.posZ, this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian(), new int[0]);
 		}
-		if (!this.worldObj.isRemote)
+		if(!this.worldObj.isRemote)
 		{
 			if(result.entityHit == null)
 			{
 				BlockPos blockpos = result.getBlockPos().offset(result.sideHit);
-				if (this.worldObj.isAirBlock(blockpos))
+				if(this.worldObj.isAirBlock(blockpos))
 				{
-					if (caster instanceof EntityPlayerMP)
+					if(caster instanceof EntityPlayerMP)
 					{
 						EntityPlayerMP casterMP = (EntityPlayerMP)caster;
-						if (casterMP.connection.getNetworkManager().isChannelOpen() && 
+						if(casterMP.connection.getNetworkManager().isChannelOpen() && 
 								casterMP.worldObj == this.worldObj && 
 								!casterMP.isPlayerSleeping())
 						{
-							if (caster.isRiding())
+							if(caster.isRiding())
 							{
 								caster.dismountRidingEntity();
 							}
@@ -87,7 +87,7 @@ public class EntitySpellTeleport extends EntitySpell
 	public void onUpdate()
 	{
 		EntityLivingBase caster = this.castingEntity;
-		if (caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
+		if(caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
 		{
 			this.setDead();
 		}

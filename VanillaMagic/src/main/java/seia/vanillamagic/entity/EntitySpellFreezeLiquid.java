@@ -40,14 +40,14 @@ public class EntitySpellFreezeLiquid extends EntitySpell
 			Vec3d casterLookVec = castingEntity.getLookVec();
 			circleCenter = new BlockPos(this.posX - casterLookVec.xCoord, this.posY - casterLookVec.yCoord, this.posZ - casterLookVec.zCoord);
 			List<BlockPos> blockPosToReplace = BlockPosHelper.getBlockPos3x3XZAroundCenterWithCenter(circleCenter.getX(), circleCenter.getY(), circleCenter.getZ());
-			for(int i = 0; i < blockPosToReplace.size(); i++)
+			for(int i = 0; i < blockPosToReplace.size(); ++i)
 			{
 				BlockPos currentPos = blockPosToReplace.get(i);
 				Block blockAtPos = worldObj.getBlockState(currentPos).getBlock();
 				if(blockAtPos instanceof BlockLiquid)
 				{
 					BlockLiquid liquidAtPos = (BlockLiquid) blockAtPos;
-					for(int j = 0; j < toReplace.length; j++)
+					for(int j = 0; j < toReplace.length; ++j)
 					{
 						if(Block.getIdFromBlock(liquidAtPos) == Block.getIdFromBlock(toReplace[j]))//if(liquidAtPos.equals(toReplace[j]))
 						{

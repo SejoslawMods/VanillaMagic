@@ -47,7 +47,7 @@ public class TileSpeedy extends CustomTileEntity
 		IInventory inv = getInventoryWithCrystal();
 		if(inv != null)
 		{
-			for(int i = 0; i < inv.getSizeInventory(); i++)
+			for(int i = 0; i < inv.getSizeInventory(); ++i)
 			{
 				ItemStack stack = inv.getStackInSlot(i);
 				if(VanillaMagicItems.INSTANCE.isCustomItem(stack, VanillaMagicItems.INSTANCE.itemAccelerationCrystal))
@@ -88,11 +88,11 @@ public class TileSpeedy extends CustomTileEntity
 
 	public void tickNeighbors() 
 	{
-		for(int x = box.xMin; x <= box.xMax; x++) 
+		for(int x = box.xMin; x <= box.xMax; ++x) 
 		{
-			for(int y = box.yMin; y <= box.yMax; y++) 
+			for(int y = box.yMin; y <= box.yMax; ++y) 
 			{
-				for(int z = box.zMin; z <= box.zMax; z++) 
+				for(int z = box.zMin; z <= box.zMax; ++z) 
 				{
 					this.tickBlock(new BlockPos(x, y, z));
 				}
@@ -108,7 +108,7 @@ public class TileSpeedy extends CustomTileEntity
 			Block block = blockState.getBlock();
 			TileEntity tile = worldObj.getTileEntity(pos);
 			Random rand = new Random();
-			for(int i = 0; i < ticks; i++)
+			for(int i = 0; i < ticks; ++i)
 			{
 				if(tile == null)
 				{

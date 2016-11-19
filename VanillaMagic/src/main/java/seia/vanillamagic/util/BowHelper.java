@@ -15,31 +15,31 @@ public class BowHelper
 	
 	public static boolean isArrow(@Nullable ItemStack stack)
 	{
-		return stack != null && stack.getItem() instanceof ItemArrow;
+		return !ItemStackHelper.isNullStack(stack) && stack.getItem() instanceof ItemArrow;
 	}
 	
 	@Nullable
 	public static ItemStack findAmmo(EntityPlayer player)
 	{
-		if (isArrow(player.getHeldItem(EnumHand.OFF_HAND)))
+		if(isArrow(player.getHeldItem(EnumHand.OFF_HAND)))
 		{
 			return player.getHeldItem(EnumHand.OFF_HAND);
 		}
-		else if (isArrow(player.getHeldItem(EnumHand.MAIN_HAND)))
+		else if(isArrow(player.getHeldItem(EnumHand.MAIN_HAND)))
 		{
 			return player.getHeldItem(EnumHand.MAIN_HAND);
 		}
 		else
 		{
-			for (int i = 0; i < player.inventory.getSizeInventory(); ++i)
+			for(int i = 0; i < player.inventory.getSizeInventory(); ++i)
 			{
 				ItemStack itemstack = player.inventory.getStackInSlot(i);
-				if (isArrow(itemstack))
+				if(isArrow(itemstack))
 				{
 					return itemstack;
 				}
 			}
-			return null;
+			return ItemStackHelper.NULL_STACK;
 		}
 	}
 }

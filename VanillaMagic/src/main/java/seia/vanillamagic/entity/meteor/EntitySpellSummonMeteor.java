@@ -53,7 +53,7 @@ public class EntitySpellSummonMeteor extends EntitySpell
 	public void onUpdate()
 	{
 		EntityLivingBase caster = this.castingEntity;
-		if (caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
+		if(caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
 		{
 			this.setDead();
 		}

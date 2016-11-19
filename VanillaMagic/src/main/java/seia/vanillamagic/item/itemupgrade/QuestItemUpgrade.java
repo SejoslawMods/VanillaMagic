@@ -50,7 +50,7 @@ public class QuestItemUpgrade extends Quest
 		
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}
@@ -65,17 +65,21 @@ public class QuestItemUpgrade extends Quest
 				{
 					return;
 				}
+				if(ItemStackHelper.isNullStack(base))
+				{
+					return;
+				}
 				if(!canGetUpgrade(base))
 				{
 					return;
 				}
 				ItemStack ingredient = getIngredient(inCauldron);
-				if(ingredient == null)
+				if(ItemStackHelper.isNullStack(ingredient))
 				{
 					return;
 				}
 				ItemStack craftingResult = ItemUpgradeRegistry.getResult(base, ingredient);
-				if(craftingResult == null)
+				if(ItemStackHelper.isNullStack(craftingResult))
 				{
 					return;
 				}
@@ -156,7 +160,6 @@ public class QuestItemUpgrade extends Quest
 		{
 			if(entityItem.getItem() == ie.item)
 			{
-				//if(entityItem.stackSize == ie.stack.stackSize)
 				if(ItemStackHelper.getStackSize(entityItem) == ItemStackHelper.getStackSize(ie.stack))
 				{
 					return true;

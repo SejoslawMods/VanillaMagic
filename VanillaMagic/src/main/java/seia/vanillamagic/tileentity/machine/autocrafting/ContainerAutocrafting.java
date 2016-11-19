@@ -11,6 +11,7 @@ import net.minecraft.tileentity.IHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import seia.vanillamagic.inventory.InventoryHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.MatrixHelper;
 
 public class ContainerAutocrafting extends Container
@@ -32,9 +33,9 @@ public class ContainerAutocrafting extends Container
 	{
 		int index = 0;
 		int size = newStackMatrix.length;
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < size; ++i)
 		{
-			for(int j = 0; j < size; j++)
+			for(int j = 0; j < size; ++j)
 			{
 				this.craftMatrix.setInventorySlotContents(index, newStackMatrix[i][j]);
 				index++;
@@ -61,7 +62,7 @@ public class ContainerAutocrafting extends Container
 	public boolean craft() 
 	{
 		this.onCraftMatrixChanged(this.craftMatrix);
-		if(this.craftResult.getStackInSlot(0) != null)
+		if(!ItemStackHelper.isNullStack(this.craftResult.getStackInSlot(0)))
 		{
 			return true;
 		}
@@ -71,9 +72,9 @@ public class ContainerAutocrafting extends Container
 	public void removeStacks(IInventory[][] inventoryMatrix)
 	{
 		int size = inventoryMatrix.length;
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < size; ++i)
 		{
-			for(int j = 0; j < size; j++)
+			for(int j = 0; j < size; ++j)
 			{
 				inventoryMatrix[i][j].decrStackSize(0, 1);
 			}

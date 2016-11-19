@@ -93,9 +93,9 @@ public class QuestAutocrafting extends Quest
 	{
 		int size = inventoryMatrix.length;
 		ItemStack[][] stackMat = new ItemStack[size][size];
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < size; ++i)
 		{
-			for(int j = 0; j < size; j++)
+			for(int j = 0; j < size; ++j)
 			{
 				stackMat[i][j] = inventoryMatrix[i][j].getStackInSlot(slot);
 			}
@@ -107,9 +107,9 @@ public class QuestAutocrafting extends Quest
 	{
 		int size = inventoryPosMatrix.length;
 		IInventory[][] invMat = new IInventory[size][size];
-		for(int i = 0; i < size; i++)
+		for(int i = 0; i < size; ++i)
 		{
-			for(int j = 0; j < size; j++)
+			for(int j = 0; j < size; ++j)
 			{
 				TileEntity tile = world.getTileEntity(inventoryPosMatrix[i][j]);
 				if(tile instanceof IInventory)

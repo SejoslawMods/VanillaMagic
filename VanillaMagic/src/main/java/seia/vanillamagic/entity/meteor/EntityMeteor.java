@@ -38,9 +38,9 @@ public class EntityMeteor extends EntityLargeFireball
 	 */
 	protected void onImpact(RayTraceResult result)
 	{
-		if (!this.worldObj.isRemote)
+		if(!this.worldObj.isRemote)
 		{
-			if (result.entityHit != null)
+			if(result.entityHit != null)
 			{
 				result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
 				this.applyEnchantments(this.shootingEntity, result.entityHit);

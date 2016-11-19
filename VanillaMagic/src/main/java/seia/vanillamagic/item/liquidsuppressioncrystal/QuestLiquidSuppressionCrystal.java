@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.BlockHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestLiquidSuppressionCrystal extends Quest
 {
@@ -20,7 +21,7 @@ public class QuestLiquidSuppressionCrystal extends Quest
 		EntityPlayer player = event.player;
 		World world = player.worldObj;
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(leftHand == null)
+		if(ItemStackHelper.isNullStack(leftHand))
 		{
 			return;
 		}
@@ -54,11 +55,11 @@ public class QuestLiquidSuppressionCrystal extends Quest
 		int radius = 5;
 		int refresh = 100; // how often block should be refreshed
 		
-		for(int i = -radius; i <= radius; i++)
+		for(int i = -radius; i <= radius; ++i)
 		{
-			for(int j = -radius; j <= radius; j++)
+			for(int j = -radius; j <= radius; ++j)
 			{
-				for(int k = -radius; k <= radius; k++)
+				for(int k = -radius; k <= radius; ++k)
 				{
 					BlockPos blockPos = new BlockPos(x + i, y + j, z + k);
 					IBlockState state = world.getBlockState(blockPos);

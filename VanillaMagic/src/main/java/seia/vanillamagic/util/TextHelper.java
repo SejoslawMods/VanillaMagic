@@ -37,7 +37,7 @@ public class TextHelper
 	public static String getEnters(int numberOfEnters)
 	{
 		String s = "";
-		for(int i = 0; i < numberOfEnters; i++)
+		for(int i = 0; i < numberOfEnters; ++i)
 		{
 			s += ENTER;
 		}

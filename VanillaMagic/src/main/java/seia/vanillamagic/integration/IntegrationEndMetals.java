@@ -15,7 +15,6 @@ public class IntegrationEndMetals implements IIntegration
 		Class<?> mainClass = Class.forName("endmetals.Main");
 		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject("endmetals.blocks.ModBlocks", "endredstoneOre", true));
 		CustomOre.INSTANCE.customOreDiamond.add((Block) ClassUtils.getFieldObject("endmetals.blocks.ModBlocks", "enddiamondOre", true));
-		
 		return true;
 	}
 }

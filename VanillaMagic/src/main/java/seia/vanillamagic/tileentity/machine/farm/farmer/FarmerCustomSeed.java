@@ -34,7 +34,6 @@ public class FarmerCustomSeed implements IFarmer
 	public boolean ignoreSustainCheck = false;
 	public boolean checkGroundForFarmland = false;
 	public boolean disableTreeFarm;
-//	public List<ItemStack> seedList = new ArrayList<ItemStack>();
 
 	public FarmerCustomSeed(Block plantedBlock, ItemStack seeds)
 	{
@@ -53,17 +52,6 @@ public class FarmerCustomSeed implements IFarmer
 		this.grownBlockMeta = grownBlockMeta;
 		this.seeds = seeds;
 		addTilledBlock(Blocks.FARMLAND);
-		
-//		seedList.add(new ItemStack(Items.WHEAT_SEEDS));
-//		seedList.add(new ItemStack(Items.CARROT));
-//		seedList.add(new ItemStack(Items.POTATO));
-//		seedList.add(new ItemStack(Blocks.RED_MUSHROOM));
-//		seedList.add(new ItemStack(Blocks.BROWN_MUSHROOM));
-//		seedList.add(new ItemStack(Items.NETHER_WART));
-//		seedList.add(new ItemStack(Blocks.SAPLING));
-//		seedList.add(new ItemStack(Items.REEDS));
-//		seedList.add(new ItemStack(Items.MELON_SEEDS));
-//		seedList.add(new ItemStack(Items.PUMPKIN_SEEDS));
 	}
 	  
 	public void clearTilledBlocks() 
@@ -124,7 +112,7 @@ public class FarmerCustomSeed implements IFarmer
 	
 	public boolean canPlant(ItemStack stack)
 	{
-		if(stack == null) 
+		if(ItemStackHelper.isNullStack(stack)) 
 		{
 			return false;
 		}
@@ -169,7 +157,7 @@ public class FarmerCustomSeed implements IFarmer
 	{
 		World worldObj = farm.getWorld();
 		ItemStack seed = farm.takeSeedFromSupplies(getSeeds(), pos);
-		if(canPlant(farm, worldObj, pos) && seed != null) 
+		if(canPlant(farm, worldObj, pos) && !ItemStackHelper.isNullStack(seed)) 
 		{
 			return plant(farm, worldObj, pos, seed);
 		}
@@ -203,10 +191,8 @@ public class FarmerCustomSeed implements IFarmer
 				{
 					if(!removed && stack.isItemEqual(getSeeds())) 
 					{
-						//stack.stackSize--;
 						ItemStackHelper.decreaseStackSize(stack, 1);
 						removed = true;
-						//if(stack.stackSize > 0) 
 						if(ItemStackHelper.getStackSize(stack) > 0)
 						{
 							result.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copy()));
@@ -290,7 +276,6 @@ public class FarmerCustomSeed implements IFarmer
 			worldObj.setBlockState(pos, getPlantedBlock().getStateFromMeta(getPlantedBlockMeta()), 1 | 2);
 			if(seed != null)
 			{
-				//seed.stackSize--;
 				ItemStackHelper.decreaseStackSize(seed, 1);
 			}
 			return true;

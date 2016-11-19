@@ -12,7 +12,6 @@ import net.minecraft.block.BlockStem;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -21,9 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.world.BlockEvent;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
@@ -40,12 +37,10 @@ public class FarmerPlantable implements IFarmer
 	
 	public boolean canPlant(ItemStack stack)
 	{
-		//if(stack == null)
 		if(ItemStackHelper.isNullStack(stack))
 		{
 			return false;
 		}
-		//if(stack.stackSize <= 0)
 		if(ItemStackHelper.getStackSize(stack) <= 0)
 		{
 			return false;
@@ -63,16 +58,16 @@ public class FarmerPlantable implements IFarmer
 		ItemStack seedStack = null;//farm.getSeedTypeInSuppliesFor(slot);
 		
 		IInventory inv = farm.getInputInventory().getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack invStack = inv.getStackInSlot(i);
-			if((invStack != null) && (invStack.getItem() instanceof IPlantable))
+			if((!ItemStackHelper.isNullStack(invStack)) && (invStack.getItem() instanceof IPlantable))
 			{
 				seedStack = invStack;
 			}
 		}
 		
-		if(seedStack == null) 
+		if(ItemStackHelper.isNullStack(seedStack)) 
 		{
 			return false;
 		}
@@ -119,7 +114,6 @@ public class FarmerPlantable implements IFarmer
 
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, ItemStack plantable) 
 	{
-		//if(plantable.stackSize <= 0)
 		if(ItemStackHelper.getStackSize(plantable) <= 0)
 		{
 			return false;
@@ -127,11 +121,9 @@ public class FarmerPlantable implements IFarmer
 		worldObj.setBlockState(bc, Blocks.AIR.getDefaultState(), 1 | 2);
 		IBlockState target = ((IPlantable) plantable.getItem()).getPlant(null, new BlockPos(0, 0, 0));    
 		worldObj.setBlockState(bc, target, 1 | 2);
-		if(plantable != null)
+		if(!ItemStackHelper.isNullStack(plantable))
 		{
-			//plantable.stackSize--;
 			ItemStackHelper.decreaseStackSize(plantable, 1);
-			//if(plantable.stackSize == 0)
 			if(ItemStackHelper.getStackSize(plantable) == 0)
 			{
 				farm.clearZeroStackSizeInventorySlots();
@@ -142,7 +134,6 @@ public class FarmerPlantable implements IFarmer
 
 	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack plantable) 
 	{
-		//if(plantable.stackSize <= 0)
 		if(ItemStackHelper.getStackSize(plantable) <= 0)
 		{
 			return false;
@@ -181,7 +172,6 @@ public class FarmerPlantable implements IFarmer
 		}
 		World worldObj = farm.getWorld();
 		List<EntityItem> result = new ArrayList<EntityItem>();
-//		final EntityPlayerMP fakePlayer = farm.getFarmer(); // TODO:
 		int fortune = farm.getMaxLootingValue();
 		ItemStack removedPlantable = null;
 		List<ItemStack> drops = block.getDrops(worldObj, bc, meta, fortune);
@@ -192,17 +182,14 @@ public class FarmerPlantable implements IFarmer
 		{
 			for(ItemStack stack : drops) 
 			{
-				if(stack != null && /*stack.stackSize*/ ItemStackHelper.getStackSize(stack)  > 0 && worldObj.rand.nextFloat() <= chance) 
+				if(stack != null && ItemStackHelper.getStackSize(stack)  > 0 && worldObj.rand.nextFloat() <= chance) 
 				{
 					if(!removed && isPlantableForBlock(stack, block)) 
 					{
 						removed = true;
 						removedPlantable = stack.copy();
-						//removedPlantable.stackSize = 1;
 						ItemStackHelper.setStackSize(removedPlantable, 1);
-						//stack.stackSize--;
 						ItemStackHelper.decreaseStackSize(stack, 1);
-						//if(stack.stackSize > 0) 
 						if(ItemStackHelper.getStackSize(stack) > 0)
 						{
 							result.add(new EntityItem(worldObj, bc.getX() + 0.5, bc.getY() + 0.5, bc.getZ() + 0.5, stack.copy()));

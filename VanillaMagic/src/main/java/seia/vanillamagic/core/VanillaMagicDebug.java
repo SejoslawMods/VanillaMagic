@@ -85,7 +85,7 @@ public class VanillaMagicDebug
 		
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(stackRightHand == null)
+		if(ItemStackHelper.isNullStack(stackRightHand))
 		{
 			return;
 		}

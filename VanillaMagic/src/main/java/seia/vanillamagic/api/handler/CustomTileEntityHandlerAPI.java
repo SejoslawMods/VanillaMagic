@@ -98,4 +98,26 @@ public class CustomTileEntityHandlerAPI
 			return null;
 		}
 	}
+	
+	/**
+	 * Returns the {@link ICustomTileEntity} at the specified position from the specified dimension.
+	 * 
+	 * @param tilePos position of the tile
+	 * @param world world on which the tile is
+	 * @return the {@link ICustomTileEntity} at the specified position. NULL if there is no tile at the given position.
+	 */
+	@Nullable
+	public static ICustomTileEntity getCustomTileEntity(BlockPos tilePos, World world)
+	{
+		try
+		{
+			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Method method = clazz.getMethod("getCustomTileEntity", BlockPos.class, World.class);
+			return (ICustomTileEntity) method.invoke(null, tilePos, world);
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+	}
 }

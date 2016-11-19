@@ -4,6 +4,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public enum ToolType 
 {
@@ -50,7 +51,7 @@ public enum ToolType
 
 	public final boolean itemMatches(ItemStack item) 
 	{
-		if(item == null) 
+		if(ItemStackHelper.isNullStack(item)) 
 		{
 			return false;
 		}

@@ -39,12 +39,12 @@ public class QuestSummonHorde extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.worldObj;
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(leftHand == null)
+		if(ItemStackHelper.isNullStack(leftHand))
 		{
 			return;
 		}
@@ -52,7 +52,6 @@ public class QuestSummonHorde extends Quest
 		{
 			if(ItemStack.areItemsEqual(leftHand, requiredLeftHand))
 			{
-				//if(leftHand.stackSize == requiredLeftHand.stackSize)
 				if(ItemStackHelper.getStackSize(leftHand) == ItemStackHelper.getStackSize(requiredLeftHand))
 				{
 					if(!player.hasAchievement(achievement))
@@ -66,7 +65,6 @@ public class QuestSummonHorde extends Quest
 					{
 						EntityHelper.addChatComponentMessage(player, player.getDisplayNameString() + " summoned horde lvl: " + this.level + ". Prepare to DIE !!!");
 						spawnHorde(player, world);
-						//leftHand.stackSize -= requiredLeftHand.stackSize;
 						ItemStackHelper.decreaseStackSize(leftHand, ItemStackHelper.getStackSize(requiredLeftHand));
 					}
 				}
@@ -79,13 +77,13 @@ public class QuestSummonHorde extends Quest
 		int posX = (int) Math.round(player.posX - 0.5f);
 		int posY = (int) player.posY;
 		int posZ = (int) Math.round(player.posZ - 0.5f);
-		for(int i = 0; i < level; i++)
+		for(int i = 0; i < level; ++i)
 		{
-			for(int ix = posX - range; ix <= posX + range; ix++)
+			for(int ix = posX - range; ix <= posX + range; ++ix)
 			{
-				for(int iz = posZ - range; iz <= posZ + range; iz++)
+				for(int iz = posZ - range; iz <= posZ + range; ++iz)
 				{
-					for(int iy = posY - verticalRange; iy <= posY + verticalRange; iy++)
+					for(int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy)
 					{
 						BlockPos spawnPos = new BlockPos(ix, iy, iz);
 						double distanceToPlayer = spawnPos.getDistance(posX, posY, posZ);

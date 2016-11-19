@@ -25,7 +25,7 @@ public class CauldronHelper
 			return entitiesInCauldron;
 		}
 		// filtering all items in cauldron to check if the recipe is correct
-		for(int i = 0; i < loadedEntities.size(); i++)
+		for(int i = 0; i < loadedEntities.size(); ++i)
 		{
 			if(loadedEntities.get(i) instanceof EntityItem)
 			{

@@ -10,15 +10,14 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeEventFactory;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class FarmerStem extends FarmerCustomSeed
 {
@@ -60,7 +59,6 @@ public class FarmerStem extends FarmerCustomSeed
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		World worldObj = farm.getWorld();
-//		final EntityPlayerMP fakePlayer = farm.getFarmer();
 		int fortune = farm.getMaxLootingValue();
 		HarvestResult result = new HarvestResult();
 		BlockPos harvestCoord = pos;
@@ -116,7 +114,7 @@ public class FarmerStem extends FarmerCustomSeed
 	{
 		World worldObj = farm.getWorld();
 		ItemStack seed = farm.takeSeedFromSupplies(seeds, pos);
-		if(canPlant(farm, worldObj, pos) && seed != null)
+		if(canPlant(farm, worldObj, pos) && !ItemStackHelper.isNullStack(seed))
 		{
 			return plant(farm, worldObj, pos, seed);
 		}

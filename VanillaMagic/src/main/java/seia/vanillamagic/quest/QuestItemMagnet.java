@@ -58,7 +58,7 @@ public class QuestItemMagnet extends Quest
 		boolean star1 = false;
 		boolean star2 = false;
 		NonNullList<ItemStack> inventory = player.inventory.mainInventory;
-		for(int i = 0; i < inventory.size(); i++)
+		for(int i = 0; i < inventory.size(); ++i)
 		{
 			if(ItemStack.areItemStacksEqual(star, inventory.get(i)))
 			{

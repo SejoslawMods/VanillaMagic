@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestMotherNatureCrystal extends Quest
 {
@@ -27,7 +28,7 @@ public class QuestMotherNatureCrystal extends Quest
 		EntityPlayer player = event.player;
 		World world = player.worldObj;
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(leftHand == null)
+		if(ItemStackHelper.isNullStack(leftHand))
 		{
 			return;
 		}
@@ -49,11 +50,11 @@ public class QuestMotherNatureCrystal extends Quest
 		int posX = (int) Math.round(player.posX - 0.5f);
 		int posY = (int) player.posY;
 		int posZ = (int) Math.round(player.posZ - 0.5f);
-		for(int ix = posX - range; ix <= posX + range; ix++)
+		for(int ix = posX - range; ix <= posX + range; ++ix)
 		{
-			for(int iz = posZ - range; iz <= posZ + range; iz++)
+			for(int iz = posZ - range; iz <= posZ + range; ++iz)
 			{
-				for(int iy = posY - verticalRange; iy <= posY + verticalRange; iy++)
+				for(int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy)
 				{
 					BlockPos blockPos = new BlockPos(ix, iy, iz);
 					Block block = world.getBlockState(blockPos).getBlock();
@@ -92,7 +93,7 @@ public class QuestMotherNatureCrystal extends Quest
 		World world = event.getWorld();
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(rightHand == null)
+		if(ItemStackHelper.isNullStack(rightHand))
 		{
 			return;
 		}

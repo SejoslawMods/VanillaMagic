@@ -18,9 +18,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 
-/**
- * TODO: Wait for ForgeTeam to remap name ItemStack.func_190916_E() to something like "getStackSize()"
- */
 public class ItemStackHelper 
 {
 	/**
@@ -94,13 +91,6 @@ public class ItemStackHelper
 		return stackWithNextMeta;
 	}
 	
-//	public static ItemStack replaceItemInStack(ItemStack stack, Item newItem) // TODO:
-//	{
-//		ItemStack newStack = stack.copy();
-//		newStack.setItem(newItem);
-//		return newStack;
-//	}
-	
 	@Nullable
 	public static ItemStack getItemStackFromJSON(JsonObject jo)
 	{
@@ -139,7 +129,7 @@ public class ItemStackHelper
 	{
 		JsonArray ja = jo.get(key).getAsJsonArray();
 		ItemStack[] tab = new ItemStack[ja.size()];
-		for(int i = 0; i < tab.length; i++)
+		for(int i = 0; i < tab.length; ++i)
 		{
 			JsonElement je = ja.get(i);
 			ItemStack stack = getItemStackFromJSON(je.getAsJsonObject());
@@ -150,7 +140,7 @@ public class ItemStackHelper
 
 	public static boolean isIInventory(ItemStack stack) 
 	{
-		if(stack == null)
+		if(ItemStackHelper.isNullStack(stack))
 		{
 			return false;
 		}

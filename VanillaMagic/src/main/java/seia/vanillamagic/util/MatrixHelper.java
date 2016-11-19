@@ -25,9 +25,9 @@ public class MatrixHelper
 	{
 		int size = matrix.length;
 		ItemStack[][] newMatrix = new ItemStack[size][size];
-		for (int i = 0; i < size; ++i) 
+		for(int i = 0; i < size; ++i) 
 		{
-			for (int j = 0; j < size; ++j) 
+			for(int j = 0; j < size; ++j) 
 			{
 				newMatrix[i][j] = matrix[size - j - 1][i];
 			}

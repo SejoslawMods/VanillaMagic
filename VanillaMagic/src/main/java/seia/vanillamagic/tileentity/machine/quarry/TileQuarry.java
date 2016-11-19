@@ -156,14 +156,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public boolean inventoryOutputHasSpace()
 	{
-		try
-		{
-			return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
-		}
-		catch(Exception e)
-		{
-			return false;
-		}
+		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputFacing());
 	}
 	
 	public void spawnDigged(ItemStack digged)
@@ -236,7 +229,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		countRedstoneBlocks();
 		// Memory efficiency.
 		int redstoneBlocks = this.redstoneBlocks;
-		for(int i = 0; i < redstoneBlocks; i++)
+		for(int i = 0; i < redstoneBlocks; ++i)
 		{
 			performOneOperation();
 		}
@@ -290,10 +283,10 @@ public class TileQuarry extends TileMachine implements IQuarry
 			if(blockToDig instanceof IInventory)
 			{
 				IInventory inv = (IInventory) blockToDig;
-				for(int i = 0; i < inv.getSizeInventory(); i++)
+				for(int i = 0; i < inv.getSizeInventory(); ++i)
 				{
 					ItemStack stack = inv.getStackInSlot(i);
-					if(stack != null)
+					if(!ItemStackHelper.isNullStack(stack))
 					{
 						drops.add(stack);
 					}
@@ -309,11 +302,10 @@ public class TileQuarry extends TileMachine implements IQuarry
 				else if(hasChest)
 				{
 					ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, getOutputFacing());
-					if(leftItems == null)
+					if(ItemStackHelper.isNullStack(leftItems))
 					{
 						break;
 					}
-					//if(leftItems.stackSize > 0)
 					if(ItemStackHelper.getStackSize(leftItems) > 0)
 					{
 						spawnDigged(leftItems);
@@ -334,7 +326,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	 */
 	public EnumFacing rotateY(EnumFacing startFace, int times)
 	{
-		for(int i = 0; i < times; i++)
+		for(int i = 0; i < times; ++i)
 		{
 			startFace = startFace.rotateY();
 		}

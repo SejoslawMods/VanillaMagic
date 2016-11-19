@@ -10,7 +10,6 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +21,7 @@ import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 import seia.vanillamagic.tileentity.machine.farm.TreeHarvestUtils;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class FarmerTree implements IFarmer
 {
@@ -74,7 +74,7 @@ public class FarmerTree implements IFarmer
 	
 	public boolean canPlant(ItemStack stack) 
 	{
-		return stack != null && stack.getItem() == saplingItem.getItem();
+		return !ItemStackHelper.isNullStack(stack) && stack.getItem() == saplingItem.getItem();
 	}
 	
 	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
@@ -92,7 +92,7 @@ public class FarmerTree implements IFarmer
 		if(canPlant(worldObj, pos)) 
 		{
 			ItemStack seed = farm.takeSeedFromSupplies(saplingItem, pos, false);
-			if(seed != null) 
+			if(!ItemStackHelper.isNullStack(seed)) 
 			{
 				return plant(farm, worldObj, pos, seed);
 			}
@@ -134,7 +134,6 @@ public class FarmerTree implements IFarmer
 			return null;
 		}
 		World worldObj = farm.getWorld();
-//		final EntityPlayerMP fakePlayer = farm.getFarmer();
 		final int fortune = farm.getMaxLootingValue();
 		HarvestResult res = new HarvestResult();
 		harvester.harvest(farm, this, pos, res);
@@ -144,7 +143,7 @@ public class FarmerTree implements IFarmer
 		boolean hasShears = farm.hasShears();
 		int noShearingPercentage = farm.isLowOnSaplings(pos);
 		int shearCount = 0;
-		for(int i = 0; i < res.harvestedBlocks.size() && hasAxe; i++) 
+		for(int i = 0; i < res.harvestedBlocks.size() && hasAxe; ++i) 
 		{
 			BlockPos coord = res.harvestedBlocks.get(i);
 			Block blk = farm.getBlock(coord);

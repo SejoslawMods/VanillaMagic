@@ -15,7 +15,6 @@ public class IntegrationDenseMetals implements IIntegration
 		Class<?> mainClass = Class.forName("com.mmd.densemetals.Main");
 		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject("com.mmd.densemetals.blocks.ModBlocks", "denseredstoneOre", true));
 		CustomOre.INSTANCE.customOreDiamond.add((Block) ClassUtils.getFieldObject("com.mmd.densemetals.blocks.ModBlocks", "densediamondOre", true));
-		
 		return true;
 	}
 }

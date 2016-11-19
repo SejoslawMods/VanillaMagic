@@ -86,7 +86,6 @@ public class QuarryUpgradeHelper
 		List<ItemStack> drops = new ArrayList<ItemStack>();
 		for(IQuarryUpgrade upgrade : upgrades)
 		{
-			//drops.addAll(upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
 			drops = ListHelper.<ItemStack>combineLists(drops, upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
 		}
 		// If there is no upgrades mine the old-fashion way.
@@ -122,7 +121,7 @@ public class QuarryUpgradeHelper
 	public List<String> addAdditionalInfo(List<String> baseInfo)
 	{
 		baseInfo.add("Upgrades:");
-		for(int i = 0; i < upgrades.size(); i++)
+		for(int i = 0; i < upgrades.size(); ++i)
 		{
 			baseInfo.add("   " + (i+1) + ") " + upgrades.get(i).getUpgradeName());
 		}

@@ -56,7 +56,7 @@ public class QuestMoveBlock extends Quest
 		BlockPos wantedBlockPos = event.getPos();
 		World world = player.worldObj;
 		ItemStack mainHand = player.getHeldItemMainhand();
-		if(mainHand == null)
+		if(ItemStackHelper.isNullStack(mainHand))
 		{
 			return;
 		}
@@ -70,13 +70,12 @@ public class QuestMoveBlock extends Quest
 			if(player.isSneaking())
 			{
 				ItemStack stackOffHand = player.getHeldItemOffhand();
-				if(stackOffHand == null)
+				if(ItemStackHelper.isNullStack(stackOffHand))
 				{
 					return;
 				}
 				if(ItemStack.areItemsEqual(requiredStackOffHand, stackOffHand))
 				{
-					//if(stackOffHand.stackSize == requiredStackOffHand.stackSize)
 					if(ItemStackHelper.getStackSize(stackOffHand) == ItemStackHelper.getStackSize(requiredStackOffHand))
 					{
 						if(canPlayerGetAchievement(player))

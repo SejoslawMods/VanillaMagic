@@ -56,7 +56,7 @@ public class QuestMineBlock extends Quest
 			{
 				return;
 			}
-			for(int i = 0; i < blocksToBeMine.size(); i++)
+			for(int i = 0; i < blocksToBeMine.size(); ++i)
 			{
 				if(Block.isEqualTo(block, blocksToBeMine.get(i)))
 				{

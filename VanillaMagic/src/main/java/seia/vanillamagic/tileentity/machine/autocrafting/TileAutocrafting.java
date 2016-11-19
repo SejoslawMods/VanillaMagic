@@ -61,7 +61,7 @@ public class TileAutocrafting extends TileMachine
 		if(inventoryOutputHasSpace())
 		{
 			initContainer();
-			for(int i = 0; i < 4; i++)
+			for(int i = 0; i < 4; ++i)
 			{
 				boolean crafted = container.craft();
 				if(crafted)

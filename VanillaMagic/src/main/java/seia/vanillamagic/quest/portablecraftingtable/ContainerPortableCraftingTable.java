@@ -57,7 +57,7 @@ public class ContainerPortableCraftingTable extends Container
 			for(int i = 0; i < 9; ++i)
 			{
 				ItemStack stack = this.craftMatrix.removeStackFromSlot(i);
-				if(stack != null)
+				if(!ItemStackHelper.isNullStack(stack))
 				{
 					player.dropItem(stack, false);
 				}
@@ -74,7 +74,7 @@ public class ContainerPortableCraftingTable extends Container
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int index)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		Slot slot = this.inventorySlots.get(index);
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
@@ -106,7 +106,6 @@ public class ContainerPortableCraftingTable extends Container
 				return ItemStackHelper.NULL_STACK;
 			}
 			
-			//if(itemstack1.stackSize == 0)
 			if(ItemStackHelper.getStackSize(itemstack1) == 0)
 			{
 				slot.putStack(ItemStackHelper.NULL_STACK);
@@ -116,12 +115,10 @@ public class ContainerPortableCraftingTable extends Container
 				slot.onSlotChanged();
 			}
 			
-			//if(itemstack1.stackSize == itemstack.stackSize)
 			if(ItemStackHelper.getStackSize(itemstack1) == ItemStackHelper.getStackSize(itemstack))
 			{
 				return ItemStackHelper.NULL_STACK;
 			}
-			//slot.onPickupFromSlot(entityPlayer, itemstack1);
 			slot.func_190901_a(entityPlayer, itemstack1); // TODO:
 		}
 		return itemstack;

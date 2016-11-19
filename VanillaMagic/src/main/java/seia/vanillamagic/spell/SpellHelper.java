@@ -166,7 +166,7 @@ public class SpellHelper
 		{
 			World world = caster.worldObj;
 			pos = pos.offset(face);
-			if (world.isAirBlock(pos))
+			if(world.isAirBlock(pos))
 			{
 				world.playSound(caster, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
 				world.setBlockState(pos, Blocks.FIRE.getDefaultState(), 11);
@@ -595,7 +595,7 @@ public class SpellHelper
 				{
 					World world = caster.worldObj;
 					List<Entity> entities = world.loadedEntityList;
-					for(int i = 0; i < entities.size(); i++)
+					for(int i = 0; i < entities.size(); ++i)
 					{
 						if(entities.get(i) instanceof EntityDragon)
 						{

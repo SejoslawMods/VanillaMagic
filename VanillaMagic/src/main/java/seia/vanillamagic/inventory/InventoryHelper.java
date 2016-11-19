@@ -111,10 +111,10 @@ public class InventoryHelper
 		{
 			ISidedInventory iSidedInventory = (ISidedInventory)inventoryIn;
 			int[] slots = iSidedInventory.getSlotsForFace(side);
-			for(int k : slots)
+			for(int slot : slots)
 			{
-				ItemStack stack = iSidedInventory.getStackInSlot(k);
-				if(stack == null)
+				ItemStack stack = iSidedInventory.getStackInSlot(slot);
+				if(ItemStackHelper.isNullStack(stack))
 				{
 					return true;
 				}
@@ -126,7 +126,7 @@ public class InventoryHelper
 			for(int j = 0; j < size; ++j)
 			{
 				ItemStack stack = inventoryIn.getStackInSlot(j);
-				if(stack == null)
+				if(ItemStackHelper.isNullStack(stack))
 				{
 					return true;
 				}
@@ -158,11 +158,11 @@ public class InventoryHelper
 	public static boolean pullItemFromSlot(IInventory inventoryOut, IInventory inventoryIn, int index, EnumFacing direction)
 	{
 		ItemStack stack = inventoryIn.getStackInSlot(index);
-		if(stack != null && canExtractItemFromSlot(inventoryIn, stack, index, direction))
+		if(!ItemStackHelper.isNullStack(stack) && canExtractItemFromSlot(inventoryIn, stack, index, direction))
 		{
 			ItemStack stackCopy = stack.copy();
 			ItemStack leftItems = putStackInInventoryAllSlots(inventoryOut, inventoryIn.decrStackSize(index, 1), (EnumFacing)null);
-			if(leftItems == null || /*leftItems.stackSize*/ ItemStackHelper.getStackSize(leftItems)  == 0)
+			if(ItemStackHelper.isNullStack(leftItems) || ItemStackHelper.getStackSize(leftItems) == 0)
 			{
 				inventoryIn.markDirty();
 				return true;
@@ -259,7 +259,7 @@ public class InventoryHelper
 
 	public static int getFirstNotNull(IInventory inv) 
 	{
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			if(!ItemStackHelper.isNullStack(inv.getStackInSlot(i)))
 			{
@@ -276,10 +276,10 @@ public class InventoryHelper
 	public static int containsAnotherInventoryBlock(IInventoryWrapper wrapper)
 	{
 		IInventory inv = wrapper.getInventory();
-		for(int i = 0; i < inv.getSizeInventory(); i++)
+		for(int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			ItemStack checkingStack = inv.getStackInSlot(i);
-			if(checkingStack != null)
+			if(!ItemStackHelper.isNullStack(checkingStack))
 			{
 				Item checkingItem = checkingStack.getItem();
 				Block blockFromItem = Block.getBlockFromItem(checkingItem);

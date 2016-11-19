@@ -18,7 +18,6 @@ public class IntegrationBetterAchievements implements IIntegration
 	{
 		Method sendIconForPage = ClassUtils.getMethod("betterachievements.api.util.IMCHelper", "sendIconForPage", new Class[]{String.class, ItemStack.class});
 		sendIconForPage.invoke(null, new Object[]{QuestHandler.INSTANCE.pageName, new ItemStack(Items.CAULDRON)});
-		
 		return true;
 	}
 }

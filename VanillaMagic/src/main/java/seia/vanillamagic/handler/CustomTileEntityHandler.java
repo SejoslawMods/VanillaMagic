@@ -64,7 +64,7 @@ public class CustomTileEntityHandler
 	 */
 	public static boolean removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
-		for(int i = 0; i < world.tickableTileEntities.size(); i++)
+		for(int i = 0; i < world.tickableTileEntities.size(); ++i)
 		{
 			TileEntity tile = world.tickableTileEntities.get(i);
 			if(BlockPosHelper.isSameBlockPos(tile.getPos(), pos))
@@ -77,12 +77,12 @@ public class CustomTileEntityHandler
 	}
 	
 	/**
-	 * @see CustomTileEntityHandler#removeCustomTileEntityAtPos(World, BlockPos)
+	 * @see CustomTileEntityHandlerAPI#removeCustomTileEntityAtPos(World, BlockPos)
 	 */
 	@Deprecated
 	public static boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
 	{
-		for(int i = 0; i < world.tickableTileEntities.size(); i++)
+		for(int i = 0; i < world.tickableTileEntities.size(); ++i)
 		{
 			TileEntity tile = world.tickableTileEntities.get(i);
 			if(BlockPosHelper.isSameBlockPos(tile.getPos(), pos))
@@ -98,7 +98,7 @@ public class CustomTileEntityHandler
 	{
 		WorldServer world = DimensionManager.getWorld(dimension);
 		List<ICustomTileEntity> list = new ArrayList<ICustomTileEntity>();
-		for(int i = 0; i < world.tickableTileEntities.size(); i++)
+		for(int i = 0; i < world.tickableTileEntities.size(); ++i)
 		{
 			TileEntity tile = world.tickableTileEntities.get(i);
 			if(tile instanceof ICustomTileEntity)
@@ -110,7 +110,7 @@ public class CustomTileEntityHandler
 	}
 	
 	/**
-	 * @see CustomTileEntityHandler#getCustomTileEntity(BlockPos, int)
+	 * @see CustomTileEntityHandlerAPI#getCustomTileEntity(BlockPos, World)
 	 */
 	@Nullable
 	public static ICustomTileEntity getCustomTileEntity(BlockPos tilePos, World world)
@@ -119,13 +119,13 @@ public class CustomTileEntityHandler
 	}
 	
 	/**
-	 * @see CustomTileEntityHandler#getCustomTileEntity(BlockPos, int)
+	 * @see CustomTileEntityHandlerAPI#getCustomTileEntity(BlockPos, int)
 	 */
 	@Nullable
 	public static ICustomTileEntity getCustomTileEntity(BlockPos tilePos, int dimension)
 	{
 		WorldServer world = DimensionManager.getWorld(dimension);
-		for(int i = 0; i < world.tickableTileEntities.size(); i++)
+		for(int i = 0; i < world.tickableTileEntities.size(); ++i)
 		{
 			TileEntity tile = world.tickableTileEntities.get(i);
 			if(BlockPosHelper.isSameBlockPos(tile.getPos(), tilePos))

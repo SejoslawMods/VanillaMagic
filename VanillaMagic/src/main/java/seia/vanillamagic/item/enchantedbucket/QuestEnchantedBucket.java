@@ -36,6 +36,7 @@ import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestEnchantedBucket extends Quest
 {
@@ -57,7 +58,7 @@ public class QuestEnchantedBucket extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos clickedPos = event.getPos();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(stackRightHand == null)
+		if(ItemStackHelper.isNullStack(stackRightHand))
 		{
 			return;
 		}
@@ -111,7 +112,7 @@ public class QuestEnchantedBucket extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos clickedPos = event.getPos();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(stackRightHand == null)
+		if(ItemStackHelper.isNullStack(stackRightHand))
 		{
 			return;
 		}
@@ -205,7 +206,7 @@ public class QuestEnchantedBucket extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(stackRightHand == null)
+		if(ItemStackHelper.isNullStack(stackRightHand))
 		{
 			return;
 		}

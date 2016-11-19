@@ -15,6 +15,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.AltarChecker;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.SmeltingHelper;
 
 public class QuestSmeltOnAltar extends Quest
@@ -52,7 +53,7 @@ public class QuestSmeltOnAltar extends Quest
 		{
 			// check if player has the "fuel" in offHand
 			ItemStack fuelOffHand = player.getHeldItemOffhand();
-			if(fuelOffHand == null)
+			if(ItemStackHelper.isNullStack(fuelOffHand))
 			{
 				return;
 			}

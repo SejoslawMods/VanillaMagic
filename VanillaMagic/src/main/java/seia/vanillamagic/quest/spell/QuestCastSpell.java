@@ -52,7 +52,7 @@ public abstract class QuestCastSpell extends Quest
 		if(EnumWand.isWandRightForSpell(wandPlayerHand, spell))
 		{
 			ItemStack casterOffHand = caster.getHeldItemOffhand();
-			if(casterOffHand == null)
+			if(ItemStackHelper.isNullStack(casterOffHand))
 			{
 				return false;
 			}
@@ -65,9 +65,8 @@ public abstract class QuestCastSpell extends Quest
 						caster.addStat(achievement, 1);
 					}
 				}
-				if(caster.hasAchievement(achievement)) //else
+				if(caster.hasAchievement(achievement))
 				{
-					//if(casterOffHand.stackSize >= spell.itemOffHand.stackSize)
 					if(ItemStackHelper.getStackSize(casterOffHand) >= 
 							ItemStackHelper.getStackSize(spell.itemOffHand))
 					{
@@ -75,7 +74,6 @@ public abstract class QuestCastSpell extends Quest
 						{
 							if(castRightSpell(caster, pos, face, hitVec))
 							{
-								//casterOffHand.stackSize -= spell.itemOffHand.stackSize;
 								ItemStackHelper.decreaseStackSize(casterOffHand, ItemStackHelper.getStackSize(spell.itemOffHand));
 								howManyTimesCasted++;
 								return true;

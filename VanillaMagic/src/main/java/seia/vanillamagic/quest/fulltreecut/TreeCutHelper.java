@@ -55,11 +55,11 @@ public class TreeCutHelper
 		int d = 3;
 		int o = -1; // -(d-1)/2
 		int leaves = 0;
-		for(int x = 0; x < d; x++) 
+		for(int x = 0; x < d; ++x) 
 		{
-			for(int y = 0; y < d; y++) 
+			for(int y = 0; y < d; ++y) 
 			{
-				for(int z = 0; z < d; z++) 
+				for(int z = 0; z < d; ++z) 
 				{
 					BlockPos leaf = pos.add(o + x, o + y, o + z);
 					IBlockState state = world.getBlockState(leaf);

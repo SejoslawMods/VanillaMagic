@@ -16,6 +16,7 @@ import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
 import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
+import seia.vanillamagic.util.ItemStackHelper;
 
 public class VanillaMagicItems implements IVanillaMagicItems
 {
@@ -74,7 +75,7 @@ public class VanillaMagicItems implements IVanillaMagicItems
 	
 	public boolean isCustomItem(ItemStack checkingStack, ICustomItem customItem)
 	{
-		if(checkingStack == null || customItem == null)
+		if(ItemStackHelper.isNullStack(checkingStack) || customItem == null)
 		{
 			return false;
 		}
@@ -95,7 +96,7 @@ public class VanillaMagicItems implements IVanillaMagicItems
 	
 	public boolean isCustomBucket(ItemStack checkingStack, IEnchantedBucket customBucket)
 	{
-		if(checkingStack == null || customBucket == null)
+		if(ItemStackHelper.isNullStack(checkingStack) || customBucket == null)
 		{
 			return false;
 		}
@@ -116,34 +117,4 @@ public class VanillaMagicItems implements IVanillaMagicItems
 		}
 		return false;
 	}
-	
-//	public List<ItemStack> getCustomItemsStacks() 
-//	{
-//		List<ItemStack> stacks = new ArrayList<ItemStack>();
-//		for(ICustomItem ci : customItems)
-//		{
-//			stacks.add(ci.getItem());
-//		}
-//		return stacks;
-//	}
-//
-//	public List<ItemStack> getEnchantedBucketsStacks() 
-//	{
-//		List<ItemStack> stacks = new ArrayList<ItemStack>();
-//		for(IEnchantedBucket eb : enchantedBuckets)
-//		{
-//			stacks.add(eb.getItem());
-//		}
-//		return stacks;
-//	}
-//	
-//	public List<ItemStack> getPotionedCrystalsStacks() 
-//	{
-//		List<ItemStack> stacks = new ArrayList<ItemStack>();
-//		for(IPotionedCrystal pc : potionedCrystals)
-//		{
-//			stacks.add(pc.getItem());
-//		}
-//		return stacks;
-//	}
 }

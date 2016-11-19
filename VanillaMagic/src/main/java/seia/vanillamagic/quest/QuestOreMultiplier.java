@@ -15,6 +15,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.OreMultiplierChecker;
 import seia.vanillamagic.util.SmeltingHelper;
 
@@ -50,7 +51,7 @@ public class QuestOreMultiplier extends Quest
 		{
 			// check if player has the "fuel" in offHand
 			ItemStack fuelOffHand = player.getHeldItemOffhand();
-			if(fuelOffHand == null)
+			if(ItemStackHelper.isNullStack(fuelOffHand))
 			{
 				return;
 			}
@@ -87,9 +88,9 @@ public class QuestOreMultiplier extends Quest
 		if(smeltingResult != null)
 		{
 			World world = player.worldObj;
-			for(int i = 0; i < multiplier; i++)
+			for(int i = 0; i < multiplier; ++i)
 			{
-				for(int j = 0; j < smeltingResult.size(); j++)
+				for(int j = 0; j < smeltingResult.size(); ++j)
 				{
 					world.spawnEntityInWorld(EntityHelper.copyItem(smeltingResult.get(j)));
 				}
