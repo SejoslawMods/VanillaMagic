@@ -321,7 +321,7 @@ achievement.motherNatureCrystal.desc=Crafting: Nether Star (middle), Wheet Seeds
 achievement.mining3x3=Mining 3x3
 achievement.mining3x3.desc=
 
-achievement.quarry=Vanilla Quarry !!! (Must be restarted when logging in.)
+achievement.quarry=Vanilla Quarry !!!
 achievement.quarry.desc=Place Cauldron and than on the Left side of the Cauldron place DiamondBlock and on the Back place RedstoneBlock. On Top place inventory (Chest) as input (with fuel). On Right place inventory (Chest) as output. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry.
 
 achievement.arrowMachineGun=Arrow Machine Gun

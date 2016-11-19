@@ -2,6 +2,8 @@ package seia.vanillamagic.util;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -17,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
+import seia.vanillamagic.core.VanillaMagic;
 
 public class ItemStackHelper 
 {
@@ -220,5 +223,13 @@ public class ItemStackHelper
 	public static boolean isNullStack(ItemStack stack)
 	{
 		return stack.func_190926_b();
+	}
+	
+	public static void printStack(ItemStack stack) 
+	{
+		VanillaMagic.LOGGER.log(Level.INFO, "Printing ItemStack data...");
+		VanillaMagic.LOGGER.log(Level.INFO, "Item: " + stack.getItem());
+		VanillaMagic.LOGGER.log(Level.INFO, "StackSize: " + getStackSize(stack));
+		VanillaMagic.LOGGER.log(Level.INFO, "Meta: " + stack.toString());
 	}
 }

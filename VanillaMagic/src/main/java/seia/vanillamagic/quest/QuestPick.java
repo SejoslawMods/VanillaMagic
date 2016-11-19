@@ -25,15 +25,21 @@ public class QuestPick extends Quest
 		return whatToPick;
 	}
 	
+	// TODO: Wait for Forge to fix item picking != ItemAir
 	@SubscribeEvent
 	public void pickItem(ItemPickupEvent event)
 	{
 		EntityPlayer player = event.player;
 		if(canPlayerGetAchievement(player))
 		{
+			System.out.println("aaaaaaaaaaaaa");
 			EntityItem onGround = event.pickedUp;
-			if(whatToPick.getItem().equals(onGround.getEntityItem().getItem()))
+			ItemStackHelper.printStack(whatToPick);
+			ItemStackHelper.printStack(onGround.getEntityItem());
+			//if(whatToPick.getItem().equals(onGround.getEntityItem().getItem()))
+			if(ItemStack.areItemStacksEqual(whatToPick, onGround.getEntityItem()))
 			{
+				System.out.println("bbbbb");
 				player.addStat(achievement, 1);
 			}
 		}

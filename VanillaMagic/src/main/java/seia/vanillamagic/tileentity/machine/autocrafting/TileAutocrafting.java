@@ -15,6 +15,7 @@ import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.TileMachine;
+import seia.vanillamagic.util.BlockPosHelper;
 
 public class TileAutocrafting extends TileMachine
 {
@@ -30,6 +31,7 @@ public class TileAutocrafting extends TileMachine
 	{
 		super.init(world, machinePos);
 		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
+		this.startPos = BlockPosHelper.copyPos(getMachinePos());
 		this.chestPosInput = getMachinePos().up();
 		this.chestPosOutput = getMachinePos().down(2);
 		try

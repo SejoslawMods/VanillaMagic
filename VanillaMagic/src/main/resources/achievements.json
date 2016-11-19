@@ -1139,6 +1139,7 @@
 	"uniqueName":"pickBlazeRod",
 	"whatToPick":
 	{
+	    "what_to_pick":"blaze_rod",
 		"id":369
 	}
 },

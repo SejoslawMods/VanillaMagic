@@ -19,6 +19,7 @@ import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.WorldHelper;
 
 public class QuestAutocrafting extends Quest
@@ -46,7 +47,7 @@ public class QuestAutocrafting extends Quest
 						}
 						if(player.hasAchievement(achievement))
 						{
-							if(player.getHeldItemOffhand() != null)
+							if(!ItemStackHelper.isNullStack(player.getHeldItemOffhand()))
 							{
 								return;
 							}
