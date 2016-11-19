@@ -82,7 +82,6 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		super.init(world, machinePos);
 		setWorkRadius(radius);
 		setWorkingPos(BlockPosHelper.copyPos(machinePos));
-		setNewStartPos(BlockPosHelper.copyPos(machinePos));
 	}
 	
 	int delay = 0;

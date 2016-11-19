@@ -80,7 +80,7 @@ public class ItemUpgradeRegistry
 	 */
 	public static void start()
 	{
-		VanillaMagic.LOGGER.log(Level.INFO, "ItemUpgradeRegistry started...");
+		VanillaMagic.LOGGER.log(Level.INFO, "ItemUpgradeRegistry created");
 	}
 	
 	/**
