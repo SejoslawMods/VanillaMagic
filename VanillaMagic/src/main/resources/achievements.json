@@ -1131,7 +1131,7 @@
 	"wandTier":2
 },
 {
-	"questClass":"seia.vanillamagic.quest.QuestPick",
+	"questClass":"seia.vanillamagic.quest.QuestPickup",
 	"requiredQuest":"buildAltarTier5",
 	"posX":0,
 	"posY":2,
@@ -1145,7 +1145,7 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestMoveBlock",
-	"requiredQuest":"pickBlazeRod",
+	"requiredQuest":"pickupBlazeRod",
 	"posX":-2,
 	"posY":1,
 	"questName":"Move block by book",
@@ -1207,7 +1207,7 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"pickBlazeRod",
+	"requiredQuest":"pickupBlazeRod",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Wither Skeleton Skull",
@@ -1244,7 +1244,7 @@
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"pickBlazeRod",
+	"requiredQuest":"pickupBlazeRod",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -1628,7 +1628,7 @@
 	"spellID":1,
 	"additionalRequiredQuests":
 	{
-		"quest_1":"pickBlazeRod"
+		"quest_1":"pickupBlazeRod"
 	}
 },
 {

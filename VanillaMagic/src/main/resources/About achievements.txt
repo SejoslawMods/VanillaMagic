@@ -1,5 +1,5 @@
 Source:
-https://github.com/Sejoslaw/VanillaMagic/tree/master/VanillaMagic/src/main/resources
+https://github.com/Sejoslaw/VanillaMagic/tree/1.11/VanillaMagic/src/main/resources
 
 
 Basic template:
