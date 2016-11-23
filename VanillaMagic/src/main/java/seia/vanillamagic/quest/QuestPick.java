@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestPick extends Quest
@@ -26,16 +26,13 @@ public class QuestPick extends Quest
 	}
 	
 	@SubscribeEvent
-	public void pickItem(ItemPickupEvent event)
+	public void pickItem(EntityItemPickupEvent event)
 	{
-		EntityPlayer player = event.player;
+		EntityPlayer player = event.getEntityPlayer();
 		if(canPlayerGetAchievement(player))
 		{
-			EntityItem onGround = event.pickedUp;
-			ItemStackHelper.printStack(whatToPick);
-			ItemStackHelper.printStack(onGround.getEntityItem());
-			//if(whatToPick.getItem().equals(onGround.getEntityItem().getItem()))
-			//if(ItemStack.areItemStacksEqual(whatToPick, onGround.getEntityItem())) // TODO: Wait for Forge to fix item picking != ItemAir
+			EntityItem onGround = event.getItem();
+			if(ItemStack.areItemStacksEqual(whatToPick, onGround.getEntityItem()))
 			{
 				player.addStat(achievement, 1);
 			}
