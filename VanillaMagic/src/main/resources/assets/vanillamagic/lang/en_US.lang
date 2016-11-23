@@ -375,8 +375,8 @@ achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar +
 achievement.craftGhastTear=Craft Ghast Tear
 achievement.craftGhastTear.desc=Toss 4x Gunpowder + 4x Blaze Powder + 1x Lava Bucket into Altar Tier 5 and right-click with Blaze Wand in right hand
 
-achievement.pickBlazeRod=Pick Blaze Rod
-achievement.pickBlazeRod.desc=Pick Blaze Rod from the ground. Rename it in Anvil to 'Blaze Wand'.
+achievement.pickupBlazeRod=Pick Blaze Rod
+achievement.pickupBlazeRod.desc=Pick Blaze Rod from the ground. Rename it in Anvil to 'Blaze Wand'.
 
 achievement.questMoveBlock=Move block by Book
 achievement.questMoveBlock.desc=Take Blaze Wand to right hand and exactly 1x Book to left hand. Shift-right-click on the block which You want to move. Than shift-right-click on the spot to move.

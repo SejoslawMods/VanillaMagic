@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.util.ItemStackHelper;
 
-public class QuestPick extends Quest
+public class QuestPickup extends Quest
 {
 	protected ItemStack whatToPick;
 	

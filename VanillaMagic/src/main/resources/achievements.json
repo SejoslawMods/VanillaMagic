@@ -1136,7 +1136,7 @@
 	"posX":0,
 	"posY":2,
 	"questName":"Pick Blaze Rod",
-	"uniqueName":"pickBlazeRod",
+	"uniqueName":"pickupBlazeRod",
 	"whatToPick":
 	{
 	    "what_to_pick":"blaze_rod",
