@@ -211,7 +211,7 @@ achievement.mineObsidian=Mine Obsidian
 achievement.mineObsidian.desc=Mine obsidian
 
 achievement.mobSpawnerDropBlock=Monster Spawner Drop Block
-achievement.mobSpawnerDropBlock.desc=
+achievement.mobSpawnerDropBlock.desc=Destroy Mob Spawner to get Block. Place Block to get Spawner.
 
 achievement.craftEnchantingTable=Craft Enchanting Table (Require: all 3 earlier)
 achievement.craftEnchantingTable.desc=Craft enchanting table
