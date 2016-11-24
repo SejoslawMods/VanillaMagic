@@ -1,6 +1,7 @@
 package seia.vanillamagic.core;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.Level;
 
@@ -13,6 +14,7 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
@@ -47,14 +49,29 @@ public class VanillaMagicDebug
 		EntityPlayer player = event.getEntityPlayer();
 		if(ItemStackHelper.checkItemsInHands(player, DEBUG_OFF_HAND_ITEMSTACK, DEBUG_MAIN_HAND_ITEMSTACK))
 		{
+			// Handle all Quests
 			for(IQuest quest : QuestList.getQuests())
 			{
 				Achievement toAchieve = quest.getAchievement();
 				player.addStat(toAchieve, 1);
 			}
+			// Handle all Basic Achievements
 			for(Achievement a : AchievementList.ACHIEVEMENTS)
 			{
 				player.addStat(a, 1);
+			}
+			// Handle all other achievements
+			Set<AchievementPage> pages = AchievementPage.getAchievementPages();
+			for(AchievementPage page : pages)
+			{
+				List<Achievement> achievements = page.getAchievements();
+				for(Achievement achievement : achievements)
+				{
+					if(!player.hasAchievement(achievement))
+					{
+						player.addStat(achievement, 1);
+					}
+				}
 			}
 		}
 	}

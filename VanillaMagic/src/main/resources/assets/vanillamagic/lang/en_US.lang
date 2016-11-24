@@ -202,6 +202,9 @@ achievement.mineDiamond.desc=Mine one more diamond
 achievement.mineObsidian=Mine Obsidian
 achievement.mineObsidian.desc=Mine obsidian
 
+achievement.mobSpawnerDropBlock=Monster Spawner Drop Block
+achievement.mobSpawnerDropBlock.desc=
+
 achievement.craftEnchantingTable=Craft Enchanting Table (Require: all 3 earlier)
 achievement.craftEnchantingTable.desc=Craft enchanting table
 
