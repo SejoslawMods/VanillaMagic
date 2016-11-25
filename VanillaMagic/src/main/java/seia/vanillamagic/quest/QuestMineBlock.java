@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.util.ListHelper;
 
@@ -46,7 +46,7 @@ public class QuestMineBlock extends Quest
 	}
 	
 	@SubscribeEvent
-	public void onBreakBlock(BlockEvent.BreakEvent event)
+	public void onBreakBlock(BreakEvent event)
 	{
 		EntityPlayer player = event.getPlayer();
 		if(canPlayerGetAchievement(player))

@@ -116,7 +116,7 @@ public class QuestCaptureEntity extends Quest
 			if(player.isSneaking())
 			{
 				ItemStack stackOffHand = player.getHeldItemOffhand();
-				if(stackOffHand == null)
+				if(ItemStackHelper.isNullStack(stackOffHand))
 				{
 					return;
 				}
@@ -145,11 +145,8 @@ public class QuestCaptureEntity extends Quest
 		{
 			return;
 		}
-		// changing name just to force Minecraft to let this item have NBTTagCompound
-		player.getHeldItemOffhand().setStackDisplayName("EntityBook");
-		// any item will be replaced to Enchanted Book
-		//ItemStack stackOffHand = ItemStackHelper.replaceItemInStack(player.getHeldItemOffhand(), Items.ENCHANTED_BOOK);
 		ItemStack stackOffHand = new ItemStack(Items.ENCHANTED_BOOK);
+		stackOffHand.setStackDisplayName("EntityBook");
 		NBTTagCompound stackTagCompound = stackOffHand.getTagCompound();
 		// Save to ItemStack
 		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))
@@ -200,6 +197,7 @@ public class QuestCaptureEntity extends Quest
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 		}
 		return entity;
 	}

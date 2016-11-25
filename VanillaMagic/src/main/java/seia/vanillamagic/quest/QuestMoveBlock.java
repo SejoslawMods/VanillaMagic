@@ -116,11 +116,8 @@ public class QuestMoveBlock extends Quest
 	
 	public void handleSave(World world, EntityPlayer player, BlockPos wantedBlockPos, EnumFacing hittedFace)
 	{
-		// changing name just to force Minecraft to let this item have NBTTagCompound
-		player.getHeldItemOffhand().setStackDisplayName("QuestBook");
-		// any item will be replaced to Enchanted Book
-		//ItemStack stackOffHand = ItemStackHelper.replaceItemInStack(player.getHeldItemOffhand(), Items.ENCHANTED_BOOK);
 		ItemStack stackOffHand = new ItemStack(Items.ENCHANTED_BOOK);
+		stackOffHand.setStackDisplayName("QuestBook");
 		NBTTagCompound stackTagCompound = stackOffHand.getTagCompound();
 		// Save to ItemStack
 		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
@@ -182,7 +179,7 @@ public class QuestMoveBlock extends Quest
 				tile.readFromNBT(questTag);
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
-			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
+			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStackHelper.NULL_STACK);
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
 		}
 	}

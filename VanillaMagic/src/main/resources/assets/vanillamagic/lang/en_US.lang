@@ -26,7 +26,7 @@ book.quarryUpgrades.title=Quarry Upgrades
 #Creative Tab Names
 ############################
 
-itemGroup.mobSpawner=Vanilla Magic Mob Spawner
+itemGroup.mobSpawner=VM Mob Spawner
 
 
 
@@ -209,9 +209,6 @@ achievement.mineDiamond.desc=Mine one more diamond
 
 achievement.mineObsidian=Mine Obsidian
 achievement.mineObsidian.desc=Mine obsidian
-
-achievement.mobSpawnerDropBlock=Monster Spawner Drop Block
-achievement.mobSpawnerDropBlock.desc=Destroy Mob Spawner to get Block. Place Block to get Spawner.
 
 achievement.craftEnchantingTable=Craft Enchanting Table (Require: all 3 earlier)
 achievement.craftEnchantingTable.desc=Craft enchanting table

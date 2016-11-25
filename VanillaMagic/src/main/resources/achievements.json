@@ -1591,19 +1591,6 @@
 	"blocksToBeMineList":"customObsidian"
 },
 {
-	"questClass":"seia.vanillamagic.quest.QuestMonsterSpawnerDropBlock",
-	"requiredQuest":"mineObsidian",
-	"posX":2,
-	"posY":0,
-	"icon":
-	{
-		"it_is":"mob_spawner",
-		"id":52
-	},
-	"questName":"Mob Spawner Drop Block",
-	"uniqueName":"mobSpawnerDropBlock"
-},
-{
 	"questClass":"seia.vanillamagic.quest.QuestCraft",
 	"requiredQuest":"craftBookshelf",
 	"posX":2,
