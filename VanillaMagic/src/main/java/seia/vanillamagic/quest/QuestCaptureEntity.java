@@ -182,7 +182,6 @@ public class QuestCaptureEntity extends Quest
 			entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
 			world.spawnEntityInWorld(entity);
 			ItemStack newOffHand = requiredStackOffHand.copy();
-			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
 		}
 	}

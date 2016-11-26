@@ -179,7 +179,6 @@ public class QuestMoveBlock extends Quest
 				tile.readFromNBT(questTag);
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
-			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStackHelper.NULL_STACK);
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
 		}
 	}
