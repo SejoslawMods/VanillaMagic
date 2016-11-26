@@ -61,7 +61,7 @@ public class ItemUpgradeAPI
 	/**
 	 * Add a new mapping. <br>
 	 * In VanillaMagic mapping will start with "_" so "pickaxe" will be -> "_pickaxe". <br>
-	 * It was made this was to prevent "pickaxe" and "axe" being counted as one mapping.
+	 * It was made this way to prevent "pickaxe" and "axe" being counted as one mapping.
 	 */
 	public static void addItemMapping(String mappingName)
 	{
