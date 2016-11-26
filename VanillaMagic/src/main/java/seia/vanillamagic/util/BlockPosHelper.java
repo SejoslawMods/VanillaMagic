@@ -95,7 +95,7 @@ public class BlockPosHelper
 	
 	public static void printCoords(Level level, EntityPlayer player, BlockPos pos)
 	{
-		printCoords(level, player.worldObj, pos);
+		printCoords(level, player.world, pos);
 		VanillaMagic.LOGGER.log(Level.INFO, " Dimension = " + WorldHelper.getDimensionID(player));
 	}
 	

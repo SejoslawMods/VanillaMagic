@@ -13,7 +13,7 @@ public class QuestPortableCraftingTable extends Quest
 	public void openCrafting(RightClickItem event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		if(EntityHelper.hasPlayerCraftingTableInMainHand(player))
 		{
 			if(canPlayerGetAchievement(player))

@@ -198,7 +198,7 @@ public class SmeltingHelper
 		if(player.hasAchievement(requiredQuest.getAchievement()))
 		{
 			List<EntityItem> smelted = new ArrayList<EntityItem>();
-			World world = player.worldObj;
+			World world = player.world;
 			int ticks = 0;
 			ticks += SmeltingHelper.countTicks(player.getHeldItemOffhand()); // value for the whole stack
 			ItemStackHelper.setStackSize(player.getHeldItemOffhand(), 0);
@@ -233,7 +233,7 @@ public class SmeltingHelper
 				// spawn or not
 				if(spawnSmelted)
 				{
-					world.spawnEntityInWorld(smeltResultEntityItem);
+					world.spawnEntity(smeltResultEntityItem);
 				}
 				smelted.add(smeltResultEntityItem);
 				ticks -= ticksToSmeltStack;

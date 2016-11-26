@@ -48,7 +48,7 @@ public class QuestCaptureEntity extends Quest
 	public void captureEntity(EntityInteract event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		Entity target = event.getTarget();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(rightHand))
@@ -99,7 +99,7 @@ public class QuestCaptureEntity extends Quest
 	public void respawnEntity(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		BlockPos respawnPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(rightHand))
@@ -180,7 +180,7 @@ public class QuestCaptureEntity extends Quest
 			}
 			entity.readFromNBT(entityTag);
 			entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
-			world.spawnEntityInWorld(entity);
+			world.spawnEntity(entity);
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
 		}

@@ -43,7 +43,7 @@ public class EntitySpellFreezeLiquid extends EntitySpell
 			for(int i = 0; i < blockPosToReplace.size(); ++i)
 			{
 				BlockPos currentPos = blockPosToReplace.get(i);
-				Block blockAtPos = worldObj.getBlockState(currentPos).getBlock();
+				Block blockAtPos = world.getBlockState(currentPos).getBlock();
 				if(blockAtPos instanceof BlockLiquid)
 				{
 					BlockLiquid liquidAtPos = (BlockLiquid) blockAtPos;
@@ -51,7 +51,7 @@ public class EntitySpellFreezeLiquid extends EntitySpell
 					{
 						if(Block.getIdFromBlock(liquidAtPos) == Block.getIdFromBlock(toReplace[j]))//if(liquidAtPos.equals(toReplace[j]))
 						{
-							worldObj.setBlockState(currentPos, replacer.getDefaultState());
+							world.setBlockState(currentPos, replacer.getDefaultState());
 						}
 					}
 				}

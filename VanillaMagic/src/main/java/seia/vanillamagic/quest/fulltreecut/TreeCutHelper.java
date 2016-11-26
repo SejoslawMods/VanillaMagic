@@ -79,7 +79,7 @@ public class TreeCutHelper
 
 	public static boolean fellTree(ItemStack itemstack, BlockPos start, EntityPlayer player)
 	{
-		if(player.worldObj.isRemote) 
+		if(player.world.isRemote) 
 		{
 			return true;
 		}

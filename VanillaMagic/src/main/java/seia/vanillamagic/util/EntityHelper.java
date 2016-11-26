@@ -50,7 +50,7 @@ public class EntityHelper
 	
 	public static EntityItem copyItem(EntityItem original)
 	{
-		return new EntityItem(original.worldObj, original.posX, original.posY, original.posZ, original.getEntityItem().copy());
+		return new EntityItem(original.world, original.posX, original.posY, original.posZ, original.getEntityItem().copy());
 	}
 	
 	public static Vec3d getEyePosition(EntityPlayer player)
@@ -58,7 +58,7 @@ public class EntityHelper
 		double posX = player.posX;
 		double posY = player.posY;
 		double posZ = player.posZ;
-		if(player.worldObj.isRemote) 
+		if(player.world.isRemote) 
 		{
 			posY += player.getEyeHeight() - player.getDefaultEyeHeight();
 		} 
@@ -85,7 +85,7 @@ public class EntityHelper
 	public static void knockBack(Entity user, Entity toKnockBack, float strenght, double xRatio, double zRatio)
 	{
 		toKnockBack.isAirBorne = true;
-		float f = MathHelper.sqrt_double(xRatio * xRatio + zRatio * zRatio);
+		float f = MathHelper.sqrt(xRatio * xRatio + zRatio * zRatio);
 		toKnockBack.motionX /= 2.0D;
 		toKnockBack.motionZ /= 2.0D;
 		toKnockBack.motionX -= xRatio / (double)f * (double)strenght;
@@ -114,7 +114,7 @@ public class EntityHelper
 	public static void addChatComponentMessage(EntityPlayer player, String msg)
 	{
 		//player.addChatComponentMessage(new TextComponentString("§a[VanillaMagic] §f" + msg));
-		player.addChatComponentMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)), false); // TODO: What is this boolean ?
+		player.sendStatusMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)), false); // TODO: What is this boolean ?
 	}
 
 	public static void removeEntities(World world, List<EntityItem> itemsInCauldron)

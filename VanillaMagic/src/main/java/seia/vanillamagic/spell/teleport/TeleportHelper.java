@@ -37,9 +37,9 @@ public class TeleportHelper
 	 */
 	public static void changePlayerDimensionWithoutPortal(EntityPlayer player, int dimension)
 	{
-		int oldDimension = player.worldObj.provider.getDimension();
+		int oldDimension = player.world.provider.getDimension();
 		EntityPlayerMP playerMP = (EntityPlayerMP) player;
-		MinecraftServer server = playerMP.worldObj.getMinecraftServer();
+		MinecraftServer server = playerMP.world.getMinecraftServer();
 		WorldServer worldServer = server.worldServerForDimension(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
 		VMTeleporter vmTele = new VMTeleporter(worldServer, player.posX, player.posY, player.posZ);
@@ -68,7 +68,7 @@ public class TeleportHelper
 	
 	public static void transferPlayerToDimension(EntityPlayerMP player, int dimension, VMTeleporter teleporter)
 	{
-		MinecraftServer server = ((EntityPlayerMP)player).worldObj.getMinecraftServer();
+		MinecraftServer server = ((EntityPlayerMP)player).world.getMinecraftServer();
 		WorldServer worldServer = server.worldServerForDimension(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
 		int i = player.dimension;
@@ -104,8 +104,8 @@ public class TeleportHelper
 		oldWorldIn.theProfiler.startSection("moving");
 		if(false && entityIn.dimension == -1)
 		{
-			posX = MathHelper.clamp_double(posX / 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
-			posZ = MathHelper.clamp_double(posZ / 8.0D, toWorldIn.getWorldBorder().minZ() + 16.0D, toWorldIn.getWorldBorder().maxZ() - 16.0D);
+			posX = MathHelper.clamp(posX / 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
+			posZ = MathHelper.clamp(posZ / 8.0D, toWorldIn.getWorldBorder().minZ() + 16.0D, toWorldIn.getWorldBorder().maxZ() - 16.0D);
 			entityIn.setLocationAndAngles(posX, entityIn.posY, posZ, entityIn.rotationYaw, entityIn.rotationPitch);
 			if(entityIn.isEntityAlive())
 			{
@@ -114,8 +114,8 @@ public class TeleportHelper
 		}
 		else if(false && entityIn.dimension == 0)
 		{
-			posX = MathHelper.clamp_double(posX * 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
-			posZ = MathHelper.clamp_double(posZ * 8.0D, toWorldIn.getWorldBorder().minZ() + 16.0D, toWorldIn.getWorldBorder().maxZ() - 16.0D);
+			posX = MathHelper.clamp(posX * 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
+			posZ = MathHelper.clamp(posZ * 8.0D, toWorldIn.getWorldBorder().minZ() + 16.0D, toWorldIn.getWorldBorder().maxZ() - 16.0D);
 			entityIn.setLocationAndAngles(posX, entityIn.posY, posZ, entityIn.rotationYaw, entityIn.rotationPitch);
 			if(entityIn.isEntityAlive())
 			{
@@ -147,13 +147,13 @@ public class TeleportHelper
 		if(lastDimension != 1)
 		{
 			oldWorldIn.theProfiler.startSection("placing");
-			posX = (double)MathHelper.clamp_int((int)posX, -29999872, 29999872);
-			posZ = (double)MathHelper.clamp_int((int)posZ, -29999872, 29999872);
+			posX = (double)MathHelper.clamp((int)posX, -29999872, 29999872);
+			posZ = (double)MathHelper.clamp((int)posZ, -29999872, 29999872);
 			if(entityIn.isEntityAlive())
 			{
 				entityIn.setLocationAndAngles(posX, entityIn.posY, posZ, entityIn.rotationYaw, entityIn.rotationPitch);
 				teleporter.placeInPortal(entityIn, rotationYaw);
-				toWorldIn.spawnEntityInWorld(entityIn);
+				toWorldIn.spawnEntity(entityIn);
 				toWorldIn.updateEntityWithOptionalForce(entityIn, false);
 			}
 			oldWorldIn.theProfiler.endSection();
@@ -177,10 +177,10 @@ public class TeleportHelper
 	 */
 	private static void updateTimeAndWeatherForPlayer(EntityPlayerMP player, WorldServer worldIn, int dimension)
 	{
-		MinecraftServer server = player.worldObj.getMinecraftServer();
+		MinecraftServer server = player.world.getMinecraftServer();
 		WorldServer worldServer = server.worldServerForDimension(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
-		WorldBorder worldborder = mcServer.worldServers[0].getWorldBorder();
+		WorldBorder worldborder = mcServer.worlds[0].getWorldBorder();
 		player.connection.sendPacket(new SPacketWorldBorder(worldborder, SPacketWorldBorder.Action.INITIALIZE));
 		player.connection.sendPacket(new SPacketTimeUpdate(worldIn.getTotalWorldTime(), worldIn.getWorldTime(), worldIn.getGameRules().getBoolean("doDaylightCycle")));
 		if(worldIn.isRaining())

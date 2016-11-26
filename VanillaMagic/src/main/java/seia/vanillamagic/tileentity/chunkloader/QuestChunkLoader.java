@@ -26,7 +26,7 @@ public class QuestChunkLoader extends Quest
 		BlockPos chunkLoaderPos = event.getPos();
 		EntityPlayer placedBy = event.getPlayer();
 		ItemStack itemInHand = event.getItemInHand();
-		World world = placedBy.worldObj;
+		World world = placedBy.world;
 		if(ItemStackHelper.isNullStack(itemInHand))
 		{
 			return;
@@ -44,7 +44,7 @@ public class QuestChunkLoader extends Quest
 					}
 					if(placedBy.hasAchievement(achievement))
 					{
-						tileChunkLoader.init(placedBy.worldObj, chunkLoaderPos);
+						tileChunkLoader.init(placedBy.world, chunkLoaderPos);
 						if(CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, placedBy.dimension))
 						{
 							EntityHelper.addChatComponentMessage(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");
@@ -60,7 +60,7 @@ public class QuestChunkLoader extends Quest
 	{
 		BlockPos destroyedBlockPos = event.getPos();
 		EntityPlayer breakBy = event.getPlayer();
-		World world = breakBy.worldObj;
+		World world = breakBy.world;
 		if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE))
 		{
 			remove(world, destroyedBlockPos, breakBy);

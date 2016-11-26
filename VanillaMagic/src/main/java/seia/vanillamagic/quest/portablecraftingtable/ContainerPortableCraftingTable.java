@@ -46,13 +46,13 @@ public class ContainerPortableCraftingTable extends Container
 	
 	public void onCraftMatrixChanged(IInventory inv)
 	{
-		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, player.worldObj));
+		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, player.world));
 	}
 	
 	public void onContainerClosed(EntityPlayer player)
 	{
 		super.onContainerClosed(player);
-		if(!player.worldObj.isRemote)
+		if(!player.world.isRemote)
 		{
 			for(int i = 0; i < 9; ++i)
 			{
@@ -119,7 +119,7 @@ public class ContainerPortableCraftingTable extends Container
 			{
 				return ItemStackHelper.NULL_STACK;
 			}
-			slot.func_190901_a(entityPlayer, itemstack1); // TODO:
+			slot.onTake(entityPlayer, itemstack1);
 		}
 		return itemstack;
 	}

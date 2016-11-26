@@ -38,7 +38,7 @@ public class QuestBuildAltar extends Quest
 		{
 			if(middleBlock instanceof BlockCauldron)
 			{
-				if(AltarChecker.checkAltarTier(player.worldObj, event.getPos(), tier))
+				if(AltarChecker.checkAltarTier(player.world, event.getPos(), tier))
 				{
 					player.addStat(achievement, 1);
 				}

@@ -33,7 +33,7 @@ public class EntitySpellPull extends EntitySpell
 			{
 				hittedEntity = result.entityHit;
 				TeleportHelper.teleportEntity(hittedEntity, casterPosWhileCasting);
-				castingEntity.worldObj.updateEntities();
+				castingEntity.world.updateEntities();
 			}
 		}
 	}

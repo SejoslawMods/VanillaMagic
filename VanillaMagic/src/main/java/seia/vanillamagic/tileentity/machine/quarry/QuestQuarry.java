@@ -23,7 +23,7 @@ public class QuestQuarry extends QuestMachineActivate
 		BlockPos quarryPos = event.getPos();
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack itemInHand = player.getHeldItemMainhand();
-		World world = player.worldObj;
+		World world = player.world;
 		if(!player.isSneaking())
 		{
 			return;
@@ -41,7 +41,7 @@ public class QuestQuarry extends QuestMachineActivate
 			if(player.hasAchievement(achievement))
 			{
 				TileQuarry tileQuarry = new TileQuarry();
-				tileQuarry.init(player.worldObj, quarryPos);
+				tileQuarry.init(player.world, quarryPos);
 				if(tileQuarry.checkSurroundings())
 				{
 					if(CustomTileEntityHandler.addCustomTileEntity(tileQuarry, player.dimension))

@@ -80,14 +80,14 @@ public class TileQuarry extends TileMachine implements IQuarry
 	{
 		if(diamondBlockPos != null)
 		{
-			if(!Block.isEqualTo(Blocks.DIAMOND_BLOCK, worldObj.getBlockState(diamondBlockPos).getBlock()))
+			if(!Block.isEqualTo(Blocks.DIAMOND_BLOCK, world.getBlockState(diamondBlockPos).getBlock()))
 			{
 				return false;
 			}
 		}
 		if(redstoneBlockPos != null)
 		{
-			if(!Block.isEqualTo(Blocks.REDSTONE_BLOCK, worldObj.getBlockState(redstoneBlockPos).getBlock()))
+			if(!Block.isEqualTo(Blocks.REDSTONE_BLOCK, world.getBlockState(redstoneBlockPos).getBlock()))
 			{
 				return false;
 			}
@@ -97,11 +97,11 @@ public class TileQuarry extends TileMachine implements IQuarry
 			for(EnumFacing redstoneFacing : facings())
 			{
 				redstoneBlockPos = pos.offset(redstoneFacing);
-				if(Block.isEqualTo(worldObj.getBlockState(redstoneBlockPos).getBlock(), Blocks.REDSTONE_BLOCK))
+				if(Block.isEqualTo(world.getBlockState(redstoneBlockPos).getBlock(), Blocks.REDSTONE_BLOCK))
 				{
 					EnumFacing diamondFacing = redstoneFacing.rotateY();
 					diamondBlockPos = pos.offset(diamondFacing);
-					if(Block.isEqualTo(worldObj.getBlockState(diamondBlockPos).getBlock(), Blocks.DIAMOND_BLOCK))
+					if(Block.isEqualTo(world.getBlockState(diamondBlockPos).getBlock(), Blocks.DIAMOND_BLOCK))
 					{
 						if(startPos == null)
 						{
@@ -113,8 +113,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 							this.chestPosOutput = pos.offset(getOutputFacing());
 							try
 							{
-								this.inventoryInput = new InventoryWrapper(worldObj, chestPosInput);
-								this.inventoryOutput = new InventoryWrapper(worldObj, chestPosOutput);
+								this.inventoryInput = new InventoryWrapper(world, chestPosInput);
+								this.inventoryOutput = new InventoryWrapper(world, chestPosOutput);
 							}
 							catch(NotInventoryException e)
 							{
@@ -161,7 +161,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public void spawnDigged(ItemStack digged)
 	{
-		Block.spawnAsEntity(worldObj, this.pos.offset(EnumFacing.UP, 2), digged);
+		Block.spawnAsEntity(world, this.pos.offset(EnumFacing.UP, 2), digged);
 	}
 	
 	public BlockPos moveWorkingPosToNextPos()
@@ -179,7 +179,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(diamondFacing);
 		diamondBlocks = 0;
-		IBlockState checkingBlock = worldObj.getBlockState(cauldronPos);
+		IBlockState checkingBlock = world.getBlockState(cauldronPos);
 		while((Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK)) // quarry resizing is not an actual upgrade, it's easier to count it here
 				|| (QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock())))
 		{
@@ -192,7 +192,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 				upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock());
 			}
 			cauldronPos = cauldronPos.offset(diamondFacing);
-			checkingBlock = worldObj.getBlockState(cauldronPos);
+			checkingBlock = world.getBlockState(cauldronPos);
 		}
 		upgradeHelper.modifyQuarry(this);
 		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
@@ -245,12 +245,12 @@ public class TileQuarry extends TileMachine implements IQuarry
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(redstoneFacing);
 		redstoneBlocks = 0;
-		IBlockState checkingBlock = worldObj.getBlockState(cauldronPos);
+		IBlockState checkingBlock = world.getBlockState(cauldronPos);
 		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.REDSTONE_BLOCK))
 		{
 			redstoneBlocks++;
 			cauldronPos = cauldronPos.offset(redstoneFacing);
-			checkingBlock = worldObj.getBlockState(cauldronPos);
+			checkingBlock = world.getBlockState(cauldronPos);
 		}
 	}
 	
@@ -263,22 +263,22 @@ public class TileQuarry extends TileMachine implements IQuarry
 		{
 			return;
 		}
-		if(worldObj.isAirBlock(workingPos)) 
+		if(world.isAirBlock(workingPos)) 
 		{
-			while(!worldObj.isAirBlock(workingPos))
+			while(!world.isAirBlock(workingPos))
 			{
 				workingPos = moveWorkingPosToNextPos();
 			}
 		}
-		else if(Block.isEqualTo(worldObj.getBlockState(workingPos).getBlock(), Blocks.BEDROCK))
+		else if(Block.isEqualTo(world.getBlockState(workingPos).getBlock(), Blocks.BEDROCK))
 		{
 			goToNextPosAfterHitBedrock();
 		}
 		else // dig something like stone, iron-ore, etc.
 		{
 			boolean hasChest = isNextToOutput(); // chest or any other IInventory
-			Block blockToDig = worldObj.getBlockState(workingPos).getBlock();
-			List<ItemStack> drops = getDrops(blockToDig, worldObj, workingPos, worldObj.getBlockState(workingPos)); // blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
+			Block blockToDig = world.getBlockState(workingPos).getBlock();
+			List<ItemStack> drops = getDrops(blockToDig, world, workingPos, world.getBlockState(workingPos)); // blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
 			// Add drops from IInventory
 			if(blockToDig instanceof IInventory)
 			{
@@ -292,7 +292,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 					}
 				}
 			}
-			worldObj.setBlockToAir(workingPos);
+			world.setBlockToAir(workingPos);
 			for(ItemStack stack : drops)
 			{
 				if(!hasChest)

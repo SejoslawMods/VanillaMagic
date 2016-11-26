@@ -30,7 +30,7 @@ public class EntitySpellTeleport extends EntitySpell
 		if(result.typeOfHit == RayTraceResult.Type.BLOCK)
 		{
 			BlockPos resultBlockPos = result.getBlockPos();
-			TileEntity resultTileEntity = this.worldObj.getTileEntity(resultBlockPos);
+			TileEntity resultTileEntity = this.world.getTileEntity(resultBlockPos);
 			if(resultTileEntity instanceof TileEntityEndGateway)
 			{
 				TileEntityEndGateway tileEntityEndGate = (TileEntityEndGateway)resultTileEntity;
@@ -46,20 +46,20 @@ public class EntitySpellTeleport extends EntitySpell
 		}
 		for(int i = 0; i < 32; ++i)
 		{
-			this.worldObj.spawnParticle(EnumParticleTypes.PORTAL, this.posX, this.posY + this.rand.nextDouble() * 2.0D, this.posZ, this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian(), new int[0]);
+			this.world.spawnParticle(EnumParticleTypes.PORTAL, this.posX, this.posY + this.rand.nextDouble() * 2.0D, this.posZ, this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian(), new int[0]);
 		}
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 		{
 			if(result.entityHit == null)
 			{
 				BlockPos blockpos = result.getBlockPos().offset(result.sideHit);
-				if(this.worldObj.isAirBlock(blockpos))
+				if(this.world.isAirBlock(blockpos))
 				{
 					if(caster instanceof EntityPlayerMP)
 					{
 						EntityPlayerMP casterMP = (EntityPlayerMP)caster;
 						if(casterMP.connection.getNetworkManager().isChannelOpen() && 
-								casterMP.worldObj == this.worldObj && 
+								casterMP.world == this.world && 
 								!casterMP.isPlayerSleeping())
 						{
 							if(caster.isRiding())

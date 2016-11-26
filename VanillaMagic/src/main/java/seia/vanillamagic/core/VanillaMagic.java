@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.config.achievement.ConfigAchievements;
-import seia.vanillamagic.creativetab.CreativeTabMobSpawner;
+import seia.vanillamagic.creativetab.mobspawner.CreativeTabMobSpawner;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.handler.QuestHandler;
@@ -26,6 +26,7 @@ import seia.vanillamagic.item.inventoryselector.InventorySelector;
 import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry;
 import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.quest.QuestList;
+import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 import seia.vanillamagic.tileentity.TileEntityRegistry;
 import seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry;
 
@@ -58,7 +59,7 @@ public class VanillaMagic
 		ItemUpgradeRegistry.start();
 		CONFIG_ACHIEVEMENTS = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
-		for(int i = 0; i < QuestList.size(); i++)
+		for(int i = 0; i < QuestList.size(); ++i)
 		{
 			QuestHandler.INSTANCE.registerEvent(QuestList.get(i));
 		}
@@ -75,7 +76,7 @@ public class VanillaMagic
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		for(int i = 0; i < QuestList.size(); i++)
+		for(int i = 0; i < QuestList.size(); ++i)
 		{
 			QuestHandler.INSTANCE.addAchievement(QuestList.get(i).getAchievement());
 		}
@@ -93,5 +94,6 @@ public class VanillaMagic
 		VanillaMagicItems.INSTANCE.postInit();
 		VanillaMagicIntegration.INSTANCE.postInit();
 		LOGGER.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
+		MobSpawnerRegistry.init();
 	}
 }

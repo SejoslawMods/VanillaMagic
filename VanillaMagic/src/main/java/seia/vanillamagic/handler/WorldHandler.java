@@ -99,7 +99,7 @@ public class WorldHandler
 						try
 						{
 							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
-							tileEntity.getTileEntity().setWorldObj(world);
+							tileEntity.getTileEntity().setWorld(world);
 							tileEntity.getTileEntity().setPos(tileEntityPos);
 							tileEntity.getTileEntity().create(world, tileEntityTag); // TODO: Was -> func_190200_a
 							// Additional parameters for different CustomTileEntities (only if MUST be)

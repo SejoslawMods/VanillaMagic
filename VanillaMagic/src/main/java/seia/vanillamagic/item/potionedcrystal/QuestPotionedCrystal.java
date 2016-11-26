@@ -78,7 +78,7 @@ public class QuestPotionedCrystal extends Quest
 						if(player.hasAchievement(achievement))
 						{
 							EntityItem newEI = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), ipc.getItem().copy());
-							world.spawnEntityInWorld(newEI);
+							world.spawnEntity(newEI);
 							EntityHelper.removeEntities(world, itemsInCauldron);
 						}
 					}

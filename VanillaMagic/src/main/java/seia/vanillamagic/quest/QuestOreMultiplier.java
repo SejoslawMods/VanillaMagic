@@ -57,7 +57,7 @@ public class QuestOreMultiplier extends Quest
 			}
 			if(SmeltingHelper.isItemFuel(fuelOffHand))
 			{
-				World world = player.worldObj;
+				World world = player.world;
 				// is right-clicking on Cauldron
 				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
@@ -87,12 +87,12 @@ public class QuestOreMultiplier extends Quest
 		List<EntityItem> smeltingResult = SmeltingHelper.countAndSmelt(player, oresInCauldron, cauldronPos.offset(EnumFacing.UP), this, false);
 		if(smeltingResult != null)
 		{
-			World world = player.worldObj;
+			World world = player.world;
 			for(int i = 0; i < multiplier; ++i)
 			{
 				for(int j = 0; j < smeltingResult.size(); ++j)
 				{
-					world.spawnEntityInWorld(EntityHelper.copyItem(smeltingResult.get(j)));
+					world.spawnEntity(EntityHelper.copyItem(smeltingResult.get(j)));
 				}
 			}
 			world.updateEntities();

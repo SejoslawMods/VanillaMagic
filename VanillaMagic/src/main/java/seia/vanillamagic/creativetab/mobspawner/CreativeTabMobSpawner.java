@@ -1,16 +1,13 @@
-package seia.vanillamagic.creativetab;
-
-import java.util.List;
+package seia.vanillamagic.creativetab.mobspawner;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 
 public class CreativeTabMobSpawner extends CreativeTabs
 {
@@ -20,6 +17,7 @@ public class CreativeTabMobSpawner extends CreativeTabs
 	{
 		super("mobSpawner");
 		SPAWNER.setCreativeTab(this);
+		Blocks.COMMAND_BLOCK.setCreativeTab(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -33,16 +31,10 @@ public class CreativeTabMobSpawner extends CreativeTabs
 		return true;
 	}
 	
-	// TODO: Add all custom spawners for all mobs
 	@SideOnly(Side.CLIENT)
 	public void displayAllRelevantItems(NonNullList<ItemStack> list)
 	{
-		List<EntityEntry> entries = ForgeRegistries.ENTITIES.getValues(); // List of all entities
-		for(EntityEntry ee : entries)
-		{
-			ItemStack stack = new ItemStack(SPAWNER);
-			stack.setStackDisplayName("Mob Spawner: " + ee.getName());
-		}
-		super.displayAllRelevantItems(list); // This must be at the end
+		list = MobSpawnerRegistry.fillList(list);
+		super.displayAllRelevantItems(list);
 	}
 }

@@ -26,7 +26,7 @@ public class ItemStackHelper
 	/**
 	 * new ItemStack((Item)null);
 	 */
-	public static final ItemStack NULL_STACK = ItemStack.field_190927_a;
+	public static final ItemStack NULL_STACK = ItemStack.EMPTY;
 	
 	private ItemStackHelper()
 	{
@@ -175,7 +175,7 @@ public class ItemStackHelper
 	public static ItemStack loadItemStackFromNBT(NBTTagCompound tag)
 	{
 		ItemStack stack = new ItemStack(tag);
-		if(stack.func_190926_b())
+		if(stack.isEmpty())
 		{
 			return NULL_STACK;
 		}
@@ -187,7 +187,7 @@ public class ItemStackHelper
 	 */
 	public static int getStackSize(ItemStack stack)
 	{
-		return stack.func_190916_E();
+		return stack.getCount();
 	}
 	
 	/**
@@ -196,7 +196,7 @@ public class ItemStackHelper
 	 */
 	public static void setStackSize(ItemStack stack, int value)
 	{
-		stack.func_190920_e(value);
+		stack.setCount(value);
 	}
 	
 	/**
@@ -205,7 +205,7 @@ public class ItemStackHelper
 	 */
 	public static void increaseStackSize(ItemStack stack, int value)
 	{
-		stack.func_190917_f(value);
+		stack.grow(value);
 	}
 	
 	/**
@@ -214,7 +214,7 @@ public class ItemStackHelper
 	 */
 	public static void decreaseStackSize(ItemStack stack, int value)
 	{
-		stack.func_190918_g(value);
+		stack.shrink(value);
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class ItemStackHelper
 	 */
 	public static boolean isNullStack(ItemStack stack)
 	{
-		return stack.func_190926_b();
+		return stack.isEmpty();
 	}
 	
 	public static void printStack(ItemStack stack) 

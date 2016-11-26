@@ -63,7 +63,7 @@ public abstract class QuestMachineActivate extends Quest
 	
 	public boolean startWorkWithCauldron(EntityPlayer player, BlockPos cauldronPos, Achievement requiredToWork)
 	{
-		if(player.worldObj.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
+		if(player.world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 		{
 			if(canActivate(player))
 			{

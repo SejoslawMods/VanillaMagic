@@ -30,9 +30,9 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 			spawnLightningBoltX = blockPos.getX();
 			spawnLightningBoltY = blockPos.getY();
 			spawnLightningBoltZ = blockPos.getZ();
-			IBlockState airCheckerState = worldObj.getBlockState(blockPos);
+			IBlockState airCheckerState = world.getBlockState(blockPos);
 			Block airCheckerStateBlock = airCheckerState.getBlock();
-			if(airCheckerStateBlock.isAir(airCheckerState, worldObj, blockPos))
+			if(airCheckerStateBlock.isAir(airCheckerState, world, blockPos))
 			{
 				return;
 			}
@@ -49,9 +49,9 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 			return;
 		}
 		// Lightning Bolt spawning
-		EntityLightningBolt entityLightningBolt = new EntityLightningBolt(worldObj, 
+		EntityLightningBolt entityLightningBolt = new EntityLightningBolt(world, 
 				spawnLightningBoltX, spawnLightningBoltY, spawnLightningBoltZ, false);
-		this.castingEntity.worldObj.spawnEntityInWorld(entityLightningBolt);
+		this.castingEntity.world.spawnEntity(entityLightningBolt);
 		this.setDead();
 	}
 	

@@ -19,7 +19,7 @@ public class QuestLiquidSuppressionCrystal extends Quest
 	public void onItemHeld(PlayerTickEvent event)
 	{
 		EntityPlayer player = event.player;
-		World world = player.worldObj;
+		World world = player.world;
 		ItemStack leftHand = player.getHeldItemOffhand();
 		if(ItemStackHelper.isNullStack(leftHand))
 		{

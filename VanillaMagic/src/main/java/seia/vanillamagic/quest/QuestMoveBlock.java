@@ -9,11 +9,13 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
@@ -50,11 +52,12 @@ public class QuestMoveBlock extends Quest
 	 */
 	int clickedTimes = 0;
 	@SubscribeEvent
-	public void onRightClick(RightClickBlock event)
+	public void onRightClick(RightClickBlock event) 
+			throws ReflectiveOperationException, RuntimeException
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos wantedBlockPos = event.getPos();
-		World world = player.worldObj;
+		World world = player.world;
 		ItemStack mainHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(mainHand))
 		{
@@ -131,7 +134,15 @@ public class QuestMoveBlock extends Quest
 			questTag = NBTHelper.setBlockPosDataToNBT(questTag, wantedBlockPos, world);
 			stackOffHand.setStackDisplayName("Saved block: " + wantedBlock.getLocalizedName());
 			TileEntity tileEntity = world.getTileEntity(wantedBlockPos);
-			if(tileEntity != null)
+			if(tileEntity instanceof TileEntityMobSpawner)
+			{
+				TileEntityMobSpawner tileMS = (TileEntityMobSpawner) tileEntity;
+				questTag = tileEntity.writeToNBT(questTag);
+				stackOffHand.setStackDisplayName("[TileEntity] " + stackOffHand.getDisplayName());
+				String name = MobSpawnerRegistry.getNameFromBaseLogic(tileMS.getSpawnerBaseLogic());
+				stackOffHand.setStackDisplayName(stackOffHand.getDisplayName() + " - " + name);
+			}
+			else if(tileEntity != null)
 			{
 				questTag = tileEntity.writeToNBT(questTag);
 				stackOffHand.setStackDisplayName("[TileEntity] " + stackOffHand.getDisplayName());

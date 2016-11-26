@@ -81,7 +81,7 @@ public class QuestBlockAbsorber extends Quest
 			if(player.hasAchievement(achievement))
 			{
 				TileBlockAbsorber tile = new TileBlockAbsorber();
-				tile.init(player.worldObj, clickedPos.offset(EnumFacing.UP));
+				tile.init(player.world, clickedPos.offset(EnumFacing.UP));
 				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
 					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");

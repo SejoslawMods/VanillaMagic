@@ -28,9 +28,9 @@ public class EntitySpellSummonMeteor extends EntitySpell
 			BlockPos blockPos = result.getBlockPos();
 			spawnMeteorX = blockPos.getX();
 			spawnMeteorZ = blockPos.getZ();
-			IBlockState airCheckerState = worldObj.getBlockState(blockPos);
+			IBlockState airCheckerState = world.getBlockState(blockPos);
 			Block airCheckerStateBlock = airCheckerState.getBlock();
-			if(airCheckerStateBlock.isAir(airCheckerState, worldObj, blockPos))
+			if(airCheckerStateBlock.isAir(airCheckerState, world, blockPos))
 			{
 				return;
 			}
@@ -43,7 +43,7 @@ public class EntitySpellSummonMeteor extends EntitySpell
 		EntityMeteor meteor = new EntityMeteor(this.castingEntity, 
 				spawnMeteorX, spawnMeteorY, spawnMeteorZ,
 				this.accelerationX, this.accelerationY, this.accelerationZ);
-		this.castingEntity.worldObj.spawnEntityInWorld(meteor);
+		this.castingEntity.world.spawnEntity(meteor);
 		this.setDead();
 	}
     

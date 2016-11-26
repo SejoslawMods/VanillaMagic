@@ -59,7 +59,7 @@ public class QuestSmeltOnAltar extends Quest
 			}
 			if(SmeltingHelper.isItemFuel(fuelOffHand))
 			{
-				World world = player.worldObj;
+				World world = player.world;
 				// is right-clicking on Cauldron
 				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{

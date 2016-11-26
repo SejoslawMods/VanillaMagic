@@ -39,7 +39,7 @@ public class TileSpeedy extends CustomTileEntity
 	
 	public IInventory getInventoryWithCrystal()
 	{
-		return (IInventory) worldObj.getTileEntity(getPos().offset(EnumFacing.UP));
+		return (IInventory) world.getTileEntity(getPos().offset(EnumFacing.UP));
 	}
 	
 	public boolean containsCrystal()
@@ -61,7 +61,7 @@ public class TileSpeedy extends CustomTileEntity
     
 	public void update() 
 	{
-		if(this.worldObj.isRemote)
+		if(this.world.isRemote)
 		{
 			return;
 		}
@@ -102,23 +102,23 @@ public class TileSpeedy extends CustomTileEntity
 
 	public void tickBlock(BlockPos pos) 
 	{
-		if(!worldObj.isAirBlock(pos))
+		if(!world.isAirBlock(pos))
 		{
-			IBlockState blockState = this.worldObj.getBlockState(pos);
+			IBlockState blockState = this.world.getBlockState(pos);
 			Block block = blockState.getBlock();
-			TileEntity tile = worldObj.getTileEntity(pos);
+			TileEntity tile = world.getTileEntity(pos);
 			Random rand = new Random();
 			for(int i = 0; i < ticks; ++i)
 			{
 				if(tile == null)
 				{
-					block.updateTick(worldObj, pos, blockState, rand);
-					worldObj.spawnParticle(EnumParticleTypes.END_ROD, pos.getX(), pos.getY(), pos.getZ(), 100, 100, 100, new int[]{});
+					block.updateTick(world, pos, blockState, rand);
+					world.spawnParticle(EnumParticleTypes.END_ROD, pos.getX(), pos.getY(), pos.getZ(), 100, 100, 100, new int[]{});
 				}
 				else if(tile instanceof ITickable)
 				{
 					((ITickable) tile).update();
-					worldObj.spawnParticle(EnumParticleTypes.END_ROD, pos.getX(), pos.getY(), pos.getZ(), 100, 100, 100, new int[]{});
+					world.spawnParticle(EnumParticleTypes.END_ROD, pos.getX(), pos.getY(), pos.getZ(), 100, 100, 100, new int[]{});
 				}
 			}
 		}

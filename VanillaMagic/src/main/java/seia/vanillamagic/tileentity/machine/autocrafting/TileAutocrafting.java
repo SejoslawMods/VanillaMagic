@@ -36,8 +36,8 @@ public class TileAutocrafting extends TileMachine
 		this.chestPosOutput = getMachinePos().down(2);
 		try
 		{
-			this.inventoryInput = new InventoryWrapper(worldObj, chestPosInput);
-			this.inventoryOutput = new InventoryWrapper(worldObj, chestPosOutput);
+			this.inventoryInput = new InventoryWrapper(world, chestPosInput);
+			this.inventoryOutput = new InventoryWrapper(world, chestPosOutput);
 		}
 		catch(NotInventoryException e)
 		{
@@ -48,14 +48,14 @@ public class TileAutocrafting extends TileMachine
 	public void initContainer()
 	{
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
-		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(worldObj, inventoryPosMatrix);
+		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(world, inventoryPosMatrix);
 		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, currentlyCraftingSlot);
-		container = new ContainerAutocrafting(worldObj, stackMatrix);
+		container = new ContainerAutocrafting(world, stackMatrix);
 	}
 	
 	public boolean checkSurroundings() 
 	{
-		return QuestAutocrafting.isConstructionComplete(this.worldObj, getMachinePos());
+		return QuestAutocrafting.isConstructionComplete(this.world, getMachinePos());
 	}
 	
 	public void doWork() 
@@ -70,7 +70,7 @@ public class TileAutocrafting extends TileMachine
 				{
 					container.outputResult(getHopperForStructure());
 					container.removeStacks(
-							QuestAutocrafting.buildIInventoryMatrix(worldObj, 
+							QuestAutocrafting.buildIInventoryMatrix(world, 
 									QuestAutocrafting.buildInventoryMatrix(getMachinePos())));
 					return;
 				}
@@ -89,7 +89,7 @@ public class TileAutocrafting extends TileMachine
 	public IHopper getHopperForStructure()
 	{
 		BlockPos hopperPos = getMachinePos().down(2);
-		TileEntity hopperTile = worldObj.getTileEntity(hopperPos);
+		TileEntity hopperTile = world.getTileEntity(hopperPos);
 		if(hopperTile instanceof IHopper)
 		{
 			return (IHopper) hopperTile;

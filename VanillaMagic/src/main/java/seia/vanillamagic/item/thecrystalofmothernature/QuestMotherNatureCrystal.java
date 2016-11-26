@@ -26,7 +26,7 @@ public class QuestMotherNatureCrystal extends Quest
 	public void onHoldInLeftHandTick(PlayerTickEvent event) // left hand
 	{
 		EntityPlayer player = event.player;
-		World world = player.worldObj;
+		World world = player.world;
 		ItemStack leftHand = player.getHeldItemOffhand();
 		if(ItemStackHelper.isNullStack(leftHand))
 		{

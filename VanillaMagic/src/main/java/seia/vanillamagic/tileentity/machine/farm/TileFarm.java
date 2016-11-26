@@ -58,11 +58,11 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			if(inventoryInput == null)
 			{
-				this.inventoryInput = new InventoryWrapper(worldObj, this.chestPosInput);
+				this.inventoryInput = new InventoryWrapper(world, this.chestPosInput);
 			}
 			if(inventoryOutput == null)
 			{
-				inventoryOutput = new InventoryWrapper(worldObj, this.chestPosOutput);
+				inventoryOutput = new InventoryWrapper(world, this.chestPosOutput);
 			}
 		}
 		catch(NotInventoryException e)
@@ -85,8 +85,8 @@ public class TileFarm extends TileMachine implements IFarm
 			{
 				chestPosOutput = pos.offset(EnumFacing.DOWN);
 			}
-			return (this.worldObj.getTileEntity(chestPosInput) instanceof IInventory) &&
-					(this.worldObj.getTileEntity(chestPosOutput) instanceof IInventory);
+			return (this.world.getTileEntity(chestPosInput) instanceof IInventory) &&
+					(this.world.getTileEntity(chestPosOutput) instanceof IInventory);
 		}
 		catch(Exception e)
 		{
@@ -117,8 +117,8 @@ public class TileFarm extends TileMachine implements IFarm
 				return false;
 			}
 			damageHoe(1, dirtLoc);
-			worldObj.setBlockState(dirtLoc, Blocks.FARMLAND.getDefaultState());
-			worldObj.playSound(dirtLoc.getX() + 0.5F, dirtLoc.getY() + 0.5F, dirtLoc.getZ() + 0.5F, 
+			world.setBlockState(dirtLoc, Blocks.FARMLAND.getDefaultState());
+			world.playSound(dirtLoc.getX() + 0.5F, dirtLoc.getY() + 0.5F, dirtLoc.getZ() + 0.5F, 
 					SoundEvents.BLOCK_GRASS_STEP, SoundCategory.BLOCKS,
 					(Blocks.FARMLAND.getSoundType().getVolume() + 1.0F) / 2.0F, Blocks.FARMLAND.getSoundType().getPitch() * 0.8F, false);
 			return true;
@@ -227,15 +227,15 @@ public class TileFarm extends TileMachine implements IFarm
 		} 
 		else if(type == ToolType.HOE) 
 		{
-			IBlockState iblockstate = worldObj.getBlockState(pos);
+			IBlockState iblockstate = world.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            if(worldObj.isAirBlock(pos.up()))
+            if(world.isAirBlock(pos.up()))
             {
                 if(block == Blocks.GRASS || block == Blocks.GRASS_PATH)
                 {
-                    if(!worldObj.isRemote)
+                    if(!world.isRemote)
                     {
-                    	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
+                    	world.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
                     	tool.setItemDamage(tool.getItemDamage() + 1);
                     }
                 }
@@ -244,15 +244,15 @@ public class TileFarm extends TileMachine implements IFarm
                     switch((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT))
                     {
                         case DIRT:
-                            if(!worldObj.isRemote)
+                            if(!world.isRemote)
                             {
-                            	worldObj.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
+                            	world.setBlockState(pos, Blocks.FARMLAND.getDefaultState(), 11);
                             	tool.setItemDamage(tool.getItemDamage() + 1);
                             }
                         case COARSE_DIRT:
-                            if(!worldObj.isRemote)
+                            if(!world.isRemote)
                             {
-                            	worldObj.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
+                            	world.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
                             	tool.setItemDamage(tool.getItemDamage() + 1);
                             }
                     }
@@ -309,14 +309,14 @@ public class TileFarm extends TileMachine implements IFarm
 	  
 	public IBlockState getBlockState(BlockPos posIn) 
 	{
-		return worldObj.getBlockState(posIn);
+		return world.getBlockState(posIn);
 	}
 
 	public boolean isOpen(BlockPos pos)
 	{
 		Block block = getBlock(pos);
 		IBlockState bs = getBlockState(pos);
-		return block.isAir(bs, worldObj, pos) || block.isReplaceable(worldObj, pos);
+		return block.isAir(bs, world, pos) || block.isReplaceable(world, pos);
 	}
 	
 	protected boolean checkProgress(boolean redstoneChecksPassed) 
@@ -507,7 +507,7 @@ public class TileFarm extends TileMachine implements IFarm
 	
 	private void insertHarvestDrop(Entity entity, BlockPos pos) 
 	{
-		if(!worldObj.isRemote) 
+		if(!world.isRemote) 
 		{
 			if(entity instanceof EntityItem && !entity.isDead) 
 			{

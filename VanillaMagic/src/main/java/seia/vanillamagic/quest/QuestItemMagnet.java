@@ -36,7 +36,7 @@ public class QuestItemMagnet extends Quest
 					double x = player.posX;
 					double y = player.posY + 0.75;
 					double z = player.posZ;
-					List<EntityItem> items = player.worldObj.getEntitiesWithinAABB(EntityItem.class, 
+					List<EntityItem> items = player.world.getEntitiesWithinAABB(EntityItem.class, 
 							new AxisAlignedBB(x - range, y - range, z - range, x + range, y + range, z + range));
 					int pulledItems = 0;
 					for(EntityItem item : items)

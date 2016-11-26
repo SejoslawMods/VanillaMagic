@@ -13,7 +13,7 @@ public class TileChunkLoader extends CustomTileEntity implements IChunkLoader
 	
 	public void update() 
 	{
-		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(worldObj, this.pos))
+		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(world, this.pos))
 		{
 			invalidate();
 			VanillaMagic.LOGGER.log(Level.WARN, "Incorrect ChunkLoader placed on:");

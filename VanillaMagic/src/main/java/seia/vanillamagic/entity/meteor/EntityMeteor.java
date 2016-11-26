@@ -18,7 +18,7 @@ public class EntityMeteor extends EntityLargeFireball
 			double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ,
 			double accelX, double accelY, double accelZ) 
 	{
-		super(castingEntity.worldObj);
+		super(castingEntity.world);
 		setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
         setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
 		setSize(BASIC_METEOR_SIZE, BASIC_METEOR_SIZE);
@@ -27,7 +27,7 @@ public class EntityMeteor extends EntityLargeFireball
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
 		shootingEntity = castingEntity;
-		double accel = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+		double accel = (double)MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
 		this.accelerationX = 0;
 		this.accelerationY = accelY / accel * 0.1D;
 		this.accelerationZ = 0;
@@ -38,15 +38,15 @@ public class EntityMeteor extends EntityLargeFireball
 	 */
 	protected void onImpact(RayTraceResult result)
 	{
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 		{
 			if(result.entityHit != null)
 			{
 				result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
 				this.applyEnchantments(this.shootingEntity, result.entityHit);
 			}
-			boolean flag = this.worldObj.getGameRules().getBoolean("mobGriefing");
-			this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+			boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
+			this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
 			this.setDead();
 		}
 	}

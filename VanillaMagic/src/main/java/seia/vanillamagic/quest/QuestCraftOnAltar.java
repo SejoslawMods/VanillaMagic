@@ -88,7 +88,7 @@ public class QuestCraftOnAltar extends Quest
 		// player has got required wand in hand
 		if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
 		{
-			World world = player.worldObj;
+			World world = player.world;
 			// is right-clicking on Cauldron
 			if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 			{

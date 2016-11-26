@@ -75,7 +75,7 @@ public class QuestInventoryBridge extends Quest
 			if(player.hasAchievement(achievement))
 			{
 				TileInventoryBridge tile = new TileInventoryBridge();
-				tile.init(player.worldObj, clickedPos.offset(EnumFacing.UP));
+				tile.init(player.world, clickedPos.offset(EnumFacing.UP));
 				try
 				{
 					tile.setPositionFromSelector(player);

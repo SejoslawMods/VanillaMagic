@@ -94,7 +94,7 @@ public class QuestItemUpgrade extends Quest
 						world.removeEntity(ei);
 					}
 					EntityItem craftingResultEntity = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), craftingResult);
-					world.spawnEntityInWorld(craftingResultEntity);
+					world.spawnEntity(craftingResultEntity);
 					// Particle + sound
 					{
 						world.playSound((double)clickedPos.getX() + 0.5D, (double)clickedPos.getY(), (double)clickedPos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);

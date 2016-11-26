@@ -37,7 +37,7 @@ public class QuestSummonHorde extends Quest
 	public void spawnHorde(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(rightHand))
 		{

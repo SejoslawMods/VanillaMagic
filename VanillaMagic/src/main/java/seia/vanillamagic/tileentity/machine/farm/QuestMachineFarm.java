@@ -34,12 +34,12 @@ public class QuestMachineFarm extends QuestMachineActivate
 	public void startFarm(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		BlockPos cauldronPos = event.getPos();
 		if(startWorkWithCauldron(player, cauldronPos, achievement))
 		{
 			TileFarm tileFarm = new TileFarm();
-			tileFarm.init(player.worldObj, cauldronPos);
+			tileFarm.init(player.world, cauldronPos);
 			tileFarm.setWorkRadius(radius);
 			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{

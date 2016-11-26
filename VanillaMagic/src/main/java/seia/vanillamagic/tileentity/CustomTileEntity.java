@@ -22,7 +22,7 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	
 	public void init(World world, BlockPos pos)
 	{
-		this.worldObj = world;
+		this.world = world;
 		this.pos = pos;
 	}
 	
@@ -33,15 +33,15 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	
 	public void setWorld(World world)
 	{
-		this.worldObj = world;
+		this.world = world;
 	}
 	
 	public void validate() 
 	{
 		super.validate();
-		if((!this.worldObj.isRemote) && (this.chunkTicket == null)) 
+		if((!this.world.isRemote) && (this.chunkTicket == null)) 
 		{
-			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.worldObj, ForgeChunkManager.Type.NORMAL);
+			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.world, ForgeChunkManager.Type.NORMAL);
 			if(ticket != null) 
 			{
 				forceChunkLoading(ticket);

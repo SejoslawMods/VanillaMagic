@@ -30,7 +30,7 @@ public class QuestAutocrafting extends Quest
 	public void addAutocrafting(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, player.getHeldItemMainhand()))
 		{
 			if(player.isSneaking())
@@ -52,7 +52,7 @@ public class QuestAutocrafting extends Quest
 								return;
 							}
 							TileAutocrafting tile = new TileAutocrafting();
-							tile.init(player.worldObj, cauldronPos);
+							tile.init(player.world, cauldronPos);
 							if(CustomTileEntityHandler.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
 							{
 								EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
@@ -68,7 +68,7 @@ public class QuestAutocrafting extends Quest
 	public void deleteAutocrafting(BreakEvent event)
 	{
 		EntityPlayer player = event.getPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		BlockPos cauldronPos = event.getPos();
 		Block cauldron = world.getBlockState(cauldronPos).getBlock();
 		if(cauldron instanceof BlockCauldron)

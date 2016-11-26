@@ -24,7 +24,7 @@ public class QuestArrowMachineGun extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack leftHand = player.getHeldItemOffhand();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		World world = player.worldObj;
+		World world = player.world;
 		if(ItemStackHelper.isNullStack(leftHand))
 		{
 			return;
@@ -63,7 +63,7 @@ public class QuestArrowMachineGun extends Quest
 						entityTippedArrow.setFire(100);
 					}
 					leftHand.damageItem(1, player);
-					world.spawnEntityInWorld(entityTippedArrow);
+					world.spawnEntity(entityTippedArrow);
 					world.playSound((EntityPlayer)null, 
 							player.posX, 
 							player.posY, 

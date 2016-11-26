@@ -164,7 +164,7 @@ public class SpellHelper
 	{
 		if(pos != null) // RightClickBlock
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			pos = pos.offset(face);
 			if(world.isAirBlock(pos))
 			{
@@ -184,7 +184,7 @@ public class SpellHelper
 	{
 		if(pos == null) // casting while NOT looking at block
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			world.playEvent(caster, 1018, new BlockPos((int)caster.posX, (int)caster.posY, (int)caster.posZ), 0);
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
@@ -199,13 +199,13 @@ public class SpellHelper
 			fireball.motionX = 0.0D;
 			fireball.motionY = 0.0D;
 			fireball.motionZ = 0.0D;
-			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + 
+			double d0 = (double)MathHelper.sqrt(accelX * accelX + 
 					accelY * accelY + 
 					accelZ * accelZ);
 			fireball.accelerationX = accelX / d0 * 0.1D;
 			fireball.accelerationY = accelY / d0 * 0.1D;
 			fireball.accelerationZ = accelZ / d0 * 0.1D;
-			world.spawnEntityInWorld(fireball);
+			world.spawnEntity(fireball);
 			world.updateEntities();
 			return true;
 		}
@@ -220,7 +220,7 @@ public class SpellHelper
 	{
 		if(pos == null) // casting while NOT looking at block
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			world.playEvent(caster, 1016, new BlockPos((int)caster.posX, (int)caster.posY, (int)caster.posZ), 0);
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
@@ -235,13 +235,13 @@ public class SpellHelper
 			fireball.motionX = 0.0D;
 			fireball.motionY = 0.0D;
 			fireball.motionZ = 0.0D;
-			double d0 = (double)MathHelper.sqrt_double(accelX * accelX + 
+			double d0 = (double)MathHelper.sqrt(accelX * accelX + 
 					accelY * accelY + 
 					accelZ * accelZ);
 			fireball.accelerationX = accelX / d0 * 0.1D;
 			fireball.accelerationY = accelY / d0 * 0.1D;
 			fireball.accelerationZ = accelZ / d0 * 0.1D;
-			world.spawnEntityInWorld(fireball);
+			world.spawnEntity(fireball);
 			world.updateEntities();
 			return true;
 		}
@@ -256,14 +256,14 @@ public class SpellHelper
 	{
 		if(pos == null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
 			EntitySpellTeleport spellTeleport = new EntitySpellTeleport(world, caster, 
 					accelX, accelY, accelZ);
-			world.spawnEntityInWorld(spellTeleport);
+			world.spawnEntity(spellTeleport);
 			world.updateEntities();
 			return true;
 		}
@@ -278,14 +278,14 @@ public class SpellHelper
 	{
 		if(pos == null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
 			EntitySpellSummonMeteor spellMeteor = new EntitySpellSummonMeteor(world, caster, 
 					accelX, accelY, accelZ);
-			world.spawnEntityInWorld(spellMeteor);
+			world.spawnEntity(spellMeteor);
 			world.updateEntities();
 			return true;
 		}
@@ -300,14 +300,14 @@ public class SpellHelper
 	{
 		if(pos == null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
 			double accelZ = lookingAt.zCoord;
 			EntitySpellSummonLightningBolt spellLightningBolt = new EntitySpellSummonLightningBolt(world,
 					caster, accelX, accelY, accelZ);
-			world.spawnEntityInWorld(spellLightningBolt);
+			world.spawnEntity(spellLightningBolt);
 			world.updateEntities();
 			return true;
 		}
@@ -323,7 +323,7 @@ public class SpellHelper
 	{
 		if(pos != null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			BlockPos spawnPos = pos.offset(face);
 			EntityAgeable entityAgeable = null;
 			if(spellID == EnumSpell.SUMMON_CHICKEN.spellID)
@@ -367,7 +367,7 @@ public class SpellHelper
 			{
 				entityAgeable.setGrowingAge(1);
 				entityAgeable.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw, 0.0F);
-				world.spawnEntityInWorld(entityAgeable);
+				world.spawnEntity(entityAgeable);
 				world.updateEntities();
 				return true;
 			}
@@ -388,7 +388,7 @@ public class SpellHelper
 	{
 		if(pos != null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			BlockPos spawnPos = pos.offset(face);
 			EntityLiving entityMob = null;
 			if(spellID == EnumSpell.SUMMON_ZOMBIE.spellID)
@@ -438,7 +438,7 @@ public class SpellHelper
 								EntitySkeleton skeleton = new EntitySkeleton(world);
 								skeleton.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
 								skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
-								world.spawnEntityInWorld(skeleton);
+								world.spawnEntity(skeleton);
 								skeleton.startRiding(entityMob);
 								world.removeEntity(entity);
 								break;
@@ -513,7 +513,7 @@ public class SpellHelper
 				{
 					EntityHelper.addRandomArmorToEntity(entityMob);
 				}
-				world.spawnEntityInWorld(entityMob);
+				world.spawnEntity(entityMob);
 				world.updateEntities();
 				return true;
 			}
@@ -542,7 +542,7 @@ public class SpellHelper
 			BlockPos casterPos = new BlockPos(casterX, casterY, casterZ);
 			AxisAlignedBB aabb = new AxisAlignedBB(casterPos);
 			aabb = aabb.expand(SIZE, SIZE, SIZE);
-			World world = caster.worldObj;
+			World world = caster.world;
 			List<Entity> entitiesInAABB = world.getEntitiesWithinAABBExcludingEntity(caster, aabb);
 			for(Entity entity : entitiesInAABB)
 			{
@@ -593,7 +593,7 @@ public class SpellHelper
 			{
 				if(caster.hasAchievement(AchievementList.THE_END2))
 				{
-					World world = caster.worldObj;
+					World world = caster.world;
 					List<Entity> entities = world.loadedEntityList;
 					for(int i = 0; i < entities.size(); ++i)
 					{
@@ -620,7 +620,7 @@ public class SpellHelper
 	public static boolean spellMoveInAir(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
+		World world = caster.world;
 		double distance = 10;
 		Vec3d casterLookVec = caster.getLookVec();
 		Potion potionSpeed = Potion.getPotionById(1);
@@ -659,7 +659,7 @@ public class SpellHelper
 	{
 		if(pos == null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
@@ -667,7 +667,7 @@ public class SpellHelper
 			EntitySpellPull spellLightningBolt = new EntitySpellPull(world,
 					caster, accelX, accelY, accelZ,
 					caster.getPosition());
-			world.spawnEntityInWorld(spellLightningBolt);
+			world.spawnEntity(spellLightningBolt);
 			world.updateEntities();
 			return true;
 		}
@@ -682,7 +682,7 @@ public class SpellHelper
 	{
 		if(pos == null)
 		{
-			World world = caster.worldObj;
+			World world = caster.world;
 			Vec3d lookingAt = caster.getLookVec();
 			double accelX = lookingAt.xCoord;
 			double accelY = lookingAt.yCoord;
@@ -690,7 +690,7 @@ public class SpellHelper
 			EntitySpellFreezeLiquid spellLightningBolt = new EntitySpellFreezeLiquid(world,
 					caster, accelX, accelY, accelZ,
 					Blocks.ICE, new BlockLiquid[]{Blocks.WATER, Blocks.FLOWING_WATER}, 5);
-			world.spawnEntityInWorld(spellLightningBolt);
+			world.spawnEntity(spellLightningBolt);
 			world.updateEntities();
 			return true;
 		}
@@ -703,7 +703,7 @@ public class SpellHelper
 	public static boolean spellWeatherRain(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
+		World world = caster.world;
 		WorldInfo worldInfo = world.getWorldInfo();
 		worldInfo.setCleanWeatherTime(0);
 		worldInfo.setRainTime(1000);
@@ -719,7 +719,7 @@ public class SpellHelper
 	public static boolean spellWeatherClear(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
+		World world = caster.world;
 		WorldInfo worldInfo = world.getWorldInfo();
 		worldInfo.setCleanWeatherTime(1000);
 		worldInfo.setRainTime(0);
@@ -732,7 +732,7 @@ public class SpellHelper
 	public static boolean spellWeatherThunderstorm(EntityPlayer caster,
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		World world = caster.worldObj;
+		World world = caster.world;
 		WorldInfo worldInfo = world.getWorldInfo();
 		worldInfo.setCleanWeatherTime(0);
 		worldInfo.setRainTime(1000);

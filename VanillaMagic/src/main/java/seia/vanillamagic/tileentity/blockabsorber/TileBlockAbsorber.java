@@ -44,13 +44,13 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 	public void update()
 	{
 		TileEntityHopper connectedHopper = getConnectedHopper();
-		IBlockState thisState = worldObj.getBlockState(pos);
+		IBlockState thisState = world.getBlockState(pos);
 		if(Block.isEqualTo(thisState.getBlock(), Blocks.AIR)) // We don't want to put Air into Hopper
 		{
 			return;
 		}
 		// For IInventory
-		TileEntity tileAtThisPos = worldObj.getTileEntity(pos);
+		TileEntity tileAtThisPos = world.getTileEntity(pos);
 		if(tileAtThisPos != null)
 		{
 			// If we have a Tile which is Inventory we want to absorb it's items first
@@ -98,7 +98,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
 		if(ItemStackHelper.isNullStack(leftItems))
 		{
-			worldObj.setBlockState(pos, Blocks.AIR.getDefaultState());
+			world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 	}
 
@@ -109,7 +109,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 	
 	public TileEntityHopper getConnectedHopper()
 	{
-		return (TileEntityHopper) worldObj.getTileEntity(pos.offset(EnumFacing.DOWN));
+		return (TileEntityHopper) world.getTileEntity(pos.offset(EnumFacing.DOWN));
 	}
 	/**
 	 * Returns NULL if there is no inventory for Hopper to transfer into.

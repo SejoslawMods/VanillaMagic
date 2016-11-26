@@ -53,7 +53,7 @@ public class UpgradeAutosmelt implements IItemUpgrade
 			if(!ItemStackHelper.isNullStack(afterSmelt))
 			{
 				EntityItem afterSmeltEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), afterSmelt);
-				world.spawnEntityInWorld(afterSmeltEntity);
+				world.spawnEntity(afterSmeltEntity);
 				drops.remove(i);
 			}
 		}

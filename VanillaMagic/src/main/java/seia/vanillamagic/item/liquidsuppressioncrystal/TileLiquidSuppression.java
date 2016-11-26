@@ -25,7 +25,7 @@ public class TileLiquidSuppression extends CustomTileEntity
 	
 	public void update() 
 	{
-		if(worldObj.isRemote)
+		if(world.isRemote)
 		{
 			return;
 		}
@@ -43,10 +43,10 @@ public class TileLiquidSuppression extends CustomTileEntity
 		{
 			block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(containedBlockName));
 		}
-		if(block != null && worldObj.setBlockState(pos, block.getStateFromMeta(containedBlockMeta)))
+		if(block != null && world.setBlockState(pos, block.getStateFromMeta(containedBlockMeta)))
 		{
 			getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
-			CustomTileEntityHandler.removeCustomTileEntityAtPos(worldObj, getPos(), WorldHelper.getDimensionID(worldObj));
+			CustomTileEntityHandler.removeCustomTileEntityAtPos(world, getPos(), WorldHelper.getDimensionID(world));
 		}
 	}
 	

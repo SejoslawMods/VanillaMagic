@@ -90,13 +90,13 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		if(delay >= delayInTicks)
 		{
 			delay = 0;
-			if(worldObj.getChunkFromBlockCoords(getMachinePos()).isLoaded())
+			if(world.getChunkFromBlockCoords(getMachinePos()).isLoaded())
 			{
 				if(getWorkingPos() == null)
 				{
 					return;
 				}
-				if(worldObj.getChunkFromBlockCoords(getWorkingPos()).isLoaded())
+				if(world.getChunkFromBlockCoords(getWorkingPos()).isLoaded())
 				{
 					if(checkSurroundings())
 					{
@@ -300,11 +300,11 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	
 	public void deserializeNBT(NBTTagCompound compound)
 	{
-		if(this.worldObj == null)
+		if(this.world == null)
 		{
 			int dimension = compound.getInteger(NBTHelper.NBT_DIMENSION);
 			WorldServer world = DimensionManager.getWorld(dimension);
-			this.worldObj = world;
+			this.world = world;
 		}
 		int machinePosX = compound.getInteger(NBTHelper.NBT_MACHINE_POS_X);
 		int machinePosY = compound.getInteger(NBTHelper.NBT_MACHINE_POS_Y);
@@ -337,11 +337,11 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		{
 			if(inventoryInput == null)
 			{
-				inventoryInput = new InventoryWrapper(worldObj, chestPosInput);
+				inventoryInput = new InventoryWrapper(world, chestPosInput);
 			}
 			if(inventoryOutput == null)
 			{
-				inventoryOutput = new InventoryWrapper(worldObj, chestPosOutput);
+				inventoryOutput = new InventoryWrapper(world, chestPosOutput);
 			}
 		}
 		catch(NotInventoryException e)
@@ -393,7 +393,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		}
 		else if(!hasInputInventory())
 		{
-			List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(worldObj, getMachinePos());
+			List<EntityItem> fuelsInCauldron = SmeltingHelper.getFuelFromCauldron(world, getMachinePos());
 			if(fuelsInCauldron.size() == 0)
 			{
 				return;
@@ -404,7 +404,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 				ticks += SmeltingHelper.countTicks(stack);
 				if(ticks >= oneOperationCost)
 				{
-					worldObj.removeEntity(entityItem);
+					world.removeEntity(entityItem);
 				}
 			}
 		}
@@ -438,7 +438,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	
 	public IBlockState getMachineState()
 	{
-		return this.worldObj.getBlockState(getMachinePos());
+		return this.world.getBlockState(getMachinePos());
 	}
 	
 	public Block getMachineBlock()
@@ -469,7 +469,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	@Nullable
 	public TileEntity getNeighborTile(EnumFacing face)
 	{
-		return this.worldObj.getTileEntity(getNeighborPos(face));
+		return this.world.getTileEntity(getNeighborPos(face));
 	}
 	
 	@Nullable
@@ -485,7 +485,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 	
 	public IBlockState getNeighborState(EnumFacing face)
 	{
-		return this.worldObj.getBlockState(getNeighborPos(face));
+		return this.world.getBlockState(getNeighborPos(face));
 	}
 	
 	public Block getNeighborBlock(EnumFacing face)

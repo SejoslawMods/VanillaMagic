@@ -46,7 +46,7 @@ public abstract class EntitySpell extends Entity
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
-		double d0 = (double)MathHelper.sqrt_double(accelX * accelX + accelY * accelY + accelZ * accelZ);
+		double d0 = (double)MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
 		this.accelerationX = accelX / d0 * 0.1D;
 		this.accelerationY = accelY / d0 * 0.1D;
 		this.accelerationZ = accelZ / d0 * 0.1D;
@@ -76,12 +76,12 @@ public abstract class EntitySpell extends Entity
 	 */
 	public void onUpdate()
 	{
-		if(this.worldObj.isRemote || (this.castingEntity == null || !this.castingEntity.isDead) && this.worldObj.isBlockLoaded(new BlockPos(this)))
+		if(this.world.isRemote || (this.castingEntity == null || !this.castingEntity.isDead) && this.world.isBlockLoaded(new BlockPos(this)))
 		{
 			super.onUpdate();
 			if(this.inGround)
 			{
-				if(this.worldObj.getBlockState(new BlockPos(this.xTile, this.yTile, this.zTile)).getBlock() == this.inTile)
+				if(this.world.getBlockState(new BlockPos(this.xTile, this.yTile, this.zTile)).getBlock() == this.inTile)
 				{
 					++this.ticksAlive;
 					if(this.ticksAlive == 600)
@@ -119,7 +119,7 @@ public abstract class EntitySpell extends Entity
 					for(int i = 0; i < 4; ++i)
 					{
 						float f1 = 0.25F;
-						this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ, new int[0]);
+						this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ, new int[0]);
 					}
 				}
 				inWater();

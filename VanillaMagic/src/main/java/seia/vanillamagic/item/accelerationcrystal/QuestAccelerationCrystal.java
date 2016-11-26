@@ -22,7 +22,7 @@ public class QuestAccelerationCrystal extends Quest
 	public void rightClickBlock(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.worldObj;
+		World world = player.world;
 		BlockPos clickedPos = event.getPos();
 		IBlockState clickedState = world.getBlockState(clickedPos);
 		Block clickedBlock = clickedState.getBlock();
