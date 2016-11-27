@@ -215,7 +215,11 @@ public class SmeltingHelper
 				{
 					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
 					ItemStackHelper.setStackSize(smeltResult, ItemStackHelper.getStackSize(entityItemToSmeltStack));
-					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX(), cauldronPos.getY(), cauldronPos.getZ(), smeltResult);
+					smeltResultEntityItem = new EntityItem(world, 
+							cauldronPos.getX() + 0.5D, 
+							cauldronPos.getY(), 
+							cauldronPos.getZ() + 0.5D, 
+							smeltResult);
 					world.removeEntity(entityItemToSmelt);
 				}
 				else if(ticks >= QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS)// won't smelt whole stack, we need to count how many we can smelt
@@ -224,7 +228,11 @@ public class SmeltingHelper
 					ItemStackHelper.decreaseStackSize(entityItemToSmeltStack, howManyCanSmelt);
 					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
 					ItemStackHelper.setStackSize(smeltResult, howManyCanSmelt);
-					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX(), cauldronPos.getY(), cauldronPos.getZ(), smeltResult);
+					smeltResultEntityItem = new EntityItem(world, 
+							cauldronPos.getX() + 0.5D, 
+							cauldronPos.getY(), 
+							cauldronPos.getZ() + 0.5D, 
+							smeltResult);
 				}
 				else // if(ticks < ONE_ITEM_SMELT_TICKS), we can't smelt any more items so let's just break
 				{

@@ -1,4 +1,4 @@
-package seia.vanillamagic.creativetab.mobspawner;
+package seia.vanillamagic.creativetab;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,13 +9,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 
-public class CreativeTabMobSpawner extends CreativeTabs
+public class VanillaMagicCreativeTab extends CreativeTabs
 {
 	private final Block SPAWNER = Blocks.MOB_SPAWNER;
 	
-	public CreativeTabMobSpawner()
+	public VanillaMagicCreativeTab()
 	{
-		super("mobSpawner");
+		super("vm");
 		SPAWNER.setCreativeTab(this);
 		Blocks.COMMAND_BLOCK.setCreativeTab(this);
 	}

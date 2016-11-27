@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.config.achievement.ConfigAchievements;
-import seia.vanillamagic.creativetab.mobspawner.CreativeTabMobSpawner;
+import seia.vanillamagic.creativetab.VanillaMagicCreativeTab;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.handler.QuestHandler;
@@ -50,7 +50,7 @@ public class VanillaMagic
 	public static Logger LOGGER;
 	public static ConfigAchievements CONFIG_ACHIEVEMENTS;
 	
-	public static final CreativeTabMobSpawner CREATIVE_TAB_MOB_SPAWNER = new CreativeTabMobSpawner();
+	public static final VanillaMagicCreativeTab CREATIVE_TAB = new VanillaMagicCreativeTab();
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)

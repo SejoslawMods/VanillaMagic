@@ -23,10 +23,10 @@ book.quarryUpgrades.title=Quarry Upgrades
 
 
 ############################
-#Creative Tab Names
+#Creative Tab Name
 ############################
 
-itemGroup.mobSpawner=VM Mob Spawner
+itemGroup.vm=Vanilla Magic
 
 
 
