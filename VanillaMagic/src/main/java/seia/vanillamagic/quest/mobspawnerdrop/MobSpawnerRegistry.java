@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,8 +29,8 @@ public class MobSpawnerRegistry
 	public static final String NBT_ID = "NBT_ID";
 	
 	private static final Map<String, ItemStack> MAP_NAME_STACK = new HashMap<>();
-	private static final Map<String, EntityEntry> MAP_NAME_ENTITY_ENTRY = new HashMap<>();
 	private static final Map<ResourceLocation, String> MAP_RESOURCE_LOCATION_NAME = new HashMap<>();
+	private static final Map<String, ResourceLocation> MAP_NAME_RESOURCE_LOCATION = new HashMap<>();
 	
 	private MobSpawnerRegistry()
 	{
@@ -49,8 +50,8 @@ public class MobSpawnerRegistry
 			entryStack.getTagCompound().setString(NBT_MOB_SPAWNER_DATA, NBT_MOB_SPAWNER_DATA);
 			
 			MAP_NAME_STACK.put(entityName, entryStack);
-			MAP_NAME_ENTITY_ENTRY.put(entityName, ee);
-			MAP_RESOURCE_LOCATION_NAME.put(new ResourceLocation(entityName), entityName);
+			MAP_RESOURCE_LOCATION_NAME.put(EntityList.getKey(ee.getEntityClass()), entityName);
+			MAP_NAME_RESOURCE_LOCATION.put(entityName, EntityList.getKey(ee.getEntityClass()));
 		}
 		VanillaMagic.LOGGER.log(Level.INFO, "Mob Spawner Registry: registered " + MAP_NAME_STACK.size() + " entities for Mob Spawners.");
 	}
@@ -113,7 +114,7 @@ public class MobSpawnerRegistry
 	public static void setID(TileEntityMobSpawner tileMS, String id, World world, BlockPos spawnerPos)
 	{
 		MobSpawnerBaseLogic msLogic = ((TileEntityMobSpawner)tileMS).getSpawnerBaseLogic();
-		msLogic.setEntityId(new ResourceLocation(id));
+		msLogic.setEntityId(MAP_NAME_RESOURCE_LOCATION.get(id));
 		tileMS.markDirty();
 		IBlockState spawnerState = world.getBlockState(spawnerPos);
 		world.notifyBlockUpdate(spawnerPos, spawnerState, spawnerState, 3);
