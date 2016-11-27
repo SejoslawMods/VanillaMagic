@@ -84,7 +84,7 @@ public class QuestOreMultiplier extends Quest
 	
 	public void multiply(EntityPlayer player, List<EntityItem> oresInCauldron, BlockPos cauldronPos)
 	{
-		List<EntityItem> smeltingResult = SmeltingHelper.countAndSmelt(player, oresInCauldron, cauldronPos.offset(EnumFacing.UP), this, false);
+		List<EntityItem> smeltingResult = SmeltingHelper.countAndSmelt_OneByOneItemFromOffHand(player, oresInCauldron, cauldronPos.offset(EnumFacing.UP), this, false);
 		if(smeltingResult != null)
 		{
 			World world = player.world;
