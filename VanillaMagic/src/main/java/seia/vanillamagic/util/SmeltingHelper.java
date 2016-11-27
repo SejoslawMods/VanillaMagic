@@ -181,14 +181,7 @@ public class SmeltingHelper
 				ItemStackHelper.getStackSize(entityItemToSmeltStack)));
 	}
 	
-	/**
-	 * TODO: Better Idea for counting and smelting items in Cauldron.
-	 * Currently will consume whole stack in offHand for 1 operation
-	 * Returns the list of smelted items
-	 * oneItemSmeltTicks = default is QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS
-	 */
-	@Nullable
-	public static List<EntityItem> countAndSmelt(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
+	public static List<EntityItem> countAndSmelt_OneByOneItemFromOffHand(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
 			Quest requiredQuest, boolean spawnSmelted)
 	{
 		if(!player.hasAchievement(requiredQuest.getAchievement()))
@@ -200,8 +193,7 @@ public class SmeltingHelper
 			List<EntityItem> smelted = new ArrayList<EntityItem>();
 			World world = player.world;
 			int ticks = 0;
-			ticks += SmeltingHelper.countTicks(player.getHeldItemOffhand()); // value for the whole stack
-			ItemStackHelper.setStackSize(player.getHeldItemOffhand(), 0);
+			ItemStack rightHand = player.getHeldItemOffhand();
 			for(int i = 0; i < itemsToSmelt.size(); ++i)
 			{
 				EntityItem entityItemToSmelt = itemsToSmelt.get(i);
@@ -210,7 +202,13 @@ public class SmeltingHelper
 				int ticksToSmeltStack = entityItemToSmeltStackSize * QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
 				ItemStack smeltResult = null;
 				EntityItem smeltResultEntityItem = null;
-				// will smelt whole stack
+				// try to add fuel to smell this stack
+				while((ItemStackHelper.getStackSize(rightHand) > 0) &&  // if we did not use whole fuel stack
+						(ticks < ticksToSmeltStack)) // if we need more ticks
+				{
+					ticks += getItemBurnTimeTicks(rightHand); // take ticks for 1 item from this stack
+					ItemStackHelper.decreaseStackSize(rightHand, 1);
+				}
 				if(ticks >= ticksToSmeltStack)
 				{
 					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
@@ -252,6 +250,79 @@ public class SmeltingHelper
 			world.updateEntities();
 			return smelted;
 		}
-		return null;
+		return new ArrayList<EntityItem>();
 	}
+	
+	/**
+	 * TODO: Better Idea for counting and smelting items in Cauldron.
+	 * Currently will consume whole stack in offHand for 1 operation
+	 * Returns the list of smelted items
+	 * oneItemSmeltTicks = default is QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS
+	 */
+//	public static List<EntityItem> countAndSmelt(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
+//			Quest requiredQuest, boolean spawnSmelted)
+//	{
+//		if(!player.hasAchievement(requiredQuest.getAchievement()))
+//		{
+//			player.addStat(requiredQuest.getAchievement(), 1);
+//		}
+//		if(player.hasAchievement(requiredQuest.getAchievement()))
+//		{
+//			List<EntityItem> smelted = new ArrayList<EntityItem>();
+//			World world = player.world;
+//			int ticks = 0;
+//			ticks += SmeltingHelper.countTicks(player.getHeldItemOffhand()); // value for the whole stack
+//			ItemStackHelper.setStackSize(player.getHeldItemOffhand(), 0);
+//			for(int i = 0; i < itemsToSmelt.size(); ++i)
+//			{
+//				EntityItem entityItemToSmelt = itemsToSmelt.get(i);
+//				ItemStack entityItemToSmeltStack = entityItemToSmelt.getEntityItem();
+//				int entityItemToSmeltStackSize = ItemStackHelper.getStackSize(entityItemToSmeltStack);
+//				int ticksToSmeltStack = entityItemToSmeltStackSize * QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
+//				ItemStack smeltResult = null;
+//				EntityItem smeltResultEntityItem = null;
+//				// will smelt whole stack
+//				if(ticks >= ticksToSmeltStack)
+//				{
+//					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
+//					ItemStackHelper.setStackSize(smeltResult, ItemStackHelper.getStackSize(entityItemToSmeltStack));
+//					smeltResultEntityItem = new EntityItem(world, 
+//							cauldronPos.getX() + 0.5D, 
+//							cauldronPos.getY(), 
+//							cauldronPos.getZ() + 0.5D, 
+//							smeltResult);
+//					world.removeEntity(entityItemToSmelt);
+//				}
+//				else if(ticks >= QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS)// won't smelt whole stack, we need to count how many we can smelt
+//				{
+//					int howManyCanSmelt = ticks / QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
+//					ItemStackHelper.decreaseStackSize(entityItemToSmeltStack, howManyCanSmelt);
+//					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
+//					ItemStackHelper.setStackSize(smeltResult, howManyCanSmelt);
+//					smeltResultEntityItem = new EntityItem(world, 
+//							cauldronPos.getX() + 0.5D, 
+//							cauldronPos.getY(), 
+//							cauldronPos.getZ() + 0.5D, 
+//							smeltResult);
+//				}
+//				else // if(ticks < ONE_ITEM_SMELT_TICKS), we can't smelt any more items so let's just break
+//				{
+//					break;
+//				}
+//				// spawn or not
+//				if(spawnSmelted)
+//				{
+//					world.spawnEntity(smeltResultEntityItem);
+//				}
+//				smelted.add(smeltResultEntityItem);
+//				ticks -= ticksToSmeltStack;
+//				//TODO: Fix the experience after smelting.
+//				int experienceToAdd = SmeltingHelper.getExperienceToAddFromWholeStack(entityItemToSmeltStack);
+//				player.addExperience(experienceToAdd);
+//			}
+//			world.updateEntities();
+//			return smelted;
+//		}
+//		return new ArrayList<EntityItem>(); // Return Empty ArrayList
+//	}
 }

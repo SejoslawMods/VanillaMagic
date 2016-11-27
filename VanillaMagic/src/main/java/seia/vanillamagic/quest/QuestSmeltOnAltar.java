@@ -75,7 +75,9 @@ public class QuestSmeltOnAltar extends Quest
 							}
 							if(player.hasAchievement(achievement))
 							{
-								SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+								//SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+								SmeltingHelper.countAndSmelt_OneByOneItemFromOffHand(
+										player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
 							}
 						}
 					}
