@@ -25,12 +25,9 @@ import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeSilkTouc
  */
 public class QuarryUpgradeRegistry
 {
-	private static List<Block> LIST_BLOCK = new ArrayList<Block>();
-	private static List<IQuarryUpgrade> LIST_UPGRADE = new ArrayList<IQuarryUpgrade>();
-	private static Map<Block, IQuarryUpgrade> MAP_BLOCK_UPGRADE = new HashMap<Block, IQuarryUpgrade>();
-	private static Map<IQuarryUpgrade, Block> MAP_UPGRADE_BLOCK = new HashMap<IQuarryUpgrade, Block>();
-	private static Map<Block, Class<? extends IQuarryUpgrade>> MAP_BLOCK_CLASS = new HashMap<Block, Class<? extends IQuarryUpgrade>>();
-	private static Map<Class<? extends IQuarryUpgrade>, IQuarryUpgrade> MAP_CLASS_UPGRADE = new HashMap<Class<? extends IQuarryUpgrade>, IQuarryUpgrade>();
+	private static List<Block> LIST_BLOCK = new ArrayList<>();
+	private static Map<Block, IQuarryUpgrade> MAP_BLOCK_UPGRADE = new HashMap<>();
+	private static Map<Class<? extends IQuarryUpgrade>, IQuarryUpgrade> MAP_CLASS_UPGRADE = new HashMap<>();
 	
 	private QuarryUpgradeRegistry()
 	{
@@ -67,10 +64,7 @@ public class QuarryUpgradeRegistry
 				throw new MappingExistsException(instance.getBlock(), MAP_BLOCK_UPGRADE.get(instance.getBlock()));
 			}
 			LIST_BLOCK.add(instance.getBlock());
-			LIST_UPGRADE.add(instance);
 			MAP_BLOCK_UPGRADE.put(instance.getBlock(), instance);
-			MAP_UPGRADE_BLOCK.put(instance, instance.getBlock());
-			MAP_BLOCK_CLASS.put(instance.getBlock(), quarryUpgradeClass);
 			MAP_CLASS_UPGRADE.put(quarryUpgradeClass, instance);
 			return true;
 		}

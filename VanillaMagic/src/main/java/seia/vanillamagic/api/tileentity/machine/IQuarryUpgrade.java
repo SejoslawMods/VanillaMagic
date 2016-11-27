@@ -14,9 +14,9 @@ import net.minecraft.world.IBlockAccess;
  * <br>
  * To create a working Quarry upgrade You must: <br>
  * 1 - Create a class which implements this interface. <br>
- * 2 - Register Your class in QuarryUpgradeAPI using QuarryUpgradeAPI.addUpgrade(YourClass.class); <br>
+ * 2 - Register Your class in QuarryUpgradeRegistry using QuarryUpgradeAPI.addUpgrade(YourClass.class); <br>
  * 3 - Place a block which You declared in getBlock() method next to the Quarry. <br>
- * If You want to check if Quarry can see Your upgrade, right-click Quarry with Clock and look at "Upgrades:" section.
+ * If You want to check if Quarry can see Your upgrade, right-click Quarry with Clock and look at "Upgrades" section.
  */
 public interface IQuarryUpgrade
 {
@@ -49,7 +49,7 @@ public interface IQuarryUpgrade
 	}
 	
 	/**
-	 * W.I.P. <br><br>
+	 * TODO: Quarry Required Upgrade W.I.P. <br><br>
 	 * Returns the upgrade that must be placed BEFORE this upgrade is placed. (talking about blocks) <br>
 	 * For instance: block with fortune 1 must be placed before block with fortune 2. <br>
 	 * If null than this will be skipped. <br>
