@@ -55,7 +55,7 @@ public class PotionedCrystalHelper
 				String ptName = getPotionTypeName(pt);
 				for(IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
 				{
-					if(pc.getPotionName().equals(ptName))
+					if(pc.getPotionUnlocalizedName().equals(ptName))
 					{
 						return pc;
 					}
@@ -85,7 +85,7 @@ public class PotionedCrystalHelper
 			String name = stackTag.getString(IPotionedCrystal.NBT_POTION_TYPE_NAME);
 			for(IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
 			{
-				if(name.equals(pc.getPotionName()))
+				if(name.equals(pc.getPotionUnlocalizedName()))
 				{
 					return pc;
 				}
