@@ -34,15 +34,18 @@ public interface IInventoryBridge extends ICustomTileEntity
 	 * OR 
 	 * the Inventory at saved position was broken.
 	 */
-	public void setPositionFromSelector(EntityPlayer player) throws NotInventoryException;
+	public void setPositionFromSelector(EntityPlayer player) 
+			throws NotInventoryException;
 	
 	/**
 	 * @see #setPositionFromSelector(EntityPlayer)
 	 */
-	public void setPositionFromSelector(InventoryPlayer invPlayer) throws NotInventoryException;
+	public void setPositionFromSelector(InventoryPlayer invPlayer) 
+			throws NotInventoryException;
 	
 	/**
 	 * @see #setPositionFromSelector(EntityPlayer)
 	 */
-	public void setPositionFromSelector(NonNullList<ItemStack> mainInventory) throws NotInventoryException;
+	public void setPositionFromSelector(NonNullList<ItemStack> mainInventory) 
+			throws NotInventoryException;
 }

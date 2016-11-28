@@ -1,13 +1,10 @@
 package seia.vanillamagic.tileentity.machine.farm;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.Level;
-
-import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
@@ -36,7 +33,7 @@ import seia.vanillamagic.util.ItemStackHelper;
 public class TileFarm extends TileMachine implements IFarm
 {
 	public static final String REGISTRY_NAME = TileFarm.class.getName();
-	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
+//	public static final GameProfile FARMER_PROFILE = new GameProfile(UUID.fromString("c1ddfd7f-120a-4000-8b64-38660d3ec62d"), "[VanillaMagicFarmer]");
 	
 	public void init(World world, BlockPos machinePos)
 	{
@@ -335,7 +332,7 @@ public class TileFarm extends TileMachine implements IFarm
 		Block block = bs.getBlock();
 		if(isOpen(workingPos)) 
 		{
-			boolean prepared = FarmersRegistry.INSTANCE.prepareBlock(this, workingPos, block, bs);
+			boolean prepared = FarmersRegistry.prepareBlock(this, workingPos, block, bs);
 			if(prepared)
 			{
 				shouldDecreaseTicks = true;
@@ -349,7 +346,7 @@ public class TileFarm extends TileMachine implements IFarm
 		}
 		if(!isOpen(workingPos))
 		{
-			IHarvestResult harvest = FarmersRegistry.INSTANCE.harvestBlock(this, workingPos, block, bs);
+			IHarvestResult harvest = FarmersRegistry.harvestBlock(this, workingPos, block, bs);
 			if(harvest != null && harvest.getDrops() != null) 
 			{
 				for(EntityItem ei : harvest.getDrops()) 

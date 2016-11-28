@@ -17,8 +17,9 @@ public class MappingExistsException extends Exception
 	 */
 	public final Object mappedValue;
 	
-	public MappingExistsException(Object checkingKey, Object mappedValue)
+	public MappingExistsException(String message, Object checkingKey, Object mappedValue)
 	{
+		super(message);
 		this.checkingKey = checkingKey;
 		this.mappedValue = mappedValue;
 	}

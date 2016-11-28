@@ -13,8 +13,10 @@ public class IntegrationSuperOres implements IIntegration
 	public boolean postInit() throws Exception
 	{
 		Class<?> mainClass = Class.forName("abused_master.SuperOres.SuperOres");
-		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject("abused_master.SuperOres.ModBlocks", "blockSuperRedstone", true));
-		CustomOre.INSTANCE.customOreDiamond.add((Block) ClassUtils.getFieldObject("abused_master.SuperOres.ModBlocks", "blockSuperDiamond", true));
+		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject("abused_master.SuperOres.ModBlocks", 
+				"blockSuperRedstone", true));
+		CustomOre.DIAMOND.add((Block) ClassUtils.getFieldObject("abused_master.SuperOres.ModBlocks", 
+				"blockSuperDiamond", true));
 		return true;
 	}
 }

@@ -83,6 +83,7 @@ public class QuestInventoryBridge extends Quest
 				catch(NotInventoryException e)
 				{
 					e.printStackTrace();
+					System.out.println(e.getMessage());
 					System.out.println(e.position.toString());
 					return;
 				}
@@ -93,6 +94,8 @@ public class QuestInventoryBridge extends Quest
 				catch(NotInventoryException e)
 				{
 					e.printStackTrace();
+					System.out.println(e.getMessage());
+					System.out.println(e.position.toString());
 					return;
 				}
 				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))

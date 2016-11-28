@@ -18,9 +18,9 @@ public class TreeHarvestUtils
 {
 	private final static List<Block> LEAVES = new ArrayList<Block>();
 	
-	private int horizontalRange;
-	private int verticalRange;
-	private BlockPos origin;
+	private int _horizontalRange;
+	private int _verticalRange;
+	private BlockPos _origin;
 
 	public TreeHarvestUtils() 
 	{
@@ -28,23 +28,23 @@ public class TreeHarvestUtils
 
 	public void harvest(TileFarm farm, FarmerTree farmer, BlockPos pos, HarvestResult res) 
 	{
-		horizontalRange = farm.getWorkRadius() + 7;
-		verticalRange = 30;
+		_horizontalRange = farm.getWorkRadius() + 7;
+		_verticalRange = 30;
 		harvest(farm.getWorld(), farm.getMachinePos(), pos, res, farmer.getIgnoreMeta());
 	}
 
 	public void harvest(World world, BlockPos pos, HarvestResult res) 
 	{
-		horizontalRange = 12;
-		verticalRange = 30;
-		origin = new BlockPos(pos);
+		_horizontalRange = 12;
+		_verticalRange = 30;
+		_origin = new BlockPos(pos);
 		IBlockState wood = world.getBlockState(pos);
 		harvestUp(world, pos, res, new HarvestTarget(wood));
 	}
 
 	private void harvest(World world, BlockPos origin, BlockPos bc, HarvestResult res, boolean ignoreMeta) 
 	{
-		this.origin = new BlockPos(origin);
+		this._origin = new BlockPos(origin);
 		IBlockState wood = world.getBlockState(bc);
 		if(ignoreMeta) 
 		{
@@ -112,18 +112,18 @@ public class TreeHarvestUtils
 
 	private boolean isInHarvestBounds(BlockPos bc) 
 	{
-		int dist = Math.abs(origin.getX() - bc.getX());
-		if(dist > horizontalRange) 
+		int dist = Math.abs(_origin.getX() - bc.getX());
+		if(dist > _horizontalRange) 
 		{
 			return false;
 		}
-		dist = Math.abs(origin.getZ() - bc.getZ());
-		if(dist > horizontalRange) 
+		dist = Math.abs(_origin.getZ() - bc.getZ());
+		if(dist > _horizontalRange) 
 		{
 			return false;
 		}
-		dist = Math.abs(origin.getY() - bc.getY());
-		if(dist > verticalRange) 
+		dist = Math.abs(_origin.getY() - bc.getY());
+		if(dist > _verticalRange) 
 		{
 			return false;
 		}

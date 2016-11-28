@@ -32,11 +32,10 @@ public class WorldHandler
 {
 	public static final WorldHandler INSTANCE = new WorldHandler();
 	
-	private static String VM_DIRECTORY = "VanillaMagic";
-	private static String FILE_NAME_TILES = "VanillaMagicTileEntities.dat";
-	private static String FILE_NAME_TILES_OLD = "VanillaMagicTileEntities.dat_old";
-	
-	private static String TILES = "tiles";
+	private static String _VM_DIRECTORY = "VanillaMagic";
+	private static String _FILE_NAME_TILES = "VanillaMagicTileEntities.dat";
+	private static String _FILE_NAME_TILES_OLD = "VanillaMagicTileEntities.dat_old";
+	private static String _TILES = "tiles";
 	
 	private WorldHandler()
 	{
@@ -84,7 +83,7 @@ public class WorldHandler
 						return;
 					}
 					fis.close();
-					NBTTagList tagList = data.getTagList(TILES, 10);
+					NBTTagList tagList = data.getTagList(_TILES, 10);
 					boolean canAdd = true;
 					for(int i = 0; i < tagList.tagCount(); ++i)
 					{
@@ -164,7 +163,7 @@ public class WorldHandler
 		{
 			folderDimension.mkdirs();
 		}
-		File fileTiles = new File(folderDimension, FILE_NAME_TILES);
+		File fileTiles = new File(folderDimension, _FILE_NAME_TILES);
 		if(!fileTiles.exists())
 		{
 			try 
@@ -176,7 +175,7 @@ public class WorldHandler
 				e.printStackTrace();
 			}
 		}
-		File fileTilesOld = new File(folderDimension, FILE_NAME_TILES_OLD);
+		File fileTilesOld = new File(folderDimension, _FILE_NAME_TILES_OLD);
 		if(!fileTilesOld.exists())
 		{
 			try 
@@ -204,7 +203,7 @@ public class WorldHandler
 			{
 				dataList.appendTag(tickables.get(j).getTileEntity().writeToNBT(new NBTTagCompound()));
 			}
-			data.setTag(TILES, dataList);
+			data.setTag(_TILES, dataList);
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
 			CompressedStreamTools.writeCompressed(data, fileOutputStream);
 			fileOutputStream.close();
@@ -219,7 +218,7 @@ public class WorldHandler
 
 	public static File getVanillaMagicRootDirectory()
 	{
-		File file = new File(DimensionManager.getCurrentSaveRootDirectory(), VM_DIRECTORY + "/");
+		File file = new File(DimensionManager.getCurrentSaveRootDirectory(), _VM_DIRECTORY + "/");
 		if(!file.exists())
 		{
 			file.mkdirs();

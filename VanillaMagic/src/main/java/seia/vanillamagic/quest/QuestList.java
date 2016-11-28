@@ -15,8 +15,8 @@ import seia.vanillamagic.event.EventQuest.EventAddQuest;
 
 public class QuestList
 {
-	private static List<IQuest> QUESTS = new ArrayList<IQuest>();
-	private static Map<String, IQuest> QUESTS_MAP = new HashMap<String, IQuest>();
+	private static List<IQuest> _QUESTS = new ArrayList<IQuest>();
+	private static Map<String, IQuest> _QUESTS_MAP = new HashMap<String, IQuest>();
 	
 	private QuestList()
 	{
@@ -28,8 +28,8 @@ public class QuestList
 	public static void addQuest(IQuest q)
 	{
 		EventAddQuest event = new EventAddQuest(q);
-		QuestList.QUESTS.add(q);
-		QuestList.QUESTS_MAP.put(q.getUniqueName(), q);
+		QuestList._QUESTS.add(q);
+		QuestList._QUESTS_MAP.put(q.getUniqueName(), q);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class QuestList
 	@Nullable
 	public static IQuest get(String key)
 	{
-		IQuest q = QUESTS_MAP.get(key);
+		IQuest q = _QUESTS_MAP.get(key);
 		if(q == null)
 		{
 			VanillaMagic.LOGGER.log(Level.ERROR, "Can't find Quest for key: " + key);
@@ -52,7 +52,7 @@ public class QuestList
 	 */
 	public static IQuest get(int index)
 	{
-		return QUESTS.get(index);
+		return _QUESTS.get(index);
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class QuestList
 	 */
 	public static int size()
 	{
-		return QUESTS.size();
+		return _QUESTS.size();
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class QuestList
 	 */
 	public static List<IQuest> getQuests()
 	{
-		return QUESTS;
+		return _QUESTS;
 	}
 	
 	/**
@@ -76,6 +76,6 @@ public class QuestList
 	 */
 	public static Map<String, IQuest> getQuestsMap()
 	{
-		return QUESTS_MAP;
+		return _QUESTS_MAP;
 	}
 }

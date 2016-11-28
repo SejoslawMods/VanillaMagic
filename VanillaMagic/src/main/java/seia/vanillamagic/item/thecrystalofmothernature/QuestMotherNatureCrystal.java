@@ -37,7 +37,7 @@ public class QuestMotherNatureCrystal extends Quest
 		{
 			return;
 		}
-		if(VanillaMagicItems.INSTANCE.isCustomItem(leftHand, VanillaMagicItems.INSTANCE.itemMotherNatureCrystal))
+		if(VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL))
 		{
 			onTickUpdate(leftHand, world, player);
 		}
@@ -102,7 +102,7 @@ public class QuestMotherNatureCrystal extends Quest
 		{
 			return;
 		}
-		if(VanillaMagicItems.INSTANCE.isCustomItem(rightHand, VanillaMagicItems.INSTANCE.itemMotherNatureCrystal))
+		if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL))
 		{
 			if(!player.hasAchievement(achievement))
 			{

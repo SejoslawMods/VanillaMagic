@@ -25,9 +25,9 @@ import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeSilkTouc
  */
 public class QuarryUpgradeRegistry
 {
-	private static List<Block> LIST_BLOCK = new ArrayList<>();
-	private static Map<Block, IQuarryUpgrade> MAP_BLOCK_UPGRADE = new HashMap<>();
-	private static Map<Class<? extends IQuarryUpgrade>, IQuarryUpgrade> MAP_CLASS_UPGRADE = new HashMap<>();
+	private static List<Block> _LIST_BLOCK = new ArrayList<>();
+	private static Map<Block, IQuarryUpgrade> _MAP_BLOCK_UPGRADE = new HashMap<>();
+	private static Map<Class<? extends IQuarryUpgrade>, IQuarryUpgrade> _MAP_CLASS_UPGRADE = new HashMap<>();
 	
 	private QuarryUpgradeRegistry()
 	{
@@ -54,18 +54,19 @@ public class QuarryUpgradeRegistry
 	/**
 	 * @see QuarryUpgradeAPI#addUpgrade(Class)
 	 */
-	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) throws MappingExistsException
+	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) 
+			throws MappingExistsException
 	{
 		try
 		{
 			IQuarryUpgrade instance = quarryUpgradeClass.newInstance();
-			if(MAP_BLOCK_UPGRADE.get(instance.getBlock()) != null) // there is already mapping for this Block
+			if(_MAP_BLOCK_UPGRADE.get(instance.getBlock()) != null) // there is already mapping for this Block
 			{
-				throw new MappingExistsException(instance.getBlock(), MAP_BLOCK_UPGRADE.get(instance.getBlock()));
+				throw new MappingExistsException("Mapping already exists: (Block, Upgrade)", instance.getBlock(), _MAP_BLOCK_UPGRADE.get(instance.getBlock()));
 			}
-			LIST_BLOCK.add(instance.getBlock());
-			MAP_BLOCK_UPGRADE.put(instance.getBlock(), instance);
-			MAP_CLASS_UPGRADE.put(quarryUpgradeClass, instance);
+			_LIST_BLOCK.add(instance.getBlock());
+			_MAP_BLOCK_UPGRADE.put(instance.getBlock(), instance);
+			_MAP_CLASS_UPGRADE.put(quarryUpgradeClass, instance);
 			return true;
 		}
 		catch(Exception e)
@@ -81,7 +82,7 @@ public class QuarryUpgradeRegistry
 	 */
 	public static boolean isUpgradeBlock(Block block)
 	{
-		for(Block b : LIST_BLOCK)
+		for(Block b : _LIST_BLOCK)
 		{
 			if(Block.isEqualTo(b, block))
 			{
@@ -97,7 +98,7 @@ public class QuarryUpgradeRegistry
 	@Nullable
 	public static IQuarryUpgrade getUpgradeFromBlock(Block block) 
 	{
-		for(Entry<Block, IQuarryUpgrade> entry : MAP_BLOCK_UPGRADE.entrySet())
+		for(Entry<Block, IQuarryUpgrade> entry : _MAP_BLOCK_UPGRADE.entrySet())
 		{
 			if(Block.isEqualTo(block, entry.getKey()))
 			{
@@ -112,7 +113,7 @@ public class QuarryUpgradeRegistry
 	 */
 	public static int countUpgrades()
 	{
-		return MAP_CLASS_UPGRADE.size();
+		return _MAP_CLASS_UPGRADE.size();
 	}
 
 	/**
@@ -121,7 +122,7 @@ public class QuarryUpgradeRegistry
 	@Nullable
 	public static IQuarryUpgrade getReguiredUpgrade(IQuarryUpgrade iqu) 
 	{
-		return MAP_CLASS_UPGRADE.get(iqu.requiredUpgrade());
+		return _MAP_CLASS_UPGRADE.get(iqu.requiredUpgrade());
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class QuarryUpgradeRegistry
 	public static List<IQuarryUpgrade> getUpgrades()
 	{
 		List<IQuarryUpgrade> upgrades = new ArrayList<IQuarryUpgrade>();
-		for(IQuarryUpgrade iqu : MAP_CLASS_UPGRADE.values())
+		for(IQuarryUpgrade iqu : _MAP_CLASS_UPGRADE.values())
 		{
 			upgrades.add(iqu);
 		}

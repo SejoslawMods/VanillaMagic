@@ -4,7 +4,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionType;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.api.item.ICustomItem;
 
 public interface IPotionedCrystal extends ICustomItem

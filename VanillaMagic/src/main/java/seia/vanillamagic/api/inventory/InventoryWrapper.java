@@ -12,26 +12,28 @@ import seia.vanillamagic.api.exception.NotInventoryException;
  */
 public class InventoryWrapper implements IInventoryWrapper
 {
-	private IInventory inventory;
-	private World world;
-	private BlockPos position;
-	private IBlockState state;
+	private IInventory _inventory;
+	private World _world;
+	private BlockPos _position;
+	private IBlockState _state;
 	
-	public InventoryWrapper(World world, BlockPos position) throws NotInventoryException
+	public InventoryWrapper(World world, BlockPos position) 
+			throws NotInventoryException
 	{
 		this.setNewInventory(world, position);
 	}
 	
-	public void setNewInventory(World world, BlockPos position) throws NotInventoryException
+	public void setNewInventory(World world, BlockPos position) 
+			throws NotInventoryException
 	{
-		this.world = world;
-		this.position = position;
-		this.state = world.getBlockState(position);
+		this._world = world;
+		this._position = position;
+		this._state = world.getBlockState(position);
 		
 		TileEntity tile = world.getTileEntity(position);
 		if(tile instanceof IInventory)
 		{
-			this.inventory = (IInventory) tile;
+			this._inventory = (IInventory) tile;
 		}
 		else
 		{
@@ -41,21 +43,21 @@ public class InventoryWrapper implements IInventoryWrapper
 	
 	public IInventory getInventory() 
 	{
-		return inventory;
+		return _inventory;
 	}
 	
 	public World getWorld() 
 	{
-		return world;
+		return _world;
 	}
 	
 	public BlockPos getPos() 
 	{
-		return position;
+		return _position;
 	}
 	
 	public IBlockState getBlockState() 
 	{
-		return state;
+		return _state;
 	}
 }

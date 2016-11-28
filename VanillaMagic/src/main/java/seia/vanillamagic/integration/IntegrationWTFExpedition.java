@@ -16,12 +16,12 @@ public class IntegrationWTFExpedition implements IIntegration
 		Class<?> clazzCore = Class.forName("wtf.core.Core");
 		
 		String clazz = "wtf.blocks.redstone.DenseRedstoneOre";
-		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_on", true));
-		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_off", true));
+		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_on", true));
+		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_off", true));
 		
 		clazz = "wtf.blocks.redstone.RedstoneStalactite";
-		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_on", true));
-		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_off", true));
+		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_on", true));
+		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_off", true));
 		
 		return true;
 	}

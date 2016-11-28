@@ -54,6 +54,10 @@ public interface IItemUpgrade
 		{
 			return false;
 		}
+		if(stack.isEmpty())
+		{
+			return false;
+		}
 		NBTTagCompound tag = stack.getTagCompound();
 		if(tag == null)
 		{

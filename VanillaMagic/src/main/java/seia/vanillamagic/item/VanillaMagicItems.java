@@ -7,9 +7,9 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.api.item.IEnchantedBucket;
-import seia.vanillamagic.api.item.IVanillaMagicItems;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
@@ -18,62 +18,65 @@ import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
 import seia.vanillamagic.util.ItemStackHelper;
 
-public class VanillaMagicItems implements IVanillaMagicItems
+public class VanillaMagicItems
 {
-	public static final VanillaMagicItems INSTANCE = new VanillaMagicItems();
-	
 	/**
 	 * All VanillaMagic items except these with additional lists.
 	 */
-	public final List<ICustomItem> customItems;
+	public static final List<ICustomItem> CUSTOM_ITEMS;
 	/**
 	 * All EnchantedBuckets list.
 	 */
-	public final List<IEnchantedBucket> enchantedBuckets;
+	public static final List<IEnchantedBucket> ENCHANTED_BUCKETS;
 	/**
 	 * All PotionedCrystals list.
 	 */
-	public final List<IPotionedCrystal> potionedCrystals;
+	public static final List<IPotionedCrystal> POTIONED_CRYSTALS;
 	
-	public final ICustomItem itemAccelerationCrystal;
-	public final ICustomItem itemLiquidSuppressionCrystal;
-	public final ICustomItem itemMotherNatureCrystal;
-	public final ICustomItem itemInventorySelector;
+	public static final ICustomItem ACCELERATION_CRYSTAL;
+	public static final ICustomItem LIQUID_SUPPRESSION_CRYSTAL; 
+	public static final ICustomItem MOTHER_NATURE_CRYSTAL; 
+	public static final ICustomItem INVENTORY_SELECTOR;
 	
 	private VanillaMagicItems()
 	{
-		customItems = new ArrayList<ICustomItem>();
-		enchantedBuckets = new ArrayList<IEnchantedBucket>();
-		potionedCrystals = new ArrayList<IPotionedCrystal>();
-		
-		itemAccelerationCrystal = new ItemAccelerationCrystal();
-		customItems.add(itemAccelerationCrystal);
-		
-		itemLiquidSuppressionCrystal = new ItemLiquidSuppressionCrystal();
-		customItems.add(itemLiquidSuppressionCrystal);
-		
-		itemMotherNatureCrystal = new ItemMotherNatureCrystal();
-		customItems.add(itemMotherNatureCrystal);
-		
-		itemInventorySelector = new ItemInventorySelector();
-		customItems.add(itemInventorySelector);
 	}
 	
-	public void addCustomItem(ICustomItem item)
+	static
 	{
-		customItems.add(item);
+		CUSTOM_ITEMS = new ArrayList<ICustomItem>();
+		
+		ENCHANTED_BUCKETS = new ArrayList<IEnchantedBucket>();
+		POTIONED_CRYSTALS = new ArrayList<IPotionedCrystal>();
+		
+		ACCELERATION_CRYSTAL = new ItemAccelerationCrystal();
+		CUSTOM_ITEMS.add(ACCELERATION_CRYSTAL);
+		
+		LIQUID_SUPPRESSION_CRYSTAL = new ItemLiquidSuppressionCrystal();
+		CUSTOM_ITEMS.add(LIQUID_SUPPRESSION_CRYSTAL);
+		
+		MOTHER_NATURE_CRYSTAL = new ItemMotherNatureCrystal();
+		CUSTOM_ITEMS.add(MOTHER_NATURE_CRYSTAL);
+		
+		INVENTORY_SELECTOR = new ItemInventorySelector();
+		CUSTOM_ITEMS.add(INVENTORY_SELECTOR);
 	}
 	
-	public void postInit()
+	public static void addCustomItem(ICustomItem item)
 	{
-		for(ICustomItem customItem : customItems)
+		CUSTOM_ITEMS.add(item);
+	}
+	
+	public static void postInit()
+	{
+		for(ICustomItem customItem : CUSTOM_ITEMS)
 		{
 			customItem.registerRecipe();
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Custom items registered: " + customItems.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Custom items registered: " + CUSTOM_ITEMS.size());
 	}
 	
-	public boolean isCustomItem(ItemStack checkingStack, ICustomItem customItem)
+	public static boolean isCustomItem(ItemStack checkingStack, ICustomItem customItem)
 	{
 		if(ItemStackHelper.isNullStack(checkingStack) || customItem == null)
 		{
@@ -94,7 +97,7 @@ public class VanillaMagicItems implements IVanillaMagicItems
 		return false;
 	}
 	
-	public boolean isCustomBucket(ItemStack checkingStack, IEnchantedBucket customBucket)
+	public static boolean isCustomBucket(ItemStack checkingStack, IEnchantedBucket customBucket)
 	{
 		if(ItemStackHelper.isNullStack(checkingStack) || customBucket == null)
 		{
@@ -116,5 +119,22 @@ public class VanillaMagicItems implements IVanillaMagicItems
 			}
 		}
 		return false;
+	}
+	
+	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
+	{
+		for(ICustomItem ci : CUSTOM_ITEMS)
+		{
+			list.add(ci.getItem());
+		}
+		for(IEnchantedBucket eb : ENCHANTED_BUCKETS)
+		{
+			list.add(eb.getItem());
+		}
+		for(IPotionedCrystal pc : POTIONED_CRYSTALS)
+		{
+			list.add(pc.getItem());
+		}
+		return list;
 	}
 }

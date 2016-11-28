@@ -10,32 +10,34 @@ import seia.vanillamagic.core.VanillaMagic;
 
 public class QuestHandler
 {
-	public static final QuestHandler INSTANCE = new QuestHandler();
+	public static final String PAGE_NAME = VanillaMagic.NAME;
+	public static final List<Object> REGISTERED_EVENTS = new ArrayList<Object>();
 	
-	public final String pageName = VanillaMagic.NAME;
-	public final List<Object> registeredEvents = new ArrayList<Object>();
-	
-	private final AchievementPage page;
+	private static final AchievementPage page;
 	
 	private QuestHandler()
 	{
-		page = new AchievementPage(pageName);
+	}
+	
+	static
+	{
+		page = new AchievementPage(PAGE_NAME);
 		AchievementPage.registerAchievementPage(page);
 	}
 	
-	public void addAchievement(Achievement achievement)
+	public static void addAchievement(Achievement achievement)
 	{
 		page.getAchievements().add(achievement);
 	}
 	
-	public List<Achievement> getAchievements()
+	public static List<Achievement> getAchievements()
 	{
 		return page.getAchievements();
 	}
 	
-	public void registerEvent(Object o)
+	public static void registerEvent(Object o)
 	{
 		MinecraftForge.EVENT_BUS.register(o);
-		INSTANCE.registeredEvents.add(o);
+		REGISTERED_EVENTS.add(o);
 	}
 }

@@ -40,27 +40,27 @@ public class BookRegistry
 	public static final IBook BOOK_ITEM_UPGRADES;
 	public static final IBook BOOK_QUARRY_UPGRADES;
 	
-	private static List<IBook> books = new ArrayList<IBook>();
+	private static List<IBook> BOOKS = new ArrayList<IBook>();
 	
 	static
 	{
 		BOOK_SPELLS = new BookSpells();
-		books.add(BOOK_SPELLS);
+		BOOKS.add(BOOK_SPELLS);
 		
 		BOOK_ALTAR_CRAFTING = new BookAltarCrafting();
-		books.add(BOOK_ALTAR_CRAFTING);
+		BOOKS.add(BOOK_ALTAR_CRAFTING);
 		
 		BOOK_BUILD_ALTAR = new BookBuildAltar();
-		books.add(BOOK_BUILD_ALTAR);
+		BOOKS.add(BOOK_BUILD_ALTAR);
 		
 		BOOK_OTHER = new BookOther();
-		books.add(BOOK_OTHER);
+		BOOKS.add(BOOK_OTHER);
 		
 		BOOK_ITEM_UPGRADES = new BookItemUpgrade();
-		books.add(BOOK_ITEM_UPGRADES);
+		BOOKS.add(BOOK_ITEM_UPGRADES);
 		
 		BOOK_QUARRY_UPGRADES = new BookQuarryUpgrades();
-		books.add(BOOK_QUARRY_UPGRADES);
+		BOOKS.add(BOOK_QUARRY_UPGRADES);
 	}
 	
 	private BookRegistry()
@@ -69,11 +69,11 @@ public class BookRegistry
 	
 	public static void postInit()
 	{
-		for(IBook book : books)
+		for(IBook book : BOOKS)
 		{
 			book.registerRecipe();
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Books registered (" + books.size() + ")");
+		VanillaMagic.LOGGER.log(Level.INFO, "Books registered (" + BOOKS.size() + ")");
 	}
 	
 	/**
@@ -87,11 +87,11 @@ public class BookRegistry
 	 */
 	public static ItemStack getBookByUID(int bookUID)
 	{
-		for(int i = 0; i < books.size(); ++i)
+		for(int i = 0; i < BOOKS.size(); ++i)
 		{
-			if(books.get(i).getUID() == bookUID)
+			if(BOOKS.get(i).getUID() == bookUID)
 			{
-				return books.get(i).getItem();
+				return BOOKS.get(i).getItem();
 			}
 		}
 		return null;

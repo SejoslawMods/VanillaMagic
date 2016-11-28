@@ -98,7 +98,7 @@ public enum Fertilizer
 		}
 	};
 
-	private ItemStack stack;
+	private ItemStack _stack;
 	
 	private Fertilizer(Item item) 
 	{
@@ -112,7 +112,7 @@ public enum Fertilizer
 
 	private Fertilizer(ItemStack stack) 
 	{
-		this.stack = ItemStackHelper.isNullStack(stack) || stack.getItem() == null ? null : stack;
+		this._stack = ItemStackHelper.isNullStack(stack) || stack.getItem() == null ? null : stack;
 //		if(this.stack != null) 
 //		{
 //			FarmStationContainer.slotItemsFertilizer.add(this.stack);
@@ -125,7 +125,7 @@ public enum Fertilizer
 	{
 		for(Fertilizer f : values()) 
 		{
-			if(!ItemStackHelper.isNullStack(f.stack)) 
+			if(!ItemStackHelper.isNullStack(f._stack)) 
 			{
 				validFertilizers.add(f);
 			}
@@ -159,7 +159,7 @@ public enum Fertilizer
 
 	protected boolean matches(ItemStack stack) 
 	{
-		return OreDictionary.itemMatches(this.stack, stack, false);
+		return OreDictionary.itemMatches(this._stack, stack, false);
 	}
 
 	/**

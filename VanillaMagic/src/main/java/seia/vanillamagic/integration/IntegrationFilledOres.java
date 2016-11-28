@@ -19,9 +19,9 @@ public class IntegrationFilledOres implements IIntegration
 		
 		// Start the right work
 		Field fieldRedstoneOre = ClassUtils.getField("mod.mcreator.mcreator_fred", "block");
-		CustomOre.INSTANCE.customOreRedstone.add((Block) fieldRedstoneOre.get(null)); // static field
+		CustomOre.REDSTONE.add((Block) fieldRedstoneOre.get(null));
 		Field fieldDiamondOre = ClassUtils.getField("mod.mcreator.mcreator_fdiamondD", "block");
-		CustomOre.INSTANCE.customOreDiamond.add((Block) fieldDiamondOre.get(null));
+		CustomOre.DIAMOND.add((Block) fieldDiamondOre.get(null));
 		
 		return true;
 	}

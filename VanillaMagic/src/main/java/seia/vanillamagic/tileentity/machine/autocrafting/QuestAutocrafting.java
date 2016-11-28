@@ -15,6 +15,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
+import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
@@ -24,7 +25,56 @@ import seia.vanillamagic.util.WorldHelper;
 
 public class QuestAutocrafting extends Quest
 {
-	private static int iinvDown = 3;
+	/**
+	 * How many blocks lower than the Cauldron are the IInventories.
+	 */
+	private static int _IINVDOWN = 3;
+	
+	int count = 0; // simple counter
+	@SubscribeEvent
+	public void changeSlot(RightClickBlock event)
+	{
+		EntityPlayer player = event.getEntityPlayer();
+		World world = player.world;
+		if(world.isRemote)
+		{
+			return;
+		}
+		ItemStack rightHand = player.getHeldItemMainhand();
+		if(!ItemStackHelper.isNullStack(rightHand)) // quit if NOT empty right hand
+		{
+			return;
+		}
+		BlockPos tilePos = event.getPos();
+		ICustomTileEntity tile = CustomTileEntityHandler.getCustomTileEntity(tilePos, world);
+		if(tile == null)
+		{
+			return;
+		}
+		if(tile instanceof IAutocrafting)
+		{
+			if(count == 0)
+			{
+				count++;
+			}
+			else
+			{
+				count = 0;
+				return;
+			}
+			IAutocrafting auto = (IAutocrafting) tile;
+			if(auto.getCurrentCraftingSlot() == auto.getDefaultMaxCraftingSlot())
+			{
+				auto.setCurrentCraftingSlot(auto.getDefaultCraftingSlot());
+			}
+			else
+			{
+				auto.setCurrentCraftingSlot(auto.getCurrentCraftingSlot() + 1);
+			}
+			EntityHelper.addChatComponentMessage(player, 
+					"Current crafting slot set to: " + auto.getCurrentCraftingSlot());
+		}
+	}
 	
 	@SubscribeEvent
 	public void addAutocrafting(RightClickBlock event)
@@ -124,15 +174,15 @@ public class QuestAutocrafting extends Quest
 
 	public static BlockPos[][] buildInventoryMatrix(BlockPos cauldronPos) 
 	{
-		BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
-		BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
-		BlockPos rightTop = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
-		BlockPos right = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ());
-		BlockPos rightBottom = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
-		BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
-		BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
-		BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ());
-		BlockPos middle = cauldronPos.offset(EnumFacing.DOWN, iinvDown);
+		BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
+		BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
+		BlockPos rightTop = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
+		BlockPos right = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ());
+		BlockPos rightBottom = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
+		BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
+		BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
+		BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ());
+		BlockPos middle = cauldronPos.offset(EnumFacing.DOWN, _IINVDOWN);
 		
 		return new BlockPos[][]{
 			new BlockPos[]{ leftTop, top, rightTop },
@@ -144,7 +194,7 @@ public class QuestAutocrafting extends Quest
 	public static boolean isConstructionComplete(World world, BlockPos cauldronPos)
 	{
 		boolean checkBasics = false;
-		if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, iinvDown)) instanceof IInventory)
+		if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, _IINVDOWN)) instanceof IInventory)
 		{
 			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, 2)) instanceof IHopper)
 			{
@@ -156,14 +206,14 @@ public class QuestAutocrafting extends Quest
 		}
 		if(checkBasics)
 		{
-			BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
-			BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
-			BlockPos rightTop = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() + 2);
-			BlockPos right = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ());
-			BlockPos rightBottom = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
-			BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
-			BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ() - 2);
-			BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - iinvDown, cauldronPos.getZ());
+			BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
+			BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
+			BlockPos rightTop = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
+			BlockPos right = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ());
+			BlockPos rightBottom = new BlockPos(cauldronPos.getX() + 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
+			BlockPos bottom = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
+			BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
+			BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ());
 			
 			if(world.getTileEntity(leftTop) instanceof IInventory)
 			{

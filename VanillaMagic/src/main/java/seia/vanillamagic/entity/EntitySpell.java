@@ -17,14 +17,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntitySpell extends Entity
 {
-	private int xTile = 0;
-	private int yTile = 0;
-	private int zTile = 0;
-	private Block inTile;
-	private boolean inGround;
+	private int _xTile = 0;
+	private int _yTile = 0;
+	private int _zTile = 0;
+	private Block _inTile;
+	private boolean _inGround;
+	private int _ticksAlive;
+	private int _ticksInAir;
+	
 	public EntityLivingBase castingEntity;
-	private int ticksAlive;
-	private int ticksInAir;
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
@@ -79,30 +80,30 @@ public abstract class EntitySpell extends Entity
 		if(this.world.isRemote || (this.castingEntity == null || !this.castingEntity.isDead) && this.world.isBlockLoaded(new BlockPos(this)))
 		{
 			super.onUpdate();
-			if(this.inGround)
+			if(this._inGround)
 			{
-				if(this.world.getBlockState(new BlockPos(this.xTile, this.yTile, this.zTile)).getBlock() == this.inTile)
+				if(this.world.getBlockState(new BlockPos(this._xTile, this._yTile, this._zTile)).getBlock() == this._inTile)
 				{
-					++this.ticksAlive;
-					if(this.ticksAlive == 600)
+					++this._ticksAlive;
+					if(this._ticksAlive == 600)
 					{
 						this.setDead();
 					}
 					return;
 				}
-				this.inGround = false;
+				this._inGround = false;
 				this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
 				this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
 				this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
-				this.ticksAlive = 0;
-				this.ticksInAir = 0;
+				this._ticksAlive = 0;
+				this._ticksInAir = 0;
 			}
 			else
 			{
-				++this.ticksInAir;
+				++this._ticksInAir;
 				inAir();
 			}
-			RayTraceResult rayTraceResult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.castingEntity);
+			RayTraceResult rayTraceResult = ProjectileHelper.forwardsRaycast(this, true, this._ticksInAir >= 25, this.castingEntity);
 			if(rayTraceResult != null)
 			{
 				this.onImpact(rayTraceResult);
@@ -165,15 +166,15 @@ public abstract class EntitySpell extends Entity
 	 */
 	public void writeEntityToNBT(NBTTagCompound compound)
 	{
-		compound.setInteger("xTile", this.xTile);
-		compound.setInteger("yTile", this.yTile);
-		compound.setInteger("zTile", this.zTile);
-		ResourceLocation resourceLocation = (ResourceLocation)Block.REGISTRY.getNameForObject(this.inTile);
+		compound.setInteger("xTile", this._xTile);
+		compound.setInteger("yTile", this._yTile);
+		compound.setInteger("zTile", this._zTile);
+		ResourceLocation resourceLocation = (ResourceLocation)Block.REGISTRY.getNameForObject(this._inTile);
 		compound.setString("inTile", resourceLocation == null ? "" : resourceLocation.toString());
-		compound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
+		compound.setByte("inGround", (byte)(this._inGround ? 1 : 0));
 		compound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
 		compound.setTag("power", this.newDoubleNBTList(new double[] {this.accelerationX, this.accelerationY, this.accelerationZ}));
-		compound.setInteger("life", this.ticksAlive);
+		compound.setInteger("life", this._ticksAlive);
 	}
     
 	/**
@@ -181,18 +182,18 @@ public abstract class EntitySpell extends Entity
 	 */
 	public void readEntityFromNBT(NBTTagCompound compound)
 	{
-		this.xTile = compound.getInteger("xTile");
-		this.yTile = compound.getInteger("yTile");
-		this.zTile = compound.getInteger("zTile");
+		this._xTile = compound.getInteger("xTile");
+		this._yTile = compound.getInteger("yTile");
+		this._zTile = compound.getInteger("zTile");
 		if(compound.hasKey("inTile", 8))
 		{
-			this.inTile = Block.getBlockFromName(compound.getString("inTile"));
+			this._inTile = Block.getBlockFromName(compound.getString("inTile"));
 		}
 		else
 		{
-			this.inTile = Block.getBlockById(compound.getByte("inTile") & 255);
+			this._inTile = Block.getBlockById(compound.getByte("inTile") & 255);
 		}
-		this.inGround = compound.getByte("inGround") == 1;
+		this._inGround = compound.getByte("inGround") == 1;
 		if(compound.hasKey("power", 9))
 		{
 			NBTTagList nbtTagListPower = compound.getTagList("power", 6);
@@ -203,7 +204,7 @@ public abstract class EntitySpell extends Entity
 				this.accelerationZ = nbtTagListPower.getDoubleAt(2);
 			}
 		}
-		this.ticksAlive = compound.getInteger("life");
+		this._ticksAlive = compound.getInteger("life");
 		if(compound.hasKey("direction", 9) && compound.getTagList("direction", 6).tagCount() == 3)
 		{
 			NBTTagList nbtTagListDirection = compound.getTagList("direction", 6);

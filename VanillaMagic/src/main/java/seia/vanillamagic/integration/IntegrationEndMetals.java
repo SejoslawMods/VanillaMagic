@@ -13,8 +13,10 @@ public class IntegrationEndMetals implements IIntegration
 	public boolean postInit() throws Exception
 	{
 		Class<?> mainClass = Class.forName("endmetals.Main");
-		CustomOre.INSTANCE.customOreRedstone.add((Block) ClassUtils.getFieldObject("endmetals.blocks.ModBlocks", "endredstoneOre", true));
-		CustomOre.INSTANCE.customOreDiamond.add((Block) ClassUtils.getFieldObject("endmetals.blocks.ModBlocks", "enddiamondOre", true));
+		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject("endmetals.blocks.ModBlocks", 
+				"endredstoneOre", true));
+		CustomOre.DIAMOND.add((Block) ClassUtils.getFieldObject("endmetals.blocks.ModBlocks", 
+				"enddiamondOre", true));
 		return true;
 	}
 }

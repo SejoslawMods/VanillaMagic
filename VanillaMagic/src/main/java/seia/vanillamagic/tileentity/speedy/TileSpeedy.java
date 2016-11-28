@@ -50,7 +50,7 @@ public class TileSpeedy extends CustomTileEntity
 			for(int i = 0; i < inv.getSizeInventory(); ++i)
 			{
 				ItemStack stack = inv.getStackInSlot(i);
-				if(VanillaMagicItems.INSTANCE.isCustomItem(stack, VanillaMagicItems.INSTANCE.itemAccelerationCrystal))
+				if(VanillaMagicItems.isCustomItem(stack, VanillaMagicItems.ACCELERATION_CRYSTAL))
 				{
 					return true;
 				}

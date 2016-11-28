@@ -24,14 +24,13 @@ public class ConfigAchievements
 {
 	public static final String VM_DIRECTORY = "/VanillaMagic/";
 	
-	public File modConfigurationDirectory;
-	public File modFile;
+	private final String _achievements = "achievements.json";
+	private final String _aboutAchievements = "About achievements.txt";
 	
-	private final String achievements = "achievements.json";
-	private final String aboutAchievements = "About achievements.txt";
-	
-	private File fileAchievements;
-	private File fileAboutAchievements;
+	private File _modConfigurationDirectory;
+	private File _modFile;
+	private File _fileAchievements;
+	private File _fileAboutAchievements;
 	
 	/**
 	 * modConfigurationDirectory - config/VanillaMagic/ <br>
@@ -39,31 +38,31 @@ public class ConfigAchievements
 	 */
 	public ConfigAchievements(File modConfigurationDirectory, File modFile) 
 	{
-		this.modConfigurationDirectory = modConfigurationDirectory;
-		this.modFile = modFile;
-		if(!this.modConfigurationDirectory.exists())
+		this._modConfigurationDirectory = modConfigurationDirectory;
+		this._modFile = modFile;
+		if(!this._modConfigurationDirectory.exists())
 		{
-			this.modConfigurationDirectory.mkdirs();
+			this._modConfigurationDirectory.mkdirs();
 			VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagic config directory created");
 		}
 		VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagic config directory loaded");
-		fileAchievements = unzip(achievements, fileAchievements);
-		fileAboutAchievements = unzip(aboutAchievements, fileAboutAchievements);
+		_fileAchievements = unzip(_achievements, _fileAchievements);
+		_fileAboutAchievements = unzip(_aboutAchievements, _fileAboutAchievements);
 		readAchievements();
 	}
 
 	@SuppressWarnings("resource")
 	public File unzip(String fileName, File localFile) 
 	{
-		localFile = new File(modConfigurationDirectory, fileName);
+		localFile = new File(_modConfigurationDirectory, fileName);
 		if(!localFile.exists())
 		{
 			try 
 			{
 				localFile.createNewFile();
-				if(!this.modFile.isDirectory())
+				if(!this._modFile.isDirectory())
 				{
-					JarFile jarFile = new JarFile(this.modFile);
+					JarFile jarFile = new JarFile(this._modFile);
 					Enumeration enumeration = jarFile.entries();
 					while(enumeration.hasMoreElements())
 					{
@@ -83,9 +82,9 @@ public class ConfigAchievements
 						}
 					}
 				}
-				else if(this.modFile.isDirectory())
+				else if(this._modFile.isDirectory())
 				{
-					File[] files = this.modFile.listFiles();
+					File[] files = this._modFile.listFiles();
 					for(File f : files)
 					{
 						if(f.getName().contains(fileName))
@@ -117,7 +116,7 @@ public class ConfigAchievements
 	{
 		try 
 		{
-			FileInputStream fis = new FileInputStream(this.fileAchievements);
+			FileInputStream fis = new FileInputStream(this._fileAchievements);
 			InputStreamReader reader = new InputStreamReader(fis);
 			JsonParser parser = new JsonParser();
 			JsonElement js = parser.parse(reader);

@@ -29,48 +29,47 @@ public class TileQuarry extends TileMachine implements IQuarry
 {
 	public static final String REGISTRY_NAME = TileQuarry.class.getName();
 	
-	private QuarryUpgradeHelper upgradeHelper = new QuarryUpgradeHelper(this);
+	private QuarryUpgradeHelper _upgradeHelper = new QuarryUpgradeHelper(this);
 	
-	private BlockPos diamondBlockPos;
-	private BlockPos redstoneBlockPos;
-	private Random rand = new Random();
+	private BlockPos _diamondBlockPos;
+	private BlockPos _redstoneBlockPos;
 	/**
 	 * It is not final, but should never be changed. <br>
 	 * It is set in the checkSurroundings().
 	 */
-	private EnumFacing startPosFacing;
-	private EnumFacing diamondFacing;
-	private EnumFacing redstoneFacing;
+	private EnumFacing _startPosFacing;
+	private EnumFacing _diamondFacing;
+	private EnumFacing _redstoneFacing;
 	
 	/**
 	 * Forces Quarry to stop working.
 	 */
-	private boolean forceStop = false;
+	private boolean _forceStop = false;
 	/**
 	 * It's (size)x(size) but (size-2)x(size-2) is for digging
 	 * BlocksInChunk
 	 * Only multiply this
 	 */
-	private int quarrySize = QuarrySizeHelper.BASIC_SIZE;
+	private int _quarrySize = QuarrySizeHelper.BASIC_SIZE;
 	
 	public int getQuarrySize()
 	{
-		return quarrySize;
+		return _quarrySize;
 	}
 	
 	public EnumFacing getStartPosFacing()
 	{
-		return startPosFacing;
+		return _startPosFacing;
 	}
 	
 	public void forceQuarryStop()
 	{
-		forceStop = true;
+		_forceStop = true;
 	}
 	
 	public void forceQuarryStart()
 	{
-		forceStop = false;
+		_forceStop = false;
 	}
 	
 	/**
@@ -78,36 +77,36 @@ public class TileQuarry extends TileMachine implements IQuarry
 	 */
 	public boolean checkSurroundings()
 	{
-		if(diamondBlockPos != null)
+		if(_diamondBlockPos != null)
 		{
-			if(!Block.isEqualTo(Blocks.DIAMOND_BLOCK, world.getBlockState(diamondBlockPos).getBlock()))
+			if(!Block.isEqualTo(Blocks.DIAMOND_BLOCK, world.getBlockState(_diamondBlockPos).getBlock()))
 			{
 				return false;
 			}
 		}
-		if(redstoneBlockPos != null)
+		if(_redstoneBlockPos != null)
 		{
-			if(!Block.isEqualTo(Blocks.REDSTONE_BLOCK, world.getBlockState(redstoneBlockPos).getBlock()))
+			if(!Block.isEqualTo(Blocks.REDSTONE_BLOCK, world.getBlockState(_redstoneBlockPos).getBlock()))
 			{
 				return false;
 			}
 		}
-		if(redstoneBlockPos == null || diamondBlockPos == null)
+		if(_redstoneBlockPos == null || _diamondBlockPos == null)
 		{
-			for(EnumFacing redstoneFacing : facings())
+			for(EnumFacing _redstoneFacing : facings())
 			{
-				redstoneBlockPos = pos.offset(redstoneFacing);
-				if(Block.isEqualTo(world.getBlockState(redstoneBlockPos).getBlock(), Blocks.REDSTONE_BLOCK))
+				_redstoneBlockPos = pos.offset(_redstoneFacing);
+				if(Block.isEqualTo(world.getBlockState(_redstoneBlockPos).getBlock(), Blocks.REDSTONE_BLOCK))
 				{
-					EnumFacing diamondFacing = redstoneFacing.rotateY();
-					diamondBlockPos = pos.offset(diamondFacing);
-					if(Block.isEqualTo(world.getBlockState(diamondBlockPos).getBlock(), Blocks.DIAMOND_BLOCK))
+					EnumFacing _diamondFacing = _redstoneFacing.rotateY();
+					_diamondBlockPos = pos.offset(_diamondFacing);
+					if(Block.isEqualTo(world.getBlockState(_diamondBlockPos).getBlock(), Blocks.DIAMOND_BLOCK))
 					{
 						if(startPos == null)
 						{
-							this.redstoneFacing = redstoneFacing;
-							this.diamondFacing = diamondFacing;
-							this.startPosFacing = diamondFacing.rotateY();
+							this._redstoneFacing = _redstoneFacing;
+							this._diamondFacing = _diamondFacing;
+							this._startPosFacing = _diamondFacing.rotateY();
 							restartDefaultStartPos();
 							this.chestPosInput = new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
 							this.chestPosOutput = pos.offset(getOutputFacing());
@@ -133,8 +132,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public void restartDefaultStartPos()
 	{
-		startPos = pos.offset(startPosFacing);
-		workingPos = pos.offset(startPosFacing);
+		startPos = pos.offset(_startPosFacing);
+		workingPos = pos.offset(_startPosFacing);
 	}
 	
 	public EnumFacing[] facings()
@@ -177,7 +176,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	protected void performAdditionalOperations()
 	{
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
-		cauldronPos = cauldronPos.offset(diamondFacing);
+		cauldronPos = cauldronPos.offset(_diamondFacing);
 		diamondBlocks = 0;
 		IBlockState checkingBlock = world.getBlockState(cauldronPos);
 		while((Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK)) // quarry resizing is not an actual upgrade, it's easier to count it here
@@ -189,22 +188,22 @@ public class TileQuarry extends TileMachine implements IQuarry
 			}
 			else // if(QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock()))
 			{
-				upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock());
+				_upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock());
 			}
-			cauldronPos = cauldronPos.offset(diamondFacing);
+			cauldronPos = cauldronPos.offset(_diamondFacing);
 			checkingBlock = world.getBlockState(cauldronPos);
 		}
-		upgradeHelper.modifyQuarry(this);
-		quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
+		_upgradeHelper.modifyQuarry(this);
+		_quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
 	}
 	
 	public List<String> getAdditionalInfo()
 	{
 		List<String> baseInfo = super.getAdditionalInfo();
-		baseInfo.add("Quarry Size: " + quarrySize + " blocks");
+		baseInfo.add("Quarry Size: " + _quarrySize + " blocks");
 		performAdditionalOperations();
-		List<String> withUpgrades = upgradeHelper.addAdditionalInfo(baseInfo);
-		upgradeHelper.clearUpgrades();
+		List<String> withUpgrades = _upgradeHelper.addAdditionalInfo(baseInfo);
+		_upgradeHelper.clearUpgrades();
 		countRedstoneBlocks();
 		baseInfo.add("Mining blocks per tick: " + redstoneBlocks);
 		return withUpgrades;
@@ -215,13 +214,13 @@ public class TileQuarry extends TileMachine implements IQuarry
 	 */
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
 	{
-		return upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState);
+		return _upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState);
 	}
 	
 	public void doWork() // once a world tick
 	{
 		// If forced to stop, stop.
-		if(forceStop)
+		if(_forceStop)
 		{
 			return;
 		}
@@ -233,7 +232,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		{
 			performOneOperation();
 		}
-		upgradeHelper.clearUpgrades();
+		_upgradeHelper.clearUpgrades();
 	}
 	
 	int redstoneBlocks = 0;
@@ -243,13 +242,13 @@ public class TileQuarry extends TileMachine implements IQuarry
 	public void countRedstoneBlocks()
 	{
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
-		cauldronPos = cauldronPos.offset(redstoneFacing);
+		cauldronPos = cauldronPos.offset(_redstoneFacing);
 		redstoneBlocks = 0;
 		IBlockState checkingBlock = world.getBlockState(cauldronPos);
 		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.REDSTONE_BLOCK))
 		{
 			redstoneBlocks++;
-			cauldronPos = cauldronPos.offset(redstoneFacing);
+			cauldronPos = cauldronPos.offset(_redstoneFacing);
 			checkingBlock = world.getBlockState(cauldronPos);
 		}
 	}
@@ -335,17 +334,17 @@ public class TileQuarry extends TileMachine implements IQuarry
 	
 	public void goToNextPosAfterHitBedrock()
 	{
-		workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosFacing);
-		if(BlockPosHelper.distanceInLine(workingPos, startPos) > quarrySize)
+		workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(_startPosFacing);
+		if(BlockPosHelper.distanceInLine(workingPos, startPos) > _quarrySize)
 		{
-			startPos = startPos.offset(rotateY(startPosFacing, 3));
+			startPos = startPos.offset(rotateY(_startPosFacing, 3));
 			workingPos = BlockPosHelper.copyPos(startPos);
 		}
 	}
 
 	public EnumFacing getOutputFacing() 
 	{
-		return startPosFacing.rotateY();
+		return _startPosFacing.rotateY();
 	}
 	
 	public void forceChunkLoading(Ticket ticket)

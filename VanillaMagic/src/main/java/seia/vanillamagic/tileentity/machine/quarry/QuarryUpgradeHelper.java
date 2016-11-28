@@ -17,12 +17,12 @@ import seia.vanillamagic.util.ListHelper;
  */
 public class QuarryUpgradeHelper
 {
-	private final IQuarry quarry;
-	private List<IQuarryUpgrade> upgrades = new ArrayList<IQuarryUpgrade>();
+	private final IQuarry _quarry;
+	private final List<IQuarryUpgrade> _upgrades = new ArrayList<IQuarryUpgrade>();
 	
 	public QuarryUpgradeHelper(IQuarry quarry)
 	{
-		this.quarry = quarry;
+		this._quarry = quarry;
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class QuarryUpgradeHelper
 		}
 		if(canAddUpgrade(iqu))
 		{
-			upgrades.add(iqu);
+			_upgrades.add(iqu);
 		}
 	}
 
@@ -51,7 +51,7 @@ public class QuarryUpgradeHelper
 			return true;
 		}
 		IQuarryUpgrade required = null;
-		for(IQuarryUpgrade registeredUpgrade : upgrades)
+		for(IQuarryUpgrade registeredUpgrade : _upgrades)
 		{
 			required = QuarryUpgradeRegistry.getReguiredUpgrade(iqu);
 			if(QuarryUpgradeRegistry.isTheSameUpgrade(registeredUpgrade, required))
@@ -68,7 +68,7 @@ public class QuarryUpgradeHelper
 	 */
 	private boolean canAddUpgrade(IQuarryUpgrade iqu) 
 	{
-		for(IQuarryUpgrade up : upgrades)
+		for(IQuarryUpgrade up : _upgrades)
 		{
 			if(Block.isEqualTo(up.getBlock(), iqu.getBlock()))
 			{
@@ -84,7 +84,7 @@ public class QuarryUpgradeHelper
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,IBlockState workingPosState) 
 	{
 		List<ItemStack> drops = new ArrayList<ItemStack>();
-		for(IQuarryUpgrade upgrade : upgrades)
+		for(IQuarryUpgrade upgrade : _upgrades)
 		{
 			drops = ListHelper.<ItemStack>combineLists(drops, upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
 		}
@@ -101,7 +101,7 @@ public class QuarryUpgradeHelper
 	 */
 	public void clearUpgrades() 
 	{
-		upgrades.clear();
+		_upgrades.clear();
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class QuarryUpgradeHelper
 	 */
 	public void modifyQuarry(IQuarry quarry)
 	{
-		for(IQuarryUpgrade upgrade : upgrades)
+		for(IQuarryUpgrade upgrade : _upgrades)
 		{
 			upgrade.modifyQuarry(quarry);
 		}
@@ -121,9 +121,9 @@ public class QuarryUpgradeHelper
 	public List<String> addAdditionalInfo(List<String> baseInfo)
 	{
 		baseInfo.add("Upgrades:");
-		for(int i = 0; i < upgrades.size(); ++i)
+		for(int i = 0; i < _upgrades.size(); ++i)
 		{
-			baseInfo.add("   " + (i+1) + ") " + upgrades.get(i).getUpgradeName());
+			baseInfo.add("   " + (i+1) + ") " + _upgrades.get(i).getUpgradeName());
 		}
 		return baseInfo;
 	}

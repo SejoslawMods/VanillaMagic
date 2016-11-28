@@ -26,7 +26,7 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class InventoryHelper 
 {
-	private static Class<?> CLASS_TILE_HOPPER = null;
+	private static Class<?> _CLASS_TILE_HOPPER = null;
 	
 	private InventoryHelper()
 	{
@@ -36,7 +36,7 @@ public class InventoryHelper
 	{
 		try 
 		{
-			CLASS_TILE_HOPPER = Class.forName("net.minecraft.tileentity.TileEntityHopper");
+			_CLASS_TILE_HOPPER = Class.forName("net.minecraft.tileentity.TileEntityHopper");
 		} 
 		catch(ClassNotFoundException e) 
 		{
@@ -141,7 +141,7 @@ public class InventoryHelper
 	public static boolean isInventoryEmpty(IInventory inventoryIn, EnumFacing side)
 			throws ReflectiveOperationException
 	{
-		Method method = CLASS_TILE_HOPPER.getMethod("isInventoryEmpty", IInventory.class, EnumFacing.class);
+		Method method = _CLASS_TILE_HOPPER.getMethod("isInventoryEmpty", IInventory.class, EnumFacing.class);
 		method.setAccessible(true);
 		return (boolean) method.invoke(null, inventoryIn, side);
 	}
@@ -215,7 +215,7 @@ public class InventoryHelper
 	public static ItemStack insertStack(IInventory inventoryIn, IInventory stack, ItemStack index, int side, EnumFacing facing)
 			throws ReflectiveOperationException
 	{
-		Method method = CLASS_TILE_HOPPER.getMethod("insertStack", IInventory.class, IInventory.class, ItemStack.class, int.class, EnumFacing.class);
+		Method method = _CLASS_TILE_HOPPER.getMethod("insertStack", IInventory.class, IInventory.class, ItemStack.class, int.class, EnumFacing.class);
 		method.setAccessible(true);
 		return (ItemStack) method.invoke(null, inventoryIn, stack, index, side, facing);
 	}
@@ -252,7 +252,7 @@ public class InventoryHelper
 	public static boolean canCombine(ItemStack stack1, ItemStack stack2) 
 			throws ReflectiveOperationException
 	{
-		Method method = CLASS_TILE_HOPPER.getMethod("canCombine", ItemStack.class, ItemStack.class);
+		Method method = _CLASS_TILE_HOPPER.getMethod("canCombine", ItemStack.class, ItemStack.class);
 		method.setAccessible(true);
 		return (boolean) method.invoke(null, stack1, stack2);
 	}

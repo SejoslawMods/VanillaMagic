@@ -53,7 +53,7 @@ public class PotionedCrystalHelper
 			{
 				PotionType pt = PotionUtils.getPotionFromItem(stack);
 				String ptName = getPotionTypeName(pt);
-				for(IPotionedCrystal pc : VanillaMagicItems.INSTANCE.potionedCrystals)
+				for(IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
 				{
 					if(pc.getPotionName().equals(ptName))
 					{
@@ -83,7 +83,7 @@ public class PotionedCrystalHelper
 		if(stackTag.hasKey(IPotionedCrystal.NBT_POTION_TYPE_NAME))
 		{
 			String name = stackTag.getString(IPotionedCrystal.NBT_POTION_TYPE_NAME);
-			for(IPotionedCrystal pc : VanillaMagicItems.INSTANCE.potionedCrystals)
+			for(IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
 			{
 				if(name.equals(pc.getPotionName()))
 				{
@@ -98,7 +98,7 @@ public class PotionedCrystalHelper
 	{
 		for(PotionType potionType : ForgeRegistries.POTION_TYPES.getValues())
 		{
-			VanillaMagicItems.INSTANCE.potionedCrystals.add(new IPotionedCrystal()
+			VanillaMagicItems.POTIONED_CRYSTALS.add(new IPotionedCrystal()
 			{
 				public PotionType getPotionType()
 				{
@@ -106,6 +106,6 @@ public class PotionedCrystalHelper
 				}
 			});
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Registered Potioned Crystals: " + VanillaMagicItems.INSTANCE.potionedCrystals.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Registered Potioned Crystals: " + VanillaMagicItems.POTIONED_CRYSTALS.size());
 	}
 }

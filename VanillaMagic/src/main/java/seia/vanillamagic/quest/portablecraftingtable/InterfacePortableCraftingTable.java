@@ -10,7 +10,7 @@ import net.minecraft.world.IInteractionObject;
 
 public class InterfacePortableCraftingTable implements IInteractionObject
 {
-	public EntityPlayer player;
+	public final EntityPlayer player;
 	
 	public InterfacePortableCraftingTable(EntityPlayer player)
 	{

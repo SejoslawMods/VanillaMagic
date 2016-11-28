@@ -55,7 +55,7 @@ public class FarmerPlantable implements IFarmer
 			return false;
 		}
 //		int slot = farm.getSupplySlotForCoord(bc); // TODO:
-		ItemStack seedStack = null;//farm.getSeedTypeInSuppliesFor(slot);
+		ItemStack seedStack = ItemStackHelper.NULL_STACK;//farm.getSeedTypeInSuppliesFor(slot);
 		
 		IInventory inv = farm.getInputInventory().getInventory();
 		for(int i = 0; i < inv.getSizeInventory(); ++i)
@@ -67,7 +67,7 @@ public class FarmerPlantable implements IFarmer
 			}
 		}
 		
-		if(ItemStackHelper.isNullStack(seedStack)) 
+		if(ItemStackHelper.isNullStack(seedStack))
 		{
 			return false;
 		}

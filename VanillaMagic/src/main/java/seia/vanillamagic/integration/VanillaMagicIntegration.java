@@ -13,32 +13,32 @@ import seia.vanillamagic.core.VanillaMagic;
  */
 public class VanillaMagicIntegration
 {
-	public static final VanillaMagicIntegration INSTANCE = new VanillaMagicIntegration();
-	
-	//==================================================================================================
-	
-	public final NBTTagCompound tagCompound = new NBTTagCompound();
-	public final List<IIntegration> integrations = new ArrayList<IIntegration>();
+	public static final NBTTagCompound TAG = new NBTTagCompound();
+	public static final List<IIntegration> INTEGRATIONS = new ArrayList<IIntegration>();
 	
 	private VanillaMagicIntegration()
+	{
+	}
+	
+	static
 	{
 		/*
 		 * Comment any of the following to disable integration.
 		 */
-		integrations.add(new IntegrationVersionChecker());
-		integrations.add(new IntegrationBetterAchievements());
-		integrations.add(new IntegrationWTFExpedition());
-		integrations.add(new IntegrationFilledOres());
-		integrations.add(new IntegrationSuperOres());
+		INTEGRATIONS.add(new IntegrationVersionChecker());
+		INTEGRATIONS.add(new IntegrationBetterAchievements());
+		INTEGRATIONS.add(new IntegrationWTFExpedition());
+		INTEGRATIONS.add(new IntegrationFilledOres());
+		INTEGRATIONS.add(new IntegrationSuperOres());
 		
-		integrations.add(new IntegrationNetherMetals());
-		integrations.add(new IntegrationEndMetals());
-		integrations.add(new IntegrationDenseMetals());
+		INTEGRATIONS.add(new IntegrationNetherMetals());
+		INTEGRATIONS.add(new IntegrationEndMetals());
+		INTEGRATIONS.add(new IntegrationDenseMetals());
 	}
 	
-	public void preInit()
+	public static void preInit()
 	{
-		for(IIntegration i : integrations)
+		for(IIntegration i : INTEGRATIONS)
 		{
 			try
 			{
@@ -54,9 +54,9 @@ public class VanillaMagicIntegration
 		}
 	}
 	
-	public void init()
+	public static void init()
 	{
-		for(IIntegration i : integrations)
+		for(IIntegration i : INTEGRATIONS)
 		{
 			try
 			{
@@ -72,9 +72,9 @@ public class VanillaMagicIntegration
 		}
 	}
 	
-	public void postInit()
+	public static void postInit()
 	{
-		for(IIntegration i : integrations)
+		for(IIntegration i : INTEGRATIONS)
 		{
 			try
 			{

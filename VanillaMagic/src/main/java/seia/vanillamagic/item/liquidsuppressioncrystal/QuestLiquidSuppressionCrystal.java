@@ -44,7 +44,7 @@ public class QuestLiquidSuppressionCrystal extends Quest
 	 */
 	public boolean playerHasCrystalInLeftHand(ItemStack leftHand)
 	{
-		return VanillaMagicItems.INSTANCE.isCustomItem(leftHand, VanillaMagicItems.INSTANCE.itemLiquidSuppressionCrystal);
+		return VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.LIQUID_SUPPRESSION_CRYSTAL);
 	}
 	
 	public void onCrystalUpdate(ItemStack leftHand, World world, EntityPlayer player)

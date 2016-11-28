@@ -9,13 +9,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.oredict.OreDictionary;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerCocoa;
-import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerCustomSeed;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerFlowerPicker;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerMelon;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerNetherWart;
@@ -25,50 +22,50 @@ import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerStem;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerTree;
 import seia.vanillamagic.tileentity.machine.farm.farmer.IFarmer;
 
-public class FarmersRegistry implements IFarmer
+public class FarmersRegistry
 {
-	public static final FarmersRegistry INSTANCE = new FarmersRegistry();
+	private static final List<IFarmer> _FARMERS;
+	private static final List<ItemStack> _SAPLINGS = OreDictionary.getOres("treeSapling");
+	private static final List<ItemStack> _WOODS = OreDictionary.getOres("logWood");
+	private static final List<ItemStack> _FLOWERS = new ArrayList<ItemStack>();
 	
-	//====================================================================
-	
-	private List<IFarmer> farmers;
-	private List<ItemStack> saplings = OreDictionary.getOres("treeSapling");
-	private List<ItemStack> woods = OreDictionary.getOres("logWood");
-	private List<ItemStack> flowers = new ArrayList<ItemStack>();
-	
-	public final FarmerPlantable DEFAULT_FARMER = new FarmerPlantable();
+	public static final FarmerPlantable DEFAULT_FARMER = new FarmerPlantable();
 	
 	private FarmersRegistry()
 	{
-		flowers.add(new ItemStack(Blocks.YELLOW_FLOWER));
-		flowers.add(new ItemStack(Blocks.RED_FLOWER));
+	}
+	
+	static
+	{
+		_FLOWERS.add(new ItemStack(Blocks.YELLOW_FLOWER));
+		_FLOWERS.add(new ItemStack(Blocks.RED_FLOWER));
 		
-		farmers = new ArrayList<IFarmer>();
-		farmers.add(new FarmerFlowerPicker(flowers));
-		farmers.add(new FarmerStem(Blocks.REEDS, new ItemStack(Items.REEDS)));
-	    farmers.add(new FarmerStem(Blocks.CACTUS, new ItemStack(Blocks.CACTUS)));
-	    farmers.add(new FarmerOreDictionaryTree(saplings, woods));
-	    farmers.add(new FarmerTree(true, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK));
-	    farmers.add(new FarmerTree(true, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK));
+		_FARMERS = new ArrayList<IFarmer>();
+		_FARMERS.add(new FarmerFlowerPicker(_FLOWERS));
+		_FARMERS.add(new FarmerStem(Blocks.REEDS, new ItemStack(Items.REEDS)));
+	    _FARMERS.add(new FarmerStem(Blocks.CACTUS, new ItemStack(Blocks.CACTUS)));
+	    _FARMERS.add(new FarmerOreDictionaryTree(_SAPLINGS, _WOODS));
+	    _FARMERS.add(new FarmerTree(true, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK));
+	    _FARMERS.add(new FarmerTree(true, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK));
 	    //special case of plantables to get spacing correct
-	    farmers.add(new FarmerMelon(Blocks.MELON_STEM, Blocks.MELON_BLOCK, new ItemStack(Items.MELON_SEEDS)));
-	    farmers.add(new FarmerMelon(Blocks.PUMPKIN_STEM, Blocks.PUMPKIN, new ItemStack(Items.PUMPKIN_SEEDS)));
+	    _FARMERS.add(new FarmerMelon(Blocks.MELON_STEM, Blocks.MELON_BLOCK, new ItemStack(Items.MELON_SEEDS)));
+	    _FARMERS.add(new FarmerMelon(Blocks.PUMPKIN_STEM, Blocks.PUMPKIN, new ItemStack(Items.PUMPKIN_SEEDS)));
 	    //'BlockNetherWart' is not an IGrowable
-	    farmers.add(new FarmerNetherWart());
+	    _FARMERS.add(new FarmerNetherWart());
 	    //Cocoa is odd
-	    farmers.add(new FarmerCocoa());
+	    _FARMERS.add(new FarmerCocoa());
 	    //Handles all 'Vanilla' style crops
-	    farmers.add(DEFAULT_FARMER);
+	    _FARMERS.add(DEFAULT_FARMER);
 	}
 	
-	public void addFarmer(IFarmer farmer)
+	public static void addFarmer(IFarmer farmer)
 	{
-		farmers.add(farmer);
+		_FARMERS.add(farmer);
 	}
 	
-	public boolean canHarvest(TileFarm farm,  BlockPos pos, Block block, IBlockState meta) 
+	public static boolean canHarvest(TileFarm farm,  BlockPos pos, Block block, IBlockState meta) 
 	{
-		for(IFarmer farmer : farmers) 
+		for(IFarmer farmer : _FARMERS) 
 		{
 			if(farmer.canHarvest(farm, pos, block, meta)) 
 			{
@@ -79,9 +76,9 @@ public class FarmersRegistry implements IFarmer
 	}
 
 	@Nullable
-	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
+	public static IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
-		for(IFarmer farmer : farmers) 
+		for(IFarmer farmer : _FARMERS) 
 		{
 			if(farmer.canHarvest(farm, pos, block, meta))
 			{
@@ -91,9 +88,9 @@ public class FarmersRegistry implements IFarmer
 		return null;
 	}
 
-	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
+	public static boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
-		for(IFarmer farmer : farmers) 
+		for(IFarmer farmer : _FARMERS) 
 		{
 			if(farmer.prepareBlock(farm, pos, block, meta))
 			{
@@ -103,9 +100,9 @@ public class FarmersRegistry implements IFarmer
 		return false;
 	}
 
-	public boolean canPlant(ItemStack stack) 
+	public static boolean canPlant(ItemStack stack) 
 	{
-		for(IFarmer farmer : farmers) 
+		for(IFarmer farmer : _FARMERS) 
 		{
 			if(farmer.canPlant(stack)) 
 			{

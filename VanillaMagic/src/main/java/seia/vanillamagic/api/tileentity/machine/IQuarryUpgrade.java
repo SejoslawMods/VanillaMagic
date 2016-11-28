@@ -36,7 +36,8 @@ public interface IQuarryUpgrade
 	 * Returns the list of the stacks which will be dropped from the given "blockToDig". <br>
 	 * Here is where You should do Your stuff like silk-touch, fortune, etc.
 	 */
-	default public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
+	default public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, 
+			BlockPos workingPos, IBlockState workingPosState)
 	{
 		return new ArrayList<ItemStack>();
 	}

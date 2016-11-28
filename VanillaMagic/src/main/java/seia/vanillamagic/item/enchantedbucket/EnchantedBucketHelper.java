@@ -50,9 +50,9 @@ public class EnchantedBucketHelper
 	@Nullable
 	public static IEnchantedBucket getEnchantedBucket(ItemStack stack) // ItemBucket
 	{
-		for(IEnchantedBucket enchantedBucket : VanillaMagicItems.INSTANCE.enchantedBuckets)
+		for(IEnchantedBucket enchantedBucket : VanillaMagicItems.ENCHANTED_BUCKETS)
 		{
-			if(VanillaMagicItems.INSTANCE.isCustomBucket(stack, enchantedBucket))
+			if(VanillaMagicItems.isCustomBucket(stack, enchantedBucket))
 			{
 				return enchantedBucket;
 			}
@@ -73,7 +73,7 @@ public class EnchantedBucketHelper
 			IFluidHandler fh = FluidUtil.getFluidHandler(stackBucket);
 			if(fh != null)
 			{
-				for(IEnchantedBucket eb : VanillaMagicItems.INSTANCE.enchantedBuckets)
+				for(IEnchantedBucket eb : VanillaMagicItems.ENCHANTED_BUCKETS)
 				{
 					if(fh.getTankProperties() != null)
 					{
@@ -110,7 +110,7 @@ public class EnchantedBucketHelper
 		Collection<Fluid> fluids = registeredFluids.values();
 		for(Fluid fluid : fluids)
 		{
-			VanillaMagicItems.INSTANCE.enchantedBuckets.add(new IEnchantedBucket()
+			VanillaMagicItems.ENCHANTED_BUCKETS.add(new IEnchantedBucket()
 			{
 				public Fluid getFluidInBucket()
 				{
@@ -119,6 +119,6 @@ public class EnchantedBucketHelper
 			});
 			VanillaMagic.LOGGER.log(Level.INFO, "Added Enchanted Bucket: " + fluid.getName());
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Registered Enchanted Buckets: " + VanillaMagicItems.INSTANCE.enchantedBuckets.size());
+		VanillaMagic.LOGGER.log(Level.INFO, "Registered Enchanted Buckets: " + VanillaMagicItems.ENCHANTED_BUCKETS.size());
 	}
 }

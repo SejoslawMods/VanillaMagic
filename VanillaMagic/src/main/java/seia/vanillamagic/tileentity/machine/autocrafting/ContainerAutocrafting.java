@@ -7,7 +7,6 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.tileentity.IHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import seia.vanillamagic.inventory.InventoryHelper;
@@ -16,17 +15,19 @@ import seia.vanillamagic.util.MatrixHelper;
 
 public class ContainerAutocrafting extends Container
 {
-	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
-	public IInventory craftResult = new InventoryCraftResult();
-	public World world;
-	public ItemStack[][] stackMatrix;
+	private InventoryCrafting _craftMatrix = new InventoryCrafting(this, 3, 3);
+	private IInventory _craftResult = new InventoryCraftResult();
+	private World _world;
+	private ItemStack[][] _stackMatrix;
+	private TileAutocrafting _tile;
 	
-	public ContainerAutocrafting(World world, ItemStack[][] stackMatrix)
+	public ContainerAutocrafting(World world, ItemStack[][] stackMatrix, TileAutocrafting tile)
 	{
-		this.world = world;
-		this.stackMatrix = stackMatrix;
+		this._world = world;
+		this._stackMatrix = stackMatrix;
 		this.reloadCraftMatrix(stackMatrix);
-		this.onCraftMatrixChanged(this.craftMatrix);
+		this.onCraftMatrixChanged(this._craftMatrix);
+		this._tile = tile;
 	}
 	
 	public void reloadCraftMatrix(ItemStack[][] newStackMatrix)
@@ -37,7 +38,7 @@ public class ContainerAutocrafting extends Container
 		{
 			for(int j = 0; j < size; ++j)
 			{
-				this.craftMatrix.setInventorySlotContents(index, newStackMatrix[i][j]);
+				this._craftMatrix.setInventorySlotContents(index, newStackMatrix[i][j]);
 				index++;
 			}
 		}
@@ -45,7 +46,7 @@ public class ContainerAutocrafting extends Container
 	
 	public void onCraftMatrixChanged(IInventory inv)
 	{
-		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, world));
+		this._craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this._craftMatrix, _world));
 	}
 	
 	public boolean canInteractWith(EntityPlayer playerIn) 
@@ -55,14 +56,14 @@ public class ContainerAutocrafting extends Container
 
 	public void rotateMatrix() 
 	{
-		this.stackMatrix = MatrixHelper.rotateMatrixRight(this.stackMatrix);
-		reloadCraftMatrix(this.stackMatrix);
+		this._stackMatrix = MatrixHelper.rotateMatrixRight(this._stackMatrix);
+		reloadCraftMatrix(this._stackMatrix);
 	}
 
 	public boolean craft() 
 	{
-		this.onCraftMatrixChanged(this.craftMatrix);
-		if(!ItemStackHelper.isNullStack(this.craftResult.getStackInSlot(0)))
+		this.onCraftMatrixChanged(this._craftMatrix);
+		if(!ItemStackHelper.isNullStack(this._craftResult.getStackInSlot(0)))
 		{
 			return true;
 		}
@@ -76,15 +77,15 @@ public class ContainerAutocrafting extends Container
 		{
 			for(int j = 0; j < size; ++j)
 			{
-				inventoryMatrix[i][j].decrStackSize(0, 1);
+				inventoryMatrix[i][j].decrStackSize(_tile.getCurrentCraftingSlot(), 1);
 			}
 		}
 	}
 
-	public void outputResult(IHopper iHopper)
+	public void outputResult(IInventory inv)
 	{
-		ItemStack result = this.craftResult.getStackInSlot(0);
-		InventoryHelper.putStackInInventoryAllSlots(iHopper, result.copy(), EnumFacing.DOWN);
-		this.craftResult.removeStackFromSlot(0);
+		ItemStack result = this._craftResult.getStackInSlot(0);
+		InventoryHelper.putStackInInventoryAllSlots(inv, result.copy(), EnumFacing.DOWN);
+		this._craftResult.removeStackFromSlot(0);
 	}
 }

@@ -23,7 +23,7 @@ public class QuestSpeedy extends Quest
 		ItemStack leftHand = player.getHeldItemOffhand();
 		if(world.getBlockState(event.getPos()).getBlock() instanceof BlockCauldron)
 		{
-			if(VanillaMagicItems.INSTANCE.isCustomItem(leftHand, VanillaMagicItems.INSTANCE.itemAccelerationCrystal))
+			if(VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
 			{
 				ItemStack rightHand = player.getHeldItemMainhand();
 				if(EnumWand.areWandsEqual(rightHand, EnumWand.BLAZE_ROD.wandItemStack))

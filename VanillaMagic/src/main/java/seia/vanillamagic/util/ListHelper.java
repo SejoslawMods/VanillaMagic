@@ -37,7 +37,7 @@ public class ListHelper
 	{
 		try
 		{
-			return (List<Block>) ClassUtils.getFieldFromStaticInstance(className, field);
+			return (List<Block>) ClassUtils.getFieldObject(className, field, true);
 		}
 		catch(Exception e)
 		{

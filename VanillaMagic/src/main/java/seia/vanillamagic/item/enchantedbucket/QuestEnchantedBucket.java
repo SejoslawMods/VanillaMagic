@@ -131,7 +131,7 @@ public class QuestEnchantedBucket extends Quest
 				}
 				if(player.hasAchievement(achievement))
 				{
-					for(IEnchantedBucket bucket : VanillaMagicItems.INSTANCE.enchantedBuckets)
+					for(IEnchantedBucket bucket : VanillaMagicItems.ENCHANTED_BUCKETS)
 					{
 						NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
 						String bucketFluid = bucketTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
@@ -223,7 +223,7 @@ public class QuestEnchantedBucket extends Quest
 			}
 			if(player.hasAchievement(achievement))
 			{
-				for(IEnchantedBucket bucket : VanillaMagicItems.INSTANCE.enchantedBuckets)
+				for(IEnchantedBucket bucket : VanillaMagicItems.ENCHANTED_BUCKETS)
 				{
 					NBTTagCompound bucketTag = bucket.getItem().getTagCompound();
 					String bucketFluid = bucketTag.getString(IEnchantedBucket.NBT_FLUID_NAME);

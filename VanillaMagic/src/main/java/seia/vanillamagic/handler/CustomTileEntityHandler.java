@@ -27,7 +27,7 @@ public class CustomTileEntityHandler
 	 * None {@link ICustomTileEntity} can be placed in empty space.<br>
 	 * Any {@link ICustomTileEntity} placed there, should be deleted.
 	 */
-	public static final BlockPos EMPTY_SPACE = new BlockPos(0, 0, 0);
+	public static final BlockPos EMPTY_SPACE = BlockPos.ORIGIN;
 	
 	private CustomTileEntityHandler()
 	{

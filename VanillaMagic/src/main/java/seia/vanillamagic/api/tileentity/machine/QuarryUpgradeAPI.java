@@ -21,7 +21,8 @@ public class QuarryUpgradeAPI
 	 * @throws MappingExistsException this {@link Exception} will be thrown if there is already registered upgrade with this Block 
 	 * (solve: change this Upgrade's Block in "getBlock" method)
 	 */
-	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) throws MappingExistsException
+	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) 
+			throws MappingExistsException
 	{
 		try 
 		{

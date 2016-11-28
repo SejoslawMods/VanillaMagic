@@ -61,16 +61,16 @@ public class VanillaMagic
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
 		for(int i = 0; i < QuestList.size(); ++i)
 		{
-			QuestHandler.INSTANCE.registerEvent(QuestList.get(i));
+			QuestHandler.registerEvent(QuestList.get(i));
 		}
-		LOGGER.log(Level.INFO, "Registered events: " + QuestHandler.INSTANCE.registeredEvents.size());
+		LOGGER.log(Level.INFO, "Registered events: " + QuestHandler.REGISTERED_EVENTS.size());
 		InventorySelector.preInit();
 		VanillaMagicDebug.INSTANCE.preInit();
 		TileEntityRegistry.preInit();
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 		WorldHandler.INSTANCE.preInit();
 		ItemUpgradeRegistry.registerEvents();
-		VanillaMagicIntegration.INSTANCE.preInit();
+		VanillaMagicIntegration.preInit();
 	}
 	
 	@EventHandler
@@ -78,10 +78,10 @@ public class VanillaMagic
 	{
 		for(int i = 0; i < QuestList.size(); ++i)
 		{
-			QuestHandler.INSTANCE.addAchievement(QuestList.get(i).getAchievement());
+			QuestHandler.addAchievement(QuestList.get(i).getAchievement());
 		}
-		LOGGER.log(Level.INFO, "Registered achievements: " + QuestHandler.INSTANCE.getAchievements().size());
-		VanillaMagicIntegration.INSTANCE.init();
+		LOGGER.log(Level.INFO, "Registered achievements: " + QuestHandler.getAchievements().size());
+		VanillaMagicIntegration.init();
 	}
 	
 	@EventHandler
@@ -91,8 +91,8 @@ public class VanillaMagic
 		CustomTileEntityHandler.postInit();
 		EnchantedBucketHelper.registerFluids();
 		PotionedCrystalHelper.registerRecipes();
-		VanillaMagicItems.INSTANCE.postInit();
-		VanillaMagicIntegration.INSTANCE.postInit();
+		VanillaMagicItems.postInit();
+		VanillaMagicIntegration.postInit();
 		LOGGER.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
 		MobSpawnerRegistry.init();
 	}

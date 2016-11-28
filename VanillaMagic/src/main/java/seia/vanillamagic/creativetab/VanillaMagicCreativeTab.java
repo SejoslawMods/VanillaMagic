@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 
 public class VanillaMagicCreativeTab extends CreativeTabs
@@ -35,6 +36,7 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 	public void displayAllRelevantItems(NonNullList<ItemStack> list)
 	{
 		list = MobSpawnerRegistry.fillList(list);
+		list = VanillaMagicItems.fillList(list);
 		super.displayAllRelevantItems(list);
 	}
 }

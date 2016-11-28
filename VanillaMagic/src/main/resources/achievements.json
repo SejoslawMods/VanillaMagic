@@ -67,7 +67,7 @@
 	"questName":"Mine Redstone",
 	"uniqueName":"mineRedstone",
 	"blocksToBeMineClass":"seia.vanillamagic.integration.CustomOre",
-	"blocksToBeMineList":"customOreRedstone"
+	"blocksToBeMineList":"REDSTONE"
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestBuildAltar",
@@ -1574,7 +1574,7 @@
 	"questName":"Mine Diamond",
 	"uniqueName":"mineDiamond",
 	"blocksToBeMineClass":"seia.vanillamagic.integration.CustomOre",
-	"blocksToBeMineList":"customOreDiamond"
+	"blocksToBeMineList":"DIAMOND"
 },
 {
 	"questClass":"seia.vanillamagic.quest.QuestMineBlock",
@@ -1588,7 +1588,7 @@
 	"questName":"Mine Obsidian",
 	"uniqueName":"mineObsidian",
 	"blocksToBeMineClass":"seia.vanillamagic.integration.CustomOre",
-	"blocksToBeMineList":"customObsidian"
+	"blocksToBeMineList":"OBSIDIAN"
 },
 {
     "questClass":"seia.vanillamagic.quest.mobspawnerdrop.QuestMobSpawnerDrop",

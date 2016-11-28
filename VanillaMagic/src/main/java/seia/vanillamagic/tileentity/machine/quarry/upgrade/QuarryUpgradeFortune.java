@@ -15,12 +15,13 @@ import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 
 public class QuarryUpgradeFortune
 {
-	Random rand = new Random();
+	private Random _rand = new Random();
+	
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState, int fortune) 
 	{
 		List<ItemStack> list = new ArrayList<ItemStack>();
-		Item item = blockToDig.getItemDropped(workingPosState, rand, fortune);
-		list.add(new ItemStack(item, blockToDig.quantityDropped(rand) * fortune, blockToDig.damageDropped(workingPosState)));
+		Item item = blockToDig.getItemDropped(workingPosState, _rand, fortune);
+		list.add(new ItemStack(item, blockToDig.quantityDropped(_rand) * fortune, blockToDig.damageDropped(workingPosState)));
 		return list;
 	}
 	

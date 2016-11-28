@@ -33,7 +33,7 @@ public class QuestAccelerationCrystal extends Quest
 		if(!world.isAirBlock(clickedPos))
 		{
 			ItemStack rightHand = player.getHeldItemMainhand();
-			if(VanillaMagicItems.INSTANCE.isCustomItem(rightHand, VanillaMagicItems.INSTANCE.itemAccelerationCrystal))
+			if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
 			{
 				if(!player.hasAchievement(achievement))
 				{

@@ -1,31 +1,30 @@
 package seia.vanillamagic.tileentity.machine.autocrafting;
 
-import javax.annotation.Nullable;
+import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.IHopper;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
+import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosHelper;
 
-public class TileAutocrafting extends TileMachine
+public class TileAutocrafting extends TileMachine implements IAutocrafting
 {
 	public static final String REGISTRY_NAME = TileAutocrafting.class.getName();
 	
-	public ContainerAutocrafting container;
+	private ContainerAutocrafting _container;
+	private int _currentlyCraftingSlot = 0;
 	
-	private int currentlyCraftingSlot = 0;
-	
-	private final int defaultCraftingSlot = 0;
+	private final int _defaultCraftingSlot = 0;
+	private final int _defaultMaxCraftingSlot = 4;
 	
 	public void init(World world, BlockPos machinePos)
 	{
@@ -49,8 +48,8 @@ public class TileAutocrafting extends TileMachine
 	{
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
 		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(world, inventoryPosMatrix);
-		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, currentlyCraftingSlot);
-		container = new ContainerAutocrafting(world, stackMatrix);
+		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, _currentlyCraftingSlot);
+		_container = new ContainerAutocrafting(world, stackMatrix, this);
 	}
 	
 	public boolean checkSurroundings() 
@@ -65,16 +64,17 @@ public class TileAutocrafting extends TileMachine
 			initContainer();
 			for(int i = 0; i < 4; ++i)
 			{
-				boolean crafted = container.craft();
+				boolean crafted = _container.craft();
 				if(crafted)
 				{
-					container.outputResult(getHopperForStructure());
-					container.removeStacks(
+					//container.outputResult(getHopperForStructure());
+					_container.outputResult(this.inventoryOutput.getInventory());
+					_container.removeStacks(
 							QuestAutocrafting.buildIInventoryMatrix(world, 
 									QuestAutocrafting.buildInventoryMatrix(getMachinePos())));
 					return;
 				}
-				container.rotateMatrix();
+				_container.rotateMatrix();
 			}
 			decreaseTicks();
 		}
@@ -85,15 +85,57 @@ public class TileAutocrafting extends TileMachine
 		return EnumFacing.DOWN;
 	}
 	
-	@Nullable
-	public IHopper getHopperForStructure()
+	/**
+	 * @see IAutocrafting#setCurrentlyCraftingSlot(int)
+	 */
+	public void setCurrentCraftingSlot(int slot)
 	{
-		BlockPos hopperPos = getMachinePos().down(2);
-		TileEntity hopperTile = world.getTileEntity(hopperPos);
-		if(hopperTile instanceof IHopper)
-		{
-			return (IHopper) hopperTile;
-		}
-		return null;
+		this._currentlyCraftingSlot = slot;
 	}
+	
+	/**
+	 * @see IAutocrafting#getCurrentlyCraftingSlot()
+	 */
+	public int getCurrentCraftingSlot()
+	{
+		return _currentlyCraftingSlot;
+	}
+	
+	/**
+	 * @see IAutocrafting#getDefaultCraftingSlot()
+	 */
+	public int getDefaultCraftingSlot()
+	{
+		return _defaultCraftingSlot;
+	}
+	
+	/**
+	 * @see IAutocrafting#getDefaultMaxCraftingSlot()
+	 */
+	public int getDefaultMaxCraftingSlot()
+	{
+		return _defaultMaxCraftingSlot;
+	}
+	
+	public List<String> getAdditionalInfo()
+	{
+		List<String> info = super.getAdditionalInfo();
+		info.add("Currently selected slot for crafting: " + _currentlyCraftingSlot);
+		return info;
+	}
+	
+//	/**
+//	 * @return Returns OutputHopper
+//	 */
+//	@Nullable
+//	public IHopper getHopperForStructure()
+//	{
+//		BlockPos hopperPos = getMachinePos().down(2);
+//		TileEntity hopperTile = world.getTileEntity(hopperPos);
+//		if(hopperTile instanceof IHopper)
+//		{
+//			return (IHopper) hopperTile;
+//		}
+//		return null;
+//	}
 }

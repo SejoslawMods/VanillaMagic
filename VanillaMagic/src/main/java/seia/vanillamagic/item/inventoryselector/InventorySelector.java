@@ -52,7 +52,7 @@ public class InventorySelector
 		{
 			return;
 		}
-		if(VanillaMagicItems.INSTANCE.isCustomItem(rightHand, VanillaMagicItems.INSTANCE.itemInventorySelector))
+		if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR))
 		{
 			BlockPos clickedPos = event.getPos();
 			if(!InventoryHelper.isInventory(world, clickedPos))
@@ -82,7 +82,7 @@ public class InventorySelector
 		{
 			return;
 		}
-		if(VanillaMagicItems.INSTANCE.isCustomItem(rightHand, VanillaMagicItems.INSTANCE.itemInventorySelector))
+		if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR))
 		{
 			NBTTagCompound rightHandTag = rightHand.getTagCompound();
 			if(player.isSneaking())
