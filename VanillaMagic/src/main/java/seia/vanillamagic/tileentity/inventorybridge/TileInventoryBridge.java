@@ -152,7 +152,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	{
 		for(ItemStack currentCheckingStack : mainInventory)
 		{
-			if(VanillaMagicItems.INSTANCE.isCustomItem(currentCheckingStack, VanillaMagicItems.INSTANCE.itemInventorySelector))
+			if(VanillaMagicItems.isCustomItem(currentCheckingStack, VanillaMagicItems.INVENTORY_SELECTOR))
 			{
 				NBTTagCompound currentCheckingStackTag = currentCheckingStack.getTagCompound();
 				if(currentCheckingStackTag != null)
