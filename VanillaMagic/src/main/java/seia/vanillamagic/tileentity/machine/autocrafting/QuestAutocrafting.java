@@ -62,17 +62,26 @@ public class QuestAutocrafting extends Quest
 				count = 0;
 				return;
 			}
+			
 			IAutocrafting auto = (IAutocrafting) tile;
-			if(auto.getCurrentCraftingSlot() == auto.getDefaultMaxCraftingSlot())
+			if(player.isSneaking()) // sneaking -> change slot
 			{
-				auto.setCurrentCraftingSlot(auto.getDefaultCraftingSlot());
+				if(auto.getCurrentCraftingSlot() == auto.getDefaultMaxCraftingSlot())
+				{
+					auto.setCurrentCraftingSlot(auto.getDefaultCraftingSlot());
+				}
+				else
+				{
+					auto.setCurrentCraftingSlot(auto.getCurrentCraftingSlot() + 1);
+				}
+				EntityHelper.addChatComponentMessage(player, 
+						"Current crafting slot set to: " + auto.getCurrentCraftingSlot());
 			}
-			else
+			else // player is not sneaking -> show current crafting slot
 			{
-				auto.setCurrentCraftingSlot(auto.getCurrentCraftingSlot() + 1);
+				EntityHelper.addChatComponentMessage(player, 
+						"Current crafting slot: " + auto.getCurrentCraftingSlot());
 			}
-			EntityHelper.addChatComponentMessage(player, 
-					"Current crafting slot set to: " + auto.getCurrentCraftingSlot());
 		}
 	}
 	

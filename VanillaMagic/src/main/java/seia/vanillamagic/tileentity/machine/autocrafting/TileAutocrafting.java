@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,6 +16,7 @@ import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.NBTHelper;
 
 public class TileAutocrafting extends TileMachine implements IAutocrafting
 {
@@ -124,18 +126,16 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 		return info;
 	}
 	
-//	/**
-//	 * @return Returns OutputHopper
-//	 */
-//	@Nullable
-//	public IHopper getHopperForStructure()
-//	{
-//		BlockPos hopperPos = getMachinePos().down(2);
-//		TileEntity hopperTile = world.getTileEntity(hopperPos);
-//		if(hopperTile instanceof IHopper)
-//		{
-//			return (IHopper) hopperTile;
-//		}
-//		return null;
-//	}
+	public NBTTagCompound serializeNBT()
+	{
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setInteger(NBTHelper.NBT_CRAFTING_SLOT, _currentlyCraftingSlot);
+		return tag;
+	}
+	
+	public void deserializeNBT(NBTTagCompound compound)
+	{
+		super.deserializeNBT(compound);
+		this._currentlyCraftingSlot = compound.getInteger(NBTHelper.NBT_CRAFTING_SLOT);
+	}
 }

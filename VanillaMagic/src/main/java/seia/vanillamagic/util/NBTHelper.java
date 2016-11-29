@@ -62,6 +62,7 @@ public class NBTHelper
 	public static final String NBT_BLOCK_ID = "NBT_BLOCK_ID";
 	public static final String NBT_PLAYER_NAME = "NBT_PLAYER_NAME";
 	public static final String NBT_CLASS = "NBT_CLASS";
+	public static final String NBT_CRAFTING_SLOT = "NBT_CRAFTING_SLOT";
 	
 	private NBTHelper()
 	{
