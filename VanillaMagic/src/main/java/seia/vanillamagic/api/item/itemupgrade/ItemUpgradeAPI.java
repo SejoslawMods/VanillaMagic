@@ -19,16 +19,18 @@ public class ItemUpgradeAPI
 	/**
 	 * Main method for registering the upgrades.
 	 * 
-	 * @param itemMappingName -> For instance: "_pickaxe" or "_sword" or "_axe" or "_myNewMapping" itd.
+	 * @param mappingName -> For instance: "_pickaxe" or "_sword" or "_axe" or "_myNewMapping" itd.
 	 * @param clazz -> MyUpgradeClass.class
+	 * @param localizedName -> If the mapping don't exists this localized name will be use as a name for new mapping.
+	 * For instance: for "_pickaxe" localized name is "Pickaxe". It must be human readable name.
 	 */
-	public static void addUpgradeMapping(String mappingName, Class<? extends IItemUpgrade> clazz)
+	public static void addUpgradeMapping(String mappingName, Class<? extends IItemUpgrade> clazz, String localizedName)
 	{
 		try
 		{
 			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
-			Method method = registryClass.getMethod("addUpgradeMapping", String.class, IItemUpgrade.class);
-			method.invoke(null, mappingName, clazz);
+			Method method = registryClass.getMethod("addUpgradeMapping", String.class, IItemUpgrade.class, String.class);
+			method.invoke(null, mappingName, clazz, localizedName);
 		}
 		catch(Exception e)
 		{
@@ -43,13 +45,13 @@ public class ItemUpgradeAPI
 	 * or <br>
 	 * addItemToMapping("_myMapping", new MyItem());
 	 */
-	public static void addItemToMapping(String mappingName, Item item)
+	public static void addItemToMapping(String mappingName, Item item, String localizedName)
 	{
 		try
 		{
 			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
-			Method method = registryClass.getMethod("addItemToMapping", String.class, Item.class);
-			method.invoke(null, mappingName, item);
+			Method method = registryClass.getMethod("addItemToMapping", String.class, Item.class, String.class);
+			method.invoke(null, mappingName, item, localizedName);
 		}
 		catch(Exception e)
 		{
@@ -63,13 +65,13 @@ public class ItemUpgradeAPI
 	 * In VanillaMagic mapping will start with "_" so "pickaxe" will be -> "_pickaxe". <br>
 	 * It was made this way to prevent "pickaxe" and "axe" being counted as one mapping.
 	 */
-	public static void addItemMapping(String mappingName)
+	public static void addItemMapping(String mappingName, String localizedName)
 	{
 		try
 		{
 			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
-			Method method = registryClass.getMethod("addItemMapping", String.class);
-			method.invoke(null, mappingName);
+			Method method = registryClass.getMethod("addItemMapping", String.class, String.class);
+			method.invoke(null, mappingName, localizedName);
 		}
 		catch(Exception e)
 		{

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import seia.vanillamagic.api.VanillaMagicAPI;
 import seia.vanillamagic.config.achievement.ConfigAchievements;
 import seia.vanillamagic.creativetab.VanillaMagicCreativeTab;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
@@ -55,6 +56,7 @@ public class VanillaMagic
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		VanillaMagicAPI.LOGGER.log(Level.INFO, "Starting VanillaMagicAPI from VanillaMagic...");
 		LOGGER = event.getModLog();
 		ItemUpgradeRegistry.start();
 		CONFIG_ACHIEVEMENTS = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());

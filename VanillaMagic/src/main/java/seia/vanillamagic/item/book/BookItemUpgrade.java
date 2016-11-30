@@ -1,7 +1,5 @@
 package seia.vanillamagic.item.book;
 
-import static seia.vanillamagic.util.TextHelper.ENTER;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +52,8 @@ public class BookItemUpgrade implements IBook
 				while(iterator.hasNext())
 				{
 					Entry<String, List<IItemUpgrade>> entry = iterator.next();
-					String key = entry.getKey();
+					String entryKey = entry.getKey();
+					String key = ItemUpgradeRegistry.getLocalizedNameForMapping(entryKey);
 					List<IItemUpgrade> values = entry.getValue();
 					for(int i = 0; i < values.size(); ++i)
 					{
@@ -65,7 +64,7 @@ public class BookItemUpgrade implements IBook
 								TextHelper.getEnters(2) + 
 								"§0" +
 								"Upgrade name: " + upgrade.getUpgradeName() + TextHelper.getEnters(2) +
-								"Ingedient item: " + upgrade.getIngredient().getItem().getUnlocalizedName()
+								"Ingredient item: " + upgrade.getIngredient().getDisplayName()
 								));
 					}
 				}
