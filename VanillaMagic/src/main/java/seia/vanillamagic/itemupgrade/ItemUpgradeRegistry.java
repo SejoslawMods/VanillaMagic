@@ -60,6 +60,10 @@ public class ItemUpgradeRegistry
 	 * Registered upgrades with events.
 	 */
 	private static final List<IItemUpgrade> _EVENT_BUS_REGISTERED_UPGRADES = new ArrayList<>();
+	/**
+	 * List of all items to which we can add upgrades.
+	 */
+	private static final List<ItemEntry> _BASE_ITEMS = new ArrayList<ItemEntry>();
 	private static final List<Item> _ITEMS = ForgeRegistries.ITEMS.getValues();
 	
 	private ItemUpgradeRegistry()
@@ -133,6 +137,7 @@ public class ItemUpgradeRegistry
 			_MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
 			VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for key: " + mappingName);
 			_MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+			_BASE_ITEMS.add(itemEntry);
 		}
 		// Add upgrade map only if it doesn't exists for the given mappingName
 		if(!_MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName))
@@ -238,5 +243,10 @@ public class ItemUpgradeRegistry
 			}
 		}
 		VanillaMagic.LOGGER.log(Level.INFO, "Registered Upgrade Events: " + registered);
+	}
+
+	public static List<ItemEntry> getBaseItems() 
+	{
+		return _BASE_ITEMS;
 	}
 }
