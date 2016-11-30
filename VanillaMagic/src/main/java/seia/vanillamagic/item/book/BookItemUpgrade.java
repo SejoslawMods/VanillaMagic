@@ -15,7 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
-import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry;
+import seia.vanillamagic.itemupgrade.ItemUpgradeRegistry;
 import seia.vanillamagic.util.TextHelper;
 
 public class BookItemUpgrade implements IBook

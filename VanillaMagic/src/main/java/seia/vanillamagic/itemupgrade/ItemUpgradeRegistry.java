@@ -1,4 +1,4 @@
-package seia.vanillamagic.item.itemupgrade;
+package seia.vanillamagic.itemupgrade;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.api.item.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.item.itemupgrade.upgrade.UpgradeAutosmelt;
+import seia.vanillamagic.itemupgrade.upgrade.UpgradeAutosmelt;
 import seia.vanillamagic.util.ItemStackHelper;
 
 /**

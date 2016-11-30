@@ -375,7 +375,7 @@
 	"wandTier":1
 },
 {
-	"questClass":"seia.vanillamagic.item.itemupgrade.QuestItemUpgrade",
+	"questClass":"seia.vanillamagic.itemupgrade.QuestItemUpgrade",
 	"requiredQuest":"craftIronOre",
 	"posX":2,
 	"posY":0,

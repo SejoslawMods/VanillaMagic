@@ -1,4 +1,4 @@
-package seia.vanillamagic.item.itemupgrade.upgrade;
+package seia.vanillamagic.itemupgrade.upgrade;
 
 import java.util.List;
 

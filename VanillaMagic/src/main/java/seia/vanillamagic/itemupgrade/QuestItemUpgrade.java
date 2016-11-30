@@ -1,4 +1,4 @@
-package seia.vanillamagic.item.itemupgrade;
+package seia.vanillamagic.itemupgrade;
 
 import java.util.List;
 import java.util.Random;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
-import seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry.ItemEntry;
+import seia.vanillamagic.itemupgrade.ItemUpgradeRegistry.ItemEntry;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
