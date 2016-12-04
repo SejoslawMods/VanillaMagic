@@ -24,17 +24,15 @@ public class TileSpeedy extends CustomTileEntity
 	public static final String REGISTRY_NAME = TileSpeedy.class.getName();
 	
 	public int ticks;
-	public Random rand;
 	public Box box;
 	public int size;
 
 	public void init(World world, BlockPos pos)
 	{
 		super.init(world, pos);
-		setBox();
 		this.ticks = 1000;
 		this.size = 4;
-		this.rand = new Random();
+		setBox();
 	}
 	
 	public IInventory getInventoryWithCrystal()
