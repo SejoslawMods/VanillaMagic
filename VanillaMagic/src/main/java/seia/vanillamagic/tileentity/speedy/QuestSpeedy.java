@@ -3,6 +3,7 @@ package seia.vanillamagic.tileentity.speedy;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,7 +22,8 @@ public class QuestSpeedy extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		World world = event.getWorld();
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(world.getBlockState(event.getPos()).getBlock() instanceof BlockCauldron)
+		BlockPos clickedPos = event.getPos();
+		if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 		{
 			if(VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
 			{
@@ -37,7 +39,7 @@ public class QuestSpeedy extends Quest
 						if(player.hasAchievement(achievement))
 						{
 							TileSpeedy speedy = new TileSpeedy();
-							speedy.init(player.world, event.getPos());
+							speedy.init(player.world, clickedPos);
 							if(speedy.containsCrystal())
 							{
 								if(CustomTileEntityHandler.addCustomTileEntity(speedy, WorldHelper.getDimensionID(world)))

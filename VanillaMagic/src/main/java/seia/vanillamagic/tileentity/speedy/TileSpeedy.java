@@ -14,37 +14,95 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import seia.vanillamagic.api.exception.NotInventoryException;
+import seia.vanillamagic.api.inventory.IInventoryWrapper;
+import seia.vanillamagic.api.inventory.InventoryWrapper;
+import seia.vanillamagic.api.tileentity.speedy.ISpeedy;
+import seia.vanillamagic.api.util.Box;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.Box;
 import seia.vanillamagic.util.NBTHelper;
 
-public class TileSpeedy extends CustomTileEntity
+public class TileSpeedy extends CustomTileEntity implements ISpeedy
 {
 	public static final String REGISTRY_NAME = TileSpeedy.class.getName();
 	
-	public int ticks;
-	public Random rand;
-	public Box box;
-	public int size;
+	/**
+	 * How many ticks in one block.
+	 */
+	protected int ticks;
+	/**
+	 * Working space box.
+	 * @see {@link Box}
+	 */
+	protected Box radiusBox;
+	/**
+	 * Size of the Speedy.
+	 */
+	protected int size;
 
 	public void init(World world, BlockPos pos)
 	{
 		super.init(world, pos);
-		setBox();
 		this.ticks = 1000;
 		this.size = 4;
-		this.rand = new Random();
+		setBox();
 	}
 	
-	public IInventory getInventoryWithCrystal()
+	private void setBox()
 	{
-		return (IInventory) world.getTileEntity(getPos().offset(EnumFacing.UP));
+		this.radiusBox = new Box(this.pos);
+		this.radiusBox.resizeX(this.size);
+		this.radiusBox.resizeY(1);
+		this.radiusBox.resizeZ(this.size);
+	}
+	
+	public int getTicks()
+	{
+		return ticks;
+	}
+	
+	public void setTicks(int ticks)
+	{
+		this.ticks = ticks;
+	}
+	
+	public Box getRadiusBox()
+	{
+		return radiusBox;
+	}
+	
+	public void setRadiusBox(Box radiusBox)
+	{
+		this.radiusBox = radiusBox;
+	}
+	
+	public int getSize()
+	{
+		return size;
+	}
+	
+	public void setSize(int size)
+	{
+		this.size = size;
+	}
+	
+	public IInventoryWrapper getInventoryWithCrystal()
+	{
+		try
+		{
+			return new InventoryWrapper(world, getPos().offset(EnumFacing.UP));
+		}
+		catch(NotInventoryException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public boolean containsCrystal()
 	{
-		IInventory inv = getInventoryWithCrystal();
+		IInventory inv = getInventoryWithCrystal().getInventory();
 		if(inv != null)
 		{
 			for(int i = 0; i < inv.getSizeInventory(); ++i)
@@ -61,38 +119,27 @@ public class TileSpeedy extends CustomTileEntity
     
 	public void update() 
 	{
-		if(this.world.isRemote)
-		{
-			return;
-		}
-		if(this.ticks == 0)
+//		if(this.world.isRemote)
+//		{
+//			return;
+//		}
+		if(this.ticks <= 0)
 		{
 			return;
 		}
 		if(containsCrystal())
 		{
-			this.tickNeighbors();
+			tickNeighbors();
 		}
 	}
-
-	public void setBox() 
+	
+	private void tickNeighbors() 
 	{
-		this.box = new Box();
-		box.xMin = this.pos.getX() - this.size;
-		box.yMin = this.pos.getY() - 1;
-		box.zMin = this.pos.getZ() - this.size;
-		box.xMax = this.pos.getX() + this.size;
-		box.yMax = this.pos.getY() + 1;
-		box.zMax = this.pos.getZ() + this.size;
-	}
-
-	public void tickNeighbors() 
-	{
-		for(int x = box.xMin; x <= box.xMax; ++x) 
+		for(int x = radiusBox.xMin; x <= radiusBox.xMax; ++x) 
 		{
-			for(int y = box.yMin; y <= box.yMax; ++y) 
+			for(int y = radiusBox.yMin; y <= radiusBox.yMax; ++y) 
 			{
-				for(int z = box.zMin; z <= box.zMax; ++z) 
+				for(int z = radiusBox.zMin; z <= radiusBox.zMax; ++z) 
 				{
 					this.tickBlock(new BlockPos(x, y, z));
 				}
@@ -100,7 +147,7 @@ public class TileSpeedy extends CustomTileEntity
 		}
 	}
 
-	public void tickBlock(BlockPos pos) 
+	private void tickBlock(BlockPos pos) 
 	{
 		if(!world.isAirBlock(pos))
 		{
@@ -142,6 +189,8 @@ public class TileSpeedy extends CustomTileEntity
 		List<String> list = super.getAdditionalInfo();
 		list.add("Size: " + size);
 		list.add("Ticks in one MC tick: " + ticks);
+		list.add("Min pos: X=" + radiusBox.xMin + ", Y=" + radiusBox.yMin + ", Z=" + radiusBox.zMin);
+		list.add("Max pos: X=" + radiusBox.xMax + ", Y=" + radiusBox.yMax + ", Z=" + radiusBox.zMax);
 		return list;
 	}
 }

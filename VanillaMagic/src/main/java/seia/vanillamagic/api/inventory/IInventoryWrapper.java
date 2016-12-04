@@ -17,7 +17,7 @@ public interface IInventoryWrapper
 	 * 
 	 * @throws NotInventoryException thrown if the {@link TileEntity} at given {@link BlockPos} couldn't be cast to {@link IInventory}
 	 */
-	void setNewInventory(World world, BlockPos position) 
+	void setNewInventory(World world, BlockPos position)
 			throws NotInventoryException;
 	
 	/**
