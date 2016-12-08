@@ -1,7 +1,10 @@
 package seia.vanillamagic.quest;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.logging.log4j.Level;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -11,7 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.util.ListHelper;
+import seia.vanillamagic.core.VanillaMagic;
 
 public class QuestMineBlock extends Quest
 {
@@ -36,7 +39,19 @@ public class QuestMineBlock extends Quest
 		}
 		else
 		{
-			this.blocksToBeMine = ListHelper.getList(jo.get("blocksToBeMineClass").getAsString(), jo.get("blocksToBeMineList").getAsString());
+			String className = jo.get("blocksToBeMineClass").getAsString();
+			String listName = jo.get("blocksToBeMineList").getAsString();
+			try
+			{
+				Class<?> clazz = Class.forName(className);
+				Field field = clazz.getField(listName);
+				this.blocksToBeMine = (List<Block>) field.get(null);
+			}
+			catch(Exception e)
+			{
+				VanillaMagic.LOGGER.log(Level.ERROR, e.getMessage());
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -53,6 +68,10 @@ public class QuestMineBlock extends Quest
 		{
 			Block block = event.getState().getBlock();
 			if(block == null) // this should never happen, right ?
+			{
+				return;
+			}
+			if(blocksToBeMine == null)
 			{
 				return;
 			}
