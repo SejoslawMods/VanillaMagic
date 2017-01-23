@@ -104,15 +104,16 @@ public class QuestBlockAbsorber extends Quest
 		if(Block.isEqualTo(hopperState.getBlock(), Blocks.HOPPER)) // if You broke Hopper
 		{
 			BlockPos customTilePos = hopperPos.offset(EnumFacing.UP);
-			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
-			if(customTile == null)
-			{
-				return;
-			}
-			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, customTilePos))
-			{
-				EntityHelper.addChatComponentMessage(event.getPlayer(), customTile.getClass().getSimpleName() + " removed");
-			}
+			CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, customTilePos, event.getPlayer());
+//			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
+//			if(customTile == null)
+//			{
+//				return;
+//			}
+//			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, customTilePos))
+//			{
+//				EntityHelper.addChatComponentMessage(event.getPlayer(), customTile.getClass().getSimpleName() + " removed");
+//			}
 		}
 	}
 }

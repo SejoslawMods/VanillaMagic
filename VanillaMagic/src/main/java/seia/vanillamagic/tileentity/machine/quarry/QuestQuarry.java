@@ -61,15 +61,16 @@ public class QuestQuarry extends QuestMachineActivate
 		World world = event.getWorld();
 		if(world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
 		{
-			ICustomTileEntity quarryTile = CustomTileEntityHandler.getCustomTileEntity(quarryPos, player.dimension);
-			if(quarryTile == null)
-			{
-				return;
-			}
-			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, quarryPos))
-			{
-				EntityHelper.addChatComponentMessage(player, quarryTile.getClass().getSimpleName() + " removed");
-			}
+			CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, quarryPos, player);
+//			ICustomTileEntity quarryTile = CustomTileEntityHandler.getCustomTileEntity(quarryPos, player.dimension);
+//			if(quarryTile == null)
+//			{
+//				return;
+//			}
+//			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, quarryPos))
+//			{
+//				EntityHelper.addChatComponentMessage(player, quarryTile.getClass().getSimpleName() + " removed");
+//			}
 		}
 	}
 }

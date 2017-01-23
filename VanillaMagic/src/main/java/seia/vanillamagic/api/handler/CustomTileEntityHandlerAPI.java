@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -73,7 +74,32 @@ public class CustomTileEntityHandlerAPI
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Error while removing CustomTileEntity at position" +
+										pos.toString());
 			return false;
+		}
+	}
+	
+	/**
+	 * This method should be use to delete the {@link ICustomTileEntity} at the specified position and inform {@link EntityPlayer} about it.<br>
+	 * For instance VanillaMagic CustomTiles are removed if the block was destroyed (mainly).
+	 * 
+	 * @param world world from which we will delete the tile
+	 * @param pos position of the deleting tile
+	 * @param player player that should be informed about CustomTileEntity being removed
+	 */
+	public static void removeCustomTileEntityAndSendInfoToPlayer(World world, BlockPos pos, EntityPlayer player)
+	{
+		try
+		{
+			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Method method = clazz.getMethod("removeCustomTileEntityAndSendInfoToPlayer", World.class, BlockPos.class, EntityPlayer.class);
+			method.invoke(null, world, pos);
+		}
+		catch(Exception e)
+		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Error while removing CustomTileEntity at position" +
+										pos.toString());
 		}
 	}
 	

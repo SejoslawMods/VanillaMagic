@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,6 +17,7 @@ import seia.vanillamagic.api.handler.CustomTileEntityHandlerAPI;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.WorldHelper;
 
 /**
@@ -74,6 +76,22 @@ public class CustomTileEntityHandler
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * @see CustomTileEntityHandlerAPI#removeCustomTileEntityAndSendInfoToPlayer(World, BlockPos, EntityPlayer)
+	 */
+	public static void removeCustomTileEntityAndSendInfoToPlayer(World world, BlockPos pos, EntityPlayer player)
+	{
+		ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
+		if(customTile == null)
+		{
+			return;
+		}
+		if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, pos))
+		{
+			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
+		}
 	}
 	
 	/**

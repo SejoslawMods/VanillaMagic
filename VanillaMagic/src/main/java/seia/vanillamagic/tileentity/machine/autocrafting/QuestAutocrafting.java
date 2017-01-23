@@ -136,15 +136,16 @@ public class QuestAutocrafting extends Quest
 			Block workbench = world.getBlockState(workbenchPos).getBlock();
 			if(workbench instanceof BlockWorkbench)
 			{
-				ICustomTileEntity autocraftingTile = CustomTileEntityHandler.getCustomTileEntity(cauldronPos, player.dimension);
-				if(autocraftingTile == null)
-				{
-					return;
-				}
-				if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, cauldronPos))
-				{
-					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
-				}
+				CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, cauldronPos, player);
+//				ICustomTileEntity autocraftingTile = CustomTileEntityHandler.getCustomTileEntity(cauldronPos, player.dimension);
+//				if(autocraftingTile == null)
+//				{
+//					return;
+//				}
+//				if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, cauldronPos))
+//				{
+//					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
+//				}
 			}
 		}
 	}

@@ -63,7 +63,8 @@ public class QuestChunkLoader extends Quest
 		World world = breakBy.world;
 		if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE))
 		{
-			remove(world, destroyedBlockPos, breakBy);
+			CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, destroyedBlockPos, breakBy);
+//			remove(world, destroyedBlockPos, breakBy);
 		}
 		else if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.TORCH))
 		{
@@ -72,7 +73,8 @@ public class QuestChunkLoader extends Quest
 				BlockPos chunkLoaderPos = destroyedBlockPos.offset(face);
 				if(Block.isEqualTo(world.getBlockState(chunkLoaderPos).getBlock(), Blocks.ENCHANTING_TABLE))
 				{
-					remove(world, destroyedBlockPos.offset(face), breakBy);
+					CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, destroyedBlockPos.offset(face), breakBy);
+//					remove(world, destroyedBlockPos.offset(face), breakBy);
 					return;
 				}
 			}
@@ -80,22 +82,24 @@ public class QuestChunkLoader extends Quest
 		else if(Block.isEqualTo(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.OBSIDIAN))
 		{
 			BlockPos upperPos = new BlockPos(destroyedBlockPos.getX(), destroyedBlockPos.getY() + 1, destroyedBlockPos.getZ());
+			// TODO: It crashes sometimes
+			// Don't know how to convert minecraft:stone[variant=stone] back into data...
 			chunkLoaderBreak(new BreakEvent(event.getWorld(), upperPos, event.getState(), event.getPlayer()));
 		}
 	}
 	
-	private void remove(World world, BlockPos pos, EntityPlayer player)
-	{
-		ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
-		if(customTile == null)
-		{
-			return;
-		}
-		if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, pos))
-		{
-			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
-		}
-	}
+//	private void remove(World world, BlockPos pos, EntityPlayer player)
+//	{
+//		ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(pos, WorldHelper.getDimensionID(world));
+//		if(customTile == null)
+//		{
+//			return;
+//		}
+//		if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, pos))
+//		{
+//			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
+//		}
+//	}
 	
 	public static boolean isChunkLoaderBuildCorrectly(World world, BlockPos chunkLoaderPos)
 	{
