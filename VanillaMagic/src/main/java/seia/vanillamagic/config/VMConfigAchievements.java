@@ -1,4 +1,4 @@
-package seia.vanillamagic.config.achievement;
+package seia.vanillamagic.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ import jline.internal.InputStreamReader;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.core.VanillaMagic;
 
-public class ConfigAchievements 
+public class VMConfigAchievements 
 {
 	public static final String VM_DIRECTORY = "/VanillaMagic/";
 	
@@ -36,7 +36,7 @@ public class ConfigAchievements
 	 * modConfigurationDirectory - config/VanillaMagic/ <br>
 	 * modFile - vanillamagic-[].jar OR /bin/ (if modding)
 	 */
-	public ConfigAchievements(File modConfigurationDirectory, File modFile) 
+	public VMConfigAchievements(File modConfigurationDirectory, File modFile) 
 	{
 		this._modConfigurationDirectory = modConfigurationDirectory;
 		this._modFile = modFile;

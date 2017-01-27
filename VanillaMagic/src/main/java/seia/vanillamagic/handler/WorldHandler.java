@@ -21,6 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.quarry.TileQuarry;
 import seia.vanillamagic.tileentity.speedy.TileSpeedy;
@@ -45,6 +46,14 @@ public class WorldHandler
 	{
 		MinecraftForge.EVENT_BUS.register(this);
 		VanillaMagic.LOGGER.log(Level.INFO, "WorldHandler registered");
+	}
+	
+	public void log(Level level, String message)
+	{
+		if(VMConfig.showCustomTileEntitySaving)
+		{
+			VanillaMagic.LOGGER.log(level, message);
+		}
 	}
 	
 	@SubscribeEvent
@@ -78,8 +87,7 @@ public class WorldHandler
 					}
 					catch(EOFException eof)
 					{
-						VanillaMagic.LOGGER.log(Level.ERROR, 
-								"[World Load] Error while reading CustomTileEntities data from file for Dimension: " + dimension);
+						log(Level.ERROR, "[World Load] Error while reading CustomTileEntities data from file for Dimension: " + dimension);
 						return;
 					}
 					fis.close();
@@ -121,11 +129,9 @@ public class WorldHandler
 						}
 						catch(Exception e)
 						{
-							VanillaMagic.LOGGER.log(Level.ERROR, 
-									"[World Load] Error while reading class for CustomTileEntity: " + tileEntityClassName);
+							log(Level.ERROR, "[World Load] Error while reading class for CustomTileEntity: " + tileEntityClassName);
 						}
-						VanillaMagic.LOGGER.log(Level.INFO, 
-								"[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
+						log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						if(tileEntity != null)
 						{
 							if(canAdd)
@@ -144,7 +150,7 @@ public class WorldHandler
 		}
 		catch(Exception e)
 		{
-			VanillaMagic.LOGGER.log(Level.INFO, "[World Load] Error while loading CustomTileEntities for Dimension: " + dimension);
+			log(Level.INFO, "[World Load] Error while loading CustomTileEntities for Dimension: " + dimension);
 			e.printStackTrace();
 		}
 	}
@@ -207,11 +213,11 @@ public class WorldHandler
 			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
 			CompressedStreamTools.writeCompressed(data, fileOutputStream);
 			fileOutputStream.close();
-			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] CustomTileEntities saved for Dimension: " + dimension);
+			log(Level.INFO, "[World Save] CustomTileEntities saved for Dimension: " + dimension);
 		}
 		catch(Exception e)
 		{
-			VanillaMagic.LOGGER.log(Level.INFO, "[World Save] Error while saving CustomTileEntities for Dimension: " + dimension);
+			log(Level.INFO, "[World Save] Error while saving CustomTileEntities for Dimension: " + dimension);
 			e.printStackTrace();
 		}
 	}

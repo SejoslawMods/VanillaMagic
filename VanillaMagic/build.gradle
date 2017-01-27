@@ -26,7 +26,7 @@ apply plugin: 'maven'
 
 version = mc_version + '-' + version_major + '.' + version_minor + '.' + version_patch + '.' + version_build
 group = "seia.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "vanillamagic"
+archivesBaseName = "VanillaMagic"
 
 srcCompat = JavaVersion.VERSION_1_8
 targetCompat = JavaVersion.VERSION_1_8

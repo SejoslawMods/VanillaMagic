@@ -13,7 +13,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.api.VanillaMagicAPI;
-import seia.vanillamagic.config.achievement.ConfigAchievements;
+import seia.vanillamagic.config.VMConfig;
+import seia.vanillamagic.config.VMConfigAchievements;
 import seia.vanillamagic.creativetab.VanillaMagicCreativeTab;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
@@ -49,7 +50,7 @@ public class VanillaMagic
 	public static ModMetadata METADATA;
 	
 	public static Logger LOGGER;
-	public static ConfigAchievements CONFIG_ACHIEVEMENTS;
+	public static VMConfigAchievements CONFIG_ACHIEVEMENTS;
 	
 	public static final VanillaMagicCreativeTab CREATIVE_TAB = new VanillaMagicCreativeTab();
 	
@@ -58,8 +59,9 @@ public class VanillaMagic
 	{
 		VanillaMagicAPI.LOGGER.log(Level.INFO, "Starting VanillaMagicAPI from VanillaMagic...");
 		LOGGER = event.getModLog();
+		VMConfig.preInit(event);
 		ItemUpgradeRegistry.start();
-		CONFIG_ACHIEVEMENTS = new ConfigAchievements(new File(event.getModConfigurationDirectory(), ConfigAchievements.VM_DIRECTORY), event.getSourceFile());
+		CONFIG_ACHIEVEMENTS = new VMConfigAchievements(new File(event.getModConfigurationDirectory(), VMConfigAchievements.VM_DIRECTORY), event.getSourceFile());
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
 		for(int i = 0; i < QuestList.size(); ++i)
 		{
@@ -78,6 +80,7 @@ public class VanillaMagic
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		VMConfig.init();
 		for(int i = 0; i < QuestList.size(); ++i)
 		{
 			QuestHandler.addAchievement(QuestList.get(i).getAchievement());
@@ -89,6 +92,7 @@ public class VanillaMagic
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		VMConfig.postInit();
 		BookRegistry.postInit();
 		CustomTileEntityHandler.postInit();
 		EnchantedBucketHelper.registerFluids();
