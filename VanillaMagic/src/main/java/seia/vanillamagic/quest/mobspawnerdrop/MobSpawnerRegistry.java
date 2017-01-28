@@ -53,7 +53,7 @@ public class MobSpawnerRegistry
 			_MAP_RESOURCE_LOCATION_NAME.put(EntityList.getKey(ee.getEntityClass()), entityName);
 			_MAP_NAME_RESOURCE_LOCATION.put(entityName, EntityList.getKey(ee.getEntityClass()));
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Mob Spawner Registry: registered " + _MAP_NAME_STACK.size() + " entities for Mob Spawners.");
+		VanillaMagic.LOGGER.log(Level.INFO, "Mob Spawner Registry: registered " + _MAP_NAME_STACK.size() + " entities for Mob Spawner.");
 	}
 	
 	public static ResourceLocation getEntityId(TileEntityMobSpawner tileMobSpawner)
