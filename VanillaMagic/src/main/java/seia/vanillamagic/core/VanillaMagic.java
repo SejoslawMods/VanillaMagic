@@ -18,6 +18,7 @@ import seia.vanillamagic.config.VMConfigAchievements;
 import seia.vanillamagic.creativetab.VanillaMagicCreativeTab;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
+import seia.vanillamagic.handler.PlayerEventHandler;
 import seia.vanillamagic.handler.QuestHandler;
 import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.integration.VanillaMagicIntegration;
@@ -68,6 +69,7 @@ public class VanillaMagic
 			QuestHandler.registerEvent(QuestList.get(i));
 		}
 		LOGGER.log(Level.INFO, "Registered events: " + QuestHandler.REGISTERED_EVENTS.size());
+		PlayerEventHandler.preInit();
 		InventorySelector.preInit();
 		VanillaMagicDebug.INSTANCE.preInit();
 		TileEntityRegistry.preInit();

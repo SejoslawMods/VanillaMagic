@@ -18,9 +18,12 @@ public class VMConfig
 	private static Configuration _config;
 	
 	public static String categoryConsole = "Console";
-	
 	public static String showCustomTileEntitySavingName = "showCustomTileEntitySavingName";
 	public static boolean showCustomTileEntitySaving = false;
+	
+	public static String categoryPlayer = "Player";
+	public static String givePlayerCustomBooksOnLoggedInName = "givePlayerCustomBooksOnLoggedIn";
+	public static boolean givePlayerCustomBooksOnLoggedIn = true;
 	
 	private VMConfig()
 	{
@@ -83,6 +86,13 @@ public class VMConfig
 				categoryConsole, 
 				showCustomTileEntitySaving, 
 				"Should console show when World save / load CustomTileEntity (console spam)");
+		
+		_config.addCustomCategoryComment(categoryPlayer, "Options connected with Player");
+		givePlayerCustomBooksOnLoggedIn = _config.getBoolean(
+				givePlayerCustomBooksOnLoggedInName, 
+				categoryPlayer, 
+				givePlayerCustomBooksOnLoggedIn, 
+				"Should Player get VanillaMagic custom books on spawn (logged in)");
 		
 		_config.save();
 	}

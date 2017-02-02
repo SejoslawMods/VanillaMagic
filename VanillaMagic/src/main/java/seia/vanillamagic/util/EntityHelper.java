@@ -113,7 +113,6 @@ public class EntityHelper
 	
 	public static void addChatComponentMessage(EntityPlayer player, String msg)
 	{
-		//player.addChatComponentMessage(new TextComponentString("§a[VanillaMagic] §f" + msg));
 		player.sendStatusMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)), false); // TODO: What is this boolean ?
 	}
 

@@ -40,27 +40,27 @@ public class BookRegistry
 	public static final IBook BOOK_ITEM_UPGRADES;
 	public static final IBook BOOK_QUARRY_UPGRADES;
 	
-	private static List<IBook> BOOKS = new ArrayList<IBook>();
+	private static List<IBook> _BOOKS = new ArrayList<IBook>();
 	
 	static
 	{
 		BOOK_SPELLS = new BookSpells();
-		BOOKS.add(BOOK_SPELLS);
+		_BOOKS.add(BOOK_SPELLS);
 		
 		BOOK_ALTAR_CRAFTING = new BookAltarCrafting();
-		BOOKS.add(BOOK_ALTAR_CRAFTING);
+		_BOOKS.add(BOOK_ALTAR_CRAFTING);
 		
 		BOOK_BUILD_ALTAR = new BookBuildAltar();
-		BOOKS.add(BOOK_BUILD_ALTAR);
+		_BOOKS.add(BOOK_BUILD_ALTAR);
 		
 		BOOK_OTHER = new BookOther();
-		BOOKS.add(BOOK_OTHER);
+		_BOOKS.add(BOOK_OTHER);
 		
 		BOOK_ITEM_UPGRADES = new BookItemUpgrade();
-		BOOKS.add(BOOK_ITEM_UPGRADES);
+		_BOOKS.add(BOOK_ITEM_UPGRADES);
 		
 		BOOK_QUARRY_UPGRADES = new BookQuarryUpgrades();
-		BOOKS.add(BOOK_QUARRY_UPGRADES);
+		_BOOKS.add(BOOK_QUARRY_UPGRADES);
 	}
 	
 	private BookRegistry()
@@ -69,11 +69,11 @@ public class BookRegistry
 	
 	public static void postInit()
 	{
-		for(IBook book : BOOKS)
+		for(IBook book : _BOOKS)
 		{
 			book.registerRecipe();
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Books registered (" + BOOKS.size() + ")");
+		VanillaMagic.LOGGER.log(Level.INFO, "Books registered (" + _BOOKS.size() + ")");
 	}
 	
 	/**
@@ -87,11 +87,11 @@ public class BookRegistry
 	 */
 	public static ItemStack getBookByUID(int bookUID)
 	{
-		for(int i = 0; i < BOOKS.size(); ++i)
+		for(int i = 0; i < _BOOKS.size(); ++i)
 		{
-			if(BOOKS.get(i).getUID() == bookUID)
+			if(_BOOKS.get(i).getUID() == bookUID)
 			{
-				return BOOKS.get(i).getItem();
+				return _BOOKS.get(i).getItem();
 			}
 		}
 		return null;
@@ -120,5 +120,13 @@ public class BookRegistry
 			return stack.getTagCompound().getInteger(BOOK_NBT_UID);
 		}
 		return -1;
+	}
+	
+	/**
+	 * @return The list of all registered IBooks.
+	 */
+	public static List<IBook> getBooks()
+	{
+		return _BOOKS;
 	}
 }

@@ -227,4 +227,13 @@ public class NBTHelper
 		}
 		return handler;
 	}
+	
+	public static NBTTagCompound getTagSafe(NBTTagCompound tag, String key)
+	{
+		if(tag == null || !tag.hasKey(key))
+		{
+			return new NBTTagCompound();
+		}
+		return tag.getCompoundTag(key);
+	}
 }
