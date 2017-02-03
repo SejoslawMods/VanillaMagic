@@ -58,6 +58,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.entity.EntitySpellFreezeLiquid;
 import seia.vanillamagic.entity.EntitySpellPull;
@@ -361,6 +362,7 @@ public class SpellHelper
 			else if(spellID == EnumSpell.SUMMON_VILLAGER.spellID)
 			{
 				entityAgeable = new EntityVillager(world);
+				VillagerRegistry.setRandomProfession((EntityVillager) entityAgeable, new Random());
 			}
 			
 			if(entityAgeable != null)
@@ -411,6 +413,7 @@ public class SpellHelper
 			else if(spellID == EnumSpell.SUMMON_MAGMA_CUBE.spellID)
 			{
 				entityMob = new EntityMagmaCube(world);
+				//entityMob = setSlimeSize(entityMob, EntityMagmaCube.class);
 			}
 			else if(spellID == EnumSpell.SUMMON_GHAST.spellID)
 			{
@@ -462,6 +465,7 @@ public class SpellHelper
 			else if(spellID == EnumSpell.SUMMON_SLIME.spellID)
 			{
 				entityMob = new EntitySlime(world);
+				//entityMob = setSlimeSize(entityMob, EntitySlime.class);
 			}
 			else if(spellID == EnumSpell.SUMMON_WITCH.spellID)
 			{
@@ -524,6 +528,22 @@ public class SpellHelper
 		}
 		return false;
 	}
+	
+//	private static int _maxSlimeSize = 3;
+//	private static EntityLiving setSlimeSize(EntityLiving entityMob, Class<? extends EntitySlime> c)
+//	{
+//		try
+//		{
+//			Method setSlimeSize = c.getMethod("setSlimeSize", int.class, boolean.class);
+//			setSlimeSize.setAccessible(true);
+//			setSlimeSize.invoke(entityMob, new Random().nextInt(_maxSlimeSize), true);
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		return entityMob;
+//	}
 	
 	/**
 	 * Fus-Ro-Dah !!!
