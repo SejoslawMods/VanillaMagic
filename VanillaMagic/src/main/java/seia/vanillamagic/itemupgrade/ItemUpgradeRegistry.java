@@ -168,6 +168,7 @@ public class ItemUpgradeRegistry
 			{
 				ItemEntry itemEntry = new ItemEntry(mappingName, item, localizedName);
 				_MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+				_BASE_ITEMS.add(new ItemEntry(mappingName, item, item.getUnlocalizedName()));
 				registeredItems++;
 			}
 		}

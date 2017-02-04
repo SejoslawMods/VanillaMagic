@@ -33,10 +33,10 @@ public class QuestItemUpgrade extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = event.getWorld();
-		if(world.isRemote)
-		{
-			return;
-		}
+//		if(world.isRemote)
+//		{
+//			return;
+//		}
 		
 		if(times == 0)
 		{
@@ -47,7 +47,6 @@ public class QuestItemUpgrade extends Quest
 			times = 0;
 			return;
 		}
-		
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(rightHand))
