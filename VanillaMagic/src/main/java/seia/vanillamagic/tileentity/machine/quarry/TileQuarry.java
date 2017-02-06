@@ -51,6 +51,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 	 * Only multiply this
 	 */
 	private int _quarrySize = QuarrySizeHelper.BASIC_SIZE;
+	private int _diamondBlocks = 0;
+	private int _redstoneBlocks = 0;
 	
 	public int getQuarrySize()
 	{
@@ -168,7 +170,6 @@ public class TileQuarry extends TileMachine implements IQuarry
 		return workingPos.offset(EnumFacing.DOWN);
 	}
 	
-	int diamondBlocks = 0;
 	/**
 	 * Here I want to check for the number of IQuarryUpgrades next to the Quarry. <br>
 	 * Count them and change the Quarry size.
@@ -177,14 +178,15 @@ public class TileQuarry extends TileMachine implements IQuarry
 	{
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(_diamondFacing);
-		diamondBlocks = 0;
+		_diamondBlocks = 0;
 		IBlockState checkingBlock = world.getBlockState(cauldronPos);
-		while((Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK)) // quarry resizing is not an actual upgrade, it's easier to count it here
+		// quarry resizing is not an actual upgrade, it's easier to count it here
+		while((Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK))
 				|| (QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock())))
 		{
 			if(Block.isEqualTo(checkingBlock.getBlock(), Blocks.DIAMOND_BLOCK))
 			{
-				diamondBlocks++;
+				_diamondBlocks++;
 			}
 			else // if(QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock()))
 			{
@@ -194,7 +196,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 			checkingBlock = world.getBlockState(cauldronPos);
 		}
 		_upgradeHelper.modifyQuarry(this);
-		_quarrySize = QuarrySizeHelper.getSize(diamondBlocks);
+		_quarrySize = QuarrySizeHelper.getSize(_diamondBlocks);
 	}
 	
 	public List<String> getAdditionalInfo()
@@ -205,7 +207,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		List<String> withUpgrades = _upgradeHelper.addAdditionalInfo(baseInfo);
 		_upgradeHelper.clearUpgrades();
 		countRedstoneBlocks();
-		baseInfo.add("Mining blocks per tick: " + redstoneBlocks);
+		baseInfo.add("Mining blocks per tick: " + _redstoneBlocks);
 		return withUpgrades;
 	}
 	
@@ -226,16 +228,13 @@ public class TileQuarry extends TileMachine implements IQuarry
 		}
 		// Counting the number of blocks
 		countRedstoneBlocks();
-		// Memory efficiency.
-		int redstoneBlocks = this.redstoneBlocks;
-		for(int i = 0; i < redstoneBlocks; ++i)
+		for(int i = 0; i < this._redstoneBlocks; ++i)
 		{
 			performOneOperation();
 		}
 		_upgradeHelper.clearUpgrades();
 	}
 	
-	int redstoneBlocks = 0;
 	/**
 	 * Counts the number of RedstoneBlocks in line.
 	 */
@@ -243,11 +242,11 @@ public class TileQuarry extends TileMachine implements IQuarry
 	{
 		BlockPos cauldronPos = BlockPosHelper.copyPos(this.getMachinePos());
 		cauldronPos = cauldronPos.offset(_redstoneFacing);
-		redstoneBlocks = 0;
+		_redstoneBlocks = 0;
 		IBlockState checkingBlock = world.getBlockState(cauldronPos);
 		while(Block.isEqualTo(checkingBlock.getBlock(), Blocks.REDSTONE_BLOCK))
 		{
-			redstoneBlocks++;
+			_redstoneBlocks++;
 			cauldronPos = cauldronPos.offset(_redstoneFacing);
 			checkingBlock = world.getBlockState(cauldronPos);
 		}
@@ -273,11 +272,12 @@ public class TileQuarry extends TileMachine implements IQuarry
 		{
 			goToNextPosAfterHitBedrock();
 		}
-		else // dig something like stone, iron-ore, etc.
+		else // mine something like stone, iron-ore, etc.
 		{
 			boolean hasChest = isNextToOutput(); // chest or any other IInventory
-			Block blockToDig = world.getBlockState(workingPos).getBlock();
-			List<ItemStack> drops = getDrops(blockToDig, world, workingPos, world.getBlockState(workingPos)); // blockToDig.getDrops(worldObj, workingPos, worldObj.getBlockState(workingPos), 0);
+			IBlockState stateToDig = world.getBlockState(workingPos);
+			Block blockToDig = stateToDig.getBlock();
+			List<ItemStack> drops = getDrops(blockToDig, world, workingPos, stateToDig);
 			// Add drops from IInventory
 			if(blockToDig instanceof IInventory)
 			{
@@ -291,7 +291,6 @@ public class TileQuarry extends TileMachine implements IQuarry
 					}
 				}
 			}
-			world.setBlockToAir(workingPos);
 			for(ItemStack stack : drops)
 			{
 				if(!hasChest)
@@ -311,6 +310,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 					}
 				}
 			}
+			world.setBlockToAir(workingPos);
 			decreaseTicks();
 		}
 		// go down by 1 at the end of work in this tick

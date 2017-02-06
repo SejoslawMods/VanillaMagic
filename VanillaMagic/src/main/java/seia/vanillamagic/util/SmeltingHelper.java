@@ -172,7 +172,7 @@ public class SmeltingHelper
 	@Nullable
 	public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt)
 	{
-		return FurnaceRecipes.instance().getSmeltingResult(stackToSmelt);
+		return FurnaceRecipes.instance().getSmeltingResult(stackToSmelt).copy();
 	}
 	
 	public static int getExperienceToAddFromWholeStack(ItemStack entityItemToSmeltStack)

@@ -16,6 +16,7 @@ import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.api.tileentity.machine.QuarryUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
+import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutosmeltDigged;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeFortune;
 import seia.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeSilkTouch;
 
@@ -43,6 +44,7 @@ public class QuarryUpgradeRegistry
 			addUpgrade(QuarryUpgradeFortune.Two.class);
 			addUpgrade(QuarryUpgradeFortune.Three.class);
 			addUpgrade(QuarryUpgradeAutoInventoryOutputPlacer.class);
+			addUpgrade(QuarryUpgradeAutosmeltDigged.class);
 		}
 		catch(MappingExistsException e)
 		{

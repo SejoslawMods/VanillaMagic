@@ -81,7 +81,7 @@ public class QuarryUpgradeHelper
 	/**
 	 * Returns the drops list from all upgrades.
 	 */
-	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,IBlockState workingPosState) 
+	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,IBlockState workingPosState)
 	{
 		List<ItemStack> drops = new ArrayList<ItemStack>();
 		for(IQuarryUpgrade upgrade : _upgrades)
@@ -91,7 +91,8 @@ public class QuarryUpgradeHelper
 		// If there is no upgrades mine the old-fashion way.
 		if(drops.isEmpty())
 		{
-			return blockToDig.getDrops(world, workingPos, workingPosState, 0);
+			//return blockToDig.getDrops(world, workingPos, workingPosState, 0);
+			drops = ListHelper.<ItemStack>combineLists(drops, blockToDig.getDrops(world, workingPos, workingPosState, 0));
 		}
 		return drops;
 	}
