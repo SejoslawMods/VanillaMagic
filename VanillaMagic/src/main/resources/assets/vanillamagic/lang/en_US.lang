@@ -51,7 +51,7 @@ achievement.craftStick.desc=Craft stick. Rename it in Anvil to 'Stick Wand'.
 
 
 achievement.portableCraftingTable=Portable Crafting Table
-achievement.portableCraftingTable.desc=Hold Crafting Table in right hand and right-click while pointing in air
+achievement.portableCraftingTable.desc=Hold Crafting Table in right hand and right-click while pointing in air.
 
 achievement.autocrafting=Autocrafting !!!
 achievement.autocrafting.desc=Place Chests in 3x3 pattern but with 1 block empty space between them. On top of the middle Chest place Hopper. On the Hopper place Crafting Table and on that place Cauldron. On top of Cauldron place Chest as fuel input. Shift-right-click the Crafting Table with Blaze Wand in right hand and empty left hand.
@@ -59,49 +59,49 @@ achievement.autocrafting.desc=Place Chests in 3x3 pattern but with 1 block empty
 
 
 achievement.spellFlintAndSteel=Flint and Steel Clone
-achievement.spellFlintAndSteel.desc=Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire
+achievement.spellFlintAndSteel.desc=Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire.
 
 achievement.spellSmallFireball=Feel like Blaze (small fireball) (Require: Pick Blaze Rod)
-achievement.spellSmallFireball.desc=Hold Blaze Wand in Your right hand and at least 2x Redstone Dust in the left hand and right-click 
+achievement.spellSmallFireball.desc=Hold Blaze Wand in Your right hand and at least 2x Redstone Dust in the left hand and right-click.
 
 achievement.spellFusRoDah=Fus-Ro-Dah !!! (repulse mobs and animals around player)
-achievement.spellFusRoDah.desc=Hold Blaze Wand in Your right hand and at least 1x Dragon's Breath in the left hand and right-click 
+achievement.spellFusRoDah.desc=Hold Blaze Wand in Your right hand and at least 1x Dragon's Breath in the left hand and right-click.
 
 achievement.spellLargeFireball=Feel like Ghast (huge fireball + explosion)
-achievement.spellLargeFireball.desc=Hold Blaze Wand in Your right hand and at least 1x Ghast Tear in the left hand and right-click 
+achievement.spellLargeFireball.desc=Hold Blaze Wand in Your right hand and at least 1x Ghast Tear in the left hand and right-click. 
 
 achievement.spellTeleport=Teleportation !!! (look and teleport)
-achievement.spellTeleport.desc=Hold Blaze Wand in Your right hand and at least 1x Magma Cream in the left hand and right-click 
+achievement.spellTeleport.desc=Hold Blaze Wand in Your right hand and at least 1x Magma Cream in the left hand and right-click. 
 
 achievement.spellTeleportToNether=Teleport to Nether
-achievement.spellTeleportToNether.desc=Hold Blaze Wand in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is safe...i think)
+achievement.spellTeleportToNether.desc=Hold Blaze Wand in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is safe...i think).
 
 achievement.spellTeleportToEnd=Teleport to End
-achievement.spellTeleportToEnd.desc=Hold Blaze Wand in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon)
+achievement.spellTeleportToEnd.desc=Hold Blaze Wand in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon).
 
 achievement.spellSummonMeteor=Meteor !!! (summon meteor from heaven)
-achievement.spellSummonMeteor.desc=Hold Nether Star in Your hand and at least 1x Gold Block in the left hand and right-click 
+achievement.spellSummonMeteor.desc=Hold Nether Star in Your hand and at least 1x Gold Block in the left hand and right-click. 
 
 achievement.spellWeatherRain=Make rain (Weather Spell)
-achievement.spellWeatherRain.desc=Hold Blaze Wand in Your right hand and at least 1x Water Bottle in the left hand and right-click
+achievement.spellWeatherRain.desc=Hold Blaze Wand in Your right hand and at least 1x Water Bottle in the left hand and right-click.
 
 achievement.spellWeatherClear=Clear weather (Weather Spell)
-achievement.spellWeatherClear.desc=Hold Blaze Wand in Your right hand and at least 1x Empty Bottle in the left hand and right-click
+achievement.spellWeatherClear.desc=Hold Blaze Wand in Your right hand and at least 1x Empty Bottle in the left hand and right-click.
 
 achievement.spellWeatherThunderstorm=Make thunderstorm (Weather Spell)
-achievement.spellWeatherThunderstorm.desc=Hold Blaze Wand in Your right hand and at least 1x Creeper Head in the left hand and right-click
+achievement.spellWeatherThunderstorm.desc=Hold Blaze Wand in Your right hand and at least 1x Creeper Head in the left hand and right-click.
 
 achievement.spellMoveInAir=Move in air (move up to 10 blocks)
-achievement.spellMoveInAir.desc=Hold Blaze Wand in Your right hand and at least 1x Feather in the left hand and right-click 
+achievement.spellMoveInAir.desc=Hold Blaze Wand in Your right hand and at least 1x Feather in the left hand and right-click. 
 
 achievement.spellPullEntityToPlayer=Pull Entity to Player (yes, ALL entities)
-achievement.spellPullEntityToPlayer.desc=Hold Blaze Wand in Your right hand and at least 4x String in the left hand and right-click 
+achievement.spellPullEntityToPlayer.desc=Hold Blaze Wand in Your right hand and at least 4x String in the left hand and right-click.
 
 achievement.spellFreezeWater3x3=Freeze Water 3x3 (will freeze the middle block)
-achievement.spellFreezeWater3x3.desc=Hold Blaze Wand in Your right hand and at least 1x Snow Block in the left hand and right-click
+achievement.spellFreezeWater3x3.desc=Hold Blaze Wand in Your right hand and at least 1x Snow Block in the left hand and right-click.
 
 achievement.spellSummonLightningBolt=Thunder !!! (summon thunder)
-achievement.spellSummonLightningBolt.desc=Hold Blaze Wand in Your hand and at least 32x Gunpowder in the left hand and right-click 
+achievement.spellSummonLightningBolt.desc=Hold Blaze Wand in Your hand and at least 32x Gunpowder in the left hand and right-click. 
 
 
 
@@ -109,84 +109,84 @@ achievement.spellSummonChicken=Summon Chicken
 achievement.spellSummonChicken.desc=Hold Nether Star in Your hand and 32x Chicken in Your left hand and right-click on block
 
 achievement.spellSummonPig=Summon Pig
-achievement.spellSummonPig.desc=Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block
+achievement.spellSummonPig.desc=Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block.
 
 achievement.spellSummonCow=Summon Cow
-achievement.spellSummonCow.desc=Hold Nether Star in Your hand and 32x Beef in Your left hand and right-click on block
+achievement.spellSummonCow.desc=Hold Nether Star in Your hand and 32x Beef in Your left hand and right-click on block.
 
 achievement.spellSummonMooshroom=Summon Mooshroom
-achievement.spellSummonMooshroom.desc=Hold Nether Star in Your hand and 32x Cooked Beef in Your left hand and right-click on block
+achievement.spellSummonMooshroom.desc=Hold Nether Star in Your hand and 32x Cooked Beef in Your left hand and right-click on block.
 
 achievement.spellSummonSheep=Summon Sheep
-achievement.spellSummonSheep.desc=Hold Nether Star in Your hand and 32x Mutton in Your left hand and right-click on block
+achievement.spellSummonSheep.desc=Hold Nether Star in Your hand and 32x Mutton in Your left hand and right-click on block.
 
 achievement.spellSummonWolf=Summon Wolf
-achievement.spellSummonWolf.desc=Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block
+achievement.spellSummonWolf.desc=Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block.
 
 achievement.spellSummonRabbit=Summon Rabbit
-achievement.spellSummonRabbit.desc=Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block
+achievement.spellSummonRabbit.desc=Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block.
 
 achievement.spellSummonHorse=Summon Horse
-achievement.spellSummonHorse.desc=Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block
+achievement.spellSummonHorse.desc=Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block.
 
 achievement.spellSummonVillager=Summon Villager
-achievement.spellSummonVillager.desc=Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block
+achievement.spellSummonVillager.desc=Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block.
 
 
 
 achievement.spellSummonZombie=Summon Zombie
-achievement.spellSummonZombie.desc=Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block
+achievement.spellSummonZombie.desc=Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block.
 
 achievement.spellSummonCreeper=Summon Creeper
-achievement.spellSummonCreeper.desc=Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block
+achievement.spellSummonCreeper.desc=Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block.
 
 achievement.spellSummonSkeleton=Summon Skeleton
-achievement.spellSummonSkeleton.desc=Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block
+achievement.spellSummonSkeleton.desc=Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block.
 
 achievement.spellSummonBlaze=Summon Blaze
-achievement.spellSummonBlaze.desc=Hold Nether Star in Your hand and 8x Blaze Rod in Your left hand and right-click on block
+achievement.spellSummonBlaze.desc=Hold Nether Star in Your hand and 8x Blaze Rod in Your left hand and right-click on block.
 
 achievement.spellSummonMagmaCube=Summon Magma Cube
-achievement.spellSummonMagmaCube.desc=Hold Nether Star in Your hand and 8x Magma Cream in Your left hand and right-click on block
+achievement.spellSummonMagmaCube.desc=Hold Nether Star in Your hand and 8x Magma Cream in Your left hand and right-click on block.
 
 achievement.spellSummonGhast=Summon Ghast
-achievement.spellSummonGhast.desc=Hold Nether Star in Your hand and 8x Ghast Tear in Your left hand and right-click on block
+achievement.spellSummonGhast.desc=Hold Nether Star in Your hand and 8x Ghast Tear in Your left hand and right-click on block.
 
 achievement.spellSummonEnderman=Summon Enderman
-achievement.spellSummonEnderman.desc=Hold Nether Star in Your hand and 8x Blaze Powder in Your left hand and right-click on block
+achievement.spellSummonEnderman.desc=Hold Nether Star in Your hand and 8x Blaze Powder in Your left hand and right-click on block.
 
 achievement.spellSummonSpider=Summon Spider
-achievement.spellSummonSpider.desc=Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block
+achievement.spellSummonSpider.desc=Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block.
 
 achievement.spellSummonSlime=Summon Slime
-achievement.spellSummonSlime.desc=Hold Nether Star in Your hand and 8x Slime Ball in Your left hand and right-click on block
+achievement.spellSummonSlime.desc=Hold Nether Star in Your hand and 8x Slime Ball in Your left hand and right-click on block.
 
 achievement.spellSummonWitch=Summon Witch
-achievement.spellSummonWitch.desc=Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block
+achievement.spellSummonWitch.desc=Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block.
 
 achievement.spellSummonPigman=Summon Pigman
-achievement.spellSummonPigman.desc=Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block
+achievement.spellSummonPigman.desc=Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.
 
 achievement.spellSummonGuardian=Summon Guardian
-achievement.spellSummonGuardian.desc=Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block
+achievement.spellSummonGuardian.desc=Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block.
 
 achievement.spellSummonPolarBear=Summon Polar Bear
-achievement.spellSummonPolarBear.desc=Hold Nether Star in Your hand and 8x Fish in Your left hand and right-click on block
+achievement.spellSummonPolarBear.desc=Hold Nether Star in Your hand and 8x Fish in Your left hand and right-click on block.
 
 achievement.spellSummonShulker=Summon Shulker
-achievement.spellSummonShulker.desc=Hold Nether Star in Your hand and 1x End Rod in Your left hand and right-click on block
+achievement.spellSummonShulker.desc=Hold Nether Star in Your hand and 1x End Rod in Your left hand and right-click on block.
 
 achievement.spellSummonSilverfish=Summon Silverfish
-achievement.spellSummonSilverfish.desc=Hold Nether Star in Your hand and 8x Stone Brick in Your left hand and right-click on block
+achievement.spellSummonSilverfish.desc=Hold Nether Star in Your hand and 8x Stone Brick in Your left hand and right-click on block.
 
 achievement.spellSummonWither=Summon Wither
-achievement.spellSummonWither.desc=Hold Nether Star in Your hand and 1x Emerald Block in Your left hand and right-click on block
+achievement.spellSummonWither.desc=Hold Nether Star in Your hand and 1x Emerald Block in Your left hand and right-click on block.
 
 achievement.spellSummonGiant=Summon Giant
-achievement.spellSummonGiant.desc=Hold Nether Star in Your hand and 8x Armor Stand in Your left hand and right-click on block
+achievement.spellSummonGiant.desc=Hold Nether Star in Your hand and 8x Armor Stand in Your left hand and right-click on block.
 
 achievement.spellSummonSpiderJockey=Summon Spider Jockey
-achievement.spellSummonSpiderJockey.desc=Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block (with 1x Bone on it)
+achievement.spellSummonSpiderJockey.desc=Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block (with 1x Bone on it).
 
 
 
@@ -199,22 +199,22 @@ achievement.summonHordeLvl10.desc=Hold 2x End Crystal in left hand and Nether St
 
 
 achievement.craftBook=Craft Book
-achievement.craftBook.desc=Craft book
+achievement.craftBook.desc=Craft book.
 
 achievement.craftBookshelf=Craft Bookshelf
-achievement.craftBookshelf.desc=Craft bookshelf
+achievement.craftBookshelf.desc=Craft bookshelf.
 
 achievement.mineDiamond=Mine Diamond
-achievement.mineDiamond.desc=Mine one more diamond
+achievement.mineDiamond.desc=Mine one more diamond.
 
 achievement.mineObsidian=Mine Obsidian
-achievement.mineObsidian.desc=Mine obsidian
+achievement.mineObsidian.desc=Mine obsidian.
 
 achievement.mobSpawnerDropBlock=Mob Spawner Drop Block
 achievement.mobSpawnerDropBlock.desc=Break Mob Spawner. It will drop Block and Book with Entity data from Spawner. Right-click with this Book in right hand on Spawner to set Spawner to the Entity from Book.
 
 achievement.craftEnchantingTable=Craft Enchanting Table (Require: all 3 earlier)
-achievement.craftEnchantingTable.desc=Craft enchanting table
+achievement.craftEnchantingTable.desc=Craft enchanting table.
 
 achievement.chunkLoader=Build ChunkLoader
 achievement.chunkLoader.desc=Place Enchanting Table. Place Obsidian in cross (3x3) under Enchanting Table. Place Torch on top of each Obsidian except the middle one. Replace Enchanting Table. Will load 3x3 chunks.
@@ -222,103 +222,103 @@ achievement.chunkLoader.desc=Place Enchanting Table. Place Obsidian in cross (3x
 
 
 achievement.craftCauldron=Craft Cauldron
-achievement.craftCauldron.desc=Craft cauldron
+achievement.craftCauldron.desc=Craft cauldron.
 
 achievement.mineRedstone=Mine Redstone
-achievement.mineRedstone.desc=Mine at least one block of redstone
+achievement.mineRedstone.desc=Mine at least one block of redstone.
 
 achievement.buildAltarTier1=Build Altar Tier 1 (Require: both earlier)
-achievement.buildAltarTier1.desc=Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle
+achievement.buildAltarTier1.desc=Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle.
 
 achievement.craftGunpowder=Craft Gunpowder
-achievement.craftGunpowder.desc=Toss 1x Sugar Cane + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftGunpowder.desc=Toss 1x Sugar Cane + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftSugar=Craft Sugar
-achievement.craftSugar.desc=Toss 1x Sugar Cane into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftSugar.desc=Toss 1x Sugar Cane into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftDirt=Craft Dirt
-achievement.craftDirt.desc=Toss 1x Sand into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftDirt.desc=Toss 1x Sand into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftSand=Craft Sand
-achievement.craftSand.desc=Toss 1x Cobblestone into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftSand.desc=Toss 1x Cobblestone into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftGlass=Craft Glass
-achievement.craftGlass.desc=Toss 1x Sand + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftGlass.desc=Toss 1x Sand + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftSnow=Craft Snow
-achievement.craftSnow.desc=Toss 1x Ice Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftSnow.desc=Toss 1x Ice Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftIce=Craft Ice
-achievement.craftIce.desc=Toss 1x Snow Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftIce.desc=Toss 1x Snow Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftCobblestone=Craft Cobblestone
-achievement.craftCobblestone.desc=Toss 1x Dirt into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftCobblestone.desc=Toss 1x Dirt into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftGravel=Craft Gravel
-achievement.craftGravel.desc=Toss 2x Cobblestone into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftGravel.desc=Toss 2x Cobblestone into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftLeather=Craft Leather
-achievement.craftLeather.desc=Toss 1x Rotten Flesh into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftLeather.desc=Toss 1x Rotten Flesh into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.craftClay=Craft Clay
-achievement.craftClay.desc=Toss 1x Sugar + 1x Gunpowder into the Altar Tier 1 and right-click with a Stick Wand in hand
+achievement.craftClay.desc=Toss 1x Sugar + 1x Gunpowder into the Altar Tier 1 and right-click with a Stick Wand in hand.
 
 achievement.buildAltarTier2=Build Altar Tier 2
-achievement.buildAltarTier2.desc=Add 1 block of Iron on each corner of Altar Tier 1 but one layer lower than Cauldron, outside of the redstone circle and replace the Cauldron
+achievement.buildAltarTier2.desc=Add 1 block of Iron on each corner of Altar Tier 1 but one layer lower than Cauldron, outside of the redstone circle and replace the Cauldron.
 
 achievement.craftIronOre=Craft Iron Ore
-achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick Wand in hand
+achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick Wand in hand.
 
 achievement.itemUpgrades=Item Upgrades
-achievement.itemUpgrades.desc=Toss 1x Item that can be upgraded + 1x ingredient into Cauldron and right-click with Blaze Wand
+achievement.itemUpgrades.desc=Toss 1x Item that can be upgraded + 1x ingredient into Cauldron and right-click with Blaze Wand.
 
 achievement.craftCactus=Craft Cactus
-achievement.craftCactus.desc=Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftCactus.desc=Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling0=Craft Oak Sapling from Cactus
-achievement.craftSapling0.desc=Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling0.desc=Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling1=Craft Spruce Sapling
-achievement.craftSapling1.desc=Toss 1x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling1.desc=Toss 1x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling2=Craft Birch Sapling
-achievement.craftSapling2.desc=Toss 1x Spruce Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling2.desc=Toss 1x Spruce Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling3=Craft Jungle Sapling
-achievement.craftSapling3.desc=Toss 1x Birch Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling3.desc=Toss 1x Birch Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling4=Craft Acacia Sapling
-achievement.craftSapling4.desc=Toss 1x Jungle Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling4.desc=Toss 1x Jungle Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling5=Craft Dark Oak Sapling
-achievement.craftSapling5.desc=Toss 1x Acacia Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling5.desc=Toss 1x Acacia Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSapling6=Craft Oak Sapling from Dark Oak
-achievement.craftSapling6.desc=Toss 1x Dark Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSapling6.desc=Toss 1x Dark Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftPumpkin=Craft Pumpkin
-achievement.craftPumpkin.desc=Toss 3x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftPumpkin.desc=Toss 3x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftMelonBlock=Craft Melon Block
-achievement.craftMelonBlock.desc=Toss 2x Pumpkin into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftMelonBlock.desc=Toss 2x Pumpkin into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftVine=Craft Vine
-achievement.craftVine.desc=Toss 2x Melon Block into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftVine.desc=Toss 2x Melon Block into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftLiyPad=Craft Lily Pad
-achievement.craftLiyPad.desc=Toss 2x Vine into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftLiyPad.desc=Toss 2x Vine into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.craftSlimeBall=Craft Slime Ball
-achievement.craftSlimeBall.desc=Toss 8x Magma Cream into the Altar Tier 2 and right-click with a Stick Wand in right hand
+achievement.craftSlimeBall.desc=Toss 8x Magma Cream into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 achievement.buildAltarTier3=Build Altar Tier 3
-achievement.buildAltarTier3.desc=Add 1 block of Gold on each side of the Altar Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west) and replace the Cauldron
+achievement.buildAltarTier3.desc=Add 1 block of Gold on each side of the Altar Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west) and replace the Cauldron.
 
 achievement.smeltOnAltar=Smelting
-achievement.smeltOnAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Altar Tier 3 and right-click with Stick Wand in Right Hand and fuel (e.g. Coal) in Left Hand
+achievement.smeltOnAltar.desc=Toss smeltable items (e.g. Beef, Iron Ore) into Altar Tier 3 and right-click with Stick Wand in Right Hand and fuel (e.g. Coal) in Left Hand.
 
 achievement.fullTreeCut=Full Tree Cut
-achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right
+achievement.fullTreeCut.desc=Take Blaze Wand to left hand and Axe-type weapon to right.
 
 achievement.machineFarm=Vanilla Automatic Farm
 achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume 1x Wheat Seed.
@@ -336,55 +336,55 @@ achievement.quarry=Vanilla Quarry !!!
 achievement.quarry.desc=Place Cauldron and than on the Left side of the Cauldron place DiamondBlock and on the Back place RedstoneBlock. On Top place inventory (Chest) as input (with fuel). On Right place inventory (Chest) as output. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry.
 
 achievement.arrowMachineGun=Arrow Machine Gun
-achievement.arrowMachineGun.desc=Take any Arrow to left hand and Nether Star to right hand and right-click (or hold)
+achievement.arrowMachineGun.desc=Take any Arrows to left hand and Nether Star to right hand and right-click (or hold if more arrows in left hand).
 
 achievement.craftGoldIngot=Craft Gold Ingot
-achievement.craftGoldIngot.desc=Toss 8x Iron Ingot into the Altar Tier 3 and right-click with a Stick Wand in hand
+achievement.craftGoldIngot.desc=Toss 8x Iron Ingot into the Altar Tier 3 and right-click with a Stick Wand in hand.
 
 achievement.blockAbsorber=Block Absorber
 achievement.blockAbsorber.desc=Take Blaze Wand in right hand and 1x Glass in left hand. Shift-right-click the Hopper. On top of the Hopper it will create a TileEntity that will absorb any Block which it detect on it's position and transport this Block to Hopper if possible.
 
 achievement.buildAltarTier4=Build Altar Tier 4
-achievement.buildAltarTier4.desc=Add 1 block of Redstone on each corner of Altar Tier 3 but one layer lower than Cauldron and replace the Cauldron
+achievement.buildAltarTier4.desc=Add 1 block of Redstone on each corner of Altar Tier 3 but one layer lower than Cauldron and replace the Cauldron.
 
 achievement.craftRottenFlesh=Craft Rotten Flesh
-achievement.craftRottenFlesh.desc=Toss 1x Leather into the Altar Tier 4 and right-click with a Stick Wand in hand
+achievement.craftRottenFlesh.desc=Toss 1x Leather into the Altar Tier 4 and right-click with a Stick Wand in hand.
 
 achievement.craftString=Craft String
-achievement.craftString.desc=Toss 2x Rotten Flesh into the Altar Tier 4 and right-click with a Stick Wand in hand
+achievement.craftString.desc=Toss 2x Rotten Flesh into the Altar Tier 4 and right-click with a Stick Wand in hand.
 
 achievement.craftSpiderEye=Craft Spider Eye
-achievement.craftSpiderEye.desc=Toss 2x String into the Altar Tier 4 and right-click with a Stick Wand in hand
+achievement.craftSpiderEye.desc=Toss 2x String into the Altar Tier 4 and right-click with a Stick Wand in hand.
 
 achievement.craftBone=Craft Bone
-achievement.craftBone.desc=Toss 2x Spider Eye into the Altar Tier 4 and right-click with a Stick Wand in hand
+achievement.craftBone.desc=Toss 2x Spider Eye into the Altar Tier 4 and right-click with a Stick Wand in hand.
 
 achievement.craftArrow=Craft Arrow
-achievement.craftArrow.desc=Toss 2x Bone into the Altar Tier 4 and right-click with a Stick Wand in hand
+achievement.craftArrow.desc=Toss 2x Bone into the Altar Tier 4 and right-click with a Stick Wand in hand.
 
 achievement.craftEnderPearl=Craft Ender Pearl
-achievement.craftEnderPearl.desc=Toss 2x Arrow into the Altar Tier 4 and right-click with a Stick Wand in hand
+achievement.craftEnderPearl.desc=Toss 2x Arrow into the Altar Tier 4 and right-click with a Stick Wand in hand.
 
 achievement.buildAltarTier5=Build Altar Tier 5
-achievement.buildAltarTier5.desc=Add 1 block of Lapis on each side of the Altar Tier 4 but one layer lower than Cauldron, 5 blocks away from the center (north, south, east, west) and replace the Cauldron
+achievement.buildAltarTier5.desc=Add 1 block of Lapis on each side of the Altar Tier 4 but one layer lower than Cauldron, 5 blocks away from the center (north, south, east, west) and replace the Cauldron.
 
 achievement.craftGlowstoneDust=Craft Glowstone Dust
-achievement.craftGlowstoneDust.desc=Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altar Tier 5 and right-click with a Blaze Wand in hand
+achievement.craftGlowstoneDust.desc=Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altar Tier 5 and right-click with a Blaze Wand in hand.
 
 achievement.craftNetherrack=Craft Netherrack
-achievement.craftNetherrack.desc=Toss 1x Stone + 2x Coal into Altar Tier 5 and right-click with Blaze Wand in right hand
+achievement.craftNetherrack.desc=Toss 1x Stone + 2x Coal into Altar Tier 5 and right-click with Blaze Wand in right hand.
 
 achievement.craftSoulSand=Craft Soul Sand
-achievement.craftSoulSand.desc=Toss 1x Sand + 2x Coal into Altar Tier 5 and right-click with Blaze Wand in right hand
+achievement.craftSoulSand.desc=Toss 1x Sand + 2x Coal into Altar Tier 5 and right-click with Blaze Wand in right hand.
 
 achievement.craftMagmaBlock=Craft Magma Block
-achievement.craftMagmaBlock.desc=Toss 1x Netherrack + 1x Magma Cream into Altar Tier 5 and right-click with Blaze Wand in right hand
+achievement.craftMagmaBlock.desc=Toss 1x Netherrack + 1x Magma Cream into Altar Tier 5 and right-click with Blaze Wand in right hand.
 
 achievement.craftNetherWart=Craft Nether Wart
-achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar + 1x RedstoneDust into Altar Tier 5 and right-click with Blaze Wand in right hand
+achievement.craftNetherWart.desc=Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar + 1x RedstoneDust into Altar Tier 5 and right-click with Blaze Wand in right hand.
 
 achievement.craftGhastTear=Craft Ghast Tear
-achievement.craftGhastTear.desc=Toss 4x Gunpowder + 4x Blaze Powder + 1x Lava Bucket into Altar Tier 5 and right-click with Blaze Wand in right hand
+achievement.craftGhastTear.desc=Toss 4x Gunpowder + 4x Blaze Powder + 1x Lava Bucket into Altar Tier 5 and right-click with Blaze Wand in right hand.
 
 achievement.pickupBlazeRod=Pick Blaze Rod
 achievement.pickupBlazeRod.desc=Pick Blaze Rod from the ground. Rename it in Anvil to 'Blaze Wand'.
@@ -405,58 +405,58 @@ achievement.potionedCrystal=Potioned Crystal
 achievement.potionedCrystal.desc=Drop 1x Nether Star + 1x Potion to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted Crystal. Hold it in inventory to get the effect of the Potion used in crafting.
 
 achievement.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
-achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand
+achievement.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand.
 
 achievement.accelerationCrystal=Acceleration Crystal
-achievement.accelerationCrystal.desc=Craft it with Nether Star in the middle and Books on top, bottom, left and right. Shift-right-click on block to speed it's ticks. (For instance: speed up Furnace)
+achievement.accelerationCrystal.desc=Craft it with Nether Star in the middle and Books on top, bottom, left and right. Shift-right-click on block to speed it's ticks. (For instance: speed up Furnace).
 
 achievement.buildAltarTier6=Build Altar Tier 6
-achievement.buildAltarTier6.desc=Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron
+achievement.buildAltarTier6.desc=Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron.
 
 achievement.inventoryBridge=Inventory Bridge
 achievement.inventoryBridge.desc=Save Inventory position into Inventory Selector and hold that item somewhere in main inventory. Hold Blaze Rod in right hand and 1x Stained Glass in left hand and Shift-Right-Click the inventory to place the end of the bridge. Items will be transfered from Inventory Selector's saved inventory to new clicked inventory.
 
 achievement.craftDiamond=Craft Diamond
-achievement.craftDiamond.desc=Toss 8x Gold Ingot into the Altar Tier 6 and right-click with a Blaze Wand in hand
+achievement.craftDiamond.desc=Toss 8x Gold Ingot into the Altar Tier 6 and right-click with a Blaze Wand in hand.
 
 achievement.buildAltarTier7=Build Altar Tier 7
-achievement.buildAltarTier7.desc=Add 1 block of Emerald on each side of the Altar Tier 4 but one layer lower than Cauldron, 7 blocks away from the center (north, south, east, west) and replace the Cauldron
+achievement.buildAltarTier7.desc=Add 1 block of Emerald on each side of the Altar Tier 4 but one layer lower than Cauldron, 7 blocks away from the center (north, south, east, west) and replace the Cauldron.
 
 achievement.craftGoldOre=Craft Gold Ore
-achievement.craftGoldOre.desc=Toss 16x Iron Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
+achievement.craftGoldOre.desc=Toss 16x Iron Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.
 
 achievement.craftCoalOre=Craft 4x Coal Ore
-achievement.craftCoalOre.desc=Toss 1x Gold Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
+achievement.craftCoalOre.desc=Toss 1x Gold Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.
 
 achievement.craftRedstoneOre=Craft Redstone Ore
-achievement.craftRedstoneOre.desc=Toss 16x Gold Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
+achievement.craftRedstoneOre.desc=Toss 16x Gold Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.
 
 achievement.craftLapisOre=Craft Lapis Ore
-achievement.craftLapisOre.desc=Toss 16x Redstone Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
+achievement.craftLapisOre.desc=Toss 16x Redstone Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.
 
 achievement.craftDiamondOre=Craft Diamond Ore
-achievement.craftDiamondOre.desc=Toss 16x Lapis Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
+achievement.craftDiamondOre.desc=Toss 16x Lapis Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.
 
 achievement.oreDoubling=Ore Doubling
 achievement.oreDoubling.desc=Place Cauldron. On each side of the Cauldron place Furnace. Drop ores into Cauldron and right-click with Nether Star in right hand and fuel in left hand.
 
 achievement.craftEmeraldOre=Craft Emerald Ore
-achievement.craftEmeraldOre.desc=Toss 8x Diamond Ore into Altar Tier 7 and right-click with Blaze Wand in right hand
+achievement.craftEmeraldOre.desc=Toss 8x Diamond Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.
 
 achievement.craftEmerald=Craft Emerald
-achievement.craftEmerald.desc=Toss 8x Diamond into the Altar Tier 7 and right-click with a Blaze Wand in hand
+achievement.craftEmerald.desc=Toss 8x Diamond into the Altar Tier 7 and right-click with a Blaze Wand in hand.
 
 achievement.craftNetherStar=Craft Nether Star
-achievement.craftNetherStar.desc=Toss 4x Emerald Block into the Altar Tier 7 and right-click with a Blaze Wand in hand
+achievement.craftNetherStar.desc=Toss 4x Emerald Block into the Altar Tier 7 and right-click with a Blaze Wand in hand.
 
 achievement.itemMagnet=Item Magnet
-achievement.itemMagnet.desc=Hold 2 Nether Stars anywhere in Your inventory but as different stacks (1x Nether Star + 1x Nether Star)
+achievement.itemMagnet.desc=Hold 2 Nether Stars anywhere in Your inventory but as different stacks (1x Nether Star + 1x Nether Star).
 
 achievement.craftDragonEgg=Craft Dragon Egg
-achievement.craftDragonEgg.desc=Toss 4x Nether Star into the Altar Tier 7 and right-click with a Blaze Wand in hand
+achievement.craftDragonEgg.desc=Toss 4x Nether Star into the Altar Tier 7 and right-click with a Blaze Wand in hand.
 
 achievement.craftDragonHead=Craft Dragon Head
-achievement.craftDragonHead.desc=Toss 1x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Wand in hand
+achievement.craftDragonHead.desc=Toss 1x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Wand in hand.
 
 achievement.craftEndCrystal=Craft End Crystal
-achievement.craftEndCrystal.desc=Toss 8x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Wand in hand
+achievement.craftEndCrystal.desc=Toss 8x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Wand in hand.
