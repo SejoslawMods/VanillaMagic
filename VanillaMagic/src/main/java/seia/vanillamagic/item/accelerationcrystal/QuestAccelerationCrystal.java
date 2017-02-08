@@ -12,12 +12,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
 
 public class QuestAccelerationCrystal extends Quest
 {
-	int updateTicks = 100;
+//	int updateTicks = 100;
 	@SubscribeEvent
 	public void rightClickBlock(RightClickBlock event)
 	{
@@ -43,7 +44,7 @@ public class QuestAccelerationCrystal extends Quest
 				{
 					TileEntity tile = world.getTileEntity(clickedPos);
 					Random rand = new Random();
-					for(int i = 0; i < updateTicks; i++)
+					for(int i = 0; i < VMConfig.accelerationCrystalUpdateTicks; i++)
 					{
 						if(tile == null)
 						{

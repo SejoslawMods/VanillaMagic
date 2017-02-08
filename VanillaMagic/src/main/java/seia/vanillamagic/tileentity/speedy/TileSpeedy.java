@@ -19,6 +19,7 @@ import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.speedy.ISpeedy;
 import seia.vanillamagic.api.util.Box;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.NBTHelper;
@@ -44,8 +45,8 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
 	public void init(World world, BlockPos pos)
 	{
 		super.init(world, pos);
-		this.ticks = 1000;
-		this.size = 4;
+		this.ticks = VMConfig.tileSpeedyTicks;
+		this.size = VMConfig.tileSpeedySize;
 		setBox();
 	}
 	

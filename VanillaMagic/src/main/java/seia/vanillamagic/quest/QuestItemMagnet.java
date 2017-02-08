@@ -12,12 +12,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.config.VMConfig;
 
 public class QuestItemMagnet extends Quest
 {
 	public final ItemStack star = new ItemStack(Items.NETHER_STAR);
-	public final int range = 6;
-	public final int maxPulledItems = 200;
+	public final int range = VMConfig.itemMagnetRange;
+	public final int maxPulledItems = VMConfig.itemMagnetMaxPulledItems;
 	
 	@SubscribeEvent
 	public void playerTick(LivingUpdateEvent event)

@@ -16,6 +16,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -45,7 +46,7 @@ public class QuestMotherNatureCrystal extends Quest
 	
 	public void onTickUpdate(ItemStack leftHand, World world, EntityPlayer player) 
 	{
-		int range = 10;
+		int range = VMConfig.motherNatureCrystalRange; // def 10
 		int verticalRange = 3;
 		int posX = (int) Math.round(player.posX - 0.5f);
 		int posY = (int) player.posY;

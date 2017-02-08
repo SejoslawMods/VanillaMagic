@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.BlockHelper;
@@ -52,7 +53,7 @@ public class QuestLiquidSuppressionCrystal extends Quest
 		int x = (int) player.posX;
 		int y = (int) player.posY;
 		int z = (int) player.posZ;
-		int radius = 5;
+		int radius = VMConfig.liquidSuppressionCrystalRadius; // def 5
 		int refresh = 100; // how often block should be refreshed
 		
 		for(int i = -radius; i <= radius; ++i)

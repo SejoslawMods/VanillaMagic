@@ -17,13 +17,33 @@ public class VMConfig
 {
 	private static Configuration _config;
 	
-	public static String categoryConsole = "Console";
-	public static String showCustomTileEntitySavingName = "showCustomTileEntitySavingName";
+	// Console
+	private static final String _categoryConsole = "Console";
 	public static boolean showCustomTileEntitySaving = false;
 	
-	public static String categoryPlayer = "Player";
-	public static String givePlayerCustomBooksOnLoggedInName = "givePlayerCustomBooksOnLoggedIn";
+	// Player
+	private static final String _categoryPlayer = "Player";
 	public static boolean givePlayerCustomBooksOnLoggedIn = true;
+	
+	// Machine
+	private static final String _categoryMachine = "Machine";
+	public static int tileSpeedyTicks = 1000;
+	public static int tileSpeedySize = 4;
+	public static int tileMachineOneOperationCost = 100;
+	public static int tileMachineMaxTicks = 4000;
+	
+	// Item
+	private static final String _categoryItem = "Item";
+	public static int accelerationCrystalUpdateTicks = 100;
+	public static int liquidSuppressionCrystalRadius = 5;
+	public static int motherNatureCrystalRange = 10;
+	public static int itemMagnetRange = 6;
+	public static int itemMagnetMaxPulledItems = 200;
+	
+	// Spell
+	private static final String _categorySpell = "Spell";
+	public static int spellCostSummonFriendly = 32;
+	public static int spellCostSummonHostile = 8;
 	
 	private VMConfig()
 	{
@@ -80,19 +100,107 @@ public class VMConfig
 	
 	public static void processConfig()
 	{
-		_config.addCustomCategoryComment(categoryConsole, "Options connected with console.");
+		// Console
+		_config.addCustomCategoryComment(_categoryConsole, "Options connected with Console.");
 		showCustomTileEntitySaving = _config.getBoolean(
-				showCustomTileEntitySavingName, 
-				categoryConsole, 
+				"showCustomTileEntitySaving", 
+				_categoryConsole, 
 				showCustomTileEntitySaving, 
-				"Should console show when World save / load CustomTileEntity (console spam)");
+				"Should console show when World save / load CustomTileEntity (console spam).");
 		
-		_config.addCustomCategoryComment(categoryPlayer, "Options connected with Player");
+		// Player
+		_config.addCustomCategoryComment(_categoryPlayer, "Options connected with Player");
 		givePlayerCustomBooksOnLoggedIn = _config.getBoolean(
-				givePlayerCustomBooksOnLoggedInName, 
-				categoryPlayer, 
+				"givePlayerCustomBooksOnLoggedIn", 
+				_categoryPlayer, 
 				givePlayerCustomBooksOnLoggedIn, 
-				"Should Player get VanillaMagic custom books on spawn (logged in)");
+				"Should Player get Vanilla Magic custom books on spawn (logged in).");
+		
+		// Machine
+		_config.addCustomCategoryComment(_categoryMachine, "Options connected with Vanilla Magic Machines");
+		tileSpeedyTicks = _config.getInt(
+				"tileSpeedyTicks", 
+				_categoryMachine, 
+				tileSpeedyTicks, 
+				1, 
+				Integer.MAX_VALUE, 
+				"The number of ticks in 1 Minecraft tick that Speedy can do to a single block.");
+		tileSpeedySize = _config.getInt(
+				"tileSpeedySize", 
+				_categoryMachine, 
+				tileSpeedySize, 
+				1, 
+				Integer.MAX_VALUE, 
+				"Size of the Speedy - Area on which Speedy can operate.");
+		tileMachineOneOperationCost = _config.getInt(
+				"tileMachineOneOperationCost", 
+				_categoryMachine, 
+				tileMachineOneOperationCost, 
+				1, 
+				Integer.MAX_VALUE, 
+				"Cost of a single Machine operation.");
+		tileMachineMaxTicks = _config.getInt(
+				"tileMachineMaxTicks", 
+				_categoryMachine, 
+				tileMachineMaxTicks, 
+				tileMachineMaxTicks, 
+				Integer.MAX_VALUE, 
+				"Max ticks (internal fuel) that Machine can store.");
+		
+		// Item
+		_config.addCustomCategoryComment(_categoryItem, "Options connected with Vanilla Magic Items");
+		accelerationCrystalUpdateTicks = _config.getInt(
+				"accelerationCrystalUpdateTicks", 
+				_categoryItem, 
+				accelerationCrystalUpdateTicks, 
+				1, 
+				Integer.MAX_VALUE, 
+				"The number of ticks that should be ticked when Player holds Acceleration Crystal.");
+		liquidSuppressionCrystalRadius = _config.getInt(
+				"liquidSuppressionCrystalRadius", 
+				_categoryItem, 
+				liquidSuppressionCrystalRadius, 
+				1, 
+				Integer.MAX_VALUE, 
+				"Radius on which Liquid Suppression Crystal works (in blocks).");
+		motherNatureCrystalRange = _config.getInt(
+				"motherNatureCrystalRange", 
+				_categoryItem, 
+				motherNatureCrystalRange, 
+				1, 
+				Integer.MAX_VALUE, 
+				"Range on which Mother Nature Crystal will work.");
+		itemMagnetRange = _config.getInt(
+				"itemMagnetRange", 
+				_categoryItem, 
+				itemMagnetRange, 
+				1, 
+				Integer.MAX_VALUE, 
+				"Range on which Item Magnet will work.");
+		itemMagnetMaxPulledItems = _config.getInt(
+				"itemMagnetMaxPulledItems", 
+				_categoryItem, 
+				itemMagnetMaxPulledItems, 
+				1, 
+				Integer.MAX_VALUE, 
+				"The maximum number of items that Item Magnet can pull at once.");
+		
+		// Spell
+		_config.addCustomCategoryComment(_categorySpell, "Options connected with Vanilla Magic spells");
+		spellCostSummonFriendly = _config.getInt(
+				"spellCostSummonFriendly", 
+				_categorySpell, 
+				spellCostSummonFriendly, 
+				1, 
+				64, 
+				"Cost of one friendly mob spawn (in items from hand).");
+		spellCostSummonHostile = _config.getInt(
+				"spellCostSummonHostile", 
+				_categorySpell, 
+				spellCostSummonHostile, 
+				1, 
+				64, 
+				"Cost of one hostile mob spawn (in items from hand).");
 		
 		_config.save();
 	}
