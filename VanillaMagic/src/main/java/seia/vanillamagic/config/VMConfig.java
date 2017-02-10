@@ -45,6 +45,12 @@ public class VMConfig
 	public static int spellCostSummonFriendly = 32;
 	public static int spellCostSummonHostile = 8;
 	
+	// Meteor
+	private static final String _categoryMeteor = "Meteor";
+	public static float basicMeteorSize = 5.0f;
+	public static int basicMeteorExplosionPower = 200;
+	public static float explosionDropRate = 0.0f;
+	
 	private VMConfig()
 	{
 	}
@@ -201,6 +207,30 @@ public class VMConfig
 				1, 
 				64, 
 				"Cost of one hostile mob spawn (in items from hand).");
+		
+		// Meteor
+		_config.addCustomCategoryComment(_categoryMeteor, "Options connected with Meteor Explosion");
+		basicMeteorSize = _config.getFloat(
+				"basicMeteorSize", 
+				_categoryMeteor, 
+				basicMeteorSize, 
+				1.0f, 
+				Float.MAX_VALUE, 
+				"Basic size of the Meteor.");
+		basicMeteorExplosionPower = _config.getInt(
+				"basicMeteorExplosionPower", 
+				_categoryMeteor, 
+				basicMeteorExplosionPower, 
+				1, 
+				Integer.MAX_VALUE, 
+				"Meteor explosion power.");
+		explosionDropRate = _config.getFloat(
+				"explosionDropRate", 
+				_categoryMeteor, 
+				explosionDropRate, 
+				0.0f, 
+				1.0f, 
+				"Rate between 0-1 for block drops from explosion.");
 		
 		_config.save();
 	}

@@ -8,11 +8,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import seia.vanillamagic.config.VMConfig;
+import seia.vanillamagic.util.explosion.ExplosionHelper;
 
 public class EntityMeteor extends EntityLargeFireball
 {
-	public static final float BASIC_METEOR_SIZE = 5f;
-	public static final int BASIC_METEOR_EXPLOSION_POWER = 20;
+//	public static final float BASIC_METEOR_SIZE = 5f;
+//	public static final int BASIC_METEOR_EXPLOSION_POWER = 100; // def 20
 
 	public EntityMeteor(EntityLivingBase castingEntity, 
 			double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ,
@@ -21,12 +23,14 @@ public class EntityMeteor extends EntityLargeFireball
 		super(castingEntity.world);
 		setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
         setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
-		setSize(BASIC_METEOR_SIZE, BASIC_METEOR_SIZE);
-		explosionPower = BASIC_METEOR_EXPLOSION_POWER;
+        float baseSize = VMConfig.basicMeteorSize;
+		//setSize(BASIC_METEOR_SIZE, BASIC_METEOR_SIZE);
+        setSize(baseSize, baseSize);
+		this.explosionPower = VMConfig.basicMeteorExplosionPower; //BASIC_METEOR_EXPLOSION_POWER;
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
-		shootingEntity = castingEntity;
+		this.shootingEntity = castingEntity;
 		double accel = (double)MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
 		this.accelerationX = 0;
 		this.accelerationY = accelY / accel * 0.1D;
@@ -38,6 +42,7 @@ public class EntityMeteor extends EntityLargeFireball
 	 */
 	protected void onImpact(RayTraceResult result)
 	{
+		super.onImpact(result);
 		if(!this.world.isRemote)
 		{
 			if(result.entityHit != null)
@@ -46,7 +51,8 @@ public class EntityMeteor extends EntityLargeFireball
 				this.applyEnchantments(this.shootingEntity, result.entityHit);
 			}
 			boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
-			this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+			//this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+			ExplosionHelper.newExplosion(this.world, (Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
 			this.setDead();
 		}
 	}

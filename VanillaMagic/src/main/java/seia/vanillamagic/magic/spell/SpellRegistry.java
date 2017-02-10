@@ -73,7 +73,7 @@ import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
 
-public class SpellRegistry 
+public class SpellRegistry
 {
 	// All registered Spells.
 	private static final List<ISpell> _SPELLS = new ArrayList<>();
@@ -103,7 +103,7 @@ public class SpellRegistry
 	public static final Spell SPELL_WEATHER_CLEAR = new SpellWeatherClear(13, "Clear weather", "spellWeatherClear", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.GLASS_BOTTLE, 1));
 	public static final Spell SPELL_WEATHER_THUNDERSTORM = new SpellWeatherThunderStorm(14, "Make thunderstorm", "spellWeatherThunderstorm", WandRegistry.WAND_BLAZE_ROD, ItemStackHelper.getHead(1, 4));
 	
-	// EntityAnimal + EntityAgeable + EntityPassive Summons
+	// Passive Mobs Summon
 	public static final SpellSummonPassive SPELL_SUMMON_CHICKEN = new SpellSummonChicken(100, "Summon Chicken", "spellSummonChicken", SUMMON_REQUIRED_WAND, new ItemStack(Items.CHICKEN, SUMMON_FRIENDLY_COST_ITEMSTACK));
 	public static final SpellSummonPassive SPELL_SUMMON_PIG = new SpellSummonPig(101, "Summon Pig", "spellSummonPig", SUMMON_REQUIRED_WAND, new ItemStack(Items.PORKCHOP, SUMMON_FRIENDLY_COST_ITEMSTACK));
 	public static final SpellSummonPassive SPELL_SUMMON_COW = new SpellSummonCow(102, "Summon Cow", "spellSummonCow", SUMMON_REQUIRED_WAND, new ItemStack(Items.BEEF, SUMMON_FRIENDLY_COST_ITEMSTACK));
@@ -118,7 +118,7 @@ public class SpellRegistry
 	public static final SpellSummonPassive SPELL_SUMMON_LAMA = new SpellSummonLama(111, "Summon Lama", "spellSummonLama", SUMMON_REQUIRED_WAND, new ItemStack(Items.LEATHER, SUMMON_FRIENDLY_COST_ITEMSTACK));
 	public static final SpellSummonPassive SPELL_SUMMON_SNOWMAN = new SpellSummonSnowman(112, "Summon Snowman", "spellSummonSnowman", SUMMON_REQUIRED_WAND, new ItemStack(Blocks.SNOW, 2));
 	
-	// EntityMob + Monsters Summon
+	// Hostile Mobs Summon
 	public static final SpellSummonHostile SPELL_SUMMON_ZOMBIE = new SpellSummonZombie(200, "Summon Zombie", "spellSummonZombie", SUMMON_REQUIRED_WAND, new ItemStack(Items.ROTTEN_FLESH, SUMMON_HOSTILE_COST_ITEMSTACK));
 	public static final SpellSummonHostile SPELL_SUMMON_CREEPER = new SpellSummonCreeper(201, "Summon Creeper", "spellSummonCreeper", SUMMON_REQUIRED_WAND, new ItemStack(Items.GUNPOWDER, SUMMON_HOSTILE_COST_ITEMSTACK));
 	public static final SpellSummonHostile SPELL_SUMMON_SKELETON = new SpellSummonSkeleton(202, "Summon Skeleton", "spellSummonSkeleton", SUMMON_REQUIRED_WAND, new ItemStack(Items.BONE, SUMMON_HOSTILE_COST_ITEMSTACK));
