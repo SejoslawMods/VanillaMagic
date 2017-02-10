@@ -108,6 +108,9 @@ achievement.spellSummonLightningBolt.desc=Hold Blaze Wand in Your hand and at le
 achievement.spellSummonChicken=Summon Chicken
 achievement.spellSummonChicken.desc=Hold Nether Star in Your hand and 32x Chicken in Your left hand and right-click on block
 
+achievement.spellSummonSquid=Summon Squid
+achievement.spellSummonSquid.desc=Hold Nether Star in Your hand and 32x Ink in Your left hand and right-click on block
+
 achievement.spellSummonPig=Summon Pig
 achievement.spellSummonPig.desc=Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block.
 
@@ -123,24 +126,36 @@ achievement.spellSummonSheep.desc=Hold Nether Star in Your hand and 32x Mutton i
 achievement.spellSummonWolf=Summon Wolf
 achievement.spellSummonWolf.desc=Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block.
 
+achievement.spellSummonLama=Summon Lama
+achievement.spellSummonLama.desc=Hold Nether Star in Your hand and 32x Leather in Your left hand and right-click on block.
+
 achievement.spellSummonRabbit=Summon Rabbit
 achievement.spellSummonRabbit.desc=Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block.
 
-achievement.spellSummonHorse=Summon Horse
+achievement.spellSummonHorse=Summon Horse (percent for Donkey or Mule)
 achievement.spellSummonHorse.desc=Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block.
 
 achievement.spellSummonVillager=Summon Villager
 achievement.spellSummonVillager.desc=Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block.
 
+achievement.spellSummonIronGolem=Summon IronGolem
+achievement.spellSummonIronGolem.desc=Hold Nether Star in Your hand and 32x Iron Ingot in Your left hand and right-click on block.
+
+achievement.spellSummonSnowman=Summon Snowman
+achievement.spellSummonSnowman.desc=Hold Nether Star in Your hand and 2x Snow Block in Your left hand and right-click on block.
+
+achievement.spellSummonEndermite=Summon Endermite
+achievement.spellSummonEndermite.desc=Hold Nether Star in Your hand and 3x Blaze Powder in Your left hand and right-click on block.
 
 
-achievement.spellSummonZombie=Summon Zombie
+
+achievement.spellSummonZombie=Summon Zombie (percent for being on Horse)
 achievement.spellSummonZombie.desc=Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block.
 
 achievement.spellSummonCreeper=Summon Creeper
 achievement.spellSummonCreeper.desc=Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block.
 
-achievement.spellSummonSkeleton=Summon Skeleton
+achievement.spellSummonSkeleton=Summon Skeleton (percent for being on Horse)
 achievement.spellSummonSkeleton.desc=Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block.
 
 achievement.spellSummonBlaze=Summon Blaze
@@ -164,10 +179,19 @@ achievement.spellSummonSlime.desc=Hold Nether Star in Your hand and 8x Slime Bal
 achievement.spellSummonWitch=Summon Witch
 achievement.spellSummonWitch.desc=Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block.
 
+achievement.spellSummonVindicator=Summon Vindicator
+achievement.spellSummonVindicator.desc=Hold Nether Star in Your hand and Iron Axe in Your left hand and right-click on block.
+
+achievement.spellSummonVex=Summon Vex
+achievement.spellSummonVex.desc=Hold Nether Star in Your hand and Iron Sword in Your left hand and right-click on block.
+
+achievement.spellSummonEvoker=Summon Evoker
+achievement.spellSummonEvoker.desc=Hold Nether Star in Your hand and 2x Emerald in Your left hand and right-click on block.
+
 achievement.spellSummonPigman=Summon Pigman
 achievement.spellSummonPigman.desc=Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.
 
-achievement.spellSummonGuardian=Summon Guardian
+achievement.spellSummonGuardian=Summon Guardian (percent for Elder)
 achievement.spellSummonGuardian.desc=Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block.
 
 achievement.spellSummonPolarBear=Summon Polar Bear
@@ -333,7 +357,7 @@ achievement.mining3x3=Mining 3x3
 achievement.mining3x3.desc=
 
 achievement.quarry=Vanilla Quarry !!!
-achievement.quarry.desc=Place Cauldron and than on the Left side of the Cauldron place DiamondBlock and on the Back place RedstoneBlock. On Top place inventory (Chest) as input (with fuel). On Right place inventory (Chest) as output. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry.
+achievement.quarry.desc=Place Cauldron and than on the Left side of the Cauldron place DiamondBlock and on the Front place RedstoneBlock. On Top place inventory (Chest) as input (with fuel). On Right place inventory (Chest) as output. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry.
 
 achievement.arrowMachineGun=Arrow Machine Gun
 achievement.arrowMachineGun.desc=Take any Arrows to left hand and Nether Star to right hand and right-click (or hold if more arrows in left hand).

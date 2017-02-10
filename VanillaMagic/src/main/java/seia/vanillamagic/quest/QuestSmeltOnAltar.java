@@ -13,7 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.AltarChecker;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.SmeltingHelper;
@@ -24,13 +25,13 @@ public class QuestSmeltOnAltar extends Quest
 	public static final int ONE_ITEM_SMELT_TICKS = 200;
 	
 	protected int requiredAltarTier;
-	protected EnumWand requiredMinimalWand;
+	protected IWand requiredMinimalWand;
 	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
 		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
-		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	public int getRequiredAltarTier()
@@ -38,7 +39,7 @@ public class QuestSmeltOnAltar extends Quest
 		return requiredAltarTier;
 	}
 	
-	public EnumWand getRequiredWand()
+	public IWand getRequiredWand()
 	{
 		return requiredMinimalWand;
 	}
@@ -49,7 +50,7 @@ public class QuestSmeltOnAltar extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos cauldronPos = event.getPos();
 		// player has got required wand in hand
-		if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
+		if(WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID()))
 		{
 			// check if player has the "fuel" in offHand
 			ItemStack fuelOffHand = player.getHeldItemOffhand();

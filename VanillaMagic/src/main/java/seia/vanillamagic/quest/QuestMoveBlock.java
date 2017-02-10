@@ -15,8 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 
@@ -27,12 +28,12 @@ public class QuestMoveBlock extends Quest
 	 * If it is a book, it must be a renamed book.
 	 */
 	protected ItemStack requiredStackOffHand;
-	protected EnumWand requiredWand;
+	protected IWand requiredWand;
 	
 	public void readData(JsonObject jo)
 	{
 		this.requiredStackOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredStackOffHand").getAsJsonObject());
-		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		this.requiredWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
 		this.icon = requiredStackOffHand.copy();
 		super.readData(jo);
 	}
@@ -42,7 +43,7 @@ public class QuestMoveBlock extends Quest
 		return requiredStackOffHand;
 	}
 	
-	public EnumWand getRequiredWand()
+	public IWand getRequiredWand()
 	{
 		return requiredWand;
 	}
@@ -63,12 +64,12 @@ public class QuestMoveBlock extends Quest
 		{
 			return;
 		}
-		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(mainHand);
+		IWand wandPlayerHand = WandRegistry.getWandByItemStack(mainHand);
 		if(wandPlayerHand == null)
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+		if(WandRegistry.areWandsEqual(requiredWand, wandPlayerHand))
 		{
 			if(player.isSneaking())
 			{

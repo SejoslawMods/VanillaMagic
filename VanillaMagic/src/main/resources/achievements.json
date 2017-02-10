@@ -1661,6 +1661,14 @@
 	"spellID":100
 },
 {
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonChicken",
+    "posX":0,
+    "posY":2,
+    "questName":"Summon Squid",
+    "spellID":110
+},
+{
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
 	"requiredQuest":"spellSummonChicken",
 	"posX":-2,
@@ -1701,6 +1709,14 @@
 	"spellID":105
 },
 {
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonWolf",
+    "posX":0,
+    "posY":2,
+    "questName":"Summon Lama",
+    "spellID":111
+},
+{
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
 	"requiredQuest":"spellSummonSheep",
 	"posX":-2,
@@ -1723,6 +1739,22 @@
 	"posY":0,
 	"questName":"Summon Villager",
 	"spellID":108
+},
+{
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonVillager",
+    "posX":0,
+    "posY":2,
+    "questName":"Summon IronGolem",
+    "spellID":109
+},
+{
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonIronGolem",
+    "posX":-2,
+    "posY":0,
+    "questName":"Summon Snowman",
+    "spellID":112
 },
 {
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
@@ -1754,7 +1786,7 @@
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Spider",
-	"spellID":207
+	"spellID":217
 },
 {
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
@@ -1763,6 +1795,14 @@
 	"posY":0,
 	"questName":"Summon Enderman",
 	"spellID":206
+},
+{
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonEnderman",
+    "posX":0,
+    "posY":-2,
+    "questName":"Summon Endermite",
+    "spellID":218
 },
 {
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
@@ -1789,12 +1829,36 @@
 	"spellID":209
 },
 {
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonWitch",
+    "posX":0,
+    "posY":-2,
+    "questName":"Summon Vindicator",
+    "spellID":219
+},
+{
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonVindicator",
+    "posX":0,
+    "posY":-2,
+    "questName":"Summon Vex",
+    "spellID":220
+},
+{
+    "questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
+    "requiredQuest":"spellSummonVex",
+    "posX":0,
+    "posY":-2,
+    "questName":"Summon Evoker",
+    "spellID":221
+},
+{
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
 	"requiredQuest":"spellSummonWitch",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Spider Jockey",
-	"spellID":217
+	"spellID":207
 },
 {
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",

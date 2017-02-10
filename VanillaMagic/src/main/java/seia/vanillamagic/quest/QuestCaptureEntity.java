@@ -16,19 +16,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 
 public class QuestCaptureEntity extends Quest
 {
 	protected ItemStack requiredStackOffHand;
-	protected EnumWand requiredWand;
+	protected IWand requiredWand;
 	
 	public void readData(JsonObject jo)
 	{
 		this.requiredStackOffHand = ItemStackHelper.getItemStackFromJSON(jo.get("requiredStackOffHand").getAsJsonObject());
-		this.requiredWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		this.requiredWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
 		this.icon = requiredStackOffHand.copy();
 		super.readData(jo);
 	}
@@ -38,7 +39,7 @@ public class QuestCaptureEntity extends Quest
 		return requiredStackOffHand;
 	}
 	
-	public EnumWand getRequirdWand()
+	public IWand getRequirdWand()
 	{
 		return requiredWand;
 	}
@@ -55,12 +56,12 @@ public class QuestCaptureEntity extends Quest
 		{
 			return;
 		}
-		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(rightHand);
+		IWand wandPlayerHand = WandRegistry.getWandByItemStack(rightHand);
 		if(wandPlayerHand == null)
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+		if(WandRegistry.areWandsEqual(requiredWand, wandPlayerHand))
 		{
 			if(player.isSneaking())
 			{
@@ -106,12 +107,12 @@ public class QuestCaptureEntity extends Quest
 		{
 			return;
 		}
-		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(rightHand);
+		IWand wandPlayerHand = WandRegistry.getWandByItemStack(rightHand);
 		if(wandPlayerHand == null)
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(requiredWand, wandPlayerHand))
+		if(WandRegistry.areWandsEqual(requiredWand, wandPlayerHand))
 		{
 			if(player.isSneaking())
 			{

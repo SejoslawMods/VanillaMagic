@@ -14,7 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.AltarChecker;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -28,7 +29,7 @@ public class QuestCraftOnAltar extends Quest
 	protected ItemStack[] ingredients;
 	protected ItemStack[] result;
 	protected int requiredAltarTier;
-	protected EnumWand requiredMinimalWand;
+	protected IWand requiredMinimalWand;
 	
 	public void readData(JsonObject jo)
 	{
@@ -36,7 +37,7 @@ public class QuestCraftOnAltar extends Quest
 		this.result = ItemStackHelper.getItemStackArrayFromJSON(jo, "result");
 		this.icon = result[0].copy();
 		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
-		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
 		super.readData(jo);
 	}
 	
@@ -55,7 +56,7 @@ public class QuestCraftOnAltar extends Quest
 		return requiredAltarTier;
 	}
 	
-	public EnumWand getRequiredWand()
+	public IWand getRequiredWand()
 	{
 		return requiredMinimalWand;
 	}
@@ -86,7 +87,7 @@ public class QuestCraftOnAltar extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos cauldronPos = event.getPos();
 		// player has got required wand in hand
-		if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
+		if(WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID()))
 		{
 			World world = player.world;
 			// is right-clicking on Cauldron

@@ -32,8 +32,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.item.VanillaMagicItems;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -66,7 +66,7 @@ public class QuestEnchantedBucket extends Quest
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(stackRightHand, EnumWand.BLAZE_ROD.wandItemStack))
+		if(WandRegistry.areWandsEqual(stackRightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
 		{
 			if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 			{

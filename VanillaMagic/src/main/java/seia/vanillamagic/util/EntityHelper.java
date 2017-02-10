@@ -124,7 +124,7 @@ public class EntityHelper
 		}
 	}
 	
-	public static void addRandomArmorToEntity(EntityLiving entity) 
+	public static void addRandomArmorToEntity(Entity entity) 
 	{
 		addRandomItemToSlot(entity, EntityEquipmentSlot.CHEST);
 		addRandomItemToSlot(entity, EntityEquipmentSlot.FEET);
@@ -133,7 +133,7 @@ public class EntityHelper
 		addRandomItemToSlot(entity, EntityEquipmentSlot.MAINHAND);
 	}
 	
-	public static EntityLiving addRandomItemToSlot(EntityLiving entity, EntityEquipmentSlot slot) 
+	public static Entity addRandomItemToSlot(Entity entity, EntityEquipmentSlot slot) 
 	{
 		entity.setItemStackToSlot(slot, EntityHelper.getRandomItemForSlot(slot));
 		return entity;

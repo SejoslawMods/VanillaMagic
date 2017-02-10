@@ -15,13 +15,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.WorldHelper;
 
 public class QuestBlockAbsorber extends Quest
 {
@@ -39,7 +37,7 @@ public class QuestBlockAbsorber extends Quest
 		{
 			return;
 		}
-		if(!EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, rightHand))
+		if(!WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), rightHand))
 		{
 			return;
 		}

@@ -1,4 +1,4 @@
-package seia.vanillamagic.spell.teleport;
+package seia.vanillamagic.magic.spell.spells.teleport;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;

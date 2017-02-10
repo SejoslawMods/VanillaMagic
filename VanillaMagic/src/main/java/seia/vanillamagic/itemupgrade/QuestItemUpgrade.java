@@ -20,8 +20,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.itemupgrade.ItemUpgradeRegistry.ItemEntry;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
@@ -53,7 +53,7 @@ public class QuestItemUpgrade extends Quest
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, rightHand))
+		if(WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), rightHand))
 		{
 			IBlockState clickedBlock = world.getBlockState(clickedPos);
 			if(clickedBlock.getBlock() instanceof BlockCauldron)

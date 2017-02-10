@@ -9,8 +9,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.item.VanillaMagicItems;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.WorldHelper;
 
@@ -28,7 +28,7 @@ public class QuestSpeedy extends Quest
 			if(VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
 			{
 				ItemStack rightHand = player.getHeldItemMainhand();
-				if(EnumWand.areWandsEqual(rightHand, EnumWand.BLAZE_ROD.wandItemStack))
+				if(WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
 				{
 					if(player.isSneaking())
 					{

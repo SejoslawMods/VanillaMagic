@@ -28,6 +28,8 @@ import seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper;
 import seia.vanillamagic.item.inventoryselector.InventorySelector;
 import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.itemupgrade.ItemUpgradeRegistry;
+import seia.vanillamagic.magic.spell.SpellRegistry;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 import seia.vanillamagic.tileentity.TileEntityRegistry;
@@ -62,6 +64,8 @@ public class VanillaMagic
 		LOGGER = event.getModLog();
 		VMConfig.preInit(event);
 		ItemUpgradeRegistry.start();
+		WandRegistry.preInit();
+		SpellRegistry.preInit();
 		CONFIG_ACHIEVEMENTS = new VMConfigAchievements(new File(event.getModConfigurationDirectory(), VMConfigAchievements.VM_DIRECTORY), event.getSourceFile());
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
 		for(int i = 0; i < QuestList.size(); ++i)

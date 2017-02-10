@@ -8,10 +8,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.QuestMachineActivate;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
@@ -32,7 +31,7 @@ public class QuestQuarry extends QuestMachineActivate
 		{
 			return;
 		}
-		if(itemInHand.getItem().equals(EnumWand.BLAZE_ROD.wandItemStack.getItem()))
+		if(itemInHand.getItem().equals(WandRegistry.WAND_BLAZE_ROD.getWandStack().getItem()))
 		{
 			if(canPlayerGetAchievement(player))
 			{

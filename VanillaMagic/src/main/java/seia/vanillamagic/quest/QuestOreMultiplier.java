@@ -13,7 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.OreMultiplierChecker;
@@ -22,13 +23,13 @@ import seia.vanillamagic.util.SmeltingHelper;
 public class QuestOreMultiplier extends Quest
 {
 	protected int multiplier;
-	protected EnumWand requiredMinimalWand;
+	protected IWand requiredMinimalWand;
 	
 	public void readData(JsonObject jo)
 	{
 		super.readData(jo);
 		this.multiplier = jo.get("multiplier").getAsInt();
-		this.requiredMinimalWand = EnumWand.getWandByTier(jo.get("wandTier").getAsInt());
+		this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
 	}
 	
 	public int getMultiplier()
@@ -36,7 +37,7 @@ public class QuestOreMultiplier extends Quest
 		return multiplier;
 	}
 	
-	public EnumWand getRequiredWand()
+	public IWand getRequiredWand()
 	{
 		return requiredMinimalWand;
 	}
@@ -47,7 +48,7 @@ public class QuestOreMultiplier extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos cauldronPos = event.getPos();
 		// player has got required wand in hand
-		if(EnumWand.isWandInMainHandRight(player, requiredMinimalWand.wandTier))
+		if(WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID()))
 		{
 			// check if player has the "fuel" in offHand
 			ItemStack fuelOffHand = player.getHeldItemOffhand();

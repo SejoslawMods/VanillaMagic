@@ -17,8 +17,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.WorldHelper;
@@ -90,7 +90,7 @@ public class QuestAutocrafting extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.world;
-		if(EnumWand.areWandsEqual(EnumWand.BLAZE_ROD.wandItemStack, player.getHeldItemMainhand()))
+		if(WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), player.getHeldItemMainhand()))
 		{
 			if(player.isSneaking())
 			{

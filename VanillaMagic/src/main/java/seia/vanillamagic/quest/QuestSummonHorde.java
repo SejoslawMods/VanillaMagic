@@ -9,9 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.spell.EnumSpell;
-import seia.vanillamagic.spell.EnumWand;
-import seia.vanillamagic.spell.SpellHelper;
+import seia.vanillamagic.magic.spell.SpellRegistry;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.ListHelper;
@@ -48,7 +47,7 @@ public class QuestSummonHorde extends Quest
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(rightHand, EnumWand.NETHER_STAR.wandItemStack))
+		if(WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_NETHER_STAR.getWandStack()))
 		{
 			if(ItemStack.areItemsEqual(leftHand, requiredLeftHand))
 			{
@@ -105,7 +104,7 @@ public class QuestSummonHorde extends Quest
 	 */
 	public void spawn(EntityPlayer player, World world, BlockPos spawnPos) 
 	{
-		int randID = ListHelper.getRandomObjectFromTab(EnumSpell.getSummonMobSpellIDsWithoutSpecific(EnumSpell.SUMMON_WITHER.spellID));
-		SpellHelper.spellSummonMob(player, spawnPos, EnumFacing.UP, null, randID, true);
+		int randID = ListHelper.getRandomObjectFromTab(SpellRegistry.getSummonMobSpellIDsWithoutSpecific(SpellRegistry.SPELL_SUMMON_WITHER.getSpellID()));
+		SpellRegistry.castSummonMob(player, world, spawnPos, EnumFacing.UP, randID, true);
 	}
 }

@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest.spell;
 
+import java.util.List;
+
 import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,26 +11,27 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import seia.vanillamagic.event.EventCastSpell;
+import seia.vanillamagic.magic.spell.ISpell;
+import seia.vanillamagic.magic.spell.SpellRegistry;
+import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumSpell;
-import seia.vanillamagic.spell.EnumWand;
-import seia.vanillamagic.spell.SpellHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
 public abstract class QuestCastSpell extends Quest
 {
-	protected EnumSpell spell;
+	protected ISpell spell;
 	
 	public void readData(JsonObject jo)
 	{
-		this.spell = EnumSpell.getSpellById(jo.get("spellID").getAsInt());
-		this.icon = spell.itemOffHand.copy();
-		this.questName = spell.spellName;
-		this.uniqueName = spell.spellUniqueName;
+		this.spell = SpellRegistry.getSpellById(jo.get("spellID").getAsInt());
+		this.icon = spell.getRequiredStackOffHand().copy();
+		this.questName = spell.getSpellName();
+		this.uniqueName = spell.getSpellUniqueName();
 		super.readData(jo);
 	}
 	
-	public EnumSpell getSpell()
+	public ISpell getSpell()
 	{
 		return spell;
 	}
@@ -44,12 +47,12 @@ public abstract class QuestCastSpell extends Quest
 		{
 			return false;
 		}
-		EnumWand wandPlayerHand = EnumWand.getWandByItemStack(caster.getHeldItemMainhand());
+		IWand wandPlayerHand = WandRegistry.getWandByItemStack(caster.getHeldItemMainhand());
 		if(wandPlayerHand == null)
 		{
 			return false;
 		}
-		if(EnumWand.isWandRightForSpell(wandPlayerHand, spell))
+		if(WandRegistry.isWandRightForSpell(wandPlayerHand, spell))
 		{
 			ItemStack casterOffHand = caster.getHeldItemOffhand();
 			if(ItemStackHelper.isNullStack(casterOffHand))
@@ -68,13 +71,13 @@ public abstract class QuestCastSpell extends Quest
 				if(caster.hasAchievement(achievement))
 				{
 					if(ItemStackHelper.getStackSize(casterOffHand) >= 
-							ItemStackHelper.getStackSize(spell.itemOffHand))
+							ItemStackHelper.getStackSize(spell.getRequiredStackOffHand()))
 					{
 						if(howManyTimesCasted == 1)
 						{
 							if(castRightSpell(caster, pos, face, hitVec))
 							{
-								ItemStackHelper.decreaseStackSize(casterOffHand, ItemStackHelper.getStackSize(spell.itemOffHand));
+								ItemStackHelper.decreaseStackSize(casterOffHand, ItemStackHelper.getStackSize(spell.getRequiredStackOffHand()));
 								howManyTimesCasted++;
 								return true;
 							}
@@ -96,16 +99,17 @@ public abstract class QuestCastSpell extends Quest
 	public boolean castRightSpell(EntityPlayer caster, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
-		for(int i = 0; i < EnumSpell.values().length; i++)
+		List<ISpell> spells = SpellRegistry.getSpells();
+		for(int i = 0; i < spells.size(); ++i)
 		{
-			EnumSpell es = EnumSpell.values()[i];
+			ISpell iSpell = spells.get(i);
 			{
-				if(spell.spellID == es.spellID)
+				if(spell.getSpellID() == iSpell.getSpellID())
 				{
-					if(spell.minimalWandTier.wandTier == es.minimalWandTier.wandTier)
+					if(spell.getWand().getWandID() == iSpell.getWand().getWandID())
 					{
-						EventCastSpell event = new EventCastSpell(caster, pos, face, hitVec, es);
-						return SpellHelper.castSpellById(spell.spellID, caster, pos, face, hitVec);
+						EventCastSpell event = new EventCastSpell(caster, pos, face, hitVec, iSpell);
+						return SpellRegistry.castSpellById(spell.getSpellID(), caster, pos, face, hitVec);
 					}
 				}
 			}

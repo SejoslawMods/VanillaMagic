@@ -15,8 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -48,7 +48,7 @@ public class QuestPotionedCrystal extends Quest
 		{
 			return;
 		}
-		if(EnumWand.areWandsEqual(stackRightHand, EnumWand.BLAZE_ROD.wandItemStack))
+		if(WandRegistry.areWandsEqual(stackRightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
 		{
 			if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 			{

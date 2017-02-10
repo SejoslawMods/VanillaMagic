@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.spell.EnumWand;
 import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestFullTreeCut extends Quest
@@ -30,7 +30,7 @@ public class QuestFullTreeCut extends Quest
 			{
 				return;
 			}
-			if(ItemStack.areItemsEqual(leftHand, EnumWand.BLAZE_ROD.wandItemStack))
+			if(ItemStack.areItemsEqual(leftHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
 			{
 				BlockPos origin = event.getPos();
 				World world = event.getWorld();

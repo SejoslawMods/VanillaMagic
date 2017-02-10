@@ -13,7 +13,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.spell.EnumWand;
+import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestArrowMachineGun extends Quest
@@ -31,7 +31,7 @@ public class QuestArrowMachineGun extends Quest
 		}
 		if(leftHand.getItem().equals(Items.ARROW) || leftHand.getItem().equals(Items.TIPPED_ARROW))
 		{
-			if(rightHand.getItem().equals(EnumWand.NETHER_STAR.wandItemStack.getItem()))
+			if(rightHand.getItem().equals(WandRegistry.WAND_NETHER_STAR.getWandStack().getItem()))
 			{
 				if(canPlayerGetAchievement(player))
 				{

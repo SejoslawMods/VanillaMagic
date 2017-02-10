@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import seia.vanillamagic.spell.teleport.TeleportHelper;
+import seia.vanillamagic.magic.spell.spells.teleport.TeleportHelper;
 
 public class EntitySpellPull extends EntitySpell
 {

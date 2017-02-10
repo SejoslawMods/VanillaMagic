@@ -51,7 +51,7 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 		// Lightning Bolt spawning
 		EntityLightningBolt entityLightningBolt = new EntityLightningBolt(world, 
 				spawnLightningBoltX, spawnLightningBoltY, spawnLightningBoltZ, false);
-		this.castingEntity.world.spawnEntity(entityLightningBolt);
+		this.world.spawnEntity(entityLightningBolt);
 		this.setDead();
 	}
 	
