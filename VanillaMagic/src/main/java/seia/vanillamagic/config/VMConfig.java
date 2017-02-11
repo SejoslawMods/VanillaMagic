@@ -7,8 +7,6 @@ import org.apache.logging.log4j.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.core.VanillaMagic;
@@ -48,8 +46,13 @@ public class VMConfig
 	// Meteor
 	private static final String _categoryMeteor = "Meteor";
 	public static float basicMeteorSize = 5.0f;
-	public static int basicMeteorExplosionPower = 200;
-	public static float explosionDropRate = 0.0f;
+	public static int basicMeteorExplosionPower = 25;
+	public static float explosionDropRate = 0.1f;
+	
+	// Hostile Mobs
+	private static final String _categoryHostileMobs = "Hostile Mobs";
+	public static int percentForSpawnWithArmor = 10;
+	public static int percentForSpawnOnHorse = 15;
 	
 	private VMConfig()
 	{
@@ -231,6 +234,23 @@ public class VMConfig
 				0.0f, 
 				1.0f, 
 				"Rate between 0-1 for block drops from explosion.");
+		
+		// Hostile Mobs
+		_config.addCustomCategoryComment(_categoryHostileMobs, "Options connected with Hostile Mobs Spawning with Spell");
+		percentForSpawnWithArmor = _config.getInt(
+				"percentForSpawnWithArmor", 
+				_categoryHostileMobs, 
+				percentForSpawnWithArmor, 
+				1, 
+				100, 
+				"Percent with which there is a chance for spawning a Mob with Armor (if possible for Armor).");
+		percentForSpawnOnHorse = _config.getInt(
+				"percentForSpawnOnHorse", 
+				_categoryHostileMobs, 
+				percentForSpawnOnHorse, 
+				1, 
+				100, 
+				"Percent with which there is a chance for spawning a Mob on Horse (if Mob has equal Horse).");
 		
 		_config.save();
 	}

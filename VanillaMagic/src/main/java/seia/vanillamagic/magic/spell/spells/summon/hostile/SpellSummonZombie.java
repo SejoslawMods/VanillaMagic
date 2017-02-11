@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import seia.vanillamagic.magic.wand.IWand;
 
-public class SpellSummonZombie extends SpellSummonHostile 
+public class SpellSummonZombie extends SpellSummonHostileWithRandomArmor
 {
 	public SpellSummonZombie(int spellID, String spellName, String spellUniqueName, IWand wand, 
 			ItemStack itemOffHand) 

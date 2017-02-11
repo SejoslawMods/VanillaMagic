@@ -366,6 +366,11 @@ public class VMExplosion extends Explosion
 		{
 			return ret;
 		}
+		if(block == Blocks.BEDROCK)
+		{
+			ret += 800D;
+			return ret;
+		}
 		if((block == Blocks.WATER) || (block == Blocks.FLOWING_WATER))
 		{
 			ret += 1.0D;
@@ -377,8 +382,8 @@ public class VMExplosion extends Explosion
 			{
 				return resistance;
 			}
-			double extra = (resistance + 4.0F) * 0.3D;
-			ret += extra * 6.0D;
+//			double extra = (resistance + 4.0F) * 0.3D;
+//			ret += extra * 6.0D;
 		}
 		return ret;
 	}

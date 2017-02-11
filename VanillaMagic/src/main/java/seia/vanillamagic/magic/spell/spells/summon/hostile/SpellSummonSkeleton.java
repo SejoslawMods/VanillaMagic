@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import seia.vanillamagic.magic.wand.IWand;
 
-public class SpellSummonSkeleton extends SpellSummonHostile 
+public class SpellSummonSkeleton extends SpellSummonHostileWithRandomArmor
 {
 	public SpellSummonSkeleton(int spellID, String spellName, String spellUniqueName, IWand wand,
 			ItemStack itemOffHand) 

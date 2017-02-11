@@ -3,6 +3,7 @@ package seia.vanillamagic.util.explosion;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class ExplosionHelper
@@ -11,7 +12,16 @@ public class ExplosionHelper
 	{
 	}
 	
-	public static VMExplosion newExplosion(World world, 
+	public static Explosion newExplosion1(World world, 
+											@Nullable Entity entity, 
+											double x, double y, double z, 
+											float strength, 
+											boolean isFlaming, boolean isSmoking)
+	{
+		return world.newExplosion((Entity)null, x, y, z, strength, isFlaming, isSmoking);
+	}
+	
+	public static Explosion newExplosion2(World world, 
 									@Nullable Entity entity, 
 									double x, double y, double z, 
 									float strength, 

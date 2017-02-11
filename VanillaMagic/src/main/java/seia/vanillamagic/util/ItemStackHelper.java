@@ -187,6 +187,10 @@ public class ItemStackHelper
 	 */
 	public static int getStackSize(ItemStack stack)
 	{
+		if(stack == null)
+		{
+			return 0;
+		}
 		return stack.getCount();
 	}
 	
@@ -196,6 +200,10 @@ public class ItemStackHelper
 	 */
 	public static void setStackSize(ItemStack stack, int value)
 	{
+		if(stack == null)
+		{
+			return;
+		}
 		stack.setCount(value);
 	}
 	
@@ -205,6 +213,10 @@ public class ItemStackHelper
 	 */
 	public static void increaseStackSize(ItemStack stack, int value)
 	{
+		if(stack == null)
+		{
+			return;
+		}
 		stack.grow(value);
 	}
 	
@@ -214,6 +226,10 @@ public class ItemStackHelper
 	 */
 	public static void decreaseStackSize(ItemStack stack, int value)
 	{
+		if(stack == null)
+		{
+			return;
+		}
 		stack.shrink(value);
 	}
 	
@@ -222,6 +238,10 @@ public class ItemStackHelper
 	 */
 	public static boolean isNullStack(ItemStack stack)
 	{
+		if(stack == null)
+		{
+			return true;
+		}
 		return stack.isEmpty();
 	}
 	

@@ -1,5 +1,7 @@
 package seia.vanillamagic.magic.spell.spells.summon;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
@@ -12,6 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.magic.spell.Spell;
 import seia.vanillamagic.magic.wand.IWand;
@@ -47,7 +50,11 @@ public abstract class SpellSummon extends Spell
 				Entity horse = getHorse(world);
 				if(horse != null)
 				{
-					entity.startRiding(horse);
+					int rand = new Random().nextInt(100);
+					if(rand < VMConfig.percentForSpawnOnHorse)
+					{
+						entity.startRiding(horse);
+					}
 				}
 				world.updateEntities();
 				return true;

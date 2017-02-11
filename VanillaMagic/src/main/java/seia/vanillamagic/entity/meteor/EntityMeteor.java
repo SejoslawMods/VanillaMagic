@@ -51,8 +51,7 @@ public class EntityMeteor extends EntityLargeFireball
 				this.applyEnchantments(this.shootingEntity, result.entityHit);
 			}
 			boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
-			//this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
-			ExplosionHelper.newExplosion(this.world, (Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+			ExplosionHelper.newExplosion2(this.world, (Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
 			this.setDead();
 		}
 	}
