@@ -29,24 +29,24 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class VMExplosion extends Explosion
 {
-	private final World world;
-	private final Entity exploder;
-	private final double explosionX;
-	private final double explosionY;
-	private final double explosionZ;
-	private final int mapHeight;
-	private final float power;
-	private final float explosionDropRate = VMConfig.explosionDropRate;
+	private final World _world;
+	private final Entity _exploder;
+	private final double _explosionX;
+	private final double _explosionY;
+	private final double _explosionZ;
+	private final int _mapHeight;
+	private final float _power;
+	private final float _explosionDropRate = VMConfig.explosionDropRate;
 	  
-	private final Random rng = new Random();
-	private final double maxDistance;
-	private final int areaSize;
-	private final int areaX;
-	private final int areaZ;
-	private final DamageSource damageSource;
-	private final List<EntityDamage> entitiesInRange = new ArrayList<>();
-	private final long[][] destroyedBlockPositions;
-	private ChunkCache chunkCache;
+	private final Random _random = new Random();
+	private final double _maxDistance;
+	private final int _areaSize;
+	private final int _areaX;
+	private final int _areaZ;
+	private final DamageSource _damageSource;
+	private final List<EntityDamage> _entitiesInRange = new ArrayList<>();
+	private final long[][] _destroyedBlockPositions;
+	private ChunkCache _chunkCache;
 	  
 	private static class XZposition
 	{
@@ -119,50 +119,50 @@ public class VMExplosion extends Explosion
 	{
 		super(world, entity, x, y, z, power, flaming, smoking);
 		
-		this.world = world;
-		this.exploder = entity;
-		this.explosionX = x;
-		this.explosionY = y;
-		this.explosionZ = z;
-		this.mapHeight = world.getHeight();
-		this.power = power;
+		this._world = world;
+		this._exploder = entity;
+		this._explosionX = x;
+		this._explosionY = y;
+		this._explosionZ = z;
+		this._mapHeight = world.getHeight();
+		this._power = power;
 	    
-		this.maxDistance = (this.power / 0.4D);
-		int maxDistanceInt = (int)Math.ceil(this.maxDistance);
-		this.areaSize = (maxDistanceInt * 2);
-		this.areaX = (ExplosionHelper.roundToNegInf(x) - maxDistanceInt);
-		this.areaZ = (ExplosionHelper.roundToNegInf(z) - maxDistanceInt);
-		this.damageSource = DamageSource.causeExplosionDamage(this);
-		this.destroyedBlockPositions = new long[this.mapHeight][];
+		this._maxDistance = (this._power / 0.4D);
+		int maxDistanceInt = (int)Math.ceil(this._maxDistance);
+		this._areaSize = (maxDistanceInt * 2);
+		this._areaX = (ExplosionHelper.roundToNegInf(x) - maxDistanceInt);
+		this._areaZ = (ExplosionHelper.roundToNegInf(z) - maxDistanceInt);
+		this._damageSource = DamageSource.causeExplosionDamage(this);
+		this._destroyedBlockPositions = new long[this._mapHeight][];
 	}
 	  
 	public void doExplosion()
 	{
-		if(this.power <= 0.0F) 
+		if(this._power <= 0.0F) 
 		{
 			return;
 		}
-		int range = this.areaSize / 2;
+		int range = this._areaSize / 2;
 		BlockPos pos = new BlockPos(getPosition());
 		BlockPos start = pos.add(-range, -range, -range);
 		BlockPos end = pos.add(range, range, range);
 		
-		this.chunkCache = new ChunkCache(this.world, start, end, 0);
+		this._chunkCache = new ChunkCache(this._world, start, end, 0);
 		
-		List<Entity> entities = this.world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(start, end));
+		List<Entity> entities = this._world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(start, end));
 		for(Entity entity : entities) 
 		{
 			if(((entity instanceof EntityLivingBase)) || ((entity instanceof EntityItem)))
 			{
-				int distance = (int)(ExplosionHelper.square(entity.posX - this.explosionX) + ExplosionHelper.square(entity.posY - this.explosionY) + ExplosionHelper.square(entity.posZ - this.explosionZ));
+				int distance = (int)(ExplosionHelper.square(entity.posX - this._explosionX) + ExplosionHelper.square(entity.posY - this._explosionY) + ExplosionHelper.square(entity.posZ - this._explosionZ));
 				double health = getEntityHealth(entity);
-				this.entitiesInRange.add(new EntityDamage(entity, distance, health));
+				this._entitiesInRange.add(new EntityDamage(entity, distance, health));
 			}
 		}
-		boolean entitiesAreInRange = !this.entitiesInRange.isEmpty();
+		boolean entitiesAreInRange = !this._entitiesInRange.isEmpty();
 		if(entitiesAreInRange) 
 		{
-			Collections.sort(this.entitiesInRange, new Comparator()
+			Collections.sort(this._entitiesInRange, new Comparator()
 			{
 				public int compare(Object a, Object b)
 				{
@@ -170,7 +170,7 @@ public class VMExplosion extends Explosion
 				}
 			});
 		}
-		int steps = (int)Math.ceil(3.141592653589793D / Math.atan(1.0D / this.maxDistance));
+		int steps = (int)Math.ceil(3.141592653589793D / Math.atan(1.0D / this._maxDistance));
 		BlockPos.MutableBlockPos tmpPos = new BlockPos.MutableBlockPos();
 		for(int phi_n = 0; phi_n < 2 * steps; ++phi_n) 
 		{
@@ -178,15 +178,15 @@ public class VMExplosion extends Explosion
 			{
 				double phi = 6.283185307179586D / steps * phi_n;
 				double theta = 3.141592653589793D / steps * theta_n;    
-				shootRay(this.explosionX, this.explosionY, this.explosionZ, phi, theta, this.power, (entitiesAreInRange) && (phi_n % 8 == 0) && (theta_n % 8 == 0), tmpPos);
+				shootRay(this._explosionX, this._explosionY, this._explosionZ, phi, theta, this._power, (entitiesAreInRange) && (phi_n % 8 == 0) && (theta_n % 8 == 0), tmpPos);
 			}
 		}
-		for(Iterator<EntityDamage> phi_n = this.entitiesInRange.iterator(); phi_n.hasNext();)
+		for(Iterator<EntityDamage> phi_n = this._entitiesInRange.iterator(); phi_n.hasNext();)
 		{
 			EntityDamage entry = (EntityDamage) phi_n.next();
 			Entity entity = entry.entity;
 			
-			entity.attackEntityFrom(this.damageSource, (float)entry.damage);
+			entity.attackEntityFrom(this._damageSource, (float)entry.damage);
 			double motionSq = ExplosionHelper.square(entry.motionX) + ExplosionHelper.square(entity.motionY) + ExplosionHelper.square(entity.motionZ);
 			double reduction = motionSq > 3600.0D ? Math.sqrt(3600.0D / motionSq) : 1.0D;
 			
@@ -196,38 +196,38 @@ public class VMExplosion extends Explosion
 		}
 		
 		EntityDamage entry;
-		Random rng = this.world.rand;
-		boolean doDrops = this.world.getGameRules().getBoolean("doTileDrops");
+		Random rng = this._world.rand;
+		boolean doDrops = this._world.getGameRules().getBoolean("doTileDrops");
 		Map<XZposition, Map<ItemStack, DropData>> blocksToDrop = new HashMap();
 		
-		this.world.playSound(null, this.explosionX, this.explosionY, this.explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (rng.nextFloat() - rng.nextFloat()) * 0.2F) * 0.7F);
+		this._world.playSound(null, this._explosionX, this._explosionY, this._explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (rng.nextFloat() - rng.nextFloat()) * 0.2F) * 0.7F);
 		int realIndex;
-		for(int y = 0; y < this.destroyedBlockPositions.length; ++y)
+		for(int y = 0; y < this._destroyedBlockPositions.length; ++y)
 		{
-			long[] bitSet = this.destroyedBlockPositions[y];
+			long[] bitSet = this._destroyedBlockPositions[y];
 			if(bitSet != null)
 			{
 				int index = -2;
 				while((index = nextSetIndex(index + 2, bitSet, 2)) != -1)
 				{
 					realIndex = index / 2;
-					int z = realIndex / this.areaSize;
-					int x = realIndex - z * this.areaSize;
+					int z = realIndex / this._areaSize;
+					int x = realIndex - z * this._areaSize;
 					
-					x += this.areaX;
-					z += this.areaZ;
+					x += this._areaX;
+					z += this._areaZ;
 					tmpPos.setPos(x, y, z);
 					
-					IBlockState state = this.chunkCache.getBlockState(tmpPos);
+					IBlockState state = this._chunkCache.getBlockState(tmpPos);
 					Block block = state.getBlock();
-					if((this.power >= 20.0F) || (
+					if((this._power >= 20.0F) || (
 							(doDrops) && 
 							(block.canDropFromExplosion(this)) && 
 							(getAtIndex(index, bitSet, 2) == 1))) 
 					{
-						for(ItemStack stack : state.getBlock().getDrops(this.world, tmpPos, state, 0)) 
+						for(ItemStack stack : state.getBlock().getDrops(this._world, tmpPos, state, 0)) 
 						{
-							if(rng.nextFloat() <= this.explosionDropRate)
+							if(rng.nextFloat() <= this._explosionDropRate)
 							{
 								XZposition xZposition = new XZposition(x / 2, z / 2);
 								Map<ItemStack, DropData> map = (Map)blocksToDrop.get(xZposition);
@@ -249,7 +249,7 @@ public class VMExplosion extends Explosion
 							}
 						}
 					}
-					block.onBlockExploded(this.world, tmpPos, this);
+					block.onBlockExploded(this._world, tmpPos, this);
 				}
 			}
 		}
@@ -264,9 +264,9 @@ public class VMExplosion extends Explosion
 				while(count > 0)
 				{
 					int stackSize = Math.min(count, 64);
-					EntityItem entityitem = new EntityItem(this.world, (xZposition.x + this.world.rand.nextFloat()) * 2.0F, ((DropData)entry2.getValue()).maxY + 0.5D, (xZposition.z + this.world.rand.nextFloat()) * 2.0F, isw);
+					EntityItem entityitem = new EntityItem(this._world, (xZposition.x + this._world.rand.nextFloat()) * 2.0F, ((DropData)entry2.getValue()).maxY + 0.5D, (xZposition.z + this._world.rand.nextFloat()) * 2.0F, isw);
 					entityitem.setDefaultPickupDelay();
-					this.world.spawnEntity(entityitem);
+					this._world.spawnEntity(entityitem);
 					count -= stackSize;
 				}
 			}
@@ -280,14 +280,14 @@ public class VMExplosion extends Explosion
 	  
 	private void destroyUnchecked(int x, int y, int z, boolean noDrop)
 	{
-		int index = (z - this.areaZ) * this.areaSize + (x - this.areaX);
+		int index = (z - this._areaZ) * this._areaSize + (x - this._areaX);
 		index *= 2;
 		
-		long[] array = this.destroyedBlockPositions[y];
+		long[] array = this._destroyedBlockPositions[y];
 		if(array == null)
 		{
-			array = makeArray(ExplosionHelper.square(this.areaSize), 2);
-			this.destroyedBlockPositions[y] = array;
+			array = makeArray(ExplosionHelper.square(this._areaSize), 2);
+			this._destroyedBlockPositions[y] = array;
 		}
 		if(noDrop) 
 		{
@@ -307,7 +307,7 @@ public class VMExplosion extends Explosion
 		for(int step = 0;; step++)
 		{
 			int blockY = ExplosionHelper.roundToNegInf(y);
-			if((blockY < 0) || (blockY >= this.mapHeight)) 
+			if((blockY < 0) || (blockY >= this._mapHeight)) 
 			{
 				break;
 			}
@@ -315,7 +315,7 @@ public class VMExplosion extends Explosion
 			int blockZ = ExplosionHelper.roundToNegInf(z);
 			
 			tmpPos.setPos(blockX, blockY, blockZ);
-			IBlockState state = this.chunkCache.getBlockState(tmpPos);
+			IBlockState state = this._chunkCache.getBlockState(tmpPos);
 			Block block = state.getBlock();
 			double absorption = getAbsorption(block, tmpPos);
 			if(absorption < 0.0D) 
@@ -332,14 +332,14 @@ public class VMExplosion extends Explosion
 				{
 					break;
 				}
-				if((block == Blocks.STONE) || ((block != Blocks.AIR) && (!block.isAir(state, this.world, tmpPos)))) 
+				if((block == Blocks.STONE) || ((block != Blocks.AIR) && (!block.isAir(state, this._world, tmpPos)))) 
 				{
 					destroyUnchecked(blockX, blockY, blockZ, power1 > 8.0D);
 				}
 			}
 			if((killEntities) && ((step + 4) % 8 == 0)) 
 			{
-				if((!this.entitiesInRange.isEmpty()) && (power1 >= 0.25D)) 
+				if((!this._entitiesInRange.isEmpty()) && (power1 >= 0.25D)) 
 				{
 					damageEntities(x, y, z, step, power1);
 				}
@@ -348,7 +348,7 @@ public class VMExplosion extends Explosion
 			{
 				for(int i = 0; i < 5; ++i) 
 				{
-					shootRay(x, y, z, this.rng.nextDouble() * 2.0D * 3.141592653589793D, this.rng.nextDouble() * 3.141592653589793D, absorption * 0.4D, false, tmpPos);
+					shootRay(x, y, z, this._random.nextDouble() * 2.0D * 3.141592653589793D, this._random.nextDouble() * 3.141592653589793D, absorption * 0.4D, false, tmpPos);
 				}
 			}
 			power1 -= absorption;
@@ -362,7 +362,7 @@ public class VMExplosion extends Explosion
 	private double getAbsorption(Block block, BlockPos pos)
 	{
 		double ret = 0.5D;
-		if((block == Blocks.AIR) || (block.isAir(block.getDefaultState(), this.world, pos))) 
+		if((block == Blocks.AIR) || (block.isAir(block.getDefaultState(), this._world, pos))) 
 		{
 			return ret;
 		}
@@ -377,7 +377,7 @@ public class VMExplosion extends Explosion
 		}
 		else
 		{
-			float resistance = block.getExplosionResistance(this.world, pos, this.exploder, this);
+			float resistance = block.getExplosionResistance(this._world, pos, this._exploder, this);
 			if(resistance < 0.0F) 
 			{
 				return resistance;
@@ -395,11 +395,11 @@ public class VMExplosion extends Explosion
 		{
 			int distanceMin = ExplosionHelper.square(step - 5);
 			int indexStart = 0;
-			int indexEnd = this.entitiesInRange.size() - 1;
+			int indexEnd = this._entitiesInRange.size() - 1;
 			do
 			{
 				index = (indexStart + indexEnd) / 2;
-				int distance = this.entitiesInRange.get(index).distance;
+				int distance = this._entitiesInRange.get(index).distance;
 				if(distance < distanceMin) 
 				{
 					indexStart = index + 1;
@@ -420,9 +420,9 @@ public class VMExplosion extends Explosion
 			index = 0;
 		}
 		int distanceMax = ExplosionHelper.square(step + 5);
-		for(int i = index; i < this.entitiesInRange.size(); i++)
+		for(int i = index; i < this._entitiesInRange.size(); i++)
 		{
-			EntityDamage entry = this.entitiesInRange.get(i);
+			EntityDamage entry = this._entitiesInRange.get(i);
 			if(entry.distance >= distanceMax) 
 			{
 				break;
@@ -435,9 +435,9 @@ public class VMExplosion extends Explosion
 				entry.damage += damage;
 				entry.health -= damage;
 				
-				double dx = entity.posX - this.explosionX;
-				double dy = entity.posY - this.explosionY;
-				double dz = entity.posZ - this.explosionZ;
+				double dx = entity.posX - this._explosionX;
+				double dy = entity.posY - this._explosionY;
+				double dz = entity.posZ - this._explosionZ;
 				
 				double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 				
@@ -446,10 +446,10 @@ public class VMExplosion extends Explosion
 				entry.motionZ += dz / distance * 0.08749999999999999D * power;
 				if(entry.health <= 0.0D)
 				{
-					entity.attackEntityFrom(this.damageSource, (float)entry.damage);
+					entity.attackEntityFrom(this._damageSource, (float)entry.damage);
 					if(!entity.isEntityAlive())
 					{
-						this.entitiesInRange.remove(i);
+						this._entitiesInRange.remove(i);
 						i--;
 					}
 				}

@@ -14,9 +14,9 @@ public class EntitySpellSummonMeteor extends EntitySpell
 {	
 	public EntitySpellSummonMeteor(World world, EntityLivingBase caster, 
 			double accelX, double accelY, double accelZ)
-    {
-        super(world, caster, accelX, accelY, accelZ);
-    }
+	{
+		super(world, caster, accelX, accelY, accelZ);
+	}
 	
 	public void onImpact(RayTraceResult result)
 	{

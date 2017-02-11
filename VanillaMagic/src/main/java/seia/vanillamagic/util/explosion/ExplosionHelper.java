@@ -13,19 +13,19 @@ public class ExplosionHelper
 	}
 	
 	public static Explosion newExplosion1(World world, 
-											@Nullable Entity entity, 
-											double x, double y, double z, 
-											float strength, 
-											boolean isFlaming, boolean isSmoking)
+			@Nullable Entity entity, 
+			double x, double y, double z, 
+			float strength, 
+			boolean isFlaming, boolean isSmoking)
 	{
 		return world.newExplosion((Entity)null, x, y, z, strength, isFlaming, isSmoking);
 	}
 	
 	public static Explosion newExplosion2(World world, 
-									@Nullable Entity entity, 
-									double x, double y, double z, 
-									float strength, 
-									boolean isFlaming, boolean isSmoking)
+			@Nullable Entity entity, 
+			double x, double y, double z, 
+			float strength, 
+			boolean isFlaming, boolean isSmoking)
 	{
 		VMExplosion explosion = new VMExplosion(world, entity, x, y, z, strength, isFlaming, isSmoking);
 		explosion.doExplosion();

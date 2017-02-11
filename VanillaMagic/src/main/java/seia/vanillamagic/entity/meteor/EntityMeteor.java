@@ -13,20 +13,17 @@ import seia.vanillamagic.util.explosion.ExplosionHelper;
 
 public class EntityMeteor extends EntityLargeFireball
 {
-//	public static final float BASIC_METEOR_SIZE = 5f;
-//	public static final int BASIC_METEOR_EXPLOSION_POWER = 100; // def 20
-
 	public EntityMeteor(EntityLivingBase castingEntity, 
 			double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ,
 			double accelX, double accelY, double accelZ) 
 	{
 		super(castingEntity.world);
 		setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
-        setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
-        float baseSize = VMConfig.basicMeteorSize;
-		//setSize(BASIC_METEOR_SIZE, BASIC_METEOR_SIZE);
-        setSize(baseSize, baseSize);
-		this.explosionPower = VMConfig.basicMeteorExplosionPower; //BASIC_METEOR_EXPLOSION_POWER;
+		setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
+		float baseSize = VMConfig.basicMeteorSize;
+		setSize(baseSize, baseSize);
+		
+		this.explosionPower = VMConfig.basicMeteorExplosionPower;
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;

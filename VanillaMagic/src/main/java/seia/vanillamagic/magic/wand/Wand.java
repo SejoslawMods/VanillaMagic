@@ -4,36 +4,36 @@ import net.minecraft.item.ItemStack;
 
 public class Wand implements IWand
 {
-	private final int wandID;
-	private final ItemStack wandStack;
-	private final String wandName;
+	private final int _wandID;
+	private final ItemStack _wandStack;
+	private final String _wandName;
 	
 	public Wand(int wandID, ItemStack wandStack, String wandName)
 	{
-		this.wandID = wandID;
-		this.wandStack = wandStack;
-		this.wandName = wandName;
+		this._wandID = wandID;
+		this._wandStack = wandStack;
+		this._wandName = wandName;
 		WandRegistry.addWand(this);
 	}
 	
 	public int getWandID() 
 	{
-		return wandID;
+		return _wandID;
 	}
 	
 	public ItemStack getWandStack() 
 	{
-		return wandStack;
+		return _wandStack;
 	}
 	
 	public String getWandName() 
 	{
-		return wandName;
+		return _wandName;
 	}
 	
 	public boolean canWandDoWork(int wandID) 
 	{
-		if(this.wandID == wandID)
+		if(this._wandID == wandID)
 		{
 			return true;
 		}

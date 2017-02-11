@@ -83,9 +83,9 @@ public class SpellRegistry
 	private static final List<ISpell> _SPELLS_HOSTILE = new ArrayList();
 	
 	// Wand that is used for summoning.
-	private static final IWand SUMMON_REQUIRED_WAND = WandRegistry.WAND_NETHER_STAR;
-	private static final int SUMMON_FRIENDLY_COST_ITEMSTACK = VMConfig.spellCostSummonFriendly;
-	private static final int SUMMON_HOSTILE_COST_ITEMSTACK = VMConfig.spellCostSummonHostile;
+	private static final IWand _SUMMON_REQUIRED_WAND = WandRegistry.WAND_NETHER_STAR;
+	private static final int _SUMMON_FRIENDLY_COST_ITEMSTACK = VMConfig.spellCostSummonFriendly;
+	private static final int _SUMMON_HOSTILE_COST_ITEMSTACK = VMConfig.spellCostSummonHostile;
 	
 	public static final Spell SPELL_LIGHTER = new SpellLighter(0, "Flint and Steel Clone", "spellFlintAndSteel", WandRegistry.WAND_STICK, new ItemStack(Items.COAL));
 	public static final Spell SPELL_SMALL_FIREBALL = new SpellSmallFireball(1, "Feel like Blaze", "spellSmallFireball", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.REDSTONE, 2));
@@ -104,43 +104,43 @@ public class SpellRegistry
 	public static final Spell SPELL_WEATHER_THUNDERSTORM = new SpellWeatherThunderStorm(14, "Make thunderstorm", "spellWeatherThunderstorm", WandRegistry.WAND_BLAZE_ROD, ItemStackHelper.getHead(1, 4));
 	
 	// Passive Mobs Summon
-	public static final SpellSummonPassive SPELL_SUMMON_CHICKEN = new SpellSummonChicken(100, "Summon Chicken", "spellSummonChicken", SUMMON_REQUIRED_WAND, new ItemStack(Items.CHICKEN, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_PIG = new SpellSummonPig(101, "Summon Pig", "spellSummonPig", SUMMON_REQUIRED_WAND, new ItemStack(Items.PORKCHOP, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_COW = new SpellSummonCow(102, "Summon Cow", "spellSummonCow", SUMMON_REQUIRED_WAND, new ItemStack(Items.BEEF, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_MOOSHROOM = new SpellSummonMooshroom(103, "Summon Mooshroom", "spellSummonMooshroom", SUMMON_REQUIRED_WAND, new ItemStack(Items.COOKED_BEEF, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_SHEEP = new SpellSummonSheep(104, "Summon Sheep", "spellSummonSheep", SUMMON_REQUIRED_WAND, new ItemStack(Items.MUTTON, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_WOLF = new SpellSummonWolf(105, "Summon Wolf", "spellSummonWolf", SUMMON_REQUIRED_WAND, new ItemStack(Items.COOKED_MUTTON, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_RABBIT = new SpellSummonRabbit(106, "Summon Rabbit", "spellSummonRabbit", SUMMON_REQUIRED_WAND, new ItemStack(Items.RABBIT, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_HORSE = new SpellSummonHorse(107, "Summon Horse", "spellSummonHorse", SUMMON_REQUIRED_WAND, new ItemStack(Items.SADDLE));
-	public static final SpellSummonPassive SPELL_SUMMON_VILLAGER = new SpellSummonVillager(108, "Summon Villager", "spellSummonVillager", SUMMON_REQUIRED_WAND, new ItemStack(Items.BOOK, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_IRON_GOLEM = new SpellSummonIronGolem(109, "Summon IronGolem", "spellSummonIronGolem", SUMMON_REQUIRED_WAND, new ItemStack(Items.IRON_INGOT, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_SQUID = new SpellSummonSquid(110, "Summon Squid", "spellSummonSquid", SUMMON_REQUIRED_WAND, new ItemStack(Items.DYE, SUMMON_FRIENDLY_COST_ITEMSTACK, 0));
-	public static final SpellSummonPassive SPELL_SUMMON_LAMA = new SpellSummonLama(111, "Summon Lama", "spellSummonLama", SUMMON_REQUIRED_WAND, new ItemStack(Items.LEATHER, SUMMON_FRIENDLY_COST_ITEMSTACK));
-	public static final SpellSummonPassive SPELL_SUMMON_SNOWMAN = new SpellSummonSnowman(112, "Summon Snowman", "spellSummonSnowman", SUMMON_REQUIRED_WAND, new ItemStack(Blocks.SNOW, 2));
+	public static final SpellSummonPassive SPELL_SUMMON_CHICKEN = new SpellSummonChicken(100, "Summon Chicken", "spellSummonChicken", _SUMMON_REQUIRED_WAND, new ItemStack(Items.CHICKEN, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_PIG = new SpellSummonPig(101, "Summon Pig", "spellSummonPig", _SUMMON_REQUIRED_WAND, new ItemStack(Items.PORKCHOP, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_COW = new SpellSummonCow(102, "Summon Cow", "spellSummonCow", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BEEF, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_MOOSHROOM = new SpellSummonMooshroom(103, "Summon Mooshroom", "spellSummonMooshroom", _SUMMON_REQUIRED_WAND, new ItemStack(Items.COOKED_BEEF, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_SHEEP = new SpellSummonSheep(104, "Summon Sheep", "spellSummonSheep", _SUMMON_REQUIRED_WAND, new ItemStack(Items.MUTTON, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_WOLF = new SpellSummonWolf(105, "Summon Wolf", "spellSummonWolf", _SUMMON_REQUIRED_WAND, new ItemStack(Items.COOKED_MUTTON, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_RABBIT = new SpellSummonRabbit(106, "Summon Rabbit", "spellSummonRabbit", _SUMMON_REQUIRED_WAND, new ItemStack(Items.RABBIT, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_HORSE = new SpellSummonHorse(107, "Summon Horse", "spellSummonHorse", _SUMMON_REQUIRED_WAND, new ItemStack(Items.SADDLE));
+	public static final SpellSummonPassive SPELL_SUMMON_VILLAGER = new SpellSummonVillager(108, "Summon Villager", "spellSummonVillager", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BOOK, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_IRON_GOLEM = new SpellSummonIronGolem(109, "Summon IronGolem", "spellSummonIronGolem", _SUMMON_REQUIRED_WAND, new ItemStack(Items.IRON_INGOT, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_SQUID = new SpellSummonSquid(110, "Summon Squid", "spellSummonSquid", _SUMMON_REQUIRED_WAND, new ItemStack(Items.DYE, _SUMMON_FRIENDLY_COST_ITEMSTACK, 0));
+	public static final SpellSummonPassive SPELL_SUMMON_LAMA = new SpellSummonLama(111, "Summon Lama", "spellSummonLama", _SUMMON_REQUIRED_WAND, new ItemStack(Items.LEATHER, _SUMMON_FRIENDLY_COST_ITEMSTACK));
+	public static final SpellSummonPassive SPELL_SUMMON_SNOWMAN = new SpellSummonSnowman(112, "Summon Snowman", "spellSummonSnowman", _SUMMON_REQUIRED_WAND, new ItemStack(Blocks.SNOW, 2));
 	
 	// Hostile Mobs Summon
-	public static final SpellSummonHostile SPELL_SUMMON_ZOMBIE = new SpellSummonZombie(200, "Summon Zombie", "spellSummonZombie", SUMMON_REQUIRED_WAND, new ItemStack(Items.ROTTEN_FLESH, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_CREEPER = new SpellSummonCreeper(201, "Summon Creeper", "spellSummonCreeper", SUMMON_REQUIRED_WAND, new ItemStack(Items.GUNPOWDER, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_SKELETON = new SpellSummonSkeleton(202, "Summon Skeleton", "spellSummonSkeleton", SUMMON_REQUIRED_WAND, new ItemStack(Items.BONE, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_BLAZE = new SpellSummonBlaze(203, "Summon Blaze", "spellSummonBlaze", SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_ROD, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_MAGMA_CUBE = new SpellSummonMagmaCube(204, "Summon Magma Cube", "spellSummonMagmaCube", SUMMON_REQUIRED_WAND, new ItemStack(Items.MAGMA_CREAM, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_GHAST = new SpellSummonGhast(205, "Summon Ghast", "spellSummonGhast", SUMMON_REQUIRED_WAND, new ItemStack(Items.GHAST_TEAR, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_ENDERMAN = new SpellSummonEnderman(206, "Summon Enderman", "spellSummonEnderman", SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_POWDER, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_SPIDER_JOCKEY = new SpellSummonSpiderJockey(207, "Summon Spider Jockey", "spellSummonSpiderJockey", SUMMON_REQUIRED_WAND, new ItemStack(Items.SPIDER_EYE, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_SLIME = new SpellSummonSlime(208, "Summon Slime", "spellSummonSlime", SUMMON_REQUIRED_WAND, new ItemStack(Items.SLIME_BALL, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_WITCH = new SpellSummonWitch(209, "Summon Witch", "spellSummonWitch", SUMMON_REQUIRED_WAND, new ItemStack(Items.GLOWSTONE_DUST, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_PIGMAN = new SpellSummonPigman(210, "Summon Pigman", "spellSummonPigman", SUMMON_REQUIRED_WAND, new ItemStack(Items.GOLD_NUGGET, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_GUARDIAN = new SpellSummonGuardian(211, "Summon Guardian", "spellSummonGuardian", SUMMON_REQUIRED_WAND, new ItemStack(Items.PRISMARINE_SHARD, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_POLAR_BEAR = new SpellSummonPoalrBear(212, "Summon Polar Bear", "spellSummonPolarBear", SUMMON_REQUIRED_WAND, new ItemStack(Items.FISH, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_SHULKER = new SpellSummonShulker(213, "Summon Shulker", "spellSummonShulker", SUMMON_REQUIRED_WAND, new ItemStack(Blocks.END_ROD, 1));
-	public static final SpellSummonHostile SPELL_SUMMON_SILVERFISH = new SpellSummonSilverfish(214, "Summon Silverfish", "spellSummonSilverfish", SUMMON_REQUIRED_WAND, new ItemStack(Blocks.STONEBRICK, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_WITHER = new SpellSummonWither(215, "Summon Wither", "spellSummonWither", SUMMON_REQUIRED_WAND, new ItemStack(Blocks.EMERALD_BLOCK, 1));
-	public static final SpellSummonHostile SPELL_SUMMON_GIANT = new SpellSummonGiant(216, "Summon Giant", "spellSummonGiant", SUMMON_REQUIRED_WAND, new ItemStack(Items.ARMOR_STAND, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_SPIDER = new SpellSummonSpider(217, "Summon Spider", "spellSummonSpider", SUMMON_REQUIRED_WAND, new ItemStack(Items.SPIDER_EYE, SUMMON_HOSTILE_COST_ITEMSTACK));
-	public static final SpellSummonHostile SPELL_SUMMON_ENDERMITE = new SpellSummonEndermite(218, "Summon Endermite", "spellSummonEndermite", SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_POWDER, 3));
-	public static final SpellSummonHostile SPELL_SUMMON_VINDICATOR = new SpellSummonVindicator(219, "Summon Vindicator", "spellSummonVindicator", SUMMON_REQUIRED_WAND, new ItemStack(Items.IRON_AXE));
-	public static final SpellSummonHostile SPELL_SUMMON_VEX = new SpellSummonVex(220, "Summon Vex", "spellSummonVex", SUMMON_REQUIRED_WAND, new ItemStack(Items.IRON_SWORD));
-	public static final SpellSummonHostile SPELL_SUMMON_EVOKER = new SpellSummonEvoker(221, "Summon Evoker", "spellSummonEvoker", SUMMON_REQUIRED_WAND, new ItemStack(Items.EMERALD, 2));
+	public static final SpellSummonHostile SPELL_SUMMON_ZOMBIE = new SpellSummonZombie(200, "Summon Zombie", "spellSummonZombie", _SUMMON_REQUIRED_WAND, new ItemStack(Items.ROTTEN_FLESH, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_CREEPER = new SpellSummonCreeper(201, "Summon Creeper", "spellSummonCreeper", _SUMMON_REQUIRED_WAND, new ItemStack(Items.GUNPOWDER, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_SKELETON = new SpellSummonSkeleton(202, "Summon Skeleton", "spellSummonSkeleton", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BONE, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_BLAZE = new SpellSummonBlaze(203, "Summon Blaze", "spellSummonBlaze", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_ROD, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_MAGMA_CUBE = new SpellSummonMagmaCube(204, "Summon Magma Cube", "spellSummonMagmaCube", _SUMMON_REQUIRED_WAND, new ItemStack(Items.MAGMA_CREAM, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_GHAST = new SpellSummonGhast(205, "Summon Ghast", "spellSummonGhast", _SUMMON_REQUIRED_WAND, new ItemStack(Items.GHAST_TEAR, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_ENDERMAN = new SpellSummonEnderman(206, "Summon Enderman", "spellSummonEnderman", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_POWDER, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_SPIDER_JOCKEY = new SpellSummonSpiderJockey(207, "Summon Spider Jockey", "spellSummonSpiderJockey", _SUMMON_REQUIRED_WAND, new ItemStack(Items.SPIDER_EYE, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_SLIME = new SpellSummonSlime(208, "Summon Slime", "spellSummonSlime", _SUMMON_REQUIRED_WAND, new ItemStack(Items.SLIME_BALL, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_WITCH = new SpellSummonWitch(209, "Summon Witch", "spellSummonWitch", _SUMMON_REQUIRED_WAND, new ItemStack(Items.GLOWSTONE_DUST, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_PIGMAN = new SpellSummonPigman(210, "Summon Pigman", "spellSummonPigman", _SUMMON_REQUIRED_WAND, new ItemStack(Items.GOLD_NUGGET, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_GUARDIAN = new SpellSummonGuardian(211, "Summon Guardian", "spellSummonGuardian", _SUMMON_REQUIRED_WAND, new ItemStack(Items.PRISMARINE_SHARD, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_POLAR_BEAR = new SpellSummonPoalrBear(212, "Summon Polar Bear", "spellSummonPolarBear", _SUMMON_REQUIRED_WAND, new ItemStack(Items.FISH, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_SHULKER = new SpellSummonShulker(213, "Summon Shulker", "spellSummonShulker", _SUMMON_REQUIRED_WAND, new ItemStack(Blocks.END_ROD, 1));
+	public static final SpellSummonHostile SPELL_SUMMON_SILVERFISH = new SpellSummonSilverfish(214, "Summon Silverfish", "spellSummonSilverfish", _SUMMON_REQUIRED_WAND, new ItemStack(Blocks.STONEBRICK, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_WITHER = new SpellSummonWither(215, "Summon Wither", "spellSummonWither", _SUMMON_REQUIRED_WAND, new ItemStack(Blocks.EMERALD_BLOCK, 1));
+	public static final SpellSummonHostile SPELL_SUMMON_GIANT = new SpellSummonGiant(216, "Summon Giant", "spellSummonGiant", _SUMMON_REQUIRED_WAND, new ItemStack(Items.ARMOR_STAND, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_SPIDER = new SpellSummonSpider(217, "Summon Spider", "spellSummonSpider", _SUMMON_REQUIRED_WAND, new ItemStack(Items.SPIDER_EYE, _SUMMON_HOSTILE_COST_ITEMSTACK));
+	public static final SpellSummonHostile SPELL_SUMMON_ENDERMITE = new SpellSummonEndermite(218, "Summon Endermite", "spellSummonEndermite", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BLAZE_POWDER, 3));
+	public static final SpellSummonHostile SPELL_SUMMON_VINDICATOR = new SpellSummonVindicator(219, "Summon Vindicator", "spellSummonVindicator", _SUMMON_REQUIRED_WAND, new ItemStack(Items.IRON_AXE));
+	public static final SpellSummonHostile SPELL_SUMMON_VEX = new SpellSummonVex(220, "Summon Vex", "spellSummonVex", _SUMMON_REQUIRED_WAND, new ItemStack(Items.IRON_SWORD));
+	public static final SpellSummonHostile SPELL_SUMMON_EVOKER = new SpellSummonEvoker(221, "Summon Evoker", "spellSummonEvoker", _SUMMON_REQUIRED_WAND, new ItemStack(Items.EMERALD, 2));
 	
 	private SpellRegistry()
 	{
