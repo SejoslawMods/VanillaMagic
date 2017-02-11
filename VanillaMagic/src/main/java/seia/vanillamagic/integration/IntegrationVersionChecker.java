@@ -13,7 +13,7 @@ public class IntegrationVersionChecker implements IIntegration
 	public boolean init() throws Exception
 	{
 		VanillaMagicIntegration.TAG.setString("curseProjectName", "vanilla-magic");
-		VanillaMagicIntegration.TAG.setString("curseFilenameParser", VanillaMagic.MODID + "-[].jar");
+		VanillaMagicIntegration.TAG.setString("curseFilenameParser", "VanillaMagic" + "-[].jar");
 		FMLInterModComms.sendRuntimeMessage(VanillaMagic.MODID, 
 				"VersionChecker", "addCurseCheck", VanillaMagicIntegration.TAG);
 		return true;
