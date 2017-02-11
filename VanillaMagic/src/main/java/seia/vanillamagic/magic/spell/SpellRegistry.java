@@ -91,7 +91,7 @@ public class SpellRegistry
 	public static final Spell SPELL_SMALL_FIREBALL = new SpellSmallFireball(1, "Feel like Blaze", "spellSmallFireball", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.REDSTONE, 2));
 	public static final Spell SPELL_LARGE_FIREBALL = new SpellLargeFireball(2, "Feel like Ghast", "spellLargeFireball", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.GHAST_TEAR));
 	public static final Spell SPELL_TELEPORT = new SpellTeleport(3, "Teleportation !!!", "spellTeleport", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.MAGMA_CREAM));
-	public static final Spell SPELL_METEOR = new SpellMeteor(4, "Meteor !!!", "spellSummonMeteor", WandRegistry.WAND_NETHER_STAR, new ItemStack(Blocks.GOLD_BLOCK));
+	public static final Spell SPELL_METEOR = new SpellMeteor(4, "Meteor !!!", "spellSummonMeteor", WandRegistry.WAND_NETHER_STAR, new ItemStack(Blocks.GOLD_BLOCK, 10));
 	public static final Spell SPELL_LIGHTNING_BOLT = new SpellLightningBolt(5, "Thunder !!!", "spellSummonLightningBolt", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.GUNPOWDER, 32));
 	public static final Spell SPELL_FUS_RO_DAH = new SpellFusRoDah(6, "Fus-Ro-Dah !!!", "spellFusRoDah", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.DRAGON_BREATH));
 	public static final Spell SPELL_TELEPORT_TO_NETHER = new SpellTeleportToNether(7, "Teleport to Nether", "spellTeleportToNether", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.NETHER_WART, 2));
