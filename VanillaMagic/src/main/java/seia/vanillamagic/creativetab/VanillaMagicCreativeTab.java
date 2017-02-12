@@ -8,6 +8,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.item.VanillaMagicItems;
+import seia.vanillamagic.item.book.BookRegistry;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 
 public class VanillaMagicCreativeTab extends CreativeTabs
@@ -37,6 +38,7 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 	{
 		list = MobSpawnerRegistry.fillList(list);
 		list = VanillaMagicItems.fillList(list);
+		list = BookRegistry.fillList(list);
 		super.displayAllRelevantItems(list);
 	}
 }

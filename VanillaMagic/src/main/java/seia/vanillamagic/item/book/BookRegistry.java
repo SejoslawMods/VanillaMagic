@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.util.TextHelper;
 
@@ -128,5 +129,14 @@ public class BookRegistry
 	public static List<IBook> getBooks()
 	{
 		return _BOOKS;
+	}
+
+	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
+	{
+		for(IBook book : _BOOKS)
+		{
+			list.add(book.getItem());
+		}
+		return list;
 	}
 }
