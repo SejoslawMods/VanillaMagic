@@ -17,6 +17,7 @@ public class NotInventoryException extends Exception
 	 * {@link World} on which the {@link IInventory} should be.
 	 */
 	public final World world;
+
 	/**
 	 * Position on which the {@link IInventory} should be.
 	 */

@@ -12,6 +12,7 @@ public class MappingExistsException extends Exception
 	 * Key which is already used in {@link Map}
 	 */
 	public final Object checkingKey;
+
 	/**
 	 * Returns the value that is already connected with the checking key.
 	 */
