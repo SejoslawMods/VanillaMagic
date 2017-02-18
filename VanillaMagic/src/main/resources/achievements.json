@@ -1865,6 +1865,18 @@
     "spellID":221
 },
 {
+    "questClass":"seia.vanillamagic.item.evokercrystal.QuestEvokerCrystal",
+    "requiredQuest":"spellSummonEvoker",
+    "posX":2,
+    "posY":0,
+    "icon":
+    {
+        "id":399
+    },
+    "questName":"Evoker Crystal",
+    "uniqueName":"evokerCrystal"
+},
+{
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
 	"requiredQuest":"spellSummonWitch",
 	"posX":-2,

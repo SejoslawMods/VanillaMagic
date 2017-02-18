@@ -2,9 +2,10 @@ package seia.vanillamagic.util;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,6 +14,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -75,8 +78,7 @@ public class EntityHelper
 	
 	public static Vec3d getLookVec(EntityPlayer player) 
 	{
-		Vec3d lv = player.getLookVec();
-		return new Vec3d(lv.xCoord, lv.yCoord, lv.zCoord);
+		return player.getLookVec();
 	}
 	
 	/**
@@ -163,5 +165,29 @@ public class EntityHelper
 			item = ListHelper.getRandomObjectFromList(EquipmentHelper.LEGGINGS);
 		}
 		return new ItemStack(item);
+	}
+
+	// TODO: Fix long range Fangs attaks.
+	@Nullable
+	public static Entity getClosestLookingAt(Entity looking, double distance)
+	{
+		double checkingDistance = 0;
+		while(checkingDistance < distance)
+		{
+			RayTraceResult result = looking.rayTrace(checkingDistance, 0.1F);
+			if(result != null)
+			{
+				if(result.typeOfHit == Type.ENTITY)
+				{
+					return result.entityHit;
+				}
+				else if(result.typeOfHit == Type.BLOCK)
+				{
+					return null;
+				}
+			}
+			checkingDistance += 1.0D;
+		}
+		return null;
 	}
 }

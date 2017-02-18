@@ -54,6 +54,11 @@ public class VMConfig
 	public static int percentForSpawnWithArmor = 10;
 	public static int percentForSpawnOnHorse = 15;
 	
+	// Evoker Crystal
+	private static final String _categoryEvokerCrystal = "Evoker Crystal";
+	public static int vexNumber = 3;
+	public static boolean vexHasLimitedLife = true;
+	
 	private VMConfig()
 	{
 	}
@@ -126,7 +131,7 @@ public class VMConfig
 				"Should Player get Vanilla Magic custom books on spawn (logged in).");
 		
 		// Machine
-		_config.addCustomCategoryComment(_categoryMachine, "Options connected with Vanilla Magic Machines");
+		_config.addCustomCategoryComment(_categoryMachine, "Options connected with Vanilla Magic Machines.");
 		tileSpeedyTicks = _config.getInt(
 				"tileSpeedyTicks", 
 				_categoryMachine, 
@@ -157,7 +162,7 @@ public class VMConfig
 				"Max ticks (internal fuel) that Machine can store.");
 		
 		// Item
-		_config.addCustomCategoryComment(_categoryItem, "Options connected with Vanilla Magic Items");
+		_config.addCustomCategoryComment(_categoryItem, "Options connected with Vanilla Magic Items.");
 		accelerationCrystalUpdateTicks = _config.getInt(
 				"accelerationCrystalUpdateTicks", 
 				_categoryItem, 
@@ -195,7 +200,7 @@ public class VMConfig
 				"The maximum number of items that Item Magnet can pull at once.");
 		
 		// Spell
-		_config.addCustomCategoryComment(_categorySpell, "Options connected with Vanilla Magic spells");
+		_config.addCustomCategoryComment(_categorySpell, "Options connected with Vanilla Magic Spells.");
 		spellCostSummonFriendly = _config.getInt(
 				"spellCostSummonFriendly", 
 				_categorySpell, 
@@ -212,7 +217,7 @@ public class VMConfig
 				"Cost of one hostile mob spawn (in items from hand).");
 		
 		// Meteor
-		_config.addCustomCategoryComment(_categoryMeteor, "Options connected with Meteor Explosion");
+		_config.addCustomCategoryComment(_categoryMeteor, "Options connected with Meteor Explosion.");
 		basicMeteorSize = _config.getFloat(
 				"basicMeteorSize", 
 				_categoryMeteor, 
@@ -236,7 +241,7 @@ public class VMConfig
 				"Rate between 0-1 for block drops from explosion.");
 		
 		// Hostile Mobs
-		_config.addCustomCategoryComment(_categoryHostileMobs, "Options connected with Hostile Mobs Spawning with Spell");
+		_config.addCustomCategoryComment(_categoryHostileMobs, "Options connected with Hostile Mobs Spawning with Spell.");
 		percentForSpawnWithArmor = _config.getInt(
 				"percentForSpawnWithArmor", 
 				_categoryHostileMobs, 
@@ -251,6 +256,22 @@ public class VMConfig
 				1, 
 				100, 
 				"Percent with which there is a chance for spawning a Mob on Horse (if Mob has equal Horse).");
+		
+		// Evoker Crystal
+		_config.addCustomCategoryComment(_categoryEvokerCrystal, "Options connected with Evoker Crystal.");
+		vexNumber = _config.getInt(
+				"vexNumber",
+				_categoryEvokerCrystal,
+				vexNumber,
+				1,
+				Integer.MAX_VALUE,
+				"The number of Vex's that can be spawn using Evoker Crystal."
+				);
+		vexHasLimitedLife = _config.getBoolean(
+				"vexHasLimitedLife", 
+				_categoryEvokerCrystal, 
+				vexHasLimitedLife, 
+				"Should spawned Vex have limited life.");
 		
 		_config.save();
 	}

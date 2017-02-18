@@ -2,12 +2,10 @@ package seia.vanillamagic.item.thecrystalofmothernature;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.api.item.ICustomItem;
+import seia.vanillamagic.item.CustomItemCrystal;
 
-public class ItemMotherNatureCrystal implements ICustomItem
+public class ItemMotherNatureCrystal extends CustomItemCrystal
 {
 	public void registerRecipe() 
 	{
@@ -22,12 +20,8 @@ public class ItemMotherNatureCrystal implements ICustomItem
 		});
 	}
 	
-	public ItemStack getItem()
+	public String getItemName() 
 	{
-		ItemStack stack = new ItemStack(Items.NETHER_STAR);
-		stack.setStackDisplayName("The Crystal of Mother Nature");
-		NBTTagCompound stackTag = stack.getTagCompound();
-		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		return stack;
+		return "The Crystal of Mother Nature";
 	}
 }

@@ -2,24 +2,24 @@ package seia.vanillamagic.item.inventoryselector;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.api.item.ICustomItem;
+import seia.vanillamagic.item.CustomItem;
 
-public class ItemInventorySelector implements ICustomItem
+public class ItemInventorySelector extends CustomItem
 {
 	public void registerRecipe() 
 	{
 		GameRegistry.addShapelessRecipe(getItem(), Items.BLAZE_ROD, Blocks.CHEST);
 	}
 	
-	public ItemStack getItem() 
+	public String getItemName() 
 	{
-		ItemStack stack = new ItemStack(Items.BLAZE_ROD);
-		stack.setStackDisplayName("Inventory Selector");
-		NBTTagCompound stackTag = stack.getTagCompound();
-		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		return stack;
+		return "Inventory Selector";
+	}
+	
+	public Item getBaseItem() 
+	{
+		return Items.BLAZE_ROD;
 	}
 }

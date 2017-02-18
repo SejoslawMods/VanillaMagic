@@ -1,12 +1,10 @@
 package seia.vanillamagic.item.liquidsuppressioncrystal;
 
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import seia.vanillamagic.api.item.ICustomItem;
+import seia.vanillamagic.item.CustomItemCrystal;
 
-public class ItemLiquidSuppressionCrystal implements ICustomItem
+public class ItemLiquidSuppressionCrystal extends CustomItemCrystal
 {
 	public void registerRecipe() 
 	{
@@ -19,12 +17,8 @@ public class ItemLiquidSuppressionCrystal implements ICustomItem
 		});
 	}
 	
-	public ItemStack getItem() 
+	public String getItemName() 
 	{
-		ItemStack stack = new ItemStack(Items.NETHER_STAR);
-		stack.setStackDisplayName("Liquid Suppression Crystal");
-		NBTTagCompound stackTag = stack.getTagCompound();
-		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		return stack;
+		return "Liquid Suppression Crystal";
 	}
 }

@@ -188,6 +188,9 @@ achievement.spellSummonVex.desc=Hold Nether Star in Your hand and Iron Sword in 
 achievement.spellSummonEvoker=Summon Evoker
 achievement.spellSummonEvoker.desc=Hold Nether Star in Your hand and 2x Emerald in Your left hand and right-click on block.
 
+achievement.evokerCrystal=Evoker Crystal
+achievement.evokerCrystal.desc=Kill Evoker to get Crystal. Pickup Crystal to get Achievement. Hold Evoker Crystal in right-hand. Right-Click to cast currently selected Spell. Shift-Right-Click to change selected Spell.
+
 achievement.spellSummonPigman=Summon Pigman
 achievement.spellSummonPigman.desc=Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.
 

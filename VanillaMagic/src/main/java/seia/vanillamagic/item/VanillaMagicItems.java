@@ -12,6 +12,7 @@ import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
+import seia.vanillamagic.item.evokercrystal.ItemEvokerCrystal;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
 import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
@@ -33,10 +34,11 @@ public class VanillaMagicItems
 	 */
 	public static final List<IPotionedCrystal> POTIONED_CRYSTALS;
 	
-	public static final ICustomItem ACCELERATION_CRYSTAL;
-	public static final ICustomItem LIQUID_SUPPRESSION_CRYSTAL; 
-	public static final ICustomItem MOTHER_NATURE_CRYSTAL; 
-	public static final ICustomItem INVENTORY_SELECTOR;
+	public static final CustomItemCrystal ACCELERATION_CRYSTAL;
+	public static final CustomItemCrystal LIQUID_SUPPRESSION_CRYSTAL; 
+	public static final CustomItemCrystal MOTHER_NATURE_CRYSTAL; 
+	public static final CustomItem INVENTORY_SELECTOR;
+	public static final CustomItemCrystal EVOKER_CRYSTAL;
 	
 	private VanillaMagicItems()
 	{
@@ -60,6 +62,9 @@ public class VanillaMagicItems
 		
 		INVENTORY_SELECTOR = new ItemInventorySelector();
 		CUSTOM_ITEMS.add(INVENTORY_SELECTOR);
+		
+		EVOKER_CRYSTAL = new ItemEvokerCrystal();
+		CUSTOM_ITEMS.add(EVOKER_CRYSTAL);
 	}
 	
 	public static void addCustomItem(ICustomItem item)
