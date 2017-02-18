@@ -10,6 +10,11 @@ public class Point
 {
 	protected int x, y;
 	
+	public Point()
+	{
+		this(0, 0);
+	}
+	
 	public Point(int x, int y)
 	{
 		this.setPosition(x, y);
