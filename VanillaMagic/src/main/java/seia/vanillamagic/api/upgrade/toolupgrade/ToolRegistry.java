@@ -63,7 +63,8 @@ public class ToolRegistry
 	}
 	
 	/**
-	 * Initialize the registry (add vanilla stacks to registry)
+	 * Initialize the registry (add vanilla stacks to registry).
+	 * Used in VanillaMagic preInit.
 	 */
 	public static void preInit()
 	{
