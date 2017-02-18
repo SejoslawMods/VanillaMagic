@@ -1,4 +1,4 @@
-package seia.vanillamagic.api.item.itemupgrade;
+package seia.vanillamagic.api.upgrade.itemupgrade;
 
 import java.lang.reflect.Method;
 

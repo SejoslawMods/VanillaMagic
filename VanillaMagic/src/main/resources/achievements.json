@@ -375,8 +375,20 @@
 	"wandTier":1
 },
 {
-	"questClass":"seia.vanillamagic.itemupgrade.QuestItemUpgrade",
-	"requiredQuest":"craftIronOre",
+    "questClass":"seia.vanillamagic.quest.upgrade.toolupgrade.QuestToolUpgrade",
+    "requiredQuest":"craftIronOre",
+    "posX":2,
+    "posY":0,
+    "questName":"Tool Upgrade",
+    "uniqueName":"toolUpgrade",
+    "icon":
+    {
+        "id":278
+    }
+},
+{
+	"questClass":"seia.vanillamagic.quest.upgrade.itemupgrade.QuestItemUpgrade",
+	"requiredQuest":"toolUpgrade",
 	"posX":2,
 	"posY":0,
 	"questName":"Item Upgrades",

@@ -1,4 +1,4 @@
-package seia.vanillamagic.itemupgrade;
+package seia.vanillamagic.quest.upgrade.itemupgrade;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
-import seia.vanillamagic.api.item.itemupgrade.ItemUpgradeAPI;
+import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
+import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.itemupgrade.upgrade.UpgradeAutosmelt;
+import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeAutosmelt;
 import seia.vanillamagic.util.ItemStackHelper;
 
 /**
@@ -84,7 +84,7 @@ public class ItemUpgradeRegistry
 	/**
 	 * This method is just to start the static.
 	 */
-	public static void start()
+	public static void preInit()
 	{
 		VanillaMagic.LOGGER.log(Level.INFO, "ItemUpgradeRegistry created");
 	}

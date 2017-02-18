@@ -1,5 +1,6 @@
-package seia.vanillamagic.itemupgrade;
+package seia.vanillamagic.quest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,21 +12,17 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.item.itemupgrade.IItemUpgrade;
-import seia.vanillamagic.itemupgrade.ItemUpgradeRegistry.ItemEntry;
 import seia.vanillamagic.magic.wand.WandRegistry;
-import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
-public class QuestItemUpgrade extends Quest
+public abstract class QuestSpawnOnCauldron extends Quest
 {
 	int times = 0;
 	@SubscribeEvent
@@ -47,6 +44,7 @@ public class QuestItemUpgrade extends Quest
 			times = 0;
 			return;
 		}
+		
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(rightHand))
@@ -59,25 +57,29 @@ public class QuestItemUpgrade extends Quest
 			if(clickedBlock.getBlock() instanceof BlockCauldron)
 			{
 				List<EntityItem> inCauldron = CauldronHelper.getItemsInCauldron(world, clickedPos);
-				ItemStack base = getBaseStack(inCauldron);
+				EntityItem base = getBaseStack(inCauldron);
 				if(base == null)
 				{
 					return;
 				}
-				if(ItemStackHelper.isNullStack(base))
+				if(ItemStackHelper.isNullStack(base.getEntityItem()))
 				{
 					return;
 				}
-				if(!canGetUpgrade(base))
+				if(!canGetUpgrade(base.getEntityItem()))
 				{
 					return;
 				}
-				ItemStack ingredient = getIngredient(inCauldron);
-				if(ItemStackHelper.isNullStack(ingredient))
+				List<EntityItem> ingredients = getIngredients(base, inCauldron);
+				if(ingredients == null)
 				{
 					return;
 				}
-				ItemStack craftingResult = ItemUpgradeRegistry.getResult(base, ingredient);
+				if(ingredients.size() <= 0)
+				{
+					return;
+				}
+				ItemStack craftingResult = getResult(base, ingredients);
 				if(ItemStackHelper.isNullStack(craftingResult))
 				{
 					return;
@@ -86,12 +88,15 @@ public class QuestItemUpgrade extends Quest
 				{
 					player.addStat(achievement, 1);
 				}
-				else if(player.hasAchievement(achievement))
+				if(player.hasAchievement(achievement))
 				{
-					for(EntityItem ei : inCauldron)
+					// Remove necessary stacks
+					world.removeEntity(base);
+					for(EntityItem ei : ingredients)
 					{
 						world.removeEntity(ei);
 					}
+					
 					EntityItem craftingResultEntity = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), craftingResult);
 					world.spawnEntity(craftingResultEntity);
 					// Particle + sound
@@ -115,56 +120,50 @@ public class QuestItemUpgrade extends Quest
 			}
 		}
 	}
-
-	public boolean canGetUpgrade(ItemStack base) 
-	{
-		base.setStackDisplayName(base.getDisplayName() + " ");
-		NBTTagCompound tag = base.getTagCompound();
-		if(tag == null)
-		{
-			return false;
-		}
-		return !tag.getBoolean(IItemUpgrade.NBT_ITEM_CONTAINS_UPGRADE);
-	}
-
+	
 	@Nullable
-	public ItemStack getIngredient(List<EntityItem> inCauldron) 
+	public EntityItem getBaseStack(List<EntityItem> inCauldron) 
 	{
 		for(EntityItem ei : inCauldron)
 		{
-			if(!isBaseItem(ei.getEntityItem()))
+			if(isBaseItem(ei))
 			{
-				return ei.getEntityItem();
+				return ei;
 			}
 		}
 		return null;
 	}
-
-	@Nullable
-	public ItemStack getBaseStack(List<EntityItem> inCauldron) 
+	
+	public List<EntityItem> getIngredients(EntityItem baseItem, List<EntityItem> inCauldron)
 	{
+		List<EntityItem> list = new ArrayList<>();
 		for(EntityItem ei : inCauldron)
 		{
-			if(isBaseItem(ei.getEntityItem()))
+			if(!isBaseItem(ei))
 			{
-				return ei.getEntityItem();
+				list.add(ei);
+			}
+		}
+		return list;
+	}
+	
+	@Nullable
+	public ItemStack getResult(EntityItem base, List<EntityItem> ingredients)
+	{
+		for(int i = 0; i < ingredients.size(); ++i)
+		{
+			ItemStack result = getResultSingle(base, ingredients.get(i));
+			if(result != null)
+			{
+				return result;
 			}
 		}
 		return null;
 	}
-
-	public boolean isBaseItem(ItemStack entityItem) 
-	{
-		for(ItemEntry ie : ItemUpgradeRegistry.getBaseItems())
-		{
-			if(entityItem.getItem() == ie.item)
-			{
-				if(ItemStackHelper.getStackSize(entityItem) == ItemStackHelper.getStackSize(ie.stack))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+	
+	public abstract boolean isBaseItem(EntityItem entityItem);
+	
+	public abstract boolean canGetUpgrade(ItemStack base);
+	
+	public abstract ItemStack getResultSingle(EntityItem base, EntityItem ingredient);
 }

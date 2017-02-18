@@ -291,10 +291,13 @@ achievement.buildAltarTier2=Build Altar Tier 2
 achievement.buildAltarTier2.desc=Add 1 block of Iron on each corner of Altar Tier 1 but one layer lower than Cauldron, outside of the redstone circle and replace the Cauldron.
 
 achievement.craftIronOre=Craft Iron Ore
-achievement.craftIronOre.desc=Toss 10x Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick Wand in hand.
+achievement.craftIronOre.desc=Toss 10x Oak Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick Wand in hand.
+
+achievement.toolUpgrade=Tool Upgrade
+achievement.toolUpgrade.desc=Toss 1x Tool (Sword, Pickaxe, etc.) + 1x better ingredient (Stone, Diamond, etc.) into Cauldron and right-click with Blaze Wand.
 
 achievement.itemUpgrades=Item Upgrades
-achievement.itemUpgrades.desc=Toss 1x Item that can be upgraded + 1x ingredient into Cauldron and right-click with Blaze Wand.
+achievement.itemUpgrades.desc=Toss 1x Item that can be upgraded + 1x ingredient into Cauldron and right-click with Blaze Wand. (Upgrades described in book)
 
 achievement.craftCactus=Craft Cactus
 achievement.craftCactus.desc=Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
