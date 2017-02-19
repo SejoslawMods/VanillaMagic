@@ -15,6 +15,9 @@ public class EventQuest extends Event
 		this.quest = quest;
 	}
 	
+	/**
+	 * @return Returns the Quest connected with this Event.
+	 */
 	public IQuest getQuest()
 	{
 		return quest;
