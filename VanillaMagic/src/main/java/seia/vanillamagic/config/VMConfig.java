@@ -42,6 +42,7 @@ public class VMConfig
 	private static final String _categorySpell = "Spell";
 	public static int spellCostSummonFriendly = 32;
 	public static int spellCostSummonHostile = 8;
+	public static boolean enableMoveBlockBlacklist = true;
 	
 	// Meteor
 	private static final String _categoryMeteor = "Meteor";
@@ -215,6 +216,11 @@ public class VMConfig
 				1, 
 				64, 
 				"Cost of one hostile mob spawn (in items from hand).");
+		enableMoveBlockBlacklist = _config.getBoolean(
+				"enableMoveBlockBlacklist", 
+				_categorySpell, 
+				enableMoveBlockBlacklist, 
+				"Should Blacklist for Quest Move Block By Book be enabled.");
 		
 		// Meteor
 		_config.addCustomCategoryComment(_categoryMeteor, "Options connected with Meteor Explosion.");

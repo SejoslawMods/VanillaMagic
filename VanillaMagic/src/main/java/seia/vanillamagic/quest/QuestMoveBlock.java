@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.quest.QuestMoveBlockRegistry;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
@@ -120,6 +122,14 @@ public class QuestMoveBlock extends Quest
 	
 	public void handleSave(World world, EntityPlayer player, BlockPos wantedBlockPos, EnumFacing hittedFace)
 	{
+		Block wantedBlock = world.getBlockState(wantedBlockPos).getBlock();
+		if(VMConfig.enableMoveBlockBlacklist)
+		{
+			if(QuestMoveBlockRegistry.isBlockOnMoveBlockBlacklist(wantedBlock)) // If Block is blacklisted than don't save it 
+			{
+				return;
+			}
+		}
 		ItemStack stackOffHand = new ItemStack(Items.ENCHANTED_BOOK);
 		stackOffHand.setStackDisplayName("QuestBook");
 		NBTTagCompound stackTagCompound = stackOffHand.getTagCompound();
@@ -127,7 +137,7 @@ public class QuestMoveBlock extends Quest
 		if(!stackTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
 		{
 			NBTTagCompound questTag = new NBTTagCompound();
-			Block wantedBlock = world.getBlockState(wantedBlockPos).getBlock();
+//			Block wantedBlock = world.getBlockState(wantedBlockPos).getBlock();
 			int blockID = Block.REGISTRY.getIDForObject(wantedBlock);
 			int meta = wantedBlock.getMetaFromState(world.getBlockState(wantedBlockPos));
 			questTag.setInteger(NBTHelper.NBT_BLOCK_ID, blockID);

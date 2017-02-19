@@ -56,7 +56,7 @@ public class ToolRegistry
 		}
 	}
 	
-	private static List<ItemEntry> _ENTRYS = new ArrayList<>();
+	private static final List<ItemEntry> _ENTRYS = new ArrayList<>();
 	
 	private ToolRegistry()
 	{
