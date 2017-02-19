@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
- * This Event will fire if Player with unlocked required Quest will try to save block into book.
+ * This Event will fire if Player with unlocked required Quest will try to save / load block into / from book.
  */
 public class EventMoveBlock extends Event 
 {
