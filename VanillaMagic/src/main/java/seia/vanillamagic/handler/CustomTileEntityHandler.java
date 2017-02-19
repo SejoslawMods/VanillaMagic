@@ -155,10 +155,7 @@ public class CustomTileEntityHandler
 	@Nullable
 	public static ICustomTileEntity getCustomTileEntity(BlockPos tilePos, World world)
 	{
-//		return getCustomTileEntity(tilePos, WorldHelper.getDimensionID(world));
-		ICustomTileEntity customTile = getCustomTileEntity(tilePos, WorldHelper.getDimensionID(world));
-		MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity(customTile, world, customTile.getTileEntity().getPos()));
-		return customTile;
+		return getCustomTileEntity(tilePos, WorldHelper.getDimensionID(world));
 	}
 	
 	/**

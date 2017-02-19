@@ -21,6 +21,8 @@ public class QuestMoveBlockRegistry
 		addBlockToMoveBlockBlacklist(Blocks.END_PORTAL);
 		addBlockToMoveBlockBlacklist(Blocks.END_PORTAL_FRAME);
 		addBlockToMoveBlockBlacklist(Blocks.END_GATEWAY);
+		
+		addBlockToMoveBlockBlacklist(Blocks.CAULDRON); // To prevent in-mod errors.
 	}
 	
 	public static void addBlockToMoveBlockBlacklist(Block blockToAdd)
