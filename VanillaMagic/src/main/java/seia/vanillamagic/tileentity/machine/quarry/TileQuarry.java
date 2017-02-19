@@ -1,7 +1,6 @@
 package seia.vanillamagic.tileentity.machine.quarry;
 
 import java.util.List;
-import java.util.Random;
 
 import org.apache.logging.log4j.Level;
 
@@ -16,6 +15,8 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventQuarry;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
@@ -116,6 +117,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 							{
 								this.inventoryInput = new InventoryWrapper(world, chestPosInput);
 								this.inventoryOutput = new InventoryWrapper(world, chestPosOutput);
+								MinecraftForge.EVENT_BUS.post(new EventQuarry.BuildCorrectly((IQuarry) this, world, pos));
 							}
 							catch(NotInventoryException e)
 							{
@@ -233,6 +235,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 			performOneOperation();
 		}
 		_upgradeHelper.clearUpgrades();
+		MinecraftForge.EVENT_BUS.post(new EventQuarry.Work((IQuarry) this, world, pos));
 	}
 	
 	/**

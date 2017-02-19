@@ -28,6 +28,7 @@ public class VanillaMagicIntegration
 		INTEGRATIONS.add(new IntegrationVersionChecker());
 		INTEGRATIONS.add(new IntegrationBetterAchievements());
 		INTEGRATIONS.add(new IntegrationWTFExpedition());
+		
 		INTEGRATIONS.add(new IntegrationFilledOres());
 		INTEGRATIONS.add(new IntegrationSuperOres());
 		

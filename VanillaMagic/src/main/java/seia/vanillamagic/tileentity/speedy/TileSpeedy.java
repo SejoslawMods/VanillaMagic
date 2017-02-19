@@ -14,6 +14,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventSpeedy;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
@@ -132,6 +134,7 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
 		{
 			tickNeighbors();
 		}
+		MinecraftForge.EVENT_BUS.post(new EventSpeedy((ISpeedy) this, world, pos));
 	}
 	
 	private void tickNeighbors() 

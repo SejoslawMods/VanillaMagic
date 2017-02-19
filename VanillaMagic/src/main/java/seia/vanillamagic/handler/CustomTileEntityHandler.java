@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventCustomTileEntity;
 import seia.vanillamagic.api.handler.CustomTileEntityHandlerAPI;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.core.VanillaMagic;
@@ -51,12 +53,20 @@ public class CustomTileEntityHandler
 	public static boolean addCustomTileEntity(ICustomTileEntity customTileEntity, int dimension)
 	{
 		WorldServer world = DimensionManager.getWorld(dimension);
-		ICustomTileEntity customTileOnWantedPos = getCustomTileEntity(customTileEntity.getTileEntity().getPos(), (World) world);
+		BlockPos customTilePos = customTileEntity.getTileEntity().getPos();
+		ICustomTileEntity customTileOnWantedPos = getCustomTileEntity(customTilePos, (World) world);
 		// If NULL than there is no CustomTile on the position on which we want to place new CustomTile.
 		// We can place our new CustomTile.
 		if(customTileOnWantedPos == null)
 		{
-			return world.addTileEntity(customTileEntity.getTileEntity());
+			if(!MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Add.Before(customTileOnWantedPos, world, customTilePos)))
+			{
+//				return world.addTileEntity(customTileEntity.getTileEntity());
+				boolean added = world.addTileEntity(customTileEntity.getTileEntity());
+				MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Add.After(customTileOnWantedPos, world, customTilePos));
+				return added;
+			}
+//			return world.addTileEntity(customTileEntity.getTileEntity());
 		}
 		return false;
 	}
@@ -71,8 +81,15 @@ public class CustomTileEntityHandler
 			TileEntity tile = world.tickableTileEntities.get(i);
 			if(BlockPosHelper.isSameBlockPos(tile.getPos(), pos))
 			{
-				world.tickableTileEntities.remove(i);
-				return true;
+//				world.tickableTileEntities.remove(i);
+//				return true;
+				ICustomTileEntity customTile = getCustomTileEntity(tile.getPos(), world);
+				if(!MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Remove.Before(customTile, world, pos)))
+				{
+					world.tickableTileEntities.remove(i);
+					MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Remove.After(null, world, pos));
+					return true;
+				}
 			}
 		}
 		return false;
@@ -90,7 +107,12 @@ public class CustomTileEntityHandler
 		}
 		if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, pos))
 		{
-			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
+//			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
+			if(!MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Remove.Before.SendInfoToPlayer(customTile, world, pos, player)))
+			{
+				EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
+				MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Remove.After.SendInfoToPlayer(customTile, world, pos, player));
+			}
 		}
 	}
 	
@@ -133,7 +155,10 @@ public class CustomTileEntityHandler
 	@Nullable
 	public static ICustomTileEntity getCustomTileEntity(BlockPos tilePos, World world)
 	{
-		return getCustomTileEntity(tilePos, WorldHelper.getDimensionID(world));
+//		return getCustomTileEntity(tilePos, WorldHelper.getDimensionID(world));
+		ICustomTileEntity customTile = getCustomTileEntity(tilePos, WorldHelper.getDimensionID(world));
+		MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity(customTile, world, customTile.getTileEntity().getPos()));
+		return customTile;
 	}
 	
 	/**
@@ -150,6 +175,7 @@ public class CustomTileEntityHandler
 			{
 				if(tile instanceof ICustomTileEntity)
 				{
+					MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity((ICustomTileEntity) tile, world, tile.getPos()));
 					return (ICustomTileEntity) tile;
 				}
 			}

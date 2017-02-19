@@ -10,9 +10,9 @@ import javax.annotation.Nullable;
 import org.apache.logging.log4j.Level;
 
 import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventQuest;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.event.EventQuest.EventAddQuest;
 
 public class QuestList
 {
@@ -31,7 +31,7 @@ public class QuestList
 //		EventAddQuest event = new EventAddQuest(q);
 //		QuestList._QUESTS.add(q);
 //		QuestList._QUESTS_MAP.put(q.getUniqueName(), q);
-		if(!MinecraftForge.EVENT_BUS.post(new EventAddQuest(q)))
+		if(!MinecraftForge.EVENT_BUS.post(new EventQuest.Add(q)))
 		{
 			QuestList._QUESTS.add(q);
 			QuestList._QUESTS_MAP.put(q.getUniqueName(), q);

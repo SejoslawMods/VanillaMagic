@@ -15,6 +15,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventBlockAbsorber;
 import seia.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
@@ -98,6 +100,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
 		if(ItemStackHelper.isNullStack(leftItems))
 		{
+			MinecraftForge.EVENT_BUS.post(new EventBlockAbsorber((IBlockAbsorber) this, world, pos, connectedHopper));
 			world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 	}

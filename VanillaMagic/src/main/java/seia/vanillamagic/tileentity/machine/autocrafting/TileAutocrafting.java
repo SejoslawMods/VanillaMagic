@@ -10,6 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventAutocrafting;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
@@ -80,6 +82,7 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 			}
 			decreaseTicks();
 		}
+		MinecraftForge.EVENT_BUS.post(new EventAutocrafting.Work((IAutocrafting) this, world, pos));
 	}
 	
 	public EnumFacing getOutputFacing() 

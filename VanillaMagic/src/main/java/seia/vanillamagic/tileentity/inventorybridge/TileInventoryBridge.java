@@ -16,6 +16,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventInventoryBridge;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
@@ -203,5 +205,6 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(outputInvWrapper.getInventory(), transportingStack, getInputFacing());
 		inv.setInventorySlotContents(slotNumber, leftItems);
 		slotNumber++;
+		MinecraftForge.EVENT_BUS.post(new EventInventoryBridge((IInventoryBridge) this, world, pos));
 	}
 }

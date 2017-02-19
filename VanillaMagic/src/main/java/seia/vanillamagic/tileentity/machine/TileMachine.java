@@ -20,13 +20,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventMachine;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IMachine;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.event.EventMachine;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.BlockPosHelper;
@@ -128,7 +128,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		if(ticks >= oneOperationCost)
 		{
 			// EventMachineWork event = new EventMachineWork(this);
-			if(!MinecraftForge.EVENT_BUS.post(new EventMachine.Work(this)))
+			if(!MinecraftForge.EVENT_BUS.post(new EventMachine.Work(this, world, pos)))
 			{
 				isActive = true;
 				performAdditionalOperations();

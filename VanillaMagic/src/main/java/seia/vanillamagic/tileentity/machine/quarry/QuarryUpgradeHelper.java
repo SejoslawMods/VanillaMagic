@@ -8,6 +8,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.util.ListHelper;
@@ -38,6 +40,7 @@ public class QuarryUpgradeHelper
 		if(canAddUpgrade(iqu))
 		{
 			_upgrades.add(iqu);
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.AddUpgrade(_quarry, _quarry.getTileEntity().getWorld(), _quarry.getMachinePos(), iqu));
 		}
 	}
 
@@ -112,7 +115,9 @@ public class QuarryUpgradeHelper
 	{
 		for(IQuarryUpgrade upgrade : _upgrades)
 		{
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
 			upgrade.modifyQuarry(quarry);
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
 		}
 	}
 

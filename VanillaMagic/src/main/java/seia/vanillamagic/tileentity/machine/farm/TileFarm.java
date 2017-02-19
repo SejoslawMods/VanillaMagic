@@ -22,6 +22,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventFarm;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IFarm;
@@ -101,6 +103,7 @@ public class TileFarm extends TileMachine implements IFarm
 		{
 			decreaseTicks();
 		}
+		MinecraftForge.EVENT_BUS.post(new EventFarm.Work((IFarm) this, world, pos));
 	}
 	
 	public boolean tillBlock(BlockPos plantingLocation) 
@@ -252,6 +255,10 @@ public class TileFarm extends TileMachine implements IFarm
                             	world.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), 11);
                             	tool.setItemDamage(tool.getItemDamage() + 1);
                             }
+					case PODZOL:
+						break;
+					default:
+						break;
                     }
                 }
             }
