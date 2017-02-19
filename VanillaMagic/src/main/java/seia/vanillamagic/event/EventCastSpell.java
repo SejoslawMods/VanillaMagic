@@ -14,18 +14,18 @@ import seia.vanillamagic.magic.spell.ISpell;
  */
 public class EventCastSpell extends Event
 {
-	public final EntityPlayer caster;
-	public final ISpell spell;
+	private EntityPlayer caster;
+	private ISpell spell;
 	
 	/** Null - if caster cast spell in air.  */
 	@Nullable
-	public final BlockPos clickedPos;
+	private BlockPos clickedPos;
 	/** Null - if caster cast spell in air.  */
 	@Nullable
-	public final EnumFacing clickedFace;
+	private EnumFacing clickedFace;
 	/** Null - if caster cast spell in air.  */
 	@Nullable
-	public final Vec3d clickingVec;
+	private Vec3d clickingVec;
 	
 	public EventCastSpell(EntityPlayer caster, BlockPos clickedPos, EnumFacing clickedFace, Vec3d clickingVec, ISpell spell) 
 	{
@@ -34,5 +34,36 @@ public class EventCastSpell extends Event
 		this.clickedFace = clickedFace;
 		this.clickingVec = clickingVec;
 		this.spell = spell;
+	}
+	
+	public EntityPlayer getCaster()
+	{
+		return caster;
+	}
+	
+	public ISpell getSpell()
+	{
+		return spell;
+	}
+	
+	/** Null - if caster cast spell in air.  */
+	@Nullable
+	public BlockPos getClickedPos()
+	{
+		return clickedPos;
+	}
+	
+	/** Null - if caster cast spell in air.  */
+	@Nullable
+	public EnumFacing getClickedFace()
+	{
+		return clickedFace;
+	}
+	
+	/** Null - if caster cast spell in air.  */
+	@Nullable
+	public Vec3d getClickedVec()
+	{
+		return clickingVec;
 	}
 }
