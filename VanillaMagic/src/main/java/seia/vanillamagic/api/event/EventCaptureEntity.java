@@ -11,9 +11,21 @@ import net.minecraft.world.World;
  */
 public class EventCaptureEntity extends EventPlayerOnWorld 
 {
-	public EventCaptureEntity(World world, EntityPlayer player)
+	private final Entity _entity;
+	
+	public EventCaptureEntity(World world, EntityPlayer player, Entity entity)
 	{
 		super(player, world);
+		this._entity = entity;
+	}
+	
+	/**
+	 * @return Returns the Entity which should be captured into book or spawned from book.<br>
+	 * 		   In Respawn Event this Entity is pre-created Entity that will be added into World if the Event is not canceled.
+	 */
+	public Entity getEntity()
+	{
+		return _entity;
 	}
 	
 	/**
@@ -21,37 +33,28 @@ public class EventCaptureEntity extends EventPlayerOnWorld
 	 */
 	public static class Capture extends EventCaptureEntity
 	{
-		private final Entity _target;
-		
-		public Capture(World world, EntityPlayer player, 
-				Entity target) 
+		public Capture(World world, EntityPlayer player, Entity target) 
 		{
-			super(world, player);
-			this._target = target;
-		}
-		
-		/**
-		 * @return Returns the Entity which should be captured into book.
-		 */
-		public Entity getTarget()
-		{
-			return _target;
+			super(world, player, target);
 		}
 	}
 	
 	/**
-	 * This Event is fired BEFORE Player respawn the captured Entity.
+	 * This Event is fired BEFORE Player respawn the captured Entity.<br>
+	 * If there was no Entity 
 	 */
 	public static class Respawn extends EventCaptureEntity
 	{
 		private final BlockPos _respawnPos;
 		private final EnumFacing _face;
+		private final String _type;
 		
-		public Respawn(World world, EntityPlayer player, BlockPos respawnPos, EnumFacing face) 
+		public Respawn(World world, EntityPlayer player, BlockPos respawnPos, EnumFacing face, Entity entity, String type) 
 		{
-			super(world, player);
+			super(world, player, entity);
 			this._respawnPos = respawnPos;
 			this._face = face;
+			this._type = type;
 		}
 		
 		/**
@@ -68,6 +71,14 @@ public class EventCaptureEntity extends EventPlayerOnWorld
 		public EnumFacing getFace()
 		{
 			return _face;
+		}
+		
+		/**
+		 * @return Returns the String representing the type of spawned Entity. This is a full-class name of the Entity.
+		 */
+		public String getEntityType()
+		{
+			return _type;
 		}
 	}
 }

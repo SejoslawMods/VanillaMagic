@@ -140,12 +140,7 @@ public class QuestCaptureEntity extends Quest
 						clickedTimesFree = 0;
 						return;
 					}
-//					handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
-					if(!MinecraftForge.EVENT_BUS.post(new EventCaptureEntity.Respawn(
-							world, player, respawnPos, event.getFace())))
-					{
-						handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
-					}
+					handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
 					clickedTimesFree++;
 				}
 			}
@@ -191,11 +186,20 @@ public class QuestCaptureEntity extends Quest
 			{
 				return;
 			}
-			entity.readFromNBT(entityTag);
-			entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
-			world.spawnEntity(entity);
-			ItemStack newOffHand = requiredStackOffHand.copy();
-			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
+//			entity.readFromNBT(entityTag);
+//			entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
+//			world.spawnEntity(entity);
+//			ItemStack newOffHand = requiredStackOffHand.copy();
+//			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
+			if(!MinecraftForge.EVENT_BUS.post(new EventCaptureEntity.Respawn(
+					world, player, respawnPos, face, entity, type)))
+			{
+				entity.readFromNBT(entityTag);
+				entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
+				world.spawnEntity(entity);
+				ItemStack newOffHand = requiredStackOffHand.copy();
+				player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
+			}
 		}
 	}
 	
