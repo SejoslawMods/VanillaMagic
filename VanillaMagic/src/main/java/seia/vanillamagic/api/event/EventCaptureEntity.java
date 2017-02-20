@@ -41,7 +41,7 @@ public class EventCaptureEntity extends EventPlayerOnWorld
 	
 	/**
 	 * This Event is fired BEFORE Player respawn the captured Entity.<br>
-	 * If there was no Entity or the type is wrong this Event will not fire.
+	 * If there was no Entity or the type is wrong, this Event will not fire.
 	 */
 	public static class Respawn extends EventCaptureEntity
 	{
