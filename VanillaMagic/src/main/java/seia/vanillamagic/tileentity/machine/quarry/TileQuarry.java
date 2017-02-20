@@ -20,6 +20,7 @@ import seia.vanillamagic.api.event.EventQuarry;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgradeHelper;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.machine.TileMachine;
@@ -30,7 +31,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 {
 	public static final String REGISTRY_NAME = TileQuarry.class.getName();
 	
-	private QuarryUpgradeHelper _upgradeHelper = new QuarryUpgradeHelper(this);
+	private IQuarryUpgradeHelper _upgradeHelper = new QuarryUpgradeHelper(this);
 	
 	private BlockPos _diamondBlockPos;
 	private BlockPos _redstoneBlockPos;
@@ -73,6 +74,11 @@ public class TileQuarry extends TileMachine implements IQuarry
 	public void forceQuarryStart()
 	{
 		_forceStop = false;
+	}
+	
+	public IQuarryUpgradeHelper getQuarryUpgradeHelper()
+	{
+		return _upgradeHelper;
 	}
 	
 	/**
@@ -192,7 +198,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 			}
 			else // if(QuarryUpgradeRegistry.isUpgradeBlock(checkingBlock.getBlock()))
 			{
-				_upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock());
+				_upgradeHelper.addUpgradeFromBlock(checkingBlock.getBlock(), cauldronPos);
 			}
 			cauldronPos = cauldronPos.offset(_diamondFacing);
 			checkingBlock = world.getBlockState(cauldronPos);
@@ -234,8 +240,8 @@ public class TileQuarry extends TileMachine implements IQuarry
 		{
 			performOneOperation();
 		}
-		_upgradeHelper.clearUpgrades();
 		MinecraftForge.EVENT_BUS.post(new EventQuarry.Work((IQuarry) this, world, pos));
+		_upgradeHelper.clearUpgrades();
 	}
 	
 	/**

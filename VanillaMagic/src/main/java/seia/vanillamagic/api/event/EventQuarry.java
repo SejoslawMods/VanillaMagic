@@ -51,14 +51,16 @@ public class EventQuarry extends EventMachine
 	/**
 	 * This is base for all IQuarryUpgrade-related Events.
 	 */
-	public static class EventQuarryUpgrade extends EventQuarry
+	public static class QuarryUpgrade extends EventQuarry
 	{
 		private final IQuarryUpgrade _upgrade;
+		private final BlockPos _upgradePos;
 		
-		public EventQuarryUpgrade(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade)
+		public QuarryUpgrade(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade, BlockPos upgradePos)
 		{
 			super(tileQuarry, world, customTilePos);
 			this._upgrade = upgrade;
+			this._upgradePos = upgradePos;
 		}
 		
 		/**
@@ -68,24 +70,32 @@ public class EventQuarry extends EventMachine
 		{
 			return _upgrade;
 		}
+		
+		/**
+		 * @return Returns position of the block connected with QuarryUpgrade.
+		 */
+		public BlockPos getUpgradePos()
+		{
+			return _upgradePos;
+		}
 	}
 	
 	/**
 	 * This Event is fired when Quarry added correctly the given upgrade.
 	 */
-	public static class AddUpgrade extends EventQuarryUpgrade
+	public static class AddUpgrade extends QuarryUpgrade
 	{
-		public AddUpgrade(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade)
+		public AddUpgrade(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade, BlockPos upgradePos)
 		{
-			super(tileQuarry, world, customTilePos, upgrade);
+			super(tileQuarry, world, customTilePos, upgrade, upgradePos);
 		}
 	}
 	
-	public static class ModifyQuarry extends EventQuarryUpgrade
+	public static class ModifyQuarry extends QuarryUpgrade
 	{
-		public ModifyQuarry(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade) 
+		public ModifyQuarry(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade, BlockPos upgradePos) 
 		{
-			super(tileQuarry, world, customTilePos, upgrade);
+			super(tileQuarry, world, customTilePos, upgrade, upgradePos);
 		}
 		
 		/**
@@ -93,9 +103,9 @@ public class EventQuarry extends EventMachine
 		 */
 		public static class Before extends ModifyQuarry
 		{
-			public Before(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade) 
+			public Before(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade, BlockPos upgradePos) 
 			{
-				super(tileQuarry, world, customTilePos, upgrade);
+				super(tileQuarry, world, customTilePos, upgrade, upgradePos);
 			}
 		}
 		
@@ -104,9 +114,9 @@ public class EventQuarry extends EventMachine
 		 */
 		public static class After extends ModifyQuarry
 		{
-			public After(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade) 
+			public After(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade, BlockPos upgradePos) 
 			{
-				super(tileQuarry, world, customTilePos, upgrade);
+				super(tileQuarry, world, customTilePos, upgrade, upgradePos);
 			}
 		}
 	}

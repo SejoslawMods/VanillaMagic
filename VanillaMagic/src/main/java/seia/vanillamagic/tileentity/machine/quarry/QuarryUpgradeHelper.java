@@ -1,7 +1,10 @@
 package seia.vanillamagic.tileentity.machine.quarry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -12,25 +15,39 @@ import net.minecraftforge.common.MinecraftForge;
 import seia.vanillamagic.api.event.EventQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
+import seia.vanillamagic.api.tileentity.machine.IQuarryUpgradeHelper;
 import seia.vanillamagic.util.ListHelper;
 
 /**
  * Each Quarry has it's own helper to handler the upgrades.
  */
-public class QuarryUpgradeHelper
+public class QuarryUpgradeHelper implements IQuarryUpgradeHelper
 {
 	private final IQuarry _quarry;
-	private final List<IQuarryUpgrade> _upgrades = new ArrayList<IQuarryUpgrade>();
+	private final List<IQuarryUpgrade> _upgrades = new ArrayList<>();
+	private final Map<BlockPos, IQuarryUpgrade> _upgradeOnPos = new HashMap<>();
 	
 	public QuarryUpgradeHelper(IQuarry quarry)
 	{
 		this._quarry = quarry;
 	}
-
-	/**
-	 * Add the {@link IQuarryUpgrade} to the list of upgrades.
-	 */
-	public void addUpgradeFromBlock(Block block)
+	
+	public IQuarry getQuarry()
+	{
+		return _quarry;
+	}
+	
+	public List<IQuarryUpgrade> getUpgradesList()
+	{
+		return _upgrades;
+	}
+	
+	public Map<BlockPos, IQuarryUpgrade> getUpgradesMap()
+	{
+		return _upgradeOnPos;
+	}
+	
+	public void addUpgradeFromBlock(Block block, BlockPos upgradePos)
 	{
 		IQuarryUpgrade iqu = QuarryUpgradeRegistry.getUpgradeFromBlock(block);
 		if(!hasRegisteredRequireUpgrade(iqu))
@@ -40,7 +57,9 @@ public class QuarryUpgradeHelper
 		if(canAddUpgrade(iqu))
 		{
 			_upgrades.add(iqu);
-			MinecraftForge.EVENT_BUS.post(new EventQuarry.AddUpgrade(_quarry, _quarry.getTileEntity().getWorld(), _quarry.getMachinePos(), iqu));
+			_upgradeOnPos.put(upgradePos, iqu);
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.AddUpgrade(
+					_quarry, _quarry.getTileEntity().getWorld(), _quarry.getMachinePos(), iqu, upgradePos));
 		}
 	}
 
@@ -80,10 +99,7 @@ public class QuarryUpgradeHelper
 		}
 		return true;
 	}
-
-	/**
-	 * Returns the drops list from all upgrades.
-	 */
+	
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,IBlockState workingPosState)
 	{
 		List<ItemStack> drops = new ArrayList<ItemStack>();
@@ -99,31 +115,33 @@ public class QuarryUpgradeHelper
 		}
 		return drops;
 	}
-
-	/**
-	 * Clears the upgrade list.
-	 */
+	
 	public void clearUpgrades() 
 	{
 		_upgrades.clear();
+		_upgradeOnPos.clear();
 	}
-
-	/**
-	 * This method will perform upgrades once a tick.
-	 */
+	
 	public void modifyQuarry(IQuarry quarry)
 	{
-		for(IQuarryUpgrade upgrade : _upgrades)
+//		for(IQuarryUpgrade upgrade : _upgrades)
+//		{
+//			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
+//			upgrade.modifyQuarry(quarry);
+//			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
+//		}
+		for(Entry<BlockPos, IQuarryUpgrade> entry : _upgradeOnPos.entrySet())
 		{
-			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
+			IQuarryUpgrade upgrade = entry.getValue();
+			BlockPos upgradePos = entry.getKey();
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(
+					quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade, upgradePos));
 			upgrade.modifyQuarry(quarry);
-			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(
+					quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade, upgradePos));
 		}
 	}
-
-	/**
-	 * Method in which all upgrades info will be added.
-	 */
+	
 	public List<String> addAdditionalInfo(List<String> baseInfo)
 	{
 		baseInfo.add("Upgrades:");
