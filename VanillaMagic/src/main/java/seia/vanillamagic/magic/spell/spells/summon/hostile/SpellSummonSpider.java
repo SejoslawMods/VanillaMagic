@@ -7,7 +7,7 @@ import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.IWand;
 
 public class SpellSummonSpider extends SpellSummonHostile 
 {

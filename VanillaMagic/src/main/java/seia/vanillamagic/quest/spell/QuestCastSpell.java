@@ -11,10 +11,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
-import seia.vanillamagic.event.EventCastSpell;
-import seia.vanillamagic.magic.spell.ISpell;
+import seia.vanillamagic.api.event.EventSpell;
+import seia.vanillamagic.api.magic.ISpell;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.spell.SpellRegistry;
-import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -110,7 +110,7 @@ public abstract class QuestCastSpell extends Quest
 					if(spell.getWand().getWandID() == iSpell.getWand().getWandID())
 					{
 						// EventCastSpell event = new EventCastSpell(caster, pos, face, hitVec, iSpell);
-						if(!MinecraftForge.EVENT_BUS.post(new EventCastSpell(caster, pos, face, hitVec, iSpell)))
+						if(!MinecraftForge.EVENT_BUS.post(new EventSpell.Cast(iSpell, caster, caster.world)))
 						{
 							return SpellRegistry.castSpellById(spell.getSpellID(), caster, pos, face, hitVec);
 						}

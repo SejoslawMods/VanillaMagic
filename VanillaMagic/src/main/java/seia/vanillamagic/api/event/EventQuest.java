@@ -8,11 +8,11 @@ import seia.vanillamagic.api.quest.IQuest;
  */
 public class EventQuest extends Event
 {
-	private IQuest quest;
+	private final IQuest _quest;
 	
 	public EventQuest(IQuest quest)
 	{
-		this.quest = quest;
+		this._quest = quest;
 	}
 	
 	/**
@@ -20,7 +20,7 @@ public class EventQuest extends Event
 	 */
 	public IQuest getQuest()
 	{
-		return quest;
+		return _quest;
 	}
 	
 	/**

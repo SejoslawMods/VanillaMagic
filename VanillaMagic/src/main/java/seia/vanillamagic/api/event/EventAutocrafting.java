@@ -6,17 +6,17 @@ import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 
 public class EventAutocrafting extends EventMachine 
 {
-	private IAutocrafting tileAutocrafting;
+	private final IAutocrafting _tileAutocrafting;
 	
 	public EventAutocrafting(IAutocrafting tileAutocrafting, World world, BlockPos customTilePos) 
 	{
 		super(tileAutocrafting, world, customTilePos);
-		this.tileAutocrafting = tileAutocrafting;
+		this._tileAutocrafting = tileAutocrafting;
 	}
 	
 	public IAutocrafting getTileAutocrafting()
 	{
-		return tileAutocrafting;
+		return _tileAutocrafting;
 	}
 	
 	/**

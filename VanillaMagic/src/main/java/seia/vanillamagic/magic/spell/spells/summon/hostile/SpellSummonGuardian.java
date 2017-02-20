@@ -7,7 +7,7 @@ import net.minecraft.entity.monster.EntityElderGuardian;
 import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.IWand;
 
 public class SpellSummonGuardian extends SpellSummonHostile 
 {

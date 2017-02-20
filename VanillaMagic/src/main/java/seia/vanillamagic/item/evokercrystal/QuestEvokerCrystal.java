@@ -6,14 +6,16 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEvoker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.event.EventSpell;
+import seia.vanillamagic.api.magic.IEvokerSpell;
 import seia.vanillamagic.item.VanillaMagicItems;
-import seia.vanillamagic.item.evokercrystal.spell.IEvokerSpell;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.EntityHelper;
 
@@ -120,7 +122,12 @@ public class QuestEvokerCrystal extends Quest
 				else // Use Spell
 				{
 					IEvokerSpell spell = EvokerSpellRegistry.getCurrentSpell(crystal);
-					spell.castSpell(player, target);
+//					spell.castSpell(player, target);
+					if(!MinecraftForge.EVENT_BUS.post(new EventSpell.Cast.EvokerSpell(
+							player, player.world, target, spell)))
+					{
+						spell.castSpell(player, target);
+					}
 				}
 			}
 		}

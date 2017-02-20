@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.IWand;
 
 public class SpellSummonPigman extends SpellSummonHostile 
 {

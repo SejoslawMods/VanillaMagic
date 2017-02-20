@@ -4,40 +4,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
  * This Event will fire if Player with unlocked required Quest will try to save / load block into / from book.
  */
-public class EventMoveBlock extends Event 
+public class EventMoveBlock extends EventPlayerOnWorld 
 {
-	private World world;
-	private EntityPlayer player;
-	private BlockPos pos;
-	private EnumFacing face;
+	private final BlockPos _pos;
+	private final EnumFacing _face;
 	
 	public EventMoveBlock(World world, EntityPlayer player, BlockPos pos, EnumFacing face)
 	{
-		this.world = world;
-		this.player = player;
-		this.pos = pos;
-		this.face = face;
-	}
-	
-	/**
-	 * @return Returns the World on which this Event occurred.
-	 */
-	public World getWorld()
-	{
-		return world;
-	}
-	
-	/**
-	 * @return Returns the Player who used book.
-	 */
-	public EntityPlayer getEntityPlayer()
-	{
-		return player;
+		super(player, world);
+		this._pos = pos;
+		this._face = face;
 	}
 	
 	/**
@@ -45,7 +25,7 @@ public class EventMoveBlock extends Event
 	 */
 	public BlockPos getPos()
 	{
-		return pos;
+		return _pos;
 	}
 	
 	/**
@@ -53,7 +33,7 @@ public class EventMoveBlock extends Event
 	 */
 	public EnumFacing getFace()
 	{
-		return face;
+		return _face;
 	}
 	
 	/**

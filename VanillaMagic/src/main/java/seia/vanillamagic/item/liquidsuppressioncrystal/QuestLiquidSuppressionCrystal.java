@@ -6,8 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import seia.vanillamagic.api.event.EventLiquidSuppressionCrystal;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
@@ -66,14 +68,24 @@ public class QuestLiquidSuppressionCrystal extends Quest
 					IBlockState state = world.getBlockState(blockPos);
 					if(BlockHelper.isBlockLiquid(state) && world.getTileEntity(blockPos) == null)
 					{
-						TileLiquidSuppression.createAirBlock(world, blockPos, refresh);
+//						TileLiquidSuppression.createAirBlock(world, blockPos, refresh);
+						if(!MinecraftForge.EVENT_BUS.post(new EventLiquidSuppressionCrystal.CreateAirBlock(
+								player, world, leftHand, blockPos, VanillaMagicItems.LIQUID_SUPPRESSION_CRYSTAL)))
+						{
+							TileLiquidSuppression.createAirBlock(world, blockPos, refresh);
+						}
 					}
 					else
 					{
 						TileEntity tile = world.getTileEntity(blockPos);
 						if(tile instanceof TileLiquidSuppression)
 						{
-							((TileLiquidSuppression) tile).resetDuration(refresh);
+//							((TileLiquidSuppression) tile).resetDuration(refresh);
+							if(!MinecraftForge.EVENT_BUS.post(new EventLiquidSuppressionCrystal.UseOnTileEntity(
+									player, world, leftHand, blockPos, VanillaMagicItems.LIQUID_SUPPRESSION_CRYSTAL, tile)))
+							{
+								((TileLiquidSuppression) tile).resetDuration(refresh);
+							}
 						}
 					}
 				}

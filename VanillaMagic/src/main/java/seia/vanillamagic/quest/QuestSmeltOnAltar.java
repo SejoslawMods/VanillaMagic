@@ -11,9 +11,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.event.EventPlayerUseCauldron;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.AltarChecker;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -77,8 +79,14 @@ public class QuestSmeltOnAltar extends Quest
 							if(player.hasAchievement(achievement))
 							{
 								//SmeltingHelper.countAndSmelt(player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
-								SmeltingHelper.countAndSmelt_OneByOneItemFromOffHand(
-										player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+//								SmeltingHelper.countAndSmelt_OneByOneItemFromOffHand(
+//										player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+								if(!MinecraftForge.EVENT_BUS.post(new EventPlayerUseCauldron.SmeltOnAltar(
+										player, world, cauldronPos, itemsToSmelt)))
+								{
+									SmeltingHelper.countAndSmelt_OneByOneItemFromOffHand(
+											player, itemsToSmelt, cauldronPos.offset(EnumFacing.UP), this, true);
+								}
 							}
 						}
 					}

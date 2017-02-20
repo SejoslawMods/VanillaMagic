@@ -14,10 +14,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventSpell;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.magic.spell.Spell;
-import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.util.EntityHelper;
 
 public abstract class SpellSummon extends Spell 
@@ -45,6 +47,12 @@ public abstract class SpellSummon extends Spell
 				if(getSpawnWithArmor())
 				{
 					EntityHelper.addRandomArmorToEntity(entity);
+				}
+//				world.spawnEntity(entity);
+				if(MinecraftForge.EVENT_BUS.post(new EventSpell.Cast.SummonSpell(
+						this, caster, world, entity)))
+				{
+					return false;
 				}
 				world.spawnEntity(entity);
 				Entity horse = getHorse(world);

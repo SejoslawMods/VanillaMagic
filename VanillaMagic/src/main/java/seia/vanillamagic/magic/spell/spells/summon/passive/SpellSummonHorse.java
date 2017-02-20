@@ -8,7 +8,7 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityMule;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.IWand;
 
 public class SpellSummonHorse extends SpellSummonPassive 
 {

@@ -17,9 +17,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.event.EventMoveBlock;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.api.quest.QuestMoveBlockRegistry;
 import seia.vanillamagic.config.VMConfig;
-import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
@@ -99,7 +99,8 @@ public class QuestMoveBlock extends Quest
 							}
 //							handleSave(world, player, wantedBlockPos, event.getFace());
 //							clickedTimes++;
-							if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Save(world, player, wantedBlockPos, event.getFace())))
+							if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Save(
+									world, player, wantedBlockPos, event.getFace())))
 							{
 								handleSave(world, player, wantedBlockPos, event.getFace());
 								clickedTimes++;
@@ -122,7 +123,8 @@ public class QuestMoveBlock extends Quest
 					}
 //					handleLoad(world, player, wantedBlockPos, event.getFace());
 //					clickedTimes++;
-					if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Load(world, player, wantedBlockPos, event.getFace())))
+					if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Load(
+							world, player, wantedBlockPos, event.getFace())))
 					{
 						handleLoad(world, player, wantedBlockPos, event.getFace());
 						clickedTimes++;

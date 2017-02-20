@@ -13,10 +13,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.event.EventCaptureEntity;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
@@ -86,7 +88,12 @@ public class QuestCaptureEntity extends Quest
 								event.setCanceled(true);
 								return;
 							}
-							handleCapture(world, player, target);
+//							handleCapture(world, player, target);
+							if(!MinecraftForge.EVENT_BUS.post(new EventCaptureEntity.Capture(
+									world, player, target)))
+							{
+								handleCapture(world, player, target);
+							}
 							clickedTimes++;
 						}
 					}
@@ -133,7 +140,12 @@ public class QuestCaptureEntity extends Quest
 						clickedTimesFree = 0;
 						return;
 					}
-					handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
+//					handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
+					if(!MinecraftForge.EVENT_BUS.post(new EventCaptureEntity.Respawn(
+							world, player, respawnPos, event.getFace())))
+					{
+						handleRespawn(world, player, stackOffHand, respawnPos, event.getFace());
+					}
 					clickedTimesFree++;
 				}
 			}

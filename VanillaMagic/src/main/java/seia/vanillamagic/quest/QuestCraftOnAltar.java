@@ -12,9 +12,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.event.EventPlayerUseCauldron;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.AltarChecker;
 import seia.vanillamagic.util.CauldronHelper;
@@ -125,17 +127,32 @@ public class QuestCraftOnAltar extends Quest
 							}
 							if(player.hasAchievement(achievement))
 							{
-								for(int i = 0; i < alreadyCheckedEntityItems.size(); ++i)
+//								for(int i = 0; i < alreadyCheckedEntityItems.size(); ++i)
+//								{
+//									world.removeEntity(alreadyCheckedEntityItems.get(i));
+//								}
+//								BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
+//								// Spawn all the results
+//								for(int i = 0; i < result.length; ++i)
+//								{
+//									Block.spawnAsEntity(world, newItemPos, result[i].copy());
+//								}
+//								world.updateEntities();
+								if(!MinecraftForge.EVENT_BUS.post(new EventPlayerUseCauldron.CraftOnAltar(
+										player, world, cauldronPos, alreadyCheckedEntityItems, result)))
 								{
-									world.removeEntity(alreadyCheckedEntityItems.get(i));
+									for(int i = 0; i < alreadyCheckedEntityItems.size(); ++i)
+									{
+										world.removeEntity(alreadyCheckedEntityItems.get(i));
+									}
+									BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
+									// Spawn all the results
+									for(int i = 0; i < result.length; ++i)
+									{
+										Block.spawnAsEntity(world, newItemPos, result[i].copy());
+									}
+									world.updateEntities();
 								}
-								BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
-								// Spawn all the results
-								for(int i = 0; i < result.length; ++i)
-								{
-									Block.spawnAsEntity(world, newItemPos, result[i].copy());
-								}
-								world.updateEntities();
 							}
 						}
 					}

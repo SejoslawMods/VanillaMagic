@@ -1,6 +1,7 @@
 package seia.vanillamagic.magic.wand;
 
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.api.magic.IWand;
 
 public class Wand implements IWand
 {

@@ -2,8 +2,6 @@ package seia.vanillamagic.item.enchantedbucket;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.item.EntityItem;
@@ -16,10 +14,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
@@ -30,6 +27,7 @@ import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import seia.vanillamagic.api.event.EventEnchantedBucket;
 import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.magic.wand.WandRegistry;
@@ -160,7 +158,12 @@ public class QuestEnchantedBucket extends Quest
 			int amount = ((IFluidHandler) tile).fill(fluid, false);
 			if(amount > 0)
 			{
-				((IFluidHandler) tile).fill(fluid, true);
+//				((IFluidHandler) tile).fill(fluid, true);
+				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillFluidHandler(
+						bucket, player, world, blockPos, tile, (IFluidHandler) tile, fluid)))
+				{
+					((IFluidHandler) tile).fill(fluid, true);
+				}
 			}
 			return;
 		}
@@ -170,11 +173,16 @@ public class QuestEnchantedBucket extends Quest
 			int amount = ((IFluidTank) tile).fill(fluid, false);
 			if(amount > 0)
 			{
-				((IFluidTank) tile).fill(fluid, true);
+//				((IFluidTank) tile).fill(fluid, true);
+				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillFluidTank(
+						bucket, player, world, blockPos, tile, (IFluidTank) tile, fluid)))
+				{
+					((IFluidTank) tile).fill(fluid, true);
+				}
 			}
 			return;
 		}
-		if(tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, face))
+		if(tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, face) && tile != null)
 		{
 			IFluidHandler fh = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, face);
 			if(fh != null)
@@ -183,7 +191,12 @@ public class QuestEnchantedBucket extends Quest
 				int amount = fh.fill(fluid, false);
 				if(amount > 0)
 				{
-					fh.fill(fluid, true);
+//					fh.fill(fluid, true);
+					if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillFluidHandler.UsingCapability(
+							bucket, player, world, blockPos, tile, (IFluidHandler) tile, fluid)))
+					{
+						fh.fill(fluid, true);
+					}
 				}
 				return;
 			}
@@ -192,12 +205,22 @@ public class QuestEnchantedBucket extends Quest
 		{
 			if(world.getBlockState(blockPos).getBlock() == Blocks.CAULDRON)
 			{
-				world.setBlockState(blockPos, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3));
+//				world.setBlockState(blockPos, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3));
+				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillCauldron(
+						bucket, player, world, blockPos)))
+				{
+					world.setBlockState(blockPos, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3));
+				}
 				return;
 			}
 		}
 		blockPos = blockPos.offset(event.getFace());
-		world.setBlockState(blockPos, bucket.getFluidInBucket().getBlock().getDefaultState());
+//		world.setBlockState(blockPos, bucket.getFluidInBucket().getBlock().getDefaultState());
+		if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.SpawnLiquid(
+				bucket, player, world, blockPos)))
+		{
+			world.setBlockState(blockPos, bucket.getFluidInBucket().getBlock().getDefaultState());
+		}
 	}
 
 	// Shoot
@@ -248,7 +271,7 @@ public class QuestEnchantedBucket extends Quest
 		EnumHand hand = EnumHand.MAIN_HAND;
 		if(!world.isRemote)
 		{
-			RayTraceResult rayTrace = rayTrace(world, player, false);
+			RayTraceResult rayTrace = EntityHelper.rayTrace(world, player, false);
 			if(rayTrace != null)
 			{
 				BlockPos hittedBlock = rayTrace.getBlockPos();
@@ -258,29 +281,15 @@ public class QuestEnchantedBucket extends Quest
 				{
 					return;
 				}
-				world.setBlockState(hittedBlock, fluidBlock.getDefaultState());
-				world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
+//				world.setBlockState(hittedBlock, fluidBlock.getDefaultState());
+//				world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
+				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.SpawnLiquid(
+						bucket, player, world, hittedBlock)))
+				{
+					world.setBlockState(hittedBlock, fluidBlock.getDefaultState());
+					world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
+				}
 			}
 		}
-	}
-	
-	@Nullable
-	public RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids)
-	{
-		float pitch = playerIn.rotationPitch;
-		float yaw = playerIn.rotationYaw;
-		double x = playerIn.posX;
-		double y = playerIn.posY + (double)playerIn.getEyeHeight();
-		double z = playerIn.posZ;
-		Vec3d vec3d = new Vec3d(x, y, z);
-		float f2 = MathHelper.cos(-yaw * 0.017453292F - (float)Math.PI);
-		float f3 = MathHelper.sin(-yaw * 0.017453292F - (float)Math.PI);
-		float f4 = -MathHelper.cos(-pitch * 0.017453292F);
-		float f5 = MathHelper.sin(-pitch * 0.017453292F);
-		float f6 = f3 * f4;
-		float f7 = f2 * f4;
-		double d3 = 1000.0D;
-		Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
-		return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
 	}
 }

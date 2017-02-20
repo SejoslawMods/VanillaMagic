@@ -6,12 +6,12 @@ import seia.vanillamagic.api.tileentity.machine.IFarm;
 
 public class EventFarm extends EventMachine 
 {
-	private IFarm tileFarm;
+	private final IFarm _tileFarm;
 
 	public EventFarm(IFarm tileFarm, World world, BlockPos customTilePos) 
 	{
 		super(tileFarm, world, customTilePos);
-		this.tileFarm = tileFarm;
+		this._tileFarm = tileFarm;
 	}
 	
 	/**
@@ -19,7 +19,7 @@ public class EventFarm extends EventMachine
 	 */
 	public IFarm getTileFarm()
 	{
-		return tileFarm;
+		return _tileFarm;
 	}
 	
 	/**

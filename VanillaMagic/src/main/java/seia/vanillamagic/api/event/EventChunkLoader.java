@@ -9,12 +9,12 @@ import seia.vanillamagic.api.tileentity.chunkloader.IChunkLoader;
  */
 public class EventChunkLoader extends EventCustomTileEntity
 {
-	private IChunkLoader tileChunkLoader;
+	private final IChunkLoader _tileChunkLoader;
 	
 	public EventChunkLoader(IChunkLoader tileChunkLoader, World world, BlockPos customTilePos) 
 	{
 		super(tileChunkLoader, world, customTilePos);
-		this.tileChunkLoader = tileChunkLoader;
+		this._tileChunkLoader = tileChunkLoader;
 	}
 	
 	/**
@@ -22,6 +22,6 @@ public class EventChunkLoader extends EventCustomTileEntity
 	 */
 	public IChunkLoader getTileChunkLoader()
 	{
-		return tileChunkLoader;
+		return _tileChunkLoader;
 	}
 }

@@ -10,12 +10,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import seia.vanillamagic.api.event.EventMotherNatureCrystal;
+import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
@@ -63,12 +66,23 @@ public class QuestMotherNatureCrystal extends Quest
 					{
 						if(world.rand.nextInt(50) == 0)
 						{
-							IBlockState preBlockState = world.getBlockState(blockPos);
-							block.updateTick(world, blockPos, world.getBlockState(blockPos), world.rand);
-							IBlockState newState = world.getBlockState(blockPos);
-							if(!newState.equals(preBlockState))
+//							IBlockState preBlockState = world.getBlockState(blockPos);
+//							block.updateTick(world, blockPos, world.getBlockState(blockPos), world.rand);
+//							IBlockState newState = world.getBlockState(blockPos);
+//							if(!newState.equals(preBlockState))
+//							{
+//								world.playEvent(2001, blockPos, Block.getIdFromBlock(newState.getBlock()) + (newState.getBlock().getMetaFromState(newState) << 12));
+//							}
+							if(!MinecraftForge.EVENT_BUS.post(new EventMotherNatureCrystal.TickBlock(
+									(ICustomItem) VanillaMagicItems.MOTHER_NATURE_CRYSTAL, player, world, blockPos)))
 							{
-								world.playEvent(2001, blockPos, Block.getIdFromBlock(newState.getBlock()) + (newState.getBlock().getMetaFromState(newState) << 12));
+								IBlockState preBlockState = world.getBlockState(blockPos);
+								block.updateTick(world, blockPos, world.getBlockState(blockPos), world.rand);
+								IBlockState newState = world.getBlockState(blockPos);
+								if(!newState.equals(preBlockState))
+								{
+									world.playEvent(2001, blockPos, Block.getIdFromBlock(newState.getBlock()) + (newState.getBlock().getMetaFromState(newState) << 12));
+								}
 							}
 						}
 					}
@@ -127,22 +141,27 @@ public class QuestMotherNatureCrystal extends Quest
 
 	public boolean applyBonemeal(ItemStack rightHand, World world, BlockPos clickedPos, FakePlayer fakePlayer) 
 	{
-		IBlockState iblockstate = world.getBlockState(clickedPos);
-		int hook = ForgeEventFactory.onApplyBonemeal(fakePlayer, world, clickedPos, iblockstate, rightHand);
+		IBlockState state = world.getBlockState(clickedPos);
+		int hook = ForgeEventFactory.onApplyBonemeal(fakePlayer, world, clickedPos, state, rightHand);
 		if(hook != 0)
 		{
 			return hook > 0;
 		}
-		if(iblockstate.getBlock() instanceof IGrowable)
+		if(state.getBlock() instanceof IGrowable)
 		{
-			IGrowable igrowable = (IGrowable) iblockstate.getBlock();
-			if(igrowable.canGrow(world, clickedPos, iblockstate, world.isRemote))
+			IGrowable growable = (IGrowable) state.getBlock();
+			if(growable.canGrow(world, clickedPos, state, world.isRemote))
 			{
 				if(!world.isRemote)
 				{
-					if(igrowable.canUseBonemeal(world, world.rand, clickedPos, iblockstate))
+					if(growable.canUseBonemeal(world, world.rand, clickedPos, state))
 					{
-						igrowable.grow(world, world.rand, clickedPos, iblockstate);
+//						growable.grow(world, world.rand, clickedPos, state);
+						if(!MinecraftForge.EVENT_BUS.post(new EventMotherNatureCrystal.Grow(
+								VanillaMagicItems.MOTHER_NATURE_CRYSTAL, fakePlayer, world, clickedPos, growable)))
+						{
+							growable.grow(world, world.rand, clickedPos, state);
+						}
 					}
 				}
 				return true;

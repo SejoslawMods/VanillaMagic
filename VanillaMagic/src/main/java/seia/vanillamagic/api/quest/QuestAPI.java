@@ -45,4 +45,40 @@ public class QuestAPI
 			return null;
 		}
 	}
+	
+	/**
+	 * Returns Quest from the List at given index.
+	 */
+	@Nullable
+	public static IQuest get(int index)
+	{
+		try
+		{
+			Class<?> clazz = Class.forName("seia.vanillamagic.quest.QuestList");
+			return (IQuest) clazz.getMethod("get", int.class).invoke(null, index);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Returns Quest List size.<br>
+	 * If something went wrong the size will be -1.
+	 */
+	public static int size()
+	{
+		try
+		{
+			Class<?> clazz = Class.forName("seia.vanillamagic.quest.QuestList");
+			return (int) clazz.getMethod("size").invoke(null);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return -1;
+		}
+	}
 }

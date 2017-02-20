@@ -9,16 +9,16 @@ import seia.vanillamagic.api.tileentity.speedy.ISpeedy;
  */
 public class EventSpeedy extends EventCustomTileEntity 
 {
-	private ISpeedy tileSpeedy;
+	private final ISpeedy _tileSpeedy;
 	
 	public EventSpeedy(ISpeedy tileSpeedy, World world, BlockPos customTilePos) 
 	{
 		super(tileSpeedy, world, customTilePos);
-		this.tileSpeedy = tileSpeedy;
+		this._tileSpeedy = tileSpeedy;
 	}
 	
 	public ISpeedy getTileSpeedy()
 	{
-		return tileSpeedy;
+		return _tileSpeedy;
 	}
 }

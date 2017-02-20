@@ -7,7 +7,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.IWand;
 
 public class SpellSummonVillager extends SpellSummonPassive 
 {

@@ -7,8 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.spell.Spell;
-import seia.vanillamagic.magic.wand.IWand;
 
 public class SpellWeatherRain extends Spell 
 {

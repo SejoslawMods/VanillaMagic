@@ -5,7 +5,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityZombieHorse;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.IWand;
 
 public class SpellSummonZombie extends SpellSummonHostileWithRandomArmor
 {

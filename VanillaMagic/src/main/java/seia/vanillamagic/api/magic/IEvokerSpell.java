@@ -1,4 +1,4 @@
-package seia.vanillamagic.item.evokercrystal.spell;
+package seia.vanillamagic.api.magic;
 
 import net.minecraft.entity.Entity;
 

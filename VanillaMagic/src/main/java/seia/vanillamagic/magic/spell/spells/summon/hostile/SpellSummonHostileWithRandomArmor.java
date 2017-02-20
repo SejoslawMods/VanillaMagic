@@ -3,8 +3,8 @@ package seia.vanillamagic.magic.spell.spells.summon.hostile;
 import java.util.Random;
 
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.config.VMConfig;
-import seia.vanillamagic.magic.wand.IWand;
 
 public abstract class SpellSummonHostileWithRandomArmor extends SpellSummonHostile
 {

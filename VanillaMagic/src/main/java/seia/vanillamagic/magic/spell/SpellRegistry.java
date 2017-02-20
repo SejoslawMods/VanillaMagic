@@ -15,6 +15,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.api.magic.ISpell;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.magic.spell.spells.SpellFusRoDah;
@@ -69,7 +71,6 @@ import seia.vanillamagic.magic.spell.spells.summon.passive.SpellSummonWolf;
 import seia.vanillamagic.magic.spell.spells.weather.SpellWeatherClear;
 import seia.vanillamagic.magic.spell.spells.weather.SpellWeatherRain;
 import seia.vanillamagic.magic.spell.spells.weather.SpellWeatherThunderStorm;
-import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
 

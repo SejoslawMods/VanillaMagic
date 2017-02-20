@@ -190,4 +190,24 @@ public class EntityHelper
 		}
 		return null;
 	}
+	
+	@Nullable
+	public static RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids)
+	{
+		float pitch = playerIn.rotationPitch;
+		float yaw = playerIn.rotationYaw;
+		double x = playerIn.posX;
+		double y = playerIn.posY + (double)playerIn.getEyeHeight();
+		double z = playerIn.posZ;
+		Vec3d vec3d = new Vec3d(x, y, z);
+		float f2 = MathHelper.cos(-yaw * 0.017453292F - (float)Math.PI);
+		float f3 = MathHelper.sin(-yaw * 0.017453292F - (float)Math.PI);
+		float f4 = -MathHelper.cos(-pitch * 0.017453292F);
+		float f5 = MathHelper.sin(-pitch * 0.017453292F);
+		float f6 = f3 * f4;
+		float f7 = f2 * f4;
+		double d3 = 1000.0D;
+		Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
+		return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+	}
 }

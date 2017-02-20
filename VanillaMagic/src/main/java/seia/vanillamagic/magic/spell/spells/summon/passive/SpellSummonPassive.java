@@ -1,9 +1,9 @@
 package seia.vanillamagic.magic.spell.spells.summon.passive;
 
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.spell.SpellRegistry;
 import seia.vanillamagic.magic.spell.spells.summon.SpellSummon;
-import seia.vanillamagic.magic.wand.IWand;
 
 public abstract class SpellSummonPassive extends SpellSummon
 {

@@ -11,8 +11,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.magic.spell.Spell;
-import seia.vanillamagic.magic.wand.IWand;
 import seia.vanillamagic.util.EntityHelper;
 
 public class SpellFusRoDah extends Spell 

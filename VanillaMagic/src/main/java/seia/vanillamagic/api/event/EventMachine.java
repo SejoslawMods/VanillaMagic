@@ -10,17 +10,17 @@ import seia.vanillamagic.api.tileentity.machine.IMachine;
  */
 public class EventMachine extends EventCustomTileEntity
 {
-	private IMachine tileMachine;
+	private final IMachine _tileMachine;
 	
 	public EventMachine(IMachine tileMachine, World world, BlockPos customTilePos)
 	{
 		super(tileMachine, world, customTilePos);
-		this.tileMachine = tileMachine;
+		this._tileMachine = tileMachine;
 	}
 	
 	public IMachine getTileMachine()
 	{
-		return tileMachine;
+		return _tileMachine;
 	}
 	
 	/**

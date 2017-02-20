@@ -11,8 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.api.magic.ISpell;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.magic.spell.ISpell;
 import seia.vanillamagic.util.TextHelper;
 
 public class WandRegistry

@@ -9,12 +9,12 @@ import seia.vanillamagic.api.tileentity.inventorybridge.IInventoryBridge;
  */
 public class EventInventoryBridge extends EventCustomTileEntity 
 {
-	private IInventoryBridge tileBridge;
+	private final IInventoryBridge _tileBridge;
 	
 	public EventInventoryBridge(IInventoryBridge tileBridge, World world, BlockPos customTilePos) 
 	{
 		super(tileBridge, world, customTilePos);
-		this.tileBridge = tileBridge;
+		this._tileBridge = tileBridge;
 	}
 	
 	/**
@@ -22,6 +22,6 @@ public class EventInventoryBridge extends EventCustomTileEntity
 	 */
 	public IInventoryBridge getInventoryBridge()
 	{
-		return tileBridge;
+		return _tileBridge;
 	}
 }

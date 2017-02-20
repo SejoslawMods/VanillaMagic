@@ -9,11 +9,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import seia.vanillamagic.api.magic.IEvokerSpell;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.evokercrystal.spell.EvokerSpellFangAttack;
 import seia.vanillamagic.item.evokercrystal.spell.EvokerSpellSummonVex;
 import seia.vanillamagic.item.evokercrystal.spell.EvokerSpellWololo;
-import seia.vanillamagic.item.evokercrystal.spell.IEvokerSpell;
 
 public class EvokerSpellRegistry 
 {

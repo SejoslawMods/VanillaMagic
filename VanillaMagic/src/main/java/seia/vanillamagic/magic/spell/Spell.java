@@ -1,7 +1,8 @@
 package seia.vanillamagic.magic.spell;
 
 import net.minecraft.item.ItemStack;
-import seia.vanillamagic.magic.wand.IWand;
+import seia.vanillamagic.api.magic.ISpell;
+import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.util.ItemStackHelper;
 
 public abstract class Spell implements ISpell

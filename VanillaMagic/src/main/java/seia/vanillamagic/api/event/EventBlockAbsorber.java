@@ -10,14 +10,14 @@ import seia.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
  */
 public class EventBlockAbsorber extends EventCustomTileEntity
 {
-	private IBlockAbsorber tileAbsorber;
-	private TileEntityHopper connectedHopper;
+	private final IBlockAbsorber _tileAbsorber;
+	private final TileEntityHopper _connectedHopper;
 	
 	public EventBlockAbsorber(IBlockAbsorber tileAbsorber, World world, BlockPos tilePos, TileEntityHopper connectedHopper) 
 	{
 		super(tileAbsorber, world, tilePos);
-		this.tileAbsorber = tileAbsorber;
-		this.connectedHopper = connectedHopper;
+		this._tileAbsorber = tileAbsorber;
+		this._connectedHopper = connectedHopper;
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class EventBlockAbsorber extends EventCustomTileEntity
 	 */
 	public IBlockAbsorber getTileAbsorber()
 	{
-		return tileAbsorber;
+		return _tileAbsorber;
 	}
 	
 	/**
@@ -33,6 +33,6 @@ public class EventBlockAbsorber extends EventCustomTileEntity
 	 */
 	public TileEntityHopper getConnectedHopper()
 	{
-		return connectedHopper;
+		return _connectedHopper;
 	}
 }

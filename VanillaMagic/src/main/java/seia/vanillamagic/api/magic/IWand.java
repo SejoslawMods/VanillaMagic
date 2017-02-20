@@ -1,4 +1,4 @@
-package seia.vanillamagic.magic.wand;
+package seia.vanillamagic.api.magic;
 
 import net.minecraft.item.ItemStack;
 

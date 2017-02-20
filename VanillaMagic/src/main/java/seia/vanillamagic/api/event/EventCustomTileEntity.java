@@ -13,15 +13,15 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
  */
 public class EventCustomTileEntity extends Event
 {
-	private ICustomTileEntity customTileEntity;
-	private World world;
-	private BlockPos customTilePos;
+	private final ICustomTileEntity _customTileEntity;
+	private final World _world;
+	private final BlockPos _customTilePos;
 	
 	public EventCustomTileEntity(ICustomTileEntity customTileEntity, World world, BlockPos customTilePos)
 	{
-		this.customTileEntity = customTileEntity;
-		this.world = world;
-		this.customTileEntity = customTileEntity;
+		this._customTileEntity = customTileEntity;
+		this._world = world;
+		this._customTilePos = customTilePos;
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public class EventCustomTileEntity extends Event
 	@Nullable
 	public ICustomTileEntity getCustomTileEntity()
 	{
-		return customTileEntity;
+		return _customTileEntity;
 	}
 	
 	/**
@@ -38,7 +38,7 @@ public class EventCustomTileEntity extends Event
 	 */
 	public World getWorld()
 	{
-		return world;
+		return _world;
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class EventCustomTileEntity extends Event
 	 */
 	public BlockPos getTilePos()
 	{
-		return customTilePos;
+		return _customTilePos;
 	}
 	
 	/**
@@ -108,11 +108,12 @@ public class EventCustomTileEntity extends Event
 			 */
 			public static class SendInfoToPlayer extends Before
 			{
-				private EntityPlayer player;
+				private final EntityPlayer _player;
 				
 				public SendInfoToPlayer(ICustomTileEntity customTileEntity, World world, BlockPos pos, EntityPlayer player) 
 				{
 					super(customTileEntity, world, pos);
+					this._player = player;
 				}
 				
 				/**
@@ -120,7 +121,7 @@ public class EventCustomTileEntity extends Event
 				 */
 				public EntityPlayer getEntityPlayer()
 				{
-					return player;
+					return _player;
 				}
 			}
 		}
@@ -142,11 +143,12 @@ public class EventCustomTileEntity extends Event
 			 */
 			public static class SendInfoToPlayer extends After
 			{
-				private EntityPlayer player;
+				private final EntityPlayer _player;
 				
 				public SendInfoToPlayer(ICustomTileEntity customTileEntity, World world, BlockPos pos, EntityPlayer player) 
 				{
 					super(customTileEntity, world, pos);
+					this._player = player;
 				}
 				
 				/**
@@ -154,7 +156,7 @@ public class EventCustomTileEntity extends Event
 				 */
 				public EntityPlayer getEntityPlayer()
 				{
-					return player;
+					return _player;
 				}
 			}
 		}

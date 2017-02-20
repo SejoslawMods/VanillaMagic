@@ -10,11 +10,12 @@ import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
  */
 public class EventQuarry extends EventMachine 
 {
-	private IQuarry tileQuarry;
+	private final IQuarry _tileQuarry;
 	
 	public EventQuarry(IQuarry tileQuarry, World world, BlockPos customTilePos) 
 	{
 		super(tileQuarry, world, customTilePos);
+		this._tileQuarry = tileQuarry;
 	}
 	
 	/**
@@ -22,7 +23,7 @@ public class EventQuarry extends EventMachine
 	 */
 	public IQuarry getTileQuarry()
 	{
-		return tileQuarry;
+		return _tileQuarry;
 	}
 	
 	/**
@@ -52,12 +53,12 @@ public class EventQuarry extends EventMachine
 	 */
 	public static class EventQuarryUpgrade extends EventQuarry
 	{
-		private IQuarryUpgrade upgrade;
+		private final IQuarryUpgrade _upgrade;
 		
 		public EventQuarryUpgrade(IQuarry tileQuarry, World world, BlockPos customTilePos, IQuarryUpgrade upgrade)
 		{
 			super(tileQuarry, world, customTilePos);
-			this.upgrade = upgrade;
+			this._upgrade = upgrade;
 		}
 		
 		/**
@@ -65,7 +66,7 @@ public class EventQuarry extends EventMachine
 		 */
 		public IQuarryUpgrade getUpgrade()
 		{
-			return upgrade;
+			return _upgrade;
 		}
 	}
 	

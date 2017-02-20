@@ -1,4 +1,4 @@
-package seia.vanillamagic.magic.spell;
+package seia.vanillamagic.api.magic;
 
 import javax.annotation.Nullable;
 
@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import seia.vanillamagic.magic.wand.IWand;
 
 /**
  * Base Spell definition.
