@@ -9,8 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.OrderedLoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import seia.vanillamagic.api.tileentity.CustomTileEntityBase;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
-import seia.vanillamagic.tileentity.CustomTileEntity;
 
 public class ChunkLoadingHandler implements OrderedLoadingCallback
 {
@@ -24,15 +24,15 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity tile = world.getTileEntity(pos);
-			if(tile instanceof CustomTileEntity)
+			if(tile instanceof CustomTileEntityBase)
 			{
-				((CustomTileEntity) tile).forceChunkLoading(ticket);
+				((CustomTileEntityBase) tile).forceChunkLoading(ticket);
 			}
 			else if(tile instanceof ICustomTileEntity)
 			{
 				/*
 				 * If it reaches here it means that it's not a VanillaMagic custom Tile 
-				 * but a custom Tile from different mod which use custom Tile API
+				 * but a custom Tile from different mod which use CustomTileEntity API
 				 */
 				((ICustomTileEntity) tile).forceChunkLoading(ticket);
 			}
@@ -50,7 +50,7 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 			int posZ = modData.getInteger("z");
 			BlockPos pos = new BlockPos(posX, posY, posZ);
 			TileEntity tile = world.getTileEntity(pos);
-			if(tile instanceof CustomTileEntity)
+			if(tile instanceof CustomTileEntityBase)
 			{
 				validTickets.add(ticket);
 			}
