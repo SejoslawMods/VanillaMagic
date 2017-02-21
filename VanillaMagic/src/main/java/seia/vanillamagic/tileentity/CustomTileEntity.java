@@ -1,41 +1,16 @@
 package seia.vanillamagic.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import seia.vanillamagic.api.tileentity.ICustomTileEntity;
+import seia.vanillamagic.api.tileentity.CustomTileEntityBase;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.util.NBTHelper;
 
-public abstract class CustomTileEntity extends TileEntity implements ICustomTileEntity
+public abstract class CustomTileEntity extends CustomTileEntityBase
 {
-	protected Ticket chunkTicket;
-	
-	public void init(World world, BlockPos pos)
-	{
-		this.world = world;
-		this.pos = pos;
-	}
-	
-	public TileEntity getTileEntity()
-	{
-		return this;
-	}
-	
-	public void setWorld(World world)
-	{
-		this.world = world;
-	}
-	
 	public void validate() 
 	{
 		super.validate();
@@ -47,31 +22,6 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 				forceChunkLoading(ticket);
 			}
 		}
-	}
-	
-	public void invalidate() 
-	{
-		super.invalidate();
-		stopChunkLoading();
-	}
-	
-	public void stopChunkLoading() 
-	{
-		if(this.chunkTicket != null) 
-		{
-			ForgeChunkManager.releaseTicket(this.chunkTicket);
-			this.chunkTicket = null;
-		}
-	}
-	
-	public void forceChunkLoading(Ticket ticket)
-	{
-		if(chunkTicket == null)
-		{
-			chunkTicket = ticket;
-		}
-		ChunkPos tilePos = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
-		ForgeChunkManager.forceChunk(ticket, tilePos);
 	}
 	
 	/**
@@ -122,18 +72,5 @@ public abstract class CustomTileEntity extends TileEntity implements ICustomTile
 	public NBTTagCompound getUpdateTag()
 	{
 		return writeToNBT(new NBTTagCompound());
-	}
-	
-	public List<String> getAdditionalInfo()
-	{
-		List<String> list = new ArrayList<String>();
-		list.add("CustomTileEntity name: " + getClass().getSimpleName());
-		list.add("CustomTileEntity position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
-		return list;
-	}
-	
-	public Ticket getChunkTicket()
-	{
-		return chunkTicket;
 	}
 }
