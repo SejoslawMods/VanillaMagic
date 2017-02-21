@@ -3,6 +3,8 @@ package seia.vanillamagic.api.tileentity.machine;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -37,6 +39,13 @@ public interface IQuarryUpgradeHelper
 	 * Add the {@link IQuarryUpgrade} to the list of upgrades.
 	 */
 	void addUpgradeFromBlock(Block block, BlockPos upgradePos);
+	
+	/**
+	 * @param upgrade checking QuarryUpgrade
+	 * @return Returns position of the given QuarryUpgrade from the list of all registered upgrades for this Quarry.
+	 */
+	@Nullable
+	BlockPos getUpgradePos(IQuarryUpgrade upgrade);
 	
 	/**
 	 * This method will perform upgrades once a tick, for each QuarryUpgrade from list.

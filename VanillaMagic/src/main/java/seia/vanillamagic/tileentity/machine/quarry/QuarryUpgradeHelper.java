@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -98,6 +100,20 @@ public class QuarryUpgradeHelper implements IQuarryUpgradeHelper
 			}
 		}
 		return true;
+	}
+	
+	@Nullable
+	public BlockPos getUpgradePos(IQuarryUpgrade upgrade)
+	{
+		for(Entry<BlockPos, IQuarryUpgrade> entry : _upgradeOnPos.entrySet())
+		{
+			IQuarryUpgrade iqu = entry.getValue();
+			if(QuarryUpgradeRegistry.isTheSameUpgrade(upgrade, iqu))
+			{
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 	
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,IBlockState workingPosState)
