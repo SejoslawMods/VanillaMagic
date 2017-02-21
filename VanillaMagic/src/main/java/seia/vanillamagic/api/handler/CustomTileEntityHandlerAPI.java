@@ -62,7 +62,7 @@ public class CustomTileEntityHandlerAPI
 	 * 
 	 * @param world world from which we will delete the tile
 	 * @param pos position of the deleting tile
-	 * @return TRUE is the tile was added successfully
+	 * @return TRUE is the tile was removed successfully
 	 */
 	public static boolean removeCustomTileEntityAtPos(World world, BlockPos pos)
 	{
