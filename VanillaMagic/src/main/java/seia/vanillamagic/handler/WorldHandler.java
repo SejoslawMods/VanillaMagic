@@ -126,12 +126,12 @@ public class WorldHandler
 									canAdd = false;
 								}
 							}
+							log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						}
 						catch(Exception e)
 						{
 							log(Level.ERROR, "[World Load] Error while reading class for CustomTileEntity: " + tileEntityClassName);
 						}
-						log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
 						if(tileEntity != null)
 						{
 							if(canAdd)
