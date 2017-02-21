@@ -69,6 +69,7 @@ public class QuarryUpgradeRegistry
 			_LIST_BLOCK.add(instance.getBlock());
 			_MAP_BLOCK_UPGRADE.put(instance.getBlock(), instance);
 			_MAP_CLASS_UPGRADE.put(quarryUpgradeClass, instance);
+			VanillaMagic.LOGGER.log(Level.INFO, "Registered QuarryUpgrade: " + instance);
 			return true;
 		}
 		catch(Exception e)
