@@ -27,7 +27,7 @@ public class QuarryUpgradeAPI
 		try 
 		{
 			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
-			Method method = clazz.getMethod("addUpgrade", IQuarryUpgrade.class);
+			Method method = clazz.getMethod("addUpgrade", Class.class);
 			Boolean b = (Boolean) method.invoke(null, quarryUpgradeClass);
 			return b.booleanValue();
 		} 

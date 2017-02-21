@@ -29,7 +29,7 @@ public class ItemUpgradeAPI
 		try
 		{
 			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
-			Method method = registryClass.getMethod("addUpgradeMapping", String.class, IItemUpgrade.class, String.class);
+			Method method = registryClass.getMethod("addUpgradeMapping", String.class, Class.class, String.class);
 			method.invoke(null, mappingName, clazz, localizedName);
 		}
 		catch(Exception e)
