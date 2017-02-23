@@ -5,14 +5,28 @@
 book.altarCrafting.itemName=原生魔法-炼金
 book.altarCrafting.title=魔法炼金的小知识。
 
-book.spells.itemName=原生魔法-施放
-book.spells.title=魔法施放的小知识。
-
 book.altarBuilding.itemName=原生魔法-结构
 book.altarBuilding.title=魔法多方块结构的小知识。
 
+book.spells.itemName=原生魔法-施放
+book.spells.title=魔法施放的小知识。
+
 book.other.itemName=原生魔法-杂项
 book.other.title=一些小小的杂物。
+
+book.itemUpgrades.itemName=原生魔法-物品升级
+book.itemUpgrades.title=物品升级
+
+book.quarryUpgrades.itemName=原生魔法-采石场升级
+book.quarryUpgrades.title=采石场升级
+
+
+
+############################
+#Creative Tab Name
+############################
+
+itemGroup.vm=原生魔法
 
 
 
@@ -66,7 +80,7 @@ achievement.spellTeleportToEnd=末界裂隙行者
 achievement.spellTeleportToEnd.desc=右持烈焰魔杖，左持末影水晶，右键空气。穿行在末界和主世界之间！[施法消耗：末影水晶×1]
 
 achievement.spellSummonMeteor=艺术创造者
-achievement.spellSummonMeteor.desc=右持下界之星，左持金块，右键空气。艺术从天而降，终结一切！[施法消耗：金块×1]
+achievement.spellSummonMeteor.desc=右持下界之星，左持金块，右键空气。艺术从天而降，终结一切！[施法消耗：金块×10]
 
 achievement.spellWeatherRain=祈雨术
 achievement.spellWeatherRain.desc=右持烈焰魔杖，左持水桶，右键空气。召唤细雨滋润万物。[施法消耗：水桶×1]
@@ -92,63 +106,122 @@ achievement.spellSummonLightningBolt.desc=右持烈焰魔杖，左持火药，�
 
 
 achievement.spellSummonChicken=献祭誓约-鸡
-achievement.spellSummonChicken.desc=右持下界之星，左持鸡肉，右键空气。[祭品消耗：鸡肉×32]
+achievement.spellSummonChicken.desc=右持下界之星，左持鸡肉，右键方块。[祭品消耗：鸡肉×32]
+
+achievement.spellSummonSquid=献祭誓约-鱿鱼
+achievement.spellSummonSquid.desc=右持下界之星，左持墨囊，右键方块。[祭品消耗：墨囊×32]
 
 achievement.spellSummonPig=献祭誓约-猪
-achievement.spellSummonPig.desc=右持下界之星，左持猪肉，右键空气。[祭品消耗：猪肉×32]
+achievement.spellSummonPig.desc=右持下界之星，左持猪肉，右键方块。[祭品消耗：猪肉×32]
 
 achievement.spellSummonCow=献祭誓约-牛
-achievement.spellSummonCow.desc=右持下界之星，左持牛肉，右键空气。[祭品消耗：牛肉×32]
+achievement.spellSummonCow.desc=右持下界之星，左持牛肉，右键方块。[祭品消耗：牛肉×32]
 
 achievement.spellSummonMooshroom=献祭誓约-牟菇
-achievement.spellSummonMooshroom.desc=右持下界之星，左持熟牛肉，右键空气。[祭品消耗：熟牛肉×32]
+achievement.spellSummonMooshroom.desc=右持下界之星，左持熟牛肉，右键方块。[祭品消耗：熟牛肉×32]
 
 achievement.spellSummonSheep=献祭誓约-羊
-achievement.spellSummonSheep.desc=右持下界之星，左持羊肉，右键空气。[祭品消耗：羊肉×32]
+achievement.spellSummonSheep.desc=右持下界之星，左持羊肉，右键方块。[祭品消耗：羊肉×32]
 
 achievement.spellSummonWolf=献祭誓约-狼
-achievement.spellSummonWolf.desc=右持下界之星，左持熟羊肉，右键空气。[祭品消耗：熟羊肉×32]
+achievement.spellSummonWolf.desc=右持下界之星，左持熟羊肉，右键方块。[祭品消耗：熟羊肉×32]
+
+achievement.spellSummonLama=献祭誓约-羊驼
+achievement.spellSummonLama.desc=右持下界之星，左持皮革，右键方块。[祭品消耗：皮革×32]
 
 achievement.spellSummonRabbit=献祭誓约-兔子
-achievement.spellSummonRabbit.desc=右持下界之星，左持兔肉，右键空气。[祭品消耗：兔肉×32]
+achievement.spellSummonRabbit.desc=右持下界之星，左持兔肉，右键方块。[祭品消耗：兔肉×32]
 
 achievement.spellSummonHorse=献祭誓约-马
-achievement.spellSummonHorse.desc=右持下界之星，左持鞍，右键空气。[祭品消耗：鞍×1]
+achievement.spellSummonHorse.desc=右持下界之星，左持鞍，右键方块。[祭品消耗：鞍×1]
 
 achievement.spellSummonVillager=献祭誓约-召唤村民
-achievement.spellSummonVillager.desc=右持下界之星，左持书，右键空气。[祭品消耗：书×32]
+achievement.spellSummonVillager.desc=右持下界之星，左持书，右键方块。[祭品消耗：书×32]
+
+achievement.spellSummonIronGolem=献祭誓约-铁傀儡
+achievement.spellSummonIronGolem.desc=右持下界之星，左持铁锭，右键方块。[祭品消耗：铁锭×32]
+
+achievement.spellSummonSnowman=献祭誓约-雪傀儡
+achievement.spellSummonSnowman.desc=右持下界之星，左持雪块，右键方块。[祭品消耗：雪块×2]
+
+achievement.spellSummonEndermite=献祭誓约-末影螨
+achievement.spellSummonEndermite.desc=右持下界之星，左持烈焰粉，右键方块。[祭品消耗：烈焰粉×3]
 
 
 
 achievement.spellSummonZombie=献祭誓约-僵尸
-achievement.spellSummonZombie.desc=右持下界之星，左持腐肉，右键空气。[祭品消耗：腐肉×32]
+achievement.spellSummonZombie.desc=右持下界之星，左持腐肉，右键方块。[祭品消耗：腐肉×8]
 
 achievement.spellSummonCreeper=献祭誓约-苦力怕
-achievement.spellSummonCreeper.desc=右持下界之星，左持火药，右键空气。[祭品消耗：火药×32]
+achievement.spellSummonCreeper.desc=右持下界之星，左持火药，右键方块。[祭品消耗：火药×8]
 
 achievement.spellSummonSkeleton=献祭誓约-骷髅
-achievement.spellSummonSkeleton.desc=右持下界之星，左持骨头，右键空气。[祭品消耗：骨头×32]
+achievement.spellSummonSkeleton.desc=右持下界之星，左持骨头，右键方块。[祭品消耗：骨头×8]
 
 achievement.spellSummonBlaze=献祭誓约-烈焰人
-achievement.spellSummonBlaze.desc=右持下界之星，左持烈焰棒，右键空气。[祭品消耗：烈焰棒×32]
+achievement.spellSummonBlaze.desc=右持下界之星，左持烈焰棒，右键方块。[祭品消耗：烈焰棒×8]
 
 achievement.spellSummonMagmaCube=献祭誓约-岩浆怪
-achievement.spellSummonMagmaCube.desc=右持下界之星，左持岩浆膏，右键空气。[祭品消耗：岩浆膏×32]
+achievement.spellSummonMagmaCube.desc=右持下界之星，左持岩浆膏，右键方块。[祭品消耗：岩浆膏×8]
 
 achievement.spellSummonGhast=献祭誓约-恶魂
-achievement.spellSummonGhast.desc=右持下界之星，左持恶魂之泪，右键空气。[祭品消耗：恶魂之泪×32]
+achievement.spellSummonGhast.desc=右持下界之星，左持恶魂之泪，右键方块。[祭品消耗：恶魂之泪×8]
 
 achievement.spellSummonEnderman=献祭誓约-末影人
-achievement.spellSummonEnderman.desc=右持下界之星，左持烈焰粉，右键空气。[祭品消耗：烈焰粉×32]
+achievement.spellSummonEnderman.desc=右持下界之星，左持烈焰粉，右键方块。[祭品消耗：烈焰粉×8]
 
 achievement.spellSummonSpider=献祭誓约-蜘蛛
-achievement.spellSummonSpider.desc=右持下界之星，左持线，右键空气。[祭品消耗：线×32]
+achievement.spellSummonSpider.desc=右持下界之星，左持线，右键方块。[祭品消耗：线×8]
 
 achievement.spellSummonSlime=献祭誓约-史莱姆
-achievement.spellSummonSlime.desc=右持下界之星，左持史莱姆球，右键空气。[祭品消耗：史莱姆球×32]
+achievement.spellSummonSlime.desc=右持下界之星，左持史莱姆球，右键方块。[祭品消耗：史莱姆球×8]
 
 achievement.spellSummonWitch=献祭誓约-女巫
-achievement.spellSummonWitch.desc=右持下界之星，左持萤石粉，右键空气。[祭品消耗：萤石粉×32]
+achievement.spellSummonWitch.desc=右持下界之星，左持萤石粉，右键方块。[祭品消耗：萤石粉×8]
+
+achievement.spellSummonVindicator=献祭誓约-卫道士
+achievement.spellSummonVindicator.desc=右持下界之星，左持铁斧，右键方块。[祭品消耗：铁斧×1]
+
+achievement.spellSummonVex=献祭誓约-恼鬼
+achievement.spellSummonVex.desc=右持下界之星，左持铁剑，右键方块。[祭品消耗：铁剑×1]
+
+achievement.spellSummonEvoker=献祭誓约-唤魔者
+achievement.spellSummonEvoker.desc=右持下界之星，左持绿宝石，右键方块。[祭品消耗：绿宝石×2]
+
+achievement.evokerCrystal=唤魔者水晶
+achievement.evokerCrystal.desc=杀死唤魔者掉落。右持唤魔者水晶，右键放出技能； Shift右键切换技能。
+
+achievement.spellSummonPigman=献祭誓约-僵尸猪人
+achievement.spellSummonPigman.desc=右持下界之星，左持金粒，右键方块。[祭品消耗：金粒×8]
+
+achievement.spellSummonGuardian=献祭誓约-守卫者
+achievement.spellSummonGuardian.desc=右持下界之星，左持萤石粉，右键方块。[祭品消耗：萤石粉×8]
+
+achievement.spellSummonPolarBear=献祭誓约-北极熊
+achievement.spellSummonPolarBear.desc=右持下界之星，左持生鱼，右键方块。[祭品消耗：生鱼×8]
+
+achievement.spellSummonShulker=献祭誓约-潜影贝
+achievement.spellSummonShulker.desc=右持下界之星，左持末地烛，右键方块。[祭品消耗：末地烛×1]
+
+achievement.spellSummonSilverfish=献祭誓约-蠹虫
+achievement.spellSummonSilverfish.desc=右持下界之星，左持石砖，右键方块。[祭品消耗：石砖×8]
+
+achievement.spellSummonWither=献祭誓约-凋零
+achievement.spellSummonWither.desc=右持下界之星，左持绿宝石块，右键方块。[祭品消耗：绿宝石×1]
+
+achievement.spellSummonGiant=献祭誓约-巨人
+achievement.spellSummonGiant.desc=右持下界之星，左持盔甲架，右键方块。[祭品消耗：盔甲架×8]
+
+achievement.spellSummonSpiderJockey=献祭誓约-蜘蛛骑士
+achievement.spellSummonSpiderJockey.desc=右持下界之星，左持蜘蛛眼，右键一个落有一根骨头的方块。[祭品消耗：蜘蛛眼×8]
+
+
+
+achievement.summonHordeLvl1=生成一级尸潮 (前置:献祭誓约-巨人)
+achievement.summonHordeLvl1.desc=右持下界之星，左持末影水晶，右键方块。[消耗：末影水晶×1]
+
+achievement.summonHordeLvl10=生成10级尸潮 (作大死!)
+achievement.summonHordeLvl10.desc=右持下界之星，左持末影水晶，右键方块。[消耗：末影水晶×2]
 
 
 
@@ -163,6 +236,9 @@ achievement.mineDiamond.desc=挖一个钻石。
 
 achievement.mineObsidian=法师的建筑素材
 achievement.mineObsidian.desc=挖一个黑曜石。
+
+achievement.mobSpawnerDropBlock=Mob Spawner Drop Block
+achievement.mobSpawnerDropBlock.desc=Break Mob Spawner. It will drop Block and Book with Entity data from Spawner. Right-click with this Book in right hand on Spawner to set Spawner to the Entity from Book.
 
 achievement.craftEnchantingTable=法师的炼金工坊
 achievement.craftEnchantingTable.desc=制作附魔台。
@@ -182,7 +258,7 @@ achievement.buildAltarTier1=初级祭坛
 achievement.buildAltarTier1.desc=放置你的坩埚，并在周围围上一圈红石粉。
 
 achievement.craftGunpowder=火药炼成
-achievement.craftGunpowder.desc=投掷一个糖和一个煤炭到你的初级祭坛里，用魔杖右击祭坛。
+achievement.craftGunpowder.desc=投掷一个甘蔗和一个煤炭到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftSugar=糖炼成
 achievement.craftSugar.desc=投掷一个甘蔗到你的初级祭坛里，用魔杖右击祭坛。
@@ -195,6 +271,12 @@ achievement.craftSand.desc=投掷一个圆石到你的初级祭坛里，用魔�
 
 achievement.craftGlass=玻璃炼成
 achievement.craftGlass.desc=投掷一个沙子和一个煤炭到你的初级祭坛里，用魔杖右击祭坛。
+
+achievement.craftSnow=雪块炼成
+achievement.craftSnow.desc=投掷一个冰块和一个水桶到你的初级祭坛里，用魔杖右击祭坛。
+
+achievement.craftIce=冰块炼成
+achievement.craftIce.desc=投掷一个雪块和一个水桶到你的初级祭坛里，用魔杖右击祭坛。
 
 achievement.craftCobblestone=圆石炼成
 achievement.craftCobblestone.desc=投掷一个泥土到你的初级祭坛里，用魔杖右击祭坛。
@@ -212,7 +294,13 @@ achievement.buildAltarTier2=二级祭坛
 achievement.buildAltarTier2.desc=在你的初级祭坛的四个角外（也就是红石的外围）放上铁块，不过这些铁块应该在低于坩埚一个方块的高度。摆放完铁块后别忘了把坩埚重新放置一下。
 
 achievement.craftIronOre=铁矿炼成
-achievement.craftIronOre.desc=投掷10个树苗和10个圆石到你的二级祭坛里，用用魔杖右击祭坛。
+achievement.craftIronOre.desc=投掷10个橡树树苗和10个圆石到你的二级祭坛里，用魔杖右击祭坛。
+
+achievement.toolUpgrade=工具升级
+achievement.toolUpgrade.desc=投掷一个工具(剑、镐等)和一个更好的材料(石头、钻石等)到坩埚里，用烈焰魔杖右击坩埚。
+
+achievement.itemUpgrades=物品升级
+achievement.itemUpgrades.desc=投掷一个可以升级的物品和一个元素到坩埚里，用烈焰魔杖右击坩埚。(升级书中有具体说明)
 
 achievement.craftCactus=仙人掌炼成
 achievement.craftCactus.desc=投掷2个橡树树苗到你的二级祭坛里，用魔杖右击祭坛。
@@ -235,8 +323,8 @@ achievement.craftSapling4.desc=投掷1个丛林树苗到你的二级祭坛里，
 achievement.craftSapling5=黑橡树树苗炼成
 achievement.craftSapling5.desc=投掷1个金合欢树苗到你的二级祭坛里，用魔杖右击祭坛。
 
-achievement.craftSapling6=黑橡树树苗炼成
-achievement.craftSapling6.desc=投掷1个金合欢树苗到你的二级祭坛里，用魔杖右击祭坛。
+achievement.craftSapling6=橡树树苗炼成
+achievement.craftSapling6.desc=投掷1个黑橡树树苗到你的二级祭坛里，用魔杖右击祭坛。
 
 achievement.craftPumpkin=南瓜炼成
 achievement.craftPumpkin.desc=投掷3个橡树树苗到你的二级祭坛里，用魔杖右击祭坛。
@@ -250,6 +338,9 @@ achievement.craftVine.desc=投掷2个西瓜到你的二级祭坛里，用魔杖�
 achievement.craftLiyPad=荷叶炼成
 achievement.craftLiyPad.desc=投掷2个藤蔓到你的二级祭坛里，用魔杖右击祭坛。
 
+achievement.craftSlimeBall=史莱姆球炼成
+achievement.craftSlimeBall.desc=投掷8个岩浆膏到你的二级祭坛里，用魔杖右击祭坛。
+
 achievement.buildAltarTier3=三级祭坛
 achievement.buildAltarTier3.desc=在你的二级祭坛的四个边外（也就是将铁块的外围）放上金块，不过这些金块应该在低于坩埚一个方块的高度。摆放完金块后别忘了把坩埚重新放置一下
 
@@ -259,8 +350,14 @@ achievement.smeltInAltar.desc=投掷需要熔炼的物品到三级祭坛里，�
 achievement.fullTreeCut=砍下一整棵树
 achievement.fullTreeCut.desc=左手有烈焰魔杖的情况下，用斧头类的工具砍树。
 
-achievement.machineFarm=自动化农场（未实现，暂不汉化）
-achievement.machineFarm.desc=Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume Seed.
+achievement.machineFarm=自动化农场
+achievement.machineFarm.desc=放置一个坩埚，上下各放一个容器，左持一个小麦种子，右持烈焰魔杖shift+右击坩埚激活。
+
+achievement.speedy=方块加速器(范围9x3x9)
+achievement.speedy.desc=放一个坩埚上面放一个装有加速水晶的箱子，左持另一个加速水晶右持烈焰魔杖shift+右击坩埚激活。
+
+achievement.motherNatureCrystal=金坷垃水晶
+achievement.motherNatureCrystal.desc=合成表:中间下界之星,四周小麦种子,南瓜左右下角,西瓜片左右上角。右持为无限骨粉，左持加速周围作物生长。
 
 achievement.mining3x3=采矿 3x3
 achievement.mining3x3.desc=
@@ -273,6 +370,9 @@ achievement.arrowMachineGun.desc=右持下界之星，左手拿着箭，右键�
 
 achievement.craftGoldIngot=金锭炼成
 achievement.craftGoldIngot.desc=投掷8个铁锭到你的三级祭坛里，用魔杖右击祭坛。
+
+achievement.blockAbsorber=黑洞漏斗
+achievement.blockAbsorber.desc=左持玻璃，右持烈焰魔杖，Shift右击漏斗。黑洞漏斗会吸收漏斗上方一格的方块。
 
 achievement.buildAltarTier4=四级祭坛
 achievement.buildAltarTier4.desc=在你的三级祭坛的四个角（与金块同层）放上红石块，不过这些红石块应该在低于坩埚一个方块的高度。摆放完红石块后别忘了把坩埚重新放置一下。
@@ -299,7 +399,7 @@ achievement.buildAltarTier5=五级祭坛
 achievement.buildAltarTier5.desc=在你的四级祭坛的四个边往外数第二层（也就是红石块层往外数的第二层）放上青金石块，不过这些青金石块应该在低于坩埚一个方块的高度。摆放完青金石块后别忘了把坩埚重新放置一下。
 
 achievement.craftGlowstoneDust=萤石粉炼成
-achievement.craftGlowstoneDust.desc=投掷2个红石粉末、2个煤炭和1个青金石到你的五级祭坛里，用烈焰魔杖右击祭坛。
+achievement.craftGlowstoneDust.desc=投掷2个红石粉末、2个煤炭和1个青金石块到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
 achievement.craftNetherrack=地狱岩炼成
 achievement.craftNetherrack.desc=投掷1个石头和2个煤炭到你的五级祭坛里，用烈焰魔杖右击祭坛。
@@ -313,6 +413,9 @@ achievement.craftMagmaBlock.desc=投掷1个地狱岩和1个岩浆膏到你的五
 achievement.craftNetherWart=地狱疣炼成
 achievement.craftNetherWart.desc=投掷1个火药、1个岩浆膏、1个糖和1个红石粉末到你的五级祭坛里，用烈焰魔杖右击祭坛。
 
+achievement.craftGhastTear=恶魂之泪炼成
+achievement.craftGhastTear.desc=投掷4个火药、4个烈焰棒、1个岩浆桶到你的五级祭坛里，用烈焰魔杖右击祭坛。
+
 achievement.pickBlazeRod=更好的魔杖
 achievement.pickBlazeRod.desc=获取一根烈焰棒！然后将它用铁砧命名为“烈焰魔杖”。更好的的魔杖制作完成DA☆ZE。
 
@@ -320,7 +423,16 @@ achievement.questMoveBlock=用书来储存方块
 achievement.questMoveBlock.desc=右持烈焰魔杖，左手仅拿1本书的情况下按住shift右击一个方块。同样的操作去释放该方块。
 
 achievement.captureEntity=生物捕获
-achievement.captureEntity.desc=右持末影魔杖，左手仅拿1本书的情况下按住shift右击一个生物。同样的操作去释放该生物。
+achievement.captureEntity.desc=右持下界之星，左手仅拿1本书的情况下按住shift右击一个生物。同样的操作去释放该生物。
+
+achievement.enchantedBucket=无底之桶
+achievement.enchantedBucket.desc=投掷一个装有液体的桶和一个下界之星到坩埚里，用烈焰法杖Shift右击坩埚。Shift左键来填充容器，右键远方方块来生成液体。(不要右击方块)
+
+achievement.liquidSuppressionCrystal=抑液之水晶
+achievement.liquidSuppressionCrystal.desc=合成表:中间下界之星+一圈空桶。左持使周围液体消失。
+
+achievement.potionedCrystal=熏香水晶
+achievement.potionedCrystal.desc=投掷一个下界之星和一瓶药水到坩埚里。用烈焰法杖Shift右击坩埚。放在背包里来获得相应的buff效果。
 
 achievement.craftWitherSkeletonSkull=凋零骷髅头颅炼成
 achievement.craftWitherSkeletonSkull.desc=投掷1个煤炭方块和1个骷髅头颅到你的五级祭坛里，用烈焰魔杖右击祭坛。
@@ -330,6 +442,9 @@ achievement.accelerationCrystal.desc=在合成台正中间放置一个下界之�
 
 achievement.buildAltarTier6=六级祭坛
 achievement.buildAltarTier6.desc=在你的四级祭坛的四个角外（也就是青金石块的内围）放上钻石块，不过这些钻石块应该在低于坩埚一个方块的高度。摆放完钻石块后别忘了把坩埚重新放置一下
+
+achievement.inventoryBridge=物品桥接
+achievement.inventoryBridge.desc=Save Inventory position into Inventory Selector and hold that item somewhere in main inventory. Hold Blaze Rod in right hand and 1x Stained Glass in left hand and Shift-Right-Click the inventory to place the end of the bridge. Items will be transfered from Inventory Selector's saved inventory to new clicked inventory.
 
 achievement.craftDiamond=钻石炼成
 achievement.craftDiamond.desc=投掷8个金锭到你的六级祭坛里，用烈焰魔杖右击祭坛
@@ -369,6 +484,9 @@ achievement.itemMagnet.desc=在物品栏内放置两个下界之星（非堆叠�
 
 achievement.craftDragonEgg=龙蛋炼成
 achievement.craftDragonEgg.desc=投掷4个下界之星到你的七级祭坛里，用烈焰魔杖右击祭坛
+
+achievement.craftDragonHead=龙头炼成
+achievement.craftDragonHead.desc=投掷1个龙蛋到你的七级祭坛里，用烈焰魔杖右击祭坛
 
 achievement.craftEndCrystal=末影水晶炼成
 achievement.craftEndCrystal.desc=投掷8个龙蛋到你的七级祭坛里，用烈焰魔杖右击祭坛
