@@ -12,12 +12,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import seia.vanillamagic.api.event.EventPotionedCrystal;
-import seia.vanillamagic.api.item.IPotionedCrystal;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.CauldronHelper;
@@ -112,14 +109,8 @@ public class QuestPotionedCrystal extends Quest
 						List<PotionEffect> effects = ipc.getPotionType().getEffects();
 						for(PotionEffect pe : effects)
 						{
-//							PotionEffect newPE = new PotionEffect(pe.getPotion(), 100, pe.getAmplifier(), pe.getIsAmbient(), pe.doesShowParticles());
-//							player.addPotionEffect(newPE);
-							if(!MinecraftForge.EVENT_BUS.post(new EventPotionedCrystal.AddPotionEffect(
-									ipc, player, player.world, player.getPosition(), pe)))
-							{
-								PotionEffect newPE = new PotionEffect(pe.getPotion(), 100, pe.getAmplifier(), pe.getIsAmbient(), pe.doesShowParticles());
-								player.addPotionEffect(newPE);
-							}
+							PotionEffect newPE = new PotionEffect(pe.getPotion(), 100, pe.getAmplifier(), pe.getIsAmbient(), pe.doesShowParticles());
+							player.addPotionEffect(newPE);
 						}
 					}
 				}

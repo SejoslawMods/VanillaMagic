@@ -10,12 +10,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.api.item.IEnchantedBucket;
-import seia.vanillamagic.api.item.IPotionedCrystal;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
 import seia.vanillamagic.item.evokercrystal.ItemEvokerCrystal;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
+import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
 import seia.vanillamagic.util.ItemStackHelper;
 

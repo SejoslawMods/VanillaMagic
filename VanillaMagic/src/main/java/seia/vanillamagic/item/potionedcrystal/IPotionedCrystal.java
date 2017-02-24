@@ -1,10 +1,10 @@
-package seia.vanillamagic.api.item;
+package seia.vanillamagic.item.potionedcrystal;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionType;
-import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
+import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.util.TextHelper;
 
 public interface IPotionedCrystal extends ICustomItem
