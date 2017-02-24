@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.util.INBTSerializable;
+import seia.vanillamagic.api.event.EventCustomTileEntity;
 import seia.vanillamagic.api.util.IAdditionalInfoProvider;
 
 /**
@@ -20,6 +21,8 @@ import seia.vanillamagic.api.util.IAdditionalInfoProvider;
  * This is resource-heavy way but the easiest way. 
  * Other way is that You override the EventCustomTileEntity events and create Your own lists of CustomTiles
  * when it Add or Remove CustomTile to / from World.
+ * 
+ * @see EventCustomTileEntity
  */
 public interface ICustomTileEntity extends 
 		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, 
