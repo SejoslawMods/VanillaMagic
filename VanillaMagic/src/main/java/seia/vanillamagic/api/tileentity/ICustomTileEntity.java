@@ -12,7 +12,13 @@ import seia.vanillamagic.api.util.IAdditionalInfoProvider;
 
 /**
  * This is the base definition for CustomTileEntity.<br>
- * Each CustomTileEntity is self-chunkloading.
+ * Each CustomTileEntity is self-chunkloading. <br>
+ * <br>
+ * If You want to take a CustomTile from any position, methods in World may not work correctly because
+ * CustomTile does not have a proper block. In order to take CustomTile You must search through all
+ * tickables list and check the position of the tickable if it is the same position as Your wanted tile.
+ * This is resource-heavy way but the easiest way. Other way is that You override the PlaceBlock event 
+ * and keep Your own list of CustomTiles on specific World (not recommended !!!).
  */
 public interface ICustomTileEntity extends 
 		ITickable, IAdditionalInfoProvider, INBTSerializable<NBTTagCompound>, 
