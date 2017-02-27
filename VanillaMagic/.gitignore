@@ -33,16 +33,12 @@ __*
 /.settings
 /bin
 /build
-/gradle
 /run
 
 /.classpath
 /.project
-/gradlew
-/gradlew.bat
 /forge*.zip
 
-/build.properties
 /locations.gradle
 
 /todo.txt
