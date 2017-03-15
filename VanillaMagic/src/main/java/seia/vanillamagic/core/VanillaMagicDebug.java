@@ -26,6 +26,7 @@ import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ListHelper;
 
 public class VanillaMagicDebug 
 {
@@ -121,10 +122,7 @@ public class VanillaMagicDebug
 				if(customTile.getTileEntity() instanceof IAdditionalInfoProvider)
 				{
 					List<String> info = ((IAdditionalInfoProvider) customTile.getTileEntity()).getAdditionalInfo();
-					for(String message : info)
-					{
-						EntityHelper.addChatComponentMessage(player, message);
-					}
+					EntityHelper.addChatComponentMessageNoSpam(player, info.toArray(new String[info.size()]));
 				}
 			}
 		}

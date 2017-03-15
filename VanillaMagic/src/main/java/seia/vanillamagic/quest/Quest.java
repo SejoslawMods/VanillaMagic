@@ -89,6 +89,10 @@ public abstract class Quest implements IQuest
 			}
 			return true;
 		}
+		if(player.hasAchievement(achievement))
+		{
+			return true;
+		}
 		return false;
 	}
 	

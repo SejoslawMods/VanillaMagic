@@ -45,7 +45,7 @@ public class QuestQuarry extends QuestMachineActivate
 				{
 					if(CustomTileEntityHandler.addCustomTileEntity(tileQuarry, player.dimension))
 					{
-						EntityHelper.addChatComponentMessage(player, tileQuarry.getClass().getSimpleName() + " added");
+						EntityHelper.addChatComponentMessageNoSpam(player, tileQuarry.getClass().getSimpleName() + " added");
 					}
 				}
 			}

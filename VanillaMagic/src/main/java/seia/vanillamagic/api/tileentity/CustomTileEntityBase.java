@@ -54,7 +54,10 @@ public abstract class CustomTileEntityBase extends TileEntity implements ICustom
 	{
 		List<String> list = new ArrayList<String>();
 		list.add("CustomTileEntity name: " + getClass().getSimpleName());
-		list.add("CustomTileEntity position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
+		list.add("CustomTileEntity position: X=" + pos.getX() + 
+				", Y=" + pos.getY() + 
+				", Z=" + pos.getZ() + 
+				", Dim=" + getWorld().provider.getDimension());
 		return list;
 	}
 	

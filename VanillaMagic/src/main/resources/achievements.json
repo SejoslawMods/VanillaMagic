@@ -2036,6 +2036,18 @@
 	"spellID":3
 },
 {
+    "questClass":"seia.vanillamagic.quest.QuestJumper",
+    "requiredQuest":"spellTeleport",
+    "posX":0,
+    "posY":-2,
+    "icon":
+    {
+        "id":340
+    },
+    "questName":"Jumper (Cross-Dimension Instant Transmission)",
+    "uniqueName":"jumper"
+},
+{
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellInAir",
 	"requiredQuest":"spellTeleport",
 	"posX":2,

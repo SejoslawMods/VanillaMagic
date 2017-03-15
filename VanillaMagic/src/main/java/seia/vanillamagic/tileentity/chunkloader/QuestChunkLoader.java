@@ -47,7 +47,7 @@ public class QuestChunkLoader extends Quest
 						tileChunkLoader.init(placedBy.world, chunkLoaderPos);
 						if(CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, placedBy.dimension))
 						{
-							EntityHelper.addChatComponentMessage(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");
+							EntityHelper.addChatComponentMessageNoSpam(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");
 						}
 					}
 				}

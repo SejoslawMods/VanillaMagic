@@ -110,7 +110,7 @@ public class CustomTileEntityHandler
 //			EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
 			if(!MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Remove.Before.SendInfoToPlayer(customTile, world, pos, player)))
 			{
-				EntityHelper.addChatComponentMessage(player, customTile.getClass().getSimpleName() + " removed");
+				EntityHelper.addChatComponentMessageNoSpam(player, customTile.getClass().getSimpleName() + " removed");
 				MinecraftForge.EVENT_BUS.post(new EventCustomTileEntity.Remove.After.SendInfoToPlayer(customTile, world, pos, player));
 			}
 		}

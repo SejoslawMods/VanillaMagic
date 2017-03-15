@@ -1,6 +1,8 @@
 package seia.vanillamagic.util;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 
 public class TextHelper 
 {
@@ -52,5 +54,13 @@ public class TextHelper
 	public static String getVanillaMagicInfo(String s)
 	{
 		return "§a[VanillaMagic] §f" + s;
+	}
+	
+	public static String constructPositionString(World world, BlockPos pos)
+	{
+		return "Dim=" + WorldHelper.getDimensionID(world) + 
+				", X=" + pos.getX() + 
+				", Y=" + pos.getY() +
+				", Z=" + pos.getZ();
 	}
 }

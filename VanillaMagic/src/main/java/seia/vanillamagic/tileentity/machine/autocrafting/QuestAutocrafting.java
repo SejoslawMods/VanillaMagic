@@ -74,12 +74,12 @@ public class QuestAutocrafting extends Quest
 				{
 					auto.setCurrentCraftingSlot(auto.getCurrentCraftingSlot() + 1);
 				}
-				EntityHelper.addChatComponentMessage(player, 
+				EntityHelper.addChatComponentMessageNoSpam(player, 
 						"Current crafting slot set to: " + auto.getCurrentCraftingSlot());
 			}
 			else // player is not sneaking -> show current crafting slot
 			{
-				EntityHelper.addChatComponentMessage(player, 
+				EntityHelper.addChatComponentMessageNoSpam(player, 
 						"Current crafting slot: " + auto.getCurrentCraftingSlot());
 			}
 		}
@@ -114,7 +114,7 @@ public class QuestAutocrafting extends Quest
 							tile.init(player.world, cauldronPos);
 							if(CustomTileEntityHandler.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
 							{
-								EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
+								EntityHelper.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
 							}
 						}
 					}

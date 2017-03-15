@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.util.EnumFacing;
@@ -45,7 +46,10 @@ public class SpellTeleportToEnd extends Spell
 							return false;
 						}
 					}
-					TeleportHelper.changePlayerDimensionWithoutPortal(caster, 0);
+					if(caster instanceof EntityPlayerMP)
+					{
+						TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, 0);
+					}
 					return true;
 				}
 			}

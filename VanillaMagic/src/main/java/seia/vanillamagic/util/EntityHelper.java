@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,12 +19,16 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
 
 public class EntityHelper 
 {
+	private static final int DELETION_ID = 2525277;
+	private static int lastAdded;
+	
 	private EntityHelper()
 	{
 	}
@@ -113,9 +119,35 @@ public class EntityHelper
 		knockBack(user, toKnockBack, strenght, xRatio, zRatio);
 	}
 	
+	public static ITextComponent wrap(String s)
+	{
+		return new TextComponentString(s);
+	}
+	
+	public static void addChatComponentMessageNoSpam(EntityPlayer player, String msg)
+	{
+		addChatComponentMessageNoSpam(player, new String[]{ msg });
+	}
+	
+	public static void addChatComponentMessageNoSpam(EntityPlayer player, String[] msg)
+	{
+		GuiNewChat chat = Minecraft.getMinecraft().ingameGUI.getChatGUI();
+		for (int i = DELETION_ID + msg.length - 1; i <= lastAdded; i++)
+		{
+			chat.deleteChatLine(i);
+		}
+		for (int i = 0; i < msg.length; i++)
+		{
+			chat.printChatMessageWithOptionalDeletion(
+					wrap(TextHelper.getVanillaMagicInfo(msg[i])), 
+					DELETION_ID + i);
+		}
+		lastAdded = DELETION_ID + msg.length - 1;
+	}
+	
 	public static void addChatComponentMessage(EntityPlayer player, String msg)
 	{
-		player.sendStatusMessage(new TextComponentString(TextHelper.getVanillaMagicInfo(msg)), false); // TODO: What is this boolean ?
+		player.sendStatusMessage(wrap(TextHelper.getVanillaMagicInfo(msg)), false); // TODO: What is this boolean ?
 	}
 
 	public static void removeEntities(World world, List<EntityItem> itemsInCauldron)

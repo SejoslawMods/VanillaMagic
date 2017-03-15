@@ -17,7 +17,7 @@ import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
-import seia.vanillamagic.util.WorldHelper;
+import seia.vanillamagic.util.TextHelper;
 
 public class InventorySelector
 {
@@ -57,14 +57,13 @@ public class InventorySelector
 			BlockPos clickedPos = event.getPos();
 			if(!InventoryHelper.isInventory(world, clickedPos))
 			{
-				EntityHelper.addChatComponentMessage(player, "Clicked block is not an Inventory");
+				EntityHelper.addChatComponentMessageNoSpam(player, "Clicked block is not an Inventory");
 				return;
 			}
 			NBTTagCompound rightHandTagOld = rightHand.getTagCompound();
 			NBTTagCompound rightHandTagNew = NBTHelper.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world);
 			rightHand.setTagCompound(rightHandTagNew);
-			EntityHelper.addChatComponentMessage(player, "Registered Inventory at: X=" + clickedPos.getX() + 
-					", Y=" + clickedPos.getY() + ", Z=" + clickedPos.getZ() + ", Dim=" + WorldHelper.getDimensionID(world));
+			EntityHelper.addChatComponentMessageNoSpam(player, "Registered Inventory at: " + TextHelper.constructPositionString(world, clickedPos));
 		}
 	}
 	
@@ -105,8 +104,7 @@ public class InventorySelector
 					EntityHelper.addChatComponentMessage(player, "No saved position");
 					return;
 				}
-				EntityHelper.addChatComponentMessage(player, "Saved position: X=" + savedPos.getX() + 
-						", Y=" + savedPos.getY() + ", Z=" + savedPos.getZ() + ", Dim=" + WorldHelper.getDimensionID(world));
+				EntityHelper.addChatComponentMessage(player, "Saved position: " + TextHelper.constructPositionString(world, savedPos));
 			}
 		}
 	}

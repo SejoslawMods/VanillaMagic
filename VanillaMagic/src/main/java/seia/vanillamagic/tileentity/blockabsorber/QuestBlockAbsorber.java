@@ -82,7 +82,7 @@ public class QuestBlockAbsorber extends Quest
 				tile.init(player.world, clickedPos.offset(EnumFacing.UP));
 				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
-					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
+					EntityHelper.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
 					ItemStackHelper.decreaseStackSize(leftHand, 1);
 					if(ItemStackHelper.getStackSize(leftHand) == 0)
 					{

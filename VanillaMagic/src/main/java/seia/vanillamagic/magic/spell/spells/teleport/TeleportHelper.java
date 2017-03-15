@@ -35,11 +35,10 @@ public class TeleportHelper
 	 * CoordX = player.posX
 	 * etc.
 	 */
-	public static void changePlayerDimensionWithoutPortal(EntityPlayer player, int dimension)
+	public static void changePlayerDimensionWithoutPortal(EntityPlayerMP player, int dimension)
 	{
 		int oldDimension = player.world.provider.getDimension();
-		EntityPlayerMP playerMP = (EntityPlayerMP) player;
-		MinecraftServer server = playerMP.world.getMinecraftServer();
+		MinecraftServer server = player.world.getMinecraftServer();
 		WorldServer worldServer = server.worldServerForDimension(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
 		VMTeleporter vmTele = new VMTeleporter(worldServer, player.posX, player.posY, player.posZ);
@@ -60,7 +59,7 @@ public class TeleportHelper
 		{
 			if(worldServer.customTeleporters.get(i) instanceof VMTeleporter)
 			{
-				transferPlayerToDimension(playerMP, dimension, (VMTeleporter)worldServer.customTeleporters.get(i));
+				transferPlayerToDimension(player, dimension, (VMTeleporter)worldServer.customTeleporters.get(i));
 				break;
 			}
 		}

@@ -1,6 +1,7 @@
 package seia.vanillamagic.magic.spell.spells;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -21,15 +22,18 @@ public class SpellTeleportToNether extends Spell
 	{
 		try
 		{
-			if(caster.dimension == 0)
+			if(caster instanceof EntityPlayerMP)
 			{
-				TeleportHelper.changePlayerDimensionWithoutPortal(caster, -1);
-				return true;
-			}
-			else if(caster.dimension == -1)
-			{
-				TeleportHelper.changePlayerDimensionWithoutPortal(caster, 0);
-				return true;
+				if(caster.dimension == 0)
+				{
+					TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, -1);
+					return true;
+				}
+				else if(caster.dimension == -1)
+				{
+					TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, 0);
+					return true;
+				}
 			}
 		}
 		catch(Exception e)

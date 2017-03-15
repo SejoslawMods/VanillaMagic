@@ -44,7 +44,7 @@ public class QuestMachineFarm extends QuestMachineActivate
 			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{
 				ItemStackHelper.decreaseStackSize(player.getHeldItemOffhand(), ItemStackHelper.getStackSize(mustHaveOffHand));
-				EntityHelper.addChatComponentMessage(player, tileFarm.getClass().getSimpleName() + " added");
+				EntityHelper.addChatComponentMessageNoSpam(player, tileFarm.getClass().getSimpleName() + " added");
 			}
 		}
 	}

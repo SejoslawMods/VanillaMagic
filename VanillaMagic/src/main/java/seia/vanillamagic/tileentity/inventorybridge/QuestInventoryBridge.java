@@ -98,7 +98,7 @@ public class QuestInventoryBridge extends Quest
 				}
 				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
-					EntityHelper.addChatComponentMessage(player, tile.getClass().getSimpleName() + " added");
+					EntityHelper.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
 					ItemStackHelper.decreaseStackSize(leftHand, 1);
 					if(ItemStackHelper.getStackSize(leftHand) == 0)
 					{

@@ -44,7 +44,7 @@ public class QuestSpeedy extends Quest
 							{
 								if(CustomTileEntityHandler.addCustomTileEntity(speedy, WorldHelper.getDimensionID(world)))
 								{
-									EntityHelper.addChatComponentMessage(player, speedy.getClass().getSimpleName() + " added");
+									EntityHelper.addChatComponentMessageNoSpam(player, speedy.getClass().getSimpleName() + " added");
 								}
 							}
 						}

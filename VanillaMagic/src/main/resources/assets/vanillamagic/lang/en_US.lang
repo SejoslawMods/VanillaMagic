@@ -73,6 +73,9 @@ achievement.spellLargeFireball.desc=Hold Blaze Wand in Your right hand and at le
 achievement.spellTeleport=Teleportation !!! (look and teleport)
 achievement.spellTeleport.desc=Hold Blaze Wand in Your right hand and at least 1x Magma Cream in the left hand and right-click. 
 
+achievement.jumper=Jumper (Cross-Dimension Instant Transmission)
+achievement.jumper.desc=Hold 1x Book in left hand and Compass in right hand and Shift-right-click block to save position. Hold Compass in left hand and 1x Jumper's Book in right hand and Shift-right-click in air to teleport.
+
 achievement.spellTeleportToNether=Teleport to Nether
 achievement.spellTeleportToNether.desc=Hold Blaze Wand in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is safe...i think).
 

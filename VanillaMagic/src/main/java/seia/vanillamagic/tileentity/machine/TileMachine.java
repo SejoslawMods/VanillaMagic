@@ -33,6 +33,7 @@ import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.SmeltingHelper;
+import seia.vanillamagic.util.TextHelper;
 import seia.vanillamagic.util.WorldHelper;
 
 public abstract class TileMachine extends CustomTileEntity implements IMachine
@@ -460,9 +461,9 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine
 		try
 		{
 			list.add("Machine name: " + getClass().getSimpleName());
-			list.add("Machine position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ());
-			list.add("Start position: X=" + startPos.getX() + ", Y=" + startPos.getY() + ", Z=" + startPos.getZ());
-			list.add("Working position: X=" + workingPos.getX() + ", Y=" + workingPos.getY() + ", Z=" + workingPos.getZ());
+			list.add("Machine position: " + TextHelper.constructPositionString(getWorld(), pos));
+			list.add("Start position: " + TextHelper.constructPositionString(getWorld(), startPos));
+			list.add("Working position: " + TextHelper.constructPositionString(getWorld(), workingPos));
 			list.add("One operation cost: " + oneOperationCost);
 			list.add("Fuel left: " + ticks);
 			list.add("Max fuel: " + maxTicks);
