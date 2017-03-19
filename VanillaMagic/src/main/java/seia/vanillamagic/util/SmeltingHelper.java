@@ -5,8 +5,12 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
+import net.minecraft.block.BlockRedstoneOre;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -21,6 +25,44 @@ public class SmeltingHelper
 {
 	private SmeltingHelper()
 	{
+	}
+	
+	public static boolean isBlockOre(Block block)
+	{
+		if(block instanceof BlockOre) // Coal, Diamond, Lapis, Emerald, Quartz
+		{
+			return true;
+		}
+		if(block instanceof BlockRedstoneOre
+				|| Block.isEqualTo(block, Blocks.REDSTONE_ORE)
+				|| Block.isEqualTo(block, Blocks.LIT_REDSTONE_ORE)) // Redstone, Lit Redstone
+		{
+			return true;
+		}
+		if(Block.isEqualTo(block, Blocks.IRON_ORE)
+				|| Block.isEqualTo(block, Blocks.GOLD_ORE)) // Iron, Gold
+		{
+			return true;
+		}
+		// Other Ores (other mods, etc.)
+		String[] oreDictionaryNames = OreDictionary.getOreNames();
+		List<String> oreNames = new ArrayList<String>(); // Ores
+		for(String oreDictionaryName : oreDictionaryNames)
+		{
+			if(oreDictionaryName.contains("ore"))
+			{
+				oreNames.add(oreDictionaryName);
+			}
+		}
+		for(String oreName : oreNames)
+		{
+			if(oreName.equals(block.getLocalizedName()) 
+					|| oreName.equals(block.getUnlocalizedName()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static List<EntityItem> getOresInCauldron(World world, BlockPos cauldronPos)
