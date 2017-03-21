@@ -61,14 +61,27 @@ public class ItemStackHelper
 		return new ItemStack(Items.SKULL, amount, meta);
 	}
 	
-	public static boolean checkItemsInHands(EntityPlayer player, 
-			ItemStack shouldHaveInOffHand, ItemStack shouldHaveInMainHand)
+	public static boolean checkItemsInHands(EntityPlayer player, ItemStack shouldHaveInOffHand, ItemStack shouldHaveInMainHand)
 	{
-		ItemStack offHand = player.getHeldItemOffhand();
-		ItemStack mainHand = player.getHeldItemMainhand();
-		if(ItemStack.areItemStacksEqual(offHand, shouldHaveInOffHand))
+		if(player == null || shouldHaveInOffHand == null || shouldHaveInMainHand == null)
 		{
-			if(ItemStack.areItemStacksEqual(mainHand, shouldHaveInMainHand))
+			return false;
+		}
+		ItemStack offHand = player.getHeldItemOffhand();
+		if(isNullStack(offHand) && !isNullStack(shouldHaveInOffHand))
+		{
+			return false;
+		}
+		ItemStack mainHand = player.getHeldItemMainhand();
+		if(isNullStack(mainHand) && !isNullStack(shouldHaveInMainHand))
+		{
+			return false;
+		}
+		if((ItemStackHelper.getStackSize(offHand) == ItemStackHelper.getStackSize(shouldHaveInOffHand))
+				&& (offHand.getItem() == shouldHaveInOffHand.getItem()))
+		{
+			if((ItemStackHelper.getStackSize(mainHand) == ItemStackHelper.getStackSize(shouldHaveInMainHand))
+					&& (mainHand.getItem() == shouldHaveInMainHand.getItem()))
 			{
 				return true;
 			}

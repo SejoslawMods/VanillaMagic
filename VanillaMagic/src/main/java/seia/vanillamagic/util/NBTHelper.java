@@ -55,6 +55,7 @@ public class NBTHelper
 	public static final String NBT_CLASS_NAME = "NBT_CLASS_NAME";
 	public static final String NBT_TAG_COMPOUND_ENTITY = "NBTQuestCaptureEntity";
 	public static final String NBT_ENTITY_TYPE = "EntityType";
+	public static final String NBT_ENTITY_NAME = "EntityName";
 	public static final String NBT_SPEEDY_TICKS = "NBT_SPEEDY_TICKS";
 	public static final String NBT_TICKS_REMAINING = "NBT_TICKS_REMAINING";
 	public static final String NBT_BLOCK_NAME = "NBT_BLOCK_NAME";

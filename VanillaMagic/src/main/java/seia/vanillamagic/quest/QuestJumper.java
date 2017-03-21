@@ -9,6 +9,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,13 +30,8 @@ public class QuestJumper extends Quest
 	public void saveBlockPosToBook(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		ItemStack rightHand = player.getHeldItemMainhand();
-		if(!ItemStack.areItemsEqual(rightHand, _REQUIRED_RIGHT_HAND))
-		{
-			return;
-		}
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(!ItemStack.areItemsEqual(leftHand, _REQUIRED_LEFT_HAND))
+		if(!ItemStackHelper.checkItemsInHands(player, _REQUIRED_LEFT_HAND, _REQUIRED_RIGHT_HAND))
 		{
 			return;
 		}
@@ -79,16 +75,7 @@ public class QuestJumper extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(!ItemStack.areItemsEqual(rightHand, _POSITION_HOLDER)) // Enchanted Book
-		{
-			return;
-		}
-		ItemStack leftHand = player.getHeldItemOffhand();
-		if(!ItemStack.areItemsEqual(leftHand, _REQUIRED_RIGHT_HAND)) // Compass
-		{
-			return;
-		}
-		if(ItemStackHelper.getStackSize(leftHand) > 1)
+		if(!ItemStackHelper.checkItemsInHands(player, _REQUIRED_RIGHT_HAND, _POSITION_HOLDER))
 		{
 			return;
 		}
@@ -121,6 +108,23 @@ public class QuestJumper extends Quest
 				EntityHelper.addChatComponentMessageNoSpam(player, 
 						"Teleported to: " + TextHelper.constructPositionString(player.getEntityWorld(), teleportPos));
 				MinecraftForge.EVENT_BUS.post(new EventJumper.Teleport.After(player, event.getWorld(), teleportPos, dimId));
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void showSavedPosTooltip(ItemTooltipEvent event)
+	{
+		ItemStack jumperBookStack = event.getItemStack();
+		NBTTagCompound jumperBookTagCompound = jumperBookStack.getTagCompound();
+		if(jumperBookTagCompound != null)
+		{
+			BlockPos teleportPos = NBTHelper.getBlockPosDataFromNBT(jumperBookTagCompound);
+			if(teleportPos != null)
+			{
+				int dimId = NBTHelper.getDimensionFromNBT(jumperBookTagCompound);
+				String info = TextHelper.constructPositionString(dimId, teleportPos);
+				event.getToolTip().add("Jumper's Book: " + info);
 			}
 		}
 	}

@@ -1949,6 +1949,19 @@
 	"spellID":215
 },
 {
+    "questClass":"seia.vanillamagic.quest.QuestShootWitherSkull",
+    "requiredQuest":"spellSummonWither",
+    "posX":0,
+    "posY":-2,
+    "icon":
+    {
+        "id":397,
+        "meta":1
+    },
+    "questName":"Shoot Wither Skull",
+    "uniqueName":"shootWitherSkull"
+},
+{
 	"questClass":"seia.vanillamagic.quest.spell.QuestCastSpellOnBlock",
 	"requiredQuest":"spellSummonWither",
 	"posX":-2,

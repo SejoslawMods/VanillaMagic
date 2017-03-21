@@ -1,5 +1,7 @@
 package seia.vanillamagic.quest;
 
+import java.util.List;
+
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
@@ -14,6 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.event.EventMoveBlock;
@@ -216,6 +219,27 @@ public class QuestMoveBlock extends Quest
 			}
 			ItemStack newOffHand = requiredStackOffHand.copy();
 			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
+		}
+	}
+	
+	@SubscribeEvent
+	public void addSavedBlockDataTooltip(ItemTooltipEvent event)
+	{
+		ItemStack savedPosBook = event.getItemStack();
+		NBTTagCompound savedPosTagCompound = savedPosBook.getTagCompound();
+		if(savedPosTagCompound != null)
+		{
+			if(savedPosTagCompound.hasKey(NBTHelper.NBT_TAG_COMPOUND_NAME))
+			{
+				NBTTagCompound questTag = savedPosTagCompound.getCompoundTag(NBTHelper.NBT_TAG_COMPOUND_NAME);
+				Block readdedBlock = Block.REGISTRY.getObjectById(questTag.getInteger(NBTHelper.NBT_BLOCK_ID));
+				if(readdedBlock != null)
+				{
+					List<String> blockInfo = event.getToolTip();
+					blockInfo.add("Saved Block: " + readdedBlock.getLocalizedName());
+					blockInfo.add("Saved Block MetaData: " + questTag.getInteger(NBTHelper.NBT_BLOCK_META));
+				}
+			}
 		}
 	}
 }

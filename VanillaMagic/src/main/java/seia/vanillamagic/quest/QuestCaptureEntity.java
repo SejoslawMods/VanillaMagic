@@ -14,6 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -163,6 +164,7 @@ public class QuestCaptureEntity extends Quest
 			target.writeToNBT(entityTag);
 			stackTagCompound.setTag(NBTHelper.NBT_TAG_COMPOUND_ENTITY, entityTag);
 			stackTagCompound.setString(NBTHelper.NBT_ENTITY_TYPE, target.getClass().getCanonicalName());
+			stackTagCompound.setString(NBTHelper.NBT_ENTITY_NAME, target.getName());
 			stackOffHand.setStackDisplayName("Captured Entity: " + target.getName());
 			world.removeEntity(target);
 		}
@@ -186,11 +188,6 @@ public class QuestCaptureEntity extends Quest
 			{
 				return;
 			}
-//			entity.readFromNBT(entityTag);
-//			entity.setLocationAndAngles(respawnPos.getX() + 0.5D, respawnPos.getY() + 0.5d, respawnPos.getZ() + 0.5D, 0, 0);
-//			world.spawnEntity(entity);
-//			ItemStack newOffHand = requiredStackOffHand.copy();
-//			player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, newOffHand);
 			if(!MinecraftForge.EVENT_BUS.post(new EventCaptureEntity.Respawn(
 					world, player, respawnPos, face, entity, type)))
 			{
@@ -216,5 +213,21 @@ public class QuestCaptureEntity extends Quest
 			e.printStackTrace();
 		}
 		return entity;
+	}
+	
+	@SubscribeEvent
+	public void addEntityDataTooltip(ItemTooltipEvent event)
+	{
+		ItemStack entityContainer = event.getItemStack();
+		NBTTagCompound entityContainerTag = entityContainer.getTagCompound();
+		if(entityContainerTag != null)
+		{
+			if(entityContainerTag.hasKey(NBTHelper.NBT_TAG_COMPOUND_ENTITY))
+			{
+				NBTTagCompound entityTag = entityContainerTag.getCompoundTag(NBTHelper.NBT_TAG_COMPOUND_ENTITY);
+				String type = entityContainerTag.getString(NBTHelper.NBT_ENTITY_NAME);
+				event.getToolTip().add("Captured Entity: " + type);
+			}
+		}
 	}
 }

@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -106,6 +107,19 @@ public class InventorySelector
 				}
 				EntityHelper.addChatComponentMessage(player, "Saved position: " + TextHelper.constructPositionString(world, savedPos));
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void showInventorySelectorTooltip(ItemTooltipEvent event)
+	{
+		ItemStack inventorySelector = event.getItemStack();
+		if(VanillaMagicItems.isCustomItem(inventorySelector, VanillaMagicItems.INVENTORY_SELECTOR))
+		{
+			NBTTagCompound selectorNBT = inventorySelector.getTagCompound();
+			int dimId = selectorNBT.getInteger(NBTHelper.NBT_DIMENSION);
+			BlockPos selectorPos = NBTHelper.getBlockPosDataFromNBT(selectorNBT);
+			event.getToolTip().add("Selector Saved Position: " + TextHelper.constructPositionString(dimId, selectorPos));
 		}
 	}
 }
