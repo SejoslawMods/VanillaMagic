@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiNewChat;
+import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -255,7 +256,11 @@ public class EntityHelper
 		}
 		for(WorldServer world : server.worlds)
 		{
-			return getEntityPlayerMPFromSP(world, playerSP);
+			EntityPlayerMP playerMP = getEntityPlayerMPFromSP(world, playerSP);
+			if(playerMP != null)
+			{
+				return playerMP;
+			}
 		}
 		return null;
 	}
@@ -274,6 +279,24 @@ public class EntityHelper
 				if(player instanceof EntityPlayerMP)
 				{
 					return (EntityPlayerMP) player;
+				}
+			}
+		}
+		return null;
+	}
+	
+	@Nullable
+	public static EntityPlayerMP getCommandSender(MinecraftServer server, ICommandSender sender)
+	{
+		Entity entitySender = sender.getCommandSenderEntity();
+		if(entitySender != null)
+		{
+			if(entitySender instanceof EntityPlayerSP)
+			{
+				EntityPlayerMP playerMP = getEntityPlayerMPFromSP(server, (EntityPlayerSP) entitySender);
+				if(playerMP != null)
+				{
+					return playerMP;
 				}
 			}
 		}

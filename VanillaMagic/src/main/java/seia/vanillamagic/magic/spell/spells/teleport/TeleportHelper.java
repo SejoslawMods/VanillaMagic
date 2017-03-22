@@ -1,7 +1,8 @@
 package seia.vanillamagic.magic.spell.spells.teleport;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.network.play.server.SPacketEntityEffect;
@@ -17,31 +18,50 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.border.WorldBorder;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventTeleportEntity;
 
-public class TeleportHelper 
+public class TeleportHelper
 {
 	private TeleportHelper()
 	{
 	}
 	
-	public static void teleportEntity(Entity entityToBeTeleported, BlockPos teleportTo)
+	public static void teleportEntitySynchronized(EntityPlayerMP playerMP, EntityPlayerSP playerSP, BlockPos pos)
 	{
-		entityToBeTeleported.setPositionAndUpdate(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
+		teleportEntity(playerMP, pos);
+		teleportEntity(playerSP, pos);
 	}
-
-	/**
-	 * Try to use this method.
-	 * It will teleport You to:
-	 * CoordX = player.posX
-	 * etc.
-	 */
-	public static void changePlayerDimensionWithoutPortal(EntityPlayerMP player, int dimension)
+	
+	public static Entity entityChangeDimension(Entity entity, int newDimId)
 	{
+		if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(entity, entity.getPosition(), newDimId)))
+		{
+			return entity.changeDimension(newDimId);
+		}
+		return null;
+	}
+	
+	public static void teleportEntity(Entity entityToBeTeleport, BlockPos teleportTo)
+	{
+		if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(entityToBeTeleport, teleportTo)))
+		{
+			entityToBeTeleport.setPositionAndUpdate(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
+		}
+	}
+	
+	public static void changePlayerDimensionWithoutPortal(EntityPlayerMP player, int dimension, BlockPos pos)
+	{
+		if(MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(player, pos, dimension)))
+		{
+			return;
+		}
 		int oldDimension = player.world.provider.getDimension();
 		MinecraftServer server = player.world.getMinecraftServer();
 		WorldServer worldServer = server.worldServerForDimension(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
-		VMTeleporter vmTele = new VMTeleporter(worldServer, player.posX, player.posY, player.posZ);
+		VMTeleporter vmTele = new VMTeleporter(worldServer, pos.getX(), pos.getY(), pos.getZ());
 		boolean has = false;
 		for(int i = 0 ; i < worldServer.customTeleporters.size(); ++i)
 		{
@@ -64,10 +84,111 @@ public class TeleportHelper
 			}
 		}
 	}
-	
-	public static void transferPlayerToDimension(EntityPlayerMP player, int dimension, VMTeleporter teleporter)
+
+	/**
+	 * It will teleport You to:
+	 * CoordX = player.posX
+	 * etc.
+	 */
+	public static void changePlayerDimensionWithoutPortal(EntityPlayerMP player, int dimension)
 	{
-		MinecraftServer server = ((EntityPlayerMP)player).world.getMinecraftServer();
+		changePlayerDimensionWithoutPortal(player, dimension, new BlockPos(player.posX, player.posY, player.posZ));
+	}
+	
+	public static Entity changeDimension(Entity entity, int newDimId, BlockPos newPos)
+	{
+		if(!entity.world.isRemote && !entity.isDead)
+		{
+			if(!ForgeHooks.onTravelToDimension(entity, newDimId)) return null;
+			entity.world.theProfiler.startSection("changeDimension");
+            MinecraftServer minecraftServer = entity.getServer();
+            int currentDim = entity.dimension;
+            WorldServer worldServerCurrent = minecraftServer.worldServerForDimension(currentDim);
+            WorldServer worldServerNew = minecraftServer.worldServerForDimension(newDimId);
+            entity.dimension = newDimId;
+
+            if(currentDim == 1 && newDimId == 1)
+            {
+            	worldServerNew = minecraftServer.worldServerForDimension(0);
+                entity.dimension = 0;
+            }
+
+            entity.world.removeEntity(entity);
+            entity.isDead = false;
+            entity.world.theProfiler.startSection("reposition");
+            BlockPos blockpos;
+
+            if (newDimId == 1)
+            {
+                blockpos = worldServerNew.getSpawnCoordinate();
+            }
+            else
+            {
+                double d0 = entity.posX;
+                double d1 = entity.posZ;
+                double d2 = 8.0D;
+
+                if (newDimId == -1)
+                {
+                    d0 = MathHelper.clamp(d0 / 8.0D, worldServerNew.getWorldBorder().minX() + 16.0D, worldServerNew.getWorldBorder().maxX() - 16.0D);
+                    d1 = MathHelper.clamp(d1 / 8.0D, worldServerNew.getWorldBorder().minZ() + 16.0D, worldServerNew.getWorldBorder().maxZ() - 16.0D);
+                }
+                else if (newDimId == 0)
+                {
+                    d0 = MathHelper.clamp(d0 * 8.0D, worldServerNew.getWorldBorder().minX() + 16.0D, worldServerNew.getWorldBorder().maxX() - 16.0D);
+                    d1 = MathHelper.clamp(d1 * 8.0D, worldServerNew.getWorldBorder().minZ() + 16.0D, worldServerNew.getWorldBorder().maxZ() - 16.0D);
+                }
+
+                d0 = (double)MathHelper.clamp((int)d0, -29999872, 29999872);
+                d1 = (double)MathHelper.clamp((int)d1, -29999872, 29999872);
+                float f = entity.rotationYaw;
+                entity.setLocationAndAngles(d0, entity.posY, d1, 90.0F, 0.0F);
+//                Teleporter teleporter = worldServerNew.getDefaultTeleporter();
+//                teleporter.placeInExistingPortal(entity, f);
+                blockpos = new BlockPos(entity);
+            }
+
+            worldServerCurrent.updateEntityWithOptionalForce(entity, false);
+            entity.world.theProfiler.endStartSection("reloading");
+            Entity newEntity = EntityList.newEntity(entity.getClass(), worldServerNew);
+
+            if (entity != null)
+            {
+//                entity.copyDataFromOld(newEntity);
+
+                if (currentDim == 1 && newDimId == 1)
+                {
+                    BlockPos blockpos1 = worldServerNew.getTopSolidOrLiquidBlock(worldServerNew.getSpawnPoint());
+                    entity.moveToBlockPosAndAngles(blockpos1, entity.rotationYaw, entity.rotationPitch);
+                }
+                else
+                {
+                    entity.moveToBlockPosAndAngles(blockpos, entity.rotationYaw, entity.rotationPitch);
+                }
+
+                boolean flag = entity.forceSpawn;
+                entity.forceSpawn = true;
+                worldServerNew.spawnEntity(entity);
+                entity.forceSpawn = flag;
+                worldServerNew.updateEntityWithOptionalForce(entity, false);
+            }
+
+            entity.isDead = true;
+            entity.world.theProfiler.endSection();
+            worldServerCurrent.resetUpdateEntityTick();
+            worldServerNew.resetUpdateEntityTick();
+            entity.world.theProfiler.endSection();
+            return entity;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	private static void transferPlayerToDimension(EntityPlayerMP player, int dimension, VMTeleporter teleporter)
+	{
+		MinecraftServer server = player.world.getMinecraftServer();
 		WorldServer worldServer = server.worldServerForDimension(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
 		int i = player.dimension;

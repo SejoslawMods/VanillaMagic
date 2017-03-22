@@ -9,6 +9,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import seia.vanillamagic.api.event.EventTeleportEntity;
 
 public class EntitySpellTeleport extends EntitySpell
 {
@@ -23,9 +25,12 @@ public class EntitySpellTeleport extends EntitySpell
 		EntityLivingBase caster = this.castingEntity;
 		if(result.typeOfHit == RayTraceResult.Type.ENTITY)
 		{
-			caster.setPositionAndUpdate(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ);
-			caster.fallDistance = 0.0F;
-			return;
+			if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ))))
+			{
+				caster.setPositionAndUpdate(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ);
+				caster.fallDistance = 0.0F;
+				return;
+			}
 		}
 		if(result.typeOfHit == RayTraceResult.Type.BLOCK)
 		{
@@ -66,14 +71,20 @@ public class EntitySpellTeleport extends EntitySpell
 							{
 								caster.dismountRidingEntity();
 							}
-							caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
-							caster.fallDistance = 0.0F;
+							if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(this.posX, this.posY + 1, this.posZ))))
+							{
+								caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
+								caster.fallDistance = 0.0F;
+							}
 						}
 					}
 					else if(caster != null)
 					{
-						caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
-						caster.fallDistance = 0.0F;
+						if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(this.posX, this.posY + 1, this.posZ))))
+						{
+							caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
+							caster.fallDistance = 0.0F;
+						}
 					}
 				}
 			}

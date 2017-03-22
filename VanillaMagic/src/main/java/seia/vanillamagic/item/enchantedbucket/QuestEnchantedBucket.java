@@ -4,15 +4,16 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -20,6 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
+import net.minecraftforge.event.world.BlockEvent.CreateFluidSourceEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -158,7 +160,6 @@ public class QuestEnchantedBucket extends Quest
 			int amount = ((IFluidHandler) tile).fill(fluid, false);
 			if(amount > 0)
 			{
-//				((IFluidHandler) tile).fill(fluid, true);
 				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillFluidHandler(
 						bucket, player, world, blockPos, tile, (IFluidHandler) tile, fluid)))
 				{
@@ -173,7 +174,6 @@ public class QuestEnchantedBucket extends Quest
 			int amount = ((IFluidTank) tile).fill(fluid, false);
 			if(amount > 0)
 			{
-//				((IFluidTank) tile).fill(fluid, true);
 				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillFluidTank(
 						bucket, player, world, blockPos, tile, (IFluidTank) tile, fluid)))
 				{
@@ -191,7 +191,6 @@ public class QuestEnchantedBucket extends Quest
 				int amount = fh.fill(fluid, false);
 				if(amount > 0)
 				{
-//					fh.fill(fluid, true);
 					if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillFluidHandler.UsingCapability(
 							bucket, player, world, blockPos, tile, (IFluidHandler) tile, fluid)))
 					{
@@ -205,7 +204,6 @@ public class QuestEnchantedBucket extends Quest
 		{
 			if(world.getBlockState(blockPos).getBlock() == Blocks.CAULDRON)
 			{
-//				world.setBlockState(blockPos, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3));
 				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.FillCauldron(
 						bucket, player, world, blockPos)))
 				{
@@ -215,19 +213,35 @@ public class QuestEnchantedBucket extends Quest
 			}
 		}
 		blockPos = blockPos.offset(event.getFace());
-//		world.setBlockState(blockPos, bucket.getFluidInBucket().getBlock().getDefaultState());
 		if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.SpawnLiquid(
 				bucket, player, world, blockPos)))
 		{
-			world.setBlockState(blockPos, bucket.getFluidInBucket().getBlock().getDefaultState());
+			IBlockState fluidState = bucket.getFluidInBucket().getBlock().getDefaultState();
+			if(!MinecraftForge.EVENT_BUS.post(new CreateFluidSourceEvent(world, blockPos, fluidState)))
+			{
+				world.setBlockState(blockPos, fluidState);
+			}
 		}
 	}
-
-	// Shoot
+	
 	@SubscribeEvent
-	public void shootLiquid(RightClickItem event) // onItemRightClick
+	public void shootLiquid(RightClickItem event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
+		World world = event.getWorld();
+		shootLiquid(player, world);
+	}
+	
+	@SubscribeEvent
+	public void spawnLiquid(RightClickBlock event)
+	{
+		EntityPlayer player = event.getEntityPlayer();
+		World world = event.getWorld();
+		shootLiquid(player, world);
+	}
+	
+	public void shootLiquid(EntityPlayer player, World world)
+	{
 		ItemStack stackRightHand = player.getHeldItemMainhand();
 		if(ItemStackHelper.isNullStack(stackRightHand))
 		{
@@ -253,7 +267,7 @@ public class QuestEnchantedBucket extends Quest
 					String stackFluid = stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
 					if(bucketFluid.equals(stackFluid))
 					{
-						onItemRightClick(event, bucket);
+						onItemRightClick(player, world, bucket);
 						return;
 					}
 				}
@@ -262,13 +276,8 @@ public class QuestEnchantedBucket extends Quest
 	}
 
 	// Shoot
-	public void onItemRightClick(RightClickItem event, IEnchantedBucket bucket) 
+	public void onItemRightClick(EntityPlayer player, World world, IEnchantedBucket bucket) 
 	{
-		EntityPlayer player = event.getEntityPlayer();
-		World world = event.getWorld();
-		BlockPos blockPos = event.getPos();
-		ItemStack stack = player.getHeldItemMainhand();
-		EnumHand hand = EnumHand.MAIN_HAND;
 		if(!world.isRemote)
 		{
 			RayTraceResult rayTrace = EntityHelper.rayTrace(world, player, false);
@@ -281,13 +290,17 @@ public class QuestEnchantedBucket extends Quest
 				{
 					return;
 				}
-//				world.setBlockState(hittedBlock, fluidBlock.getDefaultState());
-//				world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
+				IBlockState fluidState = fluidBlock.getDefaultState();
 				if(!MinecraftForge.EVENT_BUS.post(new EventEnchantedBucket.SpawnLiquid(
 						bucket, player, world, hittedBlock)))
 				{
-					world.setBlockState(hittedBlock, fluidBlock.getDefaultState());
-					world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
+					ItemStack bucketStack = player.getHeldItemMainhand().copy();
+					if(!MinecraftForge.EVENT_BUS.post(new CreateFluidSourceEvent(world, hittedBlock, fluidState)))
+					{
+						world.setBlockState(hittedBlock, fluidState);
+						world.updateBlockTick(hittedBlock, fluidBlock, 1000, 1);
+					}
+					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, bucketStack);
 				}
 			}
 		}

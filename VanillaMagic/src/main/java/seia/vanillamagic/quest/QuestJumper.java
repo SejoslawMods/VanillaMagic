@@ -94,11 +94,11 @@ public class QuestJumper extends Quest
 				{
 					return;
 				}
-				if(player.dimension == dimId) // Teleportation occurres in the same Dimension
+				if(player.dimension == dimId) // Teleport occurres in the same Dimension
 				{
-					player.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
+					TeleportHelper.teleportEntity(player, teleportPos);
 				}
-				else // Teleportation to another Dimension
+				else // Teleport to another Dimension
 				{
 					if(player instanceof EntityPlayerMP)
 					{

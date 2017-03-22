@@ -64,6 +64,10 @@ public class TextHelper
 	
 	public static String constructPositionString(World world, BlockPos pos)
 	{
+		if(world == null || pos == null)
+		{
+			return "";
+		}
 		return "Dim=" + WorldHelper.getDimensionID(world) + 
 				", X=" + pos.getX() + 
 				", Y=" + pos.getY() +
