@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.api.VanillaMagicAPI;
 import seia.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
+import seia.vanillamagic.command.VanillaMagicCommands;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.config.VMConfigAchievements;
 import seia.vanillamagic.creativetab.VanillaMagicCreativeTab;
@@ -94,6 +95,7 @@ public class VanillaMagic
 			QuestHandler.addAchievement(QuestList.get(i).getAchievement());
 		}
 		LOGGER.log(Level.INFO, "Registered achievements: " + QuestHandler.getAchievements().size());
+		VanillaMagicCommands.init(event);
 		VanillaMagicIntegration.init();
 	}
 	

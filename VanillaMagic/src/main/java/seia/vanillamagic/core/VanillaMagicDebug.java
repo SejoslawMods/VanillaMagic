@@ -26,7 +26,6 @@ import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.ListHelper;
 
 public class VanillaMagicDebug 
 {
@@ -50,28 +49,33 @@ public class VanillaMagicDebug
 		EntityPlayer player = event.getEntityPlayer();
 		if(ItemStackHelper.checkItemsInHands(player, DEBUG_OFF_HAND_ITEMSTACK, DEBUG_MAIN_HAND_ITEMSTACK))
 		{
-			// Handle all Quests
-			for(IQuest quest : QuestList.getQuests())
+			activate(player);
+		}
+	}
+	
+	public static void activate(EntityPlayer player)
+	{
+		// Handle all Quests
+		for(IQuest quest : QuestList.getQuests())
+		{
+			Achievement toAchieve = quest.getAchievement();
+			player.addStat(toAchieve, 1);
+		}
+		// Handle all Basic Achievements
+		for(Achievement a : AchievementList.ACHIEVEMENTS)
+		{
+			player.addStat(a, 1);
+		}
+		// Handle all other achievements
+		Set<AchievementPage> pages = AchievementPage.getAchievementPages();
+		for(AchievementPage page : pages)
+		{
+			List<Achievement> achievements = page.getAchievements();
+			for(Achievement achievement : achievements)
 			{
-				Achievement toAchieve = quest.getAchievement();
-				player.addStat(toAchieve, 1);
-			}
-			// Handle all Basic Achievements
-			for(Achievement a : AchievementList.ACHIEVEMENTS)
-			{
-				player.addStat(a, 1);
-			}
-			// Handle all other achievements
-			Set<AchievementPage> pages = AchievementPage.getAchievementPages();
-			for(AchievementPage page : pages)
-			{
-				List<Achievement> achievements = page.getAchievements();
-				for(Achievement achievement : achievements)
+				if(!player.hasAchievement(achievement))
 				{
-					if(!player.hasAchievement(achievement))
-					{
-						player.addStat(achievement, 1);
-					}
+					player.addStat(achievement, 1);
 				}
 			}
 		}

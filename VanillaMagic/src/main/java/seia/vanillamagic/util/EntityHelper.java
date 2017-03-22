@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -15,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -22,6 +24,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
 
 public class EntityHelper 
@@ -241,5 +244,39 @@ public class EntityHelper
 		double d3 = 1000.0D;
 		Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
 		return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+	}
+	
+	@Nullable
+	public static EntityPlayerMP getEntityPlayerMPFromSP(MinecraftServer server, EntityPlayerSP playerSP)
+	{
+		if(server == null || playerSP == null)
+		{
+			return null;
+		}
+		for(WorldServer world : server.worlds)
+		{
+			return getEntityPlayerMPFromSP(world, playerSP);
+		}
+		return null;
+	}
+	
+	@Nullable
+	public static EntityPlayerMP getEntityPlayerMPFromSP(WorldServer world, EntityPlayerSP playerSP)
+	{
+		if(world == null || playerSP == null)
+		{
+			return null;
+		}
+		for(EntityPlayer player : world.playerEntities)
+		{
+			if(player.getName().equals(playerSP.getName()))
+			{
+				if(player instanceof EntityPlayerMP)
+				{
+					return (EntityPlayerMP) player;
+				}
+			}
+		}
+		return null;
 	}
 }
