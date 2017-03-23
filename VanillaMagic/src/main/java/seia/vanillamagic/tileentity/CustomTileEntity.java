@@ -35,8 +35,8 @@ public abstract class CustomTileEntity extends CustomTileEntityBase
 	}
 	
 	public void deserializeNBT(NBTTagCompound tag)
-    {
-    }
+	{
+	}
 	
 	/**
 	 * Try to override {@link #serializeNBT()} instead of this method.
