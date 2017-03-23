@@ -124,7 +124,7 @@ public class DoSomethingWhenMyUpgradeIsRegistered
 	{
 		IQuarryUpgrade myUpgrade = QuarryUpgradeAPI.getUpgradeFromBlock(MyBlocks.MY_BLOCK); // Get upgrade for Your block.
 		IQuarryUpgrade eventUpgrade = event.getUpgrade(); // Get upgrade from event
-		if(QuarryUpgradeAPI.isTheSameUpgrade(powerUpgrade, eventUpgrade)) // Check if Quarry is adding my upgrade.
+		if(QuarryUpgradeAPI.isTheSameUpgrade(myUpgrade, eventUpgrade)) // Check if Quarry is adding my upgrade.
 		{
 			// If it reached here it means that this is Your upgrade and here should be stuff which should happen when Your upgrade is added.
 			System.out.println("My upgrade was added");
