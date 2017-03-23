@@ -14,9 +14,10 @@ import net.minecraft.world.IBlockAccess;
  * <br>
  * To create a working Quarry upgrade You must: <br>
  * 1 - Create a class which implements this interface. <br>
- * 2 - Register Your class in QuarryUpgradeRegistry using QuarryUpgradeAPI.addUpgrade(YourClass.class); <br>
+ * 2 - Register (in FMLInitializationEvent phase) Your class using QuarryUpgradeAPI.addUpgrade(YourClass.class); <br>
  * 3 - Place a block which You declared in getBlock() method next to the Quarry. <br>
- * If You want to check if Quarry can see Your upgrade, right-click Quarry with Clock and look at "Upgrades" section.
+ * If You want to check if Quarry can see Your upgrade, right-click Quarry with Clock and look at "Upgrades" section. <br>
+ * Scroll down for an example.
  */
 public interface IQuarryUpgrade
 {
@@ -60,3 +61,76 @@ public interface IQuarryUpgrade
 		return null;
 	}
 }
+/*
+
+=============================================================================
+For instance:
+=============================================================================
+
+@Mod(...)
+public class MyMod
+{
+	...
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		...
+		MinecraftForge.EVENT_BUS.register(new DoSomethingWhenMyUpgradeIsRegistered()); // Register Your Event connected with Your upgrade
+		...
+	}
+	
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		...
+		try 
+		{
+			...
+			QuarryUpgradeAPI.addUpgrade(MyNewUpgrade.class); // Register Your new Upgrade
+			...
+		} 
+		// This Exception will be thrown if this upgrade is already registered OR other upgrade with the same block is already registered.
+		catch(MappingExistsException e)
+		{
+			e.printStackTrace();
+		}
+		...
+	}
+	...
+}
+=============================================================================
+
+public class MyNewUpgrade implements IQuarryUpgrade
+{
+	...
+	public String getUpgradeName() 
+	{
+		return "My New Upgrade Full Name";
+	}
+	
+	public Block getBlock() 
+	{
+		return MyBlocks.MY_BLOCK; // This should be an block used for Your upgrade. For instance: Blocks.DIRT.
+	}
+	...
+}
+=============================================================================
+
+public class DoSomethingWhenMyUpgradeIsRegistered
+{
+	...
+	@SubscribeEvent
+	public void addQuarryTileBattery(EventQuarry.AddUpgrade event) // Event which is fired when Quarry check block if it is an upgrade
+	{
+		IQuarryUpgrade myUpgrade = QuarryUpgradeAPI.getUpgradeFromBlock(MyBlocks.MY_BLOCK); // Get upgrade for Your block.
+		IQuarryUpgrade eventUpgrade = event.getUpgrade(); // Get upgrade from event
+		if(QuarryUpgradeAPI.isTheSameUpgrade(powerUpgrade, eventUpgrade)) // Check if Quarry is adding my upgrade.
+		{
+			// If it reached here it means that this is Your upgrade and here should be stuff which should happen when Your upgrade is added.
+			System.out.println("My upgrade was added");
+		}
+	}
+	...
+}
+
+ */

@@ -15,11 +15,12 @@ public class QuarryUpgradeAPI
 	}
 	
 	/**
-	 * Main method to register new IQuarryUpgrade. <br>
-	 * Returns TRUE if the upgrade was successfully registered.
+	 * Main method to register new IQuarryUpgrade.
 	 * 
 	 * @throws MappingExistsException this {@link Exception} will be thrown if there is already registered upgrade with this Block 
 	 * (solve: change this Upgrade's Block in "getBlock" method)
+	 * 
+	 * @return Returns TRUE if the upgrade was successfully registered.
 	 */
 	public static boolean addUpgrade(Class<? extends IQuarryUpgrade> quarryUpgradeClass) 
 			throws MappingExistsException
