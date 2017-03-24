@@ -26,7 +26,7 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 		double spawnLightningBoltZ = 0;
 		if(result.typeOfHit == Type.BLOCK)
 		{
-			BlockPos blockPos = result.getBlockPos();
+			BlockPos blockPos = result.getBlockPos().offset(result.sideHit);
 			spawnLightningBoltX = blockPos.getX();
 			spawnLightningBoltY = blockPos.getY();
 			spawnLightningBoltZ = blockPos.getZ();
@@ -51,7 +51,7 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 		// Lightning Bolt spawning
 		EntityLightningBolt entityLightningBolt = new EntityLightningBolt(world, 
 				spawnLightningBoltX, spawnLightningBoltY, spawnLightningBoltZ, false);
-		this.world.spawnEntity(entityLightningBolt);
+		this.world.addWeatherEffect(entityLightningBolt);
 		this.setDead();
 	}
 	

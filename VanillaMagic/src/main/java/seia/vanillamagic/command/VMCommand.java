@@ -5,7 +5,6 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import seia.vanillamagic.command.commands.VMCommandGetAllAchievements;
-import seia.vanillamagic.command.commands.VMCommandTeleport;
 
 public class VMCommand extends CommandBase
 {
@@ -27,10 +26,6 @@ public class VMCommand extends CommandBase
 			if(args[0].equals(VMCommandGetAllAchievements.COMMAND_NAME))
 			{
 				VMCommandGetAllAchievements.execute(server, sender, args);
-			}
-			else if(args[0].equals(VMCommandTeleport.COMMAND_NAME))
-			{
-				VMCommandTeleport.execute(server, sender, args);
 			}
 		}
 	}
