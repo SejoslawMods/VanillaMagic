@@ -36,7 +36,7 @@ public class MobSpawnerRegistry
 	{
 	}
 	
-	public static void init()
+	public static void postInit()
 	{
 		VanillaMagic.LOGGER.log(Level.INFO, "Started Mob Spawner Registry...");
 		for(EntityEntry ee : ForgeRegistries.ENTITIES)

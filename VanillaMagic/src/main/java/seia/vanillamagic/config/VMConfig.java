@@ -37,6 +37,7 @@ public class VMConfig
 	public static int motherNatureCrystalRange = 10;
 	public static int itemMagnetRange = 6;
 	public static int itemMagnetMaxPulledItems = 200;
+	public static boolean itemCanAutoplant = true;
 	
 	// Spell
 	private static final String _categorySpell = "Spell";
@@ -199,6 +200,11 @@ public class VMConfig
 				1, 
 				Integer.MAX_VALUE, 
 				"The maximum number of items that Item Magnet can pull at once.");
+		itemCanAutoplant = _config.getBoolean(
+				"itemCanAutoplant", 
+				_categoryItem, 
+				itemCanAutoplant, 
+				"If autoplanting items like Sapling, etc should be enabled.");
 		
 		// Spell
 		_config.addCustomCategoryComment(_categorySpell, "Options connected with Vanilla Magic Spells.");

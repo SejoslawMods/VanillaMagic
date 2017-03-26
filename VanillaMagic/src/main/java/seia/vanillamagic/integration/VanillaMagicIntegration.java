@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.core.VanillaMagic;
+import seia.vanillamagic.integration.internal.IntegrationAutoplantEntityItem;
+import seia.vanillamagic.integration.internal.IntegrationNewVanillaCrafting;
 
 /**
  * Integration is always done at the end of each phase (PreInit, Init, PostInit).
@@ -28,7 +30,6 @@ public class VanillaMagicIntegration
 		INTEGRATIONS.add(new IntegrationVersionChecker());
 		INTEGRATIONS.add(new IntegrationBetterAchievements());
 		INTEGRATIONS.add(new IntegrationWTFExpedition());
-		INTEGRATIONS.add(new IntegrationNewVanillaCrafting());
 		
 		INTEGRATIONS.add(new IntegrationFilledOres());
 		INTEGRATIONS.add(new IntegrationSuperOres());
@@ -36,6 +37,13 @@ public class VanillaMagicIntegration
 		INTEGRATIONS.add(new IntegrationNetherMetals());
 		INTEGRATIONS.add(new IntegrationEndMetals());
 		INTEGRATIONS.add(new IntegrationDenseMetals());
+		
+		/**
+		 * VM internal integrations
+		 * Use to add new features to VM without Quest
+		 */
+		INTEGRATIONS.add(new IntegrationNewVanillaCrafting());
+		INTEGRATIONS.add(new IntegrationAutoplantEntityItem());
 	}
 	
 	public static void preInit()
