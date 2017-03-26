@@ -1,4 +1,4 @@
-package seia.vanillamagic.creativetab;
+package seia.vanillamagic.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;

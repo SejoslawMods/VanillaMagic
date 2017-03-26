@@ -17,7 +17,6 @@ import seia.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
 import seia.vanillamagic.command.VanillaMagicCommands;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.config.VMConfigAchievements;
-import seia.vanillamagic.creativetab.VanillaMagicCreativeTab;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.handler.PlayerEventHandler;
