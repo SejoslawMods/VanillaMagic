@@ -10,13 +10,12 @@ public class IntegrationDenseMetals implements IIntegration
 		return "Dense Metals";
 	}
 	
-	public boolean postInit() throws Exception
+	public void postInit() throws Exception
 	{
 		Class<?> mainClass = Class.forName("com.mmd.densemetals.Main");
 		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject("com.mmd.densemetals.blocks.ModBlocks", 
 				"denseredstoneOre", true));
 		CustomOre.DIAMOND.add((Block) ClassUtils.getFieldObject("com.mmd.densemetals.blocks.ModBlocks", 
 				"densediamondOre", true));
-		return true;
 	}
 }

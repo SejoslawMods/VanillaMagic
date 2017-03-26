@@ -12,7 +12,7 @@ public class IntegrationFilledOres implements IIntegration
 		return "Filled Ores";
 	}
 	
-	public boolean postInit() throws Exception
+	public void postInit() throws Exception
 	{
 		// Check if we have installed Filled Ores
 		Class<?> clazzFilledOres = Class.forName("mod.mcreator.FilledOres");
@@ -22,7 +22,5 @@ public class IntegrationFilledOres implements IIntegration
 		CustomOre.REDSTONE.add((Block) fieldRedstoneOre.get(null));
 		Field fieldDiamondOre = ClassUtils.getField("mod.mcreator.mcreator_fdiamondD", "block");
 		CustomOre.DIAMOND.add((Block) fieldDiamondOre.get(null));
-		
-		return true;
 	}
 }

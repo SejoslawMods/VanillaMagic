@@ -14,13 +14,12 @@ public class IntegrationBetterAchievements implements IIntegration
 		return "BetterAchievements";
 	}
 	
-	public boolean init() throws Exception
+	public void init() throws Exception
 	{
 		Method sendIconForPage = ClassUtils.getMethod("betterachievements.api.util.IMCHelper", 
 				"sendIconForPage", 
 				new Class[]{String.class, ItemStack.class});
 		sendIconForPage.invoke(null, 
 				new Object[]{QuestHandler.PAGE_NAME, new ItemStack(Items.CAULDRON)});
-		return true;
 	}
 }

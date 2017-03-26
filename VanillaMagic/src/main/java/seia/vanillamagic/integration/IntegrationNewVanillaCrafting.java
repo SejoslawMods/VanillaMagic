@@ -11,10 +11,8 @@ public class IntegrationNewVanillaCrafting implements IIntegration
 		return "VanillaMagic New Vanilla Crafting";
 	}
 	
-	public boolean postInit()
+	public void postInit()
 	{
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.BOOK), Items.ENCHANTED_BOOK);
-		
-		return true;
 	}
 }

@@ -9,18 +9,15 @@ public interface IIntegration
 {
 	String getModName();
 	
-	default boolean preInit() throws Exception
+	default void preInit() throws Exception
 	{
-		return false;
 	}
 	
-	default boolean init() throws Exception
+	default void init() throws Exception
 	{
-		return false;
 	}
 	
-	default boolean postInit() throws Exception
+	default void postInit() throws Exception
 	{
-		return false;
 	}
 }

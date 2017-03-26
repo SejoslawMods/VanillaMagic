@@ -10,7 +10,7 @@ public class IntegrationWTFExpedition implements IIntegration
 		return "WTF-Expedition";
 	}
 	
-	public boolean postInit() throws Exception
+	public void postInit() throws Exception
 	{
 		// Check if we have installed right mod
 		Class<?> clazzCore = Class.forName("wtf.core.Core");
@@ -22,7 +22,5 @@ public class IntegrationWTFExpedition implements IIntegration
 		clazz = "wtf.blocks.redstone.RedstoneStalactite";
 		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_on", true));
 		CustomOre.REDSTONE.add((Block) ClassUtils.getFieldObject(clazz, "denseRedstone_off", true));
-		
-		return true;
 	}
 }
