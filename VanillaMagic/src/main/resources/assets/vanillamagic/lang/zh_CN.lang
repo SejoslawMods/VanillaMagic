@@ -31,6 +31,14 @@ itemGroup.vm=原生魔法
 
 
 ############################
+#Commands
+############################
+
+command.vm.usage=usage
+
+
+
+############################
 #Wand Names
 ############################
 
@@ -72,6 +80,9 @@ achievement.spellLargeFireball.desc=右持烈焰魔杖，左持恶魂之泪，�
 
 achievement.spellTeleport=空间裂隙行者
 achievement.spellTeleport.desc=右持烈焰魔杖，左持岩浆膏，右键你想前往之地。目光可视之处，皆可瞬息抵达。[施法消耗：岩浆膏×1]
+
+achievement.jumper=空间跳跃
+achievement.jumper.desc=左手持书，右手持指南针，Shift右击方块来存储空间跳跃目的地。 左持指南针，右持跳跃之书，Shift右击空气传送。
 
 achievement.spellTeleportToNether=地狱裂隙行者
 achievement.spellTeleportToNether.desc=右持烈焰魔杖，左持地狱疣，右键空气。主世界和地狱之间再无屏障！[施法消耗：地狱疣×2]
@@ -209,6 +220,9 @@ achievement.spellSummonSilverfish.desc=右持下界之星，左持石砖，右�
 achievement.spellSummonWither=献祭誓约-凋零
 achievement.spellSummonWither.desc=右持下界之星，左持绿宝石块，右键方块。[祭品消耗：绿宝石×1]
 
+achievement.shootWitherSkull=释放凋零头颅
+achievement.shootWitherSkull.desc=右手持下界之星左手拿凋零头颅，右击空气来发射一个凋零头。[消耗：凋零头颅×1]
+
 achievement.spellSummonGiant=献祭誓约-巨人
 achievement.spellSummonGiant.desc=右持下界之星，左持盔甲架，右键方块。[祭品消耗：盔甲架×8]
 
@@ -220,7 +234,7 @@ achievement.spellSummonSpiderJockey.desc=右持下界之星，左持蜘蛛眼，
 achievement.summonHordeLvl1=生成一级尸潮 (前置:献祭誓约-巨人)
 achievement.summonHordeLvl1.desc=右持下界之星，左持末影水晶，右键方块。[消耗：末影水晶×1]
 
-achievement.summonHordeLvl10=生成10级尸潮 (作大死!)
+achievement.summonHordeLvl10=生成10级尸潮 (作大死)
 achievement.summonHordeLvl10.desc=右持下界之星，左持末影水晶，右键方块。[消耗：末影水晶×2]
 
 
@@ -238,7 +252,7 @@ achievement.mineObsidian=法师的建筑素材
 achievement.mineObsidian.desc=挖一个黑曜石。
 
 achievement.mobSpawnerDropBlock=Mob Spawner Drop Block
-achievement.mobSpawnerDropBlock.desc=Break Mob Spawner. It will drop Block and Book with Entity data from Spawner. Right-click with this Book in right hand on Spawner to set Spawner to the Entity from Book.
+achievement.mobSpawnerDropBlock.desc=破坏一个刷怪笼，它会掉落一个方块和一本数据书。右持数据书对刷怪笼使用可以改变为特定的刷怪笼。
 
 achievement.craftEnchantingTable=法师的炼金工坊
 achievement.craftEnchantingTable.desc=制作附魔台。
