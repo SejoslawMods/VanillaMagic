@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -13,13 +14,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.event.EventMoveBlock;
 import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.api.quest.QuestMoveBlockRegistry;
 import seia.vanillamagic.config.VMConfig;
@@ -100,10 +104,11 @@ public class QuestMoveBlock extends Quest
 								clickedTimes = 0;
 								return;
 							}
-//							handleSave(world, player, wantedBlockPos, event.getFace());
-//							clickedTimes++;
-							if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Save(
-									world, player, wantedBlockPos, event.getFace())))
+//							Replaced by BreakEvent
+//							if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Save(
+//									world, player, wantedBlockPos, event.getFace())))
+							if(!MinecraftForge.EVENT_BUS.post(new BreakEvent(
+									world, wantedBlockPos, world.getBlockState(wantedBlockPos), player)))
 							{
 								handleSave(world, player, wantedBlockPos, event.getFace());
 								clickedTimes++;
@@ -124,14 +129,13 @@ public class QuestMoveBlock extends Quest
 						clickedTimes = 0;
 						return;
 					}
-//					handleLoad(world, player, wantedBlockPos, event.getFace());
-//					clickedTimes++;
-					if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Load(
-							world, player, wantedBlockPos, event.getFace())))
-					{
+//					Replaced by PlaceEvent in handleLoad method. See handleLoad method below.
+//					if(!MinecraftForge.EVENT_BUS.post(new EventMoveBlock.Load(
+//							world, player, wantedBlockPos, event.getFace())))
+//					{
 						handleLoad(world, player, wantedBlockPos, event.getFace());
 						clickedTimes++;
-					}
+//					}
 				}
 			}
 		}
@@ -205,6 +209,15 @@ public class QuestMoveBlock extends Quest
 			Block readdedBlock = Block.REGISTRY.getObjectById(questTag.getInteger(NBTHelper.NBT_BLOCK_ID));
 			if(readdedBlock != null)
 			{
+				if(MinecraftForge.EVENT_BUS.post(new PlaceEvent(
+						// Is it a snapshot of a Block which should be placed from hand (in this case Book) ???
+						new BlockSnapshot(world, wantedBlockPos, world.getBlockState(wantedBlockPos)),
+						world.getBlockState(wantedBlockPos), player, EnumHand.OFF_HAND
+						)))
+				{
+					// Try to post new PlaceEvent but if it is canceled, return.
+					return;
+				}
 				world.setBlockState(wantedBlockPos, readdedBlock.getStateFromMeta(questTag.getInteger(NBTHelper.NBT_BLOCK_META)));
 				//world.notifyBlockOfStateChange(wantedBlockPos, readdedBlock);
 				world.notifyNeighborsOfStateChange(wantedBlockPos, readdedBlock, true); // TODO: ???

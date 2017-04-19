@@ -7,7 +7,9 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.core.VanillaMagic;
+import seia.vanillamagic.integration.internal.IntegrationAdditionalToolTips;
 import seia.vanillamagic.integration.internal.IntegrationAutoplantEntityItem;
+import seia.vanillamagic.integration.internal.IntegrationDeathPoint;
 import seia.vanillamagic.integration.internal.IntegrationNewVanillaCrafting;
 
 /**
@@ -44,6 +46,8 @@ public class VanillaMagicIntegration
 		 */
 		INTEGRATIONS.add(new IntegrationNewVanillaCrafting());
 		INTEGRATIONS.add(new IntegrationAutoplantEntityItem());
+		INTEGRATIONS.add(new IntegrationAdditionalToolTips());
+		INTEGRATIONS.add(new IntegrationDeathPoint());
 	}
 	
 	public static void preInit()
