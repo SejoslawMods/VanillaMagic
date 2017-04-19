@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.integration.IIntegration;
 
 /**
@@ -39,6 +40,8 @@ public class IntegrationAdditionalToolTips implements IIntegration
 	@SideOnly(Side.CLIENT)
 	public void registerTweak(ItemTooltipEvent event)
 	{
+		if(!VMConfig.showAdditionalTooltips) return;
+		
 		if(event.getItemStack() == null) return;
 
 		ItemStack stack = event.getItemStack();

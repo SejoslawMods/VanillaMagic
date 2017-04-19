@@ -61,6 +61,11 @@ public class VMConfig
 	public static int vexNumber = 3;
 	public static boolean vexHasLimitedLife = true;
 	
+	// Integration
+	private static final String _categoryIntegration = "Integration";
+	public static boolean showAdditionalTooltips = true;
+	public static boolean showLastDeathPoint = true;
+	
 	private VMConfig()
 	{
 	}
@@ -284,6 +289,19 @@ public class VMConfig
 				_categoryEvokerCrystal, 
 				vexHasLimitedLife, 
 				"Should spawned Vex have limited life.");
+		
+		// Integration
+		_config.addCustomCategoryComment(_categoryIntegration, "Options connected with Integrations with VM");
+		showAdditionalTooltips = _config.getBoolean(
+				"showAdditionalTooltips", 
+				_categoryIntegration, 
+				showAdditionalTooltips, 
+				"Additional tooltips (weapons durability, food saturation, etc.)");
+		showLastDeathPoint = _config.getBoolean(
+				"showLastDeathPoint", 
+				_categoryIntegration, 
+				showAdditionalTooltips, 
+				"Death info (last death position)");
 		
 		_config.save();
 	}
