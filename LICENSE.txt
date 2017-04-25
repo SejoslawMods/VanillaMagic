@@ -3,7 +3,7 @@ License page: http://www.zlib.net/zlib_license.html
 
 version 1.2.11, January 15th, 2017
 
-  Copyright (C) 1995-2017 Jean-loup Gailly and Mark Adler
+  Copyright (C) 2010-2017 Krzysztof Dobrzyński
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -21,5 +21,5 @@ version 1.2.11, January 15th, 2017
      misrepresented as being the original software.
   3. This notice may not be removed or altered from any source distribution.
 
-  Jean-loup Gailly        Mark Adler
-  jloup@gzip.org          madler@alumni.caltech.edu
+  Krzysztof Dobrzyński
+  k.dobrzynski94@gmail.com
