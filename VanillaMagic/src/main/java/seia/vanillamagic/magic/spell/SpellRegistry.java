@@ -174,6 +174,16 @@ public class SpellRegistry
 		return _SPELLS;
 	}
 	
+	public static List<ISpell> getSpellPassive()
+	{
+		return _SPELLS_PASSIVE;
+	}
+	
+	public static List<ISpell> getSpellHostile()
+	{
+		return _SPELLS_HOSTILE;
+	}
+	
 	public static boolean castSpellById(int spellID, EntityPlayer caster, BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
 		ISpell spell = getSpellById(spellID);

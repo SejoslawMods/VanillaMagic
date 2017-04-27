@@ -48,7 +48,16 @@ public class WandRegistry
 	}
 	
 	/**
+	 * @return Returns the list which contains all Wands.
+	 */
+	public static List<IWand> getWands()
+	{
+		return _WANDS;
+	}
+	
+	/**
 	 * @param player - player we are checking
+	 * 
 	 * @return - the Wand which player has got in main hand - null if the item is not a Wand
 	 */
 	@Nullable

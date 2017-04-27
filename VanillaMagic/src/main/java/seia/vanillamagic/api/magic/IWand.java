@@ -24,6 +24,7 @@ public interface IWand
 	
 	/**
 	 * @param wandID Wand ID
+	 * 
 	 * @return Returns TRUE if the Wand with given ID can do the work.
 	 */
 	boolean canWandDoWork(int wandID);
