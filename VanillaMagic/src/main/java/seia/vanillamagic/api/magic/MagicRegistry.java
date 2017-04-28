@@ -5,14 +5,21 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import seia.vanillamagic.api.VanillaMagicAPI;
 
 /**
  * Registry holding data about all Spells and Wands. <br>
  * <br>
  * To check if 2 Spell are Equal do: spell1.getSpellID() == spell2.getSpellID(); <br>
  * To check if 2 Wand are Equal do: MagicRegistry.areWandsEqual(wand1, wand2); OR compare wand1 and wand2 ItemStacks<br>
+ * <br>
+ * NOTE !!! <br>
+ * Be careful with adding new Spell or Wand. <br>
+ * Make sure that You use DIFFERENT Item in OffHand than VanillaMagic use for it's Spells.
  */
 public class MagicRegistry
 {
@@ -24,6 +31,10 @@ public class MagicRegistry
 	 * WandRegistry.class
 	 */
 	public static final String WAND_REGISTRY = "seia.vanillamagic.magic.wand.WandRegistry";
+	/**
+	 * EvokerSpellRegistry.class
+	 */
+	public static final String EVOKER_REGISTRY = "seia.vanillamagic.item.evokercrystal.EvokerSpellRegistry";
 	
 	private MagicRegistry()
 	{
@@ -46,6 +57,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Spells List.");
 			return null;
 		}
 	}
@@ -64,6 +76,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Passive Mobs Spells List.");
 			return null;
 		}
 	}
@@ -82,6 +95,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Hostile Mobs Spells List.");
 			return null;
 		}
 	}
@@ -102,6 +116,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Spell by it's ID.");
 			return null;
 		}
 	}
@@ -122,6 +137,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Wand for Player - MainHand.");
 			return null;
 		}
 	}
@@ -142,6 +158,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Wand for Player - OffHand.");
 			return null;
 		}
 	}
@@ -162,6 +179,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Wand by ItemStack.");
 			return null;
 		}
 	}
@@ -182,6 +200,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get if Wands are equal.");
 			return false;
 		}
 	}
@@ -202,6 +221,7 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get if Wand is right for Spell.");
 			return false;
 		}
 	}
@@ -219,6 +239,25 @@ public class MagicRegistry
 		}
 		catch(Exception e)
 		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Wands List.");
+			return null;
+		}
+	}
+	
+	/**
+	 * @return Returns List which contains all currently registered Evoker Spells.
+	 */
+	public static List<IEvokerSpell> getEvokerSpells()
+	{
+		try
+		{
+			Class<?> evokerRegistryClass = Class.forName(EVOKER_REGISTRY);
+			Method m = evokerRegistryClass.getMethod("getEvokerSpells");
+			return (List<IEvokerSpell>) m.invoke(null);
+		}
+		catch(Exception e)
+		{
+			VanillaMagicAPI.LOGGER.log(Level.ERROR, "Couldn't get Evoker Spells List.");
 			return null;
 		}
 	}

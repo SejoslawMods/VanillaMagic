@@ -12,6 +12,11 @@ import seia.vanillamagic.api.VanillaMagicAPI;
 
 public class ItemUpgradeAPI 
 {
+	/**
+	 * ItemUpgradeRegistry Class
+	 */
+	private static final String REGISTRY_CLASS = "seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry";
+	
 	private ItemUpgradeAPI()
 	{
 	}
@@ -28,7 +33,7 @@ public class ItemUpgradeAPI
 	{
 		try
 		{
-			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
+			Class<?> registryClass = Class.forName(REGISTRY_CLASS);
 			Method method = registryClass.getMethod("addUpgradeMapping", String.class, Class.class, String.class);
 			method.invoke(null, mappingName, clazz, localizedName);
 		}
@@ -49,7 +54,7 @@ public class ItemUpgradeAPI
 	{
 		try
 		{
-			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
+			Class<?> registryClass = Class.forName(REGISTRY_CLASS);
 			Method method = registryClass.getMethod("addItemToMapping", String.class, Item.class, String.class);
 			method.invoke(null, mappingName, item, localizedName);
 		}
@@ -69,7 +74,7 @@ public class ItemUpgradeAPI
 	{
 		try
 		{
-			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
+			Class<?> registryClass = Class.forName(REGISTRY_CLASS);
 			Method method = registryClass.getMethod("addItemMapping", String.class, String.class);
 			method.invoke(null, mappingName, localizedName);
 		}
@@ -90,7 +95,7 @@ public class ItemUpgradeAPI
 	{
 		try
 		{
-			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
+			Class<?> registryClass = Class.forName(REGISTRY_CLASS);
 			Method method = registryClass.getMethod("getResult", ItemStack.class, ItemStack.class);
 			return (ItemStack) method.invoke(null, base, ingredient);
 		}
@@ -106,7 +111,7 @@ public class ItemUpgradeAPI
 	{
 		try
 		{
-			Class<?> registryClass = Class.forName("seia.vanillamagic.item.itemupgrade.ItemUpgradeRegistry");
+			Class<?> registryClass = Class.forName(REGISTRY_CLASS);
 			Method method = registryClass.getMethod("getMappingNameFromItemStack", ItemStack.class);
 			return (String) method.invoke(null, stack);
 		}

@@ -7,6 +7,11 @@ import javax.annotation.Nullable;
  */
 public class QuestAPI 
 {
+	/**
+	 * QuestList Class
+	 */
+	private static final String QUEST_LIST_CLASS = "seia.vanillamagic.quest.QuestList";
+	
 	private QuestAPI()
 	{
 	}
@@ -18,7 +23,7 @@ public class QuestAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.quest.QuestList");
+			Class<?> clazz = Class.forName(QUEST_LIST_CLASS);
 			clazz.getMethod("addQuest", IQuest.class).invoke(null, q);
 		}
 		catch(Exception e)
@@ -36,7 +41,7 @@ public class QuestAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.quest.QuestList");
+			Class<?> clazz = Class.forName(QUEST_LIST_CLASS);
 			return (IQuest) clazz.getMethod("get", String.class).invoke(null, key);
 		}
 		catch(Exception e)
@@ -54,7 +59,7 @@ public class QuestAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.quest.QuestList");
+			Class<?> clazz = Class.forName(QUEST_LIST_CLASS);
 			return (IQuest) clazz.getMethod("get", int.class).invoke(null, index);
 		}
 		catch(Exception e)
@@ -72,7 +77,7 @@ public class QuestAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.quest.QuestList");
+			Class<?> clazz = Class.forName(QUEST_LIST_CLASS);
 			return (int) clazz.getMethod("size").invoke(null);
 		}
 		catch(Exception e)

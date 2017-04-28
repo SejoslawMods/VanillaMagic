@@ -10,6 +10,11 @@ import seia.vanillamagic.api.exception.MappingExistsException;
 
 public class QuarryUpgradeAPI 
 {
+	/**
+	 * QuarryUpgradeRegistry Class
+	 */
+	private static final String REGISTRY_CLASS = "seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry";
+	
 	private QuarryUpgradeAPI()
 	{
 	}
@@ -27,7 +32,7 @@ public class QuarryUpgradeAPI
 	{
 		try 
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Class<?> clazz = Class.forName(REGISTRY_CLASS);
 			Method method = clazz.getMethod("addUpgrade", Class.class);
 			Boolean b = (Boolean) method.invoke(null, quarryUpgradeClass);
 			return b.booleanValue();
@@ -50,7 +55,7 @@ public class QuarryUpgradeAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Class<?> clazz = Class.forName(REGISTRY_CLASS);
 			Method method = clazz.getMethod("isUpgradeBlock", Block.class);
 			Boolean b = (Boolean) method.invoke(null, block);
 			return b.booleanValue();
@@ -67,7 +72,7 @@ public class QuarryUpgradeAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Class<?> clazz = Class.forName(REGISTRY_CLASS);
 			Method method = clazz.getMethod("getUpgradeFromBlock", Block.class);
 			return (IQuarryUpgrade) method.invoke(null, block);
 		}
@@ -86,7 +91,7 @@ public class QuarryUpgradeAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Class<?> clazz = Class.forName(REGISTRY_CLASS);
 			Method method = clazz.getMethod("getReguiredUpgrade", IQuarryUpgrade.class);
 			return (IQuarryUpgrade) method.invoke(null, iqu);
 		}
@@ -104,7 +109,7 @@ public class QuarryUpgradeAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Class<?> clazz = Class.forName(REGISTRY_CLASS);
 			Method method = clazz.getMethod("isTheSameUpgrade", IQuarryUpgrade.class, IQuarryUpgrade.class);
 			Boolean b = (Boolean) method.invoke(null, iqu1, iqu2);
 			return b.booleanValue();
@@ -124,7 +129,7 @@ public class QuarryUpgradeAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry");
+			Class<?> clazz = Class.forName(REGISTRY_CLASS);
 			Method method = clazz.getMethod("getUpgrades");
 			return (List<IQuarryUpgrade>) method.invoke(null);
 		}

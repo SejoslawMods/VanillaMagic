@@ -27,8 +27,26 @@ import seia.vanillamagic.api.tileentity.ICustomTileEntity;
  */
 public class CustomTileEntityHandlerAPI 
 {
+	/**
+	 * Handler class
+	 */
+	private static final String HANDLER_CLASS = "seia.vanillamagic.handler.CustomTileEntityHandler";
+	
 	private CustomTileEntityHandlerAPI()
 	{
+	}
+	
+	/**
+	 * This method should be use to register {@link ICustomTileEntity} into the CustomTileEntityHandler.<br>
+	 * For instance VanillaMagic CustomTiles are registered after clicked on block (mainly).
+	 * 
+	 * @param customTileEntity ICustomTileEntity which should be added
+	 * @param world World to which this tile should be added.
+	 * @return TRUE if the tile was added successfully
+	 */
+	public static boolean addCustomTileEntity(ICustomTileEntity customTileEntity, World world)
+	{
+		return addCustomTileEntity(customTileEntity, world.provider.getDimension());
 	}
 	
 	/**
@@ -43,7 +61,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName(HANDLER_CLASS);
 			Method method = clazz.getMethod("addCustomTileEntity", ICustomTileEntity.class, int.class);
 			return (boolean) method.invoke(null, customTileEntity, dimension);
 		}
@@ -68,7 +86,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName(HANDLER_CLASS);
 			Method method = clazz.getMethod("removeCustomTileEntityAtPos", World.class, BlockPos.class);
 			return (boolean) method.invoke(null, world, pos);
 		}
@@ -92,7 +110,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName(HANDLER_CLASS);
 			Method method = clazz.getMethod("removeCustomTileEntityAndSendInfoToPlayer", World.class, BlockPos.class, EntityPlayer.class);
 			method.invoke(null, world, pos);
 		}
@@ -115,7 +133,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName(HANDLER_CLASS);
 			Method method = clazz.getMethod("getCustomTileEntity", BlockPos.class, int.class);
 			return (ICustomTileEntity) method.invoke(null, tilePos, dimension);
 		}
@@ -137,7 +155,7 @@ public class CustomTileEntityHandlerAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.handler.CustomTileEntityHandler");
+			Class<?> clazz = Class.forName(HANDLER_CLASS);
 			Method method = clazz.getMethod("getCustomTileEntity", BlockPos.class, World.class);
 			return (ICustomTileEntity) method.invoke(null, tilePos, world);
 		}

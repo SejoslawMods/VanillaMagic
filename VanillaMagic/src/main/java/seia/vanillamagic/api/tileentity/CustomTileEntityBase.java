@@ -10,6 +10,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 
+/**
+ * Basic implementation of {@link ICustomTileEntity}
+ */
 public abstract class CustomTileEntityBase extends TileEntity implements ICustomTileEntity
 {
 	protected Ticket chunkTicket;

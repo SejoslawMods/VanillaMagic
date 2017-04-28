@@ -32,6 +32,11 @@ public class EvokerSpellRegistry
 		_SPELLS.add(spell);
 	}
 	
+	public static List<IEvokerSpell> getEvokerSpells()
+	{
+		return _SPELLS;
+	}
+	
 	@Nullable
 	public static IEvokerSpell getSpell(int spellID)
 	{

@@ -12,6 +12,11 @@ import seia.vanillamagic.api.VanillaMagicAPI;
  */
 public class VanillaMagicItemsAPI
 {
+	/**
+	 * VM Items Class
+	 */
+	private static final String ITEMS_CLASS = "seia.vanillamagic.item.VanillaMagicItems";
+	
 	private VanillaMagicItemsAPI()
 	{
 	}
@@ -23,7 +28,7 @@ public class VanillaMagicItemsAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.item.VanillaMagicItems");
+			Class<?> clazz = Class.forName(ITEMS_CLASS);
 			Method method = clazz.getMethod("addCustomItem", ICustomItem.class);
 			method.invoke(null, item);
 			VanillaMagicAPI.LOGGER.log(Level.INFO, "Registered CustomItem: " + item.getUniqueNBTName());
@@ -42,7 +47,7 @@ public class VanillaMagicItemsAPI
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.item.VanillaMagicItems");
+			Class<?> clazz = Class.forName(ITEMS_CLASS);
 			Method method = clazz.getMethod("isCustomItem", ItemStack.class, ICustomItem.class);
 			return (boolean) method.invoke(null, checkingStack, customItem);
 		}
