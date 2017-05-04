@@ -11,6 +11,9 @@ import net.minecraft.util.math.RayTraceResult;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.util.explosion.ExplosionHelper;
 
+/**
+ * Class which represents Meteor itself.
+ */
 public class EntityMeteor extends EntityLargeFireball
 {
 	public EntityMeteor(EntityLivingBase castingEntity, 
@@ -53,6 +56,9 @@ public class EntityMeteor extends EntityLargeFireball
 		}
 	}
 	
+	/**
+	 * Register Meteor DataFixer.
+	 */
 	public static void fixData(DataFixer dataFixer)
 	{
 		EntityFireball.registerFixesFireball(dataFixer, "Meteor");

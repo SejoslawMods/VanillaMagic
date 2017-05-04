@@ -6,6 +6,9 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
+/**
+ * Class which holds data for all additional blocks equivalents.
+ */
 public class CustomOre 
 {
 	public static final List<Block> REDSTONE = new ArrayList<Block>();

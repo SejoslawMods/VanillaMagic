@@ -10,6 +10,10 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import seia.vanillamagic.entity.EntitySpell;
 
+/**
+ * Class which represents EntitySpell which will spawn Meteor.
+ * Player shot this Entity and after hitting ground This will spawn EntityMeteor.
+ */
 public class EntitySpellSummonMeteor extends EntitySpell
 {	
 	public EntitySpellSummonMeteor(World world, EntityLivingBase caster, 
@@ -18,6 +22,9 @@ public class EntitySpellSummonMeteor extends EntitySpell
 		super(world, caster, accelX, accelY, accelZ);
 	}
 	
+	/**
+	 * This method is called when this Entity hits something.
+	 */
 	public void onImpact(RayTraceResult result)
 	{
 		double spawnMeteorX = 0;
@@ -48,7 +55,7 @@ public class EntitySpellSummonMeteor extends EntitySpell
 	}
     
 	/**
-	 * Called to update the entity's position/logic.
+	 * Called to update the Entity's position / logic.
 	 */
 	public void onUpdate()
 	{

@@ -12,8 +12,14 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.api.tileentity.CustomTileEntityBase;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 
+/**
+ * Class which defines additional chunks loading and what can load them.
+ */
 public class ChunkLoadingHandler implements OrderedLoadingCallback
 {
+	/**
+	 * Load chunks from given tickets.
+	 */
 	public void ticketsLoaded(List<Ticket> tickets, World world)
 	{
 		for(Ticket ticket : tickets)
@@ -39,6 +45,9 @@ public class ChunkLoadingHandler implements OrderedLoadingCallback
 		}
 	}
 	
+	/**
+	 * Load chunks from given tickets.
+	 */
 	public List<Ticket> ticketsLoaded(List<Ticket> tickets, World world, int maxTicketCount)
 	{
 		List<Ticket> validTickets = new ArrayList<Ticket>();

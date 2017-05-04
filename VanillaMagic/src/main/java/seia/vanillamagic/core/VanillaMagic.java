@@ -35,6 +35,9 @@ import seia.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import seia.vanillamagic.tileentity.TileEntityRegistry;
 import seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry;
 
+/**
+ * Core mod File.
+ */
 @Mod(
 		modid = VanillaMagic.MODID, 
 		version = VanillaMagic.VERSION,
@@ -57,6 +60,9 @@ public class VanillaMagic
 	
 	public static final VanillaMagicCreativeTab CREATIVE_TAB = new VanillaMagicCreativeTab();
 	
+	/**
+	 * PreInitialization stage.
+	 */
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -81,9 +87,12 @@ public class VanillaMagic
 		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
 		WorldHandler.INSTANCE.preInit();
 		ItemUpgradeRegistry.registerEvents();
-		VanillaMagicIntegration.preInit();
+		VanillaMagicIntegration.preInit(); // Integration should be read ALWAYS at the end.
 	}
 	
+	/**
+	 * Initialization stage.
+	 */
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
@@ -93,9 +102,12 @@ public class VanillaMagic
 			QuestHandler.addAchievement(QuestList.get(i).getAchievement());
 		}
 		LOGGER.log(Level.INFO, "Registered achievements: " + QuestHandler.getAchievements().size());
-		VanillaMagicIntegration.init();
+		VanillaMagicIntegration.init(); // Integration should be read ALWAYS at the end.
 	}
 	
+	/**
+	 * PostInitialization stage.
+	 */
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
@@ -107,6 +119,6 @@ public class VanillaMagic
 		VanillaMagicItems.postInit();
 		VanillaMagicIntegration.postInit();
 		LOGGER.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
-		MobSpawnerRegistry.postInit();
+		MobSpawnerRegistry.postInit(); // Integration should be read ALWAYS at the end.
 	}
 }

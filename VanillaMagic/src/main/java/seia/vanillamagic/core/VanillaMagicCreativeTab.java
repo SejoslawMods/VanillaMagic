@@ -12,8 +12,14 @@ import seia.vanillamagic.item.book.BookRegistry;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
 import seia.vanillamagic.util.WorldHelper;
 
+/**
+ * VM Creative Tab
+ */
 public class VanillaMagicCreativeTab extends CreativeTabs
 {
+	/**
+	 * Creative Tab Icon
+	 */
 	private final Block SPAWNER = Blocks.MOB_SPAWNER;
 	
 	public VanillaMagicCreativeTab()
@@ -23,17 +29,26 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 		Blocks.COMMAND_BLOCK.setCreativeTab(this);
 	}
 	
+	/**
+	 * @return Returns CreativeTab Icon.
+	 */
 	@SideOnly(Side.CLIENT)
 	public ItemStack getTabIconItem() 
 	{
 		return new ItemStack(SPAWNER);
 	}
 	
+	/**
+	 * @return Returns if CreativeTab should have search bar.
+	 */
 	public boolean hasSearchBar()
 	{
 		return true;
 	}
 	
+	/**
+	 * Display all VM Custom Items.
+	 */
 	@SideOnly(Side.CLIENT)
 	public void displayAllRelevantItems(NonNullList<ItemStack> list)
 	{

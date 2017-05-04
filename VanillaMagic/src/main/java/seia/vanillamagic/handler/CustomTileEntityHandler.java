@@ -37,11 +37,17 @@ public class CustomTileEntityHandler
 	{
 	}
 	
+	/**
+	 * PostInitialization method to indicate that handler is working.
+	 */
 	public static void postInit()
 	{
 		VanillaMagic.LOGGER.log(Level.INFO, "CustomTileEntityHandler registered");
 	}
 	
+	/**
+	 * @return VM Root directory.
+	 */
 	public static String getRootDir()
 	{
 		return WorldHandler.getVanillaMagicRootDirectory().getAbsolutePath();

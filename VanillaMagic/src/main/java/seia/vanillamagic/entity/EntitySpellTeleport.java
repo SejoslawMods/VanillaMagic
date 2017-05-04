@@ -12,6 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import seia.vanillamagic.api.event.EventTeleportEntity;
 
+/**
+ * Class which defines the Teleport Spell.
+ */
 public class EntitySpellTeleport extends EntitySpell
 {
 	public EntitySpellTeleport(World worldIn, EntityLivingBase caster, 
@@ -20,6 +23,9 @@ public class EntitySpellTeleport extends EntitySpell
 		super(worldIn, caster, accelX, accelY, accelZ);
 	}
 	
+	/**
+	 * Run when Entity collide with something.
+	 */
 	protected void onImpact(RayTraceResult result) 
 	{
 		EntityLivingBase caster = this.castingEntity;
@@ -93,7 +99,7 @@ public class EntitySpellTeleport extends EntitySpell
 	}
 	
 	/**
-	 * Called to update the entity's position/logic.
+	 * Called to update the Entity's position / logic.
 	 */
 	public void onUpdate()
 	{

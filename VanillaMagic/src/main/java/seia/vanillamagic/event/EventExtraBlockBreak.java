@@ -6,6 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
+/**
+ * Event which is fired when Extra blocks need to be broken.
+ * For instance: to cut down tree.
+ */
 public class EventExtraBlockBreak extends Event
 {
 	public final ItemStack itemStack;
@@ -24,6 +28,9 @@ public class EventExtraBlockBreak extends Event
 		this.state = state;
 	}
 	
+	/**
+	 * Method to run the Event statically.
+	 */
 	public static EventExtraBlockBreak fireEvent(ItemStack itemStack, EntityPlayer player, IBlockState state, 
 			int width, int height, int depth, int distance)
 	{

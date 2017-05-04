@@ -20,6 +20,9 @@ import jline.internal.InputStreamReader;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.core.VanillaMagic;
 
+/**
+ * Class which operates on additional VM configuration files.
+ */
 public class VMConfigAchievements 
 {
 	public static final String VM_DIRECTORY = "/VanillaMagic/";
@@ -50,7 +53,10 @@ public class VMConfigAchievements
 		_fileAboutAchievements = unzip(_aboutAchievements, _fileAboutAchievements);
 		readAchievements();
 	}
-
+	
+	/**
+	 * Unzip the specified file from JAR - copy into directory from inside of JAR file.
+	 */
 	@SuppressWarnings("resource")
 	public File unzip(String fileName, File localFile) 
 	{
@@ -112,6 +118,9 @@ public class VMConfigAchievements
 		return localFile;
 	}
 	
+	/**
+	 * Read all achievements from achievements.json file
+	 */
 	public void readAchievements()
 	{
 		try 
@@ -126,9 +135,9 @@ public class VMConfigAchievements
 				for(JsonElement je : ja)
 				{
 					JsonObject jo = je.getAsJsonObject();
-					Class<?> className = Class.forName(jo.get("questClass").getAsString());
-					IQuest quest = (IQuest) className.newInstance();
-					quest.readData(jo);
+					Class<?> className = Class.forName(jo.get("questClass").getAsString()); // Read Quest class.
+					IQuest quest = (IQuest) className.newInstance(); // Create Quest instance
+					quest.readData(jo); // Read Quest data.
 				}
 				VanillaMagic.LOGGER.log(Level.WARN, "VanillaMagic achievements readded from JSON file");
 			}

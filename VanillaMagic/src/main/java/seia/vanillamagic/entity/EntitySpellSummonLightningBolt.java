@@ -11,6 +11,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 
+/**
+ * Class which defines the Spell Summon Lightning Bolt.
+ */
 public class EntitySpellSummonLightningBolt extends EntitySpell
 {
 	public EntitySpellSummonLightningBolt(World world, EntityLivingBase caster, 
@@ -19,6 +22,9 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 		super(world, caster, accelX, accelY, accelZ);
 	}
 	
+	/**
+	 * Run when Entity collide with something.
+	 */
 	protected void onImpact(RayTraceResult result) 
 	{
 		double spawnLightningBoltX = 0;
@@ -56,7 +62,7 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 	}
 	
 	/**
-	 * Called to update the entity's position/logic.
+	 * Called to update the Entity's position / logic.
 	 */
 	public void onUpdate()
 	{

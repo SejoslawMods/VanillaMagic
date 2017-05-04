@@ -29,6 +29,9 @@ import seia.vanillamagic.util.BlockPosHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.WorldHelper;
 
+/**
+ * Class which is responsible for loading / saving CustomTileEntities.
+ */
 public class WorldHandler
 {
 	public static final WorldHandler INSTANCE = new WorldHandler();
@@ -42,12 +45,18 @@ public class WorldHandler
 	{
 	}
 	
+	/**
+	 * PreInitialization stage. Register Events from this class.
+	 */
 	public void preInit()
 	{
 		MinecraftForge.EVENT_BUS.register(this);
 		VanillaMagic.LOGGER.log(Level.INFO, "WorldHandler registered");
 	}
 	
+	/**
+	 * Show additional console info if enabled in config,
+	 */
 	public void log(Level level, String message)
 	{
 		if(VMConfig.showCustomTileEntitySaving)
@@ -56,6 +65,9 @@ public class WorldHandler
 		}
 	}
 	
+	/**
+	 * Event which loads all CustomTileEntities to for World.
+	 */
 	@SubscribeEvent
 	public void worldLoad(WorldEvent.Load event)
 	{
@@ -155,6 +167,9 @@ public class WorldHandler
 		}
 	}
 	
+	/**
+	 * Event which saves all CustomTileEntities for given World.
+	 */
 	@SubscribeEvent
 	public void worldSave(WorldEvent.Save event)
 	{
@@ -222,6 +237,9 @@ public class WorldHandler
 		}
 	}
 
+	/**
+	 * @return Returns VM root directory for CustomTileEntities.
+	 */
 	public static File getVanillaMagicRootDirectory()
 	{
 		File file = new File(DimensionManager.getCurrentSaveRootDirectory(), _VM_DIRECTORY + "/");

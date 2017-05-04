@@ -27,6 +27,12 @@ import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * VM Debug Tools.
+ * Right-Click with Clock to show additional information,
+ * 64x Command Block in left and right hand and right-click in air to get all achievements,
+ * etc.
+ */
 public class VanillaMagicDebug 
 {
 	public static final VanillaMagicDebug INSTANCE = new VanillaMagicDebug();
@@ -39,10 +45,16 @@ public class VanillaMagicDebug
 		VanillaMagic.LOGGER.log(Level.INFO, "VanillaMagicDebug registered");
 	}
 	
+	/**
+	 * Run in PreInitialization stage.
+	 */
 	public void preInit()
 	{
 	}
 	
+	/**
+	 * 64x Command Block in left and right hand and right-click in air to get all the achievements
+	 */
 	@SubscribeEvent
 	public void activateDebug(RightClickItem event)
 	{
@@ -53,6 +65,9 @@ public class VanillaMagicDebug
 		}
 	}
 	
+	/**
+	 * Give all achievements to specified Player.
+	 */
 	public static void activate(EntityPlayer player)
 	{
 		// Handle all Quests

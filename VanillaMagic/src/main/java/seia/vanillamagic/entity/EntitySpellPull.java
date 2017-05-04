@@ -8,6 +8,9 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import seia.vanillamagic.magic.spell.spells.teleport.TeleportHelper;
 
+/**
+ * Class which defines Pull Entity Spell.
+ */
 public class EntitySpellPull extends EntitySpell
 {
 	public BlockPos casterPosWhileCasting;
@@ -21,6 +24,9 @@ public class EntitySpellPull extends EntitySpell
 		this.casterPosWhileCasting = casterPosWhileCasting;
 	}
 	
+	/**
+	 * Run when Entity collide with something.
+	 */
 	protected void onImpact(RayTraceResult result) 
 	{
 		if(result.typeOfHit == Type.BLOCK)

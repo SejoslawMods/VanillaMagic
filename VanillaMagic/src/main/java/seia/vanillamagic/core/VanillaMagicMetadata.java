@@ -4,12 +4,19 @@ import java.util.Arrays;
 
 import net.minecraftforge.fml.common.ModMetadata;
 
+/**
+ * Class which adds metadata to main class.
+ */
 public class VanillaMagicMetadata 
 {
 	private VanillaMagicMetadata()
 	{
 	}
-
+	
+	/**
+	 * Run in PreInitialization stage.
+	 * Add mod metadata.
+	 */
 	public static ModMetadata preInit(ModMetadata modMetadata) 
 	{
 		modMetadata.modId = VanillaMagic.MODID;

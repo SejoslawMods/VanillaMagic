@@ -11,6 +11,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import seia.vanillamagic.util.BlockPosHelper;
 
+/**
+ * Class which describes the Spell which Freeze Water.
+ */
 public class EntitySpellFreezeLiquid extends EntitySpell
 {
 	public BlockPos circleCenter;
@@ -29,10 +32,16 @@ public class EntitySpellFreezeLiquid extends EntitySpell
 		this.circleRadius = circleRadius;
 	}
 	
+	/**
+	 * Run when this Entity hit something.
+	 */
 	protected void onImpact(RayTraceResult result) 
 	{
 	}
 	
+	/**
+	 * Run when this Entity is in water.
+	 */
 	public void inWater()
 	{
 		if(circleCenter == null)

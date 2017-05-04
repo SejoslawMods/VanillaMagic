@@ -15,6 +15,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Basic EntitySpell definition.
+ * This Spell is fired when Player casts Spell.
+ * Works like invisible Ender Pearl which go in the Player looking direction.
+ */
 public abstract class EntitySpell extends Entity
 {
 	private int _xTile = 0;
@@ -25,7 +30,7 @@ public abstract class EntitySpell extends Entity
 	private int _ticksAlive;
 	private int _ticksInAir;
 	
-	public EntityLivingBase castingEntity;
+	public EntityLivingBase castingEntity; // This is mainly the EntityPlayer
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
@@ -53,6 +58,9 @@ public abstract class EntitySpell extends Entity
 		this.accelerationZ = accelZ / d0 * 0.1D;
 	}
 	
+	/**
+	 * Initialise the Entity
+	 */
 	protected void entityInit()
 	{
 	}
@@ -153,10 +161,17 @@ public abstract class EntitySpell extends Entity
 	 */
 	protected abstract void onImpact(RayTraceResult result);
 	
+	/**
+	 * Run when this Entity is in water.
+	 * (Spawn water particle, etc.)
+	 */
 	public void inWater()
 	{
 	}
     
+	/**
+	 * Run when this Entity is in air.
+	 */
 	public void inAir()
 	{
 	}
@@ -225,7 +240,7 @@ public abstract class EntitySpell extends Entity
 	{
 		return true;
 	}
-
+	
 	public float getCollisionBorderSize()
 	{
 		return 1.0F;

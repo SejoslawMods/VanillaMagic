@@ -11,6 +11,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.core.VanillaMagic;
 
+/**
+ * VM Forge Configuration File
+ */
 public class VMConfig 
 {
 	private static Configuration _config;
@@ -70,6 +73,9 @@ public class VMConfig
 	{
 	}
 	
+	/**
+	 * Run in PreInitialization stage. Checks config file and read from it.
+	 */
 	public static void preInit(FMLPreInitializationEvent event) 
 	{
 		MinecraftForge.EVENT_BUS.register(new VMConfig());
@@ -83,6 +89,9 @@ public class VMConfig
 		synchroniseConfig(false);
 	}
 	
+	/**
+	 * Synchronise config and read from it.
+	 */
 	public static void synchroniseConfig(boolean load) 
 	{
 		try
@@ -107,6 +116,9 @@ public class VMConfig
 		}
 	}
 	
+	/**
+	 * Resynchronise config if something changed in config file.
+	 */
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event)
 	{
@@ -119,6 +131,9 @@ public class VMConfig
 		}
 	}
 	
+	/**
+	 * Read from config file.
+	 */
 	public static void processConfig()
 	{
 		// Console
@@ -306,10 +321,16 @@ public class VMConfig
 		_config.save();
 	}
 	
+	/**
+	 * Run in Initialization stage.
+	 */
 	public static void init() 
 	{
 	}
 	
+	/**
+	 * Run in PostInitialization stage.
+	 */
 	public static void postInit() 
 	{
 	}
