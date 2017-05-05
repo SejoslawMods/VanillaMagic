@@ -24,8 +24,14 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Class which add various methods to operate on MC inventory.
+ */
 public class InventoryHelper 
 {
+	/**
+	 * TileEntityHopper Class
+	 */
 	private static Class<?> _CLASS_TILE_HOPPER = null;
 	
 	private InventoryHelper()
@@ -44,33 +50,48 @@ public class InventoryHelper
 		}
 	}
 	
+	/**
+	 * @return Returns TRUE if there is an inventory on the specified position.
+	 */
 	public static boolean isInventory(World world, BlockPos pos) 
 	{
 		return world.getTileEntity(pos) instanceof IInventory;
 	}
 	
+	/**
+	 * Drop all items from specified inventory.
+	 */
 	public static void dropInventoryItems(World worldIn, BlockPos pos, IInventory inventory)
 	{
 		net.minecraft.inventory.InventoryHelper.dropInventoryItems(worldIn, pos, inventory);
 	}
 	
+	/**
+	 * Drop all items from specified inventory.
+	 */
 	public static void dropInventoryItems(World worldIn, Entity entityAt, IInventory inventory)
 	{
 		net.minecraft.inventory.InventoryHelper.dropInventoryItems(worldIn, entityAt, inventory);
 	}
 	
+	/**
+	 * Spawn specified ItemStack on specified position.
+	 */
 	public static void spawnItemStack(World worldIn, BlockPos pos, ItemStack stack)
 	{
 		net.minecraft.inventory.InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
 	}
 	
+	/**
+	 * @return Returns new ItemHandler for given inventory.
+	 */
 	public static IItemHandler createUnSidedHandler(IInventory inv)
 	{
 		return new InvWrapper(inv);
 	}
 	
 	/**
-	 * Returns false if the inventory has any room to place items in
+	 * @return Returns false if the inventory has any room to place items in
 	 */
 	public static boolean isInventoryFull(IInventory inventoryIn, EnumFacing side)
 	{
@@ -103,7 +124,7 @@ public class InventoryHelper
 	}
 	
 	/**
-	 * Returns true if the given inventory has free slot.
+	 * @return Returns true if the given inventory has free slot.
 	 */
 	public static boolean hasInventoryFreeSpace(IInventory inventoryIn, EnumFacing side)
 	{
@@ -136,7 +157,7 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Returns false if the specified IInventory contains any items
+	 * @return Returns false if the specified IInventory contains any items
 	 */
 	public static boolean isInventoryEmpty(IInventory inventoryIn, EnumFacing side)
 			throws ReflectiveOperationException
@@ -145,15 +166,19 @@ public class InventoryHelper
 		method.setAccessible(true);
 		return (boolean) method.invoke(null, inventoryIn, side);
 	}
-
+	
+	/**
+	 * @return Returns TRUE if the Hopper captured items.
+	 */
 	public static boolean captureDroppedItems(IHopper hopper)
 	{
 		return TileEntityHopper.captureDroppedItems(hopper);
 	}
 
 	/**
-	 * Pulls from the specified slot in the inventoryIn and places in any available slot in the inventoryOut. Returns true if
-	 * the entire stack was moved
+	 * Pulls from the specified slot in the inventoryIn and places in any available slot in the inventoryOut. 
+	 * 
+	 * @return Returns true if the entire stack was moved.
 	 */
 	public static boolean pullItemFromSlot(IInventory inventoryOut, IInventory inventoryIn, int index, EnumFacing direction)
 	{
@@ -173,8 +198,9 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Attempts to place the passed EntityItem's stack into the inventory using as many slots as possible. Returns false
-	 * if the stackSize of the drop was not depleted.
+	 * Attempts to place the passed EntityItem's stack into the inventory using as many slots as possible. 
+	 * 
+	 * @return Returns false if the stackSize of the drop was not depleted.
 	 */
 	public static boolean putDropInInventoryAllSlots(IInventory inventoryIn, EntityItem itemIn)
 	{
@@ -182,7 +208,9 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Attempts to place the passed stack in the inventory, using as many slots as required. Returns leftover items
+	 * Attempts to place the passed stack in the inventory, using as many slots as required. 
+	 * 
+	 * @return Returns leftover items.
 	 */
 	@Nullable
 	public static ItemStack putStackInInventoryAllSlots(IInventory inventoryIn, ItemStack stack, @Nullable EnumFacing side)
@@ -209,7 +237,9 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Insert the specified stack to the specified inventory and return any leftover items
+	 * Insert the specified stack to the specified inventory.
+	 * 
+	 * @return Returns any leftover items
 	 */
 	@Nullable
 	public static ItemStack insertStack(IInventory inventoryIn, IInventory stack, ItemStack index, int side, EnumFacing facing)
@@ -221,19 +251,24 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Returns the IInventory for the specified hopper
+	 * @return Returns the IInventory for the specified hopper.
 	 */
 	public static IInventory getHopperInventory(IHopper hopper)
 	{
 		return getInventoryAtPosition(hopper.getWorld(), hopper.getXPos(), hopper.getYPos() + 1.0D, hopper.getZPos());
 	}
-
-	@Nullable
+	
+	/**
+	 * @return Returns list with all captured items at specified position.
+	 */
 	public static List<EntityItem> getCaptureItems(World worldIn, double x, double y, double z)
 	{
 		return TileEntityHopper.getCaptureItems(worldIn, x, y, z);
 	}
     
+	/**
+	 * @return Returns an inventory from specified position.
+	 */
 	@Nullable
 	public static IInventory getInventoryAtPosition(World world, BlockPos pos)
 	{
@@ -241,14 +276,17 @@ public class InventoryHelper
 	}
 
 	/**
-	 * Returns the IInventory (if applicable) of the TileEntity at the specified position
+	 * @return Returns the IInventory (if applicable) of the TileEntity at the specified position.
 	 */
 	@Nullable
 	public static IInventory getInventoryAtPosition(World worldIn, double x, double y, double z)
 	{
 		return TileEntityHopper.getInventoryAtPosition(worldIn, x, y, z);
 	}
-
+	
+	/**
+	 * @return Returns TRUE if the two stacks can combine.
+	 */
 	public static boolean canCombine(ItemStack stack1, ItemStack stack2) 
 			throws ReflectiveOperationException
 	{
@@ -256,7 +294,10 @@ public class InventoryHelper
 		method.setAccessible(true);
 		return (boolean) method.invoke(null, stack1, stack2);
 	}
-
+	
+	/**
+	 * @return Returns the first slot from inventory which is not a Null Slot.
+	 */
 	public static int getFirstNotNull(IInventory inv) 
 	{
 		for(int i = 0; i < inv.getSizeInventory(); ++i)
@@ -270,7 +311,7 @@ public class InventoryHelper
 	}
 	
 	/**
-	 * Returns the slot number of the first found inventory.<br>
+	 * @return Returns the slot number of the first found inventory.<br>
 	 * If there is no inventory block, will return -1
 	 */
 	public static int containsAnotherInventoryBlock(IInventoryWrapper wrapper)

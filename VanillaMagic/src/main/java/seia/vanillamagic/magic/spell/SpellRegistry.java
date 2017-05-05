@@ -74,6 +74,9 @@ import seia.vanillamagic.magic.spell.spells.weather.SpellWeatherThunderStorm;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Registry which store data about all registered Spells.
+ */
 public class SpellRegistry
 {
 	// All registered Spells.
@@ -147,6 +150,10 @@ public class SpellRegistry
 	{
 	}
 	
+	/**
+	 * PreInitialization stage.
+	 * Count registered Spells.
+	 */
 	public static void preInit()
 	{
 		VanillaMagic.LOGGER.log(Level.INFO, "Registered spells: " + _SPELLS.size());
@@ -154,36 +161,57 @@ public class SpellRegistry
 		VanillaMagic.LOGGER.log(Level.INFO, "Registered spells (hostile entities): " + _SPELLS_HOSTILE.size());
 	}
 	
+	/**
+	 * Register new Spell. For Mobs use {@link #addEntityHostile(ISpell)} or {@link #addEntityPassive(ISpell)}.
+	 */
 	public static void addSpell(ISpell spell)
 	{
 		_SPELLS.add(spell);
 	}
 	
+	/**
+	 * Register new EntityPassive Spell.
+	 */
 	public static void addEntityPassive(ISpell spell)
 	{
 		_SPELLS_PASSIVE.add(spell);
 	}
 	
+	/**
+	 * Register new EntityHostile Spell.
+	 */
 	public static void addEntityHostile(ISpell spell)
 	{
 		_SPELLS_HOSTILE.add(spell);
 	}
 	
+	/**
+	 * @return Returns list with all registered Spells (without Mobs).
+	 */
 	public static List<ISpell> getSpells()
 	{
 		return _SPELLS;
 	}
 	
+	/**
+	 * @return Returns all registered Passive Mobs Spells.
+	 */
 	public static List<ISpell> getSpellPassive()
 	{
 		return _SPELLS_PASSIVE;
 	}
 	
+	/**
+	 * @return Returns all registered Hostile Mobs Spells.
+	 */
 	public static List<ISpell> getSpellHostile()
 	{
 		return _SPELLS_HOSTILE;
 	}
 	
+	/**
+	 * Cast Spell by the given ID.
+	 */
 	public static boolean castSpellById(int spellID, EntityPlayer caster, BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{
 		ISpell spell = getSpellById(spellID);
@@ -195,6 +223,9 @@ public class SpellRegistry
 		return casted;
 	}
 	
+	/**
+	 * @return Returns the Spell by it ID.
+	 */
 	@Nullable
 	public static ISpell getSpellById(int id)
 	{
@@ -209,6 +240,9 @@ public class SpellRegistry
 		return null;
 	}
 	
+	/**
+	 * @return Returns the array with Spell IDs of all registered Hostile Mobs.
+	 */
 	public static int[] getSummonMobSpellIDs()
 	{
 		int max = SPELL_SUMMON_SPIDER.getSpellID();
@@ -223,6 +257,9 @@ public class SpellRegistry
 		return tab;
 	}
 	
+	/**
+	 * @return Returns the array with all registered Mobs without the specified ID.
+	 */
 	public static int[] getSummonMobSpellIDsWithoutSpecific(int summonSpellID)
 	{
 		int[] all = getSummonMobSpellIDs();
@@ -238,10 +275,13 @@ public class SpellRegistry
 		}
 		return without;
 	}
-
-	public static void castSummonMob(EntityPlayer player, World world, BlockPos spawnPos, EnumFacing up, int randID, boolean b) 
+	
+	/**
+	 * Cast a single Spell Summon Mob.
+	 */
+	public static void castSummonMob(EntityPlayer player, World world, BlockPos spawnPos, EnumFacing up, int spellID, boolean b) 
 	{
-		ISpell spell = _SPELLS_HOSTILE.get(randID);
+		ISpell spell = _SPELLS_HOSTILE.get(spellID);
 		spell.castSpell(player, spawnPos, up, null);
 	}
 }

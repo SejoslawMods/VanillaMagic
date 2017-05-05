@@ -12,21 +12,46 @@ import net.minecraft.util.NonNullList;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.util.TextHelper;
 
+/**
+ * Class which holds all additional data for Books and Books themselves.
+ */
 public class BookRegistry 
 {
+	/**
+	 * Basic Book Item
+	 */
 	public static final Item BOOK_ITEM = Items.WRITABLE_BOOK;
+	/**
+	 * Color of the book title.
+	 */
 	public static final String COLOR_TITLE = TextHelper.COLOR_BLUE;
+	/**
+	 * Color of the book header.
+	 */
 	public static final String COLOR_HEADER = TextHelper.COLOR_RED;
+	/**
+	 * Name of the Book author.
+	 */
 	public static final String AUTHOR = "Seia";
-	public static final String YEAR = "2016";
+	/**
+	 * Year displayed in book.
+	 */
+	public static final String YEAR = "2017";
+	
+	// Book Names
 	public static final String BOOK_NAME_SPELLS = TextHelper.translateToLocal("book.spells.itemName");
 	public static final String BOOK_NAME_ALTAR_CRAFTING = TextHelper.translateToLocal("book.altarCrafting.itemName");
 	public static final String BOOK_NAME_BUILD_ALTAR = TextHelper.translateToLocal("book.altarBuilding.itemName");
 	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
 	public static final String BOOK_NAME_ITEM_UPGRADES = TextHelper.translateToLocal("book.itemUpgrades.itemName");
 	public static final String BOOK_NAME_QUARRY_UPGRADES = TextHelper.translateToLocal("book.quarryUpgrades.itemName");
+	
+	/**
+	 * Book unique ID.
+	 */
 	public static final String BOOK_NBT_UID = "bookUID";
 	
+	// Book unique IDs
 	public static final int BOOK_ALTAR_CRAFTING_UID = 1;
 	public static final int BOOK_BUILD_ALTAR_UID = 2;
 	public static final int BOOK_SPELLS_UID = 3;
@@ -34,6 +59,7 @@ public class BookRegistry
 	public static final int BOOK_ITEM_UPGRADES_UID = 5;
 	public static final int BOOK_QUARRY_UPGRADES_UID = 6;
 	
+	// Books
 	public static final IBook BOOK_ALTAR_CRAFTING;
 	public static final IBook BOOK_BUILD_ALTAR;
 	public static final IBook BOOK_SPELLS;
@@ -41,6 +67,9 @@ public class BookRegistry
 	public static final IBook BOOK_ITEM_UPGRADES;
 	public static final IBook BOOK_QUARRY_UPGRADES;
 	
+	/**
+	 * List with all Books.
+	 */
 	private static List<IBook> _BOOKS = new ArrayList<IBook>();
 	
 	static
@@ -68,6 +97,10 @@ public class BookRegistry
 	{
 	}
 	
+	/**
+	 * PostInitialization stage.
+	 * Register all recipes.
+	 */
 	public static void postInit()
 	{
 		for(IBook book : _BOOKS)
@@ -130,7 +163,10 @@ public class BookRegistry
 	{
 		return _BOOKS;
 	}
-
+	
+	/**
+	 * Add all Books to list.
+	 */
 	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
 	{
 		for(IBook book : _BOOKS)

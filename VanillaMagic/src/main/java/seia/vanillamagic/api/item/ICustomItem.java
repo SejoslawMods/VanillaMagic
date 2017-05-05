@@ -3,10 +3,13 @@ package seia.vanillamagic.api.item;
 import net.minecraft.item.ItemStack;
 
 /**
- * Interface implemented to any class that should support custom items.
+ * Interface implemented to any class that should be a Custom Item.
  */
 public interface ICustomItem
 {
+	/**
+	 * Unique NBT Tag. This Tag represents this CustomItem unique name.
+	 */
 	public static final String NBT_UNIQUE_NAME = "NBT_UNIQUE_NAME";
 	
 	/**
@@ -15,12 +18,12 @@ public interface ICustomItem
 	void registerRecipe();
 	
 	/**
-	 * Get the Item as ItemStack with all the NBT data already written.
+	 * @return Returns the Item as ItemStack with all the NBT data already written.
 	 */
 	ItemStack getItem();
 	
 	/**
-	 * Returns the unique tag of this "item".
+	 * @return Returns the unique tag of this "item".
 	 */
 	default String getUniqueNBTName()
 	{

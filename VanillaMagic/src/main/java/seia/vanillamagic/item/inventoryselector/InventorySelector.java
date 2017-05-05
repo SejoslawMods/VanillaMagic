@@ -20,15 +20,29 @@ import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.TextHelper;
 
+/**
+ * Class which describes the Inventory Selector behavior.
+ */
 public class InventorySelector
 {
+	private InventorySelector()
+	{
+	}
+	
+	/**
+	 * Register Inventory Selector behavior.
+	 */
 	public static void preInit()
 	{
 		MinecraftForge.EVENT_BUS.register(new InventorySelector());
 		VanillaMagic.LOGGER.log(Level.INFO, "Inventory Selector registered");
 	}
 	
+	
 	int clicks = 0;
+	/**
+	 * On right-click select new inventory position to be saved.
+	 */
 	@SubscribeEvent
 	public void selectInventory(RightClickBlock event)
 	{
@@ -68,6 +82,9 @@ public class InventorySelector
 		}
 	}
 	
+	/**
+	 * Show currently saved position.
+	 */
 	@SubscribeEvent
 	public void showSavedPosition(RightClickItem event)
 	{
@@ -110,6 +127,9 @@ public class InventorySelector
 		}
 	}
 	
+	/**
+	 * Show Inventory Selector tooltip.
+	 */
 	@SubscribeEvent
 	public void showInventorySelectorTooltip(ItemTooltipEvent event)
 	{

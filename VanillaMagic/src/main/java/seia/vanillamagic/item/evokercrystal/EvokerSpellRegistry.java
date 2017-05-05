@@ -15,10 +15,17 @@ import seia.vanillamagic.item.evokercrystal.spell.EvokerSpellFangAttack;
 import seia.vanillamagic.item.evokercrystal.spell.EvokerSpellSummonVex;
 import seia.vanillamagic.item.evokercrystal.spell.EvokerSpellWololo;
 
+/**
+ * Class which contains data about all registered Evoker Spells.
+ */
 public class EvokerSpellRegistry 
 {
+	/**
+	 * List with all registered Evoker Spells.
+	 */
 	private static List<IEvokerSpell> _SPELLS = new ArrayList<>();
 	
+	// Spells
 	private static IEvokerSpell SPELL_FANGS = new EvokerSpellFangAttack();
 	private static IEvokerSpell SPELL_SUMMON_VEX = new EvokerSpellSummonVex();
 	private static IEvokerSpell SPELL_WOLOLO = new EvokerSpellWololo();
@@ -27,16 +34,25 @@ public class EvokerSpellRegistry
 	{
 	}
 	
+	/**
+	 * Register new Evoker Spell.
+	 */
 	public static void add(IEvokerSpell spell)
 	{
 		_SPELLS.add(spell);
 	}
 	
+	/**
+	 * @return Returns all Evoker Spells list.
+	 */
 	public static List<IEvokerSpell> getEvokerSpells()
 	{
 		return _SPELLS;
 	}
 	
+	/**
+	 * @return Returns the Evoker Spell from the given ID.
+	 */
 	@Nullable
 	public static IEvokerSpell getSpell(int spellID)
 	{
@@ -50,6 +66,9 @@ public class EvokerSpellRegistry
 		return null;
 	}
 	
+	/**
+	 * @return Returns the current Evoker Spell from given ItemStack.
+	 */
 	@Nullable
 	public static IEvokerSpell getCurrentSpell(ItemStack stack)
 	{
@@ -61,7 +80,10 @@ public class EvokerSpellRegistry
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Change Evoker Spell to next one (on shift-right-click).
+	 */
 	public static void changeSpell(EntityPlayer player, ItemStack crystal)
 	{
 		if(player == null || crystal == null)

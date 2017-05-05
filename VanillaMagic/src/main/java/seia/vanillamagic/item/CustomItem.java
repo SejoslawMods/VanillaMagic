@@ -6,6 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import seia.vanillamagic.api.item.ICustomItem;
 
+/**
+ * Basic ICustomItem implementation.
+ */
 public abstract class CustomItem implements ICustomItem
 {
 	public ItemStack getItem()
@@ -17,7 +20,13 @@ public abstract class CustomItem implements ICustomItem
 		return stack;
 	}
 	
+	/**
+	 * @return Returns the name on this item to be displayed.
+	 */
 	public abstract String getItemName();
 	
+	/**
+	 * @return Returns item connected with this CustomItem.
+	 */
 	public abstract Item getBaseItem();
 }

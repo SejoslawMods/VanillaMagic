@@ -20,19 +20,25 @@ import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Class which add various methods to work with PotionedCrystals.
+ */
 public class PotionedCrystalHelper 
 {
 	private PotionedCrystalHelper()
 	{
 	}
 	
+	/**
+	 * @return Returns the name of the Potion from given PotionType.
+	 */
 	public static String getPotionTypeName(PotionType pt)
 	{
 		return ForgeRegistries.POTION_TYPES.getKey(pt).getResourcePath();
 	}
 	
 	/**
-	 * Returns the IPotionedCrystal from ItemPotion.
+	 * @return Returns the IPotionedCrystal from ItemPotion. Used mainly during Cauldron Crafting.
 	 */
 	@Nullable
 	public static IPotionedCrystal getPotionedCrystalFromCauldron(World world, BlockPos cauldronPos)
@@ -67,6 +73,8 @@ public class PotionedCrystalHelper
 	
 	/**
 	 * Given ItemStack is a PotionedCrystal - Nether Star.
+	 * 
+	 * @return Returns the PotionedCrystal from given ItemStack.
 	 */
 	@Nullable
 	public static IPotionedCrystal getPotionedCrystal(ItemStack netherStarStack)
@@ -94,6 +102,9 @@ public class PotionedCrystalHelper
 		return null;
 	}
 	
+	/**
+	 * Register all PotionedCrystal recipes.
+	 */
 	public static void registerRecipes()
 	{
 		for(PotionType potionType : ForgeRegistries.POTION_TYPES.getValues())

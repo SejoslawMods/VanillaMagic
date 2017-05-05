@@ -24,17 +24,26 @@ import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.util.CauldronHelper;
 
+/**
+ * Class which contains methods connected with Enchanted Bucket.
+ */
 public class EnchantedBucketHelper
 {
 	private EnchantedBucketHelper()
 	{
 	}
 	
+	/**
+	 * @return Returns the FluidStack from given Fluid.
+	 */
 	public static FluidStack getFluidStack(Fluid fluid)
 	{
 		return new FluidStack(fluid, Fluid.BUCKET_VOLUME);
 	}
 	
+	/**
+	 * @return Returns the given ItemStack filled with given Fluid.
+	 */
 	public static ItemStack getResult(ItemStack stack, Fluid fluid)
 	{
 		IFluidHandler fh = FluidUtil.getFluidHandler(stack);
@@ -42,11 +51,17 @@ public class EnchantedBucketHelper
 		return stack;
 	}
 	
+	/**
+	 * @return Returns the Bucket filled with given Fluid.
+	 */
 	public static ItemStack getResult(Fluid fluid)
 	{
 		return getResult(new ItemStack(Items.BUCKET), fluid);
 	}
 	
+	/**
+	 * @return Returns the EnchantedBucket from given ItemStack.
+	 */
 	@Nullable
 	public static IEnchantedBucket getEnchantedBucket(ItemStack stack) // ItemBucket
 	{
@@ -61,7 +76,7 @@ public class EnchantedBucketHelper
 	}
 	
 	/**
-	 * Returns the first IEnchantedBucket from Cauldron at the given position.
+	 * @return Returns the first IEnchantedBucket from Cauldron at the given position.
 	 */
 	@Nullable
 	public static IEnchantedBucket getEnchantedBucketFromCauldron(World world, BlockPos cauldronPos)
@@ -104,6 +119,9 @@ public class EnchantedBucketHelper
 		return null;
 	}
 	
+	/**
+	 * Register all EnchantedBuckets.
+	 */
 	public static void registerFluids()
 	{
 		Map<String, Fluid> registeredFluids = FluidRegistry.getRegisteredFluids();

@@ -9,10 +9,13 @@ import seia.vanillamagic.api.item.ICustomItem;
 public interface IBook extends ICustomItem
 {
 	/**
-	 * Returns the index of the book (for easier searching).
+	 * @return Returns the index of the book (for easier searching).
 	 */
 	int getUID();
 	
+	/**
+	 * @return Returns the unique NBT Tag for this Book.
+	 */
 	default public String getUniqueNBTName() 
 	{
 		return BookRegistry.BOOK_NBT_UID;

@@ -9,6 +9,7 @@ public class ItemEvokerCrystal extends CustomItemCrystal
 	public static final String NBT_SPELL_ID = "NBT_SPELL_ID";
 	
 	// Evoker Crystal cannot be crafted !!!
+	// They only drop from Evokers
 	public void registerRecipe() 
 	{
 	}

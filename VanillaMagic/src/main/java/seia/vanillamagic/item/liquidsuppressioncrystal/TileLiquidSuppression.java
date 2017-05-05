@@ -15,6 +15,9 @@ import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.NBTHelper;
 import seia.vanillamagic.util.WorldHelper;
 
+/**
+ * Class which represents Tile which is placed to hide liquid source block.
+ */
 public class TileLiquidSuppression extends CustomTileEntity
 {
 	public static final String REGISTRY_NAME = TileLiquidSuppression.class.getName();

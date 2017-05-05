@@ -7,16 +7,28 @@ package seia.vanillamagic.integration;
  */
 public interface IIntegration
 {
+	/**
+	 * @return Returns the human readable name of the mod.
+	 */
 	String getModName();
 	
+	/**
+	 * Run in PreInitialization stage.
+	 */
 	default void preInit() throws Exception
 	{
 	}
 	
+	/**
+	 * Run in Initialization stage.
+	 */
 	default void init() throws Exception
 	{
 	}
 	
+	/**
+	 * Run in PostInitialization stage.
+	 */
 	default void postInit() throws Exception
 	{
 	}

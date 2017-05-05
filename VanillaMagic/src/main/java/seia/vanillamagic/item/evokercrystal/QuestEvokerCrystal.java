@@ -103,11 +103,17 @@ public class QuestEvokerCrystal extends Quest
 		useCrystal(caster, target);
 	}
 	
+	/**
+	 * Use Evoker Crystal
+	 */
 	public void useCrystal(EntityPlayer player, Entity target)
 	{
 		useCrystal(player, target, player.isSneaking());
 	}
 	
+	/**
+	 * Use Evoker Crystal
+	 */
 	public void useCrystal(EntityPlayer player, Entity target, boolean isSneaking)
 	{
 		if(player.hasAchievement(achievement))

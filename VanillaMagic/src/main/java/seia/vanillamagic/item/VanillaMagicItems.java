@@ -19,6 +19,9 @@ import seia.vanillamagic.item.potionedcrystal.IPotionedCrystal;
 import seia.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Class which holds data about ALL VM CustomItems
+ */
 public class VanillaMagicItems
 {
 	/**
@@ -67,11 +70,18 @@ public class VanillaMagicItems
 		CUSTOM_ITEMS.add(EVOKER_CRYSTAL);
 	}
 	
+	/**
+	 * Register new CustomItem.
+	 */
 	public static void addCustomItem(ICustomItem item)
 	{
 		CUSTOM_ITEMS.add(item);
 	}
 	
+	/**
+	 * PostInitialization stage.
+	 * Register all recipes.
+	 */
 	public static void postInit()
 	{
 		for(ICustomItem customItem : CUSTOM_ITEMS)
@@ -81,6 +91,9 @@ public class VanillaMagicItems
 		VanillaMagic.LOGGER.log(Level.INFO, "Custom items registered: " + CUSTOM_ITEMS.size());
 	}
 	
+	/**
+	 * @return Returns TRUE if the given ItemStack is a given CustomItem.
+	 */
 	public static boolean isCustomItem(ItemStack checkingStack, ICustomItem customItem)
 	{
 		if(ItemStackHelper.isNullStack(checkingStack) || customItem == null)
@@ -102,6 +115,9 @@ public class VanillaMagicItems
 		return false;
 	}
 	
+	/**
+	 * @return Returns TRUE if the given ItemStack is a given IEnchantedBucket.
+	 */
 	public static boolean isCustomBucket(ItemStack checkingStack, IEnchantedBucket customBucket)
 	{
 		if(ItemStackHelper.isNullStack(checkingStack) || customBucket == null)
@@ -126,6 +142,9 @@ public class VanillaMagicItems
 		return false;
 	}
 	
+	/**
+	 * @return Returns given list filled with all CustomItems.
+	 */
 	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
 	{
 		for(ICustomItem ci : CUSTOM_ITEMS)

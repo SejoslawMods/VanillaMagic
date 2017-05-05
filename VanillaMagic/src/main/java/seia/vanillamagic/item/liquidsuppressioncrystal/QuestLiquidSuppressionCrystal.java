@@ -18,6 +18,10 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestLiquidSuppressionCrystal extends Quest
 {
+	/**
+	 * If Player has the Crystal in inventory and walk near liquid source, 
+	 * the liquid should disappear for some time.
+	 */
 	@SubscribeEvent
 	public void onItemHeld(PlayerTickEvent event)
 	{
@@ -50,6 +54,10 @@ public class QuestLiquidSuppressionCrystal extends Quest
 		return VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.LIQUID_SUPPRESSION_CRYSTAL);
 	}
 	
+	/**
+	 * Once per tick.
+	 * Make liquid sources disappear.
+	 */
 	public void onCrystalUpdate(ItemStack leftHand, World world, EntityPlayer player)
 	{
 		int x = (int) player.posX;

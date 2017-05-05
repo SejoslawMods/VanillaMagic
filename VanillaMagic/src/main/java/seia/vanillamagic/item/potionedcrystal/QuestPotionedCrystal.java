@@ -23,9 +23,15 @@ import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Class which describes Quest used by PotionedCrystals.
+ */
 public class QuestPotionedCrystal extends Quest
 {
 	int countTicks = 0;
+	/**
+	 * Craft single PotionedCrystal.
+	 */
 	@SubscribeEvent
 	public void craftPotionedCrystal(RightClickBlock event)
 	{
@@ -89,6 +95,9 @@ public class QuestPotionedCrystal extends Quest
 		}
 	}
 	
+	/**
+	 * Use Potion effect when Player holds a PotionedCrystal inside inventory.
+	 */
 	@SubscribeEvent
 	public void onWearTick(PlayerTickEvent event)
 	{

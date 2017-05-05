@@ -11,7 +11,7 @@ public class IntegrationBetterAchievements implements IIntegration
 {
 	public String getModName()
 	{
-		return "BetterAchievements";
+		return "Better Achievements";
 	}
 	
 	public void init() throws Exception

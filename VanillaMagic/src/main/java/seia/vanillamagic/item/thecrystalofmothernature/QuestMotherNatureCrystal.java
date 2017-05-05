@@ -26,6 +26,9 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestMotherNatureCrystal extends Quest
 {
+	/**
+	 * Tick all around Plants when Player holds Crystal in LeftHand (OffHand).
+	 */
 	@SubscribeEvent
 	public void onHoldInLeftHandTick(PlayerTickEvent event) // left hand
 	{
@@ -47,6 +50,9 @@ public class QuestMotherNatureCrystal extends Quest
 		}
 	}
 	
+	/**
+	 * One tick - tick all plants around Player.
+	 */
 	public void onTickUpdate(ItemStack leftHand, World world, EntityPlayer player) 
 	{
 		int range = VMConfig.motherNatureCrystalRange; // def 10
@@ -92,6 +98,9 @@ public class QuestMotherNatureCrystal extends Quest
 	}
 
 	int countTicks = 0;
+	/**
+	 * When Crystal is used normally (from RightHand - MainHand) it should work like bonemeal.
+	 */
 	@SubscribeEvent
 	public void onCrystalUse(RightClickBlock event) // right hand
 	{
@@ -133,12 +142,18 @@ public class QuestMotherNatureCrystal extends Quest
 			}
 		}
 	}
-
+	
+	/**
+	 * Apply bonemeal effect.
+	 */
 	public boolean applyBonemeal(ItemStack rightHand, World world, BlockPos clickedPos) 
 	{
 		return world instanceof WorldServer && applyBonemeal(rightHand, world, clickedPos, FakePlayerFactory.getMinecraft((WorldServer) world));
 	}
-
+	
+	/**
+	 * Apply bonemeal effect.
+	 */
 	public boolean applyBonemeal(ItemStack rightHand, World world, BlockPos clickedPos, FakePlayer fakePlayer) 
 	{
 		IBlockState state = world.getBlockState(clickedPos);

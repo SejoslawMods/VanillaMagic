@@ -202,6 +202,9 @@ public class ItemUpgradeRegistry
 		return null;
 	}
 	
+	/**
+	 * @return Returns name of the mapping from given ItemStack.
+	 */
 	public static String getMappingNameFromItemStack(ItemStack stack) 
 	{
 		for(Entry<String, List<ItemEntry>> mappingEntry : _MAPPING_ITEMNAME_ITEMENTRY.entrySet())
@@ -218,7 +221,7 @@ public class ItemUpgradeRegistry
 	}
 	
 	/**
-	 * Returns the map of category names for upgrades. <br>
+	 * @return Returns the map of category names for upgrades. <br>
 	 * For instance (mapping): "_pickaxe" -> the list of all available pickaxes upgrades.
 	 */
 	public static Map<String, List<IItemUpgrade>> getUpgradesMap()
@@ -226,11 +229,17 @@ public class ItemUpgradeRegistry
 		return _MAPPING_ITEMNAME_UPGRADE;
 	}
 	
+	/**
+	 * @return Returns the localized name from given mapping.
+	 */
 	public static String getLocalizedNameForMapping(String mappingName)
 	{
 		return _MAPPING_ITEMNAME_LOCALIZEDNAME.get(mappingName);
 	}
 	
+	/**
+	 * Register any additional Event inside CustomItem class.
+	 */
 	public static void registerEvents()
 	{
 		int registered = 0;
@@ -245,7 +254,10 @@ public class ItemUpgradeRegistry
 		}
 		VanillaMagic.LOGGER.log(Level.INFO, "Registered Upgrade Events: " + registered);
 	}
-
+	
+	/**
+	 * @return Returns base items list.
+	 */
 	public static List<ItemEntry> getBaseItems() 
 	{
 		return _BASE_ITEMS;

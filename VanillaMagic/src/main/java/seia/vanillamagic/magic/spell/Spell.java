@@ -5,12 +5,30 @@ import seia.vanillamagic.api.magic.ISpell;
 import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Basic implementation of Spell.
+ */
 public abstract class Spell implements ISpell
 {
+	/**
+	 * Spell ID.
+	 */
 	private final int _spellID;
+	/**
+	 * Name of the Spell.
+	 */
 	private final String _spellName;
+	/**
+	 * Spell unique name.
+	 */
 	private final String _spellUniqueName;
+	/**
+	 * Wand required for this Spell.
+	 */
 	private final IWand _wand;
+	/**
+	 * Required ItemStack in offhand for successfully Spell cast.
+	 */
 	private final ItemStack _itemOffHand;
 	
 	public Spell(int spellID, String spellName, String spellUniqueName, IWand wand, ItemStack itemOffHand)
