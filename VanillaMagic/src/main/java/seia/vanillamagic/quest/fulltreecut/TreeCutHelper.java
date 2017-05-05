@@ -10,17 +10,26 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import seia.vanillamagic.event.EventExtraBlockBreak;
 
+/**
+ * Class which contains various methods to help cut tree.
+ */
 public class TreeCutHelper 
 {
 	private TreeCutHelper()
 	{
 	}
 	
+	/**
+	 * @return Returns TRUE if the block at specified position is a log.
+	 */
 	public static boolean isLog(World world, BlockPos pos)
 	{
 		return world.getBlockState(pos).getBlock().isWood(world, pos);
 	}
 	
+	/**
+	 * @return Returns TRUE if the tree was detected.
+	 */
 	public static boolean detectTree(World world, BlockPos origin)
 	{
 		BlockPos pos = null;
@@ -76,7 +85,10 @@ public class TreeCutHelper
 		// not enough leaves
 		return false;
 	}
-
+	
+	/**
+	 * Start tree breaking.
+	 */
 	public static boolean fellTree(ItemStack itemstack, BlockPos start, EntityPlayer player)
 	{
 		if(player.world.isRemote) 

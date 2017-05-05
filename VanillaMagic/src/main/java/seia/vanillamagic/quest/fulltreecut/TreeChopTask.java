@@ -16,13 +16,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import seia.vanillamagic.util.ToolHelper;
 
+/**
+ * Class which describes single tree fall mechanics.
+ */
 public class TreeChopTask 
 {
 	public final World world;
 	public final EntityPlayer player;
 	public final ItemStack tool;
 	public final int blocksPerTick;
-
+	
 	public Queue<BlockPos> blocks = Lists.newLinkedList();
 	public Set<BlockPos> visited = new THashSet<BlockPos>();
 
@@ -34,7 +37,10 @@ public class TreeChopTask
 		this.blocksPerTick = blocksPerTick;
 		this.blocks.add(start);
 	}
-
+	
+	/**
+	 * Break logs.
+	 */
 	@SubscribeEvent
 	public void chopChop(WorldTickEvent event)
 	{
@@ -94,7 +100,10 @@ public class TreeChopTask
 			left--;
 		}
 	}
-
+	
+	/**
+	 * When the tree is broken. Unregister work.
+	 */
 	private void finish() 
 	{
 		MinecraftForge.EVENT_BUS.unregister(this);

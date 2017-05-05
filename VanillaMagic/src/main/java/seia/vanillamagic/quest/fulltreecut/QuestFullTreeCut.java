@@ -14,6 +14,9 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestFullTreeCut extends Quest
 {
+	/**
+	 * When tree is cut down it should break all the logs above the destroyed block.
+	 */
 	@SubscribeEvent
 	public void onTreeCut(BreakEvent event)
 	{
