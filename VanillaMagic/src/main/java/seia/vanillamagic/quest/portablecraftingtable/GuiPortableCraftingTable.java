@@ -8,6 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Class which represents GUI for Portable Crafting Table (PCT).
+ * Similar to vanilla Crafting Table.
+ */
 @SideOnly(Side.CLIENT)
 public class GuiPortableCraftingTable extends GuiContainer
 {

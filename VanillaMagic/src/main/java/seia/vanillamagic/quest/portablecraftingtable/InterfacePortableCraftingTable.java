@@ -8,6 +8,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IInteractionObject;
 
+/**
+ * Class which represents Interface of Portable Crafting Table (PCT).
+ * Works similar to vanilla Crafting Table.
+ */
 public class InterfacePortableCraftingTable implements IInteractionObject
 {
 	public final EntityPlayer player;

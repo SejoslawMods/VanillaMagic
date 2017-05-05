@@ -19,8 +19,14 @@ import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Base Quest for casting Spells.
+ */
 public abstract class QuestCastSpell extends Quest
 {
+	/**
+	 * Spell which should be casted.
+	 */
 	protected ISpell spell;
 	
 	public void readData(JsonObject jo)
@@ -32,15 +38,18 @@ public abstract class QuestCastSpell extends Quest
 		super.readData(jo);
 	}
 	
+	/**
+	 * @return Returns the Spell for this Quest.
+	 */
 	public ISpell getSpell()
 	{
 		return spell;
 	}
-
-	/**
-	 * Method for checking the possibilities to cast spell
-	 */
+	
 	int howManyTimesCasted = 1;
+	/**
+	 * Method for checking if is it possible to cast current Spell.
+	 */
 	public boolean castSpell(EntityPlayer caster, EnumHand hand, ItemStack inHand, 
 			BlockPos pos, EnumFacing face, Vec3d hitVec)
 	{

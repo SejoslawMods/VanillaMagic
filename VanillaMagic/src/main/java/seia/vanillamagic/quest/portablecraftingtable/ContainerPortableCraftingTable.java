@@ -13,6 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Class which represents Container for Portable Crafting Table (PCT).
+ * Works similar to vanilla Crafting Table.
+ */
 public class ContainerPortableCraftingTable extends Container
 {
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);

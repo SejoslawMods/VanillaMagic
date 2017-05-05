@@ -22,6 +22,9 @@ import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.util.CauldronHelper;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Quest which describes an action in which result something should be crafting on Cauldron.
+ */
 public abstract class QuestSpawnOnCauldron extends Quest
 {
 	int times = 0;
@@ -121,6 +124,9 @@ public abstract class QuestSpawnOnCauldron extends Quest
 		}
 	}
 	
+	/**
+	 * @return Returns the Item from list which is registered as a Base Item.
+	 */
 	@Nullable
 	public EntityItem getBaseStack(List<EntityItem> inCauldron) 
 	{
@@ -134,6 +140,9 @@ public abstract class QuestSpawnOnCauldron extends Quest
 		return null;
 	}
 	
+	/**
+	 * @return Returns list of all Items registered as ingredients for given Base Item from given list.
+	 */
 	public List<EntityItem> getIngredients(EntityItem baseItem, List<EntityItem> inCauldron)
 	{
 		List<EntityItem> list = new ArrayList<>();
@@ -147,6 +156,9 @@ public abstract class QuestSpawnOnCauldron extends Quest
 		return list;
 	}
 	
+	/**
+	 * @return Returns the result ItemStack from crafting on Cauldron.
+	 */
 	@Nullable
 	public ItemStack getResult(EntityItem base, List<EntityItem> ingredients)
 	{
@@ -161,9 +173,18 @@ public abstract class QuestSpawnOnCauldron extends Quest
 		return null;
 	}
 	
+	/**
+	 * @return Returns TRUE if the given Item is registered as base for upgrades.
+	 */
 	public abstract boolean isBaseItem(EntityItem entityItem);
 	
+	/**
+	 * @return Returns TRUE if the given ItemStack can get any more upgrades (don't contains specified tag).
+	 */
 	public abstract boolean canGetUpgrade(ItemStack base);
 	
+	/**
+	 * @return Returns ItemStack as a crafting result with all the NBT data already written.
+	 */
 	public abstract ItemStack getResultSingle(EntityItem base, EntityItem ingredient);
 }

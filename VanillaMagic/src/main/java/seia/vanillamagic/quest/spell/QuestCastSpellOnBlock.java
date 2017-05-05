@@ -11,6 +11,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class QuestCastSpellOnBlock extends QuestCastSpell
 {
+	/**
+	 * Cast spell when right-clicked while pointing at block.
+	 */
 	@SubscribeEvent
 	public void caseSpell(RightClickBlock event)
 	{

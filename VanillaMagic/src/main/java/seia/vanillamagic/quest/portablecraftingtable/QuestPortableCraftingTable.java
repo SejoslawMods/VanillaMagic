@@ -9,6 +9,9 @@ import seia.vanillamagic.util.EntityHelper;
 
 public class QuestPortableCraftingTable extends Quest
 {
+	/**
+	 * On right-click open Portable Crafting Table interface.
+	 */
 	@SubscribeEvent
 	public void openCrafting(RightClickItem event)
 	{

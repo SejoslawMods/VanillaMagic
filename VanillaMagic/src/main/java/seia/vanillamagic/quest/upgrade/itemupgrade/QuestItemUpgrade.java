@@ -20,7 +20,7 @@ public class QuestItemUpgrade extends QuestSpawnOnCauldron
 		}
 		return !tag.getBoolean(IItemUpgrade.NBT_ITEM_CONTAINS_UPGRADE);
 	}
-
+	
 	public boolean isBaseItem(EntityItem entityItem) 
 	{
 		for(ItemEntry ie : ItemUpgradeRegistry.getBaseItems())

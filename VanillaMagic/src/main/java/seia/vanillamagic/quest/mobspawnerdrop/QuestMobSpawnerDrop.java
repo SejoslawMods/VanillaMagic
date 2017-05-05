@@ -20,6 +20,11 @@ import seia.vanillamagic.util.ItemStackHelper;
 
 public class QuestMobSpawnerDrop extends Quest
 {
+	/**
+	 * When MobSPawner is broke drop:
+	 * 1. MobSpawner in form of block
+	 * 2. Enchanted Book with Entity from spawner.
+	 */
 	@SubscribeEvent
 	public void onMobSpawnerBreak(BreakEvent event)
 	{
@@ -66,6 +71,9 @@ public class QuestMobSpawnerDrop extends Quest
 		}
 	}
 	
+	/**
+	 * On right-click MobSpawner with Entity book, change MobSpanwer Entity id to the id form book.
+	 */
 	@SubscribeEvent
 	public void onRightClickWithBook(RightClickBlock event)
 	{

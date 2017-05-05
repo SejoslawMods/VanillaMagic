@@ -8,6 +8,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class QuestCastSpellInAir extends QuestCastSpell
 {
+	/**
+	 * Cast spell when right-clicked while pointing in air.
+	 */
 	@SubscribeEvent
 	public void castSpell(RightClickItem event)
 	{

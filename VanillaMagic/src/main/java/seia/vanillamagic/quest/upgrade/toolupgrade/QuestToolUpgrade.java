@@ -5,6 +5,9 @@ import net.minecraft.item.ItemStack;
 import seia.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
 import seia.vanillamagic.quest.QuestSpawnOnCauldron;
 
+/**
+ * Class which is a definition of ToolUpgrade Quest.
+ */
 public class QuestToolUpgrade extends QuestSpawnOnCauldron
 {
 	public boolean isBaseItem(EntityItem entityItem) 

@@ -14,6 +14,9 @@ import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.SmeltingHelper;
 
+/**
+ * Class which is a definition of Autosmelt ItemUpgrade.
+ */
 public class UpgradeAutosmelt implements IItemUpgrade
 {
 	public ItemStack getIngredient() 
@@ -31,6 +34,9 @@ public class UpgradeAutosmelt implements IItemUpgrade
 		return "Autosmelt Upgrade";
 	}
 	
+	/**
+	 * Smelt digged blocks.
+	 */
 	@SubscribeEvent
 	public void onDig(HarvestDropsEvent event)
 	{

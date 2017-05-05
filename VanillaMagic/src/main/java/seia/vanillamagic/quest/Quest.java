@@ -21,13 +21,35 @@ import seia.vanillamagic.util.ItemStackHelper;
  */
 public abstract class Quest implements IQuest
 {
+	/**
+	 * Achievement connected with this Quest.
+	 */
 	protected Achievement achievement;
+	/**
+	 * Achievement that is required for this Quest to be completed.
+	 */
 	protected Achievement required;
+	/**
+	 * Quest that is required for this Quest to be completed.
+	 */
 	protected IQuest requiredQuest;
+	/**
+	 * Position of this Quest on Achievement Page.
+	 */
 	protected int posX, posY;
+	/**
+	 * Icon of this Quest on Achievement Page.
+	 */
 	protected ItemStack icon;
+	/**
+	 * 1. Name of the Quest - to be displayed.
+	 * 2. Unique name of this Quest.
+	 */
 	protected String questName, uniqueName;
 	
+	/**
+	 * Array of additional Quests which should be completed to get this Quest.
+	 */
 	@Nullable
 	IQuest[] additionalRequiredQuests;
 	
