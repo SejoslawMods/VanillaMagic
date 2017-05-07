@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.util.TextHelper;
 
 /**
  * Basic implementation of ItemUpgrade.
@@ -19,11 +18,12 @@ public abstract class ItemUpgradeBase implements IItemUpgrade
 	private final String _tooltipInfo = "ItemUpgrades:";
 	
 	/**
-	 * @see {@link TextHelper}
-	 * 
 	 * @return Returns the color is which upgrade name should be displayed.
 	 */
-	public abstract String getTextColor();
+	public String getTextColor()
+	{
+		return "§7"; // Grey
+	}
 	
 	@SubscribeEvent
 	public void showUpgradeTooltip(ItemTooltipEvent event)
