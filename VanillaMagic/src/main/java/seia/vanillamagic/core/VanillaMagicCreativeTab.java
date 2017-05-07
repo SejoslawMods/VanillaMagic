@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.book.BookRegistry;
 import seia.vanillamagic.quest.mobspawnerdrop.MobSpawnerRegistry;
+import seia.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import seia.vanillamagic.util.WorldHelper;
 
 /**
@@ -56,6 +57,7 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 		list = VanillaMagicItems.fillList(list);
 		list = BookRegistry.fillList(list);
 		list = WorldHelper.fillList(list);
+		list = ItemUpgradeRegistry.fillList(list);
 		super.displayAllRelevantItems(list);
 	}
 }

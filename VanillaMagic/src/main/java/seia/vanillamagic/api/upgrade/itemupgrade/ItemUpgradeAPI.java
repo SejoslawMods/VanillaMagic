@@ -6,10 +6,14 @@ import javax.annotation.Nullable;
 
 import org.apache.logging.log4j.Level;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import seia.vanillamagic.api.VanillaMagicAPI;
 
+/**
+ * Class which is used to manipulate on VM Item Upgrades.
+ */
 public class ItemUpgradeAPI 
 {
 	/**
@@ -48,7 +52,8 @@ public class ItemUpgradeAPI
 	 * Add a single value to the mapping. If mapping doesn't exists it will add a new mapping. <br>
 	 * For instance: addItemToMapping("_pickaxe", new MyItemPickaxe()); <br>
 	 * or <br>
-	 * addItemToMapping("_myMapping", new MyItem());
+	 * addItemToMapping("_myMapping", new MyItem()); <br>
+	 * If You want to add Block use {@link Item#getItemFromBlock(Block)}
 	 */
 	public static void addItemToMapping(String mappingName, Item item, String localizedName)
 	{

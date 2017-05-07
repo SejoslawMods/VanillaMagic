@@ -10,14 +10,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
+import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeBase;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.SmeltingHelper;
+import seia.vanillamagic.util.TextHelper;
 
 /**
  * Class which is a definition of Autosmelt ItemUpgrade.
  */
-public class UpgradeAutosmelt implements IItemUpgrade
+public class UpgradeAutosmelt extends ItemUpgradeBase
 {
 	public ItemStack getIngredient() 
 	{
@@ -32,6 +33,11 @@ public class UpgradeAutosmelt implements IItemUpgrade
 	public String getUpgradeName() 
 	{
 		return "Autosmelt Upgrade";
+	}
+	
+	public String getTextColor()
+	{
+		return TextHelper.COLOR_RED;
 	}
 	
 	/**

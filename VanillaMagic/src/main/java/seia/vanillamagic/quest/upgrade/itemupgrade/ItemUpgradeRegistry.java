@@ -12,12 +12,14 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeAutosmelt;
+import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeWitherEffect;
 import seia.vanillamagic.util.ItemStackHelper;
 
 /**
@@ -64,6 +66,9 @@ public class ItemUpgradeRegistry
 	 * List of all items to which we can add upgrades.
 	 */
 	private static final List<ItemEntry> _BASE_ITEMS = new ArrayList<ItemEntry>();
+	/**
+	 * Used for registering vanilla items.
+	 */
 	private static final List<Item> _ITEMS = ForgeRegistries.ITEMS.getValues();
 	
 	private ItemUpgradeRegistry()
@@ -79,6 +84,7 @@ public class ItemUpgradeRegistry
 		addItemMapping("_shovel", "Shovel");
 		
 		addUpgradeMapping("_pickaxe", UpgradeAutosmelt.class, "Pickaxe");
+		addUpgradeMapping("_sword", UpgradeWitherEffect.class, "Sword");
 	}
 	
 	/**
@@ -261,5 +267,32 @@ public class ItemUpgradeRegistry
 	public static List<ItemEntry> getBaseItems() 
 	{
 		return _BASE_ITEMS;
+	}
+	
+	/**
+	 * @return Returns the given list filled with all possible outcome items with all possible upgrades.
+	 */
+	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
+	{
+		// All registered upgrades
+		for(Entry<String, List<IItemUpgrade>> upgrade : _MAPPING_ITEMNAME_UPGRADE.entrySet())
+		{
+			// item type - for instance: "_pickaxe"
+			String itemName = upgrade.getKey();
+			// all upgrades registered for this item type
+			List<IItemUpgrade> upgrades = upgrade.getValue();
+			// all entries for this upgrade
+			List<ItemEntry> entries = _MAPPING_ITEMNAME_ITEMENTRY.get(itemName);
+			// all upgrades
+			for(IItemUpgrade itemUpgrade : upgrades)
+			{
+				// all found entries
+				for(ItemEntry itemEntry : entries)
+				{
+					list.add(itemUpgrade.getResult(itemEntry.stack));
+				}
+			}
+		}
+		return list;
 	}
 }
