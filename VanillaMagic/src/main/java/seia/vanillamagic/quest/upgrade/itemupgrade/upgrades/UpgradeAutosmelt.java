@@ -47,14 +47,9 @@ public class UpgradeAutosmelt extends ItemUpgradeBase
 	public void onDig(HarvestDropsEvent event)
 	{
 		EntityPlayer player = event.getHarvester();
-		if(player == null)
-		{
-			return;
-		}
-		if(!containsTag(player.getHeldItemMainhand()))
-		{
-			return;
-		}
+		if(player == null) return;
+		if(!containsTag(player.getHeldItemMainhand())) return;
+		
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		List<ItemStack> drops = event.getDrops();

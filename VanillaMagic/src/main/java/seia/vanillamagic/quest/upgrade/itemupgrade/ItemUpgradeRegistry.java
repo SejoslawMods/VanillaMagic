@@ -19,6 +19,7 @@ import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeAutosmelt;
+import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeLifesteal;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeWitherEffect;
 import seia.vanillamagic.util.ItemStackHelper;
 
@@ -85,6 +86,7 @@ public class ItemUpgradeRegistry
 		
 		addUpgradeMapping("_pickaxe", UpgradeAutosmelt.class, "Pickaxe");
 		addUpgradeMapping("_sword", UpgradeWitherEffect.class, "Sword");
+		addUpgradeMapping("_sword", UpgradeLifesteal.class, "Sword");
 	}
 	
 	/**
