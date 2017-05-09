@@ -18,21 +18,37 @@ import net.minecraftforge.items.IItemHandler;
  */
 public class NBTHelper
 {
+	// Machine position
 	public static final String NBT_MACHINE_POS_X = "NBT_MACHINE_POS_X";
 	public static final String NBT_MACHINE_POS_Y = "NBT_MACHINE_POS_Y";
 	public static final String NBT_MACHINE_POS_Z = "NBT_MACHINE_POS_Z";
+	
+	// Working position - for instance: in Quarry
 	public static final String NBT_WORKING_POS_X = "NBT_WORKING_POS_X";
 	public static final String NBT_WORKING_POS_Y = "NBT_WORKING_POS_Y";
 	public static final String NBT_WORKING_POS_Z = "NBT_WORKING_POS_Z";
+	
+	// Start working position
 	public static final String NBT_START_POS_X = "NBT_START_POS_X";
 	public static final String NBT_START_POS_Y = "NBT_START_POS_Y";
 	public static final String NBT_START_POS_Z = "NBT_START_POS_Z";
+	
+	// Chest input position
 	public static final String NBT_CHEST_POS_INPUT_X = "NBT_CHEST_POS_INPUT_X";
 	public static final String NBT_CHEST_POS_INPUT_Y = "NBT_CHEST_POS_INPUT_Y";
 	public static final String NBT_CHEST_POS_INPUT_Z = "NBT_CHEST_POS_INPUT_Z";
+	
+	// Chest output position
 	public static final String NBT_CHEST_POS_OUTPUT_X = "NBT_CHEST_POS_OUTPUT_X";
 	public static final String NBT_CHEST_POS_OUTPUT_Y = "NBT_CHEST_POS_OUTPUT_Y";
 	public static final String NBT_CHEST_POS_OUTPUT_Z = "NBT_CHEST_POS_OUTPUT_Z";
+	
+	// Position tags
+	public static final String NBT_POSX = "NBT_POSX";
+	public static final String NBT_POSY = "NBT_POSY";
+	public static final String NBT_POSZ = "NBT_POSZ";
+	
+	// Other tags
 	public static final String NBT_RADIUS = "NBT_RADIUS";
 	public static final String NBT_ONE_OPERATION_COST = "NBT_ONE_OPERATION_COST";
 	public static final String NBT_TICKS = "NBT_TICKS";
@@ -42,9 +58,6 @@ public class NBTHelper
 	public static final String NBT_NEEDS_FUEL = "NBT_NEEDS_FUEL";
 	public static final String NBT_LOCALIZED_NAME_BLOCK = "NBT_LOCALIZED_NAME_BLOCK";
 	public static final String NBT_UNLOCALIZED_NAME_BLOCK = "NBT_UNLOCALIZED_NAME_BLOCK";
-	public static final String NBT_POSX = "NBT_POSX";
-	public static final String NBT_POSY = "NBT_POSY";
-	public static final String NBT_POSZ = "NBT_POSZ";
 	public static final String NBT_HAS_TILEENTITY = "NBT_HAS_TILEENTITY";
 	public static final String NBT_TAG_COMPOUND_NAME = "NBT_TAG_COMPOUND_NAME";
 	public static final String NBT_IINVENTORY_ITEMS = "NBT_IINVENTORY_ITEMS";

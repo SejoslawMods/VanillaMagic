@@ -5,6 +5,9 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
+/**
+ * Class which store various methods connected with text and messages.
+ */
 public class TextHelper 
 {
 	public static final String ENTER = "\n";

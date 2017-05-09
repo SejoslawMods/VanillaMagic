@@ -8,16 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeBase;
 import seia.vanillamagic.util.ItemStackHelper;
 import seia.vanillamagic.util.TextHelper;
 
 /**
  * Class which defines a Wither Effect for Sword
  */
-public class UpgradeWitherEffect extends ItemUpgradeBase
+public class UpgradeWitherEffect extends UpgradeSword
 {
 	public ItemStack getIngredient() 
 	{
@@ -39,28 +36,15 @@ public class UpgradeWitherEffect extends ItemUpgradeBase
 		return TextHelper.COLOR_GREY;
 	}
 	
-	/**
-	 * When Entity was hit with this upgrade. Add Wither Effect to it.
-	 */
-	@SubscribeEvent
-	public void onAttack(AttackEntityEvent event)
+	public void onAttack(EntityPlayer player, Entity target) 
 	{
-		EntityPlayer player = event.getEntityPlayer();
-		// if for some reason Player is null, quit.
-		if(player == null) return; 
-		// If item does not contains required tag, quit.
-		if(!containsTag(player.getHeldItemMainhand())) return; 
-		else
-		{
-			Entity hittedEntity = event.getTarget();
-			World world = player.getEntityWorld();
-			int multiplier = 1;
-			
-			if(world.getDifficulty() == EnumDifficulty.NORMAL) 		multiplier = 10;
-			else if(world.getDifficulty() == EnumDifficulty.HARD)	multiplier = 40;
-			
-			if(hittedEntity instanceof EntityLivingBase)
-				((EntityLivingBase) hittedEntity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * multiplier, 1));
-		}
+		World world = player.getEntityWorld();
+		int multiplier = 1;
+		
+		if(world.getDifficulty() == EnumDifficulty.NORMAL) 		multiplier = 10;
+		else if(world.getDifficulty() == EnumDifficulty.HARD)	multiplier = 40;
+		
+		if(target instanceof EntityLivingBase)
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * multiplier, 1));
 	}
 }

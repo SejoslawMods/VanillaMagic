@@ -16,6 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.ForgeEventFactory;
 
+/**
+ * Class which store various methods connected with tools.
+ */
 public class ToolHelper 
 {
 	private ToolHelper()

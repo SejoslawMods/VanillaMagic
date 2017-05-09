@@ -6,7 +6,7 @@ import seia.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
 import seia.vanillamagic.quest.QuestSpawnOnCauldron;
 
 /**
- * Class which is a definition of ToolUpgrade Quest.
+ * Class which is a definition of ToolUpgrade Quest. (upgrade tool to better version - better resource)
  */
 public class QuestToolUpgrade extends QuestSpawnOnCauldron
 {

@@ -5,6 +5,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * Class which is used for checking if the Altar was created successfully.
+ * Checking structure, etc.
+ */
 public class AltarChecker 
 {
 	public static final Block BLOCK_TIER_1 = Blocks.REDSTONE_WIRE;

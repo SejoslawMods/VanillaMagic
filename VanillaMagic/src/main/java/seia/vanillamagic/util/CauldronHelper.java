@@ -8,6 +8,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * Class which store various methods connected with Cauldron.
+ */
 public class CauldronHelper 
 {
 	private CauldronHelper()

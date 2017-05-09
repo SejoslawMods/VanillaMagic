@@ -6,12 +6,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+/**
+ * Class which is used for various explosion related mathematics.
+ */
 public class ExplosionHelper
 {
 	private ExplosionHelper()
 	{
 	}
 	
+	/**
+	 * Explosion was made using {@link World#newExplosion(Entity, double, double, double, float, boolean, boolean)}
+	 * 
+	 * @return Returns new Explosion object.
+	 */
 	public static Explosion newExplosion1(World world, 
 			@Nullable Entity entity, 
 			double x, double y, double z, 
@@ -21,6 +29,11 @@ public class ExplosionHelper
 		return world.newExplosion((Entity)null, x, y, z, strength, isFlaming, isSmoking);
 	}
 	
+	/**
+	 * Explosion was made using {@link VMExplosion}
+	 * 
+	 * @return Returns new Explosion object.
+	 */
 	public static Explosion newExplosion2(World world, 
 			@Nullable Entity entity, 
 			double x, double y, double z, 

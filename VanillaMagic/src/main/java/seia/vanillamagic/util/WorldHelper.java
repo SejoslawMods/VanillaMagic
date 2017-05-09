@@ -18,6 +18,9 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.WorldEvent;
 import seia.vanillamagic.quest.QuestJumper;
 
+/**
+ * Class which store various methods connected with MC World.
+ */
 public class WorldHelper
 {
 	private WorldHelper()

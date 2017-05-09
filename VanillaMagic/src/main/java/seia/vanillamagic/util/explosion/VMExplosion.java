@@ -27,6 +27,10 @@ import net.minecraft.world.World;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.util.ItemStackHelper;
 
+/**
+ * Explosion object itself.
+ * This is where all the crazy mathematics is.
+ */
 public class VMExplosion extends Explosion
 {
 	private final World _world;

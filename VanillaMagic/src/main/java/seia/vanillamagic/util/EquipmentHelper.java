@@ -9,6 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.core.VanillaMagic;
 
+/**
+ * Class which store various methods connected with Equipment and Inventory.
+ */
 public class EquipmentHelper 
 {
 	public static final List<Item> HELMETS = new ArrayList<Item>();

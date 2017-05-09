@@ -28,6 +28,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
 
+/**
+ * Class which store various methods connected with Entities.
+ */
 public class EntityHelper 
 {
 	private static final int DELETION_ID = 2525277;

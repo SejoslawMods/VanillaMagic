@@ -4,12 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
+import seia.vanillamagic.util.WeatherHelper;
 
 /**
  * Class which defines the Spell Summon Lightning Bolt.
@@ -54,10 +54,7 @@ public class EntitySpellSummonLightningBolt extends EntitySpell
 		{
 			return;
 		}
-		// Lightning Bolt spawning
-		EntityLightningBolt entityLightningBolt = new EntityLightningBolt(world, 
-				spawnLightningBoltX, spawnLightningBoltY, spawnLightningBoltZ, false);
-		this.world.addWeatherEffect(entityLightningBolt);
+		WeatherHelper.spawnLightningBolt(world, spawnLightningBoltX, spawnLightningBoltY, spawnLightningBoltZ);
 		this.setDead();
 	}
 	

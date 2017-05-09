@@ -18,6 +18,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.core.VanillaMagic;
 
+/**
+ * Class which store various methods connected with Block Position.
+ */
 public class BlockPosHelper
 {
 	public static final int SEARCH_RADIUS = 100;

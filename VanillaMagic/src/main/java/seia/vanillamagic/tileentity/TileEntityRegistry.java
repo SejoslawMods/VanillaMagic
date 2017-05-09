@@ -11,6 +11,9 @@ import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 import seia.vanillamagic.tileentity.machine.quarry.TileQuarry;
 import seia.vanillamagic.tileentity.speedy.TileSpeedy;
 
+/**
+ * Class which is used to register VM CustomTileEntities.
+ */
 public class TileEntityRegistry 
 {
 	private TileEntityRegistry()
@@ -19,7 +22,7 @@ public class TileEntityRegistry
 	
 	public static void preInit()
 	{
-		// Register TileEntities
+		// Register VM CustomTileEntities
 		register(TileQuarry.class, TileQuarry.REGISTRY_NAME);
 		register(TileChunkLoader.class, TileChunkLoader.REGISTRY_NAME);
 		register(TileFarm.class, TileFarm.REGISTRY_NAME);

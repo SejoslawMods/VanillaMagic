@@ -7,6 +7,9 @@ import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 
+/**
+ * Class which store various methods connected with Bow.
+ */
 public class BowHelper 
 {
 	private BowHelper()

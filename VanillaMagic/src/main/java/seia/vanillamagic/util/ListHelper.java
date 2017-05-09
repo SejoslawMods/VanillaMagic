@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 
+/**
+ * Class which store various methods connected with List.
+ */
 public class ListHelper 
 {
 	private ListHelper()
@@ -46,7 +49,7 @@ public class ListHelper
 	}
 	
 	/**
-	 * Returns the combined lists.
+	 * @return Returns the combined lists.
 	 */
 	public static <T> List<T> combineLists(List<T> l1, List<T> l2)
 	{

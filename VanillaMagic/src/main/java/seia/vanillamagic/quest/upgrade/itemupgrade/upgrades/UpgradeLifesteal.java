@@ -4,21 +4,19 @@ import java.util.Collection;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeBase;
 import seia.vanillamagic.util.TextHelper;
 
 /**
  * Class which represents Lifesteal upgrade for Swords
  */
-public class UpgradeLifesteal extends ItemUpgradeBase
+public class UpgradeLifesteal extends UpgradeSword
 {
 	public ItemStack getIngredient() 
 	{
@@ -40,34 +38,22 @@ public class UpgradeLifesteal extends ItemUpgradeBase
 		return TextHelper.COLOR_GREEN;
 	}
 	
-	/**
-	 * Take health from enemy and add it to Player.
-	 */
-	@SubscribeEvent
-	public void onAttack(AttackEntityEvent event)
+	public void onAttack(EntityPlayer player, Entity target) 
 	{
-		EntityPlayer player = event.getEntityPlayer();
-		// if for some reason Player is null, quit.
-		if(player == null) return; 
-		// If item does not contains required tag, quit.
 		ItemStack playerMainHandStack = player.getHeldItemMainhand();
-		if(!containsTag(playerMainHandStack)) return; 
-		else
+		// Attributes 
+		Multimap<String, AttributeModifier> attributes = playerMainHandStack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, playerMainHandStack);
+		// Used attribute
+		String attributeName = SharedMonsterAttributes.ATTACK_DAMAGE.getName();
+		// All modifiers for this name
+		Collection<AttributeModifier> modifiers = attributes.get(attributeName);
+		
+		double amount = 0;
+		for(AttributeModifier am : modifiers)
 		{
-			// Attributes 
-			Multimap<String, AttributeModifier> attributes = playerMainHandStack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, playerMainHandStack);
-			// Used attribute
-			String attributeName = SharedMonsterAttributes.ATTACK_DAMAGE.getName();
-			// All modifiers for this name
-			Collection<AttributeModifier> modifiers = attributes.get(attributeName);
-			
-			double amount = 0;
-			for(AttributeModifier am : modifiers)
-			{
-				amount += am.getAmount() / 2; // to make it not too OP
-			}
-			
-			player.heal((float) amount);
+			amount += am.getAmount() / 2; // to make it not too OP
 		}
+		
+		player.heal((float) amount);
 	}
 }

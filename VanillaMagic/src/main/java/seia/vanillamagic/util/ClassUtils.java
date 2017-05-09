@@ -6,6 +6,9 @@ import java.lang.reflect.Method;
 
 import javax.annotation.Nullable;
 
+/**
+ * Class which store various methods connected with Class operaions.
+ */
 public class ClassUtils 
 {
 	private ClassUtils()

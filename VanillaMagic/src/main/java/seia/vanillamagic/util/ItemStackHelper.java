@@ -21,6 +21,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 import seia.vanillamagic.core.VanillaMagic;
 
+/**
+ * Class which store various methods connected with ItemStack.
+ */
 public class ItemStackHelper 
 {
 	/**
@@ -182,7 +185,7 @@ public class ItemStackHelper
 	//================================== StackSize Operations ====================================
 	
 	/**
-	 * Will return {@link ItemStackHelper#NULL_STACK} 
+	 * @return Will return {@link ItemStackHelper#NULL_STACK} 
 	 * if the {@link ItemStack} should be understand as Empty.
 	 */
 	public static ItemStack loadItemStackFromNBT(NBTTagCompound tag)
@@ -196,7 +199,7 @@ public class ItemStackHelper
 	}
 	
 	/**
-	 * This method will returns the old ItemStack.stackSize
+	 * @return Returns the old ItemStack.stackSize
 	 */
 	public static int getStackSize(ItemStack stack)
 	{
@@ -209,7 +212,7 @@ public class ItemStackHelper
 	
 	/**
 	 * This method will sets the ItemStack.stackSize to the given value.<br>
-	 * Returns the given stack.
+	 * @return Returns the given stack.
 	 */
 	public static void setStackSize(ItemStack stack, int value)
 	{
@@ -222,7 +225,7 @@ public class ItemStackHelper
 	
 	/**
 	 * This method will increase the ItemStack.stackSize of the given stack.<br>
-	 * Returns the given stack.
+	 * @return Returns the given stack.
 	 */
 	public static void increaseStackSize(ItemStack stack, int value)
 	{
@@ -235,7 +238,7 @@ public class ItemStackHelper
 	
 	/**
 	 * This method will decrease the ItemStack.stackSize of the given stack.<br>
-	 * Returns the given stack.
+	 * @return Returns the given stack.
 	 */
 	public static void decreaseStackSize(ItemStack stack, int value)
 	{
@@ -247,7 +250,7 @@ public class ItemStackHelper
 	}
 	
 	/**
-	 * Returns true if the given ItemStack is {@link #NULL_STACK}
+	 * @return Returns true if the given ItemStack is {@link #NULL_STACK}
 	 */
 	public static boolean isNullStack(ItemStack stack)
 	{

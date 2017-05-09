@@ -14,6 +14,9 @@ import seia.vanillamagic.api.event.EventQuest;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.core.VanillaMagic;
 
+/**
+ * Class which stores all registered Quests.
+ */
 public class QuestList
 {
 	private static List<IQuest> _QUESTS = new ArrayList<IQuest>();
@@ -28,9 +31,6 @@ public class QuestList
 	 */
 	public static void addQuest(IQuest q)
 	{
-//		EventAddQuest event = new EventAddQuest(q);
-//		QuestList._QUESTS.add(q);
-//		QuestList._QUESTS_MAP.put(q.getUniqueName(), q);
 		if(!MinecraftForge.EVENT_BUS.post(new EventQuest.Add(q)))
 		{
 			QuestList._QUESTS.add(q);

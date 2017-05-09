@@ -21,6 +21,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.quest.QuestSmeltOnAltar;
 
+/**
+ * Class which store various methods connected with smelting.
+ */
 public class SmeltingHelper
 {
 	private SmeltingHelper()
@@ -109,7 +112,7 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * Returns the all fuelStacks from the inventory
+	 * @return Returns the all fuelStacks from the inventory
 	 */
 	public static List<ItemStack> getFuelFromInventory(IInventory inv)
 	{
@@ -126,7 +129,7 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * Returns the first fuelStack from the inventory.<br>
+	 * @return Returns the first fuelStack from the inventory.<br>
 	 * Indexes:<br>
 	 * 0 - ItemStack<br>
 	 * 1 - index (slot)
@@ -146,7 +149,7 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * Returns the smeltables EntityItems from the ALL entities in cauldron BlockPos
+	 * @return Returns the smeltables EntityItems from the ALL entities in cauldron BlockPos
 	 */
 	public static List<EntityItem> getSmeltable(List<EntityItem> entitiesInCauldron)
 	{
@@ -170,7 +173,7 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * Returns the all fuel from the Cauldron position
+	 * @return Returns the all fuel from the Cauldron position
 	 */
 	public static List<EntityItem> getFuelFromCauldron(World world, BlockPos cauldronPos)
 	{
@@ -198,7 +201,7 @@ public class SmeltingHelper
 	}
 	
 	/**
-	 * e.g. will return 1600 if the item was Coal.
+	 * @return e.g. will return 1600 if the item was Coal.
 	 * Won't care about stackSize
 	 */
 	public static int getItemBurnTimeTicks(ItemStack fuel)
@@ -294,77 +297,4 @@ public class SmeltingHelper
 		}
 		return new ArrayList<EntityItem>();
 	}
-	
-	/**
-	 * TODO: Better Idea for counting and smelting items in Cauldron.
-	 * Currently will consume whole stack in offHand for 1 operation
-	 * Returns the list of smelted items
-	 * oneItemSmeltTicks = default is QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS
-	 */
-//	public static List<EntityItem> countAndSmelt(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
-//			Quest requiredQuest, boolean spawnSmelted)
-//	{
-//		if(!player.hasAchievement(requiredQuest.getAchievement()))
-//		{
-//			player.addStat(requiredQuest.getAchievement(), 1);
-//		}
-//		if(player.hasAchievement(requiredQuest.getAchievement()))
-//		{
-//			List<EntityItem> smelted = new ArrayList<EntityItem>();
-//			World world = player.world;
-//			int ticks = 0;
-//			ticks += SmeltingHelper.countTicks(player.getHeldItemOffhand()); // value for the whole stack
-//			ItemStackHelper.setStackSize(player.getHeldItemOffhand(), 0);
-//			for(int i = 0; i < itemsToSmelt.size(); ++i)
-//			{
-//				EntityItem entityItemToSmelt = itemsToSmelt.get(i);
-//				ItemStack entityItemToSmeltStack = entityItemToSmelt.getEntityItem();
-//				int entityItemToSmeltStackSize = ItemStackHelper.getStackSize(entityItemToSmeltStack);
-//				int ticksToSmeltStack = entityItemToSmeltStackSize * QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
-//				ItemStack smeltResult = null;
-//				EntityItem smeltResultEntityItem = null;
-//				// will smelt whole stack
-//				if(ticks >= ticksToSmeltStack)
-//				{
-//					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
-//					ItemStackHelper.setStackSize(smeltResult, ItemStackHelper.getStackSize(entityItemToSmeltStack));
-//					smeltResultEntityItem = new EntityItem(world, 
-//							cauldronPos.getX() + 0.5D, 
-//							cauldronPos.getY(), 
-//							cauldronPos.getZ() + 0.5D, 
-//							smeltResult);
-//					world.removeEntity(entityItemToSmelt);
-//				}
-//				else if(ticks >= QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS)// won't smelt whole stack, we need to count how many we can smelt
-//				{
-//					int howManyCanSmelt = ticks / QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
-//					ItemStackHelper.decreaseStackSize(entityItemToSmeltStack, howManyCanSmelt);
-//					smeltResult = SmeltingHelper.getSmeltingResultAsNewStack(entityItemToSmeltStack);
-//					ItemStackHelper.setStackSize(smeltResult, howManyCanSmelt);
-//					smeltResultEntityItem = new EntityItem(world, 
-//							cauldronPos.getX() + 0.5D, 
-//							cauldronPos.getY(), 
-//							cauldronPos.getZ() + 0.5D, 
-//							smeltResult);
-//				}
-//				else // if(ticks < ONE_ITEM_SMELT_TICKS), we can't smelt any more items so let's just break
-//				{
-//					break;
-//				}
-//				// spawn or not
-//				if(spawnSmelted)
-//				{
-//					world.spawnEntity(smeltResultEntityItem);
-//				}
-//				smelted.add(smeltResultEntityItem);
-//				ticks -= ticksToSmeltStack;
-//				//TODO: Fix the experience after smelting.
-//				int experienceToAdd = SmeltingHelper.getExperienceToAddFromWholeStack(entityItemToSmeltStack);
-//				player.addExperience(experienceToAdd);
-//			}
-//			world.updateEntities();
-//			return smelted;
-//		}
-//		return new ArrayList<EntityItem>(); // Return Empty ArrayList
-//	}
 }

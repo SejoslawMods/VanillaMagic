@@ -2,6 +2,9 @@ package seia.vanillamagic.util;
 
 import net.minecraft.item.ItemStack;
 
+/**
+ * Class which store various methods connected with Matrixes.
+ */
 public class MatrixHelper 
 {
 	private MatrixHelper()

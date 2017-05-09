@@ -5,6 +5,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * Class which store various methods connected with Ore Multiplier.
+ * Checking structure, etc.
+ */
 public class OreMultiplierChecker 
 {
 	private OreMultiplierChecker()

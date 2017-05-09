@@ -20,6 +20,7 @@ import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeAPI;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeAutosmelt;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeLifesteal;
+import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeThor;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeWitherEffect;
 import seia.vanillamagic.util.ItemStackHelper;
 
@@ -78,15 +79,20 @@ public class ItemUpgradeRegistry
 	
 	static 
 	{
+		// Mappings
 		addItemMapping("_pickaxe", "Pickaxe");
 		addItemMapping("_axe", "Axe");
 		addItemMapping("_sword", "Sword");
 		addItemMapping("_hoe", "Hoe");
 		addItemMapping("_shovel", "Shovel");
 		
+		// Upgrades
+		// Pickaxe Upgrades
 		addUpgradeMapping("_pickaxe", UpgradeAutosmelt.class, "Pickaxe");
+		// Sword Upgrades
 		addUpgradeMapping("_sword", UpgradeWitherEffect.class, "Sword");
 		addUpgradeMapping("_sword", UpgradeLifesteal.class, "Sword");
+		addUpgradeMapping("_sword", UpgradeThor.class, "Sword");
 	}
 	
 	/**
@@ -196,17 +202,10 @@ public class ItemUpgradeRegistry
 		}
 		List<IItemUpgrade> upgrades = _MAPPING_ITEMNAME_UPGRADE.get(mappingName);
 		for(IItemUpgrade upgrade : upgrades)
-		{
-			if(upgrade.getIngredient().getItem() == ingredient.getItem())
-			{
-				//if(upgrade.getIngredient().stackSize == ingredient.stackSize)
-				if(ItemStackHelper.getStackSize(upgrade.getIngredient()) == 
-						ItemStackHelper.getStackSize(ingredient))
-				{
-					return upgrade.getResult(base);
-				}
-			}
-		}
+			if(upgrade.getIngredient().getItem() == ingredient.getItem()) // Check Item
+				if(upgrade.getIngredient().getMetadata() == ingredient.getMetadata()) // Check Item Metadata
+					if(ItemStackHelper.getStackSize(upgrade.getIngredient()) == ItemStackHelper.getStackSize(ingredient)) // Check StackSize
+						return upgrade.getResult(base);
 		return null;
 	}
 	

@@ -9,6 +9,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
 
+/**
+ * Class which store various methods connected with Block.
+ */
 public class BlockHelper 
 {
 	private BlockHelper()
