@@ -439,7 +439,7 @@ achievement.questMoveBlock.desc=Take Blaze Wand to right hand and exactly 1x Boo
 achievement.captureEntity=Capture Entity
 achievement.captureEntity.desc=Hold Nether Star in right hand and 1x Book in left hand. Shift-right-click on Entity to capture it and than on block to respawn it.
 
-achievement.enchantedBucket=Enchanted Bucket (WARNING: Right-click will remove fluid.)
+achievement.enchantedBucket=Enchanted Bucket
 achievement.enchantedBucket.desc=Drop 1x Bucket with fluid + 1x Nether Star to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted bucket. Shift-left-click to spawn fluid from bucket or fill tank, right-click in distance to spawn fluid in distance.
 
 achievement.liquidSuppressionCrystal=Liquid Suppression Crystal
