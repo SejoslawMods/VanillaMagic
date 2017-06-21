@@ -89,7 +89,7 @@ public abstract class Quest implements IQuest
 			this.additionalRequiredQuests = requiredQuestsTable;
 		}
 		// Building Achievement
-		this.achievement = new Achievement(this.questName, 
+		this.achievement = new Achievement("vanillamagic:" + this.uniqueName /*this.questName*/, 
 				this.uniqueName, 
 				this.posX, 
 				this.posY, 
