@@ -59,11 +59,17 @@ public class Box
 		zMax = zMax + size;
 	}
 	
+	/**
+	 * @return Returns the minimum position of this box.
+	 */
 	public BlockPos getMinPos()
 	{
 		return new BlockPos(xMin, yMin, zMin);
 	}
 	
+	/**
+	 * @return Returns the maximum position of this box.
+	 */
 	public BlockPos getMaxPos()
 	{
 		return new BlockPos(xMax, yMax, zMax);

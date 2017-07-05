@@ -10,10 +10,14 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
+import net.minecraft.util.text.TextComponentTranslation;
 import seia.vanillamagic.api.quest.IQuest;
+import seia.vanillamagic.api.quest.QuestData;
+import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.api.util.Point;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackUtil;
+import seia.vanillamagic.util.QuestUtil;
+import seia.vanillamagic.util.TextUtil;
 
 /** 
  * Base class for all the quests.<br>
@@ -22,30 +26,28 @@ import seia.vanillamagic.util.ItemStackHelper;
 public abstract class Quest implements IQuest
 {
 	/**
-	 * Achievement connected with this Quest.
-	 */
-	protected Achievement achievement;
-	/**
-	 * Achievement that is required for this Quest to be completed.
-	 */
-	protected Achievement required;
-	/**
 	 * Quest that is required for this Quest to be completed.
 	 */
 	protected IQuest requiredQuest;
 	/**
-	 * Position of this Quest on Achievement Page.
+	 * Position of this Quest on Quest Page.
 	 */
 	protected int posX, posY;
 	/**
-	 * Icon of this Quest on Achievement Page.
+	 * Icon of this Quest on Quest Page.
 	 */
 	protected ItemStack icon;
 	/**
 	 * 1. Name of the Quest - to be displayed.
 	 * 2. Unique name of this Quest.
+	 * 3. Quest Title
+	 * 4. Quest Description
 	 */
-	protected String questName, uniqueName;
+	protected String questName, uniqueName, questTitle, questDescription;
+	/**
+	 * Quest data for Minecraft statistics.
+	 */
+	protected QuestData questData;
 	
 	/**
 	 * Array of additional Quests which should be completed to get this Quest.
@@ -56,12 +58,12 @@ public abstract class Quest implements IQuest
 	public void readData(JsonObject jo)
 	{
 		this.requiredQuest = QuestList.get(jo.get("requiredQuest").getAsString());
-		this.required = (this.requiredQuest == null ? null : this.requiredQuest.getAchievement());
-		if(jo.has("questName"))
+		//this.required = (this.requiredQuest == null ? null : this.requiredQuest.getAdvancement());
+		if (jo.has("questName"))
 		{
 			this.questName = jo.get("questName").getAsString();
 		}
-		if(jo.has("uniqueName"))
+		if (jo.has("uniqueName"))
 		{
 			this.uniqueName = jo.get("uniqueName").getAsString();
 		}
@@ -70,54 +72,65 @@ public abstract class Quest implements IQuest
 		this.posX = (this.requiredQuest != null ? (this.requiredQuest.getPosition().getX() + tmpX) : tmpX);
 		int tmpY = jo.get("posY").getAsInt();
 		this.posY = (this.requiredQuest != null ? (this.requiredQuest.getPosition().getY() + tmpY) : tmpY);
-		if(jo.has("icon"))
+		if (jo.has("icon"))
 		{
-			this.icon = ItemStackHelper.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
+			this.icon = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
 		}
 		// Additional Quests
-		if(jo.has("additionalRequiredQuests"))
+		if (jo.has("additionalRequiredQuests"))
 		{
 			JsonObject additionalRequiredQuests = jo.get("additionalRequiredQuests").getAsJsonObject();
 			Set<Entry<String, JsonElement>> set = additionalRequiredQuests.entrySet();
 			IQuest[] requiredQuestsTable = new IQuest[set.size()];
 			int index = 0;
-			for(Entry<String, JsonElement> q : set)
+			for (Entry<String, JsonElement> q : set)
 			{
 				requiredQuestsTable[index] = QuestList.get(q.getValue().getAsString());
 				index++;
 			}
 			this.additionalRequiredQuests = requiredQuestsTable;
 		}
-		// Building Achievement
-		this.achievement = new Achievement("vanillamagic:" + this.uniqueName /*this.questName*/, 
+		this.questTitle = "achievement." + this.uniqueName;
+		this.questDescription = "achievement." + this.uniqueName + ".desc";
+		// Build QuestData
+		this.questData = new QuestData("vanillamagic:" + this.uniqueName,
+				new TextComponentTranslation("achievement." + this.uniqueName, new Object[0]),
+				this);
+		this.questData.registerStat();
+		/*
+		this.achievement = new Advancement("vanillamagic:" + this.uniqueName, 
 				this.uniqueName, 
 				this.posX, 
 				this.posY, 
 				this.icon, 
 				this.required)
 				.registerStat();
+		*/
 		// Registering Quest - this method should ONLY be called here
 		QuestList.addQuest(this);
 	}
 	
-	public boolean canPlayerGetAchievement(EntityPlayer player)
+	/**
+	 * @return Returns TRUE if checking Player can get this Quest.
+	 */
+	public boolean canPlayerGetQuest(EntityPlayer player)
 	{
-		if(!player.hasAchievement(achievement))
+		if (QuestUtil.hasQuestUnlocked(player, this.requiredQuest))
 		{
-			// Player need additional quests to be completed.
-			if(hasAdditionalQuests())
+			if (hasAdditionalQuests())
 			{
-				return finishedAdditionalQuests(player);
+				if (finishedAdditionalQuests(player))
+					return true;
 			}
-			return true;
-		}
-		if(player.hasAchievement(achievement))
-		{
-			return true;
+			else
+				return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * @return Returns TRUE if this Quest has any additional Quests that need to be achieved before this.
+	 */
 	public boolean hasAdditionalQuests()
 	{
 		return additionalRequiredQuests != null;
@@ -125,11 +138,11 @@ public abstract class Quest implements IQuest
 	
 	public boolean finishedAdditionalQuests(EntityPlayer player)
 	{
-		if(hasAdditionalQuests())
+		if (hasAdditionalQuests())
 		{
-			for(IQuest quest : additionalRequiredQuests)
+			for (IQuest quest : additionalRequiredQuests)
 			{
-				if(!player.hasAchievement(quest.getAchievement()))
+				if (!QuestUtil.hasQuestUnlocked(player, quest))
 				{
 					return false;
 				}
@@ -141,16 +154,6 @@ public abstract class Quest implements IQuest
 	/*
 	 * =============================================================== GETTERS ================================================================
 	 */
-	
-	public Achievement getAchievement()
-	{
-		return achievement;
-	}
-	
-	public Achievement getRequiredAchievement()
-	{
-		return required;
-	}
 	
 	public IQuest getRequiredQuest()
 	{
@@ -172,6 +175,11 @@ public abstract class Quest implements IQuest
 		return questName;
 	}
 	
+	public String getQuestDesc()
+	{
+		return TextUtil.translateToLocal(this.questDescription);
+	}
+	
 	public String getUniqueName()
 	{
 		return uniqueName;
@@ -180,5 +188,10 @@ public abstract class Quest implements IQuest
 	public IQuest[] getAdditionalRequiredQuests()
 	{
 		return additionalRequiredQuests;
+	}
+	
+	public QuestData getQuestData()
+	{
+		return this.questData;
 	}
 }

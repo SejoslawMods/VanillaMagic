@@ -1,10 +1,7 @@
 package seia.vanillamagic.api.util;
 
-import seia.vanillamagic.api.quest.IQuest;
-
 /**
  * Simple presentation of 2D Point. <br>
- * Used in {@link IQuest}
  */
 public class Point 
 {
@@ -20,17 +17,26 @@ public class Point
 		this.setPosition(x, y);
 	}
 	
+	/**
+	 * Set the position of this point.
+	 */
 	public void setPosition(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
 	
+	/**
+	 * @return Returns the X-Coordinate of this point.
+	 */
 	public int getX()
 	{
 		return x;
 	}
 	
+	/**
+	 * @return Returns the Y-Coordintate of this point.
+	 */
 	public int getY()
 	{
 		return y;

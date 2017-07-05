@@ -5,7 +5,7 @@ import java.util.Arrays;
 import net.minecraftforge.fml.common.ModMetadata;
 
 /**
- * Class which adds metadata to main class.
+ * Class which adds metadata to mod main class.
  */
 public class VanillaMagicMetadata 
 {
