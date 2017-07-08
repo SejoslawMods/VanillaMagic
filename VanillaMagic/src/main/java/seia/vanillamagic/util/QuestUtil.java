@@ -20,6 +20,9 @@ public class QuestUtil
 	 */
 	public static boolean hasQuestUnlocked(EntityPlayer player, IQuest quest)
 	{
+		// Can't unlock null quest.
+		if (quest == null) return false;
+		
 		StatBase stat = quest.getQuestData();
 		int statValue = 0;
 		

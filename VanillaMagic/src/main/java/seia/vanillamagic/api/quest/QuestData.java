@@ -4,7 +4,7 @@ import net.minecraft.stats.StatBase;
 import net.minecraft.util.text.ITextComponent;
 
 /**
- * Holds data for Minecraft statistics.
+ * Holds data for Minecraft statistics about single Quest.
  */
 public class QuestData extends StatBase
 {
@@ -17,10 +17,10 @@ public class QuestData extends StatBase
 	 * @param questUniqueId -> "vanillamagic:" + questUniqueName
 	 * @param statNameIn
 	 */
-	public QuestData(String questUniqueId, ITextComponent statNameIn, IQuest quest)
+	public QuestData(String questUniqueId, ITextComponent statNameIn, IQuest connectedQuest)
 	{
 		super(questUniqueId, statNameIn);
-		this._quest = quest;
+		this._quest = connectedQuest;
 	}
 	
 	/**

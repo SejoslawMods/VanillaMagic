@@ -51,8 +51,11 @@ public class VanillaMagic
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
 		EventUtil.registerEvent(new QuestBookEvent()); // Main Questbook Event
 		
-		// TODO: Testing DummyQuest
-		QuestList.addQuest(new DummyQuest());
+		// TODO: Testing on DummyQuest
+		DummyQuest dq1 = new DummyQuest((DummyQuest)null, "Dummy 1", "dQ1", 0, 0);
+		QuestList.addQuest(dq1);
+		DummyQuest dq2 = new DummyQuest(dq1, "Dummy 2", "dQ2", 0, 1);
+		QuestList.addQuest(dq2);
 	}
 	
 	/**

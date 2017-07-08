@@ -37,19 +37,19 @@ import seia.vanillamagic.util.QuestUtil;
 public class GuiVMQuests extends GuiScreen implements IProgressMeter
 {
 	/**
-	 * Is the smallest column used to display a achievement on the GUI.
+	 * Is the smallest column used to display a Quest on the GUI.
 	 */
 	public static int MIN_DISPLAY_COLUMN;
 	/**
-	 * Is the smallest row used to display a achievement on the GUI.
+	 * Is the smallest row used to display a Quest on the GUI.
 	 */
 	public static int MIN_DISPLAY_ROW;
 	/**
-	 * Is the biggest column used to display a achievement on the GUI.
+	 * Is the biggest column used to display a Quest on the GUI.
 	 */
 	public static int MAX_DISPLAY_COLUMN;
 	/**
-	 * Is the biggest row used to display a achievement on the GUI.
+	 * Is the biggest row used to display a Quest on the GUI.
 	 */
 	public static int MAX_DISPLAY_ROW;
 	
@@ -228,6 +228,12 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	 * l -> centerHeight
 	 * i1 -> centerWidthWithOffset
 	 * j1 -> centerHeightWithOffset
+	 * i2 -> drawBackgroundPosXOffset
+	 * j2 -> drawBackgroundPosYOffset
+	 * i4 -> drawBackgroundPosX
+	 * l3 -> drawBackgroundPosY
+	 * l6 -> iconPosX
+	 * j7 -> iconPosY
 	 */
 	public void drawQuestsScreen(int mouseX, int mouseY, float partialTicks)
 	{
@@ -269,8 +275,8 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         GlStateManager.enableColorMaterial();
         int k1 = xScroll + 288 >> 4;
         int l1 = yScroll + 288 >> 4;
-        int i2 = (xScroll + 288) % 16;
-        int j2 = (yScroll + 288) % 16;
+        int drawBackgroundPosXOffset = (xScroll + 288) % 16;
+        int drawBackgroundPosYOffset = (yScroll + 288) % 16;
         int k2 = 4;
         int l2 = 8;
         int i3 = 10;
@@ -279,19 +285,19 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         Random random = new Random();
         float f = 16.0F / this.zoom;
         float f1 = 16.0F / this.zoom;
-
-        for (int l3 = 0; (float)l3 * f - (float)j2 < 155.0F; ++l3)
+        
+        for (int drawBackgroundPosY = 0; (float)drawBackgroundPosY * f - (float)drawBackgroundPosYOffset < 155.0F; ++drawBackgroundPosY)
         {
-            float f2 = 0.6F - (float)(l1 + l3) / 25.0F * 0.3F;
+            float f2 = 0.6F - (float)(l1 + drawBackgroundPosY) / 25.0F * 0.3F;
             GlStateManager.color(f2, f2, f2, 1.0F);
 
-            for (int i4 = 0; (float)i4 * f1 - (float)i2 < 224.0F; ++i4)
+            for (int drawBackgroundPosX = 0; (float)drawBackgroundPosX * f1 - (float)drawBackgroundPosXOffset < 224.0F; ++drawBackgroundPosX)
             {
-                random.setSeed((long)(this.mc.getSession().getPlayerID().hashCode() + k1 + i4 + (l1 + l3) * 16));
-                int j4 = random.nextInt(1 + l1 + l3) + (l1 + l3) / 2;
+                random.setSeed((long)(this.mc.getSession().getPlayerID().hashCode() + k1 + drawBackgroundPosX + (l1 + drawBackgroundPosY) * 16));
+                int j4 = random.nextInt(1 + l1 + drawBackgroundPosY) + (l1 + drawBackgroundPosY) / 2;
                 TextureAtlasSprite textureatlassprite = this.getTexture(Blocks.SAND);
 
-                if (j4 <= 37 && l1 + l3 != 35)
+                if (j4 <= 37 && l1 + drawBackgroundPosY != 35)
                 {
                     if (j4 == 22)
                     {
@@ -328,10 +334,11 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 }
 
                 this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                this.drawTexturedModalRect(i4 * 16 - i2, l3 * 16 - j2, textureatlassprite, 16, 16);
+                // Main background drawing method
+                this.drawTexturedModalRect(drawBackgroundPosX * 16 - drawBackgroundPosXOffset, drawBackgroundPosY * 16 - drawBackgroundPosYOffset, textureatlassprite, 16, 16);
             }
         }
-
+        
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
 
@@ -342,10 +349,10 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 
             if (quest.getParent() != null && questList.contains(quest.getParent()))
             {
-                int k5 = quest.getPosition().getY() * 24 - xScroll + 11; // displayColumn
-                int l5 = quest.getPosition().getX() * 24 - yScroll + 11; // displayRow
-                int j6 = quest.getParent().getPosition().getY() * 24 - xScroll + 11;
-                int k6 = quest.getParent().getPosition().getX() * 24 - yScroll + 11;
+                int k5 = quest.getPosition().getX() * 24 - xScroll + 11; // displayColumn
+                int l5 = quest.getPosition().getY() * 24 - yScroll + 11; // displayRow
+                int j6 = quest.getParent().getPosition().getX() * 24 - xScroll + 11;
+                int k6 = quest.getParent().getPosition().getY() * 24 - yScroll + 11;
                 boolean flag = QuestUtil.hasQuestUnlocked(this._player, quest);  //this._statsManager.hasAchievementUnlocked(quest);
                 boolean flag1 = QuestUtil.canUnlockQuest(this._player, quest);  //this.statFileWriter.canUnlockAchievement(quest);
                 int k4 = QuestUtil.countRequirementsUntilAvailable(this._player, quest);
@@ -397,10 +404,10 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         for (int i6 = 0; i6 < questList.size(); ++i6)
         {
             IQuest quest2 = questList.get(i6);
-            int l6 = quest2.getPosition().getY() * 24 - xScroll;
-            int j7 = quest2.getPosition().getX() * 24 - yScroll;
+            int iconPosX = quest2.getPosition().getX() * 24 - xScroll;
+            int iconPosY = quest2.getPosition().getY() * 24 - yScroll;
 
-            if (l6 >= -24 && j7 >= -24 && (float)l6 <= 224.0F * this.zoom && (float)j7 <= 155.0F * this.zoom)
+            if (iconPosX >= -24 && iconPosY >= -24 && (float)iconPosX <= 224.0F * this.zoom && (float)iconPosY <= 155.0F * this.zoom)
             {
                 int l7 = QuestUtil.countRequirementsUntilAvailable(this._player, quest2);
 
@@ -438,11 +445,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 GlStateManager.enableBlend(); // Forge: Specifically enable blend because it is needed here. And we fix Generic RenderItem's leakage of it.
 //                if (quest2.getSpecial())
 //                {
-//                    this.drawTexturedModalRect(l6 - 2, j7 - 2, 26, 202, 26, 26);
+             // Spiked Quest background
+//                    this.drawTexturedModalRect(iconPosX - 2, iconPosY - 2, 26, 202, 26, 26); 
 //                }
 //                else
 //                {
-                    this.drawTexturedModalRect(l6 - 2, j7 - 2, 0, 202, 26, 26);
+             // Normal rectangle Quest background
+//                    this.drawTexturedModalRect(iconPosX - 2, iconPosY - 2, 0, 202, 26, 26);
 //                }
                 GlStateManager.disableBlend(); //Forge: Cleanup states we set.
 
@@ -455,7 +464,7 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 
                 GlStateManager.disableLighting(); //Forge: Make sure Lighting is disabled. Fixes MC-33065
                 GlStateManager.enableCull();
-                this.itemRender.renderItemAndEffectIntoGUI(quest2.getIcon(), l6 + 3, j7 + 3);
+                this.itemRender.renderItemAndEffectIntoGUI(quest2.getIcon(), iconPosX + 3, iconPosY + 3);
                 GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
                 GlStateManager.disableLighting();
 
@@ -466,7 +475,7 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-                if (f3 >= (float)l6 && f3 <= (float)(l6 + 22) && f4 >= (float)j7 && f4 <= (float)(j7 + 22))
+                if (f3 >= (float)iconPosX && f3 <= (float)(iconPosX + 22) && f4 >= (float)iconPosY && f4 <= (float)(iconPosY + 22))
                 {
                     quest = quest2;
                 }
@@ -507,22 +516,22 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 
                 if (QuestUtil.hasQuestUnlocked(this._player, quest))
                 {
-                    this.fontRenderer.drawStringWithShadow(I18n.format("achievement.taken", new Object[0]), (float)i7, (float)(k7 + i9 + 4), -7302913);
+                    this.fontRenderer.drawStringWithShadow(I18n.format("quest.taken", new Object[0]), (float)i7, (float)(k7 + i9 + 4), -7302913);
                 }
             }
-            else if (i8 == 3)
+            else if (i8 == 3 && quest.getParent() != null)
             {
-                s = I18n.format("achievement.unknown", new Object[0]);
+                s = I18n.format("quest.unknown", new Object[0]);
                 int k8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
-                String s2 = (new TextComponentTranslation("achievement.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
+                String s2 = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
                 int i5 = this.fontRenderer.getWordWrappedHeight(s2, k8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + k8 + 3, k7 + i5 + 12 + 3, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(s2, i7, k7 + 12, k8, -9416624);
             }
-            else if (i8 < 3)
+            else if (i8 < 3 && quest.getParent() != null)
             {
                 int l8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
-                String s3 = (new TextComponentTranslation("achievement.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
+                String s3 = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
                 int j9 = this.fontRenderer.getWordWrappedHeight(s3, l8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + l8 + 3, k7 + j9 + 12 + 3, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(s3, i7, k7 + 12, l8, -9416624);

@@ -90,11 +90,11 @@ public abstract class Quest implements IQuest
 			}
 			this.additionalRequiredQuests = requiredQuestsTable;
 		}
-		this.questTitle = "achievement." + this.uniqueName;
-		this.questDescription = "achievement." + this.uniqueName + ".desc";
+		this.questTitle = "quest." + this.uniqueName;
+		this.questDescription = "quest." + this.uniqueName + ".desc";
 		// Build QuestData
 		this.questData = new QuestData("vanillamagic:" + this.uniqueName,
-				new TextComponentTranslation("achievement." + this.uniqueName, new Object[0]),
+				new TextComponentTranslation("quest." + this.uniqueName, new Object[0]),
 				this);
 		this.questData.registerStat();
 		/*
@@ -155,24 +155,24 @@ public abstract class Quest implements IQuest
 	 * =============================================================== GETTERS ================================================================
 	 */
 	
-	public IQuest getRequiredQuest()
+	public IQuest getParent()
 	{
-		return requiredQuest;
+		return this.requiredQuest;
 	}
 	
 	public Point getPosition()
 	{
-		return new Point(posX, posY);
+		return new Point(this.posX, this.posY);
 	}
 	
 	public ItemStack getIcon()
 	{
-		return icon;
+		return this.icon;
 	}
 	
 	public String getQuestName()
 	{
-		return questName;
+		return this.questName;
 	}
 	
 	public String getQuestDesc()
@@ -182,12 +182,12 @@ public abstract class Quest implements IQuest
 	
 	public String getUniqueName()
 	{
-		return uniqueName;
+		return this.uniqueName;
 	}
 	
 	public IQuest[] getAdditionalRequiredQuests()
 	{
-		return additionalRequiredQuests;
+		return this.additionalRequiredQuests;
 	}
 	
 	public QuestData getQuestData()
