@@ -55,6 +55,8 @@ wand.endRod=End Wand
 #Quests Texts
 ############################
 
+quest.name=Quest Name
+quest.achieved=Unlocked Quest
 quest.taken=Taken
 quest.requires=Requires
 quest.unknown=???

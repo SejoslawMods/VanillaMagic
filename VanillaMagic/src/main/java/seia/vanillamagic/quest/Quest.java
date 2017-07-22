@@ -93,9 +93,8 @@ public abstract class Quest implements IQuest
 		this.questTitle = "quest." + this.uniqueName;
 		this.questDescription = "quest." + this.uniqueName + ".desc";
 		// Build QuestData
-		this.questData = new QuestData("vanillamagic:" + this.uniqueName,
-				new TextComponentTranslation("quest." + this.uniqueName, new Object[0]),
-				this);
+		this.questData = buildQuestData();
+		if (this.requiredQuest == null) this.questData.isIndependent = true;
 		this.questData.registerStat();
 		/*
 		this.achievement = new Advancement("vanillamagic:" + this.uniqueName, 
@@ -108,6 +107,16 @@ public abstract class Quest implements IQuest
 		*/
 		// Registering Quest - this method should ONLY be called here
 		QuestList.addQuest(this);
+	}
+	
+	/**
+	 * @return Returns QuestData build for this Quest
+	 */
+	public QuestData buildQuestData() 
+	{
+		return new QuestData("vanillamagic:" + this.uniqueName, 
+				new TextComponentTranslation("quest." + this.uniqueName, new Object[0]), 
+				this);
 	}
 	
 	/**
@@ -175,7 +184,7 @@ public abstract class Quest implements IQuest
 		return this.questName;
 	}
 	
-	public String getQuestDesc()
+	public String getQuestDescription()
 	{
 		return TextUtil.translateToLocal(this.questDescription);
 	}

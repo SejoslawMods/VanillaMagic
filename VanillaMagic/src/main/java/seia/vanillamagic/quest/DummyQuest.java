@@ -23,5 +23,6 @@ public class DummyQuest extends Quest
 		this.questData = new QuestData("vanillamagic:" + this.getUniqueName(),
 				new TextComponentTranslation("quest." + this.getUniqueName(), new Object[0]),
 				this);
+		this.questData.registerStat();
 	}
 }

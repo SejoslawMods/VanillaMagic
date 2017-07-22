@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.api.VanillaMagicAPI;
 import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.quest.DummyQuest;
-import seia.vanillamagic.questbook.QuestBookEvent;
+import seia.vanillamagic.questbook.EventQuestBook;
 import seia.vanillamagic.util.EventUtil;
 
 /**
@@ -49,12 +49,15 @@ public class VanillaMagic
 		VanillaMagicAPI.LOGGER.log(Level.INFO, "Starting VanillaMagicAPI from VanillaMagic...");
 		LOGGER = event.getModLog();
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
-		EventUtil.registerEvent(new QuestBookEvent()); // Main Questbook Event
+		EventUtil.registerEvent(new EventQuestBook()); // Main Questbook Event
 		
 		// TODO: Testing on DummyQuest
-		DummyQuest dq1 = new DummyQuest((DummyQuest)null, "Dummy 1", "dQ1", 0, 0);
+		DummyQuest dq0 = new DummyQuest((DummyQuest)null, "Dummy 0", "dQ0", 0, 0);
+		dq0.getQuestData().isIndependent = true;
+		QuestList.addQuest(dq0);
+		DummyQuest dq1 = new DummyQuest(dq0, "Dummy 1", "dQ1", 0, 1);
 		QuestList.addQuest(dq1);
-		DummyQuest dq2 = new DummyQuest(dq1, "Dummy 2", "dQ2", 0, 1);
+		DummyQuest dq2 = new DummyQuest(dq1, "Dummy 2", "dQ2", 0, 2);
 		QuestList.addQuest(dq2);
 	}
 	

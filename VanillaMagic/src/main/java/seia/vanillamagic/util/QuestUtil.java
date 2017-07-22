@@ -21,15 +21,15 @@ public class QuestUtil
 	public static boolean hasQuestUnlocked(EntityPlayer player, IQuest quest)
 	{
 		// Can't unlock null quest.
-		if (quest == null) return false;
+		if (quest == null) return true;
 		
 		StatBase stat = quest.getQuestData();
 		int statValue = 0;
 		
-		if (PlayerUtil.isSinglePlayer(player))
-			statValue = PlayerUtil.toSinglePlayer(player).getStatFileWriter().readStat(stat);
-		else if (PlayerUtil.isMultiPlayer(player))
-			statValue = PlayerUtil.toMultiPlayer(player).getStatFile().readStat(stat);
+		if (EntityUtil.isSinglePlayer(player))
+			statValue = EntityUtil.toSinglePlayer(player).getStatFileWriter().readStat(stat);
+		else if (EntityUtil.isMultiPlayer(player))
+			statValue = EntityUtil.toMultiPlayer(player).getStatFile().readStat(stat);
 		
 		return statValue > 0;
 	}
@@ -45,19 +45,11 @@ public class QuestUtil
 	@SideOnly(Side.CLIENT)
 	public static int countRequirementsUntilAvailable(EntityPlayer player, IQuest quest)
 	{
-		if (hasQuestUnlocked(player, quest))
-        {
-            return 0;
-        }
+		if (hasQuestUnlocked(player, quest)) return 0;
         else
         {
             int i = 0;
-
-            for (IQuest q = quest.getParent(); q != null && !hasQuestUnlocked(player, quest); ++i)
-            {
-                q = q.getParent();
-            }
-
+            for (IQuest q = quest.getParent(); q != null && !hasQuestUnlocked(player, quest); ++i) q = q.getParent();
             return i;
         }
 	}
@@ -67,6 +59,12 @@ public class QuestUtil
 	 */
 	public static void addStat(EntityPlayer player, IQuest quest)
 	{
-		player.addStat(quest.getQuestData());
+		if (EntityUtil.isSinglePlayer(player)) EntityUtil.toSinglePlayer(player).addStat(quest.getQuestData());
+		else if (EntityUtil.isMultiPlayer(player)) 
+		{
+			EntityUtil.toMultiPlayer(player).addStat(quest.getQuestData());
+			String message = TextUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
+			EntityUtil.addChatComponentMessageNoSpam(player, message);
+		}
 	}
 }

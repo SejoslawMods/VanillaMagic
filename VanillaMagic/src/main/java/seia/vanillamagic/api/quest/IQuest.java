@@ -56,7 +56,7 @@ public interface IQuest
 	 /**
 	  * @return Returns Quest description.
 	  */
-	 String getQuestDesc();
+	 String getQuestDescription();
 		
 	 /**
 	  * @return Returns the Quest unique name.

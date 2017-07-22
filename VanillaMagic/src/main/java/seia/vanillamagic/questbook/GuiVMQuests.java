@@ -27,6 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.util.QuestUtil;
+import seia.vanillamagic.util.TextUtil;
 
 /**
  * GUI which shows Quests progress.
@@ -137,10 +138,7 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 		{
 			if (Mouse.isButtonDown(0))
 			{
-				int centerX = ((this.width - this.imageWidth) / 2) + 8;
-				int centerY = ((this.height - this.imageHeight) / 2) + 17;
-				
-				if ((this._scrolling == 0 || this._scrolling == 1) && mouseX >= centerX && mouseX < centerX + 224 && mouseY >= centerY && mouseY < centerY + 155)
+				if ((this._scrolling == 0 || this._scrolling == 1))
 				{
 					if (this._scrolling == 0)
 					{
@@ -323,15 +321,11 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         int l1 = yScroll + 288 >> 4;
         int drawBackgroundPosXOffset = (xScroll + 288) % 16;
         int drawBackgroundPosYOffset = (yScroll + 288) % 16;
-        int k2 = 4;
-        int l2 = 8;
-        int i3 = 10;
-        int j3 = 22;
-        int k3 = 37;
         Random random = new Random();
         float f = 16.0F / this.zoom;
         float f1 = 16.0F / this.zoom;
         
+        // Draw Background
         for (int drawBackgroundPosY = 0; (float)drawBackgroundPosY * f - (float)drawBackgroundPosYOffset < 155.0F; ++drawBackgroundPosY)
         {
             float f2 = 0.6F - (float)(l1 + drawBackgroundPosY) / 25.0F * 0.3F;
@@ -532,17 +526,21 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         GlStateManager.enableBlend();
         GlStateManager.popMatrix();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.drawTexturedModalRect(centerWidth, centerHeight, 0, 0, this.imageWidth, this.imageHeight);
+//        this.drawTexturedModalRect(centerWidth, centerHeight, 0, 0, this.imageWidth, this.imageHeight); // Renders all MC images
         this.zLevel = 0.0F;
         GlStateManager.depthFunc(515);
         GlStateManager.disableDepth();
         GlStateManager.enableTexture2D();
         super.drawScreen(mouseX, mouseY, partialTicks);
-
+        
+        // TODO: Temporary solution for Quest names
+        int questNameMoveX = 0;
+        int questNameMoveY = -15;
+        String questName = TextUtil.translateToLocal("quest.name") + ": ";
         if (quest != null)
         {
             String s = quest.getQuestData().getStatName().getUnformattedText();
-            String s1 = quest.getQuestDesc();//.getDescription();
+            String questDescription = quest.getQuestDescription();//.getDescription();
             int i7 = mouseX + 12;
             int k7 = mouseY - 4;
             int i8 = QuestUtil.countRequirementsUntilAvailable(this._player, quest);
@@ -550,7 +548,7 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             if (QuestUtil.canUnlockQuest(this._player, quest))
             {
                 int j8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
-                int i9 = this.fontRenderer.getWordWrappedHeight(s1, j8);
+                int i9 = this.fontRenderer.getWordWrappedHeight(questDescription, j8);
 
                 if (QuestUtil.hasQuestUnlocked(this._player, quest))
                 {
@@ -558,17 +556,20 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 }
 
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + j8 + 3, k7 + i9 + 3 + 12, -1073741824, -1073741824);
-                this.fontRenderer.drawSplitString(s1, i7, k7 + 12, j8, -6250336);
+                this.fontRenderer.drawSplitString(questDescription, i7, k7 + 12, j8, -6250336);
 
                 if (QuestUtil.hasQuestUnlocked(this._player, quest))
                 {
                     this.fontRenderer.drawStringWithShadow(I18n.format("quest.taken", new Object[0]), (float)i7, (float)(k7 + i9 + 4), -7302913);
                 }
+                
+                this.fontRenderer.drawSplitString(questName + quest.getQuestName(), i7 + questNameMoveX, k7 + questNameMoveY, k7, -1); // TODO: Quest Name
             }
             else if (i8 == 3 && quest.getParent() != null)
             {
                 s = I18n.format("quest.unknown", new Object[0]);
                 int k8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
+                this.fontRenderer.drawSplitString(questName + quest.getQuestName(), i7 + questNameMoveX, k7 + questNameMoveY, k8, -1); // TODO: Quest Name
                 String s2 = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
                 int i5 = this.fontRenderer.getWordWrappedHeight(s2, k8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + k8 + 3, k7 + i5 + 12 + 3, -1073741824, -1073741824);
@@ -577,7 +578,9 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             else if (i8 < 3 && quest.getParent() != null)
             {
                 int l8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
+                this.fontRenderer.drawSplitString(questName + quest.getQuestName(), i7 + questNameMoveX, k7 + questNameMoveY, l8, -1); // TODO: Quest Name
                 String s3 = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
+                s3 += " " + quest.getParent().getQuestName();
                 int j9 = this.fontRenderer.getWordWrappedHeight(s3, l8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + l8 + 3, k7 + j9 + 12 + 3, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(s3, i7, k7 + 12, l8, -9416624);
