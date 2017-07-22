@@ -35,10 +35,26 @@ public class Point
 	}
 	
 	/**
+	 * Set new position for the X coordinate of this point.
+	 */
+	public void setX(int newX)
+	{
+		this.x = newX;
+	}
+	
+	/**
 	 * @return Returns the Y-Coordintate of this point.
 	 */
 	public int getY()
 	{
 		return y;
+	}
+	
+	/**
+	 * Set new position for the Y coordinate of this point.
+	 */
+	public void setY(int newY)
+	{
+		this.y = newY;
 	}
 }

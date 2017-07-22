@@ -20,18 +20,17 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketClientStatus;
-import net.minecraft.stats.StatisticsManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.api.quest.QuestList;
-import seia.vanillamagic.util.PlayerUtil;
 import seia.vanillamagic.util.QuestUtil;
 
 /**
- * Gui which shows Quests progress
+ * GUI which shows Quests progress.
+ * Remade of the old Achievements GUI.
  */
 @SideOnly(Side.CLIENT)
 public class GuiVMQuests extends GuiScreen implements IProgressMeter
@@ -67,10 +66,6 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	 */
 	private EntityPlayer _player;
 	/**
-	 * Player's Statistics Manager
-	 */
-	private StatisticsManager _statsManager;
-	/**
 	 * Is Player scrolling the screen
 	 */
 	private int _scrolling;
@@ -79,8 +74,8 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	 */
 	private boolean _loadingQuests = true;
 	
-	protected int imageWidth = this.width;
-	protected int imageHeight = this.height - 20;
+	protected int imageWidth = 256;
+	protected int imageHeight = 202;
 	protected int xLastScroll;
 	protected int yLastScroll;
 	protected float zoom = 1.0F;
@@ -95,7 +90,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	{
 		this._parentScreen = parentScreen;
 		this._player = playerWhoOpenedBook;
-		this._statsManager = PlayerUtil.getStatisticsManager(this._player);
+		//this._statsManager = PlayerUtil.getStatisticsManager(this._player);
+		this.xScrollTarget = (double)(QuestList.get(0).getPosition().getX() * 24 - 70 - 12);
+        this.xScrollO = this.xScrollTarget;
+        this.xScrollP = this.xScrollTarget;
+        this.yScrollTarget = (double)(QuestList.get(0).getPosition().getY() * 24 - 70);
+        this.yScrollO = this.yScrollTarget;
+        this.yScrollP = this.yScrollTarget;
 	}
 	
 	/**
@@ -104,11 +105,12 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	public void initGui()
 	{
 		this.mc.getConnection().sendPacket(new CPacketClientStatus(CPacketClientStatus.State.REQUEST_STATS));
+		this.buttonList.clear();
 		this.buttonList.add(new GuiButton(1, 0, 0, 80, 20, I18n.format("gui.done", new Object[0])));
 	}
 	
 	/**
-	 * When button is pressed using Mouse.
+	 * When button is pressed with Mouse.
 	 */
 	protected void actionPerformed(GuiButton button) throws IOException
 	{
@@ -135,8 +137,8 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 		{
 			if (Mouse.isButtonDown(0))
 			{
-				int centerX = this.width / 2;
-				int centerY = this.height / 2;
+				int centerX = ((this.width - this.imageWidth) / 2) + 8;
+				int centerY = ((this.height - this.imageHeight) / 2) + 17;
 				
 				if ((this._scrolling == 0 || this._scrolling == 1) && mouseX >= centerX && mouseX < centerX + 224 && mouseY >= centerY && mouseY < centerY + 155)
 				{
@@ -210,15 +212,59 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 				this.yScrollTarget = (double)(Y_MAX - 1);
 			}
 			
-			// Draw Default Background
+			// Draw Default Background - grey background
 			this.drawDefaultBackground();
-			// Draw Quests
+			// Draw Quests - Quest Screen
 			this.drawQuestsScreen(mouseX, mouseY, partialTicks);
-			// Draw Title
+			// Draw Title - Quests Title
 			this.drawCenteredString(this.fontRenderer, "Quests", this.width / 2, 5, Color.WHITE.getRGB());
-			// Draw Buttons
+			// Draw Buttons - Done Button
 			super.drawScreen(mouseX, mouseY, partialTicks);
 		}
+	}
+	
+	
+	/**
+	 * Update screen.
+	 */
+	public void updateScreen()
+	{
+		if (!this._loadingQuests)
+		{
+			this.xScrollO = this.xScrollP;
+			this.yScrollO = this.yScrollP;
+			double xScroll = this.xScrollTarget - this.xScrollP;
+			double yScroll = this.yScrollTarget - this.yScrollP;
+			
+			if (xScroll * xScroll + yScroll * yScroll < 4.0D)
+			{
+				this.xScrollP += xScroll;
+				this.yScrollP += yScroll;
+			}
+			else
+			{
+				this.xScrollP += xScroll * 0.85D;
+				this.yScrollP += yScroll * 0.85D;
+			}
+		}
+	}
+	
+	public boolean doesGuiPauseGame()
+	{
+		return !this._loadingQuests;
+	}
+	
+	public void onStatsUpdated() 
+	{
+		if (this._loadingQuests)
+		{
+			this._loadingQuests = false;
+		}
+	}
+	
+	private TextureAtlasSprite getTexture(Block block)
+	{
+		return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(block.getDefaultState());
 	}
 	
 	/**
@@ -550,48 +596,5 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         GlStateManager.enableDepth();
         GlStateManager.enableLighting();
         RenderHelper.disableStandardItemLighting();
-	}
-	
-	/**
-	 * Update screen.
-	 */
-	public void updateScreen()
-	{
-		if (!this._loadingQuests)
-		{
-			this.xScrollO = this.xScrollP;
-			this.yScrollO = this.yScrollP;
-			double xScroll = this.xScrollTarget - this.xScrollP;
-			double yScroll = this.yScrollTarget - this.yScrollP;
-			
-			if (xScroll * xScroll + yScroll * yScroll < 4.0D)
-			{
-				this.xScrollP += xScroll;
-				this.yScrollP += yScroll;
-			}
-			else
-			{
-				this.xScrollP += xScroll * 0.85D;
-				this.yScrollP += yScroll * 0.85D;
-			}
-		}
-	}
-	
-	public boolean doesGuiPauseGame()
-	{
-		return !this._loadingQuests;
-	}
-	
-	public void onStatsUpdated() 
-	{
-		if (this._loadingQuests)
-		{
-			this._loadingQuests = false;
-		}
-	}
-	
-	private TextureAtlasSprite getTexture(Block block)
-	{
-		return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(block.getDefaultState());
 	}
 }
