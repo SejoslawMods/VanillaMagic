@@ -191,6 +191,8 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	int slotNumber = 0;
 	public void update()
 	{
+		if (inputInvWrapper == null) return; // if something weird happened to input, break the update
+		
 		IInventory inv = inputInvWrapper.getInventory();
 		if(slotNumber >= inv.getSizeInventory())
 		{
