@@ -7,8 +7,9 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import seia.vanillamagic.api.util.VectorWrapper;
+import seia.vanillamagic.api.util.VectorWrapper.Vector3D;
 import seia.vanillamagic.util.BlockPosUtil;
 
 /**
@@ -46,8 +47,8 @@ public class EntitySpellFreezeLiquid extends EntitySpell
 	{
 		if (circleCenter == null)
 		{
-			Vec3d casterLookVec = castingEntity.getLookVec();
-			circleCenter = new BlockPos(this.posX - casterLookVec.x, this.posY - casterLookVec.y, this.posZ - casterLookVec.z);
+			Vector3D casterLookVec = VectorWrapper.wrap(castingEntity.getLookVec());
+			circleCenter = new BlockPos(this.posX - casterLookVec.getX(), this.posY - casterLookVec.getY(), this.posZ - casterLookVec.getZ());
 			List<BlockPos> blockPosToReplace = BlockPosUtil.getBlockPos3x3XZAroundCenterWithCenter(circleCenter.getX(), circleCenter.getY(), circleCenter.getZ());
 			for (int i = 0; i < blockPosToReplace.size(); ++i)
 			{

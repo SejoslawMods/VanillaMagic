@@ -27,6 +27,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
 
 /**
  * Class which wraps various EntityPlayer related things.

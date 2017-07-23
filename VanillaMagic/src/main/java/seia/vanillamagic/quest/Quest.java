@@ -58,23 +58,16 @@ public abstract class Quest implements IQuest
 	public void readData(JsonObject jo)
 	{
 		this.requiredQuest = QuestList.get(jo.get("requiredQuest").getAsString());
-		if (jo.has("questName"))
-		{
-			this.questName = jo.get("questName").getAsString();
-		}
-		if (jo.has("uniqueName"))
-		{
-			this.uniqueName = jo.get("uniqueName").getAsString();
-		}
+		if (jo.has("questName")) this.questName = jo.get("questName").getAsString();
+		if (jo.has("uniqueName")) this.uniqueName = jo.get("uniqueName").getAsString();
+		
 		// Quest position on the screen
 		int tmpX = jo.get("posX").getAsInt();
 		this.posX = (this.requiredQuest != null ? (this.requiredQuest.getPosition().getX() + tmpX) : tmpX);
 		int tmpY = jo.get("posY").getAsInt();
 		this.posY = (this.requiredQuest != null ? (this.requiredQuest.getPosition().getY() + tmpY) : tmpY);
-		if (jo.has("icon"))
-		{
-			this.icon = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
-		}
+		if (jo.has("icon")) this.icon = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
+		
 		// Additional Quests
 		if (jo.has("additionalRequiredQuests"))
 		{
@@ -138,16 +131,26 @@ public abstract class Quest implements IQuest
 	public boolean finishedAdditionalQuests(EntityPlayer player)
 	{
 		if (hasAdditionalQuests())
-		{
 			for (IQuest quest : additionalRequiredQuests)
-			{
 				if (!QuestUtil.hasQuestUnlocked(player, quest))
-				{
 					return false;
-				}
-			}
-		}
 		return true;
+	}
+	
+	/**
+	 * Add THIS Quest to given Player.
+	 */
+	public void addStat(EntityPlayer player)
+	{
+		QuestUtil.addStat(player, this);
+	}
+	
+	/**
+	 * @return Returns TRUE if the given Player already owns THIS Quest.
+	 */
+	public boolean hasQuest(EntityPlayer player)
+	{
+		return QuestUtil.hasQuestUnlocked(player, this);
 	}
 	
 	/*

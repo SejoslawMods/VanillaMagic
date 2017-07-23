@@ -22,6 +22,7 @@ public class QuestList
 	 * All registered Quests
 	 */
 	private static List<IQuest> _QUESTS = new ArrayList<IQuest>();
+	
 	/**
 	 * Map: <br>
 	 * Key - Quest Unique Name <br>

@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.WorldEvent;
+import seia.vanillamagic.quest.QuestJumper;
 
 /**
  * Class which wraps various World related stuff.
