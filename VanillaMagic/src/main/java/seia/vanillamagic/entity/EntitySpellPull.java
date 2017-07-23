@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import seia.vanillamagic.magic.spell.spells.teleport.TeleportHelper;
+import seia.vanillamagic.magic.spell.spells.teleport.TeleportUtil;
 
 /**
  * Class which defines Pull Entity Spell.
@@ -29,16 +29,16 @@ public class EntitySpellPull extends EntitySpell
 	 */
 	protected void onImpact(RayTraceResult result) 
 	{
-		if(result.typeOfHit == Type.BLOCK)
+		if (result.typeOfHit == Type.BLOCK)
 		{
 			// TODO: EntitySpellPull -> what should happened if hit a block, maybe pull block ???
 		}
-		else if(result.typeOfHit == Type.ENTITY)
+		else if (result.typeOfHit == Type.ENTITY)
 		{
-			if(hittedEntity == null)
+			if (hittedEntity == null)
 			{
 				hittedEntity = result.entityHit;
-				TeleportHelper.teleportEntity(hittedEntity, casterPosWhileCasting);
+				TeleportUtil.teleportEntity(hittedEntity, casterPosWhileCasting);
 				castingEntity.world.updateEntities();
 			}
 		}

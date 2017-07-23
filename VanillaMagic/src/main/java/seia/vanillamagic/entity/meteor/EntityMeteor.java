@@ -9,7 +9,7 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import seia.vanillamagic.config.VMConfig;
-import seia.vanillamagic.util.explosion.ExplosionHelper;
+import seia.vanillamagic.util.explosion.ExplosionUtil;
 
 /**
  * Class which represents Meteor itself.
@@ -23,10 +23,10 @@ public class EntityMeteor extends EntityLargeFireball
 		super(castingEntity.world);
 		setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
 		setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
-		float baseSize = VMConfig.basicMeteorSize;
+		float baseSize = VMConfig.BASIC_METEOR_SIZE;
 		setSize(baseSize, baseSize);
 		
-		this.explosionPower = VMConfig.basicMeteorExplosionPower;
+		this.explosionPower = VMConfig.BASIC_METEOR_EXPLOSION_POWER;
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
@@ -43,15 +43,15 @@ public class EntityMeteor extends EntityLargeFireball
 	protected void onImpact(RayTraceResult result)
 	{
 		super.onImpact(result);
-		if(!this.world.isRemote)
+		if (!this.world.isRemote)
 		{
-			if(result.entityHit != null)
+			if (result.entityHit != null)
 			{
 				result.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 6.0F);
 				this.applyEnchantments(this.shootingEntity, result.entityHit);
 			}
 			boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
-			ExplosionHelper.newExplosion2(this.world, (Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
+			ExplosionUtil.newExplosion2(this.world, (Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag, flag);
 			this.setDead();
 		}
 	}

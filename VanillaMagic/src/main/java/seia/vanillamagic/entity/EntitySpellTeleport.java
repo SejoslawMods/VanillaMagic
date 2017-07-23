@@ -1,7 +1,6 @@
 package seia.vanillamagic.entity;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityEndGateway;
@@ -15,7 +14,7 @@ import seia.vanillamagic.api.event.EventTeleportEntity;
 /**
  * Class which defines the Teleport Spell.
  */
-public class EntitySpellTeleport extends EntitySpell
+public class EntitySpellTeleport extends EntitySpellUpdate
 {
 	public EntitySpellTeleport(World worldIn, EntityLivingBase caster, 
 			double accelX, double accelY, double accelZ) 
@@ -29,23 +28,23 @@ public class EntitySpellTeleport extends EntitySpell
 	protected void onImpact(RayTraceResult result) 
 	{
 		EntityLivingBase caster = this.castingEntity;
-		if(result.typeOfHit == RayTraceResult.Type.ENTITY)
+		if (result.typeOfHit == RayTraceResult.Type.ENTITY)
 		{
-			if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ))))
+			if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ))))
 			{
 				caster.setPositionAndUpdate(result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ);
 				caster.fallDistance = 0.0F;
 				return;
 			}
 		}
-		if(result.typeOfHit == RayTraceResult.Type.BLOCK)
+		if (result.typeOfHit == RayTraceResult.Type.BLOCK)
 		{
 			BlockPos resultBlockPos = result.getBlockPos();
 			TileEntity resultTileEntity = this.world.getTileEntity(resultBlockPos);
-			if(resultTileEntity instanceof TileEntityEndGateway)
+			if (resultTileEntity instanceof TileEntityEndGateway)
 			{
 				TileEntityEndGateway tileEntityEndGate = (TileEntityEndGateway)resultTileEntity;
-				if(caster != null)
+				if (caster != null)
 				{
 					tileEntityEndGate.teleportEntity(caster);
 					this.setDead();
@@ -55,38 +54,36 @@ public class EntitySpellTeleport extends EntitySpell
 				return;
 			}
 		}
-		for(int i = 0; i < 32; ++i)
-		{
+		
+		for (int i = 0; i < 32; ++i)
 			this.world.spawnParticle(EnumParticleTypes.PORTAL, this.posX, this.posY + this.rand.nextDouble() * 2.0D, this.posZ, this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian(), new int[0]);
-		}
-		if(!this.world.isRemote)
+		
+		if (!this.world.isRemote)
 		{
-			if(result.entityHit == null)
+			if (result.entityHit == null)
 			{
 				BlockPos blockpos = result.getBlockPos().offset(result.sideHit);
-				if(this.world.isAirBlock(blockpos))
+				if (this.world.isAirBlock(blockpos))
 				{
-					if(caster instanceof EntityPlayerMP)
+					if (caster instanceof EntityPlayerMP)
 					{
 						EntityPlayerMP casterMP = (EntityPlayerMP)caster;
-						if(casterMP.connection.getNetworkManager().isChannelOpen() && 
+						if (casterMP.connection.getNetworkManager().isChannelOpen() && 
 								casterMP.world == this.world && 
 								!casterMP.isPlayerSleeping())
 						{
-							if(caster.isRiding())
-							{
-								caster.dismountRidingEntity();
-							}
-							if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(this.posX, this.posY + 1, this.posZ))))
+							if (caster.isRiding()) caster.dismountRidingEntity();
+							
+							if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(this.posX, this.posY + 1, this.posZ))))
 							{
 								caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
 								caster.fallDistance = 0.0F;
 							}
 						}
 					}
-					else if(caster != null)
+					else if (caster != null)
 					{
-						if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(this.posX, this.posY + 1, this.posZ))))
+						if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(caster, new BlockPos(this.posX, this.posY + 1, this.posZ))))
 						{
 							caster.setPositionAndUpdate(this.posX, this.posY + 1, this.posZ);
 							caster.fallDistance = 0.0F;
@@ -95,22 +92,6 @@ public class EntitySpellTeleport extends EntitySpell
 				}
 			}
 			this.setDead();
-		}
-	}
-	
-	/**
-	 * Called to update the Entity's position / logic.
-	 */
-	public void onUpdate()
-	{
-		EntityLivingBase caster = this.castingEntity;
-		if(caster != null && caster instanceof EntityPlayer && !caster.isEntityAlive())
-		{
-			this.setDead();
-		}
-		else
-		{
-			super.onUpdate();
 		}
 	}
 }
