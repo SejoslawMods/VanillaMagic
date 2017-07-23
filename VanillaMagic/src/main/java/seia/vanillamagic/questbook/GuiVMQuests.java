@@ -134,10 +134,7 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 			{
 				if (this._scrolling == 0 || this._scrolling == 1)
 				{
-					if (this._scrolling == 0)
-					{
-						this._scrolling = 1;
-					}
+					if (this._scrolling == 0) this._scrolling = 1;
 					else
 					{
 						this.xScrollP -= (double)((float)(mouseX - this.xLastScroll) * this.zoom);
@@ -151,22 +148,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 					this.yLastScroll = mouseY;
 				}
 			}
-			else
-			{
-				this._scrolling = 0;
-			}
+			else this._scrolling = 0;
 			
 			int wheelMovement = Mouse.getDWheel();
 			float localZoom = this.zoom;
 			
-			if (wheelMovement < 0)
-			{
-				this.zoom += 0.25F;
-			}
-			else if (wheelMovement > 0)
-			{
-				this.zoom -= 0.25F;
-			}
+			if (wheelMovement < 0) this.zoom += 0.25F;
+			else if (wheelMovement > 0) this.zoom -= 0.25F;
 			
 			this.zoom = MathHelper.clamp(this.zoom, 1.0F, 2.0F);
 			
@@ -183,12 +171,12 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 				this.xScrollTarget = this.xScrollP;
 				this.yScrollTarget = this.yScrollP;
 			}
-			
+			/*
 			if (this.xScrollTarget < (double)X_MIN) this.xScrollTarget = (double)X_MIN;
 			if (this.yScrollTarget < (double)Y_MIN) this.yScrollTarget = (double)Y_MIN;
 			if (this.xScrollTarget >= (double)X_MAX) this.xScrollTarget = (double)(X_MAX - 1);
 			if (this.yScrollTarget >= (double)Y_MAX) this.yScrollTarget = (double)(Y_MAX - 1);
-			
+			*/
 			// Draw Default Background - grey background
 			this.drawDefaultBackground();
 			// Draw Quests - Quest Screen
@@ -259,12 +247,12 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	{
 		int xScroll = MathHelper.floor(this.xScrollO + (this.xScrollP - this.xScrollO) * (double) partialTicks);
         int yScroll = MathHelper.floor(this.yScrollO + (this.yScrollP - this.yScrollO) * (double) partialTicks);
-        
+        /*
         if (xScroll < X_MIN) xScroll = X_MIN;
         if (yScroll < Y_MIN) yScroll = Y_MIN;
         if (xScroll >= X_MAX) xScroll = X_MAX - 1;
         if (yScroll >= Y_MAX) yScroll = Y_MAX - 1;
-        
+        */
         int centerWidth = (this.width - this.imageWidth) / 2;
         int centerHeight = (this.height - this.imageHeight) / 2;
         int centerWidthWithOffset = centerWidth + 16;
@@ -302,31 +290,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 {
                     if (j4 == 22)
                     {
-                        if (random.nextInt(2) == 0)
-                        {
-                            textureatlassprite = this.getTexture(Blocks.DIAMOND_ORE);
-                        }
-                        else
-                        {
-                            textureatlassprite = this.getTexture(Blocks.REDSTONE_ORE);
-                        }
+                        if (random.nextInt(2) == 0) textureatlassprite = this.getTexture(Blocks.DIAMOND_ORE);
+                        else textureatlassprite = this.getTexture(Blocks.REDSTONE_ORE);
                     }
-                    else if (j4 == 10)
-                    {
-                        textureatlassprite = this.getTexture(Blocks.IRON_ORE);
-                    }
-                    else if (j4 == 8)
-                    {
-                        textureatlassprite = this.getTexture(Blocks.COAL_ORE);
-                    }
-                    else if (j4 > 4)
-                    {
-                        textureatlassprite = this.getTexture(Blocks.STONE);
-                    }
-                    else if (j4 > 0)
-                    {
-                        textureatlassprite = this.getTexture(Blocks.DIRT);
-                    }
+                    else if (j4 == 10) textureatlassprite = this.getTexture(Blocks.IRON_ORE);
+                    else if (j4 == 8) textureatlassprite = this.getTexture(Blocks.COAL_ORE);
+                    else if (j4 > 4) textureatlassprite = this.getTexture(Blocks.STONE);
+                    else if (j4 > 0) textureatlassprite = this.getTexture(Blocks.DIRT);
                 }
                 else
                 {
@@ -362,34 +332,16 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 {
                     int l4 = -16777216;
 
-                    if (flag)
-                    {
-                        l4 = -6250336;
-                    }
-                    else if (flag1)
-                    {
-                        l4 = -16711936;
-                    }
+                    if (flag) l4 = -6250336;
+                    else if (flag1) l4 = -16711936;
 
                     this.drawHorizontalLine(k5, j6, l5, l4);
                     this.drawVerticalLine(j6, l5, k6, l4);
 
-                    if (k5 > j6)
-                    {
-                        this.drawTexturedModalRect(k5 - 11 - 7, l5 - 5, 114, 234, 7, 11);
-                    }
-                    else if (k5 < j6)
-                    {
-                        this.drawTexturedModalRect(k5 + 11, l5 - 5, 107, 234, 7, 11);
-                    }
-                    else if (l5 > k6)
-                    {
-                        this.drawTexturedModalRect(k5 - 5, l5 - 11 - 7, 96, 234, 11, 7);
-                    }
-                    else if (l5 < k6)
-                    {
-                        this.drawTexturedModalRect(k5 - 5, l5 + 11, 96, 241, 11, 7);
-                    }
+                    if (k5 > j6) this.drawTexturedModalRect(k5 - 11 - 7, l5 - 5, 114, 234, 7, 11);
+                    else if (k5 < j6) this.drawTexturedModalRect(k5 + 11, l5 - 5, 107, 234, 7, 11);
+                    else if (l5 > k6) this.drawTexturedModalRect(k5 - 5, l5 - 11 - 7, 96, 234, 11, 7);
+                    else if (l5 < k6) this.drawTexturedModalRect(k5 - 5, l5 + 11, 96, 241, 11, 7);
                 }
             }
         }
@@ -412,29 +364,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             {
                 int l7 = QuestUtil.countRequirementsUntilAvailable(this._player, quest2);
 
-                if (QuestUtil.hasQuestUnlocked(this._player, quest2))
-                {
-                    GlStateManager.color(0.75F, 0.75F, 0.75F, 1.0F);
-                }
-                else if (QuestUtil.canUnlockQuest(this._player, quest2))
-                {
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                }
-                else if (l7 < 3)
-                {
-                    GlStateManager.color(0.3F, 0.3F, 0.3F, 1.0F);
-                }
-                else if (l7 == 3)
-                {
-                    GlStateManager.color(0.2F, 0.2F, 0.2F, 1.0F);
-                }
+                if (QuestUtil.hasQuestUnlocked(this._player, quest2)) GlStateManager.color(0.75F, 0.75F, 0.75F, 1.0F);
+                else if (QuestUtil.canUnlockQuest(this._player, quest2)) GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                else if (l7 < 3) GlStateManager.color(0.3F, 0.3F, 0.3F, 1.0F);
+                else if (l7 == 3) GlStateManager.color(0.2F, 0.2F, 0.2F, 1.0F);
                 else
                 {
-                    if (l7 != 4)
-                    {
-                        continue;
-                    }
-
+                    if (l7 != 4) continue;
                     GlStateManager.color(0.1F, 0.1F, 0.1F, 1.0F);
                 }
 
@@ -451,29 +387,16 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 //                }
                 GlStateManager.disableBlend(); //Forge: Cleanup states we set.
 
-                if (!QuestUtil.canUnlockQuest(this._player, quest2))
-                {
-                    GlStateManager.color(0.1F, 0.1F, 0.1F, 1.0F);
-                    //this.itemRender.isNotRenderingEffectsInGUI(false);
-                }
+                if (!QuestUtil.canUnlockQuest(this._player, quest2)) GlStateManager.color(0.1F, 0.1F, 0.1F, 1.0F);
 
                 GlStateManager.disableLighting(); //Forge: Make sure Lighting is disabled. Fixes MC-33065
                 GlStateManager.enableCull();
                 this.itemRender.renderItemAndEffectIntoGUI(quest2.getIcon(), iconPosX + 3, iconPosY + 3);
                 GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
                 GlStateManager.disableLighting();
-
-//                if (!QuestUtil.canUnlockQuest(this._player, quest2))
-//                {
-//                    this.itemRender.isNotRenderingEffectsInGUI(true);
-//                }
-
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-                if (f3 >= (float)iconPosX && f3 <= (float)(iconPosX + 22) && f4 >= (float)iconPosY && f4 <= (float)(iconPosY + 22))
-                {
-                    quest = quest2;
-                }
+                if (f3 >= (float)iconPosX && f3 <= (float)(iconPosX + 22) && f4 >= (float)iconPosY && f4 <= (float)(iconPosY + 22)) quest = quest2;
             }
         }
 
@@ -481,7 +404,6 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         GlStateManager.enableBlend();
         GlStateManager.popMatrix();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-//        this.drawTexturedModalRect(centerWidth, centerHeight, 0, 0, this.imageWidth, this.imageHeight); // Renders all MC images
         this.zLevel = 0.0F;
         GlStateManager.depthFunc(515);
         GlStateManager.disableDepth();
@@ -501,18 +423,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 int j8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
                 int i9 = this.fontRenderer.getWordWrappedHeight(questDescription, j8);
 
-                if (QuestUtil.hasQuestUnlocked(this._player, quest))
-                {
-                    i9 += 12;
-                }
+                if (QuestUtil.hasQuestUnlocked(this._player, quest)) i9 += 12;
 
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + j8 + 3, k7 + i9 + 3 + 12, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(questDescription, i7, k7 + 12, j8, -6250336);
 
                 if (QuestUtil.hasQuestUnlocked(this._player, quest))
-                {
                     this.fontRenderer.drawStringWithShadow(I18n.format("quest.taken", new Object[0]), (float)i7, (float)(k7 + i9 + 4), -7302913);
-                }
             }
             else if (i8 == 3)
             {
@@ -532,15 +449,10 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + l8 + 3, k7 + j9 + 12 + 3, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(s3, i7, k7 + 12, l8, -9416624);
             }
-            else
-            {
-                s = null;
-            }
+            else s = null;
 
             if (s != null)
-            {
                 this.fontRenderer.drawStringWithShadow(s, (float)i7, (float)k7, QuestUtil.canUnlockQuest(this._player, quest) ? -1 : -8355712);
-            }
         }
 
         GlStateManager.enableDepth();
