@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -87,10 +88,8 @@ public class ItemStackUtil
 	public static boolean checkItemsInHands(EntityPlayer player, ItemStack shouldHaveInOffHand, ItemStack shouldHaveInMainHand)
 	{
 		// Check Player
-		if (player == null)
-		{
-			return false;
-		}
+		if (player == null) return false;
+		
 		// Check Left Hand
 		ItemStack offHand = player.getHeldItemOffhand();
 		if (shouldHaveInOffHand != null) // Not null means that we want to check this hand
@@ -161,14 +160,8 @@ public class ItemStackUtil
 				block = Block.getBlockById(id);
 			}
 			
-			if (item == null)
-			{
-				return new ItemStack(block, stackSize, meta);
-			}
-			else if (block == null)
-			{
-				return new ItemStack(item, stackSize, meta);
-			}
+			if (item == null) return new ItemStack(block, stackSize, meta);
+			else if (block == null) return new ItemStack(item, stackSize, meta);
 		}
 		catch (Exception e)
 		{
@@ -197,16 +190,12 @@ public class ItemStackUtil
 	 */
 	public static boolean isIInventory(ItemStack stack) 
 	{
-		if (ItemStackUtil.isNullStack(stack))
-		{
-			return false;
-		}
+		if (ItemStackUtil.isNullStack(stack)) return false;
+		
 		Item itemFromStack = stack.getItem();
 		Block blockFromStack = Block.getBlockFromItem(itemFromStack);
-		if (blockFromStack == null)
-		{
-			return false;
-		}
+		if (blockFromStack == null) return false;
+		
 		if (blockFromStack instanceof ITileEntityProvider)
 		{
 			IBlockState blockFromStackState = blockFromStack.getDefaultState();
@@ -229,10 +218,7 @@ public class ItemStackUtil
 	public static ItemStack loadItemStackFromNBT(NBTTagCompound tag)
 	{
 		ItemStack stack = new ItemStack(tag);
-		if (stack.isEmpty())
-		{
-			return NULL_STACK;
-		}
+		if (stack.isEmpty()) return NULL_STACK;
 		return stack;
 	}
 	
@@ -241,10 +227,7 @@ public class ItemStackUtil
 	 */
 	public static int getStackSize(ItemStack stack)
 	{
-		if (stack == null)
-		{
-			return 0;
-		}
+		if (stack == null) return 0;
 		return stack.getCount();
 	}
 	
@@ -254,10 +237,7 @@ public class ItemStackUtil
 	 */
 	public static void setStackSize(ItemStack stack, int value)
 	{
-		if (stack == null)
-		{
-			return;
-		}
+		if (stack == null) return;
 		stack.setCount(value);
 	}
 	
@@ -267,10 +247,7 @@ public class ItemStackUtil
 	 */
 	public static void increaseStackSize(ItemStack stack, int value)
 	{
-		if (stack == null)
-		{
-			return;
-		}
+		if (stack == null) return;
 		stack.grow(value);
 	}
 	
@@ -280,10 +257,7 @@ public class ItemStackUtil
 	 */
 	public static void decreaseStackSize(ItemStack stack, int value)
 	{
-		if (stack == null)
-		{
-			return;
-		}
+		if (stack == null) return;
 		stack.shrink(value);
 	}
 	
@@ -292,10 +266,7 @@ public class ItemStackUtil
 	 */
 	public static boolean isNullStack(ItemStack stack)
 	{
-		if (stack == null)
-		{
-			return true;
-		}
+		if (stack == null) return true;
 		return stack.isEmpty();
 	}
 	
