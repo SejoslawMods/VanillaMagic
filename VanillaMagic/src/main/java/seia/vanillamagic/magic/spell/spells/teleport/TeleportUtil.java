@@ -35,42 +35,39 @@ public class TeleportUtil
 	
 	public static Entity entityChangeDimension(Entity entity, int newDimId)
 	{
-		if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(entity, entity.getPosition(), newDimId)))
+		if  (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(entity, entity.getPosition(), newDimId)))
 			return entity.changeDimension(newDimId);
 		return null;
 	}
 	
 	public static void teleportEntity(Entity entityToBeTeleport, BlockPos teleportTo)
 	{
-		if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(entityToBeTeleport, teleportTo)))
+		if  (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(entityToBeTeleport, teleportTo)))
 			entityToBeTeleport.setPositionAndUpdate(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
 	}
 	
 	public static void changePlayerDimensionWithoutPortal(EntityPlayerMP player, int dimension, BlockPos pos)
 	{
-		if (MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(player, pos, dimension)))
-		{
-			return;
-		}
+		if  (MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(player, pos, dimension))) return;
+		
 		MinecraftServer server = player.world.getMinecraftServer();
 		WorldServer worldServer = server.getWorld(dimension);
 		VMTeleporter vmTele = new VMTeleporter(worldServer, pos.getX(), pos.getY(), pos.getZ());
 		boolean has = false;
-		for(int i = 0 ; i < worldServer.customTeleporters.size(); ++i)
+		for (int i = 0 ; i < worldServer.customTeleporters.size(); ++i)
 		{
-			if(worldServer.customTeleporters.get(i) instanceof VMTeleporter)
+			if (worldServer.customTeleporters.get(i) instanceof VMTeleporter)
 			{
 				has = true;
 				break;
 			}
 		}
-		if(!has)
+		
+		if (!has) worldServer.customTeleporters.add(vmTele);
+		
+		for (int i = 0 ; i < worldServer.customTeleporters.size(); ++i)
 		{
-			worldServer.customTeleporters.add(vmTele);
-		}
-		for(int i = 0 ; i < worldServer.customTeleporters.size(); ++i)
-		{
-			if(worldServer.customTeleporters.get(i) instanceof VMTeleporter)
+			if (worldServer.customTeleporters.get(i) instanceof VMTeleporter)
 			{
 				transferPlayerToDimension(player, dimension, (VMTeleporter)worldServer.customTeleporters.get(i));
 				break;
@@ -90,17 +87,16 @@ public class TeleportUtil
 	
 	public static Entity changeDimension(Entity entity, int newDimId, BlockPos newPos)
 	{
-		if(!entity.world.isRemote && !entity.isDead)
+		if (!entity.world.isRemote && !entity.isDead)
 		{
-			if(!ForgeHooks.onTravelToDimension(entity, newDimId)) return null;
-//			entity.world.theProfiler.startSection("changeDimension");
+			if (!ForgeHooks.onTravelToDimension(entity, newDimId)) return null;
             MinecraftServer minecraftServer = entity.getServer();
             int currentDim = entity.dimension;
             WorldServer worldServerCurrent = minecraftServer.getWorld(currentDim);
             WorldServer worldServerNew = minecraftServer.getWorld(newDimId);
             entity.dimension = newDimId;
 
-            if(currentDim == 1 && newDimId == 1)
+            if (currentDim == 1 && newDimId == 1)
             {
             	worldServerNew = minecraftServer.getWorld(0);
                 entity.dimension = 0;
@@ -108,24 +104,20 @@ public class TeleportUtil
 
             entity.world.removeEntity(entity);
             entity.isDead = false;
-//            entity.world.theProfiler.startSection("reposition");
             BlockPos blockpos;
 
-            if (newDimId == 1)
-            {
-                blockpos = worldServerNew.getSpawnCoordinate();
-            }
+            if  (newDimId == 1) blockpos = worldServerNew.getSpawnCoordinate();
             else
             {
                 double d0 = entity.posX;
                 double d1 = entity.posZ;
 
-                if (newDimId == -1)
+                if  (newDimId == -1)
                 {
                     d0 = MathHelper.clamp(d0 / 8.0D, worldServerNew.getWorldBorder().minX() + 16.0D, worldServerNew.getWorldBorder().maxX() - 16.0D);
                     d1 = MathHelper.clamp(d1 / 8.0D, worldServerNew.getWorldBorder().minZ() + 16.0D, worldServerNew.getWorldBorder().maxZ() - 16.0D);
                 }
-                else if (newDimId == 0)
+                else if  (newDimId == 0)
                 {
                     d0 = MathHelper.clamp(d0 * 8.0D, worldServerNew.getWorldBorder().minX() + 16.0D, worldServerNew.getWorldBorder().maxX() - 16.0D);
                     d1 = MathHelper.clamp(d1 * 8.0D, worldServerNew.getWorldBorder().minZ() + 16.0D, worldServerNew.getWorldBorder().maxZ() - 16.0D);
@@ -134,27 +126,19 @@ public class TeleportUtil
                 d0 = (double)MathHelper.clamp((int)d0, -29999872, 29999872);
                 d1 = (double)MathHelper.clamp((int)d1, -29999872, 29999872);
                 entity.setLocationAndAngles(d0, entity.posY, d1, 90.0F, 0.0F);
-//                Teleporter teleporter = worldServerNew.getDefaultTeleporter();
-//                teleporter.placeInExistingPortal(entity, f);
                 blockpos = new BlockPos(entity);
             }
 
             worldServerCurrent.updateEntityWithOptionalForce(entity, false);
-//            entity.world.theProfiler.endStartSection("reloading");
 
             if (entity != null)
             {
-//                entity.copyDataFromOld(newEntity);
-
                 if (currentDim == 1 && newDimId == 1)
                 {
                     BlockPos blockpos1 = worldServerNew.getTopSolidOrLiquidBlock(worldServerNew.getSpawnPoint());
                     entity.moveToBlockPosAndAngles(blockpos1, entity.rotationYaw, entity.rotationPitch);
                 }
-                else
-                {
-                    entity.moveToBlockPosAndAngles(blockpos, entity.rotationYaw, entity.rotationPitch);
-                }
+                else entity.moveToBlockPosAndAngles(blockpos, entity.rotationYaw, entity.rotationPitch);
 
                 boolean flag = entity.forceSpawn;
                 entity.forceSpawn = true;
@@ -164,16 +148,11 @@ public class TeleportUtil
             }
 
             entity.isDead = true;
-//            entity.world.theProfiler.endSection();
             worldServerCurrent.resetUpdateEntityTick();
             worldServerNew.resetUpdateEntityTick();
-//            entity.world.theProfiler.endSection();
             return entity;
 		}
-		else
-		{
-			return null;
-		}
+		else return null;
 	}
 	
 	private static void transferPlayerToDimension(EntityPlayerMP player, int dimension, VMTeleporter teleporter)
@@ -195,10 +174,9 @@ public class TeleportUtil
 		player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
 		updateTimeAndWeatherForPlayer(player, worldserver1, dimension);
 		syncPlayerInventory(player);
-		for(PotionEffect potioneffect : player.getActivePotionEffects())
-		{
+		
+		for (PotionEffect potioneffect : player.getActivePotionEffects())
 			player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
-		}
 	}
 	
 	@SuppressWarnings("unused")
@@ -211,62 +189,46 @@ public class TeleportUtil
 		double posZ = entityIn.posZ * moveFactor;
 		double d2 = 8.0D;
 		float rotationYaw = entityIn.rotationYaw;
-//		oldWorldIn.theProfiler.startSection("moving");
-		if(false && entityIn.dimension == -1)
+		
+		if (false && entityIn.dimension == -1)
 		{
 			posX = MathHelper.clamp(posX / 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
 			posZ = MathHelper.clamp(posZ / 8.0D, toWorldIn.getWorldBorder().minZ() + 16.0D, toWorldIn.getWorldBorder().maxZ() - 16.0D);
 			entityIn.setLocationAndAngles(posX, entityIn.posY, posZ, entityIn.rotationYaw, entityIn.rotationPitch);
-			if(entityIn.isEntityAlive())
-			{
-				oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
-			}
+			if (entityIn.isEntityAlive()) oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
 		}
-		else if(false && entityIn.dimension == 0)
+		else if (false && entityIn.dimension == 0)
 		{
 			posX = MathHelper.clamp(posX * 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
 			posZ = MathHelper.clamp(posZ * 8.0D, toWorldIn.getWorldBorder().minZ() + 16.0D, toWorldIn.getWorldBorder().maxZ() - 16.0D);
 			entityIn.setLocationAndAngles(posX, entityIn.posY, posZ, entityIn.rotationYaw, entityIn.rotationPitch);
-			if(entityIn.isEntityAlive())
-			{
-				oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
-			}
+			if (entityIn.isEntityAlive()) oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
 		}
 		
-		if(entityIn.dimension == 1)
+		if (entityIn.dimension == 1)
 		{
 			BlockPos blockpos;
-			if(lastDimension == 1)
-			{
-				blockpos = toWorldIn.getSpawnPoint();
-			}
-			else
-			{
-				blockpos = toWorldIn.getSpawnCoordinate();
-			}
+			if (lastDimension == 1) blockpos = toWorldIn.getSpawnPoint();
+			else blockpos = toWorldIn.getSpawnCoordinate();
+			
 			posX = (double)blockpos.getX();
 			entityIn.posY = (double)blockpos.getY();
 			posZ = (double)blockpos.getZ();
 			entityIn.setLocationAndAngles(posX, entityIn.posY, rotationYaw, 90.0F, 0.0F);
-			if(entityIn.isEntityAlive())
-			{
-				oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
-			}
+			if (entityIn.isEntityAlive()) oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
 		}
-//		oldWorldIn.theProfiler.endSection();
-		if(lastDimension != 1)
+		
+		if (lastDimension != 1)
 		{
-//			oldWorldIn.theProfiler.startSection("placing");
 			posX = (double)MathHelper.clamp((int)posX, -29999872, 29999872);
 			posZ = (double)MathHelper.clamp((int)posZ, -29999872, 29999872);
-			if(entityIn.isEntityAlive())
+			if (entityIn.isEntityAlive())
 			{
 				entityIn.setLocationAndAngles(posX, entityIn.posY, posZ, entityIn.rotationYaw, entityIn.rotationPitch);
 				teleporter.placeInPortal(entityIn, rotationYaw);
 				toWorldIn.spawnEntity(entityIn);
 				toWorldIn.updateEntityWithOptionalForce(entityIn, false);
 			}
-//			oldWorldIn.theProfiler.endSection();
 		}
 		entityIn.setWorld(toWorldIn);
 	}
@@ -274,10 +236,7 @@ public class TeleportUtil
 	private static void preparePlayer(EntityPlayerMP playerIn, WorldServer worldIn)
 	{
 		WorldServer worldserver = playerIn.getServerWorld();
-		if(worldIn != null)
-		{
-			worldIn.getPlayerChunkMap().removePlayer(playerIn);
-		}
+		if (worldIn != null) worldIn.getPlayerChunkMap().removePlayer(playerIn);
 		worldserver.getPlayerChunkMap().addPlayer(playerIn);
 		worldserver.getChunkProvider().provideChunk((int)playerIn.posX >> 4, (int)playerIn.posZ >> 4);
 	}
@@ -293,7 +252,8 @@ public class TeleportUtil
 		WorldBorder worldborder = mcServer.worlds[0].getWorldBorder();
 		player.connection.sendPacket(new SPacketWorldBorder(worldborder, SPacketWorldBorder.Action.INITIALIZE));
 		player.connection.sendPacket(new SPacketTimeUpdate(worldIn.getTotalWorldTime(), worldIn.getWorldTime(), worldIn.getGameRules().getBoolean("doDaylightCycle")));
-		if(worldIn.isRaining())
+		
+		if (worldIn.isRaining())
 		{
 			player.connection.sendPacket(new SPacketChangeGameState(1, 0.0F));
 			player.connection.sendPacket(new SPacketChangeGameState(7, worldIn.getRainStrength(1.0F)));
