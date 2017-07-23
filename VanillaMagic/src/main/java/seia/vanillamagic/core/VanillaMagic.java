@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.api.VanillaMagicAPI;
 import seia.vanillamagic.api.quest.QuestList;
-import seia.vanillamagic.quest.DummyQuest;
 import seia.vanillamagic.questbook.EventQuestBook;
 import seia.vanillamagic.util.EventUtil;
 
@@ -41,6 +40,17 @@ public class VanillaMagic
 	public static Logger LOGGER;
 	
 	/**
+	 * Config used for loading achievements
+	 */
+	public static VMConfigAchievements CONFIG_ACHIEVEMENTS;
+	
+	/**
+	 * VM custom Creative Tab
+	 */
+	public static final VanillaMagicCreativeTab CREATIVE_TAB = new VanillaMagicCreativeTab();
+	
+	
+	/**
 	 * PreInitialization stage.
 	 */
 	@EventHandler
@@ -50,15 +60,22 @@ public class VanillaMagic
 		LOGGER = event.getModLog();
 		METADATA = VanillaMagicMetadata.preInit(METADATA);
 		EventUtil.registerEvent(new EventQuestBook()); // Main Questbook Event
-		
-		// TODO: Testing on DummyQuest
-		DummyQuest dq0 = new DummyQuest((DummyQuest)null, "Dummy 0", "dQ0", 0, 0);
-		dq0.getQuestData().isIndependent = true;
-		QuestList.addQuest(dq0);
-		DummyQuest dq1 = new DummyQuest(dq0, "Dummy 1", "dQ1", 0, 1);
-		QuestList.addQuest(dq1);
-		DummyQuest dq2 = new DummyQuest(dq1, "Dummy 2", "dQ2", 0, 2);
-		QuestList.addQuest(dq2);
+		VMConfig.preInit(event);
+		ToolRegistry.preInit();
+		ItemUpgradeRegistry.preInit();
+		WandRegistry.preInit();
+		SpellRegistry.preInit();
+		CONFIG_ACHIEVEMENTS = new VMConfigAchievements(new File(event.getModConfigurationDirectory(), VMConfigAchievements.VM_DIRECTORY), event.getSourceFile());
+		for (int i = 0; i < QuestList.size(); ++i) EventUtil.registerEvent(QuestList.get(i));
+		LOGGER.log(Level.INFO, "Registered Quests: " + QuestList.size();
+		PlayerEventHandler.preInit();
+		InventorySelector.preInit();
+		VanillaMagicDebug.INSTANCE.preInit();
+		TileEntityRegistry.preInit();
+		ForgeChunkManager.setForcedChunkLoadingCallback(INSTANCE, new ChunkLoadingHandler());
+		WorldHandler.INSTANCE.preInit();
+		ItemUpgradeRegistry.registerEvents();
+		VanillaMagicIntegration.preInit(); // Integration should be read ALWAYS at the end.
 	}
 	
 	/**
@@ -67,6 +84,8 @@ public class VanillaMagic
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		VMConfig.init();
+		VanillaMagicIntegration.init(); // Integration should be read ALWAYS at the end.
 	}
 	
 	/**
@@ -75,6 +94,15 @@ public class VanillaMagic
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		VMConfig.postInit();
+		BookRegistry.postInit();
+		CustomTileEntityHandler.postInit();
+		EnchantedBucketHelper.registerFluids();
+		PotionedCrystalHelper.registerRecipes();
+		VanillaMagicItems.postInit();
+		VanillaMagicIntegration.postInit();
+		LOGGER.log(Level.INFO, "Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
+		MobSpawnerRegistry.postInit(); // Integration should be read ALWAYS at the end.
 	}
 	
 	/**

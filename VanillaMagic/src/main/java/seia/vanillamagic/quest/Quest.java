@@ -58,7 +58,6 @@ public abstract class Quest implements IQuest
 	public void readData(JsonObject jo)
 	{
 		this.requiredQuest = QuestList.get(jo.get("requiredQuest").getAsString());
-		//this.required = (this.requiredQuest == null ? null : this.requiredQuest.getAdvancement());
 		if (jo.has("questName"))
 		{
 			this.questName = jo.get("questName").getAsString();
@@ -96,15 +95,6 @@ public abstract class Quest implements IQuest
 		this.questData = buildQuestData();
 		if (this.requiredQuest == null) this.questData.isIndependent = true;
 		this.questData.registerStat();
-		/*
-		this.achievement = new Advancement("vanillamagic:" + this.uniqueName, 
-				this.uniqueName, 
-				this.posX, 
-				this.posY, 
-				this.icon, 
-				this.required)
-				.registerStat();
-		*/
 		// Registering Quest - this method should ONLY be called here
 		QuestList.addQuest(this);
 	}

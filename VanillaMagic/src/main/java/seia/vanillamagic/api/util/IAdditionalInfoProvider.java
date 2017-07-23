@@ -8,7 +8,7 @@ import java.util.List;
 public interface IAdditionalInfoProvider
 {
 	/**
-	 * Returns the list with additional informations.
+	 * @return Returns the list with additional informations.
 	 */
 	List<String> getAdditionalInfo();
 }
