@@ -1,8 +1,11 @@
 package seia.vanillamagic.core;
 
+import java.io.File;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -11,6 +14,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import seia.vanillamagic.api.VanillaMagicAPI;
 import seia.vanillamagic.api.quest.QuestList;
+import seia.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
+import seia.vanillamagic.config.VMConfig;
+import seia.vanillamagic.config.VMConfigAchievements;
 import seia.vanillamagic.questbook.EventQuestBook;
 import seia.vanillamagic.util.EventUtil;
 
