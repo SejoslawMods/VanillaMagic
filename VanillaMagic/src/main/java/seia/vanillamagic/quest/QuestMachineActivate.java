@@ -55,7 +55,7 @@ public abstract class QuestMachineActivate extends Quest
 		{
 			if (canActivate(player))
 			{
-				if (canPlayerGetQuest(player)) addStat(player);
+				checkQuestProgress(player);
 				if (hasQuest(player)) return true;
 			}
 		}

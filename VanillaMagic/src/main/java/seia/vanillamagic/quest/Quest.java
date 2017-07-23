@@ -153,6 +153,16 @@ public abstract class Quest implements IQuest
 		return QuestUtil.hasQuestUnlocked(player, this);
 	}
 	
+	/**
+	 * Check Player progress on this Quest
+	 */
+	public void checkQuestProgress(EntityPlayer player)
+	{
+		if (canPlayerGetQuest(player))
+			if (!hasQuest(player))
+				addStat(player);
+	}
+	
 	/*
 	 * =============================================================== GETTERS ================================================================
 	 */

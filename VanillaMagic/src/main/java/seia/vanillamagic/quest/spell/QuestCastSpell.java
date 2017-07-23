@@ -65,9 +65,7 @@ public abstract class QuestCastSpell extends Quest
 			
 			if (spell.isItemOffHandRightForSpell(casterOffHand))
 			{
-				if (!hasQuest(caster))
-					if (canPlayerGetQuest(caster))
-						addStat(caster);
+				checkQuestProgress(caster);
 				
 				if (hasQuest(caster))
 				{

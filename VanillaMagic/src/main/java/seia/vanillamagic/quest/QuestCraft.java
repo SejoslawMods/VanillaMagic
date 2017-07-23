@@ -15,8 +15,7 @@ public class QuestCraft extends Quest
 		{
 			Item item = event.crafting.getItem();
 			if (item.equals(this.getIcon().getItem()))
-				if (canPlayerGetQuest(player))
-					addStat(player);
+				checkQuestProgress(player);
 		}
 	}
 }

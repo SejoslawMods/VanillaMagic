@@ -29,7 +29,7 @@ public class QuestItemMagnet extends Quest
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			if (playerHasRightItemsInInventory(player))
 			{
-				if (canPlayerGetQuest(player)) addStat(player);
+				checkQuestProgress(player);
 				
 				if (hasQuest(player))
 				{

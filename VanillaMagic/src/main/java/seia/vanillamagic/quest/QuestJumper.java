@@ -41,7 +41,7 @@ public class QuestJumper extends Quest
 			if (!MinecraftForge.EVENT_BUS.post(new EventJumper.SavePosition.Before(player, world, posToSave)))
 			{
 				player.setHeldItem(EnumHand.OFF_HAND, writeDataToBook(world, posToSave));
-				addStat(player);
+				if (!hasQuest(player)) addStat(player);
 				EntityUtil.addChatComponentMessageNoSpam(player, "Position saved: " + TextUtil.constructPositionString(world, posToSave));
 			}
 			MinecraftForge.EVENT_BUS.post(new EventJumper.SavePosition.After(player, world, posToSave));

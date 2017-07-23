@@ -62,7 +62,8 @@ public abstract class QuestSpawnOnCauldron extends Quest
 				
 				ItemStack craftingResult = getResult(base, ingredients);
 				if (ItemStackUtil.isNullStack(craftingResult)) return;
-				if (!hasQuest(player)) addStat(player);
+				
+				checkQuestProgress(player);
 				
 				if (hasQuest(player))
 				{

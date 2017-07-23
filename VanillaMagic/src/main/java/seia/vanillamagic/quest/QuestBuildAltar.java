@@ -33,8 +33,9 @@ public class QuestBuildAltar extends Quest
 		EntityPlayer player = event.getPlayer();
 		Block middleBlock = event.getPlacedBlock().getBlock();
 		if (canPlayerGetQuest(player))
-			if (middleBlock instanceof BlockCauldron)
-				if (AltarUtil.checkAltarTier(player.world, event.getPos(), tier))
-					addStat(player);
+			if (!hasQuest(player))
+				if (middleBlock instanceof BlockCauldron)
+					if (AltarUtil.checkAltarTier(player.world, event.getPos(), tier))
+						addStat(player);
 	}
 }

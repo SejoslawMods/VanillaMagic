@@ -86,7 +86,7 @@ public class QuestMoveBlock extends Quest
 				{
 					if (ItemStackUtil.getStackSize(stackOffHand) == ItemStackUtil.getStackSize(requiredStackOffHand))
 					{
-						if (canPlayerGetQuest(player)) addStat(player);
+						checkQuestProgress(player);
 						
 						if (hasQuest(player))
 						{

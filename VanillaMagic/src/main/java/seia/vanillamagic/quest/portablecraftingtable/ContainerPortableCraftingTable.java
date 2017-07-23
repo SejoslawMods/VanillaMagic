@@ -11,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import seia.vanillamagic.util.ItemStackUtil;
 
 /**
@@ -43,7 +44,9 @@ public class ContainerPortableCraftingTable extends Container
 	
 	public void onCraftMatrixChanged(IInventory inv)
 	{
-		this.craftResult.setInventorySlotContents(0, CraftingManager.findMatchingRecipe(this.craftMatrix, player.world).getRecipeOutput());
+		IRecipe recipe = CraftingManager.findMatchingRecipe(this.craftMatrix, player.world);
+		if (recipe == null) this.craftResult.setInventorySlotContents(0, ItemStackUtil.NULL_STACK);
+		else this.craftResult.setInventorySlotContents(0, recipe.getCraftingResult(craftMatrix));
 	}
 	
 	public void onContainerClosed(EntityPlayer player)

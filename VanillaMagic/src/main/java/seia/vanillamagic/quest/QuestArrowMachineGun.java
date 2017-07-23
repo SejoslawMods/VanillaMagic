@@ -38,7 +38,7 @@ public class QuestArrowMachineGun extends Quest
 		
 		if (checkHands(player, leftHand, rightHand))
 		{
-			if (canPlayerGetQuest(player)) addStat(player);
+			checkQuestProgress(player);
 			
 			if (hasQuest(player))
 			{

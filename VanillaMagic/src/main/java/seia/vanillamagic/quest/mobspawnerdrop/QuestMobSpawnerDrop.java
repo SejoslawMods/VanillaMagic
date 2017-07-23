@@ -33,7 +33,7 @@ public class QuestMobSpawnerDrop extends Quest
 		if (spawnerBlock instanceof BlockMobSpawner) // if  we broke MobSpawner
 		{
 			EntityPlayer player = event.getPlayer();
-			if (!hasQuest(player)) addStat(player);
+			checkQuestProgress(player);
 			
 			if (hasQuest(player))
 			{

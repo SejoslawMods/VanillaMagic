@@ -32,7 +32,9 @@ public class QuestPickup extends Quest
 		if (canPlayerGetQuest(player))
 		{
 			EntityItem onGround = event.getItem();
-			if (ItemStack.areItemStacksEqual(whatToPick, onGround.getItem())) addStat(player);
+			if (ItemStack.areItemStacksEqual(whatToPick, onGround.getItem())) 
+				if (!hasQuest(player)) 
+					addStat(player);
 		}
 	}
 }

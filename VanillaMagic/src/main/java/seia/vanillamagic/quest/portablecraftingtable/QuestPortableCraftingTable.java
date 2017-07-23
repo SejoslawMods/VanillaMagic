@@ -17,7 +17,8 @@ public class QuestPortableCraftingTable extends Quest
 		EntityPlayer player = event.getEntityPlayer();
 		if (EntityUtil.hasPlayerCraftingTableInMainHand(player))
 		{
-			if (canPlayerGetQuest(player)) addStat(player);
+			checkQuestProgress(player);
+			
 			if (hasQuest(player)) player.displayGui(new InterfacePortableCraftingTable(player));
 		}
 	}

@@ -70,7 +70,7 @@ public class QuestSmeltOnAltar extends Quest
 						List<EntityItem> itemsToSmelt = SmeltingUtil.getSmeltable(world, cauldronPos);
 						if (itemsToSmelt.size() > 0)
 						{
-							if (canPlayerGetQuest(player)) addStat(player);
+							checkQuestProgress(player);
 							
 							if (hasQuest(player))
 								if (!MinecraftForge.EVENT_BUS.post(new EventPlayerUseCauldron.SmeltOnAltar(player, world, cauldronPos, itemsToSmelt)))

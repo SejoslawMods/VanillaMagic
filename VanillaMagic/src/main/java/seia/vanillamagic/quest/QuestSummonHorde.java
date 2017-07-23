@@ -49,9 +49,7 @@ public class QuestSummonHorde extends Quest
 			{
 				if (ItemStackUtil.getStackSize(leftHand) == ItemStackUtil.getStackSize(requiredLeftHand))
 				{
-					if (!hasQuest(player))
-						if (canPlayerGetQuest(player)) 
-							addStat(player);
+					checkQuestProgress(player);
 					
 					if (hasQuest(player))
 					{

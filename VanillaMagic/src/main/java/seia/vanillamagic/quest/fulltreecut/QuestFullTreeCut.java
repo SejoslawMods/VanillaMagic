@@ -38,7 +38,7 @@ public class QuestFullTreeCut extends Quest
 					origin = origin.offset(EnumFacing.UP);
 					if (TreeCutHelper.detectTree(player.world, origin))
 					{
-						if (canPlayerGetQuest(player)) addStat(player);
+						checkQuestProgress(player);
 						if (hasQuest(player)) TreeCutHelper.fellTree(player.getHeldItemMainhand(), origin, player);
 					}
 				}

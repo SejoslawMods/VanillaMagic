@@ -68,7 +68,7 @@ public class QuestOreMultiplier extends Quest
 						List<EntityItem> oresInCauldron = SmeltingUtil.getOresInCauldron(world, cauldronPos);
 						if (oresInCauldron.size() > 0)
 						{
-							if (canPlayerGetQuest(player)) addStat(player);
+							checkQuestProgress(player);
 							
 							if (hasQuest(player))
 							{

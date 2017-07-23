@@ -28,7 +28,7 @@ public class QuestShootWitherSkull extends Quest
 			ItemStack rightHand = player.getHeldItemMainhand();
 			if (ItemStack.areItemsEqual(rightHand, shouldHaveRightHand))
 			{
-				if (!hasQuest(player)) addStat(player);
+				checkQuestProgress(player);
 				
 				if (hasQuest(player))
 				{

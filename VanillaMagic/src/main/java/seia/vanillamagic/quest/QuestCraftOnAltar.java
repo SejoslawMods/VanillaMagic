@@ -115,7 +115,7 @@ public class QuestCraftOnAltar extends Quest
 						// the amount of items in Cauldron was right and the items themselfs were right
 						if (ingredients.length == alreadyCheckedEntityItems.size())
 						{
-							if (canPlayerGetQuest(player)) addStat(player);
+							checkQuestProgress(player);
 							
 							if (hasQuest(player))
 							{

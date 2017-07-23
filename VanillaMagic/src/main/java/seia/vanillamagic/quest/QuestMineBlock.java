@@ -71,7 +71,7 @@ public class QuestMineBlock extends Quest
 			{
 				if (Block.isEqualTo(block, blocksToBeMine.get(i)))
 				{
-					addStat(player);
+					if (!hasQuest(player)) addStat(player);
 					return;
 				}
 			}
