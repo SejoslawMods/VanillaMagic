@@ -2,6 +2,7 @@ package seia.vanillamagic.item.thecrystalofmothernature;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.item.CustomItemCrystal;
 
@@ -9,7 +10,11 @@ public class ItemMotherNatureCrystal extends CustomItemCrystal
 {
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getItem(), new Object[]{
+		GameRegistry.addShapedRecipe(
+				new ResourceLocation(""),
+				null,
+				getItem(), 
+				new Object[]{
 				"MSM",
 				"SNS",
 				"PSP",

@@ -18,7 +18,7 @@ import seia.vanillamagic.api.event.EventQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgradeHelper;
-import seia.vanillamagic.util.ListHelper;
+import seia.vanillamagic.util.ListUtil;
 
 /**
  * Each Quarry has it's own helper to handler the upgrades.
@@ -52,66 +52,52 @@ public class QuarryUpgradeHelper implements IQuarryUpgradeHelper
 	public void addUpgradeFromBlock(Block block, BlockPos upgradePos)
 	{
 		IQuarryUpgrade iqu = QuarryUpgradeRegistry.getUpgradeFromBlock(block);
-		if(!hasRegisteredRequireUpgrade(iqu))
-		{
-			return;
-		}
-		if(canAddUpgrade(iqu))
+		if (!hasRegisteredRequireUpgrade(iqu)) return;
+		
+		if (canAddUpgrade(iqu))
 		{
 			_upgrades.add(iqu);
 			_upgradeOnPos.put(upgradePos, iqu);
-			MinecraftForge.EVENT_BUS.post(new EventQuarry.AddUpgrade(
-					_quarry, _quarry.getTileEntity().getWorld(), _quarry.getMachinePos(), iqu, upgradePos));
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.AddUpgrade(_quarry, _quarry.getTileEntity().getWorld(), _quarry.getMachinePos(), iqu, upgradePos));
 		}
 	}
 
 	/**
-	 * Returns TRUE if the required upgrade for the given upgrade is registered.
+	 * Returns TRUE if  the required upgrade for the given upgrade is registered.
 	 */
 	private boolean hasRegisteredRequireUpgrade(IQuarryUpgrade iqu) 
 	{
-		if(iqu.requiredUpgrade() == null)
-		{
-			return true;
-		}
+		if (iqu.requiredUpgrade() == null) return true;
+		
 		IQuarryUpgrade required = null;
-		for(IQuarryUpgrade registeredUpgrade : _upgrades)
+		for (IQuarryUpgrade registeredUpgrade : _upgrades)
 		{
 			required = QuarryUpgradeRegistry.getReguiredUpgrade(iqu);
-			if(QuarryUpgradeRegistry.isTheSameUpgrade(registeredUpgrade, required))
-			{
-				return true;
-			}
+			if (QuarryUpgradeRegistry.isTheSameUpgrade(registeredUpgrade, required)) return true;
 		}
 		return false;
 	}
 
 	/**
-	 * If the given upgrade is already on the list, return FALSE. <br>
+	 * if  the given upgrade is already on the list, return FALSE. <br>
 	 * Otherwise return TRUE.
 	 */
 	private boolean canAddUpgrade(IQuarryUpgrade iqu) 
 	{
-		for(IQuarryUpgrade up : _upgrades)
-		{
-			if(Block.isEqualTo(up.getBlock(), iqu.getBlock()))
-			{
+		for (IQuarryUpgrade up : _upgrades)
+			if (Block.isEqualTo(up.getBlock(), iqu.getBlock()))
 				return false;
-			}
-		}
 		return true;
 	}
 	
 	@Nullable
 	public BlockPos getUpgradePos(IQuarryUpgrade upgrade)
 	{
-		for(Entry<BlockPos, IQuarryUpgrade> entry : _upgradeOnPos.entrySet())
+		for (Entry<BlockPos, IQuarryUpgrade> entry : _upgradeOnPos.entrySet())
 		{
 			IQuarryUpgrade iqu = entry.getValue();
-			if(QuarryUpgradeRegistry.isTheSameUpgrade(upgrade, iqu))
-			{
+			if (QuarryUpgradeRegistry.isTheSameUpgrade(upgrade, iqu))
 				return entry.getKey();
-			}
 		}
 		return null;
 	}
@@ -119,16 +105,12 @@ public class QuarryUpgradeHelper implements IQuarryUpgradeHelper
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,IBlockState workingPosState)
 	{
 		List<ItemStack> drops = new ArrayList<ItemStack>();
-		for(IQuarryUpgrade upgrade : _upgrades)
-		{
-			drops = ListHelper.<ItemStack>combineLists(drops, upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
-		}
-		// If there is no upgrades mine the old-fashion way.
-		if(drops.isEmpty())
-		{
-			//return blockToDig.getDrops(world, workingPos, workingPosState, 0);
-			drops = ListHelper.<ItemStack>combineLists(drops, blockToDig.getDrops(world, workingPos, workingPosState, 0));
-		}
+		for (IQuarryUpgrade upgrade : _upgrades)
+			drops = ListUtil.<ItemStack>combineLists(drops, upgrade.getDrops(blockToDig, world, workingPos, workingPosState));
+		
+		// if  there is no upgrades mine the old-fashion way.
+		if (drops.isEmpty()) 
+			drops = ListUtil.<ItemStack>combineLists(drops, blockToDig.getDrops(world, workingPos, workingPosState, 0));
 		return drops;
 	}
 	
@@ -140,31 +122,20 @@ public class QuarryUpgradeHelper implements IQuarryUpgradeHelper
 	
 	public void modifyQuarry(IQuarry quarry)
 	{
-//		for(IQuarryUpgrade upgrade : _upgrades)
-//		{
-//			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
-//			upgrade.modifyQuarry(quarry);
-//			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade));
-//		}
-		for(Entry<BlockPos, IQuarryUpgrade> entry : _upgradeOnPos.entrySet())
+		for (Entry<BlockPos, IQuarryUpgrade> entry : _upgradeOnPos.entrySet())
 		{
 			IQuarryUpgrade upgrade = entry.getValue();
 			BlockPos upgradePos = entry.getKey();
-			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(
-					quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade, upgradePos));
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.Before(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade, upgradePos));
 			upgrade.modifyQuarry(quarry);
-			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(
-					quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade, upgradePos));
+			MinecraftForge.EVENT_BUS.post(new EventQuarry.ModifyQuarry.After(quarry, quarry.getTileEntity().getWorld(), quarry.getMachinePos(), upgrade, upgradePos));
 		}
 	}
 	
 	public List<String> addAdditionalInfo(List<String> baseInfo)
 	{
 		baseInfo.add("Upgrades:");
-		for(int i = 0; i < _upgrades.size(); ++i)
-		{
-			baseInfo.add("   " + (i+1) + ") " + _upgrades.get(i).getUpgradeName());
-		}
+		for (int i = 0; i < _upgrades.size(); ++i) baseInfo.add("   " + (i+1) + ") " + _upgrades.get(i).getUpgradeName());
 		return baseInfo;
 	}
 }

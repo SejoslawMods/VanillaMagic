@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.VanillaMagicItems;
-import seia.vanillamagic.util.CauldronHelper;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.CauldronUtil;
+import seia.vanillamagic.util.ItemStackUtil;
 
 /**
  * Class which add various methods to work with PotionedCrystals.
@@ -43,29 +43,21 @@ public class PotionedCrystalHelper
 	@Nullable
 	public static IPotionedCrystal getPotionedCrystalFromCauldron(World world, BlockPos cauldronPos)
 	{
-		List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
-		if(itemsInCauldron == null)
+		List<EntityItem> itemsInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
+		if (itemsInCauldron == null) return null;
+		
+		for (EntityItem ei : itemsInCauldron)
 		{
-			return null;
-		}
-		for(EntityItem ei : itemsInCauldron)
-		{
-			ItemStack stack = ei.getEntityItem();
-			if(ItemStackHelper.isNullStack(stack))
-			{
-				return null;
-			}
-			if(stack.getItem() instanceof ItemPotion)
+			ItemStack stack = ei.getItem();
+			if (ItemStackUtil.isNullStack(stack)) return null;
+			
+			if (stack.getItem() instanceof ItemPotion)
 			{
 				PotionType pt = PotionUtils.getPotionFromItem(stack);
 				String ptName = getPotionTypeName(pt);
-				for(IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
-				{
-					if(pc.getPotionUnlocalizedName().equals(ptName))
-					{
+				for (IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
+					if (pc.getPotionUnlocalizedName().equals(ptName))
 						return pc;
-					}
-				}
 			}
 		}
 		return null;
@@ -79,25 +71,17 @@ public class PotionedCrystalHelper
 	@Nullable
 	public static IPotionedCrystal getPotionedCrystal(ItemStack netherStarStack)
 	{
-		if(ItemStackHelper.isNullStack(netherStarStack))
-		{
-			return null;
-		}
+		if (ItemStackUtil.isNullStack(netherStarStack)) return null;
+		
 		NBTTagCompound stackTag = netherStarStack.getTagCompound();
-		if(stackTag == null)
-		{
-			return null;
-		}
-		if(stackTag.hasKey(IPotionedCrystal.NBT_POTION_TYPE_NAME))
+		if (stackTag == null) return null;
+		
+		if (stackTag.hasKey(IPotionedCrystal.NBT_POTION_TYPE_NAME))
 		{
 			String name = stackTag.getString(IPotionedCrystal.NBT_POTION_TYPE_NAME);
-			for(IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
-			{
-				if(name.equals(pc.getPotionUnlocalizedName()))
-				{
+			for (IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS)
+				if (name.equals(pc.getPotionUnlocalizedName()))
 					return pc;
-				}
-			}
 		}
 		return null;
 	}
@@ -107,7 +91,7 @@ public class PotionedCrystalHelper
 	 */
 	public static void registerRecipes()
 	{
-		for(PotionType potionType : ForgeRegistries.POTION_TYPES.getValues())
+		for (PotionType potionType : ForgeRegistries.POTION_TYPES.getValues())
 		{
 			VanillaMagicItems.POTIONED_CRYSTALS.add(new IPotionedCrystal()
 			{

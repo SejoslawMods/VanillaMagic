@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import seia.vanillamagic.api.item.IEnchantedBucket;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.item.VanillaMagicItems;
-import seia.vanillamagic.util.CauldronHelper;
+import seia.vanillamagic.util.CauldronUtil;
 
 /**
  * Class which contains methods connected with Enchanted Bucket.
@@ -65,13 +65,9 @@ public class EnchantedBucketHelper
 	@Nullable
 	public static IEnchantedBucket getEnchantedBucket(ItemStack stack) // ItemBucket
 	{
-		for(IEnchantedBucket enchantedBucket : VanillaMagicItems.ENCHANTED_BUCKETS)
-		{
-			if(VanillaMagicItems.isCustomBucket(stack, enchantedBucket))
-			{
+		for (IEnchantedBucket enchantedBucket : VanillaMagicItems.ENCHANTED_BUCKETS)
+			if (VanillaMagicItems.isCustomBucket(stack, enchantedBucket))
 				return enchantedBucket;
-			}
-		}
 		return null;
 	}
 	
@@ -81,34 +77,29 @@ public class EnchantedBucketHelper
 	@Nullable
 	public static IEnchantedBucket getEnchantedBucketFromCauldron(World world, BlockPos cauldronPos)
 	{
-		List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, cauldronPos);
-		for(EntityItem ei : itemsInCauldron)
+		List<EntityItem> itemsInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
+		for (EntityItem ei : itemsInCauldron)
 		{
 			ItemStack stackBucket = ei.getItem();
 			IFluidHandler fh = FluidUtil.getFluidHandler(stackBucket);
-			if(fh != null)
+			if (fh != null)
 			{
-				for(IEnchantedBucket eb : VanillaMagicItems.ENCHANTED_BUCKETS)
+				for (IEnchantedBucket eb : VanillaMagicItems.ENCHANTED_BUCKETS)
 				{
-					if(fh.getTankProperties() != null)
+					if (fh.getTankProperties() != null)
 					{
 						Fluid fluidInBucket = eb.getFluidInBucket();
-						if(fluidInBucket != null)
+						if (fluidInBucket != null)
 						{
 							FluidStack fluidStackInBucket = getFluidStack(fluidInBucket);
-							if(fluidStackInBucket != null)
+							if (fluidStackInBucket != null)
 							{
 								IFluidTankProperties prop0 = fh.getTankProperties()[0];
-								if(prop0 != null)
+								if (prop0 != null)
 								{
 									FluidStack prop0Stack = prop0.getContents();
-									if(prop0Stack != null)
-									{
-										if(prop0Stack.isFluidEqual(fluidStackInBucket))
-										{
-											return eb;
-										}
-									}
+									if (prop0Stack != null)
+										if (prop0Stack.isFluidEqual(fluidStackInBucket)) return eb;
 								}
 							}
 						}
@@ -126,7 +117,7 @@ public class EnchantedBucketHelper
 	{
 		Map<String, Fluid> registeredFluids = FluidRegistry.getRegisteredFluids();
 		Collection<Fluid> fluids = registeredFluids.values();
-		for(Fluid fluid : fluids)
+		for (Fluid fluid : fluids)
 		{
 			VanillaMagicItems.ENCHANTED_BUCKETS.add(new IEnchantedBucket()
 			{

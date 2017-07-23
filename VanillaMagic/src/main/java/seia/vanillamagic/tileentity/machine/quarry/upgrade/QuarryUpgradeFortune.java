@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
-import seia.vanillamagic.util.SmeltingHelper;
+import seia.vanillamagic.util.SmeltingUtil;
 
 public class QuarryUpgradeFortune
 {
@@ -23,10 +23,7 @@ public class QuarryUpgradeFortune
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		Item item = blockToDig.getItemDropped(workingPosState, _rand, fortune);
 		int quantity = 1;
-		if(SmeltingHelper.isBlockOre(blockToDig))
-		{
-			quantity = blockToDig.quantityDropped(_rand) * fortune;
-		}
+		if (SmeltingUtil.isBlockOre(blockToDig)) quantity = blockToDig.quantityDropped(_rand) * fortune;
 		list.add(new ItemStack(item, quantity, blockToDig.damageDropped(workingPosState)));
 		return list;
 	}

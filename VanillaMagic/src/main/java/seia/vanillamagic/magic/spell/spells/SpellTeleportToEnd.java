@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.api.util.VectorWrapper.Vector3D;
 import seia.vanillamagic.magic.spell.Spell;
-import seia.vanillamagic.magic.spell.spells.teleport.TeleportHelper;
+import seia.vanillamagic.magic.spell.spells.teleport.TeleportUtil;
 import seia.vanillamagic.util.EntityUtil;
 
 public class SpellTeleportToEnd extends Spell 
@@ -30,7 +30,7 @@ public class SpellTeleportToEnd extends Spell
 		{
 			if (caster.dimension == 0)
 			{
-				if (TeleportHelper.entityChangeDimension(caster, 1) != null) return true;
+				if (TeleportUtil.entityChangeDimension(caster, 1) != null) return true;
 			}
 			else if (caster.dimension == 1)
 			{
@@ -45,7 +45,7 @@ public class SpellTeleportToEnd extends Spell
 					}
 				}
 				if (caster instanceof EntityPlayerMP) 
-					TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, 0);
+					TeleportUtil.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, 0);
 				return true;
 			}
 		}

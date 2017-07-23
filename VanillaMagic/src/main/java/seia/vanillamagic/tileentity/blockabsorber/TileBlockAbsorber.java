@@ -20,7 +20,7 @@ import seia.vanillamagic.api.event.EventBlockAbsorber;
 import seia.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorber
 {
@@ -47,23 +47,21 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 	{
 		TileEntityHopper connectedHopper = getConnectedHopper();
 		IBlockState thisState = world.getBlockState(pos);
-		if(Block.isEqualTo(thisState.getBlock(), Blocks.AIR)) // We don't want to put Air into Hopper
-		{
-			return;
-		}
+		if (Block.isEqualTo(thisState.getBlock(), Blocks.AIR)) return; // We don't want to put Air into Hopper
+		
 		// For IInventory
 		TileEntity tileAtThisPos = world.getTileEntity(pos);
-		if(tileAtThisPos != null)
+		if (tileAtThisPos != null)
 		{
-			// If we have a Tile which is Inventory we want to absorb it's items first
-			if(tileAtThisPos instanceof IInventory)
+			// if  we have a Tile which is Inventory we want to absorb it's items first
+			if (tileAtThisPos instanceof IInventory)
 			{
 				IInventory inv = (IInventory) tileAtThisPos;
 				try
 				{
-					if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // First call to absorb items from Inventory
+					if (!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // First call to absorb items from Inventory
 					{
-						for(int i = 0; i < inv.getSizeInventory(); ++i)
+						for (int i = 0; i < inv.getSizeInventory(); ++i)
 						{
 							ItemStack stackInSlot = inv.getStackInSlot(i);
 							ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, stackInSlot, getInputFacing());
@@ -71,7 +69,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 						}
 					}
 				}
-				catch(ReflectiveOperationException e)
+				catch (ReflectiveOperationException e)
 				{
 					e.printStackTrace();
 					return;
@@ -79,10 +77,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 				
 				try
 				{
-					if(!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) // Second call to check if all items were absorbed after first call
-					{
-						return; // If it's not possible to absorb all, return
-					}
+					if (!InventoryHelper.isInventoryEmpty(inv, EnumFacing.DOWN)) return; // Second call to check if  all items were absorbed after first call
 				}
 				catch(ReflectiveOperationException e)
 				{
@@ -90,15 +85,13 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 				}
 			}
 		}
-		// If it's not an Inventory than it must be a Block
+		// if  it's not an Inventory than it must be a Block
 		// For normal Block
 		ItemStack thisBlock = new ItemStack(thisState.getBlock());
-		if(thisBlock.getItem() == null)
-		{
-			return;
-		}
+		if (thisBlock.getItem() == null) return;
+		
 		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
-		if(ItemStackHelper.isNullStack(leftItems))
+		if (ItemStackUtil.isNullStack(leftItems))
 		{
 			MinecraftForge.EVENT_BUS.post(new EventBlockAbsorber((IBlockAbsorber) this, world, pos, connectedHopper));
 			world.setBlockState(pos, Blocks.AIR.getDefaultState());
@@ -115,7 +108,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
 		return (TileEntityHopper) world.getTileEntity(pos.offset(EnumFacing.DOWN));
 	}
 	/**
-	 * Returns NULL if there is no inventory for Hopper to transfer into.
+	 * Returns NULL if  there is no inventory for Hopper to transfer into.
 	 */
 	@Nullable
 	public IInventory getInventoryForHopperTransfer()

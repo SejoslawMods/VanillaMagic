@@ -26,10 +26,10 @@ import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.BlockPosHelper;
-import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.NBTHelper;
-import seia.vanillamagic.util.WorldHelper;
+import seia.vanillamagic.util.BlockPosUtil;
+import seia.vanillamagic.util.ItemStackUtil;
+import seia.vanillamagic.util.NBTUtil;
+import seia.vanillamagic.util.WorldUtil;
 
 public class TileInventoryBridge extends CustomTileEntity implements IInventoryBridge
 {
@@ -76,7 +76,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
 		super.writeToNBT(compound);
-		compound = NBTHelper.writeToINBTSerializable(this, compound);
+		compound = NBTUtil.writeToINBTSerializable(this, compound);
 		return compound;
     }
 	
@@ -101,7 +101,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	public void readFromNBT(NBTTagCompound compound)
     {
 		super.readFromNBT(compound);
-		NBTHelper.readFromINBTSerializable(this, compound);
+		NBTUtil.readFromINBTSerializable(this, compound);
     }
 	
 	public void deserializeNBT(NBTTagCompound compound)
@@ -115,9 +115,9 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 		{
 			inputInvWrapper = new InventoryWrapper(DimensionManager.getWorld(inputInvDim), inputPos);
 		}
-		catch(NotInventoryException e)
+		catch (NotInventoryException e)
 		{
-			BlockPosHelper.printCoords(Level.ERROR, "NotInventoryException at: ", inputPos);
+			BlockPosUtil.printCoords(Level.ERROR, "NotInventoryException at: ", inputPos);
 			e.printStackTrace();
 		}
 		
@@ -130,9 +130,9 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 		{
 			outputInvWrapper = new InventoryWrapper(DimensionManager.getWorld(outputInvDim), outputPos);
 		}
-		catch(NotInventoryException e)
+		catch (NotInventoryException e)
 		{
-			BlockPosHelper.printCoords(Level.ERROR, "NotInventoryException at: ", outputPos);
+			BlockPosUtil.printCoords(Level.ERROR, "NotInventoryException at: ", outputPos);
 			e.printStackTrace();
 		}
 	}
@@ -152,20 +152,20 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 	
 	public void setPositionFromSelector(NonNullList<ItemStack> mainInventory) throws NotInventoryException 
 	{
-		for(ItemStack currentCheckingStack : mainInventory)
+		for (ItemStack currentCheckingStack : mainInventory)
 		{
-			if(VanillaMagicItems.isCustomItem(currentCheckingStack, VanillaMagicItems.INVENTORY_SELECTOR))
+			if (VanillaMagicItems.isCustomItem(currentCheckingStack, VanillaMagicItems.INVENTORY_SELECTOR))
 			{
 				NBTTagCompound currentCheckingStackTag = currentCheckingStack.getTagCompound();
-				if(currentCheckingStackTag != null)
+				if (currentCheckingStackTag != null)
 				{
-					BlockPos savedPosition = NBTHelper.getBlockPosDataFromNBT(currentCheckingStackTag);
-					World world = DimensionManager.getWorld(NBTHelper.getDimensionFromNBT(currentCheckingStackTag));
+					BlockPos savedPosition = NBTUtil.getBlockPosDataFromNBT(currentCheckingStackTag);
+					World world = DimensionManager.getWorld(NBTUtil.getDimensionFromNBT(currentCheckingStackTag));
 					inputInvWrapper = new InventoryWrapper(world, savedPosition);
 					inputInvX = savedPosition.getX();
 					inputInvY = savedPosition.getY();
 					inputInvZ = savedPosition.getZ();
-					inputInvDim = WorldHelper.getDimensionID(world);
+					inputInvDim = WorldUtil.getDimensionID(world);
 				}
 			}
 		}
@@ -177,7 +177,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 		outputInvX = pos.getX();
 		outputInvY = pos.getY();
 		outputInvZ = pos.getZ();
-		outputInvDim = WorldHelper.getDimensionID(world);
+		outputInvDim = WorldUtil.getDimensionID(world);
 	}
 	
 	public EnumFacing getInputFacing()
@@ -194,12 +194,10 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 		if (inputInvWrapper == null) return; // if something weird happened to input, break the update
 		
 		IInventory inv = inputInvWrapper.getInventory();
-		if(slotNumber >= inv.getSizeInventory())
-		{
-			slotNumber = 0;
-		}
+		if (slotNumber >= inv.getSizeInventory()) slotNumber = 0;
+		
 		ItemStack transportingStack = inv.getStackInSlot(slotNumber);
-		if(ItemStackHelper.isNullStack(transportingStack))
+		if (ItemStackUtil.isNullStack(transportingStack))
 		{
 			slotNumber++;
 			return;

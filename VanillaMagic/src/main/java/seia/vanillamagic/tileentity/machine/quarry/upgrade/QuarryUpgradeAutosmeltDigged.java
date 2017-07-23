@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
-import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.SmeltingHelper;
+import seia.vanillamagic.util.ItemStackUtil;
+import seia.vanillamagic.util.SmeltingUtil;
 
 public class QuarryUpgradeAutosmeltDigged implements IQuarryUpgrade
 {
@@ -28,11 +28,8 @@ public class QuarryUpgradeAutosmeltDigged implements IQuarryUpgrade
 	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
 	{
 		List<ItemStack> list = new ArrayList<ItemStack>();
-		ItemStack burnedStack = SmeltingHelper.getSmeltingResultAsNewStack(new ItemStack(blockToDig));
-		if(!ItemStackHelper.isNullStack(burnedStack))
-		{
-			list.add(burnedStack);
-		}
+		ItemStack burnedStack = SmeltingUtil.getSmeltingResultAsNewStack(new ItemStack(blockToDig));
+		if (!ItemStackUtil.isNullStack(burnedStack)) list.add(burnedStack);
 		return list;
 	}
 }

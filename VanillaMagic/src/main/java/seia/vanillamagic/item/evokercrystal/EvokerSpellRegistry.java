@@ -25,10 +25,12 @@ public class EvokerSpellRegistry
 	 */
 	private static List<IEvokerSpell> _SPELLS = new ArrayList<>();
 	
-	// Spells
-	private static IEvokerSpell SPELL_FANGS = new EvokerSpellFangAttack();
-	private static IEvokerSpell SPELL_SUMMON_VEX = new EvokerSpellSummonVex();
-	private static IEvokerSpell SPELL_WOLOLO = new EvokerSpellWololo();
+	static
+	{
+		_SPELLS.add(new EvokerSpellFangAttack());
+		_SPELLS.add(new EvokerSpellSummonVex());
+		_SPELLS.add(new EvokerSpellWololo());
+	}
 	
 	private EvokerSpellRegistry()
 	{
@@ -56,13 +58,9 @@ public class EvokerSpellRegistry
 	@Nullable
 	public static IEvokerSpell getSpell(int spellID)
 	{
-		for(IEvokerSpell spell : _SPELLS)
-		{
-			if(spell.getSpellID() == spellID)
-			{
+		for (IEvokerSpell spell : _SPELLS)
+			if (spell.getSpellID() == spellID)
 				return spell;
-			}
-		}
 		return null;
 	}
 	
@@ -72,7 +70,7 @@ public class EvokerSpellRegistry
 	@Nullable
 	public static IEvokerSpell getCurrentSpell(ItemStack stack)
 	{
-		if(VanillaMagicItems.isCustomItem(stack, VanillaMagicItems.EVOKER_CRYSTAL))
+		if (VanillaMagicItems.isCustomItem(stack, VanillaMagicItems.EVOKER_CRYSTAL))
 		{
 			NBTTagCompound stackTag = stack.getTagCompound();
 			int spellID = stackTag.getInteger(ItemEvokerCrystal.NBT_SPELL_ID);
@@ -86,18 +84,14 @@ public class EvokerSpellRegistry
 	 */
 	public static void changeSpell(EntityPlayer player, ItemStack crystal)
 	{
-		if(player == null || crystal == null)
-		{
-			return;
-		}
+		if (player == null || crystal == null) return;
+		
 		IEvokerSpell currentSpell = getCurrentSpell(crystal);
 		int spellID = currentSpell.getSpellID();
 		spellID++;
 		IEvokerSpell nextSpell = getSpell(spellID);
-		if(nextSpell == null)
-		{
-			nextSpell = getSpell(1);
-		}
+		if (nextSpell == null) nextSpell = getSpell(1);
+		
 		ItemStack newCrystal = crystal.copy();
 		newCrystal.getTagCompound().setInteger(ItemEvokerCrystal.NBT_SPELL_ID, nextSpell.getSpellID());
 		newCrystal.setStackDisplayName(VanillaMagicItems.EVOKER_CRYSTAL.getItemName() + ": " + nextSpell.getSpellName());

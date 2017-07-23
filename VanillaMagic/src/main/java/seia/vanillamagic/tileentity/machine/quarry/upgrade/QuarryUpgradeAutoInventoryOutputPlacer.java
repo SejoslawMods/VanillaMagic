@@ -15,7 +15,7 @@ import seia.vanillamagic.api.inventory.IInventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IQuarry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.inventory.InventoryHelper;
-import seia.vanillamagic.util.BlockHelper;
+import seia.vanillamagic.util.BlockUtil;
 
 public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade
 {
@@ -34,21 +34,21 @@ public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade
 		IInventoryWrapper invOutputWrapper = quarry.getOutputInventory();
 		IInventory invOutput = invOutputWrapper.getInventory();
 		EnumFacing invFacing = quarry.getOutputFacing();
-		if(!InventoryHelper.hasInventoryFreeSpace(invOutput, invFacing))
+		if (!InventoryHelper.hasInventoryFreeSpace(invOutput, invFacing))
 		{
 			IInventoryWrapper invInputWrapper = quarry.getInputInventory();
 			int slotWithInventory = InventoryHelper.containsAnotherInventoryBlock(invInputWrapper);
-			if(slotWithInventory != -1)
+			if (slotWithInventory != -1)
 			{
 				World worldOutput = invOutputWrapper.getWorld();
 				BlockPos nextPos = invOutputWrapper.getPos().offset(invFacing, 2);
 				IInventory invInput = invInputWrapper.getInventory();
 				ItemStack stackWithInventory = invInput.getStackInSlot(slotWithInventory);
-				BlockHelper.placeBlockFromStack(worldOutput, nextPos, stackWithInventory);
+				BlockUtil.placeBlockFromStack(worldOutput, nextPos, stackWithInventory);
 				invInput.decrStackSize(slotWithInventory, 1);
 				IBlockState placedBlockState = worldOutput.getBlockState(nextPos);
 				Block placedBlock = placedBlockState.getBlock();
-				if(placedBlock instanceof ITileEntityProvider) // this should always be true ???
+				if (placedBlock instanceof ITileEntityProvider) // this should always be true ???
 				{
 					TileEntity createdTileEntity = placedBlock.createTileEntity(worldOutput, placedBlockState);
 					worldOutput.setTileEntity(nextPos, createdTileEntity);
@@ -56,7 +56,7 @@ public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade
 					{
 						invOutputWrapper.setNewInventory(worldOutput, nextPos);
 					} 
-					catch(NotInventoryException e)
+					catch (NotInventoryException e)
 					{
 						e.printStackTrace();
 					}

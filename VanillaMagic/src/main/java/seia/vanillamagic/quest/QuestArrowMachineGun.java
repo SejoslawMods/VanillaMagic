@@ -81,6 +81,8 @@ public class QuestArrowMachineGun extends Quest
 	public void showTooltip(ItemTooltipEvent event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
+		if (player == null) return;
+		
 		ItemStack leftHand = player.getHeldItemOffhand();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		if (ItemStackUtil.isNullStack(leftHand)) return;

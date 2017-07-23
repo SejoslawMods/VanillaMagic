@@ -11,8 +11,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.QuestMachineActivate;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class QuestQuarry extends QuestMachineActivate
 {
@@ -22,32 +22,20 @@ public class QuestQuarry extends QuestMachineActivate
 		BlockPos quarryPos = event.getPos();
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack itemInHand = player.getHeldItemMainhand();
-		World world = player.world;
-		if(!player.isSneaking())
+		if (!player.isSneaking()) return;
+		if (ItemStackUtil.isNullStack(itemInHand)) return;
+		
+		if (itemInHand.getItem().equals(WandRegistry.WAND_BLAZE_ROD.getWandStack().getItem()))
 		{
-			return;
-		}
-		if(ItemStackHelper.isNullStack(itemInHand))
-		{
-			return;
-		}
-		if(itemInHand.getItem().equals(WandRegistry.WAND_BLAZE_ROD.getWandStack().getItem()))
-		{
-			if(canPlayerGetAchievement(player))
-			{
-				player.addStat(achievement, 1);
-			}
-			if(player.hasAchievement(achievement))
+			if (canPlayerGetQuest(player)) addStat(player);
+			
+			if (hasQuest(player))
 			{
 				TileQuarry tileQuarry = new TileQuarry();
 				tileQuarry.init(player.world, quarryPos);
-				if(tileQuarry.checkSurroundings())
-				{
-					if(CustomTileEntityHandler.addCustomTileEntity(tileQuarry, player.dimension))
-					{
-						EntityHelper.addChatComponentMessageNoSpam(player, tileQuarry.getClass().getSimpleName() + " added");
-					}
-				}
+				if (tileQuarry.checkSurroundings())
+					if (CustomTileEntityHandler.addCustomTileEntity(tileQuarry, player.dimension))
+						EntityUtil.addChatComponentMessageNoSpam(player, tileQuarry.getClass().getSimpleName() + " added");
 			}
 		}
 	}
@@ -58,18 +46,7 @@ public class QuestQuarry extends QuestMachineActivate
 		BlockPos quarryPos = event.getPos();
 		EntityPlayer player = event.getPlayer();
 		World world = event.getWorld();
-		if(world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
-		{
+		if (world.getBlockState(quarryPos).getBlock() instanceof BlockCauldron)
 			CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, quarryPos, player);
-//			ICustomTileEntity quarryTile = CustomTileEntityHandler.getCustomTileEntity(quarryPos, player.dimension);
-//			if(quarryTile == null)
-//			{
-//				return;
-//			}
-//			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, quarryPos))
-//			{
-//				EntityHelper.addChatComponentMessage(player, quarryTile.getClass().getSimpleName() + " removed");
-//			}
-		}
 	}
 }

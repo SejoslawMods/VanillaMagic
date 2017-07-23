@@ -10,8 +10,8 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import seia.vanillamagic.inventory.InventoryHelper;
-import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.MatrixHelper;
+import seia.vanillamagic.util.ItemStackUtil;
+import seia.vanillamagic.util.MatrixUtil;
 
 public class ContainerAutocrafting extends Container
 {
@@ -34,9 +34,9 @@ public class ContainerAutocrafting extends Container
 	{
 		int index = 0;
 		int size = newStackMatrix.length;
-		for(int i = 0; i < size; ++i)
+		for (int i = 0; i < size; ++i)
 		{
-			for(int j = 0; j < size; ++j)
+			for (int j = 0; j < size; ++j)
 			{
 				this._craftMatrix.setInventorySlotContents(index, newStackMatrix[i][j]);
 				index++;
@@ -46,7 +46,7 @@ public class ContainerAutocrafting extends Container
 	
 	public void onCraftMatrixChanged(IInventory inv)
 	{
-		this._craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this._craftMatrix, _world));
+		this._craftResult.setInventorySlotContents(0, CraftingManager.findMatchingRecipe(this._craftMatrix, _world).getRecipeOutput());
 	}
 	
 	public boolean canInteractWith(EntityPlayer playerIn) 
@@ -56,30 +56,23 @@ public class ContainerAutocrafting extends Container
 
 	public void rotateMatrix() 
 	{
-		this._stackMatrix = MatrixHelper.rotateMatrixRight(this._stackMatrix);
+		this._stackMatrix = MatrixUtil.rotateMatrixRight(this._stackMatrix);
 		reloadCraftMatrix(this._stackMatrix);
 	}
 
 	public boolean craft() 
 	{
 		this.onCraftMatrixChanged(this._craftMatrix);
-		if(!ItemStackHelper.isNullStack(this._craftResult.getStackInSlot(0)))
-		{
-			return true;
-		}
+		if (!ItemStackUtil.isNullStack(this._craftResult.getStackInSlot(0))) return true;
 		return false;
 	}
 
 	public void removeStacks(IInventory[][] inventoryMatrix)
 	{
 		int size = inventoryMatrix.length;
-		for(int i = 0; i < size; ++i)
-		{
-			for(int j = 0; j < size; ++j)
-			{
+		for (int i = 0; i < size; ++i)
+			for (int j = 0; j < size; ++j)
 				inventoryMatrix[i][j].decrStackSize(_tile.getCurrentCraftingSlot(), 1);
-			}
-		}
 	}
 
 	public void outputResult(IInventory inv)

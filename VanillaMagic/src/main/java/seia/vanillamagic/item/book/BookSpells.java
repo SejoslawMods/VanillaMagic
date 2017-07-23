@@ -5,11 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.quest.IQuest;
-import seia.vanillamagic.quest.QuestList;
+import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.quest.spell.QuestCastSpell;
-import seia.vanillamagic.util.TextHelper;
+import seia.vanillamagic.util.TextUtil;
 
 public class BookSpells implements IBook
 {
@@ -20,7 +21,11 @@ public class BookSpells implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getItem(), new Object[]{
+		GameRegistry.addShapedRecipe(
+				new ResourceLocation(""),
+				null,
+				getItem(), 
+				new Object[]{
 				" B ",
 				" B ",
 				" B ",
@@ -38,20 +43,20 @@ public class BookSpells implements IBook
 			{
 				// Pages
 				pages.appendTag(new NBTTagString(
-						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.spells.title") + " ====" + 
-						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
+						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextUtil.translateToLocal("book.spells.title") + " ====" + 
+						TextUtil.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
-				for(int i = 0; i < QuestList.size(); ++i)
+				for (int i = 0; i < QuestList.size(); ++i)
 				{
 					IQuest quest = QuestList.get(i);
-					if(quest instanceof QuestCastSpell)
+					if (quest instanceof QuestCastSpell)
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextHelper.translateToLocal("achievement." + quest.getUniqueName()) + 
-								TextHelper.getEnters(2) + 
+								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.getEnters(2) + 
 								"§0" +
-								TextHelper.translateToLocal("achievement." + quest.getUniqueName() + ".desc")
+								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc")
 								));
 					}
 				}

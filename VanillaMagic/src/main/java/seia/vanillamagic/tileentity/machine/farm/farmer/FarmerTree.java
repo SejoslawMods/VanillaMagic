@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -21,7 +22,7 @@ import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 import seia.vanillamagic.tileentity.machine.farm.TreeHarvestUtils;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class FarmerTree implements IFarmer
 {
@@ -37,10 +38,7 @@ public class FarmerTree implements IFarmer
 	public FarmerTree(Block sapling, Block... wood) 
 	{
 		this.sapling = sapling;
-		if(sapling != null) 
-		{
-			saplingItem = new ItemStack(sapling);
-		}
+		if (sapling != null) saplingItem = new ItemStack(sapling);
 		woods = wood;
 	}
 
@@ -62,40 +60,30 @@ public class FarmerTree implements IFarmer
 
 	protected boolean isWood(Block block) 
 	{
-		for(Block wood : woods) 
-		{
-			if(block == wood) 
-			{
+		for (Block wood : woods) 
+			if (block == wood) 
 				return true;
-			}
-		}
 		return false;
 	}
 	
 	public boolean canPlant(ItemStack stack) 
 	{
-		return !ItemStackHelper.isNullStack(stack) && stack.getItem() == saplingItem.getItem();
+		return !ItemStackUtil.isNullStack(stack) && stack.getItem() == saplingItem.getItem();
 	}
 	
 	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
-		if(block == sapling) 
-		{
-			return true;
-		}
+		if (block == sapling) return true;
 		return plantFromInventory(farm, pos, block, state);
 	}
 
 	protected boolean plantFromInventory(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		World worldObj = farm.getWorld();
-		if(canPlant(worldObj, pos)) 
+		if (canPlant(worldObj, pos)) 
 		{
 			ItemStack seed = farm.takeSeedFromSupplies(saplingItem, pos, false);
-			if(!ItemStackHelper.isNullStack(seed)) 
-			{
-				return plant(farm, worldObj, pos, seed);
-			}
+			if (!ItemStackUtil.isNullStack(seed)) return plant(farm, worldObj, pos, seed);
 		}
 		return false;
 	}
@@ -106,18 +94,14 @@ public class FarmerTree implements IFarmer
 		IBlockState bs = worldObj.getBlockState(grnPos);
 		Block ground = bs.getBlock(); 
 		IPlantable plantable = (IPlantable) sapling;
-		if(sapling.canPlaceBlockAt(worldObj, pos) &&        
-				ground.canSustainPlant(bs, worldObj, grnPos, EnumFacing.UP, plantable)) 
-		{
-			return true;
-		}
+		if (sapling.canPlaceBlockAt(worldObj, pos) && ground.canSustainPlant(bs, worldObj, grnPos, EnumFacing.UP, plantable)) return true;
 		return false;
 	}
 
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos, ItemStack seed) 
 	{    
 		worldObj.setBlockToAir(pos);
-		if(canPlant(worldObj, pos)) 
+		if (canPlant(worldObj, pos)) 
 		{            
 			worldObj.setBlockState(pos, sapling.getStateFromMeta(seed.getItemDamage()), 1 | 2);
 			return true;
@@ -129,10 +113,8 @@ public class FarmerTree implements IFarmer
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		boolean hasAxe = farm.hasAxe();
-		if(!hasAxe) 
-		{
-			return null;
-		}
+		if (!hasAxe) return null;
+		
 		World worldObj = farm.getWorld();
 		final int fortune = farm.getMaxLootingValue();
 		HarvestResult res = new HarvestResult();
@@ -143,49 +125,41 @@ public class FarmerTree implements IFarmer
 		boolean hasShears = farm.hasShears();
 		int noShearingPercentage = farm.isLowOnSaplings(pos);
 		int shearCount = 0;
-		for(int i = 0; i < res.harvestedBlocks.size() && hasAxe; ++i) 
+		for (int i = 0; i < res.harvestedBlocks.size() && hasAxe; ++i) 
 		{
 			BlockPos coord = res.harvestedBlocks.get(i);
 			Block blk = farm.getBlock(coord);
-			List<ItemStack> drops;
+			NonNullList<ItemStack> drops = NonNullList.create();
 			boolean wasSheared = false;
 			boolean wasAxed = false;
 			boolean wasWood = isWood(blk);
 			float chance = 1.0F;
-			if(blk instanceof IShearable && hasShears && ((shearCount / res.harvestedBlocks.size() + noShearingPercentage) < 100)) 
+			if (blk instanceof IShearable && hasShears && ((shearCount / res.harvestedBlocks.size() + noShearingPercentage) < 100)) 
 			{
-				drops = ((IShearable) blk).onSheared(null, worldObj, coord, 0);
+				drops = (NonNullList<ItemStack>) ((IShearable) blk).onSheared(null, worldObj, coord, 0);
 				wasSheared = true;
 				shearCount += 100;
 			} 
 			else 
 			{
-				drops = blk.getDrops(worldObj, coord, farm.getBlockState(coord), fortune);
+				blk.getDrops(drops, worldObj, coord, farm.getBlockState(coord), fortune);
 				chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, coord, farm.getBlockState(coord), fortune, chance, false, null/*fakePlayer*/);
 				wasAxed = true;
 			}
 			
-			if(drops != null) 
-			{
-				for(ItemStack drop : drops) 
-				{
-					if(worldObj.rand.nextFloat() <= chance) 
-					{
+			if (drops != null) 
+				for (ItemStack drop : drops) 
+					if (worldObj.rand.nextFloat() <= chance) 
 						res.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
-					}
-				}
-			}
-			if(wasAxed && !wasWood) 
-			{
-				wasAxed = true;
-			}
 			
-			if(wasAxed) 
+			if (wasAxed && !wasWood) wasAxed = true;
+			
+			if (wasAxed) 
 			{
 				farm.damageAxe(blk, new BlockPos(coord));
 				hasAxe = farm.hasAxe();
 			} 
-			else if(wasSheared) 
+			else if (wasSheared) 
 			{
 				farm.damageShears(blk, new BlockPos(coord));
 				hasShears = farm.hasShears();
@@ -193,23 +167,12 @@ public class FarmerTree implements IFarmer
 			farm.getWorld().setBlockToAir(coord);
 			actualHarvests.add(coord);
 		}
-//		ItemStack[] inv = fakePlayer.inventory.mainInventory;
-//		for(int slot = 0; slot < inv.length; slot++) 
-//		{
-//			ItemStack stack = inv[slot];
-//			if(stack != null) 
-//			{
-//				inv[slot] = null;
-//				EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
-//				res.drops.add(entityitem);
-//			}
-//		}
 		res.harvestedBlocks.clear();
 		res.harvestedBlocks.addAll(actualHarvests);
 		//try replant    
-		for(EntityItem drop : res.drops) 
+		for (EntityItem drop : res.drops) 
 		{
-			if(canPlant(drop.getEntityItem()) && plant(farm, worldObj, pos, drop.getEntityItem())) 
+			if (canPlant(drop.getItem()) && plant(farm, worldObj, pos, drop.getItem())) 
 			{     
 				res.drops.remove(drop);
 				break;

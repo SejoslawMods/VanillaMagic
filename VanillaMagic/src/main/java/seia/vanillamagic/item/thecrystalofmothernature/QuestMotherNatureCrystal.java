@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -22,7 +23,7 @@ import seia.vanillamagic.api.item.ICustomItem;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class QuestMotherNatureCrystal extends Quest
 {
@@ -35,19 +36,12 @@ public class QuestMotherNatureCrystal extends Quest
 		EntityPlayer player = event.player;
 		World world = player.world;
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(ItemStackHelper.isNullStack(leftHand))
-		{
-			return;
-		}
+		if (ItemStackUtil.isNullStack(leftHand)) return;
+		
 		NBTTagCompound stackTag = leftHand.getTagCompound();
-		if(stackTag == null)
-		{
-			return;
-		}
-		if(VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL))
-		{
-			onTickUpdate(leftHand, world, player);
-		}
+		if (stackTag == null) return;
+		
+		if (VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL)) onTickUpdate(leftHand, world, player);
 	}
 	
 	/**
@@ -55,40 +49,31 @@ public class QuestMotherNatureCrystal extends Quest
 	 */
 	public void onTickUpdate(ItemStack leftHand, World world, EntityPlayer player) 
 	{
-		int range = VMConfig.motherNatureCrystalRange; // def 10
+		int range = VMConfig.MOTHER_NATURE_CRYSTAL_RANGE; // def 10
 		int verticalRange = 3;
 		int posX = (int) Math.round(player.posX - 0.5f);
 		int posY = (int) player.posY;
 		int posZ = (int) Math.round(player.posZ - 0.5f);
-		for(int ix = posX - range; ix <= posX + range; ++ix)
+		for (int ix = posX - range; ix <= posX + range; ++ix)
 		{
-			for(int iz = posZ - range; iz <= posZ + range; ++iz)
+			for (int iz = posZ - range; iz <= posZ + range; ++iz)
 			{
-				for(int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy)
+				for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy)
 				{
 					BlockPos blockPos = new BlockPos(ix, iy, iz);
 					Block block = world.getBlockState(blockPos).getBlock();
-					if(block instanceof IPlantable || block instanceof IGrowable)
+					if (block instanceof IPlantable || block instanceof IGrowable)
 					{
-						if(world.rand.nextInt(50) == 0)
+						if (world.rand.nextInt(50) == 0)
 						{
-//							IBlockState preBlockState = world.getBlockState(blockPos);
-//							block.updateTick(world, blockPos, world.getBlockState(blockPos), world.rand);
-//							IBlockState newState = world.getBlockState(blockPos);
-//							if(!newState.equals(preBlockState))
-//							{
-//								world.playEvent(2001, blockPos, Block.getIdFromBlock(newState.getBlock()) + (newState.getBlock().getMetaFromState(newState) << 12));
-//							}
-							if(!MinecraftForge.EVENT_BUS.post(new EventMotherNatureCrystal.TickBlock(
+							if (!MinecraftForge.EVENT_BUS.post(new EventMotherNatureCrystal.TickBlock(
 									(ICustomItem) VanillaMagicItems.MOTHER_NATURE_CRYSTAL, player, world, blockPos)))
 							{
 								IBlockState preBlockState = world.getBlockState(blockPos);
 								block.updateTick(world, blockPos, world.getBlockState(blockPos), world.rand);
 								IBlockState newState = world.getBlockState(blockPos);
-								if(!newState.equals(preBlockState))
-								{
+								if (!newState.equals(preBlockState))
 									world.playEvent(2001, blockPos, Block.getIdFromBlock(newState.getBlock()) + (newState.getBlock().getMetaFromState(newState) << 12));
-								}
 							}
 						}
 					}
@@ -104,37 +89,29 @@ public class QuestMotherNatureCrystal extends Quest
 	@SubscribeEvent
 	public void onCrystalUse(RightClickBlock event) // right hand
 	{
-		if(countTicks == 0)
-		{
-			countTicks++;
-		}
+		if (countTicks == 0) countTicks++;
 		else
 		{
 			countTicks = 0;
 			return;
 		}
+		
 		EntityPlayer player = event.getEntityPlayer();
 		World world = event.getWorld();
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(ItemStackHelper.isNullStack(rightHand))
-		{
-			return;
-		}
+		if (ItemStackUtil.isNullStack(rightHand)) return;
+		
 		NBTTagCompound stackTag = rightHand.getTagCompound();
-		if(stackTag == null)
+		if (stackTag == null) return;
+		
+		if (VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL))
 		{
-			return;
-		}
-		if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL))
-		{
-			if(!player.hasAchievement(achievement))
+			if (!hasQuest(player)) addStat(player);
+			
+			if (hasQuest(player))
 			{
-				player.addStat(achievement, 1);
-			}
-			if(player.hasAchievement(achievement))
-			{
-				if(applyBonemeal(rightHand, world, clickedPos))
+				if (applyBonemeal(rightHand, world, clickedPos))
 				{
 					IBlockState state = world.getBlockState(clickedPos);
 					world.playEvent(2001, clickedPos, Block.getIdFromBlock(state.getBlock()) + (state.getBlock().getMetaFromState(state) << 12));
@@ -157,22 +134,19 @@ public class QuestMotherNatureCrystal extends Quest
 	public boolean applyBonemeal(ItemStack rightHand, World world, BlockPos clickedPos, FakePlayer fakePlayer) 
 	{
 		IBlockState state = world.getBlockState(clickedPos);
-		int hook = ForgeEventFactory.onApplyBonemeal(fakePlayer, world, clickedPos, state, rightHand);
-		if(hook != 0)
-		{
-			return hook > 0;
-		}
-		if(state.getBlock() instanceof IGrowable)
+		int hook = ForgeEventFactory.onApplyBonemeal(fakePlayer, world, clickedPos, state, rightHand, EnumHand.MAIN_HAND);
+		if (hook != 0) return hook > 0;
+		
+		if (state.getBlock() instanceof IGrowable)
 		{
 			IGrowable growable = (IGrowable) state.getBlock();
-			if(growable.canGrow(world, clickedPos, state, world.isRemote))
+			if (growable.canGrow(world, clickedPos, state, world.isRemote))
 			{
-				if(!world.isRemote)
+				if (!world.isRemote)
 				{
-					if(growable.canUseBonemeal(world, world.rand, clickedPos, state))
+					if (growable.canUseBonemeal(world, world.rand, clickedPos, state))
 					{
-//						growable.grow(world, world.rand, clickedPos, state);
-						if(!MinecraftForge.EVENT_BUS.post(new EventMotherNatureCrystal.Grow(
+						if (!MinecraftForge.EVENT_BUS.post(new EventMotherNatureCrystal.Grow(
 								VanillaMagicItems.MOTHER_NATURE_CRYSTAL, fakePlayer, world, clickedPos, growable)))
 						{
 							growable.grow(world, world.rand, clickedPos, state);

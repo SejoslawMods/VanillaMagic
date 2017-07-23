@@ -8,15 +8,11 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import seia.vanillamagic.api.magic.IEvokerSpell;
 
 //TODO: Fix long range Fangs attaks.
-public class EvokerSpellFangAttack extends EvokerSpell
+public class EvokerSpellFangAttack implements IEvokerSpell
 {
-	public EvokerSpellFangAttack() 
-	{
-		super();
-	}
-	
 	public int getSpellID() 
 	{
 		return 2;
@@ -30,26 +26,21 @@ public class EvokerSpellFangAttack extends EvokerSpell
 	public void castSpell(Entity caster, Entity target) 
 	{
 		EntityLivingBase fakeEvoker = (EntityLivingBase) caster;
-		if(fakeEvoker == null)
-		{
-			return;
-		}
-		if(target == null)
-		{
-			return;
-		}
+		if (fakeEvoker == null) return;
+		if (target == null) return;
+		
 		double minDifY = Math.min(target.posY, fakeEvoker.posY);
 		double maxDifY = Math.max(target.posY, fakeEvoker.posY) + 1.0D;
 		float distance = (float)MathHelper.atan2(target.posZ - fakeEvoker.posZ, target.posX - fakeEvoker.posX);
 		
-		if(fakeEvoker.getDistanceSqToEntity(target) < 9.0D)
+		if (fakeEvoker.getDistanceSqToEntity(target) < 9.0D)
 		{
-			for(int i = 0; i < 5; ++i)
+			for (int i = 0; i < 5; ++i)
 			{
 				float distance1 = distance + (float)i * (float)Math.PI * 0.4F;
 				spawnFangs(fakeEvoker, fakeEvoker.posX + (double)MathHelper.cos(distance1) * 1.5D, fakeEvoker.posZ + (double)MathHelper.sin(distance1) * 1.5D, minDifY, maxDifY, distance1, 0);
 			}
-			for(int k = 0; k < 8; ++k)
+			for (int k = 0; k < 8; ++k)
 			{
 				float distance1 = distance + (float)k * (float)Math.PI * 2.0F / 8.0F + ((float)Math.PI * 2F / 5F);
 				spawnFangs(fakeEvoker, fakeEvoker.posX + (double)MathHelper.cos(distance1) * 2.5D, fakeEvoker.posZ + (double)MathHelper.sin(distance1) * 2.5D, minDifY, maxDifY, distance1, 3);
@@ -58,7 +49,7 @@ public class EvokerSpellFangAttack extends EvokerSpell
 		}
 		else
 		{
-			for(int l = 0; l < 16; ++l)
+			for (int l = 0; l < 16; ++l)
 			{
 				double distance1 = 1.25D * (double)(l + 1);
 				int distance1Int = 1 * l;
@@ -74,30 +65,24 @@ public class EvokerSpellFangAttack extends EvokerSpell
 		boolean flag = false;
 		double maxY = 0.0D;
 		
-		while(true)
+		while (true)
 		{
-			if(!fakeEvoker.world.isBlockNormalCube(pos, true) && fakeEvoker.world.isBlockNormalCube(pos.down(), true))
+			if (!fakeEvoker.world.isBlockNormalCube(pos, true) && fakeEvoker.world.isBlockNormalCube(pos.down(), true))
 			{
-				if(!fakeEvoker.world.isAirBlock(pos))
+				if (!fakeEvoker.world.isAirBlock(pos))
 				{
 					IBlockState state = fakeEvoker.world.getBlockState(pos);
 					AxisAlignedBB aabb = state.getCollisionBoundingBox(fakeEvoker.world, pos);
-					if(aabb != null)
-					{
-						maxY = aabb.maxY;
-					}
+					if (aabb != null) maxY = aabb.maxY;
 				}
 				flag = true;
 				break;
 			}
 			pos = pos.down();
-			if(pos.getY() < MathHelper.floor(minDifY) - 1)
-			{
-				break;
-			}
+			if (pos.getY() < MathHelper.floor(minDifY) - 1) break;
 		}
 		
-		if(flag)
+		if (flag)
 		{
 			EntityEvokerFangs entityFangs = new EntityEvokerFangs(fakeEvoker.world, nextX, (double)pos.getY() + maxY, nextZ, distance, warmupDelayTicks, fakeEvoker);
 			fakeEvoker.world.spawnEntity(entityFangs);

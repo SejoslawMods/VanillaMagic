@@ -16,8 +16,8 @@ import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class QuestInventoryBridge extends Quest
 {
@@ -31,46 +31,29 @@ public class QuestInventoryBridge extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(ItemStackHelper.isNullStack(rightHand))
-		{
-			return;
-		}
-		if(!WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), rightHand))
-		{
-			return;
-		}
+		if (ItemStackUtil.isNullStack(rightHand)) return;
+		if (!WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), rightHand)) return;
+		
 		ItemStack leftHand = player.getHeldItemOffhand();
-		if(ItemStackHelper.isNullStack(leftHand))
-		{
-			return;
-		}
-		if(!ItemStack.areItemsEqual(leftHand, requiredLeftHand))
-		{
-			return;
-		}
-		if(player.isSneaking())
+		if (ItemStackUtil.isNullStack(leftHand)) return;
+		if (!ItemStack.areItemsEqual(leftHand, requiredLeftHand)) return;
+		
+		if (player.isSneaking())
 		{
 			World world = event.getWorld();
 			BlockPos clickedPos = event.getPos();
 			// RightClicked on IInventory
 			TileEntity clickedInventory = world.getTileEntity(clickedPos);
-			if(clickedInventory == null)
-			{
-				return;
-			}
-			if(!(clickedInventory instanceof IInventory))
-			{
-				return;
-			}
+			if (clickedInventory == null) return;
+			if (!(clickedInventory instanceof IInventory)) return;
+			
 			/*
 			 * Player has got Blaze Rod in right hand and "requiredLeftHand" in left hand.
 			 * We can now spawn TileEntity and let it do work.
 			 */
-			if(canPlayerGetAchievement(player))
-			{
-				player.addStat(achievement, 1);
-			}
-			if(player.hasAchievement(achievement))
+			if (canPlayerGetQuest(player)) addStat(player);
+			
+			if (hasQuest(player))
 			{
 				TileInventoryBridge tile = new TileInventoryBridge();
 				tile.init(player.world, clickedPos.offset(EnumFacing.UP));
@@ -78,13 +61,14 @@ public class QuestInventoryBridge extends Quest
 				{
 					tile.setPositionFromSelector(player);
 				}
-				catch(NotInventoryException e)
+				catch (NotInventoryException e)
 				{
 					e.printStackTrace();
 					System.out.println(e.getMessage());
 					System.out.println(e.position.toString());
 					return;
 				}
+				
 				try
 				{
 					tile.setOutputInventory(world, clickedPos);
@@ -96,14 +80,12 @@ public class QuestInventoryBridge extends Quest
 					System.out.println(e.position.toString());
 					return;
 				}
-				if(CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
+				
+				if (CustomTileEntityHandler.addCustomTileEntity(tile, player.dimension))
 				{
-					EntityHelper.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
-					ItemStackHelper.decreaseStackSize(leftHand, 1);
-					if(ItemStackHelper.getStackSize(leftHand) == 0)
-					{
-						player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
-					}
+					EntityUtil.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
+					ItemStackUtil.decreaseStackSize(leftHand, 1);
+					if (ItemStackUtil.getStackSize(leftHand) == 0) player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, null);
 				}
 			}
 		}
@@ -115,19 +97,10 @@ public class QuestInventoryBridge extends Quest
 		BlockPos inventoryPos = event.getPos();
 		World world = event.getWorld();
 		TileEntity inventoryTile = world.getTileEntity(inventoryPos);
-		if(inventoryTile instanceof IInventory)
+		if (inventoryTile instanceof IInventory)
 		{
 			BlockPos customTilePos = inventoryPos.offset(EnumFacing.UP);
 			CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, customTilePos, event.getPlayer());
-//			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(customTilePos, WorldHelper.getDimensionID(world));
-//			if(customTile == null)
-//			{
-//				return;
-//			}
-//			if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, customTilePos))
-//			{
-//				EntityHelper.addChatComponentMessage(event.getPlayer(), customTile.getClass().getSimpleName() + " removed");
-//			}
 		}
 	}
 }

@@ -17,7 +17,7 @@ import seia.vanillamagic.api.event.EventSpell;
 import seia.vanillamagic.api.magic.IEvokerSpell;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.util.EntityHelper;
+import seia.vanillamagic.util.EntityUtil;
 
 public class QuestEvokerCrystal extends Quest
 {
@@ -28,7 +28,7 @@ public class QuestEvokerCrystal extends Quest
 	public void evokerDropCrystal(LivingDropsEvent event)
 	{
 		EntityLivingBase dyingEntity = event.getEntityLiving();
-		if(dyingEntity instanceof EntityEvoker)
+		if (dyingEntity instanceof EntityEvoker)
 		{
 			ItemStack evokerCrystal = VanillaMagicItems.EVOKER_CRYSTAL.getItem();
 			EntityItem droppedCrystal = new EntityItem(dyingEntity.world, dyingEntity.posX, dyingEntity.posY, dyingEntity.posZ, evokerCrystal);
@@ -42,13 +42,10 @@ public class QuestEvokerCrystal extends Quest
 	@SubscribeEvent
 	public void pickupEvokerCrystal(EntityItemPickupEvent event)
 	{
-		if(ItemStack.areItemsEqualIgnoreDurability(event.getItem().getEntityItem(), VanillaMagicItems.EVOKER_CRYSTAL.getItem()))
+		if (ItemStack.areItemsEqualIgnoreDurability(event.getItem().getItem(), VanillaMagicItems.EVOKER_CRYSTAL.getItem()))
 		{
 			EntityPlayer player = event.getEntityPlayer();
-			if(canPlayerGetAchievement(player))
-			{
-				player.addStat(achievement, 1);
-			}
+			if (canPlayerGetQuest(player)) addStat(player);
 		}
 	}
 	
@@ -61,11 +58,8 @@ public class QuestEvokerCrystal extends Quest
 	public void useCrystal(RightClickItem event)
 	{
 		EntityPlayer caster = event.getEntityPlayer();
-		if(!caster.hasAchievement(achievement))
-		{
-			return;
-		}
-		Entity target = EntityHelper.getClosestLookingAt(caster, 1000.0D);
+		if (!hasQuest(caster)) return;
+		Entity target = EntityUtil.getClosestLookingAt(caster, 1000.0D);
 		useCrystal(caster, target);
 	}
 	
@@ -78,10 +72,7 @@ public class QuestEvokerCrystal extends Quest
 	public void onShortRangeClickEntity(EntityInteractSpecific event)
 	{
 		EntityPlayer caster = event.getEntityPlayer();
-		if(!caster.hasAchievement(achievement))
-		{
-			return;
-		}
+		if (!hasQuest(caster)) return;
 		Entity target = event.getTarget();
 		useCrystal(caster, target);
 	}
@@ -95,10 +86,7 @@ public class QuestEvokerCrystal extends Quest
 	public void onShortRangeClickEntity(EntityInteract event)
 	{
 		EntityPlayer caster = event.getEntityPlayer();
-		if(!caster.hasAchievement(achievement))
-		{
-			return;
-		}
+		if(!hasQuest(caster)) return;
 		Entity target = event.getTarget();
 		useCrystal(caster, target);
 	}
@@ -116,20 +104,16 @@ public class QuestEvokerCrystal extends Quest
 	 */
 	public void useCrystal(EntityPlayer player, Entity target, boolean isSneaking)
 	{
-		if(player.hasAchievement(achievement))
+		if (hasQuest(player))
 		{
 			ItemStack crystal = player.getHeldItemMainhand();
-			if(VanillaMagicItems.isCustomItem(crystal, VanillaMagicItems.EVOKER_CRYSTAL))
+			if (VanillaMagicItems.isCustomItem(crystal, VanillaMagicItems.EVOKER_CRYSTAL))
 			{
-				if(isSneaking) // Change Spell
-				{
-					EvokerSpellRegistry.changeSpell(player, crystal);
-				}
+				if (isSneaking) EvokerSpellRegistry.changeSpell(player, crystal); // Change Spell
 				else // Use Spell
 				{
 					IEvokerSpell spell = EvokerSpellRegistry.getCurrentSpell(crystal);
-//					spell.castSpell(player, target);
-					if(!MinecraftForge.EVENT_BUS.post(new EventSpell.Cast.EvokerSpell(
+					if (!MinecraftForge.EVENT_BUS.post(new EventSpell.Cast.EvokerSpell(
 							player, player.world, target, spell)))
 					{
 						spell.castSpell(player, target);

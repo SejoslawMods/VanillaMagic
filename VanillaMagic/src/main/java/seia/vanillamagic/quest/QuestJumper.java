@@ -14,7 +14,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.event.EventJumper;
-import seia.vanillamagic.magic.spell.spells.teleport.TeleportHelper;
+import seia.vanillamagic.magic.spell.spells.teleport.TeleportUtil;
 import seia.vanillamagic.util.EntityUtil;
 import seia.vanillamagic.util.ItemStackUtil;
 import seia.vanillamagic.util.NBTUtil;
@@ -77,10 +77,10 @@ public class QuestJumper extends Quest
 				int dimId = NBTUtil.getDimensionFromNBT(bookData);
 				if (MinecraftForge.EVENT_BUS.post(new EventJumper.Teleport.Before(player, event.getWorld(), teleportPos, dimId))) return;
 				
-				if (player.dimension == dimId) TeleportHelper.teleportEntity(player, teleportPos); // Teleport occurres in the same Dimension
+				if (player.dimension == dimId) TeleportUtil.teleportEntity(player, teleportPos); // Teleport occurres in the same Dimension
 				else // Teleport to another Dimension
 				{
-					if (player instanceof EntityPlayerMP) TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) player, dimId);
+					if (player instanceof EntityPlayerMP) TeleportUtil.changePlayerDimensionWithoutPortal((EntityPlayerMP) player, dimId);
 				}
 				EntityUtil.addChatComponentMessageNoSpam(player, "Teleported to: " + TextUtil.constructPositionString(player.getEntityWorld(), teleportPos));
 				MinecraftForge.EVENT_BUS.post(new EventJumper.Teleport.After(player, event.getWorld(), teleportPos, dimId));

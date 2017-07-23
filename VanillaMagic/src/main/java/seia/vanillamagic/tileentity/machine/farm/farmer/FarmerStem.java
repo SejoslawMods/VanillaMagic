@@ -12,12 +12,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.tileentity.machine.farm.HarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class FarmerStem extends FarmerCustomSeed
 {
@@ -30,10 +31,7 @@ public class FarmerStem extends FarmerCustomSeed
 	  
 	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
-		if(plantedBlock == block) 
-		{
-			return true;
-		}
+		if (plantedBlock == block) return true;
 		return plantFromInventory(farm, pos);
 	}
 	  
@@ -41,12 +39,7 @@ public class FarmerStem extends FarmerCustomSeed
 	{
 		BlockPos up = pos.offset(EnumFacing.UP);
 		Block upBlock = farm.getWorld().getBlockState(up).getBlock();
-		//return upBlock == plantedBlock;
-		
-		if(Block.isEqualTo(upBlock, plantedBlock))
-		{
-			return true;
-		}
+		if (Block.isEqualTo(upBlock, plantedBlock)) return true;
 		return false;
 	}
 	  
@@ -59,7 +52,6 @@ public class FarmerStem extends FarmerCustomSeed
 	public IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
 		World worldObj = farm.getWorld();
-		int fortune = farm.getMaxLootingValue();
 		HarvestResult result = new HarvestResult();
 		BlockPos harvestCoord = pos;
 		boolean done = false;
@@ -67,46 +59,23 @@ public class FarmerStem extends FarmerCustomSeed
 		{
 			harvestCoord = harvestCoord.offset(EnumFacing.UP);
 			boolean hasHoe = farm.hasHoe();
-			if(plantedBlock == farm.getBlock(harvestCoord) && hasHoe) 
+			if (plantedBlock == farm.getBlock(harvestCoord) && hasHoe) 
 			{
 				result.harvestedBlocks.add(harvestCoord);
-				List<ItemStack> drops = plantedBlock.getDrops(worldObj, harvestCoord, state, 0); // TODO: FarmerStem -> Currently disabled fortune.
-//				float chance = ForgeEventFactory.fireBlockHarvesting(drops, worldObj, harvestCoord, state, fortune, 1.0F, false, null/*fakePlayer*/);
+				NonNullList<ItemStack> drops = NonNullList.create();
+				plantedBlock.getDrops(drops, worldObj, harvestCoord, state, 0);
 				if(drops != null) 
-				{
 					for(ItemStack drop : drops) 
-					{
-//						if(worldObj.rand.nextFloat() <= chance) 
-//						{
-							result.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
-//						}
-					}
-				}
+						result.drops.add(new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop.copy()));
+				
 				farm.damageHoe(1, new BlockPos(harvestCoord));
-//				ItemStack[] inv = fakePlayer.inventory.mainInventory;
-//				for(int slot = 0; slot < inv.length; slot++) 
-//				{
-//					ItemStack stack = inv[slot];
-//					if(stack != null) 
-//					{
-//						inv[slot] = null;
-//						EntityItem entityitem = new EntityItem(worldObj, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
-//						result.drops.add(entityitem);
-//					}
-//				}
 			} 
-			else 
-			{
-				done = true;
-			}
+			else done = true;
 		} 
-		while(!done);
+		while (!done);
 		List<BlockPos> toClear = new ArrayList<BlockPos>(result.getHarvestedBlocks());
 		Collections.sort(toClear, COMP);
-		for(BlockPos coord : toClear) 
-		{
-			farm.getWorld().setBlockToAir(coord);
-		}
+		for (BlockPos coord : toClear) farm.getWorld().setBlockToAir(coord);
 		return result;
 	}
 	  
@@ -114,10 +83,7 @@ public class FarmerStem extends FarmerCustomSeed
 	{
 		World worldObj = farm.getWorld();
 		ItemStack seed = farm.takeSeedFromSupplies(seeds, pos);
-		if(canPlant(farm, worldObj, pos) && !ItemStackHelper.isNullStack(seed))
-		{
-			return plant(farm, worldObj, pos, seed);
-		}
+		if (canPlant(farm, worldObj, pos) && !ItemStackUtil.isNullStack(seed)) return plant(farm, worldObj, pos, seed);
 		return false;
 	}
 

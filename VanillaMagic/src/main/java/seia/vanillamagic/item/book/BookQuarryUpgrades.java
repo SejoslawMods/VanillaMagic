@@ -5,11 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry;
-import seia.vanillamagic.util.TextHelper;
+import seia.vanillamagic.util.TextUtil;
 
 public class BookQuarryUpgrades implements IBook
 {
@@ -20,7 +21,11 @@ public class BookQuarryUpgrades implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getItem(), new Object[]{
+		GameRegistry.addShapedRecipe(
+				new ResourceLocation(""),
+				null,
+				getItem(), 
+				new Object[]{
 				"  B",
 				" B ",
 				"  B",
@@ -38,14 +43,14 @@ public class BookQuarryUpgrades implements IBook
 			{
 				// Pages
 				pages.appendTag(new NBTTagString(
-						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.quarryUpgrades.title") + " ====" + 
-						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
+						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextUtil.translateToLocal("book.quarryUpgrades.title") + " ====" + 
+						TextUtil.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
-				for(IQuarryUpgrade iqu : QuarryUpgradeRegistry.getUpgrades())
+				for (IQuarryUpgrade iqu : QuarryUpgradeRegistry.getUpgrades())
 				{
 					pages.appendTag(new NBTTagString(
 							BookRegistry.COLOR_HEADER + 
-							iqu.getUpgradeName() + TextHelper.getEnters(2) + 
+							iqu.getUpgradeName() + TextUtil.getEnters(2) + 
 							"§0" +
 							"Block: " + ForgeRegistries.BLOCKS.getKey(iqu.getBlock()).getResourcePath()
 							));

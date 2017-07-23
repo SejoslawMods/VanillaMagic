@@ -17,10 +17,7 @@ public class FarmerNetherWart extends FarmerCustomSeed
 	
 	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
-		if(!farm.isOpen(pos)) 
-		{
-			return false;
-		}
+		if (!farm.isOpen(pos)) return false;
 		return plantFromInventory(farm, pos);
 	}
 }

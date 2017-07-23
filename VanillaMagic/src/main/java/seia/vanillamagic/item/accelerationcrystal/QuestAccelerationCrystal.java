@@ -20,7 +20,6 @@ import seia.vanillamagic.quest.Quest;
 
 public class QuestAccelerationCrystal extends Quest
 {
-//	int updateTicks = 100;
 	@SubscribeEvent
 	public void rightClickBlock(RightClickBlock event)
 	{
@@ -29,38 +28,32 @@ public class QuestAccelerationCrystal extends Quest
 		BlockPos clickedPos = event.getPos();
 		IBlockState clickedState = world.getBlockState(clickedPos);
 		Block clickedBlock = clickedState.getBlock();
-		if(world.isRemote)
-		{
-			return;
-		}
-		if(!world.isAirBlock(clickedPos))
+		if (world.isRemote) return;
+		
+		if (!world.isAirBlock(clickedPos))
 		{
 			ItemStack rightHand = player.getHeldItemMainhand();
-			if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
+			if (VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
 			{
-				if(!player.hasAchievement(achievement))
-				{
-					player.addStat(achievement, 1);
-				}
-				if(player.hasAchievement(achievement))
+				if (!hasQuest(player)) addStat(player);
+				
+				if (hasQuest(player))
 				{
 					TileEntity tile = world.getTileEntity(clickedPos);
 					Random rand = new Random();
-					for(int i = 0; i < VMConfig.accelerationCrystalUpdateTicks; i++)
+					for (int i = 0; i < VMConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS; i++)
 					{
-						if(tile == null)
+						if (tile == null)
 						{
-//							clickedBlock.updateTick(world, clickedPos, clickedState, rand);
-							if(!MinecraftForge.EVENT_BUS.post(new EventAccelerationCrystal.TickBlock(
+							if (!MinecraftForge.EVENT_BUS.post(new EventAccelerationCrystal.TickBlock(
 									VanillaMagicItems.ACCELERATION_CRYSTAL, world, clickedPos, player)))
 							{
 								clickedBlock.updateTick(world, clickedPos, clickedState, rand);
 							}
 						}
-						else if(tile instanceof ITickable)
+						else if (tile instanceof ITickable)
 						{
-//							((ITickable) tile).update();
-							if(!MinecraftForge.EVENT_BUS.post(new EventAccelerationCrystal.TickTileEntity(
+							if (!MinecraftForge.EVENT_BUS.post(new EventAccelerationCrystal.TickTileEntity(
 									VanillaMagicItems.ACCELERATION_CRYSTAL, world, clickedPos, player, tile)))
 							{
 								((ITickable) tile).update();

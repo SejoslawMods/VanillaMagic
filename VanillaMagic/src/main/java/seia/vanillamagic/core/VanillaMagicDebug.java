@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +24,6 @@ import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.api.util.IAdditionalInfoProvider;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
-import seia.vanillamagic.util.EntityHelper;
 import seia.vanillamagic.util.EntityUtil;
 import seia.vanillamagic.util.ItemStackUtil;
 import seia.vanillamagic.util.QuestUtil;
@@ -101,9 +99,9 @@ public class VanillaMagicDebug
 	public void showTileEntityInfo(RightClickBlock event)
 	{
 		World world = event.getWorld();
-		if(world.isRemote) return;
+		if (world.isRemote) return;
 		
-		if(showTime == 1) showTime++;
+		if (showTime == 1) showTime++;
 		else
 		{
 			showTime = 1;
@@ -112,20 +110,19 @@ public class VanillaMagicDebug
 		
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(ItemStackUtil.isNullStack(stackRightHand)) return;
-		if(stackRightHand.getItem().equals(Items.CLOCK))
+		if (ItemStackUtil.isNullStack(stackRightHand)) return;
+		
+		if (stackRightHand.getItem().equals(Items.CLOCK))
 		{
 			// show info
 			BlockPos tilePos = event.getPos();
 			ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(tilePos, world);
-			if(customTile == null)
-			{
-				return;
-			}
+			if (customTile == null) return;
+			
 			TileEntity tile = customTile.getTileEntity();
-			if(tile instanceof ICustomTileEntity)
+			if (tile instanceof ICustomTileEntity)
 			{
-				if(customTile.getTileEntity() instanceof IAdditionalInfoProvider)
+				if (customTile.getTileEntity() instanceof IAdditionalInfoProvider)
 				{
 					List<String> info = ((IAdditionalInfoProvider) customTile.getTileEntity()).getAdditionalInfo();
 					EntityUtil.addChatComponentMessageNoSpam(player, info.toArray(new String[info.size()]));

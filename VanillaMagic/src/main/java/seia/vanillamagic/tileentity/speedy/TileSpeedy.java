@@ -24,7 +24,7 @@ import seia.vanillamagic.api.util.Box;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.NBTUtil;
 
 public class TileSpeedy extends CustomTileEntity implements ISpeedy
 {
@@ -47,8 +47,8 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
 	public void init(World world, BlockPos pos)
 	{
 		super.init(world, pos);
-		this.ticks = VMConfig.tileSpeedyTicks;
-		this.size = VMConfig.tileSpeedySize;
+		this.ticks = VMConfig.TILE_SPEEDY_TICKS;
+		this.size = VMConfig.TILE_SPEEDY_SIZE;
 		setBox();
 	}
 	
@@ -96,7 +96,7 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
 		{
 			return new InventoryWrapper(world, getPos().offset(EnumFacing.UP));
 		}
-		catch(NotInventoryException e)
+		catch (NotInventoryException e)
 		{
 			e.printStackTrace();
 			return null;
@@ -106,15 +106,12 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
 	public boolean containsCrystal()
 	{
 		IInventory inv = getInventoryWithCrystal().getInventory();
-		if(inv != null)
+		if (inv != null)
 		{
-			for(int i = 0; i < inv.getSizeInventory(); ++i)
+			for (int i = 0; i < inv.getSizeInventory(); ++i)
 			{
 				ItemStack stack = inv.getStackInSlot(i);
-				if(VanillaMagicItems.isCustomItem(stack, VanillaMagicItems.ACCELERATION_CRYSTAL))
-				{
-					return true;
-				}
+				if (VanillaMagicItems.isCustomItem(stack, VanillaMagicItems.ACCELERATION_CRYSTAL)) return true;
 			}
 		}
 		return false;
@@ -122,51 +119,35 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
     
 	public void update() 
 	{
-//		if(this.world.isRemote)
-//		{
-//			return;
-//		}
-		if(this.ticks <= 0)
-		{
-			return;
-		}
-		if(containsCrystal())
-		{
-			tickNeighbors();
-		}
+		if (this.ticks <= 0) return;
+		if (containsCrystal()) tickNeighbors();
 		MinecraftForge.EVENT_BUS.post(new EventSpeedy((ISpeedy) this, world, pos));
 	}
 	
 	private void tickNeighbors() 
 	{
-		for(int x = radiusBox.xMin; x <= radiusBox.xMax; ++x) 
-		{
-			for(int y = radiusBox.yMin; y <= radiusBox.yMax; ++y) 
-			{
-				for(int z = radiusBox.zMin; z <= radiusBox.zMax; ++z) 
-				{
+		for (int x = radiusBox.xMin; x <= radiusBox.xMax; ++x) 
+			for (int y = radiusBox.yMin; y <= radiusBox.yMax; ++y) 
+				for (int z = radiusBox.zMin; z <= radiusBox.zMax; ++z) 
 					this.tickBlock(new BlockPos(x, y, z));
-				}
-			}
-		}
 	}
 
 	private void tickBlock(BlockPos pos) 
 	{
-		if(!world.isAirBlock(pos))
+		if (!world.isAirBlock(pos))
 		{
 			IBlockState blockState = this.world.getBlockState(pos);
 			Block block = blockState.getBlock();
 			TileEntity tile = world.getTileEntity(pos);
 			Random rand = new Random();
-			for(int i = 0; i < ticks; ++i)
+			for (int i = 0; i < ticks; ++i)
 			{
-				if(tile == null)
+				if (tile == null)
 				{
 					block.updateTick(world, pos, blockState, rand);
 					world.spawnParticle(EnumParticleTypes.END_ROD, pos.getX(), pos.getY(), pos.getZ(), 100, 100, 100, new int[]{});
 				}
-				else if(tile instanceof ITickable)
+				else if (tile instanceof ITickable)
 				{
 					((ITickable) tile).update();
 					world.spawnParticle(EnumParticleTypes.END_ROD, pos.getX(), pos.getY(), pos.getZ(), 100, 100, 100, new int[]{});
@@ -178,14 +159,14 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setInteger(NBTHelper.NBT_SPEEDY_TICKS, ticks);
+		tag.setInteger(NBTUtil.NBT_SPEEDY_TICKS, ticks);
 		return tag;
 	}
     
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		this.ticks = tag.getInteger(NBTHelper.NBT_SPEEDY_TICKS);
+		this.ticks = tag.getInteger(NBTUtil.NBT_SPEEDY_TICKS);
 	}
 	
 	public List<String> getAdditionalInfo()

@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.util.TextHelper;
+import seia.vanillamagic.util.TextUtil;
 
 /**
  * Class which holds all additional data for Books and Books themselves.
@@ -24,11 +24,11 @@ public class BookRegistry
 	/**
 	 * Color of the book title.
 	 */
-	public static final String COLOR_TITLE = TextHelper.COLOR_BLUE;
+	public static final String COLOR_TITLE = TextUtil.COLOR_BLUE;
 	/**
 	 * Color of the book header.
 	 */
-	public static final String COLOR_HEADER = TextHelper.COLOR_RED;
+	public static final String COLOR_HEADER = TextUtil.COLOR_RED;
 	/**
 	 * Name of the Book author.
 	 */
@@ -39,12 +39,12 @@ public class BookRegistry
 	public static final String YEAR = "2017";
 	
 	// Book Names
-	public static final String BOOK_NAME_SPELLS = TextHelper.translateToLocal("book.spells.itemName");
-	public static final String BOOK_NAME_ALTAR_CRAFTING = TextHelper.translateToLocal("book.altarCrafting.itemName");
-	public static final String BOOK_NAME_BUILD_ALTAR = TextHelper.translateToLocal("book.altarBuilding.itemName");
-	public static final String BOOK_NAME_OTHER = TextHelper.translateToLocal("book.other.itemName");
-	public static final String BOOK_NAME_ITEM_UPGRADES = TextHelper.translateToLocal("book.itemUpgrades.itemName");
-	public static final String BOOK_NAME_QUARRY_UPGRADES = TextHelper.translateToLocal("book.quarryUpgrades.itemName");
+	public static final String BOOK_NAME_SPELLS = TextUtil.translateToLocal("book.spells.itemName");
+	public static final String BOOK_NAME_ALTAR_CRAFTING = TextUtil.translateToLocal("book.altarCrafting.itemName");
+	public static final String BOOK_NAME_BUILD_ALTAR = TextUtil.translateToLocal("book.altarBuilding.itemName");
+	public static final String BOOK_NAME_OTHER = TextUtil.translateToLocal("book.other.itemName");
+	public static final String BOOK_NAME_ITEM_UPGRADES = TextUtil.translateToLocal("book.itemUpgrades.itemName");
+	public static final String BOOK_NAME_QUARRY_UPGRADES = TextUtil.translateToLocal("book.quarryUpgrades.itemName");
 	
 	/**
 	 * Book unique ID.
@@ -103,10 +103,7 @@ public class BookRegistry
 	 */
 	public static void postInit()
 	{
-		for(IBook book : _BOOKS)
-		{
-			book.registerRecipe();
-		}
+		for (IBook book : _BOOKS) book.registerRecipe();
 		VanillaMagic.LOGGER.log(Level.INFO, "Books registered (" + _BOOKS.size() + ")");
 	}
 	
@@ -121,13 +118,9 @@ public class BookRegistry
 	 */
 	public static ItemStack getBookByUID(int bookUID)
 	{
-		for(int i = 0; i < _BOOKS.size(); ++i)
-		{
-			if(_BOOKS.get(i).getUID() == bookUID)
-			{
+		for (int i = 0; i < _BOOKS.size(); ++i)
+			if (_BOOKS.get(i).getUID() == bookUID)
 				return _BOOKS.get(i).getItem();
-			}
-		}
 		return null;
 	}
 	
@@ -136,10 +129,7 @@ public class BookRegistry
 	 */
 	public static boolean isBook(ItemStack stack)
 	{
-		if(stack.getTagCompound() != null)
-		{
-			return stack.getTagCompound().hasKey(BOOK_NBT_UID);
-		}
+		if (stack.getTagCompound() != null) return stack.getTagCompound().hasKey(BOOK_NBT_UID);
 		return false;
 	}
 	
@@ -149,10 +139,7 @@ public class BookRegistry
 	 */
 	public static int getUIDByBook(ItemStack stack)
 	{
-		if(isBook(stack))
-		{
-			return stack.getTagCompound().getInteger(BOOK_NBT_UID);
-		}
+		if (isBook(stack)) return stack.getTagCompound().getInteger(BOOK_NBT_UID);
 		return -1;
 	}
 	
@@ -169,10 +156,7 @@ public class BookRegistry
 	 */
 	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
 	{
-		for(IBook book : _BOOKS)
-		{
-			list.add(book.getItem());
-		}
+		for (IBook book : _BOOKS) list.add(book.getItem());
 		return list;
 	}
 }

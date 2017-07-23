@@ -15,10 +15,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.item.VanillaMagicItems;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.NBTHelper;
-import seia.vanillamagic.util.TextHelper;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.ItemStackUtil;
+import seia.vanillamagic.util.NBTUtil;
+import seia.vanillamagic.util.TextUtil;
 
 /**
  * Class which describes the Inventory Selector behavior.
@@ -47,38 +47,32 @@ public class InventorySelector
 	public void selectInventory(RightClickBlock event)
 	{
 		clicks++;
-		if(clicks == 1)
-		{
-			clicks++;
-		}
+		if (clicks == 1) clicks++;
 		else
 		{
 			clicks = 0;
 			return;
 		}
+		
 		World world = event.getWorld();
-		if(world.isRemote)
-		{
-			return;
-		}
+		if (world.isRemote) return;
+		
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(ItemStackHelper.isNullStack(rightHand))
-		{
-			return;
-		}
-		if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR))
+		if (ItemStackUtil.isNullStack(rightHand)) return;
+		
+		if (VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR))
 		{
 			BlockPos clickedPos = event.getPos();
-			if(!InventoryHelper.isInventory(world, clickedPos))
+			if (!InventoryHelper.isInventory(world, clickedPos))
 			{
-				EntityHelper.addChatComponentMessageNoSpam(player, "Clicked block is not an Inventory");
+				EntityUtil.addChatComponentMessageNoSpam(player, "Clicked block is not an Inventory");
 				return;
 			}
 			NBTTagCompound rightHandTagOld = rightHand.getTagCompound();
-			NBTTagCompound rightHandTagNew = NBTHelper.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world);
+			NBTTagCompound rightHandTagNew = NBTUtil.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world);
 			rightHand.setTagCompound(rightHandTagNew);
-			EntityHelper.addChatComponentMessageNoSpam(player, "Registered Inventory at: " + TextHelper.constructPositionString(world, clickedPos));
+			EntityUtil.addChatComponentMessageNoSpam(player, "Registered Inventory at: " + TextUtil.constructPositionString(world, clickedPos));
 		}
 	}
 	
@@ -89,40 +83,36 @@ public class InventorySelector
 	public void showSavedPosition(RightClickItem event)
 	{
 		World world = event.getWorld();
-		if(!world.isRemote)
-		{
-			return;
-		}
+		if (!world.isRemote) return;
+		
 		EntityPlayer player = event.getEntityPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(ItemStackHelper.isNullStack(rightHand))
-		{
-			return;
-		}
-		if(VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR))
+		if (ItemStackUtil.isNullStack(rightHand)) return;
+		
+		if (VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR))
 		{
 			NBTTagCompound rightHandTag = rightHand.getTagCompound();
-			if(player.isSneaking())
+			if (player.isSneaking())
 			{
 				// Clear saved position
-				if(rightHandTag.hasKey(NBTHelper.NBT_POSX)) // checking only posX
+				if (rightHandTag.hasKey(NBTUtil.NBT_POSX)) // checking only posX
 				{
-					EntityHelper.addChatComponentMessage(player, "Cleared position");
-					rightHandTag.removeTag(NBTHelper.NBT_POSX);
-					rightHandTag.removeTag(NBTHelper.NBT_POSY);
-					rightHandTag.removeTag(NBTHelper.NBT_POSZ);
+					EntityUtil.addChatComponentMessageNoSpam(player, "Cleared position");
+					rightHandTag.removeTag(NBTUtil.NBT_POSX);
+					rightHandTag.removeTag(NBTUtil.NBT_POSY);
+					rightHandTag.removeTag(NBTUtil.NBT_POSZ);
 				}
 			}
 			else
 			{
 				// Show saved position
-				BlockPos savedPos = NBTHelper.getBlockPosDataFromNBT(rightHandTag);
-				if(savedPos == null)
+				BlockPos savedPos = NBTUtil.getBlockPosDataFromNBT(rightHandTag);
+				if (savedPos == null)
 				{
-					EntityHelper.addChatComponentMessage(player, "No saved position");
+					EntityUtil.addChatComponentMessageNoSpam(player, "No saved position");
 					return;
 				}
-				EntityHelper.addChatComponentMessage(player, "Saved position: " + TextHelper.constructPositionString(world, savedPos));
+				EntityUtil.addChatComponentMessageNoSpam(player, "Saved position: " + TextUtil.constructPositionString(world, savedPos));
 			}
 		}
 	}
@@ -134,12 +124,12 @@ public class InventorySelector
 	public void showInventorySelectorTooltip(ItemTooltipEvent event)
 	{
 		ItemStack inventorySelector = event.getItemStack();
-		if(VanillaMagicItems.isCustomItem(inventorySelector, VanillaMagicItems.INVENTORY_SELECTOR))
+		if (VanillaMagicItems.isCustomItem(inventorySelector, VanillaMagicItems.INVENTORY_SELECTOR))
 		{
 			NBTTagCompound selectorNBT = inventorySelector.getTagCompound();
-			int dimId = selectorNBT.getInteger(NBTHelper.NBT_DIMENSION);
-			BlockPos selectorPos = NBTHelper.getBlockPosDataFromNBT(selectorNBT);
-			event.getToolTip().add("Selector Saved Position: " + TextHelper.constructPositionString(dimId, selectorPos));
+			int dimId = selectorNBT.getInteger(NBTUtil.NBT_DIMENSION);
+			BlockPos selectorPos = NBTUtil.getBlockPosDataFromNBT(selectorNBT);
+			event.getToolTip().add("Selector Saved Position: " + TextUtil.constructPositionString(dimId, selectorPos));
 		}
 	}
 }

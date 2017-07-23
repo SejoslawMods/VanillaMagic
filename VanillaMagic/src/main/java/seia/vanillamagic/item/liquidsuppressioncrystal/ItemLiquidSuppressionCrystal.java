@@ -1,6 +1,7 @@
 package seia.vanillamagic.item.liquidsuppressioncrystal;
 
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.item.CustomItemCrystal;
 
@@ -8,7 +9,11 @@ public class ItemLiquidSuppressionCrystal extends CustomItemCrystal
 {
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getItem(), new Object[]{
+		GameRegistry.addShapedRecipe(
+				new ResourceLocation(""),
+				null,
+				getItem(), 
+				new Object[]{
 				"BBB",
 				"BNB",
 				"BBB",

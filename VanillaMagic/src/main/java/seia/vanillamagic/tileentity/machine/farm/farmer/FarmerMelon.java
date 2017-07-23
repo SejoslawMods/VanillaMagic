@@ -21,20 +21,14 @@ public class FarmerMelon extends FarmerCustomSeed
 	{
 		int xVal = farm.getMachinePos().getX() & 1;
 		int zVal = farm.getMachinePos().getZ() & 1;
-		if((pos.getX() & 1) != xVal || (pos.getZ() & 1) != zVal) 
+		if ((pos.getX() & 1) != xVal || (pos.getZ() & 1) != zVal) 
 		{
-			// if we have melon seeds, we still want to return true here so they are not planted by the default plantable handlers
-			// return canPlant(farm.getSeedTypeInSuppliesFor(pos)); // TODO:
-			
 			// check for melon seeds
 			IInventory inv = farm.getInputInventory().getInventory();
-			for(int i = 0; i < inv.getSizeInventory(); ++i)
+			for (int i = 0; i < inv.getSizeInventory(); ++i)
 			{
 				ItemStack invSeeds = inv.getStackInSlot(i);
-				if((invSeeds != null) && canPlant(invSeeds))
-				{
-					return true;
-				}
+				if ((invSeeds != null) && canPlant(invSeeds)) return true;
 			}
 		}
 		return super.prepareBlock(farm, pos, block, state);

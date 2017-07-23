@@ -46,7 +46,7 @@ public class QuarryUpgradeRegistry
 			addUpgrade(QuarryUpgradeAutoInventoryOutputPlacer.class);
 			addUpgrade(QuarryUpgradeAutosmeltDigged.class);
 		}
-		catch(MappingExistsException e)
+		catch (MappingExistsException e)
 		{
 			e.printStackTrace();
 			VanillaMagic.LOGGER.log(Level.ERROR, "Error while registering QuarryUpgrade for block: " + e.checkingKey);
@@ -62,17 +62,16 @@ public class QuarryUpgradeRegistry
 		try
 		{
 			IQuarryUpgrade instance = quarryUpgradeClass.newInstance();
-			if(_MAP_BLOCK_UPGRADE.get(instance.getBlock()) != null) // there is already mapping for this Block
-			{
+			if (_MAP_BLOCK_UPGRADE.get(instance.getBlock()) != null) // there is already mapping for this Block
 				throw new MappingExistsException("Mapping already exists: (Block, Upgrade)", instance.getBlock(), _MAP_BLOCK_UPGRADE.get(instance.getBlock()));
-			}
+			
 			_LIST_BLOCK.add(instance.getBlock());
 			_MAP_BLOCK_UPGRADE.put(instance.getBlock(), instance);
 			_MAP_CLASS_UPGRADE.put(quarryUpgradeClass, instance);
 			VanillaMagic.LOGGER.log(Level.INFO, "Registered QuarryUpgrade: " + instance);
 			return true;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			VanillaMagic.LOGGER.log(Level.WARN, "Couldn't register Quarry upgrade: " + quarryUpgradeClass.getSimpleName());
 			e.printStackTrace();
@@ -85,13 +84,9 @@ public class QuarryUpgradeRegistry
 	 */
 	public static boolean isUpgradeBlock(Block block)
 	{
-		for(Block b : _LIST_BLOCK)
-		{
-			if(Block.isEqualTo(b, block))
-			{
+		for (Block b : _LIST_BLOCK)
+			if (Block.isEqualTo(b, block))
 				return true;
-			}
-		}
 		return false;
 	}
 
@@ -101,13 +96,9 @@ public class QuarryUpgradeRegistry
 	@Nullable
 	public static IQuarryUpgrade getUpgradeFromBlock(Block block) 
 	{
-		for(Entry<Block, IQuarryUpgrade> entry : _MAP_BLOCK_UPGRADE.entrySet())
-		{
-			if(Block.isEqualTo(block, entry.getKey()))
-			{
+		for (Entry<Block, IQuarryUpgrade> entry : _MAP_BLOCK_UPGRADE.entrySet())
+			if (Block.isEqualTo(block, entry.getKey()))
 				return entry.getValue();
-			}
-		}
 		return null;
 	}
 	
@@ -142,10 +133,7 @@ public class QuarryUpgradeRegistry
 	public static List<IQuarryUpgrade> getUpgrades()
 	{
 		List<IQuarryUpgrade> upgrades = new ArrayList<IQuarryUpgrade>();
-		for(IQuarryUpgrade iqu : _MAP_CLASS_UPGRADE.values())
-		{
-			upgrades.add(iqu);
-		}
+		for (IQuarryUpgrade iqu : _MAP_CLASS_UPGRADE.values()) upgrades.add(iqu);
 		return upgrades;
 	}
 }

@@ -11,8 +11,8 @@ import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.WorldHelper;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.WorldUtil;
 
 public class QuestSpeedy extends Quest
 {
@@ -23,29 +23,25 @@ public class QuestSpeedy extends Quest
 		World world = event.getWorld();
 		ItemStack leftHand = player.getHeldItemOffhand();
 		BlockPos clickedPos = event.getPos();
-		if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
+		if (world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 		{
-			if(VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
+			if (VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
 			{
 				ItemStack rightHand = player.getHeldItemMainhand();
-				if(WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
+				if (WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
 				{
-					if(player.isSneaking())
+					if (player.isSneaking())
 					{
-						if(canPlayerGetAchievement(player))
-						{
-							player.addStat(achievement, 1);
-						}
-						if(player.hasAchievement(achievement))
+						if (canPlayerGetQuest(player)) addStat(player);
+						
+						if (hasQuest(player))
 						{
 							TileSpeedy speedy = new TileSpeedy();
 							speedy.init(player.world, clickedPos);
-							if(speedy.containsCrystal())
+							if (speedy.containsCrystal())
 							{
-								if(CustomTileEntityHandler.addCustomTileEntity(speedy, WorldHelper.getDimensionID(world)))
-								{
-									EntityHelper.addChatComponentMessageNoSpam(player, speedy.getClass().getSimpleName() + " added");
-								}
+								if (CustomTileEntityHandler.addCustomTileEntity(speedy, WorldUtil.getDimensionID(world)))
+									EntityUtil.addChatComponentMessageNoSpam(player, speedy.getClass().getSimpleName() + " added");
 							}
 						}
 					}

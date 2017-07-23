@@ -12,8 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.NBTHelper;
-import seia.vanillamagic.util.WorldHelper;
+import seia.vanillamagic.util.NBTUtil;
 
 /**
  * Class which represents Tile which is placed to hide liquid source block.
@@ -28,28 +27,20 @@ public class TileLiquidSuppression extends CustomTileEntity
 	
 	public void update() 
 	{
-		if(world.isRemote)
-		{
-			return;
-		}
+		if (world.isRemote) return;
 		ticksRemaining--;
-		if(ticksRemaining <= 0)
-		{
-			returnContainedBlock();
-		}
+		if (ticksRemaining <= 0) returnContainedBlock();
 	}
 	
 	public void returnContainedBlock()
 	{
 		Block block = null;
-		if(!Strings.isNullOrEmpty(containedBlockName))
-		{
+		if (!Strings.isNullOrEmpty(containedBlockName)) 
 			block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(containedBlockName));
-		}
-		if(block != null && world.setBlockState(pos, block.getStateFromMeta(containedBlockMeta)))
+		if (block != null && world.setBlockState(pos, block.getStateFromMeta(containedBlockMeta)))
 		{
 			getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
-			CustomTileEntityHandler.removeCustomTileEntityAtPos(world, getPos(), WorldHelper.getDimensionID(world));
+			CustomTileEntityHandler.removeCustomTileEntityAtPos(world, getPos());
 		}
 	}
 	
@@ -62,26 +53,23 @@ public class TileLiquidSuppression extends CustomTileEntity
 	public void readFromNBT(NBTTagCompound tagCompound)
 	{
 		super.readFromNBT(tagCompound);
-		ticksRemaining = tagCompound.getInteger(NBTHelper.NBT_TICKS_REMAINING);
-		containedBlockName = tagCompound.getString(NBTHelper.NBT_BLOCK_NAME);
-		containedBlockMeta = tagCompound.getInteger(NBTHelper.NBT_BLOCK_META);
+		ticksRemaining = tagCompound.getInteger(NBTUtil.NBT_TICKS_REMAINING);
+		containedBlockName = tagCompound.getString(NBTUtil.NBT_BLOCK_NAME);
+		containedBlockMeta = tagCompound.getInteger(NBTUtil.NBT_BLOCK_META);
 	}
     
 	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound)
 	{
 		super.writeToNBT(tagCompound);
-		tagCompound.setInteger(NBTHelper.NBT_TICKS_REMAINING, ticksRemaining);
-		tagCompound.setString(NBTHelper.NBT_BLOCK_NAME, Strings.isNullOrEmpty(containedBlockName) ? "" : containedBlockName);
-		tagCompound.setInteger(NBTHelper.NBT_BLOCK_META, containedBlockMeta);
+		tagCompound.setInteger(NBTUtil.NBT_TICKS_REMAINING, ticksRemaining);
+		tagCompound.setString(NBTUtil.NBT_BLOCK_NAME, Strings.isNullOrEmpty(containedBlockName) ? "" : containedBlockName);
+		tagCompound.setInteger(NBTUtil.NBT_BLOCK_META, containedBlockMeta);
 		return tagCompound;
 	}
 	
 	public void resetDuration(int refresh) 
 	{
-		if(ticksRemaining < refresh)
-		{
-			ticksRemaining = refresh;
-		}
+		if (ticksRemaining < refresh) ticksRemaining = refresh;
 	}
     
 	public void setDuration(int duration)
@@ -91,10 +79,8 @@ public class TileLiquidSuppression extends CustomTileEntity
 
 	public static TileLiquidSuppression createAirBlock(World world, BlockPos blockPos, int duration) 
 	{
-		if(world.isAirBlock(blockPos))
-		{
-			return null;
-		}
+		if (world.isAirBlock(blockPos)) return null;
+		
 		IBlockState cachedState = world.getBlockState(blockPos);
 		world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
 		TileLiquidSuppression tile = new TileLiquidSuppression();

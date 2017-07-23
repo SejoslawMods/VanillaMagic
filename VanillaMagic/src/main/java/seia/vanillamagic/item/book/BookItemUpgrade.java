@@ -11,10 +11,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
-import seia.vanillamagic.util.TextHelper;
+import seia.vanillamagic.util.TextUtil;
 
 public class BookItemUpgrade implements IBook
 {
@@ -25,7 +26,11 @@ public class BookItemUpgrade implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addRecipe(getItem(), new Object[]{
+		GameRegistry.addShapedRecipe(
+				new ResourceLocation(""),
+				null,
+				getItem(), 
+				new Object[]{
 				"B  ",
 				" B ",
 				"  B",
@@ -43,27 +48,27 @@ public class BookItemUpgrade implements IBook
 			{		
 				// Pages
 				pages.appendTag(new NBTTagString(
-						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextHelper.translateToLocal("book.itemUpgrades.title") + " ====" + 
-						TextHelper.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
+						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextUtil.translateToLocal("book.itemUpgrades.title") + " ====" + 
+						TextUtil.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
 				Map<String, List<IItemUpgrade>> map = ItemUpgradeRegistry.getUpgradesMap();
 				Set<Entry<String, List<IItemUpgrade>>> set = map.entrySet();
 				Iterator<Entry<String, List<IItemUpgrade>>> iterator = set.iterator();
-				while(iterator.hasNext())
+				while (iterator.hasNext())
 				{
 					Entry<String, List<IItemUpgrade>> entry = iterator.next();
 					String entryKey = entry.getKey();
 					String key = ItemUpgradeRegistry.getLocalizedNameForMapping(entryKey);
 					List<IItemUpgrade> values = entry.getValue();
-					for(int i = 0; i < values.size(); ++i)
+					for (int i = 0; i < values.size(); ++i)
 					{
 						IItemUpgrade upgrade = values.get(i);
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
 								"Key: " + key + 
-								TextHelper.getEnters(2) + 
+								TextUtil.getEnters(2) + 
 								"§0" +
-								"Upgrade name: " + upgrade.getUpgradeName() + TextHelper.getEnters(2) +
+								"Upgrade name: " + upgrade.getUpgradeName() + TextUtil.getEnters(2) +
 								"Ingredient item: " + upgrade.getIngredient().getDisplayName()
 								));
 					}

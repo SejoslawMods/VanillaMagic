@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public enum Fertilizer 
 {
@@ -55,7 +55,7 @@ public enum Fertilizer
 		{
 			BlockPos below = bc.offset(EnumFacing.DOWN);
 			Block belowBlock = world.getBlockState(below).getBlock();
-			if(belowBlock == Blocks.DIRT || belowBlock == Blocks.GRASS) 
+			if (belowBlock == Blocks.DIRT || belowBlock == Blocks.GRASS) 
 			{
 				EnumActionResult res = stack.getItem().onItemUse(player, world, below, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
 				return res != null && res != EnumActionResult.PASS; 
@@ -112,24 +112,16 @@ public enum Fertilizer
 
 	private Fertilizer(ItemStack stack) 
 	{
-		this._stack = ItemStackHelper.isNullStack(stack) || stack.getItem() == null ? null : stack;
-//		if(this.stack != null) 
-//		{
-//			FarmStationContainer.slotItemsFertilizer.add(this.stack);
-//		}
+		this._stack = ItemStackUtil.isNullStack(stack) || stack.getItem() == null ? null : stack;
 	}
 
-	private static final List<Fertilizer> validFertilizers = new ArrayList();
+	private static final List<Fertilizer> validFertilizers = new ArrayList<Fertilizer>();
 	
 	static 
 	{
-		for(Fertilizer f : values()) 
-		{
-			if(!ItemStackHelper.isNullStack(f._stack)) 
-			{
+		for (Fertilizer f : values()) 
+			if (!ItemStackUtil.isNullStack(f._stack)) 
 				validFertilizers.add(f);
-			}
-		}
 	}
 
 	/**
@@ -139,13 +131,9 @@ public enum Fertilizer
 	 */
 	public static Fertilizer getInstance(ItemStack stack) 
 	{
-		for(Fertilizer fertilizer : validFertilizers) 
-		{
-			if(fertilizer.matches(stack)) 
-			{
+		for (Fertilizer fertilizer : validFertilizers) 
+			if (fertilizer.matches(stack)) 
 				return fertilizer;
-			}
-		}
 		return NONE;
 	}
 

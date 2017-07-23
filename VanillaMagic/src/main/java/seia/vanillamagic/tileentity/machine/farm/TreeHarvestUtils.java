@@ -46,34 +46,22 @@ public class TreeHarvestUtils
 	{
 		this._origin = new BlockPos(origin);
 		IBlockState wood = world.getBlockState(bc);
-		if(ignoreMeta) 
-		{
-			harvestUp(world, bc, res, new BaseHarvestTarget(wood.getBlock()));
-		} 
-		else 
-		{
-			harvestUp(world, bc, res, new HarvestTarget(wood));
-		}
+		if (ignoreMeta) harvestUp(world, bc, res, new BaseHarvestTarget(wood.getBlock()));
+		else harvestUp(world, bc, res, new HarvestTarget(wood));
 	}
 
 	protected void harvestUp(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) 
 	{
-		if(!isInHarvestBounds(bc) || res.harvestedBlocks.contains(bc)) 
-		{
-			return;
-		}
+		if (!isInHarvestBounds(bc) || res.harvestedBlocks.contains(bc)) return;
+		
 		IBlockState bs = world.getBlockState(bc);    
 		boolean isLeaves = isLeaves(bs);
-		if(target.isTarget(bs) || isLeaves) 
+		if (target.isTarget(bs) || isLeaves) 
 		{
 			res.harvestedBlocks.add(bc);
-			for(EnumFacing dir : EnumFacing.VALUES) 
-			{
-				if(dir != EnumFacing.DOWN) 
-				{
+			for (EnumFacing dir : EnumFacing.VALUES) 
+				if (dir != EnumFacing.DOWN) 
 					harvestUp(world, bc.offset(dir), res, target);
-				}
-			}
 		} 
 		else 
 		{
@@ -81,14 +69,11 @@ public class TreeHarvestUtils
 			harvestAdjacentWood(world, bc, res, target);
 			// and another check for large oaks, where wood can be surrounded by
 			// leaves	      
-			for(EnumFacing dir : EnumFacing.HORIZONTALS) 
+			for (EnumFacing dir : EnumFacing.HORIZONTALS) 
 			{
 				BlockPos loc = bc.offset(dir);
 				IBlockState locBS = world.getBlockState(loc);        
-				if(isLeaves(locBS)) 
-				{
-					harvestAdjacentWood(world, loc, res, target);
-				}
+				if (isLeaves(locBS)) harvestAdjacentWood(world, loc, res, target);
 			}
 		}
 	}
@@ -100,33 +85,24 @@ public class TreeHarvestUtils
 
 	private void harvestAdjacentWood(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) 
 	{    
-		for(EnumFacing dir : EnumFacing.HORIZONTALS) 
+		for (EnumFacing dir : EnumFacing.HORIZONTALS) 
 		{
 			BlockPos targ = bc.offset(dir);
-			if(target.isTarget(world.getBlockState(targ))) 
-			{
-				harvestUp(world, targ, res, target);
-			}
+			if (target.isTarget(world.getBlockState(targ))) harvestUp(world, targ, res, target);
 		}
 	}
 
 	private boolean isInHarvestBounds(BlockPos bc) 
 	{
 		int dist = Math.abs(_origin.getX() - bc.getX());
-		if(dist > _horizontalRange) 
-		{
-			return false;
-		}
+		if (dist > _horizontalRange) return false;
+		
 		dist = Math.abs(_origin.getZ() - bc.getZ());
-		if(dist > _horizontalRange) 
-		{
-			return false;
-		}
+		if(dist > _horizontalRange) return false;
+		
 		dist = Math.abs(_origin.getY() - bc.getY());
-		if(dist > _verticalRange) 
-		{
-			return false;
-		}
+		if (dist > _verticalRange) return false;
+		
 		return true;
 	}
 
@@ -149,18 +125,18 @@ public class TreeHarvestUtils
 			{
 				v = bs.getValue(BlockNewLog.VARIANT);
 			} 
-			catch(Exception e) 
+			catch (Exception e) 
 			{
 				e.printStackTrace();
 			}
 			
-			if(v == null) 
+			if (v == null) 
 			{
 				try 
 				{
 					v = bs.getValue(BlockOldLog.VARIANT);
 				} 
-				catch(Exception e) 
+				catch (Exception e) 
 				{
 					e.printStackTrace();
 				}
@@ -170,10 +146,7 @@ public class TreeHarvestUtils
 		
 		boolean isTarget(IBlockState bs) 
 		{
-			if(variant == null) 
-			{
-				return super.isTarget(bs);
-			}
+			if (variant == null) return super.isTarget(bs);
 			return super.isTarget(bs) && variant == getVariant(bs);
 		}
 	}

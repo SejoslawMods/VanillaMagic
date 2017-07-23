@@ -10,11 +10,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.tileentity.ICustomTileEntity;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.quest.QuestMachineActivate;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.ItemStackUtil;
 
 public class QuestMachineFarm extends QuestMachineActivate
 {
@@ -24,27 +23,23 @@ public class QuestMachineFarm extends QuestMachineActivate
 	{
 		super.readData(jo);
 		radius = jo.get("radius").getAsInt();
-		if(radius < 0)
-		{
-			radius = -radius;
-		}
+		if (radius < 0) radius = -radius;
 	}
 	
 	@SubscribeEvent
 	public void startFarm(RightClickBlock event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		World world = player.world;
 		BlockPos cauldronPos = event.getPos();
-		if(startWorkWithCauldron(player, cauldronPos, achievement))
+		if (startWorkWithCauldron(player, cauldronPos, this))
 		{
 			TileFarm tileFarm = new TileFarm();
 			tileFarm.init(player.world, cauldronPos);
 			tileFarm.setWorkRadius(radius);
-			if(CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
+			if (CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
 			{
-				ItemStackHelper.decreaseStackSize(player.getHeldItemOffhand(), ItemStackHelper.getStackSize(mustHaveOffHand));
-				EntityHelper.addChatComponentMessageNoSpam(player, tileFarm.getClass().getSimpleName() + " added");
+				ItemStackUtil.decreaseStackSize(player.getHeldItemOffhand(), ItemStackUtil.getStackSize(mustHaveOffHand));
+				EntityUtil.addChatComponentMessageNoSpam(player, tileFarm.getClass().getSimpleName() + " added");
 			}
 		}
 	}
@@ -55,21 +50,8 @@ public class QuestMachineFarm extends QuestMachineActivate
 		EntityPlayer player = event.getPlayer();
 		World world = event.getWorld();
 		BlockPos cauldronPos = event.getPos();
-		if(world.getTileEntity(cauldronPos.offset(EnumFacing.UP)) instanceof IInventory)
-		{
-			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)
-			{
+		if (world.getTileEntity(cauldronPos.offset(EnumFacing.UP)) instanceof IInventory)
+			if (world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)
 				CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, cauldronPos, player);
-//				ICustomTileEntity farmTile = CustomTileEntityHandler.getCustomTileEntity(cauldronPos, player.dimension);
-//				if(farmTile == null)
-//				{
-//					return;
-//				}
-//				if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, cauldronPos))
-//				{
-//					EntityHelper.addChatComponentMessage(player, farmTile.getClass().getSimpleName() + " removed");
-//				}
-			}
-		}
 	}
 }

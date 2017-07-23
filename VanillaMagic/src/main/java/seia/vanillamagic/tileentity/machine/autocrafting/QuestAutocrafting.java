@@ -19,9 +19,9 @@ import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.handler.CustomTileEntityHandler;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.ItemStackHelper;
-import seia.vanillamagic.util.WorldHelper;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.ItemStackUtil;
+import seia.vanillamagic.util.WorldUtil;
 
 public class QuestAutocrafting extends Quest
 {
@@ -36,27 +36,18 @@ public class QuestAutocrafting extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.world;
-		if(world.isRemote)
-		{
-			return;
-		}
+		if (world.isRemote) return;
+		
 		ItemStack rightHand = player.getHeldItemMainhand();
-		if(!ItemStackHelper.isNullStack(rightHand)) // quit if NOT empty right hand
-		{
-			return;
-		}
+		if (!ItemStackUtil.isNullStack(rightHand)) return; // quit if  NOT empty right hand
+		
 		BlockPos tilePos = event.getPos();
 		ICustomTileEntity tile = CustomTileEntityHandler.getCustomTileEntity(tilePos, world);
-		if(tile == null)
+		if (tile == null) return;
+		
+		if (tile instanceof IAutocrafting)
 		{
-			return;
-		}
-		if(tile instanceof IAutocrafting)
-		{
-			if(count == 0)
-			{
-				count++;
-			}
+			if (count == 0) count++;
 			else
 			{
 				count = 0;
@@ -64,22 +55,18 @@ public class QuestAutocrafting extends Quest
 			}
 			
 			IAutocrafting auto = (IAutocrafting) tile;
-			if(player.isSneaking()) // sneaking -> change slot
+			if (player.isSneaking()) // sneaking -> change slot
 			{
-				if(auto.getCurrentCraftingSlot() == auto.getDefaultMaxCraftingSlot())
-				{
+				if (auto.getCurrentCraftingSlot() == auto.getDefaultMaxCraftingSlot()) 
 					auto.setCurrentCraftingSlot(auto.getDefaultCraftingSlot());
-				}
 				else
-				{
 					auto.setCurrentCraftingSlot(auto.getCurrentCraftingSlot() + 1);
-				}
-				EntityHelper.addChatComponentMessageNoSpam(player, 
+				EntityUtil.addChatComponentMessageNoSpam(player, 
 						"Current crafting slot set to: " + auto.getCurrentCraftingSlot());
 			}
 			else // player is not sneaking -> show current crafting slot
 			{
-				EntityHelper.addChatComponentMessageNoSpam(player, 
+				EntityUtil.addChatComponentMessageNoSpam(player, 
 						"Current crafting slot: " + auto.getCurrentCraftingSlot());
 			}
 		}
@@ -90,32 +77,26 @@ public class QuestAutocrafting extends Quest
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		World world = player.world;
-		if(WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), player.getHeldItemMainhand()))
+		if (WandRegistry.areWandsEqual(WandRegistry.WAND_BLAZE_ROD.getWandStack(), player.getHeldItemMainhand()))
 		{
-			if(player.isSneaking())
+			if (player.isSneaking())
 			{
 				BlockPos workbenchPos = event.getPos();
 				BlockPos cauldronPos = workbenchPos.up();
-				if(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
+				if (world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 				{
-					if(isConstructionComplete(world, cauldronPos))
+					if (isConstructionComplete(world, cauldronPos))
 					{
-						if(canPlayerGetAchievement(player))
+						if (canPlayerGetQuest(player)) addStat(player);
+						
+						if (hasQuest(player))
 						{
-							player.addStat(achievement, 1);
-						}
-						if(player.hasAchievement(achievement))
-						{
-							if(!ItemStackHelper.isNullStack(player.getHeldItemOffhand()))
-							{
-								return;
-							}
+							if (!ItemStackUtil.isNullStack(player.getHeldItemOffhand())) return;
+							
 							TileAutocrafting tile = new TileAutocrafting();
 							tile.init(player.world, cauldronPos);
-							if(CustomTileEntityHandler.addCustomTileEntity(tile, WorldHelper.getDimensionID(world)))
-							{
-								EntityHelper.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
-							}
+							if (CustomTileEntityHandler.addCustomTileEntity(tile, WorldUtil.getDimensionID(world)))
+								EntityUtil.addChatComponentMessageNoSpam(player, tile.getClass().getSimpleName() + " added");
 						}
 					}
 				}
@@ -130,23 +111,12 @@ public class QuestAutocrafting extends Quest
 		World world = player.world;
 		BlockPos cauldronPos = event.getPos();
 		Block cauldron = world.getBlockState(cauldronPos).getBlock();
-		if(cauldron instanceof BlockCauldron)
+		if (cauldron instanceof BlockCauldron)
 		{
 			BlockPos workbenchPos = cauldronPos.down();
 			Block workbench = world.getBlockState(workbenchPos).getBlock();
-			if(workbench instanceof BlockWorkbench)
-			{
+			if (workbench instanceof BlockWorkbench)
 				CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, cauldronPos, player);
-//				ICustomTileEntity autocraftingTile = CustomTileEntityHandler.getCustomTileEntity(cauldronPos, player.dimension);
-//				if(autocraftingTile == null)
-//				{
-//					return;
-//				}
-//				if(CustomTileEntityHandler.removeCustomTileEntityAtPos(world, cauldronPos))
-//				{
-//					EntityHelper.addChatComponentMessage(player, "TileEntity removed");
-//				}
-			}
 		}
 	}
 	
@@ -154,13 +124,9 @@ public class QuestAutocrafting extends Quest
 	{
 		int size = inventoryMatrix.length;
 		ItemStack[][] stackMat = new ItemStack[size][size];
-		for(int i = 0; i < size; ++i)
-		{
-			for(int j = 0; j < size; ++j)
-			{
+		for (int i = 0; i < size; ++i)
+			for (int j = 0; j < size; ++j)
 				stackMat[i][j] = inventoryMatrix[i][j].getStackInSlot(slot);
-			}
-		}
 		return stackMat;
 	}
 
@@ -168,15 +134,13 @@ public class QuestAutocrafting extends Quest
 	{
 		int size = inventoryPosMatrix.length;
 		IInventory[][] invMat = new IInventory[size][size];
-		for(int i = 0; i < size; ++i)
+		for (int i = 0; i < size; ++i)
 		{
-			for(int j = 0; j < size; ++j)
+			for (int j = 0; j < size; ++j)
 			{
 				TileEntity tile = world.getTileEntity(inventoryPosMatrix[i][j]);
-				if(tile instanceof IInventory)
-				{
+				if (tile instanceof IInventory)
 					invMat[i][j] = (IInventory) tile;
-				}
 			}
 		}
 		return invMat;
@@ -204,17 +168,12 @@ public class QuestAutocrafting extends Quest
 	public static boolean isConstructionComplete(World world, BlockPos cauldronPos)
 	{
 		boolean checkBasics = false;
-		if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, _IINVDOWN)) instanceof IInventory)
-		{
-			if(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, 2)) instanceof IHopper)
-			{
-				if(world.getBlockState(cauldronPos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockWorkbench)
-				{
+		if (world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, _IINVDOWN)) instanceof IInventory)
+			if (world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN, 2)) instanceof IHopper)
+				if (world.getBlockState(cauldronPos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockWorkbench)
 					checkBasics = true;
-				}
-			}
-		}
-		if(checkBasics)
+		
+		if (checkBasics)
 		{
 			BlockPos leftTop = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
 			BlockPos top = new BlockPos(cauldronPos.getX(), cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() + 2);
@@ -225,31 +184,15 @@ public class QuestAutocrafting extends Quest
 			BlockPos leftBottom = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ() - 2);
 			BlockPos left = new BlockPos(cauldronPos.getX() - 2, cauldronPos.getY() - _IINVDOWN, cauldronPos.getZ());
 			
-			if(world.getTileEntity(leftTop) instanceof IInventory)
-			{
-				if(world.getTileEntity(top) instanceof IInventory)
-				{
-					if(world.getTileEntity(rightTop) instanceof IInventory)
-					{
-						if(world.getTileEntity(right) instanceof IInventory)
-						{
-							if(world.getTileEntity(rightBottom) instanceof IInventory)
-							{
-								if(world.getTileEntity(bottom) instanceof IInventory)
-								{
-									if(world.getTileEntity(leftBottom) instanceof IInventory)
-									{
-										if(world.getTileEntity(left) instanceof IInventory)
-										{
+			if (world.getTileEntity(leftTop) instanceof IInventory)
+				if (world.getTileEntity(top) instanceof IInventory)
+					if (world.getTileEntity(rightTop) instanceof IInventory)
+						if (world.getTileEntity(right) instanceof IInventory)
+							if (world.getTileEntity(rightBottom) instanceof IInventory)
+								if (world.getTileEntity(bottom) instanceof IInventory)
+									if (world.getTileEntity(leftBottom) instanceof IInventory)
+										if (world.getTileEntity(left) instanceof IInventory)
 											return true;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
 		}
 		return false;
 	}

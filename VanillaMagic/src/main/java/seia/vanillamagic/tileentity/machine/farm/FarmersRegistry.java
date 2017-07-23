@@ -65,77 +65,34 @@ public class FarmersRegistry
 	
 	public static boolean canHarvest(TileFarm farm,  BlockPos pos, Block block, IBlockState meta) 
 	{
-		for(IFarmer farmer : _FARMERS) 
-		{
-			if(farmer.canHarvest(farm, pos, block, meta)) 
-			{
+		for (IFarmer farmer : _FARMERS) 
+			if (farmer.canHarvest(farm, pos, block, meta)) 
 				return true;
-			}
-		}
 		return false;
 	}
 
 	@Nullable
 	public static IHarvestResult harvestBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
-		for(IFarmer farmer : _FARMERS) 
-		{
-			if(farmer.canHarvest(farm, pos, block, meta))
-			{
+		for (IFarmer farmer : _FARMERS) 
+			if (farmer.canHarvest(farm, pos, block, meta))
 				return farmer.harvestBlock(farm, pos, block, meta);
-			}
-		}
 		return null;
 	}
 
 	public static boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState meta) 
 	{
-		for(IFarmer farmer : _FARMERS) 
-		{
-			if(farmer.prepareBlock(farm, pos, block, meta))
-			{
+		for (IFarmer farmer : _FARMERS) 
+			if (farmer.prepareBlock(farm, pos, block, meta))
 				return true;
-			}
-		}
 		return false;
 	}
 
 	public static boolean canPlant(ItemStack stack) 
 	{
-		for(IFarmer farmer : _FARMERS) 
-		{
-			if(farmer.canPlant(stack)) 
-			{
+		for (IFarmer farmer : _FARMERS) 
+			if (farmer.canPlant(stack)) 
 				return true;
-			}
-		}
 		return false;
 	}
-
-//	@Nullable
-//	public FarmerCustomSeed addSeed(String mod, String blockName, String itemName, Block... extraFarmland) 
-//	{
-//		if(Block.REGISTRY.containsKey(new ResourceLocation(mod, blockName))) 
-//		{
-//			Block cropBlock = Block.REGISTRY.getObject(new ResourceLocation(mod, blockName));
-//			Item seedItem = Item.REGISTRY.getObject(new ResourceLocation(mod, itemName));
-//			if(seedItem != null) 
-//			{
-//				FarmerCustomSeed farmer = new FarmerCustomSeed(cropBlock, new ItemStack(seedItem));
-//				if(extraFarmland != null) 
-//				{
-//					for(Block farmland : extraFarmland) 
-//					{
-//						if(farmland != null) 
-//						{
-//							farmer.addTilledBlock(farmland);
-//						}
-//					}
-//				}
-//				addFarmer(farmer);
-//				return farmer;
-//			}
-//		}
-//		return null;
-//	}
 }

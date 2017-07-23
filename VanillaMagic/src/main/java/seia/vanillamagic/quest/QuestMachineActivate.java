@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.util.ItemStackUtil;
-import seia.vanillamagic.util.QuestUtil;
 
 public abstract class QuestMachineActivate extends Quest
 {
@@ -48,17 +47,16 @@ public abstract class QuestMachineActivate extends Quest
 		return false;
 	}
 	
-	public boolean startWorkWithCauldron(EntityPlayer player, BlockPos cauldronPos, IQuest requireToWork)
+	public boolean startWorkWithCauldron(EntityPlayer player, BlockPos cauldronPos, IQuest quest)
 	{
+		if (!player.isSneaking()) return false;
+		
 		if (player.world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
 		{
 			if (canActivate(player))
 			{
 				if (canPlayerGetQuest(player)) addStat(player);
-				
-				if (QuestUtil.canUnlockQuest(player, requireToWork))
-					if (player.isSneaking())
-						return true;
+				if (hasQuest(player)) return true;
 			}
 		}
 		return false;

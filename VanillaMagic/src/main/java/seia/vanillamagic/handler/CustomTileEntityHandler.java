@@ -115,24 +115,6 @@ public class CustomTileEntityHandler
 		}
 	}
 	
-	/**
-	 * @see CustomTileEntityHandlerAPI#removeCustomTileEntityAtPos(World, BlockPos)
-	 */
-	@Deprecated
-	public static boolean removeCustomTileEntityAtPos(World world, BlockPos pos, int dimension)
-	{
-		for (int i = 0; i < world.tickableTileEntities.size(); ++i)
-		{
-			TileEntity tile = world.tickableTileEntities.get(i);
-			if (BlockPosUtil.isSameBlockPos(tile.getPos(), pos))
-			{
-				world.tickableTileEntities.remove(i);
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	public static List<ICustomTileEntity> getCustomEntitiesInDimension(int dimension)
 	{
 		WorldServer world = DimensionManager.getWorld(dimension);

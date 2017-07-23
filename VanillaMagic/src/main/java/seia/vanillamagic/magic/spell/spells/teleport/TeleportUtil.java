@@ -2,7 +2,6 @@ package seia.vanillamagic.magic.spell.spells.teleport;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.network.play.server.SPacketEntityEffect;
@@ -22,9 +21,9 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import seia.vanillamagic.api.event.EventTeleportEntity;
 
-public class TeleportHelper
+public class TeleportUtil
 {
-	private TeleportHelper()
+	private TeleportUtil()
 	{
 	}
 	
@@ -36,31 +35,25 @@ public class TeleportHelper
 	
 	public static Entity entityChangeDimension(Entity entity, int newDimId)
 	{
-		if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(entity, entity.getPosition(), newDimId)))
-		{
+		if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(entity, entity.getPosition(), newDimId)))
 			return entity.changeDimension(newDimId);
-		}
 		return null;
 	}
 	
 	public static void teleportEntity(Entity entityToBeTeleport, BlockPos teleportTo)
 	{
-		if(!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(entityToBeTeleport, teleportTo)))
-		{
+		if (!MinecraftForge.EVENT_BUS.post(new EventTeleportEntity(entityToBeTeleport, teleportTo)))
 			entityToBeTeleport.setPositionAndUpdate(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
-		}
 	}
 	
 	public static void changePlayerDimensionWithoutPortal(EntityPlayerMP player, int dimension, BlockPos pos)
 	{
-		if(MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(player, pos, dimension)))
+		if (MinecraftForge.EVENT_BUS.post(new EventTeleportEntity.ChangeDimension(player, pos, dimension)))
 		{
 			return;
 		}
-		int oldDimension = player.world.provider.getDimension();
 		MinecraftServer server = player.world.getMinecraftServer();
-		WorldServer worldServer = server.worldServerForDimension(dimension);
-		MinecraftServer mcServer = worldServer.getMinecraftServer();
+		WorldServer worldServer = server.getWorld(dimension);
 		VMTeleporter vmTele = new VMTeleporter(worldServer, pos.getX(), pos.getY(), pos.getZ());
 		boolean has = false;
 		for(int i = 0 ; i < worldServer.customTeleporters.size(); ++i)
@@ -100,22 +93,22 @@ public class TeleportHelper
 		if(!entity.world.isRemote && !entity.isDead)
 		{
 			if(!ForgeHooks.onTravelToDimension(entity, newDimId)) return null;
-			entity.world.theProfiler.startSection("changeDimension");
+//			entity.world.theProfiler.startSection("changeDimension");
             MinecraftServer minecraftServer = entity.getServer();
             int currentDim = entity.dimension;
-            WorldServer worldServerCurrent = minecraftServer.worldServerForDimension(currentDim);
-            WorldServer worldServerNew = minecraftServer.worldServerForDimension(newDimId);
+            WorldServer worldServerCurrent = minecraftServer.getWorld(currentDim);
+            WorldServer worldServerNew = minecraftServer.getWorld(newDimId);
             entity.dimension = newDimId;
 
             if(currentDim == 1 && newDimId == 1)
             {
-            	worldServerNew = minecraftServer.worldServerForDimension(0);
+            	worldServerNew = minecraftServer.getWorld(0);
                 entity.dimension = 0;
             }
 
             entity.world.removeEntity(entity);
             entity.isDead = false;
-            entity.world.theProfiler.startSection("reposition");
+//            entity.world.theProfiler.startSection("reposition");
             BlockPos blockpos;
 
             if (newDimId == 1)
@@ -126,7 +119,6 @@ public class TeleportHelper
             {
                 double d0 = entity.posX;
                 double d1 = entity.posZ;
-                double d2 = 8.0D;
 
                 if (newDimId == -1)
                 {
@@ -141,7 +133,6 @@ public class TeleportHelper
 
                 d0 = (double)MathHelper.clamp((int)d0, -29999872, 29999872);
                 d1 = (double)MathHelper.clamp((int)d1, -29999872, 29999872);
-                float f = entity.rotationYaw;
                 entity.setLocationAndAngles(d0, entity.posY, d1, 90.0F, 0.0F);
 //                Teleporter teleporter = worldServerNew.getDefaultTeleporter();
 //                teleporter.placeInExistingPortal(entity, f);
@@ -149,8 +140,7 @@ public class TeleportHelper
             }
 
             worldServerCurrent.updateEntityWithOptionalForce(entity, false);
-            entity.world.theProfiler.endStartSection("reloading");
-            Entity newEntity = EntityList.newEntity(entity.getClass(), worldServerNew);
+//            entity.world.theProfiler.endStartSection("reloading");
 
             if (entity != null)
             {
@@ -174,10 +164,10 @@ public class TeleportHelper
             }
 
             entity.isDead = true;
-            entity.world.theProfiler.endSection();
+//            entity.world.theProfiler.endSection();
             worldServerCurrent.resetUpdateEntityTick();
             worldServerNew.resetUpdateEntityTick();
-            entity.world.theProfiler.endSection();
+//            entity.world.theProfiler.endSection();
             return entity;
 		}
 		else
@@ -189,12 +179,12 @@ public class TeleportHelper
 	private static void transferPlayerToDimension(EntityPlayerMP player, int dimension, VMTeleporter teleporter)
 	{
 		MinecraftServer server = player.world.getMinecraftServer();
-		WorldServer worldServer = server.worldServerForDimension(dimension);
+		WorldServer worldServer = server.getWorld(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
 		int i = player.dimension;
-		WorldServer worldserver = mcServer.worldServerForDimension(player.dimension);
+		WorldServer worldserver = mcServer.getWorld(player.dimension);
 		player.dimension = dimension;
-		WorldServer worldserver1 = mcServer.worldServerForDimension(player.dimension);
+		WorldServer worldserver1 = mcServer.getWorld(player.dimension);
 		player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType()));
 		worldserver.removeEntityDangerously(player);
 		player.isDead = false;
@@ -221,7 +211,7 @@ public class TeleportHelper
 		double posZ = entityIn.posZ * moveFactor;
 		double d2 = 8.0D;
 		float rotationYaw = entityIn.rotationYaw;
-		oldWorldIn.theProfiler.startSection("moving");
+//		oldWorldIn.theProfiler.startSection("moving");
 		if(false && entityIn.dimension == -1)
 		{
 			posX = MathHelper.clamp(posX / 8.0D, toWorldIn.getWorldBorder().minX() + 16.0D, toWorldIn.getWorldBorder().maxX() - 16.0D);
@@ -263,10 +253,10 @@ public class TeleportHelper
 				oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
 			}
 		}
-		oldWorldIn.theProfiler.endSection();
+//		oldWorldIn.theProfiler.endSection();
 		if(lastDimension != 1)
 		{
-			oldWorldIn.theProfiler.startSection("placing");
+//			oldWorldIn.theProfiler.startSection("placing");
 			posX = (double)MathHelper.clamp((int)posX, -29999872, 29999872);
 			posZ = (double)MathHelper.clamp((int)posZ, -29999872, 29999872);
 			if(entityIn.isEntityAlive())
@@ -276,7 +266,7 @@ public class TeleportHelper
 				toWorldIn.spawnEntity(entityIn);
 				toWorldIn.updateEntityWithOptionalForce(entityIn, false);
 			}
-			oldWorldIn.theProfiler.endSection();
+//			oldWorldIn.theProfiler.endSection();
 		}
 		entityIn.setWorld(toWorldIn);
 	}
@@ -298,7 +288,7 @@ public class TeleportHelper
 	private static void updateTimeAndWeatherForPlayer(EntityPlayerMP player, WorldServer worldIn, int dimension)
 	{
 		MinecraftServer server = player.world.getMinecraftServer();
-		WorldServer worldServer = server.worldServerForDimension(dimension);
+		WorldServer worldServer = server.getWorld(dimension);
 		MinecraftServer mcServer = worldServer.getMinecraftServer();
 		WorldBorder worldborder = mcServer.worlds[0].getWorldBorder();
 		player.connection.sendPacket(new SPacketWorldBorder(worldborder, SPacketWorldBorder.Action.INITIALIZE));

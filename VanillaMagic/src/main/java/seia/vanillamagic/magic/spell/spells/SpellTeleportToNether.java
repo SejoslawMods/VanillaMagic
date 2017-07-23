@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.api.magic.IWand;
 import seia.vanillamagic.api.util.VectorWrapper.Vector3D;
 import seia.vanillamagic.magic.spell.Spell;
-import seia.vanillamagic.magic.spell.spells.teleport.TeleportHelper;
+import seia.vanillamagic.magic.spell.spells.teleport.TeleportUtil;
 
 public class SpellTeleportToNether extends Spell 
 {
@@ -26,12 +26,12 @@ public class SpellTeleportToNether extends Spell
 			{
 				if (caster.dimension == 0)
 				{
-					TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, -1);
+					TeleportUtil.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, -1);
 					return true;
 				}
 				else if (caster.dimension == -1)
 				{
-					TeleportHelper.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, 0);
+					TeleportUtil.changePlayerDimensionWithoutPortal((EntityPlayerMP) caster, 0);
 					return true;
 				}
 			}

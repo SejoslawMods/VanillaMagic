@@ -7,7 +7,7 @@ import seia.vanillamagic.api.event.EventChunkLoader;
 import seia.vanillamagic.api.tileentity.chunkloader.IChunkLoader;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.CustomTileEntity;
-import seia.vanillamagic.util.BlockPosHelper;
+import seia.vanillamagic.util.BlockPosUtil;
 
 public class TileChunkLoader extends CustomTileEntity implements IChunkLoader
 {
@@ -15,11 +15,11 @@ public class TileChunkLoader extends CustomTileEntity implements IChunkLoader
 	
 	public void update() 
 	{
-		if(!QuestChunkLoader.isChunkLoaderBuildCorrectly(world, this.pos))
+		if (!QuestChunkLoader.isChunkLoaderBuildCorrectly(world, this.pos))
 		{
 			invalidate();
 			VanillaMagic.LOGGER.log(Level.WARN, "Incorrect ChunkLoader placed on:");
-			BlockPosHelper.printCoords(this.pos);
+			BlockPosUtil.printCoords(this.pos);
 		}
 		MinecraftForge.EVENT_BUS.post(new EventChunkLoader((IChunkLoader) this, world, pos));
 	}

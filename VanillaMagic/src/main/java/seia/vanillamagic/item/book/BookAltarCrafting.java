@@ -8,8 +8,8 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.quest.IQuest;
+import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.quest.QuestCraftOnAltar;
-import seia.vanillamagic.quest.QuestList;
 import seia.vanillamagic.util.TextUtil;
 
 public class BookAltarCrafting implements IBook
@@ -46,10 +46,10 @@ public class BookAltarCrafting implements IBook
 						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextUtil.translateToLocal("book.altarCrafting.title") + " ====" + 
 						TextUtil.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
-				for(int i = 0; i < QuestList.size(); ++i)
+				for (int i = 0; i < QuestList.size(); ++i)
 				{
 					IQuest quest = QuestList.get(i);
-					if(quest instanceof QuestCraftOnAltar)
+					if (quest instanceof QuestCraftOnAltar)
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 

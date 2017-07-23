@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionType;
 import seia.vanillamagic.api.item.ICustomItem;
-import seia.vanillamagic.util.TextHelper;
+import seia.vanillamagic.util.TextUtil;
 
 /**
  * Interface used to dynamically create PotionedCrystals for each registered Potion.
@@ -26,7 +26,7 @@ public interface IPotionedCrystal extends ICustomItem
 	{
 		ItemStack stack = new ItemStack(Items.NETHER_STAR);
 		stack.setStackDisplayName("Potioned Crystal: " + 
-									TextHelper.translateToLocal(getPotionLocalizedName()));
+									TextUtil.translateToLocal(getPotionLocalizedName()));
 		NBTTagCompound stackTag = stack.getTagCompound();
 		stackTag.setString(NBT_UNIQUE_NAME, getUniqueNBTName());
 		stackTag.setString(NBT_POTION_TYPE_NAME, getPotionUnlocalizedName());
@@ -42,7 +42,6 @@ public interface IPotionedCrystal extends ICustomItem
 	 */
 	default String getPotionUnlocalizedName()
 	{
-		//return ForgeRegistries.POTION_TYPES.getKey(getPotionType()).getResourcePath();
 		return PotionedCrystalHelper.getPotionTypeName(getPotionType());
 	}
 	

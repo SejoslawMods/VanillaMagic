@@ -19,9 +19,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import seia.vanillamagic.api.event.EventPotionedCrystalTick;
 import seia.vanillamagic.magic.wand.WandRegistry;
 import seia.vanillamagic.quest.Quest;
-import seia.vanillamagic.util.CauldronHelper;
-import seia.vanillamagic.util.EntityHelper;
-import seia.vanillamagic.util.ItemStackHelper;
+import seia.vanillamagic.util.CauldronUtil;
+import seia.vanillamagic.util.EntityUtil;
+import seia.vanillamagic.util.ItemStackUtil;
 
 /**
  * Class which describes Quest used by PotionedCrystals.
@@ -35,59 +35,47 @@ public class QuestPotionedCrystal extends Quest
 	@SubscribeEvent
 	public void craftPotionedCrystal(RightClickBlock event)
 	{
-		if(countTicks == 0)
-		{
-			countTicks++;
-		}
+		if (countTicks == 0) countTicks++;
 		else
 		{
 			countTicks = 0;
 			return;
 		}
+		
 		World world = event.getWorld();
 		EntityPlayer player = event.getEntityPlayer();
 		BlockPos clickedPos = event.getPos();
 		ItemStack stackRightHand = player.getHeldItemMainhand();
-		if(ItemStackHelper.isNullStack(stackRightHand))
+		if (ItemStackUtil.isNullStack(stackRightHand)) return;
+		if (!player.isSneaking()) return;
+		
+		if (WandRegistry.areWandsEqual(stackRightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
 		{
-			return;
-		}
-		if(!player.isSneaking())
-		{
-			return;
-		}
-		if(WandRegistry.areWandsEqual(stackRightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
-		{
-			if(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
+			if (world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
 			{
-				List<EntityItem> itemsInCauldron = CauldronHelper.getItemsInCauldron(world, clickedPos);
-				if(itemsInCauldron.size() == 0)
-				{
-					return;
-				}
-				else if(itemsInCauldron.size() == 2)
+				List<EntityItem> itemsInCauldron = CauldronUtil.getItemsInCauldron(world, clickedPos);
+				if (itemsInCauldron.size() == 0) return;
+				else if (itemsInCauldron.size() == 2)
 				{
 					boolean ns = false;
-					for(EntityItem item : itemsInCauldron)
+					for (EntityItem item : itemsInCauldron)
 					{
-						if(item.getEntityItem().getItem().equals(Items.NETHER_STAR))
+						if (item.getItem().getItem().equals(Items.NETHER_STAR))
 						{
 							ns = true;
 							break;
 						}
 					}
 					IPotionedCrystal ipc = PotionedCrystalHelper.getPotionedCrystalFromCauldron(world, clickedPos);
-					if(ns == true && ipc != null)
+					if (ns == true && ipc != null)
 					{
-						if(!player.hasAchievement(achievement))
-						{
-							player.addStat(achievement, 1);
-						}
-						if(player.hasAchievement(achievement))
+						if (!hasQuest(player)) addStat(player);
+						
+						if (hasQuest(player))
 						{
 							EntityItem newEI = new EntityItem(world, clickedPos.getX(), clickedPos.getY() + 1, clickedPos.getZ(), ipc.getItem().copy());
 							world.spawnEntity(newEI);
-							EntityHelper.removeEntities(world, itemsInCauldron);
+							EntityUtil.removeEntities(world, itemsInCauldron);
 						}
 					}
 				}
@@ -104,27 +92,22 @@ public class QuestPotionedCrystal extends Quest
 		EntityPlayer player = event.player;
 		InventoryPlayer inventory = player.inventory;
 		NonNullList<ItemStack> mainInv = inventory.mainInventory;
-		for(ItemStack stack : mainInv)
+		for (ItemStack stack : mainInv)
 		{
-			if(!ItemStackHelper.isNullStack(stack))
+			if (!ItemStackUtil.isNullStack(stack))
 			{
 				IPotionedCrystal ipc = PotionedCrystalHelper.getPotionedCrystal(stack);
-				if(ipc != null)
+				if (ipc != null)
 				{
-					if(!player.hasAchievement(achievement))
-					{
-						player.addStat(achievement, 1);
-					}
-					if(player.hasAchievement(achievement))
+					if (!hasQuest(player)) addStat(player);
+					
+					if (hasQuest(player))
 					{
 						List<PotionEffect> effects = ipc.getPotionType().getEffects();
-						for(PotionEffect pe : effects)
+						for (PotionEffect pe : effects)
 						{
 							PotionEffect newPE = new PotionEffect(pe.getPotion(), 100, pe.getAmplifier(), pe.getIsAmbient(), pe.doesShowParticles());
-							if(!MinecraftForge.EVENT_BUS.post(new EventPotionedCrystalTick(player, stack, newPE)))
-							{
-								player.addPotionEffect(newPE);
-							}
+							if (!MinecraftForge.EVENT_BUS.post(new EventPotionedCrystalTick(player, stack, newPE))) player.addPotionEffect(newPE);
 						}
 					}
 				}

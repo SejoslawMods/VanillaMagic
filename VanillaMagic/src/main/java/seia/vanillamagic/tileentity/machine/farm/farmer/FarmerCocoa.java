@@ -27,29 +27,19 @@ public class FarmerCocoa extends FarmerCustomSeed
 	  
 	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
 	{
-		if(block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2)
-		{
-			return true;
-		}
-		else if(block instanceof BlockCocoa && state.getValue(BlockCocoa.AGE) == 2)
-		{
-			return true;
-		}
+		if (block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2) return true;
+		else if(block instanceof BlockCocoa && state.getValue(BlockCocoa.AGE) == 2) return true;
 		return false;
 	}
 	  
 	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos) 
 	{
 		EnumFacing dir = getPlantDirection(worldObj, pos);
-		if(dir == null) 
-		{
-			return false;
-		}
+		if (dir == null) return false;
+		
 		IBlockState iBlockState = getPlantedBlock().getDefaultState().withProperty(FACING, dir);
-		if(worldObj.setBlockState(pos, iBlockState, 1 | 2)) 
-		{
-			return true;
-		}
+		if (worldObj.setBlockState(pos, iBlockState, 1 | 2)) return true;
+		
 		return false;
 	}
 	  
@@ -61,17 +51,12 @@ public class FarmerCocoa extends FarmerCustomSeed
 	@Nullable
 	private EnumFacing getPlantDirection(World worldObj, BlockPos pos) 
 	{
-		if(!worldObj.isAirBlock(pos)) 
-		{
-			return null;
-		}
-		for(EnumFacing dir : EnumFacing.HORIZONTALS) 
+		if (!worldObj.isAirBlock(pos)) return null;
+		
+		for (EnumFacing dir : EnumFacing.HORIZONTALS) 
 		{
 			BlockPos p = pos.offset(dir);
-			if(validBlock(worldObj.getBlockState(p)))
-			{
-				return dir;
-			}
+			if (validBlock(worldObj.getBlockState(p))) return dir;
 		}
 		return null;
 	}

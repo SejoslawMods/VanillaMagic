@@ -17,8 +17,8 @@ import seia.vanillamagic.api.inventory.InventoryWrapper;
 import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.TileMachine;
-import seia.vanillamagic.util.BlockPosHelper;
-import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.BlockPosUtil;
+import seia.vanillamagic.util.NBTUtil;
 
 public class TileAutocrafting extends TileMachine implements IAutocrafting
 {
@@ -34,7 +34,7 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 	{
 		super.init(world, machinePos);
 		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
-		this.startPos = BlockPosHelper.copyPos(getMachinePos());
+		this.startPos = BlockPosUtil.copyPos(getMachinePos());
 		this.chestPosInput = getMachinePos().up();
 		this.chestPosOutput = getMachinePos().down(2);
 		try
@@ -42,7 +42,7 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 			this.inventoryInput = new InventoryWrapper(world, chestPosInput);
 			this.inventoryOutput = new InventoryWrapper(world, chestPosOutput);
 		}
-		catch(NotInventoryException e)
+		catch (NotInventoryException e)
 		{
 			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
 		}
@@ -53,7 +53,7 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
 		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(world, inventoryPosMatrix);
 		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, _currentlyCraftingSlot);
-		_container = new ContainerAutocrafting(world, stackMatrix, this);
+		this._container = new ContainerAutocrafting(world, stackMatrix, this);
 	}
 	
 	public boolean checkSurroundings() 
@@ -63,15 +63,14 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 	
 	public void doWork() 
 	{
-		if(inventoryOutputHasSpace())
+		if (inventoryOutputHasSpace())
 		{
 			initContainer();
-			for(int i = 0; i < 4; ++i)
+			for (int i = 0; i < 4; ++i)
 			{
 				boolean crafted = _container.craft();
-				if(crafted)
+				if (crafted)
 				{
-					//container.outputResult(getHopperForStructure());
 					_container.outputResult(this.inventoryOutput.getInventory());
 					_container.removeStacks(
 							QuestAutocrafting.buildIInventoryMatrix(world, 
@@ -132,13 +131,13 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound tag = super.serializeNBT();
-		tag.setInteger(NBTHelper.NBT_CRAFTING_SLOT, _currentlyCraftingSlot);
+		tag.setInteger(NBTUtil.NBT_CRAFTING_SLOT, _currentlyCraftingSlot);
 		return tag;
 	}
 	
 	public void deserializeNBT(NBTTagCompound compound)
 	{
 		super.deserializeNBT(compound);
-		this._currentlyCraftingSlot = compound.getInteger(NBTHelper.NBT_CRAFTING_SLOT);
+		this._currentlyCraftingSlot = compound.getInteger(NBTUtil.NBT_CRAFTING_SLOT);
 	}
 }

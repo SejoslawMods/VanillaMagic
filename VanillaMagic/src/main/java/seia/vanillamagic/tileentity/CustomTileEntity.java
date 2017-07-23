@@ -7,20 +7,17 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import seia.vanillamagic.api.tileentity.CustomTileEntityBase;
 import seia.vanillamagic.core.VanillaMagic;
-import seia.vanillamagic.util.NBTHelper;
+import seia.vanillamagic.util.NBTUtil;
 
 public abstract class CustomTileEntity extends CustomTileEntityBase
 {
 	public void validate() 
 	{
 		super.validate();
-		if((!this.world.isRemote) && (this.chunkTicket == null)) 
+		if ((!this.world.isRemote) && (this.chunkTicket == null)) 
 		{
 			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.world, ForgeChunkManager.Type.NORMAL);
-			if(ticket != null) 
-			{
-				forceChunkLoading(ticket);
-			}
+			if (ticket != null) forceChunkLoading(ticket);
 		}
 	}
 	
@@ -31,7 +28,7 @@ public abstract class CustomTileEntity extends CustomTileEntityBase
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		NBTHelper.readFromINBTSerializable(this, tag);
+		NBTUtil.readFromINBTSerializable(this, tag);
 	}
 	
 	public void deserializeNBT(NBTTagCompound tag)
@@ -45,8 +42,8 @@ public abstract class CustomTileEntity extends CustomTileEntityBase
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag = NBTHelper.writeToINBTSerializable(this, tag);
-		tag.setString(NBTHelper.NBT_CLASS, this.getClass().getName());
+		tag = NBTUtil.writeToINBTSerializable(this, tag);
+		tag.setString(NBTUtil.NBT_CLASS, this.getClass().getName());
 		return tag;
 	}
 	

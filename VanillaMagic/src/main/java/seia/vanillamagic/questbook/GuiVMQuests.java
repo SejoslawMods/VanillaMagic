@@ -536,7 +536,6 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
         // TODO: Temporary solution for Quest names
         int questNameMoveX = 0;
         int questNameMoveY = -15;
-        String questName = TextUtil.translateToLocal("quest.name") + ": ";
         if (quest != null)
         {
             String s = quest.getQuestData().getStatName().getUnformattedText();
@@ -562,14 +561,11 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
                 {
                     this.fontRenderer.drawStringWithShadow(I18n.format("quest.taken", new Object[0]), (float)i7, (float)(k7 + i9 + 4), -7302913);
                 }
-                
-                this.fontRenderer.drawSplitString(questName + quest.getQuestName(), i7 + questNameMoveX, k7 + questNameMoveY, k7, -1); // TODO: Quest Name
             }
             else if (i8 == 3 && quest.getParent() != null)
             {
                 s = I18n.format("quest.unknown", new Object[0]);
                 int k8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
-                this.fontRenderer.drawSplitString(questName + quest.getQuestName(), i7 + questNameMoveX, k7 + questNameMoveY, k8, -1); // TODO: Quest Name
                 String s2 = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
                 int i5 = this.fontRenderer.getWordWrappedHeight(s2, k8);
                 this.drawGradientRect(i7 - 3, k7 - 3, i7 + k8 + 3, k7 + i5 + 12 + 3, -1073741824, -1073741824);
@@ -578,7 +574,6 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             else if (i8 < 3 && quest.getParent() != null)
             {
                 int l8 = Math.max(this.fontRenderer.getStringWidth(s), 120);
-                this.fontRenderer.drawSplitString(questName + quest.getQuestName(), i7 + questNameMoveX, k7 + questNameMoveY, l8, -1); // TODO: Quest Name
                 String s3 = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
                 s3 += " " + quest.getParent().getQuestName();
                 int j9 = this.fontRenderer.getWordWrappedHeight(s3, l8);
