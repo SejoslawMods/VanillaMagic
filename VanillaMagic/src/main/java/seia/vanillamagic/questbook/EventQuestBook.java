@@ -6,11 +6,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.util.EntityUtil;
 import seia.vanillamagic.util.EventUtil;
 import seia.vanillamagic.util.ItemStackUtil;
-import seia.vanillamagic.util.QuestUtil;
 import seia.vanillamagic.util.TextUtil;
 
 /**
@@ -39,8 +37,6 @@ public class EventQuestBook
 				// Is book named correctly ?
 				if (ItemStackUtil.stackNameEqual(rightHand, TextUtil.translateToLocal("questbook.itemName")))
 				{
-					QuestUtil.addStat(playerWhoOpenedBook, QuestList.get(0));
-					
 					// If singleplayer
 					if (EntityUtil.isSinglePlayer(playerWhoOpenedBook))
 					{

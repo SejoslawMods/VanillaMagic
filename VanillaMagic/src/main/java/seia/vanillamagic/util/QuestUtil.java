@@ -1,6 +1,7 @@
 package seia.vanillamagic.util;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.StatBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -62,9 +63,11 @@ public class QuestUtil
 		if (EntityUtil.isSinglePlayer(player)) EntityUtil.toSinglePlayer(player).addStat(quest.getQuestData());
 		else if (EntityUtil.isMultiPlayer(player)) 
 		{
-			EntityUtil.toMultiPlayer(player).addStat(quest.getQuestData());
+			EntityPlayerMP playerMP = EntityUtil.toMultiPlayer(player);
+			playerMP.addStat(quest.getQuestData());
+			playerMP.getStatFile().sendStats(playerMP);
 			String message = TextUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
-			EntityUtil.addChatComponentMessageNoSpam(player, message);
+			EntityUtil.addChatComponentMessageNoSpam(playerMP, message);
 		}
 	}
 }

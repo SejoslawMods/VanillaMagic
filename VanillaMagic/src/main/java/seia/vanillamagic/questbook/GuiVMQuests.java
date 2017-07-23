@@ -27,7 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.util.QuestUtil;
-import seia.vanillamagic.util.TextUtil;
 
 /**
  * GUI which shows Quests progress.
@@ -91,7 +90,6 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	{
 		this._parentScreen = parentScreen;
 		this._player = playerWhoOpenedBook;
-		//this._statsManager = PlayerUtil.getStatisticsManager(this._player);
 		this.xScrollTarget = (double)(QuestList.get(0).getPosition().getX() * 24 - 70 - 12);
         this.xScrollO = this.xScrollTarget;
         this.xScrollP = this.xScrollTarget;
@@ -116,12 +114,8 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	protected void actionPerformed(GuiButton button) throws IOException
 	{
 		if (!this._loadingQuests)
-		{
 			if (button.id == 1)
-			{
 				Minecraft.getMinecraft().displayGuiScreen(this._parentScreen);
-			}
-		}
 	}
 	
 	/**
