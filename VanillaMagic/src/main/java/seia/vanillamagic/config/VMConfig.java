@@ -80,10 +80,8 @@ public class VMConfig
 	{
 		MinecraftForge.EVENT_BUS.register(new VMConfig());
 		File configDir = new File(event.getModConfigurationDirectory(), VMConfigAchievements.VM_DIRECTORY);
-		if(!configDir.exists())
-		{
-			configDir.mkdir();
-		}
+		if (!configDir.exists()) configDir.mkdir();
+		
 		File configFile = new File(configDir, "VanillaMagic.cfg");
 		_config = new Configuration(configFile);
 		synchroniseConfig(false);
@@ -96,23 +94,17 @@ public class VMConfig
 	{
 		try
 		{
-			if(load)
-			{
-				_config.load();
-			}
+			if (load) _config.load();
 			VMConfig.processConfig();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			VanillaMagic.LOGGER.log(Level.ERROR, "Error while loading VanillaMagic configuration file.");
 			e.printStackTrace();
 		}
 		finally
 		{
-			if(_config.hasChanged())
-			{
-				_config.save();
-			}
+			if (_config.hasChanged()) _config.save();
 		}
 	}
 	
@@ -122,7 +114,7 @@ public class VMConfig
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event)
 	{
-		if(event.getModID().equals(VanillaMagic.MODID))
+		if (event.getModID().equals(VanillaMagic.MODID))
 		{
 			VanillaMagic.LOGGER.log(Level.INFO, "Updating config...");
 			synchroniseConfig(false);

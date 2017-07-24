@@ -138,7 +138,7 @@ public class VMConfigAchievements
 			else
 				VanillaMagic.LOGGER.log(Level.WARN, "Can't load VanillaMagic Quests from JSON file");
 		} 
-		catch(Exception e) 
+		catch (Exception e) 
 		{
 			e.printStackTrace();
 			VanillaMagic.LOGGER.log(Level.INFO, "Error while loading Quests.json");
