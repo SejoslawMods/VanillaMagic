@@ -5,11 +5,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry;
+import seia.vanillamagic.util.CraftingUtil;
 import seia.vanillamagic.util.TextUtil;
 
 public class BookQuarryUpgrades implements IBook
@@ -21,11 +20,7 @@ public class BookQuarryUpgrades implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addShapedRecipe(
-				new ResourceLocation(""),
-				null,
-				getItem(), 
-				new Object[]{
+		CraftingUtil.addShapedRecipe(getItem(), new Object[]{
 				"  B",
 				" B ",
 				"  B",

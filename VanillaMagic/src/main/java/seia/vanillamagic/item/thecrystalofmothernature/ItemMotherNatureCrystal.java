@@ -2,19 +2,14 @@ package seia.vanillamagic.item.thecrystalofmothernature;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.item.CustomItemCrystal;
+import seia.vanillamagic.util.CraftingUtil;
 
 public class ItemMotherNatureCrystal extends CustomItemCrystal
 {
 	public void registerRecipe() 
 	{
-		GameRegistry.addShapedRecipe(
-				new ResourceLocation(""),
-				null,
-				getItem(), 
-				new Object[]{
+		CraftingUtil.addShapedRecipe(getItem(), new Object[]{
 				"MSM",
 				"SNS",
 				"PSP",

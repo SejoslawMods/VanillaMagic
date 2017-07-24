@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.quest.IQuest;
 import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.item.accelerationcrystal.QuestAccelerationCrystal;
@@ -20,6 +18,7 @@ import seia.vanillamagic.quest.spell.QuestCastSpell;
 import seia.vanillamagic.tileentity.chunkloader.QuestChunkLoader;
 import seia.vanillamagic.tileentity.machine.autocrafting.QuestAutocrafting;
 import seia.vanillamagic.tileentity.machine.quarry.QuestQuarry;
+import seia.vanillamagic.util.CraftingUtil;
 import seia.vanillamagic.util.TextUtil;
 
 public class BookOther implements IBook
@@ -31,11 +30,7 @@ public class BookOther implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addShapedRecipe(
-				new ResourceLocation(""),
-				null,
-				getItem(), 
-				new Object[]{
+		CraftingUtil.addShapedRecipe(getItem(), new Object[]{
 				"   ",
 				"   ",
 				"BBB",

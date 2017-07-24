@@ -7,10 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import seia.vanillamagic.api.quest.QuestList;
 import seia.vanillamagic.quest.QuestBuildAltar;
+import seia.vanillamagic.util.CraftingUtil;
 import seia.vanillamagic.util.TextUtil;
 
 public class BookBuildAltar implements IBook
@@ -22,11 +21,7 @@ public class BookBuildAltar implements IBook
 	
 	public void registerRecipe() 
 	{
-		GameRegistry.addShapedRecipe(
-				new ResourceLocation(""),
-				null,
-				getItem(), 
-				new Object[]{
+		CraftingUtil.addShapedRecipe(getItem(), new Object[]{
 				"   ",
 				"BBB",
 				"   ",
