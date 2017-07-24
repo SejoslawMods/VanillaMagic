@@ -61,10 +61,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -82,10 +82,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc"
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc"
 								)));
 						pages.appendTag(new NBTTagString(
 								"Quarry from top:" + ENTER +
@@ -101,10 +101,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -118,10 +118,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -135,10 +135,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -152,10 +152,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								"--->"
 								));
 						pages.appendTag(new NBTTagString(
@@ -202,10 +202,10 @@ public class BookOther implements IBook
 					{
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest.getUniqueName() + ".desc"
+								TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc"
 										)));
 					}
 				}

@@ -54,10 +54,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest1 = (QuestBuildAltar) QuestList.get("buildAltarTier1");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest1.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest1.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest1.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TextUtil.translateToLocal("quest." + quest1.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								// How Altar should look
 										"§cRRR" + ENTER +
 										"§cR§0C§cR" + ENTER +
@@ -70,10 +70,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest2 = (QuestBuildAltar) QuestList.get("buildAltarTier2");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest2.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest2.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest2.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TextUtil.translateToLocal("quest." + quest2.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.appendTag(new NBTTagString(
 								TextUtil.getEnters(1) +
@@ -91,10 +91,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest3 = (QuestBuildAltar) QuestList.get("buildAltarTier3");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest3.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest3.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest3.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TextUtil.translateToLocal("quest." + quest3.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.appendTag(new NBTTagString(
 								TextUtil.getEnters(1) +
@@ -114,10 +114,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest4 = (QuestBuildAltar) QuestList.get("buildAltarTier4");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest4.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest4.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest4.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TextUtil.translateToLocal("quest." + quest4.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.appendTag(new NBTTagString(
 								TextUtil.getEnters(1) +
@@ -137,10 +137,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest5 = (QuestBuildAltar) QuestList.get("buildAltarTier5");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest5.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest5.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest5.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TextUtil.translateToLocal("quest." + quest5.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.appendTag(new NBTTagString(
 								TextUtil.getEnters(1) +
@@ -164,10 +164,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest6 = (QuestBuildAltar) QuestList.get("buildAltarTier6");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest6.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest6.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest6.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TextUtil.translateToLocal("quest." + quest6.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.appendTag(new NBTTagString(
 								TextUtil.getEnters(1) +
@@ -191,10 +191,10 @@ public class BookBuildAltar implements IBook
 						QuestBuildAltar quest7 = (QuestBuildAltar) QuestList.get("buildAltarTier7");
 						pages.appendTag(new NBTTagString(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("achievement." + quest7.getUniqueName()) + 
+								TextUtil.translateToLocal("quest." + quest7.getUniqueName()) + 
 								TextUtil.getEnters(2) + 
 								"§0" +
-								TextUtil.translateToLocal("achievement." + quest7.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TextUtil.translateToLocal("quest." + quest7.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.appendTag(new NBTTagString(
 								// How Altar should look
