@@ -4,6 +4,8 @@ import net.minecraft.util.math.Vec3d;
 
 /**
  * Class which is used to wrap Minecraft native Vector utils.
+ * Minecraft version independent Vector wrapper. 
+ * It will be independent if updated correctly.
  */
 public class VectorWrapper 
 {
