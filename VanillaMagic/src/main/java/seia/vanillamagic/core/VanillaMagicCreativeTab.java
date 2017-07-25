@@ -26,7 +26,9 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 	public VanillaMagicCreativeTab()
 	{
 		super("vm");
+		
 		SPAWNER.setCreativeTab(this);
+		Blocks.COMMAND_BLOCK.setCreativeTab(this);
 	}
 	
 	/**
@@ -57,6 +59,7 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 		list = BookRegistry.fillList(list);
 		list = WorldUtil.fillList(list);
 		list = ItemUpgradeRegistry.fillList(list);
+		
 		super.displayAllRelevantItems(list);
 	}
 }
