@@ -76,7 +76,7 @@ public class QuestEnchantedBucket extends Quest
 							break;
 						}
 					}
-					IEnchantedBucket bucket = EnchantedBucketHelper.getEnchantedBucketFromCauldron(world, clickedPos);
+					IEnchantedBucket bucket = EnchantedBucketUtil.getEnchantedBucketFromCauldron(world, clickedPos);
 					if (ns == true && bucket != null)
 					{
 						if (!hasQuest(player)) addStat(player);

@@ -40,7 +40,7 @@ public interface IEnchantedBucket extends ICustomItem
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper");
+			Class<?> clazz = Class.forName("seia.vanillamagic.item.enchantedbucket.EnchantedBucketUtil");
 			Method method = clazz.getMethod("getResult", Fluid.class);
 			return (ItemStack) method.invoke(null, getFluidInBucket());
 		}

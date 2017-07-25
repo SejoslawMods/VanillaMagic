@@ -3,7 +3,6 @@ package seia.vanillamagic.core;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,17 +27,6 @@ public class VanillaMagicCreativeTab extends CreativeTabs
 	{
 		super("vm");
 		SPAWNER.setCreativeTab(this);
-		
-		// Set Blocks to this CreativeTab
-		Blocks.COMMAND_BLOCK.setCreativeTab(this);
-		
-		// Set Items to this CreativeTab
-		Items.BLAZE_ROD.setCreativeTab(this);
-		Items.BOOK.setCreativeTab(this);
-		Items.BUCKET.setCreativeTab(this);
-		Items.NETHER_STAR.setCreativeTab(this);
-		Items.WRITABLE_BOOK.setCreativeTab(this);
-		Items.WRITTEN_BOOK.setCreativeTab(this);
 	}
 	
 	/**

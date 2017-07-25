@@ -24,7 +24,7 @@ import seia.vanillamagic.handler.WorldHandler;
 import seia.vanillamagic.integration.VanillaMagicIntegration;
 import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.book.BookRegistry;
-import seia.vanillamagic.item.enchantedbucket.EnchantedBucketHelper;
+import seia.vanillamagic.item.enchantedbucket.EnchantedBucketUtil;
 import seia.vanillamagic.item.inventoryselector.InventorySelector;
 import seia.vanillamagic.item.potionedcrystal.PotionedCrystalHelper;
 import seia.vanillamagic.magic.spell.SpellRegistry;
@@ -119,7 +119,7 @@ public class VanillaMagic
 		VMConfig.postInit();
 		BookRegistry.postInit();
 		CustomTileEntityHandler.postInit();
-		EnchantedBucketHelper.registerFluids();
+		EnchantedBucketUtil.registerFluids();
 		PotionedCrystalHelper.registerRecipes();
 		VanillaMagicItems.postInit();
 		VanillaMagicIntegration.postInit();

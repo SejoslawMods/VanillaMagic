@@ -27,9 +27,9 @@ import seia.vanillamagic.util.CauldronUtil;
 /**
  * Class which contains methods connected with Enchanted Bucket.
  */
-public class EnchantedBucketHelper
+public class EnchantedBucketUtil
 {
-	private EnchantedBucketHelper()
+	private EnchantedBucketUtil()
 	{
 	}
 	
