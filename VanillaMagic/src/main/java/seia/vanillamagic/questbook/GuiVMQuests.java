@@ -30,7 +30,7 @@ import seia.vanillamagic.util.QuestUtil;
 
 /**
  * GUI which shows Quests progress.
- * Remade of the old Achievements GUI.
+ * Remake of the old Achievements GUI.
  */
 @SideOnly(Side.CLIENT)
 public class GuiVMQuests extends GuiScreen implements IProgressMeter
@@ -52,12 +52,21 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 	 */
 	public static int MAX_DISPLAY_ROW;
 	
-	/*
+	// Quest columns and rows
 	private static final int X_MIN = MIN_DISPLAY_COLUMN * 24 - 112;
 	private static final int Y_MIN = MIN_DISPLAY_ROW * 24 - 112;
 	private static final int X_MAX = MAX_DISPLAY_COLUMN * 24 - 77;
 	private static final int Y_MAX = MAX_DISPLAY_ROW * 24 - 77;
-	 */
+	
+	// Quest multipliers for window bounds
+	private static final int X_MIN_WIDTH_MULTIPLIER = 5;
+	private static final int Y_MIN_HEIGHT_MULTIPLIER = 2;
+	private static final int X_MAX_WIDTH_MULTIPLIER = 100;
+	private static final int Y_MAX_HEIGHT_MULTIPLIER = 8;
+	
+	// Needed pixels for Y max 
+	private static final int Y_MAX_HEIGHT_NEEDED_PIXELS = 500;
+	
 	/**
 	 * Parent screen. (This should be in-game screen).
 	 */
@@ -174,13 +183,13 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 				this.xScrollTarget = this.xScrollP;
 				this.yScrollTarget = this.yScrollP;
 			}
-			//TODO: Fix scrolling
-			/*
-			if (this.xScrollTarget < (double)X_MIN) this.xScrollTarget = (double)X_MIN;
-			if (this.yScrollTarget < (double)Y_MIN) this.yScrollTarget = (double)Y_MIN;
-			if (this.xScrollTarget >= (double)X_MAX) this.xScrollTarget = (double)(X_MAX - 1);
-			if (this.yScrollTarget >= (double)Y_MAX) this.yScrollTarget = (double)(Y_MAX - 1);
-			 */
+			
+			// Scrolling
+			if (this.xScrollTarget < (double)X_MIN * X_MIN_WIDTH_MULTIPLIER) this.xScrollTarget = (double)X_MIN * X_MIN_WIDTH_MULTIPLIER;
+			if (this.yScrollTarget < (double)Y_MIN * Y_MIN_HEIGHT_MULTIPLIER) this.yScrollTarget = (double)Y_MIN * Y_MIN_HEIGHT_MULTIPLIER;
+			if (this.xScrollTarget >= (double)X_MAX / X_MAX_WIDTH_MULTIPLIER) this.xScrollTarget = (double)(X_MAX - 1) / X_MAX_WIDTH_MULTIPLIER;
+			if (this.yScrollTarget >= Y_MAX_HEIGHT_NEEDED_PIXELS + (double)Y_MAX / Y_MAX_HEIGHT_MULTIPLIER) this.yScrollTarget = Y_MAX_HEIGHT_NEEDED_PIXELS + (double)(Y_MAX - 1) / Y_MAX_HEIGHT_MULTIPLIER;
+			
 			// Draw Default Background - grey background
 			this.drawDefaultBackground();
 			// Draw Quests - Quest Screen
@@ -238,13 +247,12 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
 		int xScroll = MathHelper.floor(this.xScrollO + (this.xScrollP - this.xScrollO) * (double) partialTicks);
         int yScroll = MathHelper.floor(this.yScrollO + (this.yScrollP - this.yScrollO) * (double) partialTicks);
         
-        // TODO: Fix scrolling
-        /*
-        if (xScroll < X_MIN) xScroll = X_MIN;
-        if (yScroll < Y_MIN) yScroll = Y_MIN / 2;
-        if (xScroll >= X_MAX) xScroll = X_MAX - 1;
-        if (yScroll >= Y_MAX) yScroll = Y_MAX - 1;
-        */
+        // Scrolling
+        if (xScroll < X_MIN * X_MIN_WIDTH_MULTIPLIER) xScroll = X_MIN * X_MIN_WIDTH_MULTIPLIER;
+        if (yScroll < Y_MIN * Y_MIN_HEIGHT_MULTIPLIER) yScroll = Y_MIN * Y_MIN_HEIGHT_MULTIPLIER;
+        if (xScroll >= X_MAX / X_MAX_WIDTH_MULTIPLIER) xScroll = (X_MAX - 1) / X_MAX_WIDTH_MULTIPLIER;
+        if (yScroll >= Y_MAX_HEIGHT_NEEDED_PIXELS + Y_MAX / Y_MAX_HEIGHT_MULTIPLIER) yScroll = Y_MAX_HEIGHT_NEEDED_PIXELS + (Y_MAX - 1) / Y_MAX_HEIGHT_MULTIPLIER;
+        
         int centerWidth = (this.width - this.imageWidth) / 2;
         int centerHeight = (this.height - this.imageHeight) / 2;
         int centerWidthWithOffset = centerWidth + 16;
@@ -275,29 +283,29 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             {
                 random.setSeed((long)(this.mc.getSession().getPlayerID().hashCode() + xScrollMoved + drawBackgroundPosX + (yScrollMoved + drawBackgroundPosY) * 16));
                 int backgroundHeight = random.nextInt(1 + yScrollMoved + drawBackgroundPosY) + (yScrollMoved + drawBackgroundPosY) / 2;
-                TextureAtlasSprite textureatlassprite = this.getTexture(Blocks.SAND);
+                TextureAtlasSprite texture = this.getTexture(Blocks.SAND);
 
                 if (backgroundHeight <= 37 && yScrollMoved + drawBackgroundPosY != 35)
                 {
                     if (backgroundHeight == 22)
                     {
-                        if (random.nextInt(2) == 0) textureatlassprite = this.getTexture(Blocks.DIAMOND_ORE);
-                        else textureatlassprite = this.getTexture(Blocks.REDSTONE_ORE);
+                        if (random.nextInt(2) == 0) texture = this.getTexture(Blocks.DIAMOND_ORE);
+                        else texture = this.getTexture(Blocks.REDSTONE_ORE);
                     }
-                    else if (backgroundHeight == 10) textureatlassprite = this.getTexture(Blocks.IRON_ORE);
-                    else if (backgroundHeight == 8) textureatlassprite = this.getTexture(Blocks.COAL_ORE);
-                    else if (backgroundHeight > 4) textureatlassprite = this.getTexture(Blocks.STONE);
-                    else if (backgroundHeight > 0) textureatlassprite = this.getTexture(Blocks.DIRT);
+                    else if (backgroundHeight == 10) texture = this.getTexture(Blocks.IRON_ORE);
+                    else if (backgroundHeight == 8) texture = this.getTexture(Blocks.COAL_ORE);
+                    else if (backgroundHeight > 4) texture = this.getTexture(Blocks.STONE);
+                    else if (backgroundHeight > 0) texture = this.getTexture(Blocks.DIRT);
                 }
                 else
                 {
                     Block block = Blocks.BEDROCK;
-                    textureatlassprite = this.getTexture(block);
+                    texture = this.getTexture(block);
                 }
 
                 this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
                 // Main background drawing method
-                this.drawTexturedModalRect(drawBackgroundPosX * 16 - drawBackgroundPosXOffset, drawBackgroundPosY * 16 - drawBackgroundPosYOffset, textureatlassprite, 16, 16);
+                this.drawTexturedModalRect(drawBackgroundPosX * 16 - drawBackgroundPosXOffset, drawBackgroundPosY * 16 - drawBackgroundPosYOffset, texture, 16, 16);
             }
         }
         
