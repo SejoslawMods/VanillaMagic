@@ -107,6 +107,7 @@ public abstract class Quest implements IQuest
 	 */
 	public boolean canPlayerGetQuest(EntityPlayer player)
 	{
+		// Player can't get Quest if doesn't have required Quest or if already has this Quest.
 		if (QuestUtil.hasQuestUnlocked(player, this.requiredQuest))
 		{
 			if (hasAdditionalQuests())
@@ -161,6 +162,14 @@ public abstract class Quest implements IQuest
 		if (canPlayerGetQuest(player))
 			if (!hasQuest(player))
 				addStat(player);
+	}
+	
+	/**
+	 * @return Returns TRUE if this Quest can be added to given Player.
+	 */
+	public boolean canAddStat(EntityPlayer player)
+	{
+		return canPlayerGetQuest(player) && !hasQuest(player);
 	}
 	
 	/*

@@ -1,6 +1,8 @@
 package seia.vanillamagic.util;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -90,5 +92,13 @@ public class TextUtil
 				", X=" + pos.getX() + 
 				", Y=" + pos.getY() +
 				", Z=" + pos.getZ();
+	}
+	
+	/**
+	 * @return Returns wrapped string with TextComponentString.
+	 */
+	public static ITextComponent wrap(String s)
+	{
+		return new TextComponentString(s);
 	}
 }

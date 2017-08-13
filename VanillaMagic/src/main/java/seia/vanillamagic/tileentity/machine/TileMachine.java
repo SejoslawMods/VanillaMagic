@@ -36,6 +36,9 @@ import seia.vanillamagic.util.SmeltingUtil;
 import seia.vanillamagic.util.TextUtil;
 import seia.vanillamagic.util.WorldUtil;
 
+/**
+ * Base Machine definition.
+ */
 public abstract class TileMachine extends CustomTileEntity implements IMachine
 {
 	public static final String REGISTRY_NAME = TileMachine.class.getSimpleName();

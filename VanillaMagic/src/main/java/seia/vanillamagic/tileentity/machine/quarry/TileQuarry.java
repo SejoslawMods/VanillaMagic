@@ -218,7 +218,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		return _upgradeHelper.getDrops(blockToDig, world, workingPos, workingPosState);
 	}
 	
-	public void doWork() // once a world tick
+	public void doWork() // once a World tick
 	{
 		// if  forced to stop, stop.
 		if (_forceStop) return;
@@ -239,6 +239,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 		cauldronPos = cauldronPos.offset(_redstoneFacing);
 		_redstoneBlocks = 0;
 		IBlockState checkingBlock = world.getBlockState(cauldronPos);
+		
 		while (Block.isEqualTo(checkingBlock.getBlock(), Blocks.REDSTONE_BLOCK))
 		{
 			_redstoneBlocks++;
@@ -253,6 +254,7 @@ public class TileQuarry extends TileMachine implements IQuarry
 	public void performOneOperation()
 	{
 		if (!canDig()) return;
+		
 		if (world.isAirBlock(workingPos)) 
 		{
 			while(!world.isAirBlock(workingPos)) 

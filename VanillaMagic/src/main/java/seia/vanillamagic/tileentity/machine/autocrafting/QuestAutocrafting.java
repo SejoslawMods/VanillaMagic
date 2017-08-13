@@ -87,7 +87,7 @@ public class QuestAutocrafting extends Quest
 				{
 					if (isConstructionComplete(world, cauldronPos))
 					{
-						if (canPlayerGetQuest(player)) addStat(player);
+						if (canAddStat(player)) addStat(player);
 						
 						if (hasQuest(player))
 						{

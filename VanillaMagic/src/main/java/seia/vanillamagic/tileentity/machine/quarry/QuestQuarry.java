@@ -27,7 +27,7 @@ public class QuestQuarry extends QuestMachineActivate
 		
 		if (itemInHand.getItem().equals(WandRegistry.WAND_BLAZE_ROD.getWandStack().getItem()))
 		{
-			if (canPlayerGetQuest(player)) addStat(player);
+			if (canAddStat(player)) addStat(player);
 			
 			if (hasQuest(player))
 			{

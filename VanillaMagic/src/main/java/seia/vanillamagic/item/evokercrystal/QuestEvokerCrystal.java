@@ -45,7 +45,7 @@ public class QuestEvokerCrystal extends Quest
 		if (ItemStack.areItemsEqualIgnoreDurability(event.getItem().getItem(), VanillaMagicItems.EVOKER_CRYSTAL.getItem()))
 		{
 			EntityPlayer player = event.getEntityPlayer();
-			if (canPlayerGetQuest(player)) addStat(player);
+			if (canAddStat(player)) addStat(player);
 		}
 	}
 	

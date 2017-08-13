@@ -51,7 +51,7 @@ public class QuestInventoryBridge extends Quest
 			 * Player has got Blaze Rod in right hand and "requiredLeftHand" in left hand.
 			 * We can now spawn TileEntity and let it do work.
 			 */
-			if (canPlayerGetQuest(player)) addStat(player);
+			if (canAddStat(player)) addStat(player);
 			
 			if (hasQuest(player))
 			{

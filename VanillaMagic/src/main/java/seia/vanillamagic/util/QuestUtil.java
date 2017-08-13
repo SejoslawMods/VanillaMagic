@@ -3,6 +3,7 @@ package seia.vanillamagic.util;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.StatBase;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import seia.vanillamagic.api.quest.IQuest;
@@ -69,5 +70,13 @@ public class QuestUtil
 			String message = TextUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
 			EntityUtil.addChatComponentMessageNoSpam(playerMP, message);
 		}
+	}
+	
+	/**
+	 * @return Returns the StatName of the given Quest.
+	 */
+	public static ITextComponent getStatName(IQuest quest)
+	{
+		return (quest != null ? quest.getQuestData().getStatName() : TextUtil.wrap(""));
 	}
 }

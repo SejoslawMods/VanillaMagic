@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.command.ICommandSender;
@@ -23,8 +22,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import seia.vanillamagic.quest.portablecraftingtable.ICraftingTable;
@@ -84,12 +81,10 @@ public class EntityUtil
 		return null;
 	}
 	
-	/**
-	 * @return Returns wrapped string with TextComponentString.
-	 */
-	public static ITextComponent wrap(String s)
+	public static void addChatComponentMessage(EntityPlayer player, String message)
 	{
-		return new TextComponentString(s);
+		GuiNewChat chat = GuiUtil.getChatGui();
+		chat.addToSentMessages(message);
 	}
 	
 	/**
@@ -105,11 +100,11 @@ public class EntityUtil
 	 */
 	public static void addChatComponentMessageNoSpam(EntityPlayer player, String[] msg)
 	{
-		GuiNewChat chat = Minecraft.getMinecraft().ingameGUI.getChatGUI();
+		GuiNewChat chat = GuiUtil.getChatGui();
 		for (int i = _DELETION_ID + msg.length - 1; i <= LAST_ADDED; ++i) 
 			chat.deleteChatLine(i);
 		for (int i = 0; i < msg.length; ++i)
-			chat.printChatMessageWithOptionalDeletion(wrap(TextUtil.getVanillaMagicInfo(msg[i])), _DELETION_ID + i);
+			chat.printChatMessageWithOptionalDeletion(TextUtil.wrap(TextUtil.getVanillaMagicInfo(msg[i])), _DELETION_ID + i);
 		LAST_ADDED = _DELETION_ID + msg.length - 1;
 	}
 	

@@ -34,7 +34,7 @@ public class QuestChunkLoader extends Quest
 				TileChunkLoader tileChunkLoader = new TileChunkLoader();
 				if (isChunkLoaderBuildCorrectly(world, chunkLoaderPos))
 				{
-					if (canPlayerGetQuest(placedBy)) addStat(placedBy);
+					if (canAddStat(placedBy)) addStat(placedBy);
 					
 					if (hasQuest(placedBy))
 					{

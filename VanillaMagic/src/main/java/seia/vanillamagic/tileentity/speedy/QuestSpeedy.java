@@ -32,7 +32,7 @@ public class QuestSpeedy extends Quest
 				{
 					if (player.isSneaking())
 					{
-						if (canPlayerGetQuest(player)) addStat(player);
+						if (canAddStat(player)) addStat(player);
 						
 						if (hasQuest(player))
 						{

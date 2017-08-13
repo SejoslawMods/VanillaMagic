@@ -16,9 +16,8 @@ public class IntegrationNewVanillaCrafting implements IIntegration
 	
 	public void postInit()
 	{
-		//GameRegistry.addShapelessRecipe(new ItemStack(Items.BOOK), Items.ENCHANTED_BOOK);
 		GameRegistry.addShapelessRecipe(
-				new ResourceLocation(""), 
+				new ResourceLocation("vanillamagic"), 
 				null, 
 				new ItemStack(Items.BOOK), 
 				Ingredient.fromItem(Items.ENCHANTED_BOOK));

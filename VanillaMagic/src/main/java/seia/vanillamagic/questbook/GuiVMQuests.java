@@ -424,7 +424,7 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             {
             	unformattedQuestName = I18n.format("quest.unknown", new Object[0]);
                 int unformattedQuestNameWidth = Math.max(this.fontRenderer.getStringWidth(unformattedQuestName), 120);
-                String unformattedRequires = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
+                String unformattedRequires = (new TextComponentTranslation("quest.requires", new Object[] {QuestUtil.getStatName(quest.getParent())})).getUnformattedText();
                 int wordWrappedHeight = this.fontRenderer.getWordWrappedHeight(unformattedRequires, unformattedQuestNameWidth);
                 this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + unformattedQuestNameWidth + 3, mouseYOffset + wordWrappedHeight + 12 + 3, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(unformattedRequires, mouseXOffset, mouseYOffset + 12, unformattedQuestNameWidth, -9416624);
@@ -432,8 +432,14 @@ public class GuiVMQuests extends GuiScreen implements IProgressMeter
             else if (requirementCount < 3)
             {
                 int unformattedQuestNameWidth = Math.max(this.fontRenderer.getStringWidth(unformattedQuestName), 120);
-                String unformattedRequires = (new TextComponentTranslation("quest.requires", new Object[] {quest.getParent().getQuestData().getStatName()})).getUnformattedText();
-                unformattedRequires += " " + quest.getParent().getQuestName();
+                String unformattedRequires = "";
+                
+                if (quest.getParent() != null)
+                {
+                	unformattedRequires = (new TextComponentTranslation("quest.requires", new Object[] {QuestUtil.getStatName(quest.getParent())})).getUnformattedText();
+                	unformattedRequires += " " + quest.getParent().getQuestName();
+                }
+                
                 int wordWrappedHeight = this.fontRenderer.getWordWrappedHeight(unformattedRequires, unformattedQuestNameWidth);
                 this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + unformattedQuestNameWidth + 3, mouseYOffset + wordWrappedHeight + 12 + 3, -1073741824, -1073741824);
                 this.fontRenderer.drawSplitString(unformattedRequires, mouseXOffset, mouseYOffset + 12, unformattedQuestNameWidth, -9416624);
