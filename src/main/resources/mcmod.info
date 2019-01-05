@@ -1,0 +1,16 @@
+[
+{
+  "modid": "vanillamagic",
+  "name": "Vanilla Magic",
+  "description": "Magic in vanilla Minecraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/Sejoslaw/VanillaMagic",
+  "updateUrl": "",
+  "authorList": ["Seia"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
