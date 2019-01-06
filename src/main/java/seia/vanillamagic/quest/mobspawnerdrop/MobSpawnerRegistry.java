@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.logging.log4j.Level;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
@@ -28,7 +26,6 @@ import seia.vanillamagic.util.ItemStackUtil;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class MobSpawnerRegistry {
-	// NBT Tags
 	public static final String NBT_MOB_SPAWNER_DATA = "NBT_MOB_SPAWNER_DATA";
 	public static final String NBT_ENTITY_CLASS = "NBT_ENTITY_CLASS";
 	public static final String NBT_ID = "NBT_ID";
@@ -37,15 +34,15 @@ public final class MobSpawnerRegistry {
 	 * Key: Entity name Value: ItemStack (Enchanted Book) with data written (Entity
 	 * class, Entity name)
 	 */
-	private static final Map<String, ItemStack> _MAP_NAME_STACK = new HashMap<>();
+	private static final Map<String, ItemStack> MAP_NAME_STACK = new HashMap<>();
 	/**
 	 * Key: ResourceLocation connected with each Entity Value: Entity name
 	 */
-	private static final Map<ResourceLocation, String> _MAP_RESOURCE_LOCATION_NAME = new HashMap<>();
+	private static final Map<ResourceLocation, String> MAP_RESOURCE_LOCATION_NAME = new HashMap<>();
 	/**
 	 * Key: Entity name Value: ResourceLocation connected with each Entity
 	 */
-	private static final Map<String, ResourceLocation> _MAP_NAME_RESOURCE_LOCATION = new HashMap<>();
+	private static final Map<String, ResourceLocation> MAP_NAME_RESOURCE_LOCATION = new HashMap<>();
 
 	private MobSpawnerRegistry() {
 	}
@@ -54,7 +51,8 @@ public final class MobSpawnerRegistry {
 	 * PostInitialization stage. Register all Entities for Mob Spawner.
 	 */
 	public static void postInit() {
-		VanillaMagic.LOGGER.log(Level.INFO, "Started Mob Spawner Registry...");
+		VanillaMagic.logInfo("Started Mob Spawner Registry...");
+
 		for (EntityEntry ee : ForgeRegistries.ENTITIES) {
 			String entityName = ee.getName();
 
@@ -64,12 +62,13 @@ public final class MobSpawnerRegistry {
 			entryStack.getTagCompound().setString(NBT_ID, entityName);
 			entryStack.getTagCompound().setString(NBT_MOB_SPAWNER_DATA, NBT_MOB_SPAWNER_DATA);
 
-			_MAP_NAME_STACK.put(entityName, entryStack);
-			_MAP_RESOURCE_LOCATION_NAME.put(EntityList.getKey(ee.getEntityClass()), entityName);
-			_MAP_NAME_RESOURCE_LOCATION.put(entityName, EntityList.getKey(ee.getEntityClass()));
+			MAP_NAME_STACK.put(entityName, entryStack);
+			MAP_RESOURCE_LOCATION_NAME.put(EntityList.getKey(ee.getEntityClass()), entityName);
+			MAP_NAME_RESOURCE_LOCATION.put(entityName, EntityList.getKey(ee.getEntityClass()));
 		}
-		VanillaMagic.LOGGER.log(Level.INFO,
-				"Mob Spawner Registry: registered " + _MAP_NAME_STACK.size() + " entities for Mob Spawner.");
+
+		VanillaMagic
+				.logInfo("Mob Spawner Registry: registered " + MAP_NAME_STACK.size() + " entities for Mob Spawner.");
 	}
 
 	/**
@@ -92,7 +91,7 @@ public final class MobSpawnerRegistry {
 	 * @return Returns ItemStack with Entity info.
 	 */
 	public static ItemStack getStackFromTile(TileEntityMobSpawner tileMobSpawner) {
-		String name = _MAP_RESOURCE_LOCATION_NAME.get(getEntityId(tileMobSpawner));
+		String name = MAP_RESOURCE_LOCATION_NAME.get(getEntityId(tileMobSpawner));
 		return getStackFromName(name);
 	}
 
@@ -107,11 +106,14 @@ public final class MobSpawnerRegistry {
 	 * @return Returns the ItemStack with Entity info.
 	 */
 	public static ItemStack getStackFromName(String name) {
-		for (Entry<String, ItemStack> entry : _MAP_NAME_STACK.entrySet()) {
+		for (Entry<String, ItemStack> entry : MAP_NAME_STACK.entrySet()) {
 			String entryName = entry.getKey();
-			if (entryName.equals(name))
+
+			if (entryName.equals(name)) {
 				return entry.getValue().copy();
+			}
 		}
+
 		return ItemStackUtil.NULL_STACK;
 	}
 
@@ -119,17 +121,18 @@ public final class MobSpawnerRegistry {
 	 * @return Returns ResourceLocation of Entity from given MobSpawner.
 	 */
 	public static String getNameFromBaseLogic(MobSpawnerBaseLogic spawnerBaseLogic) {
-		return _MAP_RESOURCE_LOCATION_NAME.get(getEntityId(spawnerBaseLogic));
+		return MAP_RESOURCE_LOCATION_NAME.get(getEntityId(spawnerBaseLogic));
 	}
 
 	/**
 	 * Fill list with ItemStacks which contains Entity info.
 	 */
 	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) {
-		for (Entry<String, ItemStack> entry : _MAP_NAME_STACK.entrySet()) {
+		for (Entry<String, ItemStack> entry : MAP_NAME_STACK.entrySet()) {
 			ItemStack bookWithData = entry.getValue();
 			list.add(bookWithData);
 		}
+
 		return list;
 	}
 
@@ -138,8 +141,9 @@ public final class MobSpawnerRegistry {
 	 */
 	public static void setID(TileEntityMobSpawner tileMS, String id, World world, BlockPos spawnerPos) {
 		MobSpawnerBaseLogic msLogic = ((TileEntityMobSpawner) tileMS).getSpawnerBaseLogic();
-		msLogic.setEntityId(_MAP_NAME_RESOURCE_LOCATION.get(id));
+		msLogic.setEntityId(MAP_NAME_RESOURCE_LOCATION.get(id));
 		tileMS.markDirty();
+
 		IBlockState spawnerState = world.getBlockState(spawnerPos);
 		world.notifyBlockUpdate(spawnerPos, spawnerState, spawnerState, 3);
 	}

@@ -17,52 +17,58 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 
-public class FarmerCocoa extends FarmerCustomSeed 
-{
-	public FarmerCocoa()
-	{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class FarmerCocoa extends FarmerCustomSeed {
+	public FarmerCocoa() {
 		super(Blocks.COCOA, new ItemStack(Items.DYE, 1, 3));
+
 		this.requiresFarmland = false;
 	}
-	  
-	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) 
-	{
-		if (block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2) return true;
-		else if(block instanceof BlockCocoa && state.getValue(BlockCocoa.AGE) == 2) return true;
-		return false;
+
+	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) {
+		return ((block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2)
+				|| (block instanceof BlockCocoa && state.getValue(BlockCocoa.AGE) == 2));
 	}
-	  
-	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos) 
-	{
+
+	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos) {
 		EnumFacing dir = getPlantDirection(worldObj, pos);
-		if (dir == null) return false;
-		
+
+		if (dir == null) {
+			return false;
+		}
+
 		IBlockState iBlockState = getPlantedBlock().getDefaultState().withProperty(FACING, dir);
-		if (worldObj.setBlockState(pos, iBlockState, 1 | 2)) return true;
-		
+
+		if (worldObj.setBlockState(pos, iBlockState, 1 | 2)) {
+			return true;
+		}
+
 		return false;
 	}
-	  
-	protected boolean canPlant(TileFarm farm, World worldObj, BlockPos pos) 
-	{
+
+	protected boolean canPlant(TileFarm farm, World worldObj, BlockPos pos) {
 		return getPlantDirection(worldObj, pos) != null;
 	}
 
 	@Nullable
-	private EnumFacing getPlantDirection(World worldObj, BlockPos pos) 
-	{
-		if (!worldObj.isAirBlock(pos)) return null;
-		
-		for (EnumFacing dir : EnumFacing.HORIZONTALS) 
-		{
+	private EnumFacing getPlantDirection(World worldObj, BlockPos pos) {
+		if (!worldObj.isAirBlock(pos)) {
+			return null;
+		}
+
+		for (EnumFacing dir : EnumFacing.HORIZONTALS) {
 			BlockPos p = pos.offset(dir);
-			if (validBlock(worldObj.getBlockState(p))) return dir;
+
+			if (validBlock(worldObj.getBlockState(p))) {
+				return dir;
+			}
 		}
 		return null;
 	}
 
-	private boolean validBlock(IBlockState state) 
-	{
+	private boolean validBlock(IBlockState state) {
 		return state.getBlock() == Blocks.LOG && state.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE;
 	}
 }

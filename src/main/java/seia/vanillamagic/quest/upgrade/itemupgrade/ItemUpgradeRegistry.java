@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeAPI;
@@ -23,13 +22,16 @@ import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeAutosmelt;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeLifesteal;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeThor;
 import seia.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeWitherEffect;
+import seia.vanillamagic.util.EventUtil;
 import seia.vanillamagic.util.ItemStackUtil;
 
 /**
  * This is the base registry which will hold ALL the upgrades for dif ferent
  * items.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class ItemUpgradeRegistry {
+public final class ItemUpgradeRegistry {
 	static final class ItemEntry {
 		public final String mappingName;
 		public final Item item;
@@ -48,29 +50,29 @@ public class ItemUpgradeRegistry {
 	 * Mapping itemName to list of available items with the same name.<br>
 	 * For instance: "_pickaxe" -> all pickaxes
 	 */
-	private static final Map<String, List<ItemEntry>> _MAPPING_ITEMNAME_ITEMENTRY = new HashMap<>();
+	private static final Map<String, List<ItemEntry>> MAPPING_ITEMNAME_ITEMENTRY = new HashMap<>();
 	/**
 	 * Mapping itemName to list of IItemUpgrades for that mapping.<br>
 	 * For instance: "_pickaxe" -> all upgrades for pickaxes
 	 */
-	private static final Map<String, List<IItemUpgrade>> _MAPPING_ITEMNAME_UPGRADE = new HashMap<>();
+	private static final Map<String, List<IItemUpgrade>> MAPPING_ITEMNAME_UPGRADE = new HashMap<>();
 	/**
 	 * Mapping itemName to it's localizedName.<br>
 	 * For instance: "_pickaxe" -> "Pickaxe"
 	 */
-	private static final Map<String, String> _MAPPING_ITEMNAME_LOCALIZEDNAME = new HashMap<>();
+	private static final Map<String, String> MAPPING_ITEMNAME_LOCALIZEDNAME = new HashMap<>();
 	/**
 	 * Registered upgrades with events.
 	 */
-	private static final List<IItemUpgrade> _EVENT_BUS_REGISTERED_UPGRADES = new ArrayList<>();
+	private static final List<IItemUpgrade> EVENT_BUS_REGISTERED_UPGRADES = new ArrayList<>();
 	/**
 	 * List of all items to which we can add upgrades.
 	 */
-	private static final List<ItemEntry> _BASE_ITEMS = new ArrayList<ItemEntry>();
+	private static final List<ItemEntry> BASE_ITEMS = new ArrayList<ItemEntry>();
 	/**
 	 * Used for registering vanilla items.
 	 */
-	private static final Collection<Item> _ITEMS = ForgeRegistries.ITEMS.getValues();
+	private static final Collection<Item> ITEMS = ForgeRegistries.ITEMS.getValues();
 
 	private ItemUpgradeRegistry() {
 	}
@@ -101,26 +103,25 @@ public class ItemUpgradeRegistry {
 	public static void addUpgradeMapping(String mappingName, Class<? extends IItemUpgrade> clazz,
 			String localizedName) {
 		try {
-			if (_MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName)) {
-				_MAPPING_ITEMNAME_UPGRADE.get(mappingName).add(clazz.newInstance());
-				VanillaMagic.LOGGER.log(Level.INFO,
-						"Added upgrade: " + clazz.getSimpleName() + ", for key: " + mappingName);
+			if (MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName)) {
+				MAPPING_ITEMNAME_UPGRADE.get(mappingName).add(clazz.newInstance());
+				VanillaMagic.logInfo("Added upgrade: " + clazz.getSimpleName() + ", for key: " + mappingName);
 			} else {
-				VanillaMagic.LOGGER.log(Level.ERROR,
+				VanillaMagic.logInfo(
 						"Couldn't find key for mapping: " + mappingName + ", for class: " + clazz.getSimpleName());
-				VanillaMagic.LOGGER.log(Level.INFO, "Creating new mapping for key: " + mappingName);
-				_MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<>());
+				VanillaMagic.logInfo("Creating new mapping for key: " + mappingName);
+				MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<>());
 				List<IItemUpgrade> upgrades = new ArrayList<>();
 				IItemUpgrade upgrade = clazz.newInstance();
 				upgrades.add(upgrade);
-				_MAPPING_ITEMNAME_UPGRADE.put(mappingName, upgrades);
-				_MAPPING_ITEMNAME_LOCALIZEDNAME.put(mappingName, localizedName);
-				_EVENT_BUS_REGISTERED_UPGRADES.add(upgrade);
+				MAPPING_ITEMNAME_UPGRADE.put(mappingName, upgrades);
+				MAPPING_ITEMNAME_LOCALIZEDNAME.put(mappingName, localizedName);
+				EVENT_BUS_REGISTERED_UPGRADES.add(upgrade);
 			}
 		} catch (Exception e) {
-			VanillaMagic.LOGGER.log(Level.ERROR,
+			VanillaMagic.log(Level.ERROR,
 					"Error while creating the instance of upgrade class: " + clazz.getSimpleName());
-			VanillaMagic.LOGGER.log(Level.ERROR, "Didn't register upgrade from class: " + clazz.getSimpleName());
+			VanillaMagic.log(Level.ERROR, "Didn't register upgrade from class: " + clazz.getSimpleName());
 			e.printStackTrace();
 		}
 	}
@@ -130,18 +131,20 @@ public class ItemUpgradeRegistry {
 	 */
 	public static void addItemToMapping(String mappingName, Item item, String localizedName) {
 		ItemEntry itemEntry = new ItemEntry(mappingName, item, localizedName);
-		if (_MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName))
-			_MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
-		else {
-			_MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
-			VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for key: " + mappingName);
-			_MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
-			_BASE_ITEMS.add(itemEntry);
+
+		if (MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName)) {
+			MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+		} else {
+			MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
+			VanillaMagic.logInfo("Created mapping for key: " + mappingName);
+			MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+			BASE_ITEMS.add(itemEntry);
 		}
+
 		// Add upgrade map only if it doesn't exists for the given mappingName
-		if (!_MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName)) {
-			_MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
-			VanillaMagic.LOGGER.log(Level.INFO, "Created mapping for upgrades for key: " + mappingName);
+		if (!MAPPING_ITEMNAME_UPGRADE.containsKey(mappingName)) {
+			MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
+			VanillaMagic.logInfo("Created mapping for upgrades for key: " + mappingName);
 		}
 	}
 
@@ -149,25 +152,25 @@ public class ItemUpgradeRegistry {
 	 * @see ItemUpgradeAPI#addItemMapping(String)
 	 */
 	public static void addItemMapping(String mappingName, String localizedName) {
-		// we want to register mapping only once for given key
-		if (_MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName))
+		if (MAPPING_ITEMNAME_ITEMENTRY.containsKey(mappingName)) {
 			return;
+		}
 
-		_MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
-		_MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
-		_MAPPING_ITEMNAME_LOCALIZEDNAME.put(mappingName, localizedName);
-		VanillaMagic.LOGGER.log(Level.INFO,
-				"Created mapping for key: " + mappingName + ", with name: " + localizedName);
+		MAPPING_ITEMNAME_ITEMENTRY.put(mappingName, new ArrayList<ItemEntry>());
+		MAPPING_ITEMNAME_UPGRADE.put(mappingName, new ArrayList<IItemUpgrade>());
+		MAPPING_ITEMNAME_LOCALIZEDNAME.put(mappingName, localizedName);
+		VanillaMagic.logInfo("Created mapping for key: " + mappingName + ", with name: " + localizedName);
 		int registeredItems = 0;
-		for (Item item : _ITEMS) {
+
+		for (Item item : ITEMS) {
 			if (item.getRegistryName().getResourcePath().contains(mappingName)) {
 				ItemEntry itemEntry = new ItemEntry(mappingName, item, localizedName);
-				_MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
-				_BASE_ITEMS.add(new ItemEntry(mappingName, item, item.getUnlocalizedName()));
+				MAPPING_ITEMNAME_ITEMENTRY.get(mappingName).add(itemEntry);
+				BASE_ITEMS.add(new ItemEntry(mappingName, item, item.getUnlocalizedName()));
 				registeredItems++;
 			}
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Registered items: " + registeredItems + " for key: " + mappingName);
+		VanillaMagic.logInfo("Registered items: " + registeredItems + " for key: " + mappingName);
 	}
 
 	/**
@@ -176,16 +179,20 @@ public class ItemUpgradeRegistry {
 	@Nullable
 	public static ItemStack getResult(ItemStack base, ItemStack ingredient) {
 		String mappingName = getMappingNameFromItemStack(base);
-		if (mappingName == null)
-			return null;
 
-		List<IItemUpgrade> upgrades = _MAPPING_ITEMNAME_UPGRADE.get(mappingName);
-		for (IItemUpgrade upgrade : upgrades)
-			if (upgrade.getIngredient().getItem() == ingredient.getItem()) // Check Item
-				if (upgrade.getIngredient().getMetadata() == ingredient.getMetadata()) // Check Item Metadata
-					if (ItemStackUtil.getStackSize(upgrade.getIngredient()) == ItemStackUtil.getStackSize(ingredient)) // Check
-																														// StackSize
-						return upgrade.getResult(base);
+		if (mappingName == null) {
+			return null;
+		}
+
+		List<IItemUpgrade> upgrades = MAPPING_ITEMNAME_UPGRADE.get(mappingName);
+
+		for (IItemUpgrade upgrade : upgrades) {
+			if ((upgrade.getIngredient().getItem() == ingredient.getItem())
+					&& (upgrade.getIngredient().getMetadata() == ingredient.getMetadata()) && (ItemStackUtil
+							.getStackSize(upgrade.getIngredient()) == ItemStackUtil.getStackSize(ingredient))) {
+				return upgrade.getResult(base);
+			}
+		}
 		return null;
 	}
 
@@ -193,10 +200,14 @@ public class ItemUpgradeRegistry {
 	 * @return Returns name of the mapping from given ItemStack.
 	 */
 	public static String getMappingNameFromItemStack(ItemStack stack) {
-		for (Entry<String, List<ItemEntry>> mappingEntry : _MAPPING_ITEMNAME_ITEMENTRY.entrySet())
-			for (ItemEntry itemEntry : mappingEntry.getValue())
-				if (itemEntry.item == stack.getItem())
+		for (Entry<String, List<ItemEntry>> mappingEntry : MAPPING_ITEMNAME_ITEMENTRY.entrySet()) {
+			for (ItemEntry itemEntry : mappingEntry.getValue()) {
+				if (itemEntry.item == stack.getItem()) {
 					return itemEntry.mappingName;
+				}
+			}
+		}
+
 		return "";
 	}
 
@@ -206,14 +217,14 @@ public class ItemUpgradeRegistry {
 	 *         pickaxes upgrades.
 	 */
 	public static Map<String, List<IItemUpgrade>> getUpgradesMap() {
-		return _MAPPING_ITEMNAME_UPGRADE;
+		return MAPPING_ITEMNAME_UPGRADE;
 	}
 
 	/**
 	 * @return Returns the localized name from given mapping.
 	 */
 	public static String getLocalizedNameForMapping(String mappingName) {
-		return _MAPPING_ITEMNAME_LOCALIZEDNAME.get(mappingName);
+		return MAPPING_ITEMNAME_LOCALIZEDNAME.get(mappingName);
 	}
 
 	/**
@@ -221,21 +232,23 @@ public class ItemUpgradeRegistry {
 	 */
 	public static void registerEvents() {
 		int registered = 0;
-		for (Entry<String, List<IItemUpgrade>> itemCategory : _MAPPING_ITEMNAME_UPGRADE.entrySet()) {
+
+		for (Entry<String, List<IItemUpgrade>> itemCategory : MAPPING_ITEMNAME_UPGRADE.entrySet()) {
 			for (IItemUpgrade upgrade : itemCategory.getValue()) {
-				MinecraftForge.EVENT_BUS.register(upgrade);
-				_EVENT_BUS_REGISTERED_UPGRADES.add(upgrade);
+				EventUtil.registerEvent(upgrade);
+				EVENT_BUS_REGISTERED_UPGRADES.add(upgrade);
 				registered++;
 			}
 		}
-		VanillaMagic.LOGGER.log(Level.INFO, "Registered Upgrade Events: " + registered);
+
+		VanillaMagic.logInfo("Registered Upgrade Events: " + registered);
 	}
 
 	/**
 	 * @return Returns base items list.
 	 */
 	public static List<ItemEntry> getBaseItems() {
-		return _BASE_ITEMS;
+		return BASE_ITEMS;
 	}
 
 	/**
@@ -243,19 +256,16 @@ public class ItemUpgradeRegistry {
 	 *         all possible upgrades.
 	 */
 	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) {
-		// All registered upgrades
-		for (Entry<String, List<IItemUpgrade>> upgrade : _MAPPING_ITEMNAME_UPGRADE.entrySet()) {
-			// item type - for instance: "_pickaxe"
+		for (Entry<String, List<IItemUpgrade>> upgrade : MAPPING_ITEMNAME_UPGRADE.entrySet()) {
 			String itemName = upgrade.getKey();
-			// all upgrades registered for this item type
 			List<IItemUpgrade> upgrades = upgrade.getValue();
-			// all entries for this upgrade
-			List<ItemEntry> entries = _MAPPING_ITEMNAME_ITEMENTRY.get(itemName);
-			// all upgrades
-			for (IItemUpgrade itemUpgrade : upgrades)
-				// all found entries
-				for (ItemEntry itemEntry : entries)
+			List<ItemEntry> entries = MAPPING_ITEMNAME_ITEMENTRY.get(itemName);
+
+			for (IItemUpgrade itemUpgrade : upgrades) {
+				for (ItemEntry itemEntry : entries) {
 					list.add(itemUpgrade.getResult(itemEntry.stack));
+				}
+			}
 		}
 		return list;
 	}

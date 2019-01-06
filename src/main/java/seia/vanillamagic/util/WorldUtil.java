@@ -12,50 +12,55 @@ import seia.vanillamagic.quest.QuestJumper;
 
 /**
  * Class which wraps various World related stuff.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class WorldUtil 
-{
-	private WorldUtil()
-	{
+public final class WorldUtil {
+	private WorldUtil() {
 	}
-	
+
+	/**
+	 * @return Returns the World from it's Id.
+	 */
+	public static World getWorld(int dimId) {
+		return DimensionManager.getWorld(dimId);
+	}
+
 	/**
 	 * @return Returns the World id.
 	 */
-	public static int getDimensionID(World world)
-	{
+	public static int getDimensionID(World world) {
 		return world.provider.getDimension();
 	}
-	
+
 	/**
 	 * @return Returns the World id.
 	 */
-	public static int getDimensionID(Entity entity)
-	{
+	public static int getDimensionID(Entity entity) {
 		return entity.dimension;
 	}
-	
+
 	/**
 	 * @return Returns the World id.
 	 */
-	public static int getDimensionID(TileEntity tile)
-	{
+	public static int getDimensionID(TileEntity tile) {
 		return getDimensionID(tile.getWorld());
 	}
-	
+
 	/**
 	 * @return Returns the World id.
 	 */
-	public static int getDimensionID(WorldEvent event)
-	{
+	public static int getDimensionID(WorldEvent event) {
 		return getDimensionID(event.getWorld());
 	}
-	
-	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) 
-	{
+
+	public static NonNullList<ItemStack> fillList(NonNullList<ItemStack> list) {
 		BlockPos pos = new BlockPos(100, 100, 100); // Default position
-		for (Integer i : DimensionManager.getIDs()) 
+
+		for (Integer i : DimensionManager.getIDs()) {
 			list.add(QuestJumper.writeDataToBook(DimensionManager.getWorld(i.intValue()), pos));
+		}
+
 		return list;
 	}
 }

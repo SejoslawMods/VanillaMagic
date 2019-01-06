@@ -3,6 +3,7 @@ package seia.vanillamagic.core;
 import java.io.File;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.fml.common.Mod;
@@ -17,8 +18,8 @@ import seia.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
 import seia.vanillamagic.config.VMConfig;
 import seia.vanillamagic.config.VMConfigAchievements;
 import seia.vanillamagic.event.ActionEventAdditionalToolTips;
-import seia.vanillamagic.event.ActionEventDeathPoint;
 import seia.vanillamagic.event.ActionEventAutoplantEntityItem;
+import seia.vanillamagic.event.ActionEventDeathPoint;
 import seia.vanillamagic.handler.ChunkLoadingHandler;
 import seia.vanillamagic.handler.PlayerEventHandler;
 import seia.vanillamagic.handler.WorldHandler;
@@ -42,7 +43,7 @@ import seia.vanillamagic.util.EventUtil;
  */
 @Mod(modid = VanillaMagic.MODID, version = VanillaMagic.VERSION, name = VanillaMagic.NAME)
 public class VanillaMagic {
-	public static final String MODID = "VanillaMagic";
+	public static final String MODID = "vanillamagic";
 	public static final String VERSION = "@VERSION@";
 	public static final String NAME = "Vanilla Magic";
 
@@ -55,7 +56,7 @@ public class VanillaMagic {
 	/**
 	 * Mod internal logger
 	 */
-	// public static Logger LOGGER;
+	public static Logger LOGGER;
 
 	/**
 	 * Config used for loading achievements

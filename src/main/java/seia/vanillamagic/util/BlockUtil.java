@@ -11,48 +11,53 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 /**
  * Class which store various methods connected with Block.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class BlockUtil 
-{
-	private BlockUtil()
-	{
+public final class BlockUtil {
+	private BlockUtil() {
 	}
-	
+
 	/**
 	 * @return Returns the number of blocks counted in given direction.
 	 */
-	public static int countBlocks(World world, BlockPos startPos, Block shouldBe, EnumFacing direction) 
-	{
+	public static int countBlocks(World world, BlockPos startPos, Block shouldBe, EnumFacing direction) {
 		int count = 0;
 		BlockPos next = new BlockPos(startPos.getX(), startPos.getY(), startPos.getZ());
 		Block nextBlock = world.getBlockState(next).getBlock();
-		while (Block.isEqualTo(nextBlock, shouldBe))
-		{
+
+		while (Block.isEqualTo(nextBlock, shouldBe)) {
 			count++;
 			next = next.offset(direction);
 			nextBlock = world.getBlockState(next).getBlock();
 		}
+
 		return count;
 	}
-	
+
 	/**
 	 * @return Returns true if the given state is a fluid.
 	 */
-	public static boolean isBlockLiquid(IBlockState state)
-	{
+	public static boolean isBlockLiquid(IBlockState state) {
 		return (state instanceof IFluidBlock || state.getMaterial().isLiquid());
 	}
-	
+
 	/**
 	 * Place block from given stack on given position.
 	 */
-	public static void placeBlockFromStack(World world, BlockPos placePosition, ItemStack stack) 
-	{
+	public static void placeBlockFromStack(World world, BlockPos placePosition, ItemStack stack) {
 		Item itemFromStack = stack.getItem();
-		if (itemFromStack != null)
-		{
-			Block blockFromStack = Block.getBlockFromItem(itemFromStack);
-			if (blockFromStack != null) world.setBlockState(placePosition, blockFromStack.getDefaultState());
+
+		if (itemFromStack == null) {
+			return;
 		}
+
+		Block blockFromStack = Block.getBlockFromItem(itemFromStack);
+
+		if (blockFromStack == null) {
+			return;
+		}
+
+		world.setBlockState(placePosition, blockFromStack.getDefaultState());
 	}
 }

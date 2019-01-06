@@ -8,69 +8,66 @@ import net.minecraft.world.World;
 
 /**
  * Class which is used for various explosion related mathematics.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class ExplosionUtil
-{
-	private ExplosionUtil()
-	{
+public final class ExplosionUtil {
+	private ExplosionUtil() {
 	}
-	
+
 	/**
-	 * Explosion was made using {@link World#newExplosion(Entity, double, double, double, float, boolean, boolean)}
+	 * Explosion was made using
+	 * {@link World#newExplosion(Entity, double, double, double, float, boolean, boolean)}
 	 * 
 	 * @return Returns new Explosion object.
 	 */
-	public static Explosion newExplosion1(World world, 
-			@Nullable Entity entity, 
-			double x, double y, double z, 
-			float strength, 
-			boolean isFlaming, boolean isSmoking)
-	{
-		return world.newExplosion((Entity)null, x, y, z, strength, isFlaming, isSmoking);
+	public static Explosion newExplosion1(World world, @Nullable Entity entity, double x, double y, double z,
+			float strength, boolean isFlaming, boolean isSmoking) {
+		return world.newExplosion((Entity) null, x, y, z, strength, isFlaming, isSmoking);
 	}
-	
+
 	/**
 	 * Explosion was made using {@link VMExplosion}
 	 * 
 	 * @return Returns new Explosion object.
 	 */
-	public static Explosion newExplosion2(World world, 
-			@Nullable Entity entity, 
-			double x, double y, double z, 
-			float strength, 
-			boolean isFlaming, boolean isSmoking)
-	{
+	public static Explosion newExplosion2(World world, @Nullable Entity entity, double x, double y, double z,
+			float strength, boolean isFlaming, boolean isSmoking) {
 		VMExplosion explosion = new VMExplosion(world, entity, x, y, z, strength, isFlaming, isSmoking);
 		explosion.doExplosion();
+
 		return explosion;
 	}
-	
-	public static int roundToNegInf(float x)
-	{
+
+	public static int roundToNegInf(float x) {
 		int ret = (int) x;
-		if (ret > x) ret--;
-		return ret;
-	}
-	
-	public static int roundToNegInf(double x)
-	{
-		int ret = (int)x;
-		if (ret > x) ret--;
+
+		if (ret > x) {
+			ret--;
+		}
+
 		return ret;
 	}
 
-	public static int square(int x)
-	{
+	public static int roundToNegInf(double x) {
+		int ret = (int) x;
+
+		if (ret > x) {
+			ret--;
+		}
+
+		return ret;
+	}
+
+	public static int square(int x) {
 		return x * x;
 	}
-	  
-	public static float square(float x)
-	{
+
+	public static float square(float x) {
 		return x * x;
 	}
-	  
-	public static double square(double x)
-	{
+
+	public static double square(double x) {
 		return x * x;
 	}
 }

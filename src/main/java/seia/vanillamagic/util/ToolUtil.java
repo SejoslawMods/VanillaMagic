@@ -17,79 +17,81 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 /**
  * Class which store various methods connected with tools.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class ToolUtil 
-{
-	private ToolUtil()
-	{
+public final class ToolUtil {
+	private ToolUtil() {
 	}
-	
-	public static void breakExtraBlock(ItemStack stack, World world, EntityPlayer player, BlockPos pos, BlockPos refPos) 
-	{
-		// prevent calling that stuff for air blocks, could lead to unexpected behaviour since it fires events
-		if (world.isAirBlock(pos)) return;
-		
-		// check if  the block can be broken, since extra block breaks shouldn't instantly break stuff like obsidian
-		// or precious ores you can't harvest while mining stone
+
+	public static void breakExtraBlock(ItemStack stack, World world, EntityPlayer player, BlockPos pos,
+			BlockPos refPos) {
+		if (world.isAirBlock(pos)) {
+			return;
+		}
+
 		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
 		IBlockState refState = world.getBlockState(refPos);
 		float refStrength = ForgeHooks.blockStrength(refState, player, world, refPos);
 		float strength = ForgeHooks.blockStrength(state, player, world, pos);
-		// only harvestable blocks that aren't impossibly slow to harvest
-		if (!ForgeHooks.canHarvestBlock(block, player, world, pos) || refStrength / strength > 10f) return;
-		
-		// From this point on it's clear that the player CAN break the block
-		if (player.capabilities.isCreativeMode) 
-		{
-			block.onBlockHarvested(world, pos, state, player);
-			if (block.removedByPlayer(state, world, pos, player, false)) block.onBlockDestroyedByPlayer(world, pos, state);
-			
-			// send update to client
-			if (!world.isRemote) ((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, pos));
+
+		if (!ForgeHooks.canHarvestBlock(block, player, world, pos) || refStrength / strength > 10f) {
 			return;
 		}
-		// callback to the tool the player uses. Called on both sides. This damages the tool n stuff.
+
+		if (player.capabilities.isCreativeMode) {
+			block.onBlockHarvested(world, pos, state, player);
+
+			if (block.removedByPlayer(state, world, pos, player, false)) {
+				block.onBlockDestroyedByPlayer(world, pos, state);
+			}
+
+			if (!world.isRemote) {
+				((EntityPlayerMP) player).connection.sendPacket(new SPacketBlockChange(world, pos));
+			}
+
+			return;
+		}
+
 		stack.onBlockDestroyed(world, state, pos, player);
-		// server sided handling
-		if (!world.isRemote) 
-		{
-			// send the blockbreak event
-			int xp = ForgeHooks.onBlockBreakEvent(world, ((EntityPlayerMP) player).interactionManager.getGameType(), (EntityPlayerMP) player, pos);
-			if (xp == -1) return;
-			
-			// serverside we reproduce ItemInWorldManager.tryHarvestBlock
+
+		if (!world.isRemote) {
+
+			int xp = ForgeHooks.onBlockBreakEvent(world, ((EntityPlayerMP) player).interactionManager.getGameType(),
+					(EntityPlayerMP) player, pos);
+
+			if (xp == -1) {
+				return;
+			}
+
 			TileEntity tileEntity = world.getTileEntity(pos);
-			// ItemInWorldManager.removeBlock
-			if (block.removedByPlayer(state, world, pos, player, true)) // boolean is if  block can be harvested, checked above
-			{
+
+			if (block.removedByPlayer(state, world, pos, player, true)) {
 				block.onBlockDestroyedByPlayer(world, pos, state);
 				block.harvestBlock(world, player, pos, state, tileEntity, stack);
 				block.dropXpOnBlockBreak(world, pos, xp);
 			}
-			// always send block update to client
+
 			EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
 			mpPlayer.connection.sendPacket(new SPacketBlockChange(world, pos));
-		}
-		// client sided handling
-		else 
-		{
-			// following code can be found in PlayerControllerMP.onPlayerDestroyBlock
+		} else {
 			world.playBroadcastSound(2001, pos, Block.getStateId(state));
-			if (block.removedByPlayer(state, world, pos, player, true)) block.onBlockDestroyedByPlayer(world, pos, state);
-			
-			// callback to the tool
+
+			if (block.removedByPlayer(state, world, pos, player, true)) {
+				block.onBlockDestroyedByPlayer(world, pos, state);
+			}
+
 			stack.onBlockDestroyed(world, state, pos, player);
-			if (ItemStackUtil.getStackSize(stack) == 0 && stack == player.getHeldItemMainhand()) 
-			{
+
+			if (ItemStackUtil.getStackSize(stack) == 0 && stack == player.getHeldItemMainhand()) {
 				ForgeEventFactory.onPlayerDestroyItem(player, stack, EnumHand.MAIN_HAND);
 				player.setHeldItem(EnumHand.MAIN_HAND, null);
 			}
-			// send an update to the server, so we get an update back
-			Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(
-					CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, 
-					pos, 
-					Minecraft.getMinecraft().objectMouseOver.sideHit));
+
+			Minecraft.getMinecraft().getConnection()
+					.sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos,
+							Minecraft.getMinecraft().objectMouseOver.sideHit));
 		}
 	}
 }

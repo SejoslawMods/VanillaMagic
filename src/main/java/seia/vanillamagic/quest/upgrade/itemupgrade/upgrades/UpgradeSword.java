@@ -9,27 +9,28 @@ import seia.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeBase;
 
 /**
  * Class which describes basic Sowrd upgrade.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public abstract class UpgradeSword extends ItemUpgradeBase 
-{
+public abstract class UpgradeSword extends ItemUpgradeBase {
 	/**
 	 * Method which is run after checking all conditions in main event method.
 	 */
 	public abstract void onAttack(EntityPlayer player, Entity target);
-	
+
 	/**
-	 * Check conditions for event to start.
-	 * Also check if sword has got required Tag.
+	 * Check conditions for event to start. Also check if sword has got required
+	 * Tag.
 	 */
 	@SubscribeEvent
-	public void doEvent(AttackEntityEvent event)
-	{
+	public void doEvent(AttackEntityEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
-		// if for some reason Player is null, quit.
-		if (player == null) return; 
-		// If item does not contains required tag, quit.
 		ItemStack playerMainHandStack = player.getHeldItemMainhand();
-		if (!containsTag(playerMainHandStack)) return; 
-		else onAttack(player, event.getTarget());
+
+		if (!containsTag(playerMainHandStack)) {
+			return;
+		}
+
+		onAttack(player, event.getTarget());
 	}
 }

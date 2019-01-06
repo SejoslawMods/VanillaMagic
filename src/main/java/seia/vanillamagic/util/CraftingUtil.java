@@ -17,72 +17,80 @@ import net.minecraftforge.registries.GameData;
 
 /**
  * Various method for handling crafting since Minecraft 1.12
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class CraftingUtil 
-{
-	private CraftingUtil() 
-	{
+public final class CraftingUtil {
+	private CraftingUtil() {
 	}
-	
+
 	/**
 	 * Adds a basic shaped recipe
 	 *
 	 * @param output The stack that should be produced
 	 */
-	public static void addShapedRecipe(ItemStack output, Object... params) 
-	{
+	public static void addShapedRecipe(ItemStack output, Object... params) {
 		ResourceLocation location = getNameForRecipe(output);
 		ShapedPrimer primer = CraftingHelper.parseShaped(params);
-		ShapedRecipes recipe = new ShapedRecipes(output.getItem().getRegistryName().toString(), primer.width, primer.height, primer.input, output);
+		ShapedRecipes recipe = new ShapedRecipes(output.getItem().getRegistryName().toString(), primer.width,
+				primer.height, primer.input, output);
 		recipe.setRegistryName(location);
 		GameData.register_impl(recipe);
 	}
-	
+
 	/**
 	 * Adds a basic shapeless recipe
 	 *
 	 * @param output The stack that should be produced
 	 */
-	public static void addShapelessRecipe(ItemStack output, Object... input) 
-	{
+	public static void addShapelessRecipe(ItemStack output, Object... input) {
 		ResourceLocation location = getNameForRecipe(output);
 		ShapelessRecipes recipe = new ShapelessRecipes(location.getResourceDomain(), output, buildInput(input));
 		recipe.setRegistryName(location);
 		GameData.register_impl(recipe);
 	}
-	
+
 	/**
-	 * Genereates a unique name based of the active mod, and the itemstack that the recipe outputs
+	 * Genereates a unique name based of the active mod, and the itemstack that the
+	 * recipe outputs
 	 *
 	 * @param output an itemstack, usualy the one the the recipe produces
 	 * @return a unique ResourceLocation based off the item item
 	 */
-	public static ResourceLocation getNameForRecipe(ItemStack output) 
-	{
+	public static ResourceLocation getNameForRecipe(ItemStack output) {
 		ModContainer activeContainer = Loader.instance().activeModContainer();
-		ResourceLocation baseLoc = new ResourceLocation(activeContainer.getModId(), output.getItem().getRegistryName().getResourcePath());
+		ResourceLocation baseLoc = new ResourceLocation(activeContainer.getModId(),
+				output.getItem().getRegistryName().getResourcePath());
 		ResourceLocation recipeLoc = baseLoc;
-		while (CraftingManager.REGISTRY.containsKey(recipeLoc)) 
-			recipeLoc = new ResourceLocation(activeContainer.getModId(), baseLoc.getResourcePath() + "_" + new Random().nextInt());
+
+		while (CraftingManager.REGISTRY.containsKey(recipeLoc)) {
+			recipeLoc = new ResourceLocation(activeContainer.getModId(),
+					baseLoc.getResourcePath() + "_" + new Random().nextInt());
+		}
+
 		return recipeLoc;
 	}
-	
+
 	/**
 	 * Converts an object array into a NonNullList of Ingredients
 	 */
-	private static NonNullList<Ingredient> buildInput(Object[] input) 
-	{
+	private static NonNullList<Ingredient> buildInput(Object[] input) {
 		NonNullList<Ingredient> list = NonNullList.create();
-		for (Object obj : input) 
-		{
-			if (obj instanceof Ingredient) list.add((Ingredient) obj);
-			else 
-			{
+
+		for (Object obj : input) {
+			if (obj instanceof Ingredient) {
+				list.add((Ingredient) obj);
+			} else {
 				Ingredient ingredient = CraftingHelper.getIngredient(obj);
-				if (ingredient == null) ingredient = Ingredient.EMPTY;
+
+				if (ingredient == null) {
+					ingredient = Ingredient.EMPTY;
+				}
+
 				list.add(ingredient);
 			}
 		}
+
 		return list;
 	}
 }

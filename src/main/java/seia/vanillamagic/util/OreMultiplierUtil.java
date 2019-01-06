@@ -6,27 +6,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
- * Class which store various methods connected with Ore Multiplier.
- * Checking structure, etc.
+ * Class which store various methods connected with Ore Multiplier. Checking
+ * structure, etc.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class OreMultiplierUtil 
-{
-	private OreMultiplierUtil()
-	{
+public final class OreMultiplierUtil {
+	private OreMultiplierUtil() {
 	}
-	
-	public static boolean check(World world, BlockPos cauldronPos)
-	{
+
+	public static boolean check(World world, BlockPos cauldronPos) {
 		BlockPos furnaceNorth = cauldronPos.offset(EnumFacing.NORTH);
 		BlockPos furnaceSouth = cauldronPos.offset(EnumFacing.SOUTH);
 		BlockPos furnaceEast = cauldronPos.offset(EnumFacing.EAST);
 		BlockPos furnaceWest = cauldronPos.offset(EnumFacing.WEST);
-		
-		if(world.getBlockState(furnaceNorth).getBlock() instanceof BlockFurnace)
-			if(world.getBlockState(furnaceSouth).getBlock() instanceof BlockFurnace)
-				if(world.getBlockState(furnaceEast).getBlock() instanceof BlockFurnace)
-					if(world.getBlockState(furnaceWest).getBlock() instanceof BlockFurnace)
-						return true;
-		return false;
+
+		return world.getBlockState(furnaceNorth).getBlock() instanceof BlockFurnace
+				&& world.getBlockState(furnaceSouth).getBlock() instanceof BlockFurnace
+				&& world.getBlockState(furnaceEast).getBlock() instanceof BlockFurnace
+				&& world.getBlockState(furnaceWest).getBlock() instanceof BlockFurnace;
 	}
 }

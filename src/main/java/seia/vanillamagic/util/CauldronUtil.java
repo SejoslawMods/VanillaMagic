@@ -10,31 +10,33 @@ import net.minecraft.world.World;
 
 /**
  * Class which store various methods connected with Cauldron.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class CauldronUtil 
-{
-	private CauldronUtil()
-	{
+public final class CauldronUtil {
+	private CauldronUtil() {
 	}
-	
-	public static List<EntityItem> getItemsInCauldron(World world, BlockPos cauldronPos)
-	{
-		// all entities in World
+
+	public static List<EntityItem> getItemsInCauldron(World world, BlockPos cauldronPos) {
 		List<Entity> loadedEntities = world.loadedEntityList;
-		// all items in cauldron
 		List<EntityItem> entitiesInCauldron = new ArrayList<EntityItem>();
-		if (loadedEntities.size() == 0) return entitiesInCauldron;
-		
-		// filtering all items in cauldron to check if  the recipe is correct
-		for (int i = 0; i < loadedEntities.size(); ++i)
-		{
-			if (loadedEntities.get(i) instanceof EntityItem)
-			{
+
+		if (loadedEntities.size() == 0) {
+			return entitiesInCauldron;
+		}
+
+		for (int i = 0; i < loadedEntities.size(); ++i) {
+			if (loadedEntities.get(i) instanceof EntityItem) {
 				EntityItem entityItemInWorld = (EntityItem) loadedEntities.get(i);
-				BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY, entityItemInWorld.posZ);
-				if (BlockPosUtil.isSameBlockPos(cauldronPos, entityItemInWorldPos)) entitiesInCauldron.add(entityItemInWorld);
+				BlockPos entityItemInWorldPos = new BlockPos(entityItemInWorld.posX, entityItemInWorld.posY,
+						entityItemInWorld.posZ);
+
+				if (BlockPosUtil.isSameBlockPos(cauldronPos, entityItemInWorldPos)) {
+					entitiesInCauldron.add(entityItemInWorld);
+				}
 			}
 		}
+
 		return entitiesInCauldron;
 	}
 }

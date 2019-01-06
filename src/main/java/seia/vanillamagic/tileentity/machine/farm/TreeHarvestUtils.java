@@ -14,154 +14,157 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import seia.vanillamagic.tileentity.machine.farm.farmer.FarmerTree;
 
-public class TreeHarvestUtils 
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class TreeHarvestUtils {
 	private final static List<Block> LEAVES = new ArrayList<Block>();
-	
-	private int _horizontalRange;
-	private int _verticalRange;
-	private BlockPos _origin;
 
-	public TreeHarvestUtils() 
-	{
-	}
+	private int horizontalRange;
+	private int verticalRange;
+	private BlockPos origin;
 
-	public void harvest(TileFarm farm, FarmerTree farmer, BlockPos pos, HarvestResult res) 
-	{
-		_horizontalRange = farm.getWorkRadius() + 7;
-		_verticalRange = 30;
+	public void harvest(TileFarm farm, FarmerTree farmer, BlockPos pos, HarvestResult res) {
+		this.horizontalRange = farm.getWorkRadius() + 7;
+		this.verticalRange = 30;
+
 		harvest(farm.getWorld(), farm.getMachinePos(), pos, res, farmer.getIgnoreMeta());
 	}
 
-	public void harvest(World world, BlockPos pos, HarvestResult res) 
-	{
-		_horizontalRange = 12;
-		_verticalRange = 30;
-		_origin = new BlockPos(pos);
+	public void harvest(World world, BlockPos pos, HarvestResult res) {
+		this.horizontalRange = 12;
+		this.verticalRange = 30;
+		this.origin = new BlockPos(pos);
+
 		IBlockState wood = world.getBlockState(pos);
+
 		harvestUp(world, pos, res, new HarvestTarget(wood));
 	}
 
-	private void harvest(World world, BlockPos origin, BlockPos bc, HarvestResult res, boolean ignoreMeta) 
-	{
-		this._origin = new BlockPos(origin);
+	private void harvest(World world, BlockPos origin, BlockPos bc, HarvestResult res, boolean ignoreMeta) {
+		this.origin = new BlockPos(origin);
 		IBlockState wood = world.getBlockState(bc);
-		if (ignoreMeta) harvestUp(world, bc, res, new BaseHarvestTarget(wood.getBlock()));
-		else harvestUp(world, bc, res, new HarvestTarget(wood));
+
+		if (ignoreMeta) {
+			harvestUp(world, bc, res, new BaseHarvestTarget(wood.getBlock()));
+		} else {
+			harvestUp(world, bc, res, new HarvestTarget(wood));
+		}
 	}
 
-	protected void harvestUp(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) 
-	{
-		if (!isInHarvestBounds(bc) || res.harvestedBlocks.contains(bc)) return;
-		
-		IBlockState bs = world.getBlockState(bc);    
+	protected void harvestUp(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) {
+		if (!isInHarvestBounds(bc) || res.harvestedBlocks.contains(bc)) {
+			return;
+		}
+
+		IBlockState bs = world.getBlockState(bc);
 		boolean isLeaves = isLeaves(bs);
-		if (target.isTarget(bs) || isLeaves) 
-		{
+
+		if (target.isTarget(bs) || isLeaves) {
 			res.harvestedBlocks.add(bc);
-			for (EnumFacing dir : EnumFacing.VALUES) 
-				if (dir != EnumFacing.DOWN) 
+
+			for (EnumFacing dir : EnumFacing.VALUES) {
+				if (dir != EnumFacing.DOWN) {
 					harvestUp(world, bc.offset(dir), res, target);
-		} 
-		else 
-		{
-			// check the sides for connected wood
+				}
+			}
+		} else {
 			harvestAdjacentWood(world, bc, res, target);
-			// and another check for large oaks, where wood can be surrounded by
-			// leaves	      
-			for (EnumFacing dir : EnumFacing.HORIZONTALS) 
-			{
+
+			for (EnumFacing dir : EnumFacing.HORIZONTALS) {
 				BlockPos loc = bc.offset(dir);
-				IBlockState locBS = world.getBlockState(loc);        
-				if (isLeaves(locBS)) harvestAdjacentWood(world, loc, res, target);
+				IBlockState locBS = world.getBlockState(loc);
+
+				if (isLeaves(locBS)) {
+					harvestAdjacentWood(world, loc, res, target);
+				}
 			}
 		}
 	}
 
-	static boolean isLeaves(IBlockState bs) 
-	{
+	static boolean isLeaves(IBlockState bs) {
 		return bs.getMaterial() == Material.LEAVES || LEAVES.contains(bs.getBlock());
 	}
 
-	private void harvestAdjacentWood(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) 
-	{    
-		for (EnumFacing dir : EnumFacing.HORIZONTALS) 
-		{
+	private void harvestAdjacentWood(World world, BlockPos bc, HarvestResult res, BaseHarvestTarget target) {
+		for (EnumFacing dir : EnumFacing.HORIZONTALS) {
 			BlockPos targ = bc.offset(dir);
-			if (target.isTarget(world.getBlockState(targ))) harvestUp(world, targ, res, target);
+
+			if (target.isTarget(world.getBlockState(targ))) {
+				harvestUp(world, targ, res, target);
+			}
 		}
 	}
 
-	private boolean isInHarvestBounds(BlockPos bc) 
-	{
-		int dist = Math.abs(_origin.getX() - bc.getX());
-		if (dist > _horizontalRange) return false;
-		
-		dist = Math.abs(_origin.getZ() - bc.getZ());
-		if(dist > _horizontalRange) return false;
-		
-		dist = Math.abs(_origin.getY() - bc.getY());
-		if (dist > _verticalRange) return false;
-		
+	private boolean isInHarvestBounds(BlockPos bc) {
+		int dist = Math.abs(this.origin.getX() - bc.getX());
+
+		if (dist > this.horizontalRange) {
+			return false;
+		}
+
+		dist = Math.abs(this.origin.getZ() - bc.getZ());
+
+		if (dist > this.horizontalRange) {
+			return false;
+		}
+
+		dist = Math.abs(this.origin.getY() - bc.getY());
+
+		if (dist > this.verticalRange) {
+			return false;
+		}
+
 		return true;
 	}
 
-	private static final class HarvestTarget extends BaseHarvestTarget 
-	{
+	private static final class HarvestTarget extends BaseHarvestTarget {
 		IBlockState bs;
 		EnumType variant;
-		
-		HarvestTarget(IBlockState bs) 
-		{
+
+		HarvestTarget(IBlockState bs) {
 			super(bs.getBlock());
+
 			this.bs = bs;
 			variant = getVariant(bs);
 		}
-		
-		public static EnumType getVariant(IBlockState bs) 
-		{
+
+		public static EnumType getVariant(IBlockState bs) {
 			EnumType v = null;
-			try 
-			{
+
+			try {
 				v = bs.getValue(BlockNewLog.VARIANT);
-			} 
-			catch (Exception e) 
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			if (v == null) 
-			{
-				try 
-				{
+
+			if (v == null) {
+				try {
 					v = bs.getValue(BlockOldLog.VARIANT);
-				} 
-				catch (Exception e) 
-				{
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 			return v;
 		}
-		
-		boolean isTarget(IBlockState bs) 
-		{
-			if (variant == null) return super.isTarget(bs);
+
+		boolean isTarget(IBlockState bs) {
+			if (variant == null) {
+				return super.isTarget(bs);
+			}
+
 			return super.isTarget(bs) && variant == getVariant(bs);
 		}
 	}
 
-	private static class BaseHarvestTarget 
-	{
+	private static class BaseHarvestTarget {
 		private final Block wood;
-		
-		BaseHarvestTarget(Block wood) 
-		{
+
+		BaseHarvestTarget(Block wood) {
 			this.wood = wood;
 		}
-		
-		boolean isTarget(IBlockState bs) 
-		{
+
+		boolean isTarget(IBlockState bs) {
 			return bs.getBlock() == wood;
 		}
 	}

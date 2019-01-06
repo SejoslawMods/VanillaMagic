@@ -8,18 +8,17 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import seia.vanillamagic.core.VanillaMagic;
 
 /**
- * Class which wraps Minecraft and Forge recipes
+ * Class which wraps Minecraft and Forge recipes.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class RecipeUtil
-{
+public final class RecipeUtil {
 	private static int RECIPE_ID = 0;
-	
-	private RecipeUtil()
-	{
+
+	private RecipeUtil() {
 	}
-	
-	public static void addShapelessRecipe(ItemStack output, NonNullList<Ingredient> input)
-	{
+
+	public static void addShapelessRecipe(ItemStack output, NonNullList<Ingredient> input) {
 		ShapelessRecipes rec = new ShapelessRecipes("", output, input);
 		rec.setRegistryName(VanillaMagic.MODID, "VMRecipe-" + RECIPE_ID++);
 		ForgeRegistries.RECIPES.register(rec);

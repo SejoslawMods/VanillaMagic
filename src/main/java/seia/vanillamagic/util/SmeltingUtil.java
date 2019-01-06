@@ -23,250 +23,248 @@ import seia.vanillamagic.quest.QuestSmeltOnAltar;
 
 /**
  * Class which store various methods connected with smelting.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class SmeltingUtil
-{
-	private SmeltingUtil()
-	{
+public final class SmeltingUtil {
+	private SmeltingUtil() {
 	}
-	
-	public static boolean isBlockOre(Block block)
-	{
-		if (block instanceof BlockOre) return true; // Coal, Diamond, Lapis, Emerald, Quartz
-		
-		if (block instanceof BlockRedstoneOre
-				|| Block.isEqualTo(block, Blocks.REDSTONE_ORE)
-				|| Block.isEqualTo(block, Blocks.LIT_REDSTONE_ORE)) // Redstone, Lit Redstone
-		{
+
+	public static boolean isBlockOre(Block block) {
+		if (block instanceof BlockOre) { // Coal, Diamond, Lapis, Emerald, Quartz
 			return true;
 		}
-		if (Block.isEqualTo(block, Blocks.IRON_ORE)
-				|| Block.isEqualTo(block, Blocks.GOLD_ORE)) // Iron, Gold
-		{
+
+		if ((block instanceof BlockRedstoneOre) || Block.isEqualTo(block, Blocks.REDSTONE_ORE)
+				|| Block.isEqualTo(block, Blocks.LIT_REDSTONE_ORE) || Block.isEqualTo(block, Blocks.IRON_ORE)
+				|| Block.isEqualTo(block, Blocks.GOLD_ORE)) {
 			return true;
 		}
+
 		// Other Ores (other mods, etc.)
 		String[] oreDictionaryNames = OreDictionary.getOreNames();
 		List<String> oreNames = new ArrayList<String>(); // Ores
-		for (String oreDictionaryName : oreDictionaryNames)
-			if (oreDictionaryName.contains("ore"))
+
+		for (String oreDictionaryName : oreDictionaryNames) {
+			if (oreDictionaryName.contains("ore")) {
 				oreNames.add(oreDictionaryName);
-		
-		for (String oreName : oreNames)
-		{
-			if (oreName.equals(block.getLocalizedName()) 
-					|| oreName.equals(block.getUnlocalizedName()))
-			{
+			}
+		}
+
+		for (String oreName : oreNames) {
+			if (oreName.equals(block.getLocalizedName()) || oreName.equals(block.getUnlocalizedName())) {
 				return true;
 			}
 		}
+
 		return false;
 	}
-	
-	public static List<EntityItem> getOresInCauldron(World world, BlockPos cauldronPos)
-	{
+
+	public static List<EntityItem> getOresInCauldron(World world, BlockPos cauldronPos) {
 		List<EntityItem> oresInCauldron = new ArrayList<EntityItem>();
-		// all items that can be smelt
 		List<EntityItem> smeltablesInCauldron = getSmeltable(world, cauldronPos);
-		// all ore names from dictionary
 		List<String> oreNames = getOreNamesFromDictionary();
-		// filter each EntityItem
-		for (EntityItem entityItem : smeltablesInCauldron)
-		{
+
+		for (EntityItem entityItem : smeltablesInCauldron) {
 			ItemStack currentSmeltable = entityItem.getItem();
-			// check all Ores names
-			for (String oreName : oreNames)
-			{
-				// all registered stacks for  ore
+
+			for (String oreName : oreNames) {
 				List<ItemStack> stacksforItem = OreDictionary.getOres(oreName);
-				for (ItemStack stackOre : stacksforItem)
-				{
-					if (ItemStack.areItemsEqual(currentSmeltable, stackOre))
-					{
+
+				for (ItemStack stackOre : stacksforItem) {
+					if (ItemStack.areItemsEqual(currentSmeltable, stackOre)) {
 						oresInCauldron.add(entityItem);
 						break;
 					}
 				}
 			}
 		}
+
 		return oresInCauldron;
 	}
-	
-	public static List<String> getOreNamesFromDictionary()
-	{
+
+	public static List<String> getOreNamesFromDictionary() {
 		List<String> oreNames = new ArrayList<String>();
 		String[] all = OreDictionary.getOreNames();
-		for (int i = 0; i < all.length; ++i)
-			if (all[i].contains("ore"))
+
+		for (int i = 0; i < all.length; ++i) {
+			if (all[i].contains("ore")) {
 				oreNames.add(all[i]);
+			}
+		}
+
 		return oreNames;
 	}
-	
+
 	/**
 	 * @return Returns the all fuelStacks from the inventory
 	 */
-	public static List<ItemStack> getFuelFromInventory(IInventory inv)
-	{
+	public static List<ItemStack> getFuelFromInventory(IInventory inv) {
 		List<ItemStack> fuels = new ArrayList<ItemStack>();
-		for (int i = 0; i < inv.getSizeInventory(); ++i)
-		{
+
+		for (int i = 0; i < inv.getSizeInventory(); ++i) {
 			ItemStack stackInSlot = inv.getStackInSlot(i);
-			if (isItemFuel(stackInSlot)) fuels.add(stackInSlot);
+
+			if (isItemFuel(stackInSlot)) {
+				fuels.add(stackInSlot);
+			}
 		}
+
 		return fuels;
 	}
-	
+
 	/**
 	 * @return Returns the first fuelStack from the inventory.<br>
-	 * Indexes:<br>
-	 * 0 - ItemStack<br>
-	 * 1 - index (slot)
+	 *         Indexes:<br>
+	 *         0 - ItemStack<br>
+	 *         1 - index (slot)
 	 */
 	@Nullable
-	public static Object[] getFuelFromInventoryAndDelete(IInventory inv)
-	{
-		for (int i = 0; i < inv.getSizeInventory(); ++i)
-		{
+	public static Object[] getFuelFromInventoryAndDelete(IInventory inv) {
+		for (int i = 0; i < inv.getSizeInventory(); ++i) {
 			ItemStack stackInSlot = inv.getStackInSlot(i);
-			if (isItemFuel(stackInSlot)) return new Object[]{inv.removeStackFromSlot(i), i};
+
+			if (isItemFuel(stackInSlot)) {
+				return new Object[] { inv.removeStackFromSlot(i), i };
+			}
 		}
+
 		return null;
 	}
-	
+
 	/**
-	 * @return Returns the smeltables EntityItems from the ALL entities in cauldron BlockPos
+	 * @return Returns the smeltables EntityItems from the ALL entities in cauldron
+	 *         BlockPos
 	 */
-	public static List<EntityItem> getSmeltable(List<EntityItem> entitiesInCauldron)
-	{
+	public static List<EntityItem> getSmeltable(List<EntityItem> entitiesInCauldron) {
 		List<EntityItem> itemsToSmelt = new ArrayList<EntityItem>();
-		for (int i = 0; i < entitiesInCauldron.size(); ++i)
-		{
+
+		for (int i = 0; i < entitiesInCauldron.size(); ++i) {
 			EntityItem entityItemInCauldron = entitiesInCauldron.get(i);
 			ItemStack smeltResult = FurnaceRecipes.instance().getSmeltingResult(entityItemInCauldron.getItem());
-			// if  null than item cannot be smelt
-			if (!ItemStackUtil.isNullStack(smeltResult)) itemsToSmelt.add(entityItemInCauldron);
+
+			if (!ItemStackUtil.isNullStack(smeltResult)) {
+				itemsToSmelt.add(entityItemInCauldron);
+			}
 		}
+
 		return itemsToSmelt;
 	}
-	
-	public static List<EntityItem> getSmeltable(World world, BlockPos cauldronPos)
-	{
+
+	public static List<EntityItem> getSmeltable(World world, BlockPos cauldronPos) {
 		return getSmeltable(CauldronUtil.getItemsInCauldron(world, cauldronPos));
 	}
-	
+
 	/**
 	 * @return Returns the all fuel from the Cauldron position
 	 */
-	public static List<EntityItem> getFuelFromCauldron(World world, BlockPos cauldronPos)
-	{
+	public static List<EntityItem> getFuelFromCauldron(World world, BlockPos cauldronPos) {
 		List<EntityItem> itemsInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
 		List<EntityItem> fuels = new ArrayList<EntityItem>();
-		if (itemsInCauldron.size() == 0) return fuels;
-		
-		for (int i = 0; i < itemsInCauldron.size(); ++i)
-		{
+
+		if (itemsInCauldron.size() == 0) {
+			return fuels;
+		}
+
+		for (int i = 0; i < itemsInCauldron.size(); ++i) {
 			EntityItem entityItemInCauldron = itemsInCauldron.get(i);
 			ItemStack stack = entityItemInCauldron.getItem();
-			if (isItemFuel(stack)) fuels.add(entityItemInCauldron);
+
+			if (isItemFuel(stack)) {
+				fuels.add(entityItemInCauldron);
+			}
 		}
+
 		return fuels;
 	}
-	
-	public static int countTicks(ItemStack stackOffHand)
-	{
+
+	public static int countTicks(ItemStack stackOffHand) {
 		return ItemStackUtil.getStackSize(stackOffHand) * getItemBurnTimeTicks(stackOffHand);
 	}
-	
+
 	/**
-	 * @return e.g. will return 1600 if  the item was Coal.
-	 * Won't care about stackSize
+	 * @return e.g. will return 1600 if the item was Coal. Won't care about
+	 *         stackSize
 	 */
-	public static int getItemBurnTimeTicks(ItemStack fuel)
-	{
+	public static int getItemBurnTimeTicks(ItemStack fuel) {
 		return TileEntityFurnace.getItemBurnTime(fuel);
 	}
-	
-	public static boolean isItemFuel(ItemStack stackInOffHand)
-	{
+
+	public static boolean isItemFuel(ItemStack stackInOffHand) {
 		return TileEntityFurnace.isItemFuel(stackInOffHand);
 	}
-	
+
 	@Nullable
-	public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt)
-	{
+	public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt) {
 		return FurnaceRecipes.instance().getSmeltingResult(stackToSmelt).copy();
 	}
-	
-	public static int getExperienceToAddFromWholeStack(ItemStack entityItemToSmeltStack)
-	{
-		return ((int)(FurnaceRecipes.instance().getSmeltingExperience(entityItemToSmeltStack) * 
-				ItemStackUtil.getStackSize(entityItemToSmeltStack)));
+
+	public static int getExperienceToAddFromWholeStack(ItemStack entityItemToSmeltStack) {
+		return ((int) (FurnaceRecipes.instance().getSmeltingExperience(entityItemToSmeltStack)
+				* ItemStackUtil.getStackSize(entityItemToSmeltStack)));
 	}
-	
-	public static List<EntityItem> countAndSmelt_OneByOneItemFromOffHand(EntityPlayer player, List<EntityItem> itemsToSmelt, BlockPos cauldronPos, 
-			IQuest requiredQuest, boolean spawnSmelted)
-	{
-		if (QuestUtil.canUnlockQuest(player, requiredQuest)) QuestUtil.addStat(player, requiredQuest);
-		
-		if (QuestUtil.hasQuestUnlocked(player, requiredQuest))
-		{
+
+	public static List<EntityItem> countAndSmelt_OneByOneItemFromOffHand(EntityPlayer player,
+			List<EntityItem> itemsToSmelt, BlockPos cauldronPos, IQuest requiredQuest, boolean spawnSmelted) {
+		if (QuestUtil.canUnlockQuest(player, requiredQuest)) {
+			QuestUtil.addStat(player, requiredQuest);
+		}
+
+		if (QuestUtil.hasQuestUnlocked(player, requiredQuest)) {
 			List<EntityItem> smelted = new ArrayList<EntityItem>();
 			World world = player.world;
 			int ticks = 0;
 			ItemStack rightHand = player.getHeldItemOffhand();
-			for (int i = 0; i < itemsToSmelt.size(); ++i)
-			{
+
+			for (int i = 0; i < itemsToSmelt.size(); ++i) {
 				EntityItem entityItemToSmelt = itemsToSmelt.get(i);
 				ItemStack entityItemToSmeltStack = entityItemToSmelt.getItem();
+
 				int entityItemToSmeltStackSize = ItemStackUtil.getStackSize(entityItemToSmeltStack);
 				int ticksToSmeltStack = entityItemToSmeltStackSize * QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
+
 				ItemStack smeltResult = null;
 				EntityItem smeltResultEntityItem = null;
-				// try to add fuel to smell this stack
-				while((ItemStackUtil.getStackSize(rightHand) > 0) &&  // if  we did not use whole fuel stack
-						(ticks < ticksToSmeltStack)) // if  we need more ticks
-				{
-					ticks += getItemBurnTimeTicks(rightHand); // take ticks for  1 item from this stack
+
+				while ((ItemStackUtil.getStackSize(rightHand) > 0) && (ticks < ticksToSmeltStack)) {
+					ticks += getItemBurnTimeTicks(rightHand);
 					ItemStackUtil.decreaseStackSize(rightHand, 1);
 				}
-				if (ticks >= ticksToSmeltStack)
-				{
+
+				if (ticks >= ticksToSmeltStack) {
 					smeltResult = getSmeltingResultAsNewStack(entityItemToSmeltStack);
 					ItemStackUtil.setStackSize(smeltResult, ItemStackUtil.getStackSize(entityItemToSmeltStack));
-					smeltResultEntityItem = new EntityItem(world, 
-							cauldronPos.getX() + 0.5D, 
-							cauldronPos.getY(), 
-							cauldronPos.getZ() + 0.5D, 
-							smeltResult);
+					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX() + 0.5D, cauldronPos.getY(),
+							cauldronPos.getZ() + 0.5D, smeltResult);
 					world.removeEntity(entityItemToSmelt);
-				}
-				else if (ticks >= QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS)// won't smelt whole stack, we need to count how many we can smelt
-				{
+				} else if (ticks >= QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS) {
 					int howManyCanSmelt = ticks / QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
 					ItemStackUtil.decreaseStackSize(entityItemToSmeltStack, howManyCanSmelt);
 					smeltResult = getSmeltingResultAsNewStack(entityItemToSmeltStack);
 					ItemStackUtil.setStackSize(smeltResult, howManyCanSmelt);
-					smeltResultEntityItem = new EntityItem(world, 
-							cauldronPos.getX() + 0.5D, 
-							cauldronPos.getY(), 
-							cauldronPos.getZ() + 0.5D, 
-							smeltResult);
-				}
-				else // if (ticks < ONE_ITEM_SMELT_TICKS), we can't smelt any more items so let's just break
+					smeltResultEntityItem = new EntityItem(world, cauldronPos.getX() + 0.5D, cauldronPos.getY(),
+							cauldronPos.getZ() + 0.5D, smeltResult);
+				} else {
 					break;
-				
-				// spawn or not
-				if (spawnSmelted) world.spawnEntity(smeltResultEntityItem);
-				
+				}
+
+				if (spawnSmelted) {
+					world.spawnEntity(smeltResultEntityItem);
+				}
+
 				smelted.add(smeltResultEntityItem);
 				ticks -= ticksToSmeltStack;
-				//TODO: Fix the experience after smelting.
+
+				// TODO: Fix the experience after smelting.
 				int experienceToAdd = getExperienceToAddFromWholeStack(entityItemToSmeltStack);
 				player.addExperience(experienceToAdd);
 			}
+
 			world.updateEntities();
+
 			return smelted;
 		}
+
 		return new ArrayList<EntityItem>();
 	}
 }

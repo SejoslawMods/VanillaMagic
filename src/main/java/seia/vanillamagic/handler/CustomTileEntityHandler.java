@@ -55,6 +55,7 @@ public final class CustomTileEntityHandler {
 			EventUtil.postEvent(new EventCustomTileEntity.Add.After(customTile, world, customTilePos));
 			return added;
 		}
+
 		return false;
 	}
 
@@ -71,10 +72,12 @@ public final class CustomTileEntityHandler {
 				if (!EventUtil.postEvent(new EventCustomTileEntity.Remove.Before(customTile, world, pos))) {
 					world.tickableTileEntities.remove(i);
 					EventUtil.postEvent(new EventCustomTileEntity.Remove.After(null, world, pos));
+
 					return true;
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -108,6 +111,7 @@ public final class CustomTileEntityHandler {
 				list.add((ICustomTileEntity) tile);
 			}
 		}
+
 		return list;
 	}
 
@@ -131,9 +135,11 @@ public final class CustomTileEntityHandler {
 
 			if ((BlockPosUtil.isSameBlockPos(tile.getPos(), tilePos)) && (tile instanceof ICustomTileEntity)) {
 				EventUtil.postEvent(new EventCustomTileEntity((ICustomTileEntity) tile, world, tile.getPos()));
+
 				return (ICustomTileEntity) tile;
 			}
 		}
+
 		return null;
 	}
 }

@@ -13,23 +13,27 @@ import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.util.ItemStackUtil;
 import seia.vanillamagic.util.SmeltingUtil;
 
-public class QuarryUpgradeAutosmeltDigged implements IQuarryUpgrade
-{
-	public String getUpgradeName() 
-	{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuarryUpgradeAutosmeltDigged implements IQuarryUpgrade {
+	public String getUpgradeName() {
 		return "Autosmelt";
 	}
-	
-	public Block getBlock() 
-	{
+
+	public Block getBlock() {
 		return Blocks.FURNACE;
 	}
-	
-	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos, IBlockState workingPosState)
-	{
+
+	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,
+			IBlockState workingPosState) {
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		ItemStack burnedStack = SmeltingUtil.getSmeltingResultAsNewStack(new ItemStack(blockToDig));
-		if (!ItemStackUtil.isNullStack(burnedStack)) list.add(burnedStack);
+
+		if (!ItemStackUtil.isNullStack(burnedStack)) {
+			list.add(burnedStack);
+		}
+
 		return list;
 	}
 }

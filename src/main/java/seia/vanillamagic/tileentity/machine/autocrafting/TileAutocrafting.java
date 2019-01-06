@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import seia.vanillamagic.api.event.EventAutocrafting;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.InventoryWrapper;
@@ -18,126 +17,118 @@ import seia.vanillamagic.api.tileentity.machine.IAutocrafting;
 import seia.vanillamagic.core.VanillaMagic;
 import seia.vanillamagic.tileentity.machine.TileMachine;
 import seia.vanillamagic.util.BlockPosUtil;
+import seia.vanillamagic.util.EventUtil;
 import seia.vanillamagic.util.NBTUtil;
 
-public class TileAutocrafting extends TileMachine implements IAutocrafting
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class TileAutocrafting extends TileMachine implements IAutocrafting {
 	public static final String REGISTRY_NAME = TileAutocrafting.class.getName();
-	
-	private ContainerAutocrafting _container;
-	private int _currentlyCraftingSlot = 0;
-	
-	private final int _defaultCraftingSlot = 0;
-	private final int _defaultMaxCraftingSlot = 4;
-	
-	public void init(World world, BlockPos machinePos)
-	{
+
+	private ContainerAutocrafting container;
+	private int currentlyCraftingSlot = 0;
+
+	private final int defaultCraftingSlot = 0;
+	private final int defaultMaxCraftingSlot = 4;
+
+	public void init(World world, BlockPos machinePos) {
 		super.init(world, machinePos);
 		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
 		this.startPos = BlockPosUtil.copyPos(getMachinePos());
 		this.chestPosInput = getMachinePos().up();
 		this.chestPosOutput = getMachinePos().down(2);
-		try
-		{
+
+		try {
 			this.inventoryInput = new InventoryWrapper(world, chestPosInput);
 			this.inventoryOutput = new InventoryWrapper(world, chestPosOutput);
-		}
-		catch (NotInventoryException e)
-		{
-			VanillaMagic.LOGGER.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
+		} catch (NotInventoryException e) {
+			VanillaMagic.log(Level.ERROR, this.getClass().getSimpleName()
+					+ " - error when converting to IInventory at position: " + e.position.toString());
 		}
 	}
-	
-	public void initContainer()
-	{
+
+	public void initContainer() {
 		BlockPos[][] inventoryPosMatrix = QuestAutocrafting.buildInventoryMatrix(getPos());
 		IInventory[][] inventoryMatrix = QuestAutocrafting.buildIInventoryMatrix(world, inventoryPosMatrix);
-		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, _currentlyCraftingSlot);
-		this._container = new ContainerAutocrafting(world, stackMatrix, this);
+		ItemStack[][] stackMatrix = QuestAutocrafting.buildStackMatrix(inventoryMatrix, this.currentlyCraftingSlot);
+
+		this.container = new ContainerAutocrafting(world, stackMatrix, this);
 	}
-	
-	public boolean checkSurroundings() 
-	{
+
+	public boolean checkSurroundings() {
 		return QuestAutocrafting.isConstructionComplete(this.world, getMachinePos());
 	}
-	
-	public void doWork() 
-	{
-		if (inventoryOutputHasSpace())
-		{
+
+	public void doWork() {
+		if (inventoryOutputHasSpace()) {
 			initContainer();
-			for (int i = 0; i < 4; ++i)
-			{
-				boolean crafted = _container.craft();
-				if (crafted)
-				{
-					_container.outputResult(this.inventoryOutput.getInventory());
-					_container.removeStacks(
-							QuestAutocrafting.buildIInventoryMatrix(world, 
-									QuestAutocrafting.buildInventoryMatrix(getMachinePos())));
+
+			for (int i = 0; i < 4; ++i) {
+				boolean crafted = this.container.craft();
+
+				if (crafted) {
+					this.container.outputResult(this.inventoryOutput.getInventory());
+					this.container.removeStacks(QuestAutocrafting.buildIInventoryMatrix(world,
+							QuestAutocrafting.buildInventoryMatrix(getMachinePos())));
 					return;
 				}
-				_container.rotateMatrix();
+
+				this.container.rotateMatrix();
 			}
+
 			decreaseTicks();
 		}
-		MinecraftForge.EVENT_BUS.post(new EventAutocrafting.Work((IAutocrafting) this, world, pos));
+
+		EventUtil.postEvent(new EventAutocrafting.Work((IAutocrafting) this, world, pos));
 	}
-	
-	public EnumFacing getOutputFacing() 
-	{
+
+	public EnumFacing getOutputFacing() {
 		return EnumFacing.DOWN;
 	}
-	
+
 	/**
 	 * @see IAutocrafting#setCurrentlyCraftingSlot(int)
 	 */
-	public void setCurrentCraftingSlot(int slot)
-	{
-		this._currentlyCraftingSlot = slot;
+	public void setCurrentCraftingSlot(int slot) {
+		this.currentlyCraftingSlot = slot;
 	}
-	
+
 	/**
 	 * @see IAutocrafting#getCurrentlyCraftingSlot()
 	 */
-	public int getCurrentCraftingSlot()
-	{
-		return _currentlyCraftingSlot;
+	public int getCurrentCraftingSlot() {
+		return this.currentlyCraftingSlot;
 	}
-	
+
 	/**
 	 * @see IAutocrafting#getDefaultCraftingSlot()
 	 */
-	public int getDefaultCraftingSlot()
-	{
-		return _defaultCraftingSlot;
+	public int getDefaultCraftingSlot() {
+		return this.defaultCraftingSlot;
 	}
-	
+
 	/**
 	 * @see IAutocrafting#getDefaultMaxCraftingSlot()
 	 */
-	public int getDefaultMaxCraftingSlot()
-	{
-		return _defaultMaxCraftingSlot;
+	public int getDefaultMaxCraftingSlot() {
+		return this.defaultMaxCraftingSlot;
 	}
-	
-	public List<String> getAdditionalInfo()
-	{
+
+	public List<String> getAdditionalInfo() {
 		List<String> info = super.getAdditionalInfo();
-		info.add("Currently selected slot for crafting: " + _currentlyCraftingSlot);
+		info.add("Currently selected slot for crafting: " + this.currentlyCraftingSlot);
 		return info;
 	}
-	
-	public NBTTagCompound serializeNBT()
-	{
+
+	public NBTTagCompound serializeNBT() {
 		NBTTagCompound tag = super.serializeNBT();
-		tag.setInteger(NBTUtil.NBT_CRAFTING_SLOT, _currentlyCraftingSlot);
+		tag.setInteger(NBTUtil.NBT_CRAFTING_SLOT, this.currentlyCraftingSlot);
 		return tag;
 	}
-	
-	public void deserializeNBT(NBTTagCompound compound)
-	{
+
+	public void deserializeNBT(NBTTagCompound compound) {
 		super.deserializeNBT(compound);
-		this._currentlyCraftingSlot = compound.getInteger(NBTUtil.NBT_CRAFTING_SLOT);
+		this.currentlyCraftingSlot = compound.getInteger(NBTUtil.NBT_CRAFTING_SLOT);
 	}
 }

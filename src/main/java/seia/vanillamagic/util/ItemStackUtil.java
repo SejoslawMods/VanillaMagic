@@ -2,8 +2,6 @@ package seia.vanillamagic.util;
 
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.Level;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -24,260 +22,262 @@ import seia.vanillamagic.core.VanillaMagic;
 
 /**
  * Class which store various methods connected with ItemStack.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class ItemStackUtil
-{
+public final class ItemStackUtil {
 	/**
 	 * new ItemStack((Item)null);
 	 */
 	public static final ItemStack NULL_STACK = ItemStack.EMPTY;
-	
-	private ItemStackUtil()
-	{
+
+	private ItemStackUtil() {
 	}
-	
+
 	/**
 	 * @return Returns Lapis item.
 	 */
-	public static ItemStack getLapis(int amount)
-	{
+	public static ItemStack getLapis(int amount) {
 		return new ItemStack(Items.DYE, amount, 4);
 	}
-	
+
 	/**
 	 * @return Returns Bonemeal item.
 	 */
-	public static ItemStack getBonemeal(int amount)
-	{
+	public static ItemStack getBonemeal(int amount) {
 		return new ItemStack(Items.DYE, amount, 0);
 	}
-	
+
 	/**
 	 * @return Returns Sugar Cane item.
 	 */
-	public static ItemStack getSugarCane(int amount)
-	{
+	public static ItemStack getSugarCane(int amount) {
 		return new ItemStack(Items.REEDS, amount);
 	}
 
 	/**
-	 * 0 - Skeleton
-	 * 1 - Wither Skeleton
-	 * 2 - Zombie
-	 * 3 - Steve
-	 * 4 - Creeper
-	 * 5 - Ender Dragon
+	 * 0 - Skeleton 1 - Wither Skeleton 2 - Zombie 3 - Steve 4 - Creeper 5 - Ender
+	 * Dragon
 	 */
 	@Nullable
-	public static ItemStack getHead(int amount, int meta)
-	{
+	public static ItemStack getHead(int amount, int meta) {
 		return new ItemStack(Items.SKULL, amount, meta);
 	}
-	
+
 	/**
 	 * @return Returns TRUE if given stack's name is equal to selected name.
 	 */
-	public static boolean stackNameEqual(ItemStack stack, String name)
-	{
+	public static boolean stackNameEqual(ItemStack stack, String name) {
 		return stack.getDisplayName().equalsIgnoreCase(name);
 	}
-	
+
 	/**
 	 * @return Returns TRUE if Player holds right items in hands.
 	 */
-	public static boolean checkItemsInHands(EntityPlayer player, ItemStack shouldHaveInOffHand, ItemStack shouldHaveInMainHand)
-	{
-		// Check Player
-		if (player == null) return false;
-		
-		// Check Left Hand
+	public static boolean checkItemsInHands(EntityPlayer player, ItemStack shouldHaveInOffHand,
+			ItemStack shouldHaveInMainHand) {
+		if (player == null) {
+			return false;
+		}
+
 		ItemStack offHand = player.getHeldItemOffhand();
-		if (shouldHaveInOffHand != null) // Not null means that we want to check this hand
-		{
-			if (isNullStack(offHand) ||
-					ItemStackUtil.getStackSize(offHand) != ItemStackUtil.getStackSize(shouldHaveInOffHand) ||
-					offHand.getItem() != shouldHaveInOffHand.getItem() ||
-					offHand.getMetadata() != shouldHaveInOffHand.getMetadata())
-			{
-				return false;
-			}
+
+		if ((shouldHaveInOffHand != null) && (isNullStack(offHand)
+				|| ItemStackUtil.getStackSize(offHand) != ItemStackUtil.getStackSize(shouldHaveInOffHand)
+				|| offHand.getItem() != shouldHaveInOffHand.getItem()
+				|| offHand.getMetadata() != shouldHaveInOffHand.getMetadata())) {
+			return false;
 		}
-		// Check Right Hand
+
 		ItemStack mainHand = player.getHeldItemMainhand();
-		if (shouldHaveInMainHand != null) // Not null means that we want to check this hand
-		{
-			if (isNullStack(mainHand) ||
-					ItemStackUtil.getStackSize(mainHand) != ItemStackUtil.getStackSize(shouldHaveInMainHand) ||
-					mainHand.getItem() != shouldHaveInMainHand.getItem() ||
-					mainHand.getMetadata() != shouldHaveInMainHand.getMetadata())
-			{
-				return false;
-			}
+
+		if ((shouldHaveInMainHand != null) && (isNullStack(mainHand)
+				|| ItemStackUtil.getStackSize(mainHand) != ItemStackUtil.getStackSize(shouldHaveInMainHand)
+				|| mainHand.getItem() != shouldHaveInMainHand.getItem()
+				|| mainHand.getMetadata() != shouldHaveInMainHand.getMetadata())) {
+			return false;
 		}
+
 		return true;
 	}
-	
+
 	/**
 	 * @return Returns the same stack but with next metadata.
 	 */
 	@Nullable
-	public static ItemStack getItemStackWithNextMetadata(ItemStack stack)
-	{
+	public static ItemStack getItemStackWithNextMetadata(ItemStack stack) {
 		ItemStack stackWithNextMeta = null;
+
 		Item item = stack.getItem();
-		int amount = getStackSize(stack); // stackSize
+		int amount = getStackSize(stack);
 		int meta = stack.getItemDamage();
-		try
-		{
+
+		try {
 			stackWithNextMeta = new ItemStack(item, amount, meta + 1);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			stackWithNextMeta = new ItemStack(item, amount, 0);
 		}
+
 		return stackWithNextMeta;
 	}
-	
+
 	/**
 	 * @return Returns ItemStack from JSON Object.
 	 */
 	@Nullable
-	public static ItemStack getItemStackFromJSON(JsonObject jo)
-	{
-		try
-		{
+	public static ItemStack getItemStackFromJSON(JsonObject jo) {
+		try {
 			int id = jo.get("id").getAsInt();
 			int stackSize = (jo.get("stackSize") != null ? jo.get("stackSize").getAsInt() : 1);
 			int meta = (jo.get("meta") != null ? jo.get("meta").getAsInt() : 0);
+
 			Item item = null;
 			Block block = null;
-			try
-			{
+
+			try {
 				item = Item.getItemById(id);
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				block = Block.getBlockById(id);
 			}
-			
-			if (item == null) return new ItemStack(block, stackSize, meta);
-			else if (block == null) return new ItemStack(item, stackSize, meta);
+
+			if (item == null) {
+				return new ItemStack(block, stackSize, meta);
+			} else if (block == null) {
+				return new ItemStack(item, stackSize, meta);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		catch (Exception e)
-		{
-		}
+
 		return null;
 	}
-	
+
 	/**
 	 * @return Returns readded ItemStack array from JSON Object.
 	 */
-	public static ItemStack[] getItemStackArrayFromJSON(JsonObject jo, String key)
-	{
+	public static ItemStack[] getItemStackArrayFromJSON(JsonObject jo, String key) {
 		JsonArray ja = jo.get(key).getAsJsonArray();
 		ItemStack[] tab = new ItemStack[ja.size()];
-		for (int i = 0; i < tab.length; ++i)
-		{
+
+		for (int i = 0; i < tab.length; ++i) {
 			JsonElement je = ja.get(i);
 			ItemStack stack = getItemStackFromJSON(je.getAsJsonObject());
 			tab[i] = stack;
 		}
+
 		return tab;
 	}
-	
+
 	/**
 	 * @return Returns TRUE if given stack is an inventory.
 	 */
-	public static boolean isIInventory(ItemStack stack) 
-	{
-		if (ItemStackUtil.isNullStack(stack)) return false;
-		
+	public static boolean isIInventory(ItemStack stack) {
+		if (ItemStackUtil.isNullStack(stack)) {
+			return false;
+		}
+
 		Item itemFromStack = stack.getItem();
 		Block blockFromStack = Block.getBlockFromItem(itemFromStack);
-		if (blockFromStack == null) return false;
-		
-		if (blockFromStack instanceof ITileEntityProvider)
-		{
-			IBlockState blockFromStackState = blockFromStack.getDefaultState();
-			TileEntity tileFromStack = blockFromStack.createTileEntity(null, blockFromStackState);
-			if ((tileFromStack instanceof IInventory) ||
-					(tileFromStack instanceof IItemHandler))
-			{
-				return true;
-			}
+
+		if (blockFromStack == null) {
+			return false;
 		}
-		return false;
+
+		if (!(blockFromStack instanceof ITileEntityProvider)) {
+			return false;
+		}
+
+		IBlockState blockFromStackState = blockFromStack.getDefaultState();
+		TileEntity tileFromStack = blockFromStack.createTileEntity(null, blockFromStackState);
+
+		return ((tileFromStack instanceof IInventory) || (tileFromStack instanceof IItemHandler));
 	}
-	
-	//================================== StackSize Operations ====================================
-	
+
+	// ========== StackSize Operations ==========
+
 	/**
-	 * @return Will return {@link ItemStackHelper#NULL_STACK} 
-	 * if the {@link ItemStack} should be understand as Empty.
+	 * @return Will return {@link ItemStackHelper#NULL_STACK} if the
+	 *         {@link ItemStack} should be understand as Empty.
 	 */
-	public static ItemStack loadItemStackFromNBT(NBTTagCompound tag)
-	{
+	public static ItemStack loadItemStackFromNBT(NBTTagCompound tag) {
 		ItemStack stack = new ItemStack(tag);
-		if (stack.isEmpty()) return NULL_STACK;
+
+		if (stack.isEmpty()) {
+			return NULL_STACK;
+		}
+
 		return stack;
 	}
-	
+
 	/**
 	 * @return Returns the old ItemStack.stackSize
 	 */
-	public static int getStackSize(ItemStack stack)
-	{
-		if (stack == null) return 0;
+	public static int getStackSize(ItemStack stack) {
+		if (stack == null) {
+			return 0;
+		}
+
 		return stack.getCount();
 	}
-	
+
 	/**
 	 * This method will sets the ItemStack.stackSize to the given value.<br>
+	 * 
 	 * @return Returns the given stack.
 	 */
-	public static void setStackSize(ItemStack stack, int value)
-	{
-		if (stack == null) return;
+	public static void setStackSize(ItemStack stack, int value) {
+		if (stack == null) {
+			return;
+		}
+
 		stack.setCount(value);
 	}
-	
+
 	/**
 	 * This method will increase the ItemStack.stackSize of the given stack.<br>
+	 * 
 	 * @return Returns the given stack.
 	 */
-	public static void increaseStackSize(ItemStack stack, int value)
-	{
-		if (stack == null) return;
+	public static void increaseStackSize(ItemStack stack, int value) {
+		if (stack == null) {
+			return;
+		}
+
 		stack.grow(value);
 	}
-	
+
 	/**
 	 * This method will decrease the ItemStack.stackSize of the given stack.<br>
+	 * 
 	 * @return Returns the given stack.
 	 */
-	public static void decreaseStackSize(ItemStack stack, int value)
-	{
-		if (stack == null) return;
+	public static void decreaseStackSize(ItemStack stack, int value) {
+		if (stack == null) {
+			return;
+		}
+
 		stack.shrink(value);
 	}
-	
+
 	/**
 	 * @return Returns true if the given ItemStack is {@link #NULL_STACK}
 	 */
-	public static boolean isNullStack(ItemStack stack)
-	{
-		if (stack == null) return true;
+	public static boolean isNullStack(ItemStack stack) {
+		if (stack == null) {
+			return true;
+		}
+
 		return stack.isEmpty();
 	}
-	
+
 	/**
 	 * Prints stack data.
 	 */
-	public static void printStack(ItemStack stack) 
-	{
-		VanillaMagic.LOGGER.log(Level.INFO, "Printing ItemStack data...");
-		VanillaMagic.LOGGER.log(Level.INFO, "Item: " + stack.getItem());
-		VanillaMagic.LOGGER.log(Level.INFO, "StackSize: " + getStackSize(stack));
-		VanillaMagic.LOGGER.log(Level.INFO, "Meta: " + stack.toString());
+	public static void printStack(ItemStack stack) {
+		VanillaMagic.logInfo("Printing ItemStack data...");
+
+		VanillaMagic.logInfo("Item: " + stack.getItem());
+		VanillaMagic.logInfo("StackSize: " + getStackSize(stack));
+		VanillaMagic.logInfo("Meta: " + stack.toString());
 	}
 }

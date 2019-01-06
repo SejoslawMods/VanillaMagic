@@ -12,39 +12,39 @@ import seia.vanillamagic.util.ItemStackUtil;
 import seia.vanillamagic.util.TextUtil;
 
 /**
- * Class which defines a Wither Effect for Sword
+ * Class which defines a Wither Effect for Sword.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class UpgradeWitherEffect extends UpgradeSword
-{
-	public ItemStack getIngredient() 
-	{
-		return ItemStackUtil.getHead(1, 1); // 1x WIther Skeleton Head
+public class UpgradeWitherEffect extends UpgradeSword {
+	public ItemStack getIngredient() {
+		return ItemStackUtil.getHead(1, 1); // 1x Wither Skeleton Head
 	}
-	
-	public String getUniqueNBTTag() 
-	{
+
+	public String getUniqueNBTTag() {
 		return "NBT_UPGRADE_WITHER_EFFECT";
 	}
-	
-	public String getUpgradeName() 
-	{
+
+	public String getUpgradeName() {
 		return "Wither Effect";
 	}
-	
-	public String getTextColor()
-	{
+
+	public String getTextColor() {
 		return TextUtil.COLOR_GREY;
 	}
-	
-	public void onAttack(EntityPlayer player, Entity target) 
-	{
+
+	public void onAttack(EntityPlayer player, Entity target) {
 		World world = player.getEntityWorld();
 		int multiplier = 1;
-		
-		if (world.getDifficulty() == EnumDifficulty.NORMAL) multiplier = 10;
-		else if (world.getDifficulty() == EnumDifficulty.HARD) multiplier = 40;
-		
-		if (target instanceof EntityLivingBase)
+
+		if (world.getDifficulty() == EnumDifficulty.NORMAL) {
+			multiplier = 10;
+		} else if (world.getDifficulty() == EnumDifficulty.HARD) {
+			multiplier = 40;
+		}
+
+		if (target instanceof EntityLivingBase) {
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * multiplier, 1));
+		}
 	}
 }

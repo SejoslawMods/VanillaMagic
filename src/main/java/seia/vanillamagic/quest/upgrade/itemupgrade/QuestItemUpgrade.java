@@ -8,27 +8,33 @@ import seia.vanillamagic.quest.QuestSpawnOnCauldron;
 import seia.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry.ItemEntry;
 import seia.vanillamagic.util.ItemStackUtil;
 
-public class QuestItemUpgrade extends QuestSpawnOnCauldron
-{
-	public boolean canGetUpgrade(ItemStack base) 
-	{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuestItemUpgrade extends QuestSpawnOnCauldron {
+	public boolean canGetUpgrade(ItemStack base) {
 		base.setStackDisplayName(base.getDisplayName() + " ");
 		NBTTagCompound tag = base.getTagCompound();
-		if (tag == null) return false;
+
+		if (tag == null) {
+			return false;
+		}
+
 		return !tag.getBoolean(IItemUpgrade.NBT_ITEM_CONTAINS_UPGRADE);
 	}
-	
-	public boolean isBaseItem(EntityItem entityItem) 
-	{
-		for (ItemEntry ie : ItemUpgradeRegistry.getBaseItems())
-			if (entityItem.getItem().getItem() == ie.item)
-				if (ItemStackUtil.getStackSize(entityItem.getItem()) == ItemStackUtil.getStackSize(ie.stack))
-					return true;
+
+	public boolean isBaseItem(EntityItem entityItem) {
+		for (ItemEntry ie : ItemUpgradeRegistry.getBaseItems()) {
+			if ((entityItem.getItem().getItem() == ie.item)
+					&& (ItemStackUtil.getStackSize(entityItem.getItem()) == ItemStackUtil.getStackSize(ie.stack))) {
+				return true;
+			}
+		}
+
 		return false;
 	}
-	
-	public ItemStack getResultSingle(EntityItem base, EntityItem ingredient)
-	{
+
+	public ItemStack getResultSingle(EntityItem base, EntityItem ingredient) {
 		return ItemUpgradeRegistry.getResult(base.getItem(), ingredient.getItem());
 	}
 }

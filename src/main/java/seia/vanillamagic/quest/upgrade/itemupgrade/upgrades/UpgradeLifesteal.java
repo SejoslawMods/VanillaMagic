@@ -14,42 +14,41 @@ import net.minecraft.item.ItemStack;
 import seia.vanillamagic.util.TextUtil;
 
 /**
- * Class which represents Lifesteal upgrade for Swords
+ * Class which represents Lifesteal upgrade for Swords.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class UpgradeLifesteal extends UpgradeSword
-{
-	public ItemStack getIngredient() 
-	{
+public class UpgradeLifesteal extends UpgradeSword {
+	public ItemStack getIngredient() {
 		return new ItemStack(Items.GOLDEN_APPLE);
 	}
-	
-	public String getUniqueNBTTag() 
-	{
+
+	public String getUniqueNBTTag() {
 		return "NBT_UPGRADE_LIFESTEAL";
 	}
-	
-	public String getUpgradeName() 
-	{
+
+	public String getUpgradeName() {
 		return "Lifesteal";
 	}
-	
-	public String getTextColor()
-	{
+
+	public String getTextColor() {
 		return TextUtil.COLOR_GREEN;
 	}
-	
-	public void onAttack(EntityPlayer player, Entity target) 
-	{
+
+	public void onAttack(EntityPlayer player, Entity target) {
 		ItemStack playerMainHandStack = player.getHeldItemMainhand();
-		// Attributes 
-		Multimap<String, AttributeModifier> attributes = playerMainHandStack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, playerMainHandStack);
-		// Used attribute
+		Multimap<String, AttributeModifier> attributes = playerMainHandStack.getItem()
+				.getAttributeModifiers(EntityEquipmentSlot.MAINHAND, playerMainHandStack);
+
 		String attributeName = SharedMonsterAttributes.ATTACK_DAMAGE.getName();
-		// All modifiers for this name
 		Collection<AttributeModifier> modifiers = attributes.get(attributeName);
-		
+
 		double amount = 0;
-		for (AttributeModifier am : modifiers) amount += am.getAmount() / 2; // to make it not too OP
+
+		for (AttributeModifier am : modifiers) {
+			amount += am.getAmount() / 2;
+		}
+
 		player.heal((float) amount);
 	}
 }

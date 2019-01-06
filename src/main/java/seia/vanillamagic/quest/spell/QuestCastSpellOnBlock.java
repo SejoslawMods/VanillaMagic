@@ -10,21 +10,22 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import seia.vanillamagic.api.util.VectorWrapper;
 import seia.vanillamagic.api.util.VectorWrapper.Vector3D;
 
-public class QuestCastSpellOnBlock extends QuestCastSpell
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuestCastSpellOnBlock extends QuestCastSpell {
 	/**
 	 * Cast spell when right-clicked while pointing at block.
 	 */
 	@SubscribeEvent
-	public void caseSpell(RightClickBlock event)
-	{
+	public void caseSpell(RightClickBlock event) {
 		EntityPlayer player = event.getEntityPlayer();
 		EnumHand hand = event.getHand();
 		ItemStack inHand = event.getItemStack();
 		BlockPos pos = event.getPos();
 		EnumFacing face = event.getFace();
 		Vector3D hitVec = VectorWrapper.wrap(event.getHitVec());
-		
+
 		castSpell(player, hand, inHand, pos, face, hitVec);
 	}
 }

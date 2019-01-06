@@ -6,37 +6,34 @@ import java.util.List;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.math.BlockPos;
 
-public class HarvestResult implements IHarvestResult
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class HarvestResult implements IHarvestResult {
 	public final List<EntityItem> drops;
 	public final List<BlockPos> harvestedBlocks;
 
-	public HarvestResult(List<EntityItem> drops, List<BlockPos> harvestedBlocks) 
-	{
+	public HarvestResult(List<EntityItem> drops, List<BlockPos> harvestedBlocks) {
 		this.drops = drops;
 		this.harvestedBlocks = harvestedBlocks;
 	}
 
-	public HarvestResult(List<EntityItem> drops, BlockPos harvestedBlock) 
-	{
+	public HarvestResult(List<EntityItem> drops, BlockPos harvestedBlock) {
 		this.drops = drops;
-		this.harvestedBlocks = new ArrayList<BlockPos>();    
-		harvestedBlocks.add(harvestedBlock);
+		this.harvestedBlocks = new ArrayList<BlockPos>();
+		this.harvestedBlocks.add(harvestedBlock);
 	}
 
-	public HarvestResult() 
-	{
-		drops = new ArrayList<EntityItem>();
-		harvestedBlocks = new ArrayList<BlockPos>();
+	public HarvestResult() {
+		this.drops = new ArrayList<EntityItem>();
+		this.harvestedBlocks = new ArrayList<BlockPos>();
 	}
 
-	public List<EntityItem> getDrops() 
-	{
-		return drops;
+	public List<EntityItem> getDrops() {
+		return this.drops;
 	}
 
-	public List<BlockPos> getHarvestedBlocks()
-	{
-		return harvestedBlocks;
+	public List<BlockPos> getHarvestedBlocks() {
+		return this.harvestedBlocks;
 	}
 }

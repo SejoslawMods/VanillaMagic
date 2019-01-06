@@ -7,8 +7,10 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
  * Various utilities connected with Minecraft Events. Wraps Minecraft Events.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class EventUtil {
+public final class EventUtil {
 	private EventUtil() {
 	}
 

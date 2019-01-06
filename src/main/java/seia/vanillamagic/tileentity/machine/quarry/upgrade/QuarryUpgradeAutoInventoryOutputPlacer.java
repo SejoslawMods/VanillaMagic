@@ -17,51 +17,56 @@ import seia.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
 import seia.vanillamagic.inventory.InventoryHelper;
 import seia.vanillamagic.util.BlockUtil;
 
-public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade
-{
-	public String getUpgradeName() 
-	{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuarryUpgradeAutoInventoryOutputPlacer implements IQuarryUpgrade {
+	public String getUpgradeName() {
 		return "Auto Inventory Output Placer";
 	}
-	
-	public Block getBlock() 
-	{
+
+	public Block getBlock() {
 		return Blocks.STAINED_HARDENED_CLAY;
 	}
-	
-	public void modifyQuarry(IQuarry quarry)
-	{
+
+	public void modifyQuarry(IQuarry quarry) {
 		IInventoryWrapper invOutputWrapper = quarry.getOutputInventory();
 		IInventory invOutput = invOutputWrapper.getInventory();
 		EnumFacing invFacing = quarry.getOutputFacing();
-		if (!InventoryHelper.hasInventoryFreeSpace(invOutput, invFacing))
-		{
-			IInventoryWrapper invInputWrapper = quarry.getInputInventory();
-			int slotWithInventory = InventoryHelper.containsAnotherInventoryBlock(invInputWrapper);
-			if (slotWithInventory != -1)
-			{
-				World worldOutput = invOutputWrapper.getWorld();
-				BlockPos nextPos = invOutputWrapper.getPos().offset(invFacing, 2);
-				IInventory invInput = invInputWrapper.getInventory();
-				ItemStack stackWithInventory = invInput.getStackInSlot(slotWithInventory);
-				BlockUtil.placeBlockFromStack(worldOutput, nextPos, stackWithInventory);
-				invInput.decrStackSize(slotWithInventory, 1);
-				IBlockState placedBlockState = worldOutput.getBlockState(nextPos);
-				Block placedBlock = placedBlockState.getBlock();
-				if (placedBlock instanceof ITileEntityProvider) // this should always be true ???
-				{
-					TileEntity createdTileEntity = placedBlock.createTileEntity(worldOutput, placedBlockState);
-					worldOutput.setTileEntity(nextPos, createdTileEntity);
-					try 
-					{
-						invOutputWrapper.setNewInventory(worldOutput, nextPos);
-					} 
-					catch (NotInventoryException e)
-					{
-						e.printStackTrace();
-					}
-				}
-			}
+
+		if (InventoryHelper.hasInventoryFreeSpace(invOutput, invFacing)) {
+			return;
+		}
+
+		IInventoryWrapper invInputWrapper = quarry.getInputInventory();
+		int slotWithInventory = InventoryHelper.containsAnotherInventoryBlock(invInputWrapper);
+
+		if (slotWithInventory == -1) {
+			return;
+		}
+
+		World worldOutput = invOutputWrapper.getWorld();
+		BlockPos nextPos = invOutputWrapper.getPos().offset(invFacing, 2);
+		IInventory invInput = invInputWrapper.getInventory();
+		ItemStack stackWithInventory = invInput.getStackInSlot(slotWithInventory);
+
+		BlockUtil.placeBlockFromStack(worldOutput, nextPos, stackWithInventory);
+
+		invInput.decrStackSize(slotWithInventory, 1);
+		IBlockState placedBlockState = worldOutput.getBlockState(nextPos);
+		Block placedBlock = placedBlockState.getBlock();
+
+		if (!(placedBlock instanceof ITileEntityProvider)) {
+			return;
+		}
+
+		TileEntity createdTileEntity = placedBlock.createTileEntity(worldOutput, placedBlockState);
+		worldOutput.setTileEntity(nextPos, createdTileEntity);
+
+		try {
+			invOutputWrapper.setNewInventory(worldOutput, nextPos);
+		} catch (NotInventoryException e) {
+			e.printStackTrace();
 		}
 	}
 }

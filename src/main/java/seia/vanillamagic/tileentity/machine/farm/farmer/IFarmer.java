@@ -9,10 +9,12 @@ import net.minecraft.util.math.BlockPos;
 import seia.vanillamagic.tileentity.machine.farm.IHarvestResult;
 import seia.vanillamagic.tileentity.machine.farm.TileFarm;
 
-public interface IFarmer 
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public interface IFarmer {
 	boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state);
-	
+
 	boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state);
 
 	boolean canPlant(ItemStack stack);

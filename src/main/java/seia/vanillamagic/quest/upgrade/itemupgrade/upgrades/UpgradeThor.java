@@ -9,33 +9,30 @@ import seia.vanillamagic.util.TextUtil;
 import seia.vanillamagic.util.WeatherUtil;
 
 /**
- * Class which defines Thor upgrade for Sword. (thunder enemy on hit)
+ * Class which defines Thor upgrade for Sword. (thunder enemy on hit).
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class UpgradeThor extends UpgradeSword 
-{
-	public ItemStack getIngredient() 
-	{
+public class UpgradeThor extends UpgradeSword {
+	public ItemStack getIngredient() {
 		return ItemStackUtil.getHead(1, 4);
 	}
-	
-	public String getUniqueNBTTag() 
-	{
+
+	public String getUniqueNBTTag() {
 		return "NBT_UPGRADE_THOR";
 	}
-	
-	public String getUpgradeName() 
-	{
+
+	public String getUpgradeName() {
 		return "Thor " + "\u26A1";
 	}
-	
-	public String getTextColor()
-	{
+
+	public String getTextColor() {
 		return TextUtil.COLOR_BLUE;
 	}
-	
-	public void onAttack(EntityPlayer player, Entity target) 
-	{
-		if (target instanceof EntityLivingBase) 
+
+	public void onAttack(EntityPlayer player, Entity target) {
+		if (target instanceof EntityLivingBase) {
 			WeatherUtil.spawnLightningBolt(player.world, target.posX, target.posY, target.posZ);
+		}
 	}
 }

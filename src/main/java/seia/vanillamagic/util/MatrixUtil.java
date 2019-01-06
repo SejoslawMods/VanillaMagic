@@ -4,13 +4,13 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Class which store various methods connected with Matrixes.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class MatrixUtil 
-{
-	private MatrixUtil()
-	{
+public final class MatrixUtil {
+	private MatrixUtil() {
 	}
-	
+
 	/**
 	 * It must be a quad matrix. <br>
 	 * From:<br>
@@ -24,13 +24,16 @@ public class MatrixUtil
 	 * [5][1][7][3]<br>
 	 * [6][2][8][4]<br>
 	 */
-	public static ItemStack[][] rotateMatrixRight(ItemStack[][] matrix)
-	{
+	public static ItemStack[][] rotateMatrixRight(ItemStack[][] matrix) {
 		int size = matrix.length;
 		ItemStack[][] newMatrix = new ItemStack[size][size];
-		for (int i = 0; i < size; ++i) 
-			for (int j = 0; j < size; ++j) 
+
+		for (int i = 0; i < size; ++i) {
+			for (int j = 0; j < size; ++j) {
 				newMatrix[i][j] = matrix[size - j - 1][i];
+			}
+		}
+
 		return newMatrix;
 	}
 }

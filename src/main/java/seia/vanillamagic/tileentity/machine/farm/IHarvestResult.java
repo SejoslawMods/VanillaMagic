@@ -5,9 +5,11 @@ import java.util.List;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.math.BlockPos;
 
-public interface IHarvestResult 
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public interface IHarvestResult {
 	List<EntityItem> getDrops();
-	
+
 	List<BlockPos> getHarvestedBlocks();
 }

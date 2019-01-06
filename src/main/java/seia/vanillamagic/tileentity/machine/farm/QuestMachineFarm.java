@@ -15,43 +15,54 @@ import seia.vanillamagic.quest.QuestMachineActivate;
 import seia.vanillamagic.util.EntityUtil;
 import seia.vanillamagic.util.ItemStackUtil;
 
-public class QuestMachineFarm extends QuestMachineActivate
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuestMachineFarm extends QuestMachineActivate {
 	protected int radius;
-	
-	public void readData(JsonObject jo)
-	{
+
+	public void readData(JsonObject jo) {
 		super.readData(jo);
-		radius = jo.get("radius").getAsInt();
-		if (radius < 0) radius = -radius;
-	}
-	
-	@SubscribeEvent
-	public void startFarm(RightClickBlock event)
-	{
-		EntityPlayer player = event.getEntityPlayer();
-		BlockPos cauldronPos = event.getPos();
-		if (startWorkWithCauldron(player, cauldronPos, this))
-		{
-			TileFarm tileFarm = new TileFarm();
-			tileFarm.init(player.world, cauldronPos);
-			tileFarm.setWorkRadius(radius);
-			if (CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension))
-			{
-				ItemStackUtil.decreaseStackSize(player.getHeldItemOffhand(), ItemStackUtil.getStackSize(mustHaveOffHand));
-				EntityUtil.addChatComponentMessageNoSpam(player, tileFarm.getClass().getSimpleName() + " added");
-			}
+
+		this.radius = jo.get("radius").getAsInt();
+
+		if (this.radius < 0) {
+			this.radius = -this.radius;
 		}
 	}
-	
+
 	@SubscribeEvent
-	public void stopFarm(BreakEvent event)
-	{
+	public void startFarm(RightClickBlock event) {
+		EntityPlayer player = event.getEntityPlayer();
+		BlockPos cauldronPos = event.getPos();
+
+		if (!startWorkWithCauldron(player, cauldronPos, this)) {
+			return;
+		}
+
+		TileFarm tileFarm = new TileFarm();
+		tileFarm.init(player.world, cauldronPos);
+		tileFarm.setWorkRadius(radius);
+
+		if (!CustomTileEntityHandler.addCustomTileEntity(tileFarm, player.dimension)) {
+			return;
+		}
+
+		ItemStackUtil.decreaseStackSize(player.getHeldItemOffhand(), ItemStackUtil.getStackSize(mustHaveOffHand));
+		EntityUtil.addChatComponentMessageNoSpam(player, tileFarm.getClass().getSimpleName() + " added");
+	}
+
+	@SubscribeEvent
+	public void stopFarm(BreakEvent event) {
 		EntityPlayer player = event.getPlayer();
 		World world = event.getWorld();
 		BlockPos cauldronPos = event.getPos();
-		if (world.getTileEntity(cauldronPos.offset(EnumFacing.UP)) instanceof IInventory)
-			if (world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)
-				CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, cauldronPos, player);
+
+		if (!(world.getTileEntity(cauldronPos.offset(EnumFacing.UP)) instanceof IInventory)
+				|| !(world.getTileEntity(cauldronPos.offset(EnumFacing.DOWN)) instanceof IInventory)) {
+			return;
+		}
+
+		CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, cauldronPos, player);
 	}
 }

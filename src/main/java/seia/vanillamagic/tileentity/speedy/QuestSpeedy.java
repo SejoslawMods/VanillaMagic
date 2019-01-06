@@ -14,39 +14,39 @@ import seia.vanillamagic.quest.Quest;
 import seia.vanillamagic.util.EntityUtil;
 import seia.vanillamagic.util.WorldUtil;
 
-public class QuestSpeedy extends Quest
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuestSpeedy extends Quest {
 	@SubscribeEvent
-	public void placeSpeedy(RightClickBlock event)
-	{
+	public void placeSpeedy(RightClickBlock event) {
 		EntityPlayer player = event.getEntityPlayer();
 		World world = event.getWorld();
 		ItemStack leftHand = player.getHeldItemOffhand();
+		ItemStack rightHand = player.getHeldItemMainhand();
 		BlockPos clickedPos = event.getPos();
-		if (world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
-		{
-			if (VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL))
-			{
-				ItemStack rightHand = player.getHeldItemMainhand();
-				if (WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack()))
-				{
-					if (player.isSneaking())
-					{
-						if (canAddStat(player)) addStat(player);
-						
-						if (hasQuest(player))
-						{
-							TileSpeedy speedy = new TileSpeedy();
-							speedy.init(player.world, clickedPos);
-							if (speedy.containsCrystal())
-							{
-								if (CustomTileEntityHandler.addCustomTileEntity(speedy, WorldUtil.getDimensionID(world)))
-									EntityUtil.addChatComponentMessageNoSpam(player, speedy.getClass().getSimpleName() + " added");
-							}
-						}
-					}
-				}
-			}
+
+		if (!(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
+				|| !VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL)
+				|| !WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack())
+				|| !player.isSneaking()) {
+			return;
 		}
+
+		this.checkQuestProgress(player);
+
+		if (!this.hasQuest(player)) {
+			return;
+		}
+
+		TileSpeedy speedy = new TileSpeedy();
+		speedy.init(player.world, clickedPos);
+
+		if (!speedy.containsCrystal()
+				|| !CustomTileEntityHandler.addCustomTileEntity(speedy, WorldUtil.getDimensionID(world))) {
+			return;
+		}
+
+		EntityUtil.addChatComponentMessageNoSpam(player, speedy.getClass().getSimpleName() + " added.");
 	}
 }

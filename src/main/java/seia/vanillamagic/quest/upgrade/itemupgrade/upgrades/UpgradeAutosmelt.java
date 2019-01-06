@@ -17,48 +17,46 @@ import seia.vanillamagic.util.TextUtil;
 
 /**
  * Class which is a definition of Autosmelt ItemUpgrade.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class UpgradeAutosmelt extends ItemUpgradeBase
-{
-	public ItemStack getIngredient() 
-	{
+public class UpgradeAutosmelt extends ItemUpgradeBase {
+	public ItemStack getIngredient() {
 		return new ItemStack(Items.MAGMA_CREAM);
 	}
-	
-	public String getUniqueNBTTag() 
-	{
+
+	public String getUniqueNBTTag() {
 		return "NBT_UPGRADE_AUTOSMELT";
 	}
-	
-	public String getUpgradeName() 
-	{
+
+	public String getUpgradeName() {
 		return "Autosmelt Upgrade";
 	}
-	
-	public String getTextColor()
-	{
+
+	public String getTextColor() {
 		return TextUtil.COLOR_RED;
 	}
-	
+
 	/**
 	 * Smelt digged blocks.
 	 */
 	@SubscribeEvent
-	public void onDig(HarvestDropsEvent event)
-	{
+	public void onDig(HarvestDropsEvent event) {
 		EntityPlayer player = event.getHarvester();
-		if (player == null) return;
-		if (!containsTag(player.getHeldItemMainhand())) return;
-		
+
+		if ((player == null) || !containsTag(player.getHeldItemMainhand())) {
+			return;
+		}
+
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		List<ItemStack> drops = event.getDrops();
-		for (int i = 0; i < drops.size(); ++i)
-		{
+
+		for (int i = 0; i < drops.size(); ++i) {
 			ItemStack dropStack = drops.get(i);
 			ItemStack afterSmelt = SmeltingUtil.getSmeltingResultAsNewStack(dropStack);
-			if (!ItemStackUtil.isNullStack(afterSmelt))
-			{
+
+			if (!ItemStackUtil.isNullStack(afterSmelt)) {
 				EntityItem afterSmeltEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), afterSmelt);
 				world.spawnEntity(afterSmeltEntity);
 				drops.remove(i);

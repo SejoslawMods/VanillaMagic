@@ -9,40 +9,35 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IInteractionObject;
 
 /**
- * Class which represents Interface of Portable Crafting Table (PCT).
- * Works similar to vanilla Crafting Table.
+ * Class which represents Interface of Portable Crafting Table (PCT). Works
+ * similar to vanilla Crafting Table.
+ * 
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class InterfacePortableCraftingTable implements IInteractionObject
-{
+public class InterfacePortableCraftingTable implements IInteractionObject {
 	public final EntityPlayer player;
-	
-	public InterfacePortableCraftingTable(EntityPlayer player)
-	{
+
+	public InterfacePortableCraftingTable(EntityPlayer player) {
 		this.player = player;
 	}
-	
-	public String getName() 
-	{
+
+	public String getName() {
 		return null;
 	}
-	
-	public boolean hasCustomName() 
-	{
+
+	public boolean hasCustomName() {
 		return false;
 	}
-	
-	public ITextComponent getDisplayName() 
-	{
+
+	public ITextComponent getDisplayName() {
 		return new TextComponentTranslation(Blocks.CRAFTING_TABLE.getUnlocalizedName() + ".name", new Object[0]);
 	}
-	
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) 
-	{
+
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
 		return new ContainerPortableCraftingTable(player);
 	}
-	
-	public String getGuiID() 
-	{
+
+	public String getGuiID() {
 		return "minecraft:crafting_table";
 	}
 }

@@ -18,135 +18,123 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import seia.vanillamagic.util.ItemStackUtil;
 
-public enum Fertilizer 
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public enum Fertilizer {
 	/**
 	 * Not a fertilizer. Using this handler class any item can be "used" as a
 	 * fertilizer. Meaning, fertilizing will always fail.
 	 */
-	NONE((ItemStack) null) 
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
+	NONE((ItemStack) null) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
 			return false;
 		}
 	},
 
-	BONEMEAL(new ItemStack(Items.DYE, 1, 15))
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
-			EnumActionResult res = stack.getItem().onItemUse(player, world, bc, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
-			return res != null && res != EnumActionResult.PASS; 
+	BONEMEAL(new ItemStack(Items.DYE, 1, 15)) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
+			EnumActionResult res = stack.getItem().onItemUse(player, world, bc, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f,
+					0.5f, 0.5f);
+			return res != null && res != EnumActionResult.PASS;
 		}
 	},
 
-	FORESTRY_FERTILIZER_COMPOUND(Item.REGISTRY.getObject(new ResourceLocation("Forestry", "fertilizerCompound"))) 
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
+	FORESTRY_FERTILIZER_COMPOUND(Item.REGISTRY.getObject(new ResourceLocation("Forestry", "fertilizerCompound"))) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
 			return BONEMEAL.apply(stack, player, world, bc);
 		}
 	},
 
-	BOTANIA_FLORAL_FERTILIZER(Item.REGISTRY.getObject(new ResourceLocation("Botania", "fertilizer"))) 
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
+	BOTANIA_FLORAL_FERTILIZER(Item.REGISTRY.getObject(new ResourceLocation("Botania", "fertilizer"))) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
 			BlockPos below = bc.offset(EnumFacing.DOWN);
 			Block belowBlock = world.getBlockState(below).getBlock();
-			if (belowBlock == Blocks.DIRT || belowBlock == Blocks.GRASS) 
-			{
-				EnumActionResult res = stack.getItem().onItemUse(player, world, below, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5f, 0.5f, 0.5f);
-				return res != null && res != EnumActionResult.PASS; 
+
+			if (belowBlock == Blocks.DIRT || belowBlock == Blocks.GRASS) {
+				EnumActionResult res = stack.getItem().onItemUse(player, world, below, EnumHand.MAIN_HAND,
+						EnumFacing.UP, 0.5f, 0.5f, 0.5f);
+				return res != null && res != EnumActionResult.PASS;
 			}
+
 			return false;
 		}
-		
-		public boolean applyOnAir() 
-		{
+
+		public boolean applyOnAir() {
 			return true;
 		}
-		
-		public boolean applyOnPlant() 
-		{
+
+		public boolean applyOnPlant() {
 			return false;
 		}
 	},
 
-	METALLURGY_FERTILIZER(Item.REGISTRY.getObject(new ResourceLocation("Metallurgy", "fertilizer"))) 
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
+	METALLURGY_FERTILIZER(Item.REGISTRY.getObject(new ResourceLocation("Metallurgy", "fertilizer"))) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
 			return BONEMEAL.apply(stack, player, world, bc);
 		}
 	},
 
-	GARDEN_CORE_COMPOST(Item.REGISTRY.getObject(new ResourceLocation("GardenCore", "compost_pile"))) 
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
+	GARDEN_CORE_COMPOST(Item.REGISTRY.getObject(new ResourceLocation("GardenCore", "compost_pile"))) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
 			return BONEMEAL.apply(stack, player, world, bc);
 		}
 	},
 
-	MAGICALCROPS_FERTILIZER(Item.REGISTRY.getObject(new ResourceLocation("magicalcrops", "magicalcrops_MagicalCropFertilizer"))) 
-	{
-		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) 
-		{
+	MAGICALCROPS_FERTILIZER(
+			Item.REGISTRY.getObject(new ResourceLocation("magicalcrops", "magicalcrops_MagicalCropFertilizer"))) {
+		public boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc) {
 			return BONEMEAL.apply(stack, player, world, bc);
 		}
 	};
 
 	private ItemStack _stack;
-	
-	private Fertilizer(Item item) 
-	{
+
+	private Fertilizer(Item item) {
 		this(new ItemStack(item));
 	}
 
-	private Fertilizer(Block block) 
-	{
+	private Fertilizer(Block block) {
 		this(new ItemStack(block));
 	}
 
-	private Fertilizer(ItemStack stack) 
-	{
+	private Fertilizer(ItemStack stack) {
 		this._stack = ItemStackUtil.isNullStack(stack) || stack.getItem() == null ? null : stack;
 	}
 
-	private static final List<Fertilizer> validFertilizers = new ArrayList<Fertilizer>();
-	
-	static 
-	{
-		for (Fertilizer f : values()) 
-			if (!ItemStackUtil.isNullStack(f._stack)) 
-				validFertilizers.add(f);
+	private static final List<Fertilizer> VALID_FERTILIZERS = new ArrayList<Fertilizer>();
+
+	static {
+		for (Fertilizer f : values()) {
+			if (!ItemStackUtil.isNullStack(f._stack)) {
+				VALID_FERTILIZERS.add(f);
+			}
+		}
 	}
 
 	/**
 	 * Returns the singleton instance for the fertilizer that was given as
-	 * parameter. If the given item is no fertilizer, it will return an instance
-	 * of Fertilizer.None.
+	 * parameter. If the given item is no fertilizer, it will return an instance of
+	 * Fertilizer.None.
 	 */
-	public static Fertilizer getInstance(ItemStack stack) 
-	{
-		for (Fertilizer fertilizer : validFertilizers) 
-			if (fertilizer.matches(stack)) 
+	public static Fertilizer getInstance(ItemStack stack) {
+		for (Fertilizer fertilizer : VALID_FERTILIZERS) {
+			if (fertilizer.matches(stack)) {
 				return fertilizer;
+			}
+		}
+
 		return NONE;
 	}
 
 	/**
 	 * Returns true if the given item can be used as fertilizer.
 	 */
-	public static boolean isFertilizer(ItemStack stack) 
-	{
+	public static boolean isFertilizer(ItemStack stack) {
 		return getInstance(stack) != NONE;
 	}
 
-	protected boolean matches(ItemStack stack) 
-	{
+	protected boolean matches(ItemStack stack) {
 		return OreDictionary.itemMatches(this._stack, stack, false);
 	}
 
@@ -162,13 +150,11 @@ public enum Fertilizer
 	 */
 	public abstract boolean apply(ItemStack stack, EntityPlayer player, World world, BlockPos bc);
 
-	public boolean applyOnAir() 
-	{
+	public boolean applyOnAir() {
 		return false;
 	}
 
-	public boolean applyOnPlant() 
-	{
+	public boolean applyOnPlant() {
 		return true;
 	}
 }

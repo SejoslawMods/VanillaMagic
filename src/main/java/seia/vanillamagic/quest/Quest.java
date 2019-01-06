@@ -125,6 +125,7 @@ public abstract class Quest implements IQuest {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -133,7 +134,7 @@ public abstract class Quest implements IQuest {
 	 *         achieved before this.
 	 */
 	public boolean hasAdditionalQuests() {
-		return additionalRequiredQuests != null;
+		return (additionalRequiredQuests != null) && (additionalRequiredQuests.length > 0);
 	}
 
 	public boolean finishedAdditionalQuests(EntityPlayer player) {
@@ -144,6 +145,7 @@ public abstract class Quest implements IQuest {
 				}
 			}
 		}
+
 		return true;
 	}
 
@@ -165,7 +167,7 @@ public abstract class Quest implements IQuest {
 	 * Check Player progress on this Quest
 	 */
 	public void checkQuestProgress(EntityPlayer player) {
-		if (canPlayerGetQuest(player) && !hasQuest(player)) {
+		if (this.canAddStat(player)) {
 			addStat(player);
 		}
 	}

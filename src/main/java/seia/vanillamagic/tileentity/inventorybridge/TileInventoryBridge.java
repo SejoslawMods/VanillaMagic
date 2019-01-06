@@ -15,8 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import seia.vanillamagic.api.event.EventInventoryBridge;
 import seia.vanillamagic.api.exception.NotInventoryException;
 import seia.vanillamagic.api.inventory.IInventoryWrapper;
@@ -27,184 +25,180 @@ import seia.vanillamagic.item.VanillaMagicItems;
 import seia.vanillamagic.item.inventoryselector.ItemInventorySelector;
 import seia.vanillamagic.tileentity.CustomTileEntity;
 import seia.vanillamagic.util.BlockPosUtil;
+import seia.vanillamagic.util.EventUtil;
 import seia.vanillamagic.util.ItemStackUtil;
 import seia.vanillamagic.util.NBTUtil;
 import seia.vanillamagic.util.WorldUtil;
 
-public class TileInventoryBridge extends CustomTileEntity implements IInventoryBridge
-{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class TileInventoryBridge extends CustomTileEntity implements IInventoryBridge {
 	public static final String REGISTRY_NAME = TileInventoryBridge.class.getName();
-	
+
 	/*
 	 * Input Inventory.
 	 */
 	@Nullable
 	protected IInventoryWrapper inputInvWrapper;
-	
+
 	/**
 	 * Inventory under this Tile.
 	 */
 	@Nullable
 	protected IInventoryWrapper outputInvWrapper;
-	
+
 	protected int inputInvX, inputInvY, inputInvZ, inputInvDim;
 	protected int outputInvX, outputInvY, outputInvZ, outputInvDim;
-	
+
 	@Nullable
-	public IInventoryWrapper getInputInventory()
-	{
+	public IInventoryWrapper getInputInventory() {
 		return inputInvWrapper;
 	}
-	
+
 	@Nullable
-	public IInventoryWrapper getOutputInventory()
-	{
+	public IInventoryWrapper getOutputInventory() {
 		return outputInvWrapper;
 	}
-	
-	public List<String> getAdditionalInfo()
-	{
+
+	public List<String> getAdditionalInfo() {
 		List<String> list = super.getAdditionalInfo();
 		list.add("Input:  X=" + inputInvX + ", Y=" + inputInvY + ", Z=" + inputInvZ + ", Dim=" + inputInvDim);
 		list.add("Output: X=" + outputInvX + ", Y=" + outputInvY + ", Z=" + outputInvZ + ", Dim=" + outputInvDim);
 		return list;
 	}
-	
+
 	/**
 	 * Try to override serializeNBT instead of this method.
 	 */
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
-    {
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound = NBTUtil.writeToINBTSerializable(this, compound);
 		return compound;
-    }
-	
-	public NBTTagCompound serializeNBT()
-	{
+	}
+
+	public NBTTagCompound serializeNBT() {
 		NBTTagCompound compound = new NBTTagCompound();
 		compound.setInteger("inputInvX", inputInvX);
 		compound.setInteger("inputInvY", inputInvY);
 		compound.setInteger("inputInvZ", inputInvZ);
 		compound.setInteger("inputInvDim", inputInvDim);
-		
+
 		compound.setInteger("outputInvX", outputInvX);
 		compound.setInteger("outputInvY", outputInvY);
 		compound.setInteger("outputInvZ", outputInvZ);
 		compound.setInteger("outputInvDim", outputInvDim);
 		return compound;
 	}
-	
+
 	/**
 	 * Try to override deserializeNBT instead of this method.
 	 */
-	public void readFromNBT(NBTTagCompound compound)
-    {
+	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		NBTUtil.readFromINBTSerializable(this, compound);
-    }
-	
-	public void deserializeNBT(NBTTagCompound compound)
-	{
+	}
+
+	public void deserializeNBT(NBTTagCompound compound) {
 		inputInvX = compound.getInteger("inputInvX");
 		inputInvY = compound.getInteger("inputInvY");
 		inputInvZ = compound.getInteger("inputInvZ");
 		inputInvDim = compound.getInteger("inputInvDim");
 		BlockPos inputPos = new BlockPos(inputInvX, inputInvY, inputInvZ);
-		try
-		{
-			inputInvWrapper = new InventoryWrapper(DimensionManager.getWorld(inputInvDim), inputPos);
-		}
-		catch (NotInventoryException e)
-		{
+
+		try {
+			inputInvWrapper = new InventoryWrapper(WorldUtil.getWorld(inputInvDim), inputPos);
+		} catch (NotInventoryException e) {
 			BlockPosUtil.printCoords(Level.ERROR, "NotInventoryException at: ", inputPos);
 			e.printStackTrace();
 		}
-		
+
 		outputInvX = compound.getInteger("outputInvX");
 		outputInvY = compound.getInteger("outputInvY");
 		outputInvZ = compound.getInteger("outputInvZ");
 		outputInvDim = compound.getInteger("outputInvDim");
 		BlockPos outputPos = new BlockPos(outputInvX, outputInvY, outputInvZ);
-		try
-		{
-			outputInvWrapper = new InventoryWrapper(DimensionManager.getWorld(outputInvDim), outputPos);
-		}
-		catch (NotInventoryException e)
-		{
+
+		try {
+			outputInvWrapper = new InventoryWrapper(WorldUtil.getWorld(outputInvDim), outputPos);
+		} catch (NotInventoryException e) {
 			BlockPosUtil.printCoords(Level.ERROR, "NotInventoryException at: ", outputPos);
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Sets the input position based on the {@link ItemInventorySelector}'s NBT saved data. 
+	 * Sets the input position based on the {@link ItemInventorySelector}'s NBT
+	 * saved data.
 	 */
-	public void setPositionFromSelector(EntityPlayer player) throws NotInventoryException 
-	{
+	public void setPositionFromSelector(EntityPlayer player) throws NotInventoryException {
 		setPositionFromSelector(player.inventory);
 	}
-	
-	public void setPositionFromSelector(InventoryPlayer invPlayer) throws NotInventoryException 
-	{
+
+	public void setPositionFromSelector(InventoryPlayer invPlayer) throws NotInventoryException {
 		setPositionFromSelector(invPlayer.mainInventory);
 	}
-	
-	public void setPositionFromSelector(NonNullList<ItemStack> mainInventory) throws NotInventoryException 
-	{
-		for (ItemStack currentCheckingStack : mainInventory)
-		{
-			if (VanillaMagicItems.isCustomItem(currentCheckingStack, VanillaMagicItems.INVENTORY_SELECTOR))
-			{
-				NBTTagCompound currentCheckingStackTag = currentCheckingStack.getTagCompound();
-				if (currentCheckingStackTag != null)
-				{
-					BlockPos savedPosition = NBTUtil.getBlockPosDataFromNBT(currentCheckingStackTag);
-					World world = DimensionManager.getWorld(NBTUtil.getDimensionFromNBT(currentCheckingStackTag));
-					inputInvWrapper = new InventoryWrapper(world, savedPosition);
-					inputInvX = savedPosition.getX();
-					inputInvY = savedPosition.getY();
-					inputInvZ = savedPosition.getZ();
-					inputInvDim = WorldUtil.getDimensionID(world);
-				}
+
+	public void setPositionFromSelector(NonNullList<ItemStack> mainInventory) throws NotInventoryException {
+		for (ItemStack currentCheckingStack : mainInventory) {
+			NBTTagCompound currentCheckingStackTag = currentCheckingStack.getTagCompound();
+
+			if (!VanillaMagicItems.isCustomItem(currentCheckingStack, VanillaMagicItems.INVENTORY_SELECTOR)
+					|| (currentCheckingStackTag == null)) {
+				continue;
 			}
+
+			BlockPos savedPosition = NBTUtil.getBlockPosDataFromNBT(currentCheckingStackTag);
+			World world = WorldUtil.getWorld(NBTUtil.getDimensionFromNBT(currentCheckingStackTag));
+			inputInvWrapper = new InventoryWrapper(world, savedPosition);
+
+			inputInvX = savedPosition.getX();
+			inputInvY = savedPosition.getY();
+			inputInvZ = savedPosition.getZ();
+
+			inputInvDim = WorldUtil.getDimensionID(world);
 		}
 	}
-	
-	public void setOutputInventory(World world, BlockPos pos) throws NotInventoryException
-	{
+
+	public void setOutputInventory(World world, BlockPos pos) throws NotInventoryException {
 		outputInvWrapper = new InventoryWrapper(world, pos);
 		outputInvX = pos.getX();
 		outputInvY = pos.getY();
 		outputInvZ = pos.getZ();
 		outputInvDim = WorldUtil.getDimensionID(world);
 	}
-	
-	public EnumFacing getInputFacing()
-	{
+
+	public EnumFacing getInputFacing() {
 		return EnumFacing.UP;
 	}
-	
+
 	/**
 	 * Currently transporting slot
 	 */
 	int slotNumber = 0;
-	public void update()
-	{
-		if (inputInvWrapper == null) return; // if something weird happened to input, break the update
-		
+
+	public void update() {
+		if (inputInvWrapper == null) {
+			return;
+		}
+
 		IInventory inv = inputInvWrapper.getInventory();
-		if (slotNumber >= inv.getSizeInventory()) slotNumber = 0;
-		
+
+		if (slotNumber >= inv.getSizeInventory()) {
+			slotNumber = 0;
+		}
+
 		ItemStack transportingStack = inv.getStackInSlot(slotNumber);
-		if (ItemStackUtil.isNullStack(transportingStack))
-		{
+
+		if (ItemStackUtil.isNullStack(transportingStack)) {
 			slotNumber++;
 			return;
 		}
-		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(outputInvWrapper.getInventory(), transportingStack, getInputFacing());
+
+		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(outputInvWrapper.getInventory(),
+				transportingStack, getInputFacing());
 		inv.setInventorySlotContents(slotNumber, leftItems);
 		slotNumber++;
-		MinecraftForge.EVENT_BUS.post(new EventInventoryBridge((IInventoryBridge) this, world, pos));
+		EventUtil.postEvent(new EventInventoryBridge((IInventoryBridge) this, world, pos));
 	}
 }

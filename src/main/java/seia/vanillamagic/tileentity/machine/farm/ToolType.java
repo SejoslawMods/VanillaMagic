@@ -6,60 +6,62 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import seia.vanillamagic.util.ItemStackUtil;
 
-public enum ToolType 
-{
-	HOE 
-	{
-		boolean match(ItemStack item) 
-		{
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public enum ToolType {
+	HOE {
+		boolean match(ItemStack item) {
 			return (item.getItem() instanceof ItemHoe);
 		}
 	},
-	AXE     
-	{
-		boolean match(ItemStack item) 
-		{
-			if (item.getItem() instanceof ItemAxe) return true;
-			else if(item.getItem().getHarvestLevel(item, "axe", null, null) >= 0) return true;
+	AXE {
+		boolean match(ItemStack item) {
+			if ((item.getItem() instanceof ItemAxe) || (item.getItem().getHarvestLevel(item, "axe", null, null) >= 0)) {
+				return true;
+			}
+
 			return false;
 		}
 	},
-	SHEARS  
-	{
-		boolean match(ItemStack item) 
-		{
-	        return item.getItem() instanceof ItemShears;
+	SHEARS {
+		boolean match(ItemStack item) {
+			return item.getItem() instanceof ItemShears;
 		}
 	},
-	NONE  
-	{
-		boolean match(ItemStack item) 
-		{
+	NONE {
+		boolean match(ItemStack item) {
 			return false;
 		}
 	};
 
-	public final boolean itemMatches(ItemStack item) 
-	{
-		if (ItemStackUtil.isNullStack(item)) return false;
+	public final boolean itemMatches(ItemStack item) {
+		if (ItemStackUtil.isNullStack(item)) {
+			return false;
+		}
+
 		return match(item);
 	}
 
 	abstract boolean match(ItemStack item);
 
-	public static boolean isTool(ItemStack stack) 
-	{
-		for (ToolType type : values()) 
-			if (type.itemMatches(stack)) 
+	public static boolean isTool(ItemStack stack) {
+		for (ToolType type : values()) {
+			if (type.itemMatches(stack)) {
 				return true;
+			}
+		}
+
 		return false;
 	}
 
-	public static ToolType getToolType(ItemStack stack) 
-	{
-		for (ToolType type : values()) 
-			if (type.itemMatches(stack)) 
+	public static ToolType getToolType(ItemStack stack) {
+		for (ToolType type : values()) {
+			if (type.itemMatches(stack)) {
 				return type;
+			}
+		}
+
 		return NONE;
 	}
 }
