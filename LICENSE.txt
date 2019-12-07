@@ -1,7 +1,7 @@
 License page: http://www.zlib.net/zlib_license.html
 
 
-version 1.2.11, January 15th, 2017
+version 1.2.11, January 15th, 2019
 
   Copyright (C) 2010-2017 Krzysztof Dobrzyński
 

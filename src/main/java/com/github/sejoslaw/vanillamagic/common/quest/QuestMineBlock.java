@@ -1,0 +1,82 @@
+package com.github.sejoslaw.vanillamagic.quest;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.Level;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
+
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public class QuestMineBlock extends Quest {
+	protected List<Block> blocksToBeMine;
+
+	public void readData(JsonObject jo) {
+		super.readData(jo);
+		List<Block> blocksToBeMine = new ArrayList<Block>();
+		JsonElement listJSON = jo.get("blocksToBeMine");
+
+		if (listJSON != null) {
+			if (listJSON.isJsonArray()) {
+				JsonArray ja = listJSON.getAsJsonArray();
+
+				for (JsonElement je : ja) {
+					blocksToBeMine.add(Block.getBlockById(je.getAsInt()));
+				}
+
+				this.blocksToBeMine = blocksToBeMine;
+			}
+		} else {
+			String className = jo.get("blocksToBeMineClass").getAsString();
+			String listName = jo.get("blocksToBeMineList").getAsString();
+
+			try {
+				Class<?> clazz = Class.forName(className);
+				Field field = clazz.getField(listName);
+				this.blocksToBeMine = (List<Block>) field.get(null);
+			} catch (Exception e) {
+				VanillaMagic.log(Level.ERROR, e.getMessage());
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public List<Block> getBlocksToBeMine() {
+		return blocksToBeMine;
+	}
+
+	@SubscribeEvent
+	public void onBreakBlock(BreakEvent event) {
+		PlayerEntity player = event.getPlayer();
+
+		if (!canPlayerGetQuest(player)) {
+			return;
+		}
+
+		Block block = event.getState().getBlock();
+
+		if ((block == null) || (blocksToBeMine == null)) {
+			return;
+		}
+
+		for (int i = 0; i < blocksToBeMine.size(); ++i) {
+			if (BlockUtil.areEqual(block, blocksToBeMine.get(i))) {
+				if (!hasQuest(player)) {
+					addStat(player);
+				}
+				return;
+			}
+		}
+	}
+}

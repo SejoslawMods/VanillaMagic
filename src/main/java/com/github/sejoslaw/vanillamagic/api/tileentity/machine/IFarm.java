@@ -1,0 +1,9 @@
+package com.github.sejoslaw.vanillamagic.api.tileentity.machine;
+
+/**
+ * This is the connection to TileFarm.
+ *
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public interface IFarm extends IMachine {
+}
