@@ -104,13 +104,13 @@ public class VMDebug {
         if (stackRightHand.getItem().equals(Items.CLOCK)) {
             BlockPos tilePos = event.getPos();
             ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(tilePos, world);
+
             if (customTile == null) {
                 return;
             }
 
             TileEntity tile = customTile.getTileEntity();
-            if ((tile instanceof ICustomTileEntity)
-                    && (customTile.getTileEntity() instanceof IAdditionalInfoProvider)) {
+            if ((tile instanceof ICustomTileEntity) && (customTile.getTileEntity() instanceof IAdditionalInfoProvider)) {
                 List<ITextComponent> info = ((IAdditionalInfoProvider) customTile.getTileEntity()).getAdditionalInfo();
                 EntityUtil.addChatComponentMessageNoSpam(player, info.toArray(new ITextComponent[info.size()]));
             }

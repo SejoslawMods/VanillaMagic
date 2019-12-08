@@ -65,7 +65,7 @@ public final class TextUtil {
      * @return Returns given string with VM prefix.
      */
     public static ITextComponent getVanillaMagicInfo(ITextComponent s) {
-        return new StringTextComponent("�a[VanillaMagic] �f" + s.getFormattedText());
+        return wrap("�a[VanillaMagic] �f" + s.getFormattedText());
     }
 
     /**

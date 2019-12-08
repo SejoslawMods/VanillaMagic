@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic.common.util;
 
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -201,7 +201,7 @@ public final class ItemStackUtil {
      * @return Returns true if the given ItemStack is {@link #NULL_STACK}
      */
     public static boolean isNullStack(ItemStack stack) {
-        if (stack == null) {
+        if (stack == null || stack == NULL_STACK) {
             return true;
         }
 
@@ -212,10 +212,10 @@ public final class ItemStackUtil {
      * Prints stack data.
      */
     public static void printStack(ItemStack stack) {
-        VanillaMagic.logInfo("Printing ItemStack data...");
+        VMLogger.logInfo("Printing ItemStack data...");
 
-        VanillaMagic.logInfo("Item: " + stack.getItem());
-        VanillaMagic.logInfo("StackSize: " + getStackSize(stack));
-        VanillaMagic.logInfo("Meta: " + stack.toString());
+        VMLogger.logInfo("Item: " + stack.getItem());
+        VMLogger.logInfo("StackSize: " + getStackSize(stack));
+        VMLogger.logInfo("Meta: " + stack.toString());
     }
 }

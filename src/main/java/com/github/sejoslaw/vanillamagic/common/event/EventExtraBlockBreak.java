@@ -1,45 +1,41 @@
-package com.github.sejoslaw.vanillamagic.event;
+package com.github.sejoslaw.vanillamagic.common.event;
 
-import net.minecraft.block.state.IBlockState;
+import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
+import net.minecraftforge.eventbus.api.Event;
 
 /**
  * Event which is fired when Extra blocks need to be broken. For instance: to
  * cut down tree.
- * 
+ *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class EventExtraBlockBreak extends Event {
-	public final ItemStack itemStack;
-	public final PlayerEntity player;
-	public final IBlockState state;
+    public final ItemStack itemStack;
+    public final PlayerEntity player;
+    public final BlockState state;
 
-	public int width;
-	public int height;
-	public int depth;
-	public int distance;
+    public int width;
+    public int height;
+    public int depth;
+    public int distance;
 
-	public EventExtraBlockBreak(ItemStack itemStack, PlayerEntity player, IBlockState state) {
-		this.itemStack = itemStack;
-		this.player = player;
-		this.state = state;
-	}
+    public EventExtraBlockBreak(ItemStack itemStack, PlayerEntity player, BlockState state) {
+        this.itemStack = itemStack;
+        this.player = player;
+        this.state = state;
+    }
 
-	/**
-	 * Method to run the Event statically.
-	 */
-	public static EventExtraBlockBreak fireEvent(ItemStack itemStack, PlayerEntity player, IBlockState state, int width,
-			int height, int depth, int distance) {
-		EventExtraBlockBreak event = new EventExtraBlockBreak(itemStack, player, state);
-		event.width = width;
-		event.height = height;
-		event.depth = depth;
-		event.distance = distance;
+    public static EventExtraBlockBreak fireEvent(ItemStack itemStack, PlayerEntity player, BlockState state, int width, int height, int depth, int distance) {
+        EventExtraBlockBreak event = new EventExtraBlockBreak(itemStack, player, state);
+        event.width = width;
+        event.height = height;
+        event.depth = depth;
+        event.distance = distance;
 
-		EventUtil.postEvent(event);
-		return event;
-	}
+        EventUtil.postEvent(event);
+        return event;
+    }
 }

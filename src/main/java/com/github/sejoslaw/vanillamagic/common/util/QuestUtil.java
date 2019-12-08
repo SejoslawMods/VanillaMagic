@@ -62,7 +62,7 @@ public final class QuestUtil {
             serverPlayer.getStats().sendStats(serverPlayer);
 
             String message = TextUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
-            EntityUtil.addChatComponentMessageNoSpam(serverPlayer, new StringTextComponent(message));
+            EntityUtil.addChatComponentMessageNoSpam(serverPlayer, TextUtil.wrap(message));
         }
     }
 
