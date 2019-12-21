@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.item.book;
+package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import java.util.ArrayList;
 import java.util.List;

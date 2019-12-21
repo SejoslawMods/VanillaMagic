@@ -69,7 +69,7 @@ public class VMConfigAchievements {
                 Enumeration<JarEntry> enumeration = jarFile.entries();
 
                 while (enumeration.hasMoreElements()) {
-                    JarEntry file = (JarEntry) enumeration.nextElement();
+                    JarEntry file = enumeration.nextElement();
 
                     if (file.getName().equals(fileName)) {
                         InputStream is = jarFile.getInputStream(file);

@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic.core;
 
-import com.github.sejoslaw.vanillamagic.config.VMConfigAchievements;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfigAchievements;
 import net.minecraftforge.fml.common.Mod;
 
 /**

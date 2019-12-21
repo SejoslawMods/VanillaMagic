@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.quarry;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry;
 
 import java.util.List;
 
@@ -325,5 +325,9 @@ public class TileQuarry extends TileMachine implements IQuarry {
 		ForgeChunkManager.forceChunk(ticket, startChunk);
 		ChunkPos workingChunk = new ChunkPos(workingPos.getX() >> 4, workingPos.getZ() >> 4);
 		ForgeChunkManager.forceChunk(ticket, workingChunk);
+	}
+
+	public boolean prepareCustomTileEntity() {
+		return this.checkSurroundings();
 	}
 }

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestData;
-import com.github.sejoslaw.vanillamagic.api.quest.QuestList;
+import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.Point;
 import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
 import com.github.sejoslaw.vanillamagic.util.QuestUtil;
@@ -55,7 +55,7 @@ public abstract class Quest implements IQuest {
 	IQuest[] additionalRequiredQuests;
 
 	public void readData(JsonObject jo) {
-		this.requiredQuest = QuestList.get(jo.get("requiredQuest").getAsString());
+		this.requiredQuest = QuestRegistry.get(jo.get("requiredQuest").getAsString());
 
 		if (jo.has("questName")) {
 			this.questName = jo.get("questName").getAsString();
@@ -83,7 +83,7 @@ public abstract class Quest implements IQuest {
 			int index = 0;
 
 			for (Entry<String, JsonElement> q : set) {
-				requiredQuestsTable[index] = QuestList.get(q.getValue().getAsString());
+				requiredQuestsTable[index] = QuestRegistry.get(q.getValue().getAsString());
 				index++;
 			}
 
@@ -101,7 +101,7 @@ public abstract class Quest implements IQuest {
 
 		this.questData.registerStat();
 		// Registering Quest - this method should ONLY be called here
-		QuestList.addQuest(this);
+		QuestRegistry.addQuest(this);
 	}
 
 	/**

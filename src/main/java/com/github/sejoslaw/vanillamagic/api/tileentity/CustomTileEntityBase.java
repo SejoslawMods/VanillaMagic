@@ -5,6 +5,8 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Unit;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
@@ -63,15 +65,19 @@ public abstract class CustomTileEntityBase extends TileEntity implements ICustom
         }
     }
 
-    public List<String> getAdditionalInfo() {
-        List<String> list = new ArrayList<String>();
-        list.add("CustomTileEntity name: " + getClass().getSimpleName());
-        list.add("CustomTileEntity position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ() + ", Dim=" + this.world.getDimension().getType().getId());
+    public List<ITextComponent> getAdditionalInfo() {
+        List<ITextComponent> list = new ArrayList<ITextComponent>();
+        list.add(new StringTextComponent("CustomTileEntity name: " + getClass().getSimpleName()));
+        list.add(new StringTextComponent("CustomTileEntity position: X=" + pos.getX() + ", Y=" + pos.getY() + ", Z=" + pos.getZ() + ", Dim=" + this.world.getDimension().getType().getId()));
         return list;
     }
 
     public Ticket getChunkTicket() {
         return chunkTicket;
+    }
+
+    public boolean prepareCustomTileEntity() {
+        return true;
     }
 
     private ChunkPos getChunkPos() {

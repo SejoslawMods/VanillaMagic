@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
-import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeAPI;
 import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
 import com.github.sejoslaw.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeAutosmelt;
 import com.github.sejoslaw.vanillamagic.quest.upgrade.itemupgrade.upgrades.UpgradeLifesteal;

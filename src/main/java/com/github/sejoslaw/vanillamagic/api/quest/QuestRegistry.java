@@ -18,7 +18,7 @@ import com.github.sejoslaw.vanillamagic.api.event.EventQuest;
  *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class QuestList {
+public class QuestRegistry {
     /**
      * All registered Quests
      */
@@ -31,7 +31,7 @@ public class QuestList {
      */
     private static Map<String, IQuest> QUESTS_MAP = new HashMap<String, IQuest>();
 
-    private QuestList() {
+    private QuestRegistry() {
     }
 
     /**
@@ -39,8 +39,8 @@ public class QuestList {
      */
     public static void addQuest(IQuest q) {
         if (!MinecraftForge.EVENT_BUS.post(new EventQuest.Add(q))) {
-            QuestList.QUESTS.add(q);
-            QuestList.QUESTS_MAP.put(q.getUniqueName(), q);
+            QuestRegistry.QUESTS.add(q);
+            QuestRegistry.QUESTS_MAP.put(q.getUniqueName(), q);
         }
     }
 

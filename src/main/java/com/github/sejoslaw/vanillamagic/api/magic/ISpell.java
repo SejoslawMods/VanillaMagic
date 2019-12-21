@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 /**
  * Base Spell definition.
@@ -46,8 +47,7 @@ public interface ISpell {
      * @param hitVec Vector from Player to the Block.
      * @return Returns TRUE if the Spell was casted correctly.
      */
-    boolean castSpell(PlayerEntity caster, @Nullable BlockPos pos, @Nullable Direction face,
-                      @Nullable Vector3D hitVec);
+    boolean castSpell(PlayerEntity caster, @Nullable BlockPos pos, @Nullable Direction face, @Nullable Vec3d hitVec);
 
     /**
      * @param stackOffHand ItemStack in the Player's OffHand.

@@ -1,9 +1,9 @@
 package com.github.sejoslaw.vanillamagic.core;
 
+import com.github.sejoslaw.vanillamagic.common.item.book.BookRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.MobSpawnerRegistry;
 import com.github.sejoslaw.vanillamagic.common.util.WorldUtil;
 import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
-import com.github.sejoslaw.vanillamagic.item.book.BookRegistry;
 import com.github.sejoslaw.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

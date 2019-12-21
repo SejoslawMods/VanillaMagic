@@ -1,15 +1,14 @@
-package com.github.sejoslaw.vanillamagic.questbook;
+package com.github.sejoslaw.vanillamagic.common.questbook;
 
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.common.util.TextUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
+import net.minecraft.item.Items;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * Events connected with VanillaMagic's QuestBook.
@@ -26,20 +25,22 @@ public class EventQuestBook {
 	 * Open VM Questbook
 	 */
 	@SubscribeEvent
-	public void openBook(RightClickItem event) {
-		PlayerEntity playerWhoOpenedBook = EventUtil.getPlayerFromEvent(event);
+	public void openBook(PlayerInteractEvent.RightClickItem event) {
+		PlayerEntity playerWhoOpenedBook = event.getPlayer();
 		ItemStack rightHand = playerWhoOpenedBook.getHeldItemMainhand();
 
-		if (!playerWhoOpenedBook.isSneaking() || !ItemStackUtil.checkItemsInHands(playerWhoOpenedBook, null, BOOK_STACK)
-				|| !ItemStackUtil.stackNameEqual(rightHand, TextUtil.translateToLocal("questbook.itemName"))) {
+		if (!playerWhoOpenedBook.isSneaking()
+				|| !ItemStackUtil.checkItemsInHands(playerWhoOpenedBook, null, BOOK_STACK)
+				|| !rightHand.getDisplayName().getFormattedText().equals(TextUtil.translateToLocal("questbook.itemName"))) {
 			return;
 		}
 
-		if (EntityUtil.isSinglePlayer(playerWhoOpenedBook)) {
-			Minecraft.getMinecraft()
-					.displayGuiScreen(new GuiVMQuests(Minecraft.getMinecraft().currentScreen, playerWhoOpenedBook));
-		} else if (EntityUtil.isMultiPlayer(playerWhoOpenedBook)) {
-			// TODO: Open Questbook GUI on Multiplayer ???
+		if (playerWhoOpenedBook instanceof ClientPlayerEntity) {
+			GuiVMQuests gui = new GuiVMQuests()
+					.setParentScreen(Minecraft.getInstance().currentScreen)
+					.setOpener(playerWhoOpenedBook);
+
+			Minecraft.getInstance().displayGuiScreen(gui);
 		}
 	}
 }

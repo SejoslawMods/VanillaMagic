@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.tileentity.speedy;
+package com.github.sejoslaw.vanillamagic.common.tileentity.speedy;
 
 import java.util.List;
 import java.util.Random;
@@ -174,5 +174,9 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy {
 		list.add("Min pos: X=" + radiusBox.xMin + ", Y=" + radiusBox.yMin + ", Z=" + radiusBox.zMin);
 		list.add("Max pos: X=" + radiusBox.xMax + ", Y=" + radiusBox.yMax + ", Z=" + radiusBox.zMax);
 		return list;
+	}
+
+	public boolean prepareCustomTileEntity() {
+		return this.containsCrystal();
 	}
 }

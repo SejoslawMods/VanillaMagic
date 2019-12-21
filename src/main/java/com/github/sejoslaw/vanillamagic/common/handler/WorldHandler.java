@@ -1,220 +1,183 @@
-package com.github.sejoslaw.vanillamagic.handler;
+package com.github.sejoslaw.vanillamagic.common.handler;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.logging.log4j.Level;
-
-import com.google.common.io.Files;
-
-import net.minecraft.nbt.CompressedStreamTools;
+import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
-import com.github.sejoslaw.vanillamagic.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.TileQuarry;
-import com.github.sejoslaw.vanillamagic.tileentity.speedy.TileSpeedy;
-import com.github.sejoslaw.vanillamagic.util.BlockPosUtil;
-import com.github.sejoslaw.vanillamagic.util.NBTUtil;
-import com.github.sejoslaw.vanillamagic.util.WorldUtil;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.apache.logging.log4j.Level;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 /**
  * Class which is responsible for loading / saving CustomTileEntities.
- * 
+ *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class WorldHandler {
-	private static String VM_DIRECTORY = "VanillaMagic";
-	private static String FILE_NAME_TILES = "VanillaMagicTileEntities.dat";
-	private static String FILE_NAME_TILES_OLD = "VanillaMagicTileEntities.dat_old";
-	private static String TILES = "tiles";
+    private static String VM_DIRECTORY = "VanillaMagic";
+    private static String FILE_NAME_TILES = "VanillaMagicTileEntities.dat";
+    private static String FILE_NAME_TILES_OLD = "VanillaMagicTileEntities.dat_old";
+    private static String TILES = "tiles";
 
-	/**
-	 * Show additional console info if enabled in config,
-	 */
-	public void log(Level level, String message) {
-		if (VMConfig.SHOW_CUSTOM_TILE_ENTITY_SAVING) {
-			VanillaMagic.log(level, message);
-		}
-	}
+    /**
+     * Show additional console info if enabled in config,
+     */
+    public void log(Level level, String message) {
+        if (VMConfig.SHOW_CUSTOM_TILE_ENTITY_SAVING.get()) {
+            VMLogger.log(level, message);
+        }
+    }
 
-	/**
-	 * Event which loads all CustomTileEntities to for World.
-	 */
-	@SubscribeEvent
-	public void worldLoad(WorldEvent.Load event) {
-		File vmDirectory = getVanillaMagicRootDirectory();
+    /**
+     * Event which loads all CustomTileEntities to for World.
+     */
+    @SubscribeEvent
+    public void worldLoad(WorldEvent.Load event) {
+        World world = event.getWorld().getWorld();
+        File vmDirectory = getVanillaMagicRootDirectory(world);
 
-		if (!vmDirectory.exists()) {
-			return;
-		}
+        if (!vmDirectory.exists()) {
+            return;
+        }
 
-		World world = event.getWorld();
-		int dimension = WorldUtil.getDimensionID(world);
-		File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
+        int dimension = world.getDimension().getType().getId();
+        File directoryDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
 
-		if (!folderDimension.exists()) {
-			return;
-		}
+        if (!directoryDimension.exists()) {
+            return;
+        }
 
-		File[] dimFiles = folderDimension.listFiles();
-		try {
-			for (File dimFile : dimFiles) {
-				String fileExtension = Files.getFileExtension(dimFile.getAbsolutePath());
-				if (fileExtension.equals("dat")) {
-					FileInputStream fis = new FileInputStream(dimFile);
-					CompoundNBT data = null;
+        File[] dimFiles = directoryDimension.listFiles();
 
-					try {
-						data = CompressedStreamTools.readCompressed(fis);
-					} catch (EOFException eof) {
-						log(Level.ERROR,
-								"[World Load] Error while reading CustomTileEntities data from file for Dimension: "
-										+ dimension);
-						return;
-					}
+        try {
+            for (File dimFile : dimFiles) {
+                String dimFileName = dimFile.getName();
+                String fileExtension = dimFileName.substring(dimFileName.lastIndexOf("."));
 
-					fis.close();
-					ListNBT tagList = data.getTagList(TILES, 10);
-					boolean canAdd = true;
+                if (fileExtension.equals("dat")) {
+                    FileInputStream fis = new FileInputStream(dimFile);
+                    CompoundNBT data = null;
 
-					for (int i = 0; i < tagList.tagCount(); ++i) {
-						CompoundNBT tileEntityTag = tagList.getCompoundTagAt(i);
-						String tileEntityClassName = tileEntityTag.getString(NBTUtil.NBT_CLASS);
-						int tileEntityPosX = tileEntityTag.getInteger("x");
-						int tileEntityPosY = tileEntityTag.getInteger("y");
-						int tileEntityPosZ = tileEntityTag.getInteger("z");
-						BlockPos tileEntityPos = new BlockPos(tileEntityPosX, tileEntityPosY, tileEntityPosZ);
-						ICustomTileEntity tileEntity = null;
+                    try {
+                        data = CompressedStreamTools.readCompressed(fis);
+                    } catch (EOFException eof) {
+                        log(Level.ERROR, "[World Load] Error while reading CustomTileEntities data from file for Dimension: " + dimension);
+                        return;
+                    }
 
-						try {
-							tileEntity = (ICustomTileEntity) Class.forName(tileEntityClassName).newInstance();
-							tileEntity.getTileEntity().setWorld(world);
-							tileEntity.getTileEntity().setPos(tileEntityPos);
-							TileEntity.create(world, tileEntityTag);
+                    fis.close();
 
-							// Additional parameters for different CustomTileEntities (only if MUST be)
-							// TODO: Replace with interface method - prepareCustomTileEntity().
-							if (tileEntity instanceof TileQuarry) {
-								TileQuarry tileQuarry = (TileQuarry) tileEntity;
-								if (!tileQuarry.checkSurroundings()) {
-									canAdd = false;
-								}
-							} else if (tileEntity instanceof TileSpeedy) {
-								TileSpeedy speedy = (TileSpeedy) tileEntity;
-								if (!speedy.containsCrystal()) {
-									canAdd = false;
-								}
-							}
-							log(Level.INFO, "[World Load] Created CustomTileEntity ("
-									+ tileEntity.getClass().getSimpleName() + ")");
-						} catch (Exception e) {
-							log(Level.ERROR, "[World Load] Error while reading class for CustomTileEntity: "
-									+ tileEntityClassName);
-						}
+                    ListNBT tagList = data.getList(TILES, 10);
+                    boolean canAdd = true;
 
-						if (tileEntity != null) {
-							if (canAdd) {
-								if (!BlockPosUtil.isSameBlockPos(tileEntityPos, CustomTileEntityHandler.EMPTY_SPACE)) {
-									NBTUtil.readFromINBTSerializable(tileEntity, tileEntityTag);
-									CustomTileEntityHandler.addCustomTileEntity(tileEntity, dimension);
-								}
-							}
-							canAdd = true;
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			log(Level.INFO, "[World Load] Error while loading CustomTileEntities for Dimension: " + dimension);
-			e.printStackTrace();
-		}
-	}
+                    for (int i = 0; i < tagList.size(); ++i) {
+                        CompoundNBT tileEntityTag = tagList.getCompound(i);
+                        TileEntity tileEntity = null;
 
-	/**
-	 * Event which saves all CustomTileEntities for given World.
-	 */
-	@SubscribeEvent
-	public void worldSave(WorldEvent.Save event) {
-		File vmDirectory = getVanillaMagicRootDirectory();
+                        try {
+                            tileEntity = TileEntity.create(tileEntityTag);
+                            tileEntity.setWorld(world);
 
-		if (!vmDirectory.exists()) {
-			vmDirectory.mkdirs();
-		}
+                            canAdd = ((ICustomTileEntity) tileEntity).prepareCustomTileEntity();
 
-		int dimension = WorldUtil.getDimensionID(event);
-		File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
+                            log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
+                        } catch (Exception e) {
+                            log(Level.ERROR, "[World Load] Error while reading class for CustomTileEntity: " + tileEntity.getClass().getName());
+                            continue;
+                        }
 
-		if (!folderDimension.exists()) {
-			folderDimension.mkdirs();
-		}
+                        if (tileEntity != null && canAdd && !tileEntity.getPos().equals(CustomTileEntityHandler.EMPTY_SPACE)) {
+                            NBTUtil.readFromINBTSerializable(tileEntity, tileEntityTag);
+                            CustomTileEntityHandler.addCustomTileEntity((ICustomTileEntity) tileEntity, world);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log(Level.INFO, "[World Load] Error while loading CustomTileEntities for Dimension: " + dimension);
+            e.printStackTrace();
+        }
+    }
 
-		File fileTiles = new File(folderDimension, FILE_NAME_TILES);
+    /**
+     * Event which saves all CustomTileEntities for given World.
+     */
+    @SubscribeEvent
+    public void worldSave(WorldEvent.Save event) {
+        World world = event.getWorld().getWorld();
+        File vmDirectory = getVanillaMagicRootDirectory(world);
 
-		if (!fileTiles.exists()) {
-			try {
-				fileTiles.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+        if (!vmDirectory.exists()) {
+            vmDirectory.mkdirs();
+        }
 
-		File fileTilesOld = new File(folderDimension, FILE_NAME_TILES_OLD);
+        int dimension = world.getDimension().getType().getId();
+        File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
 
-		if (!fileTilesOld.exists()) {
-			try {
-				fileTilesOld.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+        if (!folderDimension.exists()) {
+            folderDimension.mkdirs();
+        }
 
-		try {
-			try {
-				Files.copy(fileTiles, fileTilesOld);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return;
-			}
+        File fileTiles = new File(folderDimension, FILE_NAME_TILES);
 
-			CompoundNBT data = new CompoundNBT();
-			ListNBT dataList = new ListNBT();
-			List<ICustomTileEntity> tickables = CustomTileEntityHandler.getCustomEntitiesInDimension(dimension);
+        if (!fileTiles.exists()) {
+            try {
+                fileTiles.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-			for (int j = 0; j < tickables.size(); ++j) {
-				dataList.appendTag(tickables.get(j).getTileEntity().writeToNBT(new CompoundNBT()));
-			}
+        File fileTilesOld = new File(folderDimension, FILE_NAME_TILES_OLD);
 
-			data.setTag(TILES, dataList);
-			FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
-			CompressedStreamTools.writeCompressed(data, fileOutputStream);
-			fileOutputStream.close();
-			log(Level.INFO, "[World Save] CustomTileEntities saved for Dimension: " + dimension);
-		} catch (Exception e) {
-			log(Level.INFO, "[World Save] Error while saving CustomTileEntities for Dimension: " + dimension);
-			e.printStackTrace();
-		}
-	}
+        try {
+            Files.copy(fileTiles.toPath(), fileTilesOld.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
 
-	/**
-	 * @return Returns VM root directory for CustomTileEntities.
-	 */
-	public static File getVanillaMagicRootDirectory() {
-		File file = new File(DimensionManager.getCurrentSaveRootDirectory(), VM_DIRECTORY + "/");
-		if (!file.exists()) {
-			file.mkdirs();
-		}
-		return file;
-	}
+        try {
+            CompoundNBT data = new CompoundNBT();
+            ListNBT entityListNBT = new ListNBT();
+            List<ICustomTileEntity> customTileEntities = CustomTileEntityHandler.getCustomEntitiesInDimension(world);
+
+            for (int j = 0; j < customTileEntities.size(); ++j) {
+                entityListNBT.add(customTileEntities.get(j).getTileEntity().write(new CompoundNBT()));
+            }
+
+            data.put(TILES, entityListNBT);
+            FileOutputStream fileOutputStream = new FileOutputStream(fileTiles);
+            CompressedStreamTools.writeCompressed(data, fileOutputStream);
+            fileOutputStream.close();
+
+            log(Level.INFO, "[World Save] CustomTileEntities saved for Dimension: " + dimension);
+        } catch (Exception e) {
+            log(Level.INFO, "[World Save] Error while saving CustomTileEntities for Dimension: " + dimension);
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @return Returns VM root directory for CustomTileEntities.
+     */
+    private static File getVanillaMagicRootDirectory(World world) {
+        File file = new File(world.getServer().getDataDirectory(), VM_DIRECTORY + "/");
+
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        return file;
+    }
 }

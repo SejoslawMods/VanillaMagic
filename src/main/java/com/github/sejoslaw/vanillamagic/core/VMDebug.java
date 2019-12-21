@@ -1,12 +1,12 @@
 package com.github.sejoslaw.vanillamagic.core;
 
-import com.github.sejoslaw.vanillamagic.api.quest.QuestList;
+import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
 import com.github.sejoslaw.vanillamagic.api.util.IAdditionalInfoProvider;
+import com.github.sejoslaw.vanillamagic.common.handler.CustomTileEntityHandler;
 import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import com.github.sejoslaw.vanillamagic.common.util.QuestUtil;
-import com.github.sejoslaw.vanillamagic.handler.CustomTileEntityHandler;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.block.Blocks;
@@ -72,7 +72,7 @@ public class VMDebug {
             progress.getRemaningCriteria().forEach(criterion -> serverPlayer.getAdvancements().grantCriterion(advancement, criterion));
         });
 
-        QuestList.getQuests().forEach(quest -> QuestUtil.addStat(serverPlayer, quest));
+        QuestRegistry.getQuests().forEach(quest -> QuestUtil.addStat(serverPlayer, quest));
     }
 
     int showTime = 1; // hue hue

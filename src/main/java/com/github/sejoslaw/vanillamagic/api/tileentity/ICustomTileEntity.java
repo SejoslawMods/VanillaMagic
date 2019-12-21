@@ -43,4 +43,9 @@ public interface ICustomTileEntity extends ITickable, IAdditionalInfoProvider, I
      * @return Returns the {@link Ticket} for this CustomTileEntity.
      */
     Ticket getChunkTicket();
+
+    /**
+     * @return Returns true if CustomTileEntity can be added to World during loading the World.
+     */
+    boolean prepareCustomTileEntity();
 }

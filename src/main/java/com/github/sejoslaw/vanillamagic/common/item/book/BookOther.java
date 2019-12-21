@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.NBTTagString;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
-import com.github.sejoslaw.vanillamagic.api.quest.QuestList;
+import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.item.accelerationcrystal.QuestAccelerationCrystal;
 import com.github.sejoslaw.vanillamagic.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
 import com.github.sejoslaw.vanillamagic.item.thecrystalofmothernature.QuestMotherNatureCrystal;
@@ -45,8 +45,8 @@ public class BookOther implements IBook {
 						+ TextUtil.translateToLocal("book.other.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
-				for (int i = 0; i < QuestList.size(); ++i) {
-					IQuest quest = QuestList.get(i);
+				for (int i = 0; i < QuestRegistry.size(); ++i) {
+					IQuest quest = QuestRegistry.get(i);
 
 					if (quest instanceof QuestChunkLoader) {
 						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER

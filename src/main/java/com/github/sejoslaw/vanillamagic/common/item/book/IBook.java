@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.item.book;
+package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
 
