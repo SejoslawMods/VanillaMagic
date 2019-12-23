@@ -1,13 +1,11 @@
 package com.github.sejoslaw.vanillamagic.common.entity;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
 /**
@@ -19,6 +17,28 @@ import net.minecraft.world.World;
 public abstract class EntitySpell extends DamagingProjectileEntity {
     public EntitySpell(EntityType<? extends EntitySpell> entityType, World world) {
         super(entityType, world);
+    }
+
+    public EntitySpell setCastingEntity(LivingEntity entity) {
+        this.shootingEntity = entity;
+
+        this.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
+        this.setPosition(this.posX, this.posY, this.posZ);
+        this.setMotion(Vec3d.ZERO);
+
+        Vec3d vec = this.shootingEntity.getLookVec();
+
+        double accelX = vec.getX();
+        double accelY = vec.getY();
+        double accelZ = vec.getZ();
+
+        double distance = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
+
+        this.accelerationX = accelX / distance * 0.1D;
+        this.accelerationY = accelY / distance * 0.1D;
+        this.accelerationZ = accelZ / distance * 0.1D;
+
+        return this;
     }
 
     protected IParticleData getParticle() {

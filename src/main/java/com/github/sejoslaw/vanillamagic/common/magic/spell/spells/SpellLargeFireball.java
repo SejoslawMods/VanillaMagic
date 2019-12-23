@@ -20,7 +20,6 @@ public class SpellLargeFireball extends Spell {
     }
 
     public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
-        // Cast while NOT looking at block
         if (pos == null) {
             return false;
         }

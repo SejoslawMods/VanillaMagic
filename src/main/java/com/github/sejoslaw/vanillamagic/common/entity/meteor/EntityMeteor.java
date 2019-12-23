@@ -15,7 +15,7 @@ import net.minecraft.world.World;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class EntityMeteor extends FireballEntity {
-    public EntityMeteor(EntityType<? extends FireballEntity> entityType, World world) {
+    public EntityMeteor(EntityType<? extends EntityMeteor> entityType, World world) {
         super(entityType, world);
     }
 
@@ -34,7 +34,7 @@ public class EntityMeteor extends FireballEntity {
             return;
         }
 
-        VMExplosion explosion = new VMExplosion(this.world, this.shootingEntity, this.getPosition(), VMConfig.BASIC_METEOR_EXPLOSION_POWER, true, Explosion.Mode.DESTROY);
+        VMExplosion explosion = new VMExplosion(this.world, this.shootingEntity, this.getPosition(), VMConfig.BASIC_METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
         explosion.doExplosion();
     }
 }
