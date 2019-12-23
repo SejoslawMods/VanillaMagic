@@ -1,25 +1,26 @@
-package com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile;
+package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.hostile;
 
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityZombieHorse;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.passive.horse.ZombieHorseEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class SpellSummonZombie extends SpellSummonHostileWithRandomArmor {
-	public SpellSummonZombie(int spellID, String spellName, String spellUniqueName, IWand wand, ItemStack itemOffHand) {
-		super(spellID, spellName, spellUniqueName, wand, itemOffHand);
-	}
+    public SpellSummonZombie(int spellID, String spellName, String spellUniqueName, IWand wand, ItemStack itemOffHand) {
+        super(spellID, spellName, spellUniqueName, wand, itemOffHand);
+    }
 
-	public Entity getEntity(World world) {
-		return new EntityZombie(world);
-	}
+    public Entity getEntity(World world) {
+        return new ZombieEntity(world);
+    }
 
-	public Entity getHorse(World world) {
-		return new EntityZombieHorse(world);
-	}
+    public Entity getHorse(World world) {
+        return new ZombieHorseEntity(EntityType.ZOMBIE_HORSE, world);
+    }
 }

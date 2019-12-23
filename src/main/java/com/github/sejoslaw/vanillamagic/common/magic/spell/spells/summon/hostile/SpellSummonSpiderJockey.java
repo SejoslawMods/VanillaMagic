@@ -1,78 +1,76 @@
-package com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile;
+package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.hostile;
 
-import java.util.List;
-
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.SkeletonEntity;
+import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.util.BlockPosUtil;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class SpellSummonSpiderJockey extends SpellSummonHostile {
-	public SpellSummonSpiderJockey(int spellID, String spellName, String spellUniqueName, IWand wand,
-			ItemStack itemOffHand) {
-		super(spellID, spellName, spellUniqueName, wand, itemOffHand);
-	}
+    public SpellSummonSpiderJockey(int spellID, String spellName, String spellUniqueName, IWand wand, ItemStack itemOffHand) {
+        super(spellID, spellName, spellUniqueName, wand, itemOffHand);
+    }
 
-	public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
-		if (pos == null) {
-			return false;
-		}
+    public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
+        if (pos == null) {
+            return false;
+        }
 
-		World world = caster.world;
-		BlockPos spawnPos = pos.offset(face);
-		Entity entityMob = null;
-		ItemStack boneStack = new ItemStack(Items.BONE);
-		BlockPos bonePos = pos.offset(face);
-		List<Entity> entities = world.getLoadedEntityList();
+        World world = caster.world;
+        BlockPos spawnPos = pos.offset(face);
+        Entity spiderEntity = null;
+        ItemStack boneStack = new ItemStack(Items.BONE);
+        BlockPos bonePos = pos.offset(face);
 
-		for (Entity entity : entities) {
-			if ((entity instanceof ItemEntity) && BlockPosUtil.isSameBlockPos(entity.getPosition(), bonePos)
-					&& ItemStack.areItemsEqual(boneStack, ((ItemEntity) entity).getItem())) {
-				entityMob = new EntitySpider(world);
+        AxisAlignedBB aabb = new AxisAlignedBB(bonePos);
+        List<Entity> entities = world.getEntitiesInAABBexcluding(caster, aabb, e -> e instanceof ItemEntity);
 
-				EntitySkeleton skeleton = new EntitySkeleton(world);
-				skeleton.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw,
-						0.0F);
-				skeleton.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.BOW));
-				world.spawnEntity(skeleton);
+        for (Entity entity : entities) {
+            if (ItemStack.areItemsEqual(boneStack, ((ItemEntity) entity).getItem())) {
+                spiderEntity = new SpiderEntity(EntityType.SPIDER, world);
 
-				skeleton.startRiding(entityMob);
-				world.removeEntity(entity);
+                Entity skeleton = new SkeletonEntity(EntityType.SKELETON, world);
+                skeleton.setLocationAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), caster.rotationYaw, 0.0F);
+                skeleton.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.BOW));
 
-				break;
-			}
-		}
+                world.addEntity(skeleton);
 
-		if (entityMob == null) {
-			VanillaMagic.logInfo("Wrong spellID. (spellID: " + getSpellID() + ")");
-			return false;
-		}
+                skeleton.startRiding(spiderEntity);
 
-		entityMob.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D,
-				caster.rotationYaw, 0.0F);
+                entity.remove();
 
-		world.spawnEntity(entityMob);
-		world.updateEntities();
+                break;
+            }
+        }
 
-		return true;
-	}
+        if (spiderEntity == null) {
+            return false;
+        }
 
-	// Build in castSpell method.
-	public Entity getEntity(World world) {
-		return null;
-	}
+        spiderEntity.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw, 0.0F);
+
+        world.addEntity(spiderEntity);
+
+        return true;
+    }
+
+    // Build in castSpell method.
+    public Entity getEntity(World world) {
+        return null;
+    }
 }

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 /**
@@ -18,7 +19,7 @@ public class SpellLargeFireball extends Spell {
         super(spellID, spellName, spellUniqueName, wand, itemOffHand);
     }
 
-    public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vector3D hitVec) {
+    public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
         // Cast while NOT looking at block
         if (pos == null) {
             return false;
@@ -27,7 +28,7 @@ public class SpellLargeFireball extends Spell {
         World world = caster.world;
         world.playEvent(caster, 1016, new BlockPos((int) caster.posX, (int) caster.posY, (int) caster.posZ), 0);
 
-        Vector3D lookingAt = VectorWrapper.wrap(caster.getLookVec());
+        Vec3d lookingAt = caster.getLookVec();
         double accelX = lookingAt.getX();
         double accelY = lookingAt.getY();
         double accelZ = lookingAt.getZ();

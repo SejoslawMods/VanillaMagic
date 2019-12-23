@@ -1,23 +1,21 @@
-package com.github.sejoslaw.vanillamagic.magic.spell.spells.summon;
+package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
+import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.common.magic.spell.Spell;
+import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
+import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.magic.spell.Spell;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
+
+import java.util.Random;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -27,7 +25,7 @@ public abstract class SpellSummon extends Spell {
 		super(spellID, spellName, spellUniqueName, wand, itemOffHand);
 	}
 
-	public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vector3D hitVec) {
+	public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
 		if (pos == null) {
 			return false;
 		}
@@ -37,16 +35,14 @@ public abstract class SpellSummon extends Spell {
 		Entity entity = getEntity(world); // Entity to spawn after spell being casted
 
 		if (entity == null) {
-			VanillaMagic.logInfo("Wrong spellID. (spellID = " + getSpellID() + ")");
 			return false;
 		}
 
-		if (entity instanceof EntityAgeable) {
-			((EntityAgeable) entity).setGrowingAge(1);
+		if (entity instanceof AgeableEntity) {
+			((AgeableEntity) entity).setGrowingAge(1);
 		}
 
-		entity.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw,
-				0.0F);
+		entity.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw, 0.0F);
 
 		if (this.getSpawnWithArmor()) {
 			EntityUtil.addRandomArmorToEntity(entity);
@@ -56,15 +52,13 @@ public abstract class SpellSummon extends Spell {
 			return false;
 		}
 
-		world.spawnEntity(entity);
+		world.addEntity(entity);
 
 		Entity horse = this.getHorse(world);
 
-		if ((horse != null) && (this.getPercent() < VMConfig.PERCENT_FOR_SPAWN_HOSTILE_ON_HORSE)) {
+		if ((horse != null) && (this.getPercent() < VMConfig.PERCENT_FOR_SPAWN_HOSTILE_ON_HORSE.get())) {
 			entity.startRiding(horse);
 		}
-
-		world.updateEntities();
 
 		return true;
 	}
@@ -73,7 +67,6 @@ public abstract class SpellSummon extends Spell {
 		return false;
 	}
 
-	@Nullable
 	public Entity getHorse(World world) {
 		return null;
 	}

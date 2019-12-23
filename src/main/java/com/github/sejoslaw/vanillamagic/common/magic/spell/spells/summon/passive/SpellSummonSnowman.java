@@ -1,21 +1,21 @@
-package com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive;
+package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.passive;
 
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class SpellSummonSnowman extends SpellSummonPassive {
-	public SpellSummonSnowman(int spellID, String spellName, String spellUniqueName, IWand wand,
-			ItemStack itemOffHand) {
-		super(spellID, spellName, spellUniqueName, wand, itemOffHand);
-	}
+    public SpellSummonSnowman(int spellID, String spellName, String spellUniqueName, IWand wand, ItemStack itemOffHand) {
+        super(spellID, spellName, spellUniqueName, wand, itemOffHand);
+    }
 
-	public Entity getEntity(World world) {
-		return new EntitySnowman(world);
-	}
+    public Entity getEntity(World world) {
+        return new SnowGolemEntity(EntityType.SNOW_GOLEM, world);
+    }
 }

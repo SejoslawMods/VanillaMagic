@@ -1,10 +1,10 @@
-package com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile;
+package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.hostile;
+
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import net.minecraft.item.ItemStack;
 
 import java.util.Random;
-
-import net.minecraft.item.ItemStack;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.config.VMConfig;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -18,7 +18,7 @@ public abstract class SpellSummonHostileWithRandomArmor extends SpellSummonHosti
 	public boolean getSpawnWithArmor() {
 		int rand = new Random().nextInt(100);
 
-		if (rand < VMConfig.PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR) {
+		if (rand < VMConfig.PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR.get()) {
 			return true;
 		}
 

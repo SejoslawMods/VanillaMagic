@@ -1,10 +1,11 @@
-package com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive;
+package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.passive;
 
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -15,6 +16,6 @@ public class SpellSummonLama extends SpellSummonPassive {
 	}
 
 	public Entity getEntity(World world) {
-		return new EntityLlama(world);
+		return new LlamaEntity(EntityType.LLAMA, world);
 	}
 }

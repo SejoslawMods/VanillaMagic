@@ -9,6 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -21,7 +22,7 @@ public class SpellLighter extends Spell {
 		super(spellID, spellName, spellUniqueName, wand, itemOffHand);
 	}
 
-	public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vector3D hitVec) {
+	public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
 		// RightClickBlock
 		if (pos == null) {
 			return false;

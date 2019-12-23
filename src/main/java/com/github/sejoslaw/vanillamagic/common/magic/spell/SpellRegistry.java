@@ -1,68 +1,12 @@
 package com.github.sejoslaw.vanillamagic.common.magic.spell;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import com.github.sejoslaw.vanillamagic.api.magic.ISpell;
 import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellMeteor;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellMoveInAir;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellPullEntityToPlayer;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellSmallFireball;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellTeleport;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellTeleportToEnd;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellTeleportToNether;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.SpellWaterFreeze;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonBlaze;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonCreeper;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonEnderman;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonEndermite;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonEvoker;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonGhast;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonGiant;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonGuardian;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonHostile;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonMagmaCube;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonPigman;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonPoalrBear;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonShulker;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonSilverfish;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonSkeleton;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonSlime;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonSpider;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonSpiderJockey;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonVex;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonVindicator;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonWitch;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonWither;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.hostile.SpellSummonZombie;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonChicken;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonCow;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonHorse;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonIronGolem;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonLama;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonMooshroom;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonPassive;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonPig;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonRabbit;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonSheep;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonSnowman;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonSquid;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonVillager;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.summon.passive.SpellSummonWolf;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.weather.SpellWeatherClear;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.weather.SpellWeatherRain;
-import com.github.sejoslaw.vanillamagic.magic.spell.spells.weather.SpellWeatherThunderStorm;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Registry which store data about all registered Spells.
@@ -79,8 +23,8 @@ public final class SpellRegistry {
 
 	// Wand that is used for summoning.
 	private static final IWand _SUMMON_REQUIRED_WAND = WandRegistry.WAND_NETHER_STAR;
-	private static final int _SUMMON_FRIENDLY_COST_ITEMSTACK = VMConfig.SPELL_COST_SUMMON_FRIENDLY;
-	private static final int _SUMMON_HOSTILE_COST_ITEMSTACK = VMConfig.SPELL_COST_SUMMON_HOSTILE;
+	private static final int _SUMMON_FRIENDLY_COST_ITEMSTACK = VMConfig.SPELL_COST_SUMMON_FRIENDLY.get();
+	private static final int _SUMMON_HOSTILE_COST_ITEMSTACK = VMConfig.SPELL_COST_SUMMON_HOSTILE.get();
 
 	public static final Spell SPELL_LIGHTER = new SpellLighter(0, "Flint and Steel Clone", "spellFlintAndSteel",
 			WandRegistry.WAND_STICK, new ItemStack(Items.COAL));

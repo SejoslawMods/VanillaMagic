@@ -1,13 +1,10 @@
-package com.github.sejoslaw.vanillamagic.tileentity;
+package com.github.sejoslaw.vanillamagic.common.tileentity;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import com.github.sejoslaw.vanillamagic.api.tileentity.CustomTileEntityBase;
+import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
 import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.util.NBTUtil;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.server.Ticket;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -17,8 +14,7 @@ public abstract class CustomTileEntity extends CustomTileEntityBase {
 		super.validate();
 
 		if ((!this.world.isRemote) && (this.chunkTicket == null)) {
-			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.world,
-					ForgeChunkManager.Type.NORMAL);
+			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.world, ForgeChunkManager.Type.NORMAL);
 
 			if (ticket != null) {
 				forceChunkLoading(ticket);

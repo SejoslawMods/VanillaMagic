@@ -1,7 +1,5 @@
 package com.github.sejoslaw.vanillamagic.api.magic;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
@@ -47,7 +45,7 @@ public interface ISpell {
      * @param hitVec Vector from Player to the Block.
      * @return Returns TRUE if the Spell was casted correctly.
      */
-    boolean castSpell(PlayerEntity caster, @Nullable BlockPos pos, @Nullable Direction face, @Nullable Vec3d hitVec);
+    boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec);
 
     /**
      * @param stackOffHand ItemStack in the Player's OffHand.
