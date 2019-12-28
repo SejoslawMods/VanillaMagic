@@ -1,123 +1,127 @@
-package com.github.sejoslaw.vanillamagic.tileentity.chunkloader;
+package com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader;
 
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.CustomTileEntityHandler;
+import com.github.sejoslaw.vanillamagic.common.quest.Quest;
+import com.github.sejoslaw.vanillamagic.common.util.BlockUtil;
+import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockTorch;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.TorchBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.handler.CustomTileEntityHandler;
-import com.github.sejoslaw.vanillamagic.quest.Quest;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestChunkLoader extends Quest {
-	@SubscribeEvent
-	public void chunkLoaderPlaced(PlaceEvent event) {
-		BlockPos chunkLoaderPos = event.getPos();
-		PlayerEntity placedBy = event.getPlayer();
-		ItemStack itemInHand = event.getItemInHand();
-		World world = placedBy.world;
+    @SubscribeEvent
+    public void chunkLoaderPlaced(BlockEvent.EntityPlaceEvent event) {
+        BlockPos chunkLoaderPos = event.getPos();
+        Entity placer = event.getEntity();
 
-		if (ItemStackUtil.isNullStack(itemInHand) || (itemInHand.getItem() == null)
-				|| !BlockUtil.areEqual(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE)) {
-			return;
-		}
+        if (!(placer instanceof PlayerEntity)) {
+            return;
+        }
 
-		TileChunkLoader tileChunkLoader = new TileChunkLoader();
+        PlayerEntity player = (PlayerEntity) placer;
 
-		if (!isChunkLoaderBuildCorrectly(world, chunkLoaderPos)) {
-			return;
-		}
+        ItemStack itemInHand = player.getHeldItemMainhand();
+        World world = placer.world;
 
-		this.checkQuestProgress(placedBy);
+        if (ItemStackUtil.isNullStack(itemInHand) || (itemInHand.getItem() == null) || !BlockUtil.areEqual(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE)) {
+            return;
+        }
 
-		if (!hasQuest(placedBy)) {
-			return;
-		}
+        TileChunkLoader tileChunkLoader = new TileChunkLoader();
 
-		tileChunkLoader.init(placedBy.world, chunkLoaderPos);
+        if (!isChunkLoaderBuildCorrectly(world, chunkLoaderPos)) {
+            return;
+        }
 
-		if (CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, placedBy.dimension)) {
-			EntityUtil.addChatComponentMessageNoSpam(placedBy, tileChunkLoader.getClass().getSimpleName() + " added");
-		}
-	}
+        this.checkQuestProgress(player);
 
-	@SubscribeEvent
-	public void chunkLoaderBreak(BreakEvent event) {
-		BlockPos destroyedBlockPos = event.getPos();
-		PlayerEntity breakBy = event.getPlayer();
-		World world = breakBy.world;
+        if (!hasQuest(player)) {
+            return;
+        }
 
-		if (BlockUtil.areEqual(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE)) {
-			CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, destroyedBlockPos, breakBy);
-		} else if (BlockUtil.areEqual(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.TORCH)) {
-			for (Direction face : Direction.values()) {
-				BlockPos chunkLoaderPos = destroyedBlockPos.offset(face);
+        tileChunkLoader.init(placer.world, chunkLoaderPos);
 
-				if (BlockUtil.areEqual(world.getBlockState(chunkLoaderPos).getBlock(), Blocks.ENCHANTING_TABLE)) {
-					CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world,
-							destroyedBlockPos.offset(face), breakBy);
-					return;
-				}
-			}
-		} else if (BlockUtil.areEqual(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.OBSIDIAN)) {
-			BlockPos upperPos = new BlockPos(destroyedBlockPos.getX(), destroyedBlockPos.getY() + 1,
-					destroyedBlockPos.getZ());
-			try {
-				// TODO: It crashes sometimes
-				// Don't know how to convert minecraft:stone[variant=stone] back into data...
-				chunkLoaderBreak(new BreakEvent(event.getWorld(), upperPos, event.getState(), event.getPlayer()));
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        if (CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, player.world)) {
+            EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(tileChunkLoader.getClass().getSimpleName() + " added"));
+        }
+    }
 
-	public static boolean isChunkLoaderBuildCorrectly(World world, BlockPos chunkLoaderPos) {
-		BlockPos torchTop = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY(), chunkLoaderPos.getZ() + 1);
-		BlockPos torchLeft = new BlockPos(chunkLoaderPos.getX() - 1, chunkLoaderPos.getY(), chunkLoaderPos.getZ());
-		BlockPos torchRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY(), chunkLoaderPos.getZ());
-		BlockPos torchBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY(), chunkLoaderPos.getZ() - 1);
-		boolean areTorchesCorrectly = false;
+    @SubscribeEvent
+    public void chunkLoaderBreak(BlockEvent.BreakEvent event) {
+        BlockPos destroyedBlockPos = event.getPos();
+        PlayerEntity breakBy = event.getPlayer();
+        World world = breakBy.world;
 
-		if ((world.getBlockState(torchTop).getBlock() instanceof BlockTorch)
-				&& (world.getBlockState(torchLeft).getBlock() instanceof BlockTorch)
-				&& (world.getBlockState(torchRight).getBlock() instanceof BlockTorch)
-				&& (world.getBlockState(torchBottom).getBlock() instanceof BlockTorch)) {
-			areTorchesCorrectly = true;
-		}
+        if (BlockUtil.areEqual(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.ENCHANTING_TABLE)) {
+            CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world, destroyedBlockPos, breakBy);
+        } else if (BlockUtil.areEqual(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.TORCH)) {
+            for (Direction face : Direction.values()) {
+                BlockPos chunkLoaderPos = destroyedBlockPos.offset(face);
 
-		if (!areTorchesCorrectly) {
-			return false;
-		}
+                if (BlockUtil.areEqual(world.getBlockState(chunkLoaderPos).getBlock(), Blocks.ENCHANTING_TABLE)) {
+                    CustomTileEntityHandler.removeCustomTileEntityAndSendInfoToPlayer(world,
+                            destroyedBlockPos.offset(face), breakBy);
+                    return;
+                }
+            }
+        } else if (BlockUtil.areEqual(world.getBlockState(destroyedBlockPos).getBlock(), Blocks.OBSIDIAN)) {
+            BlockPos upperPos = new BlockPos(destroyedBlockPos.getX(), destroyedBlockPos.getY() + 1,
+                    destroyedBlockPos.getZ());
+            try {
+                // TODO: It crashes sometimes
+                // Don't know how to convert minecraft:stone[variant=stone] back into data...
+                chunkLoaderBreak(new BlockEvent.BreakEvent(event.getWorld().getWorld(), upperPos, event.getState(), event.getPlayer()));
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-		BlockPos obsidianUnder = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
-		BlockPos obsidianTop = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1,
-				chunkLoaderPos.getZ() + 1);
-		BlockPos obsidianLeft = new BlockPos(chunkLoaderPos.getX() - 1, chunkLoaderPos.getY() - 1,
-				chunkLoaderPos.getZ());
-		BlockPos obsidianRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY() - 1,
-				chunkLoaderPos.getZ());
-		BlockPos obsidianBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1,
-				chunkLoaderPos.getZ() - 1);
+    public static boolean isChunkLoaderBuildCorrectly(World world, BlockPos chunkLoaderPos) {
+        BlockPos torchTop = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY(), chunkLoaderPos.getZ() + 1);
+        BlockPos torchLeft = new BlockPos(chunkLoaderPos.getX() - 1, chunkLoaderPos.getY(), chunkLoaderPos.getZ());
+        BlockPos torchRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY(), chunkLoaderPos.getZ());
+        BlockPos torchBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY(), chunkLoaderPos.getZ() - 1);
+        boolean areTorchesCorrectly = false;
 
-		if (BlockUtil.areEqual(world.getBlockState(obsidianUnder).getBlock(), Blocks.OBSIDIAN)
-				&& BlockUtil.areEqual(world.getBlockState(obsidianTop).getBlock(), Blocks.OBSIDIAN)
-				&& BlockUtil.areEqual(world.getBlockState(obsidianLeft).getBlock(), Blocks.OBSIDIAN)
-				&& BlockUtil.areEqual(world.getBlockState(obsidianRight).getBlock(), Blocks.OBSIDIAN)
-				&& BlockUtil.areEqual(world.getBlockState(obsidianBottom).getBlock(), Blocks.OBSIDIAN)) {
-			return true;
-		}
+        if ((world.getBlockState(torchTop).getBlock() instanceof TorchBlock)
+                && (world.getBlockState(torchLeft).getBlock() instanceof TorchBlock)
+                && (world.getBlockState(torchRight).getBlock() instanceof TorchBlock)
+                && (world.getBlockState(torchBottom).getBlock() instanceof TorchBlock)) {
+            areTorchesCorrectly = true;
+        }
 
-		return false;
-	}
+        if (!areTorchesCorrectly) {
+            return false;
+        }
+
+        BlockPos obsidianUnder = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
+        BlockPos obsidianTop = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ() + 1);
+        BlockPos obsidianLeft = new BlockPos(chunkLoaderPos.getX() - 1, chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
+        BlockPos obsidianRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
+        BlockPos obsidianBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ() - 1);
+
+        if (BlockUtil.areEqual(world.getBlockState(obsidianUnder).getBlock(), Blocks.OBSIDIAN)
+                && BlockUtil.areEqual(world.getBlockState(obsidianTop).getBlock(), Blocks.OBSIDIAN)
+                && BlockUtil.areEqual(world.getBlockState(obsidianLeft).getBlock(), Blocks.OBSIDIAN)
+                && BlockUtil.areEqual(world.getBlockState(obsidianRight).getBlock(), Blocks.OBSIDIAN)
+                && BlockUtil.areEqual(world.getBlockState(obsidianBottom).getBlock(), Blocks.OBSIDIAN)) {
+            return true;
+        }
+
+        return false;
+    }
 }

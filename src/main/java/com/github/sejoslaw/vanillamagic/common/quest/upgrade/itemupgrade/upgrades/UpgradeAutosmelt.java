@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeBase;
+import com.github.sejoslaw.vanillamagic.common.itemupgrade.ItemUpgradeBase;
 import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
 import com.github.sejoslaw.vanillamagic.util.SmeltingUtil;
 import com.github.sejoslaw.vanillamagic.util.TextUtil;

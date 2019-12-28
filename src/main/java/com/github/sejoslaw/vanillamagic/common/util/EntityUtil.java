@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic.common.util;
 
 import javax.annotation.Nullable;
 
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import com.github.sejoslaw.vanillamagic.common.quest.portablecraftingtable.ICraftingTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

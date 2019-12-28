@@ -1,10 +1,9 @@
 package com.github.sejoslaw.vanillamagic.api.quest;
 
+import com.github.sejoslaw.vanillamagic.api.math.Point;
 import com.google.gson.JsonObject;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import com.github.sejoslaw.vanillamagic.api.util.Point;
 
 /**
  * This is the base of the Quest System.<br>

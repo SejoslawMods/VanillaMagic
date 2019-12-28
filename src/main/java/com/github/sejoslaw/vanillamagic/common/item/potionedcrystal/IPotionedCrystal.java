@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.item.potionedcrystal;
+package com.github.sejoslaw.vanillamagic.common.item.potionedcrystal;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

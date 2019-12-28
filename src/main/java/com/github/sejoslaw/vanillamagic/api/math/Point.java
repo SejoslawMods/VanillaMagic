@@ -1,7 +1,7 @@
-package com.github.sejoslaw.vanillamagic.api.util;
+package com.github.sejoslaw.vanillamagic.api.math;
 
 /**
- * Simple presentation of 2D Point. <br>
+ * Simple presentation of 2D Point.
  */
 public class Point {
     protected int x, y;

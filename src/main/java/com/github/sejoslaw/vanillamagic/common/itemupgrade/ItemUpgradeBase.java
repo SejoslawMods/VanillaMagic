@@ -1,7 +1,8 @@
-package com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade;
+package com.github.sejoslaw.vanillamagic.common.itemupgrade;
 
 import java.util.List;
 
+import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;

@@ -1,12 +1,12 @@
 package com.github.sejoslaw.vanillamagic.common.util;
 
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.stats.Stat;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 
 /**
  * Various Quest-related utilities.
@@ -61,7 +61,7 @@ public final class QuestUtil {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
             serverPlayer.getStats().sendStats(serverPlayer);
 
-            String message = TextUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
+            String message = TranslationUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
             EntityUtil.addChatComponentMessageNoSpam(serverPlayer, TextUtil.wrap(message));
         }
     }

@@ -56,7 +56,7 @@ public class QuarryUpgradeHelper implements IQuarryUpgradeHelper {
 		if (canAddUpgrade(iqu)) {
 			this.upgrades.add(iqu);
 			this.upgradeOnPos.put(upgradePos, iqu);
-			EventUtil.postEvent(new EventQuarry.AddUpgrade(this.quarry, this.quarry.getTileEntity().getWorld(),
+			EventUtil.postEvent(new EventQuarry.AddUpgrade(this.quarry, this.quarry.asTileEntity().getWorld(),
 					this.quarry.getMachinePos(), iqu, upgradePos));
 		}
 	}
@@ -135,12 +135,12 @@ public class QuarryUpgradeHelper implements IQuarryUpgradeHelper {
 			IQuarryUpgrade upgrade = entry.getValue();
 			BlockPos upgradePos = entry.getKey();
 
-			EventUtil.postEvent(new EventQuarry.ModifyQuarry.Before(quarry, quarry.getTileEntity().getWorld(),
+			EventUtil.postEvent(new EventQuarry.ModifyQuarry.Before(quarry, quarry.asTileEntity().getWorld(),
 					quarry.getMachinePos(), upgrade, upgradePos));
 
 			upgrade.modifyQuarry(quarry);
 
-			EventUtil.postEvent(new EventQuarry.ModifyQuarry.After(quarry, quarry.getTileEntity().getWorld(),
+			EventUtil.postEvent(new EventQuarry.ModifyQuarry.After(quarry, quarry.asTileEntity().getWorld(),
 					quarry.getMachinePos(), upgrade, upgradePos));
 		}
 	}

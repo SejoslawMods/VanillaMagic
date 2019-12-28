@@ -1,39 +1,12 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import org.apache.logging.log4j.Level;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.ServerWorld;
-import com.github.sejoslaw.vanillamagic.api.event.EventMachine;
-import com.github.sejoslaw.vanillamagic.api.exception.NotInventoryException;
 import com.github.sejoslaw.vanillamagic.api.inventory.IInventoryWrapper;
-import com.github.sejoslaw.vanillamagic.api.inventory.InventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IMachine;
-import com.github.sejoslaw.vanillamagic.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.inventory.InventoryHelper;
-import com.github.sejoslaw.vanillamagic.tileentity.CustomTileEntity;
-import com.github.sejoslaw.vanillamagic.util.BlockPosUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
-import com.github.sejoslaw.vanillamagic.util.NBTUtil;
-import com.github.sejoslaw.vanillamagic.util.SmeltingUtil;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.util.WorldUtil;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * Base Machine definition.
@@ -50,9 +23,9 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine {
 	protected ItemStack shouldBeInRightHand;
 
 	protected int radius = 4;
-	protected int oneOperationCost = VMConfig.TILE_MACHINE_ONE_OPERATION_COST;
+	protected int oneOperationCost = VMConfig.TILE_MACHINE_ONE_OPERATION_COST.get();
 	protected int ticks = 0;
-	protected int maxTicks = VMConfig.TILE_MACHINE_MAX_TICKS;
+	protected int maxTicks = VMConfig.TILE_MACHINE_MAX_TICKS.get();
 	protected int delayInTicks = 0;
 
 	protected boolean isActive = false;
@@ -64,6 +37,10 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine {
 
 	protected BlockPos chestPosInput;
 	protected BlockPos chestPosOutput;
+
+	public TileMachine(TileEntityType<?> tileEntityType) {
+		super(tileEntityType);
+	}
 
 	/**
 	 * This should check if the Machine is build correctly.
@@ -172,7 +149,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine {
 	public void showBoundingBox() {
 	}
 
-	public boolean finishedWork() {
+	public boolean isWorkFinished() {
 		return finished;
 	}
 

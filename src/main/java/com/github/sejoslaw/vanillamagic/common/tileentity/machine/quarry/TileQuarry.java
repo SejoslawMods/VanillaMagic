@@ -67,15 +67,15 @@ public class TileQuarry extends TileMachine implements IQuarry {
 		return this.startPosFacing;
 	}
 
-	public void forceQuarryStop() {
+	public void forceStop() {
 		this.forceStop = true;
 	}
 
-	public void forceQuarryStart() {
+	public void forceStart() {
 		this.forceStop = false;
 	}
 
-	public IQuarryUpgradeHelper getQuarryUpgradeHelper() {
+	public IQuarryUpgradeHelper getUpgradeHelper() {
 		return this.upgradeHelper;
 	}
 
@@ -327,7 +327,7 @@ public class TileQuarry extends TileMachine implements IQuarry {
 		ForgeChunkManager.forceChunk(ticket, workingChunk);
 	}
 
-	public boolean prepareCustomTileEntity() {
+	public boolean isPrepared() {
 		return this.checkSurroundings();
 	}
 }

@@ -1,19 +1,19 @@
-package com.github.sejoslaw.vanillamagic.item.accelerationcrystal;
+package com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal;
 
-import net.minecraft.init.Items;
-import com.github.sejoslaw.vanillamagic.item.CustomItemCrystal;
-import com.github.sejoslaw.vanillamagic.util.CraftingUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemCrystal;
+import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
+import net.minecraft.util.text.ITextComponent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class ItemAccelerationCrystal extends CustomItemCrystal {
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(),
-				new Object[] { " B ", "BNB", " B ", 'B', Items.BOOK, 'N', Items.NETHER_STAR });
+		CraftingUtil.addShapedRecipe(getItem(), new Object[] { " B ", "BNB", " B ", 'B', Items.BOOK, 'N', Items.NETHER_STAR });
 	}
 
-	public String getItemName() {
-		return "Acceleration Crystal";
+	public ITextComponent getItemName() {
+		return TextUtil.wrap("Acceleration Crystal");
 	}
 }

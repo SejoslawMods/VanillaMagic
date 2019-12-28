@@ -71,18 +71,18 @@ public interface IQuarry extends IMachine {
 
     /**
      * Forces Quarry to stop it's work. <br>
-     * Quarry won't start until You use {@link #forceQuarryStart()}.
+     * Quarry won't start until You use {@link #forceStart()}.
      */
-    void forceQuarryStop();
+    void forceStop();
 
     /**
      * Forces Quarry to start it's work.
      */
-    void forceQuarryStart();
+    void forceStart();
 
     /**
      * @return Returns QuarryUpgradeHelper connected with this Quarry. <br>
      * Each Quarry has it's own QuarryUpgradeHelper.
      */
-    IQuarryUpgradeHelper getQuarryUpgradeHelper();
+    IQuarryUpgradeHelper getUpgradeHelper();
 }

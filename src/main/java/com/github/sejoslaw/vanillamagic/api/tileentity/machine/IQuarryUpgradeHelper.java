@@ -30,9 +30,7 @@ public interface IQuarryUpgradeHelper {
 
 	/**
 	 * @return Returns all upgrades of this Quarry in form of Map. <br>
-	 *         Key is a position of Block connected with IQuarryUpgrade. <br>
-	 *         World.getBlockState(key).getBlock() == value.getBlock() <br>
-	 *         If these are not equal than something went horribly wrong.
+	 *         Key is a position of Block connected with IQuarryUpgrade.
 	 */
 	Map<BlockPos, IQuarryUpgrade> getUpgradesMap();
 

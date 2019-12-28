@@ -1,19 +1,16 @@
 package com.github.sejoslaw.vanillamagic.api.tileentity.machine;
 
-import javax.annotation.Nullable;
-
+import com.github.sejoslaw.vanillamagic.api.inventory.IInventoryWrapper;
+import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import com.github.sejoslaw.vanillamagic.api.inventory.IInventoryWrapper;
-import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
 
 /**
- * Machine is a TileEntity that perform some work on World. This interface is
- * made to unify some of the Machine work.
+ * Machine is a TileEntity that perform some work on World.
  *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
@@ -117,13 +114,12 @@ public interface IMachine extends ICustomTileEntity {
     /**
      * @return Returns if a Machine has finished work.
      */
-    boolean finishedWork();
+    boolean isWorkFinished();
 
     /**
      * @return Returns what Player should hold in left hand (off hand) to activate
      * this Machine. This usually should be set in Quest.
      */
-    @Nullable
     ItemStack getActivationStackLeftHand();
 
     /**
@@ -135,7 +131,6 @@ public interface IMachine extends ICustomTileEntity {
      * @return Returns what Player should hold in right hand (main hand) to activate
      * this Machine. This usually should be set in Quest.
      */
-    @Nullable
     ItemStack getActivationStackRightHand();
 
     /**
@@ -152,7 +147,6 @@ public interface IMachine extends ICustomTileEntity {
      * @return Returns the inventory from which Machine can take resources to work
      * (fuel, etc.).
      */
-    @Nullable
     IInventoryWrapper getInputInventory();
 
     /**
@@ -163,7 +157,6 @@ public interface IMachine extends ICustomTileEntity {
     /**
      * @return Returns the inventory to which Machine should output.
      */
-    @Nullable
     IInventoryWrapper getOutputInventory();
 
     /**
@@ -181,13 +174,11 @@ public interface IMachine extends ICustomTileEntity {
     /**
      * @return Returns the neighbor TileEntity at given face.
      */
-    @Nullable
     TileEntity getNeighborTile(Direction face);
 
     /**
      * @return Returns the Machine that is next to this Machine.
      */
-    @Nullable
     IMachine getNeighborMachine(Direction face);
 
     /**

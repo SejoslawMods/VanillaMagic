@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic.common.quest;
 
-import com.github.sejoslaw.vanillamagic.common.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.init.Items;

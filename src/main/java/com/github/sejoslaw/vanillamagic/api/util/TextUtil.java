@@ -1,14 +1,11 @@
-package com.github.sejoslaw.vanillamagic.common.util;
+package com.github.sejoslaw.vanillamagic.api.util;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.fml.ForgeI18n;
 
 /**
- * Class which store various methods connected with text and messages.
- *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class TextUtil {
@@ -52,13 +49,6 @@ public final class TextUtil {
         }
 
         return s;
-    }
-
-    /**
-     * @return Returns translated string.
-     */
-    public static String translateToLocal(String text) {
-        return ForgeI18n.parseMessage(text);
     }
 
     /**

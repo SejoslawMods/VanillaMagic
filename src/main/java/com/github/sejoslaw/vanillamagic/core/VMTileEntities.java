@@ -1,0 +1,47 @@
+package com.github.sejoslaw.vanillamagic.core;
+
+import com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.TileBlockAbsorber;
+import com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.TileChunkLoader;
+import com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.TileInventoryBridge;
+import com.github.sejoslaw.vanillamagic.common.tileentity.speedy.TileSpeedy;
+import com.mojang.datafixers.DataFixUtils;
+import com.mojang.datafixers.types.Type;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.SharedConstants;
+import net.minecraft.util.datafix.DataFixesManager;
+import net.minecraft.util.datafix.TypeReferences;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.ObjectHolder;
+
+import java.util.function.Supplier;
+
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+@ObjectHolder(VanillaMagic.MODID)
+public class VMTileEntities {
+    public static TileEntityType<TileChunkLoader> CHUNK_LOADER = null;
+    public static TileEntityType<TileInventoryBridge> INVENTORY_BRIDGE = null;
+    public static TileEntityType<TileBlockAbsorber> BLOCK_ABSORBER = null;
+    public static TileEntityType<TileSpeedy> SPEEDY = null;
+
+    @SubscribeEvent
+    public static void onTileEntitiesRegistry(RegistryEvent.Register<TileEntityType<?>> event) {
+        event.getRegistry().registerAll(
+                buildTileEntityType(TileChunkLoader::new, TileChunkLoader.REGISTRY_NAME),
+                buildTileEntityType(TileInventoryBridge::new, TileInventoryBridge.REGISTRY_NAME),
+                buildTileEntityType(TileBlockAbsorber::new, TileBlockAbsorber.REGISTRY_NAME),
+                buildTileEntityType(TileSpeedy::new, TileSpeedy.REGISTRY_NAME)
+        );
+    }
+
+    private static <T extends TileEntity> TileEntityType<T> buildTileEntityType(Supplier<T> factory, String registryName) {
+        Type<?> type = DataFixesManager.getDataFixer().getSchema(DataFixUtils.makeKey(SharedConstants.getVersion().getWorldVersion())).getChoiceType(TypeReferences.BLOCK_ENTITY, registryName);
+
+        return TileEntityType.Builder
+                .create(factory)
+                .build(type);
+    }
+}

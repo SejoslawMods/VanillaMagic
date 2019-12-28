@@ -4,7 +4,7 @@ import com.github.sejoslaw.vanillamagic.api.magic.IWand;
 import com.github.sejoslaw.vanillamagic.common.magic.spell.Spell;
 import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.common.util.TeleportUtil;
-import com.github.sejoslaw.vanillamagic.common.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;

@@ -2,67 +2,94 @@ package com.github.sejoslaw.vanillamagic.common.tileentity;
 
 import com.github.sejoslaw.vanillamagic.api.tileentity.CustomTileEntityBase;
 import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.server.Ticket;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.client.model.data.IModelData;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class CustomTileEntity extends CustomTileEntityBase {
-	public void validate() {
-		super.validate();
+    public CustomTileEntity(TileEntityType<?> tileEntityType) {
+        super(tileEntityType);
+    }
 
-		if ((!this.world.isRemote) && (this.chunkTicket == null)) {
-			Ticket ticket = ForgeChunkManager.requestTicket(VanillaMagic.INSTANCE, this.world, ForgeChunkManager.Type.NORMAL);
+    /**
+     * Try to override {@link #serializeNBT()} instead of this method.
+     */
+    @Deprecated
+    public CompoundNBT write(CompoundNBT tag) {
+        super.write(tag);
+        tag.putString(NBTUtil.NBT_CLASS, this.getClass().getName());
+        return tag;
+    }
 
-			if (ticket != null) {
-				forceChunkLoading(ticket);
-			}
-		}
-	}
+    public TileEntity getTileEntity() {
+        return this;
+    }
 
-	/**
-	 * Try to override {@link #deserializeNBT(CompoundNBT)} instead of this
-	 * method.
-	 */
-	@Deprecated
-	public void readFromNBT(CompoundNBT tag) {
-		super.readFromNBT(tag);
-		NBTUtil.readFromINBTSerializable(this, tag);
-	}
+    public void deserializeNBT(CompoundNBT nbt) {
+    }
 
-	public void deserializeNBT(CompoundNBT tag) {
-	}
+    public CompoundNBT serializeNBT() {
+        CompoundNBT tag = new CompoundNBT();
+        return tag;
+    }
 
-	/**
-	 * Try to override {@link #serializeNBT()} instead of this method.
-	 */
-	@Deprecated
-	public CompoundNBT writeToNBT(CompoundNBT tag) {
-		super.writeToNBT(tag);
-		tag = NBTUtil.writeToINBTSerializable(this, tag);
-		tag.putString(NBTUtil.NBT_CLASS, this.getClass().getName());
-		return tag;
-	}
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        CompoundNBT nbt = this.getUpdateTag();
+        return new SUpdateTileEntityPacket(getPos(), -999, nbt);
+    }
 
-	public CompoundNBT serializeNBT() {
-		CompoundNBT tag = new CompoundNBT();
-		return tag;
-	}
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        super.onDataPacket(net, pkt);
+        this.read(pkt.getNbtCompound());
+    }
 
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		CompoundNBT nbt = new CompoundNBT();
-		this.writeToNBT(nbt);
-		return new SPacketUpdateTileEntity(getPos(), -999, nbt);
-	}
+    public void handleUpdateTag(CompoundNBT tag) {
+    }
 
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		super.onDataPacket(net, pkt);
-		this.readFromNBT(pkt.getNbtCompound());
-	}
+    public void onChunkUnloaded() {
+    }
 
-	public CompoundNBT getUpdateTag() {
-		return writeToNBT(new CompoundNBT());
-	}
+    public void onLoad() {
+    }
+
+    public AxisAlignedBB getRenderBoundingBox() {
+        return null;
+    }
+
+    public boolean canRenderBreaking() {
+        return false;
+    }
+
+    public boolean hasFastRenderer() {
+        return false;
+    }
+
+    public void requestModelDataUpdate() {
+    }
+
+    public IModelData getModelData() {
+        return null;
+    }
+
+    public CompoundNBT getUpdateTag() {
+        return this.write(new CompoundNBT());
+    }
+
+    public void tick() {
+    }
+
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
+        return null;
+    }
 }

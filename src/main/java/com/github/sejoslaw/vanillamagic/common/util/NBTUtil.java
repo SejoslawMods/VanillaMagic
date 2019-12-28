@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -171,20 +170,6 @@ public final class NBTUtil {
         }
 
         return inv;
-    }
-
-    public static CompoundNBT writeToINBTSerializable(INBTSerializable<CompoundNBT> nbtSerial, CompoundNBT nbt) {
-        nbt.put(NBT_SERIALIZABLE, nbtSerial.serializeNBT());
-
-        return nbt;
-    }
-
-    public static INBTSerializable<CompoundNBT> readFromINBTSerializable(INBTSerializable<CompoundNBT> nbtSerial, CompoundNBT nbt) {
-        if (nbt.contains(NBT_SERIALIZABLE)) {
-            nbtSerial.deserializeNBT(nbt.getCompound(NBT_SERIALIZABLE));
-        }
-
-        return nbtSerial;
     }
 
     public static CompoundNBT writeToIItemHandler(IItemHandler handler, CompoundNBT nbt) {

@@ -4,7 +4,7 @@ import com.github.sejoslaw.vanillamagic.api.event.EventCustomTileEntity;
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
 import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.common.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -29,11 +29,11 @@ public final class CustomTileEntityHandler {
     }
 
     public static boolean addCustomTileEntity(ICustomTileEntity customTileEntity, World world) {
-        BlockPos customTilePos = customTileEntity.getTileEntity().getPos();
+        BlockPos customTilePos = customTileEntity.asTileEntity().getPos();
         ICustomTileEntity customTile = getCustomTileEntity(world, customTilePos);
 
         if ((customTile == null) && !EventUtil.postEvent(new EventCustomTileEntity.Add.Before(customTile, world, customTilePos))) {
-            boolean added = world.addTileEntity(customTileEntity.getTileEntity());
+            boolean added = world.addTileEntity(customTileEntity.asTileEntity());
             EventUtil.postEvent(new EventCustomTileEntity.Add.After(customTile, world, customTilePos));
             return added;
         }

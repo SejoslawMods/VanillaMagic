@@ -88,7 +88,7 @@ public class WorldHandler {
                             tileEntity = TileEntity.create(tileEntityTag);
                             tileEntity.setWorld(world);
 
-                            canAdd = ((ICustomTileEntity) tileEntity).prepareCustomTileEntity();
+                            canAdd = ((ICustomTileEntity) tileEntity).isPrepared();
 
                             log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
                         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class WorldHandler {
             List<ICustomTileEntity> customTileEntities = CustomTileEntityHandler.getCustomEntitiesInDimension(world);
 
             for (int j = 0; j < customTileEntities.size(); ++j) {
-                entityListNBT.add(customTileEntities.get(j).getTileEntity().write(new CompoundNBT()));
+                entityListNBT.add(customTileEntities.get(j).asTileEntity().write(new CompoundNBT()));
             }
 
             data.put(TILES, entityListNBT);

@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.ItemUpgradeBase;
+import com.github.sejoslaw.vanillamagic.common.itemupgrade.ItemUpgradeBase;
 
 /**
  * Class which describes basic Sowrd upgrade.

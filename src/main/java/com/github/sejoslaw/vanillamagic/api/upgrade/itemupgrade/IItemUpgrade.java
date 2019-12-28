@@ -3,14 +3,10 @@ package com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
- * This is the base of the Upgrade System. <br>
- * After registration in ItemUpgradeRegistry each upgrade is registered in
- * {@link MinecraftForge#EVENT_BUS}. <br>
- * This is made to simplify the Events implementing. You can write Your Events
- * in class that implements IItemUpgrade.
+ * This is the base of the Upgrade System.
+ * You can write Your Events in class that implements IItemUpgrade.
  *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */

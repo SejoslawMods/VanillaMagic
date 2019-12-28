@@ -1,28 +1,24 @@
-package com.github.sejoslaw.vanillamagic.item;
+package com.github.sejoslaw.vanillamagic.common.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
+import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
+import com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.IPotionedCrystal;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
-import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
-import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.item.accelerationcrystal.ItemAccelerationCrystal;
-import com.github.sejoslaw.vanillamagic.item.evokercrystal.ItemEvokerCrystal;
-import com.github.sejoslaw.vanillamagic.item.inventoryselector.ItemInventorySelector;
-import com.github.sejoslaw.vanillamagic.item.liquidsuppressioncrystal.ItemLiquidSuppressionCrystal;
-import com.github.sejoslaw.vanillamagic.item.potionedcrystal.IPotionedCrystal;
-import com.github.sejoslaw.vanillamagic.item.thecrystalofmothernature.ItemMotherNatureCrystal;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which holds data about ALL VM CustomItems.
  * 
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class VanillaMagicItems {
+public class VMItems {
 	/**
 	 * All VanillaMagic items except these with additional lists.
 	 */
@@ -42,14 +38,14 @@ public class VanillaMagicItems {
 	public static final CustomItem INVENTORY_SELECTOR;
 	public static final CustomItemCrystal EVOKER_CRYSTAL;
 
-	private VanillaMagicItems() {
+	private VMItems() {
 	}
 
 	static {
-		CUSTOM_ITEMS = new ArrayList<ICustomItem>();
+		CUSTOM_ITEMS = new ArrayList<>();
 
-		ENCHANTED_BUCKETS = new ArrayList<IEnchantedBucket>();
-		POTIONED_CRYSTALS = new ArrayList<IPotionedCrystal>();
+		ENCHANTED_BUCKETS = new ArrayList<>();
+		POTIONED_CRYSTALS = new ArrayList<>();
 
 		ACCELERATION_CRYSTAL = new ItemAccelerationCrystal();
 		CUSTOM_ITEMS.add(ACCELERATION_CRYSTAL);
@@ -82,7 +78,7 @@ public class VanillaMagicItems {
 			customItem.registerRecipe();
 		}
 
-		VanillaMagic.logInfo("Custom Items registered: " + CUSTOM_ITEMS.size());
+		VMLogger.logInfo("Custom Items registered: " + CUSTOM_ITEMS.size());
 	}
 
 	/**
@@ -93,17 +89,13 @@ public class VanillaMagicItems {
 			return false;
 		}
 
-		CompoundNBT stackTag = checkingStack.getTagCompound();
-		if (stackTag == null) {
+		CompoundNBT stackTag = checkingStack.getOrCreateTag();
+
+		if (stackTag == null || !stackTag.contains(ICustomItem.NBT_UNIQUE_NAME) || !stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName())) {
 			return false;
 		}
 
-		if ((stackTag.hasKey(ICustomItem.NBT_UNIQUE_NAME))
-				&& (stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName()))) {
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
@@ -114,15 +106,17 @@ public class VanillaMagicItems {
 			return false;
 		}
 
-		CompoundNBT stackTag = checkingStack.getTagCompound();
+		CompoundNBT stackTag = checkingStack.getOrCreateTag();
+
 		if (stackTag == null) {
 			return false;
 		}
 
-		if (stackTag.hasKey(IEnchantedBucket.NBT_ENCHANTED_BUCKET)
+		String fluidName = ForgeRegistries.FLUIDS.getKey(customBucket.getFluidInBucket()).toString();
+
+		if (stackTag.contains(IEnchantedBucket.NBT_ENCHANTED_BUCKET)
 				&& stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET).equals(customBucket.getUniqueNBTName())
-				&& stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME)
-						.equals(customBucket.getFluidInBucket().getName())) {
+				&& stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME).equals(fluidName)) {
 			return true;
 		}
 

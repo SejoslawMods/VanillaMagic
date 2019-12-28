@@ -1,9 +1,8 @@
 package com.github.sejoslaw.vanillamagic.api.tileentity.speedy;
 
-import net.minecraft.inventory.IInventory;
 import com.github.sejoslaw.vanillamagic.api.inventory.IInventoryWrapper;
+import com.github.sejoslaw.vanillamagic.api.math.Box;
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
-import com.github.sejoslaw.vanillamagic.api.util.Box;
 
 /**
  * This is the connection to TileSpeedy.
@@ -48,14 +47,12 @@ public interface ISpeedy extends ICustomTileEntity {
     void setSize(int size);
 
     /**
-     * @return Returns the {@link IInventoryWrapper} for the {@link IInventory} with
-     * Acceleration Crystal.
+     * @return Returns the {@link IInventoryWrapper} for the inventory withAcceleration Crystal.
      */
     IInventoryWrapper getInventoryWithCrystal();
 
     /**
-     * @return Returns TRUE if the connected {@link IInventory} contains
-     * Acceleration Crystal.
+     * @return Returns TRUE if the connected inventory contains Acceleration Crystal.
      */
     boolean containsCrystal();
 }

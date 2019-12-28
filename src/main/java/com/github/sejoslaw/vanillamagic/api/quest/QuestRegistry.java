@@ -1,17 +1,13 @@
 package com.github.sejoslaw.vanillamagic.api.quest;
 
+import com.github.sejoslaw.vanillamagic.api.VanillaMagicAPI;
+import org.apache.logging.log4j.Level;
+
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import org.apache.logging.log4j.Level;
-
-import net.minecraftforge.common.MinecraftForge;
-import com.github.sejoslaw.vanillamagic.api.VanillaMagicAPI;
-import com.github.sejoslaw.vanillamagic.api.event.EventQuest;
 
 /**
  * Class which stores all registered Quests.
@@ -38,10 +34,8 @@ public class QuestRegistry {
      * Main method for adding Quests.
      */
     public static void addQuest(IQuest q) {
-        if (!MinecraftForge.EVENT_BUS.post(new EventQuest.Add(q))) {
-            QuestRegistry.QUESTS.add(q);
-            QuestRegistry.QUESTS_MAP.put(q.getUniqueName(), q);
-        }
+        QuestRegistry.QUESTS.add(q);
+        QuestRegistry.QUESTS_MAP.put(q.getUniqueName(), q);
     }
 
     /**

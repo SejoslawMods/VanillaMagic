@@ -1,27 +1,22 @@
-package com.github.sejoslaw.vanillamagic.quest;
+package com.github.sejoslaw.vanillamagic.common.quest;
 
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
+import com.github.sejoslaw.vanillamagic.api.math.Point;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestData;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
-import com.github.sejoslaw.vanillamagic.api.util.Point;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
-import com.github.sejoslaw.vanillamagic.util.QuestUtil;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.common.util.QuestUtil;
+import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
- * Base class for all the quests.<br>
- * Each Quest MUST overrides {@link readData} if it adds additional data.
+ * Base class for all the quests.
  * 
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
@@ -51,7 +46,6 @@ public abstract class Quest implements IQuest {
 	/**
 	 * Array of additional Quests which should be completed to get this Quest.
 	 */
-	@Nullable
 	IQuest[] additionalRequiredQuests;
 
 	public void readData(JsonObject jo) {
@@ -78,11 +72,11 @@ public abstract class Quest implements IQuest {
 		// Additional Quests
 		if (jo.has("additionalRequiredQuests")) {
 			JsonObject additionalRequiredQuests = jo.get("additionalRequiredQuests").getAsJsonObject();
-			Set<Entry<String, JsonElement>> set = additionalRequiredQuests.entrySet();
+			Set<Map.Entry<String, JsonElement>> set = additionalRequiredQuests.entrySet();
 			IQuest[] requiredQuestsTable = new IQuest[set.size()];
 			int index = 0;
 
-			for (Entry<String, JsonElement> q : set) {
+			for (Map.Entry<String, JsonElement> q : set) {
 				requiredQuestsTable[index] = QuestRegistry.get(q.getValue().getAsString());
 				index++;
 			}
@@ -108,8 +102,7 @@ public abstract class Quest implements IQuest {
 	 * @return Returns QuestData build for this Quest
 	 */
 	public QuestData buildQuestData() {
-		return new QuestData("vanillamagic:" + this.uniqueName,
-				new TextComponentTranslation("quest." + this.uniqueName, new Object[0]), this);
+		return new QuestData("vanillamagic:" + this.uniqueName, this);
 	}
 
 	/**
@@ -201,7 +194,7 @@ public abstract class Quest implements IQuest {
 	}
 
 	public String getQuestDescription() {
-		return TextUtil.translateToLocal(this.questDescription);
+		return TranslationUtil.translateToLocal(this.questDescription);
 	}
 
 	public String getUniqueName() {

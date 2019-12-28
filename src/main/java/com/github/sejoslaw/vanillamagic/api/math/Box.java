@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.api.util;
+package com.github.sejoslaw.vanillamagic.api.math;
 
 import net.minecraft.util.math.BlockPos;
 

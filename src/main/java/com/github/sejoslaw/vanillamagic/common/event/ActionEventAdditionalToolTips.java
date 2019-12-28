@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic.common.event;
 
 import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.common.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

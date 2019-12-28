@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Level;
 import net.minecraft.block.Block;
 import com.github.sejoslaw.vanillamagic.api.exception.MappingExistsException;
 import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.QuarryUpgradeAPI;
 import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
 import com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutoInventoryOutputPlacer;
 import com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.upgrade.QuarryUpgradeAutosmeltDigged;

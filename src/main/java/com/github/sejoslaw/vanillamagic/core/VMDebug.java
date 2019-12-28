@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic.core;
 
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
-import com.github.sejoslaw.vanillamagic.api.util.IAdditionalInfoProvider;
+import com.github.sejoslaw.vanillamagic.api.tileentity.IAdditionalInfoProvider;
 import com.github.sejoslaw.vanillamagic.common.handler.CustomTileEntityHandler;
 import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
@@ -103,15 +103,15 @@ public class VMDebug {
 
         if (stackRightHand.getItem().equals(Items.CLOCK)) {
             BlockPos tilePos = event.getPos();
-            ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(tilePos, world);
+            ICustomTileEntity customTile = CustomTileEntityHandler.getCustomTileEntity(world, tilePos);
 
             if (customTile == null) {
                 return;
             }
 
-            TileEntity tile = customTile.getTileEntity();
-            if ((tile instanceof ICustomTileEntity) && (customTile.getTileEntity() instanceof IAdditionalInfoProvider)) {
-                List<ITextComponent> info = ((IAdditionalInfoProvider) customTile.getTileEntity()).getAdditionalInfo();
+            TileEntity tile = customTile.asTileEntity();
+            if ((tile instanceof ICustomTileEntity) && (customTile.asTileEntity() instanceof IAdditionalInfoProvider)) {
+                List<ITextComponent> info = ((IAdditionalInfoProvider) customTile.asTileEntity()).getAdditionalInfo();
                 EntityUtil.addChatComponentMessageNoSpam(player, info.toArray(new ITextComponent[info.size()]));
             }
         }

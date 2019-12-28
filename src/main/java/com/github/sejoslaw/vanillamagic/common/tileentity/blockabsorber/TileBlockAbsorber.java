@@ -1,118 +1,101 @@
-package com.github.sejoslaw.vanillamagic.tileentity.blockabsorber;
+package com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.IHopper;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.MinecraftForge;
 import com.github.sejoslaw.vanillamagic.api.event.EventBlockAbsorber;
 import com.github.sejoslaw.vanillamagic.api.tileentity.blockabsorber.IBlockAbsorber;
-import com.github.sejoslaw.vanillamagic.inventory.InventoryHelper;
-import com.github.sejoslaw.vanillamagic.tileentity.CustomTileEntity;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.inventory.InventoryHelper;
+import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
+import com.github.sejoslaw.vanillamagic.common.util.BlockUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.core.VMTileEntities;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.HopperTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorber {
-	public static final String REGISTRY_NAME = TileBlockAbsorber.class.getName();
+    public static final String REGISTRY_NAME = TileBlockAbsorber.class.getName();
 
-	public List<String> getAdditionalInfo() {
-		List<String> list = super.getAdditionalInfo();
-		TileEntityHopper connectedHopper = getConnectedHopper();
-		BlockPos connectedHopperPos = connectedHopper.getPos();
-		list.add("Saved Hopper position: X=" + connectedHopperPos.getX() + ", Y=" + connectedHopperPos.getY() + ", Z="
-				+ connectedHopperPos.getZ());
-		list.add("Has connected Hopper: " + (connectedHopper != null));
-		return list;
-	}
+    public TileBlockAbsorber() {
+        super(VMTileEntities.BLOCK_ABSORBER);
+    }
 
-	/**
-	 * On each update this {@link TileEntity} will check for block which is on this
-	 * position and try to place it in bottom {@link IHopper}
-	 * 
-	 * @see com.github.sejoslaw.vanillamagic.tileentity.CustomTileEntity#update()
-	 */
-	public void update() {
-		TileEntityHopper connectedHopper = getConnectedHopper();
-		IBlockState thisState = world.getBlockState(pos);
+    public List<ITextComponent> getAdditionalInfo() {
+        List<ITextComponent> list = super.getAdditionalInfo();
+        HopperTileEntity connectedHopper = getConnectedHopper();
+        BlockPos connectedHopperPos = connectedHopper.getPos();
+        list.add(TextUtil.wrap("Saved Hopper position: X=" + connectedHopperPos.getX() + ", Y=" + connectedHopperPos.getY() + ", Z=" + connectedHopperPos.getZ()));
+        list.add(TextUtil.wrap("Has connected Hopper: " + (connectedHopper != null)));
+        return list;
+    }
 
-		if (BlockUtil.areEqual(thisState.getBlock(), Blocks.AIR)) {
-			return;
-		}
+    /**
+     * On each tick this {@link TileEntity} will check for block which is on this position and try to place it in bottom Hopper.
+     */
+    public void tick() {
+        HopperTileEntity connectedHopper = getConnectedHopper();
+        BlockState thisState = world.getBlockState(pos);
 
-		TileEntity tileAtThisPos = world.getTileEntity(pos);
-		if ((tileAtThisPos != null) && (tileAtThisPos instanceof IInventory)) {
-			IInventory inv = (IInventory) tileAtThisPos;
+        if (BlockUtil.areEqual(thisState.getBlock(), Blocks.AIR)) {
+            return;
+        }
 
-			try {
-				if (!InventoryHelper.isInventoryEmpty(inv, Direction.DOWN)) {
-					for (int i = 0; i < inv.getSizeInventory(); ++i) {
-						ItemStack stackInSlot = inv.getStackInSlot(i);
-						ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, stackInSlot,
-								getInputFacing());
-						inv.setInventorySlotContents(i, leftItems);
-					}
-				}
-			} catch (ReflectiveOperationException e) {
-				e.printStackTrace();
-				return;
-			}
+        TileEntity tileAtThisPos = world.getTileEntity(pos);
+        if ((tileAtThisPos != null) && (tileAtThisPos instanceof IInventory)) {
+            IInventory inv = (IInventory) tileAtThisPos;
 
-			try {
-				if (!InventoryHelper.isInventoryEmpty(inv, Direction.DOWN)) {
-					return;
-				}
-			} catch (ReflectiveOperationException e) {
-				e.printStackTrace();
-			}
-		}
+            try {
+                if (!InventoryHelper.isInventoryEmpty(inv, Direction.DOWN)) {
+                    for (int i = 0; i < inv.getSizeInventory(); ++i) {
+                        ItemStack stackInSlot = inv.getStackInSlot(i);
+                        ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, stackInSlot, getInputFacing());
+                        inv.setInventorySlotContents(i, leftItems);
+                    }
+                }
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+                return;
+            }
 
-		ItemStack thisBlock = new ItemStack(thisState.getBlock());
+            try {
+                if (!InventoryHelper.isInventoryEmpty(inv, Direction.DOWN)) {
+                    return;
+                }
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+            }
+        }
 
-		if (thisBlock.getItem() == null) {
-			return;
-		}
+        ItemStack thisBlock = new ItemStack(thisState.getBlock());
 
-		ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
+        if (thisBlock.getItem() == null) {
+            return;
+        }
 
-		if (ItemStackUtil.isNullStack(leftItems)) {
-			MinecraftForge.EVENT_BUS.post(new EventBlockAbsorber((IBlockAbsorber) this, world, pos, connectedHopper));
-			world.setBlockState(pos, Blocks.AIR.getDefaultState());
-		}
-	}
+        ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
 
-	public Direction getInputFacing() {
-		return Direction.UP;
-	}
+        if (ItemStackUtil.isNullStack(leftItems)) {
+            MinecraftForge.EVENT_BUS.post(new EventBlockAbsorber(this, world, pos, connectedHopper));
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        }
+    }
 
-	public TileEntityHopper getConnectedHopper() {
-		return (TileEntityHopper) world.getTileEntity(pos.offset(Direction.DOWN));
-	}
+    public Direction getInputFacing() {
+        return Direction.UP;
+    }
 
-	/**
-	 * Returns NULL if there is no inventory for Hopper to transfer into.
-	 */
-	@Nullable
-	public IInventory getInventoryForHopperTransfer() {
-		try {
-			Method thisMethod = getConnectedHopper().getClass().getMethod("getInventoryForHopperTransfer");
-			thisMethod.setAccessible(true);
-			return (IInventory) thisMethod.invoke(getConnectedHopper());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+    public HopperTileEntity getConnectedHopper() {
+        return (HopperTileEntity) world.getTileEntity(pos.offset(Direction.DOWN));
+    }
 }
