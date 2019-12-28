@@ -2,7 +2,6 @@ package com.github.sejoslaw.vanillamagic.common.handler;
 
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
 import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
 import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -88,6 +87,8 @@ public class WorldHandler {
                             tileEntity = TileEntity.create(tileEntityTag);
                             tileEntity.setWorld(world);
 
+                            ((ICustomTileEntity) tileEntity).init();
+
                             canAdd = ((ICustomTileEntity) tileEntity).isPrepared();
 
                             log(Level.INFO, "[World Load] Created CustomTileEntity (" + tileEntity.getClass().getSimpleName() + ")");
@@ -97,7 +98,7 @@ public class WorldHandler {
                         }
 
                         if (tileEntity != null && canAdd && !tileEntity.getPos().equals(CustomTileEntityHandler.EMPTY_SPACE)) {
-                            NBTUtil.readFromINBTSerializable(tileEntity, tileEntityTag);
+                            tileEntity.deserializeNBT(tileEntityTag);
                             CustomTileEntityHandler.addCustomTileEntity((ICustomTileEntity) tileEntity, world);
                         }
                     }
@@ -153,7 +154,7 @@ public class WorldHandler {
             List<ICustomTileEntity> customTileEntities = CustomTileEntityHandler.getCustomEntitiesInDimension(world);
 
             for (int j = 0; j < customTileEntities.size(); ++j) {
-                entityListNBT.add(customTileEntities.get(j).asTileEntity().write(new CompoundNBT()));
+                entityListNBT.add(customTileEntities.get(j).asTileEntity().serializeNBT());
             }
 
             data.put(TILES, entityListNBT);

@@ -1,24 +1,15 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.autocrafting;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.autocrafting;
 
-import java.util.List;
-
-import org.apache.logging.log4j.Level;
-
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.event.EventAutocrafting;
 import com.github.sejoslaw.vanillamagic.api.exception.NotInventoryException;
 import com.github.sejoslaw.vanillamagic.api.inventory.InventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IAutocrafting;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.tileentity.machine.TileMachine;
-import com.github.sejoslaw.vanillamagic.util.BlockPosUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.NBTUtil;
+import com.github.sejoslaw.vanillamagic.common.tileentity.machine.TileMachine;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
+import com.github.sejoslaw.vanillamagic.core.VMTileEntities;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import org.apache.logging.log4j.Level;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -32,19 +23,23 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting {
 	private final int defaultCraftingSlot = 0;
 	private final int defaultMaxCraftingSlot = 4;
 
-	public void init(World world, BlockPos machinePos) {
-		super.init(world, machinePos);
+	public TileAutocrafting() {
+		super(VMTileEntities.AUTO_CRAFTING);
+	}
+
+	public void init() {
+		super.init();
+
 		this.oneOperationCost = 100; // 1 Coal = 16 crafting operations ?
-		this.startPos = BlockPosUtil.copyPos(getMachinePos());
-		this.chestPosInput = getMachinePos().up();
-		this.chestPosOutput = getMachinePos().down(2);
+		this.startPos = this.pos;
+		this.chestPosInput = this.pos.up();
+		this.chestPosOutput = this.pos.down(2);
 
 		try {
 			this.inventoryInput = new InventoryWrapper(world, chestPosInput);
 			this.inventoryOutput = new InventoryWrapper(world, chestPosOutput);
 		} catch (NotInventoryException e) {
-			VanillaMagic.log(Level.ERROR, this.getClass().getSimpleName()
-					+ " - error when converting to IInventory at position: " + e.position.toString());
+			VMLogger.log(Level.ERROR, this.getClass().getSimpleName() + " - error when converting to IInventory at position: " + e.position.toString());
 		}
 	}
 
@@ -57,7 +52,7 @@ public class TileAutocrafting extends TileMachine implements IAutocrafting {
 	}
 
 	public boolean checkSurroundings() {
-		return QuestAutocrafting.isConstructionComplete(this.world, getMachinePos());
+		return QuestAutocrafting.isConstructionComplete(this.world, this.pos);
 	}
 
 	public void doWork() {

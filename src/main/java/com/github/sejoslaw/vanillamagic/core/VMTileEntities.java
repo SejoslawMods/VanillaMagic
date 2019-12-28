@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic.core;
 import com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.TileBlockAbsorber;
 import com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.TileChunkLoader;
 import com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.TileInventoryBridge;
+import com.github.sejoslaw.vanillamagic.common.tileentity.machine.autocrafting.TileAutocrafting;
 import com.github.sejoslaw.vanillamagic.common.tileentity.speedy.TileSpeedy;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
@@ -26,6 +27,7 @@ public class VMTileEntities {
     public static TileEntityType<TileInventoryBridge> INVENTORY_BRIDGE = null;
     public static TileEntityType<TileBlockAbsorber> BLOCK_ABSORBER = null;
     public static TileEntityType<TileSpeedy> SPEEDY = null;
+    public static TileEntityType<TileAutocrafting> AUTO_CRAFTING = null;
 
     @SubscribeEvent
     public static void onTileEntitiesRegistry(RegistryEvent.Register<TileEntityType<?>> event) {
@@ -33,7 +35,8 @@ public class VMTileEntities {
                 buildTileEntityType(TileChunkLoader::new, TileChunkLoader.REGISTRY_NAME),
                 buildTileEntityType(TileInventoryBridge::new, TileInventoryBridge.REGISTRY_NAME),
                 buildTileEntityType(TileBlockAbsorber::new, TileBlockAbsorber.REGISTRY_NAME),
-                buildTileEntityType(TileSpeedy::new, TileSpeedy.REGISTRY_NAME)
+                buildTileEntityType(TileSpeedy::new, TileSpeedy.REGISTRY_NAME),
+                buildTileEntityType(TileAutocrafting::new, TileAutocrafting.REGISTRY_NAME)
         );
     }
 

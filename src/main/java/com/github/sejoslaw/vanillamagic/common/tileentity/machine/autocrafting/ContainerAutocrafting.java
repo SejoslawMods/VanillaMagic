@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.autocrafting;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.autocrafting;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Container;

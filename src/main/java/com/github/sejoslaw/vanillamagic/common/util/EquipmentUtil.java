@@ -1,11 +1,11 @@
 package com.github.sejoslaw.vanillamagic.common.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which store various methods connected with Equipment and Inventory.
@@ -13,11 +13,11 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class EquipmentUtil {
-    public static final List<Item> HELMETS = new ArrayList<Item>();
-    public static final List<Item> CHEST_PLATES = new ArrayList<Item>();
-    public static final List<Item> LEGGINGS = new ArrayList<Item>();
-    public static final List<Item> BOOTS = new ArrayList<Item>();
-    public static final List<Item> WEAPONS = new ArrayList<Item>();
+    public static final List<Item> HELMETS = new ArrayList<>();
+    public static final List<Item> CHEST_PLATES = new ArrayList<>();
+    public static final List<Item> LEGGINGS = new ArrayList<>();
+    public static final List<Item> BOOTS = new ArrayList<>();
+    public static final List<Item> WEAPONS = new ArrayList<>();
 
     private EquipmentUtil() {
     }
@@ -42,6 +42,6 @@ public final class EquipmentUtil {
             }
         }
 
-        VanillaMagic.logInfo("Readded [" + names[0] + "]: " + registry.size());
+        VMLogger.logInfo("Readded [" + names[0] + "]: " + registry.size());
     }
 }

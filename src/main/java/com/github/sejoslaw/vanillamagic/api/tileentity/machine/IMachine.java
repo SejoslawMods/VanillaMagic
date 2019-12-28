@@ -2,41 +2,14 @@ package com.github.sejoslaw.vanillamagic.api.tileentity.machine;
 
 import com.github.sejoslaw.vanillamagic.api.inventory.IInventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
 /**
- * Machine is a TileEntity that perform some work on World.
- *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public interface IMachine extends ICustomTileEntity {
-    /**
-     * @return Returns the actual position of the machine block. By MachinePosition
-     * we understand the core of the Machine. In Vanilla Magic it usually
-     * will return Cauldron position.
-     */
-    BlockPos getMachinePos();
-
-    /**
-     * @return Returns the state of this Machine.
-     */
-    BlockState getMachineState();
-
-    /**
-     * @return Returns the Machine block.
-     */
-    Block getMachineBlock();
-
-    /**
-     * Set Machine position.
-     */
-    void setMachinePos(BlockPos newPos);
-
     /**
      * @return Returns the current Machine working position. In Quarry it's a
      * digging position. It should return the position on which Machine is
@@ -107,11 +80,6 @@ public interface IMachine extends ICustomTileEntity {
     void checkFuel();
 
     /**
-     * Method to force the Machine to end it's work.
-     */
-    void endWork();
-
-    /**
      * @return Returns if a Machine has finished work.
      */
     boolean isWorkFinished();
@@ -165,34 +133,7 @@ public interface IMachine extends ICustomTileEntity {
     void setOutputInventory(IInventoryWrapper inv);
 
     /**
-     * @return Returns if the output inventory has space for more items.
+     * @return Returns a Direction into which the Machine will output items.
      */
     Direction getOutputDirection();
-
-    // =========================== NEIGHBOR ===========================
-
-    /**
-     * @return Returns the neighbor TileEntity at given face.
-     */
-    TileEntity getNeighborTile(Direction face);
-
-    /**
-     * @return Returns the Machine that is next to this Machine.
-     */
-    IMachine getNeighborMachine(Direction face);
-
-    /**
-     * @return Returns the neighbor position.
-     */
-    BlockPos getNeighborPos(Direction face);
-
-    /**
-     * @return Returns the state of the neighbor block.
-     */
-    BlockState getNeighborState(Direction face);
-
-    /**
-     * @return Returns the neighbor block.
-     */
-    Block getNeighborBlock(Direction face);
 }

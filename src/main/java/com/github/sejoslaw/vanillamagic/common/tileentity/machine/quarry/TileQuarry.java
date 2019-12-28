@@ -144,9 +144,9 @@ public class TileQuarry extends TileMachine implements IQuarry {
 		return ticks >= oneOperationCost;
 	}
 
-	public boolean inventoryOutputHasSpace() {
-		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputDirection());
-	}
+//	public boolean inventoryOutputHasSpace() {
+//		return !InventoryHelper.isInventoryFull(getOutputInventory().getInventory(), getOutputDirection());
+//	}
 
 	public void spawnDigged(ItemStack digged) {
 		Block.spawnAsEntity(world, this.pos.offset(Direction.UP, 2), digged);

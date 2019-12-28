@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
@@ -117,11 +118,7 @@ public final class ItemStackUtil {
         Item itemFromStack = stack.getItem();
         Block blockFromStack = Block.getBlockFromItem(itemFromStack);
 
-        if (blockFromStack == null) {
-            return false;
-        }
-
-        if (!(blockFromStack instanceof ITileEntityProvider)) {
+        if (blockFromStack == Blocks.AIR) {
             return false;
         }
 

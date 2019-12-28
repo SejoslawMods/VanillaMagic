@@ -9,10 +9,9 @@ import net.minecraft.world.World;
  */
 public interface ICustomTileEntity extends ITileEntityObject, ITickableTileEntity, IAdditionalInfoProvider {
     /**
-     * This initialization will be used for placing the ICustomTileEntity FOR THE FIRST TIME on the right position. <br>
-     * As well as starting chunkloading the Chunk with current CustomTileEntity.
+     * Performs additional logic when current CustomTileEntity is constructed.
      */
-    void init(World world, BlockPos pos);
+    void init();
 
     /**
      * @return True if CustomTileEntity can be added to World during loading the World.
