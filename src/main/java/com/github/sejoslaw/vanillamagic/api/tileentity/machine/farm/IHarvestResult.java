@@ -1,15 +1,15 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.farm;
-
-import java.util.List;
+package com.github.sejoslaw.vanillamagic.api.tileentity.machine.farm;
 
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.math.BlockPos;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public interface IHarvestResult {
-	List<ItemEntity> getDrops();
+    List<ItemEntity> getDrops();
 
-	List<BlockPos> getHarvestedBlocks();
+    List<BlockPos> getHarvestedBlocks();
 }

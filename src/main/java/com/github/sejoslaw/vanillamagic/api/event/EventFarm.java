@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic.api.event;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IFarm;
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.farm.IFarm;
 
 /**
  * Event connected with TileFarm.

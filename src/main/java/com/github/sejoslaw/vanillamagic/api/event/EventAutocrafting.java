@@ -2,7 +2,6 @@ package com.github.sejoslaw.vanillamagic.api.event;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IAutocrafting;
 
 /**
  * Event connected with Autocrafting Structure.

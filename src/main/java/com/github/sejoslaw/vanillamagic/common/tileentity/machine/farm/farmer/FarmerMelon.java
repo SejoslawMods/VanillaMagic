@@ -1,42 +1,52 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.farm.farmer;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.farm.farmer;
 
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.farm.IFarm;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import com.github.sejoslaw.vanillamagic.tileentity.machine.farm.TileFarm;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class FarmerMelon extends FarmerCustomSeed {
-	private Block grownBlock;
+    private Block grownBlock;
 
-	public FarmerMelon(Block plantedBlock, Block grownBlock, ItemStack seeds) {
-		super(plantedBlock, seeds);
-		this.grownBlock = grownBlock;
-	}
+    public FarmerMelon(Block plantedBlock, Block grownBlock, ItemStack seeds) {
+        super(plantedBlock, seeds);
 
-	public boolean prepareBlock(TileFarm farm, BlockPos pos, Block block, IBlockState state) {
-		int xVal = farm.getMachinePos().getX() & 1;
-		int zVal = farm.getMachinePos().getZ() & 1;
+        this.grownBlock = grownBlock;
+    }
 
-		if ((pos.getX() & 1) != xVal || (pos.getZ() & 1) != zVal) {
-			IInventory inv = farm.getInputInventory().getInventory();
+    public boolean prepareBlock(IFarm farm, BlockPos pos, Block block, BlockState state) {
+        int xVal = farm.asTileEntity().getPos().getX() & 1;
+        int zVal = farm.asTileEntity().getPos().getZ() & 1;
 
-			for (int i = 0; i < inv.getSizeInventory(); ++i) {
-				ItemStack invSeeds = inv.getStackInSlot(i);
+        if ((pos.getX() & 1) != xVal || (pos.getZ() & 1) != zVal) {
+            IInventory inv = farm.getInputInventory().getInventory();
 
-				if ((invSeeds != null) && canPlant(invSeeds)) {
-					return true;
-				}
-			}
-		}
-		return super.prepareBlock(farm, pos, block, state);
-	}
+            for (int i = 0; i < inv.getSizeInventory(); ++i) {
+                ItemStack invSeeds = inv.getStackInSlot(i);
 
-	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) {
-		return block == grownBlock;
-	}
+                if (canPlant(invSeeds)) {
+                    return true;
+                }
+            }
+        }
+
+        return super.prepareBlock(farm, pos, block, state);
+    }
+
+    public boolean canHarvest(IFarm farm, BlockPos pos, Block block, BlockState state) {
+        return block == grownBlock;
+    }
+
+    public int getMaxAge() {
+        return 0;
+    }
+
+    public int getAge(BlockState state) {
+        return 0;
+    }
 }

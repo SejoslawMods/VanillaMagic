@@ -1,74 +1,60 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.farm.farmer;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.farm.farmer;
 
-import static net.minecraft.block.BlockHorizontal.FACING;
-
-import javax.annotation.Nullable;
-
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.farm.IFarm;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCocoa;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CocoaBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.tileentity.machine.farm.TileFarm;
+
+import java.util.Comparator;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class FarmerCocoa extends FarmerCustomSeed {
-	public FarmerCocoa() {
-		super(Blocks.COCOA, new ItemStack(Items.DYE, 1, 3));
+    public FarmerCocoa() {
+        super(Blocks.COCOA, new ItemStack(Items.COCOA_BEANS, 1));
 
-		this.requiresFarmland = false;
-	}
+        this.requiresFarmland = false;
+    }
 
-	public boolean canHarvest(TileFarm farm, BlockPos pos, Block block, IBlockState state) {
-		return ((block == getPlantedBlock() && state.getValue(BlockCocoa.AGE) == 2)
-				|| (block instanceof BlockCocoa && state.getValue(BlockCocoa.AGE) == 2));
-	}
+    public int getMaxAge() {
+        return CocoaBlock.AGE.getAllowedValues().stream().max(Comparator.naturalOrder()).get();
+    }
 
-	protected boolean plant(TileFarm farm, World worldObj, BlockPos pos) {
-		Direction dir = getPlantDirection(worldObj, pos);
+    public int getAge(BlockState state) {
+        return state.get(CocoaBlock.AGE);
+    }
 
-		if (dir == null) {
-			return false;
-		}
+    public boolean canHarvest(IFarm farm, BlockPos pos, Block block, BlockState state) {
+        return (block == getPlantedBlock() || block instanceof CocoaBlock) && getAge(state) == getMaxAge();
+    }
 
-		IBlockState iBlockState = getPlantedBlock().getDefaultState().withProperty(FACING, dir);
+    protected boolean canPlant(IFarm farm, World world, BlockPos pos) {
+        return getPlantDirection(world, pos) != null;
+    }
 
-		if (worldObj.setBlockState(pos, iBlockState, 1 | 2)) {
-			return true;
-		}
+    private Direction getPlantDirection(World world, BlockPos pos) {
+        if (!world.isAirBlock(pos)) {
+            return null;
+        }
 
-		return false;
-	}
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            BlockPos p = pos.offset(dir);
 
-	protected boolean canPlant(TileFarm farm, World worldObj, BlockPos pos) {
-		return getPlantDirection(worldObj, pos) != null;
-	}
+            if (validBlock(world.getBlockState(p))) {
+                return dir;
+            }
+        }
+        return null;
+    }
 
-	@Nullable
-	private Direction getPlantDirection(World worldObj, BlockPos pos) {
-		if (!worldObj.isAirBlock(pos)) {
-			return null;
-		}
-
-		for (Direction dir : Direction.HORIZONTALS) {
-			BlockPos p = pos.offset(dir);
-
-			if (validBlock(worldObj.getBlockState(p))) {
-				return dir;
-			}
-		}
-		return null;
-	}
-
-	private boolean validBlock(IBlockState state) {
-		return state.getBlock() == Blocks.LOG && state.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE;
-	}
+    private boolean validBlock(BlockState state) {
+        return state.getBlock() == Blocks.JUNGLE_LOG;
+    }
 }

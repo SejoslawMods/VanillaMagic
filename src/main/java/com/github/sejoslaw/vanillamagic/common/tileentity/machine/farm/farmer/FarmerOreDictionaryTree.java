@@ -1,108 +1,97 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.farm.farmer;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.farm.farmer;
 
-import java.util.List;
-
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.farm.IFarm;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import com.github.sejoslaw.vanillamagic.tileentity.machine.farm.TileFarm;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class FarmerOreDictionaryTree extends FarmerTree {
-	protected List<ItemStack> saplings;
-	protected List<ItemStack> woodBlocks;
+    protected List<ItemStack> saplings;
+    protected List<ItemStack> woodBlocks;
 
-	public FarmerOreDictionaryTree(List<ItemStack> saplings, List<ItemStack> woods) {
-		super(null);
-		this.saplings = saplings;
-		this.woodBlocks = woods;
-	}
+    public FarmerOreDictionaryTree(List<ItemStack> saplings, List<ItemStack> woods) {
+        super(null);
+        this.saplings = saplings;
+        this.woodBlocks = woods;
+    }
 
-	protected boolean isWood(Block block) {
-		return woodBlocks.contains(block);
-	}
+    protected boolean isWood(Block block) {
+        return woodBlocks.contains(block);
+    }
 
-	public boolean canPlant(ItemStack stack) {
-		return stack != null && saplings.contains(stack) && Block.getBlockFromItem(stack.getItem()) != null;
-	}
+    public boolean canPlant(ItemStack stack) {
+        return stack != null && saplings.contains(stack) && Block.getBlockFromItem(stack.getItem()) != Blocks.AIR;
+    }
 
-	public boolean prepareBlock(TileFarm farm, BlockPos bc, Block block, IBlockState meta) {
-		if (saplings.contains(block)) {
-			return true;
-		}
+    public boolean prepareBlock(IFarm farm, BlockPos pos, Block block, BlockState state) {
+        if (saplings.contains(block)) {
+            return true;
+        }
 
-		return plantFromInventory(farm, bc, block, meta);
-	}
+        return plantFromInventory(farm, pos, block, state);
+    }
 
-	protected boolean plantFromInventory(TileFarm farm, BlockPos bc, Block block, IBlockState meta) {
-		World worldObj = farm.getWorld();
-		ItemStack sapling = new ItemStack((Item) null);
+    protected boolean plantFromInventory(IFarm farm, BlockPos pos, Block block, BlockState state) {
+        World world = farm.asTileEntity().getWorld();
+        ItemStack saplingStack = new ItemStack(null);
+        IInventory inv = farm.getInputInventory().getInventory();
 
-		IInventory inv = farm.getInputInventory().getInventory();
+        for (int i = 0; i < inv.getSizeInventory(); ++i) {
+            ItemStack invStack = inv.getStackInSlot(i);
 
-		for (int i = 0; i < inv.getSizeInventory(); ++i) {
-			ItemStack invStack = inv.getStackInSlot(i);
+            if ((!ItemStackUtil.isNullStack(invStack)) && saplings.contains(invStack)) {
+                saplingStack = invStack.copy();
+                break;
+            }
+        }
 
-			if ((!ItemStackUtil.isNullStack(invStack)) && saplings.contains(invStack)) {
-				sapling = invStack.copy();
-			}
-		}
+        if (canPlant(world, pos, saplingStack)) {
+            ItemStack seed = farm.takeSeedFromSupplies(saplingStack, pos);
 
-		if (canPlant(worldObj, bc, sapling)) {
-			ItemStack seed = farm.takeSeedFromSupplies(sapling, bc, false);
+            if (!ItemStackUtil.isNullStack(seed)) {
+                return plant(farm, world, pos, seed);
+            }
+        }
 
-			if (!ItemStackUtil.isNullStack(seed)) {
-				return plant(farm, worldObj, bc, seed);
-			}
-		}
+        return false;
+    }
 
-		return false;
-	}
+    protected boolean canPlant(World world, BlockPos pos, ItemStack saplingStack) {
+        if (!saplings.contains(saplingStack) || ItemStackUtil.isNullStack(saplingStack)) {
+            return false;
+        }
 
-	protected boolean canPlant(World worldObj, BlockPos bc, ItemStack sapling) {
-		if (!saplings.contains(sapling) || ItemStackUtil.isNullStack(sapling)) {
-			return false;
-		}
+        BlockPos groundPos = pos.down();
+        BlockState groundState = world.getBlockState(groundPos);
+        Block groundBlock = groundState.getBlock();
+        Block saplingBlock = Block.getBlockFromItem(saplingStack.getItem());
 
-		BlockPos grnPos = bc.down();
-		IBlockState bs = worldObj.getBlockState(grnPos);
-		Block ground = bs.getBlock();
-		Block saplingBlock = Block.getBlockFromItem(sapling.getItem());
+        if (saplingBlock == Blocks.AIR) {
+            return false;
+        }
 
-		if (saplingBlock == null) {
-			return false;
-		}
+        return groundBlock.canSustainPlant(groundState, world, groundPos, Direction.UP, (IPlantable) saplingBlock);
+    }
 
-		if (saplingBlock.canPlaceBlockAt(worldObj, bc)) {
-			if (saplingBlock instanceof IPlantable) {
-				return ground.canSustainPlant(bs, worldObj, grnPos, Direction.UP, (IPlantable) saplingBlock);
-			}
+    protected boolean plant(IFarm farm, World world, BlockPos pos, ItemStack seedStack) {
+        world.setBlockState(pos, Block.getBlockFromItem(seedStack.getItem()).getDefaultState(), 1 | 2);
 
-			return true;
-		}
+        if (!ItemStackUtil.isNullStack(seedStack)) {
+            ItemStackUtil.decreaseStackSize(seedStack, 1);
+        }
 
-		return false;
-	}
-
-	protected boolean plant(TileFarm farm, World worldObj, BlockPos bc, ItemStack seed) {
-		worldObj.setBlockToAir(bc);
-		Item item = seed.getItem();
-		worldObj.setBlockState(bc, Block.getBlockFromItem(item).getStateFromMeta(item.getMetadata(seed.getMetadata())),
-				1 | 2);
-
-		if (!ItemStackUtil.isNullStack(seed)) {
-			ItemStackUtil.decreaseStackSize(seed, 1);
-		}
-
-		return true;
-	}
+        return true;
+    }
 }
