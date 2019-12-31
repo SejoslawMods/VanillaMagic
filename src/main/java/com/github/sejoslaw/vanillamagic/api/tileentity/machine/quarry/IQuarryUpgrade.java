@@ -1,13 +1,13 @@
-package com.github.sejoslaw.vanillamagic.api.tileentity.machine;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Every method except getBlock() is fired once a tick. <br>
@@ -25,27 +25,27 @@ public interface IQuarryUpgrade {
     /**
      * @return Returns readable upgrade name like: "My upgrade" or "Silk-Touch".
      */
-    public String getUpgradeName();
+    String getUpgradeName();
 
     /**
      * @return Returns the Block to which this upgrade is connected. <br>
      * <br>
      * Each upgrade MUST HAVE a different block !!!
      */
-    public Block getBlock();
+    Block getBlock();
 
     /**
      * @return Returns the list of the stacks which will be dropped from the given "blockToDig". <br>
      * Here is where You should do Your stuff like silk-touch, fortune, etc.
      */
-    default public List<ItemStack> getDrops(Block blockToDig, IWorld world, BlockPos workingPos, BlockState workingPosState) {
-        return new ArrayList<ItemStack>();
+    default List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
+        return new ArrayList<>();
     }
 
     /**
      * Here is where You should modify the Quarry itself.
      */
-    default public void modifyQuarry(IQuarry quarry) {
+    default void modifyQuarry(IQuarry quarry) {
     }
 
     /**
@@ -54,7 +54,7 @@ public interface IQuarryUpgrade {
      * For instance: block with fortune 1 must be placed before block with fortune 2. <br>
      * If null than this will be skipped. <br>
      */
-    default public Class<? extends IQuarryUpgrade> requiredUpgrade() {
+    default Class<? extends IQuarryUpgrade> requiredUpgrade() {
         return null;
     }
 }

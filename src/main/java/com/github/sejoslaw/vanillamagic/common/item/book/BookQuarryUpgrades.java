@@ -6,7 +6,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry.IQuarryUpgrade;
 import com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.QuarryUpgradeRegistry;
 import com.github.sejoslaw.vanillamagic.util.CraftingUtil;
 import com.github.sejoslaw.vanillamagic.util.TextUtil;

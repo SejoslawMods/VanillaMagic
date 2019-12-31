@@ -47,17 +47,7 @@ public final class BlockUtil {
      */
     public static void placeBlockFromStack(World world, BlockPos placePosition, ItemStack stack) {
         Item itemFromStack = stack.getItem();
-
-        if (itemFromStack == null) {
-            return;
-        }
-
         Block blockFromStack = Block.getBlockFromItem(itemFromStack);
-
-        if (blockFromStack == null) {
-            return;
-        }
-
         world.setBlockState(placePosition, blockFromStack.getDefaultState());
     }
 

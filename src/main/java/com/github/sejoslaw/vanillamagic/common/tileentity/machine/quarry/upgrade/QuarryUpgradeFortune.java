@@ -1,81 +1,65 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.upgrade;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.upgrade;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry.IQuarryUpgrade;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
-import com.github.sejoslaw.vanillamagic.util.SmeltingUtil;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuarryUpgradeFortune {
-	private Random rand = new Random();
+    public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState, int fortune) {
+        List<ItemStack> drops = Block.getDrops(workingPosState, (ServerWorld) world, workingPos, null);
+        drops.forEach(stack -> stack.grow(fortune));
+        return drops;
+    }
 
-	public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,
-			IBlockState workingPosState, int fortune) {
-		List<ItemStack> list = new ArrayList<ItemStack>();
-		Item item = blockToDig.getItemDropped(workingPosState, rand, fortune);
-		int quantity = 1;
+    public static class One extends QuarryUpgradeFortune implements IQuarryUpgrade {
+        public String getUpgradeName() {
+            return "Fortune 1";
+        }
 
-		if (SmeltingUtil.isBlockOre(blockToDig)) {
-			quantity = blockToDig.quantityDropped(rand) * fortune;
-		}
+        public Block getBlock() {
+            return Blocks.LAPIS_BLOCK;
+        }
 
-		list.add(new ItemStack(item, quantity, blockToDig.damageDropped(workingPosState)));
-		return list;
-	}
+        public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
+            return super.getDrops(blockToDig, world, workingPos, workingPosState, 1);
+        }
+    }
 
-	public static class One extends QuarryUpgradeFortune implements IQuarryUpgrade {
-		public String getUpgradeName() {
-			return "Fortune 1";
-		}
+    public static class Two extends QuarryUpgradeFortune implements IQuarryUpgrade {
+        public String getUpgradeName() {
+            return "Fortune 2";
+        }
 
-		public Block getBlock() {
-			return Blocks.LAPIS_BLOCK;
-		}
+        public Block getBlock() {
+            return Blocks.IRON_BLOCK;
+        }
 
-		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,
-				IBlockState workingPosState) {
-			return super.getDrops(blockToDig, world, workingPos, workingPosState, 1);
-		}
-	}
+        public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
+            return super.getDrops(blockToDig, world, workingPos, workingPosState, 2);
+        }
+    }
 
-	public static class Two extends QuarryUpgradeFortune implements IQuarryUpgrade {
-		public String getUpgradeName() {
-			return "Fortune 2";
-		}
+    public static class Three extends QuarryUpgradeFortune implements IQuarryUpgrade {
+        public String getUpgradeName() {
+            return "Fortune 3";
+        }
 
-		public Block getBlock() {
-			return Blocks.IRON_BLOCK;
-		}
+        public Block getBlock() {
+            return Blocks.GOLD_BLOCK;
+        }
 
-		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,
-				IBlockState workingPosState) {
-			return super.getDrops(blockToDig, world, workingPos, workingPosState, 2);
-		}
-	}
-
-	public static class Three extends QuarryUpgradeFortune implements IQuarryUpgrade {
-		public String getUpgradeName() {
-			return "Fortune 3";
-		}
-
-		public Block getBlock() {
-			return Blocks.GOLD_BLOCK;
-		}
-
-		public List<ItemStack> getDrops(Block blockToDig, IBlockAccess world, BlockPos workingPos,
-				IBlockState workingPosState) {
-			return super.getDrops(blockToDig, world, workingPos, workingPosState, 3);
-		}
-	}
+        public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
+            return super.getDrops(blockToDig, world, workingPos, workingPosState, 3);
+        }
+    }
 }

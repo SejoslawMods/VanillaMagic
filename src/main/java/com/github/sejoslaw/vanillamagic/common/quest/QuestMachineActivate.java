@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.quest;
+package com.github.sejoslaw.vanillamagic.common.quest;
 
 import com.google.gson.JsonObject;
 

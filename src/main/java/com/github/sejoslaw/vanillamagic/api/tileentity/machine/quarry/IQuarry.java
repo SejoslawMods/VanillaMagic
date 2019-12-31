@@ -1,13 +1,12 @@
-package com.github.sejoslaw.vanillamagic.api.tileentity.machine;
+package com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry;
 
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IMachine;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
 /**
- * This is the connection to the TileQuarry.
- *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public interface IQuarry extends IMachine {
@@ -38,7 +37,7 @@ public interface IQuarry extends IMachine {
     /**
      * @return Returns facings around the Quarry;
      */
-    Direction[] directions();
+    Iterable<Direction> directions();
 
     /**
      * @return Returns TRUE if the Quarry can mine next block.
@@ -48,7 +47,7 @@ public interface IQuarry extends IMachine {
     /**
      * Spawns the given ItemStack.
      */
-    void spawnDigged(ItemStack digged);
+    void spawnAfterDig(ItemStack digStack);
 
     /**
      * @return Moves the working position to the next position and returns it.
@@ -62,10 +61,7 @@ public interface IQuarry extends IMachine {
     void performOneOperation();
 
     /**
-     * @return Rotates the given facing the number of given times and returns this
-     * facing after rotation. <br>
-     * This will only rotate Horizontally.
-     * @see {@link net.minecraft.util.Direction.Plane#HORIZONTAL}
+     * @return Rotates the given facing the number of given times and returns this facing after rotation. This will only rotate Horizontally.
      */
     Direction rotateY(Direction startFace, int times);
 
@@ -81,8 +77,7 @@ public interface IQuarry extends IMachine {
     void forceStart();
 
     /**
-     * @return Returns QuarryUpgradeHelper connected with this Quarry. <br>
-     * Each Quarry has it's own QuarryUpgradeHelper.
+     * @return Returns QuarryUpgradeHelper connected with this Quarry. Each Quarry has it's own QuarryUpgradeHelper.
      */
-    IQuarryUpgradeHelper getUpgradeHelper();
+    IQuarryUpgradeManager getUpgradeManager();
 }

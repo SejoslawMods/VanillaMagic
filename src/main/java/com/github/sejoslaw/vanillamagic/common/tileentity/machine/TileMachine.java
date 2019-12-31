@@ -88,6 +88,7 @@ public abstract class TileMachine extends CustomTileEntity implements IMachine {
     public void init() {
         super.init();
 
+        checkSurroundings();
         setWorkRadius(radius);
         setWorkingPos(pos);
     }

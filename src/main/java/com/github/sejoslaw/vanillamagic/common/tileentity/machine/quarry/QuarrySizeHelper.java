@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.tileentity.machine.quarry;
+package com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -14,12 +14,12 @@ public final class QuarrySizeHelper {
 	 * Quarry itself needs 1 diamond block to be created. <br>
 	 * 16 * 1 = 16
 	 */
-	public static final int BASIC_SIZE = 16;
+	public static final int BASIC_SIZE = CHUNK_SIZE;
 
 	private QuarrySizeHelper() {
 	}
 
-	public static int getSize(int diamondBlocks) {
+	public static int calculateSize(int diamondBlocks) {
 		return BASIC_SIZE * diamondBlocks;
 	}
 }

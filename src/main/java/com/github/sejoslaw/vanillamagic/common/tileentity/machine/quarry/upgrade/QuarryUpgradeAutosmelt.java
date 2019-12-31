@@ -1,6 +1,8 @@
 package com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.upgrade;
 
 import com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry.IQuarryUpgrade;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.common.util.SmeltingUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,18 +16,23 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class QuarryUpgradeSilkTouch implements IQuarryUpgrade {
+public class QuarryUpgradeAutosmelt implements IQuarryUpgrade {
     public String getUpgradeName() {
-        return "Silk-Touch";
+        return "Autosmelt";
     }
 
     public Block getBlock() {
-        return Blocks.QUARTZ_BLOCK;
+        return Blocks.FURNACE;
     }
 
     public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
         List<ItemStack> list = new ArrayList<>();
-        list.add(new ItemStack(blockToDig));
+        ItemStack burnedStack = SmeltingUtil.getSmeltingResultAsNewStack(new ItemStack(blockToDig), world);
+
+        if (!ItemStackUtil.isNullStack(burnedStack)) {
+            list.add(burnedStack);
+        }
+
         return list;
     }
 }

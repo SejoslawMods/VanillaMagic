@@ -23,6 +23,13 @@ public abstract class CustomTileEntityBase extends TileEntity implements ICustom
         super(tileEntityType);
     }
 
+    public void setup(World world, BlockPos pos) {
+        this.world = world;
+        this.pos = pos;
+
+        this.init();
+    }
+
     public void init() {
         if (this.world instanceof ServerWorld) {
             IChunk chunk = world.getChunk(pos);

@@ -2,8 +2,8 @@ package com.github.sejoslaw.vanillamagic.api.event;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IQuarry;
-import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IQuarryUpgrade;
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry.IQuarry;
+import com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry.IQuarryUpgrade;
 
 /**
  * Base for all Quarry Events.

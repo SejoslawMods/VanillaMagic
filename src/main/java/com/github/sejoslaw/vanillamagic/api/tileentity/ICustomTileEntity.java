@@ -14,6 +14,11 @@ public interface ICustomTileEntity extends ITileEntityObject, ITickableTileEntit
     void init();
 
     /**
+     * Setups CustomTileEntity.
+     */
+    void setup(World world, BlockPos pos);
+
+    /**
      * @return True if CustomTileEntity can be added to World during loading the World.
      */
     boolean isPrepared();
