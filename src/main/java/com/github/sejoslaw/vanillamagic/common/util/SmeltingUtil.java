@@ -112,7 +112,7 @@ public final class SmeltingUtil {
      */
     public static List<ItemEntity> getFuelFromCauldron(World world, BlockPos cauldronPos) {
         List<ItemEntity> itemsInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
-        List<ItemEntity> fuels = new ArrayList<ItemEntity>();
+        List<ItemEntity> fuels = new ArrayList<>();
 
         if (itemsInCauldron.size() == 0) {
             return fuels;

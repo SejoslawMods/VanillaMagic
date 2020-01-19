@@ -1,10 +1,11 @@
-package com.github.sejoslaw.vanillamagic.common.item;
+package com.github.sejoslaw.vanillamagic.core;
 
 import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
 import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItem;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemCrystal;
 import com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.IPotionedCrystal;
 import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
-import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;

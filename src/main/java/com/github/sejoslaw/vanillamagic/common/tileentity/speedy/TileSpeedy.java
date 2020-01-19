@@ -8,7 +8,7 @@ import com.github.sejoslaw.vanillamagic.api.math.Box;
 import com.github.sejoslaw.vanillamagic.api.tileentity.speedy.ISpeedy;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.common.item.VMItems;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
 import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
 import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;

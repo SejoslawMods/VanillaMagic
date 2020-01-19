@@ -7,7 +7,7 @@ import com.github.sejoslaw.vanillamagic.api.inventory.InventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.tileentity.inventorybridge.IInventoryBridge;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import com.github.sejoslaw.vanillamagic.common.inventory.InventoryHelper;
-import com.github.sejoslaw.vanillamagic.common.item.VMItems;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
 import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
 import com.github.sejoslaw.vanillamagic.common.util.*;
 import com.github.sejoslaw.vanillamagic.core.VMTileEntities;

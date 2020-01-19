@@ -23,13 +23,7 @@ public final class CraftingUtil {
             if (obj instanceof Ingredient) {
                 list.add((Ingredient) obj);
             } else {
-                Ingredient ingredient = Ingredient.fromStacks((ItemStack) obj);
-
-                if (ingredient == null) {
-                    ingredient = Ingredient.EMPTY;
-                }
-
-                list.add(ingredient);
+                list.add(Ingredient.fromStacks((ItemStack) obj));
             }
         }
 
