@@ -8,8 +8,6 @@ General ideas not yet started to be implemented:
 
 6 - Breeder
 
-7 - PluginJEI ???
-
 9 - Item Filter. Paper with NBT TagList.
     TagList will contains the names of the Items / Blocks 
     that can be transfered by InventoryBridge.

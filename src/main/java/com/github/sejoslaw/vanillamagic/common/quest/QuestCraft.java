@@ -1,24 +1,26 @@
-package com.github.sejoslaw.vanillamagic.quest;
+package com.github.sejoslaw.vanillamagic.common.quest;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestCraft extends Quest {
-	@SubscribeEvent
-	public void onCrafting(ItemCraftedEvent event) {
-		PlayerEntity player = event.player;
+    @SubscribeEvent
+    public void onCrafting(PlayerEvent.ItemCraftedEvent event) {
+        PlayerEntity player = event.getPlayer();
 
-		if (!hasQuest(player)) {
-			Item item = event.crafting.getItem();
+        if (hasQuest(player)) {
+            return;
+        }
 
-			if (item.equals(this.getIcon().getItem())) {
-				checkQuestProgress(player);
-			}
-		}
-	}
+        Item item = event.getCrafting().getItem();
+
+        if (item.equals(this.getIcon().getItem())) {
+            checkQuestProgress(player);
+        }
+    }
 }

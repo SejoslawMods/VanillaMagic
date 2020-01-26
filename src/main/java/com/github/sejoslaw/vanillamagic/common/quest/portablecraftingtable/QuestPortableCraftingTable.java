@@ -1,32 +1,40 @@
-package com.github.sejoslaw.vanillamagic.quest.portablecraftingtable;
+package com.github.sejoslaw.vanillamagic.common.quest.portablecraftingtable;
 
+import com.github.sejoslaw.vanillamagic.common.quest.Quest;
+import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.quest.Quest;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
+import net.minecraft.inventory.container.SimpleNamedContainerProvider;
+import net.minecraft.inventory.container.WorkbenchContainer;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestPortableCraftingTable extends Quest {
-	/**
-	 * On right-click open Portable Crafting Table interface.
-	 */
-	@SubscribeEvent
-	public void openCrafting(RightClickItem event) {
-		PlayerEntity player = event.getPlayerEntity();
+    /**
+     * On right-click open Portable Crafting Table interface.
+     */
+    @SubscribeEvent
+    public void openCrafting(PlayerInteractEvent.RightClickItem event) {
+        PlayerEntity player = event.getPlayer();
 
-		if (!EntityUtil.hasPlayerCraftingTableInMainHand(player)) {
-			return;
-		}
+        if (!EntityUtil.hasPlayerCraftingTableInMainHand(player)) {
+            return;
+        }
 
-		checkQuestProgress(player);
+        checkQuestProgress(player);
 
-		if (!hasQuest(player)) {
-			return;
-		}
+        if (!hasQuest(player)) {
+            return;
+        }
 
-		player.displayGui(new InterfacePortableCraftingTable(player));
-	}
+        player.openContainer(new SimpleNamedContainerProvider((p_220270_2_, playerInventory, playerEntity) ->
+                new WorkbenchContainer(p_220270_2_, playerInventory, IWorldPosCallable.of(player.world, player.getPosition())),
+                new TranslationTextComponent("container.crafting")));
+        player.addStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+    }
 }

@@ -1,71 +1,53 @@
 package com.github.sejoslaw.vanillamagic.common.quest;
 
+import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import com.google.gson.JsonObject;
-
-import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class QuestMachineActivate extends Quest {
-	protected ItemStack mustHaveOffHand;
-	protected ItemStack mustHaveMainHand;
+    protected ItemStack mustHaveOffHand;
+    protected ItemStack mustHaveMainHand;
 
-	public void readData(JsonObject jo) {
-		super.readData(jo);
+    public void readData(JsonObject jo) {
+        super.readData(jo);
 
-		if (jo.has("mustHaveOffHand")) {
-			this.mustHaveOffHand = ItemStackUtil.getItemStackFromJSON(jo.get("mustHaveOffHand").getAsJsonObject());
-		}
+        if (jo.has("mustHaveOffHand")) {
+            this.mustHaveOffHand = ItemStackUtil.getItemStackFromJSON(jo.get("mustHaveOffHand").getAsJsonObject());
+        }
 
-		if (jo.has("mustHaveMainHand")) {
-			this.mustHaveMainHand = ItemStackUtil.getItemStackFromJSON(jo.get("mustHaveMainHand").getAsJsonObject());
-		}
-	}
+        if (jo.has("mustHaveMainHand")) {
+            this.mustHaveMainHand = ItemStackUtil.getItemStackFromJSON(jo.get("mustHaveMainHand").getAsJsonObject());
+        }
+    }
 
-	public ItemStack getRequiredStackOffHand() {
-		return mustHaveOffHand;
-	}
+    public boolean canActivate(PlayerEntity player) {
+        ItemStack offHand = player.getHeldItemOffhand();
+        ItemStack mainHand = player.getHeldItemMainhand();
 
-	public ItemStack getRequiredStackMainHand() {
-		return mustHaveMainHand;
-	}
+        if (ItemStackUtil.isNullStack(offHand) || ItemStackUtil.isNullStack(mainHand)) {
+            return false;
+        }
 
-	public boolean canActivate(PlayerEntity player) {
-		ItemStack offHand = player.getHeldItemOffhand();
-		ItemStack mainHand = player.getHeldItemMainhand();
+        return ItemStack.areItemsEqual(offHand, mustHaveOffHand)
+                && (ItemStackUtil.getStackSize(offHand) >= ItemStackUtil.getStackSize(mustHaveOffHand))
+                && ItemStack.areItemsEqual(mainHand, mustHaveMainHand)
+                && (ItemStackUtil.getStackSize(mainHand) >= ItemStackUtil.getStackSize(mustHaveMainHand));
+    }
 
-		if (ItemStackUtil.isNullStack(offHand) || ItemStackUtil.isNullStack(mainHand)) {
-			return false;
-		}
+    public boolean startWorkWithCauldron(PlayerEntity player, BlockPos cauldronPos, IQuest quest) {
+        if (!player.isSneaking() || !(player.world.getBlockState(cauldronPos).getBlock() instanceof CauldronBlock) || !canActivate(player)) {
+            return false;
+        }
 
-		if (ItemStack.areItemsEqual(offHand, mustHaveOffHand)
-				&& (ItemStackUtil.getStackSize(offHand) >= ItemStackUtil.getStackSize(mustHaveOffHand))
-				&& ItemStack.areItemsEqual(mainHand, mustHaveMainHand)
-				&& (ItemStackUtil.getStackSize(mainHand) >= ItemStackUtil.getStackSize(mustHaveMainHand))) {
-			return true;
-		}
+        checkQuestProgress(player);
 
-		return false;
-	}
-
-	public boolean startWorkWithCauldron(PlayerEntity player, BlockPos cauldronPos, IQuest quest) {
-		if (!player.isSneaking() || !(player.world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
-				|| !canActivate(player)) {
-			return false;
-		}
-
-		checkQuestProgress(player);
-
-		if (!hasQuest(player)) {
-			return false;
-		}
-
-		return true;
-	}
+        return hasQuest(player);
+    }
 }

@@ -1,8 +1,5 @@
 package com.github.sejoslaw.vanillamagic.api.quest;
 
-import com.github.sejoslaw.vanillamagic.api.VanillaMagicAPI;
-import org.apache.logging.log4j.Level;
-
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,14 +15,14 @@ public class QuestRegistry {
     /**
      * All registered Quests
      */
-    private static List<IQuest> QUESTS = new ArrayList<IQuest>();
+    private static List<IQuest> QUESTS = new ArrayList<>();
 
     /**
      * Map: <br>
      * Key - Quest Unique Name <br>
      * Value - Quest <br>
      */
-    private static Map<String, IQuest> QUESTS_MAP = new HashMap<String, IQuest>();
+    private static Map<String, IQuest> QUESTS_MAP = new HashMap<>();
 
     private QuestRegistry() {
     }
@@ -39,19 +36,11 @@ public class QuestRegistry {
     }
 
     /**
-     * @return Returns Quest from the Map, where "key" is a uniqueName of the
-     * Quest.<br>
-     * Returns NULL if there is no Quest registered at the given "key".
+     * @return Returns Quest from the Map, where "key" is a uniqueName of the Quest.
      */
     @Nullable
     public static IQuest get(String key) {
-        IQuest q = QUESTS_MAP.get(key);
-
-        if (q == null) {
-            VanillaMagicAPI.LOGGER.log(Level.ERROR, "Can't find Quest for key: " + key);
-        }
-
-        return q;
+        return QUESTS_MAP.get(key);
     }
 
     /**
@@ -73,12 +62,5 @@ public class QuestRegistry {
      */
     public static List<IQuest> getQuests() {
         return QUESTS.subList(0, QUESTS.size() - 1);
-    }
-
-    /**
-     * @return Returns Quests as Map. Where key is a 'uniqueName' of the Quest.
-     */
-    public static Map<String, IQuest> getQuestsMap() {
-        return QUESTS_MAP;
     }
 }

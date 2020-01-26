@@ -1,112 +1,104 @@
-package com.github.sejoslaw.vanillamagic.quest;
+package com.github.sejoslaw.vanillamagic.common.quest;
 
-import java.util.Random;
-
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.init.Enchantments;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.magic.wand.WandRegistry;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.Random;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestArrowMachineGun extends Quest {
-	public boolean checkHands(PlayerEntity player, ItemStack leftHand, ItemStack rightHand) {
-		if ((leftHand.getItem().equals(Items.ARROW) || leftHand.getItem().equals(Items.TIPPED_ARROW))
-				&& rightHand.getItem().equals(WandRegistry.WAND_NETHER_STAR.getWandStack().getItem())) {
-			return true;
-		}
+    public boolean checkHands(ItemStack leftHand, ItemStack rightHand) {
+        return (leftHand.getItem().equals(Items.ARROW) || leftHand.getItem().equals(Items.TIPPED_ARROW))
+                && rightHand.getItem().equals(WandRegistry.WAND_NETHER_STAR.getWandStack().getItem());
+    }
 
-		return false;
-	}
+    @SubscribeEvent
+    public void onRightClick(PlayerInteractEvent.RightClickItem event) {
+        PlayerEntity player = event.getPlayer();
+        ItemStack leftHand = player.getHeldItemOffhand();
+        ItemStack rightHand = player.getHeldItemMainhand();
+        World world = player.world;
 
-	@SubscribeEvent
-	public void onRightClick(RightClickItem event) {
-		PlayerEntity player = event.getPlayerEntity();
-		ItemStack leftHand = player.getHeldItemOffhand();
-		ItemStack rightHand = player.getHeldItemMainhand();
-		World world = player.world;
+        if (ItemStackUtil.isNullStack(leftHand) || !checkHands(leftHand, rightHand)) {
+            return;
+        }
 
-		if (ItemStackUtil.isNullStack(leftHand)) {
-			return;
-		}
+        checkQuestProgress(player);
 
-		if (!checkHands(player, leftHand, rightHand)) {
-			return;
-		}
+        if (!hasQuest(player)) {
+            return;
+        }
 
-		checkQuestProgress(player);
+        ArrowEntity arrowEntity = new ArrowEntity(world, player);
+        arrowEntity.setPotionEffect(leftHand);
+        arrowEntity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 3.0F, 1.0F);
+        arrowEntity.setIsCritical(true);
 
-		if (!hasQuest(player)) {
-			return;
-		}
+        int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, leftHand);
 
-		EntityTippedArrow entityTippedArrow = new EntityTippedArrow(world, player);
-		entityTippedArrow.setPotionEffect(leftHand);
-		entityTippedArrow.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 3.0F, 1.0F);
-		entityTippedArrow.setIsCritical(true);
+        if (j > 0) {
+            arrowEntity.setDamage(arrowEntity.getDamage() + (double) j * 0.5D + 0.5D);
+        }
 
-		int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, leftHand);
+        int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, leftHand);
 
-		if (j > 0) {
-			entityTippedArrow.setDamage(entityTippedArrow.getDamage() + (double) j * 0.5D + 0.5D);
-		}
+        if (k > 0) {
+            arrowEntity.setKnockbackStrength(k);
+        }
 
-		int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, leftHand);
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, leftHand) > 0) {
+            arrowEntity.setFire(100);
+        }
 
-		if (k > 0) {
-			entityTippedArrow.setKnockbackStrength(k);
-		}
+        world.addEntity(arrowEntity);
+        world.playSound(null, player.posX, player.posY, player.posZ,
+                SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
 
-		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, leftHand) > 0) {
-			entityTippedArrow.setFire(100);
-		}
+        if (ItemStackUtil.getStackSize(leftHand) > 0) {
+            ItemStackUtil.decreaseStackSize(leftHand, 1);
 
-		world.spawnEntity(entityTippedArrow);
-		world.playSound((PlayerEntity) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
-				SoundCategory.NEUTRAL, 1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
+            if (ItemStackUtil.getStackSize(leftHand) <= 0) {
+                player.inventory.deleteStack(leftHand);
+            }
+        }
+    }
 
-		if (ItemStackUtil.getStackSize(leftHand) > 0) {
-			ItemStackUtil.decreaseStackSize(leftHand, 1);
+    @SubscribeEvent
+    public void showTooltip(ItemTooltipEvent event) {
+        PlayerEntity player = event.getPlayer();
 
-			if (ItemStackUtil.getStackSize(leftHand) <= 0) {
-				player.inventory.deleteStack(leftHand);
-			}
-		}
-	}
+        if (player == null) {
+            return;
+        }
 
-	@SubscribeEvent
-	public void showTooltip(ItemTooltipEvent event) {
-		PlayerEntity player = event.getPlayerEntity();
+        ItemStack leftHand = player.getHeldItemOffhand();
+        ItemStack rightHand = player.getHeldItemMainhand();
 
-		if (player == null) {
-			return;
-		}
+        if (ItemStackUtil.isNullStack(leftHand)) {
+            return;
+        }
 
-		ItemStack leftHand = player.getHeldItemOffhand();
-		ItemStack rightHand = player.getHeldItemMainhand();
+        if (checkHands(leftHand, rightHand)) {
+            ItemStack eventStack = event.getItemStack();
 
-		if (ItemStackUtil.isNullStack(leftHand)) {
-			return;
-		}
-
-		if (checkHands(player, leftHand, rightHand)) {
-			ItemStack eventStack = event.getItemStack();
-
-			if (ItemStack.areItemsEqual(eventStack, WandRegistry.WAND_NETHER_STAR.getWandStack())
-					|| eventStack.getItem().equals(Items.ARROW) || eventStack.getItem().equals(Items.TIPPED_ARROW)) {
-				event.getToolTip().add("Hold down Right-Mouse-Button to fire arrows very fast.");
-			}
-		}
-	}
+            if (ItemStack.areItemsEqual(eventStack, WandRegistry.WAND_NETHER_STAR.getWandStack()) || eventStack.getItem().equals(Items.ARROW) || eventStack.getItem().equals(Items.TIPPED_ARROW)) {
+                event.getToolTip().add(TextUtil.wrap("Hold down Right-Mouse-Button to fire arrows very fast."));
+            }
+        }
+    }
 }

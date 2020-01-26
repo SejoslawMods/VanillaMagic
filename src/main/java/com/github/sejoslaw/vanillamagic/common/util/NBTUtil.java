@@ -2,12 +2,14 @@ package com.github.sejoslaw.vanillamagic.common.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -74,8 +76,8 @@ public final class NBTUtil {
     public static final String NBT_SPEEDY_TICKS = "NBT_SPEEDY_TICKS";
     public static final String NBT_TICKS_REMAINING = "NBT_TICKS_REMAINING";
     public static final String NBT_BLOCK_NAME = "NBT_BLOCK_NAME";
-    public static final String NBT_BLOCK_META = "NBT_BLOCK_META";
-    public static final String NBT_BLOCK_ID = "NBT_BLOCK_ID";
+    public static final String NBT_BLOCK_STATE = "NBT_BLOCK_META";
+    public static final String NBT_BLOCK = "NBT_BLOCK_ID";
     public static final String NBT_PLAYER_NAME = "NBT_PLAYER_NAME";
     public static final String NBT_CLASS = "NBT_CLASS";
     public static final String NBT_CRAFTING_SLOT = "NBT_CRAFTING_SLOT";
@@ -106,7 +108,15 @@ public final class NBTUtil {
         return new BlockPos(posX, posY, posZ);
     }
 
-    public static CompoundNBT setBlockPosDataToNBT(CompoundNBT nbt, BlockPos pos, World world) {
+    public static int getDimensionFromNBT(CompoundNBT nbt) {
+        if (nbt == null || !nbt.contains(NBT_DIMENSION)) {
+            return DimensionType.OVERWORLD.getId();
+        }
+
+        return nbt.getInt(NBT_DIMENSION);
+    }
+
+    public static CompoundNBT setBlockPosDataToNBT(CompoundNBT nbt, BlockPos pos, DimensionType dimensionType) {
         if (nbt == null) {
             nbt = new CompoundNBT();
         }
@@ -118,7 +128,7 @@ public final class NBTUtil {
         nbt.putInt(NBT_POSX, pos.getX());
         nbt.putInt(NBT_POSY, pos.getY());
         nbt.putInt(NBT_POSZ, pos.getZ());
-        nbt.putInt(NBT_DIMENSION, world.getDimension().getType().getId());
+        nbt.putInt(NBT_DIMENSION, dimensionType.getId());
 
         return nbt;
     }
@@ -140,10 +150,12 @@ public final class NBTUtil {
         ListNBT listNbt = new ListNBT();
 
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
-            if (inv.getStackInSlot(i) != null) {
+            ItemStack slotStack = inv.getStackInSlot(i);
+
+            if (slotStack != null) {
                 CompoundNBT itemNbt = new CompoundNBT();
                 itemNbt.putByte(NBT_IINVENTORY_SLOT, (byte) i);
-                inv.getStackInSlot(i).write(itemNbt);
+                slotStack.write(itemNbt);
                 listNbt.set(i, itemNbt);
             }
         }

@@ -1,100 +1,99 @@
-package com.github.sejoslaw.vanillamagic.quest.spell;
+package com.github.sejoslaw.vanillamagic.common.quest.spell;
 
-import java.util.List;
-
+import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
+import com.github.sejoslaw.vanillamagic.api.magic.ISpell;
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
+import com.github.sejoslaw.vanillamagic.common.magic.spell.SpellRegistry;
+import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
+import com.github.sejoslaw.vanillamagic.common.quest.Quest;
+import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import com.google.gson.JsonObject;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
-import com.github.sejoslaw.vanillamagic.api.magic.ISpell;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.magic.spell.SpellRegistry;
-import com.github.sejoslaw.vanillamagic.magic.wand.WandRegistry;
-import com.github.sejoslaw.vanillamagic.quest.Quest;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraft.util.math.Vec3d;
+
+import java.util.List;
 
 /**
  * Base Quest for casting Spells.
- * 
+ *
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class QuestCastSpell extends Quest {
-	/**
-	 * Spell which should be casted.
-	 */
-	protected ISpell spell;
+    /**
+     * Spell which should be casted.
+     */
+    protected ISpell spell;
 
-	public void readData(JsonObject jo) {
-		this.spell = SpellRegistry.getSpellById(jo.get("spellID").getAsInt());
-		this.icon = spell.getRequiredStackOffHand().copy();
-		this.questName = spell.getSpellName();
-		this.uniqueName = spell.getSpellUniqueName();
-		super.readData(jo);
-	}
+    public int timesCaster = 1;
 
-	/**
-	 * @return Returns the Spell for this Quest.
-	 */
-	public ISpell getSpell() {
-		return spell;
-	}
+    public void readData(JsonObject jo) {
+        this.spell = SpellRegistry.getSpellById(jo.get("spellID").getAsInt());
+        this.icon = spell.getRequiredStackOffHand().copy();
+        this.questName = spell.getSpellName();
+        this.uniqueName = spell.getSpellUniqueName();
 
-	int howManyTimesCasted = 1;
+        super.readData(jo);
+    }
 
-	/**
-	 * Method for checking if is it possible to cast current Spell.
-	 */
-	public boolean castSpell(PlayerEntity caster, Hand hand, ItemStack inHand, BlockPos pos, Direction face,
-			Vector3D hitVec) {
-		if (!finishedAdditionalQuests(caster)) {
-			return false;
-		}
+    /**
+     * @return Returns the Spell for this Quest.
+     */
+    public ISpell getSpell() {
+        return spell;
+    }
 
-		IWand wandPlayerHand = WandRegistry.getWandByItemStack(caster.getHeldItemMainhand());
-		ItemStack casterOffHand = caster.getHeldItemOffhand();
+    /**
+     * Method for checking if is it possible to cast current Spell.
+     */
+    public boolean castSpell(PlayerEntity caster, Hand hand, ItemStack inHand, BlockPos pos, Direction face, Vec3d hitVec) {
+        if (!finishedAdditionalQuests(caster)) {
+            return false;
+        }
 
-		if ((wandPlayerHand == null) || !WandRegistry.isWandRightForSpell(wandPlayerHand, spell)
-				|| ItemStackUtil.isNullStack(casterOffHand) || !spell.isItemOffHandRightForSpell(casterOffHand)) {
-			return false;
-		}
+        IWand wandPlayerHand = WandRegistry.getWandByItemStack(caster.getHeldItemMainhand());
+        ItemStack casterOffHand = caster.getHeldItemOffhand();
 
-		checkQuestProgress(caster);
+        if (wandPlayerHand == null ||
+                !WandRegistry.isWandRightForSpell(wandPlayerHand, spell) ||
+                ItemStackUtil.isNullStack(casterOffHand) ||
+                !spell.isItemOffHandRightForSpell(casterOffHand)) {
+            return false;
+        }
 
-		if (!hasQuest(caster) || (ItemStackUtil.getStackSize(casterOffHand) >= ItemStackUtil
-				.getStackSize(spell.getRequiredStackOffHand()))) {
-			return false;
-		}
+        checkQuestProgress(caster);
 
-		if ((howManyTimesCasted == 1) && castRightSpell(caster, pos, face, hitVec)) {
-			ItemStackUtil.decreaseStackSize(casterOffHand, ItemStackUtil.getStackSize(spell.getRequiredStackOffHand()));
-			howManyTimesCasted++;
-			return true;
-		} else {
-			howManyTimesCasted = 1;
-		}
+        if (!hasQuest(caster) || (ItemStackUtil.getStackSize(casterOffHand) >= ItemStackUtil.getStackSize(spell.getRequiredStackOffHand()))) {
+            return false;
+        }
 
-		return false;
-	}
+        if ((timesCaster == 1) && castRightSpell(caster, pos, face, hitVec)) {
+            ItemStackUtil.decreaseStackSize(casterOffHand, ItemStackUtil.getStackSize(spell.getRequiredStackOffHand()));
+            timesCaster++;
+            return true;
+        } else {
+            timesCaster = 1;
+        }
 
-	/**
-	 * Method for casting the right spell
-	 */
-	public boolean castRightSpell(PlayerEntity caster, BlockPos pos, Direction face, Vector3D hitVec) {
-		List<ISpell> spells = SpellRegistry.getSpells();
-		for (int i = 0; i < spells.size(); ++i) {
-			ISpell iSpell = spells.get(i);
+        return false;
+    }
 
-			if ((spell.getSpellID() == iSpell.getSpellID())
-					&& (spell.getWand().getWandID() == iSpell.getWand().getWandID())
-					&& !EventUtil.postEvent(new EventSpell.Cast(iSpell, caster, caster.world))) {
-				return SpellRegistry.castSpellById(spell.getSpellID(), caster, pos, face, hitVec);
-			}
-		}
-		return false;
-	}
+    /**
+     * Method for casting the right spell
+     */
+    public boolean castRightSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
+        List<ISpell> spells = SpellRegistry.getSpells();
+        for (ISpell iSpell : spells) {
+            if ((spell.getSpellID() == iSpell.getSpellID()) &&
+                    (spell.getWand().getWandID() == iSpell.getWand().getWandID()) &&
+                    !EventUtil.postEvent(new EventSpell.Cast(iSpell, caster, caster.world))) {
+                return SpellRegistry.castSpellById(spell.getSpellID(), caster, pos, face, hitVec);
+            }
+        }
+        return false;
+    }
 }

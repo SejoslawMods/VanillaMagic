@@ -81,7 +81,7 @@ public final class ItemStackUtil {
 
             if (item == null) {
                 return new ItemStack(blockState.getBlock(), stackSize);
-            } else if (blockState == null) {
+            } else {
                 return new ItemStack(item, stackSize);
             }
         } catch (Exception e) {

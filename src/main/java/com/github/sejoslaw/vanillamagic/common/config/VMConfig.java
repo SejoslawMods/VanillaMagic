@@ -35,7 +35,6 @@ public class VMConfig {
     public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_RADIUS;// = 5;
     public static ForgeConfigSpec.IntValue MOTHER_NATURE_CRYSTAL_RANGE;// = 10;
     public static ForgeConfigSpec.IntValue ITEM_MAGNET_RANGE;// = 6;
-    public static ForgeConfigSpec.IntValue ITEM_MAGNET_PULLED_ITEMS;// = 200;
     public static ForgeConfigSpec.BooleanValue ITEM_CAN_AUTOPLANT;
 
     // Spell
@@ -109,9 +108,6 @@ public class VMConfig {
         ITEM_MAGNET_RANGE = COMMON_BUILDER
                 .comment("Range on which Item Magnet will work.")
                 .defineInRange("ITEM_MAGNET_RANGE", 6, 1, Integer.MAX_VALUE);
-        ITEM_MAGNET_PULLED_ITEMS = COMMON_BUILDER
-                .comment("The maximum number of items that Item Magnet can pull at once.")
-                .defineInRange("ITEM_MAGNET_PULLED_ITEMS", 20, 1, Integer.MAX_VALUE);
         ITEM_CAN_AUTOPLANT = COMMON_BUILDER
                 .comment("If autoplanting items like Sapling, etc should be enabled.")
                 .define("ITEM_CAN_AUTOPLANT", true);

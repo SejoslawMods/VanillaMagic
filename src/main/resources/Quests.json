@@ -1,7 +1,7 @@
 [
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraft",
-	"requiredQuest":"",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+	"parent":"",
 	"posX":0,
 	"posY":6,
 	"icon":
@@ -12,8 +12,8 @@
 	"uniqueName":"craftStick"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.portablecraftingtable.QuestPortableCraftingTable",
-	"requiredQuest":"craftStick",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.portablecraftingtable.QuestPortableCraftingTable",
+	"parent":"craftStick",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -25,7 +25,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.machine.autocrafting.QuestAutocrafting",
-	"requiredQuest":"portableCraftingTable",
+	"parent":"portableCraftingTable",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -36,16 +36,16 @@
 	"uniqueName":"autocrafting"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"craftStick",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"craftStick",
 	"posX":0,
 	"posY":-2,
 	"questName":"Flint and Steel Clone",
 	"spellID":0
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraft",
-	"requiredQuest":"craftStick",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+	"parent":"craftStick",
 	"posX":1,
 	"posY":2,
 	"icon":
@@ -56,8 +56,8 @@
 	"uniqueName":"craftCauldron"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestMineBlock",
-	"requiredQuest":"craftStick",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+	"parent":"craftStick",
 	"posX":-1,
 	"posY":2,
 	"icon":
@@ -66,12 +66,11 @@
 	},
 	"questName":"Mine Redstone",
 	"uniqueName":"mineRedstone",
-	"blocksToBeMineClass":"com.github.sejoslaw.vanillamagic.integration.CustomOre",
-	"blocksToBeMineList":"REDSTONE"
+	"blocksToBeMined":"redstone"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"craftStick",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"craftStick",
 	"posX":0,
 	"posY":3,
 	"icon":
@@ -88,8 +87,8 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier1",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier1",
 	"posX":-2,
 	"posY":1,
 	"questName":"Craft Gunpowder",
@@ -112,8 +111,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftGunpowder",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftGunpowder",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Sugar",
@@ -132,8 +131,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSugar",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSugar",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Dirt",
@@ -152,8 +151,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftDirt",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftDirt",
 	"posX":0,
 	"posY":-2,
 	"questName":"Craft Sand",
@@ -172,8 +171,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftDirt",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftDirt",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Cobblestone",
@@ -192,8 +191,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftCobblestone",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftCobblestone",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Gravel",
@@ -213,8 +212,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier1",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier1",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Leather",
@@ -233,8 +232,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftLeather",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftLeather",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Clay",
@@ -257,8 +256,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSand",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSand",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Glass",
@@ -281,8 +280,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftGlass",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftGlass",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Snow",
@@ -309,8 +308,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSnow",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSnow",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Ice",
@@ -336,8 +335,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"buildAltarTier1",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"buildAltarTier1",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -349,8 +348,8 @@
 	"tier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier2",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier2",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Iron Ore",
@@ -375,8 +374,8 @@
 	"wandTier":1
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.upgrade.toolupgrade.QuestToolUpgrade",
-    "requiredQuest":"craftIronOre",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.upgrade.toolupgrade.QuestToolUpgrade",
+    "parent":"craftIronOre",
     "posX":2,
     "posY":0,
     "questName":"Tool Upgrade",
@@ -387,8 +386,8 @@
     }
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.upgrade.itemupgrade.QuestItemUpgrade",
-	"requiredQuest":"toolUpgrade",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.QuestItemUpgrade",
+	"parent":"toolUpgrade",
 	"posX":2,
 	"posY":0,
 	"questName":"Item Upgrades",
@@ -399,8 +398,8 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier2",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier2",
 	"posX":-2,
 	"posY":1,
 	"questName":"Craft Cactus",
@@ -420,8 +419,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftCactus",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftCactus",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Oak Sapling from Cactus",
@@ -441,8 +440,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling0",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling0",
 	"posX":0,
 	"posY":2,
 	"questName":"Craft Spruce Sapling",
@@ -462,8 +461,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling1",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling1",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Birch Sapling",
@@ -484,8 +483,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling2",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling2",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Jungle Sapling",
@@ -506,8 +505,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling3",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling3",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Acacia Sapling",
@@ -528,8 +527,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling4",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling4",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Dark Oak Sapling",
@@ -550,8 +549,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling5",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling5",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Oak Sapling from Dark Oak",
@@ -571,8 +570,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSapling0",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSapling0",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Pumpkin",
@@ -592,8 +591,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftPumpkin",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftPumpkin",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Melon Block",
@@ -613,8 +612,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftMelonBlock",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftMelonBlock",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Vine",
@@ -634,8 +633,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftVine",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftVine",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Lily Pad",
@@ -655,8 +654,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftLiyPad",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftLiyPad",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Slime Ball",
@@ -676,8 +675,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"buildAltarTier2",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"buildAltarTier2",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -689,8 +688,8 @@
 	"tier":3
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestSmeltOnAltar",
-	"requiredQuest":"buildAltarTier3",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestSmeltOnAltar",
+	"parent":"buildAltarTier3",
 	"posX":-2,
 	"posY":1,
 	"icon":
@@ -704,7 +703,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.QuestQuarry",
-	"requiredQuest":"smeltOnAltar",
+	"parent":"smeltOnAltar",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -719,8 +718,8 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.fulltreecut.QuestFullTreeCut",
-	"requiredQuest":"quarry",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.fulltreecut.QuestFullTreeCut",
+	"parent":"quarry",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -732,7 +731,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.machine.farm.QuestMachineFarm",
-	"requiredQuest":"fullTreeCut",
+	"parent":"fullTreeCut",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -753,7 +752,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.speedy.QuestSpeedy",
-	"requiredQuest":"machineFarm",
+	"parent":"machineFarm",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -765,7 +764,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.item.thecrystalofmothernature.QuestMotherNatureCrystal",
-	"requiredQuest":"speedy",
+	"parent":"speedy",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -776,8 +775,8 @@
 	"uniqueName":"motherNatureCrystal"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier3",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier3",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Gold Ingot",
@@ -798,7 +797,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.blockabsorber.QuestBlockAbsorber",
-	"requiredQuest":"craftGoldIngot",
+	"parent":"craftGoldIngot",
 	"posX":2,
 	"posY":0,
 	"icon":
@@ -810,8 +809,8 @@
 	"uniqueName":"blockAbsorber"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"buildAltarTier3",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"buildAltarTier3",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -823,8 +822,8 @@
 	"tier":4
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier4",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier4",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Rotten Flesh",
@@ -843,8 +842,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftRottenFlesh",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftRottenFlesh",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft String",
@@ -864,8 +863,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftString",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftString",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Spider Eye",
@@ -885,8 +884,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSpiderEye",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSpiderEye",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Bone",
@@ -906,8 +905,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftBone",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftBone",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Arrow",
@@ -927,8 +926,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestArrowMachineGun",
-	"requiredQuest":"craftArrow",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestArrowMachineGun",
+	"parent":"craftArrow",
 	"posX":0,
 	"posY":-2,
 	"icon":
@@ -939,8 +938,8 @@
 	"uniqueName":"arrowMachineGun"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftArrow",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftArrow",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Ender Pearl",
@@ -960,8 +959,8 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"buildAltarTier4",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"buildAltarTier4",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -973,8 +972,8 @@
 	"tier":5
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier5",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier5",
 	"posX":-2,
 	"posY":1,
 	"questName":"Craft Glowstone Dust",
@@ -1003,8 +1002,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftGlowstoneDust",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftGlowstoneDust",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Netherrack",
@@ -1028,8 +1027,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftNetherrack",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftNetherrack",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Soul Sand",
@@ -1053,8 +1052,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftSoulSand",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftSoulSand",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Magma Block",
@@ -1077,8 +1076,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftMagmaBlock",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftMagmaBlock",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Nether Wart",
@@ -1109,8 +1108,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftNetherWart",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftNetherWart",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Ghast Tear",
@@ -1143,8 +1142,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestPickup",
-	"requiredQuest":"buildAltarTier5",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestPickup",
+	"parent":"buildAltarTier5",
 	"posX":0,
 	"posY":2,
 	"questName":"Pick Blaze Rod",
@@ -1156,8 +1155,8 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestMoveBlock",
-	"requiredQuest":"pickupBlazeRod",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMoveBlock",
+	"parent":"pickupBlazeRod",
 	"posX":-2,
 	"posY":1,
 	"questName":"Move block by book",
@@ -1169,8 +1168,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCaptureEntity",
-	"requiredQuest":"questMoveBlock",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCaptureEntity",
+	"parent":"questMoveBlock",
 	"posX":-2,
 	"posY":0,
 	"questName":"Capture Entity",
@@ -1183,7 +1182,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.item.enchantedbucket.QuestEnchantedBucket",
-	"requiredQuest":"captureEntity",
+	"parent":"captureEntity",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -1195,7 +1194,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
-	"requiredQuest":"enchantedBucket",
+	"parent":"enchantedBucket",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -1207,7 +1206,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.item.potionedcrystal.QuestPotionedCrystal",
-	"requiredQuest":"liquidSuppressionCrystal",
+	"parent":"liquidSuppressionCrystal",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -1218,8 +1217,8 @@
 	"uniqueName":"potionedCrystal"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"pickupBlazeRod",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"pickupBlazeRod",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Wither Skeleton Skull",
@@ -1244,7 +1243,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.item.accelerationcrystal.QuestAccelerationCrystal",
-	"requiredQuest":"craftWitherSkeletonSkull",
+	"parent":"craftWitherSkeletonSkull",
 	"posX":2,
 	"posY":0,
 	"icon":
@@ -1255,8 +1254,8 @@
 	"uniqueName":"accelerationCrystal"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"pickupBlazeRod",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"pickupBlazeRod",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -1269,7 +1268,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.inventorybridge.QuestInventoryBridge",
-	"requiredQuest":"buildAltarTier6",
+	"parent":"buildAltarTier6",
 	"posX":-2,
 	"posY":1,
 	"icon":
@@ -1281,8 +1280,8 @@
 	"uniqueName":"inventoryBridge"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier6",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier6",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Diamond",
@@ -1302,8 +1301,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestBuildAltar",
-	"requiredQuest":"buildAltarTier6",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"parent":"buildAltarTier6",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -1315,8 +1314,8 @@
 	"tier":7
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier7",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier7",
 	"posX":-2,
 	"posY":1,
 	"questName":"Craft Gold Ore",
@@ -1336,8 +1335,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftGoldOre",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftGoldOre",
 	"posX":0,
 	"posY":2,
 	"questName":"Craft Coal Ore",
@@ -1357,8 +1356,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftGoldOre",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftGoldOre",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Redstone Ore",
@@ -1378,8 +1377,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftRedstoneOre",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftRedstoneOre",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Lapis Ore",
@@ -1399,8 +1398,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftLapisOre",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftLapisOre",
 	"posX":-2,
 	"posY":0,
 	"questName":"Craft Diamond Ore",
@@ -1420,8 +1419,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestOreMultiplier",
-	"requiredQuest":"craftDiamondOre",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestOreMultiplier",
+	"parent":"craftDiamondOre",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -1434,8 +1433,8 @@
 	"wandTier":3
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"buildAltarTier7",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"buildAltarTier7",
 	"posX":2,
 	"posY":1,
 	"questName":"Craft Emerald",
@@ -1455,8 +1454,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftEmerald",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftEmerald",
 	"posX":0,
 	"posY":2,
 	"questName":"Craft Emerald Ore",
@@ -1476,8 +1475,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftEmerald",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftEmerald",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Nether Star",
@@ -1497,8 +1496,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestItemMagnet",
-	"requiredQuest":"craftNetherStar",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestItemMagnet",
+	"parent":"craftNetherStar",
 	"posX":0,
 	"posY":2,
 	"icon":
@@ -1509,8 +1508,8 @@
 	"uniqueName":"itemMagnet"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftNetherStar",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftNetherStar",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Dragon Egg",
@@ -1530,8 +1529,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraftOnAltar",
-	"requiredQuest":"craftDragonEgg",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"parent":"craftDragonEgg",
 	"posX":2,
 	"posY":0,
 	"questName":"Craft Dragon Head",
@@ -1551,8 +1550,8 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraft",
-	"requiredQuest":"craftStick",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+	"parent":"craftStick",
 	"posX":2,
 	"posY":1,
 	"icon":
@@ -1563,8 +1562,8 @@
 	"uniqueName":"craftBook"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraft",
-	"requiredQuest":"craftBook",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+	"parent":"craftBook",
 	"posX":2,
 	"posY":0,
 	"icon":
@@ -1575,8 +1574,8 @@
 	"uniqueName":"craftBookshelf"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestMineBlock",
-	"requiredQuest":"craftBook",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+	"parent":"craftBook",
 	"posX":2,
 	"posY":-1,
 	"icon":
@@ -1585,12 +1584,11 @@
 	},
 	"questName":"Mine Diamond",
 	"uniqueName":"mineDiamond",
-	"blocksToBeMineClass":"com.github.sejoslaw.vanillamagic.integration.CustomOre",
-	"blocksToBeMineList":"DIAMOND"
+	"blocksToBeMined":"diamond"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestMineBlock",
-	"requiredQuest":"craftBook",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+	"parent":"craftBook",
 	"posX":2,
 	"posY":1,
 	"icon":
@@ -1599,12 +1597,11 @@
 	},
 	"questName":"Mine Obsidian",
 	"uniqueName":"mineObsidian",
-	"blocksToBeMineClass":"com.github.sejoslaw.vanillamagic.integration.CustomOre",
-	"blocksToBeMineList":"OBSIDIAN"
+	"blocksToBeMined":"obsidian"
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.mobspawnerdrop.QuestMobSpawnerDrop",
-    "requiredQuest":"mineObsidian",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.QuestMobSpawnerDrop",
+    "parent":"mineObsidian",
     "posX":2,
     "posY":0,
     "icon":
@@ -1616,8 +1613,8 @@
     "uniqueName":"mobSpawnerDropBlock"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestCraft",
-	"requiredQuest":"craftBookshelf",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+	"parent":"craftBookshelf",
 	"posX":2,
 	"posY":0,
 	"icon":
@@ -1634,7 +1631,7 @@
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.chunkloader.QuestChunkLoader",
-	"requiredQuest":"craftEnchantingTable",
+	"parent":"craftEnchantingTable",
 	"posX":2,
 	"posY":0,
 	"icon":
@@ -1645,8 +1642,8 @@
 	"uniqueName":"chunkLoader"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellFlintAndSteel",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellFlintAndSteel",
 	"posX":0,
 	"posY":-2,
 	"questName":"Feel like Blaze",
@@ -1657,208 +1654,208 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellSmallFireball",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellSmallFireball",
 	"posX":0,
 	"posY":-2,
 	"questName":"Fus-Ro-Dah !!!",
 	"spellID":6
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSmallFireball",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSmallFireball",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Chicken",
 	"spellID":100
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonChicken",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonChicken",
     "posX":0,
     "posY":2,
     "questName":"Summon Squid",
     "spellID":110
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonChicken",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonChicken",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Pig",
 	"spellID":101
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonPig",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonPig",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Cow",
 	"spellID":102
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonCow",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonCow",
 	"posX":0,
 	"posY":2,
 	"questName":"Summon Mooshroom",
 	"spellID":103
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonCow",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonCow",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Sheep",
 	"spellID":104
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonSheep",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonSheep",
 	"posX":0,
 	"posY":2,
 	"questName":"Summon Wolf",
 	"spellID":105
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonWolf",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonWolf",
     "posX":0,
     "posY":2,
     "questName":"Summon Lama",
     "spellID":111
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonSheep",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonSheep",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Rabbit",
 	"spellID":106
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonRabbit",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonRabbit",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Horse",
 	"spellID":107
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonHorse",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonHorse",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Villager",
 	"spellID":108
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonVillager",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonVillager",
     "posX":0,
     "posY":2,
     "questName":"Summon IronGolem",
     "spellID":109
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonIronGolem",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonIronGolem",
     "posX":-2,
     "posY":0,
     "questName":"Summon Snowman",
     "spellID":112
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonChicken",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonChicken",
 	"posX":0,
 	"posY":-2,
 	"questName":"Summon Zombie",
 	"spellID":200
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonZombie",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonZombie",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Creeper",
 	"spellID":201
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonCreeper",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonCreeper",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Skeleton",
 	"spellID":202
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonSkeleton",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonSkeleton",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Spider",
 	"spellID":217
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonSpider",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonSpider",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Enderman",
 	"spellID":206
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonEnderman",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonEnderman",
     "posX":0,
     "posY":-2,
     "questName":"Summon Endermite",
     "spellID":218
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonEnderman",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonEnderman",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Polar Bear",
 	"spellID":212
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonPolarBear",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonPolarBear",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Slime",
 	"spellID":208
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonSlime",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonSlime",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Witch",
 	"spellID":209
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonWitch",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonWitch",
     "posX":0,
     "posY":-2,
     "questName":"Summon Vindicator",
     "spellID":219
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonVindicator",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonVindicator",
     "posX":0,
     "posY":-2,
     "questName":"Summon Vex",
     "spellID":220
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-    "requiredQuest":"spellSummonVex",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent":"spellSummonVex",
     "posX":0,
     "posY":-2,
     "questName":"Summon Evoker",
@@ -1866,7 +1863,7 @@
 },
 {
     "questClass":"com.github.sejoslaw.vanillamagic.item.evokercrystal.QuestEvokerCrystal",
-    "requiredQuest":"spellSummonEvoker",
+    "parent":"spellSummonEvoker",
     "posX":2,
     "posY":0,
     "icon":
@@ -1877,80 +1874,80 @@
     "uniqueName":"evokerCrystal"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonWitch",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonWitch",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Spider Jockey",
 	"spellID":207
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonZombie",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonZombie",
 	"posX":0,
 	"posY":-2,
 	"questName":"Summon Pigman",
 	"spellID":210
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonPigman",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonPigman",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Blaze",
 	"spellID":203
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonBlaze",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonBlaze",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Magma Cube",
 	"spellID":204
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonMagmaCube",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonMagmaCube",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Ghast",
 	"spellID":205
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonPigman",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonPigman",
 	"posX":0,
 	"posY":-2,
 	"questName":"Summon Silverfish",
 	"spellID":214
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonSilverfish",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonSilverfish",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Guardian",
 	"spellID":211
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonGuardian",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonGuardian",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Shulker",
 	"spellID":213
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonShulker",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonShulker",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Wither",
 	"spellID":215
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.QuestShootWitherSkull",
-    "requiredQuest":"spellSummonWither",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestShootWitherSkull",
+    "parent":"spellSummonWither",
     "posX":0,
     "posY":-2,
     "icon":
@@ -1962,16 +1959,16 @@
     "uniqueName":"shootWitherSkull"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellOnBlock",
-	"requiredQuest":"spellSummonWither",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"parent":"spellSummonWither",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Giant",
 	"spellID":216
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestSummonHorde",
-	"requiredQuest":"spellSummonSilverfish",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
+	"parent":"spellSummonSilverfish",
 	"posX":0,
 	"posY":-2,
 	"questName":"Summon Horde Lvl: 1",
@@ -1987,8 +1984,8 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.QuestSummonHorde",
-	"requiredQuest":"summonHordeLvl1",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
+	"parent":"summonHordeLvl1",
 	"posX":-2,
 	"posY":0,
 	"questName":"Summon Horde Lvl: 10",
@@ -2001,56 +1998,56 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellSmallFireball",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellSmallFireball",
 	"posX":2,
 	"posY":0,
 	"questName":"Feel like Ghast",
 	"spellID":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellLargeFireball",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellLargeFireball",
 	"posX":0,
 	"posY":2,
 	"questName":"Thunder !!!",
 	"spellID":5
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellSummonLightningBolt",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellSummonLightningBolt",
 	"posX":2,
 	"posY":0,
 	"questName":"Pull Entity to Player",
 	"spellID":10
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellPullEntityToPlayer",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellPullEntityToPlayer",
 	"posX":2,
 	"posY":0,
 	"questName":"Freeze Water 3x3",
 	"spellID":11
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellFreezeWater3x3",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellFreezeWater3x3",
 	"posX":2,
 	"posY":0,
 	"questName":"Move in air",
 	"spellID":9
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellLargeFireball",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellLargeFireball",
 	"posX":0,
 	"posY":-2,
 	"questName":"Teleportation !!!",
 	"spellID":3
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.quest.QuestJumper",
-    "requiredQuest":"spellTeleport",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestJumper",
+    "parent":"spellTeleport",
     "posX":0,
     "posY":-2,
     "icon":
@@ -2061,48 +2058,48 @@
     "uniqueName":"jumper"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellTeleport",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellTeleport",
 	"posX":2,
 	"posY":0,
 	"questName":"Teleport to Nether",
 	"spellID":7
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellTeleportToNether",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellTeleportToNether",
 	"posX":2,
 	"posY":0,
 	"questName":"Teleport to End",
 	"spellID":8
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellLargeFireball",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellLargeFireball",
 	"posX":2,
 	"posY":0,
 	"questName":"Meteor !!!",
 	"spellID":4
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellSummonMeteor",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellSummonMeteor",
 	"posX":2,
 	"posY":0,
 	"questName":"Make rain",
 	"spellID":12
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellWeatherRain",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellWeatherRain",
 	"posX":2,
 	"posY":0,
 	"questName":"Clear weather",
 	"spellID":13
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpellInAir",
-	"requiredQuest":"spellWeatherClear",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+	"parent":"spellWeatherClear",
 	"posX":2,
 	"posY":0,
 	"questName":"Make thunderstorm",

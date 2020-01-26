@@ -1,102 +1,76 @@
-package com.github.sejoslaw.vanillamagic.quest;
+package com.github.sejoslaw.vanillamagic.common.quest;
 
-import java.util.List;
-
+import com.github.sejoslaw.vanillamagic.api.event.EventPlayerUseCauldron;
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
+import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
+import com.github.sejoslaw.vanillamagic.common.util.*;
 import com.google.gson.JsonObject;
-
-import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.api.event.EventPlayerUseCauldron;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.magic.wand.WandRegistry;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
-import com.github.sejoslaw.vanillamagic.util.OreMultiplierUtil;
-import com.github.sejoslaw.vanillamagic.util.SmeltingUtil;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestOreMultiplier extends Quest {
-	protected int multiplier;
-	protected IWand requiredMinimalWand;
+    protected int multiplier;
+    protected IWand requiredMinimalWand;
 
-	public void readData(JsonObject jo) {
-		super.readData(jo);
-		this.multiplier = jo.get("multiplier").getAsInt();
-		this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
-	}
+    public void readData(JsonObject jo) {
+        super.readData(jo);
 
-	public int getMultiplier() {
-		return multiplier;
-	}
+        this.multiplier = jo.get("multiplier").getAsInt();
+        this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
+    }
 
-	public IWand getRequiredWand() {
-		return requiredMinimalWand;
-	}
+    @SubscribeEvent
+    public void doubleOre(PlayerInteractEvent.RightClickBlock event) {
+        PlayerEntity player = event.getPlayer();
+        BlockPos cauldronPos = event.getPos();
+        ItemStack fuelOffHand = player.getHeldItemOffhand();
 
-	@SubscribeEvent
-	public void doubleOre(RightClickBlock event) {
-		PlayerEntity player = event.getPlayerEntity();
-		BlockPos cauldronPos = event.getPos();
+        if (!WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID()) || ItemStackUtil.isNullStack(fuelOffHand) || !SmeltingUtil.isItemFuel(fuelOffHand)) {
+            return;
+        }
 
-		if (!WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID())) {
-			return;
-		}
+        World world = player.world;
 
-		ItemStack fuelOffHand = player.getHeldItemOffhand();
+        if (!(world.getBlockState(cauldronPos).getBlock() instanceof CauldronBlock) || !OreMultiplierUtil.check(world, cauldronPos)) {
+            return;
+        }
 
-		if (ItemStackUtil.isNullStack(fuelOffHand) || !SmeltingUtil.isItemFuel(fuelOffHand)) {
-			return;
-		}
+        List<ItemEntity> oresInCauldron = SmeltingUtil.getOresInCauldron(world, cauldronPos);
 
-		World world = player.world;
+        if (oresInCauldron.size() <= 0) {
+            return;
+        }
 
-		if (!(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
-				|| !OreMultiplierUtil.check(world, cauldronPos)) {
-			return;
-		}
+        checkQuestProgress(player);
 
-		List<ItemEntity> oresInCauldron = SmeltingUtil.getOresInCauldron(world, cauldronPos);
+        if (!hasQuest(player) || EventUtil.postEvent(new EventPlayerUseCauldron.OreMultiplier(player, world, cauldronPos, oresInCauldron))) {
+            return;
+        }
 
-		if (oresInCauldron.size() <= 0) {
-			return;
-		}
+        multiply(player, oresInCauldron, cauldronPos);
+    }
 
-		checkQuestProgress(player);
+    public void multiply(PlayerEntity player, List<ItemEntity> oresInCauldron, BlockPos cauldronPos) {
+        List<ItemEntity> smeltingResult = SmeltingUtil.countAndSmelt_OneByOneItemFromOffHand(player, oresInCauldron, cauldronPos.offset(Direction.UP), this, false);
 
-		if (!hasQuest(player) || EventUtil
-				.postEvent(new EventPlayerUseCauldron.OreMultiplier(player, world, cauldronPos, oresInCauldron))) {
-			return;
-		}
+        World world = player.world;
 
-		multiply(player, oresInCauldron, cauldronPos);
-	}
-
-	public void multiply(PlayerEntity player, List<ItemEntity> oresInCauldron, BlockPos cauldronPos) {
-		List<ItemEntity> smeltingResult = SmeltingUtil.countAndSmelt_OneByOneItemFromOffHand(player, oresInCauldron,
-				cauldronPos.offset(Direction.UP), this, false);
-
-		if (smeltingResult == null) {
-			return;
-		}
-
-		World world = player.world;
-
-		for (int i = 0; i < multiplier; ++i) {
-			for (int j = 0; j < smeltingResult.size(); ++j) {
-				world.spawnEntity(EntityUtil.copyItem(smeltingResult.get(j)));
-			}
-		}
-
-		world.updateEntities();
-	}
+        for (int i = 0; i < multiplier; ++i) {
+            for (ItemEntity itemEntity : smeltingResult) {
+                world.addEntity(EntityUtil.copyItem(itemEntity));
+            }
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic.common.util;
 
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
-import com.github.sejoslaw.vanillamagic.quest.QuestSmeltOnAltar;
+import com.github.sejoslaw.vanillamagic.common.quest.QuestSmeltOnAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -89,10 +89,9 @@ public final class SmeltingUtil {
      * BlockPos
      */
     public static List<ItemEntity> getSmeltable(List<ItemEntity> entitiesInCauldron) {
-        List<ItemEntity> itemsToSmelt = new ArrayList<ItemEntity>();
+        List<ItemEntity> itemsToSmelt = new ArrayList<>();
 
-        for (int i = 0; i < entitiesInCauldron.size(); ++i) {
-            ItemEntity entityItemInCauldron = entitiesInCauldron.get(i);
+        for (ItemEntity entityItemInCauldron : entitiesInCauldron) {
             ItemStack smeltResult = getSmeltingResultAsNewStack(entityItemInCauldron.getItem(), entityItemInCauldron.world);
 
             if (!ItemStackUtil.isNullStack(smeltResult)) {
@@ -118,8 +117,7 @@ public final class SmeltingUtil {
             return fuels;
         }
 
-        for (int i = 0; i < itemsInCauldron.size(); ++i) {
-            ItemEntity entityItemInCauldron = itemsInCauldron.get(i);
+        for (ItemEntity entityItemInCauldron : itemsInCauldron) {
             ItemStack stack = entityItemInCauldron.getItem();
 
             if (isItemFuel(stack)) {
@@ -166,7 +164,7 @@ public final class SmeltingUtil {
                 .stream()
                 .filter(recipe -> recipe.getType() == IRecipeType.SMELTING)
                 .filter(recipe -> recipe instanceof AbstractCookingRecipe)
-                .map(recipe -> (AbstractCookingRecipe)recipe)
+                .map(recipe -> (AbstractCookingRecipe) recipe)
                 .filter(recipe -> ItemStack.areItemStacksEqual(recipe.getRecipeOutput(), stack))
                 .findFirst()
                 .orElse(null);
@@ -183,20 +181,19 @@ public final class SmeltingUtil {
             return new ArrayList<>();
         }
 
-        List<ItemEntity> smelted = new ArrayList<ItemEntity>();
+        List<ItemEntity> smelted = new ArrayList<>();
         World world = player.world;
         int ticks = 0;
         ItemStack rightHand = player.getHeldItemOffhand();
 
-        for (int i = 0; i < itemsToSmelt.size(); ++i) {
-            ItemEntity entityItemToSmelt = itemsToSmelt.get(i);
+        for (ItemEntity entityItemToSmelt : itemsToSmelt) {
             ItemStack entityItemToSmeltStack = entityItemToSmelt.getItem();
 
             int entityItemToSmeltStackSize = ItemStackUtil.getStackSize(entityItemToSmeltStack);
             int ticksToSmeltStack = entityItemToSmeltStackSize * QuestSmeltOnAltar.ONE_ITEM_SMELT_TICKS;
 
-            ItemStack smeltResult = null;
-            ItemEntity smeltResultItemEntity = null;
+            ItemStack smeltResult;
+            ItemEntity smeltResultItemEntity;
 
             while ((ItemStackUtil.getStackSize(rightHand) > 0) && (ticks < ticksToSmeltStack)) {
                 ticks += getItemBurnTimeTicks(rightHand);
@@ -225,7 +222,6 @@ public final class SmeltingUtil {
             smelted.add(smeltResultItemEntity);
             ticks -= ticksToSmeltStack;
 
-            // TODO: Fix the experience after smelting.
             float experienceToAdd = getExperienceToAddFromWholeStack(entityItemToSmeltStack, world);
             player.experience += experienceToAdd;
         }

@@ -1,145 +1,113 @@
-package com.github.sejoslaw.vanillamagic.quest;
+package com.github.sejoslaw.vanillamagic.common.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.github.sejoslaw.vanillamagic.api.event.EventPlayerUseCauldron;
+import com.github.sejoslaw.vanillamagic.api.magic.IWand;
+import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
+import com.github.sejoslaw.vanillamagic.common.util.AltarUtil;
+import com.github.sejoslaw.vanillamagic.common.util.CauldronUtil;
+import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
 import com.google.gson.JsonObject;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.api.event.EventPlayerUseCauldron;
-import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.magic.wand.WandRegistry;
-import com.github.sejoslaw.vanillamagic.util.AltarUtil;
-import com.github.sejoslaw.vanillamagic.util.CauldronUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestCraftOnAltar extends Quest {
-	/*
-	 * Each ItemStack is a different Item Instead of doing 1x Coal + 1x Coal, do 2x
-	 * Coal -> 2 will be stackSize
-	 */
-	protected ItemStack[] ingredients;
-	protected ItemStack[] result;
-	protected int requiredAltarTier;
-	protected IWand requiredMinimalWand;
+    /*
+     * Each ItemStack is a different Item Instead of doing 1x Coal + 1x Coal, do 2x Coal -> 2 will be stackSize
+     */
+    protected ItemStack[] ingredients;
+    protected ItemStack[] result;
+    protected int requiredAltarTier;
+    protected IWand requiredMinimalWand;
 
-	public void readData(JsonObject jo) {
-		this.ingredients = ItemStackUtil.getItemStackArrayFromJSON(jo, "ingredients");
-		this.result = ItemStackUtil.getItemStackArrayFromJSON(jo, "result");
-		this.icon = result[0].copy();
-		this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
-		this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
-		super.readData(jo);
-	}
+    public void readData(JsonObject jo) {
+        this.ingredients = ItemStackUtil.getItemStackArrayFromJSON(jo, "ingredients");
+        this.result = ItemStackUtil.getItemStackArrayFromJSON(jo, "result");
+        this.icon = result[0].copy();
+        this.requiredAltarTier = jo.get("requiredAltarTier").getAsInt();
+        this.requiredMinimalWand = WandRegistry.getWandByTier(jo.get("wandTier").getAsInt());
 
-	public ItemStack[] getIngredients() {
-		return ingredients;
-	}
+        super.readData(jo);
+    }
 
-	public ItemStack[] getResult() {
-		return result;
-	}
+    public ItemStack[] getResult() {
+        return result;
+    }
 
-	public int getRequiredAltarTier() {
-		return requiredAltarTier;
-	}
+    public int getIngredientsStackSize() {
+        return Arrays.stream(ingredients).map(ItemStack::getCount).reduce(0, Integer::sum);
+    }
 
-	public IWand getRequiredWand() {
-		return requiredMinimalWand;
-	}
+    public int getIngredientsInCauldronStackSize(List<ItemEntity> entitiesInCauldron) {
+        return entitiesInCauldron.stream().map(entity -> entity.getItem().getCount()).reduce(0, Integer::sum);
+    }
 
-	public int getIngredientsStackSize() {
-		int stackSize = 0;
+    @SubscribeEvent
+    public void craftOnAltar(PlayerInteractEvent.RightClickBlock event) {
+        PlayerEntity player = event.getPlayer();
+        BlockPos cauldronPos = event.getPos();
 
-		for (int i = 0; i < ingredients.length; ++i) {
-			stackSize += ItemStackUtil.getStackSize(ingredients[i]);
-		}
+        if (!WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID())) {
+            return;
+        }
 
-		return stackSize;
-	}
+        World world = player.world;
 
-	public int getIngredientsInCauldronStackSize(List<ItemEntity> entitiesInCauldron) {
-		int stackSize = 0;
+        if (!(world.getBlockState(cauldronPos).getBlock() instanceof CauldronBlock) || !AltarUtil.checkAltarTier(world, cauldronPos, requiredAltarTier)) {
+            return;
+        }
 
-		for (int i = 0; i < entitiesInCauldron.size(); ++i) {
-			stackSize += ItemStackUtil.getStackSize(entitiesInCauldron.get(i).getItem());
-		}
+        List<ItemEntity> entitiesInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
+        int ingredientsStackSize = getIngredientsStackSize();
+        int ingredientsInCauldronStackSize = getIngredientsInCauldronStackSize(entitiesInCauldron);
 
-		return stackSize;
-	}
+        if (ingredientsStackSize != ingredientsInCauldronStackSize) {
+            return;
+        }
 
-	@SubscribeEvent
-	public void craftOnAltar(RightClickBlock event) {
-		PlayerEntity player = event.getPlayerEntity();
-		BlockPos cauldronPos = event.getPos();
+        List<ItemEntity> alreadyCheckedItemEntities = new ArrayList<>();
 
-		if (!WandRegistry.isWandInMainHandRight(player, requiredMinimalWand.getWandID())) {
-			return;
-		}
+        for (ItemStack currentlyCheckedIngredient : ingredients) {
+            for (ItemEntity currentlyCheckedItemEntity : entitiesInCauldron) {
+                if (ItemStack.areItemStacksEqual(currentlyCheckedIngredient, currentlyCheckedItemEntity.getItem())) {
+                    alreadyCheckedItemEntities.add(currentlyCheckedItemEntity);
+                    break;
+                }
+            }
+        }
 
-		World world = player.world;
+        if (ingredients.length != alreadyCheckedItemEntities.size()) {
+            return;
+        }
 
-		if (!(world.getBlockState(cauldronPos).getBlock() instanceof BlockCauldron)
-				|| !AltarUtil.checkAltarTier(world, cauldronPos, requiredAltarTier)) {
-			return;
-		}
+        checkQuestProgress(player);
 
-		List<ItemEntity> entitiesInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
-		int ingredientsStackSize = getIngredientsStackSize();
-		int ingredientsInCauldronStackSize = getIngredientsInCauldronStackSize(entitiesInCauldron);
+        if (!hasQuest(player) || EventUtil.postEvent(new EventPlayerUseCauldron.CraftOnAltar(player, world, cauldronPos, alreadyCheckedItemEntities, result))) {
+            return;
+        }
 
-		if (ingredientsStackSize != ingredientsInCauldronStackSize) {
-			return;
-		}
+        for (ItemEntity alreadyCheckedItemEntity : alreadyCheckedItemEntities) {
+            alreadyCheckedItemEntity.remove();
+        }
 
-		List<ItemEntity> alreadyCheckedItemEntitys = new ArrayList<ItemEntity>();
+        BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
 
-		for (int i = 0; i < ingredients.length; ++i) {
-			ItemStack currentlyCheckedIngredient = ingredients[i];
-
-			for (int j = 0; j < entitiesInCauldron.size(); ++j) {
-				ItemEntity currentlyCheckedItemEntity = entitiesInCauldron.get(j);
-
-				if (ItemStack.areItemStacksEqual(currentlyCheckedIngredient, currentlyCheckedItemEntity.getItem())) {
-					alreadyCheckedItemEntitys.add(currentlyCheckedItemEntity);
-					break;
-				}
-			}
-		}
-
-		if (ingredients.length != alreadyCheckedItemEntitys.size()) {
-			return;
-		}
-
-		checkQuestProgress(player);
-
-		if (!hasQuest(player) || EventUtil.postEvent(new EventPlayerUseCauldron.CraftOnAltar(player, world, cauldronPos,
-				alreadyCheckedItemEntitys, result))) {
-			return;
-		}
-
-		for (int i = 0; i < alreadyCheckedItemEntitys.size(); ++i) {
-			world.removeEntity(alreadyCheckedItemEntitys.get(i));
-		}
-
-		BlockPos newItemPos = new BlockPos(cauldronPos.getX(), cauldronPos.getY() + 1, cauldronPos.getZ());
-
-		for (int i = 0; i < result.length; ++i) {
-			Block.spawnAsEntity(world, newItemPos, result[i].copy());
-		}
-
-		world.updateEntities();
-	}
+        for (ItemStack itemStack : result) {
+            Block.spawnAsEntity(world, newItemPos, itemStack.copy());
+        }
+    }
 }
