@@ -17,7 +17,7 @@ public abstract class ItemUpgradeBase implements IItemUpgrade {
     /**
      * Tooltip header
      */
-    private final String _tooltipInfo = "ItemUpgrades:";
+    private final String tooltipInfo = "ItemUpgrades:";
 
     /**
      * @return Returns the color is which upgrade name should be displayed.
@@ -36,8 +36,8 @@ public abstract class ItemUpgradeBase implements IItemUpgrade {
         List<ITextComponent> tooltips = event.getToolTip();
 
         // Add header info
-        if (!tooltips.contains(_tooltipInfo)) {
-            tooltips.add(new StringTextComponent(_tooltipInfo));
+        if (!tooltips.contains(tooltipInfo)) {
+            tooltips.add(new StringTextComponent(tooltipInfo));
         }
 
         // Add upgrade info

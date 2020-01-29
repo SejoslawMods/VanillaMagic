@@ -61,6 +61,6 @@ public class QuestRegistry {
      * @return Returns Quests as List.
      */
     public static List<IQuest> getQuests() {
-        return QUESTS.subList(0, QUESTS.size() - 1);
+        return QUESTS;
     }
 }
