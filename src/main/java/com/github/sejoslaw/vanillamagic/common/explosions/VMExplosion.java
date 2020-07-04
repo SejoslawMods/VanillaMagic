@@ -155,9 +155,9 @@ public class VMExplosion extends Explosion {
 
         for (Entity entity : entities) {
             if (((entity instanceof LivingEntity)) || ((entity instanceof ItemEntity))) {
-                int distance = (int) (square(entity.posX - this.explosionX)
-                        + square(entity.posY - this.explosionY)
-                        + square(entity.posZ - this.explosionZ));
+                int distance = (int) (square(entity.getPosX() - this.explosionX)
+                        + square(entity.getPosY() - this.explosionY)
+                        + square(entity.getPosZ() - this.explosionZ));
                 double health = getEntityHealth(entity);
 
                 this.entitiesInRange.add(new EntityDamage(entity, distance, health));
@@ -175,7 +175,7 @@ public class VMExplosion extends Explosion {
         }
 
         int steps = (int) Math.ceil(Math.PI / Math.atan(1.0D / this.maxDistance));
-        BlockPos.MutableBlockPos tmpPos = new BlockPos.MutableBlockPos();
+        BlockPos.Mutable tmpPos = new BlockPos.Mutable();
 
         for (int phiN = 0; phiN < 2 * steps; ++phiN) {
             for (int thetaN = 0; thetaN < steps; ++thetaN) {
@@ -302,7 +302,7 @@ public class VMExplosion extends Explosion {
         }
     }
 
-    private void shootRay(double x, double y, double z, double phi, double theta, double power, boolean killEntities, BlockPos.MutableBlockPos tmpPos) {
+    private void shootRay(double x, double y, double z, double phi, double theta, double power, boolean killEntities, BlockPos.Mutable tmpPos) {
         double deltaX = Math.sin(theta) * Math.cos(phi);
         double deltaY = Math.cos(theta);
         double deltaZ = Math.sin(theta) * Math.sin(phi);
@@ -419,7 +419,7 @@ public class VMExplosion extends Explosion {
 
             Entity entity = entityDamage.entity;
 
-            if (square(entity.posX - x) + square(entity.posY - y) + square(entity.posZ - z) > 25.0D) {
+            if (square(entity.getPosX() - x) + square(entity.getPosY() - y) + square(entity.getPosZ() - z) > 25.0D) {
                 continue;
             }
 
@@ -428,9 +428,9 @@ public class VMExplosion extends Explosion {
             entityDamage.damage += damage;
             entityDamage.health -= damage;
 
-            double deltaX = entity.posX - this.explosionX;
-            double deltaY = entity.posY - this.explosionY;
-            double deltaZ = entity.posZ - this.explosionZ;
+            double deltaX = entity.getPosX() - this.explosionX;
+            double deltaY = entity.getPosY() - this.explosionY;
+            double deltaZ = entity.getPosZ() - this.explosionZ;
 
             double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
             double offset = 0.08749999999999999D;

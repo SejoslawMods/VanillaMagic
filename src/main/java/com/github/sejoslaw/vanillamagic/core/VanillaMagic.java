@@ -74,7 +74,7 @@ public class VanillaMagic {
 //        BookRegistry.postInit();
 //        EnchantedBucketUtil.registerFluids();
 //        PotionedCrystalHelper.registerRecipes();
-//        VanillaMagicItems.postInit();
+//        VMItems.postInit();
 //        VanillaMagicIntegration.postInit();
 //        logInfo("Registered Quarry Upgrades: " + QuarryUpgradeRegistry.countUpgrades());
 //        MobSpawnerRegistry.postInit(); // Integration should be read ALWAYS at the end.

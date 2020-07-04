@@ -85,7 +85,7 @@ public class WorldHandler {
 
                         try {
                             tileEntity = TileEntity.create(tileEntityTag);
-                            tileEntity.setWorld(world);
+                            tileEntity.setWorldAndPos(world, tileEntity.getPos());
 
                             ((ICustomTileEntity) tileEntity).init();
 
@@ -97,7 +97,7 @@ public class WorldHandler {
                             continue;
                         }
 
-                        if (tileEntity != null && canAdd && !tileEntity.getPos().equals(CustomTileEntityHandler.EMPTY_SPACE)) {
+                        if (canAdd && !tileEntity.getPos().equals(CustomTileEntityHandler.EMPTY_SPACE)) {
                             tileEntity.deserializeNBT(tileEntityTag);
                             CustomTileEntityHandler.addCustomTileEntity((ICustomTileEntity) tileEntity, world);
                         }

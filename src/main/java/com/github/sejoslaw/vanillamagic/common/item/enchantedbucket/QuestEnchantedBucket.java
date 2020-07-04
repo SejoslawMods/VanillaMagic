@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Blocks;
@@ -30,7 +30,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.github.sejoslaw.vanillamagic.api.event.EventEnchantedBucket;
 import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.magic.wand.WandRegistry;
 import com.github.sejoslaw.vanillamagic.quest.Quest;
 import com.github.sejoslaw.vanillamagic.util.CauldronUtil;
@@ -113,7 +113,7 @@ public class QuestEnchantedBucket extends Quest {
 		}
 
 		if (hasQuest(player)) {
-			for (IEnchantedBucket bucket : VanillaMagicItems.ENCHANTED_BUCKETS) {
+			for (IEnchantedBucket bucket : VMItems.ENCHANTED_BUCKETS) {
 				CompoundNBT bucketTag = bucket.getItem().getTagCompound();
 				String bucketFluid = bucketTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
 				String stackFluid = stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
@@ -178,7 +178,7 @@ public class QuestEnchantedBucket extends Quest {
 		}
 
 		blockPos = blockPos.offset(event.getFace());
-		IBlockState fluidState = bucket.getFluidInBucket().getBlock().getDefaultState();
+		BlockState fluidState = bucket.getFluidInBucket().getBlock().getDefaultState();
 
 		if (!EventUtil.postEvent(new EventEnchantedBucket.SpawnLiquid(bucket, player, world, blockPos))
 				&& !EventUtil.postEvent(new CreateFluidSourceEvent(world, blockPos, fluidState))) {
@@ -212,7 +212,7 @@ public class QuestEnchantedBucket extends Quest {
 		}
 
 		if (hasQuest(player)) {
-			for (IEnchantedBucket bucket : VanillaMagicItems.ENCHANTED_BUCKETS) {
+			for (IEnchantedBucket bucket : VMItems.ENCHANTED_BUCKETS) {
 				CompoundNBT bucketTag = bucket.getItem().getTagCompound();
 				String bucketFluid = bucketTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
 				String stackFluid = stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME);
@@ -244,7 +244,7 @@ public class QuestEnchantedBucket extends Quest {
 			return;
 		}
 
-		IBlockState fluidState = fluidBlock.getDefaultState();
+		BlockState fluidState = fluidBlock.getDefaultState();
 		if (!EventUtil.postEvent(new EventEnchantedBucket.SpawnLiquid(bucket, player, world, hittedBlock))) {
 			ItemStack bucketStack = player.getHeldItemMainhand().copy();
 

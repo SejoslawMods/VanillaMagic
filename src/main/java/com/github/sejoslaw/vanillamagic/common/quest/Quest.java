@@ -62,9 +62,9 @@ public abstract class Quest implements IQuest {
 
         // Quest position on the screen
         int tmpX = jo.get("posX").getAsInt();
-        this.posX = (this.parent != null ? (this.parent.getPosition().getX() + tmpX) : tmpX);
+        this.getPosX() = (this.parent != null ? (this.parent.getPosition().getX() + tmpX) : tmpX);
         int tmpY = jo.get("posY").getAsInt();
-        this.posY = (this.parent != null ? (this.parent.getPosition().getY() + tmpY) : tmpY);
+        this.getPosY() = (this.parent != null ? (this.parent.getPosition().getY() + tmpY) : tmpY);
 
         if (jo.has("icon")) {
             this.icon = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
@@ -178,7 +178,7 @@ public abstract class Quest implements IQuest {
     }
 
     public Point getPosition() {
-        return new Point(this.posX, this.posY);
+        return new Point(this.getPosX(), this.getPosY());
     }
 
     public ItemStack getIcon() {

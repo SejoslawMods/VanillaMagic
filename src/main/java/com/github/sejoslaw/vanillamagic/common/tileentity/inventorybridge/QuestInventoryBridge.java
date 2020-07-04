@@ -49,7 +49,7 @@ public class QuestInventoryBridge extends Quest {
         BlockPos clickedPos = event.getPos();
         TileEntity clickedInventory = world.getTileEntity(clickedPos);
 
-        if ((clickedInventory == null) || !(clickedInventory instanceof IInventory)) {
+        if (!(clickedInventory instanceof IInventory)) {
             return;
         }
 
@@ -60,7 +60,7 @@ public class QuestInventoryBridge extends Quest {
         }
 
         TileInventoryBridge tile = new TileInventoryBridge();
-        tile.init(player.world, clickedPos.offset(Direction.UP));
+        tile.setup(player.world, clickedPos.offset(Direction.UP));
 
         try {
             tile.setPositionFromSelector(player);

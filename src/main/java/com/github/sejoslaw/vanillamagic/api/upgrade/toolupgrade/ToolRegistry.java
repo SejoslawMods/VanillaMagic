@@ -1,12 +1,10 @@
 package com.github.sejoslaw.vanillamagic.api.upgrade.toolupgrade;
 
-import com.github.sejoslaw.vanillamagic.api.VanillaMagicAPI;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -84,8 +82,6 @@ public class ToolRegistry {
         add(Items.STONE_SHOVEL, Items.IRON_INGOT, Items.IRON_SHOVEL);
         add(Items.IRON_SHOVEL, Items.GOLD_INGOT, Items.GOLDEN_SHOVEL);
         add(Items.GOLDEN_SHOVEL, Items.DIAMOND, Items.DIAMOND_SHOVEL);
-
-        VanillaMagicAPI.LOGGER.log(Level.INFO, "Registered ToolRegistry entrys: " + ENTRYS.size());
     }
 
     /**
@@ -119,12 +115,13 @@ public class ToolRegistry {
      */
     public static void add(ItemStack toolIn, ItemStack ingredient, ItemStack toolOut) {
         ItemEntry ie = new ItemEntry(toolIn, ingredient, toolOut);
+
         for (ItemEntry entry : ENTRYS) {
             if (ie.compareTo(entry) == 0) {
-                VanillaMagicAPI.LOGGER.log(Level.ERROR, "Entry exists: " + ie.toString());
                 return;
             }
         }
+
         ENTRYS.add(ie);
     }
 
@@ -171,6 +168,7 @@ public class ToolRegistry {
                 return ie.ingredient;
             }
         }
+
         return null;
     }
 
@@ -188,6 +186,7 @@ public class ToolRegistry {
                 return ie.toolOut;
             }
         }
+
         return null;
     }
 }

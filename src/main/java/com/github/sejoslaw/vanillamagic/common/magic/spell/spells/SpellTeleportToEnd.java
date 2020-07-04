@@ -33,14 +33,12 @@ public class SpellTeleportToEnd extends Spell {
                 return true;
             } else if (caster.dimension == DimensionType.THE_END) {
                 World world = caster.world;
-                AxisAlignedBB aabb = new AxisAlignedBB(caster.posX - 256, caster.posY - 256, caster.posZ - 256, caster.posX + 256, caster.posY + 256, caster.posZ + 256);
-                List<Entity> entities = world.getEntitiesWithinAABB(EntityType.ENDER_DRAGON, aabb, entity -> true);
+                AxisAlignedBB aabb = new AxisAlignedBB(caster.getPosX() - 256, caster.getPosY() - 256, caster.getPosZ() - 256, caster.getPosX() + 256, caster.getPosY() + 256, caster.getPosZ() + 256);
+                List<EnderDragonEntity> entities = world.getEntitiesWithinAABB(EntityType.ENDER_DRAGON, aabb, entity -> true);
 
-                for (int i = 0; i < entities.size(); ++i) {
-                    if (entities.get(i) instanceof EnderDragonEntity) {
-                        EntityUtil.addChatComponentMessageNoSpam(caster, TextUtil.wrap("You need to kill Dragon !!!"));
-                        return false;
-                    }
+                if (entities.size() > 0) {
+                    EntityUtil.addChatComponentMessageNoSpam(caster, TextUtil.wrap("You need to kill Dragon !!!"));
+                    return false;
                 }
 
                 TeleportUtil.entityChangeDimension(caster, DimensionType.OVERWORLD);

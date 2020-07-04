@@ -63,9 +63,9 @@ public class QuestSummonHorde extends Quest {
     }
 
     public void spawnHorde(PlayerEntity player, World world) {
-        int posX = (int) Math.round(player.posX - 0.5f);
-        int posY = (int) player.posY;
-        int posZ = (int) Math.round(player.posZ - 0.5f);
+        int posX = (int) Math.round(player.getPosX() - 0.5f);
+        int posY = (int) player.getPosY();
+        int posZ = (int) Math.round(player.getPosZ() - 0.5f);
 
         for (int i = 0; i < level; ++i) {
             for (int ix = posX - range; ix <= posX + range; ++ix) {

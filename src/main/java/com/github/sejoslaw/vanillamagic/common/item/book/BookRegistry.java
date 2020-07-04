@@ -116,7 +116,7 @@ public final class BookRegistry {
 	 */
 	public static ItemStack getBookByUID(int bookUID) {
 		for (int i = 0; i < BOOKS.size(); ++i) {
-			if (BOOKS.get(i).getUID() == bookUID) {
+			if (BOOKS.get(i).getBookID() == bookUID) {
 				return BOOKS.get(i).getItem();
 			}
 		}

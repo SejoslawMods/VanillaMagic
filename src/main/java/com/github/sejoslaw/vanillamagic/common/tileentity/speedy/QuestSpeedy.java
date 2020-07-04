@@ -1,18 +1,17 @@
-package com.github.sejoslaw.vanillamagic.tileentity.speedy;
+package com.github.sejoslaw.vanillamagic.common.tileentity.speedy;
 
-import net.minecraft.block.BlockCauldron;
+import com.github.sejoslaw.vanillamagic.common.handler.CustomTileEntityHandler;
+import com.github.sejoslaw.vanillamagic.common.magic.wand.WandRegistry;
+import com.github.sejoslaw.vanillamagic.common.quest.Quest;
+import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.handler.CustomTileEntityHandler;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
-import com.github.sejoslaw.vanillamagic.magic.wand.WandRegistry;
-import com.github.sejoslaw.vanillamagic.quest.Quest;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.WorldUtil;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -20,14 +19,14 @@ import com.github.sejoslaw.vanillamagic.util.WorldUtil;
 public class QuestSpeedy extends Quest {
 	@SubscribeEvent
 	public void placeSpeedy(RightClickBlock event) {
-		PlayerEntity player = event.getPlayerEntity();
+		PlayerEntity player = event.getPlayer();
 		World world = event.getWorld();
 		ItemStack leftHand = player.getHeldItemOffhand();
 		ItemStack rightHand = player.getHeldItemMainhand();
 		BlockPos clickedPos = event.getPos();
 
-		if (!(world.getBlockState(clickedPos).getBlock() instanceof BlockCauldron)
-				|| !VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.ACCELERATION_CRYSTAL)
+		if (!(world.getBlockState(clickedPos).getBlock() instanceof CauldronBlock)
+				|| !VMItems.isCustomItem(leftHand, VMItems.ACCELERATION_CRYSTAL)
 				|| !WandRegistry.areWandsEqual(rightHand, WandRegistry.WAND_BLAZE_ROD.getWandStack())
 				|| !player.isSneaking()) {
 			return;
@@ -42,11 +41,10 @@ public class QuestSpeedy extends Quest {
 		TileSpeedy speedy = new TileSpeedy();
 		speedy.init(player.world, clickedPos);
 
-		if (!speedy.containsCrystal()
-				|| !CustomTileEntityHandler.addCustomTileEntity(speedy, WorldUtil.getDimensionID(world))) {
+		if (!speedy.containsCrystal() || !CustomTileEntityHandler.addCustomTileEntity(speedy, world)) {
 			return;
 		}
 
-		EntityUtil.addChatComponentMessageNoSpam(player, speedy.getClass().getSimpleName() + " added.");
+		EntityUtil.addChatComponentMessage(player, speedy.getClass().getSimpleName() + " added.");
 	}
 }

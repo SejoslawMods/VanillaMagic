@@ -24,6 +24,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
 import java.util.Random;
@@ -53,8 +54,8 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy {
         super(VMTileEntities.SPEEDY);
     }
 
-    public void init(World world, BlockPos pos) {
-        super.init(world, pos);
+    public void init() {
+        super.init();
 
         this.ticks = VMConfig.TILE_SPEEDY_TICKS.get();
         this.size = VMConfig.TILE_SPEEDY_SIZE.get();
@@ -153,7 +154,7 @@ public class TileSpeedy extends CustomTileEntity implements ISpeedy {
                 if (tile instanceof ITickableTileEntity) {
                     ((ITickableTileEntity) tile).tick();
                 } else {
-                    blockState.tick(world, pos, rand);
+                    blockState.tick((ServerWorld) world, pos, rand);
                 }
             }
         }

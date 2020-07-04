@@ -1,29 +1,25 @@
-package com.github.sejoslaw.vanillamagic.item.thecrystalofmothernature;
+package com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature;
 
+import com.github.sejoslaw.vanillamagic.api.event.EventMotherNatureCrystal;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.common.quest.Quest;
+import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.ServerWorld;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import com.github.sejoslaw.vanillamagic.api.event.EventMotherNatureCrystal;
-import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
-import com.github.sejoslaw.vanillamagic.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
-import com.github.sejoslaw.vanillamagic.quest.Quest;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -33,7 +29,7 @@ public class QuestMotherNatureCrystal extends Quest {
 	 * Tick all around Plants when Player holds Crystal in LeftHand (OffHand).
 	 */
 	@SubscribeEvent
-	public void onHoldInLeftHandTick(PlayerTickEvent event) // left hand
+	public void onHoldInLeftHandTick(TickEvent.PlayerTickEvent event) // left hand
 	{
 		PlayerEntity player = event.player;
 		World world = player.world;
@@ -43,12 +39,12 @@ public class QuestMotherNatureCrystal extends Quest {
 			return;
 		}
 
-		CompoundNBT stackTag = leftHand.getTagCompound();
+		CompoundNBT stackTag = leftHand.getTag();
 		if (stackTag == null) {
 			return;
 		}
 
-		if (VanillaMagicItems.isCustomItem(leftHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL)) {
+		if (VMItems.isCustomItem(leftHand, VMItems.MOTHER_NATURE_CRYSTAL)) {
 			onTickUpdate(leftHand, world, player);
 		}
 	}
@@ -57,12 +53,12 @@ public class QuestMotherNatureCrystal extends Quest {
 	 * One tick - tick all plants around Player.
 	 */
 	public void onTickUpdate(ItemStack leftHand, World world, PlayerEntity player) {
-		int range = VMConfig.MOTHER_NATURE_CRYSTAL_RANGE; // def 10
+		int range = VMConfig.MOTHER_NATURE_CRYSTAL_RANGE.get(); // def 10
 		int verticalRange = 3;
 
-		int posX = (int) Math.round(player.posX - 0.5f);
-		int posY = (int) player.posY;
-		int posZ = (int) Math.round(player.posZ - 0.5f);
+		int posX = (int) Math.round(player.getPosX() - 0.5f);
+		int posY = (int) player.getPosY();
+		int posZ = (int) Math.round(player.getPosZ() - 0.5f);
 
 		for (int ix = posX - range; ix <= posX + range; ++ix) {
 			for (int iz = posZ - range; iz <= posZ + range; ++iz) {
@@ -73,8 +69,7 @@ public class QuestMotherNatureCrystal extends Quest {
 		}
 	}
 
-	public void updateTick(ItemStack leftHand, World world, PlayerEntity player, int range, int verticalRange, int posX,
-			int posY, int posZ, int ix, int iz, int iy) {
+	public void updateTick(ItemStack leftHand, World world, PlayerEntity player, int range, int verticalRange, int posX, int posY, int posZ, int ix, int iz, int iy) {
 		BlockPos blockPos = new BlockPos(ix, iy, iz);
 		Block block = world.getBlockState(blockPos).getBlock();
 
@@ -82,18 +77,16 @@ public class QuestMotherNatureCrystal extends Quest {
 			return;
 		}
 
-		if ((world.rand.nextInt(50) != 0) || (EventUtil.postEvent(new EventMotherNatureCrystal.TickBlock(
-				(ICustomItem) VanillaMagicItems.MOTHER_NATURE_CRYSTAL, player, world, blockPos)))) {
+		if ((world.rand.nextInt(50) != 0) || (EventUtil.postEvent(new EventMotherNatureCrystal.TickBlock(VMItems.MOTHER_NATURE_CRYSTAL, player, world, blockPos)))) {
 			return;
 		}
 
-		IBlockState preBlockState = world.getBlockState(blockPos);
-		block.updateTick(world, blockPos, world.getBlockState(blockPos), world.rand);
-		IBlockState newState = world.getBlockState(blockPos);
+		BlockState preBlockState = world.getBlockState(blockPos);
+		block.tick(world.getBlockState(blockPos), (ServerWorld) world, blockPos, world.rand);
+		BlockState newState = world.getBlockState(blockPos);
 
 		if (!newState.equals(preBlockState)) {
-			world.playEvent(2001, blockPos,
-					Block.getIdFromBlock(newState.getBlock()) + (newState.getBlock().getMetaFromState(newState) << 12));
+			world.playEvent(2005, blockPos, 0);
 		}
 	}
 
@@ -104,7 +97,7 @@ public class QuestMotherNatureCrystal extends Quest {
 	 * bonemeal.
 	 */
 	@SubscribeEvent
-	public void onCrystalUse(RightClickBlock event) // right hand
+	public void onCrystalUse(PlayerInteractEvent.RightClickBlock event) // right hand
 	{
 		if (countTicks == 0) {
 			countTicks++;
@@ -113,7 +106,7 @@ public class QuestMotherNatureCrystal extends Quest {
 			return;
 		}
 
-		PlayerEntity player = event.getPlayerEntity();
+		PlayerEntity player = event.getPlayer();
 		World world = event.getWorld();
 		BlockPos clickedPos = event.getPos();
 		ItemStack rightHand = player.getHeldItemMainhand();
@@ -122,12 +115,12 @@ public class QuestMotherNatureCrystal extends Quest {
 			return;
 		}
 
-		CompoundNBT stackTag = rightHand.getTagCompound();
+		CompoundNBT stackTag = rightHand.getTag();
 		if (stackTag == null) {
 			return;
 		}
 
-		if (!VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.MOTHER_NATURE_CRYSTAL)) {
+		if (!VMItems.isCustomItem(rightHand, VMItems.MOTHER_NATURE_CRYSTAL)) {
 			return;
 		}
 
@@ -135,47 +128,9 @@ public class QuestMotherNatureCrystal extends Quest {
 			addStat(player);
 		}
 
-		if (hasQuest(player) && applyBonemeal(rightHand, world, clickedPos)) {
-			IBlockState state = world.getBlockState(clickedPos);
-			world.playEvent(2001, clickedPos,
-					Block.getIdFromBlock(state.getBlock()) + (state.getBlock().getMetaFromState(state) << 12));
+		if (hasQuest(player) && BoneMealItem.applyBonemeal(rightHand, world, clickedPos)) {
+			BlockState state = world.getBlockState(clickedPos);
+			world.playEvent(2005, clickedPos, 0);
 		}
-	}
-
-	/**
-	 * Apply bonemeal effect.
-	 */
-	public boolean applyBonemeal(ItemStack rightHand, World world, BlockPos clickedPos) {
-		return world instanceof ServerWorld
-				&& applyBonemeal(rightHand, world, clickedPos, FakePlayerFactory.getMinecraft((ServerWorld) world));
-	}
-
-	/**
-	 * Apply bonemeal effect.
-	 */
-	public boolean applyBonemeal(ItemStack rightHand, World world, BlockPos clickedPos, FakePlayer fakePlayer) {
-		IBlockState state = world.getBlockState(clickedPos);
-		int hook = ForgeEventFactory.onApplyBonemeal(fakePlayer, world, clickedPos, state, rightHand,
-				Hand.MAIN_HAND);
-
-		if (hook != 0) {
-			return hook > 0;
-		}
-
-		if (!(state.getBlock() instanceof IGrowable)) {
-			return false;
-		}
-
-		IGrowable growable = (IGrowable) state.getBlock();
-		if (!growable.canGrow(world, clickedPos, state, world.isRemote) || world.isRemote
-				|| !growable.canUseBonemeal(world, world.rand, clickedPos, state)
-				|| EventUtil.postEvent(new EventMotherNatureCrystal.Grow(VanillaMagicItems.MOTHER_NATURE_CRYSTAL,
-						fakePlayer, world, clickedPos, growable))) {
-			return false;
-		}
-
-		growable.grow(world, world.rand, clickedPos, state);
-
-		return true;
 	}
 }

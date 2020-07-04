@@ -10,7 +10,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.item.evokercrystal.spell.EvokerSpellFangAttack;
 import com.github.sejoslaw.vanillamagic.item.evokercrystal.spell.EvokerSpellSummonVex;
 import com.github.sejoslaw.vanillamagic.item.evokercrystal.spell.EvokerSpellWololo;
@@ -67,7 +67,7 @@ public final class EvokerSpellRegistry {
 	 */
 	@Nullable
 	public static IEvokerSpell getCurrentSpell(ItemStack stack) {
-		if (VanillaMagicItems.isCustomItem(stack, VanillaMagicItems.EVOKER_CRYSTAL)) {
+		if (VMItems.isCustomItem(stack, VMItems.EVOKER_CRYSTAL)) {
 			CompoundNBT stackTag = stack.getTagCompound();
 			int spellID = stackTag.getInteger(ItemEvokerCrystal.NBT_SPELL_ID);
 			return getSpell(spellID);
@@ -95,7 +95,7 @@ public final class EvokerSpellRegistry {
 		ItemStack newCrystal = crystal.copy();
 		newCrystal.getTagCompound().setInteger(ItemEvokerCrystal.NBT_SPELL_ID, nextSpell.getSpellID());
 		newCrystal
-				.setDisplayName(VanillaMagicItems.EVOKER_CRYSTAL.getItemName() + ": " + nextSpell.getSpellName());
+				.setDisplayName(VMItems.EVOKER_CRYSTAL.getItemName() + ": " + nextSpell.getSpellName());
 		player.setItemStackToSlot(EquipmentSlotType.MAINHAND, newCrystal);
 	}
 }

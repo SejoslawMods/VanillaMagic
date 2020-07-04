@@ -1,9 +1,8 @@
-package com.github.sejoslaw.vanillamagic.item.thecrystalofmothernature;
+package com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import com.github.sejoslaw.vanillamagic.item.CustomItemCrystal;
-import com.github.sejoslaw.vanillamagic.util.CraftingUtil;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemCrystal;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw

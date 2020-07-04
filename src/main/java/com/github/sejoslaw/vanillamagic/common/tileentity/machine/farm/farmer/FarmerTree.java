@@ -126,7 +126,7 @@ public class FarmerTree implements IFarmer {
         final int fortune = farm.getMaxLootingValue();
         HarvestResult res = new HarvestResult();
 
-        harvester.harvest(farm, this, pos, res);
+        harvester.harvest(farm, pos, res);
         Collections.sort(res.harvestedBlocks, COMP);
 
         List<BlockPos> actualHarvests = new ArrayList<>();

@@ -22,8 +22,8 @@ public abstract class EntitySpell extends DamagingProjectileEntity {
     public EntitySpell setCastingEntity(LivingEntity entity) {
         this.shootingEntity = entity;
 
-        this.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-        this.setPosition(this.posX, this.posY, this.posZ);
+        this.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
+        this.setPosition(this.getPosX(), this.getPosY(), this.getPosZ());
         this.setMotion(Vec3d.ZERO);
 
         Vec3d vec = this.shootingEntity.getLookVec();

@@ -66,7 +66,7 @@ public class QuestArrowMachineGun extends Quest {
         }
 
         world.addEntity(arrowEntity);
-        world.playSound(null, player.posX, player.posY, player.posZ,
+        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(),
                 SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + 0.5F);
 
         if (ItemStackUtil.getStackSize(leftHand) > 0) {

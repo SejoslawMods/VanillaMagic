@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
 import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.util.CauldronUtil;
 
 /**
@@ -59,8 +59,8 @@ public final class EnchantedBucketUtil {
 	 */
 	@Nullable
 	public static IEnchantedBucket getEnchantedBucket(ItemStack stack) {
-		for (IEnchantedBucket enchantedBucket : VanillaMagicItems.ENCHANTED_BUCKETS) {
-			if (VanillaMagicItems.isCustomBucket(stack, enchantedBucket)) {
+		for (IEnchantedBucket enchantedBucket : VMItems.ENCHANTED_BUCKETS) {
+			if (VMItems.isCustomBucket(stack, enchantedBucket)) {
 				return enchantedBucket;
 			}
 		}
@@ -93,7 +93,7 @@ public final class EnchantedBucketUtil {
 				continue;
 			}
 
-			for (IEnchantedBucket eb : VanillaMagicItems.ENCHANTED_BUCKETS) {
+			for (IEnchantedBucket eb : VMItems.ENCHANTED_BUCKETS) {
 				Fluid fluidInBucket = eb.getFluidInBucket();
 				if (fluidInBucket == null) {
 					continue;
@@ -120,7 +120,7 @@ public final class EnchantedBucketUtil {
 		Collection<Fluid> fluids = registeredFluids.values();
 
 		for (Fluid fluid : fluids) {
-			VanillaMagicItems.ENCHANTED_BUCKETS.add(new IEnchantedBucket() {
+			VMItems.ENCHANTED_BUCKETS.add(new IEnchantedBucket() {
 				public Fluid getFluidInBucket() {
 					return fluid;
 				}
@@ -128,6 +128,6 @@ public final class EnchantedBucketUtil {
 			VanillaMagic.logInfo("Added Enchanted Bucket: " + fluid.getName());
 		}
 
-		VanillaMagic.logInfo("Registered Enchanted Buckets: " + VanillaMagicItems.ENCHANTED_BUCKETS.size());
+		VanillaMagic.logInfo("Registered Enchanted Buckets: " + VMItems.ENCHANTED_BUCKETS.size());
 	}
 }

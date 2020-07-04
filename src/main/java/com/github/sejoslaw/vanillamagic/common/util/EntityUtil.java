@@ -3,7 +3,6 @@ package com.github.sejoslaw.vanillamagic.common.util;
 import javax.annotation.Nullable;
 
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.quest.portablecraftingtable.ICraftingTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -20,6 +19,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -50,15 +50,14 @@ public final class EntityUtil {
     }
 
     public static void addChatComponentMessage(PlayerEntity player, String message) {
-        NewChatGui chat = GuiUtil.getChatGui();
-        chat.addToSentMessages(message);
+        addChatComponentMessageNoSpam(player, new StringTextComponent(message));
     }
 
     /**
      * Adds a message to Player's chat with no spam.
      */
     public static void addChatComponentMessageNoSpam(PlayerEntity player, ITextComponent msg) {
-        addChatComponentMessageNoSpam(player, new ITextComponent[]{msg});
+        addChatComponentMessageNoSpam(player, new ITextComponent[]{ msg });
     }
 
     /**
@@ -93,21 +92,19 @@ public final class EntityUtil {
 
         if (BlockUtil.areEqual(ct, Blocks.CRAFTING_TABLE)) {
             return true;
-        } else if (player.getHeldItemMainhand().getItem() instanceof ICraftingTable) {
-            return ((ICraftingTable) mainHand.getItem()).canOpenGui(player);
         }
 
         return false;
     }
 
     public static ItemEntity copyItem(ItemEntity original) {
-        return new ItemEntity(original.world, original.posX, original.posY, original.posZ, original.getItem().copy());
+        return new ItemEntity(original.world, original.getPosX(), original.getPosY(), original.getPosZ(), original.getItem().copy());
     }
 
     public static Vec3d getEyePosition(PlayerEntity player) {
-        double posX = player.posX;
-        double posY = player.posY;
-        double posZ = player.posZ;
+        double posX = player.getPosX();
+        double posY = player.getPosY();
+        double posZ = player.getPosZ();
 
         if (player.world.isRemote) {
             posY += player.getEyeHeight() - player.getEyeHeight();
@@ -155,8 +152,8 @@ public final class EntityUtil {
      * knocks back "toKnockBack" entity
      */
     public static void knockBack(Entity user, Entity toKnockBack, float strenght) {
-        double xRatio = user.posX - toKnockBack.posX;
-        double zRatio = user.posZ - toKnockBack.posZ;
+        double xRatio = user.getPosX() - toKnockBack.getPosX();
+        double zRatio = user.getPosZ() - toKnockBack.getPosZ();
 
         knockBack(user, toKnockBack, strenght, xRatio, zRatio);
     }
@@ -199,7 +196,7 @@ public final class EntityUtil {
         double checkingDistance = 0;
 
         while (checkingDistance < distance) {
-            RayTraceResult result = looking.func_213324_a(checkingDistance, 0.1F, true);
+            RayTraceResult result = looking.pick(checkingDistance, 0.1F, true);
 
             if (result instanceof BlockRayTraceResult) {
                 return null;
@@ -217,9 +214,9 @@ public final class EntityUtil {
         float pitch = player.rotationPitch;
         float yaw = player.rotationYaw;
 
-        double x = player.posX;
-        double y = player.posY + (double) player.getEyeHeight();
-        double z = player.posZ;
+        double x = player.getPosX();
+        double y = player.getPosY() + (double) player.getEyeHeight();
+        double z = player.getPosZ();
 
         Vec3d vec3d = new Vec3d(x, y, z);
 

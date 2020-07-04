@@ -1,11 +1,8 @@
 package com.github.sejoslaw.vanillamagic.common.item.potionedcrystal;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.PotionType;
 import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
 
 /**
  * Interface used to dynamically create PotionedCrystals for each registered

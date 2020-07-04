@@ -25,7 +25,7 @@ public class SpellSmallFireball extends Spell {
         }
 
         World world = caster.world;
-        world.playEvent(caster, 1018, new BlockPos((int) caster.posX, (int) caster.posY, (int) caster.posZ), 0);
+        world.playEvent(caster, 1018, new BlockPos((int) caster.getPosX(), (int) caster.getPosY(), (int) caster.getPosZ()), 0);
 
         Vec3d lookingAt = caster.getLookVec();
         double accelX = lookingAt.getX();

@@ -20,7 +20,7 @@ import com.github.sejoslaw.vanillamagic.util.TextUtil;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class BookItemUpgrade implements IBook {
-	public int getUID() {
+	public int getBookID() {
 		return BookRegistry.BOOK_ITEM_UPGRADES_UID;
 	}
 
@@ -61,7 +61,7 @@ public class BookItemUpgrade implements IBook {
 			data.setTag("pages", pages);
 			data.putString("author", BookRegistry.AUTHOR);
 			data.putString("title", BookRegistry.BOOK_NAME_ITEM_UPGRADES);
-			data.setInteger(BookRegistry.BOOK_NBT_UID, getUID());
+			data.setInteger(BookRegistry.BOOK_NBT_UID, getBookID());
 		}
 		book.setTagCompound(data);
 		book.setDisplayName(BookRegistry.BOOK_NAME_ITEM_UPGRADES);

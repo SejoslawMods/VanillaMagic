@@ -1,18 +1,18 @@
-package com.github.sejoslaw.vanillamagic.item.liquidsuppressioncrystal;
+package com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal;
 
+import com.github.sejoslaw.vanillamagic.common.handler.CustomTileEntityHandler;
+import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
+import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
+import com.github.sejoslaw.vanillamagic.core.VMTileEntities;
 import com.google.common.base.Strings;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import com.github.sejoslaw.vanillamagic.handler.CustomTileEntityHandler;
-import com.github.sejoslaw.vanillamagic.tileentity.CustomTileEntity;
-import com.github.sejoslaw.vanillamagic.util.NBTUtil;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Class which represents Tile which is placed to hide liquid source block.
@@ -25,6 +25,10 @@ public class TileLiquidSuppression extends CustomTileEntity {
 	public int ticksRemaining;
 	public String containedBlockName;
 	public int containedBlockMeta;
+
+	public TileLiquidSuppression() {
+		super(VMTileEntities.LIQUID_SUPPRESSION);
+	}
 
 	public void update() {
 		if (world.isRemote) {
@@ -45,33 +49,32 @@ public class TileLiquidSuppression extends CustomTileEntity {
 			block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(containedBlockName));
 		}
 
-		if ((block != null) && world.setBlockState(pos, block.getStateFromMeta(containedBlockMeta))) {
-			IBlockState blockState = this.getWorld().getBlockState(getPos());
+		if ((block != null) && world.setBlockState(pos, Block.getStateById(containedBlockMeta))) {
+			BlockState blockState = this.getWorld().getBlockState(getPos());
 			getWorld().notifyBlockUpdate(getPos(), blockState, blockState, 3);
 			CustomTileEntityHandler.removeCustomTileEntityAtPos(world, getPos());
 		}
 	}
 
-	public void setContainedBlockInfo(IBlockState state) {
+	public void setContainedBlockInfo(BlockState state) {
 		containedBlockName = state.getBlock().getRegistryName().toString();
-		containedBlockMeta = state.getBlock().getMetaFromState(state);
+		containedBlockMeta = Block.getStateId(state);
 	}
 
-	public void readFromNBT(CompoundNBT tagCompound) {
-		super.readFromNBT(tagCompound);
+	public void read(CompoundNBT tagCompound) {
+		super.read(tagCompound);
 
-		ticksRemaining = tagCompound.getInteger(NBTUtil.NBT_TICKS_REMAINING);
+		ticksRemaining = tagCompound.getInt(NBTUtil.NBT_TICKS_REMAINING);
 		containedBlockName = tagCompound.getString(NBTUtil.NBT_BLOCK_NAME);
-		containedBlockMeta = tagCompound.getInteger(NBTUtil.NBT_BLOCK_META);
+		containedBlockMeta = tagCompound.getInt(NBTUtil.NBT_BLOCK_STATE);
 	}
 
-	public CompoundNBT writeToNBT(CompoundNBT tagCompound) {
-		super.writeToNBT(tagCompound);
+	public CompoundNBT write(CompoundNBT tagCompound) {
+		super.write(tagCompound);
 
-		tagCompound.setInteger(NBTUtil.NBT_TICKS_REMAINING, ticksRemaining);
-		tagCompound.putString(NBTUtil.NBT_BLOCK_NAME,
-				Strings.isNullOrEmpty(containedBlockName) ? "" : containedBlockName);
-		tagCompound.setInteger(NBTUtil.NBT_BLOCK_META, containedBlockMeta);
+		tagCompound.putInt(NBTUtil.NBT_TICKS_REMAINING, ticksRemaining);
+		tagCompound.putString(NBTUtil.NBT_BLOCK_NAME, Strings.isNullOrEmpty(containedBlockName) ? "" : containedBlockName);
+		tagCompound.putInt(NBTUtil.NBT_BLOCK_STATE, containedBlockMeta);
 
 		return tagCompound;
 	}
@@ -91,11 +94,11 @@ public class TileLiquidSuppression extends CustomTileEntity {
 			return null;
 		}
 
-		IBlockState cachedState = world.getBlockState(blockPos);
+		BlockState cachedState = world.getBlockState(blockPos);
 		world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
 
 		TileLiquidSuppression tile = new TileLiquidSuppression();
-		tile.init(world, blockPos);
+		tile.setup(world, blockPos);
 		tile.setContainedBlockInfo(cachedState);
 		tile.setDuration(duration);
 

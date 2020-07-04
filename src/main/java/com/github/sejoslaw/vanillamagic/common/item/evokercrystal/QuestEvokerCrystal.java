@@ -14,7 +14,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
 import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.quest.Quest;
 import com.github.sejoslaw.vanillamagic.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.util.EventUtil;
@@ -34,9 +34,9 @@ public class QuestEvokerCrystal extends Quest {
 			return;
 		}
 
-		ItemStack evokerCrystal = VanillaMagicItems.EVOKER_CRYSTAL.getItem();
-		ItemEntity droppedCrystal = new ItemEntity(dyingEntity.world, dyingEntity.posX, dyingEntity.posY,
-				dyingEntity.posZ, evokerCrystal);
+		ItemStack evokerCrystal = VMItems.EVOKER_CRYSTAL.getItem();
+		ItemEntity droppedCrystal = new ItemEntity(dyingEntity.world, dyingEntity.getPosX(), dyingEntity.getPosY(),
+				dyingEntity.getPosZ(), evokerCrystal);
 		event.getDrops().add(droppedCrystal);
 	}
 
@@ -47,7 +47,7 @@ public class QuestEvokerCrystal extends Quest {
 	public void pickupEvokerCrystal(ItemEntityPickupEvent event) {
 		ItemStack eventStack = event.getItem().getItem();
 
-		if (!ItemStack.areItemsEqualIgnoreDurability(eventStack, VanillaMagicItems.EVOKER_CRYSTAL.getItem())) {
+		if (!ItemStack.areItemsEqualIgnoreDurability(eventStack, VMItems.EVOKER_CRYSTAL.getItem())) {
 			return;
 		}
 
@@ -125,7 +125,7 @@ public class QuestEvokerCrystal extends Quest {
 		}
 
 		ItemStack crystal = player.getHeldItemMainhand();
-		if (!VanillaMagicItems.isCustomItem(crystal, VanillaMagicItems.EVOKER_CRYSTAL)) {
+		if (!VMItems.isCustomItem(crystal, VMItems.EVOKER_CRYSTAL)) {
 			return;
 		}
 

@@ -44,7 +44,7 @@ public class QuestShootWitherSkull extends Quest {
         double accelY = lookingAt.getY();
         double accelZ = lookingAt.getZ();
 
-        WitherSkullEntity entityWitherSkull = new WitherSkullEntity(world, player.posX + accelX, player.posY + 1.5D + accelY, player.posZ + accelZ, accelX, accelY, accelZ);
+        WitherSkullEntity entityWitherSkull = new WitherSkullEntity(world, player.getPosX() + accelX, player.getPosY() + 1.5D + accelY, player.getPosZ() + accelZ, accelX, accelY, accelZ);
         entityWitherSkull.shootingEntity = player;
         entityWitherSkull.setMotion(0, 0, 0);
 

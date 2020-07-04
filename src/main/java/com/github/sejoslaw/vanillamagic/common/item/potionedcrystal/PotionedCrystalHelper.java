@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.util.CauldronUtil;
 import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
 
@@ -60,7 +60,7 @@ public class PotionedCrystalHelper {
 			PotionType pt = PotionUtils.getPotionFromItem(stack);
 			String ptName = getPotionTypeName(pt);
 
-			for (IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS) {
+			for (IPotionedCrystal pc : VMItems.POTIONED_CRYSTALS) {
 				if (pc.getPotionUnlocalizedName().equals(ptName)) {
 					return pc;
 				}
@@ -86,7 +86,7 @@ public class PotionedCrystalHelper {
 		}
 
 		String name = stackTag.getString(IPotionedCrystal.NBT_POTION_TYPE_NAME);
-		for (IPotionedCrystal pc : VanillaMagicItems.POTIONED_CRYSTALS) {
+		for (IPotionedCrystal pc : VMItems.POTIONED_CRYSTALS) {
 			if (name.equals(pc.getPotionUnlocalizedName())) {
 				return pc;
 			}
@@ -100,13 +100,13 @@ public class PotionedCrystalHelper {
 	 */
 	public static void registerRecipes() {
 		for (PotionType potionType : ForgeRegistries.POTION_TYPES.getValues()) {
-			VanillaMagicItems.POTIONED_CRYSTALS.add(new IPotionedCrystal() {
+			VMItems.POTIONED_CRYSTALS.add(new IPotionedCrystal() {
 				public PotionType getPotionType() {
 					return potionType;
 				}
 			});
 		}
 
-		VanillaMagic.logInfo("Registered Potioned Crystals: " + VanillaMagicItems.POTIONED_CRYSTALS.size());
+		VanillaMagic.logInfo("Registered Potioned Crystals: " + VMItems.POTIONED_CRYSTALS.size());
 	}
 }

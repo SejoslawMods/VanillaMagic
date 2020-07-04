@@ -36,7 +36,7 @@ public class QuestChunkLoader extends Quest {
         ItemStack itemInHand = player.getHeldItemMainhand();
         World world = placer.world;
 
-        if (ItemStackUtil.isNullStack(itemInHand) || (itemInHand.getItem() == null) || !BlockUtil.areEqual(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE)) {
+        if (ItemStackUtil.isNullStack(itemInHand) || !BlockUtil.areEqual(Block.getBlockFromItem(itemInHand.getItem()), Blocks.ENCHANTING_TABLE)) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class QuestChunkLoader extends Quest {
             return;
         }
 
-        tileChunkLoader.init(placer.world, chunkLoaderPos);
+        tileChunkLoader.setup(placer.world, chunkLoaderPos);
 
         if (CustomTileEntityHandler.addCustomTileEntity(tileChunkLoader, player.world)) {
             EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(tileChunkLoader.getClass().getSimpleName() + " added"));

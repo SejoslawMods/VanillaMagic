@@ -17,7 +17,7 @@ import com.github.sejoslaw.vanillamagic.util.TextUtil;
  */
 public class BookBuildAltar implements IBook
 {
-	public int getUID() {
+	public int getBookID() {
 		return BookRegistry.BOOK_BUILD_ALTAR_UID;
 	}
 	
@@ -216,7 +216,7 @@ public class BookBuildAltar implements IBook
 			data.setTag("pages", pages);
 			data.putString("author", BookRegistry.AUTHOR);
 			data.putString("title", BookRegistry.BOOK_NAME_BUILD_ALTAR);
-			data.setInteger(BookRegistry.BOOK_NBT_UID, getUID());
+			data.setInteger(BookRegistry.BOOK_NBT_UID, getBookID());
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setDisplayName(BookRegistry.BOOK_NAME_BUILD_ALTAR);

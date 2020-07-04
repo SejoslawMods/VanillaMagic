@@ -28,7 +28,7 @@ public final class WorldUtil {
         return list;
     }
 
-    public static World getWorld(MinecraftServer server, int worldId) {
+    private static World getWorld(MinecraftServer server, int worldId) {
         DimensionType dimensionType = DimensionType.getById(worldId);
         return server.getWorld(dimensionType);
     }

@@ -76,7 +76,7 @@ public final class NBTUtil {
     public static final String NBT_SPEEDY_TICKS = "NBT_SPEEDY_TICKS";
     public static final String NBT_TICKS_REMAINING = "NBT_TICKS_REMAINING";
     public static final String NBT_BLOCK_NAME = "NBT_BLOCK_NAME";
-    public static final String NBT_BLOCK_STATE = "NBT_BLOCK_META";
+    public static final String NBT_BLOCK_STATE = "NBT_BLOCK_STATE";
     public static final String NBT_BLOCK = "NBT_BLOCK_ID";
     public static final String NBT_PLAYER_NAME = "NBT_PLAYER_NAME";
     public static final String NBT_CLASS = "NBT_CLASS";

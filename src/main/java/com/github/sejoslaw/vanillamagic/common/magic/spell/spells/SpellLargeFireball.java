@@ -25,14 +25,14 @@ public class SpellLargeFireball extends Spell {
         }
 
         World world = caster.world;
-        world.playEvent(caster, 1016, new BlockPos((int) caster.posX, (int) caster.posY, (int) caster.posZ), 0);
+        world.playEvent(caster, 1016, new BlockPos((int) caster.getPosX(), (int) caster.getPosY(), (int) caster.getPosZ()), 0);
 
         Vec3d lookingAt = caster.getLookVec();
         double accelX = lookingAt.getX();
         double accelY = lookingAt.getY();
         double accelZ = lookingAt.getZ();
 
-        FireballEntity fireball = new FireballEntity(world, caster.posX + accelX, caster.posY + 1.5D + accelY, caster.posZ + accelZ, accelX, accelY, accelZ);
+        FireballEntity fireball = new FireballEntity(world, caster.getPosX() + accelX, caster.getPosY() + 1.5D + accelY, caster.getPosZ() + accelZ, accelX, accelY, accelZ);
         fireball.shootingEntity = caster;
         fireball.setMotion(0.0D, 0.0D, 0.0D);
 

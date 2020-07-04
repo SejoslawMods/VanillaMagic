@@ -60,7 +60,7 @@ public class QuestBlockAbsorber extends Quest {
         }
 
         TileBlockAbsorber tile = new TileBlockAbsorber();
-        tile.init(player.world, clickedPos.offset(Direction.UP));
+        tile.setup(player.world, clickedPos.offset(Direction.UP));
 
         if (!CustomTileEntityHandler.addCustomTileEntity(tile, player.world)) {
             return;

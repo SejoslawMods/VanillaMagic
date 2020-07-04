@@ -15,7 +15,7 @@ import com.github.sejoslaw.vanillamagic.util.TextUtil;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class BookSpells implements IBook {
-	public int getUID() {
+	public int getBookID() {
 		return BookRegistry.BOOK_SPELLS_UID;
 	}
 
@@ -48,7 +48,7 @@ public class BookSpells implements IBook {
 			data.setTag("pages", pages);
 			data.putString("author", BookRegistry.AUTHOR);
 			data.putString("title", BookRegistry.BOOK_NAME_SPELLS);
-			data.setInteger(BookRegistry.BOOK_NBT_UID, getUID());
+			data.setInteger(BookRegistry.BOOK_NBT_UID, getBookID());
 		}
 		infoBook.setTagCompound(data);
 		infoBook.setDisplayName(BookRegistry.BOOK_NAME_SPELLS);

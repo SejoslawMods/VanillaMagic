@@ -66,11 +66,11 @@ public final class BlockPosUtil {
     }
 
     public static void freezeNearby(Entity entity, World world, BlockPos pos, int size) {
-        BlockPos.MutableBlockPos blockPosCenter = new BlockPos.MutableBlockPos(0, 0, 0);
+        BlockPos.Mutable blockPosCenter = new BlockPos.Mutable(0, 0, 0);
 
         BlockPos.getAllInBoxMutable(pos.add(-size, -1.0D, -size), pos.add(size, -1.0D, size))
                 .forEach(blockPosAround -> {
-                    if (blockPosAround.distanceSq(entity.posX, entity.posY, entity.posZ, true) <= (double) (size * size)) {
+                    if (blockPosAround.distanceSq(entity.getPosX(), entity.getPosY(), entity.getPosZ(), true) <= (double) (size * size)) {
                         return;
                     }
 

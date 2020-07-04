@@ -3,7 +3,7 @@ package com.github.sejoslaw.vanillamagic.core;
 import com.github.sejoslaw.vanillamagic.common.item.book.BookRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.MobSpawnerRegistry;
 import com.github.sejoslaw.vanillamagic.common.util.WorldUtil;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -43,7 +43,7 @@ public class VMItemGroup extends ItemGroup {
 		this.addMinecraftBlocks(list);
 
         list = MobSpawnerRegistry.fillList(list);
-		list = VanillaMagicItems.fillList(list);
+		list = VMItems.fillList(list);
 		list = BookRegistry.fillList(list);
 		list = WorldUtil.fillList(list);
 		list = ItemUpgradeRegistry.fillList(list);

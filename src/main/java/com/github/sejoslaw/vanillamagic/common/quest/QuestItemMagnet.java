@@ -41,15 +41,15 @@ public class QuestItemMagnet extends Quest {
 
         float itemMotion = 0.45F;
 
-        double x = player.posX;
-        double y = player.posY + 0.75;
-        double z = player.posZ;
+        double x = player.getPosX();
+        double y = player.getPosY() + 0.75;
+        double z = player.getPosZ();
 
         List<ItemEntity> items = player.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(x - range, y - range, z - range, x + range, y + range, z + range));
         Vec3d playerVec = new Vec3d(x, y, z);
 
         for (ItemEntity itemEntity : items) {
-            Vec3d itemEntityVec = new Vec3d(itemEntity.posX, itemEntity.posY, itemEntity.posZ);
+            Vec3d itemEntityVec = new Vec3d(itemEntity.getPosX(), itemEntity.getPosY(), itemEntity.getPosZ());
             Vec3d finalVec = playerVec.subtract(itemEntityVec);
 
             if (finalVec.length() > 1) {

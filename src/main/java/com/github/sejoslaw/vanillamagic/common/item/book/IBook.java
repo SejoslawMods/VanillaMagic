@@ -12,7 +12,7 @@ public interface IBook extends ICustomItem {
 	/**
 	 * @return Returns the index of the book (for easier searching).
 	 */
-	int getUID();
+	int getBookID();
 
 	/**
 	 * @return Returns the unique NBT Tag for this Book.

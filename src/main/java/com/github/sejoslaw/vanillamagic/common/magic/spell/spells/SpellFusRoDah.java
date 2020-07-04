@@ -31,9 +31,9 @@ public class SpellFusRoDah extends Spell {
         int SIZE = 8;
         float strenght = 2.0f;
 
-        double casterX = caster.posX;
-        double casterY = caster.posY;
-        double casterZ = caster.posZ;
+        double casterX = caster.getPosX();
+        double casterY = caster.getPosY();
+        double casterZ = caster.getPosZ();
 
         BlockPos casterPos = new BlockPos(casterX, casterY, casterZ);
         AxisAlignedBB aabb = new AxisAlignedBB(casterPos);

@@ -1,8 +1,6 @@
-package com.github.sejoslaw.vanillamagic.item.liquidsuppressioncrystal;
+package com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal;
 
-import net.minecraft.init.Items;
-import com.github.sejoslaw.vanillamagic.item.CustomItemCrystal;
-import com.github.sejoslaw.vanillamagic.util.CraftingUtil;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemCrystal;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw

@@ -10,7 +10,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.github.sejoslaw.vanillamagic.inventory.InventoryHelper;
-import com.github.sejoslaw.vanillamagic.item.VanillaMagicItems;
+import com.github.sejoslaw.vanillamagic.item.VMItems;
 import com.github.sejoslaw.vanillamagic.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
 import com.github.sejoslaw.vanillamagic.util.NBTUtil;
@@ -51,7 +51,7 @@ public class InventorySelector {
 			return;
 		}
 
-		if (!VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR)) {
+		if (!VMItems.isCustomItem(rightHand, VMItems.INVENTORY_SELECTOR)) {
 			return;
 		}
 
@@ -87,7 +87,7 @@ public class InventorySelector {
 			return;
 		}
 
-		if (!VanillaMagicItems.isCustomItem(rightHand, VanillaMagicItems.INVENTORY_SELECTOR)) {
+		if (!VMItems.isCustomItem(rightHand, VMItems.INVENTORY_SELECTOR)) {
 			return;
 		}
 
@@ -123,7 +123,7 @@ public class InventorySelector {
 	public void showInventorySelectorTooltip(ItemTooltipEvent event) {
 		ItemStack inventorySelector = event.getItemStack();
 
-		if (!VanillaMagicItems.isCustomItem(inventorySelector, VanillaMagicItems.INVENTORY_SELECTOR)) {
+		if (!VMItems.isCustomItem(inventorySelector, VMItems.INVENTORY_SELECTOR)) {
 			return;
 		}
 

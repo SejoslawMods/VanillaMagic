@@ -25,9 +25,9 @@ public class SpellMoveInAir extends Spell {
         // will teleport caster to the farthest blockPos between casterPos and
         // 'distance'
         for (double i = distance; i > 0; i -= 1.0D) {
-            double newPosX = caster.posX + casterLookVec.getX() * i;
-            double newPosY = caster.posY + casterLookVec.getY() * i;
-            double newPosZ = caster.posZ + casterLookVec.getZ() * i;
+            double newPosX = caster.getPosX() + casterLookVec.getX() * i;
+            double newPosY = caster.getPosY() + casterLookVec.getY() * i;
+            double newPosZ = caster.getPosZ() + casterLookVec.getZ() * i;
 
             BlockPos newPos = new BlockPos(newPosX, newPosY, newPosZ);
             BlockPos newPosHead = new BlockPos(newPosX, newPosY + 1, newPosZ);
