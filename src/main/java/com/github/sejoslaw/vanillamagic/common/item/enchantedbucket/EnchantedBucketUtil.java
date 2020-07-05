@@ -1,26 +1,26 @@
-package com.github.sejoslaw.vanillamagic.item.enchantedbucket;
+package com.github.sejoslaw.vanillamagic.common.item.enchantedbucket;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
+import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
+import com.github.sejoslaw.vanillamagic.common.util.CauldronUtil;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.init.Items;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import com.github.sejoslaw.vanillamagic.api.item.IEnchantedBucket;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.item.VMItems;
-import com.github.sejoslaw.vanillamagic.util.CauldronUtil;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Class which contains methods connected with Enchanted Bucket.
@@ -35,16 +35,16 @@ public final class EnchantedBucketUtil {
 	 * @return Returns the FluidStack from given Fluid.
 	 */
 	public static FluidStack getFluidStack(Fluid fluid) {
-		return new FluidStack(fluid, Fluid.BUCKET_VOLUME);
+		return new FluidStack(fluid, 1000);
 	}
 
 	/**
 	 * @return Returns the given ItemStack filled with given Fluid.
 	 */
 	public static ItemStack getResult(ItemStack stack, Fluid fluid) {
-		IFluidHandler fh = FluidUtil.getFluidHandler(stack);
-		fh.fill(getFluidStack(fluid), true);
-		return stack;
+		IFluidHandlerItem fh = FluidUtil.getFluidHandler(stack).orElse(null);
+		fh.fill(getFluidStack(fluid), IFluidHandler.FluidAction.EXECUTE);
+		return fh.getContainer();
 	}
 
 	/**
@@ -77,21 +77,9 @@ public final class EnchantedBucketUtil {
 
 		for (ItemEntity ei : itemsInCauldron) {
 			ItemStack stackBucket = ei.getItem();
-			IFluidHandler fh = FluidUtil.getFluidHandler(stackBucket);
+			IFluidHandlerItem fh = FluidUtil.getFluidHandler(stackBucket).orElse(null);
 
-			if ((fh == null) || (fh.getTankProperties() == null)) {
-				continue;
-			}
-
-			IFluidTankProperties prop0 = fh.getTankProperties()[0];
-			if (prop0 == null) {
-				continue;
-			}
-
-			FluidStack prop0Stack = prop0.getContents();
-			if (prop0Stack == null) {
-				continue;
-			}
+			FluidStack fluidStack = fh.getFluidInTank(0);
 
 			for (IEnchantedBucket eb : VMItems.ENCHANTED_BUCKETS) {
 				Fluid fluidInBucket = eb.getFluidInBucket();
@@ -100,11 +88,8 @@ public final class EnchantedBucketUtil {
 				}
 
 				FluidStack fluidStackInBucket = getFluidStack(fluidInBucket);
-				if (fluidStackInBucket == null) {
-					continue;
-				}
 
-				if (prop0Stack.isFluidEqual(fluidStackInBucket)) {
+				if (fluidStack.isFluidEqual(fluidStackInBucket)) {
 					return eb;
 				}
 			}
@@ -116,18 +101,14 @@ public final class EnchantedBucketUtil {
 	 * Register all EnchantedBuckets.
 	 */
 	public static void registerFluids() {
-		Map<String, Fluid> registeredFluids = FluidRegistry.getRegisteredFluids();
-		Collection<Fluid> fluids = registeredFluids.values();
+		Set<Map.Entry<ResourceLocation, Fluid>> registeredFluids = ForgeRegistries.FLUIDS.getEntries();
 
-		for (Fluid fluid : fluids) {
-			VMItems.ENCHANTED_BUCKETS.add(new IEnchantedBucket() {
-				public Fluid getFluidInBucket() {
-					return fluid;
-				}
-			});
-			VanillaMagic.logInfo("Added Enchanted Bucket: " + fluid.getName());
+		for (Map.Entry<ResourceLocation, Fluid> entry : registeredFluids) {
+			Fluid fluid = entry.getValue();
+			VMItems.ENCHANTED_BUCKETS.add(() -> fluid);
+			VMLogger.logInfo("Added Enchanted Bucket: " + fluid.getRegistryName());
 		}
 
-		VanillaMagic.logInfo("Registered Enchanted Buckets: " + VMItems.ENCHANTED_BUCKETS.size());
+		VMLogger.logInfo("Registered Enchanted Buckets: " + VMItems.ENCHANTED_BUCKETS.size());
 	}
 }

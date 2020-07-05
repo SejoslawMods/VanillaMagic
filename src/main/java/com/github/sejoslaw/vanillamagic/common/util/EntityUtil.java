@@ -86,15 +86,7 @@ public final class EntityUtil {
 
         Block ct = Block.getBlockFromItem(mainHand.getItem());
 
-        if (ct == null) {
-            return false;
-        }
-
-        if (BlockUtil.areEqual(ct, Blocks.CRAFTING_TABLE)) {
-            return true;
-        }
-
-        return false;
+        return BlockUtil.areEqual(ct, Blocks.CRAFTING_TABLE);
     }
 
     public static ItemEntity copyItem(ItemEntity original) {
@@ -138,7 +130,7 @@ public final class EntityUtil {
 
         if (toKnockBack.onGround) {
             motionY /= 2.0D;
-            motionY += (double) strenght;
+            motionY += strenght;
 
             if (motionY > 0.4000000059604645D) {
                 motionY = 0.4000000059604645D;
@@ -269,12 +261,8 @@ public final class EntityUtil {
     public static ServerPlayerEntity getCommandSender(MinecraftServer server, CommandSource sender) {
         Entity entitySender = sender.getEntity();
 
-        if ((entitySender != null) && (entitySender instanceof ClientPlayerEntity)) {
-            ServerPlayerEntity serverPlayer = getServerPlayerFromClientPlayer(server, (ClientPlayerEntity) entitySender);
-
-            if (serverPlayer != null) {
-                return serverPlayer;
-            }
+        if ((entitySender instanceof ClientPlayerEntity)) {
+            return getServerPlayerFromClientPlayer(server, (ClientPlayerEntity) entitySender);
         }
 
         return null;
