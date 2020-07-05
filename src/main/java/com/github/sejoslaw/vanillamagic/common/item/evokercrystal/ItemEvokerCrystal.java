@@ -1,8 +1,10 @@
-package com.github.sejoslaw.vanillamagic.item.evokercrystal;
+package com.github.sejoslaw.vanillamagic.common.item.evokercrystal;
 
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemCrystal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import com.github.sejoslaw.vanillamagic.item.CustomItemCrystal;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -16,17 +18,17 @@ public class ItemEvokerCrystal extends CustomItemCrystal {
 	public void registerRecipe() {
 	}
 
-	public String getItemName() {
-		return "Evoker Crystal";
+	public ITextComponent getItemName() {
+		return new StringTextComponent("Evoker Crystal");
 	}
 
 	public ItemStack getItem() {
 		ItemStack stack = new ItemStack(getBaseItem());
-		stack.setDisplayName(getItemName() + ": " + EvokerSpellRegistry.getSpell(1).getSpellName());
+		stack.setDisplayName(new StringTextComponent(getItemName() + ": " + EvokerSpellRegistry.getSpell(1).getSpellName()));
 
-		CompoundNBT stackTag = stack.getTagCompound();
+		CompoundNBT stackTag = stack.getTag();
 		stackTag.putString(NBT_UNIQUE_NAME, getUniqueNBTName());
-		stackTag.setInteger(NBT_SPELL_ID, 1);
+		stackTag.putInt(NBT_SPELL_ID, 1);
 
 		return stack;
 	}

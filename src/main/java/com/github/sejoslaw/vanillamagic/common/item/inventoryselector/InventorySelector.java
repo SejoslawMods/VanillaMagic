@@ -1,20 +1,21 @@
-package com.github.sejoslaw.vanillamagic.item.inventoryselector;
+package com.github.sejoslaw.vanillamagic.common.item.inventoryselector;
 
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.inventory.InventoryHelper;
+import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.inventory.InventoryHelper;
-import com.github.sejoslaw.vanillamagic.item.VMItems;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
-import com.github.sejoslaw.vanillamagic.util.NBTUtil;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * Class which describes the Inventory Selector behavior.
@@ -28,7 +29,7 @@ public class InventorySelector {
 	 * On right-click select new inventory position to be saved.
 	 */
 	@SubscribeEvent
-	public void selectInventory(RightClickBlock event) {
+	public void selectInventory(PlayerInteractEvent.RightClickBlock event) {
 		clicks++;
 
 		if (clicks == 1) {
@@ -44,7 +45,7 @@ public class InventorySelector {
 			return;
 		}
 
-		PlayerEntity player = event.getPlayerEntity();
+		PlayerEntity player = event.getPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
 
 		if (ItemStackUtil.isNullStack(rightHand)) {
@@ -58,29 +59,28 @@ public class InventorySelector {
 		BlockPos clickedPos = event.getPos();
 
 		if (!InventoryHelper.isInventory(world, clickedPos)) {
-			EntityUtil.addChatComponentMessageNoSpam(player, "Clicked block is not an Inventory");
+			EntityUtil.addChatComponentMessage(player, "Clicked block is not an Inventory");
 			return;
 		}
 
-		CompoundNBT rightHandTagOld = rightHand.getTagCompound();
-		CompoundNBT rightHandTagNew = NBTUtil.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world);
-		rightHand.setTagCompound(rightHandTagNew);
-		EntityUtil.addChatComponentMessageNoSpam(player,
-				"Registered Inventory at: " + TextUtil.constructPositionString(world, clickedPos));
+		CompoundNBT rightHandTagOld = rightHand.getTag();
+		CompoundNBT rightHandTagNew = NBTUtil.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world.getDimension().getType());
+		rightHand.setTag(rightHandTagNew);
+		EntityUtil.addChatComponentMessage(player, "Registered Inventory at: " + TextUtil.constructPositionString(world.getDimension().getType(), clickedPos));
 	}
 
 	/**
 	 * Show currently saved position.
 	 */
 	@SubscribeEvent
-	public void showSavedPosition(RightClickItem event) {
+	public void showSavedPosition(PlayerInteractEvent.RightClickItem event) {
 		World world = event.getWorld();
 
 		if (!world.isRemote) {
 			return;
 		}
 
-		PlayerEntity player = event.getPlayerEntity();
+		PlayerEntity player = event.getPlayer();
 		ItemStack rightHand = player.getHeldItemMainhand();
 
 		if (ItemStackUtil.isNullStack(rightHand)) {
@@ -91,27 +91,26 @@ public class InventorySelector {
 			return;
 		}
 
-		CompoundNBT rightHandTag = rightHand.getTagCompound();
+		CompoundNBT rightHandTag = rightHand.getTag();
 
 		if (player.isSneaking()) {
 			// Clear saved position
-			if (!rightHandTag.hasKey(NBTUtil.NBT_POSX)) {
+			if (!rightHandTag.hasUniqueId(NBTUtil.NBT_POSX)) {
 				return;
 			}
 
-			EntityUtil.addChatComponentMessageNoSpam(player, "Cleared position.");
-			rightHandTag.removeTag(NBTUtil.NBT_POSX);
-			rightHandTag.removeTag(NBTUtil.NBT_POSY);
-			rightHandTag.removeTag(NBTUtil.NBT_POSZ);
+			EntityUtil.addChatComponentMessage(player, "Cleared position.");
+			rightHandTag.remove(NBTUtil.NBT_POSX);
+			rightHandTag.remove(NBTUtil.NBT_POSY);
+			rightHandTag.remove(NBTUtil.NBT_POSZ);
 		} else {
 			// Show saved position
 			BlockPos savedPos = NBTUtil.getBlockPosDataFromNBT(rightHandTag);
 
 			if (savedPos == null) {
-				EntityUtil.addChatComponentMessageNoSpam(player, "No saved position.");
+				EntityUtil.addChatComponentMessage(player, "No saved position.");
 			} else {
-				EntityUtil.addChatComponentMessageNoSpam(player,
-						"Saved position: " + TextUtil.constructPositionString(world, savedPos));
+				EntityUtil.addChatComponentMessage(player, "Saved position: " + TextUtil.constructPositionString(world.getDimension().getType(), savedPos));
 			}
 		}
 	}
@@ -127,9 +126,10 @@ public class InventorySelector {
 			return;
 		}
 
-		CompoundNBT selectorNBT = inventorySelector.getTagCompound();
-		int dimId = selectorNBT.getInteger(NBTUtil.NBT_DIMENSION);
+		CompoundNBT selectorNBT = inventorySelector.getTag();
+		int dimId = selectorNBT.getInt(NBTUtil.NBT_DIMENSION);
 		BlockPos selectorPos = NBTUtil.getBlockPosDataFromNBT(selectorNBT);
-		event.getToolTip().add("Saved Position: " + TextUtil.constructPositionString(dimId, selectorPos));
+		DimensionType dimType = DimensionType.getById(dimId);
+		event.getToolTip().add(new StringTextComponent("Saved Position: " + TextUtil.constructPositionString(dimType, selectorPos)));
 	}
 }

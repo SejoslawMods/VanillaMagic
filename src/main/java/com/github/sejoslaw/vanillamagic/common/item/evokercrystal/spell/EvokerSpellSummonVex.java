@@ -1,14 +1,16 @@
-package com.github.sejoslaw.vanillamagic.item.evokercrystal.spell;
+package com.github.sejoslaw.vanillamagic.common.item.evokercrystal.spell;
+
+import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
+import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.monster.VexEntity;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Random;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.monster.EntityVex;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
-import com.github.sejoslaw.vanillamagic.config.VMConfig;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -28,22 +30,23 @@ public class EvokerSpellSummonVex implements IEvokerSpell {
 		}
 
 		Random rand = new Random();
+		World world = fakeEvoker.world;
 
-		for (int i = 0; i < VMConfig.VEX_NUMBER; ++i) {
-			BlockPos pos = (new BlockPos(fakeEvoker)).add(-2 + rand.nextInt(5), 1, -2 + rand.nextInt(5));
+		for (int i = 0; i < VMConfig.VEX_NUMBER.get(); ++i) {
+			BlockPos pos = new BlockPos(fakeEvoker).add(-2 + rand.nextInt(5), 1, -2 + rand.nextInt(5));
 
-			EntityVex entityVex = new EntityVex(fakeEvoker.world);
-			entityVex.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
-			entityVex.onInitialSpawn(fakeEvoker.world.getDifficultyForLocation(pos), (IEntityLivingData) null);
-			entityVex.setBoundOrigin(pos);
+			VexEntity vex = EntityType.VEX.create(world);
+			vex.moveToBlockPosAndAngles(pos, 0.0F, 0.0F);
+			vex.onInitialSpawn(world, world.getDifficultyForLocation(pos), SpawnReason.MOB_SUMMONED, null, null);
+			vex.setBoundOrigin(pos);
 
-			if (VMConfig.VEX_HAS_LIMITED_LIFE) {
-				entityVex.setLimitedLife(20 * (30 + rand.nextInt(90)));
+			if (VMConfig.VEX_HAS_LIMITED_LIFE.get()) {
+				vex.setLimitedLife(20 * (30 + rand.nextInt(90)));
 			}
 
-			fakeEvoker.world.spawnEntity(entityVex);
+			world.addEntity(vex);
 		}
 
-		fakeEvoker.playSound(SoundEvents.EVOCATION_ILLAGER_PREPARE_SUMMON, 1.0F, 1.0F);
+		fakeEvoker.playSound(SoundEvents.ENTITY_EVOKER_PREPARE_SUMMON, 1.0F, 1.0F);
 	}
 }

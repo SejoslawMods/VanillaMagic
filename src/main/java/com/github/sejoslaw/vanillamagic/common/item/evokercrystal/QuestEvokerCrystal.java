@@ -1,23 +1,21 @@
-package com.github.sejoslaw.vanillamagic.item.evokercrystal;
+package com.github.sejoslaw.vanillamagic.common.item.evokercrystal;
 
+import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
+import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
+import com.github.sejoslaw.vanillamagic.common.quest.Quest;
+import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
+import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.EntityEvoker;
+import net.minecraft.entity.monster.EvokerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.ItemEntityPickupEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteractSpecific;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
-import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
-import com.github.sejoslaw.vanillamagic.item.VMItems;
-import com.github.sejoslaw.vanillamagic.quest.Quest;
-import com.github.sejoslaw.vanillamagic.util.EntityUtil;
-import com.github.sejoslaw.vanillamagic.util.EventUtil;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -28,15 +26,14 @@ public class QuestEvokerCrystal extends Quest {
 	 */
 	@SubscribeEvent
 	public void evokerDropCrystal(LivingDropsEvent event) {
-		EntityLivingBase dyingEntity = event.getEntityLiving();
+		LivingEntity dyingEntity = event.getEntityLiving();
 
-		if (!(dyingEntity instanceof EntityEvoker)) {
+		if (!(dyingEntity instanceof EvokerEntity)) {
 			return;
 		}
 
 		ItemStack evokerCrystal = VMItems.EVOKER_CRYSTAL.getItem();
-		ItemEntity droppedCrystal = new ItemEntity(dyingEntity.world, dyingEntity.getPosX(), dyingEntity.getPosY(),
-				dyingEntity.getPosZ(), evokerCrystal);
+		ItemEntity droppedCrystal = new ItemEntity(dyingEntity.world, dyingEntity.getPosX(), dyingEntity.getPosY(), dyingEntity.getPosZ(), evokerCrystal);
 		event.getDrops().add(droppedCrystal);
 	}
 
@@ -44,14 +41,14 @@ public class QuestEvokerCrystal extends Quest {
 	 * Player gets the Quest when he picked up the Evoker Crystal.
 	 */
 	@SubscribeEvent
-	public void pickupEvokerCrystal(ItemEntityPickupEvent event) {
+	public void pickupEvokerCrystal(EntityItemPickupEvent event) {
 		ItemStack eventStack = event.getItem().getItem();
 
 		if (!ItemStack.areItemsEqualIgnoreDurability(eventStack, VMItems.EVOKER_CRYSTAL.getItem())) {
 			return;
 		}
 
-		PlayerEntity player = event.getPlayerEntity();
+		PlayerEntity player = event.getPlayer();
 
 		if (canAddStat(player)) {
 			addStat(player);
@@ -64,8 +61,8 @@ public class QuestEvokerCrystal extends Quest {
 	 * Right-Click -> Use Spell <br>
 	 */
 	@SubscribeEvent
-	public void useCrystal(RightClickItem event) {
-		PlayerEntity caster = event.getPlayerEntity();
+	public void useCrystal(PlayerInteractEvent.RightClickItem event) {
+		PlayerEntity caster = event.getPlayer();
 
 		if (!hasQuest(caster)) {
 			return;
@@ -81,8 +78,8 @@ public class QuestEvokerCrystal extends Quest {
 	 * Right-Click -> Use Spell <br>
 	 */
 	@SubscribeEvent
-	public void onShortRangeClickEntity(EntityInteractSpecific event) {
-		PlayerEntity caster = event.getPlayerEntity();
+	public void onShortRangeClickEntity(PlayerInteractEvent.EntityInteractSpecific event) {
+		PlayerEntity caster = event.getPlayer();
 
 		if (!hasQuest(caster)) {
 			return;
@@ -98,8 +95,8 @@ public class QuestEvokerCrystal extends Quest {
 	 * Right-Click -> Use Spell <br>
 	 */
 	@SubscribeEvent
-	public void onShortRangeClickEntity(EntityInteract event) {
-		PlayerEntity caster = event.getPlayerEntity();
+	public void onShortRangeClickEntity(PlayerInteractEvent.EntityInteract event) {
+		PlayerEntity caster = event.getPlayer();
 
 		if (!hasQuest(caster)) {
 			return;

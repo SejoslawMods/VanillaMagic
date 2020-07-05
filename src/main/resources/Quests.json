@@ -24,18 +24,6 @@
 	"uniqueName":"portableCraftingTable"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.machine.autocrafting.QuestAutocrafting",
-	"parent":"portableCraftingTable",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":58
-	},
-	"questName":"Autocrafting !!!",
-	"uniqueName":"autocrafting"
-},
-{
 	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
 	"parent":"craftStick",
 	"posX":0,

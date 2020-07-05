@@ -1,19 +1,19 @@
-package com.github.sejoslaw.vanillamagic.item.evokercrystal;
+package com.github.sejoslaw.vanillamagic.common.item.evokercrystal;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
+import com.github.sejoslaw.vanillamagic.common.item.evokercrystal.spell.EvokerSpellFangAttack;
+import com.github.sejoslaw.vanillamagic.common.item.evokercrystal.spell.EvokerSpellSummonVex;
+import com.github.sejoslaw.vanillamagic.common.item.evokercrystal.spell.EvokerSpellWololo;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import com.github.sejoslaw.vanillamagic.api.magic.IEvokerSpell;
-import com.github.sejoslaw.vanillamagic.item.VMItems;
-import com.github.sejoslaw.vanillamagic.item.evokercrystal.spell.EvokerSpellFangAttack;
-import com.github.sejoslaw.vanillamagic.item.evokercrystal.spell.EvokerSpellSummonVex;
-import com.github.sejoslaw.vanillamagic.item.evokercrystal.spell.EvokerSpellWololo;
+import net.minecraft.util.text.StringTextComponent;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which contains data about all registered Evoker Spells.
@@ -68,8 +68,8 @@ public final class EvokerSpellRegistry {
 	@Nullable
 	public static IEvokerSpell getCurrentSpell(ItemStack stack) {
 		if (VMItems.isCustomItem(stack, VMItems.EVOKER_CRYSTAL)) {
-			CompoundNBT stackTag = stack.getTagCompound();
-			int spellID = stackTag.getInteger(ItemEvokerCrystal.NBT_SPELL_ID);
+			CompoundNBT stackTag = stack.getTag();
+			int spellID = stackTag.getInt(ItemEvokerCrystal.NBT_SPELL_ID);
 			return getSpell(spellID);
 		}
 		return null;
@@ -93,9 +93,8 @@ public final class EvokerSpellRegistry {
 		}
 
 		ItemStack newCrystal = crystal.copy();
-		newCrystal.getTagCompound().setInteger(ItemEvokerCrystal.NBT_SPELL_ID, nextSpell.getSpellID());
-		newCrystal
-				.setDisplayName(VMItems.EVOKER_CRYSTAL.getItemName() + ": " + nextSpell.getSpellName());
+		newCrystal.getTag().putInt(ItemEvokerCrystal.NBT_SPELL_ID, nextSpell.getSpellID());
+		newCrystal.setDisplayName(new StringTextComponent(VMItems.EVOKER_CRYSTAL.getItemName() + ": " + nextSpell.getSpellName()));
 		player.setItemStackToSlot(EquipmentSlotType.MAINHAND, newCrystal);
 	}
 }
