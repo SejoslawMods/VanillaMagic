@@ -1,6 +1,8 @@
 package com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal;
 
 import com.github.sejoslaw.vanillamagic.common.item.CustomItemCrystal;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -11,7 +13,7 @@ public class ItemLiquidSuppressionCrystal extends CustomItemCrystal {
 				new Object[] { "BBB", "BNB", "BBB", 'B', Items.BUCKET, 'N', Items.NETHER_STAR });
 	}
 
-	public String getItemName() {
-		return "Liquid Suppression Crystal";
+	public ITextComponent getItemName() {
+		return new StringTextComponent("Liquid Suppression Crystal");
 	}
 }
