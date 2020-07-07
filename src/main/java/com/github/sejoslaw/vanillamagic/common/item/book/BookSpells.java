@@ -1,15 +1,16 @@
-package com.github.sejoslaw.vanillamagic.item.book;
+package com.github.sejoslaw.vanillamagic.common.item.book;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.nbt.NBTTagString;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
-import com.github.sejoslaw.vanillamagic.quest.spell.QuestCastSpell;
-import com.github.sejoslaw.vanillamagic.util.CraftingUtil;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpell;
+import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.StringNBT;
+import net.minecraft.util.text.StringTextComponent;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -25,33 +26,35 @@ public class BookSpells implements IBook {
 
 	public ItemStack getItem() {
 		ItemStack infoBook = new ItemStack(BookRegistry.BOOK_ITEM);
+
 		CompoundNBT data = new CompoundNBT();
 		{
 			// Constructing TagCompound
 			ListNBT pages = new ListNBT();
 			{
 				// Pages
-				pages.appendTag(new NBTTagString("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
+				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
 						+ TextUtil.translateToLocal("book.spells.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
-				for (int i = 0; i < QuestRegistry.size(); ++i) {
-					IQuest quest = QuestRegistry.get(i);
-
+				for (IQuest quest : QuestRegistry.getQuests()) {
 					if (quest instanceof QuestCastSpell) {
-						pages.appendTag(new NBTTagString(BookRegistry.COLOR_HEADER
+						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
 								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
 								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
 					}
 				}
 			}
-			data.setTag("pages", pages);
+
+			data.put("pages", pages);
 			data.putString("author", BookRegistry.AUTHOR);
 			data.putString("title", BookRegistry.BOOK_NAME_SPELLS);
-			data.setInteger(BookRegistry.BOOK_NBT_UID, getBookID());
+			data.putInt(BookRegistry.BOOK_NBT_UID, getBookID());
 		}
-		infoBook.setTagCompound(data);
-		infoBook.setDisplayName(BookRegistry.BOOK_NAME_SPELLS);
+
+		infoBook.setTag(data);
+		infoBook.setDisplayName(new StringTextComponent(BookRegistry.BOOK_NAME_SPELLS));
+
 		return infoBook;
 	}
 }

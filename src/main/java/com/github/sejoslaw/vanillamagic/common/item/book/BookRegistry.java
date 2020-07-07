@@ -1,14 +1,14 @@
 package com.github.sejoslaw.vanillamagic.common.item.book;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.init.Items;
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.util.TextUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which holds all additional data for Books and Books themselves.
@@ -69,7 +69,7 @@ public final class BookRegistry {
 	/**
 	 * List with all Books.
 	 */
-	private static List<IBook> BOOKS = new ArrayList<IBook>();
+	private static final List<IBook> BOOKS = new ArrayList<>();
 
 	static {
 		BOOK_SPELLS = new BookSpells();
@@ -102,7 +102,7 @@ public final class BookRegistry {
 			book.registerRecipe();
 		}
 
-		VanillaMagic.logInfo("Books registered (" + BOOKS.size() + ")");
+		VMLogger.logInfo("Books registered (" + BOOKS.size() + ")");
 	}
 
 	/**
@@ -115,9 +115,9 @@ public final class BookRegistry {
 	 * 6 - Quarry Upgrades <br>
 	 */
 	public static ItemStack getBookByUID(int bookUID) {
-		for (int i = 0; i < BOOKS.size(); ++i) {
-			if (BOOKS.get(i).getBookID() == bookUID) {
-				return BOOKS.get(i).getItem();
+		for (IBook book : BOOKS) {
+			if (book.getBookID() == bookUID) {
+				return book.getItem();
 			}
 		}
 
@@ -128,8 +128,8 @@ public final class BookRegistry {
 	 * Checks if the given ItemStack is a book.
 	 */
 	public static boolean isBook(ItemStack stack) {
-		if (stack.getTagCompound() != null) {
-			return stack.getTagCompound().hasKey(BOOK_NBT_UID);
+		if (stack.getTag() != null) {
+			return stack.getTag().hasUniqueId(BOOK_NBT_UID);
 		}
 
 		return false;
@@ -141,7 +141,7 @@ public final class BookRegistry {
 	 */
 	public static int getUIDByBook(ItemStack stack) {
 		if (isBook(stack)) {
-			return stack.getTagCompound().getInteger(BOOK_NBT_UID);
+			return stack.getTag().getInt(BOOK_NBT_UID);
 		}
 
 		return -1;

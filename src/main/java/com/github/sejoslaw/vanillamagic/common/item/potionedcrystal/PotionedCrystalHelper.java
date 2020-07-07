@@ -1,22 +1,21 @@
-package com.github.sejoslaw.vanillamagic.item.potionedcrystal;
+package com.github.sejoslaw.vanillamagic.common.item.potionedcrystal;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import com.github.sejoslaw.vanillamagic.common.util.CauldronUtil;
+import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
+import com.github.sejoslaw.vanillamagic.core.VMItems;
+import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PotionItem;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.PotionType;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import com.github.sejoslaw.vanillamagic.core.VanillaMagic;
-import com.github.sejoslaw.vanillamagic.item.VMItems;
-import com.github.sejoslaw.vanillamagic.util.CauldronUtil;
-import com.github.sejoslaw.vanillamagic.util.ItemStackUtil;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Class which add various methods to work with PotionedCrystals.
@@ -30,8 +29,8 @@ public class PotionedCrystalHelper {
 	/**
 	 * @return Returns the name of the Potion from given PotionType.
 	 */
-	public static String getPotionTypeName(PotionType pt) {
-		return ForgeRegistries.POTION_TYPES.getKey(pt).getResourcePath();
+	public static String getPotionTypeName(Potion potion) {
+		return ForgeRegistries.POTION_TYPES.getKey(potion).getPath();
 	}
 
 	/**
@@ -53,12 +52,12 @@ public class PotionedCrystalHelper {
 				return null;
 			}
 
-			if (!(stack.getItem() instanceof ItemPotion)) {
+			if (!(stack.getItem() instanceof PotionItem)) {
 				continue;
 			}
 
-			PotionType pt = PotionUtils.getPotionFromItem(stack);
-			String ptName = getPotionTypeName(pt);
+			Potion potion = PotionUtils.getPotionFromItem(stack);
+			String ptName = getPotionTypeName(potion);
 
 			for (IPotionedCrystal pc : VMItems.POTIONED_CRYSTALS) {
 				if (pc.getPotionUnlocalizedName().equals(ptName)) {
@@ -80,8 +79,8 @@ public class PotionedCrystalHelper {
 			return null;
 		}
 
-		CompoundNBT stackTag = netherStarStack.getTagCompound();
-		if ((stackTag == null) || !stackTag.hasKey(IPotionedCrystal.NBT_POTION_TYPE_NAME)) {
+		CompoundNBT stackTag = netherStarStack.getTag();
+		if ((stackTag == null) || !stackTag.hasUniqueId(IPotionedCrystal.NBT_POTION_TYPE_NAME)) {
 			return null;
 		}
 
@@ -99,14 +98,10 @@ public class PotionedCrystalHelper {
 	 * Register all PotionedCrystal recipes.
 	 */
 	public static void registerRecipes() {
-		for (PotionType potionType : ForgeRegistries.POTION_TYPES.getValues()) {
-			VMItems.POTIONED_CRYSTALS.add(new IPotionedCrystal() {
-				public PotionType getPotionType() {
-					return potionType;
-				}
-			});
+		for (Potion potion : ForgeRegistries.POTION_TYPES.getValues()) {
+			VMItems.POTIONED_CRYSTALS.add(() -> potion);
 		}
 
-		VanillaMagic.logInfo("Registered Potioned Crystals: " + VMItems.POTIONED_CRYSTALS.size());
+		VMLogger.logInfo("Registered Potioned Crystals: " + VMItems.POTIONED_CRYSTALS.size());
 	}
 }

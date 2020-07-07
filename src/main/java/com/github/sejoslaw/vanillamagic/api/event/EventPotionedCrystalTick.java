@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic.api.event;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 
 /**
  * This Event is fired BEFORE PotionedCrystal apply PotionEffect to Player.
@@ -11,9 +11,9 @@ import net.minecraft.potion.Effect;
  */
 public class EventPotionedCrystalTick extends EventPlayerOnWorld {
     private final ItemStack crystalStack;
-    private final Effect effectToApply;
+    private final EffectInstance effectToApply;
 
-    public EventPotionedCrystalTick(PlayerEntity player, ItemStack crystalStack, Effect effectToApply) {
+    public EventPotionedCrystalTick(PlayerEntity player, ItemStack crystalStack, EffectInstance effectToApply) {
         super(player, player.world);
         this.crystalStack = crystalStack;
         this.effectToApply = effectToApply;
@@ -29,7 +29,7 @@ public class EventPotionedCrystalTick extends EventPlayerOnWorld {
     /**
      * @return Returns the PotionEffect which will be applied to Player.
      */
-    public Effect getPotionEffect() {
+    public EffectInstance getPotionEffect() {
         return this.effectToApply;
     }
 }

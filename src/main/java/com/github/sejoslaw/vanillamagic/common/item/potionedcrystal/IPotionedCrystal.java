@@ -1,8 +1,12 @@
 package com.github.sejoslaw.vanillamagic.common.item.potionedcrystal;
 
+import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.text.StringTextComponent;
 
 /**
  * Interface used to dynamically create PotionedCrystals for each registered
@@ -16,16 +20,16 @@ public interface IPotionedCrystal extends ICustomItem {
 	/**
 	 * @return Returns the type of this Potion.
 	 */
-	PotionType getPotionType();
+	Potion getPotion();
 
 	/**
 	 * @return Returns the Crystal.
 	 */
 	default ItemStack getItem() {
 		ItemStack stack = new ItemStack(Items.NETHER_STAR);
-		stack.setDisplayName("Potioned Crystal: " + TextUtil.translateToLocal(getPotionLocalizedName()));
+		stack.setDisplayName(new StringTextComponent("Potioned Crystal: " + TextUtil.translateToLocal(getPotionLocalizedName())));
 
-		CompoundNBT stackTag = stack.getTagCompound();
+		CompoundNBT stackTag = stack.getTag();
 		stackTag.putString(NBT_UNIQUE_NAME, getUniqueNBTName());
 		stackTag.putString(NBT_POTION_TYPE_NAME, getPotionUnlocalizedName());
 
@@ -40,7 +44,7 @@ public interface IPotionedCrystal extends ICustomItem {
 	 * @see #getPotionLocalizedName()
 	 */
 	default String getPotionUnlocalizedName() {
-		return PotionedCrystalHelper.getPotionTypeName(getPotionType());
+		return PotionedCrystalHelper.getPotionTypeName(getPotion());
 	}
 
 	/**
@@ -51,7 +55,7 @@ public interface IPotionedCrystal extends ICustomItem {
 	 * @see #getPotionUnlocalizedName()
 	 */
 	default String getPotionLocalizedName() {
-		return getPotionType().getNamePrefixed("potion.effect.");
+		return getPotion().getNamePrefixed("potion.effect.");
 	}
 
 	/**
