@@ -10,8 +10,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -81,6 +84,7 @@ public class GuiVMQuests extends Screen {
     protected int imageHeight = 202;
 
     protected float zoom = 1.0F;
+    protected double zLevel = 1.0F;
     protected double xScrollO;
     protected double yScrollO;
     protected double xScrollP;
@@ -388,5 +392,33 @@ public class GuiVMQuests extends Screen {
 
     private TextureAtlasSprite getTexture(Block block) {
         return this.minecraft.getModelManager().getBlockModelShapes().getTexture(block.getDefaultState());
+    }
+
+
+    public void drawTexturedModalRect(int posX, int posY, int posZ, int modelId, int width, int height) {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuffer();
+
+        bufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        bufferBuilder.pos(posX, posY + height, this.zLevel).tex(((float)(posZ) * 0.00390625F), ((float)(modelId + height) * 0.00390625F)).endVertex();
+        bufferBuilder.pos(posX + width, posY + height, this.zLevel).tex(((float)(posZ + width) * 0.00390625F), ((float)(modelId + height) * 0.00390625F)).endVertex();
+        bufferBuilder.pos(posX + width, posY, this.zLevel).tex(((float)(posZ + width) * 0.00390625F), ((float)(modelId) * 0.00390625F)).endVertex();
+        bufferBuilder.pos(posX, posY, this.zLevel).tex(((float)(posZ) * 0.00390625F), ((float)(modelId) * 0.00390625F)).endVertex();
+
+        tessellator.draw();
+    }
+
+
+    public void drawTexturedModalRect(int posX, int posY, TextureAtlasSprite texture, int width, int height) {
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuffer();
+
+        bufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        bufferBuilder.pos(posX, posY + height, this.zLevel).tex(texture.getMinU(), texture.getMaxV()).endVertex();
+        bufferBuilder.pos(posX + width, posY + height, this.zLevel).tex(texture.getMaxU(), texture.getMaxV()).endVertex();
+        bufferBuilder.pos(posX + width, posY, this.zLevel).tex(texture.getMaxU(), texture.getMinV()).endVertex();
+        bufferBuilder.pos(posX, posY, this.zLevel).tex(texture.getMinU(), texture.getMinV()).endVertex();
+
+        tessellator.draw();
     }
 }
