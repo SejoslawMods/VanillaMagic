@@ -3,7 +3,7 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemRegistry;
 import com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal;
 import com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
 import com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature.QuestMotherNatureCrystal;
@@ -25,7 +25,7 @@ import static com.github.sejoslaw.vanillamagic.api.util.TextUtil.ENTER;
  */
 public class BookOther extends AbstractBook {
 	public void registerRecipe() {
-		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 6));
+		CustomItemRegistry.addRecipe(this, new ItemStack(Items.BOOK, 6));
 	}
 
 	public void addPages(ListNBT pages) {

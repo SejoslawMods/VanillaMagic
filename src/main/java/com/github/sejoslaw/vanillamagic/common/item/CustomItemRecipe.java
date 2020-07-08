@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic.common.item;
 
 import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
 import com.github.sejoslaw.vanillamagic.common.util.CauldronUtil;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -41,5 +42,14 @@ public class CustomItemRecipe {
         }
 
         return true;
+    }
+
+    public void spawn(World world, BlockPos pos) {
+        List<ItemEntity> entitiesInCauldron = CauldronUtil.getItemsInCauldron(world, pos);
+        entitiesInCauldron.forEach(Entity::remove);
+
+        ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+        entity.setItem(this.output.getItem().copy());
+        world.addEntity(entity);
     }
 }

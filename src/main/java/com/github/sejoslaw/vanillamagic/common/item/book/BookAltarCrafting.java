@@ -3,7 +3,7 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar;
 import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import net.minecraft.nbt.StringNBT;
  */
 public class BookAltarCrafting extends AbstractBook {
 	public void registerRecipe() {
-		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 3));
+		CustomItemRegistry.addRecipe(this, new ItemStack(Items.BOOK, 3));
 	}
 
 	public void addPages(ListNBT pages) {

@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
+import com.github.sejoslaw.vanillamagic.common.item.CustomItemRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.ItemUpgradeRegistryEntry;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ import net.minecraft.nbt.StringNBT;
  */
 public class BookItemUpgrade extends AbstractBook {
 	public void registerRecipe() {
-		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 5));
+		CustomItemRegistry.addRecipe(this, new ItemStack(Items.BOOK, 5));
 	}
 
 	public void addPages(ListNBT pages) {

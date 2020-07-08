@@ -10,7 +10,7 @@ import java.util.Set;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class CustomItemRegistry {
-    private static final Set<CustomItemRecipe> RECIPES = new HashSet<>();
+    public static final Set<CustomItemRecipe> RECIPES = new HashSet<>();
 
     private CustomItemRegistry() {
     }
