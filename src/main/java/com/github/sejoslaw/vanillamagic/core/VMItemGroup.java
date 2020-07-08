@@ -23,7 +23,7 @@ public class VMItemGroup extends ItemGroup {
 	}
 
 	public ItemStack createIcon() {
-		return new ItemStack(Blocks.SPAWNER);
+		return new ItemStack(Blocks.CAULDRON);
 	}
 
 	/**

@@ -97,11 +97,7 @@ public class VMItems {
 
 		CompoundNBT stackTag = checkingStack.getOrCreateTag();
 
-		if (stackTag == null || !stackTag.contains(ICustomItem.NBT_UNIQUE_NAME) || !stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName())) {
-			return false;
-		}
-
-		return true;
+		return stackTag.contains(ICustomItem.NBT_UNIQUE_NAME) && stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName());
 	}
 
 	/**
@@ -113,20 +109,11 @@ public class VMItems {
 		}
 
 		CompoundNBT stackTag = checkingStack.getOrCreateTag();
-
-		if (stackTag == null) {
-			return false;
-		}
-
 		String fluidName = ForgeRegistries.FLUIDS.getKey(customBucket.getFluidInBucket()).toString();
 
-		if (stackTag.contains(IEnchantedBucket.NBT_ENCHANTED_BUCKET)
+		return stackTag.contains(IEnchantedBucket.NBT_ENCHANTED_BUCKET)
 				&& stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET).equals(customBucket.getUniqueNBTName())
-				&& stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME).equals(fluidName)) {
-			return true;
-		}
-
-		return false;
+				&& stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME).equals(fluidName);
 	}
 
 	/**

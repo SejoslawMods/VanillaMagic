@@ -17,8 +17,4 @@ public class VMLogger {
     public static void logInfo(String message) {
         log(Level.INFO, message);
     }
-
-    public static void logException(Exception ex) {
-        LOGGER.error(ex.getMessage(), ex);
-    }
 }
