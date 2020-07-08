@@ -2,8 +2,11 @@ package com.github.sejoslaw.vanillamagic.common.util;
 
 import com.github.sejoslaw.vanillamagic.common.quest.QuestJumper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 
 /**
@@ -23,5 +26,10 @@ public final class WorldUtil {
         });
 
         return list;
+    }
+
+    public static World getWorld(MinecraftServer server, int dimId) {
+        DimensionType dt = DimensionType.getById(dimId);
+        return server.getWorld(dt);
     }
 }

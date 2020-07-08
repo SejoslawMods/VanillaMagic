@@ -1,10 +1,10 @@
 package com.github.sejoslaw.vanillamagic.common.item.potionedcrystal;
 
-import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
+import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import com.github.sejoslaw.vanillamagic.api.item.ICustomItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.text.StringTextComponent;
 

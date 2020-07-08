@@ -2,9 +2,8 @@ package com.github.sejoslaw.vanillamagic.core;
 
 import com.github.sejoslaw.vanillamagic.common.item.book.BookRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.MobSpawnerRegistry;
+import com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import com.github.sejoslaw.vanillamagic.common.util.WorldUtil;
-import com.github.sejoslaw.vanillamagic.item.VMItems;
-import com.github.sejoslaw.vanillamagic.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
@@ -23,7 +22,6 @@ public class VMItemGroup extends ItemGroup {
 		super(label);
 	}
 
-	@Override
 	public ItemStack createIcon() {
 		return new ItemStack(Blocks.SPAWNER);
 	}
@@ -42,11 +40,11 @@ public class VMItemGroup extends ItemGroup {
     public void fill(NonNullList<ItemStack> list) {
 		this.addMinecraftBlocks(list);
 
-        list = MobSpawnerRegistry.fillList(list);
+        //list = MobSpawnerRegistry.fillList(list);
 		list = VMItems.fillList(list);
 		list = BookRegistry.fillList(list);
 		list = WorldUtil.fillList(list);
-		list = ItemUpgradeRegistry.fillList(list);
+		//list = ItemUpgradeRegistry.fillList(list);
 
         super.fill(list);
     }
