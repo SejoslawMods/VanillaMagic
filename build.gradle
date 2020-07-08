@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = mc_version + '-' + version_major + '.' + version_minor + '.' + version_patch + '.' + version_build
+version = mc_version + '-' + version_major + '.' + version_minor + '.' + version_patch
 group = "com.github.sejoslaw.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "VanillaMagic"
 
