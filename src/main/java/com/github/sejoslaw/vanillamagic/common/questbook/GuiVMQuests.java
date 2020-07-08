@@ -4,7 +4,7 @@ import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.common.util.QuestUtil;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.sun.prism.TextureMap;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.network.play.client.CClientStatusPacket;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -164,14 +165,14 @@ public class GuiVMQuests extends Screen {
         int centerWidthWithOffset = centerWidth + 16;
         int centerHeightWithOffset = centerHeight + 17;
 
-        GlStateManager.depthFunc(518);
-        GlStateManager.pushMatrix();
-        GlStateManager.translatef((float) centerWidthWithOffset, (float) centerHeightWithOffset, -200.0F);
-        GlStateManager.scalef(1.0F / this.zoom, 1.0F / this.zoom, 1.0F);
-        GlStateManager.enableTexture();
-        GlStateManager.disableLighting();
-        GlStateManager.enableRescaleNormal();
-        GlStateManager.enableColorMaterial();
+        RenderSystem.depthFunc(518);
+        RenderSystem.pushMatrix();
+        RenderSystem.translatef((float) centerWidthWithOffset, (float) centerHeightWithOffset, -200.0F);
+        RenderSystem.scalef(1.0F / this.zoom, 1.0F / this.zoom, 1.0F);
+        RenderSystem.enableTexture();
+        RenderSystem.disableLighting();
+        RenderSystem.enableRescaleNormal();
+        RenderSystem.enableColorMaterial();
 
         int xScrollMoved = xScroll + 288 >> 4;
         int yScrollMoved = yScroll + 288 >> 4;
@@ -185,7 +186,7 @@ public class GuiVMQuests extends Screen {
         // Draw Background
         for (int drawBackgroundPosY = 0; (float) drawBackgroundPosY * localZoom - (float) drawBackgroundPosYOffset < 155.0F; ++drawBackgroundPosY) {
             float color = 0.6F - (float) (yScrollMoved + drawBackgroundPosY) / 25.0F * 0.3F;
-            GlStateManager.color3f(color, color, color);
+            RenderSystem.color3f(color, color, color);
 
             for (int drawBackgroundPosX = 0; (float) drawBackgroundPosX * localZoom - (float) drawBackgroundPosXOffset < 224.0F; ++drawBackgroundPosX) {
                 random.setSeed(this.minecraft.getSession().getPlayerID().hashCode() + xScrollMoved + drawBackgroundPosX + (yScrollMoved + drawBackgroundPosY) * 16);
@@ -212,14 +213,14 @@ public class GuiVMQuests extends Screen {
                     texture = this.getTexture(Blocks.BEDROCK);
                 }
 
-                this.minecraft.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                this.minecraft.getTextureManager().bindTexture(PlayerContainer.LOCATION_BLOCKS_TEXTURE);
                 // Main background drawing method
                 this.drawTexturedModalRect(drawBackgroundPosX * 16 - drawBackgroundPosXOffset, drawBackgroundPosY * 16 - drawBackgroundPosYOffset, texture, 16, 16);
             }
         }
 
-        GlStateManager.enableDepthTest();
-        GlStateManager.depthFunc(515);
+        RenderSystem.enableDepthTest();
+        RenderSystem.depthFunc(515);
 
         List<IQuest> questList = QuestRegistry.getQuests();
 
@@ -247,8 +248,8 @@ public class GuiVMQuests extends Screen {
                         color = -16711936;
                     }
 
-                    this.drawHorizontalLine(column, parentColumn, row, color);
-                    this.drawVerticalLine(parentColumn, row, parentRow, color);
+                    this.hLine(column, parentColumn, row, color);
+                    this.vLine(parentColumn, row, parentRow, color);
 
                     if (column > parentColumn) {
                         this.drawTexturedModalRect(column - 11 - 7, row - 5, 114, 234, 7, 11);
@@ -268,10 +269,10 @@ public class GuiVMQuests extends Screen {
         float zoomX = (float) (mouseX - centerWidthWithOffset) * this.zoom;
         float zoomY = (float) (mouseY - centerHeightWithOffset) * this.zoom;
 
-        RenderHelper.enableGUIStandardItemLighting();
-        GlStateManager.disableLighting();
-        GlStateManager.enableRescaleNormal();
-        GlStateManager.enableColorMaterial();
+        RenderHelper.enableStandardItemLighting();
+        RenderSystem.disableLighting();
+        RenderSystem.enableRescaleNormal();
+        RenderSystem.enableColorMaterial();
 
         for (IQuest quest2 : questList) {
             int iconPosX = quest2.getPosition().getX() * 24 - xScroll;
@@ -281,36 +282,36 @@ public class GuiVMQuests extends Screen {
                 int requirementCount = QuestUtil.countRequirementsUntilAvailable(this.player, quest2);
 
                 if (QuestUtil.hasQuestUnlocked(this.player, quest2)) {
-                    GlStateManager.color3f(0.75F, 0.75F, 0.75F);
+                    RenderSystem.color3f(0.75F, 0.75F, 0.75F);
                 } else if (quest2.canPlayerGetQuest(this.player)) {
-                    GlStateManager.color3f(1.0F, 1.0F, 1.0F);
+                    RenderSystem.color3f(1.0F, 1.0F, 1.0F);
                 } else if (requirementCount < 3) {
-                    GlStateManager.color3f(0.3F, 0.3F, 0.3F);
+                    RenderSystem.color3f(0.3F, 0.3F, 0.3F);
                 } else if (requirementCount == 3) {
-                    GlStateManager.color3f(0.2F, 0.2F, 0.2F);
+                    RenderSystem.color3f(0.2F, 0.2F, 0.2F);
                 } else {
                     if (requirementCount != 4) {
                         continue;
                     }
 
-                    GlStateManager.color3f(0.1F, 0.1F, 0.1F);
+                    RenderSystem.color3f(0.1F, 0.1F, 0.1F);
                 }
 
-                GlStateManager.enableBlend();
-                GlStateManager.disableBlend();
+                RenderSystem.enableBlend();
+                RenderSystem.disableBlend();
 
                 if (!quest2.canPlayerGetQuest(this.player)) {
-                    GlStateManager.color3f(0.1F, 0.1F, 0.1F);
+                    RenderSystem.color3f(0.1F, 0.1F, 0.1F);
                 }
 
-                GlStateManager.disableLighting();
-                GlStateManager.enableCull();
+                RenderSystem.disableLighting();
+                RenderSystem.enableCull();
 
                 this.itemRenderer.renderItemAndEffectIntoGUI(quest2.getIcon(), iconPosX + 3, iconPosY + 3);
 
-                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-                GlStateManager.disableLighting();
-                GlStateManager.color3f(1.0F, 1.0F, 1.0F);
+                RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                RenderSystem.disableLighting();
+                RenderSystem.color3f(1.0F, 1.0F, 1.0F);
 
                 if (zoomX >= (float) iconPosX && zoomX <= (float) (iconPosX + 22) && zoomY >= (float) iconPosY && zoomY <= (float) (iconPosY + 22)) {
                     quest = quest2;
@@ -318,14 +319,14 @@ public class GuiVMQuests extends Screen {
             }
         }
 
-        GlStateManager.disableDepthTest();
-        GlStateManager.enableBlend();
-        GlStateManager.popMatrix();
-        GlStateManager.color3f(1.0F, 1.0F, 1.0F);
+        RenderSystem.disableDepthTest();
+        RenderSystem.enableBlend();
+        RenderSystem.popMatrix();
+        RenderSystem.color3f(1.0F, 1.0F, 1.0F);
 
-        GlStateManager.depthFunc(515);
-        GlStateManager.disableDepthTest();
-        GlStateManager.enableTexture();
+        RenderSystem.depthFunc(515);
+        RenderSystem.disableDepthTest();
+        RenderSystem.enableTexture();
 
         super.render(mouseX, mouseY, partialTicks);
 
@@ -346,7 +347,7 @@ public class GuiVMQuests extends Screen {
                     questNameWrappedHeight += 12;
                 }
 
-                this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + questNameWidth + 3, mouseYOffset + questNameWrappedHeight + 3 + 12, -1073741824, -1073741824);
+                this.fillGradient(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + questNameWidth + 3, mouseYOffset + questNameWrappedHeight + 3 + 12, -1073741824, -1073741824);
                 this.font.drawSplitString(questDescription, mouseXOffset, mouseYOffset + 12, questNameWidth, -6250336);
 
                 if (QuestUtil.hasQuestUnlocked(this.player, quest)) {
@@ -357,7 +358,7 @@ public class GuiVMQuests extends Screen {
                 int unformattedQuestNameWidth = Math.max(this.font.getStringWidth(questName), 120);
                 String unformattedRequires = (new TranslationTextComponent("quest.requires", QuestUtil.getStatName(quest.getParent()))).getFormattedText();
                 int wordWrappedHeight = this.font.getWordWrappedHeight(unformattedRequires, unformattedQuestNameWidth);
-                this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + unformattedQuestNameWidth + 3, mouseYOffset + wordWrappedHeight + 12 + 3, -1073741824, -1073741824);
+                this.fillGradient(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + unformattedQuestNameWidth + 3, mouseYOffset + wordWrappedHeight + 12 + 3, -1073741824, -1073741824);
                 this.font.drawSplitString(unformattedRequires, mouseXOffset, mouseYOffset + 12, unformattedQuestNameWidth, -9416624);
             } else if (requirementCount < 3) {
                 int unformattedQuestNameWidth = Math.max(this.font.getStringWidth(questName), 120);
@@ -369,7 +370,7 @@ public class GuiVMQuests extends Screen {
                 }
 
                 int wordWrappedHeight = this.font.getWordWrappedHeight(unformattedRequires, unformattedQuestNameWidth);
-                this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + unformattedQuestNameWidth + 3, mouseYOffset + wordWrappedHeight + 12 + 3, -1073741824, -1073741824);
+                this.fillGradient(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + unformattedQuestNameWidth + 3, mouseYOffset + wordWrappedHeight + 12 + 3, -1073741824, -1073741824);
                 this.font.drawSplitString(unformattedRequires, mouseXOffset, mouseYOffset + 12, unformattedQuestNameWidth, -9416624);
             } else {
                 questName = null;
@@ -380,8 +381,8 @@ public class GuiVMQuests extends Screen {
             }
         }
 
-        GlStateManager.enableDepthTest();
-        GlStateManager.enableLighting();
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableLighting();
         RenderHelper.disableStandardItemLighting();
     }
 
