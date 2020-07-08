@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal;
 import com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal;
 import com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature.QuestMotherNatureCrystal;
@@ -11,7 +12,7 @@ import com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar;
 import com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpell;
 import com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.QuestChunkLoader;
 import com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry;
-import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
+import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -30,7 +31,7 @@ public class BookOther implements IBook {
 	}
 
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(), new Object[] { "   ", "   ", "BBB", 'B', Items.BOOK });
+		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 6));
 	}
 
 	public ItemStack getItem() {
@@ -43,14 +44,14 @@ public class BookOther implements IBook {
 			{
 				// Pages
 				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
-						+ TextUtil.translateToLocal("book.other.title") + " ====" + TextUtil.getEnters(4) + "-"
+						+ TranslationUtil.translateToLocal("book.other.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
 				for (IQuest quest : QuestRegistry.getQuests()) {
 					if (quest instanceof QuestChunkLoader) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
 								+ TextUtil.getEnters(2) + "--->"));
 						pages.add(StringNBT.valueOf("Layer 1:" + ENTER + "  �6T " + ENTER + "�6T�0E�6T" + ENTER
 								+ "  �6T " + TextUtil.getEnters(2) + "�0Layer 2:" + ENTER + "  �5O " + ENTER + "�5OOO"
@@ -58,32 +59,32 @@ public class BookOther implements IBook {
 					}
 					else if (quest instanceof QuestQuarry) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
 						pages.add(StringNBT.valueOf("Quarry from top:" + ENTER + "           �aN           "
 								+ ENTER + "" + ENTER + "            �cR" + ENTER + "�aW          �0C�9D          �aE"
 								+ ENTER + "" + ENTER + "           �aS"));
 					}
 					else if (quest instanceof QuestAccelerationCrystal) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
 								+ TextUtil.getEnters(2) + "--->"));
 						pages.add(StringNBT.valueOf("Crafting:" + TextUtil.getEnters(2) + "[ ][�6B�0][ ]" + ENTER
 								+ "[�6B�0][�8NS�0][�6B�0]" + ENTER + "[ ][�6B�0][ ]"));
 					}
 					else if (quest instanceof QuestLiquidSuppressionCrystal) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
 								+ TextUtil.getEnters(2) + "--->"));
 						pages.add(StringNBT.valueOf("Crafting:" + TextUtil.getEnters(2) + "[�7B�0][�7B�0][�7B�0]"
 								+ ENTER + "[�7B�0][�8NS�0][�7B�0]" + ENTER + "[�7B�0][�7B�0][�7B�0]"));
 					}
 					else if (quest instanceof QuestMotherNatureCrystal) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")
 								+ TextUtil.getEnters(2) + "--->"));
 						pages.add(StringNBT.valueOf("Crafting:" + TextUtil.getEnters(2) + "[�2M�0][�aS�0][�2M�0]"
 								+ ENTER + "[�aS�0][�8NS�0][�aS�0]" + ENTER + "[�6P�0][�aS�0][�6P�0]"));
@@ -91,8 +92,8 @@ public class BookOther implements IBook {
 					// Others
 					else if (!(quest instanceof QuestCraftOnAltar) && !(quest instanceof QuestCastSpell) && !(quest instanceof QuestBuildAltar)) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
 					}
 				}
 

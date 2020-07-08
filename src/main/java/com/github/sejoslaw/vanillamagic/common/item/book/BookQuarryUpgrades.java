@@ -2,8 +2,8 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import com.github.sejoslaw.vanillamagic.api.tileentity.machine.quarry.IQuarryUpgrade;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuarryUpgradeRegistry;
-import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,7 +21,7 @@ public class BookQuarryUpgrades implements IBook {
 	}
 
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(), new Object[] { "  B", " B ", "  B", 'B', Items.BOOK });
+		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 7));
 	}
 
 	public ItemStack getItem() {
@@ -34,7 +34,7 @@ public class BookQuarryUpgrades implements IBook {
 			{
 				// Pages
 				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
-						+ TextUtil.translateToLocal("book.quarryUpgrades.title") + " ====" + TextUtil.getEnters(4) + "-"
+						+ TranslationUtil.translateToLocal("book.quarryUpgrades.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
 				for (IQuarryUpgrade iqu : QuarryUpgradeRegistry.getUpgrades()) {

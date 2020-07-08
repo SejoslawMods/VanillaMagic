@@ -75,9 +75,4 @@ public final class TextUtil {
     public static ITextComponent wrap(String s) {
         return new StringTextComponent(s);
     }
-
-    // TODO: Implement
-    public static String translateToLocal(String str) {
-        return str;
-    }
 }

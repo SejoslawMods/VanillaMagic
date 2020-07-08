@@ -3,8 +3,8 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpell;
-import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,7 +21,7 @@ public class BookSpells implements IBook {
 	}
 
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(), new Object[] { " B ", " B ", " B ", 'B', Items.BOOK });
+		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 8));
 	}
 
 	public ItemStack getItem() {
@@ -34,14 +34,14 @@ public class BookSpells implements IBook {
 			{
 				// Pages
 				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
-						+ TextUtil.translateToLocal("book.spells.title") + " ====" + TextUtil.getEnters(4) + "-"
+						+ TranslationUtil.translateToLocal("book.spells.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
 				for (IQuest quest : QuestRegistry.getQuests()) {
 					if (quest instanceof QuestCastSpell) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
 					}
 				}
 			}

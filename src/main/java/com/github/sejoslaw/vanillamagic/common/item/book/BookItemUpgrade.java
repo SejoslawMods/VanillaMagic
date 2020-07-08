@@ -2,9 +2,10 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import com.github.sejoslaw.vanillamagic.api.upgrade.itemupgrade.IItemUpgrade;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.ItemUpgradeRegistry;
 import com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.ItemUpgradeRegistryEntry;
-import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
+import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,7 +22,7 @@ public class BookItemUpgrade implements IBook {
 	}
 
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(), new Object[] { "B  ", " B ", "  B", 'B', Items.BOOK });
+		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 5));
 	}
 
 	public ItemStack getItem() {
@@ -34,7 +35,7 @@ public class BookItemUpgrade implements IBook {
 			{
 				// Pages
 				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
-						+ TextUtil.translateToLocal("book.itemUpgrades.title") + " ====" + TextUtil.getEnters(4) + "-"
+						+ TranslationUtil.translateToLocal("book.itemUpgrades.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
 				for (ItemUpgradeRegistryEntry entry : ItemUpgradeRegistry.ENTRIES) {

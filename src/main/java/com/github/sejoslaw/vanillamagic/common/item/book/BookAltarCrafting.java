@@ -3,8 +3,9 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar;
-import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
+import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,11 +22,7 @@ public class BookAltarCrafting implements IBook {
 	}
 
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(), new Object[] { "B  ", "B  ", "B  ", 'B', Items.BOOK });
-
-//		Ingredient book = Ingredient.fromStacks(new ItemStack(Items.BOOK));
-//		NonNullList<Ingredient> ingredients = NonNullList.from(book, book);
-//		ShapedRecipe recipe = new ShapedRecipe(null, null, 3, 3, ingredients, getItem());
+		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 3));
 	}
 
 	public ItemStack getItem() {
@@ -38,7 +35,7 @@ public class BookAltarCrafting implements IBook {
 			{
 				// Pages
 				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
-						+ TextUtil.translateToLocal("book.altarCrafting.title") + " ====" + TextUtil.getEnters(4) + "-"
+						+ TranslationUtil.translateToLocal("book.altarCrafting.title") + " ====" + TextUtil.getEnters(4) + "-"
 						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
 
 				for (int i = 0; i < QuestRegistry.size(); ++i) {
@@ -46,8 +43,8 @@ public class BookAltarCrafting implements IBook {
 
 					if (quest instanceof QuestCraftOnAltar) {
 						pages.add(StringNBT.valueOf(BookRegistry.COLOR_HEADER
-								+ TextUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
-								+ "�0" + TextUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
+								+ TranslationUtil.translateToLocal("quest." + quest.getUniqueName()) + TextUtil.getEnters(2)
+								+ "�0" + TranslationUtil.translateToLocal("quest." + quest.getUniqueName() + ".desc")));
 					}
 				}
 			}

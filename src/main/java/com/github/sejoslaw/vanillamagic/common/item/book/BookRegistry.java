@@ -1,6 +1,8 @@
 package com.github.sejoslaw.vanillamagic.common.item.book;
 
+import com.github.sejoslaw.vanillamagic.api.VanillaMagicAPI;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,15 +37,16 @@ public final class BookRegistry {
 	/**
 	 * Year displayed in book.
 	 */
-	public static final String YEAR = "2019";
+	public static final String YEAR = VanillaMagicAPI.VERSION;
 
 	// Book Names
-	public static final String BOOK_NAME_SPELLS = TextUtil.translateToLocal("book.spells.itemName");
-	public static final String BOOK_NAME_ALTAR_CRAFTING = TextUtil.translateToLocal("book.altarCrafting.itemName");
-	public static final String BOOK_NAME_BUILD_ALTAR = TextUtil.translateToLocal("book.altarBuilding.itemName");
-	public static final String BOOK_NAME_OTHER = TextUtil.translateToLocal("book.other.itemName");
-	public static final String BOOK_NAME_ITEM_UPGRADES = TextUtil.translateToLocal("book.itemUpgrades.itemName");
-	public static final String BOOK_NAME_QUARRY_UPGRADES = TextUtil.translateToLocal("book.quarryUpgrades.itemName");
+	public static final String BOOK_NAME_SPELLS = TranslationUtil.translateToLocal("book.spells.itemName");
+	public static final String BOOK_NAME_ALTAR_CRAFTING = TranslationUtil.translateToLocal("book.altarCrafting.itemName");
+	public static final String BOOK_NAME_BUILD_ALTAR = TranslationUtil.translateToLocal("book.altarBuilding.itemName");
+	public static final String BOOK_NAME_OTHER = TranslationUtil.translateToLocal("book.other.itemName");
+	public static final String BOOK_NAME_ITEM_UPGRADES = TranslationUtil.translateToLocal("book.itemUpgrades.itemName");
+	public static final String BOOK_NAME_QUARRY_UPGRADES = TranslationUtil.translateToLocal("book.quarryUpgrades.itemName");
+	public static final String BOOK_NAME_ON_GROUND_CRAFTING = TranslationUtil.translateToLocal("book.onGroundCrafting.itemName");
 
 	/**
 	 * Book unique ID.
@@ -57,6 +60,7 @@ public final class BookRegistry {
 	public static final int BOOK_OTHER_UID = 4;
 	public static final int BOOK_ITEM_UPGRADES_UID = 5;
 	public static final int BOOK_QUARRY_UPGRADES_UID = 6;
+	public static final int BOOK_ON_GROUND_CRAFTING_RECIPES_UID = 6;
 
 	// Books
 	public static final IBook BOOK_ALTAR_CRAFTING;
@@ -65,6 +69,7 @@ public final class BookRegistry {
 	public static final IBook BOOK_OTHER;
 	public static final IBook BOOK_ITEM_UPGRADES;
 	public static final IBook BOOK_QUARRY_UPGRADES;
+	public static final IBook BOOK_ON_GROUND_CRAFTING_RECIPES;
 
 	/**
 	 * List with all Books.
@@ -89,6 +94,9 @@ public final class BookRegistry {
 
 		BOOK_QUARRY_UPGRADES = new BookQuarryUpgrades();
 		BOOKS.add(BOOK_QUARRY_UPGRADES);
+
+		BOOK_ON_GROUND_CRAFTING_RECIPES = new BookOnGroundCraftingRecipes();
+		BOOKS.add(BOOK_ON_GROUND_CRAFTING_RECIPES);
 	}
 
 	private BookRegistry() {

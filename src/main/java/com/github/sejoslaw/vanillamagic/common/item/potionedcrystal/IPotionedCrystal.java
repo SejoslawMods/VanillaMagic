@@ -27,7 +27,7 @@ public interface IPotionedCrystal extends ICustomItem {
 	 */
 	default ItemStack getItem() {
 		ItemStack stack = new ItemStack(Items.NETHER_STAR);
-		stack.setDisplayName(new StringTextComponent("Potioned Crystal: " + TextUtil.translateToLocal(getPotionLocalizedName())));
+		stack.setDisplayName(new StringTextComponent("Potioned Crystal: " + TranslationUtil.translateToLocal(getPotionLocalizedName())));
 
 		CompoundNBT stackTag = stack.getTag();
 		stackTag.putString(NBT_UNIQUE_NAME, getUniqueNBTName());

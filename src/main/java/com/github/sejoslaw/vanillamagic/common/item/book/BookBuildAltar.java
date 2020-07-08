@@ -2,8 +2,8 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar;
-import com.github.sejoslaw.vanillamagic.common.util.CraftingUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -23,12 +23,7 @@ public class BookBuildAltar implements IBook
 	}
 	
 	public void registerRecipe() {
-		CraftingUtil.addShapedRecipe(getItem(), new Object[]{
-				"   ",
-				"BBB",
-				"   ",
-				'B', Items.BOOK
-		});
+		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 4));
 	}
 	
 	public ItemStack getItem()
@@ -42,7 +37,7 @@ public class BookBuildAltar implements IBook
 			{
 				// Pages
 				pages.add(StringNBT.valueOf(
-						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TextUtil.translateToLocal("book.altarBuilding.title") + " ====" +
+						"\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== " + TranslationUtil.translateToLocal("book.altarBuilding.title") + " ====" +
 						TextUtil.getEnters(4) + "-" + BookRegistry.AUTHOR + " " + BookRegistry.YEAR
 						));
 				{
@@ -52,10 +47,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest1.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest1.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest1.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
+								TranslationUtil.translateToLocal("quest." + quest1.getUniqueName() + ".desc") + TextUtil.getEnters(2) +
 								// How Altar should look
 										"�cRRR" + ENTER +
 										"�cR�0C�cR" + ENTER +
@@ -68,10 +63,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest2.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest2.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest2.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TranslationUtil.translateToLocal("quest." + quest2.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.add(StringNBT.valueOf(
 								TextUtil.getEnters(1) +
@@ -89,10 +84,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest3.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest3.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest3.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TranslationUtil.translateToLocal("quest." + quest3.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.add(StringNBT.valueOf(
 								TextUtil.getEnters(1) +
@@ -112,10 +107,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest4.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest4.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest4.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TranslationUtil.translateToLocal("quest." + quest4.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.add(StringNBT.valueOf(
 								TextUtil.getEnters(1) +
@@ -135,10 +130,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest5.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest5.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest5.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TranslationUtil.translateToLocal("quest." + quest5.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.add(StringNBT.valueOf(
 								TextUtil.getEnters(1) +
@@ -162,10 +157,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest6.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest6.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest6.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TranslationUtil.translateToLocal("quest." + quest6.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.add(StringNBT.valueOf(
 								TextUtil.getEnters(1) +
@@ -189,10 +184,10 @@ public class BookBuildAltar implements IBook
 
 						pages.add(StringNBT.valueOf(
 								BookRegistry.COLOR_HEADER + 
-								TextUtil.translateToLocal("quest." + quest7.getUniqueName()) + 
+								TranslationUtil.translateToLocal("quest." + quest7.getUniqueName()) +
 								TextUtil.getEnters(2) + 
 								"�0" +
-								TextUtil.translateToLocal("quest." + quest7.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
+								TranslationUtil.translateToLocal("quest." + quest7.getUniqueName() + ".desc") + TextUtil.getEnters(2) + "--->"
 								));
 						pages.add(StringNBT.valueOf(
 								// How Altar should look
