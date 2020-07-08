@@ -2,7 +2,6 @@ package com.github.sejoslaw.vanillamagic.common.item.book;
 
 import com.github.sejoslaw.vanillamagic.api.VanillaMagicAPI;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.util.TranslationUtil;
 import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,28 +38,10 @@ public final class BookRegistry {
 	 */
 	public static final String YEAR = VanillaMagicAPI.VERSION;
 
-	// Book Names
-	public static final String BOOK_NAME_SPELLS = TranslationUtil.translateToLocal("book.spells.itemName");
-	public static final String BOOK_NAME_ALTAR_CRAFTING = TranslationUtil.translateToLocal("book.altarCrafting.itemName");
-	public static final String BOOK_NAME_BUILD_ALTAR = TranslationUtil.translateToLocal("book.altarBuilding.itemName");
-	public static final String BOOK_NAME_OTHER = TranslationUtil.translateToLocal("book.other.itemName");
-	public static final String BOOK_NAME_ITEM_UPGRADES = TranslationUtil.translateToLocal("book.itemUpgrades.itemName");
-	public static final String BOOK_NAME_QUARRY_UPGRADES = TranslationUtil.translateToLocal("book.quarryUpgrades.itemName");
-	public static final String BOOK_NAME_ON_GROUND_CRAFTING = TranslationUtil.translateToLocal("book.onGroundCrafting.itemName");
-
 	/**
 	 * Book unique ID.
 	 */
 	public static final String BOOK_NBT_UID = "bookUID";
-
-	// Book unique IDs
-	public static final int BOOK_ALTAR_CRAFTING_UID = 1;
-	public static final int BOOK_BUILD_ALTAR_UID = 2;
-	public static final int BOOK_SPELLS_UID = 3;
-	public static final int BOOK_OTHER_UID = 4;
-	public static final int BOOK_ITEM_UPGRADES_UID = 5;
-	public static final int BOOK_QUARRY_UPGRADES_UID = 6;
-	public static final int BOOK_ON_GROUND_CRAFTING_RECIPES_UID = 6;
 
 	// Books
 	public static final IBook BOOK_ALTAR_CRAFTING;
@@ -114,26 +95,7 @@ public final class BookRegistry {
 	}
 
 	/**
-	 * bookUID: <br>
-	 * 1 - Altar Crafting <br>
-	 * 2 - Altar Building <br>
-	 * 3 - Spells <br>
-	 * 4 - Other <br>
-	 * 5 - Item Upgrades <br>
-	 * 6 - Quarry Upgrades <br>
-	 */
-	public static ItemStack getBookByUID(int bookUID) {
-		for (IBook book : BOOKS) {
-			if (book.getBookID() == bookUID) {
-				return book.getItem();
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * Checks if the given ItemStack is a book.
+	 * Checks if the given ItemStack is a Vanilla Magic Book.
 	 */
 	public static boolean isBook(ItemStack stack) {
 		if (stack.getTag() != null) {
@@ -141,18 +103,6 @@ public final class BookRegistry {
 		}
 
 		return false;
-	}
-
-	/**
-	 * This method will return the bookUID from the stack. <br>
-	 * If it returns -1, than it means that the given stack is not a book.
-	 */
-	public static int getUIDByBook(ItemStack stack) {
-		if (isBook(stack)) {
-			return stack.getTag().getInt(BOOK_NBT_UID);
-		}
-
-		return -1;
 	}
 
 	/**

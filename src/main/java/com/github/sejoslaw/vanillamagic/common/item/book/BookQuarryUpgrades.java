@@ -6,53 +6,27 @@ import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuarryUpgradeRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.StringNBT;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class BookQuarryUpgrades implements IBook {
-	public int getBookID() {
-		return BookRegistry.BOOK_QUARRY_UPGRADES_UID;
-	}
-
+public class BookQuarryUpgrades extends AbstractBook {
 	public void registerRecipe() {
 		OnGroundCraftingHandler.addRecipe(getItem(), new ItemStack(Items.BOOK, 7));
 	}
 
-	public ItemStack getItem() {
-		ItemStack book = new ItemStack(BookRegistry.BOOK_ITEM);
-
-		CompoundNBT data = new CompoundNBT();
-		{
-			// Constructing TagCompound
-			ListNBT pages = new ListNBT();
-			{
-				// Pages
-				pages.add(StringNBT.valueOf("\n\n\n\n" + BookRegistry.COLOR_TITLE + "==== "
-						+ TranslationUtil.translateToLocal("book.quarryUpgrades.title") + " ====" + TextUtil.getEnters(4) + "-"
-						+ BookRegistry.AUTHOR + " " + BookRegistry.YEAR));
-
-				for (IQuarryUpgrade iqu : QuarryUpgradeRegistry.getUpgrades()) {
-					pages.add(StringNBT.valueOf(
-							BookRegistry.COLOR_HEADER + iqu.getUpgradeName() + TextUtil.getEnters(2) + "�0" + "Block: "
-									+ ForgeRegistries.BLOCKS.getKey(iqu.getBlock())));
-				}
-			}
-
-			data.put("pages", pages);
-			data.putString("author", BookRegistry.AUTHOR);
-			data.putString("title", BookRegistry.BOOK_NAME_QUARRY_UPGRADES);
-			data.putInt(BookRegistry.BOOK_NBT_UID, getBookID());
+	public void addPages(ListNBT pages) {
+		for (IQuarryUpgrade iqu : QuarryUpgradeRegistry.getUpgrades()) {
+			pages.add(StringNBT.valueOf(
+					BookRegistry.COLOR_HEADER + iqu.getUpgradeName() + TextUtil.getEnters(2) + "�0" +
+					"Block: " + ForgeRegistries.BLOCKS.getKey(iqu.getBlock())));
 		}
+	}
 
-		book.setTag(data);
-		book.setDisplayName(new StringTextComponent(BookRegistry.BOOK_NAME_QUARRY_UPGRADES));
-
-		return book;
+	public String getBookTranslationKey() {
+		return "quarryUpgrades";
 	}
 }
