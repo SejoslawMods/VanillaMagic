@@ -166,8 +166,6 @@ public class VMConfig {
                 .define("SHOW_LAST_DEATH_POINT", true);
         COMMON_BUILDER.pop();
 
-        COMMON_BUILDER.pop();
-
         COMMON_CONFIG = COMMON_BUILDER.build();
     }
 }

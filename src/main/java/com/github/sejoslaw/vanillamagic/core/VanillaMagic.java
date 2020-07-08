@@ -15,12 +15,12 @@ public class VanillaMagic {
     /**
      * Config used for loading achievements
      */
-    public static VMConfigAchievements CONFIG_ACHIEVEMENTS;
+//    public static VMConfigAchievements CONFIG_ACHIEVEMENTS;
 
     /**
      * VM custom Creative Tab
      */
-    public static final VMItemGroup ITEM_GROUP = new VMItemGroup("vm");
+//    public static final VMItemGroup ITEM_GROUP = new VMItemGroup("vm");
 
     public VanillaMagic() {
     }
