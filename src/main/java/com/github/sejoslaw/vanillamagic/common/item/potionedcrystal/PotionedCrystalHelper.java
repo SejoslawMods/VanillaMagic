@@ -94,10 +94,7 @@ public class PotionedCrystalHelper {
 		return null;
 	}
 
-	/**
-	 * Register all PotionedCrystal recipes.
-	 */
-	public static void registerRecipes() {
+	public static void initialize() {
 		for (Potion potion : ForgeRegistries.POTION_TYPES.getValues()) {
 			VMItems.POTIONED_CRYSTALS.add(() -> potion);
 		}

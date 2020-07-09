@@ -22,7 +22,7 @@ import java.util.Set;
 public final class ItemUpgradeRegistry {
     public static final Set<ItemUpgradeRegistryEntry> ENTRIES = new HashSet<>();
 
-    public static void preInit() {
+    public static void initialize() {
         addUpgrades("pickaxe", new UpgradeAutosmelt());
         addUpgrades("sword", new UpgradeWitherEffect(), new UpgradeLifesteal(), new UpgradeThor());
     }

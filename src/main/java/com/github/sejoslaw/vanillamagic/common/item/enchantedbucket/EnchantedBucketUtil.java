@@ -97,10 +97,7 @@ public final class EnchantedBucketUtil {
 		return null;
 	}
 
-	/**
-	 * Register all EnchantedBuckets.
-	 */
-	public static void registerFluids() {
+	public static void initialize() {
 		Set<Map.Entry<ResourceLocation, Fluid>> registeredFluids = ForgeRegistries.FLUIDS.getEntries();
 
 		for (Map.Entry<ResourceLocation, Fluid> entry : registeredFluids) {

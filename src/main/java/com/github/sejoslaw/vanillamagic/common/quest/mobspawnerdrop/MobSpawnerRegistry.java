@@ -29,10 +29,7 @@ public final class MobSpawnerRegistry {
     private MobSpawnerRegistry() {
     }
 
-    /**
-     * PostInitialization stage. Register all Entities for Mob Spawner.
-     */
-    public static void postInit() {
+    public static void initialize() {
         VMLogger.logInfo("Started Mob Spawner Registry...");
 
         for (EntityType<?> type : ForgeRegistries.ENTITIES) {

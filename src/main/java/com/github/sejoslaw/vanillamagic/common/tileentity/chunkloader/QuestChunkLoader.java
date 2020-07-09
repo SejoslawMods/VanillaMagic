@@ -114,14 +114,10 @@ public class QuestChunkLoader extends Quest {
         BlockPos obsidianRight = new BlockPos(chunkLoaderPos.getX() + 1, chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ());
         BlockPos obsidianBottom = new BlockPos(chunkLoaderPos.getX(), chunkLoaderPos.getY() - 1, chunkLoaderPos.getZ() - 1);
 
-        if (BlockUtil.areEqual(world.getBlockState(obsidianUnder).getBlock(), Blocks.OBSIDIAN)
+        return BlockUtil.areEqual(world.getBlockState(obsidianUnder).getBlock(), Blocks.OBSIDIAN)
                 && BlockUtil.areEqual(world.getBlockState(obsidianTop).getBlock(), Blocks.OBSIDIAN)
                 && BlockUtil.areEqual(world.getBlockState(obsidianLeft).getBlock(), Blocks.OBSIDIAN)
                 && BlockUtil.areEqual(world.getBlockState(obsidianRight).getBlock(), Blocks.OBSIDIAN)
-                && BlockUtil.areEqual(world.getBlockState(obsidianBottom).getBlock(), Blocks.OBSIDIAN)) {
-            return true;
-        }
-
-        return false;
+                && BlockUtil.areEqual(world.getBlockState(obsidianBottom).getBlock(), Blocks.OBSIDIAN);
     }
 }

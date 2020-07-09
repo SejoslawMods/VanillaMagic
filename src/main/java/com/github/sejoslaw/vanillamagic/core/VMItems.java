@@ -76,10 +76,7 @@ public class VMItems {
 		CUSTOM_ITEMS.add(item);
 	}
 
-	/**
-	 * PostInitialization stage. Register all recipes.
-	 */
-	public static void postInit() {
+	public static void initialize() {
 		for (ICustomItem customItem : CUSTOM_ITEMS) {
 			customItem.registerRecipe();
 		}

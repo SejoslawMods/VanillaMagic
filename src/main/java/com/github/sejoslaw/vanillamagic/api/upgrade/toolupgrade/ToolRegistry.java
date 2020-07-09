@@ -52,7 +52,7 @@ public class ToolRegistry {
      * Initialize the registry (add vanilla stacks to registry). Used in
      * VanillaMagic preInit.
      */
-    public static void preInit() {
+    public static void initialize() {
         // Axe
         add(Items.WOODEN_AXE, Blocks.STONE, Items.STONE_AXE);
         add(Items.STONE_AXE, Items.IRON_INGOT, Items.IRON_AXE);

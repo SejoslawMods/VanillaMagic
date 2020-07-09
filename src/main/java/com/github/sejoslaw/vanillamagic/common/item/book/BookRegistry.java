@@ -83,10 +83,7 @@ public final class BookRegistry {
 	private BookRegistry() {
 	}
 
-	/**
-	 * PostInitialization stage. Register all recipes.
-	 */
-	public static void postInit() {
+	public static void initialize() {
 		for (IBook book : BOOKS) {
 			book.registerRecipe();
 		}
