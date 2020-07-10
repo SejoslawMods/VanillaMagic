@@ -132,7 +132,6 @@ public class QuestCaptureEntity extends Quest {
         stackOffHand.setDisplayName(TextUtil.wrap("EntityBook"));
         CompoundNBT stackTagCompound = stackOffHand.getOrCreateTag();
 
-        // Save to ItemStack
         if (!stackTagCompound.contains(NBTUtil.NBT_TAG_COMPOUND_ENTITY)) {
             CompoundNBT entityTag = new CompoundNBT();
             target.writeUnlessRemoved(entityTag);

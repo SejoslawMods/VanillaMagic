@@ -129,7 +129,6 @@ public class QuestEvokerCrystal extends Quest {
 		if (isSneaking) {
 			EvokerSpellRegistry.changeSpell(player, crystal);
 		} else {
-			// Use Spell
 			IEvokerSpell spell = EvokerSpellRegistry.getCurrentSpell(crystal);
 
 			if (!EventUtil.postEvent(new EventSpell.Cast.EvokerSpell(player, player.world, target, spell))) {

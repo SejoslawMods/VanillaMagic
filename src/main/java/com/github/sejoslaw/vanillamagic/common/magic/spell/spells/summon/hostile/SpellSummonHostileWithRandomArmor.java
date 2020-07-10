@@ -16,12 +16,6 @@ public abstract class SpellSummonHostileWithRandomArmor extends SpellSummonHosti
 	}
 
 	public boolean getSpawnWithArmor() {
-		int rand = new Random().nextInt(100);
-
-		if (rand < VMConfig.PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR.get()) {
-			return true;
-		}
-
-		return false;
+		return new Random().nextInt(100) < VMConfig.PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR.get();
 	}
 }

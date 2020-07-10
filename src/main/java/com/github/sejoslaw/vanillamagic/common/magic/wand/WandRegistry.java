@@ -16,24 +16,11 @@ import java.util.List;
  * Registry containing all data about currently registered Wands.
  */
 public final class WandRegistry {
-    // All registered Wands.
-    private static final List<IWand> WANDS = new ArrayList<>();
+    public static final List<IWand> WANDS = new ArrayList<>();
 
-    /**
-     * basic wand - Stick Wand
-     */
     public static final IWand WAND_STICK = new Wand(1, new ItemStack(Items.STICK), TranslationUtil.translateToLocal("wand.stick"));
-    /**
-     * the most common wand - Blaze Wand
-     */
     public static final IWand WAND_BLAZE_ROD = new Wand(2, new ItemStack(Items.BLAZE_ROD), TranslationUtil.translateToLocal("wand.blazeRod"));
-    /**
-     * used mainly for summoning and resurrecting - Nether Star
-     */
     public static final IWand WAND_NETHER_STAR = new Wand(3, new ItemStack(Items.NETHER_STAR), TranslationUtil.translateToLocal("wand.netherStar"));
-    /**
-     * ??? - End Wand
-     */
     public static final IWand WAND_END_ROD = new Wand(4, new ItemStack(Blocks.END_ROD), TranslationUtil.translateToLocal("wand.endRod"));
 
     private WandRegistry() {
@@ -47,13 +34,6 @@ public final class WandRegistry {
     }
 
     /**
-     * @return Returns the list which contains all Wands.
-     */
-    public static List<IWand> getWands() {
-        return WANDS;
-    }
-
-    /**
      * @param player - player we are checking
      * @return Returns the Wand which player has got in main hand - null if the item
      * is not a Wand
@@ -61,16 +41,6 @@ public final class WandRegistry {
     @Nullable
     public static IWand isWandInMainHand(PlayerEntity player) {
         return getWandByItemStack(player.getHeldItemMainhand());
-    }
-
-    /**
-     * @param player - player we are checking
-     * @return Returns the Wand which player has got in off hand - null if the item
-     * is not a Wand
-     */
-    @Nullable
-    public static IWand isWandInOffHand(PlayerEntity player) {
-        return getWandByItemStack(player.getHeldItemOffhand());
     }
 
     /**
@@ -94,14 +64,14 @@ public final class WandRegistry {
      */
     @Nullable
     public static IWand getWandByItemStack(ItemStack inHand) {
-        for (int i = 0; i < WANDS.size(); ++i) {
-            IWand currentlyCheckingEnumWand = WANDS.get(i);
+        for (IWand currentlyCheckingEnumWand : WANDS) {
             ItemStack currentlyCheckingWand = currentlyCheckingEnumWand.getWandStack();
 
             if (ItemStack.areItemsEqual(currentlyCheckingWand, inHand)) {
                 return currentlyCheckingEnumWand;
             }
         }
+
         return null;
     }
 
@@ -139,13 +109,12 @@ public final class WandRegistry {
      */
     @Nullable
     public static IWand getWandByTier(int wandID) {
-        for (int i = 0; i < WANDS.size(); ++i) {
-            IWand currentlyCheckingEnumWand = WANDS.get(i);
-
+        for (IWand currentlyCheckingEnumWand : WANDS) {
             if (currentlyCheckingEnumWand.getWandID() == wandID) {
                 return currentlyCheckingEnumWand;
             }
         }
+
         return null;
     }
 }

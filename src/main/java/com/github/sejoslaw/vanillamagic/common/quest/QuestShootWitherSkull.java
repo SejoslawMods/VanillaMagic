@@ -48,10 +48,11 @@ public class QuestShootWitherSkull extends Quest {
         entityWitherSkull.shootingEntity = player;
         entityWitherSkull.setMotion(0, 0, 0);
 
-        double d0 = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
-        entityWitherSkull.accelerationX = accelX / d0 * 0.1D;
-        entityWitherSkull.accelerationY = accelY / d0 * 0.1D;
-        entityWitherSkull.accelerationZ = accelZ / d0 * 0.1D;
+        double accelDelta = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
+
+        entityWitherSkull.accelerationX = accelX / accelDelta * 0.1D;
+        entityWitherSkull.accelerationY = accelY / accelDelta * 0.1D;
+        entityWitherSkull.accelerationZ = accelZ / accelDelta * 0.1D;
 
         world.addEntity(entityWitherSkull);
 

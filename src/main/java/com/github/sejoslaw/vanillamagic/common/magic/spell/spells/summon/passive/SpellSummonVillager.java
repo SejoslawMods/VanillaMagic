@@ -21,15 +21,10 @@ public class SpellSummonVillager extends SpellSummonPassive {
     }
 
     public Entity getEntity(World world) {
-        VillagerEntity entity = new VillagerEntity(EntityType.VILLAGER, world);
-        entity.setVillagerData(entity.getVillagerData().withProfession(this.getRandomProfession()));
-        return entity;
-    }
-
-    private VillagerProfession getRandomProfession() {
         Collection<VillagerProfession> professions = ForgeRegistries.PROFESSIONS.getValues();
-        int professionsCount = professions.size();
-        int random = new Random().nextInt(professionsCount);
-        return (VillagerProfession) professions.stream().toArray()[random];
+        VillagerProfession profession = (VillagerProfession) professions.toArray()[new Random().nextInt(professions.size())];
+        VillagerEntity entity = new VillagerEntity(EntityType.VILLAGER, world);
+        entity.setVillagerData(entity.getVillagerData().withProfession(profession));
+        return entity;
     }
 }

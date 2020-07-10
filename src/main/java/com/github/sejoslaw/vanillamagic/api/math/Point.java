@@ -2,13 +2,11 @@ package com.github.sejoslaw.vanillamagic.api.math;
 
 /**
  * Simple presentation of 2D Point.
+ *
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class Point {
     protected int x, y;
-
-    public Point() {
-        this(0, 0);
-    }
 
     public Point(int x, int y) {
         this.setPosition(x, y);

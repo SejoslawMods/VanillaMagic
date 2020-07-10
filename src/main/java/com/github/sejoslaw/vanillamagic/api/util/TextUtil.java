@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic.api.util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.dimension.DimensionType;
 
 /**
@@ -11,29 +12,29 @@ import net.minecraft.world.dimension.DimensionType;
 public final class TextUtil {
     public static final String ENTER = "\n";
 
-    public static final String CHANGING = "�k";
-    public static final String BOLD = "�l";
-    public static final String ITALIC = "�o";
-    public static final String STRIKED = "�m";
-    public static final String UNDERLINED = "�n";
-    public static final String NONE = "�r";
+    public static final String CHANGING = TextFormatting.OBFUSCATED.toString();
+    public static final String BOLD = TextFormatting.BOLD.toString();
+    public static final String ITALIC = TextFormatting.ITALIC.toString();
+    public static final String STRIKED = TextFormatting.STRIKETHROUGH.toString();
+    public static final String UNDERLINED = TextFormatting.UNDERLINE.toString();
+    public static final String NONE = TextFormatting.RESET.toString();
 
-    public static final String COLOR_BLACK = "�0";
-    public static final String COLOR_DARK_BLUE = "�1";
-    public static final String COLOR_DARK_GREEN = "�2";
-    public static final String COLOR_TUEQUOISE = "�3";
-    public static final String COLOR_DARK_RED = "�4";
-    public static final String COLOR_PURPLE = "�5";
-    public static final String COLOR_ORANGE = "�6";
-    public static final String COLOR_GREY = "�7";
-    public static final String COLOR_DARK_GREY = "�8";
-    public static final String COLOR_BLUE = "�9";
-    public static final String COLOR_GREEN = "�a";
-    public static final String COLOR_CYAN = "�b";
-    public static final String COLOR_RED = "�c";
-    public static final String COLOR_PINK = "�d";
-    public static final String COLOR_YELLOW = "�e";
-    public static final String COLOR_WHITE = "�f";
+    public static final String COLOR_BLACK = TextFormatting.BLACK.toString();
+    public static final String COLOR_DARK_BLUE = TextFormatting.DARK_BLUE.toString();
+    public static final String COLOR_DARK_GREEN = TextFormatting.DARK_GREEN.toString();
+    public static final String COLOR_DARK_AQUA = TextFormatting.DARK_AQUA.toString();
+    public static final String COLOR_DARK_RED = TextFormatting.DARK_RED.toString();
+    public static final String COLOR_DARK_PURPLE = TextFormatting.DARK_PURPLE.toString();
+    public static final String COLOR_GOLD = TextFormatting.GOLD.toString();
+    public static final String COLOR_GREY = TextFormatting.GRAY.toString();
+    public static final String COLOR_DARK_GREY = TextFormatting.DARK_GRAY.toString();
+    public static final String COLOR_BLUE = TextFormatting.BLUE.toString();
+    public static final String COLOR_GREEN = TextFormatting.GREEN.toString();
+    public static final String COLOR_AQUA = TextFormatting.AQUA.toString();
+    public static final String COLOR_RED = TextFormatting.RED.toString();
+    public static final String COLOR_LIGHT_PURPLE = TextFormatting.LIGHT_PURPLE.toString();
+    public static final String COLOR_YELLOW = TextFormatting.YELLOW.toString();
+    public static final String COLOR_WHITE = TextFormatting.WHITE.toString();
 
     private TextUtil() {
     }

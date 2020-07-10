@@ -60,7 +60,6 @@ public abstract class Quest implements IQuest {
             this.uniqueName = jo.get("uniqueName").getAsString();
         }
 
-        // Quest position on the screen
         int tmpX = jo.get("posX").getAsInt();
         this.posX = (this.parent != null ? (this.parent.getPosition().getX() + tmpX) : tmpX);
         int tmpY = jo.get("posY").getAsInt();
@@ -70,7 +69,6 @@ public abstract class Quest implements IQuest {
             this.icon = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
         }
 
-        // Additional Quests
         if (jo.has("additionalRequiredQuests")) {
             JsonObject additionalRequiredQuests = jo.get("additionalRequiredQuests").getAsJsonObject();
             Set<Map.Entry<String, JsonElement>> set = additionalRequiredQuests.entrySet();
@@ -90,7 +88,6 @@ public abstract class Quest implements IQuest {
 
         this.questData = buildQuestData();
 
-        // Registering Quest - this method should ONLY be called here
         QuestRegistry.addQuest(this);
     }
 
@@ -107,9 +104,7 @@ public abstract class Quest implements IQuest {
     public boolean canPlayerGetQuest(PlayerEntity player) {
         if (QuestUtil.hasQuestUnlocked(player, this.parent)) {
             if (hasAdditionalQuests()) {
-                if (finishedAdditionalQuests(player)) {
-                    return true;
-                }
+                return finishedAdditionalQuests(player);
             } else {
                 return true;
             }
@@ -169,8 +164,7 @@ public abstract class Quest implements IQuest {
     }
 
     /*
-     * =============================================================== GETTERS
-     * ================================================================
+     * GETTERS
      */
 
     public IQuest getParent() {

@@ -142,26 +142,16 @@ public class TileFarm extends TileMachine implements IFarm {
         return hasTool(ToolType.SHEARS);
     }
 
-    public int getAxeLootingValue() {
-        ItemStack tool = getTool(ToolType.AXE);
-
-        if (ItemStackUtil.isNullStack(tool)) {
-            return 0;
-        }
-
-        return getLooting(tool);
-    }
-
     public void damageHoe(int damage, BlockPos pos) {
-        damageTool(ToolType.HOE, null, pos, damage);
+        damageTool(ToolType.HOE, pos, damage);
     }
 
     public void damageAxe(Block block, BlockPos pos) {
-        damageTool(ToolType.AXE, block, pos, 1);
+        damageTool(ToolType.AXE, pos, 1);
     }
 
     public void damageShears(Block block, BlockPos pos) {
-        damageTool(ToolType.SHEARS, block, pos, 1);
+        damageTool(ToolType.SHEARS, pos, 1);
     }
 
     public boolean hasTool(ToolType type) {
@@ -182,7 +172,7 @@ public class TileFarm extends TileMachine implements IFarm {
         return null;
     }
 
-    public void damageTool(ToolType type, Block block, BlockPos pos, int damage) {
+    public void damageTool(ToolType type, BlockPos pos, int damage) {
         ItemStack tool = getTool(type);
 
         if (ItemStackUtil.isNullStack(tool)) {
@@ -252,14 +242,6 @@ public class TileFarm extends TileMachine implements IFarm {
         return getBlockState(pos).isAir(this.world, pos);
     }
 
-    protected boolean checkProgress(boolean redstoneChecksPassed) {
-        if (redstoneChecksPassed) {
-            this.doTick();
-        }
-
-        return false;
-    }
-
     protected void doTick() {
         workingPos = getNextCoord();
         BlockState bs = getBlockState(workingPos);
@@ -282,7 +264,7 @@ public class TileFarm extends TileMachine implements IFarm {
 
         for (ItemEntity ei : harvest.getDrops()) {
             if (ei != null) {
-                insertHarvestDrop(ei, workingPos);
+                insertHarvestDrop(ei);
             }
         }
     }
@@ -357,14 +339,14 @@ public class TileFarm extends TileMachine implements IFarm {
         return ItemStackUtil.NULL_STACK;
     }
 
-    private void insertHarvestDrop(Entity entity, BlockPos pos) {
+    private void insertHarvestDrop(Entity entity) {
         if (world.isRemote && !(entity instanceof ItemEntity) && !entity.isAlive()) {
             return;
         }
 
         ItemEntity item = (ItemEntity) entity;
         ItemStack stack = item.getItem().copy();
-        int numInserted = insertResult(stack, pos);
+        int numInserted = insertResult(stack);
         ItemStackUtil.decreaseStackSize(stack, numInserted);
         item.setItem(stack);
 
@@ -373,7 +355,7 @@ public class TileFarm extends TileMachine implements IFarm {
         }
     }
 
-    private int insertResult(ItemStack stack, BlockPos pos) {
+    private int insertResult(ItemStack stack) {
         ItemStack left = InventoryHelper.putStackInInventoryAllSlots(getOutputInventory().getInventory(), stack, Direction.DOWN);
 
         if (ItemStackUtil.isNullStack(left)) {

@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic.common.util;
 import com.github.sejoslaw.vanillamagic.common.event.ActionEventAdditionalToolTips;
 import com.github.sejoslaw.vanillamagic.common.event.ActionEventAutoplantItemEntity;
 import com.github.sejoslaw.vanillamagic.common.event.ActionEventDeathPoint;
+import com.github.sejoslaw.vanillamagic.common.handler.OnGroundCraftingHandler;
 import com.github.sejoslaw.vanillamagic.common.handler.PlayerEventHandler;
 import com.github.sejoslaw.vanillamagic.common.handler.WorldHandler;
 import com.github.sejoslaw.vanillamagic.common.item.inventoryselector.InventorySelector;
@@ -29,6 +30,7 @@ public final class EventUtil {
         registerEvent(new ActionEventAdditionalToolTips());
         registerEvent(new ActionEventAutoplantItemEntity());
         registerEvent(new ActionEventDeathPoint());
+        registerEvent(new OnGroundCraftingHandler());
     }
 
     /**

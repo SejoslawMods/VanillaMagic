@@ -30,7 +30,7 @@ public class TileLiquidSuppression extends CustomTileEntity {
 		super(VMTileEntities.LIQUID_SUPPRESSION);
 	}
 
-	public void update() {
+	public void tick() {
 		if (world.isRemote) {
 			return;
 		}

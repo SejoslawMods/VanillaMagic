@@ -73,9 +73,9 @@ public class TreeCutHelper {
         return false;
     }
 
-    public static boolean fellTree(ItemStack itemstack, BlockPos start, PlayerEntity player) {
+    public static void fellTree(ItemStack itemstack, BlockPos start, PlayerEntity player) {
         if (player.world.isRemote) {
-            return true;
+            return;
         }
 
         EventExtraBlockBreak event = EventExtraBlockBreak.fireEvent(itemstack, player, player.getEntityWorld().getBlockState(start), 3, 3, 3, 1);
@@ -86,6 +86,5 @@ public class TreeCutHelper {
         }
 
         EventUtil.registerEvent(new TreeChopTask(itemstack, start, player, speed));
-        return true;
     }
 }

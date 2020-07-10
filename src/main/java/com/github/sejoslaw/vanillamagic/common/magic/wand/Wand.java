@@ -41,10 +41,6 @@ public class Wand implements IWand {
     }
 
     public boolean canWandDoWork(int wandID) {
-        if (this.wandID == wandID) {
-            return true;
-        }
-
-        return false;
+        return this.wandID == wandID;
     }
 }

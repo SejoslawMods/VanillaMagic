@@ -69,6 +69,7 @@ public class QuestEnchantedBucket extends Quest {
 		}
 
 		boolean containsNetherStar = false;
+
 		for (ItemEntity item : itemsInCauldron) {
 			if (item.getItem().getItem().equals(Items.NETHER_STAR)) {
 				containsNetherStar = true;
@@ -77,6 +78,7 @@ public class QuestEnchantedBucket extends Quest {
 		}
 
 		IEnchantedBucket bucket = EnchantedBucketUtil.getEnchantedBucketFromCauldron(world, clickedPos);
+
 		if ((containsNetherStar) && (bucket != null)) {
 			if (!hasQuest(player)) {
 				addStat(player);
@@ -98,6 +100,7 @@ public class QuestEnchantedBucket extends Quest {
 		}
 
 		CompoundNBT stackTag = stackRightHand.getTag();
+
 		if ((stackTag == null) || !stackTag.hasUniqueId(IEnchantedBucket.NBT_ENCHANTED_BUCKET)) {
 			return;
 		}
@@ -213,7 +216,6 @@ public class QuestEnchantedBucket extends Quest {
 		}
 	}
 
-	// Shoot
 	public void onItemRightClick(PlayerEntity player, World world, IEnchantedBucket bucket) {
 		if (world.isRemote) {
 			return;

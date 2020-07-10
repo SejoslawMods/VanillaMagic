@@ -18,11 +18,9 @@ public final class WeatherUtil {
      *
      * @param world World on which Lightning Bolt should be spawned.
      * @param pos   Position
-     * @return Returns spawned Entity.
      */
-    public static LightningBoltEntity spawnLightningBolt(World world, BlockPos pos) {
+    public static void spawnLightningBolt(World world, BlockPos pos) {
         LightningBoltEntity bolt = new LightningBoltEntity(world, pos.getX(), pos.getY(), pos.getZ(), false);
         world.addEntity(bolt);
-        return bolt;
     }
 }

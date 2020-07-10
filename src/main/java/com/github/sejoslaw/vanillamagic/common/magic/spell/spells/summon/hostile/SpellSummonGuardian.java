@@ -17,7 +17,7 @@ public class SpellSummonGuardian extends SpellSummonHostile {
     }
 
     public Entity getEntity(World world) {
-        Entity entity = null;
+        Entity entity;
 
         if (this.getPercent() < 30) {
             entity = new ElderGuardianEntity(EntityType.ELDER_GUARDIAN, world);

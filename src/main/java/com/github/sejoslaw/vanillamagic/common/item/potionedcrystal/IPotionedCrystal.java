@@ -15,7 +15,7 @@ import net.minecraft.util.text.StringTextComponent;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public interface IPotionedCrystal extends ICustomItem {
-	public static final String NBT_POTION_TYPE_NAME = "NBT_POTION_TYPE_NAME";
+	String NBT_POTION_TYPE_NAME = "NBT_POTION_TYPE_NAME";
 
 	/**
 	 * @return Returns the type of this Potion.

@@ -15,10 +15,6 @@ public class QuestCastSpellInAir extends QuestCastSpell {
      */
     @SubscribeEvent
     public void castSpell(PlayerInteractEvent.RightClickItem event) {
-        PlayerEntity player = event.getPlayer();
-        Hand hand = event.getHand();
-        ItemStack inHand = event.getItemStack();
-
-        castSpell(player, hand, inHand, null, null, null);
+        castSpell(event.getPlayer(), null, null, null);
     }
 }

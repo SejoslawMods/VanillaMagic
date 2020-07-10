@@ -41,10 +41,6 @@ public class PotionedCrystalHelper {
 	public static IPotionedCrystal getPotionedCrystalFromCauldron(World world, BlockPos cauldronPos) {
 		List<ItemEntity> itemsInCauldron = CauldronUtil.getItemsInCauldron(world, cauldronPos);
 
-		if (itemsInCauldron == null) {
-			return null;
-		}
-
 		for (ItemEntity ei : itemsInCauldron) {
 			ItemStack stack = ei.getItem();
 
@@ -65,6 +61,7 @@ public class PotionedCrystalHelper {
 				}
 			}
 		}
+
 		return null;
 	}
 
@@ -80,11 +77,13 @@ public class PotionedCrystalHelper {
 		}
 
 		CompoundNBT stackTag = netherStarStack.getTag();
+
 		if ((stackTag == null) || !stackTag.hasUniqueId(IPotionedCrystal.NBT_POTION_TYPE_NAME)) {
 			return null;
 		}
 
 		String name = stackTag.getString(IPotionedCrystal.NBT_POTION_TYPE_NAME);
+
 		for (IPotionedCrystal pc : VMItems.POTIONED_CRYSTALS) {
 			if (name.equals(pc.getPotionUnlocalizedName())) {
 				return pc;

@@ -56,14 +56,13 @@ public class QuestLiquidSuppressionCrystal extends Quest {
 		for (int i = -radius; i <= radius; ++i) {
 			for (int j = -radius; j <= radius; ++j) {
 				for (int k = -radius; k <= radius; ++k) {
-					this.updateCrystal(leftHand, world, player, x, y, z, radius, refresh, i, j, k);
+					this.updateCrystal(leftHand, world, player, x, y, z, refresh, i, j, k);
 				}
 			}
 		}
 	}
 
-	private void updateCrystal(ItemStack leftHand, World world, PlayerEntity player, int x, int y, int z, int radius,
-			int refresh, int i, int j, int k) {
+	private void updateCrystal(ItemStack leftHand, World world, PlayerEntity player, int x, int y, int z, int refresh, int i, int j, int k) {
 		BlockPos blockPos = new BlockPos(x + i, y + j, z + k);
 		BlockState state = world.getBlockState(blockPos);
 

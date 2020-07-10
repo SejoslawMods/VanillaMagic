@@ -19,12 +19,7 @@ public class QuestCastSpellOnBlock extends QuestCastSpell {
     @SubscribeEvent
     public void caseSpell(PlayerInteractEvent.RightClickBlock event) {
         PlayerEntity player = event.getPlayer();
-        Hand hand = event.getHand();
-        ItemStack inHand = event.getItemStack();
-        BlockPos pos = event.getPos();
-        Direction face = event.getFace();
         Vec3d hitVec = player.getLookVec();
-
-        castSpell(player, hand, inHand, pos, face, hitVec);
+        castSpell(player, event.getPos(), event.getFace(), hitVec);
     }
 }

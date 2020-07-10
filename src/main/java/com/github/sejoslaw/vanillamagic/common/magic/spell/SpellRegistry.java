@@ -28,14 +28,10 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class SpellRegistry {
-    // All registered Spells.
-    private static final List<ISpell> SPELLS = new ArrayList<>();
-    // All passive Entities.
-    private static final List<ISpell> SPELLS_PASSIVE = new ArrayList<>();
-    // All hostile Entities.
-    private static final List<ISpell> SPELLS_HOSTILE = new ArrayList<>();
+    public static final List<ISpell> SPELLS = new ArrayList<>();
+    public static final List<ISpell> SPELLS_PASSIVE = new ArrayList<>();
+    public static final List<ISpell> SPELLS_HOSTILE = new ArrayList<>();
 
-    // Wand that is used for summoning.
     private static final IWand _SUMMON_REQUIRED_WAND = WandRegistry.WAND_NETHER_STAR;
     private static final int _SUMMON_FRIENDLY_COST_ITEMSTACK = VMConfig.SPELL_COST_SUMMON_FRIENDLY.get();
     private static final int _SUMMON_HOSTILE_COST_ITEMSTACK = VMConfig.SPELL_COST_SUMMON_HOSTILE.get();
@@ -56,7 +52,6 @@ public final class SpellRegistry {
     public static final Spell SPELL_WEATHER_CLEAR = new SpellWeatherClear(13, "Clear weather", "spellWeatherClear", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.GLASS_BOTTLE, 1));
     public static final Spell SPELL_WEATHER_THUNDERSTORM = new SpellWeatherThunderStorm(14, "Make thunderstorm", "spellWeatherThunderstorm", WandRegistry.WAND_BLAZE_ROD, new ItemStack(Items.CREEPER_HEAD));
 
-    // Passive Mobs Summon
     public static final SpellSummonPassive SPELL_SUMMON_CHICKEN = new SpellSummonChicken(100, "Summon Chicken", "spellSummonChicken", _SUMMON_REQUIRED_WAND, new ItemStack(Items.CHICKEN, _SUMMON_FRIENDLY_COST_ITEMSTACK));
     public static final SpellSummonPassive SPELL_SUMMON_PIG = new SpellSummonPig(101, "Summon Pig", "spellSummonPig", _SUMMON_REQUIRED_WAND, new ItemStack(Items.PORKCHOP, _SUMMON_FRIENDLY_COST_ITEMSTACK));
     public static final SpellSummonPassive SPELL_SUMMON_COW = new SpellSummonCow(102, "Summon Cow", "spellSummonCow", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BEEF, _SUMMON_FRIENDLY_COST_ITEMSTACK));
@@ -71,7 +66,6 @@ public final class SpellRegistry {
     public static final SpellSummonPassive SPELL_SUMMON_LAMA = new SpellSummonLama(111, "Summon Lama", "spellSummonLama", _SUMMON_REQUIRED_WAND, new ItemStack(Items.LEATHER, _SUMMON_FRIENDLY_COST_ITEMSTACK));
     public static final SpellSummonPassive SPELL_SUMMON_SNOWMAN = new SpellSummonSnowman(112, "Summon Snowman", "spellSummonSnowman", _SUMMON_REQUIRED_WAND, new ItemStack(Blocks.SNOW, 2));
 
-    // Hostile Mobs Summon
     public static final SpellSummonHostile SPELL_SUMMON_ZOMBIE = new SpellSummonZombie(200, "Summon Zombie", "spellSummonZombie", _SUMMON_REQUIRED_WAND, new ItemStack(Items.ROTTEN_FLESH, _SUMMON_HOSTILE_COST_ITEMSTACK));
     public static final SpellSummonHostile SPELL_SUMMON_CREEPER = new SpellSummonCreeper(201, "Summon Creeper", "spellSummonCreeper", _SUMMON_REQUIRED_WAND, new ItemStack(Items.GUNPOWDER, _SUMMON_HOSTILE_COST_ITEMSTACK));
     public static final SpellSummonHostile SPELL_SUMMON_SKELETON = new SpellSummonSkeleton(202, "Summon Skeleton", "spellSummonSkeleton", _SUMMON_REQUIRED_WAND, new ItemStack(Items.BONE, _SUMMON_HOSTILE_COST_ITEMSTACK));
@@ -121,27 +115,6 @@ public final class SpellRegistry {
     }
 
     /**
-     * @return Returns list with all registered Spells (without Mobs).
-     */
-    public static List<ISpell> getSpells() {
-        return SPELLS;
-    }
-
-    /**
-     * @return Returns all registered Passive Mobs Spells.
-     */
-    public static List<ISpell> getSpellPassive() {
-        return SPELLS_PASSIVE;
-    }
-
-    /**
-     * @return Returns all registered Hostile Mobs Spells.
-     */
-    public static List<ISpell> getSpellHostile() {
-        return SPELLS_HOSTILE;
-    }
-
-    /**
      * Cast Spell by the given ID.
      */
     public static boolean castSpellById(int spellID, PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
@@ -151,17 +124,14 @@ public final class SpellRegistry {
             return false;
         }
 
-        boolean casted = spell.castSpell(caster, pos, face, hitVec);
-        return casted;
+        return spell.castSpell(caster, pos, face, hitVec);
     }
 
     /**
      * @return Returns the Spell by it ID.
      */
     public static ISpell getSpellById(int id) {
-        for (int i = 0; i < SPELLS.size(); ++i) {
-            ISpell spell = SPELLS.get(i);
-
+        for (ISpell spell : SPELLS) {
             if (spell.getSpellID() == id) {
                 return spell;
             }
@@ -195,9 +165,9 @@ public final class SpellRegistry {
         int[] without = new int[all.length - 1];
         int index = 0;
 
-        for (int i = 0; i < all.length; ++i) {
-            if (all[i] != summonSpellID) {
-                without[index] = all[i];
+        for (int value : all) {
+            if (value != summonSpellID) {
+                without[index] = value;
                 index++;
             }
         }

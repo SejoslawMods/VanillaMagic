@@ -36,7 +36,6 @@ public class SpellSummonSpiderJockey extends SpellSummonHostile {
         Entity spiderEntity = null;
         ItemStack boneStack = new ItemStack(Items.BONE);
         BlockPos bonePos = pos.offset(face);
-
         AxisAlignedBB aabb = new AxisAlignedBB(bonePos);
         List<Entity> entities = world.getEntitiesInAABBexcluding(caster, aabb, e -> e instanceof ItemEntity);
 
@@ -49,9 +48,7 @@ public class SpellSummonSpiderJockey extends SpellSummonHostile {
                 skeleton.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.BOW));
 
                 world.addEntity(skeleton);
-
                 skeleton.startRiding(spiderEntity);
-
                 entity.remove();
 
                 break;
@@ -63,7 +60,6 @@ public class SpellSummonSpiderJockey extends SpellSummonHostile {
         }
 
         spiderEntity.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY(), spawnPos.getZ() + 0.5D, caster.rotationYaw, 0.0F);
-
         world.addEntity(spiderEntity);
 
         return true;

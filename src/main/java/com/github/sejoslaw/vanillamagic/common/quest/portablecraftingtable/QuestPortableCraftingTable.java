@@ -32,8 +32,8 @@ public class QuestPortableCraftingTable extends Quest {
             return;
         }
 
-        player.openContainer(new SimpleNamedContainerProvider((p_220270_2_, playerInventory, playerEntity) ->
-                new WorkbenchContainer(p_220270_2_, playerInventory, IWorldPosCallable.of(player.world, player.getPosition())),
+        player.openContainer(new SimpleNamedContainerProvider((windowId, playerInventory, playerEntity) ->
+                new WorkbenchContainer(windowId, playerInventory, IWorldPosCallable.of(player.world, player.getPosition())),
                 new TranslationTextComponent("container.crafting")));
         player.addStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
     }

@@ -45,14 +45,14 @@ public class QuestMotherNatureCrystal extends Quest {
 		}
 
 		if (VMItems.isCustomItem(leftHand, VMItems.MOTHER_NATURE_CRYSTAL)) {
-			onTickUpdate(leftHand, world, player);
+			onTickUpdate(world, player);
 		}
 	}
 
 	/**
 	 * One tick - tick all plants around Player.
 	 */
-	public void onTickUpdate(ItemStack leftHand, World world, PlayerEntity player) {
+	public void onTickUpdate(World world, PlayerEntity player) {
 		int range = VMConfig.MOTHER_NATURE_CRYSTAL_RANGE.get(); // def 10
 		int verticalRange = 3;
 
@@ -63,13 +63,13 @@ public class QuestMotherNatureCrystal extends Quest {
 		for (int ix = posX - range; ix <= posX + range; ++ix) {
 			for (int iz = posZ - range; iz <= posZ + range; ++iz) {
 				for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy) {
-					this.updateTick(leftHand, world, player, range, verticalRange, posX, posY, posZ, ix, iz, iy);
+					this.updateTick(world, player, ix, iz, iy);
 				}
 			}
 		}
 	}
 
-	public void updateTick(ItemStack leftHand, World world, PlayerEntity player, int range, int verticalRange, int posX, int posY, int posZ, int ix, int iz, int iy) {
+	public void updateTick(World world, PlayerEntity player, int ix, int iz, int iy) {
 		BlockPos blockPos = new BlockPos(ix, iy, iz);
 		Block block = world.getBlockState(blockPos).getBlock();
 
@@ -128,8 +128,7 @@ public class QuestMotherNatureCrystal extends Quest {
 			addStat(player);
 		}
 
-		if (hasQuest(player) && BoneMealItem.applyBonemeal(rightHand, world, clickedPos)) {
-			BlockState state = world.getBlockState(clickedPos);
+		if (hasQuest(player) && BoneMealItem.applyBonemeal(rightHand, world, clickedPos, player)) {
 			world.playEvent(2005, clickedPos, 0);
 		}
 	}

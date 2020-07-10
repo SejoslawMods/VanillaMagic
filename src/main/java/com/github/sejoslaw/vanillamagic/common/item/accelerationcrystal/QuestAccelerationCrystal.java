@@ -30,34 +30,31 @@ public class QuestAccelerationCrystal extends Quest {
 		BlockPos clickedPos = event.getPos();
 		BlockState clickedState = world.getBlockState(clickedPos);
 		Block clickedBlock = clickedState.getBlock();
+		ItemStack rightHand = player.getHeldItemMainhand();
 
-		if (world.isRemote) {
+		if (world.isRemote || world.isAirBlock(clickedPos) || !VMItems.isCustomItem(rightHand, VMItems.ACCELERATION_CRYSTAL)) {
 			return;
 		}
 
-		if (!world.isAirBlock(clickedPos)) {
-			ItemStack rightHand = player.getHeldItemMainhand();
+		if (!hasQuest(player)) {
+			addStat(player);
+		}
 
-			if (VMItems.isCustomItem(rightHand, VMItems.ACCELERATION_CRYSTAL)) {
-				if (!hasQuest(player)) {
-					addStat(player);
+		if (!hasQuest(player)) {
+			return;
+		}
+
+		TileEntity tile = world.getTileEntity(clickedPos);
+		Random rand = new Random();
+
+		for (int i = 0; i < VMConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(); i++) {
+			if (tile == null) {
+				if (!EventUtil.postEvent(new EventAccelerationCrystal.TickBlock(VMItems.ACCELERATION_CRYSTAL, world, clickedPos, player))) {
+					clickedBlock.tick(clickedState, (ServerWorld) world, clickedPos, rand);
 				}
-
-				if (hasQuest(player)) {
-					TileEntity tile = world.getTileEntity(clickedPos);
-					Random rand = new Random();
-
-					for (int i = 0; i < VMConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(); i++) {
-						if (tile == null) {
-							if (!EventUtil.postEvent(new EventAccelerationCrystal.TickBlock(VMItems.ACCELERATION_CRYSTAL, world, clickedPos, player))) {
-								clickedBlock.tick(clickedState, (ServerWorld) world, clickedPos, rand);
-							}
-						} else if (tile instanceof ITickable) {
-							if (!EventUtil.postEvent(new EventAccelerationCrystal.TickTileEntity(VMItems.ACCELERATION_CRYSTAL, world, clickedPos, player, tile))) {
-								((ITickable) tile).tick();
-							}
-						}
-					}
+			} else if (tile instanceof ITickable) {
+				if (!EventUtil.postEvent(new EventAccelerationCrystal.TickTileEntity(VMItems.ACCELERATION_CRYSTAL, world, clickedPos, player, tile))) {
+					((ITickable) tile).tick();
 				}
 			}
 		}

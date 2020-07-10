@@ -37,13 +37,11 @@ public final class BookRegistry {
 	 * Year displayed in book.
 	 */
 	public static final String YEAR = VanillaMagicAPI.VERSION;
-
 	/**
 	 * Book unique ID.
 	 */
 	public static final String BOOK_NBT_UID = "bookUID";
 
-	// Books
 	public static final IBook BOOK_ALTAR_CRAFTING;
 	public static final IBook BOOK_BUILD_ALTAR;
 	public static final IBook BOOK_SPELLS;
@@ -89,17 +87,6 @@ public final class BookRegistry {
 		}
 
 		VMLogger.logInfo("Books registered (" + BOOKS.size() + ")");
-	}
-
-	/**
-	 * Checks if the given ItemStack is a Vanilla Magic Book.
-	 */
-	public static boolean isBook(ItemStack stack) {
-		if (stack.getTag() != null) {
-			return stack.getTag().hasUniqueId(BOOK_NBT_UID);
-		}
-
-		return false;
 	}
 
 	/**

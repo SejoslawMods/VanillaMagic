@@ -50,7 +50,7 @@ public class WorldHandler {
         }
 
         int dimension = world.getDimension().getType().getId();
-        File directoryDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
+        File directoryDimension = new File(vmDirectory, dimension + "/");
 
         if (!directoryDimension.exists()) {
             return;
@@ -153,8 +153,8 @@ public class WorldHandler {
             ListNBT entityListNBT = new ListNBT();
             List<ICustomTileEntity> customTileEntities = CustomTileEntityHandler.getCustomEntitiesInDimension(world);
 
-            for (int j = 0; j < customTileEntities.size(); ++j) {
-                entityListNBT.add(customTileEntities.get(j).asTileEntity().serializeNBT());
+            for (ICustomTileEntity customTileEntity : customTileEntities) {
+                entityListNBT.add(customTileEntity.asTileEntity().serializeNBT());
             }
 
             data.put(TILES, entityListNBT);

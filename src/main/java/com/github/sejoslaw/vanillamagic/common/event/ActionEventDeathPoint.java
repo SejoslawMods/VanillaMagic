@@ -12,7 +12,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class ActionEventDeathPoint {
-
     @SubscribeEvent
     public void registerTweak(LivingDeathEvent event) {
         Entity entity = event.getEntity();

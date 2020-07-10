@@ -24,7 +24,7 @@ public final class EvokerSpellRegistry {
 	/**
 	 * List with all registered Evoker Spells.
 	 */
-	private static List<IEvokerSpell> SPELLS = new ArrayList<>();
+	public static final List<IEvokerSpell> SPELLS = new ArrayList<>();
 
 	static {
 		SPELLS.add(new EvokerSpellFangAttack());
@@ -40,13 +40,6 @@ public final class EvokerSpellRegistry {
 	 */
 	public static void add(IEvokerSpell spell) {
 		SPELLS.add(spell);
-	}
-
-	/**
-	 * @return Returns all Evoker Spells list.
-	 */
-	public static List<IEvokerSpell> getEvokerSpells() {
-		return SPELLS;
 	}
 
 	/**

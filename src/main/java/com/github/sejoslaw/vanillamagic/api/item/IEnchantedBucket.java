@@ -14,15 +14,15 @@ import java.lang.reflect.Method;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public interface IEnchantedBucket extends ICustomItem {
-    public static final String NBT_ENCHANTED_BUCKET = "NBT_ENCHANTED_BUCKET";
-    public static final String NBT_FLUID_NAME = "NBT_FLUID_NAME";
+    String NBT_ENCHANTED_BUCKET = "NBT_ENCHANTED_BUCKET";
+    String NBT_FLUID_NAME = "NBT_FLUID_NAME";
 
     /**
      * @return Returns fluid which this bucket contains.
      */
     Fluid getFluidInBucket();
 
-    default public ItemStack getItem() {
+    default ItemStack getItem() {
         Fluid fluidInBucket = this.getFluidInBucket();
 
         ItemStack stack = getBucket().copy();
@@ -40,9 +40,9 @@ public interface IEnchantedBucket extends ICustomItem {
      * @return Returns crafting ingredient bucket with fluid.
      */
     @Nullable
-    default public ItemStack getBucket() {
+    default ItemStack getBucket() {
         try {
-            Class<?> clazz = Class.forName("com.github.sejoslaw.vanillamagic.item.enchantedbucket.EnchantedBucketUtil");
+            Class<?> clazz = Class.forName("com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.EnchantedBucketUtil");
             Method method = clazz.getMethod("getResult", Fluid.class);
             return (ItemStack) method.invoke(null, getFluidInBucket());
         } catch (Exception e) {

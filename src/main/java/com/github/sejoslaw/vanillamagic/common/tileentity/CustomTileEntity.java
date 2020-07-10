@@ -25,7 +25,6 @@ public abstract class CustomTileEntity extends CustomTileEntityBase {
     /**
      * Try to override {@link #serializeNBT()} instead of this method.
      */
-    @Deprecated
     public CompoundNBT write(CompoundNBT tag) {
         super.write(tag);
         tag.putString(NBTUtil.NBT_CLASS, this.getClass().getName());

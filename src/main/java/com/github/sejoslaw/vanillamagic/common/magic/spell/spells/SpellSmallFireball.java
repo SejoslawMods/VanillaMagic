@@ -28,6 +28,7 @@ public class SpellSmallFireball extends Spell {
         world.playEvent(caster, 1018, new BlockPos((int) caster.getPosX(), (int) caster.getPosY(), (int) caster.getPosZ()), 0);
 
         Vec3d lookingAt = caster.getLookVec();
+
         double accelX = lookingAt.getX();
         double accelY = lookingAt.getY();
         double accelZ = lookingAt.getZ();
@@ -37,10 +38,11 @@ public class SpellSmallFireball extends Spell {
         fireball.shootingEntity = caster;
         fireball.setMotion(0.0D, 0.0D, 0.0D);
 
-        double d0 = (double) MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
-        fireball.accelerationX = accelX / d0 * 0.1D;
-        fireball.accelerationY = accelY / d0 * 0.1D;
-        fireball.accelerationZ = accelZ / d0 * 0.1D;
+        double accelDelta = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
+
+        fireball.accelerationX = accelX / accelDelta * 0.1D;
+        fireball.accelerationY = accelY / accelDelta * 0.1D;
+        fireball.accelerationZ = accelZ / accelDelta * 0.1D;
 
         world.addEntity(fireball);
 

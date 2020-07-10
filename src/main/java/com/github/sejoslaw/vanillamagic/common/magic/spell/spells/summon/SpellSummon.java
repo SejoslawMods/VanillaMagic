@@ -32,7 +32,7 @@ public abstract class SpellSummon extends Spell {
 
 		World world = caster.world;
 		BlockPos spawnPos = pos.offset(face);
-		Entity entity = getEntity(world); // Entity to spawn after spell being casted
+		Entity entity = getEntity(world);
 
 		if (entity == null) {
 			return false;

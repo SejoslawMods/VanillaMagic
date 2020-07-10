@@ -55,19 +55,6 @@ public final class EnchantedBucketUtil {
 	}
 
 	/**
-	 * @return Returns the EnchantedBucket from given ItemStack.
-	 */
-	@Nullable
-	public static IEnchantedBucket getEnchantedBucket(ItemStack stack) {
-		for (IEnchantedBucket enchantedBucket : VMItems.ENCHANTED_BUCKETS) {
-			if (VMItems.isCustomBucket(stack, enchantedBucket)) {
-				return enchantedBucket;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * @return Returns the first IEnchantedBucket from Cauldron at the given
 	 *         position.
 	 */

@@ -92,9 +92,11 @@ public abstract class QuestSpawnOnCauldron extends Quest {
                 SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 
         Random rand = new Random();
+
         double particleX = (double) clickedPos.getX() + 0.5D;
         double particleY = (double) clickedPos.getY() + rand.nextDouble() * 6.0D / 16.0D;
         double particleZ = (double) clickedPos.getZ() + 0.5D;
+
         double randomPos = rand.nextDouble() * 0.6D - 0.3D;
 
         world.addParticle(ParticleTypes.SMOKE, particleX - 0.52D, particleY, particleZ + randomPos, 0.0D, 0.0D, 0.0D);

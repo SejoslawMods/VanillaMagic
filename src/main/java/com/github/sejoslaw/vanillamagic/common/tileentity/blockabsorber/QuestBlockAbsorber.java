@@ -47,9 +47,7 @@ public class QuestBlockAbsorber extends Quest {
         BlockPos clickedPos = event.getPos();
         TileEntity clickedHopper = player.world.getTileEntity(clickedPos);
 
-        if ((clickedHopper == null)
-                || !(clickedHopper instanceof IHopper)
-                || !(clickedHopper instanceof HopperTileEntity)) {
+        if (!(clickedHopper instanceof HopperTileEntity)) {
             return;
         }
 

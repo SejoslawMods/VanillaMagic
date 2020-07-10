@@ -50,7 +50,7 @@ public abstract class QuestCastSpell extends Quest {
     /**
      * Method for checking if is it possible to cast current Spell.
      */
-    public boolean castSpell(PlayerEntity caster, Hand hand, ItemStack inHand, BlockPos pos, Direction face, Vec3d hitVec) {
+    public boolean castSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
         if (!finishedAdditionalQuests(caster)) {
             return false;
         }
@@ -74,6 +74,7 @@ public abstract class QuestCastSpell extends Quest {
         if ((timesCaster == 1) && castRightSpell(caster, pos, face, hitVec)) {
             ItemStackUtil.decreaseStackSize(casterOffHand, ItemStackUtil.getStackSize(spell.getRequiredStackOffHand()));
             timesCaster++;
+
             return true;
         } else {
             timesCaster = 1;
@@ -86,7 +87,8 @@ public abstract class QuestCastSpell extends Quest {
      * Method for casting the right spell
      */
     public boolean castRightSpell(PlayerEntity caster, BlockPos pos, Direction face, Vec3d hitVec) {
-        List<ISpell> spells = SpellRegistry.getSpells();
+        List<ISpell> spells = SpellRegistry.SPELLS;
+
         for (ISpell iSpell : spells) {
             if ((spell.getSpellID() == iSpell.getSpellID()) &&
                     (spell.getWand().getWandID() == iSpell.getWand().getWandID()) &&
@@ -94,6 +96,7 @@ public abstract class QuestCastSpell extends Quest {
                 return SpellRegistry.castSpellById(spell.getSpellID(), caster, pos, face, hitVec);
             }
         }
+
         return false;
     }
 }

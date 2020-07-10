@@ -30,8 +30,10 @@ public final class FarmersRegistry {
     static {
         List<ItemStack> saplings = filterBlocks("sapling");
         List<ItemStack> woods = new ArrayList<>();
+
         woods.addAll(filterBlocks("log"));
         woods.addAll(filterBlocks("wood"));
+
         FARMERS.add(new FarmerOreDictionaryTree(saplings, woods));
 
         FLOWERS.add(new ItemStack(Blocks.CHORUS_FLOWER));

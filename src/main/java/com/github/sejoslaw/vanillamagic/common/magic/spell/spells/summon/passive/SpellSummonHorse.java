@@ -18,7 +18,7 @@ public class SpellSummonHorse extends SpellSummonPassive {
     }
 
     public Entity getEntity(World world) {
-        Entity entity = null;
+        Entity entity;
         int rand = this.getPercent();
 
         if (rand < 30) {

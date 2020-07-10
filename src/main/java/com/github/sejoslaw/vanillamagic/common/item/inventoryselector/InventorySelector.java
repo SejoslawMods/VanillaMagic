@@ -66,6 +66,7 @@ public class InventorySelector {
 		CompoundNBT rightHandTagOld = rightHand.getTag();
 		CompoundNBT rightHandTagNew = NBTUtil.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world.getDimension().getType());
 		rightHand.setTag(rightHandTagNew);
+
 		EntityUtil.addChatComponentMessage(player, "Registered Inventory at: " + TextUtil.constructPositionString(world.getDimension().getType(), clickedPos));
 	}
 
@@ -94,7 +95,6 @@ public class InventorySelector {
 		CompoundNBT rightHandTag = rightHand.getTag();
 
 		if (player.isSneaking()) {
-			// Clear saved position
 			if (!rightHandTag.hasUniqueId(NBTUtil.NBT_POSX)) {
 				return;
 			}
@@ -104,7 +104,6 @@ public class InventorySelector {
 			rightHandTag.remove(NBTUtil.NBT_POSY);
 			rightHandTag.remove(NBTUtil.NBT_POSZ);
 		} else {
-			// Show saved position
 			BlockPos savedPos = NBTUtil.getBlockPosDataFromNBT(rightHandTag);
 
 			if (savedPos == null) {

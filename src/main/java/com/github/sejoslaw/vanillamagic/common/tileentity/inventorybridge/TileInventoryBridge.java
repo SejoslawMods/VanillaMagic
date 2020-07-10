@@ -88,6 +88,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
         inputInvX = compound.getInt("inputInvX");
         inputInvY = compound.getInt("inputInvY");
         inputInvZ = compound.getInt("inputInvZ");
+
         inputInvDim = compound.getInt("inputInvDim");
         BlockPos inputPos = new BlockPos(inputInvX, inputInvY, inputInvZ);
 
@@ -101,6 +102,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
         outputInvX = compound.getInt("outputInvX");
         outputInvY = compound.getInt("outputInvY");
         outputInvZ = compound.getInt("outputInvZ");
+
         outputInvDim = compound.getInt("outputInvDim");
         BlockPos outputPos = new BlockPos(outputInvX, outputInvY, outputInvZ);
 
@@ -127,7 +129,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
         for (ItemStack currentCheckingStack : mainInventory) {
             CompoundNBT currentCheckingStackTag = currentCheckingStack.getOrCreateTag();
 
-            if (!VMItems.isCustomItem(currentCheckingStack, VMItems.INVENTORY_SELECTOR) || (currentCheckingStackTag == null)) {
+            if (!VMItems.isCustomItem(currentCheckingStack, VMItems.INVENTORY_SELECTOR)) {
                 continue;
             }
 
@@ -147,9 +149,11 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
 
     public void setOutputInventory(World world, BlockPos pos) throws NotInventoryException {
         outputInvWrapper = new InventoryWrapper(world, pos);
+
         outputInvX = pos.getX();
         outputInvY = pos.getY();
         outputInvZ = pos.getZ();
+
         outputInvDim = world.dimension.getType().getId();
     }
 
@@ -162,7 +166,7 @@ public class TileInventoryBridge extends CustomTileEntity implements IInventoryB
      */
     int slotNumber = 0;
 
-    public void update() {
+    public void tick() {
         if (inputInvWrapper == null) {
             return;
         }

@@ -27,7 +27,6 @@ public class SpellFusRoDah extends Spell {
             return false;
         }
 
-        // it will be (2 *SIZE)x(2 *SIZE)x(2 * SIZE) area of effect
         int SIZE = 8;
         float strenght = 2.0f;
 

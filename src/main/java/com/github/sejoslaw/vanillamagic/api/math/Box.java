@@ -4,6 +4,8 @@ import net.minecraft.util.math.BlockPos;
 
 /**
  * Simple 3D Box implementation.
+ *
+ * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class Box {
     public int xMin;
@@ -12,10 +14,6 @@ public class Box {
     public int xMax;
     public int yMax;
     public int zMax;
-
-    public Box() {
-        this(0, 0, 0, 0, 0, 0);
-    }
 
     public Box(BlockPos pos) {
         this(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
@@ -28,12 +26,6 @@ public class Box {
         this.xMax = xMax;
         this.yMax = yMax;
         this.zMax = zMax;
-    }
-
-    public void resizeBox(int size) {
-        resizeX(size);
-        resizeY(size);
-        resizeZ(size);
     }
 
     public void resizeX(int size) {
@@ -49,19 +41,5 @@ public class Box {
     public void resizeZ(int size) {
         zMin = zMin - size;
         zMax = zMax + size;
-    }
-
-    /**
-     * @return Returns the minimum position of this box.
-     */
-    public BlockPos getMinPos() {
-        return new BlockPos(xMin, yMin, zMin);
-    }
-
-    /**
-     * @return Returns the maximum position of this box.
-     */
-    public BlockPos getMaxPos() {
-        return new BlockPos(xMax, yMax, zMax);
     }
 }

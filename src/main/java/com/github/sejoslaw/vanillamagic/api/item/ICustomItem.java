@@ -11,7 +11,7 @@ public interface ICustomItem {
     /**
      * Unique NBT Tag. This Tag represents this CustomItem unique name.
      */
-    public static final String NBT_UNIQUE_NAME = "NBT_UNIQUE_NAME";
+    String NBT_UNIQUE_NAME = "NBT_UNIQUE_NAME";
 
     /**
      * Add recipe to the GameRegistry.

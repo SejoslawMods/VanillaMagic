@@ -22,8 +22,6 @@ public class SpellMoveInAir extends Spell {
         double distance = 10;
         Vec3d casterLookVec = caster.getLookVec();
 
-        // will teleport caster to the farthest blockPos between casterPos and
-        // 'distance'
         for (double i = distance; i > 0; i -= 1.0D) {
             double newPosX = caster.getPosX() + casterLookVec.getX() * i;
             double newPosY = caster.getPosY() + casterLookVec.getY() * i;
@@ -35,9 +33,11 @@ public class SpellMoveInAir extends Spell {
             if ((newPosY > 0) && world.isAirBlock(newPos) && world.isAirBlock(newPosHead)) {
                 caster.setPositionAndUpdate(newPosX, newPosY, newPosZ);
                 caster.fallDistance = 0.0F;
+
                 return true;
             }
         }
+
         return false;
     }
 }

@@ -52,7 +52,7 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
         }
 
         TileEntity tileAtThisPos = world.getTileEntity(pos);
-        if ((tileAtThisPos != null) && (tileAtThisPos instanceof IInventory)) {
+        if ((tileAtThisPos instanceof IInventory)) {
             IInventory inv = (IInventory) tileAtThisPos;
 
             try {
@@ -78,11 +78,6 @@ public class TileBlockAbsorber extends CustomTileEntity implements IBlockAbsorbe
         }
 
         ItemStack thisBlock = new ItemStack(thisState.getBlock());
-
-        if (thisBlock.getItem() == null) {
-            return;
-        }
-
         ItemStack leftItems = InventoryHelper.putStackInInventoryAllSlots(connectedHopper, thisBlock, getInputFacing());
 
         if (ItemStackUtil.isNullStack(leftItems)) {

@@ -167,11 +167,7 @@ public class VMExplosion extends Explosion {
         boolean entitiesAreInRange = !this.entitiesInRange.isEmpty();
 
         if (entitiesAreInRange) {
-            Collections.sort(this.entitiesInRange, new Comparator<Object>() {
-                public int compare(Object a, Object b) {
-                    return ((EntityDamage) a).distance - ((EntityDamage) b).distance;
-                }
-            });
+            this.entitiesInRange.sort(Comparator.comparingInt(entityDamage -> entityDamage.distance));
         }
 
         int steps = (int) Math.ceil(Math.PI / Math.atan(1.0D / this.maxDistance));
@@ -182,8 +178,7 @@ public class VMExplosion extends Explosion {
                 double phi = 6.283185307179586D / steps * phiN;
                 double theta = Math.PI / steps * thetaN;
 
-                this.shootRay(this.explosionX, this.explosionY, this.explosionZ, phi, theta, this.power,
-                        (entitiesAreInRange) && (phiN % 8 == 0) && (thetaN % 8 == 0), tmpPos);
+                this.shootRay(this.explosionX, this.explosionY, this.explosionZ, phi, theta, this.power, (entitiesAreInRange) && (phiN % 8 == 0) && (thetaN % 8 == 0), tmpPos);
             }
         }
 
@@ -459,7 +454,7 @@ public class VMExplosion extends Explosion {
             return 5.0D;
         }
 
-        return (1.0D / 0.0D);
+        return 1.0D;
     }
 
     private static long[] makeArray(int size, int step) {
