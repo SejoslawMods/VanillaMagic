@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +40,7 @@ public final class QuestRegistry {
         Quest parent = QUESTS.stream().filter(q -> q.uniqueName.equals(jo.get("parent").getAsString())).findFirst().get();
 
         if (parent == null) {
-            parent = new Quest(null, new Vec3d(0, 0, 0), ItemStack.EMPTY, "");
+            parent = new Quest(null, new Vec3d(0, 0, 0), ItemStack.EMPTY, "", null);
         }
 
         ItemStack iconStack = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
@@ -49,7 +50,9 @@ public final class QuestRegistry {
         double posY = parent.position.y + jo.get("posY").getAsInt();
         Vec3d position = new Vec3d(posX, posY, 0);
 
-        QUESTS.add(new Quest(parent, position, iconStack, uniqueName));
+        Quest quest = new Quest(parent, position, iconStack, uniqueName, jo);
+//        MinecraftForge.EVENT_BUS.register(quest.???);
+        QUESTS.add(quest);
     }
 
     public static void addQuestData(String worldName, String userName, Set<String> questUniqueNames) {
