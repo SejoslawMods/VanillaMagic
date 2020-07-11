@@ -112,7 +112,7 @@ public class VMDebug {
             TileEntity tile = customTile.asTileEntity();
             if ((tile instanceof ICustomTileEntity) && (customTile.asTileEntity() instanceof IAdditionalInfoProvider)) {
                 List<ITextComponent> info = ((IAdditionalInfoProvider) customTile.asTileEntity()).getAdditionalInfo();
-                EntityUtil.addChatComponentMessageNoSpam(player, info.toArray(new ITextComponent[info.size()]));
+                EntityUtil.addChatComponentMessageNoSpam(info.toArray(new ITextComponent[info.size()]));
             }
         }
     }

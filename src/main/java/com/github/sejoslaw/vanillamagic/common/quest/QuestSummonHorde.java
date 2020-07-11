@@ -57,7 +57,7 @@ public class QuestSummonHorde extends Quest {
             return;
         }
 
-        EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(player.getDisplayName() + " summoned horde lvl: " + this.level + ". Prepare to DIE !!!"));
+        EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap(player.getDisplayName() + " summoned horde lvl: " + this.level + ". Prepare to DIE !!!"));
         spawnHorde(player, world);
         ItemStackUtil.decreaseStackSize(leftHand, ItemStackUtil.getStackSize(requiredLeftHand));
     }

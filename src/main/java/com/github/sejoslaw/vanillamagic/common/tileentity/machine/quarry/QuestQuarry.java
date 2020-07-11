@@ -43,7 +43,7 @@ public class QuestQuarry extends QuestMachineActivate {
             return;
         }
 
-        EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(tileQuarry.getClass().getSimpleName() + " added"));
+        EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap(tileQuarry.getClass().getSimpleName() + " added"));
     }
 
     @SubscribeEvent

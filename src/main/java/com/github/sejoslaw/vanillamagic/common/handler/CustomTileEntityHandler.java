@@ -67,7 +67,7 @@ public final class CustomTileEntityHandler {
         }
 
         if (CustomTileEntityHandler.removeCustomTileEntityAtPos(world, pos) && !EventUtil.postEvent(new EventCustomTileEntity.Remove.Before.SendInfoToPlayer(customTile, world, pos, player))) {
-            EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(customTile.getClass().getSimpleName() + " removed"));
+            EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap(customTile.getClass().getSimpleName() + " removed"));
             EventUtil.postEvent(new EventCustomTileEntity.Remove.After.SendInfoToPlayer(customTile, world, pos, player));
         }
     }

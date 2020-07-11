@@ -46,7 +46,7 @@ public class QuestJumper extends Quest {
             addStat(player);
         }
 
-        EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap("Position saved: " + TextUtil.constructPositionString(world.getDimension().getType(), posToSave)));
+        EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap("Position saved: " + TextUtil.constructPositionString(world.getDimension().getType(), posToSave)));
         EventUtil.postEvent(new EventJumper.SavePosition.After(player, world, posToSave));
     }
 
@@ -83,7 +83,7 @@ public class QuestJumper extends Quest {
         World world = WorldUtil.getWorld(server, dimId);
         TeleportUtil.teleportEntity(player, teleportPos, world);
 
-        EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap("Teleported to: " + TextUtil.constructPositionString(world.getDimension().getType(), teleportPos)));
+        EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap("Teleported to: " + TextUtil.constructPositionString(world.getDimension().getType(), teleportPos)));
         EventUtil.postEvent(new EventJumper.Teleport.After(player, event.getWorld(), teleportPos, dimId));
     }
 

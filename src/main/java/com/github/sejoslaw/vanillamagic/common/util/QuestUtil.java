@@ -25,7 +25,7 @@ public final class QuestUtil {
             return true;
         }
 
-        Stat stat = quest.getQuestData();
+        Stat<?> stat = quest.getQuestData();
         int statValue = 0;
 
         if (player instanceof ClientPlayerEntity) {
@@ -62,7 +62,7 @@ public final class QuestUtil {
             serverPlayer.getStats().sendStats(serverPlayer);
 
             String message = TranslationUtil.translateToLocal("quest.achieved") + ": " + quest.getQuestName();
-            EntityUtil.addChatComponentMessageNoSpam(serverPlayer, TextUtil.wrap(message));
+            EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap(message));
         }
     }
 

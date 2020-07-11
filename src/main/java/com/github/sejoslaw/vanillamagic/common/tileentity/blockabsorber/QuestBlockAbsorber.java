@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
-import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -64,7 +63,7 @@ public class QuestBlockAbsorber extends Quest {
             return;
         }
 
-        EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(tile.getClass().getSimpleName() + " added"));
+        EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap(tile.getClass().getSimpleName() + " added"));
         ItemStackUtil.decreaseStackSize(leftHand, 1);
 
         if (ItemStackUtil.getStackSize(leftHand) != 0) {

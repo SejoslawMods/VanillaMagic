@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.NewChatGui;
-import net.minecraft.command.CommandSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,8 +14,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.stats.StatisticsManager;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -35,35 +32,21 @@ public final class EntityUtil {
     private EntityUtil() {
     }
 
-    /**
-     * @return Returns StatisticsManager connected with given Player.
-     */
-    @Nullable
-    public static StatisticsManager getStatisticsManager(PlayerEntity player) {
-        if (player instanceof ClientPlayerEntity) {
-            return ((ClientPlayerEntity) player).getStats();
-        } else if (player instanceof ServerPlayerEntity) {
-            return ((ServerPlayerEntity) player).getStats();
-        }
-
-        return null;
-    }
-
-    public static void addChatComponentMessage(PlayerEntity player, String message) {
-        addChatComponentMessageNoSpam(player, new StringTextComponent(message));
+    public static void addChatComponentMessage(String message) {
+        addChatComponentMessageNoSpam(new StringTextComponent(message));
     }
 
     /**
      * Adds a message to Player's chat with no spam.
      */
-    public static void addChatComponentMessageNoSpam(PlayerEntity player, ITextComponent msg) {
-        addChatComponentMessageNoSpam(player, new ITextComponent[]{ msg });
+    public static void addChatComponentMessageNoSpam(ITextComponent msg) {
+        addChatComponentMessageNoSpam(new ITextComponent[]{ msg });
     }
 
     /**
      * Adds a message to Player's chat with no spam.
      */
-    public static void addChatComponentMessageNoSpam(PlayerEntity player, ITextComponent[] msg) {
+    public static void addChatComponentMessageNoSpam(ITextComponent[] msg) {
         NewChatGui chat = GuiUtil.getChatGui();
 
         for (int i = DELETION_ID + msg.length - 1; i <= LAST_ADDED; ++i) {
@@ -93,28 +76,10 @@ public final class EntityUtil {
         return new ItemEntity(original.world, original.getPosX(), original.getPosY(), original.getPosZ(), original.getItem().copy());
     }
 
-    public static Vec3d getEyePosition(PlayerEntity player) {
-        double posX = player.getPosX();
-        double posY = player.getPosY();
-        double posZ = player.getPosZ();
-
-        if (player.world.isRemote) {
-            posY += player.getEyeHeight() - player.getEyeHeight();
-        } else {
-            posY += player.getEyeHeight();
-
-            if (player instanceof ServerPlayerEntity && player.isSneaking()) {
-                posY -= 0.08;
-            }
-        }
-
-        return new Vec3d(posX, posY, posZ);
-    }
-
     /**
      * knocks back "toKnockBack" entity
      */
-    public static void knockBack(Entity user, Entity toKnockBack, float strenght, double xRatio, double zRatio) {
+    public static void knockBack(Entity toKnockBack, float strength, double xRatio, double zRatio) {
         toKnockBack.isAirBorne = true;
         float f = MathHelper.sqrt(xRatio * xRatio + zRatio * zRatio);
 
@@ -125,12 +90,12 @@ public final class EntityUtil {
         motionX /= 2.0D;
         motionZ /= 2.0D;
 
-        motionX -= xRatio / (double) f * (double) strenght;
-        motionZ -= zRatio / (double) f * (double) strenght;
+        motionX -= xRatio / (double) f * (double) strength;
+        motionZ -= zRatio / (double) f * (double) strength;
 
         if (toKnockBack.onGround) {
             motionY /= 2.0D;
-            motionY += strenght;
+            motionY += strength;
 
             if (motionY > 0.4000000059604645D) {
                 motionY = 0.4000000059604645D;
@@ -143,11 +108,11 @@ public final class EntityUtil {
     /**
      * knocks back "toKnockBack" entity
      */
-    public static void knockBack(Entity user, Entity toKnockBack, float strenght) {
+    public static void knockBack(Entity user, Entity toKnockBack, float strength) {
         double xRatio = user.getPosX() - toKnockBack.getPosX();
         double zRatio = user.getPosZ() - toKnockBack.getPosZ();
 
-        knockBack(user, toKnockBack, strenght, xRatio, zRatio);
+        knockBack(toKnockBack, strength, xRatio, zRatio);
     }
 
     public static void addRandomArmorToEntity(Entity entity) {
@@ -228,23 +193,6 @@ public final class EntityUtil {
     }
 
     @Nullable
-    public static ServerPlayerEntity getServerPlayerFromClientPlayer(MinecraftServer server, ClientPlayerEntity clientPlayer) {
-        if (server == null || clientPlayer == null) {
-            return null;
-        }
-
-        for (ServerWorld world : server.getWorlds()) {
-            ServerPlayerEntity serverPlayer = getServerPlayerFromClientPlayer(world, clientPlayer);
-
-            if (serverPlayer != null) {
-                return serverPlayer;
-            }
-        }
-
-        return null;
-    }
-
-    @Nullable
     public static ServerPlayerEntity getServerPlayerFromClientPlayer(ServerWorld world, ClientPlayerEntity clientPlayer) {
         if (world == null || clientPlayer == null) {
             return null;
@@ -255,16 +203,5 @@ public final class EntityUtil {
                 .filter(serverPlayer -> serverPlayer.getName().equals(clientPlayer.getName()))
                 .findAny()
                 .get();
-    }
-
-    @Nullable
-    public static ServerPlayerEntity getCommandSender(MinecraftServer server, CommandSource sender) {
-        Entity entitySender = sender.getEntity();
-
-        if ((entitySender instanceof ClientPlayerEntity)) {
-            return getServerPlayerFromClientPlayer(server, (ClientPlayerEntity) entitySender);
-        }
-
-        return null;
     }
 }

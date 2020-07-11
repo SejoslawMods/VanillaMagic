@@ -1,13 +1,11 @@
 package com.github.sejoslaw.vanillamagic.common.util;
 
-import com.github.sejoslaw.vanillamagic.core.VMLogger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -51,14 +49,10 @@ public final class ItemStackUtil {
 
         ItemStack mainHand = player.getHeldItemMainhand();
 
-        if ((shouldHaveInMainHand != null) && (isNullStack(mainHand)
-                || ItemStackUtil.getStackSize(mainHand) != ItemStackUtil.getStackSize(shouldHaveInMainHand)
-                || mainHand.getItem() != shouldHaveInMainHand.getItem()
-                || mainHand.getTag() != shouldHaveInMainHand.getTag())) {
-            return false;
-        }
-
-        return true;
+        return (shouldHaveInMainHand == null) || (!isNullStack(mainHand)
+                && ItemStackUtil.getStackSize(mainHand) == ItemStackUtil.getStackSize(shouldHaveInMainHand)
+                && mainHand.getItem() == shouldHaveInMainHand.getItem()
+                && mainHand.getTag() == shouldHaveInMainHand.getTag());
     }
 
     /**
@@ -128,8 +122,6 @@ public final class ItemStackUtil {
         return ((tileFromStack instanceof IInventory) || (tileFromStack instanceof IItemHandler));
     }
 
-    // ========== StackSize Operations ==========
-
     /**
      * @return Will return empty stack if the
      * {@link ItemStack} should be understand as Empty.
@@ -169,19 +161,6 @@ public final class ItemStackUtil {
     }
 
     /**
-     * This method will increase the ItemStack.stackSize of the given stack.<br>
-     *
-     * @return Returns the given stack.
-     */
-    public static void increaseStackSize(ItemStack stack, int value) {
-        if (stack == null) {
-            return;
-        }
-
-        stack.grow(value);
-    }
-
-    /**
      * This method will decrease the ItemStack.stackSize of the given stack.<br>
      *
      * @return Returns the given stack.
@@ -203,16 +182,5 @@ public final class ItemStackUtil {
         }
 
         return stack.isEmpty();
-    }
-
-    /**
-     * Prints stack data.
-     */
-    public static void printStack(ItemStack stack) {
-        VMLogger.logInfo("Printing ItemStack data...");
-
-        VMLogger.logInfo("Item: " + stack.getItem());
-        VMLogger.logInfo("StackSize: " + getStackSize(stack));
-        VMLogger.logInfo("Meta: " + stack.toString());
     }
 }

@@ -2,8 +2,6 @@ package com.github.sejoslaw.vanillamagic.common.util;
 
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.common.quest.QuestSmeltOnAltar;
-import net.minecraft.block.Block;
-import net.minecraft.block.OreBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
@@ -31,14 +29,6 @@ public final class SmeltingUtil {
     private SmeltingUtil() {
     }
 
-    public static boolean isBlockOre(Block block) {
-        if (block instanceof OreBlock) { // Coal, Diamond, Lapis, Emerald, Quartz, etc.
-            return true;
-        }
-
-        return block.getRegistryName().toString().contains("ore");
-    }
-
     public static List<ItemEntity> getOresInCauldron(World world, BlockPos cauldronPos) {
         List<ItemEntity> smeltablesInCauldron = getSmeltable(world, cauldronPos);
 
@@ -46,23 +36,6 @@ public final class SmeltingUtil {
                 .stream()
                 .filter(item -> item.getItem().getItem().getRegistryName().toString().contains("ore"))
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * @return Returns the all fuelStacks from the inventory
-     */
-    public static List<ItemStack> getFuelFromInventory(IInventory inv) {
-        List<ItemStack> fuels = new ArrayList<>();
-
-        for (int i = 0; i < inv.getSizeInventory(); ++i) {
-            ItemStack stackInSlot = inv.getStackInSlot(i);
-
-            if (isItemFuel(stackInSlot)) {
-                fuels.add(stackInSlot);
-            }
-        }
-
-        return fuels;
     }
 
     /**

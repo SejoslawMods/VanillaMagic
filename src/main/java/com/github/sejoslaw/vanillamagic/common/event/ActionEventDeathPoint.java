@@ -22,6 +22,6 @@ public class ActionEventDeathPoint {
 
         PlayerEntity player = (PlayerEntity) entity;
         String message = "Last death position: " + TextUtil.constructPositionString(player.world.getDimension().getType(), entity.getPosition());
-        EntityUtil.addChatComponentMessageNoSpam(player, TextUtil.wrap(message));
+        EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap(message));
     }
 }

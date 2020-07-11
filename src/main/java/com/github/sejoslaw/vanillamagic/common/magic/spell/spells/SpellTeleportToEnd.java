@@ -5,7 +5,6 @@ import com.github.sejoslaw.vanillamagic.common.magic.spell.Spell;
 import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.common.util.TeleportUtil;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -37,7 +36,7 @@ public class SpellTeleportToEnd extends Spell {
                 List<EnderDragonEntity> entities = world.getEntitiesWithinAABB(EntityType.ENDER_DRAGON, aabb, entity -> true);
 
                 if (entities.size() > 0) {
-                    EntityUtil.addChatComponentMessageNoSpam(caster, TextUtil.wrap("You need to kill Dragon !!!"));
+                    EntityUtil.addChatComponentMessageNoSpam(TextUtil.wrap("You need to kill Dragon !!!"));
                     return false;
                 }
 

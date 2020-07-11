@@ -59,7 +59,7 @@ public class InventorySelector {
 		BlockPos clickedPos = event.getPos();
 
 		if (!InventoryHelper.isInventory(world, clickedPos)) {
-			EntityUtil.addChatComponentMessage(player, "Clicked block is not an Inventory");
+			EntityUtil.addChatComponentMessage("Clicked block is not an Inventory");
 			return;
 		}
 
@@ -67,7 +67,7 @@ public class InventorySelector {
 		CompoundNBT rightHandTagNew = NBTUtil.setBlockPosDataToNBT(rightHandTagOld, clickedPos, world.getDimension().getType());
 		rightHand.setTag(rightHandTagNew);
 
-		EntityUtil.addChatComponentMessage(player, "Registered Inventory at: " + TextUtil.constructPositionString(world.getDimension().getType(), clickedPos));
+		EntityUtil.addChatComponentMessage("Registered Inventory at: " + TextUtil.constructPositionString(world.getDimension().getType(), clickedPos));
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class InventorySelector {
 				return;
 			}
 
-			EntityUtil.addChatComponentMessage(player, "Cleared position.");
+			EntityUtil.addChatComponentMessage("Cleared position.");
 			rightHandTag.remove(NBTUtil.NBT_POSX);
 			rightHandTag.remove(NBTUtil.NBT_POSY);
 			rightHandTag.remove(NBTUtil.NBT_POSZ);
@@ -107,9 +107,9 @@ public class InventorySelector {
 			BlockPos savedPos = NBTUtil.getBlockPosDataFromNBT(rightHandTag);
 
 			if (savedPos == null) {
-				EntityUtil.addChatComponentMessage(player, "No saved position.");
+				EntityUtil.addChatComponentMessage("No saved position.");
 			} else {
-				EntityUtil.addChatComponentMessage(player, "Saved position: " + TextUtil.constructPositionString(world.getDimension().getType(), savedPos));
+				EntityUtil.addChatComponentMessage("Saved position: " + TextUtil.constructPositionString(world.getDimension().getType(), savedPos));
 			}
 		}
 	}

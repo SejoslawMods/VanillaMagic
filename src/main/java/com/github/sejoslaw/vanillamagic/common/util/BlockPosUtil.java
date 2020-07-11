@@ -1,15 +1,8 @@
 package com.github.sejoslaw.vanillamagic.common.util;
 
 import com.github.sejoslaw.vanillamagic.core.VMLogger;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
@@ -21,8 +14,6 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class BlockPosUtil {
-    public static final int SEARCH_RADIUS = 100;
-
     private BlockPosUtil() {
     }
 
@@ -45,48 +36,6 @@ public final class BlockPosUtil {
     public static void printCoords(Level level, String text, BlockPos pos) {
         VMLogger.log(level, text);
         printCoords(pos);
-    }
-
-    public static void printCoords(Level level, Block block, BlockPos pos) {
-        VMLogger.log(level, block.toString());
-        printCoords(pos);
-    }
-
-    public static void printCoords(Level level, World world, BlockPos pos) {
-        Block block = world.getBlockState(pos).getBlock();
-        printCoords(level, block, pos);
-
-        VMLogger.logInfo(" Dimension = " + world.getDimension().getType().getId());
-    }
-
-    public static void printCoords(Level level, PlayerEntity player, BlockPos pos) {
-        printCoords(level, player.world, pos);
-
-        VMLogger.logInfo(" Dimension = " + player.world.getDimension().getType().getId());
-    }
-
-    public static void freezeNearby(Entity entity, World world, BlockPos pos, int size) {
-        BlockPos.Mutable blockPosCenter = new BlockPos.Mutable(0, 0, 0);
-
-        BlockPos.getAllInBoxMutable(pos.add(-size, -1.0D, -size), pos.add(size, -1.0D, size))
-                .forEach(blockPosAround -> {
-                    if (blockPosAround.distanceSq(entity.getPosX(), entity.getPosY(), entity.getPosZ(), true) <= (double) (size * size)) {
-                        return;
-                    }
-
-                    blockPosCenter.setPos(blockPosAround.getX(), blockPosAround.getY() + 1, blockPosAround.getZ());
-                    BlockState blockCenterState = world.getBlockState(blockPosCenter);
-
-                    if (blockCenterState.getMaterial() != Material.AIR) {
-                        return;
-                    }
-
-                    BlockState blockAroundState = world.getBlockState(blockPosAround);
-
-                    if (blockAroundState.getMaterial() == Material.WATER) {
-                        world.setBlockState(blockPosAround, Blocks.ICE.getDefaultState());
-                    }
-                });
     }
 
     public static List<BlockPos> getBlockPos3x3XZ(BlockPos pos) {
@@ -117,36 +66,5 @@ public final class BlockPosUtil {
         blocks.addAll(getBlockPos3x3XZ(centerPos.offset(Direction.DOWN)));
 
         return blocks;
-    }
-
-    public static List<BlockPos> drawCircle2DXZ(int centerX, int posY, int centerZ, int radius, Block fillWith) {
-        List<BlockPos> toFill = new ArrayList<>();
-
-        int d = (5 - radius * 4) / 4;
-        int x = 0;
-        int z = radius;
-
-        do {
-            toFill.add(new BlockPos(centerX + x, posY, centerZ + z));
-            toFill.add(new BlockPos(centerX + x, posY, centerZ + z));
-            toFill.add(new BlockPos(centerX + x, posY, centerZ - z));
-            toFill.add(new BlockPos(centerX - x, posY, centerZ + z));
-            toFill.add(new BlockPos(centerX - x, posY, centerZ - z));
-            toFill.add(new BlockPos(centerX + z, posY, centerZ + x));
-            toFill.add(new BlockPos(centerX + z, posY, centerZ - x));
-            toFill.add(new BlockPos(centerX - z, posY, centerZ + x));
-            toFill.add(new BlockPos(centerX - z, posY, centerZ - x));
-
-            if (d < 0) {
-                d += 2 * x + 1;
-            } else {
-                d += 2 * (x - z) + 1;
-                z--;
-            }
-
-            x++;
-        } while (x <= z);
-
-        return toFill;
     }
 }

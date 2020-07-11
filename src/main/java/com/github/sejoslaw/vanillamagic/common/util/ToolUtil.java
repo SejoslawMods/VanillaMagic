@@ -86,11 +86,10 @@ public final class ToolUtil {
 
             if (ItemStackUtil.getStackSize(stack) == 0 && stack == player.getHeldItemMainhand()) {
                 ForgeEventFactory.onPlayerDestroyItem(player, stack, Hand.MAIN_HAND);
-                player.setHeldItem(Hand.MAIN_HAND, null);
+                player.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
             }
 
-            Minecraft mc = Minecraft.getInstance();
-            mc.getConnection().sendPacket(new CPlayerDiggingPacket(CPlayerDiggingPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.getFacingDirections(player)[0]));
+            Minecraft.getInstance().getConnection().sendPacket(new CPlayerDiggingPacket(CPlayerDiggingPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.getFacingDirections(player)[0]));
         }
     }
 }

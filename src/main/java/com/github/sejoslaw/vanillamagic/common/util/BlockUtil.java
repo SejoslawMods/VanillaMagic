@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
@@ -16,23 +15,6 @@ import net.minecraftforge.fluids.IFluidBlock;
  */
 public final class BlockUtil {
     private BlockUtil() {
-    }
-
-    /**
-     * @return Returns the number of blocks counted in given direction.
-     */
-    public static int countBlocks(World world, BlockPos startPos, Block shouldBe, Direction direction) {
-        int count = 0;
-        BlockPos next = new BlockPos(startPos.getX(), startPos.getY(), startPos.getZ());
-        Block nextBlock = world.getBlockState(next).getBlock();
-
-        while (areEqual(nextBlock, shouldBe)) {
-            count++;
-            next = next.offset(direction);
-            nextBlock = world.getBlockState(next).getBlock();
-        }
-
-        return count;
     }
 
     /**

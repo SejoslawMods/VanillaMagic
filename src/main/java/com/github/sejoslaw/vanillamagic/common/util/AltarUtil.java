@@ -23,27 +23,6 @@ public final class AltarUtil {
     private AltarUtil() {
     }
 
-    public static Block getBlockByTier(int tier) {
-        switch (tier) {
-            case 1:
-                return BLOCK_TIER_1;
-            case 2:
-                return BLOCK_TIER_2;
-            case 3:
-                return BLOCK_TIER_3;
-            case 4:
-                return BLOCK_TIER_4;
-            case 5:
-                return BLOCK_TIER_5;
-            case 6:
-                return BLOCK_TIER_6;
-            case 7:
-                return BLOCK_TIER_7;
-            default:
-                return null;
-        }
-    }
-
     public static boolean checkAltarTier(World world, BlockPos midPos, int tier) {
         switch (tier) {
             case 1:

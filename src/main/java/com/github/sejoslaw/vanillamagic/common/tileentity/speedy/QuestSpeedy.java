@@ -45,6 +45,6 @@ public class QuestSpeedy extends Quest {
 			return;
 		}
 
-		EntityUtil.addChatComponentMessage(player, speedy.getClass().getSimpleName() + " added.");
+		EntityUtil.addChatComponentMessage(speedy.getClass().getSimpleName() + " added.");
 	}
 }
