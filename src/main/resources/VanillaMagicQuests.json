@@ -8,7 +8,6 @@
 	{
 		"id":280
 	},
-	"questName":"Craft Stick",
 	"uniqueName":"craftStick"
 },
 {
@@ -20,7 +19,6 @@
 	{
 		"id":58
 	},
-	"questName":"Portable Crafting Table",
 	"uniqueName":"portableCraftingTable"
 },
 {
@@ -28,7 +26,7 @@
 	"parent":"craftStick",
 	"posX":0,
 	"posY":-2,
-	"questName":"Flint and Steel Clone",
+	"uniqueName": "spellFlintAndSteel",
 	"spellID":0
 },
 {
@@ -40,7 +38,6 @@
 	{
 		"id":380
 	},
-	"questName":"Craft Cauldron",
 	"uniqueName":"craftCauldron"
 },
 {
@@ -52,7 +49,6 @@
 	{
 		"id":73
 	},
-	"questName":"Mine Redstone",
 	"uniqueName":"mineRedstone",
 	"blocksToBeMined":"redstone"
 },
@@ -65,7 +61,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 1 (Require: both earlier)",
 	"uniqueName":"buildAltarTier1",
 	"tier":1,
 	"additionalRequiredQuests":
@@ -79,7 +74,6 @@
 	"parent":"buildAltarTier1",
 	"posX":-2,
 	"posY":1,
-	"questName":"Craft Gunpowder",
 	"uniqueName":"craftGunpowder",
 	"ingredients":
 	[{
@@ -103,7 +97,6 @@
 	"parent":"craftGunpowder",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Sugar",
 	"uniqueName":"craftSugar",
 	"ingredients":
 	[{
@@ -123,7 +116,6 @@
 	"parent":"craftSugar",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Dirt",
 	"uniqueName":"craftDirt",
 	"ingredients":
 	[{
@@ -143,7 +135,6 @@
 	"parent":"craftDirt",
 	"posX":0,
 	"posY":-2,
-	"questName":"Craft Sand",
 	"uniqueName":"craftSand",
 	"ingredients":
 	[{
@@ -163,7 +154,6 @@
 	"parent":"craftDirt",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Cobblestone",
 	"uniqueName":"craftCobblestone",
 	"ingredients":
 	[{
@@ -183,7 +173,6 @@
 	"parent":"craftCobblestone",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Gravel",
 	"uniqueName":"craftGravel",
 	"ingredients":
 	[{
@@ -204,7 +193,6 @@
 	"parent":"buildAltarTier1",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Leather",
 	"uniqueName":"craftLeather",
 	"ingredients":
 	[{
@@ -224,7 +212,6 @@
 	"parent":"craftLeather",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Clay",
 	"uniqueName":"craftClay",
 	"ingredients":
 	[{
@@ -248,7 +235,6 @@
 	"parent":"craftSand",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Glass",
 	"uniqueName":"craftGlass",
 	"ingredients":
 	[{
@@ -272,7 +258,6 @@
 	"parent":"craftGlass",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Snow",
 	"uniqueName":"craftSnow",
 	"ingredients":
 	[{
@@ -300,7 +285,6 @@
 	"parent":"craftSnow",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Ice",
 	"uniqueName":"craftIce",
 	"ingredients":
 	[{
@@ -331,7 +315,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 2",
 	"uniqueName":"buildAltarTier2",
 	"tier":2
 },
@@ -340,7 +323,6 @@
 	"parent":"buildAltarTier2",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Iron Ore",
 	"uniqueName":"craftIronOre",
 	"ingredients":
 	[{
@@ -366,7 +348,6 @@
     "parent":"craftIronOre",
     "posX":2,
     "posY":0,
-    "questName":"Tool Upgrade",
     "uniqueName":"toolUpgrade",
     "icon":
     {
@@ -378,7 +359,6 @@
 	"parent":"toolUpgrade",
 	"posX":2,
 	"posY":0,
-	"questName":"Item Upgrades",
 	"uniqueName":"itemUpgrades",
 	"icon":
 	{
@@ -390,7 +370,6 @@
 	"parent":"buildAltarTier2",
 	"posX":-2,
 	"posY":1,
-	"questName":"Craft Cactus",
 	"uniqueName":"craftCactus",
 	"ingredients":
 	[{
@@ -411,7 +390,6 @@
 	"parent":"craftCactus",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Oak Sapling from Cactus",
 	"uniqueName":"craftSapling0",
 	"ingredients":
 	[{
@@ -432,7 +410,6 @@
 	"parent":"craftSapling0",
 	"posX":0,
 	"posY":2,
-	"questName":"Craft Spruce Sapling",
 	"uniqueName":"craftSapling1",
 	"ingredients":
 	[{
@@ -453,7 +430,6 @@
 	"parent":"craftSapling1",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Birch Sapling",
 	"uniqueName":"craftSapling2",
 	"ingredients":
 	[{
@@ -475,7 +451,6 @@
 	"parent":"craftSapling2",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Jungle Sapling",
 	"uniqueName":"craftSapling3",
 	"ingredients":
 	[{
@@ -497,7 +472,6 @@
 	"parent":"craftSapling3",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Acacia Sapling",
 	"uniqueName":"craftSapling4",
 	"ingredients":
 	[{
@@ -519,7 +493,6 @@
 	"parent":"craftSapling4",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Dark Oak Sapling",
 	"uniqueName":"craftSapling5",
 	"ingredients":
 	[{
@@ -541,7 +514,6 @@
 	"parent":"craftSapling5",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Oak Sapling from Dark Oak",
 	"uniqueName":"craftSapling6",
 	"ingredients":
 	[{
@@ -562,7 +534,6 @@
 	"parent":"craftSapling0",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Pumpkin",
 	"uniqueName":"craftPumpkin",
 	"ingredients":
 	[{
@@ -583,7 +554,6 @@
 	"parent":"craftPumpkin",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Melon Block",
 	"uniqueName":"craftMelonBlock",
 	"ingredients":
 	[{
@@ -604,7 +574,6 @@
 	"parent":"craftMelonBlock",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Vine",
 	"uniqueName":"craftVine",
 	"ingredients":
 	[{
@@ -625,7 +594,6 @@
 	"parent":"craftVine",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Lily Pad",
 	"uniqueName":"craftLiyPad",
 	"ingredients":
 	[{
@@ -646,7 +614,6 @@
 	"parent":"craftLiyPad",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Slime Ball",
 	"uniqueName":"craftSlimeBall",
 	"ingredients":
 	[{
@@ -671,7 +638,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 3",
 	"uniqueName":"buildAltarTier3",
 	"tier":3
 },
@@ -684,7 +650,6 @@
 	{
 		"id":61
 	},
-	"questName":"Smelt on Altar",
 	"uniqueName":"smeltOnAltar",
 	"requiredAltarTier":1,
 	"wandTier":1
@@ -698,7 +663,6 @@
 	{
 		"id":380
 	},
-	"questName":"Quarry !!!",
 	"uniqueName":"quarry",
 	"mustHaveMainHand":
 	{
@@ -714,7 +678,6 @@
 	{
 		"id":279
 	},
-	"questName":"Full Tree Cut",
 	"uniqueName":"fullTreeCut"
 },
 {
@@ -726,7 +689,6 @@
 	{
 		"id":288
 	},
-	"questName":"Speedy",
 	"uniqueName":"speedy"
 },
 {
@@ -738,7 +700,6 @@
 	{
 		"id":399
 	},
-	"questName":"The Crystal of Mother Nature",
 	"uniqueName":"motherNatureCrystal"
 },
 {
@@ -746,7 +707,6 @@
 	"parent":"buildAltarTier3",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Gold Ingot",
 	"uniqueName":"craftGoldIngot",
 	"ingredients":
 	[{
@@ -772,7 +732,6 @@
 		"just_to_know_what_it_is":"item_hopper",
 		"id":154
 	},
-	"questName":"Block Absorber",
 	"uniqueName":"blockAbsorber"
 },
 {
@@ -784,7 +743,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 4",
 	"uniqueName":"buildAltarTier4",
 	"tier":4
 },
@@ -793,7 +751,6 @@
 	"parent":"buildAltarTier4",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Rotten Flesh",
 	"uniqueName":"craftRottenFlesh",
 	"ingredients":
 	[{
@@ -813,7 +770,6 @@
 	"parent":"craftRottenFlesh",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft String",
 	"uniqueName":"craftString",
 	"ingredients":
 	[{
@@ -834,7 +790,6 @@
 	"parent":"craftString",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Spider Eye",
 	"uniqueName":"craftSpiderEye",
 	"ingredients":
 	[{
@@ -855,7 +810,6 @@
 	"parent":"craftSpiderEye",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Bone",
 	"uniqueName":"craftBone",
 	"ingredients":
 	[{
@@ -876,7 +830,6 @@
 	"parent":"craftBone",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Arrow",
 	"uniqueName":"craftArrow",
 	"ingredients":
 	[{
@@ -901,7 +854,6 @@
 	{
 		"id":262
 	},
-	"questName":"Arrow Machine Gun",
 	"uniqueName":"arrowMachineGun"
 },
 {
@@ -909,7 +861,6 @@
 	"parent":"craftArrow",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Ender Pearl",
 	"uniqueName":"craftEnderPearl",
 	"ingredients":
 	[{
@@ -934,7 +885,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 5",
 	"uniqueName":"buildAltarTier5",
 	"tier":5
 },
@@ -943,7 +893,6 @@
 	"parent":"buildAltarTier5",
 	"posX":-2,
 	"posY":1,
-	"questName":"Craft Glowstone Dust",
 	"uniqueName":"craftGlowstoneDust",
 	"ingredients":
 	[{
@@ -973,7 +922,6 @@
 	"parent":"craftGlowstoneDust",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Netherrack",
 	"uniqueName":"craftNetherrack",
 	"ingredients":
 	[{
@@ -998,7 +946,6 @@
 	"parent":"craftNetherrack",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Soul Sand",
 	"uniqueName":"craftSoulSand",
 	"ingredients":
 	[{
@@ -1023,7 +970,6 @@
 	"parent":"craftSoulSand",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Magma Block",
 	"uniqueName":"craftMagmaBlock",
 	"ingredients":
 	[{
@@ -1047,7 +993,6 @@
 	"parent":"craftMagmaBlock",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Nether Wart",
 	"uniqueName":"craftNetherWart",
 	"ingredients":
 	[{
@@ -1079,7 +1024,6 @@
 	"parent":"craftNetherWart",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Ghast Tear",
 	"uniqueName":"craftGhastTear",
 	"ingredients":
 	[{
@@ -1113,7 +1057,6 @@
 	"parent":"buildAltarTier5",
 	"posX":0,
 	"posY":2,
-	"questName":"Pick Blaze Rod",
 	"uniqueName":"pickupBlazeRod",
 	"whatToPick":
 	{
@@ -1126,7 +1069,6 @@
 	"parent":"pickupBlazeRod",
 	"posX":-2,
 	"posY":1,
-	"questName":"Move block by book",
 	"uniqueName":"questMoveBlock",
 	"requiredStackOffHand":
 	{
@@ -1139,7 +1081,6 @@
 	"parent":"questMoveBlock",
 	"posX":-2,
 	"posY":0,
-	"questName":"Capture Entity",
 	"uniqueName":"captureEntity",
 	"requiredStackOffHand":
 	{
@@ -1156,7 +1097,6 @@
 	{
 		"id":325
 	},
-	"questName":"Enchanted Bucket",
 	"uniqueName":"enchantedBucket"
 },
 {
@@ -1168,7 +1108,6 @@
 	{
 		"id":399
 	},
-	"questName":"Liquid Suppression Crystal",
 	"uniqueName":"liquidSuppressionCrystal"
 },
 {
@@ -1180,7 +1119,6 @@
 	{
 		"id":373
 	},
-	"questName":"Potioned Crystal",
 	"uniqueName":"potionedCrystal"
 },
 {
@@ -1188,7 +1126,6 @@
 	"parent":"pickupBlazeRod",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Wither Skeleton Skull",
 	"uniqueName":"craftWitherSkeletonSkull",
 	"ingredients":
 	[{
@@ -1217,7 +1154,6 @@
 	{
 		"id":399
 	},
-	"questName":"Acceleration Crystal",
 	"uniqueName":"accelerationCrystal"
 },
 {
@@ -1229,7 +1165,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 6",
 	"uniqueName":"buildAltarTier6",
 	"tier":6
 },
@@ -1243,7 +1178,6 @@
 		"it_is":"vanilla_chest",
 		"id":54
 	},
-	"questName":"Inventory Bridge",
 	"uniqueName":"inventoryBridge"
 },
 {
@@ -1251,7 +1185,6 @@
 	"parent":"buildAltarTier6",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Diamond",
 	"uniqueName":"craftDiamond",
 	"ingredients":
 	[{
@@ -1276,7 +1209,6 @@
 	{
 		"id":380
 	},
-	"questName":"Build Altar Tier 7",
 	"uniqueName":"buildAltarTier7",
 	"tier":7
 },
@@ -1285,7 +1217,6 @@
 	"parent":"buildAltarTier7",
 	"posX":-2,
 	"posY":1,
-	"questName":"Craft Gold Ore",
 	"uniqueName":"craftGoldOre",
 	"ingredients":
 	[{
@@ -1306,7 +1237,6 @@
 	"parent":"craftGoldOre",
 	"posX":0,
 	"posY":2,
-	"questName":"Craft Coal Ore",
 	"uniqueName":"craftCoalOre",
 	"ingredients":
 	[{
@@ -1327,7 +1257,6 @@
 	"parent":"craftGoldOre",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Redstone Ore",
 	"uniqueName":"craftRedstoneOre",
 	"ingredients":
 	[{
@@ -1348,7 +1277,6 @@
 	"parent":"craftRedstoneOre",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Lapis Ore",
 	"uniqueName":"craftLapisOre",
 	"ingredients":
 	[{
@@ -1369,7 +1297,6 @@
 	"parent":"craftLapisOre",
 	"posX":-2,
 	"posY":0,
-	"questName":"Craft Diamond Ore",
 	"uniqueName":"craftDiamondOre",
 	"ingredients":
 	[{
@@ -1394,7 +1321,6 @@
 	{
 		"id":380
 	},
-	"questName":"Ore Doubling",
 	"uniqueName":"oreDoubling",
 	"multiplier":2,
 	"wandTier":3
@@ -1404,7 +1330,6 @@
 	"parent":"buildAltarTier7",
 	"posX":2,
 	"posY":1,
-	"questName":"Craft Emerald",
 	"uniqueName":"craftEmerald",
 	"ingredients":
 	[{
@@ -1425,7 +1350,6 @@
 	"parent":"craftEmerald",
 	"posX":0,
 	"posY":2,
-	"questName":"Craft Emerald Ore",
 	"uniqueName":"craftEmeraldOre",
 	"ingredients":
 	[{
@@ -1446,7 +1370,6 @@
 	"parent":"craftEmerald",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Nether Star",
 	"uniqueName":"craftNetherStar",
 	"ingredients":
 	[{
@@ -1471,7 +1394,6 @@
 	{
 		"id":399
 	},
-	"questName":"Item Magnet",
 	"uniqueName":"itemMagnet"
 },
 {
@@ -1479,7 +1401,6 @@
 	"parent":"craftNetherStar",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Dragon Egg",
 	"uniqueName":"craftDragonEgg",
 	"ingredients":
 	[{
@@ -1500,7 +1421,6 @@
 	"parent":"craftDragonEgg",
 	"posX":2,
 	"posY":0,
-	"questName":"Craft Dragon Head",
 	"uniqueName":"craftDragonHead",
 	"ingredients":
 	[{
@@ -1525,7 +1445,6 @@
 	{
 		"id":340
 	},
-	"questName":"Craft Book",
 	"uniqueName":"craftBook"
 },
 {
@@ -1537,7 +1456,6 @@
 	{
 		"id":47
 	},
-	"questName":"Craft Bookshelf",
 	"uniqueName":"craftBookshelf"
 },
 {
@@ -1549,7 +1467,6 @@
 	{
 		"id":264
 	},
-	"questName":"Mine Diamond",
 	"uniqueName":"mineDiamond",
 	"blocksToBeMined":"diamond"
 },
@@ -1562,7 +1479,6 @@
 	{
 		"id":49
 	},
-	"questName":"Mine Obsidian",
 	"uniqueName":"mineObsidian",
 	"blocksToBeMined":"obsidian"
 },
@@ -1576,7 +1492,6 @@
         "it_is":"mob_spawner",
         "id":52
     },
-    "questName":"Mob Spawner Drop Block",
     "uniqueName":"mobSpawnerDropBlock"
 },
 {
@@ -1588,7 +1503,6 @@
 	{
 		"id":116
 	},
-	"questName":"Craft Enchanting Table (Require: all 3 earlier)",
 	"uniqueName":"craftEnchantingTable",
 	"additionalRequiredQuests":
 	{
@@ -1605,7 +1519,6 @@
 	{
 		"id":116
 	},
-	"questName":"Build ChunkLoader",
 	"uniqueName":"chunkLoader"
 },
 {
@@ -1613,7 +1526,6 @@
 	"parent":"spellFlintAndSteel",
 	"posX":0,
 	"posY":-2,
-	"questName":"Feel like Blaze",
 	"spellID":1,
 	"additionalRequiredQuests":
 	{
@@ -1625,7 +1537,6 @@
 	"parent":"spellSmallFireball",
 	"posX":0,
 	"posY":-2,
-	"questName":"Fus-Ro-Dah !!!",
 	"spellID":6
 },
 {
@@ -1633,7 +1544,6 @@
 	"parent":"spellSmallFireball",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Chicken",
 	"spellID":100
 },
 {
@@ -1641,7 +1551,6 @@
     "parent":"spellSummonChicken",
     "posX":0,
     "posY":2,
-    "questName":"Summon Squid",
     "spellID":110
 },
 {
@@ -1649,7 +1558,6 @@
 	"parent":"spellSummonChicken",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Pig",
 	"spellID":101
 },
 {
@@ -1657,7 +1565,6 @@
 	"parent":"spellSummonPig",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Cow",
 	"spellID":102
 },
 {
@@ -1665,7 +1572,6 @@
 	"parent":"spellSummonCow",
 	"posX":0,
 	"posY":2,
-	"questName":"Summon Mooshroom",
 	"spellID":103
 },
 {
@@ -1673,7 +1579,6 @@
 	"parent":"spellSummonCow",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Sheep",
 	"spellID":104
 },
 {
@@ -1681,7 +1586,6 @@
 	"parent":"spellSummonSheep",
 	"posX":0,
 	"posY":2,
-	"questName":"Summon Wolf",
 	"spellID":105
 },
 {
@@ -1689,7 +1593,6 @@
     "parent":"spellSummonWolf",
     "posX":0,
     "posY":2,
-    "questName":"Summon Lama",
     "spellID":111
 },
 {
@@ -1697,7 +1600,6 @@
 	"parent":"spellSummonSheep",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Rabbit",
 	"spellID":106
 },
 {
@@ -1705,7 +1607,6 @@
 	"parent":"spellSummonRabbit",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Horse",
 	"spellID":107
 },
 {
@@ -1713,7 +1614,6 @@
 	"parent":"spellSummonHorse",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Villager",
 	"spellID":108
 },
 {
@@ -1721,7 +1621,6 @@
     "parent":"spellSummonVillager",
     "posX":0,
     "posY":2,
-    "questName":"Summon IronGolem",
     "spellID":109
 },
 {
@@ -1729,7 +1628,6 @@
     "parent":"spellSummonIronGolem",
     "posX":-2,
     "posY":0,
-    "questName":"Summon Snowman",
     "spellID":112
 },
 {
@@ -1737,7 +1635,6 @@
 	"parent":"spellSummonChicken",
 	"posX":0,
 	"posY":-2,
-	"questName":"Summon Zombie",
 	"spellID":200
 },
 {
@@ -1745,7 +1642,6 @@
 	"parent":"spellSummonZombie",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Creeper",
 	"spellID":201
 },
 {
@@ -1753,7 +1649,6 @@
 	"parent":"spellSummonCreeper",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Skeleton",
 	"spellID":202
 },
 {
@@ -1761,7 +1656,6 @@
 	"parent":"spellSummonSkeleton",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Spider",
 	"spellID":217
 },
 {
@@ -1769,7 +1663,6 @@
 	"parent":"spellSummonSpider",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Enderman",
 	"spellID":206
 },
 {
@@ -1777,7 +1670,6 @@
     "parent":"spellSummonEnderman",
     "posX":0,
     "posY":-2,
-    "questName":"Summon Endermite",
     "spellID":218
 },
 {
@@ -1785,7 +1677,6 @@
 	"parent":"spellSummonEnderman",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Polar Bear",
 	"spellID":212
 },
 {
@@ -1793,7 +1684,6 @@
 	"parent":"spellSummonPolarBear",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Slime",
 	"spellID":208
 },
 {
@@ -1801,7 +1691,6 @@
 	"parent":"spellSummonSlime",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Witch",
 	"spellID":209
 },
 {
@@ -1809,7 +1698,6 @@
     "parent":"spellSummonWitch",
     "posX":0,
     "posY":-2,
-    "questName":"Summon Vindicator",
     "spellID":219
 },
 {
@@ -1817,7 +1705,6 @@
     "parent":"spellSummonVindicator",
     "posX":0,
     "posY":-2,
-    "questName":"Summon Vex",
     "spellID":220
 },
 {
@@ -1825,7 +1712,6 @@
     "parent":"spellSummonVex",
     "posX":0,
     "posY":-2,
-    "questName":"Summon Evoker",
     "spellID":221
 },
 {
@@ -1837,7 +1723,6 @@
     {
         "id":399
     },
-    "questName":"Evoker Crystal",
     "uniqueName":"evokerCrystal"
 },
 {
@@ -1845,7 +1730,6 @@
 	"parent":"spellSummonWitch",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Spider Jockey",
 	"spellID":207
 },
 {
@@ -1853,7 +1737,6 @@
 	"parent":"spellSummonZombie",
 	"posX":0,
 	"posY":-2,
-	"questName":"Summon Pigman",
 	"spellID":210
 },
 {
@@ -1861,7 +1744,6 @@
 	"parent":"spellSummonPigman",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Blaze",
 	"spellID":203
 },
 {
@@ -1869,7 +1751,6 @@
 	"parent":"spellSummonBlaze",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Magma Cube",
 	"spellID":204
 },
 {
@@ -1877,7 +1758,6 @@
 	"parent":"spellSummonMagmaCube",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Ghast",
 	"spellID":205
 },
 {
@@ -1885,7 +1765,6 @@
 	"parent":"spellSummonPigman",
 	"posX":0,
 	"posY":-2,
-	"questName":"Summon Silverfish",
 	"spellID":214
 },
 {
@@ -1893,7 +1772,6 @@
 	"parent":"spellSummonSilverfish",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Guardian",
 	"spellID":211
 },
 {
@@ -1901,7 +1779,6 @@
 	"parent":"spellSummonGuardian",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Shulker",
 	"spellID":213
 },
 {
@@ -1909,7 +1786,6 @@
 	"parent":"spellSummonShulker",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Wither",
 	"spellID":215
 },
 {
@@ -1922,7 +1798,6 @@
         "id":397,
         "meta":1
     },
-    "questName":"Shoot Wither Skull",
     "uniqueName":"shootWitherSkull"
 },
 {
@@ -1930,7 +1805,6 @@
 	"parent":"spellSummonWither",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Giant",
 	"spellID":216
 },
 {
@@ -1938,7 +1812,6 @@
 	"parent":"spellSummonSilverfish",
 	"posX":0,
 	"posY":-2,
-	"questName":"Summon Horde Lvl: 1",
 	"uniqueName":"summonHordeLvl1",
 	"level":1,
 	"requiredLeftHand":
@@ -1955,7 +1828,6 @@
 	"parent":"summonHordeLvl1",
 	"posX":-2,
 	"posY":0,
-	"questName":"Summon Horde Lvl: 10",
 	"uniqueName":"summonHordeLvl10",
 	"level":10,
 	"requiredLeftHand":
@@ -1969,7 +1841,6 @@
 	"parent":"spellSmallFireball",
 	"posX":2,
 	"posY":0,
-	"questName":"Feel like Ghast",
 	"spellID":2
 },
 {
@@ -1977,7 +1848,6 @@
 	"parent":"spellLargeFireball",
 	"posX":0,
 	"posY":2,
-	"questName":"Thunder !!!",
 	"spellID":5
 },
 {
@@ -1985,7 +1855,6 @@
 	"parent":"spellSummonLightningBolt",
 	"posX":2,
 	"posY":0,
-	"questName":"Pull Entity to Player",
 	"spellID":10
 },
 {
@@ -1993,7 +1862,6 @@
 	"parent":"spellPullEntityToPlayer",
 	"posX":2,
 	"posY":0,
-	"questName":"Freeze Water 3x3",
 	"spellID":11
 },
 {
@@ -2001,7 +1869,6 @@
 	"parent":"spellFreezeWater3x3",
 	"posX":2,
 	"posY":0,
-	"questName":"Move in air",
 	"spellID":9
 },
 {
@@ -2009,7 +1876,6 @@
 	"parent":"spellLargeFireball",
 	"posX":0,
 	"posY":-2,
-	"questName":"Teleportation !!!",
 	"spellID":3
 },
 {
@@ -2021,7 +1887,6 @@
     {
         "id":340
     },
-    "questName":"Jumper (Cross-Dimension Instant Transmission)",
     "uniqueName":"jumper"
 },
 {
@@ -2029,7 +1894,6 @@
 	"parent":"spellTeleport",
 	"posX":2,
 	"posY":0,
-	"questName":"Teleport to Nether",
 	"spellID":7
 },
 {
@@ -2037,7 +1901,6 @@
 	"parent":"spellTeleportToNether",
 	"posX":2,
 	"posY":0,
-	"questName":"Teleport to End",
 	"spellID":8
 },
 {
@@ -2045,7 +1908,6 @@
 	"parent":"spellLargeFireball",
 	"posX":2,
 	"posY":0,
-	"questName":"Meteor !!!",
 	"spellID":4
 },
 {
@@ -2053,7 +1915,6 @@
 	"parent":"spellSummonMeteor",
 	"posX":2,
 	"posY":0,
-	"questName":"Make rain",
 	"spellID":12
 },
 {
@@ -2061,7 +1922,6 @@
 	"parent":"spellWeatherRain",
 	"posX":2,
 	"posY":0,
-	"questName":"Clear weather",
 	"spellID":13
 },
 {
@@ -2069,7 +1929,6 @@
 	"parent":"spellWeatherClear",
 	"posX":2,
 	"posY":0,
-	"questName":"Make thunderstorm",
 	"spellID":14
 }
 ]
