@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = mc_version + '-' + version_major + '.' + version_minor + '.' + version_patch
-group = "com.github.sejoslaw.vanillamagic.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "VanillaMagic"
+group = "com.github.sejoslaw.vanillamagic2.core.VanillaMagic" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "VanillaMagic2"
 
 srcCompat = JavaVersion.VERSION_1_8
 targetCompat = JavaVersion.VERSION_1_8
@@ -52,33 +52,4 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:' + mc_version + '-' + forge_version
-}
-
-configurations {
-    api
-    compile.extendsFrom api
-}
-
-task sourcesJarCode(type: Jar) {
-    from sourceSets.main.allSource
-    include 'seia/vanillamagic/**'
-    classifier = 'sourcesCode'
-}
-
-task sourcesJarDeobf(type: Jar) {
-    from zipTree('build/retromapping/retromappedReplacedMain.jar')
-    classifier = 'sourcesDeobf'
-}
-
-task apiJar(type: Jar) {
-    from sourceSets.main.allSource
-    from sourceSets.main.output
-    include 'seia/vanillamagic/api/**'
-    classifier = 'api'
-}
-
-artifacts {
-    archives sourcesJarCode
-    archives sourcesJarDeobf
-    archives apiJar
 }
