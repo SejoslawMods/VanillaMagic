@@ -39,8 +39,7 @@ public abstract class CustomTileEntity extends CustomTileEntityBase {
     }
 
     public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
-        return tag;
+        return new CompoundNBT();
     }
 
     public SUpdateTileEntityPacket getUpdatePacket() {
@@ -51,44 +50,5 @@ public abstract class CustomTileEntity extends CustomTileEntityBase {
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
         this.read(pkt.getNbtCompound());
-    }
-
-    public void handleUpdateTag(CompoundNBT tag) {
-    }
-
-    public void onChunkUnloaded() {
-    }
-
-    public void onLoad() {
-    }
-
-    public AxisAlignedBB getRenderBoundingBox() {
-        return null;
-    }
-
-    public boolean canRenderBreaking() {
-        return false;
-    }
-
-    public boolean hasFastRenderer() {
-        return false;
-    }
-
-    public void requestModelDataUpdate() {
-    }
-
-    public IModelData getModelData() {
-        return null;
-    }
-
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
-    }
-
-    public void tick() {
-    }
-
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
-        return null;
     }
 }

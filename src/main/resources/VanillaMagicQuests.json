@@ -690,7 +690,7 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.machine.quarry.QuestQuarry",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry",
 	"parent":"smeltOnAltar",
 	"posX":0,
 	"posY":2,
@@ -718,29 +718,8 @@
 	"uniqueName":"fullTreeCut"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.machine.farm.QuestMachineFarm",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.speedy.QuestSpeedy",
 	"parent":"fullTreeCut",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":380
-	},
-	"questName":"Automatic Farm",
-	"uniqueName":"machineFarm",
-	"mustHaveOffHand":
-	{
-		"id":295
-	},
-	"mustHaveMainHand":
-	{
-		"id":369
-	},
-	"radius":4
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.speedy.QuestSpeedy",
-	"parent":"machineFarm",
 	"posX":-2,
 	"posY":0,
 	"icon":
@@ -751,7 +730,7 @@
 	"uniqueName":"speedy"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.item.thecrystalofmothernature.QuestMotherNatureCrystal",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature.QuestMotherNatureCrystal",
 	"parent":"speedy",
 	"posX":-2,
 	"posY":0,
@@ -784,7 +763,7 @@
 	"wandTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.blockabsorber.QuestBlockAbsorber",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.QuestBlockAbsorber",
 	"parent":"craftGoldIngot",
 	"posX":2,
 	"posY":0,
@@ -1169,7 +1148,7 @@
 	"wandTier":3
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.item.enchantedbucket.QuestEnchantedBucket",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.QuestEnchantedBucket",
 	"parent":"captureEntity",
 	"posX":-2,
 	"posY":0,
@@ -1181,7 +1160,7 @@
 	"uniqueName":"enchantedBucket"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
 	"parent":"enchantedBucket",
 	"posX":-2,
 	"posY":0,
@@ -1193,7 +1172,7 @@
 	"uniqueName":"liquidSuppressionCrystal"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.item.potionedcrystal.QuestPotionedCrystal",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.QuestPotionedCrystal",
 	"parent":"liquidSuppressionCrystal",
 	"posX":-2,
 	"posY":0,
@@ -1230,7 +1209,7 @@
 	"wandTier":2
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.item.accelerationcrystal.QuestAccelerationCrystal",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal",
 	"parent":"craftWitherSkeletonSkull",
 	"posX":2,
 	"posY":0,
@@ -1255,7 +1234,7 @@
 	"tier":6
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.inventorybridge.QuestInventoryBridge",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.QuestInventoryBridge",
 	"parent":"buildAltarTier6",
 	"posX":-2,
 	"posY":1,
@@ -1618,7 +1597,7 @@
 	}
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.tileentity.chunkloader.QuestChunkLoader",
+	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.QuestChunkLoader",
 	"parent":"craftEnchantingTable",
 	"posX":2,
 	"posY":0,
@@ -1850,7 +1829,7 @@
     "spellID":221
 },
 {
-    "questClass":"com.github.sejoslaw.vanillamagic.item.evokercrystal.QuestEvokerCrystal",
+    "questClass":"com.github.sejoslaw.vanillamagic.common.item.evokercrystal.QuestEvokerCrystal",
     "parent":"spellSummonEvoker",
     "posX":2,
     "posY":0,

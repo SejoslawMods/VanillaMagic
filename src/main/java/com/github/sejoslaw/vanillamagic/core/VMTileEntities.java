@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.Til
 import com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.TileBlockAbsorber;
 import com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.TileChunkLoader;
 import com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.TileInventoryBridge;
-import com.github.sejoslaw.vanillamagic.common.tileentity.machine.farm.TileFarm;
 import com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.TileQuarry;
 import com.github.sejoslaw.vanillamagic.common.tileentity.speedy.TileSpeedy;
 import com.mojang.datafixers.DataFixUtils;
@@ -29,7 +28,6 @@ public class VMTileEntities {
     public static TileEntityType<TileInventoryBridge> INVENTORY_BRIDGE = null;
     public static TileEntityType<TileBlockAbsorber> BLOCK_ABSORBER = null;
     public static TileEntityType<TileSpeedy> SPEEDY = null;
-    public static TileEntityType<TileFarm> FARM = null;
     public static TileEntityType<TileQuarry> QUARRY = null;
     public static TileEntityType<TileLiquidSuppression> LIQUID_SUPPRESSION = null;
 
@@ -40,7 +38,6 @@ public class VMTileEntities {
                 buildTileEntityType(TileInventoryBridge::new, TileInventoryBridge.REGISTRY_NAME),
                 buildTileEntityType(TileBlockAbsorber::new, TileBlockAbsorber.REGISTRY_NAME),
                 buildTileEntityType(TileSpeedy::new, TileSpeedy.REGISTRY_NAME),
-                buildTileEntityType(TileFarm::new, TileFarm.REGISTRY_NAME),
                 buildTileEntityType(TileQuarry::new, TileQuarry.REGISTRY_NAME),
                 buildTileEntityType(TileLiquidSuppression::new, TileLiquidSuppression.REGISTRY_NAME)
         );

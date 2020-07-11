@@ -15,7 +15,7 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuarryUpgradeFortune {
-    public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState, int fortune) {
+    public List<ItemStack> getDrops(World world, BlockPos workingPos, BlockState workingPosState, int fortune) {
         List<ItemStack> drops = Block.getDrops(workingPosState, (ServerWorld) world, workingPos, null);
         drops.forEach(stack -> stack.grow(fortune));
         return drops;
@@ -31,7 +31,7 @@ public class QuarryUpgradeFortune {
         }
 
         public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
-            return super.getDrops(blockToDig, world, workingPos, workingPosState, 1);
+            return super.getDrops(world, workingPos, workingPosState, 1);
         }
     }
 
@@ -45,7 +45,7 @@ public class QuarryUpgradeFortune {
         }
 
         public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
-            return super.getDrops(blockToDig, world, workingPos, workingPosState, 2);
+            return super.getDrops(world, workingPos, workingPosState, 2);
         }
     }
 
@@ -59,7 +59,7 @@ public class QuarryUpgradeFortune {
         }
 
         public List<ItemStack> getDrops(Block blockToDig, World world, BlockPos workingPos, BlockState workingPosState) {
-            return super.getDrops(blockToDig, world, workingPos, workingPosState, 3);
+            return super.getDrops(world, workingPos, workingPosState, 3);
         }
     }
 }
