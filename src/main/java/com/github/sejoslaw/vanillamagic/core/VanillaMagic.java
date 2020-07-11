@@ -2,8 +2,7 @@ package com.github.sejoslaw.vanillamagic.core;
 
 import com.github.sejoslaw.vanillamagic.api.quest.QuestRegistry;
 import com.github.sejoslaw.vanillamagic.api.upgrade.toolupgrade.ToolRegistry;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfigQuests;
+import com.github.sejoslaw.vanillamagic.common.file.VMConfigQuests;
 import com.github.sejoslaw.vanillamagic.common.item.book.BookRegistry;
 import com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.EnchantedBucketUtil;
 import com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.PotionedCrystalHelper;

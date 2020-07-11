@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic.common.quest;
 
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

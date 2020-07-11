@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature;
 
 import com.github.sejoslaw.vanillamagic.api.event.EventMotherNatureCrystal;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.quest.Quest;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
 import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;

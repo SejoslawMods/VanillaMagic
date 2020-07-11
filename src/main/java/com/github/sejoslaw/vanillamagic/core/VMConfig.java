@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.common.config;
+package com.github.sejoslaw.vanillamagic.core;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;

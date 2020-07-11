@@ -1,8 +1,9 @@
 package com.github.sejoslaw.vanillamagic.common.handler;
 
 import com.github.sejoslaw.vanillamagic.api.tileentity.ICustomTileEntity;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.core.VMLogger;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.ListNBT;
@@ -10,10 +11,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.Level;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
@@ -23,10 +26,7 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class WorldHandler {
-    private static String VM_DIRECTORY = "VanillaMagic";
-    private static String FILE_NAME_TILES = "VanillaMagicTileEntities.dat";
-    private static String FILE_NAME_TILES_OLD = "VanillaMagicTileEntities.dat_old";
-    private static String TILES = "tiles";
+    private static final String TILES = "tiles";
 
     /**
      * Show additional console info if enabled in config,
@@ -45,7 +45,12 @@ public class WorldHandler {
         World world = event.getWorld().getWorld();
         File vmDirectory = getVanillaMagicRootDirectory(world);
 
+        if (vmDirectory == null) {
+            return;
+        }
+
         if (!vmDirectory.exists()) {
+            vmDirectory.mkdirs();
             return;
         }
 
@@ -53,6 +58,7 @@ public class WorldHandler {
         File directoryDimension = new File(vmDirectory, dimension + "/");
 
         if (!directoryDimension.exists()) {
+            directoryDimension.mkdirs();
             return;
         }
 
@@ -65,7 +71,7 @@ public class WorldHandler {
 
                 if (fileExtension.equals("dat")) {
                     FileInputStream fis = new FileInputStream(dimFile);
-                    CompoundNBT data = null;
+                    CompoundNBT data;
 
                     try {
                         data = CompressedStreamTools.readCompressed(fis);
@@ -77,7 +83,7 @@ public class WorldHandler {
                     fis.close();
 
                     ListNBT tagList = data.getList(TILES, 10);
-                    boolean canAdd = true;
+                    boolean canAdd;
 
                     for (int i = 0; i < tagList.size(); ++i) {
                         CompoundNBT tileEntityTag = tagList.getCompound(i);
@@ -118,18 +124,22 @@ public class WorldHandler {
         World world = event.getWorld().getWorld();
         File vmDirectory = getVanillaMagicRootDirectory(world);
 
+        if (vmDirectory == null) {
+            return;
+        }
+
         if (!vmDirectory.exists()) {
             vmDirectory.mkdirs();
         }
 
         int dimension = world.getDimension().getType().getId();
-        File folderDimension = new File(vmDirectory, String.valueOf(dimension) + "/");
+        File folderDimension = Paths.get(vmDirectory.getAbsolutePath(), String.valueOf(dimension)).toFile(); //new File(vmDirectory, String.valueOf(dimension) + "/");
 
         if (!folderDimension.exists()) {
             folderDimension.mkdirs();
         }
 
-        File fileTiles = new File(folderDimension, FILE_NAME_TILES);
+        File fileTiles = new File(folderDimension, "VanillaMagicTileEntities.dat");
 
         if (!fileTiles.exists()) {
             try {
@@ -139,7 +149,7 @@ public class WorldHandler {
             }
         }
 
-        File fileTilesOld = new File(folderDimension, FILE_NAME_TILES_OLD);
+        File fileTilesOld = new File(folderDimension, "VanillaMagicTileEntities.dat_old");
 
         try {
             Files.copy(fileTiles.toPath(), fileTilesOld.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -173,7 +183,15 @@ public class WorldHandler {
      * @return Returns VM root directory for CustomTileEntities.
      */
     private static File getVanillaMagicRootDirectory(World world) {
-        File file = new File(world.getServer().getDataDirectory(), VM_DIRECTORY + "/");
+        if (world instanceof ClientWorld) {
+            return null;
+        }
+
+        File file = Paths.get(
+                FMLPaths.GAMEDIR.get().toString(),
+                "saves",
+                world.getServer().getWorldName(),
+                "VanillaMagic").toFile();
 
         if (!file.exists()) {
             file.mkdirs();

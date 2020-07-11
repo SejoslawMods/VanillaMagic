@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal;
 
 import com.github.sejoslaw.vanillamagic.api.event.EventLiquidSuppressionCrystal;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.quest.Quest;
 import com.github.sejoslaw.vanillamagic.common.util.BlockUtil;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;

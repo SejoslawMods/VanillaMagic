@@ -7,7 +7,7 @@ import com.github.sejoslaw.vanillamagic.api.inventory.InventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.math.Box;
 import com.github.sejoslaw.vanillamagic.api.tileentity.speedy.ISpeedy;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.core.VMItems;
 import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
@@ -23,7 +23,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;

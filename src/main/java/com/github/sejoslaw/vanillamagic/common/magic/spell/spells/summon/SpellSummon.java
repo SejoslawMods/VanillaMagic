@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon;
 
 import com.github.sejoslaw.vanillamagic.api.event.EventSpell;
 import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.magic.spell.Spell;
 import com.github.sejoslaw.vanillamagic.common.util.EntityUtil;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;

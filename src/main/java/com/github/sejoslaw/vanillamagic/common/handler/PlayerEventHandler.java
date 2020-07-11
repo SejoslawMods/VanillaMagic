@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic.common.handler;
 
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.item.book.BookRegistry;
 import com.github.sejoslaw.vanillamagic.common.item.book.IBook;
 import com.github.sejoslaw.vanillamagic.common.util.NBTUtil;
@@ -23,19 +23,23 @@ public class PlayerEventHandler {
      */
     @SubscribeEvent
     public void onPlayerLoggedInGiveBooks(PlayerEvent.PlayerLoggedInEvent event) {
-        if (VMConfig.GIVE_PLAYER_CUSTOM_BOOKS_ON_LOGIN.get()) {
-            PlayerEntity player = event.getPlayer();
-            CompoundNBT playerData = player.writeWithoutTypeId(new CompoundNBT());
-            CompoundNBT data = NBTUtil.getTagSafe(playerData, PlayerEntity.PERSISTED_NBT_TAG);
-
-            if (!data.getBoolean(NBT_PLAYER_HAS_BOOK)) {
-                for (IBook book : BookRegistry.getBooks()) {
-                    ItemHandlerHelper.giveItemToPlayer(player, book.getItem());
-                }
-
-                data.putBoolean(NBT_PLAYER_HAS_BOOK, true);
-                playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
-            }
+        if (!VMConfig.GIVE_PLAYER_CUSTOM_BOOKS_ON_LOGIN.get()) {
+            return;
         }
+
+        PlayerEntity player = event.getPlayer();
+        CompoundNBT playerData = player.writeWithoutTypeId(new CompoundNBT());
+        CompoundNBT data = NBTUtil.getTagSafe(playerData, PlayerEntity.PERSISTED_NBT_TAG);
+
+        if (data.getBoolean(NBT_PLAYER_HAS_BOOK)) {
+            return;
+        }
+
+        for (IBook book : BookRegistry.getBooks()) {
+            ItemHandlerHelper.giveItemToPlayer(player, book.getItem());
+        }
+
+        data.putBoolean(NBT_PLAYER_HAS_BOOK, true);
+        playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
     }
 }

@@ -69,13 +69,6 @@ public class VMItems {
 		CUSTOM_ITEMS.add(EVOKER_CRYSTAL);
 	}
 
-	/**
-	 * Register new CustomItem.
-	 */
-	public static void addCustomItem(ICustomItem item) {
-		CUSTOM_ITEMS.add(item);
-	}
-
 	public static void initialize() {
 		for (ICustomItem customItem : CUSTOM_ITEMS) {
 			customItem.registerRecipe();
@@ -95,22 +88,6 @@ public class VMItems {
 		CompoundNBT stackTag = checkingStack.getOrCreateTag();
 
 		return stackTag.contains(ICustomItem.NBT_UNIQUE_NAME) && stackTag.getString(ICustomItem.NBT_UNIQUE_NAME).equals(customItem.getUniqueNBTName());
-	}
-
-	/**
-	 * @return Returns TRUE if the given ItemStack is a given IEnchantedBucket.
-	 */
-	public static boolean isCustomBucket(ItemStack checkingStack, IEnchantedBucket customBucket) {
-		if (ItemStackUtil.isNullStack(checkingStack) || customBucket == null) {
-			return false;
-		}
-
-		CompoundNBT stackTag = checkingStack.getOrCreateTag();
-		String fluidName = ForgeRegistries.FLUIDS.getKey(customBucket.getFluidInBucket()).toString();
-
-		return stackTag.contains(IEnchantedBucket.NBT_ENCHANTED_BUCKET)
-				&& stackTag.getString(IEnchantedBucket.NBT_ENCHANTED_BUCKET).equals(customBucket.getUniqueNBTName())
-				&& stackTag.getString(IEnchantedBucket.NBT_FLUID_NAME).equals(fluidName);
 	}
 
 	/**

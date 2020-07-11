@@ -6,7 +6,7 @@ import com.github.sejoslaw.vanillamagic.api.inventory.IInventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.inventory.InventoryWrapper;
 import com.github.sejoslaw.vanillamagic.api.tileentity.machine.IMachine;
 import com.github.sejoslaw.vanillamagic.api.util.TextUtil;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.inventory.InventoryHelper;
 import com.github.sejoslaw.vanillamagic.common.tileentity.CustomTileEntity;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;

@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic.common.entity.meteor;
 
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.explosions.VMExplosion;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.FireballEntity;

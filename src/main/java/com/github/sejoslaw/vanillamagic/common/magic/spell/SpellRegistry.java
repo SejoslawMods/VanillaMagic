@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic.common.magic.spell;
 
 import com.github.sejoslaw.vanillamagic.api.magic.ISpell;
 import com.github.sejoslaw.vanillamagic.api.magic.IWand;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.magic.spell.spells.*;
 import com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.hostile.*;
 import com.github.sejoslaw.vanillamagic.common.magic.spell.spells.summon.passive.*;

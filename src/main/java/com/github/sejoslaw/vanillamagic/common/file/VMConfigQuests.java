@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic.common.config;
+package com.github.sejoslaw.vanillamagic.common.file;
 
 import com.github.sejoslaw.vanillamagic.api.quest.IQuest;
 import com.github.sejoslaw.vanillamagic.core.VMLogger;
@@ -46,7 +46,7 @@ public class VMConfigQuests {
             }
         }
 
-        return Paths.get(modsPath.getParent().toString(), "src", "main", "resurces", QUESTS_FILENAME);
+        return Paths.get(modsPath.getParent().getParent().toString(), "src", "main", "resources", QUESTS_FILENAME);
     }
 
     public static void unzip(File destinationFile, File sourceFile) {

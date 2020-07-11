@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic.common.event;
 
 import com.github.sejoslaw.vanillamagic.api.event.EventAutoplant;
-import com.github.sejoslaw.vanillamagic.common.config.VMConfig;
+import com.github.sejoslaw.vanillamagic.core.VMConfig;
 import com.github.sejoslaw.vanillamagic.common.util.BlockUtil;
 import com.github.sejoslaw.vanillamagic.common.util.EventUtil;
 import com.github.sejoslaw.vanillamagic.common.util.ItemStackUtil;
