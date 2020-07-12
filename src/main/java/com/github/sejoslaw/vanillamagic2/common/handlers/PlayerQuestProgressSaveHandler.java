@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers;
 
-import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
+import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.core.VMFiles;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,7 +16,7 @@ public final class PlayerQuestProgressSaveHandler {
                 try {
                     jsonWriter.beginObject();
 
-                    for (String questUniqueName : QuestRegistry.getPlayerQuests(worldName, playerName)) {
+                    for (String questUniqueName : PlayerQuestProgressRegistry.getPlayerQuests(worldName, playerName)) {
                         jsonWriter.name(questUniqueName).value(1);
                     }
 

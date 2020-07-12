@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers;
 
-import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
+import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.core.VMFiles;
 import com.google.gson.JsonObject;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -20,7 +20,7 @@ public class PlayerQuestProgressLoadHandler {
             VMFiles.readJson(playerQuestsFile, rootElement -> {
                 JsonObject jo = rootElement.getAsJsonObject();
                 Set<String> questUniqueNames = jo.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toSet());
-                QuestRegistry.addQuestData(worldName, playerName, questUniqueNames);
+                PlayerQuestProgressRegistry.USER_DATA.add(new PlayerQuestProgressRegistry.PlayerQuestProgressData(worldName, playerName, questUniqueNames));
             });
         });
     }

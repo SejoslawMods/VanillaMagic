@@ -11,7 +11,7 @@ public final class VanillaMagic {
 
     public VanillaMagic() {
         VMFiles.initialize();
-//        VMRegistries.initialize();
+        VMRegistries.initialize();
         VMQuests.initialize();
 //        VMItems.initialize();
 //        VMEvents.initialize();

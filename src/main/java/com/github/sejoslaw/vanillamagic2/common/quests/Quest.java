@@ -1,5 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
+import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
@@ -8,27 +10,35 @@ import net.minecraft.util.math.Vec3d;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class Quest {
-    public final Quest parent;
-    public final Vec3d position;
-    public final ItemStack iconStack;
-    public final String uniqueName;
+    public Quest parent;
+    public Vec3d position;
+    public ItemStack iconStack;
+    public String uniqueName;
 
-    public Quest(Quest parent, Vec3d position, ItemStack iconStack, String uniqueName, JsonObject jo) {
-        this.parent = parent;
-        this.position = position;
-        this.iconStack = iconStack;
-        this.uniqueName = uniqueName;
+    public void readData(JsonObject jo) {
+        parent = QuestRegistry.getQuest(jo.get("parent").getAsString());
 
-        if (jo != null) {
-            this.readData(jo);
+        if (parent == null) {
+            parent = getEmpty();
         }
+
+        iconStack = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
+        uniqueName = jo.get("uniqueName").getAsString();
+
+        double posX = parent.position.x + jo.get("posX").getAsInt();
+        double posY = parent.position.y + jo.get("posY").getAsInt();
+
+        position = new Vec3d(posX, posY, 0);
     }
 
-    private void readData(JsonObject jo) {
-        // TODO: Read info about QuestActionExecutor (???) - some class that can be registered in EventBus
-        // TODO: Various classes should inherit from QuestActionExecutor
-        // TODO: Maybe QuestCaller (???)
-        // TODO: QuestExecutor (???)
-        // TODO: QuestRunner (???)
+    public static Quest getEmpty() {
+        Quest quest = new Quest();
+
+        quest.parent = null;
+        quest.uniqueName = "";
+        quest.iconStack = ItemStack.EMPTY;
+        quest.position = new Vec3d(0, 0, 0);
+
+        return quest;
     }
 }
