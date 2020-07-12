@@ -22,7 +22,7 @@ public class Quest {
             parent = getEmpty();
         }
 
-        iconStack = ItemStackUtil.getItemStackFromJSON(jo.get("icon").getAsJsonObject());
+        iconStack = ItemStackUtil.getItemStackFromJson(jo.get("icon").getAsJsonObject());
         uniqueName = jo.get("uniqueName").getAsString();
 
         double posX = parent.position.x + jo.get("posX").getAsInt();
