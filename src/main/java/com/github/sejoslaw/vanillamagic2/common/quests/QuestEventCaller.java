@@ -19,7 +19,7 @@ public class QuestEventCaller {
         this.questClass = questClass;
     }
 
-    public QuestEventCaller build() {
+    public QuestEventCaller register() {
         try {
             eventCaller = eventCallerClass.newInstance();
             MinecraftForge.EVENT_BUS.register(this.eventCaller);

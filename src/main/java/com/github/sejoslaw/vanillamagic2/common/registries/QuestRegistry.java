@@ -14,7 +14,7 @@ public final class QuestRegistry {
     private static final List<QuestEventCaller> QUEST_EVENT_CALLERS = new ArrayList<>();
 
     public static void initialize() {
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("craftOnAltar", EventCallerCraftOnAltar.class, QuestCraftOnAltar.class).build());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("craftOnAltar", EventCallerCraftOnAltar.class, QuestCraftOnAltar.class).register());
     }
 
     public static void readQuest(JsonObject jo) {
