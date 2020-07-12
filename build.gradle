@@ -30,7 +30,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                advancedbow {
+                vanillamagic2 {
                     source sourceSets.main
                 }
             }
@@ -42,7 +42,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                advancedbow {
+                vanillamagic2 {
                     source sourceSets.main
                 }
             }
