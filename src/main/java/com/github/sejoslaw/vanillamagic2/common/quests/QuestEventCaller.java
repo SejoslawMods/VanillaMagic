@@ -21,7 +21,7 @@ public class QuestEventCaller {
 
     public QuestEventCaller register() {
         try {
-            eventCaller = eventCallerClass.newInstance();
+            this.eventCaller = this.eventCallerClass.newInstance();
             MinecraftForge.EVENT_BUS.register(this.eventCaller);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -36,9 +36,9 @@ public class QuestEventCaller {
 
     public void addNewQuest(JsonObject jo) {
         try {
-            Quest quest = questClass.newInstance();
+            Quest quest = this.questClass.newInstance();
             quest.readData(jo);
-            eventCaller.addQuest(quest);
+            this.eventCaller.addQuest(quest);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
