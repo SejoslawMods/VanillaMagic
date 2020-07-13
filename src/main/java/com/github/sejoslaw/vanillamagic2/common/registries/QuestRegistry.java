@@ -50,6 +50,8 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("chunkLoader", EventCallerChunkLoader.class, QuestChunkLoader.class).register()); // ???
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("inventoryBridge", EventCallerInventoryBridge.class, QuestInventoryBridge.class).register()); // ???
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerant", EventCallerAccelerant.class, QuestAccelerant.class).register()); // old Speedy
+
+        // Machines
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("quarry", EventCallerQuarry.class, QuestQuarry.class).register());
 
         // TODO: Add hierarchy for quests and callers
