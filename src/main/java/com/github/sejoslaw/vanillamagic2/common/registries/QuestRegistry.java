@@ -56,7 +56,6 @@ public final class QuestRegistry {
         // Machines
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("quarry", EventCallerQuarry.class, QuestQuarry.class).register());
 
-        // TODO: Add hierarchy for quests and callers
         // TODO: Add QuestExecutor for handling common code with lambdas for additional code
     }
 
