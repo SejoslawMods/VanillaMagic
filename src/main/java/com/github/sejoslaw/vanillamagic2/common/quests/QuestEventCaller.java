@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -22,7 +21,7 @@ public class QuestEventCaller {
     public QuestEventCaller register() {
         try {
             this.eventCaller = this.eventCallerClass.newInstance();
-            MinecraftForge.EVENT_BUS.register(this.eventCaller);
+            this.eventCaller.register();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
