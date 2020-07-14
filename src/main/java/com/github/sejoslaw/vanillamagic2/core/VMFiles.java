@@ -6,9 +6,6 @@ import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressLoad
 import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressSaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonWriter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -183,16 +180,14 @@ public final class VMFiles {
 
             FileInputStream fis = new FileInputStream(file);
             InputStreamReader reader = new InputStreamReader(fis);
-            JsonParser parser = new JsonParser();
-            JsonElement rootElement = parser.parse(reader);
 
-            consumer.accept(new JsonService(rootElement.getAsJsonObject()));
+            consumer.accept(JsonService.parse(reader));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void writeJson(File file, Consumer<JsonWriter> consumer) {
+    public static void writeJson(File file, Consumer<OutputStreamWriter> consumer) {
         try {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
@@ -204,9 +199,8 @@ public final class VMFiles {
 
             FileOutputStream fos = new FileOutputStream(file);
             OutputStreamWriter osw = new OutputStreamWriter(fos);
-            JsonWriter writer = new JsonWriter(osw);
 
-            consumer.accept(writer);
+            consumer.accept(osw);
         } catch (Exception e) {
             e.printStackTrace();
         }
