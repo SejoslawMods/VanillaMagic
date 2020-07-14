@@ -55,8 +55,6 @@ public final class QuestRegistry {
 
         // Machines
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("quarry", EventCallerQuarry.class, QuestQuarry.class).register());
-
-        // TODO: Add QuestExecutor for handling common code with lambdas for additional code
     }
 
     public static void readQuest(IJsonService jsonService) {
