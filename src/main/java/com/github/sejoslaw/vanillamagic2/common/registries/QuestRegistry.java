@@ -1,8 +1,9 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
+import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.quests.QuestEventCaller;
-import com.google.gson.JsonObject;
+import com.github.sejoslaw.vanillamagic2.common.quests.types.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("castSpellOnBlock", EventCallerCastSpellOnBlock.class, QuestCastSpellOnBlock.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("itemUpgrade", EventCallerItemUpgrade.class, QuestItemUpgrade.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("toolUpgrade", EventCallerToolUpgrade.class, QuestToolUpgrade.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("arrowMachineGun ", EventCallerArrowMachineGun .class, QuestArrowMachineGun .class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("arrowMachineGun ", EventCallerArrowMachineGun .class, QuestArrowMachineGun.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("buildAltar", EventCallerBuildAltar.class, QuestBuildAltar.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("captureEntity", EventCallerCaptureEntity.class, QuestCaptureEntity.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("craft", EventCallerCraft.class, QuestCraft.class).register());
@@ -58,11 +59,11 @@ public final class QuestRegistry {
         // TODO: Add QuestExecutor for handling common code with lambdas for additional code
     }
 
-    public static void readQuest(JsonObject jo) {
+    public static void readQuest(IJsonService jsonService) {
         try {
-            String questEventCallerKey = jo.get("eventCaller").getAsString();
+            String questEventCallerKey = jsonService.getString("eventCaller");
             QuestEventCaller caller = QUEST_EVENT_CALLERS.stream().filter(c -> c.key.equals(questEventCallerKey)).findFirst().get();
-            caller.addNewQuest(jo);
+            caller.addNewQuest(jsonService);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

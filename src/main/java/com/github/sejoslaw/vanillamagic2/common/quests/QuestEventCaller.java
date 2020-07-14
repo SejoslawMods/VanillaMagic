@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
-import com.google.gson.JsonObject;
+import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -34,10 +34,10 @@ public class QuestEventCaller {
         return this.eventCaller;
     }
 
-    public void addNewQuest(JsonObject jo) {
+    public void addNewQuest(IJsonService jsonService) {
         try {
             Quest quest = this.questClass.newInstance();
-            quest.readData(jo);
+            quest.readData(jsonService);
             this.eventCaller.addQuest(quest);
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -1,8 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
+import com.github.sejoslaw.vanillamagic2.common.json.JsonItemStack;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
@@ -14,14 +13,18 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public final class ItemStackUtil {
+public final class ItemStackUtils {
     /**
      * @return ItemStack from JSON Object.
      */
-    public static ItemStack getItemStackFromJson(JsonObject jo) {
+    public static ItemStack getItemStackFromJson(JsonItemStack jsonItemStack) {
         try {
-            int id = jo.get("id").getAsInt();
-            int stackSize = (jo.get("stackSize") != null ? jo.get("stackSize").getAsInt() : 1);
+            int id = jsonItemStack.getId();
+            int stackSize = jsonItemStack.getStackSize();
+
+            if (stackSize < 0) {
+                stackSize = 1;
+            }
 
             Item item = null;
             BlockState blockState = null;
@@ -47,12 +50,11 @@ public final class ItemStackUtil {
     /**
      * @return ItemStacks from JSON Object.
      */
-    public static List<ItemStack> getItemStacksFromJson(JsonObject jo, String key) {
-        JsonArray ja = jo.get(key).getAsJsonArray();
+    public static List<ItemStack> getItemStacksFromJson(IJsonService rootService, String key) {
         List<ItemStack> stacks = new ArrayList<>();
 
-        for (JsonElement je : ja) {
-            ItemStack stack = getItemStackFromJson(je.getAsJsonObject());
+        for (IJsonService service : rootService.getList(key)) {
+            ItemStack stack = getItemStackFromJson(service.getItemStack(key));
             stacks.add(stack);
         }
 

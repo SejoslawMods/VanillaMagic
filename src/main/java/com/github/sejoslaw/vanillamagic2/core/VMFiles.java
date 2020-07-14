@@ -4,6 +4,8 @@ import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressLoadHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressSaveHandler;
+import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
+import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonWriter;
@@ -169,7 +171,7 @@ public final class VMFiles {
         }
     }
 
-    public static void readJson(File file, Consumer<JsonElement> consumer) {
+    public static void readJson(File file, Consumer<IJsonService> consumer) {
         try {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
@@ -184,7 +186,7 @@ public final class VMFiles {
             JsonParser parser = new JsonParser();
             JsonElement rootElement = parser.parse(reader);
 
-            consumer.accept(rootElement);
+            consumer.accept(new JsonService(rootElement.getAsJsonObject()));
         } catch (Exception e) {
             e.printStackTrace();
         }
