@@ -39,9 +39,9 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("summonHorde", EventCallerSummonHorde.class, QuestSummonHorde.class).register());
 
         // Connected with Items
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerationCrystal ", EventCallerAccelerationCrystal .class, QuestAccelerationCrystal .class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerationCrystal ", EventCallerAccelerationCrystal .class, QuestAccelerationCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("enchantedBucket", EventCallerEnchantedBucket.class, QuestEnchantedBucket.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("evokerCrystal ", EventCallerEvokerCrystal .class, QuestEvokerCrystal .class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("evokerCrystal ", EventCallerEvokerCrystal .class, QuestEvokerCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("liquidSuppressionCrystal", EventCallerLiquidSuppressionCrystal.class, QuestLiquidSuppressionCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("potionCrystal", EventCallerPotionCrystal.class, QuestPotionCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("motherNatureCrystal", EventCallerMotherNatureCrystal.class, QuestMotherNatureCrystal.class).register());
