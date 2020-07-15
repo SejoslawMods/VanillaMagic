@@ -3,7 +3,10 @@ package com.github.sejoslaw.vanillamagic2.common.quests;
 import com.github.sejoslaw.vanillamagic2.common.functions.Action;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
+import com.github.sejoslaw.vanillamagic2.common.functions.Function4;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
@@ -19,6 +22,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -50,7 +54,14 @@ public final class EventExecutor {
     public void onItemTooltip(ItemTooltipEvent event) {
     }
 
-    public void onEntityPlace(BlockEvent.EntityPlaceEvent event) {
+    public void onEntityPlace(BlockEvent.EntityPlaceEvent event, Function4<PlayerEntity, World, BlockState, BlockPos, Quest> check, Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
+        Entity entity = event.getEntity();
+        PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
+        World world = event.getWorld().getWorld();
+        BlockState state = event.getPlacedBlock();
+        BlockPos pos = event.getPos();
+
+        performCheck(player, () -> check.apply(player, world, state, pos), () -> consumer.accept(player, world, state, pos));
     }
 
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
@@ -83,6 +94,18 @@ public final class EventExecutor {
 
     private void performCheck(PlayerEntity player, Action action) {
          checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, action));
+    }
+
+    private void performCheck(PlayerEntity player, Supplier<Quest> check, Action action) {
+        checkItemsInHands(player, (skippedQuest) -> {
+            Quest quest = check.get();
+
+            if (quest == null) {
+                return;
+            }
+
+            checkQuestProgress(player, quest, action);
+        });
     }
 
     private void checkItemsInHands(PlayerEntity player, Consumer<Quest> consumer) {

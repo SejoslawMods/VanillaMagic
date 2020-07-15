@@ -1,0 +1,65 @@
+package com.github.sejoslaw.vanillamagic2.common.utils;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
+public final class AltarUtils {
+    private static final Map<Integer, Block> BLOCKS = new HashMap<>();
+
+    static {
+        BLOCKS.put(1, Blocks.REDSTONE_WIRE);
+        BLOCKS.put(2, Blocks.IRON_BLOCK);
+        BLOCKS.put(3, Blocks.GOLD_BLOCK);
+        BLOCKS.put(4, Blocks.REDSTONE_BLOCK);
+        BLOCKS.put(5, Blocks.LAPIS_BLOCK);
+        BLOCKS.put(6, Blocks.DIAMOND_BLOCK);
+        BLOCKS.put(7, Blocks.EMERALD_BLOCK);
+    }
+
+    public static boolean checkAltarTier(World world, BlockPos pos, int tier) {
+        Block block = BLOCKS.get(tier);
+
+        if (tier <= 1) {
+            return checkTierNSidesOnly(world, pos.up(), tier, block) &&
+                   checkTierNCornersOnly(world, pos.up(), tier, block);
+        } else {
+            if (checkAltarTier(world, pos, tier - 1)) {
+                return tier % 2 == 0 ? checkTierNSidesOnly(world, pos, tier, block) : checkTierNCornersOnly(world, pos, tier, block);
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean checkTierNCornersOnly(World world, BlockPos pos, int distance, Block block) {
+        BlockPos up = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() + distance);
+        BlockPos left = new BlockPos(pos.getX() - distance, pos.getY() - 1, pos.getZ());
+        BlockPos down = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() - distance);
+        BlockPos right = new BlockPos(pos.getX() + distance, pos.getY() - 1, pos.getZ());
+
+        return world.getBlockState(up).getBlock() == block &&
+               world.getBlockState(left).getBlock() == block &&
+               world.getBlockState(down).getBlock() == block &&
+               world.getBlockState(right).getBlock() == block;
+    }
+
+    private static boolean checkTierNSidesOnly(World world, BlockPos pos, int distance, Block block) {
+        BlockPos rightUp = new BlockPos(pos.getX() + distance, pos.getY() - 1, pos.getZ() + distance);
+        BlockPos leftUp = new BlockPos(pos.getX() - distance, pos.getY() - 1, pos.getZ() + distance);
+        BlockPos leftDown = new BlockPos(pos.getX() - distance, pos.getY() - 1, pos.getZ() - distance);
+        BlockPos rightDown = new BlockPos(pos.getX() + distance, pos.getY() - 1, pos.getZ() - distance);
+
+        return world.getBlockState(rightUp).getBlock() == block &&
+               world.getBlockState(leftUp).getBlock() == block &&
+               world.getBlockState(leftDown).getBlock() == block &&
+               world.getBlockState(rightDown).getBlock() == block;
+    }
+}
