@@ -1,12 +1,14 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.Action;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
+import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
+import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -28,6 +30,10 @@ public final class EventExecutor {
         this.caller = caller;
     }
 
+    public void parseHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {
+        consumer.accept(player.getHeldItemOffhand(), player.getHeldItemMainhand());
+    }
+
     public void onBlockBreak(BlockEvent.BreakEvent event) {
     }
 
@@ -36,9 +42,9 @@ public final class EventExecutor {
      * @param event
      * @param consumer
      */
-    public void onPlayerInteract(PlayerInteractEvent event, Consumer3<PlayerEntity, BlockPos, Direction> consumer) {
+    public void onPlayerInteract(PlayerInteractEvent event, Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
         PlayerEntity player = event.getPlayer();
-        performCheck(player, () -> consumer.accept(player, event.getPos(), event.getFace()));
+        performCheck(player, () -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
     }
 
     public void onItemTooltip(ItemTooltipEvent event) {

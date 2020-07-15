@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EventCallerPortableCraftingTable extends EventCaller<QuestPortableCraftingTable> {
     @SubscribeEvent
     public void openCraftingTableGui(PlayerInteractEvent.RightClickItem event) {
-        this.executor.onPlayerInteract(event, (player, pos, face) -> {
+        this.executor.onPlayerInteract(event, (player, world, pos, face) -> {
             player.openContainer(new SimpleNamedContainerProvider((windowId, playerInventory, playerEntity) ->
                     new WorkbenchContainer(windowId, playerInventory, IWorldPosCallable.of(player.world, player.getPosition())),
                     new TranslationTextComponent("container.crafting")));
