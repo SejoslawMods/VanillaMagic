@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressLoad
 import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressSaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
+import com.github.sejoslaw.vanillamagic2.common.utils.PlayerUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -80,8 +81,9 @@ public final class VMFiles {
      * @param player
      */
     public static void parsePlayerQuests(PlayerEntity player, Consumer3<String, String, File> consumer) {
-        String playerName = player.getName().getFormattedText();
-        String worldName = player.world.getServer().getWorldName();
+        String playerName = PlayerUtils.getName(player);
+        String worldName = PlayerUtils.getWorldName(player);
+
         Path playerQuestsPath = VMFiles.getPlayerQuestsFilePath(worldName, playerName);
         File playerQuestsFile = playerQuestsPath.toFile();
 
