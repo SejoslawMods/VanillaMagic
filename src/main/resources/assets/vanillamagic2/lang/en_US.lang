@@ -67,6 +67,7 @@ quest.achieved=Unlocked Quest
 quest.taken=Taken
 quest.requires=Requires
 quest.unknown=???
+quest.summonHorde.message=Summoning Horde !!!
 
 
 

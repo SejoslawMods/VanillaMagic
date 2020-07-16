@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
-import com.github.sejoslaw.vanillamagic2.common.utils.PlayerUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.HashSet;
@@ -29,8 +29,8 @@ public final class PlayerQuestProgressRegistry {
     public static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
 
     public static PlayerQuestProgressData getPlayerData(PlayerEntity player) {
-        String worldName = PlayerUtils.getWorldName(player);
-        String playerName = PlayerUtils.getName(player);
+        String worldName = EntityUtils.getWorldName(player);
+        String playerName = EntityUtils.getPlayerName(player);
         return getPlayerData(worldName, playerName);
     }
 

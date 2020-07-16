@@ -1,13 +1,11 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
-import com.github.sejoslaw.vanillamagic2.common.functions.Action;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
-import com.github.sejoslaw.vanillamagic2.common.functions.Function4;
+import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +20,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -34,8 +33,15 @@ public final class EventExecutor {
         this.caller = caller;
     }
 
-    public void parseHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {
+    public void withHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {
         consumer.accept(player.getHeldItemOffhand(), player.getHeldItemMainhand());
+    }
+
+    public void forQuestWithCheck(Function<Quest, Boolean> check, Consumer<Quest> action) {
+        this.caller.quests
+                .stream()
+                .filter(check::apply)
+                .forEach(action);
     }
 
     public void onBlockBreak(BlockEvent.BreakEvent event) {
@@ -67,7 +73,12 @@ public final class EventExecutor {
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
     }
 
-    public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+    public void onItemCrafted(PlayerEvent.ItemCraftedEvent event, Function3<PlayerEntity, ItemStack, IInventory, Quest> check, Consumer3<PlayerEntity, ItemStack, IInventory> consumer) {
+        PlayerEntity player = event.getPlayer();
+        ItemStack result = event.getCrafting();
+        IInventory inv = event.getInventory();
+
+        performCheck(player, () -> check.apply(player, result, inv), () -> consumer.accept(player, result, inv));
     }
 
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {

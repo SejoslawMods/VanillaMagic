@@ -3,9 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.quests.QuestEventCaller;
-import com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.EventCallerArrowMachineGun;
-import com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.EventCallerBuildAltar;
-import com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.EventCallerPortableCraftingTable;
+import com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.*;
 

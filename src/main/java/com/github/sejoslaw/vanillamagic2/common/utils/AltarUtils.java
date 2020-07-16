@@ -24,6 +24,11 @@ public final class AltarUtils {
         BLOCKS.put(7, Blocks.EMERALD_BLOCK);
     }
 
+    /**
+     * Checks if the Altar is build correctly at specified position.
+     *
+     * @return True if the  Altar is build correctly; otherwise false.
+     */
     public static boolean checkAltarTier(World world, BlockPos pos, int tier) {
         Block block = BLOCKS.get(tier);
 

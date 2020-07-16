@@ -19,7 +19,7 @@ public class EventCallerArrowMachineGun extends EventCaller<QuestArrowMachineGun
     @SubscribeEvent
     public void shootArrow(PlayerInteractEvent.RightClickItem event) {
         this.executor.onPlayerInteract(event, (player, world, pos, face) -> {
-            this.executor.parseHands(player, (leftHandStack, rightHandStack) -> {
+            this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
                 ArrowEntity arrowEntity = new ArrowEntity(world, player);
 
                 arrowEntity.setPotionEffect(leftHandStack);
