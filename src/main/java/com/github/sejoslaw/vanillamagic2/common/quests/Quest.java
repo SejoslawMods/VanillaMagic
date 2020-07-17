@@ -18,8 +18,8 @@ public class Quest {
 
     // Fields used by classes inherited from Quest
     public int altarTier;
-    public ItemStack stackRightHand;
-    public ItemStack stackLeftHand;
+    public ItemStack rightHandStack;
+    public ItemStack leftHandStack;
     public int wandTier;
     public int multiplier;
     public int level;
@@ -60,8 +60,8 @@ public class Quest {
      */
     private void tryReadCustomFields(IJsonService jsonService) {
         this.altarTier = jsonService.getInt("altarTier");
-        this.stackRightHand = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("stackRightHand"));
-        this.stackLeftHand = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("stackLeftHand"));
+        this.rightHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("rightHandStack"));
+        this.leftHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("leftHandStack"));
         this.wandTier = jsonService.getInt("wandTier");
         this.multiplier = jsonService.getInt("multiplier");
         this.level = jsonService.getInt("level");

@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -26,10 +27,10 @@ import java.util.function.Supplier;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public final class EventExecutor {
-    private final EventCaller<? extends Quest> caller;
+public final class EventExecutor<TQuest extends Quest> {
+    private final EventCaller<TQuest> caller;
 
-    public EventExecutor(EventCaller<? extends Quest> caller) {
+    public EventExecutor(EventCaller<TQuest> caller) {
         this.caller = caller;
     }
 
@@ -37,7 +38,7 @@ public final class EventExecutor {
         consumer.accept(player.getHeldItemOffhand(), player.getHeldItemMainhand());
     }
 
-    public void forQuestWithCheck(Function<Quest, Boolean> check, Consumer<Quest> action) {
+    public void forQuestWithCheck(Function<TQuest, Boolean> check, Consumer<TQuest> action) {
         this.caller.quests
                 .stream()
                 .filter(check::apply)
@@ -54,13 +55,14 @@ public final class EventExecutor {
      */
     public void onPlayerInteract(PlayerInteractEvent event, Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
         PlayerEntity player = event.getPlayer();
+
         performCheck(player, () -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
     }
 
     public void onItemTooltip(ItemTooltipEvent event) {
     }
 
-    public void onEntityPlace(BlockEvent.EntityPlaceEvent event, Function4<PlayerEntity, World, BlockState, BlockPos, Quest> check, Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
+    public void onEntityPlace(BlockEvent.EntityPlaceEvent event, Function4<PlayerEntity, World, BlockState, BlockPos, TQuest> check, Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
         Entity entity = event.getEntity();
         PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
         World world = event.getWorld().getWorld();
@@ -73,7 +75,7 @@ public final class EventExecutor {
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
     }
 
-    public void onItemCrafted(PlayerEvent.ItemCraftedEvent event, Function3<PlayerEntity, ItemStack, IInventory, Quest> check, Consumer3<PlayerEntity, ItemStack, IInventory> consumer) {
+    public void onItemCrafted(PlayerEvent.ItemCraftedEvent event, Function3<PlayerEntity, ItemStack, IInventory, TQuest> check, Consumer3<PlayerEntity, ItemStack, IInventory> consumer) {
         PlayerEntity player = event.getPlayer();
         ItemStack result = event.getCrafting();
         IInventory inv = event.getInventory();
@@ -81,7 +83,16 @@ public final class EventExecutor {
         performCheck(player, () -> check.apply(player, result, inv), () -> consumer.accept(player, result, inv));
     }
 
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+    public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event, Consumer<PlayerEntity> consumer) {
+        LivingEntity entity = event.getEntityLiving();
+
+        if (!(entity instanceof PlayerEntity)) {
+            return;
+        }
+
+        PlayerEntity player = (PlayerEntity) entity;
+
+        performCheck(player, () -> consumer.accept(player));
     }
 
     public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
@@ -107,9 +118,9 @@ public final class EventExecutor {
          checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, action));
     }
 
-    private void performCheck(PlayerEntity player, Supplier<Quest> check, Action action) {
+    private void performCheck(PlayerEntity player, Supplier<TQuest> check, Action action) {
         checkItemsInHands(player, (skippedQuest) -> {
-            Quest quest = check.get();
+            TQuest quest = check.get();
 
             if (quest == null) {
                 return;
@@ -119,16 +130,22 @@ public final class EventExecutor {
         });
     }
 
-    private void checkItemsInHands(PlayerEntity player, Consumer<Quest> consumer) {
-        for (Quest quest : this.caller.quests) {
-            if (ItemStack.areItemStacksEqual(player.getHeldItemOffhand(), quest.stackLeftHand) &&
-                    ItemStack.areItemStacksEqual(player.getHeldItemMainhand(), quest.stackRightHand)) {
-                consumer.accept(quest);
+    private void checkItemsInHands(PlayerEntity player, Consumer<TQuest> consumer) {
+        for (TQuest quest : this.caller.quests) {
+            if (quest.leftHandStack != null && !ItemStack.areItemStacksEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
+                continue;
             }
+
+            if (quest.rightHandStack != null && !ItemStack.areItemStacksEqual(player.getHeldItemMainhand(), quest.rightHandStack)) {
+                continue;
+            }
+
+            consumer.accept(quest);
+            return;
         }
     }
 
-    private void checkQuestProgress(PlayerEntity player, Quest quest, Action action) {
+    private void checkQuestProgress(PlayerEntity player, TQuest quest, Action action) {
         String questUniqueName = quest.uniqueName;
 
         if (!PlayerQuestProgressRegistry.hasPlayerGotQuest(player, questUniqueName)) {

@@ -13,11 +13,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EventCallerBuildAltar extends EventCaller<QuestBuildAltar> {
     @SubscribeEvent
     public void buildAltar(BlockEvent.EntityPlaceEvent event) {
-        this.executor.onEntityPlace(event, (player, world, state, pos) -> this.quests
-                        .stream()
-                        .filter(quest -> state.getBlock() instanceof CauldronBlock && AltarUtils.checkAltarTier(world, pos, quest.altarTier))
-                        .findFirst()
-                        .get(),
+        this.executor.onEntityPlace(event,
+                (player, world, state, pos) ->
+                        this.quests
+                            .stream()
+                            .filter(quest -> state.getBlock() instanceof CauldronBlock && AltarUtils.checkAltarTier(world, pos, quest.altarTier))
+                            .findFirst()
+                            .get(),
                 (player, world, state, pos) -> { });
     }
 }

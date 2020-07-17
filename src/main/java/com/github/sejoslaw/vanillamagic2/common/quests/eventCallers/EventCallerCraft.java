@@ -11,12 +11,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EventCallerCraft extends EventCaller<QuestCraft> {
     @SubscribeEvent
     public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-        this.executor.onItemCrafted(event, (player, result, inv) ->
-                this.quests
-                        .stream()
-                        .filter(quest -> result.getItem() == quest.iconStack.getItem())
-                        .findFirst()
-                        .orElse(null),
+        this.executor.onItemCrafted(event,
+                (player, result, inv) ->
+                        this.quests
+                            .stream()
+                            .filter(quest -> result.getItem() == quest.iconStack.getItem())
+                            .findFirst()
+                            .orElse(null),
                 (player, result, inv) -> { });
     }
 }
