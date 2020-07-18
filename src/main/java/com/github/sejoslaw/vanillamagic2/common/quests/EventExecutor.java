@@ -45,7 +45,13 @@ public final class EventExecutor<TQuest extends Quest> {
                 .forEach(action);
     }
 
-    public void onBlockBreak(BlockEvent.BreakEvent event) {
+    public void onBlockBreak(BlockEvent.BreakEvent event, Function4<PlayerEntity, World, BlockPos, BlockState, TQuest> check, Consumer4<PlayerEntity, World, BlockPos, BlockState> consumer) {
+        PlayerEntity player = event.getPlayer();
+        World world = event.getWorld().getWorld();
+        BlockPos pos = event.getPos();
+        BlockState state = event.getState();
+
+        performCheck(player, () -> check.apply(player, world, pos, state), () -> consumer.accept(player, world, pos, state));
     }
 
     /**
