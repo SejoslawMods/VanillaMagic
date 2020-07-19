@@ -1,8 +1,13 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
@@ -35,5 +40,20 @@ public final class EntityUtils {
                 .stream()
                 .filter(type -> type.getClassification() == classification)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Teleports Entity to the specified location on specified World.
+     */
+    public static void teleport(Entity entity, BlockPos newPos, World world) {
+        if (entity instanceof ServerPlayerEntity && world instanceof ServerWorld) {
+            ((ServerPlayerEntity) entity).teleport((ServerWorld) world, newPos.getX(), newPos.getY(), newPos.getZ(), ((ServerPlayerEntity) entity).cameraYaw, entity.rotationPitch);
+        } else {
+            if (world != entity.world) {
+                entity.changeDimension(world.getDimension().getType());
+            }
+
+            entity.teleportKeepLoaded(newPos.getX(), newPos.getY(), newPos.getZ());
+        }
     }
 }

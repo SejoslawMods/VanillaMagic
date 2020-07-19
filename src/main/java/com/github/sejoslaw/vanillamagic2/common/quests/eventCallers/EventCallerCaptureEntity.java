@@ -39,7 +39,7 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
                             stackNbt.put(NbtUtils.NBT_CAPTURED, entityTag);
                             stackNbt.putString(NbtUtils.NBT_ENTITY_TYPE, entity.getType().getRegistryName().toString());
                             stackNbt.putString(NbtUtils.NBT_ENTITY_NAME, entity.getName().getFormattedText());
-                            leftHandStack.setDisplayName(TextUtils.combine("quest.capturedEntity.bookTitlePrefix", entity.getName().getFormattedText()));
+                            leftHandStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.capturedEntity.bookTitlePrefix"), entity.getName().getFormattedText()));
 
                             entity.remove();
 

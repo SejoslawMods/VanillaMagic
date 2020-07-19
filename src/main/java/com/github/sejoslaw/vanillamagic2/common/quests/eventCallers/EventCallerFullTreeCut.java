@@ -81,7 +81,7 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
         return false;
     }
 
-    private final class TreeChopTask {
+    private static final class TreeChopTask {
         private final PlayerEntity player;
         private final World world;
         private final BlockPos pos;

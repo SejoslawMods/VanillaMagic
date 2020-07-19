@@ -1,9 +1,11 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -35,7 +37,14 @@ public final class TextUtils {
     /**
      * @return Combined component from given key with the message from the second argument.
      */
-    public static ITextComponent combine(String key, String text) {
-        return toComponent(translate(key).getFormattedText() + text);
+    public static ITextComponent combine(ITextComponent component, String text) {
+        return toComponent(component.getFormattedText() + text);
+    }
+
+    /**
+     * @return String formatted information about the specified position.
+     */
+    public static String getPosition(World world, BlockPos pos) {
+        return world.getDimension().getType().getRegistryName().toString() + "[" + pos.toString() + "]";
     }
 }
