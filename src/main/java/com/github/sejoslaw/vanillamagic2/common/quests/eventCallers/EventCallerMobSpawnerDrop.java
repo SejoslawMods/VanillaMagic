@@ -42,8 +42,7 @@ public class EventCallerMobSpawnerDrop extends EventCaller<QuestMobSpawnerDrop> 
                     EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(entityName);
 
                     ItemStack bookStack = new ItemStack(Items.ENCHANTED_BOOK);
-                    String displayName = TextUtils.translate("quest.mobSpawner.bookTitlePrefix").getFormattedText() + entityType.getName().getFormattedText();
-                    bookStack.setDisplayName(TextUtils.toComponent(displayName));
+                    bookStack.setDisplayName(TextUtils.combine("quest.mobSpawner.bookTitlePrefix", entityType.getName().getFormattedText()));
                     bookStack.getOrCreateTag().putString(NbtUtils.NBT_SPAWNER_ENTITY, entityName.toString());
 
                     ItemEntity spawnerBook = new ItemEntity(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, bookStack);

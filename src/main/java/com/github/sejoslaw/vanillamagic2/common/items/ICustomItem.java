@@ -35,7 +35,7 @@ public interface ICustomItem {
         stack.setDisplayName(TextUtils.translate("item." + this.getUniqueKey() + ".displayName"));
 
         CompoundNBT data = stack.getOrCreateTag();
-        data.putString(NbtUtils.CUSTOM_ITEM_UNIQUE_NAME, this.getUniqueKey());
+        data.putString(NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME, this.getUniqueKey());
 
         return stack;
     }

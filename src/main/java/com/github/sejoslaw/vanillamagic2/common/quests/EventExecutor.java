@@ -78,7 +78,13 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheck(player, () -> check.apply(player, world, state, pos), () -> consumer.accept(player, world, state, pos));
     }
 
-    public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+    public void onEntityInteract(PlayerInteractEvent.EntityInteract event, Function4<PlayerEntity, Entity, World, BlockPos, TQuest> check, Consumer4<PlayerEntity, Entity, World, BlockPos> consumer) {
+        PlayerEntity player = event.getPlayer();
+        Entity target = event.getTarget();
+        World world = event.getWorld();
+        BlockPos pos = event.getPos();
+
+        performCheck(player, () -> check.apply(player, target, world, pos), () -> consumer.accept(player, target, world, pos));
     }
 
     public void onItemCrafted(PlayerEvent.ItemCraftedEvent event, Function3<PlayerEntity, ItemStack, IInventory, TQuest> check, Consumer3<PlayerEntity, ItemStack, IInventory> consumer) {

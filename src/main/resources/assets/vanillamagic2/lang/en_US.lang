@@ -69,6 +69,7 @@ quest.requires=Requires
 quest.unknown=???
 quest.summonHorde.message=Summoning Horde !!!
 quest.mobSpawner.bookTitlePrefix=Mob Spawner Entity Data:
+quest.capturedEntity.bookTitlePrefix=Captured Entity:
 
 
 

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class EventCaller<TQuest extends Quest> {
     public final List<TQuest> quests = new ArrayList<>();
-    public final EventExecutor<TQuest> executor = new EventExecutor<TQuest>(this);
+    public final EventExecutor<TQuest> executor = new EventExecutor<>(this);
 
     public void addQuest(Quest quest) {
         quests.add((TQuest) quest);

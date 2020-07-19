@@ -20,7 +20,7 @@ public class Quest {
     public int altarTier;
     public ItemStack rightHandStack;
     public ItemStack leftHandStack;
-    public int wandTier;
+    public int wandTier; // TODO: Can delete ???
     public int multiplier;
     public int level;
 

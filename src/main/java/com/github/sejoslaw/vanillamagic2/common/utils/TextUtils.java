@@ -31,4 +31,11 @@ public final class TextUtils {
     public static ITextComponent toComponent(String message) {
         return new StringTextComponent(message);
     }
+
+    /**
+     * @return Combined component from given key with the message from the second argument.
+     */
+    public static ITextComponent combine(String key, String text) {
+        return toComponent(translate(key).getFormattedText() + text);
+    }
 }
