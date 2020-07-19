@@ -18,12 +18,12 @@ public class QuestMineBlock extends Quest {
     public void readData(IJsonService jsonService) {
         super.readData(jsonService);
 
-        String blockName = jsonService.getString("blocksToBeMined");
+        String blockName = jsonService.getString("blocksToMine").toLowerCase();
 
         this.blocksToMine = ForgeRegistries.BLOCKS
                 .getEntries()
                 .stream()
-                .filter(entry -> entry.getKey().toString().contains(blockName))
+                .filter(entry -> entry.getKey().toString().toLowerCase().contains(blockName))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
     }
