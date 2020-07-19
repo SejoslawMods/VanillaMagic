@@ -15,8 +15,11 @@ public final class NbtUtils {
     public static final String NBT_CAPTURED = "NBT_CAPTURED";
     public static final String NBT_ENTITY_TYPE = "NBT_ENTITY_TYPE";
     public static final String NBT_ENTITY_NAME = "NBT_ENTITY_NAME";
-    public static final String NBT_POSITION = "NBT_POSITION";
 
+    public static final String NBT_BLOCK = "NBT_BLOCK";
+    public static final String NBT_BLOCK_STATE = "NBT_BLOCK_STATE";
+
+    public static final String NBT_POSITION = "NBT_POSITION";
     public static final String NBT_POS_X = "NBT_POS_X";
     public static final String NBT_POS_Y = "NBT_POS_Y";
     public static final String NBT_POS_Z = "NBT_POS_Z";
