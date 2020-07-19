@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,14 +11,21 @@ import net.minecraft.network.play.client.CPlayerDiggingPacket;
 import net.minecraft.network.play.server.SChangeBlockPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class BlockUtils {
+    /**
+     * Breaks extra block on World. Each broken block affects the ItemStack durability.
+     */
     public static void breakBlock(ItemStack stack, World world, PlayerEntity player, BlockPos pos) {
         if (world.isAirBlock(pos)) {
             return;
@@ -76,5 +84,16 @@ public final class BlockUtils {
 
             Minecraft.getInstance().getConnection().sendPacket(new CPlayerDiggingPacket(CPlayerDiggingPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.getFacingDirections(player)[0]));
         }
+    }
+
+    public static List<ItemEntity> getItems(World world, BlockPos pos) {
+        AxisAlignedBB aabb = new AxisAlignedBB(
+                pos.getX() - 0.5D,
+                pos.getY() - 0.5D,
+                pos.getZ() - 0.5D,
+                pos.getX() + 0.5D,
+                pos.getY() + 0.5D,
+                pos.getZ() + 0.5D);
+        return new ArrayList<>(world.getEntitiesWithinAABB(ItemEntity.class, aabb));
     }
 }
