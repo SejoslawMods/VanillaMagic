@@ -34,13 +34,18 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
 
     @SubscribeEvent
     public void teleport(PlayerInteractEvent.RightClickItem event) {
+        final CompoundNBT[] nbt = new CompoundNBT[1];
+
         this.executor.onPlayerInteract(event,
-                (player, world, pos, direction) -> player.getHeldItemMainhand().getOrCreateTag().contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null,
+                (player, world, pos, direction) -> {
+                    nbt[0] = player.getHeldItemMainhand().getOrCreateTag();
+                    return nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
+                },
                 (player, world, pos, direction, quest) ->
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                        CompoundNBT nbt = rightHandStack.getOrCreateTag().getCompound(NbtUtils.NBT_POSITION);
-                        BlockPos savedPos = NbtUtils.getPos(nbt);
-                        World savedWorld = NbtUtils.getWorld(player.getServer(), nbt);
+                        nbt[0] = nbt[0].getCompound(NbtUtils.NBT_POSITION);
+                        BlockPos savedPos = NbtUtils.getPos(nbt[0]);
+                        World savedWorld = NbtUtils.getWorld(player.getServer(), nbt[0]);
                         EntityUtils.teleport(player, savedPos, savedWorld);
                     }));
     }
