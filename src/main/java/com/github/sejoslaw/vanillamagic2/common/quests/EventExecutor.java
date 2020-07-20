@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRe
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -111,7 +112,13 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheck(player, (quest) -> consumer.accept(player));
     }
 
-    public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
+    public void onItemPickup(PlayerEvent.ItemPickupEvent event, Function4<PlayerEntity, World, ItemEntity, ItemStack, TQuest> check, Consumer5<PlayerEntity, World, ItemEntity, ItemStack, TQuest> consumer) {
+        PlayerEntity player = event.getPlayer();
+        ItemEntity originalEntity = event.getOriginalEntity();
+        ItemStack pickedStack = event.getStack();
+        World world = player.world;
+
+        performCheck(player, () -> check.apply(player, world, originalEntity, pickedStack), (quest) -> consumer.accept(player, world, originalEntity, pickedStack, quest));
     }
 
     public void onLivingDrops(LivingDropsEvent event) {
