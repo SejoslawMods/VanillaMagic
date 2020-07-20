@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers;
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestOreMultiplier;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -40,7 +41,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
                 },
                 (player, world, pos, direction, quest) ->
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                        List<ItemStack> smeltingResult = BlockUtils.smeltItems(player, oresInCauldron[0], quest.singleItemSmeltingCost);
+                        List<ItemStack> smeltingResult = ItemStackUtils.smeltItems(player, oresInCauldron[0], quest.singleItemSmeltingCost);
                         BlockPos spawnPos = pos.offset(Direction.UP);
 
                         smeltingResult.forEach(stack -> {

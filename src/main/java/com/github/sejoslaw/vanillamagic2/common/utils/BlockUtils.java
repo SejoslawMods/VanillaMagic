@@ -7,12 +7,8 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.play.client.CPlayerDiggingPacket;
 import net.minecraft.network.play.server.SChangeBlockPacket;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -112,72 +108,5 @@ public final class BlockUtils {
                 .stream()
                 .filter(entity -> entity.getItem().getItem().getRegistryName().toString().toLowerCase().contains("ore"))
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * @return ItemStacks with smelting result based on given input.
-     */
-    public static List<ItemStack> smeltItems(PlayerEntity player, List<ItemEntity> stacksToSmelt, int smeltingCost) {
-        ItemStack leftHandStack = player.getHeldItemOffhand();
-        World world = player.world;
-        final int[] ticks = {0};
-
-        return stacksToSmelt
-                .stream()
-                .map(entity -> {
-                    ItemStack stack = entity.getItem();
-                    int stackSize = stack.getCount();
-                    int ticksToSmeltStack = stackSize * smeltingCost;
-
-                    while (leftHandStack.getCount() > 0 && ticks[0] < ticksToSmeltStack) {
-                        ticks[0] += AbstractFurnaceTileEntity.getBurnTimes().getOrDefault(stack.getItem(), 0);
-                        stack.grow(-1);
-                    }
-
-                    ItemStack smeltingResult = getSmeltingResultAsNewStack(stack, world);
-
-                    if (ticks[0] >= ticksToSmeltStack) {
-                        smeltingResult.setCount(stack.getCount());
-                        entity.remove();
-                    } else if (ticks[0] >= smeltingCost) {
-                        int howManyCanSmelt = ticks[0] / smeltingCost;
-                        stack.grow(-howManyCanSmelt);
-                        smeltingResult.setCount(howManyCanSmelt);
-                    } else {
-                        return ItemStack.EMPTY;
-                    }
-
-                    ticks[0] -= ticksToSmeltStack;
-                    player.experience += getExperienceFromStack(stack, world);
-
-                    return smeltingResult;
-                })
-                .filter(stack -> stack != ItemStack.EMPTY)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * @return Experience value from the given ItemStack.
-     */
-    public static float getExperienceFromStack(ItemStack stack, World world) {
-        AbstractCookingRecipe cookingRecipe = (AbstractCookingRecipe) world.getRecipeManager().getRecipes()
-                .stream()
-                .filter(recipe -> (recipe.getType() == IRecipeType.SMELTING) && (recipe instanceof AbstractCookingRecipe) && ItemStack.areItemStacksEqual(recipe.getRecipeOutput(), stack))
-                .findFirst()
-                .orElse(null);
-        return cookingRecipe == null ? 0 : cookingRecipe.getExperience();
-    }
-
-    /**
-     * @return Smelting result based on given ItemStack.
-     */
-    public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt, World world) {
-        IRecipe<?> recipe = world.getRecipeManager().getRecipes()
-                .stream()
-                .filter(checkingRecipe -> (checkingRecipe.getType() == IRecipeType.SMELTING) && checkingRecipe.getIngredients().get(0).test(stackToSmelt))
-                .findFirst()
-                .orElse(null);
-
-        return recipe == null ? ItemStack.EMPTY : recipe.getRecipeOutput();
     }
 }

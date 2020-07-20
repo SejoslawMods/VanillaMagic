@@ -23,6 +23,7 @@ public class Quest {
     public int wandTier; // TODO: Can delete ???
     public int multiplier;
     public int level;
+    public int singleItemSmeltingCost;
 
     public void readData(IJsonService jsonService) {
         this.parent = QuestRegistry.getQuest(jsonService.getString("parent"));
@@ -65,5 +66,6 @@ public class Quest {
         this.wandTier = jsonService.getInt("wandTier");
         this.multiplier = jsonService.getInt("multiplier");
         this.level = jsonService.getInt("level");
+        this.singleItemSmeltingCost = jsonService.getInt("singleItemSmeltingCost");
     }
 }
