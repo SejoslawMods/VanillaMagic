@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCraftOnAltar;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.Entity;
@@ -40,7 +41,7 @@ public class EventCallerCraftOnAltar extends EventCaller<QuestCraftOnAltar> {
                         return null;
                     }
 
-                    ingredientsInCauldron[0] = BlockUtils.getItems(world, pos);
+                    ingredientsInCauldron[0] = WorldUtils.getItems(world, pos);
 
                     for (QuestCraftOnAltar quest : questsWithValidAltar) {
                         List<ItemEntity> validItemEntities = new ArrayList<>();

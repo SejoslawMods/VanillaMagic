@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestOreMultiplier;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -31,7 +32,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
                         return null;
                     }
 
-                    oresInCauldron[0] = BlockUtils.getOres(world, pos);
+                    oresInCauldron[0] = WorldUtils.getOres(world, pos);
 
                     if (oresInCauldron[0].size() <= 0) {
                         return null;
