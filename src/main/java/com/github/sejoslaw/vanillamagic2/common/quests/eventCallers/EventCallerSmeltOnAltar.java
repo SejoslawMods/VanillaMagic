@@ -5,7 +5,6 @@ import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestSmeltOnAltar;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
-import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
@@ -23,24 +22,23 @@ public class EventCallerSmeltOnAltar extends EventCaller<QuestSmeltOnAltar> {
         final List<ItemEntity>[] smeltables = new List[1];
 
         this.executor.onPlayerInteract(event,
-                (player, world, pos, direction) -> {
-                    ItemStack leftHandStack = player.getHeldItemOffhand();
-                    QuestSmeltOnAltar quest = this.quests.get(0);
+                (player, world, pos, direction) ->
+                        this.executor.clickCauldron(world, pos, () -> {
+                            ItemStack leftHandStack = player.getHeldItemOffhand();
+                            QuestSmeltOnAltar quest = this.quests.get(0);
 
-                    if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) ||
-                        !(world.getBlockState(pos).getBlock() instanceof CauldronBlock) ||
-                        !AltarUtils.checkAltarTier(world, pos, quest.altarTier)) {
-                        return null;
-                    }
+                            if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier)) {
+                                return null;
+                            }
 
-                    smeltables[0] = ItemStackUtils.getSmeltables(world, pos);
+                            smeltables[0] = ItemStackUtils.getSmeltables(world, pos);
 
-                    if (smeltables[0].size() <= 0) {
-                        return null;
-                    }
+                            if (smeltables[0].size() <= 0) {
+                                return null;
+                            }
 
-                    return quest;
-                },
+                            return quest;
+                        }),
                 (player, world, pos, direction, quest) -> WorldUtils.spawnOnCauldron(
                         world,
                         pos,

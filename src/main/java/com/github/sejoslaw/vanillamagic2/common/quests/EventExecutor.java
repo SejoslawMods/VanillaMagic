@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests;
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -33,6 +34,14 @@ public final class EventExecutor<TQuest extends Quest> {
 
     public EventExecutor(EventCaller<TQuest> caller) {
         this.caller = caller;
+    }
+
+    public TQuest clickCauldron(World world, BlockPos pos, Supplier<TQuest> action) {
+        if (!(world.getBlockState(pos).getBlock() instanceof CauldronBlock)) {
+            return null;
+        }
+
+        return action.get();
     }
 
     public void withHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {
