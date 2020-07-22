@@ -3,7 +3,6 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers;
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCraftOnAltar;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.CauldronBlock;

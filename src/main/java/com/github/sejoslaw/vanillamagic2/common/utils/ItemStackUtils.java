@@ -141,7 +141,7 @@ public final class ItemStackUtils {
      * @return Smeltable ItemStacks available on specified position.
      */
     public static List<ItemEntity> getSmeltables(World world, BlockPos pos) {
-        return BlockUtils.getItems(world, pos)
+        return WorldUtils.getItems(world, pos)
                 .stream()
                 .map(itemEntity -> getSmeltingResultAsNewStack(itemEntity.getItem(), world))
                 .filter(stack -> stack != ItemStack.EMPTY)

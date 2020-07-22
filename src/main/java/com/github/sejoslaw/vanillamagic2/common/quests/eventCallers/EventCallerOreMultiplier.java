@@ -2,7 +2,6 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestOreMultiplier;
-import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.CauldronBlock;
