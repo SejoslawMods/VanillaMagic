@@ -45,6 +45,6 @@ public class EventCallerSmeltOnAltar extends EventCaller<QuestSmeltOnAltar> {
                         world,
                         pos,
                         ItemStackUtils.smeltItems(player, smeltables[0], quest.singleItemSmeltingCost),
-                        stack -> stack.getCount()));
+                        ItemStack::getCount));
     }
 }
