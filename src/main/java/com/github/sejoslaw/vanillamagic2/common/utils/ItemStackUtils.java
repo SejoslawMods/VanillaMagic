@@ -105,6 +105,7 @@ public final class ItemStackUtils {
 
                     ticks[0] -= ticksToSmeltStack;
                     player.experience += getExperienceFromStack(stack, world);
+                    entity.remove();
 
                     return smeltingResult;
                 })

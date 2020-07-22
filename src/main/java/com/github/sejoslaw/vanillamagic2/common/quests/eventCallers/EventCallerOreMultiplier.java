@@ -39,16 +39,11 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
 
                     return this.quests.get(0);
                 },
-                (player, world, pos, direction, quest) ->
-                    this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                        List<ItemStack> smeltingResult = ItemStackUtils.smeltItems(player, oresInCauldron[0], quest.singleItemSmeltingCost);
-                        BlockPos spawnPos = pos.offset(Direction.UP);
-
-                        smeltingResult.forEach(stack -> {
-                            stack.setCount(stack.getCount() * quest.multiplier);
-                            world.addEntity(new ItemEntity(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), stack));
-                        });
-                    }));
+                (player, world, pos, direction, quest) -> WorldUtils.spawnOnCauldron(
+                        world,
+                        pos,
+                        ItemStackUtils.smeltItems(player, oresInCauldron[0], quest.singleItemSmeltingCost),
+                        stack -> stack.getCount() * quest.multiplier));
     }
 
     private boolean isStructureValid(World world, BlockPos pos) {
