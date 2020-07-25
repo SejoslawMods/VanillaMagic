@@ -20,7 +20,6 @@ public class Quest {
     public int altarTier;
     public ItemStack rightHandStack;
     public ItemStack leftHandStack;
-    public int wandTier; // TODO: Can delete ???
     public int multiplier;
     public int level;
     public int singleItemSmeltingCost;
@@ -63,7 +62,6 @@ public class Quest {
         this.altarTier = jsonService.getInt("altarTier");
         this.rightHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("rightHandStack"));
         this.leftHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("leftHandStack"));
-        this.wandTier = jsonService.getInt("wandTier");
         this.multiplier = jsonService.getInt("multiplier");
         this.level = jsonService.getInt("level");
         this.singleItemSmeltingCost = jsonService.getInt("singleItemSmeltingCost");
