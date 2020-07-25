@@ -16,12 +16,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -55,58 +53,105 @@ public final class EventExecutor<TQuest extends Quest> {
                 .forEach(action);
     }
 
-    public void onBlockBreak(BlockEvent.BreakEvent event, Function4<PlayerEntity, World, BlockPos, BlockState, TQuest> check, Consumer4<PlayerEntity, World, BlockPos, BlockState> consumer) {
+    public void onAttackEntity(AttackEntityEvent event,
+                               Function3<PlayerEntity, World, Entity, TQuest> check,
+                               Consumer4<PlayerEntity, World, Entity, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
+        World world = player.getEntityWorld();
+        Entity target = event.getTarget();
+
+        performCheck(player,
+                () -> check.apply(player, world, target),
+                (quest) -> consumer.accept(player, world, target, quest));
+    }
+
+    public void onBlockEvent(BlockEvent event, PlayerEntity player,
+                             Function3<World, BlockPos, BlockState, TQuest> check,
+                             Consumer4<World, BlockPos, BlockState, TQuest> consumer) {
         World world = event.getWorld().getWorld();
         BlockPos pos = event.getPos();
         BlockState state = event.getState();
 
-        performCheck(player, () -> check.apply(player, world, pos, state), (quest) -> consumer.accept(player, world, pos, state));
+        performCheck(player,
+                () -> check.apply(world, pos, state),
+                (quest) -> consumer.accept(world, pos, state, quest));
     }
 
-    public void onPlayerInteract(PlayerInteractEvent event, Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
+    public void onHarvestDrops(BlockEvent.HarvestDropsEvent event,
+                               Function5<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> check,
+                               Consumer6<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> consumer) {
+        PlayerEntity player = event.getHarvester();
+        List<ItemStack> drops = event.getDrops();
+
+        onBlockEvent(event, player,
+                (world, pos, state) -> check.apply(player, world, pos, state, drops),
+                (world, pos, state, quest) -> consumer.accept(player, world, pos, state, drops, quest));
+    }
+
+    public void onBlockBreak(BlockEvent.BreakEvent event,
+                             Function4<PlayerEntity, World, BlockPos, BlockState, TQuest> check,
+                             Consumer4<PlayerEntity, World, BlockPos, BlockState> consumer) {
+        PlayerEntity player = event.getPlayer();
+
+        onBlockEvent(event, player,
+                (world, pos, state) -> check.apply(player, world, pos, state),
+                (world, pos, state, quest) -> consumer.accept(player, world, pos, state));
+    }
+
+    public void onPlayerInteract(PlayerInteractEvent event,
+                                 Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
         PlayerEntity player = event.getPlayer();
 
         performCheck(player, (quest) -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
     }
 
-    public void onPlayerInteract(PlayerInteractEvent event, Function4<PlayerEntity, World, BlockPos, Direction, TQuest> check, Consumer5<PlayerEntity, World, BlockPos, Direction, TQuest> consumer) {
+    public void onPlayerInteract(PlayerInteractEvent event,
+                                 Function4<PlayerEntity, World, BlockPos, Direction, TQuest> check,
+                                 Consumer5<PlayerEntity, World, BlockPos, Direction, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         Direction dir = event.getFace();
 
-        performCheck(player, () -> check.apply(player, world, pos, dir), (quest) -> consumer.accept(player, world, pos, dir, quest));
+        performCheck(player,
+                () -> check.apply(player, world, pos, dir),
+                (quest) -> consumer.accept(player, world, pos, dir, quest));
     }
 
     public void onItemTooltip(ItemTooltipEvent event) {
     }
 
-    public void onEntityPlace(BlockEvent.EntityPlaceEvent event, Function4<PlayerEntity, World, BlockState, BlockPos, TQuest> check, Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
+    public void onEntityPlace(BlockEvent.EntityPlaceEvent event,
+                              Function4<PlayerEntity, World, BlockState, BlockPos, TQuest> check,
+                              Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
         Entity entity = event.getEntity();
         PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
-        World world = event.getWorld().getWorld();
-        BlockState state = event.getPlacedBlock();
-        BlockPos pos = event.getPos();
 
-        performCheck(player, () -> check.apply(player, world, state, pos), (quest) -> consumer.accept(player, world, state, pos));
+        onBlockEvent(event, player,
+                (world, pos, state) -> check.apply(player, world, state, pos),
+                (world, pos, state, quest) -> consumer.accept(player, world, state, pos));
     }
 
-    public void onEntityInteract(PlayerInteractEvent.EntityInteract event, Function4<PlayerEntity, Entity, World, BlockPos, TQuest> check, Consumer4<PlayerEntity, Entity, World, BlockPos> consumer) {
-        PlayerEntity player = event.getPlayer();
+    public void onEntityInteract(PlayerInteractEvent.EntityInteract event,
+                                 Function4<PlayerEntity, Entity, World, BlockPos, TQuest> check,
+                                 Consumer4<PlayerEntity, Entity, World, BlockPos> consumer) {
         Entity target = event.getTarget();
-        World world = event.getWorld();
-        BlockPos pos = event.getPos();
 
-        performCheck(player, () -> check.apply(player, target, world, pos), (quest) -> consumer.accept(player, target, world, pos));
+        onPlayerInteract(event,
+                (player, world, pos, direction) -> check.apply(player, target, world, pos),
+                (player, world, pos, direction, quest) -> consumer.accept(player, target, world, pos));
     }
 
-    public void onItemCrafted(PlayerEvent.ItemCraftedEvent event, Function3<PlayerEntity, ItemStack, IInventory, TQuest> check, Consumer3<PlayerEntity, ItemStack, IInventory> consumer) {
+    public void onItemCrafted(PlayerEvent.ItemCraftedEvent event,
+                              Function3<PlayerEntity, ItemStack, IInventory, TQuest> check,
+                              Consumer3<PlayerEntity, ItemStack, IInventory> consumer) {
         PlayerEntity player = event.getPlayer();
         ItemStack result = event.getCrafting();
         IInventory inv = event.getInventory();
 
-        performCheck(player, () -> check.apply(player, result, inv), (quest) -> consumer.accept(player, result, inv));
+        performCheck(player,
+                () -> check.apply(player, result, inv),
+                (quest) -> consumer.accept(player, result, inv));
     }
 
     public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event, Consumer<PlayerEntity> consumer) {
@@ -121,13 +166,17 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheck(player, (quest) -> consumer.accept(player));
     }
 
-    public void onItemPickup(PlayerEvent.ItemPickupEvent event, Function4<PlayerEntity, World, ItemEntity, ItemStack, TQuest> check, Consumer5<PlayerEntity, World, ItemEntity, ItemStack, TQuest> consumer) {
+    public void onItemPickup(PlayerEvent.ItemPickupEvent event,
+                             Function4<PlayerEntity, World, ItemEntity, ItemStack, TQuest> check,
+                             Consumer5<PlayerEntity, World, ItemEntity, ItemStack, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
         ItemEntity originalEntity = event.getOriginalEntity();
         ItemStack pickedStack = event.getStack();
         World world = player.world;
 
-        performCheck(player, () -> check.apply(player, world, originalEntity, pickedStack), (quest) -> consumer.accept(player, world, originalEntity, pickedStack, quest));
+        performCheck(player,
+                () -> check.apply(player, world, originalEntity, pickedStack),
+                (quest) -> consumer.accept(player, world, originalEntity, pickedStack, quest));
     }
 
     public void onLivingDrops(LivingDropsEvent event) {
