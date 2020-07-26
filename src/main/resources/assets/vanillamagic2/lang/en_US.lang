@@ -73,6 +73,7 @@ quest.capturedEntity.bookTitlePrefix=Captured Entity:
 quest.jumper.bookTitle=Jumper's Book:
 quest.moveBlock.tileEntity=[TileEntity]
 quest.moveBlock.block=[BLOCK]
+quest.spell.killDragonMessage=You need to kill Dragon !!!
 
 
 
