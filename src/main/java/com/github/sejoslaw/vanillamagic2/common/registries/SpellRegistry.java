@@ -2,9 +2,13 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
 import com.github.sejoslaw.vanillamagic2.common.spells.normal.*;
+import com.github.sejoslaw.vanillamagic2.common.spells.summon.SpellSummonEntity;
 import com.github.sejoslaw.vanillamagic2.common.spells.weather.SpellWeatherClear;
 import com.github.sejoslaw.vanillamagic2.common.spells.weather.SpellWeatherRain;
 import com.github.sejoslaw.vanillamagic2.common.spells.weather.SpellWeatherThunderstorm;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +20,6 @@ public final class SpellRegistry {
     public static final Map<String, Spell> SPELLS = new HashMap<>();
 
     public static void initialize() {
-        // Normal Spells
         SPELLS.put("spellFlintAndSteel", new SpellLighter());
         SPELLS.put("spellSmallFireball", new SpellSmallFireball());
         SPELLS.put("spellLargeFireball", new SpellLargeFireball());
@@ -30,83 +33,13 @@ public final class SpellRegistry {
         SPELLS.put("spellPullEntityToPlayer", new SpellPullEntityToPlayer());
         SPELLS.put("spellFreezeWater3x3", new SpellFreezeWater());
 
-        // Weather Spells
         SPELLS.put("spellWeatherRain", new SpellWeatherRain());
         SPELLS.put("spellWeatherClear", new SpellWeatherClear());
         SPELLS.put("spellWeatherThunderstorm", new SpellWeatherThunderstorm());
 
-        // Summon Spells
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
-        SPELLS.put();
+        for (Map.Entry<ResourceLocation, EntityType<?>> entry : ForgeRegistries.ENTITIES.getEntries()) {
+            String spellUniqueName = "spellSummon_" + entry.getKey().getPath();
+            SPELLS.put(spellUniqueName, new SpellSummonEntity(entry.getValue()));
+        }
     }
 }
