@@ -2,6 +2,9 @@ package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.entity.Entity;
@@ -19,7 +22,9 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -189,6 +194,37 @@ public final class EventExecutor<TQuest extends Quest> {
     }
 
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+    }
+
+    public void craftOnAltar(PlayerInteractEvent event, Map<List<ItemStack>, List<ItemStack>> recipes) {
+        final List<ItemEntity>[] ingredientsInCauldron = new List[1];
+        final int[] index = {0};
+        final List<Map.Entry<List<ItemStack>, List<ItemStack>>>[] entries = new List[1];
+
+        this.onPlayerInteract(event,
+                (player, world, pos, direction) ->
+                        this.clickCauldron(world, pos, () -> {
+                            ingredientsInCauldron[0] = WorldUtils.getItems(world, pos);
+                            entries[0] = new ArrayList<>(recipes.entrySet());
+
+                            for (int i = 0; i < entries[0].size(); ++i) {
+                                Map.Entry<List<ItemStack>, List<ItemStack>> entry = entries[0].get(i);
+
+                                if (!AltarUtils.canCraftOnAltar(entry.getKey(), ingredientsInCauldron[0])) {
+                                    continue;
+                                }
+
+                                index[0] = i;
+                                return this.caller.quests.get(i);
+                            }
+
+                            return null;
+                        }),
+                (player, world, pos, direction, quest) -> {
+                    ingredientsInCauldron[0].forEach(Entity::remove);
+                    BlockPos newItemPos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+                    entries[0].get(index[0]).getValue().forEach(stack -> Block.spawnAsEntity(world, newItemPos, stack.copy()));
+                });
     }
 
     /*

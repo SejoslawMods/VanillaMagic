@@ -2,10 +2,14 @@ package com.github.sejoslaw.vanillamagic2.common.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,6 +46,24 @@ public final class AltarUtils {
         }
 
         return false;
+    }
+
+    /**
+     * @return True if the Altar contains the required ingredients. otherwise false.
+     */
+    public static boolean canCraftOnAltar(List<ItemStack> ingredients, List<ItemEntity> ingredientsInCauldron) {
+        List<ItemEntity> validItemEntities = new ArrayList<>();
+
+        for (ItemStack currentlyCheckedIngredient : ingredients) {
+            for (ItemEntity currentlyCheckedItemEntity : ingredientsInCauldron) {
+                if (ItemStack.areItemStacksEqual(currentlyCheckedIngredient, currentlyCheckedItemEntity.getItem())) {
+                    validItemEntities.add(currentlyCheckedItemEntity);
+                    break;
+                }
+            }
+        }
+
+        return ingredients.size() == validItemEntities.size();
     }
 
     private static boolean checkTierNCornersOnly(World world, BlockPos pos, int distance, Block block) {
