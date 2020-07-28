@@ -60,7 +60,6 @@ public final class VMFiles {
     }
 
     /**
-     * @param worldName
      * @return Path to VanillaMagic directory in World directory.
      */
     public static Path getVMWorldDir(String worldName) {
@@ -68,7 +67,6 @@ public final class VMFiles {
     }
 
     /**
-     * @param worldName
      * @return Path to file with Custom Tile Entities in specified World directory.
      */
     public static Path getCustomTileEntitiesFilePath(String worldName) {
@@ -77,8 +75,6 @@ public final class VMFiles {
 
     /**
      * Parses Player data for Quests manipulation.
-     *
-     * @param player
      */
     public static void parsePlayerQuests(PlayerEntity player, Consumer3<String, String, File> consumer) {
         String playerName = EntityUtils.getPlayerName(player);
@@ -91,8 +87,6 @@ public final class VMFiles {
     }
 
     /**
-     * @param worldName
-     * @param playerName
      * @return Path to JSON file with Player's quests in specified World.
      */
     public static Path getPlayerQuestsFilePath(String worldName, String playerName) {
@@ -119,9 +113,6 @@ public final class VMFiles {
 
     /**
      * Unzips the source file into the destination file.
-     *
-     * @param destinationFile
-     * @param sourceFile
      */
     public static void unzip(File destinationFile, File sourceFile) {
         if (destinationFile.exists()) {
