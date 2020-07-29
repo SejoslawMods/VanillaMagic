@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
-import com.github.sejoslaw.vanillamagic2.common.items.ICustomItem;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestAccelerationCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -20,9 +19,7 @@ public class EventCallerAccelerationCrystal extends EventCallerCustomItem<QuestA
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) -> {
-            ICustomItem customItem = this.getCustomItem();
-
-            this.executor.useCustomItem(player, customItem, (handStack) -> {
+            this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
                 TileEntity tile = world.getTileEntity(pos);
                 boolean isTickable = tile instanceof ITickable;
 

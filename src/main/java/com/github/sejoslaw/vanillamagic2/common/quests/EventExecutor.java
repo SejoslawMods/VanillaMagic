@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
-import com.github.sejoslaw.vanillamagic2.common.items.ICustomItem;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
@@ -234,19 +233,19 @@ public final class EventExecutor<TQuest extends Quest> {
                 });
     }
 
-    public void useCustomItem(PlayerEntity player, ICustomItem customItem, Consumer<ItemStack> consumer) {
+    public void useCustomItem(PlayerEntity player, String customItemUniqueKey, Consumer<ItemStack> consumer) {
         this.withHands(player, (leftHandStack, rightHandStack) -> {
             CompoundNBT nbt = rightHandStack.getOrCreateTag();
             String key = NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME;
 
-            if (nbt.contains(key) && nbt.getString(key).equals(customItem.getUniqueKey())) {
+            if (nbt.contains(key) && nbt.getString(key).equals(customItemUniqueKey)) {
                 consumer.accept(rightHandStack);
                 return;
             }
 
             nbt = leftHandStack.getOrCreateTag();
 
-            if (nbt.contains(key) && nbt.getString(key).equals(customItem.getUniqueKey())) {
+            if (nbt.contains(key) && nbt.getString(key).equals(customItemUniqueKey)) {
                 consumer.accept(leftHandStack);
             }
         });

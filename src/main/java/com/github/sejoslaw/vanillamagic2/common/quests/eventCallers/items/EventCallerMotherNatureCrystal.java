@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
-import com.github.sejoslaw.vanillamagic2.common.items.ICustomItem;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestMotherNatureCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,9 +21,7 @@ public class EventCallerMotherNatureCrystal extends EventCallerCustomItem<QuestM
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
         this.executor.onPlayerTick(event, (player, world, quest) -> {
-            ICustomItem customItem = this.getCustomItem();
-
-            this.executor.useCustomItem(player, customItem, (handStack) -> {
+            this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
                 int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
                 int verticalRange = 3;
 
