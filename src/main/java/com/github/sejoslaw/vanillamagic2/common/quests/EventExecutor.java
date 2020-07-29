@@ -193,7 +193,11 @@ public final class EventExecutor<TQuest extends Quest> {
     public void onEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
     }
 
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+    public void onPlayerTick(TickEvent.PlayerTickEvent event, Consumer3<PlayerEntity, World, TQuest> consumer) {
+        PlayerEntity player = event.player;
+        World world = player.world;
+
+        performCheck(player, quest -> consumer.accept(player, world, quest));
     }
 
     public void craftOnAltar(PlayerInteractEvent event, Map<List<ItemStack>, List<ItemStack>> recipes) {

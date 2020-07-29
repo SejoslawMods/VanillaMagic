@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.items;
 
+import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
 import com.github.sejoslaw.vanillamagic2.common.items.ICustomItem;
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestCustomItem;
@@ -14,7 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -32,21 +32,21 @@ public abstract class EventCallerCustomItem<TQuest extends QuestCustomItem<? ext
         this.executor.craftOnAltar(event, this.recipes);
     }
 
-    protected void useCustomItem(PlayerEntity player, Consumer<ICustomItem> consumer) {
+    protected void useCustomItem(PlayerEntity player, Consumer2<ItemStack, ICustomItem> consumer) {
         this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
             ICustomItem customItem = this.getCustomItem();
             CompoundNBT nbt = rightHandStack.getOrCreateTag();
             String key = NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME;
 
             if (nbt.contains(key) && nbt.getString(key).equals(customItem.getUniqueKey())) {
-                consumer.accept(customItem);
+                consumer.accept(rightHandStack, customItem);
                 return;
             }
 
             nbt = leftHandStack.getOrCreateTag();
 
             if (nbt.contains(key) && nbt.getString(key).equals(customItem.getUniqueKey())) {
-                consumer.accept(customItem);
+                consumer.accept(leftHandStack, customItem);
             }
         });
     }
