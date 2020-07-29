@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
+import com.github.sejoslaw.vanillamagic2.common.items.ICustomItem;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestAccelerationCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,22 +19,25 @@ import java.util.Random;
 public class EventCallerAccelerationCrystal extends EventCallerCustomItem<QuestAccelerationCrystal> {
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
-        this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
-                this.useCustomItem(player, (handStack, customItem) -> {
-                    TileEntity tile = world.getTileEntity(pos);
-                    boolean isTickable = tile instanceof ITickable;
+        this.executor.onPlayerInteract(event, (player, world, pos, direction) -> {
+            ICustomItem customItem = this.getCustomItem();
 
-                    Random rand = new Random();
-                    BlockState state = world.getBlockState(pos);
-                    Block block = state.getBlock();
+            this.executor.useCustomItem(player, customItem, (handStack) -> {
+                TileEntity tile = world.getTileEntity(pos);
+                boolean isTickable = tile instanceof ITickable;
 
-                    for (int i = 0; i < VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(); i++) {
-                        if (isTickable) {
-                            ((ITickable) tile).tick();
-                        } else {
-                            block.tick(state, (ServerWorld) world, pos, rand);
-                        }
+                Random rand = new Random();
+                BlockState state = world.getBlockState(pos);
+                Block block = state.getBlock();
+
+                for (int i = 0; i < VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(); i++) {
+                    if (isTickable) {
+                        ((ITickable) tile).tick();
+                    } else {
+                        block.tick(state, (ServerWorld) world, pos, rand);
                     }
-                }));
+                }
+            });
+        });
     }
 }

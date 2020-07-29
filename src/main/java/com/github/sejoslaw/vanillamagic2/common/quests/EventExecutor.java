@@ -1,8 +1,10 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
+import com.github.sejoslaw.vanillamagic2.common.items.ICustomItem;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,6 +15,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -229,6 +232,24 @@ public final class EventExecutor<TQuest extends Quest> {
                     BlockPos newItemPos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
                     entries[0].get(index[0]).getValue().forEach(stack -> Block.spawnAsEntity(world, newItemPos, stack.copy()));
                 });
+    }
+
+    public void useCustomItem(PlayerEntity player, ICustomItem customItem, Consumer<ItemStack> consumer) {
+        this.withHands(player, (leftHandStack, rightHandStack) -> {
+            CompoundNBT nbt = rightHandStack.getOrCreateTag();
+            String key = NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME;
+
+            if (nbt.contains(key) && nbt.getString(key).equals(customItem.getUniqueKey())) {
+                consumer.accept(rightHandStack);
+                return;
+            }
+
+            nbt = leftHandStack.getOrCreateTag();
+
+            if (nbt.contains(key) && nbt.getString(key).equals(customItem.getUniqueKey())) {
+                consumer.accept(leftHandStack);
+            }
+        });
     }
 
     /*
