@@ -36,7 +36,7 @@ public class EventCallerMotherNatureCrystal extends EventCallerCustomItem<QuestM
                                 BlockState state = world.getBlockState(pos);
                                 Block block = state.getBlock();
 
-                                if (!(block instanceof IGrowable)) {
+                                if (!(block instanceof IGrowable) && world.rand.nextInt(50) != 0) {
                                     return;
                                 }
 
