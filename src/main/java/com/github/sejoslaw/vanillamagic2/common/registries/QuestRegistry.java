@@ -46,7 +46,7 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("crystallizedLiquid", EventCallerCrystallizedLiquid.class, QuestCrystallizedLiquid.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("evokerCrystal ", EventCallerEvokerCrystal.class, QuestEvokerCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("liquidSuppressionCrystal", EventCallerLiquidSuppressionCrystal.class, QuestLiquidSuppressionCrystal.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("potionCrystal", EventCallerPotionCrystal.class, QuestPotionCrystal.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("crystallizedPotion", EventCallerCrystallizedPotion.class, QuestCrystallizedPotion.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("motherNatureCrystal", EventCallerMotherNatureCrystal.class, QuestMotherNatureCrystal.class).register());
 
         // Connected with Custom Tile Entities
