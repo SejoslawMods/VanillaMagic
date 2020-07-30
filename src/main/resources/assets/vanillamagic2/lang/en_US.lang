@@ -81,7 +81,8 @@ quest.spell.killDragonMessage=You need to kill Dragon !!!
 #Quests Texts
 ############################
 
-item.crystallizedLiquid.bucketNamePrefix=Crystalized Liquid:
+item.crystallizedLiquid.namePrefix=Crystallized Liquid:
+item.crystallizedPotion.namePrefix=Crystallized Potion:
 
 
 
