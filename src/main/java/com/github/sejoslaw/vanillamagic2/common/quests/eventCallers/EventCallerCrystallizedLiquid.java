@@ -1,6 +1,5 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventCallers;
 
-import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCrystallizedLiquid;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
@@ -21,36 +20,28 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class EventCallerCrystallizedLiquid extends EventCaller<QuestCrystallizedLiquid> {
-    private final Map<List<ItemStack>, List<ItemStack>> recipes = new HashMap<>();
+public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCrystallizedLiquid> {
+    public void fillRecipes() {
+        for (Map.Entry<ResourceLocation, Fluid> entry : ForgeRegistries.FLUIDS.getEntries()) {
+            List<ItemStack> ingredients = new ArrayList<>();
+            ingredients.add(new ItemStack(Items.NETHER_STAR));
+            ingredients.add(new ItemStack(entry.getValue().getFilledBucket()));
 
-    @SubscribeEvent
-    public void craft(PlayerInteractEvent.RightClickBlock event) {
-        if (this.recipes.isEmpty()) {
-            for (Map.Entry<ResourceLocation, Fluid> entry : ForgeRegistries.FLUIDS.getEntries()) {
-                List<ItemStack> ingredients = new ArrayList<>();
-                ingredients.add(new ItemStack(Items.NETHER_STAR));
-                ingredients.add(new ItemStack(entry.getValue().getFilledBucket()));
+            ItemStack stack = new ItemStack(Items.NETHER_STAR);
+            stack.getOrCreateTag().putString(NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME, entry.getKey().toString());
+            stack.setDisplayName(TextUtils.combine(TextUtils.translate("item.crystallizedLiquid.bucketNamePrefix"), entry.getKey().getPath()));
 
-                ItemStack stack = new ItemStack(Items.NETHER_STAR);
-                stack.getOrCreateTag().putString(NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME, entry.getKey().toString());
-                stack.setDisplayName(TextUtils.combine(TextUtils.translate("item.crystallizedLiquid.bucketNamePrefix"), entry.getKey().getPath()));
+            List<ItemStack> results = new ArrayList<>();
+            results.add(stack);
 
-                List<ItemStack> results = new ArrayList<>();
-                results.add(stack);
-
-                this.recipes.put(ingredients, results);
-            }
+            this.recipes.put(ingredients, results);
         }
-
-        this.executor.craftOnAltar(event, this.recipes);
     }
 
     @SubscribeEvent
