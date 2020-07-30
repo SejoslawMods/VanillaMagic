@@ -20,32 +20,31 @@ public class EventCallerMotherNatureCrystal extends EventCallerCustomItem<QuestM
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
-        this.executor.onPlayerTick(event, (player, world, quest) -> {
-            this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
-                int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
-                int verticalRange = 3;
+        this.executor.onPlayerTick(event, (player, world, quest) ->
+                this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
+                    int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
+                    int verticalRange = 3;
 
-                int posX = (int) Math.round(player.getPosX() - 0.5f);
-                int posY = (int) player.getPosY();
-                int posZ = (int) Math.round(player.getPosZ() - 0.5f);
+                    int posX = (int) Math.round(player.getPosX() - 0.5f);
+                    int posY = (int) player.getPosY();
+                    int posZ = (int) Math.round(player.getPosZ() - 0.5f);
 
-                for (int ix = posX - range; ix <= posX + range; ++ix) {
-                    for (int iz = posZ - range; iz <= posZ + range; ++iz) {
-                        for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy) {
-                            BlockPos pos = new BlockPos(ix, iy, iz);
-                            BlockState state = world.getBlockState(pos);
-                            Block block = state.getBlock();
+                    for (int ix = posX - range; ix <= posX + range; ++ix) {
+                        for (int iz = posZ - range; iz <= posZ + range; ++iz) {
+                            for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy) {
+                                BlockPos pos = new BlockPos(ix, iy, iz);
+                                BlockState state = world.getBlockState(pos);
+                                Block block = state.getBlock();
 
-                            if (!(block instanceof IGrowable) && world.rand.nextInt(50) != 0) {
-                                return;
+                                if (!(block instanceof IGrowable) && world.rand.nextInt(50) != 0) {
+                                    return;
+                                }
+
+                                this.boneMealStack.setCount(64);
+                                BoneMealItem.applyBonemeal(this.boneMealStack, world, pos, player);
                             }
-
-                            this.boneMealStack.setCount(64);
-                            BoneMealItem.applyBonemeal(this.boneMealStack, world, pos, player);
                         }
                     }
-                }
-            });
-        });
+                }));
     }
 }
