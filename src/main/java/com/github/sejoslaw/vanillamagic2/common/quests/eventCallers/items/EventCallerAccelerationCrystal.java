@@ -18,23 +18,22 @@ import java.util.Random;
 public class EventCallerAccelerationCrystal extends EventCallerCustomItem<QuestAccelerationCrystal> {
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
-        this.executor.onPlayerInteract(event, (player, world, pos, direction) -> {
-            this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
-                TileEntity tile = world.getTileEntity(pos);
-                boolean isTickable = tile instanceof ITickable;
+        this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
+                this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
+                    TileEntity tile = world.getTileEntity(pos);
+                    boolean isTickable = tile instanceof ITickable;
 
-                Random rand = new Random();
-                BlockState state = world.getBlockState(pos);
-                Block block = state.getBlock();
+                    Random rand = new Random();
+                    BlockState state = world.getBlockState(pos);
+                    Block block = state.getBlock();
 
-                for (int i = 0; i < VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(); i++) {
-                    if (isTickable) {
-                        ((ITickable) tile).tick();
-                    } else {
-                        block.tick(state, (ServerWorld) world, pos, rand);
+                    for (int i = 0; i < VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(); i++) {
+                        if (isTickable) {
+                            ((ITickable) tile).tick();
+                        } else {
+                            block.tick(state, (ServerWorld) world, pos, rand);
+                        }
                     }
-                }
-            });
-        });
+                }));
     }
 }

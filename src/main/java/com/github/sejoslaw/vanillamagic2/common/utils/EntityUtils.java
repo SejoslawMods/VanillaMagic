@@ -6,6 +6,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -55,5 +58,26 @@ public final class EntityUtils {
 
             entity.teleportKeepLoaded(newPos.getX(), newPos.getY(), newPos.getZ());
         }
+    }
+
+    /**
+     * @return Entity at which
+     */
+    public static Entity getLookingAt(Entity entity, double distance) {
+        double checkingDistance = 0;
+
+        while (checkingDistance < distance) {
+            RayTraceResult result = entity.pick(checkingDistance, 0.1F, true);
+
+            if (result instanceof BlockRayTraceResult) {
+                return null;
+            } else if (result instanceof EntityRayTraceResult) {
+                return ((EntityRayTraceResult) result).getEntity();
+            }
+
+            checkingDistance += 1.0D;
+        }
+
+        return null;
     }
 }

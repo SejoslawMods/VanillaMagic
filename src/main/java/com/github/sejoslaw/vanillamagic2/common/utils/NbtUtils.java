@@ -25,6 +25,8 @@ public final class NbtUtils {
     public static final String NBT_POS_Z = "NBT_POS_Z";
     public static final String NBT_DIMENSION = "NBT_DIMENSION";
 
+    public static final String NBT_SPELL_ID = "NBT_SPELL_ID";
+
     /**
      * @return NBT serialized position on specified World.
      */

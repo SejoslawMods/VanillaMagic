@@ -40,21 +40,12 @@ itemGroup.vm=Vanilla Magic
 
 
 ############################
-#Commands
+#Spells
 ############################
 
-command.vm.usage=usage
-
-
-
-############################
-#Wand Names
-############################
-
-wand.stick=Stick Wand
-wand.blazeRod=Blaze Wand
-wand.netherStar=Nether Star
-wand.endRod=End Wand
+spell.evoker.wololo.name=Wololo
+spell.evoker.summonVex.name=Summon Vex
+spell.evoker.fangs.name=Fangs
 
 
 
@@ -62,11 +53,6 @@ wand.endRod=End Wand
 #Quests Texts
 ############################
 
-quest.name=Quest Name
-quest.achieved=Unlocked Quest
-quest.taken=Taken
-quest.requires=Requires
-quest.unknown=???
 quest.summonHorde.message=Summoning Horde !!!
 quest.mobSpawner.bookTitlePrefix=Mob Spawner Entity Data:
 quest.capturedEntity.bookTitlePrefix=Captured Entity:
@@ -78,7 +64,7 @@ quest.spell.killDragonMessage=You need to kill Dragon !!!
 
 
 ############################
-#Quests Texts
+#Custom Items
 ############################
 
 item.crystallizedLiquid.namePrefix=Crystallized Liquid:
