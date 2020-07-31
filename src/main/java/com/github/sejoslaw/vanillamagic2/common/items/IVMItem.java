@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public interface ICustomItem {
+public interface IVMItem {
     /**
      * @return The array of ingredients for crafting this Custom Item.
      */
@@ -35,7 +35,7 @@ public interface ICustomItem {
         stack.setDisplayName(TextUtils.translate("item." + this.getUniqueKey() + ".displayName"));
 
         CompoundNBT data = stack.getOrCreateTag();
-        data.putString(NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME, this.getUniqueKey());
+        data.putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, this.getUniqueKey());
 
         return stack;
     }

@@ -14,11 +14,11 @@ public final class VMForgeConfig {
 
     // Console
     private static final String CATEGORY_CONSOLE = "Console";
-    public static ForgeConfigSpec.BooleanValue SHOW_CUSTOM_TILE_ENTITY_SAVING;
+    public static ForgeConfigSpec.BooleanValue SHOW_VM_TILE_ENTITY_SAVING;
 
     // Player
     private static final String CATEGORY_PLAYER = "Player";
-    public static ForgeConfigSpec.BooleanValue GIVE_PLAYER_CUSTOM_BOOKS_ON_LOGIN;
+    public static ForgeConfigSpec.BooleanValue GIVE_PLAYER_VM_BOOKS_ON_LOGIN;
 
     // Machine
     private static final String CATEGORY_MACHINE = "Machine";
@@ -68,16 +68,16 @@ public final class VMForgeConfig {
     static {
         // Console
         COMMON_BUILDER.comment("Options connected with Console.").push(CATEGORY_CONSOLE);
-        SHOW_CUSTOM_TILE_ENTITY_SAVING = COMMON_BUILDER
-                .comment("Should console show when World save / load CustomTileEntity (console spam).")
-                .define("SHOW_CUSTOM_TILE_ENTITY_SAVING", true);
+        SHOW_VM_TILE_ENTITY_SAVING = COMMON_BUILDER
+                .comment("Should console show when World save / load VMTileEntity (console spam).")
+                .define("SHOW_VM_TILE_ENTITY_SAVING", true);
         COMMON_BUILDER.pop();
 
         // Player
         COMMON_BUILDER.comment("Options connected with Player").push(CATEGORY_PLAYER);
-        GIVE_PLAYER_CUSTOM_BOOKS_ON_LOGIN = COMMON_BUILDER
-                .comment("Should Player get Vanilla Magic custom books on spawn (logged in).")
-                .define("GIVE_PLAYER_CUSTOM_BOOKS_ON_LOGIN", true);
+        GIVE_PLAYER_VM_BOOKS_ON_LOGIN = COMMON_BUILDER
+                .comment("Should Player get Vanilla Magic VM books on spawn (logged in).")
+                .define("GIVE_PLAYER_VM_BOOKS_ON_LOGIN", true);
         COMMON_BUILDER.pop();
 
         // Machine

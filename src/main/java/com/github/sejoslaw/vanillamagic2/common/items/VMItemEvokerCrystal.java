@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class CustomItemEvokerCrystal extends CustomItemCrystal {
+public class VMItemEvokerCrystal extends VMItemCrystal {
     public List<ItemStack> getIngredients() {
         List<ItemStack> stacks = super.getIngredients();
         stacks.add(new ItemStack(Items.TOTEM_OF_UNDYING));

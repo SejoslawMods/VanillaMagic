@@ -15,11 +15,11 @@ import java.util.Random;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class EventCallerAccelerationCrystal extends EventCallerCustomItem<QuestAccelerationCrystal> {
+public class EventCallerAccelerationCrystal extends EventCallerVMItem<QuestAccelerationCrystal> {
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
-                this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
+                this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
                     TileEntity tile = world.getTileEntity(pos);
                     boolean isTickable = tile instanceof ITickable;
 

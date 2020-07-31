@@ -233,19 +233,19 @@ public final class EventExecutor<TQuest extends Quest> {
                 });
     }
 
-    public void useCustomItem(PlayerEntity player, String customItemUniqueKey, Consumer<ItemStack> consumer) {
+    public void useVMItem(PlayerEntity player, String vmItemUniqueKey, Consumer<ItemStack> consumer) {
         this.withHands(player, (leftHandStack, rightHandStack) -> {
             CompoundNBT nbt = rightHandStack.getOrCreateTag();
-            String key = NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME;
+            String key = NbtUtils.NBT_VM_ITEM_UNIQUE_NAME;
 
-            if (nbt.contains(key) && nbt.getString(key).equals(customItemUniqueKey)) {
+            if (nbt.contains(key) && nbt.getString(key).equals(vmItemUniqueKey)) {
                 consumer.accept(rightHandStack);
                 return;
             }
 
             nbt = leftHandStack.getOrCreateTag();
 
-            if (nbt.contains(key) && nbt.getString(key).equals(customItemUniqueKey)) {
+            if (nbt.contains(key) && nbt.getString(key).equals(vmItemUniqueKey)) {
                 consumer.accept(leftHandStack);
             }
         });

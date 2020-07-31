@@ -15,13 +15,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class EventCallerMotherNatureCrystal extends EventCallerCustomItem<QuestMotherNatureCrystal> {
+public class EventCallerMotherNatureCrystal extends EventCallerVMItem<QuestMotherNatureCrystal> {
     private final ItemStack boneMealStack = new ItemStack(Items.BONE_MEAL);
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
         this.executor.onPlayerTick(event, (player, world, quest) ->
-                this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
+                this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
                     int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
                     int verticalRange = 3;
 

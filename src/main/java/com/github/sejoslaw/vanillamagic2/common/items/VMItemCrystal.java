@@ -6,7 +6,7 @@ import net.minecraft.item.Items;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public abstract class CustomItemCrystal implements ICustomItem {
+public abstract class VMItemCrystal implements IVMItem {
     public Item getBaseItem() {
         return Items.NETHER_STAR;
     }

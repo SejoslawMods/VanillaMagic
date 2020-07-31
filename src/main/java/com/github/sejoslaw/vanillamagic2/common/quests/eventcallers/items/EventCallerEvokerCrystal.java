@@ -8,11 +8,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class EventCallerEvokerCrystal extends EventCallerCustomItem<QuestEvokerCrystal> {
+public class EventCallerEvokerCrystal extends EventCallerVMItem<QuestEvokerCrystal> {
     @SubscribeEvent
     public void useItem(PlayerInteractEvent event) {
         this.executor.onPlayerInteract(event, (player, world, blockPos, direction) ->
-                this.executor.useCustomItem(player, this.getCustomItem().getUniqueKey(), (handStack) -> {
+                this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
                     if (player.isSneaking()) {
                         EvokerSpellRegistry.changeSpell(handStack);
                     } else {

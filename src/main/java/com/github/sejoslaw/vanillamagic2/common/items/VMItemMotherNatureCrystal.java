@@ -8,10 +8,12 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class CustomItemLiquidSuppressionCrystal extends CustomItemCrystal {
+public class VMItemMotherNatureCrystal extends VMItemCrystal {
     public List<ItemStack> getIngredients() {
         List<ItemStack> stacks = super.getIngredients();
-        stacks.add(new ItemStack(Items.BUCKET, 8));
+        stacks.add(new ItemStack(Items.MELON, 2));
+        stacks.add(new ItemStack(Items.WHEAT_SEEDS, 4));
+        stacks.add(new ItemStack(Items.PUMPKIN, 2));
         return stacks;
     }
 }

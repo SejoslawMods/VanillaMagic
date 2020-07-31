@@ -67,9 +67,9 @@ public final class VMFiles {
     }
 
     /**
-     * @return Path to file with Custom Tile Entities in specified World directory.
+     * @return Path to file with VM Tile Entities in specified World directory.
      */
-    public static Path getCustomTileEntitiesFilePath(String worldName) {
+    public static Path getVMTileEntitiesFilePath(String worldName) {
         return Paths.get(getVMWorldDir(worldName).toString(), "VanillaMagicTileEntities.dat");
     }
 

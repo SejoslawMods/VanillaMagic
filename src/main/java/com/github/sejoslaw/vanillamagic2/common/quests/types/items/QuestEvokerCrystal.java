@@ -1,12 +1,12 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.types.items;
 
-import com.github.sejoslaw.vanillamagic2.common.items.CustomItemEvokerCrystal;
+import com.github.sejoslaw.vanillamagic2.common.items.VMItemEvokerCrystal;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class QuestEvokerCrystal extends QuestCustomItem<CustomItemEvokerCrystal> {
-    public CustomItemEvokerCrystal getCustomItem() {
-        return new CustomItemEvokerCrystal();
+public class QuestEvokerCrystal extends QuestVMItem<VMItemEvokerCrystal> {
+    public VMItemEvokerCrystal getVMItem() {
+        return new VMItemEvokerCrystal();
     }
 }

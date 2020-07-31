@@ -8,12 +8,10 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class CustomItemMotherNatureCrystal extends CustomItemCrystal {
+public class VMItemAccelerationCrystal extends VMItemCrystal {
     public List<ItemStack> getIngredients() {
         List<ItemStack> stacks = super.getIngredients();
-        stacks.add(new ItemStack(Items.MELON, 2));
-        stacks.add(new ItemStack(Items.WHEAT_SEEDS, 4));
-        stacks.add(new ItemStack(Items.PUMPKIN, 2));
+        stacks.add(new ItemStack(Items.FEATHER, 16));
         return stacks;
     }
 }

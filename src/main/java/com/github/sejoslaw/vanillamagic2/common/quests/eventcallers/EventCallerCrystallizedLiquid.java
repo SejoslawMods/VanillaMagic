@@ -37,9 +37,9 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
     public void spawnLiquid(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) -> {
             for (Map.Entry<List<ItemStack>, List<ItemStack>> entry : this.recipes.entrySet()) {
-                String fluidKey = entry.getValue().get(0).getOrCreateTag().getString(NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME);
+                String fluidKey = entry.getValue().get(0).getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME);
 
-                this.executor.useCustomItem(player, fluidKey, handStack -> {
+                this.executor.useVMItem(player, fluidKey, handStack -> {
                     TileEntity tile = world.getTileEntity(pos);
                     Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidKey));
 

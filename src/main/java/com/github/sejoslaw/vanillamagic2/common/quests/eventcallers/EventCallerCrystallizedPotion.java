@@ -28,7 +28,7 @@ public class EventCallerCrystallizedPotion extends EventCallerCraftable<QuestCry
     public void onTick(TickEvent.PlayerTickEvent event) {
         this.executor.onPlayerTick(event, (player, world, quest) -> {
             for (ItemStack stack : player.inventory.mainInventory) {
-                Potion potion = ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(stack.getOrCreateTag().getString(NbtUtils.NBT_CUSTOM_ITEM_UNIQUE_NAME)));
+                Potion potion = ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME)));
 
                 if (potion == null) {
                     continue;
