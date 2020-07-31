@@ -1,16 +1,16 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.BaseItemType;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.ItemUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.ItemUpgradeProcessor;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.eventCallers.ItemUpgradeEventCallerAutosmelt;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.eventCallers.ItemUpgradeEventCallerLifesteal;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.eventCallers.ItemUpgradeEventCallerThor;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.eventCallers.ItemUpgradeEventCallerWither;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.types.AutosmeltUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.types.LifestealUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.types.ThorUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemUpgrades.types.WitherUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.BaseItemType;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeProcessor;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerAutosmelt;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerLifesteal;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerThor;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerWither;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.AutosmeltUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.LifestealUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.ThorUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.WitherUpgrade;
 import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
