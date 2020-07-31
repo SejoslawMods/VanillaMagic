@@ -18,7 +18,6 @@ import java.util.List;
 public class SpellFusRoDah extends Spell {
     public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
         int distance = VMForgeConfig.SPELL_FUS_RO_DAH_DISTANCE.get();
-        double strength = VMForgeConfig.SPELL_FUS_RO_DAH_STRENGTH.get();
 
         double casterX = player.getPosX();
         double casterY = player.getPosY();
@@ -31,7 +30,7 @@ public class SpellFusRoDah extends Spell {
         List<Entity> entitiesInAABB = world.getEntitiesWithinAABBExcludingEntity(player, aabb);
 
         for (Entity entity : entitiesInAABB) {
-            this.knockBack(player, entity, strength);
+            this.knockBack(player, entity, VMForgeConfig.SPELL_FUS_RO_DAH_STRENGTH.get());
         }
     }
 

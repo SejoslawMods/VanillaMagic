@@ -41,6 +41,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_HOSTILE;// = 8;
     public static ForgeConfigSpec.IntValue SPELL_FUS_RO_DAH_DISTANCE; // = 8
     public static ForgeConfigSpec.DoubleValue SPELL_FUS_RO_DAH_STRENGTH; // 2
+    public static ForgeConfigSpec.DoubleValue SPELL_MOVE_IN_AIR_DISTANCE; // 10
 
     // Meteor
     private static final String CATEGORY_METEOR = "Meteor";
@@ -127,6 +128,9 @@ public final class VMForgeConfig {
         SPELL_FUS_RO_DAH_STRENGTH = COMMON_BUILDER
                 .comment("Strength of the Fus-Ro-Dah spell.")
                 .defineInRange("SPELL_FUS_RO_DAH_STRENGTH", 2, 1, Double.MAX_VALUE);
+        SPELL_MOVE_IN_AIR_DISTANCE = COMMON_BUILDER
+                .comment("Number of blocks by which the Player will move in air.")
+                .defineInRange("SPELL_MOVE_IN_AIR_DISTANCE", 10, 1, Double.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         // Meteor

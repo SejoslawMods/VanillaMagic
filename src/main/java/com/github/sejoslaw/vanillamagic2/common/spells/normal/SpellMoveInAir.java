@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.normal;
 
+import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
@@ -12,11 +13,9 @@ import net.minecraft.world.World;
  */
 public class SpellMoveInAir extends Spell {
     public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
-        final double DISTANCE = 10;
-
         Vec3d casterLookVec = player.getLookVec();
 
-        for (double i = DISTANCE; i > 0; i -= 1.0D) {
+        for (double i = VMForgeConfig.SPELL_MOVE_IN_AIR_DISTANCE.get(); i > 0; i -= 1.0D) {
             double newPosX = player.getPosX() + casterLookVec.getX() * i;
             double newPosY = player.getPosY() + casterLookVec.getY() * i;
             double newPosZ = player.getPosZ() + casterLookVec.getZ() * i;
