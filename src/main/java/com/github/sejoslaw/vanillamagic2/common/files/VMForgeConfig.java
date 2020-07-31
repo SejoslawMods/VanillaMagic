@@ -31,6 +31,7 @@ public final class VMForgeConfig {
     private static final String CATEGORY_ITEM = "Item";
     public static ForgeConfigSpec.IntValue ACCELERATION_CRYSTAL_UPDATE_TICKS;// = 100;
     public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_RADIUS;// = 5;
+    public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE; // = 100
     public static ForgeConfigSpec.IntValue MOTHER_NATURE_CRYSTAL_RANGE;// = 10;
     public static ForgeConfigSpec.IntValue ITEM_MAGNET_RANGE;// = 6;
     public static ForgeConfigSpec.BooleanValue ITEM_CAN_AUTOPLANT;
@@ -40,8 +41,8 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_FRIENDLY;// = 32;
     public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_HOSTILE;// = 8;
     public static ForgeConfigSpec.IntValue SPELL_FUS_RO_DAH_DISTANCE; // = 8
-    public static ForgeConfigSpec.DoubleValue SPELL_FUS_RO_DAH_STRENGTH; // 2
-    public static ForgeConfigSpec.DoubleValue SPELL_MOVE_IN_AIR_DISTANCE; // 10
+    public static ForgeConfigSpec.DoubleValue SPELL_FUS_RO_DAH_STRENGTH; // = 2
+    public static ForgeConfigSpec.DoubleValue SPELL_MOVE_IN_AIR_DISTANCE; // = 10
 
     // Meteor
     private static final String CATEGORY_METEOR = "Meteor";
@@ -103,6 +104,9 @@ public final class VMForgeConfig {
         LIQUID_SUPPRESSION_CRYSTAL_RADIUS = COMMON_BUILDER
                 .comment("Radius on which Liquid Suppression Crystal works (in blocks).")
                 .defineInRange("LIQUID_SUPPRESSION_CRYSTAL_RADIUS", 5, 1, Integer.MAX_VALUE);
+        LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE = COMMON_BUILDER
+                .comment("Defines how ofthen the suppression blocks should be refreshed.")
+                .defineInRange("LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE", 100, 1, Integer.MAX_VALUE);
         MOTHER_NATURE_CRYSTAL_RANGE = COMMON_BUILDER
                 .comment("Range on which Mother Nature Crystal will work.")
                 .defineInRange("MOTHER_NATURE_CRYSTAL_RANGE", 10, 1, Integer.MAX_VALUE);
