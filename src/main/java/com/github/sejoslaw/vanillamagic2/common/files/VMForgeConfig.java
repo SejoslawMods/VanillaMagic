@@ -39,6 +39,8 @@ public final class VMForgeConfig {
     private static final String CATEGORY_SPELL = "Spell";
     public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_FRIENDLY;// = 32;
     public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_HOSTILE;// = 8;
+    public static ForgeConfigSpec.IntValue SPELL_FUS_RO_DAH_DISTANCE; // = 8
+    public static ForgeConfigSpec.DoubleValue SPELL_FUS_RO_DAH_STRENGTH; // 2
 
     // Meteor
     private static final String CATEGORY_METEOR = "Meteor";
@@ -119,6 +121,12 @@ public final class VMForgeConfig {
         SPELL_COST_SUMMON_HOSTILE = COMMON_BUILDER
                 .comment("Cost of one hostile mob spawn (in items from hand).")
                 .defineInRange("SPELL_COST_SUMMON_HOSTILE", 8, 1, 64);
+        SPELL_FUS_RO_DAH_DISTANCE = COMMON_BUILDER
+                .comment("Area of effect of Fus-Ro-Dah spell.")
+                .defineInRange("SPELL_FUS_RO_DAH_DISTANCE", 8, 1, Integer.MAX_VALUE);
+        SPELL_FUS_RO_DAH_STRENGTH = COMMON_BUILDER
+                .comment("Strength of the Fus-Ro-Dah spell.")
+                .defineInRange("SPELL_FUS_RO_DAH_STRENGTH", 2, 1, Double.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         // Meteor

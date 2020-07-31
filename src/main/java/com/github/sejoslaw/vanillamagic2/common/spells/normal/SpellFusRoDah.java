@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.normal;
 
+import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,8 +17,8 @@ import java.util.List;
  */
 public class SpellFusRoDah extends Spell {
     public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
-        int SIZE = 8;
-        float strength = 2.0f;
+        int distance = VMForgeConfig.SPELL_FUS_RO_DAH_DISTANCE.get();
+        double strength = VMForgeConfig.SPELL_FUS_RO_DAH_STRENGTH.get();
 
         double casterX = player.getPosX();
         double casterY = player.getPosY();
@@ -25,7 +26,7 @@ public class SpellFusRoDah extends Spell {
 
         BlockPos casterPos = new BlockPos(casterX, casterY, casterZ);
         AxisAlignedBB aabb = new AxisAlignedBB(casterPos);
-        aabb = aabb.expand(SIZE, SIZE, SIZE);
+        aabb = aabb.expand(distance, distance, distance);
 
         List<Entity> entitiesInAABB = world.getEntitiesWithinAABBExcludingEntity(player, aabb);
 
@@ -34,7 +35,7 @@ public class SpellFusRoDah extends Spell {
         }
     }
 
-    private void knockBack(PlayerEntity player, Entity entity, float strength) {
+    private void knockBack(PlayerEntity player, Entity entity, double strength) {
         double xRatio = player.getPosX() - entity.getPosX();
         double zRatio = player.getPosZ() - entity.getPosZ();
 
@@ -48,8 +49,8 @@ public class SpellFusRoDah extends Spell {
         motionX /= 2.0D;
         motionZ /= 2.0D;
 
-        motionX -= xRatio / (double) f * (double) strength;
-        motionZ -= zRatio / (double) f * (double) strength;
+        motionX -= xRatio / (double) f * strength;
+        motionZ -= zRatio / (double) f * strength;
 
         if (entity.onGround) {
             motionY /= 2.0D;
