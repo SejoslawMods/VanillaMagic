@@ -27,4 +27,8 @@ public abstract class VMTileEntity extends TileEntity implements IVMTileEntity {
         super.onDataPacket(net, pkt);
         this.read(pkt.getNbtCompound());
     }
+
+    public void remove() {
+        ((IVMTileEntity) this).remove();
+    }
 }

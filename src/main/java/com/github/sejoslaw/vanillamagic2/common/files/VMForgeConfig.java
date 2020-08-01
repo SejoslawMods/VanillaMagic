@@ -22,8 +22,8 @@ public final class VMForgeConfig {
 
     // Machine
     private static final String CATEGORY_MACHINE = "Machine";
-    public static ForgeConfigSpec.IntValue TILE_SPEEDY_TICKS;// = 1000;
-    public static ForgeConfigSpec.IntValue TILE_SPEEDY_SIZE;// = 4;
+    public static ForgeConfigSpec.IntValue TILE_ACCELERANT_TICKS;// = 1000;
+    public static ForgeConfigSpec.IntValue TILE_ACCELERANT_SIZE;// = 4;
     public static ForgeConfigSpec.IntValue TILE_MACHINE_ONE_OPERATION_COST;// = 100;
     public static ForgeConfigSpec.IntValue TILE_MACHINE_MAX_TICKS;// = 4000;
 
@@ -82,12 +82,12 @@ public final class VMForgeConfig {
 
         // Machine
         COMMON_BUILDER.comment("Options connected with Vanilla Magic Machines.").push(CATEGORY_MACHINE);
-        TILE_SPEEDY_TICKS = COMMON_BUILDER
+        TILE_ACCELERANT_TICKS = COMMON_BUILDER
                 .comment("The number of ticks in 1 Minecraft tick that Speedy can do to a single block.")
-                .defineInRange("TILE_SPEEDY_TICKS", 1000, 1, Integer.MAX_VALUE);
-        TILE_SPEEDY_SIZE = COMMON_BUILDER
+                .defineInRange("TILE_ACCELERANT_TICKS", 1000, 1, Integer.MAX_VALUE);
+        TILE_ACCELERANT_SIZE = COMMON_BUILDER
                 .comment("Size of the Speedy - Area on which Speedy can operate.")
-                .defineInRange("TILE_SPEEDY_SIZE", 4, 1, Integer.MAX_VALUE);
+                .defineInRange("TILE_ACCELERANT_SIZE", 4, 1, Integer.MAX_VALUE);
         TILE_MACHINE_ONE_OPERATION_COST = COMMON_BUILDER
                 .comment("Cost of a single Machine operation.")
                 .defineInRange("TILE_MACHINE_ONE_OPERATION_COST", 100, 1, Integer.MAX_VALUE);

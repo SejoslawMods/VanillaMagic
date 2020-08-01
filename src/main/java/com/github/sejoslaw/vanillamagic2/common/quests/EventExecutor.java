@@ -42,11 +42,7 @@ public final class EventExecutor<TQuest extends Quest> {
     }
 
     public TQuest clickCauldron(World world, BlockPos pos, Supplier<TQuest> action) {
-        if (!(world.getBlockState(pos).getBlock() instanceof CauldronBlock)) {
-            return null;
-        }
-
-        return action.get();
+        return world.getBlockState(pos).getBlock() instanceof CauldronBlock ? action.get() : null;
     }
 
     public void withHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {

@@ -46,4 +46,11 @@ public interface IVMItem {
     default String getUniqueKey() {
         return this.getClass().getSimpleName().toLowerCase();
     }
+
+    /**
+     * @return True if the specified ItemStack is current VM Item.
+     */
+    default boolean isVMItem(ItemStack stack) {
+        return stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME).equals(this.getUniqueKey());
+    }
 }

@@ -32,9 +32,9 @@ public final class VMFiles {
         // Quests Config
         unzip(VMFiles.getQuestsFilePath().toFile(), VMFiles.getQuestsFileSourcePath().toFile());
 
-        // Custom Tile Entities
-//        MinecraftForge.EVENT_BUS.register(new CustomTileEntitySaveHandler());
-//        MinecraftForge.EVENT_BUS.register(new CustomTileEntityLoadHandler());
+        // VM TileEntities
+//        MinecraftForge.EVENT_BUS.register(new VMTileEntitySaveHandler());
+//        MinecraftForge.EVENT_BUS.register(new VMTileEntityLoadHandler());
 
         // Player Quest Progress
         MinecraftForge.EVENT_BUS.register(new PlayerQuestProgressSaveHandler());

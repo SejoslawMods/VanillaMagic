@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestLiquidSuppressionCrystal;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileLiquidSuppressor;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -32,12 +33,10 @@ public class EventCallerLiquidSuppressionCrystal extends EventCallerVMItem<Quest
                                 BlockState state = world.getBlockState(blockPos);
 
                                 if (state.getMaterial().isLiquid() && (world.getTileEntity(blockPos) == null)) {
-                                    VMTileLiquidSuppressor tile = new VMTileLiquidSuppressor();
-                                    tile.initialize(state, refresh);
-                                    tile.initialize(world, blockPos);
-
-                                    world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
-                                    tile.spawn();
+                                    WorldUtils.spawnVMTile(world, blockPos, new VMTileLiquidSuppressor(), (tile) -> {
+                                        tile.initialize(state, refresh);
+                                        world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+                                    });
                                 } else {
                                     TileEntity tile = world.getTileEntity(blockPos);
 

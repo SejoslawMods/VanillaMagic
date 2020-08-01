@@ -73,6 +73,14 @@ item.crystallizedPotion.namePrefix=Crystallized Potion:
 
 
 ############################
+#Custom Items
+############################
+
+tile.added=VM TileEntity added
+
+
+
+############################
 #Quests
 ############################
 

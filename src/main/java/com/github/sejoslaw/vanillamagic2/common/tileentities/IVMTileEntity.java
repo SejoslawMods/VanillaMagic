@@ -93,10 +93,11 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     }
 
     /**
-     * Removes corresponding TileEntity.
+     * Removes TileEntity and cleans up registry.
      */
     default void remove() {
         this.getTileEntity().remove();
+        TileEntityRegistry.remove(this);
     }
 
     /**
@@ -118,5 +119,6 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
      */
     default void spawn() {
         this.getWorld().setTileEntity(this.getPos(), this.getTileEntity());
+        TileEntityRegistry.spawn(this);
     }
 }
