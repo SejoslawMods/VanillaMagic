@@ -118,7 +118,7 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
      * Performs logic needed to add current VM TileEntity into the World.
      */
     default void spawn() {
-        this.getWorld().setTileEntity(this.getPos(), this.getTileEntity());
+        this.getWorld().addTileEntity(this.getTileEntity());
         TileEntityRegistry.spawn(this);
     }
 }

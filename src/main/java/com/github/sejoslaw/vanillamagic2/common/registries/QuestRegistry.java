@@ -53,7 +53,6 @@ public final class QuestRegistry {
 
         // Connected with Custom Tile Entities
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("blockAbsorber", EventCallerBlockAbsorber.class, QuestBlockAbsorber.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("inventoryBridge", EventCallerInventoryBridge.class, QuestInventoryBridge.class).register()); // ???
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerant", EventCallerAccelerant.class, QuestAccelerant.class).register()); // old Speedy
 
         // Machines
