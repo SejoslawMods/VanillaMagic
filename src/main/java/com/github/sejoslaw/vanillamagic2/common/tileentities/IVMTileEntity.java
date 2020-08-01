@@ -112,4 +112,11 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     default CompoundNBT write(CompoundNBT nbt) {
         return this.getTileEntity().write(nbt);
     }
+
+    /**
+     * Performs logic needed to add current VM TileEntity into the World.
+     */
+    default void spawn() {
+        this.getWorld().setTileEntity(this.getPos(), this.getTileEntity());
+    }
 }
