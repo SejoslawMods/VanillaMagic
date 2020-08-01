@@ -2,23 +2,40 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.extensions.IForgeTileEntity;
 
 import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public interface IVMTileEntity extends ITickableTileEntity {
+public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     /**
      * @return Current VM TileEntity in a form of a Minecraft standard TileEntity.
      */
     TileEntity getTileEntity();
+
+    /**
+     * @return Update data packet with data about the current VM TileEntity.
+     */
+    SUpdateTileEntityPacket getUpdatePacket();
+
+    /**
+     * Called when you receive a TileEntityData packet for the location this
+     * TileEntity is currently in. On the client, the NetworkManager will always
+     * be the remote server. On the server, it will be whomever is responsible for
+     * sending the packet.
+     */
+    void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt);
 
     /**
      * Adds tooltip information about the current VM TileEntity.
@@ -27,10 +44,17 @@ public interface IVMTileEntity extends ITickableTileEntity {
     }
 
     /**
+     * Ticking functionality for Vm TileEntity.
+     */
+    default void tick() {
+    }
+
+    /**
      * Initializes the current VM TileEntity.
      */
     default void initialize(World world, BlockPos pos) {
         this.getTileEntity().setWorldAndPos(world, pos);
+        this.getWorld().getChunkProvider().forceChunk(this.getChunkPos(), true);
     }
 
     /**
@@ -52,6 +76,13 @@ public interface IVMTileEntity extends ITickableTileEntity {
      */
     default Chunk getChunk() {
         return this.getWorld().getChunkAt(this.getPos());
+    }
+
+    /**
+     * @return X and Z coordinates of a Chunk in which the current VM TileEntity is.
+     */
+    default ChunkPos getChunkPos() {
+        return this.getChunk().getPos();
     }
 
     /**
