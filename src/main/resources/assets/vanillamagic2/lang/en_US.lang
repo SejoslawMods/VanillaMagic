@@ -77,6 +77,7 @@ item.crystallizedPotion.namePrefix=Crystallized Potion:
 ############################
 
 tile.added=VM TileEntity added
+tile.removed=VM TileEntity removed
 
 
 

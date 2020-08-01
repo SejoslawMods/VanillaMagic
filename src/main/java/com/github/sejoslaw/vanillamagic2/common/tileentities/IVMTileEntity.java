@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -97,6 +98,7 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
      */
     default void remove() {
         this.getWorld().removeTileEntity(this.getPos());
+        TextUtils.addChatMessage("tile.removed");
     }
 
     /**
@@ -118,5 +120,6 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
      */
     default void spawn() {
         this.getWorld().addTileEntity(this.getTileEntity());
+        TextUtils.addChatMessage("tile.added");
     }
 }

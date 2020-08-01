@@ -68,7 +68,6 @@ public final class WorldUtils {
         tile.initialize(world, pos);
         consumer.accept(tile);
         tile.spawn();
-        TextUtils.addChatMessage("tile.added");
     }
 
     /**
