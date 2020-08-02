@@ -19,7 +19,7 @@ public class VMTileBlockAbsorber extends VMTileEntity {
     }
 
     public void tick() {
-        HopperTileEntity hopperTileEntity = (HopperTileEntity) world.getTileEntity(this.getPos().offset(Direction.DOWN));
+        HopperTileEntity hopperTileEntity = (HopperTileEntity) this.getWorld().getTileEntity(this.getPos().offset(Direction.DOWN));
 
         if (hopperTileEntity == null) {
             this.remove();
