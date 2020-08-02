@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
-import com.github.sejoslaw.vanillamagic2.common.items.IVMItem;
 import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import com.github.sejoslaw.vanillamagic2.core.VMTiles;
@@ -22,7 +21,6 @@ public class VMTileAccelerant extends VMTileEntity {
     private final List<BlockPos> tickPoses = new ArrayList<>();
 
     private BlockPos invPos;
-    private IVMItem item;
 
     public VMTileAccelerant() {
         super(VMTiles.ACCELERANT);
@@ -34,7 +32,6 @@ public class VMTileAccelerant extends VMTileEntity {
         super.initialize(world, pos);
 
         this.invPos = this.getPos().offset(Direction.UP);
-        this.item = ItemRegistry.ACCELERATION_CRYSTAL;
 
         int size = VMForgeConfig.TILE_ACCELERANT_SIZE.get();
 
@@ -67,7 +64,7 @@ public class VMTileAccelerant extends VMTileEntity {
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
 
-            if (this.item.isVMItem(stack)) {
+            if (ItemRegistry.ACCELERATION_CRYSTAL.isVMItem(stack)) {
                 return true;
             }
         }
