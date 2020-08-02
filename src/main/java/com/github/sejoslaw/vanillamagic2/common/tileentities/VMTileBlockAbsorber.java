@@ -9,32 +9,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class VMTileBlockAbsorber extends VMTileEntity {
-    private HopperTileEntity hopperTileEntity;
-
     public VMTileBlockAbsorber() {
         super(VMTiles.BLOCK_ABSORBER);
     }
 
-    public void initialize(World world, BlockPos pos) {
-        super.initialize(world, pos);
+    public void tick() {
+        HopperTileEntity hopperTileEntity = (HopperTileEntity) world.getTileEntity(this.getPos().offset(Direction.DOWN));
 
-        this.hopperTileEntity = (HopperTileEntity) world.getTileEntity(this.getPos().offset(Direction.DOWN));
-
-        if (this.hopperTileEntity == null) {
+        if (hopperTileEntity == null) {
             this.remove();
         }
-    }
 
-    public void tick() {
         for (int i = 0; i < VMForgeConfig.TILE_ABSORBER_PULLING_SPEED.get(); ++i) {
-            if (!HopperTileEntity.pullItems(this.hopperTileEntity)) {
+            if (!HopperTileEntity.pullItems(hopperTileEntity)) {
                 return;
             }
         }
@@ -48,6 +40,6 @@ public class VMTileBlockAbsorber extends VMTileEntity {
         ItemEntity itemEntity = new ItemEntity(this.getWorld(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), new ItemStack(this.getBlockState().getBlock()));
         this.getWorld().setBlockState(this.getPos(), Blocks.AIR.getDefaultState());
         this.getWorld().addEntity(itemEntity);
-        HopperTileEntity.pullItems(this.hopperTileEntity);
+        HopperTileEntity.pullItems(hopperTileEntity);
     }
 }
