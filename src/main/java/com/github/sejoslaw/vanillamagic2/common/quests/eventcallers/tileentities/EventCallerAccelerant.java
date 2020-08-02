@@ -17,7 +17,6 @@ public class EventCallerAccelerant extends EventCallerVMItem<QuestAccelerant> {
                 (player, world, pos, direction) -> this.executor.clickCauldron(world, pos, () -> this.quests.get(0)),
                 (player, world, pos, direction, quest) ->
                         this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) ->
-                                WorldUtils.spawnVMTile(world, pos, new VMTileAccelerant(), (tile) ->
-                                        tile.setCrystal(this.getVMItem()))));
+                                WorldUtils.spawnVMTile(world, pos, new VMTileAccelerant(), (tile) -> { })));
     }
 }
