@@ -51,12 +51,14 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("crystallizedPotion", EventCallerCrystallizedPotion.class, QuestCrystallizedPotion.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("motherNatureCrystal", EventCallerMotherNatureCrystal.class, QuestMotherNatureCrystal.class).register());
 
-        // Connected with Custom Tile Entities
+        // Connected with VM TileEntities
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("blockAbsorber", EventCallerBlockAbsorber.class, QuestBlockAbsorber.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerant", EventCallerAccelerant.class, QuestAccelerant.class).register()); // old Speedy
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("inventoryBridge", EventCallerInventoryBridge.class, QuestInventoryBridge.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerant", EventCallerAccelerant.class, QuestAccelerant.class).register());
 
         // Machines
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("quarry", EventCallerQuarry.class, QuestQuarry.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("farm", EventCallerFarm.class, QuestFarm.class).register());
     }
 
     public static void readQuest(IJsonService jsonService) {
