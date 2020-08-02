@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestSmeltOnAltar;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
@@ -23,7 +24,7 @@ public class EventCallerSmeltOnAltar extends EventCaller<QuestSmeltOnAltar> {
 
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) ->
-                        this.executor.clickCauldron(world, pos, () -> {
+                        this.executor.click(Blocks.CAULDRON, world, pos, () -> {
                             ItemStack leftHandStack = player.getHeldItemOffhand();
                             QuestSmeltOnAltar quest = this.quests.get(0);
 

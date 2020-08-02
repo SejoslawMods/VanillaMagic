@@ -7,7 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CauldronBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -41,8 +41,8 @@ public final class EventExecutor<TQuest extends Quest> {
         this.caller = caller;
     }
 
-    public TQuest clickCauldron(World world, BlockPos pos, Supplier<TQuest> action) {
-        return world.getBlockState(pos).getBlock() instanceof CauldronBlock ? action.get() : null;
+    public TQuest click(Block block, World world, BlockPos pos, Supplier<TQuest> action) {
+        return world.getBlockState(pos).getBlock() == block ? action.get() : null;
     }
 
     public void withHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {
@@ -205,7 +205,7 @@ public final class EventExecutor<TQuest extends Quest> {
 
         this.onPlayerInteract(event,
                 (player, world, pos, direction) ->
-                        this.clickCauldron(world, pos, () -> {
+                        this.click(Blocks.CAULDRON, world, pos, () -> {
                             ingredientsInCauldron[0] = WorldUtils.getItems(world, pos);
                             entries[0] = new ArrayList<>(recipes.entrySet());
 

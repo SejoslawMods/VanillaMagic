@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
-import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileAccelerant;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileLiquidSuppressor;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.*;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
 import net.minecraft.tileentity.TileEntity;
@@ -22,12 +21,14 @@ import java.util.function.Supplier;
 public final class VMTiles {
     public static TileEntityType<VMTileLiquidSuppressor> LIQUID_SUPPRESSOR = null;
     public static TileEntityType<VMTileAccelerant> ACCELERANT = null;
+    public static TileEntityType<VMTileBlockAbsorber> BLOCK_ABSORBER = null;
 
     @SubscribeEvent
     public static void onTileEntitiesRegistry(RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry().registerAll(
                 buildTileEntityType(VMTileLiquidSuppressor::new, VMTileLiquidSuppressor.class.getName()),
-                buildTileEntityType(VMTileAccelerant::new, VMTileAccelerant.class.getName())
+                buildTileEntityType(VMTileAccelerant::new, VMTileAccelerant.class.getName()),
+                buildTileEntityType(VMTileBlockAbsorber::new, VMTileBlockAbsorber.class.getName())
         );
     }
 

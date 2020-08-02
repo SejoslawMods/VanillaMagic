@@ -26,6 +26,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue TILE_ACCELERANT_SIZE;// = 4;
     public static ForgeConfigSpec.IntValue TILE_MACHINE_ONE_OPERATION_COST;// = 100;
     public static ForgeConfigSpec.IntValue TILE_MACHINE_MAX_TICKS;// = 4000;
+    public static ForgeConfigSpec.IntValue TILE_ABSORBER_PULLING_SPEED;
 
     // Item
     private static final String CATEGORY_ITEM = "Item";
@@ -94,6 +95,9 @@ public final class VMForgeConfig {
         TILE_MACHINE_MAX_TICKS = COMMON_BUILDER
                 .comment("Max ticks (internal fuel) that Machine can store.")
                 .defineInRange("TILE_MACHINE_MAX_TICKS", 4000, 1, Integer.MAX_VALUE);
+        TILE_ABSORBER_PULLING_SPEED = COMMON_BUILDER
+                .comment("Speed (in ticks) how fast the Block Absorber should take items from connected inventory.")
+                .defineInRange("TILE_ABSORBER_PULLING_SPEED", 100, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         // Item

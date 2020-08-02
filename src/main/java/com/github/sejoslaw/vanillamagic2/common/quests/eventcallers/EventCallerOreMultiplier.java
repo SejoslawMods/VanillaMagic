@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestOreMultiplier;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.Direction;
@@ -25,7 +26,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
 
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) ->
-                        this.executor.clickCauldron(world, pos, () -> {
+                        this.executor.click(Blocks.CAULDRON, world, pos, () -> {
                            if (!isStructureValid(world, pos)) {
                                return null;
                            }
