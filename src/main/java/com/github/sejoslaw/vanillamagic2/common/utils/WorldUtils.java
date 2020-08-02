@@ -96,4 +96,15 @@ public final class WorldUtils {
         TileEntity tile = world.getTileEntity(pos);
         return tile instanceof IInventory ? (IInventory) tile : null;
     }
+
+    /**
+     * @return List will all currently registered VM TileEntities on the specified World.
+     */
+    public static List<IVMTileEntity> getVMTiles(World world) {
+        return world.tickableTileEntities
+                .stream()
+                .filter(tile -> tile instanceof IVMTileEntity)
+                .map(tile -> (IVMTileEntity) tile)
+                .collect(Collectors.toList());
+    }
 }

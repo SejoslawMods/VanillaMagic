@@ -4,10 +4,13 @@ import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressLoadHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressSaveHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.VMTileEntityLoadHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.VMTileEntitySaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -33,8 +36,8 @@ public final class VMFiles {
         unzip(VMFiles.getQuestsFilePath().toFile(), VMFiles.getQuestsFileSourcePath().toFile());
 
         // VM TileEntities
-//        MinecraftForge.EVENT_BUS.register(new VMTileEntitySaveHandler());
-//        MinecraftForge.EVENT_BUS.register(new VMTileEntityLoadHandler());
+        MinecraftForge.EVENT_BUS.register(new VMTileEntitySaveHandler());
+        MinecraftForge.EVENT_BUS.register(new VMTileEntityLoadHandler());
 
         // Player Quest Progress
         MinecraftForge.EVENT_BUS.register(new PlayerQuestProgressSaveHandler());
@@ -69,8 +72,10 @@ public final class VMFiles {
     /**
      * @return Path to file with VM Tile Entities in specified World directory.
      */
-    public static Path getVMTileEntitiesFilePath(String worldName) {
-        return Paths.get(getVMWorldDir(worldName).toString(), "VanillaMagicTileEntities.dat");
+    public static Path getVMTileEntitiesFilePath(World world) {
+        String worldName = world.getServer().getWorldName();
+        String dimensionId = String.valueOf(world.getDimension().getType().getId());
+        return Paths.get(getVMWorldDir(worldName).toString(), dimensionId, "VanillaMagicTileEntities.dat");
     }
 
     /**
