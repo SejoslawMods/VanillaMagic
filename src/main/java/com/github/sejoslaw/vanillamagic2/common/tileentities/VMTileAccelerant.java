@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.items.IVMItem;
-import com.github.sejoslaw.vanillamagic2.common.items.VMItemAccelerationCrystal;
+import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import com.github.sejoslaw.vanillamagic2.core.VMTiles;
 import net.minecraft.inventory.IInventory;
@@ -34,7 +34,7 @@ public class VMTileAccelerant extends VMTileEntity {
         super.initialize(world, pos);
 
         this.invPos = this.getPos().offset(Direction.UP);
-        this.item = new VMItemAccelerationCrystal();
+        this.item = ItemRegistry.ACCELERATION_CRYSTAL;
 
         int size = VMForgeConfig.TILE_ACCELERANT_SIZE.get();
 
