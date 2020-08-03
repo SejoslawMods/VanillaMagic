@@ -19,16 +19,18 @@ import java.util.function.Supplier;
  */
 @ObjectHolder(VanillaMagic.MODID)
 public final class VMTiles {
-    public static TileEntityType<VMTileLiquidSuppressor> LIQUID_SUPPRESSOR = null;
-    public static TileEntityType<VMTileAccelerant> ACCELERANT = null;
-    public static TileEntityType<VMTileBlockAbsorber> BLOCK_ABSORBER = null;
+    public static final TileEntityType<VMTileLiquidSuppressor> LIQUID_SUPPRESSOR = null;
+    public static final TileEntityType<VMTileAccelerant> ACCELERANT = null;
+    public static final TileEntityType<VMTileBlockAbsorber> BLOCK_ABSORBER = null;
+    public static final TileEntityType<VMTileInventoryBridge> INVENTORY_BRIDGE = null;
 
     @SubscribeEvent
     public static void onTileEntitiesRegistry(RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry().registerAll(
                 buildTileEntityType(VMTileLiquidSuppressor::new, VMTileLiquidSuppressor.class.getName()),
                 buildTileEntityType(VMTileAccelerant::new, VMTileAccelerant.class.getName()),
-                buildTileEntityType(VMTileBlockAbsorber::new, VMTileBlockAbsorber.class.getName())
+                buildTileEntityType(VMTileBlockAbsorber::new, VMTileBlockAbsorber.class.getName()),
+                buildTileEntityType(VMTileInventoryBridge::new, VMTileInventoryBridge.class.getName())
         );
     }
 

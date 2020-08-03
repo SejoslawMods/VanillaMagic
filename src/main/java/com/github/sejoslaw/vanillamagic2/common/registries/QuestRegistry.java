@@ -5,12 +5,10 @@ import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.quests.QuestEventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items.*;
-import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.tileentities.EventCallerAccelerant;
-import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.tileentities.EventCallerBlockAbsorber;
+import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.tileentities.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.*;
-import com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities.QuestAccelerant;
-import com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities.QuestBlockAbsorber;
+import com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities.*;
 
 import java.util.ArrayList;
 import java.util.List;

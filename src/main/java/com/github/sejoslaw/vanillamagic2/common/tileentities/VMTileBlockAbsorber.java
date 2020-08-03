@@ -1,13 +1,13 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import com.github.sejoslaw.vanillamagic2.core.VMTiles;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 
 /**
@@ -31,9 +31,9 @@ public class VMTileBlockAbsorber extends VMTileEntity {
             }
         }
 
-        TileEntity tile = this.getWorld().getTileEntity(this.getPos());
+        IInventory inv = WorldUtils.getInventory(this.getWorld(), this.getPos());
 
-        if (tile instanceof IInventory && !((IInventory) tile).isEmpty()) {
+        if (inv == null || !inv.isEmpty()) {
             return;
         }
 

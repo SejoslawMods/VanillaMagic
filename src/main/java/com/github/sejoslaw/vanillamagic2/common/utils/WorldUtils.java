@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -93,8 +94,7 @@ public final class WorldUtils {
      * @return Inventory on the specified position; null otherwise.
      */
     public static IInventory getInventory(World world, BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        return tile instanceof IInventory ? (IInventory) tile : null;
+        return HopperTileEntity.getInventoryAtPosition(world, pos);
     }
 
     /**

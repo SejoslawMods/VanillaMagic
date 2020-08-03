@@ -78,6 +78,9 @@ item.crystallizedPotion.namePrefix=Crystallized Potion:
 
 tile.added=VM TileEntity added
 tile.removed=VM TileEntity removed
+tile.inventorySelector.added=Position saved
+tile.inventorySelector.placed=Bridge created
+tile.inventorySelector.clear=Position cleared
 
 
 

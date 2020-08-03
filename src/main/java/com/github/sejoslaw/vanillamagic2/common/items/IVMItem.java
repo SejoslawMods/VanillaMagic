@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +32,7 @@ public interface IVMItem {
     default ItemStack getStack() {
         ItemStack stack = new ItemStack(this.getBaseItem());
         stack.setDisplayName(TextUtils.translate("item." + this.getUniqueKey() + ".displayName"));
-
-        CompoundNBT data = stack.getOrCreateTag();
-        data.putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, this.getUniqueKey());
-
+        stack.getOrCreateTag().putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, this.getUniqueKey());
         return stack;
     }
 
