@@ -29,7 +29,7 @@ public class VMTileEntityLoadHandler extends VMTileEntityHandler {
                         .forEach(tileNbt -> {
                             try {
                                 IVMTileEntity tile = (IVMTileEntity) TileEntity.create(tileNbt);
-                                WorldUtils.spawnVMTile(world, tile.getPos(), tile, (vmTile) -> { });
+                                WorldUtils.spawnVMTile(world, tile.getPos(), tile, (vmTile) -> vmTile.read(tileNbt));
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
