@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities.QuestB
 import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileBlockAbsorber;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -16,6 +17,6 @@ public abstract class EventCallerBlockAbsorber extends EventCaller<QuestBlockAbs
     public void addVMTile(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) -> this.executor.click(Blocks.HOPPER, world, pos, () -> this.quests.get(0)),
-                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(world, pos, new VMTileBlockAbsorber(), (tile) -> { }));
+                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(world, pos.offset(Direction.UP), new VMTileBlockAbsorber(), (tile) -> { }));
     }
 }
