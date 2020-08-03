@@ -9,7 +9,6 @@ import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
