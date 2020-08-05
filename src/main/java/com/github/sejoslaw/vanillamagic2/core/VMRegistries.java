@@ -7,6 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.registries.*;
  */
 public final class VMRegistries {
     public static void initialize() {
+        MachineModuleRegistry.initialize();
         ItemRegistry.initialize();
         EvokerSpellRegistry.initialize();
         ItemUpgradeRegistry.initialize();

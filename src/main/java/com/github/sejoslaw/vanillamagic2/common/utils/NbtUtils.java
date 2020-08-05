@@ -10,32 +10,32 @@ import net.minecraft.world.dimension.DimensionType;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class NbtUtils {
+    public static final String NBT_ENTITY_TYPE = "NBT_ENTITY_TYPE";
+    public static final String NBT_ENTITY_NAME = "NBT_ENTITY_NAME";
+
+    public static final String NBT_BLOCK = "NBT_BLOCK";
+    public static final String NBT_BLOCK_STATE = "NBT_BLOCK_STATE";
+
+    public static final String NBT_POSITION = "NBT_POSITION";
+    public static final String NBT_DIMENSION = "NBT_DIMENSION";
+
     public static final String NBT_VM_ITEM_UNIQUE_NAME = "NBT_VM_ITEM_UNIQUE_NAME";
     public static final String NBT_SPAWNER_ENTITY = "NBT_SPAWNER_ENTITY";
     public static final String NBT_CAPTURED = "NBT_CAPTURED";
-    public static final String NBT_ENTITY_TYPE = "NBT_ENTITY_TYPE";
-    public static final String NBT_ENTITY_NAME = "NBT_ENTITY_NAME";
-    public static final String NBT_BLOCK = "NBT_BLOCK";
-    public static final String NBT_BLOCK_STATE = "NBT_BLOCK_STATE";
-    public static final String NBT_POSITION = "NBT_POSITION";
-    public static final String NBT_POS_X = "NBT_POS_X";
-    public static final String NBT_POS_Y = "NBT_POS_Y";
-    public static final String NBT_POS_Z = "NBT_POS_Z";
-    public static final String NBT_DIMENSION = "NBT_DIMENSION";
     public static final String NBT_SPELL_ID = "NBT_SPELL_ID";
     public static final String NBT_TICKS = "NBT_TICKS";
+    public static final String NBT_MACHINE_MODULE_KEY = "NBT_MACHINE_MODULE_KEY";
+
+    public static final String NBT_MODULE_START_POS = "NBT_MODULE_START_POS";
+    public static final String NBT_MODULE_WORKING_POS = "NBT_MODULE_WORKING_POS";
 
     /**
      * @return NBT serialized position on specified World.
      */
     public static CompoundNBT toNbt(World world, BlockPos pos) {
         CompoundNBT nbt = new CompoundNBT();
-
-        nbt.putInt(NBT_POS_X, pos.getX());
-        nbt.putInt(NBT_POS_Y, pos.getY());
-        nbt.putInt(NBT_POS_Z, pos.getZ());
+        nbt.putLong(NBT_POSITION, pos.toLong());
         nbt.putInt(NBT_DIMENSION, world.getDimension().getType().getId());
-
         return  nbt;
     }
 
@@ -43,7 +43,7 @@ public final class NbtUtils {
      * @return Position from given NBT.
      */
     public static BlockPos getPos(CompoundNBT nbt) {
-        return new BlockPos(nbt.getInt(NBT_POS_X), nbt.getInt(NBT_POS_Y), nbt.getInt(NBT_POS_Z));
+        return BlockPos.fromLong(nbt.getLong(NBT_POSITION));
     }
 
     /**

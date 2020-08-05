@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.*;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.VMTileMachine;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
 import net.minecraft.tileentity.TileEntity;
@@ -23,6 +24,7 @@ public final class VMTiles {
     public static final TileEntityType<VMTileAccelerant> ACCELERANT = null;
     public static final TileEntityType<VMTileBlockAbsorber> BLOCK_ABSORBER = null;
     public static final TileEntityType<VMTileInventoryBridge> INVENTORY_BRIDGE = null;
+    public static final TileEntityType<VMTileMachine> MACHINE = null;
 
     @SubscribeEvent
     public static void onTileEntitiesRegistry(RegistryEvent.Register<TileEntityType<?>> event) {
@@ -30,7 +32,8 @@ public final class VMTiles {
                 buildTileEntityType(VMTileLiquidSuppressor::new, VMTileLiquidSuppressor.class.getName()),
                 buildTileEntityType(VMTileAccelerant::new, VMTileAccelerant.class.getName()),
                 buildTileEntityType(VMTileBlockAbsorber::new, VMTileBlockAbsorber.class.getName()),
-                buildTileEntityType(VMTileInventoryBridge::new, VMTileInventoryBridge.class.getName())
+                buildTileEntityType(VMTileInventoryBridge::new, VMTileInventoryBridge.class.getName()),
+                buildTileEntityType(VMTileMachine::new, VMTileMachine.class.getName())
         );
     }
 
