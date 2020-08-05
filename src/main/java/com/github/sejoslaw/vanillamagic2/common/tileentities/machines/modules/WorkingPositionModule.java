@@ -1,23 +1,19 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
 
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
-import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class WorkingPositionModule implements IMachineModule {
+public class WorkingPositionModule extends AbstractMachineModule {
     public boolean canExecute(IVMTileMachine machine) {
-        CompoundNBT nbt = machine.getTileData();
-
-        if (!nbt.hasUniqueId(NbtUtils.NBT_MODULE_WORKING_POS)) {
-            nbt.putLong(NbtUtils.NBT_MODULE_WORKING_POS, machine.getPos().toLong());
+        if (this.getWorkingPos(machine).equals(BlockPos.ZERO)) {
+            this.setWorkingPos(machine, machine.getPos());
         }
 
-        if (!nbt.hasUniqueId(NbtUtils.NBT_MODULE_START_POS)) {
-            nbt.putLong(NbtUtils.NBT_MODULE_START_POS, machine.getPos().toLong());
+        if (this.getStartPos(machine).equals(BlockPos.ZERO)) {
+            this.setStartPos(machine, machine.getPos());
         }
 
         return true;
