@@ -3,10 +3,8 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.ITextComponent;
@@ -21,33 +19,14 @@ import java.util.List;
  */
 public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     /**
-     * @return Current VM TileEntity in a form of a Minecraft standard TileEntity.
-     */
-    TileEntity getTileEntity();
-
-    /**
      * @return Update data packet with data about the current VM TileEntity.
      */
     SUpdateTileEntityPacket getUpdatePacket();
 
     /**
-     * Called when you receive a TileEntityData packet for the location this
-     * TileEntity is currently in. On the client, the NetworkManager will always
-     * be the remote server. On the server, it will be whomever is responsible for
-     * sending the packet.
-     */
-    void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt);
-
-    /**
      * Adds tooltip information about the current VM TileEntity.
      */
     default void addTooltipInfo(List<ITextComponent> lines) {
-    }
-
-    /**
-     * Ticking functionality for Vm TileEntity.
-     */
-    default void tick() {
     }
 
     /**
