@@ -27,6 +27,22 @@ public abstract class AbstractMachineModule implements IMachineModule {
         this.setPos(machine, pos, NbtUtils.NBT_MODULE_START_POS);
     }
 
+    protected BlockPos getInputStoragePos(IVMTileMachine machine) {
+        return this.getPos(machine, NbtUtils.NBT_MODULE_STORAGE_INPUT_POS);
+    }
+
+    protected void setInputStoragePos(IVMTileMachine machine, BlockPos pos) {
+        this.setPos(machine, pos, NbtUtils.NBT_MODULE_STORAGE_INPUT_POS);
+    }
+
+    protected BlockPos getOutputStoragePos(IVMTileMachine machine) {
+        return this.getPos(machine, NbtUtils.NBT_MODULE_STORAGE_OUTPUT_POS);
+    }
+
+    protected void setOutputStoragePos(IVMTileMachine machine, BlockPos pos) {
+        this.setPos(machine, pos, NbtUtils.NBT_MODULE_STORAGE_OUTPUT_POS);
+    }
+
     // ---=== PRIVATE ===---
 
     protected BlockPos getPos(IVMTileMachine machine, String key) {

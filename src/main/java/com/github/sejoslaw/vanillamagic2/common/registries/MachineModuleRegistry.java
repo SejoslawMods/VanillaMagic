@@ -20,6 +20,7 @@ public final class MachineModuleRegistry {
 
     public static void initialize() {
         DEFAULT_MODULES.add(new WorkingPositionModule());
+        DEFAULT_MODULES.add(new StorageModule());
         DEFAULT_MODULES.add(new SmeltableTicksEnergyModule());
 
         registerModule(QUARRY_KEY, new QuarryLogicModule());
