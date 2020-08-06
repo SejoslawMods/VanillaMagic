@@ -22,6 +22,7 @@ public final class MachineModuleRegistry {
         DEFAULT_MODULES.add(new WorkingPositionModule());
         DEFAULT_MODULES.add(new StorageModule());
         DEFAULT_MODULES.add(new SmeltableTicksEnergyModule());
+        DEFAULT_MODULES.add(new ForgeEnergyModule());
 
         registerModule(QUARRY_KEY, new QuarryLogicModule()); // TODO: extends AbstractLogicModule
         registerModule(FARM_KEY, new FarmLogicModule());

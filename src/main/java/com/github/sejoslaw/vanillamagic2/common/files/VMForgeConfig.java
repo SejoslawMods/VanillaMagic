@@ -22,43 +22,42 @@ public final class VMForgeConfig {
 
     // Machine
     private static final String CATEGORY_MACHINE = "Machine";
-    public static ForgeConfigSpec.IntValue TILE_ACCELERANT_TICKS;// = 1000;
-    public static ForgeConfigSpec.IntValue TILE_ACCELERANT_SIZE;// = 4;
-    public static ForgeConfigSpec.IntValue TILE_MACHINE_ONE_OPERATION_COST;// = 100;
-    public static ForgeConfigSpec.IntValue TILE_MACHINE_MAX_TICKS;// = 4000;
+    public static ForgeConfigSpec.IntValue TILE_ACCELERANT_TICKS;
+    public static ForgeConfigSpec.IntValue TILE_ACCELERANT_SIZE;
+    public static ForgeConfigSpec.DoubleValue TILE_MACHINE_ONE_OPERATION_COST;
     public static ForgeConfigSpec.IntValue TILE_ABSORBER_PULLING_SPEED;
 
     // Item
     private static final String CATEGORY_ITEM = "Item";
-    public static ForgeConfigSpec.IntValue ACCELERATION_CRYSTAL_UPDATE_TICKS;// = 100;
-    public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_RADIUS;// = 5;
-    public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE; // = 100
-    public static ForgeConfigSpec.IntValue MOTHER_NATURE_CRYSTAL_RANGE;// = 10;
-    public static ForgeConfigSpec.IntValue ITEM_MAGNET_RANGE;// = 6;
+    public static ForgeConfigSpec.IntValue ACCELERATION_CRYSTAL_UPDATE_TICKS;
+    public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_RADIUS;
+    public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE;
+    public static ForgeConfigSpec.IntValue MOTHER_NATURE_CRYSTAL_RANGE;
+    public static ForgeConfigSpec.IntValue ITEM_MAGNET_RANGE;
     public static ForgeConfigSpec.BooleanValue ITEM_CAN_AUTOPLANT;
 
     // Spell
     private static final String CATEGORY_SPELL = "Spell";
-    public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_FRIENDLY;// = 32;
-    public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_HOSTILE;// = 8;
-    public static ForgeConfigSpec.IntValue SPELL_FUS_RO_DAH_DISTANCE; // = 8
-    public static ForgeConfigSpec.DoubleValue SPELL_FUS_RO_DAH_STRENGTH; // = 2
-    public static ForgeConfigSpec.DoubleValue SPELL_MOVE_IN_AIR_DISTANCE; // = 10
+    public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_FRIENDLY;
+    public static ForgeConfigSpec.IntValue SPELL_COST_SUMMON_HOSTILE;
+    public static ForgeConfigSpec.IntValue SPELL_FUS_RO_DAH_DISTANCE;
+    public static ForgeConfigSpec.DoubleValue SPELL_FUS_RO_DAH_STRENGTH;
+    public static ForgeConfigSpec.DoubleValue SPELL_MOVE_IN_AIR_DISTANCE;
 
     // Meteor
     private static final String CATEGORY_METEOR = "Meteor";
-    public static ForgeConfigSpec.DoubleValue BASIC_METEOR_SIZE;// = 5.0f;
-    public static ForgeConfigSpec.IntValue BASIC_METEOR_EXPLOSION_POWER;// = 25;
-    public static ForgeConfigSpec.DoubleValue BASIC_METEOR_EXPLOSION_DROP_RATE;// = 0.1f;
+    public static ForgeConfigSpec.DoubleValue BASIC_METEOR_SIZE;
+    public static ForgeConfigSpec.IntValue BASIC_METEOR_EXPLOSION_POWER;
+    public static ForgeConfigSpec.DoubleValue BASIC_METEOR_EXPLOSION_DROP_RATE;
 
     // Hostile Mobs
     private static final String CATEGORY_HOSTILE_MOBS = "Hostile Mobs";
-    public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR;// = 10;
-    public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_ON_HORSE;// = 15;
+    public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR;
+    public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_ON_HORSE;
 
     // Evoker Crystal
     private static final String CATEGORY_EVOKER_CRYSTAL = "Evoker Crystal";
-    public static ForgeConfigSpec.IntValue VEX_NUMBER;// = 3;
+    public static ForgeConfigSpec.IntValue VEX_NUMBER;
     public static ForgeConfigSpec.BooleanValue VEX_HAS_LIMITED_LIFE;
 
     // Integration
@@ -90,11 +89,8 @@ public final class VMForgeConfig {
                 .comment("Size of the Speedy - Area on which Speedy can operate.")
                 .defineInRange("TILE_ACCELERANT_SIZE", 4, 1, Integer.MAX_VALUE);
         TILE_MACHINE_ONE_OPERATION_COST = COMMON_BUILDER
-                .comment("Cost of a single Machine operation.")
-                .defineInRange("TILE_MACHINE_ONE_OPERATION_COST", 100, 1, Integer.MAX_VALUE);
-        TILE_MACHINE_MAX_TICKS = COMMON_BUILDER
-                .comment("Max ticks (internal fuel) that Machine can store.")
-                .defineInRange("TILE_MACHINE_MAX_TICKS", 4000, 1, Integer.MAX_VALUE);
+                .comment("Cost of a single Machine operation. (in ticks) (i.e.: for Furnace recipes it's 800)")
+                .defineInRange("TILE_MACHINE_ONE_OPERATION_COST", 100, 1, Double.MAX_VALUE);
         TILE_ABSORBER_PULLING_SPEED = COMMON_BUILDER
                 .comment("Speed (in ticks) how fast the Block Absorber should take items from connected inventory.")
                 .defineInRange("TILE_ABSORBER_PULLING_SPEED", 100, 1, Integer.MAX_VALUE);
@@ -109,7 +105,7 @@ public final class VMForgeConfig {
                 .comment("Radius on which Liquid Suppression Crystal works (in blocks).")
                 .defineInRange("LIQUID_SUPPRESSION_CRYSTAL_RADIUS", 5, 1, Integer.MAX_VALUE);
         LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE = COMMON_BUILDER
-                .comment("Defines how ofthen the suppression blocks should be refreshed.")
+                .comment("Defines how often the suppression blocks should be refreshed.")
                 .defineInRange("LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE", 100, 1, Integer.MAX_VALUE);
         MOTHER_NATURE_CRYSTAL_RANGE = COMMON_BUILDER
                 .comment("Range on which Mother Nature Crystal will work.")
