@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.VMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
@@ -245,6 +246,13 @@ public final class EventExecutor<TQuest extends Quest> {
                 consumer.accept(leftHandStack);
             }
         });
+    }
+
+    public void addVMTileMachine(PlayerInteractEvent.RightClickBlock event, String moduleKey) {
+        this.onPlayerInteract(event,
+                (player, world, pos, direction) -> this.click(Blocks.CAULDRON, world, pos, () -> this.caller.quests.get(0)),
+                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(world, pos, new VMTileMachine(),
+                        (tile) -> tile.setModuleKey(moduleKey)));
     }
 
     /*
