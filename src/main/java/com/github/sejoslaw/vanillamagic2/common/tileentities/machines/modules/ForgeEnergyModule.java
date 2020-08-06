@@ -21,6 +21,11 @@ public class ForgeEnergyModule extends AbstractEnergyModule {
             return false;
         }
 
-        return energyStorage.extractEnergy((int)oneOperationCost, false) == (int)oneOperationCost;
+        if (energyStorage.extractEnergy((int)oneOperationCost, false) == (int)oneOperationCost) {
+            this.setHasEnergy(machine, true);
+            return true;
+        }
+
+        return false;
     }
 }
