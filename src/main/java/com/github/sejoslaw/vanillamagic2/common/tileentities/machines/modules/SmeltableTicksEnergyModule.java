@@ -22,8 +22,9 @@ public class SmeltableTicksEnergyModule extends AbstractEnergyModule {
         }
 
         final double oneOperationCost = VMForgeConfig.TILE_MACHINE_ONE_OPERATION_COST.get();
+        final List<Integer> slotsToRemove = new ArrayList<>();
+
         double ticks = 0;
-        List<Integer> slotsToRemove = new ArrayList<>();
 
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
