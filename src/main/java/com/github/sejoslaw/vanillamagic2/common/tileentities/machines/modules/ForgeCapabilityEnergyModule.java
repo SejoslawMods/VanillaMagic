@@ -1,14 +1,17 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class ForgeEnergyModule extends AbstractForgeEnergyModule {
+public class ForgeCapabilityEnergyModule extends AbstractForgeEnergyModule {
     protected boolean canExecuteNoEnergy(IVMTileMachine machine) {
-        IEnergyStorage energyStorage = (IEnergyStorage) machine.getWorld().getTileEntity(this.getEnergySourcePos(machine));
+        TileEntity tile = machine.getWorld().getTileEntity(this.getEnergySourcePos(machine));
+        IEnergyStorage energyStorage = tile.getCapability(CapabilityEnergy.ENERGY).orElse(null);
         return this.checkForgeEnergyStorage(machine, energyStorage);
     }
 }
