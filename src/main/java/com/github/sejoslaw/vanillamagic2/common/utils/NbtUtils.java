@@ -31,6 +31,7 @@ public final class NbtUtils {
     public static final String NBT_MODULE_STORAGE_INPUT_POS = "NBT_MODULE_STORAGE_INPUT_POS";
     public static final String NBT_MODULE_STORAGE_OUTPUT_POS = "NBT_MODULE_STORAGE_OUTPUT_POS";
     public static final String NBT_MODULE_HAS_ENERGY = "NBT_MODULE_HAS_ENERGY";
+    public static final String NBT_MODULE_ENERGY_SOURCE_POS = "NBT_MODULE_ENERGY_SOURCE_POS";
 
     /**
      * @return NBT serialized position on specified World.

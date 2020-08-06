@@ -51,6 +51,14 @@ public abstract class AbstractMachineModule implements IMachineModule {
         machine.getTileData().putBoolean(NbtUtils.NBT_MODULE_HAS_ENERGY, value);
     }
 
+    protected BlockPos getEnergySourcePos(IVMTileMachine machine) {
+        return this.getPos(machine, NbtUtils.NBT_MODULE_ENERGY_SOURCE_POS);
+    }
+
+    protected void setEnergySourcePos(IVMTileMachine machine, BlockPos pos) {
+        this.setPos(machine, pos, NbtUtils.NBT_MODULE_ENERGY_SOURCE_POS);
+    }
+
     // ---=== PRIVATE ===---
 
     protected BlockPos getPos(IVMTileMachine machine, String key) {
