@@ -13,6 +13,14 @@ public abstract class AbstractMachineModule implements IMachineModule {
         return machine.getTileData().hasUniqueId(key);
     }
 
+    protected int getInt(IVMTileMachine machine, String key) {
+        return machine.getTileData().getInt(key);
+    }
+
+    protected void setInt(IVMTileMachine machine, int value, String key) {
+        machine.getTileData().putInt(key, value);
+    }
+
     protected BlockPos getWorkingPos(IVMTileMachine machine) {
         return this.getPos(machine, NbtUtils.NBT_MODULE_WORKING_POS);
     }
