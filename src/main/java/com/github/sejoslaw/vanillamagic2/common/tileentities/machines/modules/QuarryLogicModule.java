@@ -14,33 +14,24 @@ public class QuarryLogicModule extends AbstractLogicModule {
 
     public void setup(IVMTileMachine machine) {
         BlockPos machinePos = machine.getPos();
-        BlockPos diamondPos = null;
-        BlockPos redstonePos = null;
-        BlockPos outputInvPos = null;
-        BlockPos inputInvPos = null;
 
-        for (Direction face : Direction.values()) {
-            BlockPos facePos = machinePos.offset(face);
+        for (Direction diamondDir : Direction.values()) {
+            BlockPos diamondPos = machinePos.offset(diamondDir);
 
-            if (machine.getWorld().getBlockState(facePos).getBlock() == Blocks.DIAMOND_BLOCK) {
-                diamondPos = facePos;
-                redstonePos = machinePos.offset(face.rotateYCCW());
-                outputInvPos = machinePos.offset(face.getOpposite());
-                inputInvPos = machinePos.offset(Direction.UP);
-                break;
+            if (machine.getWorld().getBlockState(diamondPos).getBlock() == Blocks.DIAMOND_BLOCK) {
+                this.setPos(machine, diamondPos, NBT_MODULE_QUARRY_DIAMOND_POS);
+                this.setPos(machine, machinePos.offset(diamondDir.rotateYCCW()), NBT_MODULE_QUARRY_REDSTONE_POS);
+
+                this.setOutputStoragePos(machine, machinePos.offset(diamondDir.getOpposite()));
+                this.setInputStoragePos(machine, machinePos.offset(Direction.UP));
+                this.setEnergySourcePos(machine, machinePos.offset(Direction.UP));
+
+                this.setStartPos(machine, machinePos.offset(diamondDir.rotateY()));
+                this.setWorkingPos(machine, machinePos.offset(diamondDir.rotateY()));
+
+                return;
             }
         }
-
-        if (diamondPos == null) {
-            return;
-        }
-
-        this.setPos(machine, diamondPos, NBT_MODULE_QUARRY_DIAMOND_POS);
-        this.setPos(machine, redstonePos, NBT_MODULE_QUARRY_REDSTONE_POS);
-
-        this.setOutputStoragePos(machine, outputInvPos);
-        this.setInputStoragePos(machine, inputInvPos);
-        this.setEnergySourcePos(machine, inputInvPos);
     }
 
     protected boolean checkStructure(IVMTileMachine machine) {
@@ -48,5 +39,6 @@ public class QuarryLogicModule extends AbstractLogicModule {
     }
 
     protected void work(IVMTileMachine machine) {
+        // TODO: Implement Quarry single operation
     }
 }
