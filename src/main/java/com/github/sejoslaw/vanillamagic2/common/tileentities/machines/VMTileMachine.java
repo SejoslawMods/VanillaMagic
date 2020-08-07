@@ -18,6 +18,8 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
 
     public void setModuleKey(String key) {
         this.moduleKey = key;
+        MachineModuleRegistry.DEFAULT_MODULES.forEach(module -> module.setup(this));
+        MachineModuleRegistry.MODULES.get(this.moduleKey).forEach(machine -> machine.setup(this));
     }
 
     public CompoundNBT write(CompoundNBT nbt) {
@@ -28,7 +30,7 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
 
     public void read(CompoundNBT nbt) {
         super.read(nbt);
-        this.moduleKey = nbt.getString(NbtUtils.NBT_MACHINE_MODULE_KEY);
+        this.setModuleKey(nbt.getString(NbtUtils.NBT_MACHINE_MODULE_KEY));
     }
 
     public void tick() {

@@ -5,6 +5,12 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities.machines;
  */
 public interface IMachineModule {
     /**
+     * Called once for all related modules before canExecute. Should be used to preconfigure VM TileMachine.
+     */
+    default void setup(IVMTileMachine machine) {
+    }
+
+    /**
      * @return True if this module can be executed for the specified VM TileMachine.
      */
     boolean canExecute(IVMTileMachine machine);
