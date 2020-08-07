@@ -15,25 +15,28 @@ public class QuarryLogicModule extends AbstractLogicModule {
 
     public void setup(IVMTileMachine machine) {
         BlockPos machinePos = machine.getPos();
+        Direction diamondDir = Direction.UP;
+        BlockPos diamondPos = BlockPos.ZERO;
 
-        for (Direction diamondDir : Direction.values()) {
-            BlockPos diamondPos = machinePos.offset(diamondDir);
+        for (Direction face : Direction.values()) {
+            diamondPos = machinePos.offset(diamondDir);
 
             if (machine.getWorld().getBlockState(diamondPos).getBlock() == Blocks.DIAMOND_BLOCK) {
-                this.setPos(machine, diamondPos, NBT_MODULE_QUARRY_DIAMOND_POS);
-                this.setPos(machine, machinePos.offset(diamondDir.rotateYCCW()), NBT_MODULE_QUARRY_REDSTONE_POS);
-                this.setInt(machine, diamondDir.rotateY().getIndex(), NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
-
-                this.setOutputStoragePos(machine, machinePos.offset(diamondDir.getOpposite()));
-                this.setInputStoragePos(machine, machinePos.offset(Direction.UP));
-                this.setEnergySourcePos(machine, machinePos.offset(Direction.UP));
-
-                this.setStartPos(machine, machinePos.offset(diamondDir.rotateY()));
-                this.setWorkingPos(machine, machinePos.offset(diamondDir.rotateY()));
-
-                return;
+                diamondDir = face;
+                break;
             }
         }
+
+        this.setPos(machine, diamondPos, NBT_MODULE_QUARRY_DIAMOND_POS);
+        this.setPos(machine, machinePos.offset(diamondDir.rotateYCCW()), NBT_MODULE_QUARRY_REDSTONE_POS);
+        this.setInt(machine, diamondDir.rotateY().getIndex(), NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
+
+        this.setOutputStoragePos(machine, machinePos.offset(diamondDir.getOpposite()));
+        this.setInputStoragePos(machine, machinePos.offset(Direction.UP));
+        this.setEnergySourcePos(machine, machinePos.offset(Direction.UP));
+
+        this.setStartPos(machine, machinePos.offset(diamondDir.rotateY()));
+        this.setWorkingPos(machine, machinePos.offset(diamondDir.rotateY()));
     }
 
     protected boolean checkStructure(IVMTileMachine machine) {
