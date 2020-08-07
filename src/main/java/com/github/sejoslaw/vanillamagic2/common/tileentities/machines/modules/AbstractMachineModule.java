@@ -9,7 +9,9 @@ import net.minecraft.util.math.BlockPos;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractMachineModule implements IMachineModule {
-    // ---=== PROTECTED ===---
+    protected boolean hasKey(IVMTileMachine machine, String key) {
+        return machine.getTileData().hasUniqueId(key);
+    }
 
     protected BlockPos getWorkingPos(IVMTileMachine machine) {
         return this.getPos(machine, NbtUtils.NBT_MODULE_WORKING_POS);
@@ -58,8 +60,6 @@ public abstract class AbstractMachineModule implements IMachineModule {
     protected void setEnergySourcePos(IVMTileMachine machine, BlockPos pos) {
         this.setPos(machine, pos, NbtUtils.NBT_MODULE_ENERGY_SOURCE_POS);
     }
-
-    // ---=== PRIVATE ===---
 
     protected BlockPos getPos(IVMTileMachine machine, String key) {
         return BlockPos.fromLong(machine.getTileData().getLong(key));
