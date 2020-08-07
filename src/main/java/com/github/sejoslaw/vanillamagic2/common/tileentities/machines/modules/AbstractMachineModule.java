@@ -65,7 +65,7 @@ public abstract class AbstractMachineModule implements IMachineModule {
         return BlockPos.fromLong(machine.getTileData().getLong(key));
     }
 
-    private void setPos(IVMTileMachine machine, BlockPos pos, String key) {
+    protected void setPos(IVMTileMachine machine, BlockPos pos, String key) {
         machine.getTileData().putLong(key, pos.toLong());
     }
 }
