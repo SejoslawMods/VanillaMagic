@@ -19,8 +19,6 @@ public final class MachineModuleRegistry {
     public static final String FARM_KEY = "farm";
 
     public static void initialize() {
-        DEFAULT_MODULES.add(new WorkingPositionModule());
-        DEFAULT_MODULES.add(new StorageModule());
         DEFAULT_MODULES.add(new SmeltableTicksEnergyModule());
         DEFAULT_MODULES.add(new ForgeEnergyModule());
         DEFAULT_MODULES.add(new ForgeCapabilityEnergyModule());
