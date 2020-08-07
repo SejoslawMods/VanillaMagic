@@ -7,7 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMac
  */
 public abstract class AbstractLogicModule extends AbstractMachineModule {
     public boolean canExecute(IVMTileMachine machine) {
-        return this.getHasEnergy(machine);
+        return this.getHasEnergy(machine) && this.checkStructure(machine);
     }
 
     public void execute(IVMTileMachine machine) {
@@ -15,5 +15,13 @@ public abstract class AbstractLogicModule extends AbstractMachineModule {
         this.work(machine);
     }
 
+    /**
+     * @return True if the machine was build correctly; otherwise false.
+     */
+    protected abstract boolean checkStructure(IVMTileMachine machine);
+
+    /**
+     * Performs machine single operation cycle.
+     */
     protected abstract void work(IVMTileMachine machine);
 }
