@@ -40,7 +40,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
     }
 
     protected boolean checkStructure(IVMTileMachine machine) {
-        return this.hasKey(machine, NBT_MODULE_QUARRY_DIAMOND_POS) && this.hasKey(machine, NBT_MODULE_QUARRY_REDSTONE_POS);
+        return this.hasKey(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
     }
 
     protected void work(IVMTileMachine machine) {
