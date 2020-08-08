@@ -26,6 +26,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue TILE_ACCELERANT_SIZE;
     public static ForgeConfigSpec.DoubleValue TILE_MACHINE_ONE_OPERATION_COST;
     public static ForgeConfigSpec.IntValue TILE_ABSORBER_PULLING_SPEED;
+    public static ForgeConfigSpec.IntValue BASIC_QUARRY_SIZE;
 
     // Item
     private static final String CATEGORY_ITEM = "Item";
@@ -94,6 +95,9 @@ public final class VMForgeConfig {
         TILE_ABSORBER_PULLING_SPEED = COMMON_BUILDER
                 .comment("Speed (in ticks) how fast the Block Absorber should take items from connected inventory.")
                 .defineInRange("TILE_ABSORBER_PULLING_SPEED", 100, 1, Integer.MAX_VALUE);
+        BASIC_QUARRY_SIZE = COMMON_BUILDER
+                .comment("Number of blocks per each diamond block in Quarry.")
+                .defineInRange("BASIC_QUARRY_SIZE", 16, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         // Item
