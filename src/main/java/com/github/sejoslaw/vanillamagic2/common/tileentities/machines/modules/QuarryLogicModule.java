@@ -113,6 +113,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
             });
 
             world.setBlockState(workingPos, Blocks.AIR.getDefaultState());
+            workingPos = workingPos.offset(Direction.DOWN);
         }
 
         this.setWorkingPos(machine, workingPos);
