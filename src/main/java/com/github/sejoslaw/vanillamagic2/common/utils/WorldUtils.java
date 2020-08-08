@@ -58,7 +58,7 @@ public final class WorldUtils {
 
         stacks.forEach(stack -> {
             stack.setCount(stackCountModifier.apply(stack));
-            world.addEntity(new ItemEntity(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), stack));
+            Block.spawnAsEntity(world, spawnPos, stack);
         });
     }
 

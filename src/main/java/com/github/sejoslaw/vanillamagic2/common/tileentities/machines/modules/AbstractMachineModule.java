@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -15,6 +16,10 @@ public abstract class AbstractMachineModule implements IMachineModule {
 
     protected int getInt(IVMTileMachine machine, String key) {
         return machine.getTileData().getInt(key);
+    }
+
+    protected Direction getDirection(IVMTileMachine machine, String key) {
+        return Direction.byIndex(machine.getTileData().getInt(key));
     }
 
     protected void setInt(IVMTileMachine machine, int value, String key) {

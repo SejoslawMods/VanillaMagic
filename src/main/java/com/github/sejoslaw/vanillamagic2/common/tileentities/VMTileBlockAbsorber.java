@@ -3,8 +3,8 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import com.github.sejoslaw.vanillamagic2.core.VMTiles;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
@@ -37,9 +37,8 @@ public class VMTileBlockAbsorber extends VMTileEntity {
             return;
         }
 
-        ItemEntity itemEntity = new ItemEntity(this.getWorld(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), new ItemStack(this.getBlockState().getBlock()));
+        Block.spawnAsEntity(this.getWorld(), this.getPos(), new ItemStack(this.getBlockState().getBlock()));
         this.getWorld().setBlockState(this.getPos(), Blocks.AIR.getDefaultState());
-        this.getWorld().addEntity(itemEntity);
         HopperTileEntity.pullItems(hopperTileEntity);
     }
 }

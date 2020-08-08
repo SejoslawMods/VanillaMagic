@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeEventCaller;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
-import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,8 +21,7 @@ public class ItemUpgradeEventCallerAutosmelt extends ItemUpgradeEventCaller {
                                     ItemStack smeltingResult = ItemStackUtils.getSmeltingResultAsNewStack(drop, world);
 
                                     if (smeltingResult != ItemStack.EMPTY) {
-                                        ItemEntity afterSmeltEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), smeltingResult);
-                                        world.addEntity(afterSmeltEntity);
+                                        Block.spawnAsEntity(world, pos, smeltingResult);
                                         drops.remove(drop);
                                     }
                                 })));
