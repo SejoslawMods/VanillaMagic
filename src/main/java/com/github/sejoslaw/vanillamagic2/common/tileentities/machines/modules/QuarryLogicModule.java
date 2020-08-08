@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -54,43 +55,35 @@ public class QuarryLogicModule extends AbstractLogicModule {
     }
 
     protected void work(IVMTileMachine machine) {
-        // TODO: Implement Quarry operation (in single tick)
-        //  2.2. Is air block - if so then go to next 'mineable' block
-        //  2.3. Else if Is Bedrock - go to next column (forward or one left)
-        //  2.4. Else (mine block)
-        //      2.4.1. Get drops from mined block
-        //      2.4.2. If block is an inventory - get content
-        //      2.4.3. Try to input into the input chest or spawn as ItemEntity
-        //      2.4.4. Set workingPos to AIR
-        //      2.4.5. Go to next 'mineable' block
+        int quarrySize = this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).rotateYCCW(), Blocks.DIAMOND_BLOCK);
 
-        for(int i = 0 ; i < this.getRedstoneBlocksCount(machine); ++i) {
-            this.performSingleOperation(machine);
+        for(int i = 0 ; i < this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).getOpposite(), Blocks.REDSTONE_BLOCK); ++i) {
+            this.performSingleOperation(machine, quarrySize);
         }
     }
 
     /**
-     * Performs single Quarry mining operation
+     * Performs single Quarry mining / moving operation
      */
-    private void performSingleOperation(IVMTileMachine machine) {
+    private void performSingleOperation(IVMTileMachine machine, int quarrySize) {
         World world = machine.getWorld();
         BlockPos workingPos = this.getWorkingPos(machine);
         BlockPos startPos = this.getStartPos(machine);
         Direction startPosDir = this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
         BlockState mineBlockState = world.getBlockState(workingPos);
 
-        if (world.isAirBlock(workingPos)) { // Go down
+        if (world.isAirBlock(workingPos)) {
             while (!world.isAirBlock(workingPos)) {
                 workingPos = workingPos.offset(Direction.DOWN);
             }
-        } else if (mineBlockState.getBlock() == Blocks.BEDROCK) { // Nest Line
+        } else if (mineBlockState.getBlock() == Blocks.BEDROCK) {
             workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosDir);
 
-            if (BlockUtils.distanceInLine(workingPos, startPos) > this.quarrySize) { // TODO: Calculate Quarry size
+            if (BlockUtils.distanceInLine(workingPos, startPos) > quarrySize) {
                 startPos = startPos.offset(startPosDir.rotateYCCW());
                 workingPos = new BlockPos(startPos);
             }
-        } else { // Mine
+        } else {
             List<ItemStack> drops = Block.getDrops(mineBlockState, (ServerWorld) world, workingPos, machine.getTileEntity());
             IInventory mineInv = WorldUtils.getInventory(world, workingPos);
 
@@ -110,21 +103,31 @@ public class QuarryLogicModule extends AbstractLogicModule {
             drops.forEach(stack -> {
                 if (outputInv == null) {
                     Block.spawnAsEntity(world, machine.getPos().offset(Direction.UP, 2), stack);
+                } else {
+                    ItemStack leftStack = HopperTileEntity.putStackInInventoryAllSlots(null, outputInv, stack, startPosDir.rotateY());
+
+                    if (leftStack != ItemStack.EMPTY && leftStack.getCount() > 0) {
+                        Block.spawnAsEntity(world, machine.getPos().offset(Direction.UP, 2), leftStack);
+                    }
                 }
             });
+
+            world.setBlockState(workingPos, Blocks.AIR.getDefaultState());
         }
+
+        this.setWorkingPos(machine, workingPos);
+        this.setStartPos(machine, startPos);
     }
 
-    private int getRedstoneBlocksCount(IVMTileMachine machine) {
-        Direction redstoneDir = this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).getOpposite();
-        BlockPos machinePos = machine.getPos().offset(redstoneDir);
-        int redstoneBlocksCount = 0;
+    private int countBlocks(IVMTileMachine machine, Direction dir, Block block) {
+        BlockPos machinePos = machine.getPos().offset(dir);
+        int blocksCount = 0;
 
-        while (machine.getWorld().getBlockState(machinePos).getBlock().equals(Blocks.REDSTONE_BLOCK)) {
-            redstoneBlocksCount++;
-            machinePos = machinePos.offset(redstoneDir);
+        while (machine.getWorld().getBlockState(machinePos).getBlock().equals(block)) {
+            blocksCount++;
+            machinePos = machinePos.offset(dir);
         }
 
-        return redstoneBlocksCount;
+        return blocksCount;
     }
 }
