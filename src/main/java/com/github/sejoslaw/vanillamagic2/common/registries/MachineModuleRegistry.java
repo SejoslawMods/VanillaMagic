@@ -24,7 +24,6 @@ public final class MachineModuleRegistry {
         DEFAULT_MODULES.add(new ForgeCapabilityEnergyModule());
 
         registerModule(QUARRY_KEY, new QuarryLogicModule());
-        registerModule(FARM_KEY, new FarmLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {
