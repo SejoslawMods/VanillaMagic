@@ -603,14 +603,14 @@
     "posX": -2,
     "posY": 1,
     "icon": {
-      "id": 61
+      "id": "minecraft:furnace"
     },
     "uniqueName": "smeltOnAltar",
     "altarTier": 1,
     "oneItemSmeltCost": 800
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry",
+    "eventCaller": "quarry",
     "parent": "smeltOnAltar",
     "posX": 0,
     "posY": 2,
@@ -618,74 +618,71 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "quarry",
-    "mustHaveMainHand": {
-      "id": 369
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.fulltreecut.QuestFullTreeCut",
+    "eventCaller": "fullTreeCut",
     "parent": "quarry",
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": 279
+      "id": "minecraft:diamond_axe"
     },
     "uniqueName": "fullTreeCut"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.speedy.QuestSpeedy",
+    "eventCaller": "accelerant",
     "parent": "fullTreeCut",
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": 288
+      "id": "minecraft:feather"
     },
-    "uniqueName": "speedy"
+    "uniqueName": "accelerant"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature.QuestMotherNatureCrystal",
-    "parent": "speedy",
+    "eventCaller": "motherNatureCrystal",
+    "parent": "accelerant",
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": 399
+      "id": "minecraft:nether_star"
     },
     "uniqueName": "motherNatureCrystal"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier3",
     "posX": 2,
     "posY": 1,
     "uniqueName": "craftGoldIngot",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "iron_ingot",
-        "id": 265,
+        "id": "minecraft:iron_ingot)",
         "count": 8
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "gold_ingot",
-        "id": 266
+        "id": "minecraft:gold_ingot"
       }
     ],
     "altarTier": 3
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.QuestBlockAbsorber",
+    "eventCaller": "blockAbsorber",
     "parent": "craftGoldIngot",
     "posX": 2,
     "posY": 0,
     "icon": {
-      "just_to_know_what_it_is": "item_hopper",
-      "id": 154
+      "id": "minecraft:hopper"
     },
     "uniqueName": "blockAbsorber"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "eventCaller": "buildAltar",
     "parent": "buildAltarTier3",
     "posX": 0,
     "posY": 2,
@@ -696,84 +693,76 @@
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier4",
     "posX": 2,
     "posY": 1,
     "uniqueName": "craftRottenFlesh",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "leather",
-        "id": 334
+        "id": "minecraft:leather"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "rotten_flesh",
-        "id": 367
+        "id": "minecraft:rotten_flesh"
       }
     ],
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftRottenFlesh",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftString",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "rotten_flesh",
-        "id": 367,
+        "id": "minecraft:rotten_flesh",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "string",
-        "id": 287
+        "id": "minecraft:string"
       }
     ],
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftString",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftSpiderEye",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "string",
-        "id": 287,
+        "id": "minecraft:string",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "spider_eye",
-        "id": 375
+        "id": "minecraft:spider_eye"
       }
     ],
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSpiderEye",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftBone",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "spider_eye",
-        "id": 375,
+        "id": "minecraft:spider_eye",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "bone",
-        "id": 352
+        "id": "minecraft:bone"
       }
     ],
     "altarTier": 4
@@ -786,8 +775,7 @@
     "uniqueName": "craftArrow",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "bone",
-        "id": 352,
+        "id": "minecraft:bone",
         "count": 2
       }
     ],
@@ -1051,7 +1039,7 @@
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": 399
+      "id": "minecraft:nether_star"
     },
     "uniqueName": "liquidSuppressionCrystal"
   },
@@ -1096,7 +1084,7 @@
     "posX": 2,
     "posY": 0,
     "icon": {
-      "id": 399
+      "id": "minecraft:nether_star"
     },
     "uniqueName": "accelerationCrystal"
   },
@@ -1130,8 +1118,7 @@
     "uniqueName": "craftDiamond",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "gold_ingot",
-        "id": 266,
+        "id": "minecraft:gold_ingot",
         "count": 8
       }
     ],
@@ -1327,8 +1314,7 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "emerald_ore",
-        "id": 399
+        "id": "minecraft:nether_star"
       }
     ],
     "altarTier": 7
@@ -1339,7 +1325,7 @@
     "posX": 0,
     "posY": 2,
     "icon": {
-      "id": 399
+      "id": "minecraft:nether_star"
     },
     "uniqueName": "itemMagnet"
   },
@@ -1351,8 +1337,7 @@
     "uniqueName": "craftDragonEgg",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "nether_star",
-        "id": 399,
+        "id": "minecraft:nether_star",
         "count": 4
       }
     ],
@@ -1660,7 +1645,7 @@
     "posX": 2,
     "posY": 0,
     "icon": {
-      "id": 399
+      "id": "minecraft:nether_star"
     },
     "uniqueName": "evokerCrystal"
   },
