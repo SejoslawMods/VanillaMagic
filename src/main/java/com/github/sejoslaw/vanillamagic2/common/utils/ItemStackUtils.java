@@ -32,6 +32,9 @@ public final class ItemStackUtils {
         byte count = jsonItemStack.getCount();
         nbt.putByte("Count", count <= 0 ? 1 : count);
 
+        int meta = jsonItemStack.getMeta();
+        nbt.putInt("Damage", Math.max(meta, 0));
+
         return ItemStack.read(nbt);
     }
 

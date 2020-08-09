@@ -17,4 +17,8 @@ public class JsonItemStack {
     public byte getCount() {
         return this.service.getByte("count");
     }
+
+    public int getMeta() {
+        return this.service.getInt("meta");
+    }
 }
