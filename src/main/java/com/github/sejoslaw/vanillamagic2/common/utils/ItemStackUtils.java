@@ -2,8 +2,6 @@ package com.github.sejoslaw.vanillamagic2.common.utils;
 
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonItemStack;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -12,8 +10,10 @@ import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,33 +27,23 @@ public final class ItemStackUtils {
      * @return ItemStack from JSON Object.
      */
     public static ItemStack getItemStackFromJson(JsonItemStack jsonItemStack) {
-        try {
-            int id = jsonItemStack.getId();
-            int stackSize = jsonItemStack.getStackSize();
+        ResourceLocation resource = new ResourceLocation(jsonItemStack.getId());
+        Item item = ForgeRegistries.ITEMS.getValue(resource);
+        ItemStack stack;
 
-            if (stackSize < 0) {
-                stackSize = 1;
-            }
-
-            Item item = null;
-            BlockState blockState = null;
-
-            try {
-                item = Item.getItemById(id);
-            } catch (Exception e) {
-                blockState = Block.getStateById(id);
-            }
-
-            if (item == null) {
-                return new ItemStack(blockState.getBlock(), stackSize);
-            } else {
-                return new ItemStack(item, stackSize);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (item != null) {
+            stack = new ItemStack(item);
+        } else {
+            stack = new ItemStack(ForgeRegistries.BLOCKS.getValue(resource));
         }
 
-        return null;
+        int stackSize = jsonItemStack.getStackSize();
+
+        if (stackSize > 0) {
+            stack.setCount(stackSize);
+        }
+
+        return stack;
     }
 
     /**

@@ -6,7 +6,7 @@
 	"posY":6,
 	"icon":
 	{
-		"id":280
+		"id":"minecraft:stick"
 	},
 	"uniqueName":"craftStick"
 },

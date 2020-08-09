@@ -10,8 +10,8 @@ public class JsonItemStack {
         this.service = service;
     }
 
-    public int getId() {
-        return this.service.getInt("id");
+    public String getId() {
+        return this.service.getString("id");
     }
 
     public int getStackSize() {
