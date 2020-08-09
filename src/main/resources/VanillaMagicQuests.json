@@ -170,154 +170,149 @@
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftCobblestone",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftGravel",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "cobblestone",
-        "id": 4,
-        "stackSize": 2
+        "id": "minecraft:cobblestone",
+        "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "gravel",
-        "id": 13
+        "id": "minecraft:gravel"
       }
     ],
     "altarTier": 1,
-    "wandTier": 1
+    "icon": {
+      "id": "minecraft:gravel"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier1",
     "posX": 2,
     "posY": 1,
     "uniqueName": "craftLeather",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "rotten_flesh",
-        "id": 367
+        "id": "minecraft:rotten_flesh"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "leather",
-        "id": 334
+        "id": "minecraft:leather"
       }
     ],
     "altarTier": 1,
-    "wandTier": 1
+    "icon": {
+      "id": "minecraft:leather"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftLeather",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftClay",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "suger",
-        "id": 353
+        "id": "minecraft:sugar"
       },
       {
-        "just_to_know_what_it_is": "gunpowder",
-        "id": 289
+        "id": "minecraft:gunpowder"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "clay_ball",
-        "id": 337
+        "id": "minecraft:clay_ball"
       }
     ],
     "altarTier": 1,
-    "wandTier": 1
+    "icon": {
+      "id": "minecraft:leather"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSand",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftGlass",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sand",
-        "id": 12
+        "id": "minecraft:sand"
       },
       {
-        "just_to_know_what_it_is": "coal",
-        "id": 263
+        "id": "minecraft:coal"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "glass",
-        "id": 20
+        "id": "minecraft:glass"
       }
     ],
     "altarTier": 1,
-    "wandTier": 1
+    "icon": {
+      "id": "minecraft:glass"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftGlass",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSnow",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "ice",
-        "id": 79
+        "id": "minecraft:ice"
       },
       {
-        "just_to_know_what_it_is": "water_bucket",
-        "id": 326
+        "id": "minecraft:water_bucket"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "snow_block",
-        "id": 80
+        "id": "minecraft:snow"
       },
       {
-        "just_to_know_what_it_is": "bucket",
-        "id": 325
+        "id": "minecraft:bucket"
       }
     ],
     "altarTier": 1,
-    "wandTier": 1
+    "icon": {
+      "id": "minecraft:snow"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSnow",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftIce",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "snow_block",
-        "id": 80
+        "id": "minecraft:snow"
       },
       {
-        "id": 326
+        "id": "minecraft:water_bucket"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "ice",
-        "id": 79
+        "id": "minecraft:ice"
       },
       {
-        "just_to_know_what_it_is": "bucket",
-        "id": 325
+        "id": "minecraft:bucket"
       }
     ],
     "altarTier": 1,
-    "wandTier": 1
+    "icon": {
+      "id": "minecraft:ice"
+    }
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
@@ -340,12 +335,12 @@
       {
         "just_to_know_what_it_is": "sapling",
         "id": 6,
-        "stackSize": 10
+        "count": 10
       },
       {
         "just_to_know_what_it_is": "cobblestone",
         "id": 4,
-        "stackSize": 10
+        "count": 10
       }
     ],
     "result": [
@@ -354,8 +349,7 @@
         "id": 15
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.upgrade.toolupgrade.QuestToolUpgrade",
@@ -387,7 +381,7 @@
       {
         "just_to_know_what_it_is": "sapling",
         "id": 6,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -396,8 +390,7 @@
         "id": 81
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -409,7 +402,7 @@
       {
         "just_to_know_what_it_is": "cactus",
         "id": 81,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -418,8 +411,7 @@
         "id": 6
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -440,8 +432,7 @@
         "meta": 1
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -463,8 +454,7 @@
         "meta": 2
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -486,8 +476,7 @@
         "meta": 3
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -509,8 +498,7 @@
         "meta": 4
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -532,8 +520,7 @@
         "meta": 5
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -554,8 +541,7 @@
         "id": 6
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -567,7 +553,7 @@
       {
         "just_to_know_what_it_is": "sapling",
         "id": 6,
-        "stackSize": 3
+        "count": 3
       }
     ],
     "result": [
@@ -576,8 +562,7 @@
         "id": 86
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -589,7 +574,7 @@
       {
         "just_to_know_what_it_is": "pumpkin",
         "id": 86,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -598,8 +583,7 @@
         "id": 103
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -611,7 +595,7 @@
       {
         "just_to_know_what_it_is": "melon_block",
         "id": 103,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -620,8 +604,7 @@
         "id": 106
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -633,7 +616,7 @@
       {
         "just_to_know_what_it_is": "vine",
         "id": 106,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -642,8 +625,7 @@
         "id": 111
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -655,7 +637,7 @@
       {
         "just_to_know_what_it_is": "magma_cream",
         "id": 378,
-        "stackSize": 8
+        "count": 8
       }
     ],
     "result": [
@@ -664,8 +646,7 @@
         "id": 341
       }
     ],
-    "altarTier": 2,
-    "wandTier": 1
+    "altarTier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
@@ -687,8 +668,7 @@
       "id": 61
     },
     "uniqueName": "smeltOnAltar",
-    "altarTier": 1,
-    "wandTier": 1
+    "altarTier": 1
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry",
@@ -743,7 +723,7 @@
       {
         "just_to_know_what_it_is": "iron_ingot",
         "id": 265,
-        "stackSize": 8
+        "count": 8
       }
     ],
     "result": [
@@ -752,8 +732,7 @@
         "id": 266
       }
     ],
-    "altarTier": 3,
-    "wandTier": 1
+    "altarTier": 3
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.QuestBlockAbsorber",
@@ -795,8 +774,7 @@
         "id": 367
       }
     ],
-    "altarTier": 4,
-    "wandTier": 1
+    "altarTier": 4
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -808,7 +786,7 @@
       {
         "just_to_know_what_it_is": "rotten_flesh",
         "id": 367,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -817,8 +795,7 @@
         "id": 287
       }
     ],
-    "altarTier": 4,
-    "wandTier": 1
+    "altarTier": 4
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -830,7 +807,7 @@
       {
         "just_to_know_what_it_is": "string",
         "id": 287,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -839,8 +816,7 @@
         "id": 375
       }
     ],
-    "altarTier": 4,
-    "wandTier": 1
+    "altarTier": 4
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -852,7 +828,7 @@
       {
         "just_to_know_what_it_is": "spider_eye",
         "id": 375,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -861,8 +837,7 @@
         "id": 352
       }
     ],
-    "altarTier": 4,
-    "wandTier": 1
+    "altarTier": 4
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -874,7 +849,7 @@
       {
         "just_to_know_what_it_is": "bone",
         "id": 352,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -883,8 +858,7 @@
         "id": 262
       }
     ],
-    "altarTier": 4,
-    "wandTier": 1
+    "altarTier": 4
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestArrowMachineGun",
@@ -906,7 +880,7 @@
       {
         "just_to_know_what_it_is": "arrow",
         "id": 262,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -915,8 +889,7 @@
         "id": 368
       }
     ],
-    "altarTier": 4,
-    "wandTier": 1
+    "altarTier": 4
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
@@ -939,12 +912,11 @@
       {
         "just_to_know_what_it_is": "redstone_dust",
         "id": 331,
-        "stackSize": 2
+        "count": 2
       },
       {
-        "just_to_know_what_it_is": "coal",
-        "id": 263,
-        "stackSize": 2
+        "id": "minecraft:coal",
+        "count": 2
       },
       {
         "just_to_know_what_it_is": "lapis_block",
@@ -957,8 +929,7 @@
         "id": 348
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -972,9 +943,8 @@
         "id": 1
       },
       {
-        "just_to_know_what_it_is": "coal",
-        "id": 263,
-        "stackSize": 2
+        "id": "minecraft:coal",
+        "count": 2
       }
     ],
     "result": [
@@ -983,8 +953,7 @@
         "id": 87
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -994,13 +963,12 @@
     "uniqueName": "craftSoulSand",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sand",
-        "id": 12
+        "id": "minecraft:sand"
       },
       {
         "just_to_know_what_it_is": "coal",
         "id": 263,
-        "stackSize": 2
+        "count": 2
       }
     ],
     "result": [
@@ -1009,8 +977,7 @@
         "id": 88
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1034,8 +1001,7 @@
         "id": 213
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1045,16 +1011,14 @@
     "uniqueName": "craftNetherWart",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "gunpowder",
-        "id": 289
+        "id": "minecraft:gunpowder"
       },
       {
         "just_to_know_what_it_is": "magma_cream",
         "id": 378
       },
       {
-        "just_to_know_what_it_is": "sugar",
-        "id": 353
+        "id": "minecraft:sugar"
       },
       {
         "just_to_know_what_it_is": "redstone_dust",
@@ -1067,8 +1031,7 @@
         "id": 372
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1078,14 +1041,13 @@
     "uniqueName": "craftGhastTear",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "gunpowder",
-        "id": 289,
-        "stackSize": 4
+        "id": "minecraft:gunpowder",
+        "count": 4
       },
       {
         "just_to_know_what_it_is": "blaze_powder",
         "id": 377,
-        "stackSize": 4
+        "count": 4
       },
       {
         "just_to_know_what_it_is": "lava_bucket",
@@ -1098,12 +1060,10 @@
         "id": 370
       },
       {
-        "just_to_know_what_it_is": "bucket",
-        "id": 325
+        "id": "minecraft:bucket"
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestPickup",
@@ -1124,8 +1084,7 @@
     "uniqueName": "questMoveBlock",
     "requiredStackOffHand": {
       "id": 340
-    },
-    "wandTier": 2
+    }
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCaptureEntity",
@@ -1135,8 +1094,7 @@
     "uniqueName": "captureEntity",
     "requiredStackOffHand": {
       "id": 340
-    },
-    "wandTier": 3
+    }
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.QuestEnchantedBucket",
@@ -1144,7 +1102,7 @@
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": 325
+      "id": "minecraft:bucket"
     },
     "uniqueName": "enchantedBucket"
   },
@@ -1191,8 +1149,7 @@
         "meta": 1
       }
     ],
-    "altarTier": 5,
-    "wandTier": 2
+    "altarTier": 5
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal",
@@ -1236,7 +1193,7 @@
       {
         "just_to_know_what_it_is": "gold_ingot",
         "id": 266,
-        "stackSize": 8
+        "count": 8
       }
     ],
     "result": [
@@ -1245,8 +1202,7 @@
         "id": 264
       }
     ],
-    "altarTier": 6,
-    "wandTier": 2
+    "altarTier": 6
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
@@ -1269,7 +1225,7 @@
       {
         "just_to_know_what_it_is": "iron_ore",
         "id": 15,
-        "stackSize": 16
+        "count": 16
       }
     ],
     "result": [
@@ -1278,8 +1234,7 @@
         "id": 14
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1297,11 +1252,10 @@
       {
         "just_to_know_what_it_is": "coal_ore",
         "id": 16,
-        "stackSize": 4
+        "count": 4
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1313,7 +1267,7 @@
       {
         "just_to_know_what_it_is": "gold_ore",
         "id": 14,
-        "stackSize": 16
+        "count": 16
       }
     ],
     "result": [
@@ -1322,8 +1276,7 @@
         "id": 73
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1335,7 +1288,7 @@
       {
         "just_to_know_what_it_is": "redstone_ore",
         "id": 73,
-        "stackSize": 16
+        "count": 16
       }
     ],
     "result": [
@@ -1344,8 +1297,7 @@
         "id": 21
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1357,7 +1309,7 @@
       {
         "just_to_know_what_it_is": "lapis_ore",
         "id": 21,
-        "stackSize": 16
+        "count": 16
       }
     ],
     "result": [
@@ -1366,8 +1318,7 @@
         "id": 56
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestOreMultiplier",
@@ -1378,8 +1329,7 @@
       "id": 380
     },
     "uniqueName": "oreDoubling",
-    "multiplier": 2,
-    "wandTier": 3
+    "multiplier": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1391,7 +1341,7 @@
       {
         "just_to_know_what_it_is": "diamond",
         "id": 264,
-        "stackSize": 8
+        "count": 8
       }
     ],
     "result": [
@@ -1400,8 +1350,7 @@
         "id": 388
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1413,7 +1362,7 @@
       {
         "just_to_know_what_it_is": "diamond_ore",
         "id": 56,
-        "stackSize": 8
+        "count": 8
       }
     ],
     "result": [
@@ -1422,8 +1371,7 @@
         "id": 129
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1435,7 +1383,7 @@
       {
         "just_to_know_what_it_is": "emerald_ore",
         "id": 133,
-        "stackSize": 4
+        "count": 4
       }
     ],
     "result": [
@@ -1444,8 +1392,7 @@
         "id": 399
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestItemMagnet",
@@ -1467,7 +1414,7 @@
       {
         "just_to_know_what_it_is": "nether_star",
         "id": 399,
-        "stackSize": 4
+        "count": 4
       }
     ],
     "result": [
@@ -1476,8 +1423,7 @@
         "id": 122
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1498,8 +1444,7 @@
         "meta": 5
       }
     ],
-    "altarTier": 7,
-    "wandTier": 2
+    "altarTier": 7
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
@@ -1884,7 +1829,7 @@
     "level": 10,
     "requiredLeftHand": {
       "id": 426,
-      "stackSize": 2
+      "count": 2
     }
   },
   {
