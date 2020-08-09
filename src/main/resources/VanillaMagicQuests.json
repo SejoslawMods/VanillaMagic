@@ -128,46 +128,46 @@
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftDirt",
     "posX": 0,
     "posY": -2,
     "uniqueName": "craftSand",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "cobblestone",
-        "id": 4
+        "id": "minecraft:cobblestone"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sand",
-        "id": 12
+        "id": "minecraft:sand"
       }
     ],
-    "requiredAltarTier": 1,
-    "wandTier": 1
+    "altarTier": 1,
+    "icon": {
+      "id": "minecraft:sand"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftDirt",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftCobblestone",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "dirt",
-        "id": 3
+        "id": "minecraft:dirt"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "cobblestone",
-        "id": 4
+        "id": "minecraft:cobblestone"
       }
     ],
-    "requiredAltarTier": 1,
-    "wandTier": 1
+    "altarTier": 1,
+    "icon": {
+      "id": "minecraft:cobblestone"
+    }
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -188,7 +188,7 @@
         "id": 13
       }
     ],
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -209,7 +209,7 @@
         "id": 334
       }
     ],
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -234,7 +234,7 @@
         "id": 337
       }
     ],
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -259,7 +259,7 @@
         "id": 20
       }
     ],
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -288,7 +288,7 @@
         "id": 325
       }
     ],
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -316,7 +316,7 @@
         "id": 325
       }
     ],
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -354,7 +354,7 @@
         "id": 15
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -396,7 +396,7 @@
         "id": 81
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -418,7 +418,7 @@
         "id": 6
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -440,7 +440,7 @@
         "meta": 1
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -463,7 +463,7 @@
         "meta": 2
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -486,7 +486,7 @@
         "meta": 3
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -509,7 +509,7 @@
         "meta": 4
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -532,7 +532,7 @@
         "meta": 5
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -554,7 +554,7 @@
         "id": 6
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -576,7 +576,7 @@
         "id": 86
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -598,7 +598,7 @@
         "id": 103
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -620,7 +620,7 @@
         "id": 106
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -642,7 +642,7 @@
         "id": 111
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -664,7 +664,7 @@
         "id": 341
       }
     ],
-    "requiredAltarTier": 2,
+    "altarTier": 2,
     "wandTier": 1
   },
   {
@@ -687,7 +687,7 @@
       "id": 61
     },
     "uniqueName": "smeltOnAltar",
-    "requiredAltarTier": 1,
+    "altarTier": 1,
     "wandTier": 1
   },
   {
@@ -752,7 +752,7 @@
         "id": 266
       }
     ],
-    "requiredAltarTier": 3,
+    "altarTier": 3,
     "wandTier": 1
   },
   {
@@ -795,7 +795,7 @@
         "id": 367
       }
     ],
-    "requiredAltarTier": 4,
+    "altarTier": 4,
     "wandTier": 1
   },
   {
@@ -817,7 +817,7 @@
         "id": 287
       }
     ],
-    "requiredAltarTier": 4,
+    "altarTier": 4,
     "wandTier": 1
   },
   {
@@ -839,7 +839,7 @@
         "id": 375
       }
     ],
-    "requiredAltarTier": 4,
+    "altarTier": 4,
     "wandTier": 1
   },
   {
@@ -861,7 +861,7 @@
         "id": 352
       }
     ],
-    "requiredAltarTier": 4,
+    "altarTier": 4,
     "wandTier": 1
   },
   {
@@ -883,7 +883,7 @@
         "id": 262
       }
     ],
-    "requiredAltarTier": 4,
+    "altarTier": 4,
     "wandTier": 1
   },
   {
@@ -915,7 +915,7 @@
         "id": 368
       }
     ],
-    "requiredAltarTier": 4,
+    "altarTier": 4,
     "wandTier": 1
   },
   {
@@ -957,7 +957,7 @@
         "id": 348
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -983,7 +983,7 @@
         "id": 87
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -1009,7 +1009,7 @@
         "id": 88
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -1034,7 +1034,7 @@
         "id": 213
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -1067,7 +1067,7 @@
         "id": 372
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -1102,7 +1102,7 @@
         "id": 325
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -1191,7 +1191,7 @@
         "meta": 1
       }
     ],
-    "requiredAltarTier": 5,
+    "altarTier": 5,
     "wandTier": 2
   },
   {
@@ -1245,7 +1245,7 @@
         "id": 264
       }
     ],
-    "requiredAltarTier": 6,
+    "altarTier": 6,
     "wandTier": 2
   },
   {
@@ -1278,7 +1278,7 @@
         "id": 14
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1300,7 +1300,7 @@
         "stackSize": 4
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1322,7 +1322,7 @@
         "id": 73
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1344,7 +1344,7 @@
         "id": 21
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1366,7 +1366,7 @@
         "id": 56
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1400,7 +1400,7 @@
         "id": 388
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1422,7 +1422,7 @@
         "id": 129
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1444,7 +1444,7 @@
         "id": 399
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1476,7 +1476,7 @@
         "id": 122
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
@@ -1498,7 +1498,7 @@
         "meta": 5
       }
     ],
-    "requiredAltarTier": 7,
+    "altarTier": 7,
     "wandTier": 2
   },
   {
