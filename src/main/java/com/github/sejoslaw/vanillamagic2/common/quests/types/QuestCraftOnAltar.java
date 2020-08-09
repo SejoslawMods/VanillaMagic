@@ -19,5 +19,9 @@ public class QuestCraftOnAltar extends Quest {
 
         this.ingredients = ItemStackUtils.getItemStacksFromJson(jsonService, "ingredients");
         this.results = ItemStackUtils.getItemStacksFromJson(jsonService, "results");
+
+        if (this.iconStack == null || this.iconStack == ItemStack.EMPTY) {
+            this.iconStack = this.results.get(0);
+        }
     }
 }
