@@ -8,25 +8,26 @@ import java.util.Set;
  */
 public interface IJsonService {
     /**
-     * @param key
      * @return String from given key.
      */
     String getString(String key);
 
     /**
-     * @param key
+     * @return Byte from given key.
+     */
+    byte getByte(String key);
+
+    /**
      * @return Int from given key.
      */
     int getInt(String key);
 
     /**
-     * @param key
      * @return Wrapped ItemStack from given key.
      */
     JsonItemStack getItemStack(String key);
 
     /**
-     * @param key
      * @return List of wrapped objects from given key.
      */
     List<IJsonService> getList(String key);

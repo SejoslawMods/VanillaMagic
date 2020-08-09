@@ -14,7 +14,7 @@ public class JsonItemStack {
         return this.service.getString("id");
     }
 
-    public int getStackSize() {
-        return this.service.getInt("stackSize");
+    public byte getCount() {
+        return this.service.getByte("count");
     }
 }

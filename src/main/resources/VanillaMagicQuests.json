@@ -80,49 +80,52 @@
         "id": "minecraft:gunpowder"
       }
     ],
-    "altarTier": 1
+    "altarTier": 1,
+    "icon": {
+      "id": "minecraft:gunpowder"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftGunpowder",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSugar",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sugar_cane",
-        "id": 338
+        "id": "minecraft:reeds"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sugar",
-        "id": 353
+        "id": "minecraft:sugar"
       }
     ],
-    "requiredAltarTier": 1,
-    "wandTier": 1
+    "altarTier": 1,
+    "icon": {
+      "id": "minecraft:sugar"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSugar",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftDirt",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sand",
-        "id": 12
+        "id": "minecraft:sand"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "dirt",
-        "id": 3
+        "id": "minecraft:dirt"
       }
     ],
-    "requiredAltarTier": 1,
-    "wandTier": 1
+    "altarTier": 1,
+    "icon": {
+      "id": "minecraft:dirt"
+    }
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",

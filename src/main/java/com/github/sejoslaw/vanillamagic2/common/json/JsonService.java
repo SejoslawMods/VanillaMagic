@@ -29,6 +29,10 @@ public final class JsonService implements IJsonService {
         return this.getValue(key, JsonElement::getAsString, "");
     }
 
+    public byte getByte(String key) {
+        return this.getValue(key, JsonElement::getAsByte, Byte.MIN_VALUE);
+    }
+
     public int getInt(String key) {
         return this.getValue(key, JsonElement::getAsInt, Integer.MIN_VALUE);
     }

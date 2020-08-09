@@ -4,16 +4,14 @@ import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonItemStack;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +25,14 @@ public final class ItemStackUtils {
      * @return ItemStack from JSON Object.
      */
     public static ItemStack getItemStackFromJson(JsonItemStack jsonItemStack) {
-        ResourceLocation resource = new ResourceLocation(jsonItemStack.getId());
-        Item item = ForgeRegistries.ITEMS.getValue(resource);
-        ItemStack stack;
+        CompoundNBT nbt = new CompoundNBT();
 
-        if (item != null) {
-            stack = new ItemStack(item);
-        } else {
-            stack = new ItemStack(ForgeRegistries.BLOCKS.getValue(resource));
-        }
+        nbt.putString("id", jsonItemStack.getId());
 
-        int stackSize = jsonItemStack.getStackSize();
+        byte count = jsonItemStack.getCount();
+        nbt.putByte("Count", count <= 0 ? 1 : count);
 
-        if (stackSize > 0) {
-            stack.setCount(stackSize);
-        }
-
-        return stack;
+        return ItemStack.read(nbt);
     }
 
     /**
