@@ -352,27 +352,27 @@
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.upgrade.toolupgrade.QuestToolUpgrade",
+    "eventCaller": "itemTierUpgrade",
     "parent": "craftIronOre",
     "posX": 2,
     "posY": 0,
     "uniqueName": "toolUpgrade",
     "icon": {
-      "id": 278
+      "id": "minecraft:diamond_pickaxe"
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.QuestItemUpgrade",
+    "eventCaller": "itemUpgrade",
     "parent": "toolUpgrade",
     "posX": 2,
     "posY": 0,
     "uniqueName": "itemUpgrades",
     "icon": {
-      "id": 278
+      "id": "minecraft:diamond_pickaxe"
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier2",
     "posX": -2,
     "posY": 1,
@@ -385,43 +385,45 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "cactus",
-        "id": 81
+        "id": "minecraft:cactus"
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:cactus"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftCactus",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSapling0",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "cactus",
-        "id": 81,
+        "id": "minecraft:cactus",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6
+        "id": "minecraft:sapling"
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling0",
     "posX": 0,
     "posY": 2,
     "uniqueName": "craftSapling1",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6
+        "id": "minecraft:sapling"
       }
     ],
     "result": [
@@ -430,10 +432,14 @@
         "meta": 1
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling",
+      "meta": 1
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling1",
     "posX": -2,
     "posY": 0,
@@ -450,136 +456,149 @@
         "meta": 2
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling",
+      "meta": 2
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling2",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSapling3",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 3
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling",
+      "meta": 3
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling3",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSapling4",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 3
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 4
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling",
+      "meta": 4
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling4",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSapling5",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 4
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 5
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling",
+      "meta": 5
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling5",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSapling6",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "meta": 5
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6
+        "id": "minecraft:sapling"
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:sapling"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSapling0",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftPumpkin",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "sapling",
-        "id": 6,
+        "id": "minecraft:sapling",
         "count": 3
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "pumpkin",
-        "id": 86
+        "id": "minecraft:pumpkin"
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:pumpkin"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftPumpkin",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftMelonBlock",
+    "uniqueName": "craftMelon",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "pumpkin",
-        "id": 86,
+        "id": "minecraft:pumpkin",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "melon_block",
-        "id": 103
+        "id": "minecraft:melon"
       }
     ],
-    "altarTier": 2
+    "altarTier": 2,
+    "icon": {
+      "id": "minecraft:melon"
+    }
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -589,8 +608,7 @@
     "uniqueName": "craftVine",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "melon_block",
-        "id": 103,
+        "id": "minecraft:melon",
         "count": 2
       }
     ],

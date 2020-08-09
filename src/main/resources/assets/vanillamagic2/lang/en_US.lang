@@ -378,8 +378,8 @@ quest.craftSapling6.desc=Toss 1x Dark Oak Sapling into the Altar Tier 2 and righ
 quest.craftPumpkin=Craft Pumpkin
 quest.craftPumpkin.desc=Toss 3x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
-quest.craftMelonBlock=Craft Melon Block
-quest.craftMelonBlock.desc=Toss 2x Pumpkin into the Altar Tier 2 and right-click with a Stick Wand in right hand.
+quest.craftMelon=Craft Melon
+quest.craftMelon.desc=Toss 2x Pumpkin into the Altar Tier 2 and right-click with a Stick Wand in right hand.
 
 quest.craftVine=Craft Vine
 quest.craftVine.desc=Toss 2x Melon Block into the Altar Tier 2 and right-click with a Stick Wand in right hand.
