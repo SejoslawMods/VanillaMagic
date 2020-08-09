@@ -42,7 +42,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
                 (player, world, pos, direction, quest) -> WorldUtils.spawnOnCauldron(
                         world,
                         pos,
-                        ItemStackUtils.smeltItems(player, oresInCauldron[0], quest.singleItemSmeltingCost),
+                        ItemStackUtils.smeltItems(player, oresInCauldron[0], quest.oneItemSmeltCost),
                         stack -> stack.getCount() * quest.multiplier));
     }
 

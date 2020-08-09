@@ -549,49 +549,45 @@
     "altarTier": 2
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftVine",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftLiyPad",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "vine",
-        "id": 106,
+        "id": "minecraft:vine",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "water_lily",
-        "id": 111
+        "id": "minecraft:waterlily"
       }
     ],
     "altarTier": 2
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftLiyPad",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftSlimeBall",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "magma_cream",
-        "id": 378,
+        "id": "minecraft:magma_cream",
         "count": 8
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "slime_ball",
-        "id": 341
+        "id": "minecraft:slime_ball"
       }
     ],
     "altarTier": 2
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "eventCaller": "buildAltar",
     "parent": "buildAltarTier2",
     "posX": 0,
     "posY": 2,
@@ -602,7 +598,7 @@
     "altarTier": 3
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSmeltOnAltar",
+    "eventCaller": "smeltOnAltar",
     "parent": "buildAltarTier3",
     "posX": -2,
     "posY": 1,
@@ -610,7 +606,8 @@
       "id": 61
     },
     "uniqueName": "smeltOnAltar",
-    "altarTier": 1
+    "altarTier": 1,
+    "oneItemSmeltCost": 800
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry",

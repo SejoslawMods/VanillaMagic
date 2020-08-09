@@ -22,7 +22,7 @@ public class Quest {
     public ItemStack leftHandStack;
     public int multiplier;
     public int level;
-    public int singleItemSmeltingCost;
+    public int oneItemSmeltCost;
 
     public void readData(IJsonService jsonService) {
         this.parent = QuestRegistry.getQuest(jsonService.getString("parent"));
@@ -64,6 +64,6 @@ public class Quest {
         this.leftHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("leftHandStack"));
         this.multiplier = jsonService.getInt("multiplier");
         this.level = jsonService.getInt("level");
-        this.singleItemSmeltingCost = jsonService.getInt("singleItemSmeltingCost");
+        this.oneItemSmeltCost = jsonService.getInt("oneItemSmeltCost");
     }
 }
