@@ -768,7 +768,7 @@
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftBone",
     "posX": 2,
     "posY": 0,
@@ -781,45 +781,42 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "arrow",
-        "id": 262
+        "id": "minecraft:arrow"
       }
     ],
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestArrowMachineGun",
+    "eventCaller": "arrowMachineGun",
     "parent": "craftArrow",
     "posX": 0,
     "posY": -2,
     "icon": {
-      "id": 262
+      "id": "minecraft:arrow"
     },
     "uniqueName": "arrowMachineGun"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftArrow",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftEnderPearl",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "arrow",
-        "id": 262,
+        "id": "minecraft:arrow",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "ender_pearl",
-        "id": 368
+        "id": "minecraft:ender_pearl"
       }
     ],
     "altarTier": 4
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "eventCaller": "buildAltar",
     "parent": "buildAltarTier4",
     "posX": 0,
     "posY": 2,
@@ -830,15 +827,14 @@
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier5",
     "posX": -2,
     "posY": 1,
     "uniqueName": "craftGlowstoneDust",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "redstone_dust",
-        "id": 331,
+        "id": "minecraft:redstone",
         "count": 2
       },
       {
@@ -846,28 +842,25 @@
         "count": 2
       },
       {
-        "just_to_know_what_it_is": "lapis_block",
-        "id": 22
+        "id": "minecraft:lapis_block"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "glowstone_dust",
-        "id": 348
+        "id": "minecraft:glowstone_dust"
       }
     ],
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftGlowstoneDust",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftNetherrack",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "stone",
-        "id": 1
+        "id": "minecraft:stone"
       },
       {
         "id": "minecraft:coal",
@@ -876,8 +869,7 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "netherrack",
-        "id": 87
+        "id": "minecraft:netherrack"
       }
     ],
     "altarTier": 5
@@ -914,8 +906,7 @@
     "uniqueName": "craftMagmaBlock",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "netherrack",
-        "id": 87
+        "id": "minecraft:netherrack"
       },
       {
         "just_to_know_what_it_is": "magma_cream",
@@ -948,8 +939,7 @@
         "id": "minecraft:sugar"
       },
       {
-        "just_to_know_what_it_is": "redstone_dust",
-        "id": 331
+        "id": "minecraft:redstone"
       }
     ],
     "result": [
