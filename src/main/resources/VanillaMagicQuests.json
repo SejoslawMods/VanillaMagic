@@ -1,96 +1,80 @@
-[
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+[{
+	"eventCaller":"craft",
 	"parent":"",
 	"posX":0,
 	"posY":6,
-	"icon":
-	{
+	"icon": {
 		"id":"minecraft:stick"
 	},
 	"uniqueName":"craftStick"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.portablecraftingtable.QuestPortableCraftingTable",
+	"eventCaller":"portableCraftingTable",
 	"parent":"craftStick",
 	"posX":-2,
 	"posY":0,
-	"icon":
-	{
-		"id":58
+	"icon": {
+		"id":"minecraft:crafting_table"
 	},
 	"uniqueName":"portableCraftingTable"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+	"eventCaller":"castSpellInAir",
 	"parent":"craftStick",
 	"posX":0,
 	"posY":-2,
-	"uniqueName": "spellFlintAndSteel",
-	"spellID":0
+	"icon": {
+		"id":"minecraft:flint_and_steel"
+	},
+	"uniqueName": "spellFlintAndSteel"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+	"eventCaller":"craft",
 	"parent":"craftStick",
 	"posX":1,
 	"posY":2,
-	"icon":
-	{
-		"id":380
+	"icon": {
+		"id":"minecraft:cauldron"
 	},
 	"uniqueName":"craftCauldron"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+	"eventCaller":"mineBlock",
 	"parent":"craftStick",
 	"posX":-1,
 	"posY":2,
-	"icon":
-	{
-		"id":73
+	"icon": {
+		"id":"minecraft:redstone_ore"
 	},
 	"uniqueName":"mineRedstone",
-	"blocksToBeMined":"redstone"
+	"blocksToMine":"redstone"
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+	"eventCaller":"buildAltar",
 	"parent":"craftStick",
 	"posX":0,
 	"posY":3,
-	"icon":
-	{
-		"id":380
+	"icon": {
+		"id":"minecraft:redstone"
 	},
 	"uniqueName":"buildAltarTier1",
-	"tier":1,
-	"additionalRequiredQuests":
-	{
-		"quest_1":"craftCauldron",
-		"quest_2":"mineRedstone"
-	}
+	"altarTier":1
 },
 {
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+	"eventCaller":"craftOnAltar",
 	"parent":"buildAltarTier1",
 	"posX":-2,
 	"posY":1,
 	"uniqueName":"craftGunpowder",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sugar_cane",
-		"id":338
-	},
-	{
-		"just_to_know_what_it_is":"coal",
-		"id":263
+	"ingredients": [{
+		"id":"minecraft:reeds"
+	}, {
+		"id":"minecraft:coal"
 	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"gunpowder",
-		"id":289
+	"result": [{
+		"id":"minecraft:gunpowder"
 	}],
-	"requiredAltarTier":1,
-	"wandTier":1
+	"altarTier":1
 },
 {
 	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
