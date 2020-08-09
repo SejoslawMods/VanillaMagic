@@ -1,1918 +1,1981 @@
-[{
-	"eventCaller":"craft",
-	"parent":"",
-	"posX":0,
-	"posY":6,
-	"icon": {
-		"id":"minecraft:stick"
-	},
-	"uniqueName":"craftStick"
-},
-{
-	"eventCaller":"portableCraftingTable",
-	"parent":"craftStick",
-	"posX":-2,
-	"posY":0,
-	"icon": {
-		"id":"minecraft:crafting_table"
-	},
-	"uniqueName":"portableCraftingTable"
-},
-{
-	"eventCaller":"castSpellInAir",
-	"parent":"craftStick",
-	"posX":0,
-	"posY":-2,
-	"icon": {
-		"id":"minecraft:flint_and_steel"
-	},
-	"uniqueName": "spellFlintAndSteel"
-},
-{
-	"eventCaller":"craft",
-	"parent":"craftStick",
-	"posX":1,
-	"posY":2,
-	"icon": {
-		"id":"minecraft:cauldron"
-	},
-	"uniqueName":"craftCauldron"
-},
-{
-	"eventCaller":"mineBlock",
-	"parent":"craftStick",
-	"posX":-1,
-	"posY":2,
-	"icon": {
-		"id":"minecraft:redstone_ore"
-	},
-	"uniqueName":"mineRedstone",
-	"blocksToMine":"redstone"
-},
-{
-	"eventCaller":"buildAltar",
-	"parent":"craftStick",
-	"posX":0,
-	"posY":3,
-	"icon": {
-		"id":"minecraft:redstone"
-	},
-	"uniqueName":"buildAltarTier1",
-	"altarTier":1
-},
-{
-	"eventCaller":"craftOnAltar",
-	"parent":"buildAltarTier1",
-	"posX":-2,
-	"posY":1,
-	"uniqueName":"craftGunpowder",
-	"ingredients": [{
-		"id":"minecraft:reeds"
-	}, {
-		"id":"minecraft:coal"
-	}],
-	"result": [{
-		"id":"minecraft:gunpowder"
-	}],
-	"altarTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftGunpowder",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSugar",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sugar_cane",
-		"id":338
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sugar",
-		"id":353
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSugar",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftDirt",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sand",
-		"id":12
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"dirt",
-		"id":3
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftDirt",
-	"posX":0,
-	"posY":-2,
-	"uniqueName":"craftSand",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"cobblestone",
-		"id":4
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sand",
-		"id":12
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftDirt",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftCobblestone",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"dirt",
-		"id":3
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"cobblestone",
-		"id":4
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftCobblestone",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftGravel",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"cobblestone",
-		"id":4,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"gravel",
-		"id":13
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier1",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftLeather",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"rotten_flesh",
-		"id":367
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"leather",
-		"id":334
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftLeather",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftClay",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"suger",
-		"id":353
-	},
-	{
-		"just_to_know_what_it_is":"gunpowder",
-		"id":289
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"clay_ball",
-		"id":337
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSand",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftGlass",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sand",
-		"id":12
-	},
-	{
-		"just_to_know_what_it_is":"coal",
-		"id":263
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"glass",
-		"id":20
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftGlass",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSnow",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"ice",
-		"id":79
-	},
-	{
-		"just_to_know_what_it_is":"water_bucket",
-		"id":326
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"snow_block",
-		"id":80
-	},
-	{
-		"just_to_know_what_it_is":"bucket",
-		"id":325
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSnow",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftIce",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"snow_block",
-		"id":80
-	},
-	{
-		"id":326
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"ice",
-		"id":79
-	},
-	{
-		"just_to_know_what_it_is":"bucket",
-		"id":325
-	}],
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
-	"parent":"buildAltarTier1",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"buildAltarTier2",
-	"tier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier2",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftIronOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"stackSize":10
-	},
-	{
-		"just_to_know_what_it_is":"cobblestone",
-		"id":4,
-		"stackSize":10
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"iron_ore",
-		"id":15
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.upgrade.toolupgrade.QuestToolUpgrade",
-    "parent":"craftIronOre",
-    "posX":2,
-    "posY":0,
-    "uniqueName":"toolUpgrade",
-    "icon":
-    {
-        "id":278
+[
+  {
+    "eventCaller": "craft",
+    "parent": "",
+    "posX": 0,
+    "posY": 6,
+    "icon": {
+      "id": "minecraft:stick"
+    },
+    "uniqueName": "craftStick"
+  },
+  {
+    "eventCaller": "portableCraftingTable",
+    "parent": "craftStick",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:crafting_table"
+    },
+    "uniqueName": "portableCraftingTable"
+  },
+  {
+    "eventCaller": "castSpellInAir",
+    "parent": "craftStick",
+    "posX": 0,
+    "posY": -2,
+    "icon": {
+      "id": "minecraft:flint_and_steel"
+    },
+    "uniqueName": "spellFlintAndSteel"
+  },
+  {
+    "eventCaller": "craft",
+    "parent": "craftStick",
+    "posX": 1,
+    "posY": 2,
+    "icon": {
+      "id": "minecraft:cauldron"
+    },
+    "uniqueName": "craftCauldron"
+  },
+  {
+    "eventCaller": "mineBlock",
+    "parent": "craftStick",
+    "posX": -1,
+    "posY": 2,
+    "icon": {
+      "id": "minecraft:redstone_ore"
+    },
+    "uniqueName": "mineRedstone",
+    "blocksToMine": "redstone"
+  },
+  {
+    "eventCaller": "buildAltar",
+    "parent": "craftStick",
+    "posX": 0,
+    "posY": 3,
+    "icon": {
+      "id": "minecraft:redstone"
+    },
+    "uniqueName": "buildAltarTier1",
+    "altarTier": 1
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "buildAltarTier1",
+    "posX": -2,
+    "posY": 1,
+    "uniqueName": "craftGunpowder",
+    "ingredients": [
+      {
+        "id": "minecraft:reeds"
+      },
+      {
+        "id": "minecraft:coal"
+      }
+    ],
+    "result": [
+      {
+        "id": "minecraft:gunpowder"
+      }
+    ],
+    "altarTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftGunpowder",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSugar",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sugar_cane",
+        "id": 338
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sugar",
+        "id": 353
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSugar",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftDirt",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sand",
+        "id": 12
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "dirt",
+        "id": 3
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftDirt",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "craftSand",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "cobblestone",
+        "id": 4
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sand",
+        "id": 12
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftDirt",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftCobblestone",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "dirt",
+        "id": 3
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "cobblestone",
+        "id": 4
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftCobblestone",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftGravel",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "cobblestone",
+        "id": 4,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "gravel",
+        "id": 13
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier1",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftLeather",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "rotten_flesh",
+        "id": 367
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "leather",
+        "id": 334
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftLeather",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftClay",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "suger",
+        "id": 353
+      },
+      {
+        "just_to_know_what_it_is": "gunpowder",
+        "id": 289
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "clay_ball",
+        "id": 337
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSand",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftGlass",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sand",
+        "id": 12
+      },
+      {
+        "just_to_know_what_it_is": "coal",
+        "id": 263
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "glass",
+        "id": 20
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftGlass",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSnow",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "ice",
+        "id": 79
+      },
+      {
+        "just_to_know_what_it_is": "water_bucket",
+        "id": 326
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "snow_block",
+        "id": 80
+      },
+      {
+        "just_to_know_what_it_is": "bucket",
+        "id": 325
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSnow",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftIce",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "snow_block",
+        "id": 80
+      },
+      {
+        "id": 326
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "ice",
+        "id": 79
+      },
+      {
+        "just_to_know_what_it_is": "bucket",
+        "id": 325
+      }
+    ],
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "parent": "buildAltarTier1",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
+    },
+    "uniqueName": "buildAltarTier2",
+    "tier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier2",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftIronOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "stackSize": 10
+      },
+      {
+        "just_to_know_what_it_is": "cobblestone",
+        "id": 4,
+        "stackSize": 10
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "iron_ore",
+        "id": 15
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.upgrade.toolupgrade.QuestToolUpgrade",
+    "parent": "craftIronOre",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "toolUpgrade",
+    "icon": {
+      "id": 278
     }
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.QuestItemUpgrade",
-	"parent":"toolUpgrade",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"itemUpgrades",
-	"icon":
-	{
-		"id":278
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier2",
-	"posX":-2,
-	"posY":1,
-	"uniqueName":"craftCactus",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"cactus",
-		"id":81
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftCactus",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSapling0",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"cactus",
-		"id":81,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling0",
-	"posX":0,
-	"posY":2,
-	"uniqueName":"craftSapling1",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":1
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling1",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSapling2",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":1
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":2
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling2",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSapling3",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":3
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling3",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSapling4",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":3
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":4
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling4",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSapling5",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":4
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":5
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling5",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSapling6",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"meta":5
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSapling0",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftPumpkin",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sapling",
-		"id":6,
-		"stackSize":3
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"pumpkin",
-		"id":86
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftPumpkin",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftMelonBlock",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"pumpkin",
-		"id":86,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"melon_block",
-		"id":103
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftMelonBlock",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftVine",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"melon_block",
-		"id":103,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"vine",
-		"id":106
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftVine",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftLiyPad",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"vine",
-		"id":106,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"water_lily",
-		"id":111
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftLiyPad",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSlimeBall",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"magma_cream",
-		"id":378,
-		"stackSize":8
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"slime_ball",
-		"id":341
-	}],
-	"requiredAltarTier":2,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
-	"parent":"buildAltarTier2",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"buildAltarTier3",
-	"tier":3
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestSmeltOnAltar",
-	"parent":"buildAltarTier3",
-	"posX":-2,
-	"posY":1,
-	"icon":
-	{
-		"id":61
-	},
-	"uniqueName":"smeltOnAltar",
-	"requiredAltarTier":1,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry",
-	"parent":"smeltOnAltar",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"quarry",
-	"mustHaveMainHand":
-	{
-		"id":369
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.fulltreecut.QuestFullTreeCut",
-	"parent":"quarry",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":279
-	},
-	"uniqueName":"fullTreeCut"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.speedy.QuestSpeedy",
-	"parent":"fullTreeCut",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":288
-	},
-	"uniqueName":"speedy"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature.QuestMotherNatureCrystal",
-	"parent":"speedy",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":399
-	},
-	"uniqueName":"motherNatureCrystal"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier3",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftGoldIngot",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"iron_ingot",
-		"id":265,
-		"stackSize":8
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"gold_ingot",
-		"id":266
-	}],
-	"requiredAltarTier":3,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.QuestBlockAbsorber",
-	"parent":"craftGoldIngot",
-	"posX":2,
-	"posY":0,
-	"icon":
-	{
-		"just_to_know_what_it_is":"item_hopper",
-		"id":154
-	},
-	"uniqueName":"blockAbsorber"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
-	"parent":"buildAltarTier3",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"buildAltarTier4",
-	"tier":4
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier4",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftRottenFlesh",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"leather",
-		"id":334
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"rotten_flesh",
-		"id":367
-	}],
-	"requiredAltarTier":4,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftRottenFlesh",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftString",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"rotten_flesh",
-		"id":367,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"string",
-		"id":287
-	}],
-	"requiredAltarTier":4,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftString",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftSpiderEye",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"string",
-		"id":287,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"spider_eye",
-		"id":375
-	}],
-	"requiredAltarTier":4,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSpiderEye",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftBone",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"spider_eye",
-		"id":375,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"bone",
-		"id":352
-	}],
-	"requiredAltarTier":4,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftBone",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftArrow",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"bone",
-		"id":352,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"arrow",
-		"id":262
-	}],
-	"requiredAltarTier":4,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestArrowMachineGun",
-	"parent":"craftArrow",
-	"posX":0,
-	"posY":-2,
-	"icon":
-	{
-		"id":262
-	},
-	"uniqueName":"arrowMachineGun"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftArrow",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftEnderPearl",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"arrow",
-		"id":262,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"ender_pearl",
-		"id":368
-	}],
-	"requiredAltarTier":4,
-	"wandTier":1
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
-	"parent":"buildAltarTier4",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"buildAltarTier5",
-	"tier":5
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier5",
-	"posX":-2,
-	"posY":1,
-	"uniqueName":"craftGlowstoneDust",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"redstone_dust",
-		"id":331,
-		"stackSize":2
-	},
-	{
-		"just_to_know_what_it_is":"coal",
-		"id":263,
-		"stackSize":2
-	},
-	{
-		"just_to_know_what_it_is":"lapis_block",
-		"id":22
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"glowstone_dust",
-		"id":348
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftGlowstoneDust",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftNetherrack",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"stone",
-		"id":1
-	},
-	{
-		"just_to_know_what_it_is":"coal",
-		"id":263,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"netherrack",
-		"id":87
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftNetherrack",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftSoulSand",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"sand",
-		"id":12
-	},
-	{
-		"just_to_know_what_it_is":"coal",
-		"id":263,
-		"stackSize":2
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"soul_sand",
-		"id":88
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftSoulSand",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftMagmaBlock",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"netherrack",
-		"id":87
-	},
-	{
-		"just_to_know_what_it_is":"magma_cream",
-		"id":378
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"magma_block",
-		"id":213
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftMagmaBlock",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftNetherWart",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"gunpowder",
-		"id":289
-	},
-	{
-		"just_to_know_what_it_is":"magma_cream",
-		"id":378
-	},
-	{
-		"just_to_know_what_it_is":"sugar",
-		"id":353
-	},
-	{
-		"just_to_know_what_it_is":"redstone_dust",
-		"id":331
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"nether_wart",
-		"id":372
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftNetherWart",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftGhastTear",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"gunpowder",
-		"id":289,
-		"stackSize":4
-	},
-	{
-		"just_to_know_what_it_is":"blaze_powder",
-		"id":377,
-		"stackSize":4
-	},
-	{
-		"just_to_know_what_it_is":"lava_bucket",
-		"id":327
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"ghast_tear",
-		"id":370
-	},
-	{
-		"just_to_know_what_it_is":"bucket",
-		"id":325
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestPickup",
-	"parent":"buildAltarTier5",
-	"posX":0,
-	"posY":2,
-	"uniqueName":"pickupBlazeRod",
-	"whatToPick":
-	{
-	    "what_to_pick":"blaze_rod",
-		"id":369
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMoveBlock",
-	"parent":"pickupBlazeRod",
-	"posX":-2,
-	"posY":1,
-	"uniqueName":"questMoveBlock",
-	"requiredStackOffHand":
-	{
-		"id":340
-	},
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCaptureEntity",
-	"parent":"questMoveBlock",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"captureEntity",
-	"requiredStackOffHand":
-	{
-		"id":340
-	},
-	"wandTier":3
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.QuestEnchantedBucket",
-	"parent":"captureEntity",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":325
-	},
-	"uniqueName":"enchantedBucket"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
-	"parent":"enchantedBucket",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":399
-	},
-	"uniqueName":"liquidSuppressionCrystal"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.QuestPotionedCrystal",
-	"parent":"liquidSuppressionCrystal",
-	"posX":-2,
-	"posY":0,
-	"icon":
-	{
-		"id":373
-	},
-	"uniqueName":"potionedCrystal"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"pickupBlazeRod",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftWitherSkeletonSkull",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"coal_block",
-		"id":173
-	},
-	{
-		"just_to_know_what_it_is":"skull",
-		"id":397
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"skull",
-		"id":397,
-		"meta":1
-	}],
-	"requiredAltarTier":5,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal",
-	"parent":"craftWitherSkeletonSkull",
-	"posX":2,
-	"posY":0,
-	"icon":
-	{
-		"id":399
-	},
-	"uniqueName":"accelerationCrystal"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
-	"parent":"pickupBlazeRod",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"buildAltarTier6",
-	"tier":6
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.QuestInventoryBridge",
-	"parent":"buildAltarTier6",
-	"posX":-2,
-	"posY":1,
-	"icon":
-	{
-		"it_is":"vanilla_chest",
-		"id":54
-	},
-	"uniqueName":"inventoryBridge"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier6",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftDiamond",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"gold_ingot",
-		"id":266,
-		"stackSize":8
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"diamond",
-		"id":264
-	}],
-	"requiredAltarTier":6,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
-	"parent":"buildAltarTier6",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"buildAltarTier7",
-	"tier":7
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier7",
-	"posX":-2,
-	"posY":1,
-	"uniqueName":"craftGoldOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"iron_ore",
-		"id":15,
-		"stackSize":16
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"gold_ore",
-		"id":14
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftGoldOre",
-	"posX":0,
-	"posY":2,
-	"uniqueName":"craftCoalOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"gold_ore",
-		"id":14
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"coal_ore",
-		"id":16,
-		"stackSize":4
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftGoldOre",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftRedstoneOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"gold_ore",
-		"id":14,
-		"stackSize":16
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"redstone_ore",
-		"id":73
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftRedstoneOre",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftLapisOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"redstone_ore",
-		"id":73,
-		"stackSize":16
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"lapis_ore",
-		"id":21
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftLapisOre",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"craftDiamondOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"lapis_ore",
-		"id":21,
-		"stackSize":16
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"diamond_ore",
-		"id":56
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestOreMultiplier",
-	"parent":"craftDiamondOre",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":380
-	},
-	"uniqueName":"oreDoubling",
-	"multiplier":2,
-	"wandTier":3
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"buildAltarTier7",
-	"posX":2,
-	"posY":1,
-	"uniqueName":"craftEmerald",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"diamond",
-		"id":264,
-		"stackSize":8
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"emerald",
-		"id":388
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftEmerald",
-	"posX":0,
-	"posY":2,
-	"uniqueName":"craftEmeraldOre",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"diamond_ore",
-		"id":56,
-		"stackSize":8
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"emerald_ore",
-		"id":129
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftEmerald",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftNetherStar",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"emerald_ore",
-		"id":133,
-		"stackSize":4
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"emerald_ore",
-		"id":399
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestItemMagnet",
-	"parent":"craftNetherStar",
-	"posX":0,
-	"posY":2,
-	"icon":
-	{
-		"id":399
-	},
-	"uniqueName":"itemMagnet"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftNetherStar",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftDragonEgg",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"nether_star",
-		"id":399,
-		"stackSize":4
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"dragon_egg",
-		"id":122
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
-	"parent":"craftDragonEgg",
-	"posX":2,
-	"posY":0,
-	"uniqueName":"craftDragonHead",
-	"ingredients":
-	[{
-		"just_to_know_what_it_is":"dragon_egg",
-		"id":122
-	}],
-	"result":
-	[{
-		"just_to_know_what_it_is":"dragon_skull",
-		"id":397,
-		"meta":5
-	}],
-	"requiredAltarTier":7,
-	"wandTier":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
-	"parent":"craftStick",
-	"posX":2,
-	"posY":1,
-	"icon":
-	{
-		"id":340
-	},
-	"uniqueName":"craftBook"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
-	"parent":"craftBook",
-	"posX":2,
-	"posY":0,
-	"icon":
-	{
-		"id":47
-	},
-	"uniqueName":"craftBookshelf"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
-	"parent":"craftBook",
-	"posX":2,
-	"posY":-1,
-	"icon":
-	{
-		"id":264
-	},
-	"uniqueName":"mineDiamond",
-	"blocksToBeMined":"diamond"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
-	"parent":"craftBook",
-	"posX":2,
-	"posY":1,
-	"icon":
-	{
-		"id":49
-	},
-	"uniqueName":"mineObsidian",
-	"blocksToBeMined":"obsidian"
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.QuestMobSpawnerDrop",
-    "parent":"mineObsidian",
-    "posX":2,
-    "posY":0,
-    "icon":
-    {
-        "it_is":"mob_spawner",
-        "id":52
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.upgrade.itemupgrade.QuestItemUpgrade",
+    "parent": "toolUpgrade",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "itemUpgrades",
+    "icon": {
+      "id": 278
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier2",
+    "posX": -2,
+    "posY": 1,
+    "uniqueName": "craftCactus",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "cactus",
+        "id": 81
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftCactus",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSapling0",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "cactus",
+        "id": 81,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling0",
+    "posX": 0,
+    "posY": 2,
+    "uniqueName": "craftSapling1",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 1
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling1",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSapling2",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 1
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 2
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling2",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSapling3",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 3
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling3",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSapling4",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 3
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 4
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling4",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSapling5",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 4
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 5
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling5",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSapling6",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "meta": 5
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSapling0",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftPumpkin",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sapling",
+        "id": 6,
+        "stackSize": 3
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "pumpkin",
+        "id": 86
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftPumpkin",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftMelonBlock",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "pumpkin",
+        "id": 86,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "melon_block",
+        "id": 103
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftMelonBlock",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftVine",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "melon_block",
+        "id": 103,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "vine",
+        "id": 106
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftVine",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftLiyPad",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "vine",
+        "id": 106,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "water_lily",
+        "id": 111
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftLiyPad",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSlimeBall",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "magma_cream",
+        "id": 378,
+        "stackSize": 8
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "slime_ball",
+        "id": 341
+      }
+    ],
+    "requiredAltarTier": 2,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "parent": "buildAltarTier2",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
     },
-    "uniqueName":"mobSpawnerDropBlock"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
-	"parent":"craftBookshelf",
-	"posX":2,
-	"posY":0,
-	"icon":
-	{
-		"id":116
-	},
-	"uniqueName":"craftEnchantingTable",
-	"additionalRequiredQuests":
-	{
-		"quest_1":"mineDiamond",
-		"quest_2":"mineObsidian"
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.QuestChunkLoader",
-	"parent":"craftEnchantingTable",
-	"posX":2,
-	"posY":0,
-	"icon":
-	{
-		"id":116
-	},
-	"uniqueName":"chunkLoader"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellFlintAndSteel",
-	"posX":0,
-	"posY":-2,
-	"spellID":1,
-	"additionalRequiredQuests":
-	{
-		"quest_1":"pickupBlazeRod"
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellSmallFireball",
-	"posX":0,
-	"posY":-2,
-	"spellID":6
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSmallFireball",
-	"posX":-2,
-	"posY":0,
-	"spellID":100
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonChicken",
-    "posX":0,
-    "posY":2,
-    "spellID":110
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonChicken",
-	"posX":-2,
-	"posY":0,
-	"spellID":101
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonPig",
-	"posX":-2,
-	"posY":0,
-	"spellID":102
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonCow",
-	"posX":0,
-	"posY":2,
-	"spellID":103
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonCow",
-	"posX":-2,
-	"posY":0,
-	"spellID":104
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonSheep",
-	"posX":0,
-	"posY":2,
-	"spellID":105
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonWolf",
-    "posX":0,
-    "posY":2,
-    "spellID":111
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonSheep",
-	"posX":-2,
-	"posY":0,
-	"spellID":106
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonRabbit",
-	"posX":-2,
-	"posY":0,
-	"spellID":107
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonHorse",
-	"posX":-2,
-	"posY":0,
-	"spellID":108
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonVillager",
-    "posX":0,
-    "posY":2,
-    "spellID":109
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonIronGolem",
-    "posX":-2,
-    "posY":0,
-    "spellID":112
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonChicken",
-	"posX":0,
-	"posY":-2,
-	"spellID":200
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonZombie",
-	"posX":-2,
-	"posY":0,
-	"spellID":201
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonCreeper",
-	"posX":-2,
-	"posY":0,
-	"spellID":202
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonSkeleton",
-	"posX":-2,
-	"posY":0,
-	"spellID":217
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonSpider",
-	"posX":-2,
-	"posY":0,
-	"spellID":206
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonEnderman",
-    "posX":0,
-    "posY":-2,
-    "spellID":218
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonEnderman",
-	"posX":-2,
-	"posY":0,
-	"spellID":212
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonPolarBear",
-	"posX":-2,
-	"posY":0,
-	"spellID":208
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonSlime",
-	"posX":-2,
-	"posY":0,
-	"spellID":209
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonWitch",
-    "posX":0,
-    "posY":-2,
-    "spellID":219
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonVindicator",
-    "posX":0,
-    "posY":-2,
-    "spellID":220
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent":"spellSummonVex",
-    "posX":0,
-    "posY":-2,
-    "spellID":221
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.item.evokercrystal.QuestEvokerCrystal",
-    "parent":"spellSummonEvoker",
-    "posX":2,
-    "posY":0,
-    "icon":
-    {
-        "id":399
+    "uniqueName": "buildAltarTier3",
+    "tier": 3
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSmeltOnAltar",
+    "parent": "buildAltarTier3",
+    "posX": -2,
+    "posY": 1,
+    "icon": {
+      "id": 61
     },
-    "uniqueName":"evokerCrystal"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonWitch",
-	"posX":-2,
-	"posY":0,
-	"spellID":207
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonZombie",
-	"posX":0,
-	"posY":-2,
-	"spellID":210
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonPigman",
-	"posX":-2,
-	"posY":0,
-	"spellID":203
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonBlaze",
-	"posX":-2,
-	"posY":0,
-	"spellID":204
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonMagmaCube",
-	"posX":-2,
-	"posY":0,
-	"spellID":205
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonPigman",
-	"posX":0,
-	"posY":-2,
-	"spellID":214
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonSilverfish",
-	"posX":-2,
-	"posY":0,
-	"spellID":211
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonGuardian",
-	"posX":-2,
-	"posY":0,
-	"spellID":213
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonShulker",
-	"posX":-2,
-	"posY":0,
-	"spellID":215
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestShootWitherSkull",
-    "parent":"spellSummonWither",
-    "posX":0,
-    "posY":-2,
-    "icon":
-    {
-        "id":397,
-        "meta":1
+    "uniqueName": "smeltOnAltar",
+    "requiredAltarTier": 1,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.machine.quarry.QuestQuarry",
+    "parent": "smeltOnAltar",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
     },
-    "uniqueName":"shootWitherSkull"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-	"parent":"spellSummonWither",
-	"posX":-2,
-	"posY":0,
-	"spellID":216
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
-	"parent":"spellSummonSilverfish",
-	"posX":0,
-	"posY":-2,
-	"uniqueName":"summonHordeLvl1",
-	"level":1,
-	"requiredLeftHand":
-	{
-		"id":426
-	},
-	"additionalRequiredQuests":
-	{
-		"quest_1":"spellSummonGiant"
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
-	"parent":"summonHordeLvl1",
-	"posX":-2,
-	"posY":0,
-	"uniqueName":"summonHordeLvl10",
-	"level":10,
-	"requiredLeftHand":
-	{
-		"id":426,
-		"stackSize":2
-	}
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellSmallFireball",
-	"posX":2,
-	"posY":0,
-	"spellID":2
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellLargeFireball",
-	"posX":0,
-	"posY":2,
-	"spellID":5
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellSummonLightningBolt",
-	"posX":2,
-	"posY":0,
-	"spellID":10
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellPullEntityToPlayer",
-	"posX":2,
-	"posY":0,
-	"spellID":11
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellFreezeWater3x3",
-	"posX":2,
-	"posY":0,
-	"spellID":9
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellLargeFireball",
-	"posX":0,
-	"posY":-2,
-	"spellID":3
-},
-{
-    "questClass":"com.github.sejoslaw.vanillamagic.common.quest.QuestJumper",
-    "parent":"spellTeleport",
-    "posX":0,
-    "posY":-2,
-    "icon":
-    {
-        "id":340
+    "uniqueName": "quarry",
+    "mustHaveMainHand": {
+      "id": 369
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.fulltreecut.QuestFullTreeCut",
+    "parent": "quarry",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": 279
     },
-    "uniqueName":"jumper"
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellTeleport",
-	"posX":2,
-	"posY":0,
-	"spellID":7
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellTeleportToNether",
-	"posX":2,
-	"posY":0,
-	"spellID":8
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellLargeFireball",
-	"posX":2,
-	"posY":0,
-	"spellID":4
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellSummonMeteor",
-	"posX":2,
-	"posY":0,
-	"spellID":12
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellWeatherRain",
-	"posX":2,
-	"posY":0,
-	"spellID":13
-},
-{
-	"questClass":"com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
-	"parent":"spellWeatherClear",
-	"posX":2,
-	"posY":0,
-	"spellID":14
-}
+    "uniqueName": "fullTreeCut"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.speedy.QuestSpeedy",
+    "parent": "fullTreeCut",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": 288
+    },
+    "uniqueName": "speedy"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.item.thecrystalofmothernature.QuestMotherNatureCrystal",
+    "parent": "speedy",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": 399
+    },
+    "uniqueName": "motherNatureCrystal"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier3",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftGoldIngot",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "iron_ingot",
+        "id": 265,
+        "stackSize": 8
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "gold_ingot",
+        "id": 266
+      }
+    ],
+    "requiredAltarTier": 3,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.blockabsorber.QuestBlockAbsorber",
+    "parent": "craftGoldIngot",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "just_to_know_what_it_is": "item_hopper",
+      "id": 154
+    },
+    "uniqueName": "blockAbsorber"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "parent": "buildAltarTier3",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
+    },
+    "uniqueName": "buildAltarTier4",
+    "tier": 4
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier4",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftRottenFlesh",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "leather",
+        "id": 334
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "rotten_flesh",
+        "id": 367
+      }
+    ],
+    "requiredAltarTier": 4,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftRottenFlesh",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftString",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "rotten_flesh",
+        "id": 367,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "string",
+        "id": 287
+      }
+    ],
+    "requiredAltarTier": 4,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftString",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftSpiderEye",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "string",
+        "id": 287,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "spider_eye",
+        "id": 375
+      }
+    ],
+    "requiredAltarTier": 4,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSpiderEye",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftBone",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "spider_eye",
+        "id": 375,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "bone",
+        "id": 352
+      }
+    ],
+    "requiredAltarTier": 4,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftBone",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftArrow",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "bone",
+        "id": 352,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "arrow",
+        "id": 262
+      }
+    ],
+    "requiredAltarTier": 4,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestArrowMachineGun",
+    "parent": "craftArrow",
+    "posX": 0,
+    "posY": -2,
+    "icon": {
+      "id": 262
+    },
+    "uniqueName": "arrowMachineGun"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftArrow",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftEnderPearl",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "arrow",
+        "id": 262,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "ender_pearl",
+        "id": 368
+      }
+    ],
+    "requiredAltarTier": 4,
+    "wandTier": 1
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "parent": "buildAltarTier4",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
+    },
+    "uniqueName": "buildAltarTier5",
+    "tier": 5
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier5",
+    "posX": -2,
+    "posY": 1,
+    "uniqueName": "craftGlowstoneDust",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "redstone_dust",
+        "id": 331,
+        "stackSize": 2
+      },
+      {
+        "just_to_know_what_it_is": "coal",
+        "id": 263,
+        "stackSize": 2
+      },
+      {
+        "just_to_know_what_it_is": "lapis_block",
+        "id": 22
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "glowstone_dust",
+        "id": 348
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftGlowstoneDust",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftNetherrack",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "stone",
+        "id": 1
+      },
+      {
+        "just_to_know_what_it_is": "coal",
+        "id": 263,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "netherrack",
+        "id": 87
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftNetherrack",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSoulSand",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "sand",
+        "id": 12
+      },
+      {
+        "just_to_know_what_it_is": "coal",
+        "id": 263,
+        "stackSize": 2
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "soul_sand",
+        "id": 88
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftSoulSand",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftMagmaBlock",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "netherrack",
+        "id": 87
+      },
+      {
+        "just_to_know_what_it_is": "magma_cream",
+        "id": 378
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "magma_block",
+        "id": 213
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftMagmaBlock",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftNetherWart",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "gunpowder",
+        "id": 289
+      },
+      {
+        "just_to_know_what_it_is": "magma_cream",
+        "id": 378
+      },
+      {
+        "just_to_know_what_it_is": "sugar",
+        "id": 353
+      },
+      {
+        "just_to_know_what_it_is": "redstone_dust",
+        "id": 331
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "nether_wart",
+        "id": 372
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftNetherWart",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftGhastTear",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "gunpowder",
+        "id": 289,
+        "stackSize": 4
+      },
+      {
+        "just_to_know_what_it_is": "blaze_powder",
+        "id": 377,
+        "stackSize": 4
+      },
+      {
+        "just_to_know_what_it_is": "lava_bucket",
+        "id": 327
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "ghast_tear",
+        "id": 370
+      },
+      {
+        "just_to_know_what_it_is": "bucket",
+        "id": 325
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestPickup",
+    "parent": "buildAltarTier5",
+    "posX": 0,
+    "posY": 2,
+    "uniqueName": "pickupBlazeRod",
+    "whatToPick": {
+      "what_to_pick": "blaze_rod",
+      "id": 369
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestMoveBlock",
+    "parent": "pickupBlazeRod",
+    "posX": -2,
+    "posY": 1,
+    "uniqueName": "questMoveBlock",
+    "requiredStackOffHand": {
+      "id": 340
+    },
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCaptureEntity",
+    "parent": "questMoveBlock",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "captureEntity",
+    "requiredStackOffHand": {
+      "id": 340
+    },
+    "wandTier": 3
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.QuestEnchantedBucket",
+    "parent": "captureEntity",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": 325
+    },
+    "uniqueName": "enchantedBucket"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
+    "parent": "enchantedBucket",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": 399
+    },
+    "uniqueName": "liquidSuppressionCrystal"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.QuestPotionedCrystal",
+    "parent": "liquidSuppressionCrystal",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": 373
+    },
+    "uniqueName": "potionedCrystal"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "pickupBlazeRod",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftWitherSkeletonSkull",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "coal_block",
+        "id": 173
+      },
+      {
+        "just_to_know_what_it_is": "skull",
+        "id": 397
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "skull",
+        "id": 397,
+        "meta": 1
+      }
+    ],
+    "requiredAltarTier": 5,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal",
+    "parent": "craftWitherSkeletonSkull",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": 399
+    },
+    "uniqueName": "accelerationCrystal"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "parent": "pickupBlazeRod",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
+    },
+    "uniqueName": "buildAltarTier6",
+    "tier": 6
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.QuestInventoryBridge",
+    "parent": "buildAltarTier6",
+    "posX": -2,
+    "posY": 1,
+    "icon": {
+      "it_is": "vanilla_chest",
+      "id": 54
+    },
+    "uniqueName": "inventoryBridge"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier6",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftDiamond",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "gold_ingot",
+        "id": 266,
+        "stackSize": 8
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "diamond",
+        "id": 264
+      }
+    ],
+    "requiredAltarTier": 6,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "parent": "buildAltarTier6",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
+    },
+    "uniqueName": "buildAltarTier7",
+    "tier": 7
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier7",
+    "posX": -2,
+    "posY": 1,
+    "uniqueName": "craftGoldOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "iron_ore",
+        "id": 15,
+        "stackSize": 16
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "gold_ore",
+        "id": 14
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftGoldOre",
+    "posX": 0,
+    "posY": 2,
+    "uniqueName": "craftCoalOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "gold_ore",
+        "id": 14
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "coal_ore",
+        "id": 16,
+        "stackSize": 4
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftGoldOre",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftRedstoneOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "gold_ore",
+        "id": 14,
+        "stackSize": 16
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "redstone_ore",
+        "id": 73
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftRedstoneOre",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftLapisOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "redstone_ore",
+        "id": 73,
+        "stackSize": 16
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "lapis_ore",
+        "id": 21
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftLapisOre",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftDiamondOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "lapis_ore",
+        "id": 21,
+        "stackSize": 16
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "diamond_ore",
+        "id": 56
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestOreMultiplier",
+    "parent": "craftDiamondOre",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 380
+    },
+    "uniqueName": "oreDoubling",
+    "multiplier": 2,
+    "wandTier": 3
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "buildAltarTier7",
+    "posX": 2,
+    "posY": 1,
+    "uniqueName": "craftEmerald",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "diamond",
+        "id": 264,
+        "stackSize": 8
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "emerald",
+        "id": 388
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftEmerald",
+    "posX": 0,
+    "posY": 2,
+    "uniqueName": "craftEmeraldOre",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "diamond_ore",
+        "id": 56,
+        "stackSize": 8
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "emerald_ore",
+        "id": 129
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftEmerald",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftNetherStar",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "emerald_ore",
+        "id": 133,
+        "stackSize": 4
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "emerald_ore",
+        "id": 399
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestItemMagnet",
+    "parent": "craftNetherStar",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": 399
+    },
+    "uniqueName": "itemMagnet"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftNetherStar",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftDragonEgg",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "nether_star",
+        "id": 399,
+        "stackSize": 4
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "dragon_egg",
+        "id": 122
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "parent": "craftDragonEgg",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftDragonHead",
+    "ingredients": [
+      {
+        "just_to_know_what_it_is": "dragon_egg",
+        "id": 122
+      }
+    ],
+    "result": [
+      {
+        "just_to_know_what_it_is": "dragon_skull",
+        "id": 397,
+        "meta": 5
+      }
+    ],
+    "requiredAltarTier": 7,
+    "wandTier": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+    "parent": "craftStick",
+    "posX": 2,
+    "posY": 1,
+    "icon": {
+      "id": 340
+    },
+    "uniqueName": "craftBook"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+    "parent": "craftBook",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": 47
+    },
+    "uniqueName": "craftBookshelf"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+    "parent": "craftBook",
+    "posX": 2,
+    "posY": -1,
+    "icon": {
+      "id": 264
+    },
+    "uniqueName": "mineDiamond",
+    "blocksToBeMined": "diamond"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+    "parent": "craftBook",
+    "posX": 2,
+    "posY": 1,
+    "icon": {
+      "id": 49
+    },
+    "uniqueName": "mineObsidian",
+    "blocksToBeMined": "obsidian"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.QuestMobSpawnerDrop",
+    "parent": "mineObsidian",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "it_is": "mob_spawner",
+      "id": 52
+    },
+    "uniqueName": "mobSpawnerDropBlock"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+    "parent": "craftBookshelf",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": 116
+    },
+    "uniqueName": "craftEnchantingTable",
+    "additionalRequiredQuests": {
+      "quest_1": "mineDiamond",
+      "quest_2": "mineObsidian"
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.QuestChunkLoader",
+    "parent": "craftEnchantingTable",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": 116
+    },
+    "uniqueName": "chunkLoader"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellFlintAndSteel",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 1,
+    "additionalRequiredQuests": {
+      "quest_1": "pickupBlazeRod"
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellSmallFireball",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 6
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSmallFireball",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 100
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonChicken",
+    "posX": 0,
+    "posY": 2,
+    "spellID": 110
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonChicken",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 101
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonPig",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 102
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonCow",
+    "posX": 0,
+    "posY": 2,
+    "spellID": 103
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonCow",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 104
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonSheep",
+    "posX": 0,
+    "posY": 2,
+    "spellID": 105
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonWolf",
+    "posX": 0,
+    "posY": 2,
+    "spellID": 111
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonSheep",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 106
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonRabbit",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 107
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonHorse",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 108
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonVillager",
+    "posX": 0,
+    "posY": 2,
+    "spellID": 109
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonIronGolem",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 112
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonChicken",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 200
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonZombie",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 201
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonCreeper",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 202
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonSkeleton",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 217
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonSpider",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 206
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonEnderman",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 218
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonEnderman",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 212
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonPolarBear",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 208
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonSlime",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 209
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonWitch",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 219
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonVindicator",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 220
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonVex",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 221
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.item.evokercrystal.QuestEvokerCrystal",
+    "parent": "spellSummonEvoker",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": 399
+    },
+    "uniqueName": "evokerCrystal"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonWitch",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 207
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonZombie",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 210
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonPigman",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 203
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonBlaze",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 204
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonMagmaCube",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 205
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonPigman",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 214
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonSilverfish",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 211
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonGuardian",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 213
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonShulker",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 215
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestShootWitherSkull",
+    "parent": "spellSummonWither",
+    "posX": 0,
+    "posY": -2,
+    "icon": {
+      "id": 397,
+      "meta": 1
+    },
+    "uniqueName": "shootWitherSkull"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "parent": "spellSummonWither",
+    "posX": -2,
+    "posY": 0,
+    "spellID": 216
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
+    "parent": "spellSummonSilverfish",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "summonHordeLvl1",
+    "level": 1,
+    "requiredLeftHand": {
+      "id": 426
+    },
+    "additionalRequiredQuests": {
+      "quest_1": "spellSummonGiant"
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
+    "parent": "summonHordeLvl1",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "summonHordeLvl10",
+    "level": 10,
+    "requiredLeftHand": {
+      "id": 426,
+      "stackSize": 2
+    }
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellSmallFireball",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 2
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellLargeFireball",
+    "posX": 0,
+    "posY": 2,
+    "spellID": 5
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellSummonLightningBolt",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 10
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellPullEntityToPlayer",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 11
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellFreezeWater3x3",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 9
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellLargeFireball",
+    "posX": 0,
+    "posY": -2,
+    "spellID": 3
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestJumper",
+    "parent": "spellTeleport",
+    "posX": 0,
+    "posY": -2,
+    "icon": {
+      "id": 340
+    },
+    "uniqueName": "jumper"
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellTeleport",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 7
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellTeleportToNether",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 8
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellLargeFireball",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 4
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellSummonMeteor",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 12
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellWeatherRain",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 13
+  },
+  {
+    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "parent": "spellWeatherClear",
+    "posX": 2,
+    "posY": 0,
+    "spellID": 14
+  }
 ]
