@@ -1414,157 +1414,182 @@
     "spellUniqueName": "spellFusRoDah"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSmallFireball",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:chicken"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonChicken",
     "posX": 0,
-    "posY": 2
+    "posY": 2,
+    "spellUniqueName": "spellSummon_minecraft:squid"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonChicken",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:pig"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonPig",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:cow"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonCow",
     "posX": 0,
-    "posY": 2
+    "posY": 2,
+    "spellUniqueName": "spellSummon_minecraft:mooshroom"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonCow",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:sheep"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonSheep",
     "posX": 0,
-    "posY": 2
+    "posY": 2,
+    "spellUniqueName": "spellSummon_minecraft:wolf"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonWolf",
     "posX": 0,
-    "posY": 2
+    "posY": 2,
+    "spellUniqueName": "spellSummon_minecraft:llama"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonSheep",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:rabbit"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonRabbit",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:horse"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonHorse",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:villager"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonVillager",
     "posX": 0,
-    "posY": 2
+    "posY": 2,
+    "spellUniqueName": "spellSummon_minecraft:iron_golem"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonIronGolem",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:snowball"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonChicken",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:zombie"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonZombie",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:creeper"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonCreeper",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:skeleton"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonSkeleton",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:spider"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonSpider",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:enderman"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonEnderman",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:endermite"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonEnderman",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:polar_bear"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonPolarBear",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:slime"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonSlime",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:witch"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonWitch",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:vindicator"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonVindicator",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:vex"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonVex",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:evoker"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.item.evokercrystal.QuestEvokerCrystal",
+    "eventCaller": "com.github.sejoslaw.vanillamagic.common.item.evokercrystal.QuestEvokerCrystal",
     "parent": "spellSummonEvoker",
     "posX": 2,
     "posY": 0,
@@ -1574,61 +1599,70 @@
     "uniqueName": "evokerCrystal"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonWitch",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+//    "spellUniqueName": "spellSummon_minecraft:pigman"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonZombie",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:pigman"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonPigman",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:blaze"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonBlaze",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:magma_cube"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonMagmaCube",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:ghast"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonPigman",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellSummon_minecraft:silverfish"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonSilverfish",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:guardian"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonGuardian",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:shulker"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
+    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonShulker",
     "posX": -2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummon_minecraft:wither"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestShootWitherSkull",
+    "eventCaller": "com.github.sejoslaw.vanillamagic.common.quest.QuestShootWitherSkull",
     "parent": "spellSummonWither",
     "posX": 0,
     "posY": -2,
@@ -1639,117 +1673,97 @@
     "uniqueName": "shootWitherSkull"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
-    "parent": "spellSummonWither",
-    "posX": -2,
-    "posY": 0
-  },
-  {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
-    "parent": "spellSummonSilverfish",
-    "posX": 0,
-    "posY": -2,
-    "uniqueName": "summonHordeLvl1",
-    "level": 1,
-    "requiredLeftHand": {
-      "id": 426
-    },
-    "additionalRequiredQuests": {
-      "quest_1": "spellSummonGiant"
-    }
-  },
-  {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
-    "parent": "summonHordeLvl1",
-    "posX": -2,
-    "posY": 0,
-    "uniqueName": "summonHordeLvl10",
-    "level": 10,
-    "requiredLeftHand": {
-      "id": 426,
-      "count": 2
-    }
-  },
-  {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellSmallFireball",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellLargeFireball"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellLargeFireball",
     "posX": 0,
-    "posY": 2
+    "posY": 2,
+    "spellUniqueName": "spellSummonLightningBolt"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellSummonLightningBolt",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellPullEntityToPlayer"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellPullEntityToPlayer",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellFreezeWater3x3"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellFreezeWater3x3",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellMoveInAir"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellLargeFireball",
     "posX": 0,
-    "posY": -2
+    "posY": -2,
+    "spellUniqueName": "spellTeleport"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestJumper",
+    "eventCaller": "com.github.sejoslaw.vanillamagic.common.quest.QuestJumper",
     "parent": "spellTeleport",
     "posX": 0,
     "posY": -2,
     "icon": {
       "id": "minecraft:book"
     },
-    "uniqueName": "jumper"
+    "spellUniqueName": "jumper"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellTeleport",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellTeleportToNether"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellTeleportToNether",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellTeleportToEnd"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellLargeFireball",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellSummonMeteor"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellSummonMeteor",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellWeatherRain"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellWeatherRain",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellWeatherClear"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellWeatherClear",
     "posX": 2,
-    "posY": 0
+    "posY": 0,
+    "spellUniqueName": "spellWeatherThunderstorm"
   }
 ]
