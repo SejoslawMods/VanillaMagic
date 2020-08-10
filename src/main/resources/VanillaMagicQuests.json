@@ -1600,13 +1600,6 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonWitch",
-    "posX": -2,
-    "posY": 0,
-//    "spellUniqueName": "spellSummon_minecraft:pigman"
-  },
-  {
-    "eventCaller": "castSpellOnBlock",
     "parent": "spellSummonZombie",
     "posX": 0,
     "posY": -2,
