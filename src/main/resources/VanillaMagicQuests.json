@@ -875,7 +875,7 @@
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftNetherrack",
     "posX": -2,
     "posY": 0,
@@ -885,21 +885,19 @@
         "id": "minecraft:sand"
       },
       {
-        "just_to_know_what_it_is": "coal",
-        "id": 263,
+        "id": "minecraft:coal",
         "count": 2
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "soul_sand",
-        "id": 88
+        "id": "minecraft:soul_sand"
       }
     ],
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftSoulSand",
     "posX": -2,
     "posY": 0,
@@ -909,20 +907,18 @@
         "id": "minecraft:netherrack"
       },
       {
-        "just_to_know_what_it_is": "magma_cream",
-        "id": 378
+        "id": "minecraft:magma_cream"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "magma_block",
-        "id": 213
+        "id": "minecraft:magma"
       }
     ],
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftMagmaBlock",
     "posX": -2,
     "posY": 0,
@@ -932,8 +928,7 @@
         "id": "minecraft:gunpowder"
       },
       {
-        "just_to_know_what_it_is": "magma_cream",
-        "id": 378
+        "id": "minecraft:magma_cream"
       },
       {
         "id": "minecraft:sugar"
@@ -944,14 +939,13 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "nether_wart",
-        "id": 372
+        "id": "minecraft:nether_wart"
       }
     ],
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftNetherWart",
     "posX": -2,
     "posY": 0,
@@ -962,19 +956,16 @@
         "count": 4
       },
       {
-        "just_to_know_what_it_is": "blaze_powder",
-        "id": 377,
+        "id": "minecraft:blaze_powder",
         "count": 4
       },
       {
-        "just_to_know_what_it_is": "lava_bucket",
-        "id": 327
+        "id": "minecraft:lava_bucket"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "ghast_tear",
-        "id": 370
+        "id": "minecraft:ghast_tear"
       },
       {
         "id": "minecraft:bucket"
@@ -983,65 +974,76 @@
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestPickup",
+    "eventCaller": "pickup",
     "parent": "buildAltarTier5",
     "posX": 0,
     "posY": 2,
     "uniqueName": "pickupBlazeRod",
-    "whatToPick": {
-      "what_to_pick": "blaze_rod",
-      "id": 369
+    "whatToPickStack": {
+      "id": "minecraft:blaze_rod"
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestMoveBlock",
+    "eventCaller": "moveBlock",
     "parent": "pickupBlazeRod",
     "posX": -2,
     "posY": 1,
     "uniqueName": "questMoveBlock",
-    "requiredStackOffHand": {
-      "id": 340
+    "leftHandStack": {
+      "id": "minecraft:book"
+    },
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCaptureEntity",
+    "eventCaller": "captureEntity",
     "parent": "questMoveBlock",
     "posX": -2,
     "posY": 0,
     "uniqueName": "captureEntity",
-    "requiredStackOffHand": {
-      "id": 340
+    "leftHandStack": {
+      "id": "minecraft:book"
+    },
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
     }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.item.enchantedbucket.QuestEnchantedBucket",
+    "eventCaller": "crystallizedLiquid",
     "parent": "captureEntity",
     "posX": -2,
     "posY": 0,
     "icon": {
       "id": "minecraft:bucket"
     },
-    "uniqueName": "enchantedBucket"
+    "uniqueName": "crystallizedLiquid",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.item.liquidsuppressioncrystal.QuestLiquidSuppressionCrystal",
-    "parent": "enchantedBucket",
+    "eventCaller": "liquidSuppressionCrystal",
+    "parent": "crystallizedLiquid",
     "posX": -2,
     "posY": 0,
     "icon": {
       "id": "minecraft:nether_star"
     },
-    "uniqueName": "liquidSuppressionCrystal"
+    "uniqueName": "liquidSuppressionCrystal",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    }
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.item.potionedcrystal.QuestPotionedCrystal",
+    "eventCaller": "crystallizedPotion",
     "parent": "liquidSuppressionCrystal",
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": 373
+      "id": "minecraft:potion"
     },
-    "uniqueName": "potionedCrystal"
+    "uniqueName": "crystallizedPotion"
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
@@ -1366,7 +1368,7 @@
     "posX": 2,
     "posY": 1,
     "icon": {
-      "id": 340
+      "id": "minecraft:book"
     },
     "uniqueName": "craftBook"
   },
@@ -1794,7 +1796,7 @@
     "posX": 0,
     "posY": -2,
     "icon": {
-      "id": 340
+      "id": "minecraft:book"
     },
     "uniqueName": "jumper"
   },

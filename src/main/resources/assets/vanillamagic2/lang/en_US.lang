@@ -474,14 +474,14 @@ quest.questMoveBlock.desc=Take Blaze Wand to right hand and exactly 1x Book to l
 quest.captureEntity=Capture Entity
 quest.captureEntity.desc=Hold Nether Star in right hand and 1x Book in left hand. Shift-right-click on Entity to capture it and than on block to respawn it.
 
-quest.enchantedBucket=Enchanted Bucket
-quest.enchantedBucket.desc=Drop 1x Bucket with fluid + 1x Nether Star to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted bucket. Shift-left-click to spawn fluid from bucket or fill tank, right-click in distance to spawn fluid in distance.
+quest.crystallizedLiquid=Crystalized Liquid
+quest.crystallizedLiquid.desc=Drop 1x Bucket with fluid + 1x Nether Star to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted bucket. Shift-left-click to spawn fluid from bucket or fill tank, right-click in distance to spawn fluid in distance.
 
 quest.liquidSuppressionCrystal=Liquid Suppression Crystal
 quest.liquidSuppressionCrystal.desc=Crafting: Place Nether Star in the middle and surround it with buckets (8x in total). Take it to left hand. Liquid will vanish around You and after some time will appear.
 
-quest.potionedCrystal=Potioned Crystal
-quest.potionedCrystal.desc=Drop 1x Nether Star + 1x Potion to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted Crystal. Hold it in inventory to get the effect of the Potion used in crafting.
+quest.crystallizedPotion=Crystallized Potion
+quest.crystallizedPotion.desc=Drop 1x Nether Star + 1x Potion to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted Crystal. Hold it in inventory to get the effect of the Potion used in crafting.
 
 quest.craftWitherSkeletonSkull=Craft Wither Skeleton Skull
 quest.craftWitherSkeletonSkull.desc=Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand.
