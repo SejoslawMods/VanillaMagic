@@ -27,7 +27,7 @@
     "icon": {
       "id": "minecraft:flint_and_steel"
     },
-    "uniqueName": "spellFlintAndSteel"
+    "spellUniqueName": "spellFlintAndSteel"
   },
   {
     "eventCaller": "craft",
@@ -1046,32 +1046,28 @@
     "uniqueName": "crystallizedPotion"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "pickupBlazeRod",
     "posX": 2,
     "posY": 1,
     "uniqueName": "craftWitherSkeletonSkull",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "coal_block",
-        "id": 173
+        "id": "minecraft:coal_block"
       },
       {
-        "just_to_know_what_it_is": "skull",
-        "id": 397
+        "id": "minecraft:skeleton_skull"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "skull",
-        "id": 397,
-        "meta": 1
+        "id": "minecraft:wither_skeleton_skull"
       }
     ],
     "altarTier": 5
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.item.accelerationcrystal.QuestAccelerationCrystal",
+    "eventCaller": "accelerationCrystal",
     "parent": "craftWitherSkeletonSkull",
     "posX": 2,
     "posY": 0,
@@ -1081,7 +1077,7 @@
     "uniqueName": "accelerationCrystal"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "eventCaller": "buildAltar",
     "parent": "pickupBlazeRod",
     "posX": 0,
     "posY": 2,
@@ -1092,18 +1088,17 @@
     "altarTier": 6
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.inventorybridge.QuestInventoryBridge",
+    "eventCaller": "inventoryBridge",
     "parent": "buildAltarTier6",
     "posX": -2,
     "posY": 1,
     "icon": {
-      "it_is": "vanilla_chest",
-      "id": 54
+      "id": "minecraft:chest"
     },
     "uniqueName": "inventoryBridge"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier6",
     "posX": 2,
     "posY": 1,
@@ -1116,14 +1111,13 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "diamond",
-        "id": 264
+        "id": "minecraft:diamond"
       }
     ],
     "altarTier": 6
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestBuildAltar",
+    "eventCaller": "buildAltar",
     "parent": "buildAltarTier6",
     "posX": 0,
     "posY": 2,
@@ -1134,112 +1128,102 @@
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier7",
     "posX": -2,
     "posY": 1,
     "uniqueName": "craftGoldOre",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "iron_ore",
-        "id": 15,
+        "id": "minecraft:iron_ore",
         "count": 16
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "gold_ore",
-        "id": 14
+        "id": "minecraft:gold_ore"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftGoldOre",
     "posX": 0,
     "posY": 2,
     "uniqueName": "craftCoalOre",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "gold_ore",
-        "id": 14
+        "id": "minecraft:gold_ore"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "coal_ore",
-        "id": 16,
+        "id": "minecraft:coal_ore",
         "count": 4
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftGoldOre",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftRedstoneOre",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "gold_ore",
-        "id": 14,
+        "id": "minecraft:gold_ore",
         "count": 16
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "redstone_ore",
-        "id": 73
+        "id": "minecraft:redstone_ore"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftRedstoneOre",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftLapisOre",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "redstone_ore",
-        "id": 73,
+        "id": "minecraft:redstone_ore",
         "count": 16
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "lapis_ore",
-        "id": 21
+        "id": "minecraft:lapis_ore"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftLapisOre",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftDiamondOre",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "lapis_ore",
-        "id": 21,
+        "id": "minecraft:lapis_ore",
         "count": 16
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "diamond_ore",
-        "id": 56
+        "id": "minecraft:diamond_ore"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestOreMultiplier",
+    "eventCaller": "oreMultiplier",
     "parent": "craftDiamondOre",
     "posX": 0,
     "posY": 2,
@@ -1250,57 +1234,52 @@
     "multiplier": 2
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier7",
     "posX": 2,
     "posY": 1,
     "uniqueName": "craftEmerald",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "diamond",
-        "id": 264,
+        "id": "minecraft:diamond",
         "count": 8
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "emerald",
-        "id": 388
+        "id": "minecraft:emerald"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftEmerald",
     "posX": 0,
     "posY": 2,
     "uniqueName": "craftEmeraldOre",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "diamond_ore",
-        "id": 56,
+        "id": "minecraft:diamond_ore",
         "count": 8
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "emerald_ore",
-        "id": 129
+        "id": "minecraft:emerald_ore"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftEmerald",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftNetherStar",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "emerald_ore",
-        "id": 133,
+        "id": "minecraft:emerald_block",
         "count": 4
       }
     ],
@@ -1312,7 +1291,7 @@
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestItemMagnet",
+    "eventCaller": "itemMagnet",
     "parent": "craftNetherStar",
     "posX": 0,
     "posY": 2,
@@ -1322,7 +1301,7 @@
     "uniqueName": "itemMagnet"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftNetherStar",
     "posX": 2,
     "posY": 0,
@@ -1335,35 +1314,31 @@
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "dragon_egg",
-        "id": 122
+        "id": "minecraft:dragon_egg"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraftOnAltar",
+    "eventCaller": "craftOnAltar",
     "parent": "craftDragonEgg",
     "posX": 2,
     "posY": 0,
     "uniqueName": "craftDragonHead",
     "ingredients": [
       {
-        "just_to_know_what_it_is": "dragon_egg",
-        "id": 122
+        "id": "minecraft:dragon_egg"
       }
     ],
     "result": [
       {
-        "just_to_know_what_it_is": "dragon_skull",
-        "id": 397,
-        "meta": 5
+        "id": "minecraft:dragon_head"
       }
     ],
     "altarTier": 7
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+    "eventCaller": "craft",
     "parent": "craftStick",
     "posX": 2,
     "posY": 1,
@@ -1373,263 +1348,220 @@
     "uniqueName": "craftBook"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+    "eventCaller": "craft",
     "parent": "craftBook",
     "posX": 2,
     "posY": 0,
     "icon": {
-      "id": 47
+      "id": "minecraft:bookshelf"
     },
     "uniqueName": "craftBookshelf"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+    "eventCaller": "mineBlock",
     "parent": "craftBook",
     "posX": 2,
     "posY": -1,
     "icon": {
-      "id": 264
+      "id": "minecraft:diamond_ore"
     },
     "uniqueName": "mineDiamond",
-    "blocksToBeMined": "diamond"
+    "blocksToMine": "diamond"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestMineBlock",
+    "eventCaller": "mineBlock",
     "parent": "craftBook",
     "posX": 2,
     "posY": 1,
     "icon": {
-      "id": 49
+      "id": "minecraft:obsidian"
     },
     "uniqueName": "mineObsidian",
-    "blocksToBeMined": "obsidian"
+    "blocksToMine": "obsidian"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.mobspawnerdrop.QuestMobSpawnerDrop",
+    "eventCaller": "mobSpawnerDrop",
     "parent": "mineObsidian",
     "posX": 2,
     "posY": 0,
     "icon": {
-      "it_is": "mob_spawner",
-      "id": 52
+      "id": "minecraft:mob_spawner"
     },
     "uniqueName": "mobSpawnerDropBlock"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestCraft",
+    "eventCaller": "craft",
     "parent": "craftBookshelf",
     "posX": 2,
     "posY": 0,
     "icon": {
-      "id": 116
+      "id": "minecraft:enchanting_table"
     },
-    "uniqueName": "craftEnchantingTable",
-    "additionalRequiredQuests": {
-      "quest_1": "mineDiamond",
-      "quest_2": "mineObsidian"
-    }
+    "uniqueName": "craftEnchantingTable"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.tileentity.chunkloader.QuestChunkLoader",
-    "parent": "craftEnchantingTable",
-    "posX": 2,
-    "posY": 0,
-    "icon": {
-      "id": 116
-    },
-    "uniqueName": "chunkLoader"
-  },
-  {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellFlintAndSteel",
     "posX": 0,
     "posY": -2,
-    "spellID": 1,
-    "additionalRequiredQuests": {
-      "quest_1": "pickupBlazeRod"
-    }
+    "spellUniqueName": "spellSmallFireball"
   },
   {
-    "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
+    "eventCaller": "castSpellInAir",
     "parent": "spellSmallFireball",
     "posX": 0,
     "posY": -2,
-    "spellID": 6
+    "spellUniqueName": "spellFusRoDah"
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSmallFireball",
     "posX": -2,
-    "posY": 0,
-    "spellID": 100
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonChicken",
     "posX": 0,
-    "posY": 2,
-    "spellID": 110
+    "posY": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonChicken",
     "posX": -2,
-    "posY": 0,
-    "spellID": 101
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonPig",
     "posX": -2,
-    "posY": 0,
-    "spellID": 102
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonCow",
     "posX": 0,
-    "posY": 2,
-    "spellID": 103
+    "posY": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonCow",
     "posX": -2,
-    "posY": 0,
-    "spellID": 104
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonSheep",
     "posX": 0,
-    "posY": 2,
-    "spellID": 105
+    "posY": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonWolf",
     "posX": 0,
-    "posY": 2,
-    "spellID": 111
+    "posY": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonSheep",
     "posX": -2,
-    "posY": 0,
-    "spellID": 106
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonRabbit",
     "posX": -2,
-    "posY": 0,
-    "spellID": 107
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonHorse",
     "posX": -2,
-    "posY": 0,
-    "spellID": 108
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonVillager",
     "posX": 0,
-    "posY": 2,
-    "spellID": 109
+    "posY": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonIronGolem",
     "posX": -2,
-    "posY": 0,
-    "spellID": 112
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonChicken",
     "posX": 0,
-    "posY": -2,
-    "spellID": 200
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonZombie",
     "posX": -2,
-    "posY": 0,
-    "spellID": 201
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonCreeper",
     "posX": -2,
-    "posY": 0,
-    "spellID": 202
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonSkeleton",
     "posX": -2,
-    "posY": 0,
-    "spellID": 217
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonSpider",
     "posX": -2,
-    "posY": 0,
-    "spellID": 206
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonEnderman",
     "posX": 0,
-    "posY": -2,
-    "spellID": 218
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonEnderman",
     "posX": -2,
-    "posY": 0,
-    "spellID": 212
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonPolarBear",
     "posX": -2,
-    "posY": 0,
-    "spellID": 208
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonSlime",
     "posX": -2,
-    "posY": 0,
-    "spellID": 209
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonWitch",
     "posX": 0,
-    "posY": -2,
-    "spellID": 219
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonVindicator",
     "posX": 0,
-    "posY": -2,
-    "spellID": 220
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonVex",
     "posX": 0,
-    "posY": -2,
-    "spellID": 221
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.item.evokercrystal.QuestEvokerCrystal",
@@ -1645,64 +1577,55 @@
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonWitch",
     "posX": -2,
-    "posY": 0,
-    "spellID": 207
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonZombie",
     "posX": 0,
-    "posY": -2,
-    "spellID": 210
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonPigman",
     "posX": -2,
-    "posY": 0,
-    "spellID": 203
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonBlaze",
     "posX": -2,
-    "posY": 0,
-    "spellID": 204
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonMagmaCube",
     "posX": -2,
-    "posY": 0,
-    "spellID": 205
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonPigman",
     "posX": 0,
-    "posY": -2,
-    "spellID": 214
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonSilverfish",
     "posX": -2,
-    "posY": 0,
-    "spellID": 211
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonGuardian",
     "posX": -2,
-    "posY": 0,
-    "spellID": 213
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonShulker",
     "posX": -2,
-    "posY": 0,
-    "spellID": 215
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestShootWitherSkull",
@@ -1719,8 +1642,7 @@
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellOnBlock",
     "parent": "spellSummonWither",
     "posX": -2,
-    "posY": 0,
-    "spellID": 216
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestSummonHorde",
@@ -1752,43 +1674,37 @@
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellSmallFireball",
     "posX": 2,
-    "posY": 0,
-    "spellID": 2
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellLargeFireball",
     "posX": 0,
-    "posY": 2,
-    "spellID": 5
+    "posY": 2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellSummonLightningBolt",
     "posX": 2,
-    "posY": 0,
-    "spellID": 10
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellPullEntityToPlayer",
     "posX": 2,
-    "posY": 0,
-    "spellID": 11
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellFreezeWater3x3",
     "posX": 2,
-    "posY": 0,
-    "spellID": 9
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellLargeFireball",
     "posX": 0,
-    "posY": -2,
-    "spellID": 3
+    "posY": -2
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.QuestJumper",
@@ -1804,42 +1720,36 @@
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellTeleport",
     "posX": 2,
-    "posY": 0,
-    "spellID": 7
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellTeleportToNether",
     "posX": 2,
-    "posY": 0,
-    "spellID": 8
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellLargeFireball",
     "posX": 2,
-    "posY": 0,
-    "spellID": 4
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellSummonMeteor",
     "posX": 2,
-    "posY": 0,
-    "spellID": 12
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellWeatherRain",
     "posX": 2,
-    "posY": 0,
-    "spellID": 13
+    "posY": 0
   },
   {
     "questClass": "com.github.sejoslaw.vanillamagic.common.quest.spell.QuestCastSpellInAir",
     "parent": "spellWeatherClear",
     "posX": 2,
-    "posY": 0,
-    "spellID": 14
+    "posY": 0
   }
 ]
