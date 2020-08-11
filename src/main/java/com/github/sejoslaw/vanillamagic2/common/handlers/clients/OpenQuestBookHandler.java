@@ -21,7 +21,7 @@ public class OpenQuestBookHandler {
     }
 
     @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent(priority= EventPriority.NORMAL, receiveCanceled=true)
+    @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
         if (OPEN_QUEST_BOOK_KEY_BINDING.isPressed()) {
             // TODO: Open GUI
