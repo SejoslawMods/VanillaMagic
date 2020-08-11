@@ -40,6 +40,15 @@ itemGroup.vm=Vanilla Magic
 
 
 ############################
+#KeyBindings
+############################
+
+key.vm.category=Vanilla Magic
+key.openQuestBook.desc=Open QuestBook
+
+
+
+############################
 #Spells
 ############################
 
@@ -73,7 +82,7 @@ item.crystallizedPotion.namePrefix=Crystallized Potion:
 
 
 ############################
-#Custom Items
+#TileEntities
 ############################
 
 tile.added=VM TileEntity added
