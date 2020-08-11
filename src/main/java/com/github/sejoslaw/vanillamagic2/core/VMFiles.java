@@ -36,12 +36,12 @@ public final class VMFiles {
         unzip(VMFiles.getQuestsFilePath().toFile(), VMFiles.getQuestsFileSourcePath().toFile());
 
         // VM TileEntities
-        MinecraftForge.EVENT_BUS.register(new VMTileEntitySaveHandler());
-        MinecraftForge.EVENT_BUS.register(new VMTileEntityLoadHandler());
+        register(new VMTileEntitySaveHandler());
+        register(new VMTileEntityLoadHandler());
 
         // Player Quest Progress
-        MinecraftForge.EVENT_BUS.register(new PlayerQuestProgressSaveHandler());
-        MinecraftForge.EVENT_BUS.register(new PlayerQuestProgressLoadHandler());
+        register(new PlayerQuestProgressSaveHandler());
+        register(new PlayerQuestProgressLoadHandler());
     }
 
     public static String getQuestsFileName() {
@@ -202,5 +202,9 @@ public final class VMFiles {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void register(Object obj) {
+        MinecraftForge.EVENT_BUS.register(obj);
     }
 }
