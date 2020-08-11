@@ -2,8 +2,8 @@ package com.github.sejoslaw.vanillamagic2.common.itemupgrades;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.Action;
 import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.EventCallerItemUpgrade;
+import com.github.sejoslaw.vanillamagic2.core.VMEvents;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -13,7 +13,7 @@ public class ItemUpgradeEventCaller {
     public ItemUpgrade itemUpgrade;
 
     public void register() {
-        MinecraftForge.EVENT_BUS.register(this);
+        VMEvents.register(this);
     }
 
     public void execute(PlayerEntity player, Action action) {

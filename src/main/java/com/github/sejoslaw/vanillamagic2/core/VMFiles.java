@@ -11,7 +11,6 @@ import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -36,12 +35,12 @@ public final class VMFiles {
         unzip(VMFiles.getQuestsFilePath().toFile(), VMFiles.getQuestsFileSourcePath().toFile());
 
         // VM TileEntities
-        register(new VMTileEntitySaveHandler());
-        register(new VMTileEntityLoadHandler());
+        VMEvents.register(new VMTileEntitySaveHandler());
+        VMEvents.register(new VMTileEntityLoadHandler());
 
         // Player Quest Progress
-        register(new PlayerQuestProgressSaveHandler());
-        register(new PlayerQuestProgressLoadHandler());
+        VMEvents.register(new PlayerQuestProgressSaveHandler());
+        VMEvents.register(new PlayerQuestProgressLoadHandler());
     }
 
     public static String getQuestsFileName() {
@@ -202,9 +201,5 @@ public final class VMFiles {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static void register(Object obj) {
-        MinecraftForge.EVENT_BUS.register(obj);
     }
 }

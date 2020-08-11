@@ -18,6 +18,10 @@ public final class VMEvents {
         addListener(VMEvents::onInterModProcess);
     }
 
+    public static void register(Object obj) {
+        MinecraftForge.EVENT_BUS.register(obj);
+    }
+
     private static <T extends Event> void addListener(Consumer<T> consumer) {
         MinecraftForge.EVENT_BUS.addListener(consumer);
     }
