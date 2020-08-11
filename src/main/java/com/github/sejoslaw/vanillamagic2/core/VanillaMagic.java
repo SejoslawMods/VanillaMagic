@@ -13,6 +13,6 @@ public final class VanillaMagic {
         VMFiles.initialize();
         VMRegistries.initialize();
         VMQuests.initialize();
-//        VMEvents.initialize();
+        VMEvents.initialize();
     }
 }
