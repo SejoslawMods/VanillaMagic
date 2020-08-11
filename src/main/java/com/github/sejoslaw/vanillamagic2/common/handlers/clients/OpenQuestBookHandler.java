@@ -1,7 +1,10 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -17,7 +20,8 @@ public class OpenQuestBookHandler {
         ClientRegistry.registerKeyBinding(OPEN_QUEST_BOOK_KEY_BINDING);
     }
 
-    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent(priority= EventPriority.NORMAL, receiveCanceled=true)
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
         if (OPEN_QUEST_BOOK_KEY_BINDING.isPressed()) {
             // TODO: Open GUI
