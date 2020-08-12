@@ -40,6 +40,14 @@ itemGroup.vm=Vanilla Magic
 
 
 ############################
+#GUI's / Screens
+############################
+
+vm.gui.questBookTitle=Vanilla Magic Quest Book
+
+
+
+############################
 #KeyBindings
 ############################
 

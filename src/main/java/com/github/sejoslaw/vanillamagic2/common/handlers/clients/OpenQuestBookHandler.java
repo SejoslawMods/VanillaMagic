@@ -1,5 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
 
+import com.github.sejoslaw.vanillamagic2.common.guis.QuestBookScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,7 +26,7 @@ public class OpenQuestBookHandler {
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
         if (OPEN_QUEST_BOOK_KEY_BINDING.isPressed()) {
-            // TODO: Open GUI
+            Minecraft.getInstance().displayGuiScreen(new QuestBookScreen());
         }
     }
 }
