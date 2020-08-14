@@ -25,7 +25,7 @@ version="${file.jarVersion}" #mandatory
 displayName="Vanilla Magic 2" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="" #optional
+updateJSONURL="https://github.com/Sejoslaw/VanillaMagic" #optional
 
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/Sejoslaw/VanillaMagic" #optional
