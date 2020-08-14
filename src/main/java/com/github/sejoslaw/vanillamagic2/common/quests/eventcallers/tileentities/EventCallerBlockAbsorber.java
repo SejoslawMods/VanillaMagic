@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public abstract class EventCallerBlockAbsorber extends EventCaller<QuestBlockAbsorber> {
+public class EventCallerBlockAbsorber extends EventCaller<QuestBlockAbsorber> {
     @SubscribeEvent
     public void addVMTile(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event,
