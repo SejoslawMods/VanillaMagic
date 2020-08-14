@@ -1,9 +1,9 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
 import com.github.sejoslaw.vanillamagic2.common.handlers.clients.OpenQuestBookHandler;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.event.lifecycle.*;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.function.Consumer;
 
@@ -20,11 +20,11 @@ public final class VMEvents {
     }
 
     public static void register(Object obj) {
-        MinecraftForge.EVENT_BUS.register(obj);
+        FMLJavaModLoadingContext.get().getModEventBus().register(obj);
     }
 
     private static <T extends Event> void addListener(Consumer<T> consumer) {
-        MinecraftForge.EVENT_BUS.addListener(consumer);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(consumer);
     }
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {

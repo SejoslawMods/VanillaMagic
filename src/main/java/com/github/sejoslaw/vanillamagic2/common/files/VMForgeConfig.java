@@ -52,12 +52,12 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.DoubleValue BASIC_METEOR_EXPLOSION_DROP_RATE;
 
     // Hostile Mobs
-    private static final String CATEGORY_HOSTILE_MOBS = "Hostile Mobs";
+    private static final String CATEGORY_HOSTILE_MOBS = "HostileMobs";
     public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_WITH_ARMOR;
     public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_ON_HORSE;
 
     // Evoker Crystal
-    private static final String CATEGORY_EVOKER_CRYSTAL = "Evoker Crystal";
+    private static final String CATEGORY_EVOKER_CRYSTAL = "EvokerCrystal";
     public static ForgeConfigSpec.IntValue VEX_NUMBER;
     public static ForgeConfigSpec.BooleanValue VEX_HAS_LIMITED_LIFE;
 
