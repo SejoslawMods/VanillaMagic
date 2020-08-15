@@ -17,4 +17,8 @@ public final class VMLogger {
     public static void logInfo(String message) {
         log(Level.INFO, message);
     }
+
+    public static void logError(String message) {
+        log(Level.ERROR, message);
+    }
 }

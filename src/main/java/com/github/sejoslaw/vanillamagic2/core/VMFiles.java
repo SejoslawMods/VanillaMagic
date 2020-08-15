@@ -165,23 +165,12 @@ public final class VMFiles {
         }
     }
 
+    public static void readJsonArray(File file, Consumer<IJsonService> consumer) {
+        readJsonInternal(file, reader -> JsonService.parseArray(reader, consumer));
+    }
+
     public static void readJson(File file, Consumer<IJsonService> consumer) {
-        try {
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileInputStream fis = new FileInputStream(file);
-            InputStreamReader reader = new InputStreamReader(fis);
-
-            consumer.accept(JsonService.parse(reader));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        readJsonInternal(file, reader -> JsonService.parse(reader, consumer));
     }
 
     public static void writeJson(File file, Consumer<OutputStreamWriter> consumer) {
@@ -198,6 +187,25 @@ public final class VMFiles {
             OutputStreamWriter osw = new OutputStreamWriter(fos);
 
             consumer.accept(osw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void readJsonInternal(File file, Consumer<InputStreamReader> consumer) {
+        try {
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileInputStream fis = new FileInputStream(file);
+            InputStreamReader reader = new InputStreamReader(fis);
+
+            consumer.accept(reader);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,6 +9,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.tileentities
 import com.github.sejoslaw.vanillamagic2.common.quests.types.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.*;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities.*;
+import com.github.sejoslaw.vanillamagic2.core.VMLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,13 +62,15 @@ public final class QuestRegistry {
     }
 
     public static void readQuest(IJsonService jsonService) {
-        try {
-            String questEventCallerKey = jsonService.getString("eventCaller");
-            QuestEventCaller caller = QUEST_EVENT_CALLERS.stream().filter(c -> c.key.equals(questEventCallerKey)).findFirst().get();
-            caller.addNewQuest(jsonService);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        String questEventCallerKey = jsonService.getString("eventCaller");
+        QuestEventCaller caller = QUEST_EVENT_CALLERS.stream().filter(c -> c.key.equals(questEventCallerKey)).findFirst().get();
+
+        if (caller == null) {
+            VMLogger.logError("Unknown EventCaller: " + questEventCallerKey);
+            return;
         }
+
+        caller.addNewQuest(jsonService);
     }
 
     public static Quest getQuest(String questUniqueName) {

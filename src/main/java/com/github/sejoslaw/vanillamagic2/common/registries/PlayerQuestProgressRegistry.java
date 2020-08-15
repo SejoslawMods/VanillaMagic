@@ -39,7 +39,7 @@ public final class PlayerQuestProgressRegistry {
                 .stream()
                 .filter(data -> data.worldName.equals(worldName) && data.playerName.equals(playerName))
                 .findFirst()
-                .get();
+                .orElse(new PlayerQuestProgressData(worldName, playerName, new HashSet<>()));
     }
 
     public static Set<String> getPlayerQuests(String worldName, String playerName) {

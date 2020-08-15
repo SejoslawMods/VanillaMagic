@@ -45,7 +45,7 @@ public final class ItemUpgradeRegistry {
                 .stream()
                 .filter(type -> stack.getItem().getRegistryName().toString().toLowerCase().contains(type.itemType.toLowerCase()))
                 .findFirst()
-                .get();
+                .orElse(new BaseItemType(stack.getTranslationKey()));
     }
 
     public static List<ItemUpgrade> getUpgrades(BaseItemType type) {
