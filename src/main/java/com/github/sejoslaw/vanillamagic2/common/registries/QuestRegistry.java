@@ -18,7 +18,7 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class QuestRegistry {
-    public static final List<QuestEventCaller> QUEST_EVENT_CALLERS = new ArrayList<>();
+    private static final List<QuestEventCaller> QUEST_EVENT_CALLERS = new ArrayList<>();
 
     public static void initialize() {
         // Standard Quests
@@ -83,5 +83,11 @@ public final class QuestRegistry {
         }
 
         return null;
+    }
+
+    public static List<Quest> getQuests() {
+        List<Quest> quests = new ArrayList<>();
+        QUEST_EVENT_CALLERS.forEach(caller -> quests.addAll(caller.getEventCaller().quests));
+        return quests;
     }
 }
