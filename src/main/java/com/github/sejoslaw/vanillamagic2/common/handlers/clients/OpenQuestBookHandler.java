@@ -6,26 +6,24 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_O;
+import org.lwjgl.glfw.GLFW;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
+@OnlyIn(Dist.CLIENT)
 public class OpenQuestBookHandler {
-    private static final KeyBinding OPEN_QUEST_BOOK_KEY_BINDING = new KeyBinding("key.openQuestBook.desc", GLFW_KEY_O, "key.vm.category");
+    private static final KeyBinding OPEN_QUEST_BOOK_KEY_BINDING = new KeyBinding("key.openQuestBook.desc", GLFW.GLFW_KEY_O, "key.vm.category");
 
     public OpenQuestBookHandler() {
         ClientRegistry.registerKeyBinding(OPEN_QUEST_BOOK_KEY_BINDING);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
+    @SubscribeEvent()
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
-        if (OPEN_QUEST_BOOK_KEY_BINDING.isPressed()) {
+        if (event.getKey() == OPEN_QUEST_BOOK_KEY_BINDING.getKey().getKeyCode() && event.getAction() == GLFW.GLFW_PRESS) {
             Minecraft.getInstance().displayGuiScreen(new QuestBookScreen());
         }
     }

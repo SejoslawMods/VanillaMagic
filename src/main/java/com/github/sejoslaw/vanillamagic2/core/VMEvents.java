@@ -1,45 +1,39 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
 import com.github.sejoslaw.vanillamagic2.common.handlers.clients.OpenQuestBookHandler;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.event.lifecycle.*;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import java.util.function.Consumer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class VMEvents {
     public static void initialize() {
-        addListener(VMEvents::onCommonSetup);
-        addListener(VMEvents::onClientSetup);
-        addListener(VMEvents::onDedicatedServerSetup);
-        addListener(VMEvents::onInterModEnqueue);
-        addListener(VMEvents::onInterModProcess);
+        registerGlobalEvents();
+
+        if (isClient()) {
+            registerClientSpecificEvents();
+        } else {
+            registerDedicatedServerSpecificEvents();
+        }
+    }
+
+    public static boolean isClient() {
+        return FMLEnvironment.dist == Dist.CLIENT;
     }
 
     public static void register(Object obj) {
-        FMLJavaModLoadingContext.get().getModEventBus().register(obj);
+        MinecraftForge.EVENT_BUS.register(obj);
     }
 
-    private static <T extends Event> void addListener(Consumer<T> consumer) {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(consumer);
+    private static void registerGlobalEvents() {
     }
 
-    private static void onCommonSetup(FMLCommonSetupEvent event) {
-    }
-
-    private static void onClientSetup(FMLClientSetupEvent event) {
+    private static void registerClientSpecificEvents() {
         register(new OpenQuestBookHandler());
     }
 
-    private static void onDedicatedServerSetup(FMLDedicatedServerSetupEvent event) {
-    }
-
-    private static void onInterModEnqueue(InterModEnqueueEvent event) {
-    }
-
-    private static void onInterModProcess(InterModProcessEvent event) {
+    private static void registerDedicatedServerSpecificEvents() {
     }
 }
