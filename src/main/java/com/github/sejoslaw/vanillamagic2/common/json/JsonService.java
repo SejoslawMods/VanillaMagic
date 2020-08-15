@@ -1,9 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.json;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.Reader;
@@ -97,6 +94,10 @@ public final class JsonService implements IJsonService {
     }
 
     private static void call(JsonElement rootElement, Consumer<IJsonService> consumer) {
+        if (rootElement == null || rootElement.isJsonNull()) {
+            rootElement = new JsonObject();
+        }
+
         IJsonService service = new JsonService(rootElement.getAsJsonObject());
         consumer.accept(service);
     }
