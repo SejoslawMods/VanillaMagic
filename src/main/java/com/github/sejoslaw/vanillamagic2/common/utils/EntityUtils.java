@@ -28,13 +28,6 @@ public final class EntityUtils {
     }
 
     /**
-     * @return Name of the World.
-     */
-    public static String getWorldName(PlayerEntity player) {
-        return player.getEntityWorld().getServer().getWorldName();
-    }
-
-    /**
      * @return List with registered types equal with the one that is specified.
      */
     public static List<EntityType<?>> getEntitiesByClassification(EntityClassification classification) {

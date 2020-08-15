@@ -72,7 +72,7 @@ public final class VMFiles {
      * @return Path to file with VM Tile Entities in specified World directory.
      */
     public static Path getVMTileEntitiesFilePath(World world) {
-        String worldName = world.getServer().getWorldName();
+        String worldName = world.getWorldInfo().getWorldName();
         String dimensionId = String.valueOf(world.getDimension().getType().getId());
         return Paths.get(getVMWorldDir(worldName).toString(), dimensionId, "VanillaMagicTileEntities.dat");
     }
@@ -82,7 +82,7 @@ public final class VMFiles {
      */
     public static void parsePlayerQuests(PlayerEntity player, Consumer3<String, String, File> consumer) {
         String playerName = EntityUtils.getPlayerName(player);
-        String worldName = EntityUtils.getWorldName(player);
+        String worldName = player.getEntityWorld().getWorldInfo().getWorldName();
 
         Path playerQuestsPath = VMFiles.getPlayerQuestsFilePath(worldName, playerName);
         File playerQuestsFile = playerQuestsPath.toFile();

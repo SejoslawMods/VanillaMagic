@@ -29,7 +29,7 @@ public final class PlayerQuestProgressRegistry {
     public static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
 
     public static PlayerQuestProgressData getPlayerData(PlayerEntity player) {
-        String worldName = EntityUtils.getWorldName(player);
+        String worldName = player.getEntityWorld().getWorldInfo().getWorldName();
         String playerName = EntityUtils.getPlayerName(player);
         return getPlayerData(worldName, playerName);
     }
