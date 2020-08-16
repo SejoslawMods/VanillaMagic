@@ -14,6 +14,6 @@ public class QuestCastSpell extends Quest {
     public void readData(IJsonService jsonService) {
         super.readData(jsonService);
 
-        this.spell = SpellRegistry.SPELLS.get(jsonService.getString("spellUniqueName"));
+        this.spell = SpellRegistry.SPELLS.get(jsonService.getString("uniqueName"));
     }
 }

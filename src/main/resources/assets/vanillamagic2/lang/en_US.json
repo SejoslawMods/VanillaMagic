@@ -85,13 +85,13 @@
   "quest.spellTeleportToEnd.desc": "Hold Blaze Wand in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon).",
 
   "quest.spellSummonMeteor": "Meteor !!! (Summon Meteor from Heaven)",
-  "quest.spellSummonMeteor.desc": "Hold Nether Star in Your hand and at least 10x Gold Block in the left hand and right-click.",
+  "quest.spellSummonMeteor.desc": "Hold Nether Star in Your hand and at least 10x Diamonds in the left hand and right-click.",
 
   "quest.spellWeatherRain": "Make rain (Weather Spell)",
-  "quest.spellWeatherRain.desc": "Hold Blaze Wand in Your right hand and at least 1x Water Bottle in the left hand and right-click.",
+  "quest.spellWeatherRain.desc": "Hold Blaze Wand in Your right hand and at least Water Bucket in the left hand and right-click.",
 
   "quest.spellWeatherClear": "Clear weather (Weather Spell)",
-  "quest.spellWeatherClear.desc": "Hold Blaze Wand in Your right hand and at least 1x Empty Bottle in the left hand and right-click.",
+  "quest.spellWeatherClear.desc": "Hold Blaze Wand in Your right hand and at least Bucket in the left hand and right-click.",
 
   "quest.spellWeatherThunderstorm": "Make thunderstorm (Weather Spell)",
   "quest.spellWeatherThunderstorm.desc": "Hold Blaze Wand in Your right hand and at least 1x Creeper Head in the left hand and right-click.",

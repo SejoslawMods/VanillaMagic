@@ -25,17 +25,21 @@ public final class ItemStackUtils {
      * @return ItemStack from JSON Object.
      */
     public static ItemStack getItemStackFromJson(JsonItemStack jsonItemStack) {
-        CompoundNBT nbt = new CompoundNBT();
+        try {
+            CompoundNBT nbt = new CompoundNBT();
 
-        nbt.putString("id", jsonItemStack.getId());
+            nbt.putString("id", jsonItemStack.getId());
 
-        byte count = jsonItemStack.getCount();
-        nbt.putByte("Count", count <= 0 ? 1 : count);
+            byte count = jsonItemStack.getCount();
+            nbt.putByte("Count", count <= 0 ? 1 : count);
 
-        int meta = jsonItemStack.getMeta();
-        nbt.putInt("Damage", Math.max(meta, 0));
+            int meta = jsonItemStack.getMeta();
+            nbt.putInt("Damage", Math.max(meta, 0));
 
-        return ItemStack.read(nbt);
+            return ItemStack.read(nbt);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     /**
