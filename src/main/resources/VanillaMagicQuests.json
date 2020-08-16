@@ -1639,7 +1639,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonChicken",
+    "parent": "spellSummon_minecraft:chicken",
     "posX": 0,
     "posY": 2,
     "uniqueName": "spellSummon_minecraft:squid",
@@ -1653,7 +1653,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonChicken",
+    "parent": "spellSummon_minecraft:chicken",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:pig",
@@ -1667,7 +1667,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonPig",
+    "parent": "spellSummon_minecraft:pig",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:cow",
@@ -1681,7 +1681,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonCow",
+    "parent": "spellSummon_minecraft:cow",
     "posX": 0,
     "posY": 2,
     "uniqueName": "spellSummon_minecraft:mooshroom",
@@ -1695,7 +1695,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonCow",
+    "parent": "spellSummon_minecraft:cow",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:sheep",
@@ -1709,7 +1709,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonSheep",
+    "parent": "spellSummon_minecraft:sheep",
     "posX": 0,
     "posY": 2,
     "uniqueName": "spellSummon_minecraft:wolf",
@@ -1723,7 +1723,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonWolf",
+    "parent": "spellSummon_minecraft:wolf",
     "posX": 0,
     "posY": 2,
     "uniqueName": "spellSummon_minecraft:llama",
@@ -1737,7 +1737,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonSheep",
+    "parent": "spellSummon_minecraft:sheep",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:rabbit",
@@ -1751,7 +1751,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonRabbit",
+    "parent": "spellSummon_minecraft:rabbit",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:horse",
@@ -1764,7 +1764,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonHorse",
+    "parent": "spellSummon_minecraft:horse",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:villager",
@@ -1778,7 +1778,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonVillager",
+    "parent": "spellSummon_minecraft:villager",
     "posX": 0,
     "posY": 2,
     "uniqueName": "spellSummon_minecraft:iron_golem",
@@ -1792,7 +1792,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonIronGolem",
+    "parent": "spellSummon_minecraft:iron_golem",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:snowball",
@@ -1806,7 +1806,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonChicken",
+    "parent": "spellSummon_minecraft:chicken",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:zombie",
@@ -1820,7 +1820,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonZombie",
+    "parent": "spellSummon_minecraft:zombie",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:creeper",
@@ -1834,7 +1834,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonCreeper",
+    "parent": "spellSummon_minecraft:creeper",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:skeleton",
@@ -1848,7 +1848,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonSkeleton",
+    "parent": "spellSummon_minecraft:skeleton",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:spider",
@@ -1862,7 +1862,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonSpider",
+    "parent": "spellSummon_minecraft:spider",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:enderman",
@@ -1876,7 +1876,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonEnderman",
+    "parent": "spellSummon_minecraft:enderman",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:endermite",
@@ -1890,7 +1890,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonEnderman",
+    "parent": "spellSummon_minecraft:enderman",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:polar_bear",
@@ -1904,7 +1904,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonPolarBear",
+    "parent": "spellSummon_minecraft:polar_bear",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:slime",
@@ -1918,7 +1918,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonSlime",
+    "parent": "spellSummon_minecraft:slime",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:witch",
@@ -1932,7 +1932,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonWitch",
+    "parent": "spellSummon_minecraft:witch",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:vindicator",
@@ -1945,7 +1945,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonVindicator",
+    "parent": "spellSummon_minecraft:vindicator",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:vex",
@@ -1958,7 +1958,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonVex",
+    "parent": "spellSummon_minecraft:vex",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:evoker",
@@ -1972,7 +1972,7 @@
   },
   {
     "eventCaller": "evokerCrystal",
-    "parent": "spellSummonEvoker",
+    "parent": "spellSummon_minecraft:evoker",
     "posX": 2,
     "posY": 0,
     "icon": {
@@ -1985,7 +1985,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonZombie",
+    "parent": "spellSummon_minecraft:zombie",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:pigman",
@@ -1999,7 +1999,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonPigman",
+    "parent": "spellSummon_minecraft:pigman",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:blaze",
@@ -2013,7 +2013,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonBlaze",
+    "parent": "spellSummon_minecraft:blaze",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:magma_cube",
@@ -2027,7 +2027,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonMagmaCube",
+    "parent": "spellSummon_minecraft:magma_cube",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:ghast",
@@ -2041,7 +2041,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonPigman",
+    "parent": "spellSummon_minecraft:pigman",
     "posX": 0,
     "posY": -2,
     "uniqueName": "spellSummon_minecraft:silverfish",
@@ -2055,7 +2055,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonSilverfish",
+    "parent": "spellSummon_minecraft:silverfish",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:guardian",
@@ -2069,7 +2069,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonGuardian",
+    "parent": "spellSummon_minecraft:guardian",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:shulker",
@@ -2083,7 +2083,7 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummonShulker",
+    "parent": "spellSummon_minecraft:shulker",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:wither",
@@ -2097,7 +2097,7 @@
   },
   {
     "eventCaller": "shootWitherSkull",
-    "parent": "spellSummonWither",
+    "parent": "spellSummon_minecraft:wither",
     "posX": 0,
     "posY": -2,
     "icon": {
