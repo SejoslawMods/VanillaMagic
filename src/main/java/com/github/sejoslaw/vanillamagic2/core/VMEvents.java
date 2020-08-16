@@ -1,6 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
-import com.github.sejoslaw.vanillamagic2.common.handlers.clients.OpenQuestBookHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.clients.OpenQuestGuiHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -31,7 +31,7 @@ public final class VMEvents {
     }
 
     private static void registerClientSpecificEvents() {
-        register(new OpenQuestBookHandler());
+        register(new OpenQuestGuiHandler());
     }
 
     private static void registerDedicatedServerSpecificEvents() {

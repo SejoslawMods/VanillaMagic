@@ -23,7 +23,7 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 @OnlyIn(Dist.CLIENT)
-public class QuestBookScreen extends Screen {
+public class QuestGui extends Screen {
     private static class QuestTreeNode {
         public Quest quest;
         public Set<QuestTreeNode> children;
@@ -72,11 +72,11 @@ public class QuestBookScreen extends Screen {
 
     private QuestTreeNode rootNode;
 
-    public QuestBookScreen() {
-        this(TextUtils.translate("vm.gui.questBookTitle"));
+    public QuestGui() {
+        this(TextUtils.translate("vm.gui.questGuiTitle"));
     }
 
-    protected QuestBookScreen(ITextComponent titleIn) {
+    protected QuestGui(ITextComponent titleIn) {
         super(titleIn);
     }
 
@@ -103,7 +103,7 @@ public class QuestBookScreen extends Screen {
     public void render(int mouseX, int mouseY, float partialTicks) {
         this.renderBackground();
         super.render(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questBookTitle").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
+        this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGuiTitle").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
         RenderSystem.translatef((float) (this.width / 2), (float) (this.height / 2), 0);
         this.drawQuestTreeNode(this.rootNode, null, 0, 0);
     }

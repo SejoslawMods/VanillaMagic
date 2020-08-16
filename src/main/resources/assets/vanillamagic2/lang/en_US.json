@@ -25,10 +25,10 @@
 
   "itemGroup.vm": "Vanilla Magic",
 
-  "vm.gui.questBookTitle": "Vanilla Magic Quests",
+  "vm.gui.questGuiTitle": "Vanilla Magic Quests",
 
   "key.vm.category": "Vanilla Magic",
-  "key.openQuestBook.desc": "Open QuestBook",
+  "key.openQuestGui.desc": "Open Quest GUI",
 
   "spell.evoker.wololo": "Wololo",
   "spell.evoker.summonVex": "Summon Vex",
