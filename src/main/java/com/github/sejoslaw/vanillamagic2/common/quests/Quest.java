@@ -27,30 +27,18 @@ public class Quest {
     public void readData(IJsonService jsonService) {
         this.parent = QuestRegistry.getQuest(jsonService.getString("parent"));
 
-        if (this.parent == null) {
-            this.parent = getEmpty();
-        }
-
         this.iconStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("icon"));
         this.uniqueName = jsonService.getString("uniqueName");
 
-        double posX = this.parent.position.x + jsonService.getInt("posX");
-        double posY = this.parent.position.y + jsonService.getInt("posY");
+        double posX = jsonService.getInt("posX");
+        posX += this.parent != null ? this.parent.position.x : 0;
+
+        double posY = jsonService.getInt("posY");
+        posY += this.parent != null ? this.parent.position.y : 0;
 
         this.position = new Vec3d(posX, posY, 0);
 
         this.tryReadCustomFields(jsonService);
-    }
-
-    public static Quest getEmpty() {
-        Quest quest = new Quest();
-
-        quest.parent = null;
-        quest.uniqueName = "";
-        quest.iconStack = ItemStack.EMPTY;
-        quest.position = new Vec3d(0, 0, 0);
-
-        return quest;
     }
 
     /**

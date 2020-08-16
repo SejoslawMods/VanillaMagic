@@ -3,7 +3,7 @@
     "eventCaller": "craft",
     "parent": "",
     "posX": 0,
-    "posY": 6,
+    "posY": 0,
     "icon": {
       "id": "minecraft:stick"
     },
