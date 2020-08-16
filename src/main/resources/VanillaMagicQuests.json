@@ -78,13 +78,13 @@
     "uniqueName": "craftGunpowder",
     "ingredients": [
       {
-        "id": "minecraft:reeds"
+        "id": "minecraft:sugar_cane"
       },
       {
         "id": "minecraft:coal"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:gunpowder"
       }
@@ -99,10 +99,10 @@
     "uniqueName": "craftSugar",
     "ingredients": [
       {
-        "id": "minecraft:reeds"
+        "id": "minecraft:sugar_cane"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sugar"
       }
@@ -123,7 +123,7 @@
         "id": "minecraft:sand"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:dirt"
       }
@@ -144,7 +144,7 @@
         "id": "minecraft:cobblestone"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sand"
       }
@@ -165,7 +165,7 @@
         "id": "minecraft:dirt"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:cobblestone"
       }
@@ -187,7 +187,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:gravel"
       }
@@ -208,7 +208,7 @@
         "id": "minecraft:rotten_flesh"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:leather"
       }
@@ -232,7 +232,7 @@
         "id": "minecraft:gunpowder"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:clay_ball"
       }
@@ -256,7 +256,7 @@
         "id": "minecraft:coal"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:glass"
       }
@@ -280,7 +280,7 @@
         "id": "minecraft:water_bucket"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:snow"
       },
@@ -307,7 +307,7 @@
         "id": "minecraft:water_bucket"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:ice"
       },
@@ -347,7 +347,7 @@
         "count": 10
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:iron_ore"
       }
@@ -395,7 +395,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:cactus"
       }
@@ -417,7 +417,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling"
       }
@@ -438,7 +438,7 @@
         "id": "minecraft:sapling"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling",
         "meta": 1
@@ -461,7 +461,7 @@
         "meta": 1
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling",
         "meta": 2
@@ -484,7 +484,7 @@
         "meta": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling",
         "meta": 3
@@ -507,7 +507,7 @@
         "meta": 3
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling",
         "meta": 4
@@ -530,7 +530,7 @@
         "meta": 4
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling",
         "meta": 5
@@ -553,7 +553,7 @@
         "meta": 5
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:sapling"
       }
@@ -575,7 +575,7 @@
         "count": 3
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:pumpkin"
       }
@@ -597,7 +597,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:melon"
       }
@@ -619,7 +619,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:vine"
       }
@@ -641,7 +641,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:waterlily"
       }
@@ -663,7 +663,7 @@
         "count": 8
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:slime_ball"
       }
@@ -763,7 +763,7 @@
         "count": 8
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:gold_ingot"
       }
@@ -811,7 +811,7 @@
         "id": "minecraft:leather"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:rotten_flesh"
       }
@@ -833,7 +833,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:string"
       }
@@ -855,7 +855,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:spider_eye"
       }
@@ -877,7 +877,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:bone"
       }
@@ -899,7 +899,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:arrow"
       }
@@ -937,7 +937,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:ender_pearl"
       }
@@ -977,7 +977,7 @@
         "id": "minecraft:lapis_block"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:glowstone_dust"
       }
@@ -1002,7 +1002,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:netherrack"
       }
@@ -1027,7 +1027,7 @@
         "count": 2
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:soul_sand"
       }
@@ -1051,7 +1051,7 @@
         "id": "minecraft:magma_cream"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:magma"
       }
@@ -1081,7 +1081,7 @@
         "id": "minecraft:redstone"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:nether_wart"
       }
@@ -1110,7 +1110,7 @@
         "id": "minecraft:lava_bucket"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:ghast_tear"
       },
@@ -1212,7 +1212,7 @@
         "id": "minecraft:skeleton_skull"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:wither_skeleton_skull"
       }
@@ -1271,7 +1271,7 @@
         "count": 8
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:diamond"
       }
@@ -1304,7 +1304,7 @@
         "count": 16
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:gold_ore"
       }
@@ -1325,7 +1325,7 @@
         "id": "minecraft:gold_ore"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:coal_ore",
         "count": 4
@@ -1348,7 +1348,7 @@
         "count": 16
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:redstone_ore"
       }
@@ -1370,7 +1370,7 @@
         "count": 16
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:lapis_ore"
       }
@@ -1392,7 +1392,7 @@
         "count": 16
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:diamond_ore"
       }
@@ -1428,7 +1428,7 @@
         "count": 8
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:emerald"
       }
@@ -1450,7 +1450,7 @@
         "count": 8
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:emerald_ore"
       }
@@ -1472,7 +1472,7 @@
         "count": 4
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:nether_star"
       }
@@ -1504,7 +1504,7 @@
         "count": 4
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:dragon_egg"
       }
@@ -1525,7 +1525,7 @@
         "id": "minecraft:dragon_egg"
       }
     ],
-    "result": [
+    "results": [
       {
         "id": "minecraft:dragon_head"
       }

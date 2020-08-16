@@ -8,6 +8,11 @@ import java.util.Set;
  */
 public interface IJsonService {
     /**
+     * @return Converts current service into JsonItemStack.
+     */
+    JsonItemStack toItemStack();
+
+    /**
      * @return String from given key.
      */
     String getString(String key);

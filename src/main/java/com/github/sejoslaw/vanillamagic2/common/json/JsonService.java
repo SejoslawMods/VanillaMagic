@@ -23,16 +23,20 @@ public final class JsonService implements IJsonService {
         this.json = json;
     }
 
+    public JsonItemStack toItemStack() {
+        return new JsonItemStack(this);
+    }
+
     public String getString(String key) {
         return this.getValue(key, JsonElement::getAsString, "");
     }
 
     public byte getByte(String key) {
-        return this.getValue(key, JsonElement::getAsByte, Byte.MIN_VALUE);
+        return this.getValue(key, JsonElement::getAsByte, (byte)0);
     }
 
     public int getInt(String key) {
-        return this.getValue(key, JsonElement::getAsInt, Integer.MIN_VALUE);
+        return this.getValue(key, JsonElement::getAsInt, 0);
     }
 
     public JsonItemStack getItemStack(String key) {
@@ -43,7 +47,7 @@ public final class JsonService implements IJsonService {
 
     public List<IJsonService> getList(String key) {
         List<IJsonService> list = new ArrayList<>();
-        JsonArray jsonArray = this.getValue(key, JsonElement::getAsJsonArray, this.json.getAsJsonArray());
+        JsonArray jsonArray = this.getValue(key, JsonElement::getAsJsonArray, new JsonArray());
 
         for (JsonElement jsonElement : jsonArray) {
             list.add(new JsonService(jsonElement.getAsJsonObject()));

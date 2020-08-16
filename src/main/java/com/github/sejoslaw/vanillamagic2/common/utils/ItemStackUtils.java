@@ -49,7 +49,7 @@ public final class ItemStackUtils {
         List<ItemStack> stacks = new ArrayList<>();
 
         for (IJsonService service : rootService.getList(key)) {
-            ItemStack stack = getItemStackFromJson(service.getItemStack(key));
+            ItemStack stack = getItemStackFromJson(service.toItemStack());
             stacks.add(stack);
         }
 
