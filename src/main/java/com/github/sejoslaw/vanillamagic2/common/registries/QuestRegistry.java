@@ -29,7 +29,7 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("castSpellOnBlock", EventCallerCastSpellOnBlock.class, QuestCastSpellOnBlock.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("itemUpgrade", EventCallerItemUpgrade.class, QuestItemUpgrade.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("itemTierUpgrade", EventCallerItemTierUpgrade.class, QuestItemTierUpgrade.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("arrowMachineGun ", EventCallerArrowMachineGun.class, QuestArrowMachineGun.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("arrowMachineGun", EventCallerArrowMachineGun.class, QuestArrowMachineGun.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("buildAltar", EventCallerBuildAltar.class, QuestBuildAltar.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("captureEntity", EventCallerCaptureEntity.class, QuestCaptureEntity.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("craft", EventCallerCraft.class, QuestCraft.class).register());
@@ -45,9 +45,9 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("summonHorde", EventCallerSummonHorde.class, QuestSummonHorde.class).register());
 
         // Connected with Items
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerationCrystal ", EventCallerAccelerationCrystal.class, QuestAccelerationCrystal.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("accelerationCrystal", EventCallerAccelerationCrystal.class, QuestAccelerationCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("crystallizedLiquid", EventCallerCrystallizedLiquid.class, QuestCrystallizedLiquid.class).register());
-        QUEST_EVENT_CALLERS.add(new QuestEventCaller("evokerCrystal ", EventCallerEvokerCrystal.class, QuestEvokerCrystal.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("evokerCrystal", EventCallerEvokerCrystal.class, QuestEvokerCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("liquidSuppressionCrystal", EventCallerLiquidSuppressionCrystal.class, QuestLiquidSuppressionCrystal.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("crystallizedPotion", EventCallerCrystallizedPotion.class, QuestCrystallizedPotion.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("motherNatureCrystal", EventCallerMotherNatureCrystal.class, QuestMotherNatureCrystal.class).register());
