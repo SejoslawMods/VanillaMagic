@@ -15,5 +15,9 @@ public class QuestCastSpell extends Quest {
         super.readData(jsonService);
 
         this.spell = SpellRegistry.SPELLS.get(jsonService.getString("uniqueName"));
+
+        if (this.iconStack == null) {
+            this.iconStack = this.leftHandStack;
+        }
     }
 }

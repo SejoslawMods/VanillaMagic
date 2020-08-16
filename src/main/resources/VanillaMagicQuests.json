@@ -1129,6 +1129,9 @@
     "posX": 0,
     "posY": 2,
     "uniqueName": "pickupBlazeRod",
+    "icon": {
+      "id": "minecraft:blaze_rod"
+    },
     "whatToPickStack": {
       "id": "minecraft:blaze_rod"
     }
@@ -1139,6 +1142,9 @@
     "posX": -2,
     "posY": 1,
     "uniqueName": "questMoveBlock",
+    "icon": {
+      "id": "minecraft:book"
+    },
     "leftHandStack": {
       "id": "minecraft:book"
     },
@@ -1152,6 +1158,9 @@
     "posX": -2,
     "posY": 0,
     "uniqueName": "captureEntity",
+    "icon": {
+      "id": "minecraft:book"
+    },
     "leftHandStack": {
       "id": "minecraft:book"
     },

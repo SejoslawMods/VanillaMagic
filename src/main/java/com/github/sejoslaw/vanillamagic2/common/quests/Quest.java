@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class Quest {
     // Core fields
     public Quest parent;
-    public double posX, posY;
+    public int posX, posY;
     public ItemStack iconStack;
     public String uniqueName;
 
