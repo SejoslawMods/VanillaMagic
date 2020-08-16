@@ -108,116 +108,110 @@
   "quest.spellSummonLightningBolt": "Thunder !!! (summon thunder)",
   "quest.spellSummonLightningBolt.desc": "Hold Blaze Wand in Your hand and at least 32x Gunpowder in the left hand and right-click.",
 
-  "quest.spellSummonChicken": "Summon Chicken",
-  "quest.spellSummonChicken.desc": "Hold Nether Star in Your hand and 32x Chicken in Your left hand and right-click on block",
+  "quest.spellSummon_minecraft:chicken": "Summon Chicken",
+  "quest.spellSummon_minecraft:chicken.desc": "Hold Nether Star in Your hand and 32x Chicken in Your left hand and right-click on block",
 
-  "quest.spellSummonSquid": "Summon Squid",
-  "quest.spellSummonSquid.desc": "Hold Nether Star in Your hand and 32x Ink in Your left hand and right-click on block",
+  "quest.spellSummon_minecraft:squid": "Summon Squid",
+  "quest.spellSummon_minecraft:squid.desc": "Hold Nether Star in Your hand and 32x Ink in Your left hand and right-click on block",
 
-  "quest.spellSummonPig": "Summon Pig",
-  "quest.spellSummonPig.desc": "Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:pig": "Summon Pig",
+  "quest.spellSummon_minecraft:pig.desc": "Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block.",
 
-  "quest.spellSummonCow": "Summon Cow",
-  "quest.spellSummonCow.desc": "Hold Nether Star in Your hand and 32x Beef in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:cow": "Summon Cow",
+  "quest.spellSummon_minecraft:cow.desc": "Hold Nether Star in Your hand and 32x Beef in Your left hand and right-click on block.",
 
-  "quest.spellSummonMooshroom": "Summon Mooshroom",
-  "quest.spellSummonMooshroom.desc": "Hold Nether Star in Your hand and 32x Cooked Beef in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:mooshroom": "Summon Mooshroom",
+  "quest.spellSummon_minecraft:mooshroom.desc": "Hold Nether Star in Your hand and 32x Cooked Beef in Your left hand and right-click on block.",
 
-  "quest.spellSummonSheep": "Summon Sheep",
-  "quest.spellSummonSheep.desc": "Hold Nether Star in Your hand and 32x Mutton in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:sheep": "Summon Sheep",
+  "quest.spellSummon_minecraft:sheep.desc": "Hold Nether Star in Your hand and 32x Mutton in Your left hand and right-click on block.",
 
-  "quest.spellSummonWolf": "Summon Wolf",
-  "quest.spellSummonWolf.desc": "Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:wolf": "Summon Wolf",
+  "quest.spellSummon_minecraft:wolf.desc": "Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block.",
 
-  "quest.spellSummonLama": "Summon Lama",
-  "quest.spellSummonLama.desc": "Hold Nether Star in Your hand and 32x Leather in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:llama": "Summon Lama",
+  "quest.spellSummon_minecraft:llama.desc": "Hold Nether Star in Your hand and 32x Leather in Your left hand and right-click on block.",
 
-  "quest.spellSummonRabbit": "Summon Rabbit",
-  "quest.spellSummonRabbit.desc": "Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:rabbit": "Summon Rabbit",
+  "quest.spellSummon_minecraft:rabbit.desc": "Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block.",
 
-  "quest.spellSummonHorse": "Summon Horse (percent for Donkey or Mule)",
-  "quest.spellSummonHorse.desc": "Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:horse": "Summon Horse (percent for Donkey or Mule)",
+  "quest.spellSummon_minecraft:horse.desc": "Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block.",
 
-  "quest.spellSummonVillager": "Summon Villager",
-  "quest.spellSummonVillager.desc": "Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:villager": "Summon Villager",
+  "quest.spellSummon_minecraft:villager.desc": "Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block.",
 
-  "quest.spellSummonIronGolem": "Summon IronGolem",
-  "quest.spellSummonIronGolem.desc": "Hold Nether Star in Your hand and 32x Iron Ingot in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:iron_golem": "Summon IronGolem",
+  "quest.spellSummon_minecraft:iron_golem.desc": "Hold Nether Star in Your hand and 32x Iron Ingot in Your left hand and right-click on block.",
 
-  "quest.spellSummonSnowman": "Summon Snowman",
-  "quest.spellSummonSnowman.desc": "Hold Nether Star in Your hand and 2x Snow Block in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:snowball": "Summon Snowman",
+  "quest.spellSummon_minecraft:snowball.desc": "Hold Nether Star in Your hand and 2x Snow Block in Your left hand and right-click on block.",
 
-  "quest.spellSummonEndermite": "Summon Endermite",
-  "quest.spellSummonEndermite.desc": "Hold Nether Star in Your hand and 3x Blaze Powder in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:endermite": "Summon Endermite",
+  "quest.spellSummon_minecraft:endermite.desc": "Hold Nether Star in Your hand and 3x Blaze Powder in Your left hand and right-click on block.",
 
-  "quest.spellSummonZombie": "Summon Zombie (percent for being on Horse)",
-  "quest.spellSummonZombie.desc": "Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:zombie": "Summon Zombie (percent for being on Horse)",
+  "quest.spellSummon_minecraft:zombie.desc": "Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block.",
 
-  "quest.spellSummonCreeper": "Summon Creeper",
-  "quest.spellSummonCreeper.desc": "Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:creeper": "Summon Creeper",
+  "quest.spellSummon_minecraft:creeper.desc": "Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block.",
 
-  "quest.spellSummonSkeleton": "Summon Skeleton (percent for being on Horse)",
-  "quest.spellSummonSkeleton.desc": "Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:skeleton": "Summon Skeleton (percent for being on Horse)",
+  "quest.spellSummon_minecraft:skeleton.desc": "Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block.",
 
-  "quest.spellSummonBlaze": "Summon Blaze",
-  "quest.spellSummonBlaze.desc": "Hold Nether Star in Your hand and 8x Blaze Rod in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:blaze": "Summon Blaze",
+  "quest.spellSummon_minecraft:blaze.desc": "Hold Nether Star in Your hand and 8x Blaze Rod in Your left hand and right-click on block.",
 
-  "quest.spellSummonMagmaCube": "Summon Magma Cube",
-  "quest.spellSummonMagmaCube.desc": "Hold Nether Star in Your hand and 8x Magma Cream in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:magma_cube": "Summon Magma Cube",
+  "quest.spellSummon_minecraft:magma_cube.desc": "Hold Nether Star in Your hand and 8x Magma Cream in Your left hand and right-click on block.",
 
-  "quest.spellSummonGhast": "Summon Ghast",
-  "quest.spellSummonGhast.desc": "Hold Nether Star in Your hand and 8x Ghast Tear in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:ghast": "Summon Ghast",
+  "quest.spellSummon_minecraft:ghast.desc": "Hold Nether Star in Your hand and 8x Ghast Tear in Your left hand and right-click on block.",
 
-  "quest.spellSummonEnderman": "Summon Enderman",
-  "quest.spellSummonEnderman.desc": "Hold Nether Star in Your hand and 8x Blaze Powder in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:enderman": "Summon Enderman",
+  "quest.spellSummon_minecraft:enderman.desc": "Hold Nether Star in Your hand and 8x Blaze Powder in Your left hand and right-click on block.",
 
-  "quest.spellSummonSpider": "Summon Spider",
-  "quest.spellSummonSpider.desc": "Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:spider": "Summon Spider",
+  "quest.spellSummon_minecraft:spider.desc": "Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block.",
 
-  "quest.spellSummonSlime": "Summon Slime",
-  "quest.spellSummonSlime.desc": "Hold Nether Star in Your hand and 8x Slime Ball in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:slime": "Summon Slime",
+  "quest.spellSummon_minecraft:slime.desc": "Hold Nether Star in Your hand and 8x Slime Ball in Your left hand and right-click on block.",
 
-  "quest.spellSummonWitch": "Summon Witch",
-  "quest.spellSummonWitch.desc": "Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:witch": "Summon Witch",
+  "quest.spellSummon_minecraft:witch.desc": "Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block.",
 
-  "quest.spellSummonVindicator": "Summon Vindicator",
-  "quest.spellSummonVindicator.desc": "Hold Nether Star in Your hand and Iron Axe in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:vindicator": "Summon Vindicator",
+  "quest.spellSummon_minecraft:vindicator.desc": "Hold Nether Star in Your hand and Iron Axe in Your left hand and right-click on block.",
 
-  "quest.spellSummonVex": "Summon Vex",
-  "quest.spellSummonVex.desc": "Hold Nether Star in Your hand and Iron Sword in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:vex": "Summon Vex",
+  "quest.spellSummon_minecraft:vex.desc": "Hold Nether Star in Your hand and Iron Sword in Your left hand and right-click on block.",
 
-  "quest.spellSummonEvoker": "Summon Evoker",
-  "quest.spellSummonEvoker.desc": "Hold Nether Star in Your hand and 2x Emerald in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:evoker": "Summon Evoker",
+  "quest.spellSummon_minecraft:evoker.desc": "Hold Nether Star in Your hand and 2x Emerald in Your left hand and right-click on block.",
 
   "quest.evokerCrystal": "Evoker Crystal",
   "quest.evokerCrystal.desc": "Kill Evoker to get Crystal. Pickup Crystal to get quest. Hold Evoker Crystal in right-hand. Right-Click to cast currently selected Spell. Shift-Right-Click to change selected Spell.",
 
-  "quest.spellSummonPigman": "Summon Pigman",
-  "quest.spellSummonPigman.desc": "Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:pigman": "Summon Pigman",
+  "quest.spellSummon_minecraft:pigman.desc": "Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.",
 
-  "quest.spellSummonGuardian": "Summon Guardian (percent for Elder)",
-  "quest.spellSummonGuardian.desc": "Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:guardian": "Summon Guardian (percent for Elder)",
+  "quest.spellSummon_minecraft:guardian.desc": "Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block.",
 
-  "quest.spellSummonPolarBear": "Summon Polar Bear",
-  "quest.spellSummonPolarBear.desc": "Hold Nether Star in Your hand and 8x Fish in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:polar_bear": "Summon Polar Bear",
+  "quest.spellSummon_minecraft:polar_bear.desc": "Hold Nether Star in Your hand and 8x Fish in Your left hand and right-click on block.",
 
-  "quest.spellSummonShulker": "Summon Shulker",
-  "quest.spellSummonShulker.desc": "Hold Nether Star in Your hand and 1x End Rod in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:shulker": "Summon Shulker",
+  "quest.spellSummon_minecraft:shulker.desc": "Hold Nether Star in Your hand and 1x End Rod in Your left hand and right-click on block.",
 
-  "quest.spellSummonSilverfish": "Summon Silverfish",
-  "quest.spellSummonSilverfish.desc": "Hold Nether Star in Your hand and 8x Stone Brick in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:silverfish": "Summon Silverfish",
+  "quest.spellSummon_minecraft:silverfish.desc": "Hold Nether Star in Your hand and 8x Stone Brick in Your left hand and right-click on block.",
 
-  "quest.spellSummonWither": "Summon Wither",
-  "quest.spellSummonWither.desc": "Hold Nether Star in Your hand and 1x Emerald Block in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:wither": "Summon Wither",
+  "quest.spellSummon_minecraft:wither.desc": "Hold Nether Star in Your hand and 1x Emerald Block in Your left hand and right-click on block.",
 
   "quest.shootWitherSkull": "Shoot Wither Skull",
   "quest.shootWitherSkull.desc": "Hold Nether Star in Your right hand and Wither Skeleton Head/s in left hand and right-click in air to shoot Wither Skull.",
-
-  "quest.spellSummonGiant": "Summon Giant",
-  "quest.spellSummonGiant.desc": "Hold Nether Star in Your hand and 8x Armor Stand in Your left hand and right-click on block.",
-
-  "quest.spellSummonSpiderJockey": "Summon Spider Jockey",
-  "quest.spellSummonSpiderJockey.desc": "Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block (with 1x Bone on it).",
 
   "quest.summonHordeLvl1": "Summon Horde Lvl: 1 (Requires: Summon Giant)",
   "quest.summonHordeLvl1.desc": "Hold 1x End Crystal in left hand and Nether Star in right hand. Right-click block to spawn Horde. Prepare to battle !",
