@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3d;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -12,7 +11,7 @@ import net.minecraft.util.math.Vec3d;
 public class Quest {
     // Core fields
     public Quest parent;
-    public Vec3d position;
+    public double posX, posY;
     public ItemStack iconStack;
     public String uniqueName;
 
@@ -30,13 +29,11 @@ public class Quest {
         this.iconStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("icon"));
         this.uniqueName = jsonService.getString("uniqueName");
 
-        double posX = jsonService.getInt("posX");
-        posX += this.parent != null ? this.parent.position.x : 0;
+        this.posX = jsonService.getInt("posX");
+        this.posX += this.parent != null ? this.parent.posX : 0;
 
-        double posY = jsonService.getInt("posY");
-        posY += this.parent != null ? this.parent.position.y : 0;
-
-        this.position = new Vec3d(posX, posY, 0);
+        this.posY = jsonService.getInt("posY");
+        this.posY += this.parent != null ? this.parent.posY : 0;
 
         this.tryReadCustomFields(jsonService);
     }
