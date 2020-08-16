@@ -115,6 +115,7 @@ public class QuestGui extends Screen {
         this.drawQuest(node.quest);
 
         node.children.forEach(childNode -> {
+            // TODO: Calculate appropriate distance between Quests
             int zoom = 24;
             int offsetX = childNode.quest.posX * zoom;
             int offsetY = childNode.quest.posY * (zoom / 2);
