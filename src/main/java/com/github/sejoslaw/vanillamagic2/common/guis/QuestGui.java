@@ -1,11 +1,14 @@
 package com.github.sejoslaw.vanillamagic2.common.guis;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
+import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -136,9 +139,24 @@ public class QuestGui extends Screen {
         float move = (float)(this.itemStackIconSize / 2);
         RenderSystem.translatef(-move, -move, 0.0F);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
-        this.drawQuestOverlay(this.questAchievedOverlayColor); // TODO: Calculate Quest color (green - achieved, yellow - available, grey - currently locked)
+        this.drawQuestOverlay(this.getQuestColor(quest));
         this.drawItemStack(quest.iconStack, 1, 1, TextUtils.translate("quest." + quest.uniqueName).getFormattedText());
         RenderSystem.translatef(move, move, 0);
+    }
+
+    /**
+     * @return Color describing if the specified Quest is achieved, available or locked.
+     */
+    private int getQuestColor(Quest quest) {
+        PlayerEntity player = Minecraft.getInstance().player;
+
+        if (PlayerQuestProgressRegistry.hasPlayerGotQuest(player, quest.uniqueName)) {
+            return this.questAchievedOverlayColor;
+        } else if (PlayerQuestProgressRegistry.canPlayerGetQuest(player, quest.uniqueName)) {
+            return this.questAvailableOverlayColor;
+        } else {
+            return this.questLockedOverlayColor;
+        }
     }
 
     /**

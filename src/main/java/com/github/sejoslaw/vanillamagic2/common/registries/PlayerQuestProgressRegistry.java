@@ -56,10 +56,6 @@ public final class PlayerQuestProgressRegistry {
     public static boolean canPlayerGetQuest(PlayerEntity player, String questUniqueName) {
         Quest quest = QuestRegistry.getQuest(questUniqueName);
 
-        if (quest == null) {
-            throw new IllegalArgumentException("Unknown Quest: " + questUniqueName);
-        }
-
         if (quest.parent != null) {
             return hasPlayerGotQuest(player, quest.parent.uniqueName);
         }

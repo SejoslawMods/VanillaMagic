@@ -82,7 +82,7 @@ public final class QuestRegistry {
             }
         }
 
-        return null;
+        throw new IllegalArgumentException("Unknown Quest: " + questUniqueName);
     }
 
     public static List<Quest> getQuests() {
