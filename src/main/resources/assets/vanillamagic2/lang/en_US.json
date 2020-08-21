@@ -63,7 +63,7 @@
   "quest.spellFlintAndSteel": "Flint and Steel Clone",
   "quest.spellFlintAndSteel.desc": "Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire.",
 
-  "quest.spellSmallFireball": "Feel like Blaze (small fireball) (Require: Pick Blaze Rod)",
+  "quest.spellSmallFireball": "Feel like Blaze (small fireball)",
   "quest.spellSmallFireball.desc": "Hold Blaze Wand in Your right hand and at least 2x Redstone Dust in the left hand and right-click.",
 
   "quest.spellFusRoDah": "Fus-Ro-Dah !!! (repulse mobs and animals around player)",
@@ -84,7 +84,7 @@
   "quest.spellTeleportToEnd": "Teleport to End",
   "quest.spellTeleportToEnd.desc": "Hold Blaze Wand in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon).",
 
-  "quest.spellSummonMeteor": "Meteor !!! (Summon Meteor from Heaven)",
+  "quest.spellSummonMeteor": "Meteor !!!",
   "quest.spellSummonMeteor.desc": "Hold Nether Star in Your hand and at least 10x Diamonds in the left hand and right-click.",
 
   "quest.spellWeatherRain": "Make rain (Weather Spell)",
@@ -99,13 +99,13 @@
   "quest.spellMoveInAir": "Move in air (move up to 10 blocks)",
   "quest.spellMoveInAir.desc": "Hold Blaze Wand in Your right hand and at least 1x Feather in the left hand and right-click.",
 
-  "quest.spellPullEntityToPlayer": "Pull Entity to Player (yes, ALL entities)",
+  "quest.spellPullEntityToPlayer": "Pull Entity to Player (Yes, ALL entities)",
   "quest.spellPullEntityToPlayer.desc": "Hold Blaze Wand in Your right hand and at least 4x String in the left hand and right-click.",
 
   "quest.spellFreezeWater3x3": "Freeze Water 3x3 (will freeze the middle block)",
   "quest.spellFreezeWater3x3.desc": "Hold Blaze Wand in Your right hand and at least 1x Snow Block in the left hand and right-click.",
 
-  "quest.spellSummonLightningBolt": "Thunder !!! (summon thunder)",
+  "quest.spellSummonLightningBolt": "Thunder !!!",
   "quest.spellSummonLightningBolt.desc": "Hold Blaze Wand in Your hand and at least 32x Gunpowder in the left hand and right-click.",
 
   "quest.spellSummon_minecraft:chicken": "Summon Chicken",
@@ -135,7 +135,7 @@
   "quest.spellSummon_minecraft:rabbit": "Summon Rabbit",
   "quest.spellSummon_minecraft:rabbit.desc": "Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block.",
 
-  "quest.spellSummon_minecraft:horse": "Summon Horse (percent for Donkey or Mule)",
+  "quest.spellSummon_minecraft:horse": "Summon Horse",
   "quest.spellSummon_minecraft:horse.desc": "Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block.",
 
   "quest.spellSummon_minecraft:villager": "Summon Villager",
@@ -150,13 +150,13 @@
   "quest.spellSummon_minecraft:endermite": "Summon Endermite",
   "quest.spellSummon_minecraft:endermite.desc": "Hold Nether Star in Your hand and 3x Blaze Powder in Your left hand and right-click on block.",
 
-  "quest.spellSummon_minecraft:zombie": "Summon Zombie (percent for being on Horse)",
+  "quest.spellSummon_minecraft:zombie": "Summon Zombie",
   "quest.spellSummon_minecraft:zombie.desc": "Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block.",
 
   "quest.spellSummon_minecraft:creeper": "Summon Creeper",
   "quest.spellSummon_minecraft:creeper.desc": "Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block.",
 
-  "quest.spellSummon_minecraft:skeleton": "Summon Skeleton (percent for being on Horse)",
+  "quest.spellSummon_minecraft:skeleton": "Summon Skeleton",
   "quest.spellSummon_minecraft:skeleton.desc": "Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block.",
 
   "quest.spellSummon_minecraft:blaze": "Summon Blaze",
@@ -195,7 +195,7 @@
   "quest.spellSummon_minecraft:pigman": "Summon Pigman",
   "quest.spellSummon_minecraft:pigman.desc": "Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.",
 
-  "quest.spellSummon_minecraft:guardian": "Summon Guardian (percent for Elder)",
+  "quest.spellSummon_minecraft:guardian": "Summon Guardian",
   "quest.spellSummon_minecraft:guardian.desc": "Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block.",
 
   "quest.spellSummon_minecraft:polar_bear": "Summon Polar Bear",
@@ -234,7 +234,7 @@
   "quest.mobSpawnerDropBlock": "Mob Spawner Drop Block",
   "quest.mobSpawnerDropBlock.desc": "Break Mob Spawner. It will drop Block and Book with Entity data from Spawner. Right-click with this Book in right hand on Spawner to set Spawner to the Entity from Book.",
 
-  "quest.craftEnchantingTable": "Craft Enchanting Table (Require: all 3 earlier)",
+  "quest.craftEnchantingTable": "Craft Enchanting Table",
   "quest.craftEnchantingTable.desc": "Craft enchanting table.",
 
   "quest.craftCauldron": "Craft Cauldron",
@@ -243,7 +243,7 @@
   "quest.mineRedstone": "Mine Redstone",
   "quest.mineRedstone.desc": "Mine at least one block of redstone.",
 
-  "quest.buildAltarTier1": "Build Altar Tier 1 (Require: both earlier)",
+  "quest.buildAltarTier1": "Build Altar Tier 1",
   "quest.buildAltarTier1.desc": "Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle.",
 
   "quest.craftGunpowder": "Craft Gunpowder",
@@ -342,7 +342,7 @@
   "quest.machineFarm": "Vanilla Automatic Farm",
   "quest.machineFarm.desc": "Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume 1x Wheat Seed.",
 
-  "quest.accelerant": "Accelerant (speed up ticks in range 9x3x9)",
+  "quest.accelerant": "Accelerant (speeds up ticks in range 9x3x9)",
   "quest.accelerant.desc": "Place Cauldron and on top place Chest with Acceleration Crystal inside. Take second Acceleration Crystal to left hand and Blaze Wand to right hand. Shift-right-click the Cauldron.",
 
   "quest.motherNatureCrystal": "The Crystal of Mother Nature",
