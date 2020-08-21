@@ -25,15 +25,10 @@ public class Quest {
 
     public void readData(IJsonService jsonService) {
         this.parent = QuestRegistry.getQuest(jsonService.getString("parent"));
-
         this.iconStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("icon"));
         this.uniqueName = jsonService.getString("uniqueName");
-
         this.posX = jsonService.getInt("posX");
-        this.posX += this.parent != null ? this.parent.posX : 0;
-
         this.posY = jsonService.getInt("posY");
-        this.posY += this.parent != null ? this.parent.posY : 0;
 
         this.tryReadCustomFields(jsonService);
     }

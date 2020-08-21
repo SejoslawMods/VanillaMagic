@@ -27,6 +27,11 @@ import java.util.stream.Collectors;
  */
 public final class WorldUtils {
     /**
+     * Cached name of the currently handling World.
+     */
+    public static String WORLD_NAME = "";
+
+    /**
      * @return All ItemEntities on specified position.
      */
     public static List<ItemEntity> getItems(World world, BlockPos pos) {
@@ -106,5 +111,15 @@ public final class WorldUtils {
                 .filter(tile -> tile instanceof IVMTileEntity)
                 .map(tile -> (IVMTileEntity) tile)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * @return Name of the currently handling World.
+     */
+    public static String getWorldName(World world) {
+        if (WORLD_NAME.isEmpty()) {
+            WORLD_NAME = world.getWorldInfo().getWorldName();
+        }
+        return WORLD_NAME;
     }
 }

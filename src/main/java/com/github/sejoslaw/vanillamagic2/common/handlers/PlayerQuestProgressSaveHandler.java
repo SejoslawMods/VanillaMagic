@@ -13,11 +13,12 @@ import java.util.Set;
  */
 public final class PlayerQuestProgressSaveHandler {
     @SubscribeEvent
-    public void savePlayerQuests(PlayerEvent.SaveToFile event) {
+    public void savePlayerQuests(PlayerEvent.PlayerLoggedOutEvent event) {
         VMFiles.parsePlayerQuests(event.getPlayer(), (worldName, playerName, playerQuestsFile) ->
                 VMFiles.writeJson(playerQuestsFile, writer -> {
-                    Set<String> playerQuests = PlayerQuestProgressRegistry.getPlayerQuests(worldName, playerName);
+                    Set<String> playerQuests = PlayerQuestProgressRegistry.getPlayerQuests(playerName);
                     JsonService.writePlayerQuestProgress(writer, playerQuests);
+                    PlayerQuestProgressRegistry.clearData(playerName);
                 }));
     }
 }

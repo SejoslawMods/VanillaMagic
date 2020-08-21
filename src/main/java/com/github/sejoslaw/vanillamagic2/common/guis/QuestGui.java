@@ -5,7 +5,6 @@ import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRe
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,11 +15,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
+import java.util.*;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -46,7 +42,7 @@ public class QuestGui extends Screen {
             Quest rootQuest = quests.stream()
                     .filter(quest -> quest.parent == null)
                     .findFirst()
-                    .get();
+                    .orElse(new Quest());
             QuestTreeNode rootNode = new QuestTreeNode(rootQuest);
             quests.remove(rootQuest);
             parseTree(rootNode, quests);
@@ -108,39 +104,90 @@ public class QuestGui extends Screen {
         super.render(mouseX, mouseY, partialTicks);
         this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGuiTitle").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
         RenderSystem.translatef((float) (this.width / 2), (float) (this.height / 2), 0);
-        this.drawQuestTreeNode(this.rootNode, null, 0, 0);
+        this.drawQuestTreeNode(this.rootNode);
     }
 
     /**
      * Draws Quest tree.
      */
-    private void drawQuestTreeNode(QuestTreeNode node, QuestTreeNode parent, int x, int y) {
+    private void drawQuestTreeNode(QuestTreeNode node) {
         this.drawQuest(node.quest);
 
         node.children.forEach(childNode -> {
-            // TODO: Calculate appropriate distance between Quests
-            int zoom = 24;
-            int offsetX = childNode.quest.posX * zoom;
-            int offsetY = childNode.quest.posY * (zoom / 2);
-            int posX = x - offsetX;
-            int posY = y - offsetY;
+            int offsetX = this.getOffsetX(childNode);
+            int offsetY = this.getOffsetY(childNode);
 
-            RenderSystem.translatef(offsetX, offsetY, 0);
-            // TODO: Render connection between childNode and node. Where 'node' is a parent and 'childNode' is a child
-            this.drawQuestTreeNode(childNode, node, posX, posY);
-            RenderSystem.translatef(-offsetX, -offsetY, 0);
+            this.drawConnection(childNode, offsetX, offsetY);
+            this.drawQuestTreeNode(childNode);
+            this.moveBackToParent(offsetX, offsetY);
         });
     }
 
     /**
-     * Draws specified Quest on a given position.
+     * Moves drawing position back to the center of parent Quest.
+     */
+    private void moveBackToParent(int offsetX, int offsetY) {
+        RenderSystem.translatef(-offsetX, -offsetY, 0);
+
+        boolean straightY = true;
+
+        if (offsetX != 0) {
+            RenderSystem.translatef((offsetX > 0 ? -(this.itemStackIconSize / 2) - 1 : (this.itemStackIconSize / 2) + 1), 0, 0);
+            straightY = false;
+        }
+
+        if (offsetY != 0 && straightY) {
+            RenderSystem.translatef(0, (offsetY > 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2)), 0);
+        }
+    }
+
+    /**
+     * Draws connection between the nodes.
+     */
+    private void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
+        int color = this.getQuestColor(child.quest);
+        boolean straightY = true;
+
+        if (offsetX != 0) {
+            RenderSystem.translatef((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
+            this.hLine(0, offsetX, 0, color);
+            RenderSystem.translatef(offsetX, 0, 0);
+            straightY = false;
+        }
+
+        if (offsetY != 0) {
+            if (straightY) {
+                RenderSystem.translatef(0, (offsetY > 0 ? (this.itemStackIconSize / 2) : -(this.itemStackIconSize / 2)), 0);
+            }
+
+            this.vLine(0, offsetY, 0, color);
+            RenderSystem.translatef(0, offsetY, 0);
+        }
+    }
+
+    /**
+     * @return X offset by which the next node should be rendered.
+     */
+    private int getOffsetX(QuestTreeNode node) {
+        return this.itemStackIconSize * 2 * node.quest.posX;
+    }
+
+    /**
+     * @return Y offset by which the next node should be rendered.
+     */
+    private int getOffsetY(QuestTreeNode node) {
+        return this.itemStackIconSize * 2 * node.quest.posY;
+    }
+
+    /**
+     * Draws specified Quest on the current position.
      */
     private void drawQuest(Quest quest) {
         float move = (float)(this.itemStackIconSize / 2);
         RenderSystem.translatef(-move, -move, 0.0F);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
         this.drawQuestOverlay(this.getQuestColor(quest));
-        this.drawItemStack(quest.iconStack, 1, 1, TextUtils.translate("quest." + quest.uniqueName).getFormattedText());
+        this.drawItemStack(quest.iconStack, 1, 1, this.getQuestText(quest));
         RenderSystem.translatef(move, move, 0);
     }
 
@@ -148,7 +195,7 @@ public class QuestGui extends Screen {
      * @return Color describing if the specified Quest is achieved, available or locked.
      */
     private int getQuestColor(Quest quest) {
-        PlayerEntity player = Minecraft.getInstance().player;
+        PlayerEntity player = this.getMinecraft().player;
 
         if (PlayerQuestProgressRegistry.hasPlayerGotQuest(player, quest.uniqueName)) {
             return this.questAchievedOverlayColor;
@@ -157,6 +204,13 @@ public class QuestGui extends Screen {
         } else {
             return this.questLockedOverlayColor;
         }
+    }
+
+    /**
+     * @return Displayed text for the specified Quest.
+     */
+    private String getQuestText(Quest quest) {
+        return TextUtils.translate("quest." + quest.uniqueName).getFormattedText();
     }
 
     /**
@@ -185,7 +239,7 @@ public class QuestGui extends Screen {
         }
 
         this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
-        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x + font.getStringWidth(text) + 3, y - 18, text);
+        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x + font.getStringWidth(text) + 3, y - 18, "");
         this.setBlitOffset(0);
         this.itemRenderer.zLevel = 0.0F;
     }

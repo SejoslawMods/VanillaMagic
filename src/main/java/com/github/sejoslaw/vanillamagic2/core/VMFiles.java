@@ -9,6 +9,7 @@ import com.github.sejoslaw.vanillamagic2.common.handlers.VMTileEntitySaveHandler
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -72,7 +73,7 @@ public final class VMFiles {
      * @return Path to file with VM Tile Entities in specified World directory.
      */
     public static Path getVMTileEntitiesFilePath(World world) {
-        String worldName = world.getWorldInfo().getWorldName();
+        String worldName = WorldUtils.getWorldName(world);
         String dimensionId = String.valueOf(world.getDimension().getType().getId());
         return Paths.get(getVMWorldDir(worldName).toString(), dimensionId, "VanillaMagicTileEntities.dat");
     }
@@ -82,7 +83,7 @@ public final class VMFiles {
      */
     public static void parsePlayerQuests(PlayerEntity player, Consumer3<String, String, File> consumer) {
         String playerName = EntityUtils.getPlayerName(player);
-        String worldName = player.getEntityWorld().getWorldInfo().getWorldName();
+        String worldName = WorldUtils.getWorldName(player.getEntityWorld());
 
         Path playerQuestsPath = VMFiles.getPlayerQuestsFilePath(worldName, playerName);
         File playerQuestsFile = playerQuestsPath.toFile();

@@ -12,12 +12,10 @@ import java.util.Set;
  */
 public final class PlayerQuestProgressRegistry {
     public static final class PlayerQuestProgressData {
-        public final String worldName;
         public final String playerName;
         public final Set<String> questUniqueNames;
 
-        public PlayerQuestProgressData(String worldName, String playerName, Set<String> questUniqueNames) {
-            this.worldName = worldName;
+        public PlayerQuestProgressData(String playerName, Set<String> questUniqueNames) {
             this.playerName = playerName;
             this.questUniqueNames = questUniqueNames;
         }
@@ -29,21 +27,20 @@ public final class PlayerQuestProgressRegistry {
     public static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
 
     public static PlayerQuestProgressData getPlayerData(PlayerEntity player) {
-        String worldName = player.getEntityWorld().getWorldInfo().getWorldName();
         String playerName = EntityUtils.getPlayerName(player);
-        return getPlayerData(worldName, playerName);
+        return getPlayerData(playerName);
     }
 
-    public static PlayerQuestProgressData getPlayerData(String worldName, String playerName) {
+    public static PlayerQuestProgressData getPlayerData(String playerName) {
         return USER_DATA
                 .stream()
-                .filter(data -> data.worldName.equals(worldName) && data.playerName.equals(playerName))
+                .filter(data -> data.playerName.equals(playerName))
                 .findFirst()
-                .orElse(new PlayerQuestProgressData(worldName, playerName, new HashSet<>()));
+                .orElse(new PlayerQuestProgressData(playerName, new HashSet<>()));
     }
 
-    public static Set<String> getPlayerQuests(String worldName, String playerName) {
-        return getPlayerData(worldName, playerName).questUniqueNames;
+    public static Set<String> getPlayerQuests(String playerName) {
+        return getPlayerData(playerName).questUniqueNames;
     }
 
     public static boolean hasPlayerGotQuest(PlayerEntity player, String questUniqueName) {
@@ -65,5 +62,9 @@ public final class PlayerQuestProgressRegistry {
 
     public static void givePlayerQuest(PlayerEntity player, String questUniqueName) {
         getPlayerData(player).questUniqueNames.add(questUniqueName);
+    }
+
+    public static void clearData(String playerName) {
+        USER_DATA.remove(getPlayerData(playerName));
     }
 }

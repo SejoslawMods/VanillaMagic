@@ -82,6 +82,10 @@ public final class QuestRegistry {
             }
         }
 
+        if (questUniqueName.isEmpty()) {
+            return null;
+        }
+
         throw new IllegalArgumentException("Unknown Quest: " + questUniqueName);
     }
 
