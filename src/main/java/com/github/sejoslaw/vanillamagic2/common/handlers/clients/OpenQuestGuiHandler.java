@@ -23,7 +23,10 @@ public class OpenQuestGuiHandler {
 
     @SubscribeEvent()
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
-        if (event.getKey() == OPEN_QUEST_GUI_KEY_BINDING.getKey().getKeyCode() && event.getAction() == GLFW.GLFW_PRESS) {
+        if (event.getKey() == OPEN_QUEST_GUI_KEY_BINDING.getKey().getKeyCode() &&
+                event.getAction() == GLFW.GLFW_PRESS &&
+                Minecraft.getInstance().world != null &&
+                Minecraft.getInstance().player != null) {
             Minecraft.getInstance().displayGuiScreen(new QuestGui());
         }
     }
