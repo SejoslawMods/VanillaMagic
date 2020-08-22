@@ -27,10 +27,6 @@ import java.util.stream.Collectors;
 @OnlyIn(Dist.CLIENT)
 public class QuestGui extends Screen {
     private static class QuestTreeNode {
-        private static final int QUEST_ACHIEVED_COLOR = Color.green.getRGB();
-        private static final int QUEST_AVAILABLE_COLOR = Color.yellow.getRGB();
-        private static final int QUEST_LOCKED_COLOR = Color.gray.getRGB();
-
         public Quest quest;
         public Set<QuestTreeNode> children;
         public int color;
@@ -104,11 +100,16 @@ public class QuestGui extends Screen {
         }
     }
 
+    private static final int QUEST_ACHIEVED_COLOR = Color.green.getRGB();
+    private static final int QUEST_AVAILABLE_COLOR = Color.yellow.getRGB();
+    private static final int QUEST_LOCKED_COLOR = Color.gray.getRGB();
+
     private final int itemStackIconSize = 18;
     private final int questBackgroundColor = new Color(143, 137, 143).getRGB();
 
     private QuestTreeNode rootNode;
     private boolean showQuestNames = false;
+    private boolean showAllQuests = false;
 
     public QuestGui() {
         this(TextUtils.translate("vm.gui.questGui.title"));
@@ -121,10 +122,19 @@ public class QuestGui extends Screen {
     protected void init() {
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
 
-        this.addButton(new Button(10, 10, 120, 20, TextUtils.translate("vm.gui.questGui.enableQuestNames").getFormattedText(), button -> {
+        int buttonWidth = 120;
+        int buttonHeight = 20;
+
+        this.addButton(new Button(10, 10, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.enableQuestNames").getFormattedText(), button -> {
             String key = this.showQuestNames ? "vm.gui.questGui.enableQuestNames" : "vm.gui.questGui.disableQuestNames";
             button.setMessage(TextUtils.translate(key).getFormattedText());
             this.showQuestNames = !this.showQuestNames;
+        }));
+
+        this.addButton(new Button(10, 40, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.showAllQuests").getFormattedText(), button -> {
+            String key = this.showAllQuests ? "vm.gui.questGui.showAllQuests" : "vm.gui.questGui.hideLockedQuests";
+            button.setMessage(TextUtils.translate(key).getFormattedText());
+            this.showAllQuests = !this.showAllQuests;
         }));
     }
 
@@ -164,6 +174,10 @@ public class QuestGui extends Screen {
         this.drawQuest(node);
 
         node.children.forEach(childNode -> {
+            if (childNode.color == QUEST_LOCKED_COLOR && !this.showAllQuests) {
+                return;
+            }
+
             int offsetX = this.getOffsetX(childNode);
             int offsetY = this.getOffsetY(childNode);
 

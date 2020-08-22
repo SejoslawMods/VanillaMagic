@@ -28,6 +28,8 @@
   "vm.gui.questGui.title": "Vanilla Magic Quests",
   "vm.gui.questGui.enableQuestNames": "Enable Quest Names",
   "vm.gui.questGui.disableQuestNames": "Disable Quest Names",
+  "vm.gui.questGui.showAllQuests": "Show All Quests",
+  "vm.gui.questGui.hideLockedQuests": "Hide Locked Quests",
 
   "key.vm.category": "Vanilla Magic",
   "key.openQuestGui.desc": "Open Quest GUI",
