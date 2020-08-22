@@ -8,6 +8,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -33,11 +34,13 @@ public class QuestGui extends Screen {
         public Quest quest;
         public Set<QuestTreeNode> children;
         public int color;
+        public int zIndex;
 
-        public QuestTreeNode(Quest quest, int color) {
+        public QuestTreeNode(Quest quest, int color, int zIndex) {
             this.quest = quest;
             this.children = new HashSet<>();
             this.color = color;
+            this.zIndex = zIndex;
         }
 
         public void clear() {
@@ -52,7 +55,7 @@ public class QuestGui extends Screen {
                     .filter(quest -> quest.parent == null)
                     .findFirst()
                     .orElse(new Quest());
-            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest));
+            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest), 20);
             quests.remove(rootQuest);
             parseTree(rootNode, quests);
             return rootNode;
@@ -69,11 +72,11 @@ public class QuestGui extends Screen {
                         int color = getQuestColor(quest);
 
                         if (color == QUEST_ACHIEVED_COLOR) {
-                            achievedQuests.add(new QuestTreeNode(quest, color));
+                            achievedQuests.add(new QuestTreeNode(quest, color, 20));
                         } else if (color == QUEST_AVAILABLE_COLOR) {
-                            availableQuests.add(new QuestTreeNode(quest, color));
+                            availableQuests.add(new QuestTreeNode(quest, color, 10));
                         } else {
-                            lockedQuests.add(new QuestTreeNode(quest, color));
+                            lockedQuests.add(new QuestTreeNode(quest, color, 0));
                         }
                     });
 
@@ -105,9 +108,10 @@ public class QuestGui extends Screen {
     private final int questBackgroundColor = new Color(143, 137, 143).getRGB();
 
     private QuestTreeNode rootNode;
+    private boolean showQuestNames = false;
 
     public QuestGui() {
-        this(TextUtils.translate("vm.gui.questGuiTitle"));
+        this(TextUtils.translate("vm.gui.questGui.title"));
     }
 
     protected QuestGui(ITextComponent titleIn) {
@@ -116,6 +120,12 @@ public class QuestGui extends Screen {
 
     protected void init() {
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
+
+        this.addButton(new Button(10, 10, 120, 20, TextUtils.translate("vm.gui.questGui.enableQuestNames").getFormattedText(), button -> {
+            String key = this.showQuestNames ? "vm.gui.questGui.enableQuestNames" : "vm.gui.questGui.disableQuestNames";
+            button.setMessage(TextUtils.translate(key).getFormattedText());
+            this.showQuestNames = !this.showQuestNames;
+        }));
     }
 
     public void removed() {
@@ -136,10 +146,15 @@ public class QuestGui extends Screen {
 
     public void render(int mouseX, int mouseY, float partialTicks) {
         this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGuiTitle").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
+        
         RenderSystem.translatef((float) (this.width / 2), (float) (this.height / 2), 0);
         this.drawQuestTreeNode(this.rootNode);
+        RenderSystem.translatef((float) -(this.width / 2), (float) -(this.height / 2), 0);
+
+        RenderSystem.translatef(0, 0, 40);
+        this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGui.title").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
+        super.render(mouseX, mouseY, partialTicks);
+        RenderSystem.translatef(0, 0, -40);
     }
 
     /**
@@ -182,6 +197,8 @@ public class QuestGui extends Screen {
     private void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
         boolean straightY = true;
 
+        RenderSystem.translatef(0, 0, child.zIndex);
+
         if (offsetX != 0) {
             RenderSystem.translatef((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
             this.hLine(0, offsetX, 0, child.color);
@@ -197,6 +214,8 @@ public class QuestGui extends Screen {
             this.vLine(0, offsetY, 0, child.color);
             RenderSystem.translatef(0, offsetY, 0);
         }
+
+        RenderSystem.translatef(0, 0, -child.zIndex);
     }
 
     /**
@@ -218,11 +237,11 @@ public class QuestGui extends Screen {
      */
     private void drawQuest(QuestTreeNode node) {
         float move = (float)(this.itemStackIconSize / 2);
-        RenderSystem.translatef(-move, -move, 0.0F);
+        RenderSystem.translatef(-move, -move, 30);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
         this.drawQuestOverlay(node.color);
         this.drawItemStack(node.quest.iconStack, 1, 1, this.getQuestText(node.quest));
-        RenderSystem.translatef(move, move, 0);
+        RenderSystem.translatef(move, move, -30);
     }
 
     /**
@@ -250,7 +269,7 @@ public class QuestGui extends Screen {
      */
     private void drawItemStack(ItemStack stack, int x, int y, String text) {
         this.setBlitOffset(200);
-        this.itemRenderer.zLevel = 200.0F;
+        this.itemRenderer.zLevel = 35;
         FontRenderer font = stack.getItem().getFontRenderer(stack);
 
         if (font == null) {
@@ -258,8 +277,8 @@ public class QuestGui extends Screen {
         }
 
         this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
-        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x + font.getStringWidth(text) + 3, y - 18, "");
+        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x + font.getStringWidth(text) + 3, y - 18, this.showQuestNames ? text : "");
         this.setBlitOffset(0);
-        this.itemRenderer.zLevel = 0.0F;
+        this.itemRenderer.zLevel = 0;
     }
 }

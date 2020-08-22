@@ -25,7 +25,9 @@
 
   "itemGroup.vm": "Vanilla Magic",
 
-  "vm.gui.questGuiTitle": "Vanilla Magic Quests",
+  "vm.gui.questGui.title": "Vanilla Magic Quests",
+  "vm.gui.questGui.enableQuestNames": "Enable Quest Names",
+  "vm.gui.questGui.disableQuestNames": "Disable Quest Names",
 
   "key.vm.category": "Vanilla Magic",
   "key.openQuestGui.desc": "Open Quest GUI",
