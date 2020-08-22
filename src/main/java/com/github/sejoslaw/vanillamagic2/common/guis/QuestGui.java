@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRe
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -24,18 +26,25 @@ import java.util.*;
 @OnlyIn(Dist.CLIENT)
 public class QuestGui extends Screen {
     private static class QuestTreeNode {
+        private static final int QUEST_ACHIEVED_COLOR = Color.green.getRGB();
+        private static final int QUEST_AVAILABLE_COLOR = Color.yellow.getRGB();
+        private static final int QUEST_LOCKED_COLOR = Color.gray.getRGB();
+
         public Quest quest;
         public Set<QuestTreeNode> children;
+        public int color;
 
-        public QuestTreeNode(Quest quest) {
+        public QuestTreeNode(Quest quest, int color) {
             this.quest = quest;
             this.children = new HashSet<>();
+            this.color = color;
         }
 
         public void clear() {
             this.quest = null;
             this.children.forEach(QuestTreeNode::clear);
             this.children = null;
+            this.color = 0;
         }
 
         public static QuestTreeNode parseTree(Collection<Quest> quests) {
@@ -43,31 +52,57 @@ public class QuestGui extends Screen {
                     .filter(quest -> quest.parent == null)
                     .findFirst()
                     .orElse(new Quest());
-            QuestTreeNode rootNode = new QuestTreeNode(rootQuest);
+            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest));
             quests.remove(rootQuest);
             parseTree(rootNode, quests);
             return rootNode;
         }
 
         private static void parseTree(QuestTreeNode rootNode, Collection<Quest> quests) {
-            List<Quest> toRemove = new ArrayList<>();
+            List<QuestTreeNode> achievedQuests = new ArrayList<>();
+            List<QuestTreeNode> availableQuests = new ArrayList<>();
+            List<QuestTreeNode> lockedQuests = new ArrayList<>();
+
             quests.stream()
                     .filter(quest -> quest.parent == rootNode.quest)
                     .forEach(quest -> {
-                        rootNode.children.add(new QuestTreeNode(quest));
-                        toRemove.add(quest);
+                        int color = getQuestColor(quest);
+
+                        if (color == QUEST_ACHIEVED_COLOR) {
+                            achievedQuests.add(new QuestTreeNode(quest, color));
+                        } else if (color == QUEST_AVAILABLE_COLOR) {
+                            availableQuests.add(new QuestTreeNode(quest, color));
+                        } else {
+                            lockedQuests.add(new QuestTreeNode(quest, color));
+                        }
                     });
-            quests.removeAll(toRemove);
+
+            rootNode.children.addAll(lockedQuests);
+            rootNode.children.addAll(availableQuests);
+            rootNode.children.addAll(achievedQuests);
+
+            quests.removeAll(achievedQuests.stream().map(node -> node.quest).collect(Collectors.toList()));
+            quests.removeAll(availableQuests.stream().map(node -> node.quest).collect(Collectors.toList()));
+            quests.removeAll(lockedQuests.stream().map(node -> node.quest).collect(Collectors.toList()));
+
             rootNode.children.forEach(childNode -> parseTree(childNode, quests));
+        }
+
+        private static int getQuestColor(Quest quest) {
+            PlayerEntity player = Minecraft.getInstance().player;
+
+            if (PlayerQuestProgressRegistry.hasPlayerGotQuest(player, quest.uniqueName)) {
+                return QUEST_ACHIEVED_COLOR;
+            } else if (PlayerQuestProgressRegistry.canPlayerGetQuest(player, quest.uniqueName)) {
+                return QUEST_AVAILABLE_COLOR;
+            } else {
+                return QUEST_LOCKED_COLOR;
+            }
         }
     }
 
     private final int itemStackIconSize = 18;
     private final int questBackgroundColor = new Color(143, 137, 143).getRGB();
-
-    private final int questAchievedOverlayColor = Color.green.getRGB();
-    private final int questAvailableOverlayColor = Color.yellow.getRGB();
-    private final int questLockedOverlayColor = Color.gray.getRGB();
 
     private QuestTreeNode rootNode;
 
@@ -111,7 +146,7 @@ public class QuestGui extends Screen {
      * Draws Quest tree.
      */
     private void drawQuestTreeNode(QuestTreeNode node) {
-        this.drawQuest(node.quest);
+        this.drawQuest(node);
 
         node.children.forEach(childNode -> {
             int offsetX = this.getOffsetX(childNode);
@@ -145,12 +180,11 @@ public class QuestGui extends Screen {
      * Draws connection between the nodes.
      */
     private void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
-        int color = this.getQuestColor(child.quest);
         boolean straightY = true;
 
         if (offsetX != 0) {
             RenderSystem.translatef((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
-            this.hLine(0, offsetX, 0, color);
+            this.hLine(0, offsetX, 0, child.color);
             RenderSystem.translatef(offsetX, 0, 0);
             straightY = false;
         }
@@ -160,7 +194,7 @@ public class QuestGui extends Screen {
                 RenderSystem.translatef(0, (offsetY > 0 ? (this.itemStackIconSize / 2) : -(this.itemStackIconSize / 2)), 0);
             }
 
-            this.vLine(0, offsetY, 0, color);
+            this.vLine(0, offsetY, 0, child.color);
             RenderSystem.translatef(0, offsetY, 0);
         }
     }
@@ -182,28 +216,13 @@ public class QuestGui extends Screen {
     /**
      * Draws specified Quest on the current position.
      */
-    private void drawQuest(Quest quest) {
+    private void drawQuest(QuestTreeNode node) {
         float move = (float)(this.itemStackIconSize / 2);
         RenderSystem.translatef(-move, -move, 0.0F);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
-        this.drawQuestOverlay(this.getQuestColor(quest));
-        this.drawItemStack(quest.iconStack, 1, 1, this.getQuestText(quest));
+        this.drawQuestOverlay(node.color);
+        this.drawItemStack(node.quest.iconStack, 1, 1, this.getQuestText(node.quest));
         RenderSystem.translatef(move, move, 0);
-    }
-
-    /**
-     * @return Color describing if the specified Quest is achieved, available or locked.
-     */
-    private int getQuestColor(Quest quest) {
-        PlayerEntity player = this.getMinecraft().player;
-
-        if (PlayerQuestProgressRegistry.hasPlayerGotQuest(player, quest.uniqueName)) {
-            return this.questAchievedOverlayColor;
-        } else if (PlayerQuestProgressRegistry.canPlayerGetQuest(player, quest.uniqueName)) {
-            return this.questAvailableOverlayColor;
-        } else {
-            return this.questLockedOverlayColor;
-        }
     }
 
     /**
