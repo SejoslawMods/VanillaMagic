@@ -110,6 +110,7 @@ public class QuestGui extends Screen {
 
     private QuestTreeNode rootNode;
     private int posX, posY;
+    private double zoom;
     private boolean showQuestNames = false;
     private boolean showAllQuests = false;
 
@@ -125,6 +126,7 @@ public class QuestGui extends Screen {
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
         this.posX = this.width / 2;
         this.posY = this.height / 2;
+        this.zoom = 1;
 
         int buttonWidth = 120;
         int buttonHeight = 20;
@@ -140,6 +142,8 @@ public class QuestGui extends Screen {
             button.setMessage(TextUtils.translate(key).getFormattedText());
             this.showAllQuests = !this.showAllQuests;
         }));
+
+        GLFW.glfwSetScrollCallback(Minecraft.getInstance().getMainWindow().getHandle(), this::scroll);
     }
 
     public void removed() {
@@ -162,9 +166,6 @@ public class QuestGui extends Screen {
         return super.mouseReleased(mouseX, mouseY, keyCode);
     }
 
-//    public boolean keyPressed(int keySym, int scancode, int p_keyPressed_3_) {
-//    }
-
     public boolean mouseDragged(double mouseX, double mouseY, int keyCode, double deltaX, double deltaY) {
         if (this.isDragging()) {
             this.posX += deltaX;
@@ -172,6 +173,10 @@ public class QuestGui extends Screen {
         }
 
         return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
+    }
+
+    public void scroll(long window, double offsetX, double offsetY) {
+        this.zoom += offsetY > 0 ? 1 : -1;
     }
 
     public void render(int mouseX, int mouseY, float partialTicks) {
@@ -198,8 +203,8 @@ public class QuestGui extends Screen {
                 return;
             }
 
-            int offsetX = this.getOffsetX(childNode);
-            int offsetY = this.getOffsetY(childNode);
+            int offsetX = this.getOffsetX(childNode) * (int) this.zoom;
+            int offsetY = this.getOffsetY(childNode) * (int) this.zoom;
 
             this.drawConnection(childNode, offsetX, offsetY);
             this.drawQuestTreeNode(childNode);
