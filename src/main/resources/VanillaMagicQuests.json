@@ -1592,7 +1592,7 @@
     "posX": 2,
     "posY": 0,
     "icon": {
-      "id": "minecraft:mob_spawner"
+      "id": "minecraft:spawner"
     },
     "uniqueName": "mobSpawnerDropBlock"
   },
@@ -2058,8 +2058,7 @@
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:stonebrick",
-      "count": 8
+      "id": "minecraft:stonebrick"
     }
   },
   {

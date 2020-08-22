@@ -15,6 +15,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.util.List;
@@ -108,6 +109,7 @@ public class QuestGui extends Screen {
     private final int questBackgroundColor = new Color(143, 137, 143).getRGB();
 
     private QuestTreeNode rootNode;
+    private int posX, posY;
     private boolean showQuestNames = false;
     private boolean showAllQuests = false;
 
@@ -121,6 +123,8 @@ public class QuestGui extends Screen {
 
     protected void init() {
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
+        this.posX = this.width / 2;
+        this.posY = this.height / 2;
 
         int buttonWidth = 120;
         int buttonHeight = 20;
@@ -142,24 +146,40 @@ public class QuestGui extends Screen {
         this.rootNode.clear();
     }
 
-//    public boolean mouseClicked(double mouseX, double mouseY, int keyCode) {
-//    }
-//
-//    public boolean mouseReleased(double mouseX, double mouseY, int keyCode) {
-//    }
-//
+    public boolean mouseClicked(double mouseX, double mouseY, int keyCode) {
+        if (keyCode == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+            this.setDragging(true);
+        }
+
+        return super.mouseClicked(mouseX, mouseY, keyCode);
+    }
+
+    public boolean mouseReleased(double mouseX, double mouseY, int keyCode) {
+        if (keyCode == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+            this.setDragging(false);
+        }
+
+        return super.mouseReleased(mouseX, mouseY, keyCode);
+    }
+
 //    public boolean keyPressed(int keySym, int scancode, int p_keyPressed_3_) {
 //    }
-//
-//    public boolean mouseDragged(double mouseX, double mouseY, int keyCode, double deltaX, double deltaY) {
-//    }
+
+    public boolean mouseDragged(double mouseX, double mouseY, int keyCode, double deltaX, double deltaY) {
+        if (this.isDragging()) {
+            this.posX += deltaX;
+            this.posY += deltaY;
+        }
+
+        return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
+    }
 
     public void render(int mouseX, int mouseY, float partialTicks) {
         this.renderBackground();
 
-        RenderSystem.translatef((float) (this.width / 2), (float) (this.height / 2), 0);
+        RenderSystem.translatef((float) this.posX, (float) this.posY, 0);
         this.drawQuestTreeNode(this.rootNode);
-        RenderSystem.translatef((float) -(this.width / 2), (float) -(this.height / 2), 0);
+        RenderSystem.translatef((float) -this.posX, (float) -this.posY, 0);
 
         RenderSystem.translatef(0, 0, 40);
         this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGui.title").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
