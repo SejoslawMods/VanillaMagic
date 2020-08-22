@@ -146,7 +146,7 @@ public class QuestGui extends Screen {
 
     public void render(int mouseX, int mouseY, float partialTicks) {
         this.renderBackground();
-        
+
         RenderSystem.translatef((float) (this.width / 2), (float) (this.height / 2), 0);
         this.drawQuestTreeNode(this.rootNode);
         RenderSystem.translatef((float) -(this.width / 2), (float) -(this.height / 2), 0);
