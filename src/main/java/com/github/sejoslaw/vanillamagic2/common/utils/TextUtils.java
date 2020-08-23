@@ -12,7 +12,6 @@ import net.minecraft.world.World;
  */
 public final class TextUtils {
     /**
-     * @param key Key taken from translation file.
      * @return Text component with translated text.
      */
     public static ITextComponent translate(String key) {

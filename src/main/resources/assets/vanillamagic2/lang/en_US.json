@@ -30,8 +30,8 @@
   "vm.gui.questGui.disableQuestNames": "Disable Quest Names",
   "vm.gui.questGui.showAllQuests": "Show All Quests",
   "vm.gui.questGui.hideLockedQuests": "Hide Locked Quests",
-  "vm.gui.questGui.enableQuestTooltip": "[W.I.P] Enable Tooltips",
-  "vm.gui.questGui.disableQuestTooltip": "[W.I.P] Disable Tooltips",
+  "vm.gui.questGui.enableQuestTooltip": "Enable Tooltips",
+  "vm.gui.questGui.disableQuestTooltip": "Disable Tooltips",
 
   "key.vm.category": "Vanilla Magic",
   "key.openQuestGui.desc": "Open Quest GUI",
@@ -56,6 +56,12 @@
   "quest.moveBlock.tileEntity": "[TileEntity]",
   "quest.moveBlock.block": "[BLOCK]",
   "quest.spell.killDragonMessage": "You need to kill Dragon !!!",
+
+  "quest.tooltip.uniqueName": "Quest Name",
+  "quest.tooltip.parent": "Parent Quest Name",
+  "quest.tooltip.rightHandStack": "Right-Hand Stack",
+  "quest.tooltip.leftHandStack": "Left-Hand Stack",
+  "quest.tooltip.description": "Description",
 
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft stick. Rename it in Anvil to 'Stick Wand'.",

@@ -3,7 +3,10 @@ package com.github.sejoslaw.vanillamagic2.common.quests;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
+
+import java.util.Collection;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -35,8 +38,6 @@ public class Quest {
 
     /**
      * Fields used by classes which inherits from Quest class.
-     *
-     * @param jsonService
      */
     private void tryReadCustomFields(IJsonService jsonService) {
         this.altarTier = jsonService.getInt("altarTier");
@@ -45,5 +46,30 @@ public class Quest {
         this.multiplier = jsonService.getInt("multiplier");
         this.level = jsonService.getInt("level");
         this.oneItemSmeltCost = jsonService.getInt("oneItemSmeltCost");
+    }
+
+    /**
+     * Adds tooltip information to given collection.
+     */
+    public void fillTooltip(Collection<String> lines) {
+        this.addLine(lines, "quest.tooltip.uniqueName", TextUtils.translate("quest." + this.uniqueName).getFormattedText());
+
+        if (this.parent != null) {
+            this.addLine(lines, "quest.tooltip.parent", TextUtils.translate("quest." + this.parent.uniqueName).getFormattedText());
+        }
+
+        if (this.rightHandStack != null) {
+            this.addLine(lines, "quest.tooltip.rightHandStack", this.rightHandStack.toString());
+        }
+
+        if (this.leftHandStack != null) {
+            this.addLine(lines, "quest.tooltip.leftHandStack", this.leftHandStack.toString());
+        }
+
+        this.addLine(lines, "quest.tooltip.description", TextUtils.translate("quest." + this.uniqueName + ".desc").getFormattedText());
+    }
+
+    public void addLine(Collection<String> lines, String key, String value) {
+        lines.add(TextUtils.translate(key).getFormattedText() + ": " + value);
     }
 }

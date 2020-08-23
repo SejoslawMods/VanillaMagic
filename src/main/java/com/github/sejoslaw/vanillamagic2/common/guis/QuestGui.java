@@ -112,6 +112,7 @@ public class QuestGui extends Screen {
 
     private QuestTreeNode rootNode;
     private int centerX, centerY;
+    private int posX, posY;
     private double zoom;
     private boolean showQuestNames = true;
     private boolean showAllQuests = false;
@@ -130,6 +131,8 @@ public class QuestGui extends Screen {
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
         this.zoom = 2;
+        this.posX = this.centerX;
+        this.posY = this.centerY;
 
         int buttonWidth = 120;
         int buttonHeight = 20;
@@ -179,6 +182,8 @@ public class QuestGui extends Screen {
         if (this.isDragging()) {
             this.centerX += deltaX;
             this.centerY += deltaY;
+            this.posX = this.centerX;
+            this.posY = this.centerY;
         }
 
         return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
@@ -192,7 +197,7 @@ public class QuestGui extends Screen {
         this.renderBackground();
 
         move((float) this.centerX, (float) this.centerY, 0);
-        this.drawQuestTreeNode(this.rootNode);
+        this.drawQuestTreeNode(this.rootNode, mouseX, mouseY);
         move((float) -this.centerX, (float) -this.centerY, 0);
 
         move(0, 0, 40);
@@ -204,8 +209,9 @@ public class QuestGui extends Screen {
     /**
      * Draws Quest tree.
      */
-    private void drawQuestTreeNode(QuestTreeNode node) {
+    private void drawQuestTreeNode(QuestTreeNode node, int mouseX, int mouseY) {
         this.drawQuest(node);
+        this.drawQuestTooltip(node, mouseX, mouseY);
 
         node.children.forEach(childNode -> {
             if (childNode.color == QUEST_LOCKED_COLOR && !this.showAllQuests) {
@@ -216,9 +222,31 @@ public class QuestGui extends Screen {
             int offsetY = this.getOffsetY(childNode);
 
             this.drawConnection(childNode, offsetX, offsetY);
-            this.drawQuestTreeNode(childNode);
+            this.drawQuestTreeNode(childNode, mouseX, mouseY);
             this.moveBackToParent(offsetX, offsetY);
         });
+    }
+
+    /**
+     * Draws Quest tooltip.
+     */
+    private void drawQuestTooltip(QuestTreeNode node, int mouseX, int mouseY) {
+        if (!this.showQuestTooltip || !this.isMouseInBox(mouseX, mouseY, this.posX, this.posY, this.itemStackIconSize / 2)) {
+            return;
+        }
+
+        List<String> lines = new ArrayList<>();
+        node.quest.fillTooltip(lines);
+        this.renderTooltip(lines, -(this.itemStackIconSize / 2), 0);
+    }
+
+    /**
+     * @return True if mouse cursor is in the radius based on (x;y) coordinates.
+     */
+    private boolean isMouseInBox(int mouseX, int mouseY, int x, int y, int radius) {
+        int mouseCoordX = mouseX + this.centerX;
+        int mouseCoordY = mouseY + this.centerY;
+        return (mouseCoordX + radius > x) && (mouseCoordX - radius < x) && (mouseCoordY + radius > y) && (mouseCoordY - radius < y);
     }
 
     /**
@@ -336,5 +364,8 @@ public class QuestGui extends Screen {
      */
     private void move(float deltaX, float deltaY, float deltaZ) {
         RenderSystem.translatef(deltaX, deltaY, deltaZ);
+
+        this.posX += deltaX;
+        this.posY += deltaY;
     }
 }
