@@ -334,7 +334,7 @@ public class QuestGui extends Screen {
     /**
      * Moves currently rendered point by specified coordinates.
      */
-    private void move(float x, float y, float z) {
-        RenderSystem.translatef(x, y, z);
+    private void move(float deltaX, float deltaY, float deltaZ) {
+        RenderSystem.translatef(deltaX, deltaY, deltaZ);
     }
 }
