@@ -30,6 +30,8 @@
   "vm.gui.questGui.disableQuestNames": "Disable Quest Names",
   "vm.gui.questGui.showAllQuests": "Show All Quests",
   "vm.gui.questGui.hideLockedQuests": "Hide Locked Quests",
+  "vm.gui.questGui.enableQuestTooltip": "[W.I.P] Enable Tooltips",
+  "vm.gui.questGui.disableQuestTooltip": "[W.I.P] Disable Tooltips",
 
   "key.vm.category": "Vanilla Magic",
   "key.openQuestGui.desc": "Open Quest GUI",

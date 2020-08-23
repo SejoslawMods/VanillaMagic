@@ -32,12 +32,14 @@ public class QuestGui extends Screen {
         public Set<QuestTreeNode> children;
         public int color;
         public int zIndex;
+        public QuestTreeNode parentNode;
 
-        public QuestTreeNode(Quest quest, int color, int zIndex) {
+        public QuestTreeNode(Quest quest, int color, int zIndex, QuestTreeNode parentNode) {
             this.quest = quest;
             this.children = new HashSet<>();
             this.color = color;
             this.zIndex = zIndex;
+            this.parentNode = parentNode;
         }
 
         public void clear() {
@@ -52,7 +54,7 @@ public class QuestGui extends Screen {
                     .filter(quest -> quest.parent == null)
                     .findFirst()
                     .orElse(new Quest());
-            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest), 20);
+            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest), 20, null);
             quests.remove(rootQuest);
             parseTree(rootNode, quests);
             return rootNode;
@@ -69,11 +71,11 @@ public class QuestGui extends Screen {
                         int color = getQuestColor(quest);
 
                         if (color == QUEST_ACHIEVED_COLOR) {
-                            achievedQuests.add(new QuestTreeNode(quest, color, 20));
+                            achievedQuests.add(new QuestTreeNode(quest, color, 20, rootNode));
                         } else if (color == QUEST_AVAILABLE_COLOR) {
-                            availableQuests.add(new QuestTreeNode(quest, color, 10));
+                            availableQuests.add(new QuestTreeNode(quest, color, 10, rootNode));
                         } else {
-                            lockedQuests.add(new QuestTreeNode(quest, color, 0));
+                            lockedQuests.add(new QuestTreeNode(quest, color, 0, rootNode));
                         }
                     });
 
@@ -109,10 +111,11 @@ public class QuestGui extends Screen {
     private final int questBackgroundColor = new Color(143, 137, 143).getRGB();
 
     private QuestTreeNode rootNode;
-    private int posX, posY;
+    private int centerX, centerY;
     private double zoom;
-    private boolean showQuestNames = false;
+    private boolean showQuestNames = true;
     private boolean showAllQuests = false;
+    private boolean showQuestTooltip = true;
 
     public QuestGui() {
         this(TextUtils.translate("vm.gui.questGui.title"));
@@ -124,14 +127,14 @@ public class QuestGui extends Screen {
 
     protected void init() {
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
-        this.posX = this.width / 2;
-        this.posY = this.height / 2;
-        this.zoom = 1;
+        this.centerX = this.width / 2;
+        this.centerY = this.height / 2;
+        this.zoom = 2;
 
         int buttonWidth = 120;
         int buttonHeight = 20;
 
-        this.addButton(new Button(10, 10, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.enableQuestNames").getFormattedText(), button -> {
+        this.addButton(new Button(10, 10, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.disableQuestNames").getFormattedText(), button -> {
             String key = this.showQuestNames ? "vm.gui.questGui.enableQuestNames" : "vm.gui.questGui.disableQuestNames";
             button.setMessage(TextUtils.translate(key).getFormattedText());
             this.showQuestNames = !this.showQuestNames;
@@ -141,6 +144,12 @@ public class QuestGui extends Screen {
             String key = this.showAllQuests ? "vm.gui.questGui.showAllQuests" : "vm.gui.questGui.hideLockedQuests";
             button.setMessage(TextUtils.translate(key).getFormattedText());
             this.showAllQuests = !this.showAllQuests;
+        }));
+
+        this.addButton(new Button(10, 70, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.disableQuestTooltip").getFormattedText(), button -> {
+            String key = this.showQuestTooltip ? "vm.gui.questGui.enableQuestTooltip" : "vm.gui.questGui.disableQuestTooltip";
+            button.setMessage(TextUtils.translate(key).getFormattedText());
+            this.showQuestTooltip = !this.showQuestTooltip;
         }));
 
         GLFW.glfwSetScrollCallback(Minecraft.getInstance().getMainWindow().getHandle(), this::scroll);
@@ -168,8 +177,8 @@ public class QuestGui extends Screen {
 
     public boolean mouseDragged(double mouseX, double mouseY, int keyCode, double deltaX, double deltaY) {
         if (this.isDragging()) {
-            this.posX += deltaX;
-            this.posY += deltaY;
+            this.centerX += deltaX;
+            this.centerY += deltaY;
         }
 
         return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
@@ -182,14 +191,14 @@ public class QuestGui extends Screen {
     public void render(int mouseX, int mouseY, float partialTicks) {
         this.renderBackground();
 
-        RenderSystem.translatef((float) this.posX, (float) this.posY, 0);
+        move((float) this.centerX, (float) this.centerY, 0);
         this.drawQuestTreeNode(this.rootNode);
-        RenderSystem.translatef((float) -this.posX, (float) -this.posY, 0);
+        move((float) -this.centerX, (float) -this.centerY, 0);
 
-        RenderSystem.translatef(0, 0, 40);
+        move(0, 0, 40);
         this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGui.title").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
         super.render(mouseX, mouseY, partialTicks);
-        RenderSystem.translatef(0, 0, -40);
+        move(0, 0, -40);
     }
 
     /**
@@ -203,8 +212,8 @@ public class QuestGui extends Screen {
                 return;
             }
 
-            int offsetX = this.getOffsetX(childNode) * (int) this.zoom;
-            int offsetY = this.getOffsetY(childNode) * (int) this.zoom;
+            int offsetX = this.getOffsetX(childNode);
+            int offsetY = this.getOffsetY(childNode);
 
             this.drawConnection(childNode, offsetX, offsetY);
             this.drawQuestTreeNode(childNode);
@@ -216,17 +225,17 @@ public class QuestGui extends Screen {
      * Moves drawing position back to the center of parent Quest.
      */
     private void moveBackToParent(int offsetX, int offsetY) {
-        RenderSystem.translatef(-offsetX, -offsetY, 0);
+        move(-offsetX, -offsetY, 0);
 
         boolean straightY = true;
 
         if (offsetX != 0) {
-            RenderSystem.translatef((offsetX > 0 ? -(this.itemStackIconSize / 2) - 1 : (this.itemStackIconSize / 2) + 1), 0, 0);
+            move((offsetX > 0 ? -(this.itemStackIconSize / 2) - 1 : (this.itemStackIconSize / 2) + 1), 0, 0);
             straightY = false;
         }
 
         if (offsetY != 0 && straightY) {
-            RenderSystem.translatef(0, (offsetY > 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2)), 0);
+            move(0, (offsetY > 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2)), 0);
         }
     }
 
@@ -236,39 +245,39 @@ public class QuestGui extends Screen {
     private void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
         boolean straightY = true;
 
-        RenderSystem.translatef(0, 0, child.zIndex);
+        move(0, 0, child.zIndex);
 
         if (offsetX != 0) {
-            RenderSystem.translatef((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
+            move((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
             this.hLine(0, offsetX, 0, child.color);
-            RenderSystem.translatef(offsetX, 0, 0);
+            move(offsetX, 0, 0);
             straightY = false;
         }
 
         if (offsetY != 0) {
             if (straightY) {
-                RenderSystem.translatef(0, (offsetY > 0 ? (this.itemStackIconSize / 2) : -(this.itemStackIconSize / 2)), 0);
+                move(0, (offsetY > 0 ? (this.itemStackIconSize / 2) : -(this.itemStackIconSize / 2)), 0);
             }
 
             this.vLine(0, offsetY, 0, child.color);
-            RenderSystem.translatef(0, offsetY, 0);
+            move(0, offsetY, 0);
         }
 
-        RenderSystem.translatef(0, 0, -child.zIndex);
+        move(0, 0, -child.zIndex);
     }
 
     /**
      * @return X offset by which the next node should be rendered.
      */
     private int getOffsetX(QuestTreeNode node) {
-        return this.itemStackIconSize * 2 * node.quest.posX;
+        return (this.itemStackIconSize * 2 * node.quest.posX) * (int) this.zoom;
     }
 
     /**
      * @return Y offset by which the next node should be rendered.
      */
     private int getOffsetY(QuestTreeNode node) {
-        return this.itemStackIconSize * 2 * node.quest.posY;
+        return (this.itemStackIconSize * 2 * node.quest.posY) * (int) this.zoom;
     }
 
     /**
@@ -276,11 +285,11 @@ public class QuestGui extends Screen {
      */
     private void drawQuest(QuestTreeNode node) {
         float move = (float)(this.itemStackIconSize / 2);
-        RenderSystem.translatef(-move, -move, 30);
+        move(-move, -move, 30);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
         this.drawQuestOverlay(node.color);
         this.drawItemStack(node.quest.iconStack, 1, 1, this.getQuestText(node.quest));
-        RenderSystem.translatef(move, move, -30);
+        move(move, move, -30);
     }
 
     /**
@@ -296,11 +305,11 @@ public class QuestGui extends Screen {
     private void drawQuestOverlay(int color) {
         this.vLine(0, this.itemStackIconSize, 0, color);
         this.hLine(0, this.itemStackIconSize, 0, color);
-        RenderSystem.translatef(this.itemStackIconSize, 0, 0);
+        move(this.itemStackIconSize, 0, 0);
         this.vLine(0, this.itemStackIconSize, 0, color);
-        RenderSystem.translatef(-this.itemStackIconSize, this.itemStackIconSize, 0);
+        move(-this.itemStackIconSize, this.itemStackIconSize, 0);
         this.hLine(0, this.itemStackIconSize, 0, color);
-        RenderSystem.translatef(0, -this.itemStackIconSize, 0);
+        move(0, -this.itemStackIconSize, 0);
     }
 
     /**
@@ -317,7 +326,15 @@ public class QuestGui extends Screen {
 
         this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
         this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x + font.getStringWidth(text) + 3, y - 18, this.showQuestNames ? text : "");
+
         this.setBlitOffset(0);
         this.itemRenderer.zLevel = 0;
+    }
+
+    /**
+     * Moves currently rendered point by specified coordinates.
+     */
+    private void move(float x, float y, float z) {
+        RenderSystem.translatef(x, y, z);
     }
 }
