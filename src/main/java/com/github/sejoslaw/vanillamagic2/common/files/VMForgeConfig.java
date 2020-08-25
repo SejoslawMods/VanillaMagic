@@ -35,6 +35,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE;
     public static ForgeConfigSpec.IntValue MOTHER_NATURE_CRYSTAL_RANGE;
     public static ForgeConfigSpec.IntValue ITEM_MAGNET_RANGE;
+    public static ForgeConfigSpec.IntValue ITEM_MAGNET_STACK_NUMBER;
     public static ForgeConfigSpec.BooleanValue ITEM_CAN_AUTOPLANT;
 
     // Spell
@@ -117,6 +118,9 @@ public final class VMForgeConfig {
         ITEM_MAGNET_RANGE = COMMON_BUILDER
                 .comment("Range on which Item Magnet will work.")
                 .defineInRange("ITEM_MAGNET_RANGE", 6, 1, Integer.MAX_VALUE);
+        ITEM_MAGNET_STACK_NUMBER = COMMON_BUILDER
+                .comment("Number of stacks that are required for Player to have in inventory or EnderChest.")
+                .defineInRange("ITEM_MAGNET_STACK_NUMBER", 2, 1, Integer.MAX_VALUE);
         ITEM_CAN_AUTOPLANT = COMMON_BUILDER
                 .comment("If autoplanting items like Sapling, etc should be enabled.")
                 .define("ITEM_CAN_AUTOPLANT", true);
@@ -131,10 +135,10 @@ public final class VMForgeConfig {
                 .comment("Cost of one hostile mob spawn (in items from hand).")
                 .defineInRange("SPELL_COST_SUMMON_HOSTILE", 8, 1, 64);
         SPELL_FUS_RO_DAH_DISTANCE = COMMON_BUILDER
-                .comment("Area of effect of Fus-Ro-Dah spell.")
+                .comment("Area of effect of a spell.")
                 .defineInRange("SPELL_FUS_RO_DAH_DISTANCE", 8, 1, Integer.MAX_VALUE);
         SPELL_FUS_RO_DAH_STRENGTH = COMMON_BUILDER
-                .comment("Strength of the Fus-Ro-Dah spell.")
+                .comment("Strength of the a spell.")
                 .defineInRange("SPELL_FUS_RO_DAH_STRENGTH", 2, 1, Double.MAX_VALUE);
         SPELL_MOVE_IN_AIR_DISTANCE = COMMON_BUILDER
                 .comment("Number of blocks by which the Player will move in air.")
