@@ -25,6 +25,8 @@
 
   "itemGroup.vm": "Vanilla Magic",
 
+  "vm.handler.deathPoint": "Last death position:",
+
   "vm.gui.questGui.title": "Vanilla Magic Quests",
   "vm.gui.questGui.enableQuestNames": "Enable Quest Names",
   "vm.gui.questGui.disableQuestNames": "Disable Quest Names",

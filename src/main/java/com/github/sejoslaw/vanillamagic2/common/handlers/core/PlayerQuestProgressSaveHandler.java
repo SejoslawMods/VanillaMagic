@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic2.common.handlers;
+package com.github.sejoslaw.vanillamagic2.common.handlers.core;
 
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;

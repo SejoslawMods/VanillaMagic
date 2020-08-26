@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic2.common.handlers;
+package com.github.sejoslaw.vanillamagic2.common.handlers.core;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
 import com.github.sejoslaw.vanillamagic2.core.VMFiles;

@@ -2,10 +2,10 @@ package com.github.sejoslaw.vanillamagic2.core;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
-import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressLoadHandler;
-import com.github.sejoslaw.vanillamagic2.common.handlers.PlayerQuestProgressSaveHandler;
-import com.github.sejoslaw.vanillamagic2.common.handlers.VMTileEntityLoadHandler;
-import com.github.sejoslaw.vanillamagic2.common.handlers.VMTileEntitySaveHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.core.PlayerQuestProgressLoadHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.core.PlayerQuestProgressSaveHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.core.VMTileEntityLoadHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.core.VMTileEntitySaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;

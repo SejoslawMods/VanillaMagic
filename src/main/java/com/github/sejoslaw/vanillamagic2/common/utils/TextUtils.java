@@ -22,7 +22,13 @@ public final class TextUtils {
      * Adds message from translation file with the given key to the Chat window.
      */
     public static void addChatMessage(String key) {
-        ITextComponent message = translate(key);
+        addChatMessage(translate(key));
+    }
+
+    /**
+     * Adds message to the Chat window.
+     */
+    public static void addChatMessage(ITextComponent message) {
         Minecraft.getInstance().ingameGUI.getChatGUI().printChatMessage(message);
     }
 

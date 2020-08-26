@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic2.common.handlers;
+package com.github.sejoslaw.vanillamagic2.common.handlers.core;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
