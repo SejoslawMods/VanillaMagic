@@ -30,7 +30,7 @@ public class EntityMeteor extends FireballEntity {
             return;
         }
 
-        VMExplosion explosion = new VMExplosion(this.world, this.shootingEntity, this.getPosition(), VMForgeConfig.BASIC_METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
+        VMExplosion explosion = new VMExplosion(this.world, this.shootingEntity, this.getPosition(), VMForgeConfig.METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
         explosion.doExplosion();
     }
 }

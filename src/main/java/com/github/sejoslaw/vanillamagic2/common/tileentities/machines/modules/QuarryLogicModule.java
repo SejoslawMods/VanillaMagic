@@ -56,7 +56,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
     }
 
     protected void work(IVMTileMachine machine) {
-        int quarrySize = this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).rotateYCCW(), Blocks.DIAMOND_BLOCK) * VMForgeConfig.BASIC_QUARRY_SIZE.get();
+        int quarrySize = this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).rotateYCCW(), Blocks.DIAMOND_BLOCK) * VMForgeConfig.QUARRY_SIZE.get();
 
         for(int i = 0 ; i < this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).getOpposite(), Blocks.REDSTONE_BLOCK); ++i) {
             this.performSingleOperation(machine, quarrySize);

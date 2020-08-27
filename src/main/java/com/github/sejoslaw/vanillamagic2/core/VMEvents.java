@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
-import com.github.sejoslaw.vanillamagic2.common.handlers.clients.OpenQuestGuiHandler;
-import com.github.sejoslaw.vanillamagic2.common.handlers.clients.ShowDeathPointHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.clients.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -29,11 +28,15 @@ public final class VMEvents {
     }
 
     private static void registerGlobalEvents() {
+        // TODO: Add autoplant handler
     }
 
     private static void registerClientSpecificEvents() {
         register(new OpenQuestGuiHandler());
         register(new ShowDeathPointHandler());
+        register(new ShowHungerTooltipHandler());
+        register(new ShowSaturationTooltipHandler());
+        register(new ShowDurabilityTooltipHandler());
     }
 
     private static void registerDedicatedServerSpecificEvents() {
