@@ -20,9 +20,10 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.ArrayList;
@@ -122,9 +123,6 @@ public final class EventExecutor<TQuest extends Quest> {
                 (quest) -> consumer.accept(player, world, pos, dir, quest));
     }
 
-    public void onItemTooltip(ItemTooltipEvent event) {
-    }
-
     public void onEntityPlace(BlockEvent.EntityPlaceEvent event,
                               Function4<PlayerEntity, World, BlockState, BlockPos, TQuest> check,
                               Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
@@ -181,15 +179,6 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheck(player,
                 () -> check.apply(player, world, originalEntity, pickedStack),
                 (quest) -> consumer.accept(player, world, originalEntity, pickedStack, quest));
-    }
-
-    public void onLivingDrops(LivingDropsEvent event) {
-    }
-
-    public void onEntityItemPickup(EntityItemPickupEvent event) {
-    }
-
-    public void onEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
     }
 
     public void onPlayerTick(TickEvent.PlayerTickEvent event, Consumer3<PlayerEntity, World, TQuest> consumer) {
