@@ -7,14 +7,19 @@ import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.function.Consumer;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -24,61 +29,65 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
                 this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                    ItemStack bookStack = new ItemStack(Items.BOOK);
-
-                    if (leftHandStack.getOrCreateTag().contains(NbtUtils.NBT_CAPTURED)) {
-                        BlockState blockState = world.getBlockState(pos);
-
-                        bookStack = new ItemStack(Items.ENCHANTED_BOOK);
-                        bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), TextUtils.translate(blockState.getBlock().getTranslationKey()).getFormattedText()));
-
-                        CompoundNBT bookNbt = bookStack.getOrCreateTag();
-                        bookNbt.put(NbtUtils.NBT_BLOCK, new CompoundNBT());
-                        bookNbt = bookNbt.getCompound(NbtUtils.NBT_BLOCK);
-                        bookNbt.putInt(NbtUtils.NBT_BLOCK_STATE, Block.getStateId(blockState));
-
-                        TileEntity tileEntity = world.getTileEntity(pos);
-
-                        if (tileEntity != null) {
-                            tileEntity.write(bookNbt);
-                            bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.tileEntity"), " " + bookStack.getDisplayName().getFormattedText()));
-                            world.removeTileEntity(pos);
-                            bookNbt.remove("x");
-                            bookNbt.remove("y");
-                            bookNbt.remove("z");
-                        }
-
-                        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    if (this.canLoad(leftHandStack)) {
+                        this.execute(player, new ItemStack(Items.BOOK), bookStack -> this.load(world, pos, direction, leftHandStack));
                     } else {
-                        CompoundNBT bookNbt = leftHandStack.getTag();
-
-                        if (!bookNbt.contains(NbtUtils.NBT_BLOCK)) {
-                            return;
-                        }
-
-                        bookNbt = bookNbt.getCompound(NbtUtils.NBT_BLOCK);
-                        BlockPos spawnPos = pos.offset(direction);
-
-                        if (!world.isAirBlock(spawnPos)) {
-                            return;
-                        }
-
-                        BlockState blockState = Block.getStateById(bookNbt.getInt(NbtUtils.NBT_BLOCK_STATE));
-
-                        world.setBlockState(spawnPos, blockState);
-                        world.notifyNeighborsOfStateChange(spawnPos, blockState.getBlock());
-
-                        TileEntity tile = world.getTileEntity(spawnPos);
-
-                        if (tile != null) {
-                            bookNbt.putInt("x", spawnPos.getX());
-                            bookNbt.putInt("y", spawnPos.getY());
-                            bookNbt.putInt("z", spawnPos.getZ());
-                            tile.read(bookNbt);
-                        }
+                        this.execute(player, new ItemStack(Items.ENCHANTED_BOOK), bookStack -> this.save(bookStack, world, pos));
                     }
-
-                    player.setItemStackToSlot(EquipmentSlotType.MAINHAND, bookStack);
                 }));
+    }
+
+    private boolean canLoad(ItemStack leftHandStack) {
+        CompoundNBT nbt = leftHandStack.getOrCreateTag();
+        return nbt.contains(NbtUtils.NBT_BLOCK) && nbt.contains(NbtUtils.NBT_BLOCK_STATE);
+    }
+
+    private void execute(PlayerEntity player, ItemStack bookStack, Consumer<ItemStack> consumer) {
+        consumer.accept(bookStack);
+        player.setItemStackToSlot(EquipmentSlotType.OFFHAND, bookStack);
+    }
+
+    private void load(World world, BlockPos pos, Direction direction, ItemStack leftHandStack) {
+        CompoundNBT nbt = leftHandStack.getOrCreateTag().getCompound(NbtUtils.NBT_BLOCK);
+        BlockPos spawnPos = pos.offset(direction);
+
+        if (!world.isAirBlock(spawnPos)) {
+            return;
+        }
+
+        BlockState blockState = Block.getStateById(nbt.getInt(NbtUtils.NBT_BLOCK_STATE));
+        world.setBlockState(spawnPos, blockState);
+
+        TileEntity tile = world.getTileEntity(spawnPos);
+
+        if (tile != null) {
+            nbt.putInt("x", spawnPos.getX());
+            nbt.putInt("y", spawnPos.getY());
+            nbt.putInt("z", spawnPos.getZ());
+            tile.read(nbt);
+        }
+    }
+
+    private void save(ItemStack bookStack, World world, BlockPos pos) {
+        BlockState blockState = world.getBlockState(pos);
+
+        bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), TextUtils.translate(blockState.getBlock().getTranslationKey()).getFormattedText()));
+
+        CompoundNBT nbt = new CompoundNBT();
+        bookStack.getOrCreateTag().put(NbtUtils.NBT_BLOCK, nbt);
+        nbt.putInt(NbtUtils.NBT_BLOCK_STATE, Block.getStateId(blockState));
+
+        TileEntity tileEntity = world.getTileEntity(pos);
+
+        if (tileEntity != null) {
+            tileEntity.write(nbt);
+            bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.tileEntity"), " " + bookStack.getDisplayName().getFormattedText()));
+            world.removeTileEntity(pos);
+            nbt.remove("x");
+            nbt.remove("y");
+            nbt.remove("z");
+        }
+
+        world.setBlockState(pos, Blocks.AIR.getDefaultState());
     }
 }
