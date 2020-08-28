@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
 import com.github.sejoslaw.vanillamagic2.common.handlers.clients.*;
+import com.github.sejoslaw.vanillamagic2.common.handlers.global.AutoplantHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -28,7 +29,7 @@ public final class VMEvents {
     }
 
     private static void registerGlobalEvents() {
-        // TODO: Add autoplant handler
+        register(new AutoplantHandler());
     }
 
     private static void registerClientSpecificEvents() {

@@ -50,6 +50,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.BooleanValue SHOW_HUNGER_TOOLTIP;
     public static ForgeConfigSpec.BooleanValue SHOW_SATURATION_TOOLTIP;
     public static ForgeConfigSpec.BooleanValue SHOW_DURABILITY_TOOLTIP;
+    public static ForgeConfigSpec.BooleanValue CAN_AUTOPLANT;
 
     static {
         COMMON_BUILDER.push(CATEGORY_PLAYER);
@@ -97,6 +98,7 @@ public final class VMForgeConfig {
         SHOW_HUNGER_TOOLTIP = COMMON_BUILDER.define("SHOW_HUNGER_TOOLTIP", true);
         SHOW_SATURATION_TOOLTIP = COMMON_BUILDER.define("SHOW_SATURATION_TOOLTIP", true);
         SHOW_DURABILITY_TOOLTIP = COMMON_BUILDER.define("SHOW_DURABILITY_TOOLTIP", true);
+        CAN_AUTOPLANT = COMMON_BUILDER.define("CAN_AUTOPLANT", true);
         COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
