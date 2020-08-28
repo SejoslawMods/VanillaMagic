@@ -19,7 +19,7 @@ public class VMItemEvokerCrystal extends VMItemCrystal {
 
     public ItemStack getStack() {
         ItemStack stack = super.getStack();
-        stack.getOrCreateTag().putInt(NbtUtils.NBT_SPELL_ID, -1);
+        stack.getOrCreateTag().putInt(NbtUtils.NBT_SPELL_ID, 0);
         EvokerSpellRegistry.changeSpell(stack);
         return stack;
     }
