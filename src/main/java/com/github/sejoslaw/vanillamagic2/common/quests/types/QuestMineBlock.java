@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import net.minecraft.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,5 +27,11 @@ public class QuestMineBlock extends Quest {
                 .filter(entry -> entry.getKey().toString().toLowerCase().contains(blockName))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
+    }
+
+    public void fillTooltip(Collection<String> lines) {
+        super.fillTooltip(lines);
+
+        this.addLine(lines, "quest.tooltip.blocksToMine", this.blocksToMine.stream().map(block -> block.getNameTextComponent().getFormattedText()).collect(Collectors.joining(", ")));
     }
 }

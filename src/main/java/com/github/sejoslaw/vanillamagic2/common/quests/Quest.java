@@ -7,6 +7,8 @@ import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -56,6 +58,18 @@ public class Quest {
             this.addLine(lines, "quest.tooltip.altarTier", String.valueOf(this.altarTier));
         }
 
+        if (this.multiplier > 1) {
+            this.addLine(lines, "quest.tooltip.multiplier", String.valueOf(this.multiplier));
+        }
+
+        if (this.level > 0) {
+            this.addLine(lines, "quest.tooltip.level", String.valueOf(this.level));
+        }
+
+        if (this.oneItemSmeltCost > 0) {
+            this.addLine(lines, "quest.tooltip.oneItemSmeltCost", String.valueOf(this.oneItemSmeltCost));
+        }
+
         this.addLine(lines, "quest.tooltip.description", TextUtils.translate("quest." + this.uniqueName + ".desc").getFormattedText());
     }
 
@@ -68,6 +82,20 @@ public class Quest {
      */
     public String getDisplayName() {
         return TextUtils.translate("quest." + this.uniqueName).getFormattedText();
+    }
+
+    /**
+     * @return Tooltip appropriate version of the given argument.
+     */
+    protected String getTooltip(List<ItemStack> list) {
+        return list.stream().map(this::getTooltip).collect(Collectors.joining(", "));
+    }
+
+    /**
+     * @return Tooltip appropriate version of the given argument.
+     */
+    protected String getTooltip(ItemStack stack) {
+        return stack.getCount() + "x " + stack.getDisplayName().getFormattedText();
     }
 
     /**

@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,5 +24,12 @@ public class QuestCraftOnAltar extends Quest {
         if (this.iconStack == null || this.iconStack == ItemStack.EMPTY) {
             this.iconStack = this.results.get(0);
         }
+    }
+
+    public void fillTooltip(Collection<String> lines) {
+        super.fillTooltip(lines);
+
+        this.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(this.ingredients));
+        this.addLine(lines, "quest.tooltip.results", this.getTooltip(this.results));
     }
 }
