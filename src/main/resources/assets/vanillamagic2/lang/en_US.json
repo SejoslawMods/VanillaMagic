@@ -283,7 +283,7 @@
   "quest.mineObsidian.desc": "Mine Obsidian.",
 
   "quest.mobSpawnerDropBlock": "Mob Spawner Drop Block",
-  "quest.mobSpawnerDropBlock.desc": "Break Mob Spawner.",
+  "quest.mobSpawnerDropBlock.desc": "Break Mob Spawner (pickup Entity Book).",
   "quest.mobSpawnerDropBlock.desc.usage": "Right-click on Spawner to set it to the Entity from Book.",
 
   "quest.craftEnchantingTable": "Craft Enchanting Table",
