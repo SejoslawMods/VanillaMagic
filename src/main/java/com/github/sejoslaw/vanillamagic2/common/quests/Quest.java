@@ -12,13 +12,11 @@ import java.util.Collection;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class Quest {
-    // Core fields
     public Quest parent;
     public int posX, posY;
     public ItemStack iconStack;
     public String uniqueName;
 
-    // Fields used by classes inherited from Quest
     public int altarTier;
     public ItemStack rightHandStack;
     public ItemStack leftHandStack;
@@ -34,18 +32,6 @@ public class Quest {
         this.posY = jsonService.getInt("posY");
 
         this.tryReadCustomFields(jsonService);
-    }
-
-    /**
-     * Fields used by classes which inherits from Quest class.
-     */
-    private void tryReadCustomFields(IJsonService jsonService) {
-        this.altarTier = jsonService.getInt("altarTier");
-        this.rightHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("rightHandStack"));
-        this.leftHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("leftHandStack"));
-        this.multiplier = jsonService.getInt("multiplier");
-        this.level = jsonService.getInt("level");
-        this.oneItemSmeltCost = jsonService.getInt("oneItemSmeltCost");
     }
 
     /**
@@ -75,5 +61,24 @@ public class Quest {
 
     public void addLine(Collection<String> lines, String key, String value) {
         lines.add(TextUtils.translate(key).getFormattedText() + ": " + value);
+    }
+
+    /**
+     * @return Formatted display name.
+     */
+    public String getDisplayName() {
+        return TextUtils.translate("quest." + this.uniqueName).getFormattedText();
+    }
+
+    /**
+     * Fields used by classes which inherits from Quest class.
+     */
+    private void tryReadCustomFields(IJsonService jsonService) {
+        this.altarTier = jsonService.getInt("altarTier");
+        this.rightHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("rightHandStack"));
+        this.leftHandStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("leftHandStack"));
+        this.multiplier = jsonService.getInt("multiplier");
+        this.level = jsonService.getInt("level");
+        this.oneItemSmeltCost = jsonService.getInt("oneItemSmeltCost");
     }
 }

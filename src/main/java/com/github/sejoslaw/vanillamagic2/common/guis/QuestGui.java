@@ -316,15 +316,8 @@ public class QuestGui extends Screen {
         move(-move, -move, 30);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
         this.drawQuestOverlay(node.color);
-        this.drawItemStack(node.quest.iconStack, 1, 1, this.getQuestText(node.quest));
+        this.drawItemStack(node.quest.iconStack, 1, 1, node.quest.getDisplayName());
         move(move, move, -30);
-    }
-
-    /**
-     * @return Displayed text for the specified Quest.
-     */
-    private String getQuestText(Quest quest) {
-        return TextUtils.translate("quest." + quest.uniqueName).getFormattedText();
     }
 
     /**

@@ -3,9 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests;
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.VMTileMachine;
-import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -18,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -285,11 +284,20 @@ public final class EventExecutor<TQuest extends Quest> {
         if (!PlayerQuestProgressRegistry.hasPlayerGotQuest(player, questUniqueName)) {
             if (PlayerQuestProgressRegistry.canPlayerGetQuest(player, questUniqueName)) {
                 PlayerQuestProgressRegistry.givePlayerQuest(player, questUniqueName);
+                this.onQuestCompleted(quest);
             } else {
                 return;
             }
         }
 
         consumer.accept(quest);
+    }
+
+    private void onQuestCompleted(TQuest quest) {
+        String questAcquiredMessage =
+                TextFormatting.GREEN + TextUtils.translate("vm.message.questCompleted").getFormattedText() +
+                TextFormatting.WHITE + " " + quest.getDisplayName();
+
+        TextUtils.addChatMessage(questAcquiredMessage);
     }
 }

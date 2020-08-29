@@ -31,7 +31,7 @@ public class SpellTeleportToEnd extends Spell {
             List<EnderDragonEntity> entities = world.getEntitiesWithinAABB(EnderDragonEntity.class, aabb);
 
             if (entities.size() > 0) {
-                TextUtils.addChatMessage("quest.spell.killDragonMessage");
+                TextUtils.addChatMessage("vm.message.killDragon");
             } else {
                 player.changeDimension(DimensionType.OVERWORLD);
             }

@@ -23,8 +23,6 @@
   "book.onGroundCrafting.ingredients": "Ingredients:",
   "book.onGroundCrafting.output": "Output:",
 
-  "itemGroup.vm": "Vanilla Magic",
-
   "vm.handler.deathPoint": "Last death position:",
   "vm.handler.hunger": "Hunger:",
   "vm.handler.saturation": "Saturation:",
@@ -54,13 +52,15 @@
   "block.inventorySelector.placed": "Bridge created",
   "block.inventorySelector.clear": "Position cleared",
 
-  "quest.summonHorde.message": "Summoning Horde !!!",
+  "vm.message.questCompleted": "[Quest Completed]",
+  "vm.message.summonHorde": "Summoning Horde !!!",
+  "vm.message.killDragon": "You need to kill Dragon !!!",
+
   "quest.mobSpawner.bookTitlePrefix": "Mob Spawner Entity Data:",
   "quest.capturedEntity.bookTitlePrefix": "Captured Entity:",
   "quest.jumper.bookTitle": "Jumper's Book:",
   "quest.moveBlock.tileEntity": "[TileEntity]",
-  "quest.moveBlock.block": "[BLOCK]",
-  "quest.spell.killDragonMessage": "You need to kill Dragon !!!",
+  "quest.moveBlock.block": "[Block]",
 
   "quest.tooltip.uniqueName": "Quest Name",
   "quest.tooltip.parent": "Parent Quest Name",

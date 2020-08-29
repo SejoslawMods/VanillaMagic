@@ -24,7 +24,7 @@ public class EventCallerSummonHorde extends EventCaller<QuestSummonHorde> {
                         this.executor.forQuestWithCheck(
                                 (quest) -> quest.level == leftHandStack.getCount(),
                                 (quest) -> {
-                                    TextUtils.addChatMessage("quest.summonHorde.message");
+                                    TextUtils.addChatMessage("vm.message.summonHorde");
                                     leftHandStack.grow(-quest.leftHandStack.getCount());
 
                                     List<EntityType<?>> monsterTypes = EntityUtils.getEntitiesByClassification(EntityClassification.MONSTER);
