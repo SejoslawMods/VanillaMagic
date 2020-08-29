@@ -84,6 +84,10 @@
   "quest.tooltip.top": "Top",
   "quest.tooltip.right": "Right",
   "quest.tooltip.refreshRate": "Refresh Rate",
+  "quest.tooltip.save": "Save",
+  "quest.tooltip.create": "Create",
+  "quest.tooltip.clear": "Clear",
+  "quest.tooltip.block": "Block",
 
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft Stick.",
@@ -458,22 +462,25 @@
   "quest.crystallizedPotion.desc.results": "1x Crystallized Potion",
 
   "quest.craftWitherSkeletonSkull": "Craft Wither Skeleton Skull",
-  "quest.craftWitherSkeletonSkull.desc": "Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand.",
+  "quest.craftWitherSkeletonSkull.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.accelerationCrystal": "Acceleration Crystal",
-  "quest.accelerationCrystal.desc": "Craft it with Nether Star in the middle and Books on top, bottom, left and right. Shift-right-click on block to speed it's ticks. (For instance: speed up Furnace).",
+  "quest.accelerationCrystal.desc": "Shift-right-click on block to speed it's ticks.",
 
   "quest.buildAltarTier6": "Build Altar Tier 6",
-  "quest.buildAltarTier6.desc": "Add 1 block of Diamond on each corner of Altar Tier 5 but one layer lower than Cauldron and replace the Cauldron.",
+  "quest.buildAltarTier6.desc": "Add 1 block on each corner of Altar one layer lower than Cauldron and replace the Cauldron.",
 
   "quest.inventoryBridge": "Inventory Bridge",
-  "quest.inventoryBridge.desc": "Save Inventory position into Inventory Selector and hold that item somewhere in main inventory. Hold Blaze Rod in right hand and 1x Stained Glass in left hand and Shift-Right-Click the inventory to place the end of the bridge. Items will be transfered from Inventory Selector's saved inventory to new clicked inventory.",
+  "quest.inventoryBridge.desc": "Transfer items from source position to output position.",
+  "quest.inventoryBridge.desc.save": "Right-click on Input Inventory Block (i.e. Chest) to save position.",
+  "quest.inventoryBridge.desc.create": "Right-click on Output Inventory Block (i.e. Chest) to create bridge.",
+  "quest.inventoryBridge.desc.clear": "Right-click in air to clear saved position.",
 
   "quest.craftDiamond": "Craft Diamond",
   "quest.craftDiamond.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier7": "Build Altar Tier 7",
-  "quest.buildAltarTier7.desc": "Add 1 block of Emerald on each side of the Altar Tier 4 but one layer lower than Cauldron, 7 blocks away from the center (north, south, east, west) and replace the Cauldron.",
+  "quest.buildAltarTier7.desc": "Add 1 block on each side of the Altar one layer lower than Cauldron, 7 blocks away from the center and replace the Cauldron.",
 
   "quest.craftGoldOre": "Craft Gold Ore",
   "quest.craftGoldOre.desc": "Toss ingredients into the Altar and Right-click.",
@@ -491,7 +498,7 @@
   "quest.craftDiamondOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.oreDoubling": "Ore Doubling",
-  "quest.oreDoubling.desc": "Place Cauldron. On each side of the Cauldron place Furnace. Drop ores into Cauldron and right-click with Nether Star in right hand and fuel in left hand.",
+  "quest.oreDoubling.desc": "Place Cauldron. On each side place Furnace. Drop ores into Cauldron and Right-click it. Hold fuel in left hand.",
 
   "quest.craftEmeraldOre": "Craft Emerald Ore",
   "quest.craftEmeraldOre.desc": "Toss ingredients into the Altar and Right-click.",
@@ -503,7 +510,7 @@
   "quest.craftNetherStar.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.itemMagnet": "Item Magnet",
-  "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks (1x Nether Star + 1x Nether Star).",
+  "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks.",
 
   "quest.craftDragonEgg": "Craft Dragon Egg",
   "quest.craftDragonEgg.desc": "Toss ingredients into the Altar and Right-click.",

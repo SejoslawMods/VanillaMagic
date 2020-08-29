@@ -3,6 +3,9 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities;
 import com.github.sejoslaw.vanillamagic2.common.items.VMItemInventorySelector;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestVMItem;
 import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+
+import java.util.Collection;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -10,5 +13,13 @@ import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 public class QuestInventoryBridge extends QuestVMItem<VMItemInventorySelector> {
     public VMItemInventorySelector getVMItem() {
         return (VMItemInventorySelector) ItemRegistry.INVENTORY_SELECTOR;
+    }
+
+    public void fillTooltip(Collection<String> lines) {
+        super.fillTooltip(lines);
+
+        this.addLine(lines, "quest.tooltip.save", TextUtils.getFormattedText("quest.inventoryBridge.desc.save"));
+        this.addLine(lines, "quest.tooltip.create", TextUtils.getFormattedText("quest.inventoryBridge.desc.create"));
+        this.addLine(lines, "quest.tooltip.clear", TextUtils.getFormattedText("quest.inventoryBridge.desc.clear"));
     }
 }

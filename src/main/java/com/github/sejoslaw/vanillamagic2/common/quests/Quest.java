@@ -49,11 +49,11 @@ public class Quest {
         }
 
         if (this.rightHandStack != null) {
-            this.addLine(lines, "quest.tooltip.rightHandStack", this.rightHandStack.toString());
+            this.addLine(lines, "quest.tooltip.rightHandStack", this.getTooltip(this.rightHandStack));
         }
 
         if (this.leftHandStack != null) {
-            this.addLine(lines, "quest.tooltip.leftHandStack", this.leftHandStack.toString());
+            this.addLine(lines, "quest.tooltip.leftHandStack", this.getTooltip(this.leftHandStack));
         }
 
         if (this.altarTier > 0) {
