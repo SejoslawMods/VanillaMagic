@@ -66,6 +66,7 @@
   "quest.tooltip.parent": "Parent Quest Name",
   "quest.tooltip.rightHandStack": "Right-Hand Stack",
   "quest.tooltip.leftHandStack": "Left-Hand Stack",
+  "quest.tooltip.altarTier": "Altar Tier",
   "quest.tooltip.description": "Description",
 
   "quest.craftStick": "Craft Stick",
@@ -73,9 +74,6 @@
 
   "quest.portableCraftingTable": "Portable Crafting Table",
   "quest.portableCraftingTable.desc": "Hold Crafting Table in right hand and right-click while pointing in air.",
-
-  "quest.autocrafting": "Autocrafting !!!",
-  "quest.autocrafting.desc": "Place Chests in 3x3 pattern but with 1 block empty space between them. On top of the middle Chest place Hopper. On the Hopper place Crafting Table and on that place Cauldron. On top of Cauldron place Chest as fuel input. Shift-right-click the Crafting Table with Blaze Wand in right hand and empty left hand.",
 
   "quest.spellFlintAndSteel": "Flint and Steel Clone",
   "quest.spellFlintAndSteel.desc": "Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire.",

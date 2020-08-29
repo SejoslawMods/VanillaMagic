@@ -66,6 +66,10 @@ public class Quest {
             this.addLine(lines, "quest.tooltip.leftHandStack", this.leftHandStack.toString());
         }
 
+        if (this.altarTier > 0) {
+            this.addLine(lines, "quest.tooltip.altarTier", String.valueOf(this.altarTier));
+        }
+
         this.addLine(lines, "quest.tooltip.description", TextUtils.translate("quest." + this.uniqueName + ".desc").getFormattedText());
     }
 

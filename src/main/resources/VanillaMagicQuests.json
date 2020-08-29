@@ -65,7 +65,7 @@
     "posX": 0,
     "posY": 3,
     "icon": {
-      "id": "minecraft:redstone"
+      "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier1",
     "altarTier": 1
