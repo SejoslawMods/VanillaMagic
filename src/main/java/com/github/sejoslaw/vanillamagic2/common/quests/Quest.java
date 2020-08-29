@@ -4,7 +4,9 @@ import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,7 +42,7 @@ public class Quest {
      * Adds tooltip information to given collection.
      */
     public void fillTooltip(Collection<String> lines) {
-        this.addLine(lines, "quest.tooltip.uniqueName", TextUtils.translate("quest." + this.uniqueName).getFormattedText());
+        this.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + TextUtils.translate("quest." + this.uniqueName).getFormattedText());
 
         if (this.parent != null) {
             this.addLine(lines, "quest.tooltip.parent", TextUtils.translate("quest." + this.parent.uniqueName).getFormattedText());
@@ -74,7 +76,11 @@ public class Quest {
     }
 
     public void addLine(Collection<String> lines, String key, String value) {
-        lines.add(TextUtils.translate(key).getFormattedText() + ": " + value);
+        String message =
+                TextFormatting.GREEN + TextUtils.translate(key).getFormattedText() +
+                TextFormatting.WHITE + ": " + value;
+
+        lines.add(message);
     }
 
     /**
@@ -96,6 +102,13 @@ public class Quest {
      */
     protected String getTooltip(ItemStack stack) {
         return stack.getCount() + "x " + stack.getDisplayName().getFormattedText();
+    }
+
+    /**
+     * @return Tooltip appropriate version of the given argument.
+     */
+    protected String getTooltip(Block block) {
+        return block.getNameTextComponent().getFormattedText();
     }
 
     /**

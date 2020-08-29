@@ -32,6 +32,6 @@ public class QuestMineBlock extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.blocksToMine", this.blocksToMine.stream().map(block -> block.getNameTextComponent().getFormattedText()).collect(Collectors.joining(", ")));
+        this.addLine(lines, "quest.tooltip.blocksToMine", this.blocksToMine.stream().map(this::getTooltip).collect(Collectors.joining(", ")));
     }
 }

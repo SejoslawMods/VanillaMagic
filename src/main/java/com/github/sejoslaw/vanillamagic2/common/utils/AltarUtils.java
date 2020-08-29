@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,17 +15,7 @@ import java.util.Map;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class AltarUtils {
-    private static final Map<Integer, Block> BLOCKS = new HashMap<>();
-
-    static {
-        BLOCKS.put(1, Blocks.REDSTONE_WIRE);
-        BLOCKS.put(2, Blocks.IRON_BLOCK);
-        BLOCKS.put(3, Blocks.GOLD_BLOCK);
-        BLOCKS.put(4, Blocks.REDSTONE_BLOCK);
-        BLOCKS.put(5, Blocks.LAPIS_BLOCK);
-        BLOCKS.put(6, Blocks.DIAMOND_BLOCK);
-        BLOCKS.put(7, Blocks.EMERALD_BLOCK);
-    }
+    public static final Map<Integer, Block> BLOCKS = new HashMap<>();
 
     /**
      * Checks if the Altar is build correctly at specified position.

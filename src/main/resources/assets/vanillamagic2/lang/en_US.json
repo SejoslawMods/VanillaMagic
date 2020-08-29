@@ -76,6 +76,7 @@
   "quest.tooltip.range": "Range",
   "quest.tooltip.blocksToMine": "Blocks To Mine",
   "quest.tooltip.whatToPick": "What To Pick",
+  "quest.tooltip.altarBlock": "Altar Block",
 
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft stick. Rename it in Anvil to 'Stick Wand'.",

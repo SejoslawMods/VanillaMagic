@@ -68,7 +68,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier1",
-    "altarTier": 1
+    "altarTier": 1,
+    "altarBlock": {
+      "id": "minecraft:redstone"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
@@ -89,7 +92,10 @@
         "id": "minecraft:gunpowder"
       }
     ],
-    "altarTier": 1
+    "altarTier": 1,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
@@ -329,7 +335,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier2",
-    "altarTier": 2
+    "altarTier": 2,
+    "altarBlock": {
+      "id": "minecraft:iron_block"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
@@ -682,7 +691,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier3",
-    "altarTier": 3
+    "altarTier": 3,
+    "altarBlock": {
+      "id": "minecraft:gold_block"
+    }
   },
   {
     "eventCaller": "smeltOnAltar",
@@ -798,7 +810,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier4",
-    "altarTier": 4
+    "altarTier": 4,
+    "altarBlock": {
+      "id": "minecraft:redstone_block"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
@@ -956,7 +971,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier5",
-    "altarTier": 5
+    "altarTier": 5,
+    "altarBlock": {
+      "id": "minecraft:lapis_block"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
@@ -1253,7 +1271,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier6",
-    "altarTier": 6
+    "altarTier": 6,
+    "altarBlock": {
+      "id": "minecraft:diamond_block"
+    }
   },
   {
     "eventCaller": "inventoryBridge",
@@ -1299,7 +1320,10 @@
       "id": "minecraft:cauldron"
     },
     "uniqueName": "buildAltarTier7",
-    "altarTier": 7
+    "altarTier": 7,
+    "altarBlock": {
+      "id": "minecraft:emerald_block"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
