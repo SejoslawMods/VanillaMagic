@@ -41,7 +41,7 @@
   {
     "eventCaller": "craft",
     "parent": "craftStick",
-    "posX": 1,
+    "posX": 0,
     "posY": 2,
     "icon": {
       "id": "minecraft:cauldron"
@@ -49,21 +49,10 @@
     "uniqueName": "craftCauldron"
   },
   {
-    "eventCaller": "mineBlock",
-    "parent": "craftStick",
-    "posX": -1,
-    "posY": 2,
-    "icon": {
-      "id": "minecraft:redstone_ore"
-    },
-    "uniqueName": "mineRedstone",
-    "blocksToMine": "redstone"
-  },
-  {
     "eventCaller": "buildAltar",
-    "parent": "craftStick",
+    "parent": "craftCauldron",
     "posX": 0,
-    "posY": 3,
+    "posY": 2,
     "icon": {
       "id": "minecraft:cauldron"
     },
@@ -74,10 +63,21 @@
     }
   },
   {
+    "eventCaller": "mineBlock",
+    "parent": "buildAltarTier1",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": "minecraft:redstone_ore"
+    },
+    "uniqueName": "mineRedstone",
+    "blocksToMine": "redstone"
+  },
+  {
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier1",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftGunpowder",
     "ingredients": [
       {
@@ -207,7 +207,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier1",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftLeather",
     "ingredients": [
       {
@@ -328,7 +328,7 @@
   },
   {
     "eventCaller": "buildAltar",
-    "parent": "buildAltarTier1",
+    "parent": "mineRedstone",
     "posX": 0,
     "posY": 2,
     "icon": {
@@ -344,7 +344,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier2",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftIronOre",
     "ingredients": [
       {
@@ -396,7 +396,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier2",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftCactus",
     "ingredients": [
       {
@@ -440,7 +440,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "craftSapling0",
     "posX": 0,
-    "posY": 2,
+    "posY": -2,
     "uniqueName": "craftSapling1",
     "ingredients": [
       {
@@ -700,7 +700,7 @@
     "eventCaller": "smeltOnAltar",
     "parent": "buildAltarTier3",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "icon": {
       "id": "minecraft:furnace"
     },
@@ -714,8 +714,8 @@
   {
     "eventCaller": "quarry",
     "parent": "smeltOnAltar",
-    "posX": 0,
-    "posY": 2,
+    "posX": -2,
+    "posY": 0,
     "icon": {
       "id": "minecraft:cauldron"
     },
@@ -767,7 +767,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier3",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftGoldIngot",
     "ingredients": [
       {
@@ -819,7 +819,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier4",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftRottenFlesh",
     "ingredients": [
       {
@@ -980,7 +980,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier5",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftGlowstoneDust",
     "ingredients": [
       {
@@ -1158,7 +1158,7 @@
     "eventCaller": "moveBlock",
     "parent": "pickupBlazeRod",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "questMoveBlock",
     "icon": {
       "id": "minecraft:book"
@@ -1229,7 +1229,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "pickupBlazeRod",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftWitherSkeletonSkull",
     "ingredients": [
       {
@@ -1263,8 +1263,19 @@
     }
   },
   {
-    "eventCaller": "buildAltar",
+    "eventCaller": "mineBlock",
     "parent": "pickupBlazeRod",
+    "posX": 0,
+    "posY": 2,
+    "icon": {
+      "id": "minecraft:diamond_ore"
+    },
+    "uniqueName": "mineDiamond",
+    "blocksToMine": "diamond"
+  },
+  {
+    "eventCaller": "buildAltar",
+    "parent": "mineDiamond",
     "posX": 0,
     "posY": 2,
     "icon": {
@@ -1280,7 +1291,7 @@
     "eventCaller": "inventoryBridge",
     "parent": "buildAltarTier6",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "icon": {
       "id": "minecraft:chest"
     },
@@ -1293,7 +1304,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier6",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftDiamond",
     "ingredients": [
       {
@@ -1329,7 +1340,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier7",
     "posX": -2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftGoldOre",
     "ingredients": [
       {
@@ -1453,7 +1464,7 @@
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier7",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "uniqueName": "craftEmerald",
     "ingredients": [
       {
@@ -1572,7 +1583,7 @@
     "eventCaller": "craft",
     "parent": "craftStick",
     "posX": 2,
-    "posY": 1,
+    "posY": 0,
     "icon": {
       "id": "minecraft:book"
     },
@@ -1587,17 +1598,6 @@
       "id": "minecraft:bookshelf"
     },
     "uniqueName": "craftBookshelf"
-  },
-  {
-    "eventCaller": "mineBlock",
-    "parent": "craftBook",
-    "posX": 2,
-    "posY": -1,
-    "icon": {
-      "id": "minecraft:diamond_ore"
-    },
-    "uniqueName": "mineDiamond",
-    "blocksToMine": "diamond"
   },
   {
     "eventCaller": "mineBlock",
@@ -1812,8 +1812,8 @@
   {
     "eventCaller": "castSpellOnBlock",
     "parent": "spellSummon_minecraft:villager",
-    "posX": 0,
-    "posY": 2,
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "spellSummon_minecraft:iron_golem",
     "rightHandStack": {
       "id": "minecraft:nether_star"
@@ -1966,8 +1966,8 @@
   {
     "eventCaller": "castSpellOnBlock",
     "parent": "spellSummon_minecraft:witch",
-    "posX": 0,
-    "posY": -2,
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "spellSummon_minecraft:vindicator",
     "rightHandStack": {
       "id": "minecraft:nether_star"
@@ -1991,9 +1991,9 @@
   },
   {
     "eventCaller": "castSpellOnBlock",
-    "parent": "spellSummon_minecraft:vex",
-    "posX": 0,
-    "posY": -2,
+    "parent": "spellSummon_minecraft:vindicator",
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "spellSummon_minecraft:evoker",
     "rightHandStack": {
       "id": "minecraft:nether_star"
@@ -2006,8 +2006,8 @@
   {
     "eventCaller": "evokerCrystal",
     "parent": "spellSummon_minecraft:evoker",
-    "posX": 2,
-    "posY": 0,
+    "posX": 0,
+    "posY": -2,
     "icon": {
       "id": "minecraft:nether_star"
     },
