@@ -1443,7 +1443,7 @@
     "icon": {
       "id": "minecraft:cauldron"
     },
-    "uniqueName": "oreDoubling",
+    "uniqueName": "oreMultiplier",
     "multiplier": 2,
     "rightHandStack": {
       "id": "minecraft:nether_star"

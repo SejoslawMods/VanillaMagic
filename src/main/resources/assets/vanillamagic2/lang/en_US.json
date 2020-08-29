@@ -23,6 +23,12 @@
   "book.onGroundCrafting.ingredients": "Ingredients:",
   "book.onGroundCrafting.output": "Output:",
 
+  "vmitem.vmitemaccelerationcrystal.displayName": "Acceleration Crystal",
+  "vmitem.vmitemevokercrystal.displayName": "Evoker Crystal",
+  "vmitem.vmiteminventoryselector.displayName": "Inventory Selector",
+  "vmitem.vmitemliquidsuppressioncrystal.displayName": "Liquid Suppression Crystal",
+  "vmitem.vmitemmothernaturecrystal.displayName": "The Crystal of Mother Nature",
+
   "vm.handler.deathPoint": "Last death position:",
   "vm.handler.hunger": "Hunger:",
   "vm.handler.saturation": "Saturation:",
@@ -39,9 +45,9 @@
   "key.vm.category": "Vanilla Magic",
   "key.openQuestGui.desc": "Open Quest GUI",
 
-  "spell.evoker.wololo": "Wololo",
-  "spell.evoker.summonVex": "Summon Vex",
-  "spell.evoker.fangs": "Fangs",
+  "spell.evoker.wololo.name": "Wololo",
+  "spell.evoker.summonVex.name": "Summon Vex",
+  "spell.evoker.fangs.name": "Fangs",
 
   "item.crystallizedLiquid.namePrefix": "Crystallized Liquid:",
   "item.crystallizedPotion.namePrefix": "Crystallized Potion:",
@@ -77,6 +83,10 @@
   "quest.tooltip.blocksToMine": "Blocks To Mine",
   "quest.tooltip.whatToPick": "What To Pick",
   "quest.tooltip.altarBlock": "Altar Block",
+  "quest.tooltip.altarBlock.position": "Altar Block Position",
+  "quest.tooltip.altarBlock.position.side": "Side",
+  "quest.tooltip.altarBlock.position.corner": "Corner",
+  "quest.tooltip.altarBlock.distance": "Altar Block Distance",
   "quest.tooltip.ticks": "Ticks",
   "quest.tooltip.size": "Size",
   "quest.tooltip.left": "Left",
@@ -88,6 +98,9 @@
   "quest.tooltip.create": "Create",
   "quest.tooltip.clear": "Clear",
   "quest.tooltip.block": "Block",
+  "quest.tooltip.changeSpell": "Change Spell",
+  "quest.tooltip.castSpell": "Cast Spell",
+  "quest.tooltip.crafting": "Crafting",
 
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft Stick.",
@@ -225,7 +238,9 @@
   "quest.spellSummon_minecraft:evoker.desc": "Right-click on block.",
 
   "quest.evokerCrystal": "Evoker Crystal",
-  "quest.evokerCrystal.desc": "Craft Evoker Crystal in Altar. Hold Evoker Crystal in right-hand. Right-Click to cast currently selected Spell. Shift-Right-Click to change selected Spell.",
+  "quest.evokerCrystal.desc": "Craft Evoker Crystal on Altar.",
+  "quest.evokerCrystal.desc.changeSpell": "Shift-right-click",
+  "quest.evokerCrystal.desc.castSpell": "Right-click",
 
   "quest.spellSummon_minecraft:pigman": "Summon Pigman",
   "quest.spellSummon_minecraft:pigman.desc": "Right-click on block.",
@@ -315,7 +330,7 @@
   "quest.craftClay.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier2": "Build Altar Tier 2",
-  "quest.buildAltarTier2.desc": "Add 1 block on each corner, but one layer lower than Cauldron and replace the Cauldron.",
+  "quest.buildAltarTier2.desc": "Add blocks and replace the Cauldron.",
 
   "quest.craftIronOre": "Craft Iron Ore",
   "quest.craftIronOre.desc": "Toss ingredients into the Altar and Right-click.",
@@ -366,7 +381,7 @@
   "quest.craftSlimeBall.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier3": "Build Altar Tier 3",
-  "quest.buildAltarTier3.desc": "Add 1 block on each side but one layer lower than Cauldron. 3 blocks away from the center and replace the Cauldron.",
+  "quest.buildAltarTier3.desc": "Add blocks and replace the Cauldron.",
 
   "quest.smeltOnAltar": "Smelting",
   "quest.smeltOnAltar.desc": "Toss smeltable items into Altar and right-click, also hold fuel (i.e. Coal).",
@@ -398,7 +413,7 @@
   "quest.blockAbsorber.desc": "Shift-right-click the Hopper. Hopper will absorb any block from above.",
 
   "quest.buildAltarTier4": "Build Altar Tier 4",
-  "quest.buildAltarTier4.desc": "Add 1 block on each corner of Altar one layer lower than Cauldron and replace the Cauldron.",
+  "quest.buildAltarTier4.desc": "Add blocks and replace the Cauldron.",
 
   "quest.craftRottenFlesh": "Craft Rotten Flesh",
   "quest.craftRottenFlesh.desc": "Toss ingredients into the Altar and Right-click.",
@@ -419,7 +434,7 @@
   "quest.craftEnderPearl.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier5": "Build Altar Tier 5",
-  "quest.buildAltarTier5.desc": "Add 1 block on each side of the Altar one layer lower than Cauldron, 5 blocks away from the center and replace the Cauldron.",
+  "quest.buildAltarTier5.desc": "Add blocks and replace the Cauldron.",
 
   "quest.craftGlowstoneDust": "Craft Glowstone Dust",
   "quest.craftGlowstoneDust.desc": "Toss ingredients into the Altar and Right-click.",
@@ -468,7 +483,7 @@
   "quest.accelerationCrystal.desc": "Shift-right-click on block to speed it's ticks.",
 
   "quest.buildAltarTier6": "Build Altar Tier 6",
-  "quest.buildAltarTier6.desc": "Add 1 block on each corner of Altar one layer lower than Cauldron and replace the Cauldron.",
+  "quest.buildAltarTier6.desc": "Add blocks and replace the Cauldron.",
 
   "quest.inventoryBridge": "Inventory Bridge",
   "quest.inventoryBridge.desc": "Transfer items from source position to output position.",
@@ -480,7 +495,7 @@
   "quest.craftDiamond.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier7": "Build Altar Tier 7",
-  "quest.buildAltarTier7.desc": "Add 1 block on each side of the Altar one layer lower than Cauldron, 7 blocks away from the center and replace the Cauldron.",
+  "quest.buildAltarTier7.desc": "Add blocks and replace the Cauldron.",
 
   "quest.craftGoldOre": "Craft Gold Ore",
   "quest.craftGoldOre.desc": "Toss ingredients into the Altar and Right-click.",
@@ -497,8 +512,9 @@
   "quest.craftDiamondOre": "Craft Diamond Ore",
   "quest.craftDiamondOre.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.oreDoubling": "Ore Doubling",
-  "quest.oreDoubling.desc": "Place Cauldron. On each side place Furnace. Drop ores into Cauldron and Right-click it. Hold fuel in left hand.",
+  "quest.oreMultiplier": "Ore Multiplier",
+  "quest.oreMultiplier.desc": "Place Cauldron. On each side place Furnace.",
+  "quest.oreMultiplier.desc.crafting": "Drop ores into Cauldron and Right-click it. Hold fuel in left hand.",
 
   "quest.craftEmeraldOre": "Craft Emerald Ore",
   "quest.craftEmeraldOre.desc": "Toss ingredients into the Altar and Right-click.",

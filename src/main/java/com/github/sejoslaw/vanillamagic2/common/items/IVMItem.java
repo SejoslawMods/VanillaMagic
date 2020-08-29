@@ -31,7 +31,7 @@ public interface IVMItem {
      */
     default ItemStack getStack() {
         ItemStack stack = new ItemStack(this.getBaseItem());
-        stack.setDisplayName(TextUtils.translate("item." + this.getUniqueKey() + ".displayName"));
+        stack.setDisplayName(TextUtils.translate("vmitem." + this.getUniqueKey() + ".displayName"));
         stack.getOrCreateTag().putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, this.getUniqueKey());
         return stack;
     }
