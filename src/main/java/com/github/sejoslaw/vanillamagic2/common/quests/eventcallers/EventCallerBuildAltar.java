@@ -7,6 +7,8 @@ import net.minecraft.block.CauldronBlock;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.Collections;
+
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
@@ -17,6 +19,7 @@ public class EventCallerBuildAltar extends EventCaller<QuestBuildAltar> {
                 (player, world, state, pos) ->
                         this.quests
                             .stream()
+                            .sorted(Collections.reverseOrder())
                             .filter(quest -> state.getBlock() instanceof CauldronBlock && AltarUtils.checkAltarTier(world, pos, quest.altarTier))
                             .findFirst()
                             .get(),

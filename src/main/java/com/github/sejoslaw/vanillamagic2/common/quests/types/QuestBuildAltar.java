@@ -12,7 +12,7 @@ import java.util.Collection;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class QuestBuildAltar extends Quest {
+public class QuestBuildAltar extends Quest implements Comparable<QuestBuildAltar> {
     public void readData(IJsonService jsonService) {
         super.readData(jsonService);
 
@@ -25,5 +25,9 @@ public class QuestBuildAltar extends Quest {
         super.fillTooltip(lines);
 
         this.addLine(lines, "quest.tooltip.altarBlock", this.getTooltip(AltarUtils.BLOCKS.get(this.altarTier)));
+    }
+
+    public int compareTo(QuestBuildAltar quest) {
+        return Integer.compare(this.altarTier, quest.altarTier);
     }
 }
