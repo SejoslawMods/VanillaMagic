@@ -1,7 +1,10 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.types.items;
 
+import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.items.VMItemLiquidSuppressionCrystal;
 import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
+
+import java.util.Collection;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -9,5 +12,12 @@ import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 public class QuestLiquidSuppressionCrystal extends QuestVMItem<VMItemLiquidSuppressionCrystal> {
     public VMItemLiquidSuppressionCrystal getVMItem() {
         return (VMItemLiquidSuppressionCrystal) ItemRegistry.LIQUID_SUPPRESSION_CRYSTAL;
+    }
+
+    public void fillTooltip(Collection<String> lines) {
+        super.fillTooltip(lines);
+
+        this.addLine(lines, "quest.tooltip.range", String.valueOf(VMForgeConfig.LIQUID_SUPPRESSION_CRYSTAL_RADIUS.get()));
+        this.addLine(lines, "quest.tooltip.refreshRate", String.valueOf(VMForgeConfig.LIQUID_SUPPRESSION_CRYSTAL_REFRESH_RATE.get()));
     }
 }

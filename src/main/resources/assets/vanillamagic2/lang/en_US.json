@@ -83,6 +83,7 @@
   "quest.tooltip.back": "Back",
   "quest.tooltip.top": "Top",
   "quest.tooltip.right": "Right",
+  "quest.tooltip.refreshRate": "Refresh Rate",
 
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft Stick.",
@@ -384,73 +385,77 @@
   "quest.quarry.desc.right": "Output Inventory (i.e. Chest)",
 
   "quest.arrowMachineGun": "Arrow Machine Gun",
-  "quest.arrowMachineGun.desc": "Take any Arrows to left hand and Nether Star to right hand and right-click (or hold if more arrows in left hand).",
+  "quest.arrowMachineGun.desc": "Take any Arrow and Right-click (or hold).",
 
   "quest.craftGoldIngot": "Craft Gold Ingot",
-  "quest.craftGoldIngot.desc": "Toss 8x Iron Ingot into the Altar Tier 3 and right-click with a Stick Wand in hand.",
+  "quest.craftGoldIngot.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.blockAbsorber": "Block Absorber",
-  "quest.blockAbsorber.desc": "Take Blaze Wand in right hand and 1x Glass in left hand. Shift-right-click the Hopper. On top of the Hopper it will create a TileEntity that will absorb any Block which it detect on it's position and transport this Block to Hopper if possible.",
+  "quest.blockAbsorber.desc": "Shift-right-click the Hopper. Hopper will absorb any block from above.",
 
   "quest.buildAltarTier4": "Build Altar Tier 4",
-  "quest.buildAltarTier4.desc": "Add 1 block of Redstone on each corner of Altar Tier 3 but one layer lower than Cauldron and replace the Cauldron.",
+  "quest.buildAltarTier4.desc": "Add 1 block on each corner of Altar one layer lower than Cauldron and replace the Cauldron.",
 
   "quest.craftRottenFlesh": "Craft Rotten Flesh",
-  "quest.craftRottenFlesh.desc": "Toss 1x Leather into the Altar Tier 4 and right-click with a Stick Wand in hand.",
+  "quest.craftRottenFlesh.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftString": "Craft String",
-  "quest.craftString.desc": "Toss 2x Rotten Flesh into the Altar Tier 4 and right-click with a Stick Wand in hand.",
+  "quest.craftString.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSpiderEye": "Craft Spider Eye",
-  "quest.craftSpiderEye.desc": "Toss 2x String into the Altar Tier 4 and right-click with a Stick Wand in hand.",
+  "quest.craftSpiderEye.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftBone": "Craft Bone",
-  "quest.craftBone.desc": "Toss 2x Spider Eye into the Altar Tier 4 and right-click with a Stick Wand in hand.",
+  "quest.craftBone.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftArrow": "Craft Arrow",
-  "quest.craftArrow.desc": "Toss 2x Bone into the Altar Tier 4 and right-click with a Stick Wand in hand.",
+  "quest.craftArrow.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftEnderPearl": "Craft Ender Pearl",
-  "quest.craftEnderPearl.desc": "Toss 2x Arrow into the Altar Tier 4 and right-click with a Stick Wand in hand.",
+  "quest.craftEnderPearl.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier5": "Build Altar Tier 5",
-  "quest.buildAltarTier5.desc": "Add 1 block of Lapis on each side of the Altar Tier 4 but one layer lower than Cauldron, 5 blocks away from the center (north, south, east, west) and replace the Cauldron.",
+  "quest.buildAltarTier5.desc": "Add 1 block on each side of the Altar one layer lower than Cauldron, 5 blocks away from the center and replace the Cauldron.",
 
   "quest.craftGlowstoneDust": "Craft Glowstone Dust",
-  "quest.craftGlowstoneDust.desc": "Toss 2x Redstone Dust + 2x Coal + 1x Lapis Block into the Altar Tier 5 and right-click with a Blaze Wand in hand.",
+  "quest.craftGlowstoneDust.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftNetherrack": "Craft Netherrack",
-  "quest.craftNetherrack.desc": "Toss 1x Stone + 2x Coal into Altar Tier 5 and right-click with Blaze Wand in right hand.",
+  "quest.craftNetherrack.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSoulSand": "Craft Soul Sand",
-  "quest.craftSoulSand.desc": "Toss 1x Sand + 2x Coal into Altar Tier 5 and right-click with Blaze Wand in right hand.",
+  "quest.craftSoulSand.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftMagmaBlock": "Craft Magma Block",
-  "quest.craftMagmaBlock.desc": "Toss 1x Netherrack + 1x Magma Cream into Altar Tier 5 and right-click with Blaze Wand in right hand.",
+  "quest.craftMagmaBlock.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftNetherWart": "Craft Nether Wart",
-  "quest.craftNetherWart.desc": "Toss 1x Gunpowder + 1x Magma Cream + 1x Sugar + 1x RedstoneDust into Altar Tier 5 and right-click with Blaze Wand in right hand.",
+  "quest.craftNetherWart.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftGhastTear": "Craft Ghast Tear",
-  "quest.craftGhastTear.desc": "Toss 4x Gunpowder + 4x Blaze Powder + 1x Lava Bucket into Altar Tier 5 and right-click with Blaze Wand in right hand.",
+  "quest.craftGhastTear.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.pickupBlazeRod": "Pick Blaze Rod",
-  "quest.pickupBlazeRod.desc": "Pick Blaze Rod from the ground. Rename it in Anvil to 'Blaze Wand'.",
+  "quest.pickupBlazeRod.desc": "Pick Blaze Rod.",
 
   "quest.questMoveBlock": "Move block by Book",
-  "quest.questMoveBlock.desc": "Take Blaze Wand to right hand and exactly 1x Book to left hand. Shift-right-click on the block which You want to move. Than shift-right-click on the spot to move.",
+  "quest.questMoveBlock.desc": "Shift-right-click on the Block to take / place it.",
 
   "quest.captureEntity": "Capture Entity",
-  "quest.captureEntity.desc": "Hold Nether Star in right hand and 1x Book in left hand. Shift-right-click on Entity to capture it and than on block to respawn it.",
+  "quest.captureEntity.desc": "Shift-right-click on Entity to capture / release it.",
 
-  "quest.crystallizedLiquid": "Crystalized Liquid",
-  "quest.crystallizedLiquid.desc": "Drop 1x Bucket with fluid + 1x Nether Star to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted bucket. Shift-left-click to spawn fluid from bucket or fill tank, right-click in distance to spawn fluid in distance.",
+  "quest.crystallizedLiquid": "Crystallized Liquid",
+  "quest.crystallizedLiquid.desc": "Toss ingredients into the Altar and Right-click. Right-click to spawn Fluid.",
+  "quest.crystallizedLiquid.desc.ingredients": "1x Nether Star, 1x any Bucket with Fluid",
+  "quest.crystallizedLiquid.desc.results": "1x Crystallized Liquid",
 
   "quest.liquidSuppressionCrystal": "Liquid Suppression Crystal",
-  "quest.liquidSuppressionCrystal.desc": "Crafting: Place Nether Star in the middle and surround it with buckets (8x in total). Take it to left hand. Liquid will vanish around You and after some time will appear.",
+  "quest.liquidSuppressionCrystal.desc": "Liquid will vanish around You and after some time will appear.",
 
   "quest.crystallizedPotion": "Crystallized Potion",
-  "quest.crystallizedPotion.desc": "Drop 1x Nether Star + 1x Potion to Cauldron. Shift-right-click Cauldron with Blaze Wand in right hand. Get crafted Crystal. Hold it in inventory to get the effect of the Potion used in crafting.",
+  "quest.crystallizedPotion.desc": "Toss ingredients into the Altar and Right-click. Hold it in inventory to get the effect of the Potion.",
+  "quest.crystallizedPotion.desc.ingredients": "1x Nether Star + 1x any Potion",
+  "quest.crystallizedPotion.desc.results": "1x Crystallized Potion",
 
   "quest.craftWitherSkeletonSkull": "Craft Wither Skeleton Skull",
   "quest.craftWitherSkeletonSkull.desc": "Toss 1x Coal Block + 1x Skeleton Head into the Altar Tier 5 and right-click with a Blaze Wand in hand.",
@@ -465,47 +470,47 @@
   "quest.inventoryBridge.desc": "Save Inventory position into Inventory Selector and hold that item somewhere in main inventory. Hold Blaze Rod in right hand and 1x Stained Glass in left hand and Shift-Right-Click the inventory to place the end of the bridge. Items will be transfered from Inventory Selector's saved inventory to new clicked inventory.",
 
   "quest.craftDiamond": "Craft Diamond",
-  "quest.craftDiamond.desc": "Toss 8x Gold Ingot into the Altar Tier 6 and right-click with a Blaze Wand in hand.",
+  "quest.craftDiamond.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier7": "Build Altar Tier 7",
   "quest.buildAltarTier7.desc": "Add 1 block of Emerald on each side of the Altar Tier 4 but one layer lower than Cauldron, 7 blocks away from the center (north, south, east, west) and replace the Cauldron.",
 
   "quest.craftGoldOre": "Craft Gold Ore",
-  "quest.craftGoldOre.desc": "Toss 16x Iron Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.",
+  "quest.craftGoldOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftCoalOre": "Craft 4x Coal Ore",
-  "quest.craftCoalOre.desc": "Toss 1x Gold Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.",
+  "quest.craftCoalOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftRedstoneOre": "Craft Redstone Ore",
-  "quest.craftRedstoneOre.desc": "Toss 16x Gold Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.",
+  "quest.craftRedstoneOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftLapisOre": "Craft Lapis Ore",
-  "quest.craftLapisOre.desc": "Toss 16x Redstone Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.",
+  "quest.craftLapisOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftDiamondOre": "Craft Diamond Ore",
-  "quest.craftDiamondOre.desc": "Toss 16x Lapis Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.",
+  "quest.craftDiamondOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.oreDoubling": "Ore Doubling",
   "quest.oreDoubling.desc": "Place Cauldron. On each side of the Cauldron place Furnace. Drop ores into Cauldron and right-click with Nether Star in right hand and fuel in left hand.",
 
   "quest.craftEmeraldOre": "Craft Emerald Ore",
-  "quest.craftEmeraldOre.desc": "Toss 8x Diamond Ore into Altar Tier 7 and right-click with Blaze Wand in right hand.",
+  "quest.craftEmeraldOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftEmerald": "Craft Emerald",
-  "quest.craftEmerald.desc": "Toss 8x Diamond into the Altar Tier 7 and right-click with a Blaze Wand in hand.",
+  "quest.craftEmerald.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftNetherStar": "Craft Nether Star",
-  "quest.craftNetherStar.desc": "Toss 4x Emerald Block into the Altar Tier 7 and right-click with a Blaze Wand in hand.",
+  "quest.craftNetherStar.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.itemMagnet": "Item Magnet",
   "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks (1x Nether Star + 1x Nether Star).",
 
   "quest.craftDragonEgg": "Craft Dragon Egg",
-  "quest.craftDragonEgg.desc": "Toss 4x Nether Star into the Altar Tier 7 and right-click with a Blaze Wand in hand.",
+  "quest.craftDragonEgg.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftDragonHead": "Craft Dragon Head",
-  "quest.craftDragonHead.desc": "Toss 1x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Wand in hand.",
+  "quest.craftDragonHead.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftEndCrystal": "Craft End Crystal",
-  "quest.craftEndCrystal.desc": "Toss 8x Dragon Egg into the Altar Tier 7 and right-click with a Blaze Wand in hand."
+  "quest.craftEndCrystal.desc": "Toss ingredients into the Altar and Right-click."
 }
