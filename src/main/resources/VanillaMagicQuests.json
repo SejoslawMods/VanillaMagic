@@ -1680,7 +1680,7 @@
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:dye",
+      "id": "minecraft:ink_sac",
       "count": 32
     }
   },
@@ -1931,7 +1931,7 @@
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:fish",
+      "id": "minecraft:cod",
       "count": 8
     }
   },
@@ -2082,7 +2082,8 @@
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:stonebrick"
+      "id": "minecraft:stone_bricks",
+      "count": 8
     }
   },
   {
@@ -2133,16 +2134,14 @@
     "posX": 0,
     "posY": -2,
     "icon": {
-      "id": "minecraft:skull",
-      "meta": 1
+      "id": "minecraft:wither_skeleton_skull"
     },
     "uniqueName": "shootWitherSkull",
     "rightHandStack": {
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:skull",
-      "meta": 1
+      "id": "minecraft:wither_skeleton_skull"
     }
   },
   {
@@ -2318,8 +2317,7 @@
       "id": "minecraft:blaze_rod"
     },
     "leftHandStack": {
-      "id": "minecraft:skull",
-      "meta": 4
+      "id": "minecraft:creeper_head"
     }
   }
 ]
