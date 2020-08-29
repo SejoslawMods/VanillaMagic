@@ -24,34 +24,34 @@ public class ShowSaturationTooltipHandler extends EventHandler {
     private String getSaturationString(float saturation) {
         String message = TextFormatting.GRAY + TextUtils.getFormattedText("vm.handler.saturation") + " ";
 
-        if (saturation <= 1) {
-            message += TextFormatting.DARK_RED;
+        if (saturation >= .1) {
+            message += TextFormatting.DARK_RED + this.squareSymbol;
         }
-        if (saturation <= 2) {
-            message += TextFormatting.RED;
+        if (saturation >= .2) {
+            message += TextFormatting.RED + this.squareSymbol;
         }
-        if (saturation <= 3) {
-            message += TextFormatting.GOLD;
+        if (saturation >= .3) {
+            message += TextFormatting.GOLD + this.squareSymbol;
         }
-        if (saturation <= 4) {
-            message += TextFormatting.YELLOW;
+        if (saturation >= .4) {
+            message += TextFormatting.YELLOW + this.squareSymbol;
         }
-        if (saturation <= 5) {
-            message += TextFormatting.GREEN;
+        if (saturation >= .5) {
+            message += TextFormatting.GREEN + this.squareSymbol;
         }
-        if (saturation <= 6) {
-            message += TextFormatting.DARK_GREEN;
+        if (saturation >= .6) {
+            message += TextFormatting.DARK_GREEN + this.squareSymbol;
         }
-        if (saturation <= 7) {
-            message += TextFormatting.DARK_AQUA;
+        if (saturation >= .7) {
+            message += TextFormatting.DARK_AQUA + this.squareSymbol;
         }
-        if (saturation <= 8) {
-            message += TextFormatting.BLUE;
+        if (saturation >= .8) {
+            message += TextFormatting.BLUE + this.squareSymbol;
         }
-        if (saturation <= 9) {
-            message += TextFormatting.DARK_PURPLE;
+        if (saturation >= .9) {
+            message += TextFormatting.DARK_PURPLE + this.squareSymbol;
         }
 
-        return message + this.squareSymbol;
+        return message;
     }
 }

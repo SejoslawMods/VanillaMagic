@@ -31,32 +31,23 @@ public class ShowDurabilityTooltipHandler extends EventHandler {
 
         if (percentage >= .9) {
             message += TextFormatting.LIGHT_PURPLE;
-        }
-        if (percentage >= .8) {
+        } else if (percentage >= .8) {
             message += TextFormatting.DARK_PURPLE;
-        }
-        if (percentage >= .7) {
+        } else if (percentage >= .7) {
             message += TextFormatting.BLUE;
-        }
-        if (percentage >= .6) {
+        } else if (percentage >= .6) {
             message += TextFormatting.DARK_AQUA;
-        }
-        if (percentage >= .5) {
+        } else if (percentage >= .5) {
             message += TextFormatting.DARK_GREEN;
-        }
-        if (percentage >= .4) {
+        } else if (percentage >= .4) {
             message += TextFormatting.GREEN;
-        }
-        if (percentage >= .3) {
+        } else if (percentage >= .3) {
             message += TextFormatting.YELLOW;
-        }
-        if (percentage >= .2) {
+        } else if (percentage >= .2) {
             message += TextFormatting.GOLD;
-        }
-        if (percentage >= .1) {
+        } else if (percentage >= .1) {
             message += TextFormatting.RED;
-        }
-        if (percentage < .1) {
+        } else {
             message += TextFormatting.DARK_RED;
         }
 
