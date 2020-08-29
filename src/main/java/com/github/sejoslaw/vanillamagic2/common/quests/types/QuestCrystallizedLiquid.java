@@ -14,5 +14,6 @@ public class QuestCrystallizedLiquid extends Quest {
 
         this.addLine(lines, "quest.tooltip.ingredients", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.ingredients"));
         this.addLine(lines, "quest.tooltip.results", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.results"));
+        this.addLine(lines, "quest.tooltip.usage", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.usage"));
     }
 }

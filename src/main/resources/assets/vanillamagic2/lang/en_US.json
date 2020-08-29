@@ -101,6 +101,7 @@
   "quest.tooltip.changeSpell": "Change Spell",
   "quest.tooltip.castSpell": "Cast Spell",
   "quest.tooltip.crafting": "Crafting",
+  "quest.tooltip.usage": "Usage",
 
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft Stick.",
@@ -464,17 +465,19 @@
   "quest.captureEntity.desc": "Shift-right-click on Entity to capture / release it.",
 
   "quest.crystallizedLiquid": "Crystallized Liquid",
-  "quest.crystallizedLiquid.desc": "Toss ingredients into the Altar and Right-click. Right-click to spawn Fluid.",
+  "quest.crystallizedLiquid.desc": "Toss ingredients into the Altar and Right-click.",
   "quest.crystallizedLiquid.desc.ingredients": "1x Nether Star, 1x any Bucket with Fluid",
   "quest.crystallizedLiquid.desc.results": "1x Crystallized Liquid",
+  "quest.crystallizedLiquid.desc.usage": "Right-click to spawn Fluid.",
 
   "quest.liquidSuppressionCrystal": "Liquid Suppression Crystal",
   "quest.liquidSuppressionCrystal.desc": "Liquid will vanish around You and after some time will appear.",
 
   "quest.crystallizedPotion": "Crystallized Potion",
-  "quest.crystallizedPotion.desc": "Toss ingredients into the Altar and Right-click. Hold it in inventory to get the effect of the Potion.",
+  "quest.crystallizedPotion.desc": "Toss ingredients into the Altar and Right-click.",
   "quest.crystallizedPotion.desc.ingredients": "1x Nether Star + 1x any Potion",
   "quest.crystallizedPotion.desc.results": "1x Crystallized Potion",
+  "quest.crystallizedPotion.desc.usage": "Hold it in inventory to get the effect of the Potion.",
 
   "quest.craftWitherSkeletonSkull": "Craft Wither Skeleton Skull",
   "quest.craftWitherSkeletonSkull.desc": "Toss ingredients into the Altar and Right-click.",

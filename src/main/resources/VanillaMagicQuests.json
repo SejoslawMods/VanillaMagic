@@ -1601,9 +1601,9 @@
   },
   {
     "eventCaller": "mineBlock",
-    "parent": "craftBook",
-    "posX": 2,
-    "posY": 1,
+    "parent": "craftBookshelf",
+    "posX": 0,
+    "posY": 2,
     "icon": {
       "id": "minecraft:obsidian"
     },
