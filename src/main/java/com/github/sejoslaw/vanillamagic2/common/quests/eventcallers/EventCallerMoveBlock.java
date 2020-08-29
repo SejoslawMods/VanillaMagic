@@ -71,7 +71,7 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
     private void save(ItemStack bookStack, World world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos);
 
-        bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), TextUtils.translate(blockState.getBlock().getTranslationKey()).getFormattedText()));
+        bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), TextUtils.getFormattedText(blockState.getBlock().getTranslationKey())));
 
         CompoundNBT nbt = new CompoundNBT();
         bookStack.getOrCreateTag().put(NbtUtils.NBT_BLOCK, nbt);

@@ -77,306 +77,311 @@
   "quest.tooltip.blocksToMine": "Blocks To Mine",
   "quest.tooltip.whatToPick": "What To Pick",
   "quest.tooltip.altarBlock": "Altar Block",
+  "quest.tooltip.ticks": "Ticks",
+  "quest.tooltip.size": "Size",
+  "quest.tooltip.left": "Left",
+  "quest.tooltip.back": "Back",
+  "quest.tooltip.top": "Top",
+  "quest.tooltip.right": "Right",
 
   "quest.craftStick": "Craft Stick",
-  "quest.craftStick.desc": "Craft stick. Rename it in Anvil to 'Stick Wand'.",
+  "quest.craftStick.desc": "Craft Stick.",
 
   "quest.portableCraftingTable": "Portable Crafting Table",
-  "quest.portableCraftingTable.desc": "Hold Crafting Table in right hand and right-click while pointing in air.",
+  "quest.portableCraftingTable.desc": "Right-click while pointing in air.",
 
   "quest.spellFlintAndSteel": "Flint and Steel Clone",
-  "quest.spellFlintAndSteel.desc": "Hold Stick Wand in Your right hand and 1x Coal in the left hand and right-click on a block to put the block on fire.",
+  "quest.spellFlintAndSteel.desc": "Right-click on a block to put the block on fire.",
 
-  "quest.spellSmallFireball": "Feel like Blaze (small fireball)",
-  "quest.spellSmallFireball.desc": "Hold Blaze Wand in Your right hand and at least 2x Redstone Dust in the left hand and right-click.",
+  "quest.spellSmallFireball": "Feel like Blaze",
+  "quest.spellSmallFireball.desc": "Right-click to shoot small fireball.",
 
-  "quest.spellFusRoDah": "Fus-Ro-Dah !!! (repulse mobs and animals around player)",
-  "quest.spellFusRoDah.desc": "Hold Blaze Wand in Your right hand and at least 1x Dragon's Breath in the left hand and right-click.",
+  "quest.spellFusRoDah": "Fus-Ro-Dah !!!",
+  "quest.spellFusRoDah.desc": "Right-click to repulse mobs.",
 
-  "quest.spellLargeFireball": "Feel like Ghast (huge fireball + explosion)",
-  "quest.spellLargeFireball.desc": "Hold Blaze Wand in Your right hand and at least 1x Ghast Tear in the left hand and right-click.",
+  "quest.spellLargeFireball": "Feel like Ghast",
+  "quest.spellLargeFireball.desc": "Right-click to shoot huge exploding fireball.",
 
-  "quest.spellTeleport": "Teleportation !!! (look and teleport)",
-  "quest.spellTeleport.desc": "Hold Blaze Wand in Your right hand and at least 1x Magma Cream in the left hand and right-click.",
+  "quest.spellTeleport": "Teleportation !!!",
+  "quest.spellTeleport.desc": "Right-click to teleport where You are pointing at.",
 
-  "quest.jumper": "Jumper (Cross-Dimension Instant Transmission)",
-  "quest.jumper.desc": "Hold 1x Book in left hand and Compass in right hand and Shift-right-click block to save position. Hold Compass in left hand and 1x Jumper's Book in right hand and Shift-right-click in air to teleport.",
+  "quest.jumper": "Jumper",
+  "quest.jumper.desc": "Shift-right-click block to save position. Shift-right-click in air to teleport.",
 
   "quest.spellTeleportToNether": "Teleport to Nether",
-  "quest.spellTeleportToNether.desc": "Hold Blaze Wand in Your right hand and at least 2x Nether Wart (+2 if You want to go back) in the left hand and right-click (it's direct teleport -> coords will be the same). Pssst go higher (60+ is safe...i think).",
+  "quest.spellTeleportToNether.desc": "Right-click to teleport. (Pssst go higher... 60+ is safe... I think)",
 
   "quest.spellTeleportToEnd": "Teleport to End",
-  "quest.spellTeleportToEnd.desc": "Hold Blaze Wand in Your right hand and at least 1x End Crystal in the left hand and right-click (You can't go back until You kill the Dragon).",
+  "quest.spellTeleportToEnd.desc": "Right-click to teleport. (You can't go back until You kill the Dragon)",
 
   "quest.spellSummonMeteor": "Meteor !!!",
-  "quest.spellSummonMeteor.desc": "Hold Nether Star in Your hand and at least 10x Diamonds in the left hand and right-click.",
+  "quest.spellSummonMeteor.desc": "Right-click to summon Meteor from the sky.",
 
-  "quest.spellWeatherRain": "Make rain (Weather Spell)",
-  "quest.spellWeatherRain.desc": "Hold Blaze Wand in Your right hand and at least Water Bucket in the left hand and right-click.",
+  "quest.spellWeatherRain": "Make Rain",
+  "quest.spellWeatherRain.desc": "Right-click to summon rain.",
 
-  "quest.spellWeatherClear": "Clear weather (Weather Spell)",
-  "quest.spellWeatherClear.desc": "Hold Blaze Wand in Your right hand and at least Bucket in the left hand and right-click.",
+  "quest.spellWeatherClear": "Clear Weather",
+  "quest.spellWeatherClear.desc": "Right-click to clear the weather.",
 
-  "quest.spellWeatherThunderstorm": "Make thunderstorm (Weather Spell)",
-  "quest.spellWeatherThunderstorm.desc": "Hold Blaze Wand in Your right hand and at least 1x Creeper Head in the left hand and right-click.",
+  "quest.spellWeatherThunderstorm": "Make Thunderstorm",
+  "quest.spellWeatherThunderstorm.desc": "Right-click to summon thunderstorm.",
 
-  "quest.spellMoveInAir": "Move in air (move up to 10 blocks)",
-  "quest.spellMoveInAir.desc": "Hold Blaze Wand in Your right hand and at least 1x Feather in the left hand and right-click.",
+  "quest.spellMoveInAir": "Move In Air",
+  "quest.spellMoveInAir.desc": "Right-click to move in air.",
 
-  "quest.spellPullEntityToPlayer": "Pull Entity to Player (Yes, ALL entities)",
-  "quest.spellPullEntityToPlayer.desc": "Hold Blaze Wand in Your right hand and at least 4x String in the left hand and right-click.",
+  "quest.spellPullEntityToPlayer": "Pull Entity to Player",
+  "quest.spellPullEntityToPlayer.desc": "Right-click while pointing at any entity to pull it to You.",
 
-  "quest.spellFreezeWater3x3": "Freeze Water 3x3 (will freeze the middle block)",
-  "quest.spellFreezeWater3x3.desc": "Hold Blaze Wand in Your right hand and at least 1x Snow Block in the left hand and right-click.",
+  "quest.spellFreezeWater3x3": "Freeze Water 3x3",
+  "quest.spellFreezeWater3x3.desc": "Right-click to freeze the water in 3x3 radius.",
 
   "quest.spellSummonLightningBolt": "Thunder !!!",
-  "quest.spellSummonLightningBolt.desc": "Hold Blaze Wand in Your hand and at least 32x Gunpowder in the left hand and right-click.",
+  "quest.spellSummonLightningBolt.desc": "Right-click to summon thunder.",
 
   "quest.spellSummon_minecraft:chicken": "Summon Chicken",
-  "quest.spellSummon_minecraft:chicken.desc": "Hold Nether Star in Your hand and 32x Chicken in Your left hand and right-click on block",
+  "quest.spellSummon_minecraft:chicken.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:squid": "Summon Squid",
-  "quest.spellSummon_minecraft:squid.desc": "Hold Nether Star in Your hand and 32x Ink in Your left hand and right-click on block",
+  "quest.spellSummon_minecraft:squid.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:pig": "Summon Pig",
-  "quest.spellSummon_minecraft:pig.desc": "Hold Nether Star in Your hand and 32x Porkchop in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:pig.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:cow": "Summon Cow",
-  "quest.spellSummon_minecraft:cow.desc": "Hold Nether Star in Your hand and 32x Beef in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:cow.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:mooshroom": "Summon Mooshroom",
-  "quest.spellSummon_minecraft:mooshroom.desc": "Hold Nether Star in Your hand and 32x Cooked Beef in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:mooshroom.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:sheep": "Summon Sheep",
-  "quest.spellSummon_minecraft:sheep.desc": "Hold Nether Star in Your hand and 32x Mutton in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:sheep.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:wolf": "Summon Wolf",
-  "quest.spellSummon_minecraft:wolf.desc": "Hold Nether Star in Your hand and 32x Cooked Mutton in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:wolf.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:llama": "Summon Lama",
-  "quest.spellSummon_minecraft:llama.desc": "Hold Nether Star in Your hand and 32x Leather in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:llama.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:rabbit": "Summon Rabbit",
-  "quest.spellSummon_minecraft:rabbit.desc": "Hold Nether Star in Your hand and 32x Rabbit in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:rabbit.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:horse": "Summon Horse",
-  "quest.spellSummon_minecraft:horse.desc": "Hold Nether Star in Your hand and 1x Saddle in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:horse.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:villager": "Summon Villager",
-  "quest.spellSummon_minecraft:villager.desc": "Hold Nether Star in Your hand and 32x Book in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:villager.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:iron_golem": "Summon IronGolem",
-  "quest.spellSummon_minecraft:iron_golem.desc": "Hold Nether Star in Your hand and 32x Iron Ingot in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:iron_golem.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:snowball": "Summon Snowman",
-  "quest.spellSummon_minecraft:snowball.desc": "Hold Nether Star in Your hand and 2x Snow Block in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:snowball.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:endermite": "Summon Endermite",
-  "quest.spellSummon_minecraft:endermite.desc": "Hold Nether Star in Your hand and 3x Blaze Powder in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:endermite.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:zombie": "Summon Zombie",
-  "quest.spellSummon_minecraft:zombie.desc": "Hold Nether Star in Your hand and 8x Rotten Flesh in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:zombie.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:creeper": "Summon Creeper",
-  "quest.spellSummon_minecraft:creeper.desc": "Hold Nether Star in Your hand and 8x Gunpowder in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:creeper.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:skeleton": "Summon Skeleton",
-  "quest.spellSummon_minecraft:skeleton.desc": "Hold Nether Star in Your hand and 8x Bone in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:skeleton.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:blaze": "Summon Blaze",
-  "quest.spellSummon_minecraft:blaze.desc": "Hold Nether Star in Your hand and 8x Blaze Rod in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:blaze.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:magma_cube": "Summon Magma Cube",
-  "quest.spellSummon_minecraft:magma_cube.desc": "Hold Nether Star in Your hand and 8x Magma Cream in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:magma_cube.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:ghast": "Summon Ghast",
-  "quest.spellSummon_minecraft:ghast.desc": "Hold Nether Star in Your hand and 8x Ghast Tear in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:ghast.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:enderman": "Summon Enderman",
-  "quest.spellSummon_minecraft:enderman.desc": "Hold Nether Star in Your hand and 8x Blaze Powder in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:enderman.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:spider": "Summon Spider",
-  "quest.spellSummon_minecraft:spider.desc": "Hold Nether Star in Your hand and 8x Spider Eye in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:spider.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:slime": "Summon Slime",
-  "quest.spellSummon_minecraft:slime.desc": "Hold Nether Star in Your hand and 8x Slime Ball in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:slime.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:witch": "Summon Witch",
-  "quest.spellSummon_minecraft:witch.desc": "Hold Nether Star in Your hand and 8x Glowstone Dust in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:witch.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:vindicator": "Summon Vindicator",
-  "quest.spellSummon_minecraft:vindicator.desc": "Hold Nether Star in Your hand and Iron Axe in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:vindicator.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:vex": "Summon Vex",
-  "quest.spellSummon_minecraft:vex.desc": "Hold Nether Star in Your hand and Iron Sword in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:vex.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:evoker": "Summon Evoker",
-  "quest.spellSummon_minecraft:evoker.desc": "Hold Nether Star in Your hand and 2x Emerald in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:evoker.desc": "Right-click on block.",
 
   "quest.evokerCrystal": "Evoker Crystal",
-  "quest.evokerCrystal.desc": "Kill Evoker to get Crystal. Pickup Crystal to get quest. Hold Evoker Crystal in right-hand. Right-Click to cast currently selected Spell. Shift-Right-Click to change selected Spell.",
+  "quest.evokerCrystal.desc": "Craft Evoker Crystal in Altar. Hold Evoker Crystal in right-hand. Right-Click to cast currently selected Spell. Shift-Right-Click to change selected Spell.",
 
   "quest.spellSummon_minecraft:pigman": "Summon Pigman",
-  "quest.spellSummon_minecraft:pigman.desc": "Hold Nether Star in Your hand and 8x Gold Nugget in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:pigman.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:guardian": "Summon Guardian",
-  "quest.spellSummon_minecraft:guardian.desc": "Hold Nether Star in Your hand and 8x Prismarine Shard in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:guardian.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:polar_bear": "Summon Polar Bear",
-  "quest.spellSummon_minecraft:polar_bear.desc": "Hold Nether Star in Your hand and 8x Fish in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:polar_bear.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:shulker": "Summon Shulker",
-  "quest.spellSummon_minecraft:shulker.desc": "Hold Nether Star in Your hand and 1x End Rod in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:shulker.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:silverfish": "Summon Silverfish",
-  "quest.spellSummon_minecraft:silverfish.desc": "Hold Nether Star in Your hand and 8x Stone Brick in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:silverfish.desc": "Right-click on block.",
 
   "quest.spellSummon_minecraft:wither": "Summon Wither",
-  "quest.spellSummon_minecraft:wither.desc": "Hold Nether Star in Your hand and 1x Emerald Block in Your left hand and right-click on block.",
+  "quest.spellSummon_minecraft:wither.desc": "Right-click on block.",
 
   "quest.shootWitherSkull": "Shoot Wither Skull",
-  "quest.shootWitherSkull.desc": "Hold Nether Star in Your right hand and Wither Skeleton Head/s in left hand and right-click in air to shoot Wither Skull.",
+  "quest.shootWitherSkull.desc": "Right-click in air to shoot Wither Skull.",
 
-  "quest.summonHordeLvl1": "Summon Horde Lvl: 1 (Requires: Summon Giant)",
-  "quest.summonHordeLvl1.desc": "Hold 1x End Crystal in left hand and Nether Star in right hand. Right-click block to spawn Horde. Prepare to battle !",
+  "quest.summonHordeLvl1": "Summon Horde - Level: 1",
+  "quest.summonHordeLvl1.desc": "Right-click block to spawn Horde.",
 
-  "quest.summonHordeLvl10": "Summon Horde Lvl: 10 (Apocalypse !!!)",
-  "quest.summonHordeLvl10.desc": "Hold 2x End Crystal in left hand and Nether Star in right hand. Right-click block to spawn Horde. Prepare to battle !!",
+  "quest.summonHordeLvl10": "Summon Horde - Level: 10",
+  "quest.summonHordeLvl10.desc": "Right-click block to spawn Horde.",
 
   "quest.craftBook": "Craft Book",
-  "quest.craftBook.desc": "Craft book.",
+  "quest.craftBook.desc": "Craft Book.",
 
   "quest.craftBookshelf": "Craft Bookshelf",
-  "quest.craftBookshelf.desc": "Craft bookshelf.",
+  "quest.craftBookshelf.desc": "Craft Bookshelf.",
 
   "quest.mineDiamond": "Mine Diamond",
   "quest.mineDiamond.desc": "Mine one more diamond.",
 
   "quest.mineObsidian": "Mine Obsidian",
-  "quest.mineObsidian.desc": "Mine obsidian.",
+  "quest.mineObsidian.desc": "Mine Obsidian.",
 
   "quest.mobSpawnerDropBlock": "Mob Spawner Drop Block",
   "quest.mobSpawnerDropBlock.desc": "Break Mob Spawner. It will drop Block and Book with Entity data from Spawner. Right-click with this Book in right hand on Spawner to set Spawner to the Entity from Book.",
 
   "quest.craftEnchantingTable": "Craft Enchanting Table",
-  "quest.craftEnchantingTable.desc": "Craft enchanting table.",
+  "quest.craftEnchantingTable.desc": "Craft Enchanting Table.",
 
   "quest.craftCauldron": "Craft Cauldron",
-  "quest.craftCauldron.desc": "Craft cauldron.",
+  "quest.craftCauldron.desc": "Craft Cauldron.",
 
   "quest.mineRedstone": "Mine Redstone",
-  "quest.mineRedstone.desc": "Mine at least one block of redstone.",
+  "quest.mineRedstone.desc": "Mine any Redstone block.",
 
   "quest.buildAltarTier1": "Build Altar Tier 1",
-  "quest.buildAltarTier1.desc": "Build a 3x3 circle with RedstoneDust and place a Cauldron in the middle.",
+  "quest.buildAltarTier1.desc": "Build a 3x3 circle and place a Cauldron in the middle.",
 
   "quest.craftGunpowder": "Craft Gunpowder",
-  "quest.craftGunpowder.desc": "Toss 1x Sugar Cane + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftGunpowder.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSugar": "Craft Sugar",
-  "quest.craftSugar.desc": "Toss 1x Sugar Cane into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftSugar.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftDirt": "Craft Dirt",
-  "quest.craftDirt.desc": "Toss 1x Sand into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftDirt.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSand": "Craft Sand",
-  "quest.craftSand.desc": "Toss 1x Cobblestone into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftSand.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftGlass": "Craft Glass",
-  "quest.craftGlass.desc": "Toss 1x Sand + 1x Coal into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftGlass.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSnow": "Craft Snow",
-  "quest.craftSnow.desc": "Toss 1x Ice Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftSnow.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftIce": "Craft Ice",
-  "quest.craftIce.desc": "Toss 1x Snow Block + 1x Water Bucket into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftIce.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftCobblestone": "Craft Cobblestone",
-  "quest.craftCobblestone.desc": "Toss 1x Dirt into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftCobblestone.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftGravel": "Craft Gravel",
-  "quest.craftGravel.desc": "Toss 2x Cobblestone into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftGravel.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftLeather": "Craft Leather",
-  "quest.craftLeather.desc": "Toss 1x Rotten Flesh into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftLeather.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftClay": "Craft Clay",
-  "quest.craftClay.desc": "Toss 1x Sugar + 1x Gunpowder into the Altar Tier 1 and right-click with a Stick Wand in hand.",
+  "quest.craftClay.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier2": "Build Altar Tier 2",
-  "quest.buildAltarTier2.desc": "Add 1 block of Iron on each corner of Altar Tier 1 but one layer lower than Cauldron, outside of the redstone circle and replace the Cauldron.",
+  "quest.buildAltarTier2.desc": "Add 1 block on each corner, but one layer lower than Cauldron and replace the Cauldron.",
 
   "quest.craftIronOre": "Craft Iron Ore",
-  "quest.craftIronOre.desc": "Toss 10x Oak Sapling + 10x Cobblestone into the Altar Tier 2 and right-click with a Stick Wand in hand.",
+  "quest.craftIronOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.toolUpgrade": "Tool Upgrade",
-  "quest.toolUpgrade.desc": "Toss 1x Tool (Sword, Pickaxe, etc.) + 1x better ingredient (Stone, Diamond, etc.) into Cauldron and right-click with Blaze Wand.",
+  "quest.toolUpgrade.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.itemUpgrades": "Item Upgrades",
-  "quest.itemUpgrades.desc": "Toss 1x Item that can be upgraded + 1x ingredient into Cauldron and right-click with Blaze Wand. (Upgrades described in book)",
+  "quest.itemUpgrades.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftCactus": "Craft Cactus",
-  "quest.craftCactus.desc": "Toss 2x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftCactus.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling0": "Craft Oak Sapling from Cactus",
-  "quest.craftSapling0.desc": "Toss 2x Cactus into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling0.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling1": "Craft Spruce Sapling",
-  "quest.craftSapling1.desc": "Toss 1x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling1.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling2": "Craft Birch Sapling",
-  "quest.craftSapling2.desc": "Toss 1x Spruce Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling2.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling3": "Craft Jungle Sapling",
-  "quest.craftSapling3.desc": "Toss 1x Birch Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling3.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling4": "Craft Acacia Sapling",
-  "quest.craftSapling4.desc": "Toss 1x Jungle Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling4.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling5": "Craft Dark Oak Sapling",
-  "quest.craftSapling5.desc": "Toss 1x Acacia Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling5.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSapling6": "Craft Oak Sapling from Dark Oak",
-  "quest.craftSapling6.desc": "Toss 1x Dark Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSapling6.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftPumpkin": "Craft Pumpkin",
-  "quest.craftPumpkin.desc": "Toss 3x Oak Sapling into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftPumpkin.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftMelon": "Craft Melon",
-  "quest.craftMelon.desc": "Toss 2x Pumpkin into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftMelon.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftVine": "Craft Vine",
-  "quest.craftVine.desc": "Toss 2x Melon Block into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftVine.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftLiyPad": "Craft Lily Pad",
-  "quest.craftLiyPad.desc": "Toss 2x Vine into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftLiyPad.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftSlimeBall": "Craft Slime Ball",
-  "quest.craftSlimeBall.desc": "Toss 8x Magma Cream into the Altar Tier 2 and right-click with a Stick Wand in right hand.",
+  "quest.craftSlimeBall.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier3": "Build Altar Tier 3",
-  "quest.buildAltarTier3.desc": "Add 1 block of Gold on each side of the Altar Tier 2 but one layer lower than Cauldron, 3 blocks away from the center (north, south, east, west) and replace the Cauldron.",
+  "quest.buildAltarTier3.desc": "Add 1 block on each side but one layer lower than Cauldron. 3 blocks away from the center and replace the Cauldron.",
 
   "quest.smeltOnAltar": "Smelting",
-  "quest.smeltOnAltar.desc": "Toss smeltable items (e.g. Beef, Iron Ore) into Altar Tier 3 and right-click with Stick Wand in Right Hand and fuel (e.g. Coal) in Left Hand.",
+  "quest.smeltOnAltar.desc": "Toss smeltable items into Altar and right-click, also hold fuel (i.e. Coal).",
 
   "quest.fullTreeCut": "Full Tree Cut",
-  "quest.fullTreeCut.desc": "Take Blaze Wand to left hand and Axe-type weapon to right.",
+  "quest.fullTreeCut.desc": "Cut down the tree.",
 
-  "quest.machineFarm": "Vanilla Automatic Farm",
-  "quest.machineFarm.desc": "Place a Cauldron, than place IInventory (chest, hopper, etc.) under (output) and above (input) Cauldron. To start farm, hold 1x Wheat Seed in left hand and a Blaze Wand in right hand and shift-right-click Cauldron. It will consume 1x Wheat Seed.",
-
-  "quest.accelerant": "Accelerant (speeds up ticks in range 9x3x9)",
-  "quest.accelerant.desc": "Place Cauldron and on top place Chest with Acceleration Crystal inside. Take second Acceleration Crystal to left hand and Blaze Wand to right hand. Shift-right-click the Cauldron.",
+  "quest.accelerant": "Accelerant",
+  "quest.accelerant.desc": "Speeds up ticks of nearby blocks. Shift-right-click the Cauldron.",
+  "quest.accelerant.desc.top": "Input Inventory with Acceleration Crystal",
 
   "quest.motherNatureCrystal": "The Crystal of Mother Nature",
-  "quest.motherNatureCrystal.desc": "Crafting: Nether Star (middle), Wheet Seeds (up, down, left, right), Pumpkin Block (bottom corners), Item Melon (upper corners). In right hand - Infinite Bonemeal. In left hand - plants around You will grow automatically.",
+  "quest.motherNatureCrystal.desc": "Apply bonemeal to nearby blocks on each tick.",
 
-  "quest.mining3x3": "Mining 3x3",
-  "quest.mining3x3.desc": "",
-
-  "quest.quarry": "Vanilla Quarry !!!",
-  "quest.quarry.desc": "Place Cauldron and than on the Left side of the Cauldron place DiamondBlock and on the Front place RedstoneBlock. On Top place inventory (Chest) as input (with fuel). On Right place inventory (Chest) as output. Shift-right-click Cauldron, with Blaze Wand in right hand and empty left hand, to start Quarry.",
+  "quest.quarry": "Quarry",
+  "quest.quarry.desc": "Right-click Cauldron to start Quarry.",
+  "quest.quarry.desc.left": "Diamond Block",
+  "quest.quarry.desc.back": "Redstone Block",
+  "quest.quarry.desc.top": "Input Inventory with fuel (i.e. Chest)",
+  "quest.quarry.desc.right": "Output Inventory (i.e. Chest)",
 
   "quest.arrowMachineGun": "Arrow Machine Gun",
   "quest.arrowMachineGun.desc": "Take any Arrows to left hand and Nether Star to right hand and right-click (or hold if more arrows in left hand).",

@@ -137,21 +137,21 @@ public class QuestGui extends Screen {
         int buttonWidth = 120;
         int buttonHeight = 20;
 
-        this.addButton(new Button(10, 10, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.disableQuestNames").getFormattedText(), button -> {
+        this.addButton(new Button(10, 10, buttonWidth, buttonHeight, TextUtils.getFormattedText("vm.gui.questGui.disableQuestNames"), button -> {
             String key = this.showQuestNames ? "vm.gui.questGui.enableQuestNames" : "vm.gui.questGui.disableQuestNames";
-            button.setMessage(TextUtils.translate(key).getFormattedText());
+            button.setMessage(TextUtils.getFormattedText(key));
             this.showQuestNames = !this.showQuestNames;
         }));
 
-        this.addButton(new Button(10, 40, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.showAllQuests").getFormattedText(), button -> {
+        this.addButton(new Button(10, 40, buttonWidth, buttonHeight, TextUtils.getFormattedText("vm.gui.questGui.showAllQuests"), button -> {
             String key = this.showAllQuests ? "vm.gui.questGui.showAllQuests" : "vm.gui.questGui.hideLockedQuests";
-            button.setMessage(TextUtils.translate(key).getFormattedText());
+            button.setMessage(TextUtils.getFormattedText(key));
             this.showAllQuests = !this.showAllQuests;
         }));
 
-        this.addButton(new Button(10, 70, buttonWidth, buttonHeight, TextUtils.translate("vm.gui.questGui.disableQuestTooltip").getFormattedText(), button -> {
+        this.addButton(new Button(10, 70, buttonWidth, buttonHeight, TextUtils.getFormattedText("vm.gui.questGui.disableQuestTooltip"), button -> {
             String key = this.showQuestTooltip ? "vm.gui.questGui.enableQuestTooltip" : "vm.gui.questGui.disableQuestTooltip";
-            button.setMessage(TextUtils.translate(key).getFormattedText());
+            button.setMessage(TextUtils.getFormattedText(key));
             this.showQuestTooltip = !this.showQuestTooltip;
         }));
 
@@ -201,7 +201,7 @@ public class QuestGui extends Screen {
         move((float) -this.centerX, (float) -this.centerY, 0);
 
         move(0, 0, 40);
-        this.drawCenteredString(this.font, TextUtils.translate("vm.gui.questGui.title").getFormattedText(), this.width / 2, 10, TextFormatting.WHITE.getColor());
+        this.drawCenteredString(this.font, TextUtils.getFormattedText("vm.gui.questGui.title"), this.width / 2, 10, TextFormatting.WHITE.getColor());
         super.render(mouseX, mouseY, partialTicks);
         move(0, 0, -40);
     }

@@ -23,7 +23,7 @@ public class ShowDurabilityTooltipHandler extends EventHandler {
     }
 
     private String getDurabilityString(ItemStack stack) {
-        String message = TextUtils.translate("vm.handler.durability").getFormattedText() + " ";
+        String message = TextUtils.getFormattedText("vm.handler.durability") + " ";
 
         int max = stack.getMaxDamage();
         int damage = stack.getDamage();

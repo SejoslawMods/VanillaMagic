@@ -295,7 +295,7 @@ public final class EventExecutor<TQuest extends Quest> {
 
     private void onQuestCompleted(TQuest quest) {
         String questAcquiredMessage =
-                TextFormatting.GREEN + TextUtils.translate("vm.message.questCompleted").getFormattedText() +
+                TextFormatting.GREEN + TextUtils.getFormattedText("vm.message.questCompleted") +
                 TextFormatting.WHITE + " " + quest.getDisplayName();
 
         TextUtils.addChatMessage(questAcquiredMessage);

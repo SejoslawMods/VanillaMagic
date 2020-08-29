@@ -22,7 +22,7 @@ public class ShowSaturationTooltipHandler extends EventHandler {
     }
 
     private String getSaturationString(float saturation) {
-        String message = TextFormatting.GRAY + TextUtils.translate("vm.handler.saturation").getFormattedText() + " ";
+        String message = TextFormatting.GRAY + TextUtils.getFormattedText("vm.handler.saturation") + " ";
 
         if (saturation <= 1) {
             message += TextFormatting.DARK_RED;

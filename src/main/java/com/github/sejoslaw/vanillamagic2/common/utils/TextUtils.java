@@ -12,6 +12,13 @@ import net.minecraft.world.World;
  */
 public final class TextUtils {
     /**
+     * @return Translated text component.
+     */
+    public static String getFormattedText(String key) {
+        return translate(key).getFormattedText();
+    }
+
+    /**
      * @return Text component with translated text.
      */
     public static ITextComponent translate(String key) {

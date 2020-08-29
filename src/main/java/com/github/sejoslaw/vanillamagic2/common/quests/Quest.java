@@ -42,10 +42,10 @@ public class Quest {
      * Adds tooltip information to given collection.
      */
     public void fillTooltip(Collection<String> lines) {
-        this.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + TextUtils.translate("quest." + this.uniqueName).getFormattedText());
+        this.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + this.getDisplayName());
 
         if (this.parent != null) {
-            this.addLine(lines, "quest.tooltip.parent", TextUtils.translate("quest." + this.parent.uniqueName).getFormattedText());
+            this.addLine(lines, "quest.tooltip.parent", TextUtils.getFormattedText("quest." + this.parent.uniqueName));
         }
 
         if (this.rightHandStack != null) {
@@ -72,12 +72,12 @@ public class Quest {
             this.addLine(lines, "quest.tooltip.oneItemSmeltCost", String.valueOf(this.oneItemSmeltCost));
         }
 
-        this.addLine(lines, "quest.tooltip.description", TextUtils.translate("quest." + this.uniqueName + ".desc").getFormattedText());
+        this.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest." + this.uniqueName + ".desc"));
     }
 
     public void addLine(Collection<String> lines, String key, String value) {
         String message =
-                TextFormatting.GREEN + TextUtils.translate(key).getFormattedText() +
+                TextFormatting.GREEN + TextUtils.getFormattedText(key) +
                 TextFormatting.WHITE + ": " + value;
 
         lines.add(message);
@@ -87,7 +87,7 @@ public class Quest {
      * @return Formatted display name.
      */
     public String getDisplayName() {
-        return TextUtils.translate("quest." + this.uniqueName).getFormattedText();
+        return TextUtils.getFormattedText("quest." + this.uniqueName);
     }
 
     /**

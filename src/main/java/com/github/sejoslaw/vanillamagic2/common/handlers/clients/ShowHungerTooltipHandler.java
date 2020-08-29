@@ -22,7 +22,7 @@ public class ShowHungerTooltipHandler extends EventHandler {
     }
 
     private String getHungerString(int hunger) {
-        String message = TextFormatting.GRAY + TextUtils.translate("vm.handler.hunger").getFormattedText() + " ";
+        String message = TextFormatting.GRAY + TextUtils.getFormattedText("vm.handler.hunger") + " ";
 
         for (int i = 0; i < (hunger / 2); i++) {
             message += TextFormatting.DARK_RED + this.squareSymbol;
