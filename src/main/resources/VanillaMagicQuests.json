@@ -1192,7 +1192,7 @@
     "posX": -2,
     "posY": 0,
     "icon": {
-      "id": "minecraft:bucket"
+      "id": "minecraft:nether_star"
     },
     "uniqueName": "crystallizedLiquid",
     "rightHandStack": {
