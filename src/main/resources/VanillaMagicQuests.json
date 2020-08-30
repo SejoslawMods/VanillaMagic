@@ -419,7 +419,7 @@
     "parent": "craftCactus",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftSapling0",
+    "uniqueName": "craftOakSapling",
     "ingredients": [
       {
         "id": "minecraft:cactus",
@@ -428,7 +428,7 @@
     ],
     "results": [
       {
-        "id": "minecraft:sapling"
+        "id": "minecraft:oak_sapling"
       }
     ],
     "altarTier": 2,
@@ -438,19 +438,18 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling0",
+    "parent": "craftOakSapling",
     "posX": 0,
     "posY": -2,
-    "uniqueName": "craftSapling1",
+    "uniqueName": "craftSpruceSapling",
     "ingredients": [
       {
-        "id": "minecraft:sapling"
+        "id": "minecraft:oak_sapling"
       }
     ],
     "results": [
       {
-        "id": "minecraft:sapling",
-        "meta": 1
+        "id": "minecraft:spruce_sapling"
       }
     ],
     "altarTier": 2,
@@ -460,20 +459,18 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling1",
+    "parent": "craftSpruceSapling",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftSapling2",
+    "uniqueName": "craftBirchSapling",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
-        "meta": 1
+        "id": "minecraft:spruce_sapling"
       }
     ],
     "results": [
       {
-        "id": "minecraft:sapling",
-        "meta": 2
+        "id": "minecraft:birch_sapling"
       }
     ],
     "altarTier": 2,
@@ -483,20 +480,18 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling2",
+    "parent": "craftBirchSapling",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftSapling3",
+    "uniqueName": "craftJungleSapling",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
-        "meta": 2
+        "id": "minecraft:birch_sapling"
       }
     ],
     "results": [
       {
-        "id": "minecraft:sapling",
-        "meta": 3
+        "id": "minecraft:jungle_sapling"
       }
     ],
     "altarTier": 2,
@@ -506,20 +501,18 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling3",
+    "parent": "craftJungleSapling",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftSapling4",
+    "uniqueName": "craftAcaciaSapling",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
-        "meta": 3
+        "id": "minecraft:jungle_sapling"
       }
     ],
     "results": [
       {
-        "id": "minecraft:sapling",
-        "meta": 4
+        "id": "minecraft:acacia_sapling"
       }
     ],
     "altarTier": 2,
@@ -529,20 +522,18 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling4",
+    "parent": "craftAcaciaSapling",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftSapling5",
+    "uniqueName": "craftDarkOakSapling",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
-        "meta": 4
+        "id": "minecraft:acacia_sapling"
       }
     ],
     "results": [
       {
-        "id": "minecraft:sapling",
-        "meta": 5
+        "id": "minecraft:dark_oak_sapling"
       }
     ],
     "altarTier": 2,
@@ -552,19 +543,18 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling5",
+    "parent": "craftDarkOakSapling",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "craftSapling6",
+    "uniqueName": "craftOakSapling2",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
-        "meta": 5
+        "id": "minecraft:dark_oak_sapling"
       }
     ],
     "results": [
       {
-        "id": "minecraft:sapling"
+        "id": "minecraft:oak_sapling"
       }
     ],
     "altarTier": 2,
@@ -574,7 +564,7 @@
   },
   {
     "eventCaller": "craftOnAltar",
-    "parent": "craftSapling0",
+    "parent": "craftOakSapling",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftPumpkin",
@@ -652,7 +642,7 @@
     ],
     "results": [
       {
-        "id": "minecraft:waterlily"
+        "id": "minecraft:lily_pad"
       }
     ],
     "altarTier": 2,
@@ -1071,7 +1061,7 @@
     ],
     "results": [
       {
-        "id": "minecraft:magma"
+        "id": "minecraft:magma_block"
       }
     ],
     "altarTier": 5,

@@ -346,26 +346,26 @@
   "quest.craftCactus": "Craft Cactus",
   "quest.craftCactus.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling0": "Craft Oak Sapling from Cactus",
-  "quest.craftSapling0.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftOakSapling": "Craft Oak Sapling",
+  "quest.craftOakSapling.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling1": "Craft Spruce Sapling",
-  "quest.craftSapling1.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftSpruceSapling": "Craft Spruce Sapling",
+  "quest.craftSpruceSapling.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling2": "Craft Birch Sapling",
-  "quest.craftSapling2.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftBirchSapling": "Craft Birch Sapling",
+  "quest.craftBirchSapling.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling3": "Craft Jungle Sapling",
-  "quest.craftSapling3.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftJungleSapling": "Craft Jungle Sapling",
+  "quest.craftJungleSapling.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling4": "Craft Acacia Sapling",
-  "quest.craftSapling4.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftAcaciaSapling": "Craft Acacia Sapling",
+  "quest.craftAcaciaSapling.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling5": "Craft Dark Oak Sapling",
-  "quest.craftSapling5.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftDarkOakSapling": "Craft Dark Oak Sapling",
+  "quest.craftDarkOakSapling.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.craftSapling6": "Craft Oak Sapling from Dark Oak",
-  "quest.craftSapling6.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.craftOakSapling2": "Craft Oak Sapling",
+  "quest.craftOakSapling2.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.craftPumpkin": "Craft Pumpkin",
   "quest.craftPumpkin.desc": "Toss ingredients into the Altar and Right-click.",
