@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
+import com.github.sejoslaw.vanillamagic2.common.recipes.AltarRecipe;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
@@ -10,14 +11,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCaller<TQuest> {
-    protected final Map<List<ItemStack>, List<ItemStack>> recipes = new HashMap<>();
+    protected List<AltarRecipe> recipes = new ArrayList<>();
 
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
@@ -50,7 +54,7 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
             List<ItemStack> results = new ArrayList<>();
             results.add(stack);
 
-            this.recipes.put(ingredients, results);
+            this.recipes.add(new AltarRecipe(this.quests.get(0), ingredients, results));
         }
     }
 }

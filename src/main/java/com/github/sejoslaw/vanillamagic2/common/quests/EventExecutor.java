@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
+import com.github.sejoslaw.vanillamagic2.common.recipes.AltarRecipe;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.VMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.utils.*;
@@ -25,9 +26,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -187,10 +186,9 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheck(player, quest -> consumer.accept(player, world, quest));
     }
 
-    public void craftOnAltar(PlayerInteractEvent event, Map<List<ItemStack>, List<ItemStack>> recipes) {
+    public void craftOnAltar(PlayerInteractEvent event, List<AltarRecipe> recipes) {
         final List<ItemEntity>[] ingredientsInCauldron = new List[1];
-        final int[] index = {0};
-        final List<Map.Entry<List<ItemStack>, List<ItemStack>>>[] entries = new List[1];
+        final AltarRecipe[] chosenRecipe = new AltarRecipe[1];
 
         this.onPlayerInteract(event,
                 (player, world, pos, direction) ->
@@ -201,25 +199,25 @@ public final class EventExecutor<TQuest extends Quest> {
                                 return null;
                             }
 
-                            entries[0] = new ArrayList<>(recipes.entrySet());
-
-                            for (int i = 0; i < entries[0].size(); ++i) {
-                                Map.Entry<List<ItemStack>, List<ItemStack>> entry = entries[0].get(i);
-
-                                if (!AltarUtils.canCraftOnAltar(entry.getKey(), ingredientsInCauldron[0])) {
+                            for (AltarRecipe recipe : recipes) {
+                                if (!AltarUtils.canCraftOnAltar(recipe.ingredients, ingredientsInCauldron[0])) {
                                     continue;
                                 }
 
-                                index[0] = i;
-                                return this.caller.quests.get(i);
+                                chosenRecipe[0] = recipe;
+                                return (TQuest)chosenRecipe[0].quest;
                             }
 
                             return null;
                         }),
                 (player, world, pos, direction, quest) -> {
+                    if (world.isRemote) {
+                        return;
+                    }
+
                     ingredientsInCauldron[0].forEach(Entity::remove);
                     BlockPos newItemPos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-                    entries[0].get(index[0]).getValue().forEach(stack -> Block.spawnAsEntity(world, newItemPos, stack.copy()));
+                    chosenRecipe[0].results.forEach(stack -> Block.spawnAsEntity(world, newItemPos, stack.copy()));
                 });
     }
 

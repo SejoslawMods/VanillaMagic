@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCrystallizedLiquid;
+import com.github.sejoslaw.vanillamagic2.common.recipes.AltarRecipe;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CauldronBlock;
@@ -18,9 +19,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
@@ -36,8 +34,8 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
     @SubscribeEvent
     public void spawnLiquid(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) -> {
-            for (Map.Entry<List<ItemStack>, List<ItemStack>> entry : this.recipes.entrySet()) {
-                String fluidKey = entry.getValue().get(0).getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME);
+            for (AltarRecipe altarRecipe : this.recipes) {
+                String fluidKey = altarRecipe.results.get(0).getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME);
 
                 this.executor.useVMItem(player, fluidKey, handStack -> {
                     TileEntity tile = world.getTileEntity(pos);

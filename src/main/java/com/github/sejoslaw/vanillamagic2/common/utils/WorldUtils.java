@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
@@ -42,7 +42,7 @@ public final class WorldUtils {
                 pos.getX() + 1,
                 pos.getY() + 1,
                 pos.getZ() + 1);
-        return new ArrayList<>(world.getEntitiesWithinAABB(ItemEntity.class, aabb));
+        return world.getEntitiesWithinAABB(ItemEntity.class, aabb, Entity::isAlive);
     }
 
     /**
