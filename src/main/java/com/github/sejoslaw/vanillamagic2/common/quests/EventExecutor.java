@@ -270,11 +270,11 @@ public final class EventExecutor<TQuest extends Quest> {
 
     private void checkItemsInHands(PlayerEntity player, Consumer<TQuest> consumer) {
         for (TQuest quest : this.caller.quests) {
-            if (quest.leftHandStack != null && !ItemStack.areItemStacksEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
+            if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
                 continue;
             }
 
-            if (quest.rightHandStack != null && !ItemStack.areItemStacksEqual(player.getHeldItemMainhand(), quest.rightHandStack)) {
+            if (quest.rightHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack)) {
                 continue;
             }
 
