@@ -45,7 +45,7 @@ public final class AltarUtils {
 
         for (ItemStack currentlyCheckedIngredient : ingredients) {
             for (ItemEntity currentlyCheckedItemEntity : ingredientsInCauldron) {
-                if (ItemStack.areItemStacksEqual(currentlyCheckedIngredient, currentlyCheckedItemEntity.getItem())) {
+                if (ItemStackUtils.areEqual(currentlyCheckedIngredient, currentlyCheckedItemEntity.getItem())) {
                     validItemEntities.add(currentlyCheckedItemEntity);
                     break;
                 }

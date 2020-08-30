@@ -36,12 +36,12 @@ public final class WorldUtils {
      */
     public static List<ItemEntity> getItems(World world, BlockPos pos) {
         AxisAlignedBB aabb = new AxisAlignedBB(
-                pos.getX() - 0.5D,
-                pos.getY() - 0.5D,
-                pos.getZ() - 0.5D,
-                pos.getX() + 0.5D,
-                pos.getY() + 0.5D,
-                pos.getZ() + 0.5D);
+                pos.getX() - 1,
+                pos.getY() - 1,
+                pos.getZ() - 1,
+                pos.getX() + 1,
+                pos.getY() + 1,
+                pos.getZ() + 1);
         return new ArrayList<>(world.getEntitiesWithinAABB(ItemEntity.class, aabb));
     }
 

@@ -196,6 +196,11 @@ public final class EventExecutor<TQuest extends Quest> {
                 (player, world, pos, direction) ->
                         this.click(Blocks.CAULDRON, world, pos, () -> {
                             ingredientsInCauldron[0] = WorldUtils.getItems(world, pos);
+
+                            if (ingredientsInCauldron[0].size() == 0) {
+                                return null;
+                            }
+
                             entries[0] = new ArrayList<>(recipes.entrySet());
 
                             for (int i = 0; i < entries[0].size(); ++i) {
