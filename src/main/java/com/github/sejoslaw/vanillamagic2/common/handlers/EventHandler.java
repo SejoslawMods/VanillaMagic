@@ -4,11 +4,14 @@ import com.github.sejoslaw.vanillamagic2.common.functions.Action;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -16,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -65,5 +69,12 @@ public abstract class EventHandler {
         if (stack.isDamageable()) {
             action.execute();
         }
+    }
+
+    public void onServerStarting(FMLServerStartingEvent event, Consumer2<MinecraftServer, CommandDispatcher<CommandSource>> consumer) {
+        MinecraftServer server = event.getServer();
+        CommandDispatcher<CommandSource> dispatcher = event.getCommandDispatcher();
+
+        consumer.accept(server, dispatcher);
     }
 }

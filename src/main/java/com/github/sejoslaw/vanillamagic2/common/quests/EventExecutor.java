@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -286,21 +285,12 @@ public final class EventExecutor<TQuest extends Quest> {
 
         if (!PlayerQuestProgressRegistry.hasPlayerGotQuest(player, questUniqueName)) {
             if (PlayerQuestProgressRegistry.canPlayerGetQuest(player, questUniqueName)) {
-                PlayerQuestProgressRegistry.givePlayerQuest(player, questUniqueName);
-                this.onQuestCompleted(quest);
+                PlayerQuestProgressUtils.givePlayerQuest(player, quest);
             } else {
                 return;
             }
         }
 
         consumer.accept(quest);
-    }
-
-    private void onQuestCompleted(TQuest quest) {
-        String questAcquiredMessage =
-                TextFormatting.GREEN + TextUtils.getFormattedText("vm.message.questCompleted") +
-                TextFormatting.WHITE + " " + quest.getDisplayName();
-
-        TextUtils.addChatMessage(questAcquiredMessage);
     }
 }
