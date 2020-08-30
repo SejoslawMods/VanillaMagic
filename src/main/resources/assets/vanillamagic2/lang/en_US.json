@@ -402,7 +402,7 @@
   "quest.quarry.desc": "Right-click Cauldron to start Quarry.",
   "quest.quarry.desc.left": "Diamond Block",
   "quest.quarry.desc.back": "Redstone Block",
-  "quest.quarry.desc.top": "Input Inventory with fuel (i.e. Chest)",
+  "quest.quarry.desc.top": "Input Inventory with fuel (i.e. Chest) or Energy Source",
   "quest.quarry.desc.right": "Output Inventory (i.e. Chest)",
 
   "quest.arrowMachineGun": "Arrow Machine Gun",

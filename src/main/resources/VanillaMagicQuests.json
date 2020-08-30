@@ -348,7 +348,7 @@
     "uniqueName": "craftIronOre",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
+        "id": "minecraft:oak_sapling",
         "count": 10
       },
       {
@@ -400,7 +400,7 @@
     "uniqueName": "craftCactus",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
+        "id": "minecraft:oak_sapling",
         "count": 2
       }
     ],
@@ -570,7 +570,7 @@
     "uniqueName": "craftPumpkin",
     "ingredients": [
       {
-        "id": "minecraft:sapling",
+        "id": "minecraft:oak_sapling",
         "count": 3
       }
     ],
@@ -761,7 +761,7 @@
     "uniqueName": "craftGoldIngot",
     "ingredients": [
       {
-        "id": "minecraft:iron_ingot)",
+        "id": "minecraft:iron_ingot",
         "count": 8
       }
     ],
