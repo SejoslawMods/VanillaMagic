@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.items.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -26,6 +27,10 @@ public class ItemRegistry {
     }
 
     public static void initialize() {
+    }
+
+    public static void forEachRegistered(Consumer<IVMItem> consumer) {
+        ITEMS.values().forEach(consumer);
     }
 
     private static IVMItem register(String key, IVMItem item) {

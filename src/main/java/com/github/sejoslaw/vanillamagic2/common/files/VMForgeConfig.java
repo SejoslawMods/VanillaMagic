@@ -29,6 +29,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue MOTHER_NATURE_CRYSTAL_RANGE;
     public static ForgeConfigSpec.IntValue ITEM_MAGNET_RANGE;
     public static ForgeConfigSpec.IntValue ITEM_MAGNET_STACK_NUMBER;
+    public static ForgeConfigSpec.BooleanValue SHOW_VMITEM_TOOLTIPS;
 
     private static final String CATEGORY_SPELL = "Spell";
     public static ForgeConfigSpec.IntValue SPELL_FUS_RO_DAH_DISTANCE;
@@ -72,6 +73,7 @@ public final class VMForgeConfig {
         MOTHER_NATURE_CRYSTAL_RANGE = COMMON_BUILDER.defineInRange("MOTHER_NATURE_CRYSTAL_RANGE", 10, 1, Integer.MAX_VALUE);
         ITEM_MAGNET_RANGE = COMMON_BUILDER.defineInRange("ITEM_MAGNET_RANGE", 6, 1, Integer.MAX_VALUE);
         ITEM_MAGNET_STACK_NUMBER = COMMON_BUILDER.defineInRange("ITEM_MAGNET_STACK_NUMBER", 2, 1, Integer.MAX_VALUE);
+        SHOW_VMITEM_TOOLTIPS = COMMON_BUILDER.define("SHOW_VMITEM_TOOLTIPS", true);
         COMMON_BUILDER.pop();
 
         COMMON_BUILDER.push(CATEGORY_SPELL);

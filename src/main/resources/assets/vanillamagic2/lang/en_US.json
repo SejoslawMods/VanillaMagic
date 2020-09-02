@@ -1,35 +1,16 @@
 {
-  "book.altarCrafting.itemName": "Vanilla Magic Altar Crafting",
-  "book.altarCrafting.title": "Altar Crafting",
-
-  "book.altarBuilding.itemName": "Vanilla Magic Altar Building",
-  "book.altarBuilding.title": "Altar Building",
-
-  "book.spells.itemName": "Vanilla Magic Spells",
-  "book.spells.title": "Spells",
-
-  "book.other.itemName": "Vanilla Magic Other Stuff",
-  "book.other.title": "Other things",
-
-  "book.itemUpgrades.itemName": "Vanilla Magic Item Upgrades",
-  "book.itemUpgrades.title": "Item Upgrades",
-
-  "book.quarryUpgrades.itemName": "Vanilla Magic Quarry Upgrades",
-  "book.quarryUpgrades.title": "Quarry Upgrades",
-
-  "book.onGroundCrafting.itemName": "Vanilla Magic On Ground Crafting Recipes",
-  "book.onGroundCrafting.title": "On Ground Crafting Recipes",
-  "book.onGroundCrafting.desc": "To craft items, drop them on the same block on ground and right-click that block with Stick in Your right hand.",
-  "book.onGroundCrafting.ingredients": "Ingredients:",
-  "book.onGroundCrafting.output": "Output:",
-
   "vmitem.vmitemaccelerationcrystal.displayName": "Acceleration Crystal",
   "vmitem.vmitemevokercrystal.displayName": "Evoker Crystal",
   "vmitem.vmiteminventoryselector.displayName": "Inventory Selector",
   "vmitem.vmitemliquidsuppressioncrystal.displayName": "Liquid Suppression Crystal",
   "vmitem.vmitemmothernaturecrystal.displayName": "The Crystal of Mother Nature",
 
-  "vm.handler.deathPoint": "Last death position:",
+  "vmitem.crystallizedLiquid.namePrefix": "Crystallized Liquid:",
+  "vmitem.crystallizedPotion.namePrefix": "Crystallized Potion:",
+
+  "vmitem.tooltip.registryName": "Registry Name:",
+
+  "vm.handler.deathPoint": "Last Death Position:",
   "vm.handler.hunger": "Hunger:",
   "vm.handler.saturation": "Saturation:",
   "vm.handler.durability": "Durability:",
@@ -48,9 +29,6 @@
   "spell.evoker.wololo.name": "Wololo",
   "spell.evoker.summonVex.name": "Summon Vex",
   "spell.evoker.fangs.name": "Fangs",
-
-  "item.crystallizedLiquid.namePrefix": "Crystallized Liquid:",
-  "item.crystallizedPotion.namePrefix": "Crystallized Potion:",
 
   "block.added": "VM TileEntity added",
   "block.removed": "VM TileEntity removed",

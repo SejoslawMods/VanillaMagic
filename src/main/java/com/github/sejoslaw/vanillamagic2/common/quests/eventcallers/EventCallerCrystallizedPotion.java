@@ -21,7 +21,7 @@ public class EventCallerCrystallizedPotion extends EventCallerCraftable<QuestCry
                 ForgeRegistries.POTION_TYPES.getEntries(),
                 (potion) -> PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), potion),
                 (potion) -> PotionUtils.addPotionToItemStack(new ItemStack(Items.NETHER_STAR), potion),
-                "item.crystallizedPotion.namePrefix");
+                "vmitem.crystallizedPotion.namePrefix");
     }
 
     @SubscribeEvent

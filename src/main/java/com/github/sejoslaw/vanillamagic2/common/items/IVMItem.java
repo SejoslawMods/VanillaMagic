@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +49,11 @@ public interface IVMItem {
      */
     default boolean isVMItem(ItemStack stack) {
         return stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME).equals(this.getUniqueKey());
+    }
+
+    /**
+     * Adds appropriate tooltips to the list.
+     */
+    default void addTooltip(ItemStack stack, List<ITextComponent> tooltips) {
     }
 }
