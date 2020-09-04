@@ -19,7 +19,8 @@ public class GiveAllQuestsCommand extends VMCommand {
                 .then(Commands
                         .literal(GIVE_ALL)
                         .then(Commands
-                                .argument(PLAYER_NAME, EntityArgument.player())));
+                                .argument(PLAYER_NAME, EntityArgument.player())
+                                .executes(this::execute)));
     }
 
     public int execute(CommandContext<CommandSource> ctx) throws CommandSyntaxException {

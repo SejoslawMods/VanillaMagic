@@ -28,6 +28,6 @@ public class ServerCommandsHandler extends EventHandler {
     }
 
     private static void register(LiteralArgumentBuilder<CommandSource> builder, VMCommand command) {
-        builder.then(command.build().executes(command::execute));
+        builder.then(command.build());
     }
 }

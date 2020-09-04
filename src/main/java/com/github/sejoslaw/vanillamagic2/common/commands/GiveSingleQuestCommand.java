@@ -24,7 +24,8 @@ public class GiveSingleQuestCommand extends VMCommand {
                         .then(Commands
                                 .argument(PLAYER_NAME, EntityArgument.player())
                                 .then(Commands
-                                        .argument(QUEST_UNIQUE_NAME, QuestArgumentType.get()))));
+                                        .argument(QUEST_UNIQUE_NAME, QuestArgumentType.get())
+                                        .executes(this::execute))));
     }
 
     public int execute(CommandContext<CommandSource> ctx) throws CommandSyntaxException {
