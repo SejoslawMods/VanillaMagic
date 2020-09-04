@@ -31,14 +31,12 @@ public class QuestGui extends Screen {
         public Quest quest;
         public Set<QuestTreeNode> children;
         public int color;
-        public int zIndex;
         public QuestTreeNode parentNode;
 
-        public QuestTreeNode(Quest quest, int color, int zIndex, QuestTreeNode parentNode) {
+        public QuestTreeNode(Quest quest, int color, QuestTreeNode parentNode) {
             this.quest = quest;
             this.children = new HashSet<>();
             this.color = color;
-            this.zIndex = zIndex;
             this.parentNode = parentNode;
         }
 
@@ -54,7 +52,7 @@ public class QuestGui extends Screen {
                     .filter(quest -> quest.parent == null)
                     .findFirst()
                     .orElse(new Quest());
-            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest), 20, null);
+            QuestTreeNode rootNode = new QuestTreeNode(rootQuest, getQuestColor(rootQuest), null);
             quests.remove(rootQuest);
             parseTree(rootNode, quests);
             return rootNode;
@@ -71,11 +69,11 @@ public class QuestGui extends Screen {
                         int color = getQuestColor(quest);
 
                         if (color == QUEST_ACHIEVED_COLOR) {
-                            achievedQuests.add(new QuestTreeNode(quest, color, 20, rootNode));
+                            achievedQuests.add(new QuestTreeNode(quest, color, rootNode));
                         } else if (color == QUEST_AVAILABLE_COLOR) {
-                            availableQuests.add(new QuestTreeNode(quest, color, 10, rootNode));
+                            availableQuests.add(new QuestTreeNode(quest, color, rootNode));
                         } else {
-                            lockedQuests.add(new QuestTreeNode(quest, color, 0, rootNode));
+                            lockedQuests.add(new QuestTreeNode(quest, color, rootNode));
                         }
                     });
 
@@ -200,10 +198,8 @@ public class QuestGui extends Screen {
         this.drawQuestTreeNode(this.rootNode, mouseX, mouseY);
         move((float) -this.centerX, (float) -this.centerY, 0);
 
-        move(0, 0, 40);
         this.drawCenteredString(this.font, TextUtils.getFormattedText("vm.gui.questGui.title"), this.width / 2, 10, TextFormatting.WHITE.getColor());
         super.render(mouseX, mouseY, partialTicks);
-        move(0, 0, -40);
     }
 
     /**
@@ -273,8 +269,6 @@ public class QuestGui extends Screen {
     private void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
         boolean straightY = true;
 
-        move(0, 0, child.zIndex);
-
         if (offsetX != 0) {
             move((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
             this.hLine(0, offsetX, 0, child.color);
@@ -290,8 +284,6 @@ public class QuestGui extends Screen {
             this.vLine(0, offsetY, 0, child.color);
             move(0, offsetY, 0);
         }
-
-        move(0, 0, -child.zIndex);
     }
 
     /**
@@ -313,11 +305,11 @@ public class QuestGui extends Screen {
      */
     private void drawQuest(QuestTreeNode node) {
         float move = (float)(this.itemStackIconSize / 2);
-        move(-move, -move, 30);
+        move(-move, -move, 0);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
         this.drawQuestOverlay(node.color);
         this.drawItemStack(node.quest.iconStack, 1, 1, node.quest.getDisplayName());
-        move(move, move, -30);
+        move(move, move, 0);
     }
 
     /**
