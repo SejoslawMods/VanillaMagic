@@ -18,40 +18,39 @@ import java.util.List;
 public class EventCallerItemMagnet extends EventCaller<QuestItemMagnet> {
     @SubscribeEvent
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        this.executor.onPlayerUpdate(event, (player) -> {
-            QuestItemMagnet quest = this.quests.get(0);
+        this.executor.onPlayerUpdate(event,
+                (player) -> {
+                    QuestItemMagnet quest = this.quests.get(0);
+                    return this.isPlayerInventoryValid(player, quest) ? quest : null;
+                },
+                (player, quest) -> {
+                    float itemMotion = 0.45F;
 
-            if (!this.isPlayerInventoryValid(player, quest)) {
-                return;
-            }
+                    double x = player.getPosX();
+                    double y = player.getPosY() + 0.75;
+                    double z = player.getPosZ();
 
-            float itemMotion = 0.45F;
+                    List<ItemEntity> items = player.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(
+                            x - quest.range,
+                            y - quest.range,
+                            z - quest.range,
+                            x + quest.range,
+                            y + quest.range,
+                            z + quest.range));
 
-            double x = player.getPosX();
-            double y = player.getPosY() + 0.75;
-            double z = player.getPosZ();
+                    Vec3d playerVec = new Vec3d(x, y, z);
 
-            List<ItemEntity> items = player.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(
-                    x - quest.range,
-                    y - quest.range,
-                    z - quest.range,
-                    x + quest.range,
-                    y + quest.range,
-                    z + quest.range));
+                    for (ItemEntity itemEntity : items) {
+                        Vec3d itemEntityVec = new Vec3d(itemEntity.getPosX(), itemEntity.getPosY(), itemEntity.getPosZ());
+                        Vec3d finalVec = playerVec.subtract(itemEntityVec);
 
-            Vec3d playerVec = new Vec3d(x, y, z);
+                        if (finalVec.length() > 1) {
+                            finalVec = finalVec.normalize();
+                        }
 
-            for (ItemEntity itemEntity : items) {
-                Vec3d itemEntityVec = new Vec3d(itemEntity.getPosX(), itemEntity.getPosY(), itemEntity.getPosZ());
-                Vec3d finalVec = playerVec.subtract(itemEntityVec);
-
-                if (finalVec.length() > 1) {
-                    finalVec = finalVec.normalize();
-                }
-
-                itemEntity.setMotion(new Vec3d(finalVec.getX() * itemMotion, finalVec.getY() * itemMotion, finalVec.getZ() * itemMotion));
-            }
-        });
+                        itemEntity.setMotion(new Vec3d(finalVec.getX() * itemMotion, finalVec.getY() * itemMotion, finalVec.getZ() * itemMotion));
+                    }
+                });
     }
 
     /**

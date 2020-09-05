@@ -9,6 +9,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -24,15 +26,21 @@ public class EventCallerItemTierUpgrade extends EventCallerUpgradable<QuestItemT
 
     protected List<ItemStack> getResults(List<ItemEntity> baseItems, List<ItemEntity> ingredients) {
         List<ItemStack> results = new ArrayList<>();
+        Map<ItemEntity, Boolean> baseItemsChecked = baseItems.stream().collect(Collectors.toMap(e -> e, e -> false));
 
-        for (ItemEntity baseEntity : baseItems) {
+        for (Map.Entry<ItemEntity, Boolean> entry : baseItemsChecked.entrySet()) {
+            ItemEntity baseEntity = entry.getKey();
+
+            if (entry.getValue() || !baseEntity.getItem().getItem().getRegistryName().getPath().contains("_")) {
+                continue;
+            }
+
             ItemStack baseStack = baseEntity.getItem();
             int tier = ItemTierRegistry.getTier(baseStack);
-            tier++;
             ItemEntity ingredient = this.getIngredient(tier, ingredients);
 
             if (ingredient == null) {
-                baseItems.remove(baseEntity);
+                entry.setValue(true);
                 continue;
             }
 

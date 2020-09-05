@@ -153,7 +153,9 @@ public final class EventExecutor<TQuest extends Quest> {
                 (quest) -> consumer.accept(player, result, inv));
     }
 
-    public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event, Consumer<PlayerEntity> consumer) {
+    public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event,
+                               Function<PlayerEntity, TQuest> check,
+                               Consumer2<PlayerEntity, TQuest> consumer) {
         LivingEntity entity = event.getEntityLiving();
 
         if (!(entity instanceof PlayerEntity)) {
@@ -162,7 +164,7 @@ public final class EventExecutor<TQuest extends Quest> {
 
         PlayerEntity player = (PlayerEntity) entity;
 
-        performCheck(player, (quest) -> consumer.accept(player));
+        performCheck(player, () -> check.apply(player), (quest) -> consumer.accept(player, quest));
     }
 
     public void onItemPickup(PlayerEvent.ItemPickupEvent event,
@@ -257,7 +259,7 @@ public final class EventExecutor<TQuest extends Quest> {
         checkItemsInHands(player, (skippedQuest) -> {
             TQuest quest = check.get();
 
-            if (quest == null) {
+            if (quest == null || !this.areHeldItemsCorrect(player, quest)) {
                 return;
             }
 
@@ -267,17 +269,21 @@ public final class EventExecutor<TQuest extends Quest> {
 
     private void checkItemsInHands(PlayerEntity player, Consumer<TQuest> consumer) {
         for (TQuest quest : this.caller.quests) {
-            if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
-                continue;
-            }
-
-            if (quest.rightHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack)) {
+            if (!this.areHeldItemsCorrect(player, quest)) {
                 continue;
             }
 
             consumer.accept(quest);
             return;
         }
+    }
+
+    private boolean areHeldItemsCorrect(PlayerEntity player, TQuest quest) {
+        if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
+            return false;
+        }
+
+        return quest.rightHandStack == null || ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack);
     }
 
     private void checkQuestProgress(PlayerEntity player, TQuest quest, Consumer<TQuest> consumer) {
