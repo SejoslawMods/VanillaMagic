@@ -1153,9 +1153,6 @@
     "icon": {
       "id": "minecraft:book"
     },
-    "leftHandStack": {
-      "id": "minecraft:book"
-    },
     "rightHandStack": {
       "id": "minecraft:blaze_rod"
     }
@@ -1167,9 +1164,6 @@
     "posY": 0,
     "uniqueName": "captureEntity",
     "icon": {
-      "id": "minecraft:book"
-    },
-    "leftHandStack": {
       "id": "minecraft:book"
     },
     "rightHandStack": {

@@ -23,7 +23,7 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
     @SubscribeEvent
     public void onEntityCapture(PlayerInteractEvent.EntityInteract event) {
         this.executor.onEntityInteract(event,
-                (player, entity, world, pos) -> !player.isSneaking() || world.isRemote ? null : this.quests.get(0),
+                (player, entity, world, pos) -> world.isRemote || player.getHeldItemOffhand().getItem() != Items.BOOK ? null : this.quests.get(0),
                 (player, entity, world, pos) ->
                         this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
                             if (entity instanceof PlayerEntity) {
@@ -39,7 +39,7 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
                             stackNbt.put(NbtUtils.NBT_CAPTURED, entityTag);
                             stackNbt.putString(NbtUtils.NBT_ENTITY_TYPE, entity.getType().getRegistryName().toString());
                             stackNbt.putString(NbtUtils.NBT_ENTITY_NAME, entity.getName().getFormattedText());
-                            leftHandStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.capturedEntity.bookTitlePrefix"), entity.getName().getFormattedText()));
+                            leftHandStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.capturedEntity.bookTitlePrefix"), " " + entity.getName().getFormattedText()));
 
                             entity.remove();
 
@@ -49,23 +49,25 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
 
     @SubscribeEvent
     public void onEntityRelease(PlayerInteractEvent.RightClickBlock event) {
-        this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
-                this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                    CompoundNBT stackNbt = leftHandStack.getOrCreateTag();
+        this.executor.onPlayerInteract(event,
+                (player, world, pos, direction) -> player.getHeldItemOffhand().getOrCreateTag().contains(NbtUtils.NBT_CAPTURED) ? this.quests.get(0) : null,
+                (player, world, pos, direction, quest) ->
+                    this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
+                        CompoundNBT stackNbt = leftHandStack.getOrCreateTag();
 
-                    if (!stackNbt.contains(NbtUtils.NBT_CAPTURED) || world.isRemote) {
-                        return;
-                    }
+                        if (!stackNbt.contains(NbtUtils.NBT_CAPTURED) || world.isRemote) {
+                            return;
+                        }
 
-                    String type = stackNbt.getString(NbtUtils.NBT_ENTITY_TYPE);
-                    Entity entity = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(type)).create(world);
-                    entity.read(stackNbt.getCompound(NbtUtils.NBT_CAPTURED));
+                        String type = stackNbt.getString(NbtUtils.NBT_ENTITY_TYPE);
+                        Entity entity = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(type)).create(world);
+                        entity.read(stackNbt.getCompound(NbtUtils.NBT_CAPTURED));
 
-                    BlockPos spawnPos = pos.offset(direction);
-                    entity.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY() + 0.5d, spawnPos.getZ() + 0.5D, 0, 0);
-                    world.addEntity(entity);
+                        BlockPos spawnPos = pos.offset(direction);
+                        entity.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY() + 0.5d, spawnPos.getZ() + 0.5D, 0, 0);
+                        world.addEntity(entity);
 
-                    player.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(Items.BOOK));
-                }));
+                        player.setItemStackToSlot(EquipmentSlotType.OFFHAND, new ItemStack(Items.BOOK));
+                    }));
     }
 }

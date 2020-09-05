@@ -25,21 +25,30 @@ import java.util.function.Consumer;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
+    private int counter = 0; // TODO: Find a way to detect if the event was called more than once
+
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
+        if (counter > 0) {
+            counter = 0;
+            return;
+        }
+
         this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
                 this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                    if (this.canLoad(leftHandStack)) {
+                    if (this.canLoad(leftHandStack) && leftHandStack.getItem() == Items.ENCHANTED_BOOK) {
                         this.execute(player, new ItemStack(Items.BOOK), bookStack -> this.load(world, pos, direction, leftHandStack));
-                    } else {
+                    } else if (leftHandStack.getItem() == Items.BOOK) {
                         this.execute(player, new ItemStack(Items.ENCHANTED_BOOK), bookStack -> this.save(bookStack, world, pos));
                     }
                 }));
+
+        counter++;
     }
 
     private boolean canLoad(ItemStack leftHandStack) {
         CompoundNBT nbt = leftHandStack.getOrCreateTag();
-        return nbt.contains(NbtUtils.NBT_BLOCK) && nbt.contains(NbtUtils.NBT_BLOCK_STATE);
+        return nbt.contains(NbtUtils.NBT_BLOCK) && nbt.getCompound(NbtUtils.NBT_BLOCK).contains(NbtUtils.NBT_BLOCK_STATE);
     }
 
     private void execute(PlayerEntity player, ItemStack bookStack, Consumer<ItemStack> consumer) {
@@ -71,7 +80,7 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
     private void save(ItemStack bookStack, World world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos);
 
-        bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), TextUtils.getFormattedText(blockState.getBlock().getTranslationKey())));
+        bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), " " + TextUtils.getFormattedText(blockState.getBlock().getTranslationKey())));
 
         CompoundNBT nbt = new CompoundNBT();
         bookStack.getOrCreateTag().put(NbtUtils.NBT_BLOCK, nbt);
