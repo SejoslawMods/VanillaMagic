@@ -14,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
+import java.util.List;
+
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
@@ -91,5 +93,18 @@ public final class BlockUtils {
         } else {
             return Math.max(pos1.getY(), pos2.getY()) - Math.min(pos1.getY(), pos2.getY());
         }
+    }
+
+    /**
+     * @return Array from given List.
+     */
+    public static Block[] getValidBlocks(List<Block> blocks) {
+        Block[] blocksArray = new Block[blocks.size()];
+
+        for (int i = 0; i < blocksArray.length; ++i) {
+            blocksArray[i] = blocks.get(i);
+        }
+
+        return blocksArray;
     }
 }

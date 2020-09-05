@@ -1,9 +1,9 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities.machines;
 
 import com.github.sejoslaw.vanillamagic2.common.registries.MachineModuleRegistry;
+import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
-import com.github.sejoslaw.vanillamagic2.core.VMTiles;
 import net.minecraft.nbt.CompoundNBT;
 
 /**
@@ -13,7 +13,7 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
     private String moduleKey;
 
     public VMTileMachine() {
-        super(VMTiles.MACHINE);
+        super(TileEntityRegistry.MACHINE.get());
     }
 
     public void setModuleKey(String key) {

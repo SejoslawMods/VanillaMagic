@@ -1,8 +1,8 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
+import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
-import com.github.sejoslaw.vanillamagic2.core.VMTiles;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -15,7 +15,7 @@ import net.minecraft.util.Direction;
  */
 public class VMTileBlockAbsorber extends VMTileEntity {
     public VMTileBlockAbsorber() {
-        super(VMTiles.BLOCK_ABSORBER);
+        super(TileEntityRegistry.BLOCK_ABSORBER.get());
     }
 
     public void tick() {

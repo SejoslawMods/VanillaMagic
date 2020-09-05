@@ -1,10 +1,15 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
+import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
-import com.github.sejoslaw.vanillamagic2.core.VMTiles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -14,7 +19,7 @@ public class VMTileLiquidSuppressor extends VMTileEntity {
     private int blockStateId;
 
     public VMTileLiquidSuppressor() {
-        super(VMTiles.LIQUID_SUPPRESSOR);
+        super(TileEntityRegistry.LIQUID_SUPPRESSOR.get());
     }
 
     public void initialize(BlockState state, int duration) {
@@ -54,5 +59,15 @@ public class VMTileLiquidSuppressor extends VMTileEntity {
     private void spawnContainedBlock() {
         this.remove();
         this.getWorld().setBlockState(this.getPos(), Block.getStateById(this.blockStateId));
+    }
+
+    public static Block[] getValidBlocks() {
+        List<Block> blocks = ForgeRegistries.FLUIDS
+                .getValues()
+                .stream()
+                .map(fluid -> fluid.getDefaultState().getBlockState().getBlock())
+                .collect(Collectors.toList());
+
+        return BlockUtils.getValidBlocks(blocks);
     }
 }

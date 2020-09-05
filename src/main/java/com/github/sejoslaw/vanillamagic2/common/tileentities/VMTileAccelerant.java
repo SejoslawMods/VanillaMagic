@@ -2,8 +2,8 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
+import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
-import com.github.sejoslaw.vanillamagic2.core.VMTiles;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
@@ -23,7 +23,7 @@ public class VMTileAccelerant extends VMTileEntity {
     private BlockPos invPos;
 
     public VMTileAccelerant() {
-        super(VMTiles.ACCELERANT);
+        super(TileEntityRegistry.ACCELERANT.get());
 
         this.ticks = VMForgeConfig.TILE_ACCELERANT_TICKS.get();
     }
