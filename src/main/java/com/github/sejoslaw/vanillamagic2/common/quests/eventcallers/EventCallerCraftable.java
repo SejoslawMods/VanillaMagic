@@ -49,7 +49,7 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
 
             ItemStack stack = result.apply(entry.getValue());
             stack.getOrCreateTag().putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, entry.getKey().toString());
-            stack.setDisplayName(TextUtils.combine(TextUtils.translate(displayNameKey), entry.getKey().getPath()));
+            stack.setDisplayName(TextUtils.combine(TextUtils.translate(displayNameKey), " " + entry.getKey().getPath()));
 
             List<ItemStack> results = new ArrayList<>();
             results.add(stack);
