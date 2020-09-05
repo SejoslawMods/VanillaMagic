@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types.items;
 
 import com.github.sejoslaw.vanillamagic2.common.items.IVMItem;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ public abstract class QuestVMItem<TVMItem extends IVMItem> extends Quest {
         super.fillTooltip(lines);
 
         IVMItem vmItem = this.getVMItem();
-        this.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(vmItem.getIngredients()));
-        this.addLine(lines, "quest.tooltip.results", this.getTooltip(vmItem.getStack()));
+        TextUtils.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(vmItem.getIngredients()));
+        TextUtils.addLine(lines, "quest.tooltip.results", this.getTooltip(vmItem.getStack()));
     }
 }

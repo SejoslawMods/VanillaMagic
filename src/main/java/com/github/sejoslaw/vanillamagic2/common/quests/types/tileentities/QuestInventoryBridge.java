@@ -18,8 +18,8 @@ public class QuestInventoryBridge extends QuestVMItem<VMItemInventorySelector> {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.save", TextUtils.getFormattedText("quest.inventoryBridge.desc.save"));
-        this.addLine(lines, "quest.tooltip.create", TextUtils.getFormattedText("quest.inventoryBridge.desc.create"));
-        this.addLine(lines, "quest.tooltip.clear", TextUtils.getFormattedText("quest.inventoryBridge.desc.clear"));
+        TextUtils.addLine(lines, "quest.tooltip.save", TextUtils.getFormattedText("quest.inventoryBridge.desc.save"));
+        TextUtils.addLine(lines, "quest.tooltip.create", TextUtils.getFormattedText("quest.inventoryBridge.desc.create"));
+        TextUtils.addLine(lines, "quest.tooltip.clear", TextUtils.getFormattedText("quest.inventoryBridge.desc.clear"));
     }
 }

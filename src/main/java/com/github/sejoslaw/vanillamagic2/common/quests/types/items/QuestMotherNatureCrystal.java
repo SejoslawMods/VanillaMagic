@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types.items;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.items.VMItemMotherNatureCrystal;
 import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 
 import java.util.Collection;
 
@@ -17,6 +18,6 @@ public class QuestMotherNatureCrystal extends QuestVMItem<VMItemMotherNatureCrys
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.range", String.valueOf(VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get()));
+        TextUtils.addLine(lines, "quest.tooltip.range", String.valueOf(VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get()));
     }
 }

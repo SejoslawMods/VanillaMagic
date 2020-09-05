@@ -12,6 +12,6 @@ public class QuestMobSpawnerDrop extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.usage", TextUtils.getFormattedText("quest.mobSpawnerDropBlock.desc.usage"));
+        TextUtils.addLine(lines, "quest.tooltip.usage", TextUtils.getFormattedText("quest.mobSpawnerDropBlock.desc.usage"));
     }
 }

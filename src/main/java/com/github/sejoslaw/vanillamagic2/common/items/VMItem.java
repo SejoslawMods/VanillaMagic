@@ -11,6 +11,6 @@ import java.util.List;
  */
 public abstract class VMItem implements IVMItem {
     public void addTooltip(ItemStack stack, List<ITextComponent> tooltips) {
-        tooltips.add(TextUtils.toComponent(TextUtils.getFormattedText("vmitem.tooltip.registryName") + this.getUniqueKey()));
+        TextUtils.addLine(tooltips, "vmitem.tooltip.registryName", this.getUniqueKey());
     }
 }

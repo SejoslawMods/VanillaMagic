@@ -12,8 +12,8 @@ public class QuestCrystallizedLiquid extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.ingredients", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.ingredients"));
-        this.addLine(lines, "quest.tooltip.results", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.results"));
-        this.addLine(lines, "quest.tooltip.usage", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.usage"));
+        TextUtils.addLine(lines, "quest.tooltip.ingredients", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.ingredients"));
+        TextUtils.addLine(lines, "quest.tooltip.results", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.results"));
+        TextUtils.addLine(lines, "quest.tooltip.usage", TextUtils.getFormattedText("quest.crystallizedLiquid.desc.usage"));
     }
 }

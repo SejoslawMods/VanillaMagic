@@ -25,9 +25,9 @@ public class QuestBuildAltar extends Quest implements Comparable<QuestBuildAltar
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.altarBlock", this.getTooltip(AltarUtils.BLOCKS.get(this.altarTier)));
-        this.addLine(lines, "quest.tooltip.altarBlock.position", this.getAltarBlockPositionTooltip());
-        this.addLine(lines, "quest.tooltip.altarBlock.distance", String.valueOf(this.altarTier));
+        TextUtils.addLine(lines, "quest.tooltip.altarBlock", this.getTooltip(AltarUtils.BLOCKS.get(this.altarTier)));
+        TextUtils.addLine(lines, "quest.tooltip.altarBlock.position", this.getAltarBlockPositionTooltip());
+        TextUtils.addLine(lines, "quest.tooltip.altarBlock.distance", String.valueOf(this.altarTier));
     }
 
     public int compareTo(QuestBuildAltar quest) {

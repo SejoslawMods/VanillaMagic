@@ -42,45 +42,37 @@ public class Quest {
      * Adds tooltip information to given collection.
      */
     public void fillTooltip(Collection<String> lines) {
-        this.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + this.getDisplayName());
+        TextUtils.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + this.getDisplayName());
 
         if (this.parent != null) {
-            this.addLine(lines, "quest.tooltip.parent", TextUtils.getFormattedText("quest." + this.parent.uniqueName));
+            TextUtils.addLine(lines, "quest.tooltip.parent", TextUtils.getFormattedText("quest." + this.parent.uniqueName));
         }
 
         if (this.rightHandStack != null) {
-            this.addLine(lines, "quest.tooltip.rightHandStack", this.getTooltip(this.rightHandStack));
+            TextUtils.addLine(lines, "quest.tooltip.rightHandStack", this.getTooltip(this.rightHandStack));
         }
 
         if (this.leftHandStack != null) {
-            this.addLine(lines, "quest.tooltip.leftHandStack", this.getTooltip(this.leftHandStack));
+            TextUtils.addLine(lines, "quest.tooltip.leftHandStack", this.getTooltip(this.leftHandStack));
         }
 
         if (this.altarTier > 0) {
-            this.addLine(lines, "quest.tooltip.altarTier", String.valueOf(this.altarTier));
+            TextUtils.addLine(lines, "quest.tooltip.altarTier", String.valueOf(this.altarTier));
         }
 
         if (this.multiplier > 1) {
-            this.addLine(lines, "quest.tooltip.multiplier", String.valueOf(this.multiplier));
+            TextUtils.addLine(lines, "quest.tooltip.multiplier", String.valueOf(this.multiplier));
         }
 
         if (this.level > 0) {
-            this.addLine(lines, "quest.tooltip.level", String.valueOf(this.level));
+            TextUtils.addLine(lines, "quest.tooltip.level", String.valueOf(this.level));
         }
 
         if (this.oneItemSmeltCost > 0) {
-            this.addLine(lines, "quest.tooltip.oneItemSmeltCost", String.valueOf(this.oneItemSmeltCost));
+            TextUtils.addLine(lines, "quest.tooltip.oneItemSmeltCost", String.valueOf(this.oneItemSmeltCost));
         }
 
-        this.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest." + this.uniqueName + ".desc"));
-    }
-
-    public void addLine(Collection<String> lines, String key, String value) {
-        String message =
-                TextFormatting.GREEN + TextUtils.getFormattedText(key) +
-                TextFormatting.WHITE + ": " + value;
-
-        lines.add(message);
+        TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest." + this.uniqueName + ".desc"));
     }
 
     /**

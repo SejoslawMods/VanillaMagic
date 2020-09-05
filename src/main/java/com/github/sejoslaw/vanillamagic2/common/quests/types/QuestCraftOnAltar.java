@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
@@ -29,7 +30,7 @@ public class QuestCraftOnAltar extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(this.ingredients));
-        this.addLine(lines, "quest.tooltip.results", this.getTooltip(this.results));
+        TextUtils.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(this.ingredients));
+        TextUtils.addLine(lines, "quest.tooltip.results", this.getTooltip(this.results));
     }
 }

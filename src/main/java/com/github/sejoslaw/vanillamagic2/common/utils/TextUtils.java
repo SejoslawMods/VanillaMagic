@@ -4,8 +4,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -58,5 +62,26 @@ public final class TextUtils {
      */
     public static String getPosition(World world, BlockPos pos) {
         return world.getDimension().getType().getRegistryName().toString() + "[" + pos.toString() + "]";
+    }
+
+    /**
+     * Adds new formatted message line to specified collection.
+     */
+    public static void addLine(Collection<String> lines, String key, String value) {
+        lines.add(buildMessageLine(key, value));
+    }
+
+    /**
+     * Adds new formatted message line to specified collection.
+     */
+    public static void addLine(List<ITextComponent> lines, String key, String value) {
+        lines.add(TextUtils.toComponent(buildMessageLine(key, value)));
+    }
+
+    /**
+     * Adds new formatted message line to specified collection.
+     */
+    public static String buildMessageLine(String key, String value) {
+        return TextFormatting.GREEN + TextUtils.getFormattedText(key) + TextFormatting.WHITE + ": " + value;
     }
 }

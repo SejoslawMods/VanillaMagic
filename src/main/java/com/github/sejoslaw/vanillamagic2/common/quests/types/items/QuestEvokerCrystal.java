@@ -17,7 +17,7 @@ public class QuestEvokerCrystal extends QuestVMItem<VMItemEvokerCrystal> {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.changeSpell", TextUtils.getFormattedText("quest.evokerCrystal.desc.changeSpell"));
-        this.addLine(lines, "quest.tooltip.castSpell", TextUtils.getFormattedText("quest.evokerCrystal.desc.castSpell"));
+        TextUtils.addLine(lines, "quest.tooltip.changeSpell", TextUtils.getFormattedText("quest.evokerCrystal.desc.changeSpell"));
+        TextUtils.addLine(lines, "quest.tooltip.castSpell", TextUtils.getFormattedText("quest.evokerCrystal.desc.castSpell"));
     }
 }

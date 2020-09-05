@@ -15,7 +15,7 @@ public class EventCallerAccelerationCrystal extends EventCallerVMItem<QuestAccel
     private final Random rand = new Random();
 
     @SubscribeEvent
-    public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
+    public void useItem(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
                 this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) ->
                         WorldUtils.tick(world, pos, VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(), this.rand)));

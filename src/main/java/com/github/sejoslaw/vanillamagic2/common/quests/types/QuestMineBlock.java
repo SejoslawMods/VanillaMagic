@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types;
 
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -32,6 +33,6 @@ public class QuestMineBlock extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.blocksToMine", this.blocksToMine.stream().map(this::getTooltip).collect(Collectors.joining(", ")));
+        TextUtils.addLine(lines, "quest.tooltip.blocksToMine", this.blocksToMine.stream().map(this::getTooltip).collect(Collectors.joining(", ")));
     }
 }

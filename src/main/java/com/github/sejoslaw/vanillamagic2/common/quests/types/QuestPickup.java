@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
@@ -22,6 +23,6 @@ public class QuestPickup extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.whatToPick", this.getTooltip(this.whatToPickStack));
+        TextUtils.addLine(lines, "quest.tooltip.whatToPick", this.getTooltip(this.whatToPickStack));
     }
 }

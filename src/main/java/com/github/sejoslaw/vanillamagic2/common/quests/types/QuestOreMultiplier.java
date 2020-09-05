@@ -13,7 +13,7 @@ public class QuestOreMultiplier extends Quest {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        this.addLine(lines, "quest.tooltip.block", Blocks.FURNACE.getNameTextComponent().getFormattedText());
-        this.addLine(lines, "quest.tooltip.crafting", TextUtils.getFormattedText("quest.oreMultiplier.desc.crafting"));
+        TextUtils.addLine(lines, "quest.tooltip.block", Blocks.FURNACE.getNameTextComponent().getFormattedText());
+        TextUtils.addLine(lines, "quest.tooltip.crafting", TextUtils.getFormattedText("quest.oreMultiplier.desc.crafting"));
     }
 }
