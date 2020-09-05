@@ -1448,7 +1448,8 @@
     "multiplier": 2,
     "rightHandStack": {
       "id": "minecraft:nether_star"
-    }
+    },
+    "oneItemSmeltCost": 200
   },
   {
     "eventCaller": "craftOnAltar",

@@ -247,6 +247,14 @@ public final class EventExecutor<TQuest extends Quest> {
                         (tile) -> tile.setModuleKey(moduleKey)));
     }
 
+    public boolean areHeldItemsCorrect(PlayerEntity player, TQuest quest) {
+        if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
+            return false;
+        }
+
+        return quest.rightHandStack == null || ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack);
+    }
+
     /*
      * -----====== Private Methods =====-----
      */
@@ -276,14 +284,6 @@ public final class EventExecutor<TQuest extends Quest> {
             consumer.accept(quest);
             return;
         }
-    }
-
-    private boolean areHeldItemsCorrect(PlayerEntity player, TQuest quest) {
-        if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
-            return false;
-        }
-
-        return quest.rightHandStack == null || ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack);
     }
 
     private void checkQuestProgress(PlayerEntity player, TQuest quest, Consumer<TQuest> consumer) {

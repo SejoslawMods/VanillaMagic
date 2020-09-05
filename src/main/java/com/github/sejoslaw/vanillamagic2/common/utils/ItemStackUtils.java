@@ -9,9 +9,9 @@ import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,13 @@ public final class ItemStackUtils {
     }
 
     /**
+     * @return Number of burning ticks.
+     */
+    public static int getBurnTicks(ItemStack stack) {
+        return ForgeHooks.getBurnTime(stack);
+    }
+
+    /**
      * @return ItemStacks with smelting result based on given input.
      */
     public static List<ItemStack> smeltItems(PlayerEntity player, List<ItemEntity> stacksToSmelt, int smeltingCost) {
@@ -72,8 +79,8 @@ public final class ItemStackUtils {
                     int ticksToSmeltStack = stackSize * smeltingCost;
 
                     while (leftHandStack.getCount() > 0 && ticks[0] < ticksToSmeltStack) {
-                        ticks[0] += AbstractFurnaceTileEntity.getBurnTimes().getOrDefault(stack.getItem(), 0);
-                        stack.grow(-1);
+                        ticks[0] += getBurnTicks(leftHandStack);
+                        leftHandStack.grow(-1);
                     }
 
                     ItemStack smeltingResult = getSmeltingResultAsNewStack(stack, world);

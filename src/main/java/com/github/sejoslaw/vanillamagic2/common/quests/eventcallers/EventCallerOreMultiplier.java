@@ -27,7 +27,11 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) ->
                         this.executor.click(Blocks.CAULDRON, world, pos, () -> {
-                           if (!isStructureValid(world, pos)) {
+                            QuestOreMultiplier quest = this.quests.get(0);
+
+                           if (!isStructureValid(world, pos) ||
+                                   !this.executor.areHeldItemsCorrect(player, quest) ||
+                                   ItemStackUtils.getBurnTicks(player.getHeldItemOffhand()) <= 0) {
                                return null;
                            }
 
@@ -37,7 +41,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
                                 return null;
                             }
 
-                            return this.quests.get(0);
+                            return quest;
                         }),
                 (player, world, pos, direction, quest) -> WorldUtils.spawnOnCauldron(
                         world,
