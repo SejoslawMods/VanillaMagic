@@ -3,12 +3,12 @@ package com.github.sejoslaw.vanillamagic2.common.utils;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -80,16 +80,20 @@ public final class WorldUtils {
      * Performs ticking logic for the specified position.
      */
     public static void tick(World world, BlockPos pos, int ticks, Random rand) {
+        if (world.isRemote) {
+            return;
+        }
+
         TileEntity tile = world.getTileEntity(pos);
-        boolean isTickable = tile instanceof ITickable;
+        boolean isTickable = tile instanceof ITickableTileEntity;
 
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
 
         for (int i = 0; i < ticks; i++) {
             if (isTickable) {
-                ((ITickable) tile).tick();
-            } else {
+                ((ITickableTileEntity) tile).tick();
+            } else if (world instanceof ServerWorld) {
                 block.tick(state, (ServerWorld) world, pos, rand);
             }
         }

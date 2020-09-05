@@ -82,6 +82,6 @@ public final class TextUtils {
      * Adds new formatted message line to specified collection.
      */
     public static String buildMessageLine(String key, String value) {
-        return TextFormatting.GREEN + TextUtils.getFormattedText(key) + TextFormatting.WHITE + ": " + value;
+        return TextFormatting.GREEN + TextUtils.getFormattedText(key) + TextFormatting.WHITE + " " + value;
     }
 }
