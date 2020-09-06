@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
+import com.github.sejoslaw.vanillamagic2.common.functions.Function2;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -40,12 +41,19 @@ public final class AltarUtils {
     /**
      * @return True if the Altar contains the required ingredients. otherwise false.
      */
-    public static boolean canCraftOnAltar(List<ItemStack> ingredients, List<ItemEntity> ingredientsInCauldron) {
+    public static boolean canCraftOnAltar(List<ItemStack> ingredients, List<ItemEntity> ingredientsInCauldron, Function2<ItemStack, ItemStack, Boolean> optionalCheck) {
         List<ItemEntity> validItemEntities = new ArrayList<>();
+
+        if (optionalCheck == null) {
+            optionalCheck = (requiredIngredientStack, ingredientInCauldronStack) -> true;
+        }
 
         for (ItemStack currentlyCheckedIngredient : ingredients) {
             for (ItemEntity currentlyCheckedItemEntity : ingredientsInCauldron) {
-                if (ItemStackUtils.areEqual(currentlyCheckedIngredient, currentlyCheckedItemEntity.getItem())) {
+                ItemStack currentlyCheckedItemStack = currentlyCheckedItemEntity.getItem();
+
+                if (ItemStackUtils.areEqual(currentlyCheckedIngredient, currentlyCheckedItemStack) &&
+                        optionalCheck.apply(currentlyCheckedIngredient, currentlyCheckedItemStack)) {
                     validItemEntities.add(currentlyCheckedItemEntity);
                     break;
                 }

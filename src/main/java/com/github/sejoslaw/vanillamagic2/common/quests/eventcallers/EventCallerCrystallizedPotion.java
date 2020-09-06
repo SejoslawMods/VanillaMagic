@@ -7,10 +7,13 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -21,23 +24,47 @@ public class EventCallerCrystallizedPotion extends EventCallerCraftable<QuestCry
                 ForgeRegistries.POTION_TYPES.getEntries(),
                 (potion) -> PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), potion),
                 (potion) -> PotionUtils.addPotionToItemStack(new ItemStack(Items.NETHER_STAR), potion),
-                "vmitem.crystallizedPotion.namePrefix");
+                "vmitem.crystallizedPotion.namePrefix",
+                (entry) -> {
+                    List<EffectInstance> effects = entry.getValue().getEffects();
+                    return effects.size() > 0 ? effects.get(0).getEffectName() : null;
+                });
+    }
+
+    public boolean canCraftOnAltar(ItemStack requiredIngredientStack, ItemStack ingredientInCauldronStack) {
+        return PotionUtils.getPotionFromItem(requiredIngredientStack) == PotionUtils.getPotionFromItem(ingredientInCauldronStack);
+    }
+
+    public Potion getPotion(ItemStack stack) {
+        return ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME)));
     }
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
-        this.executor.onPlayerTick(event, (player, world, quest) -> {
-            for (ItemStack stack : player.inventory.mainInventory) {
-                Potion potion = ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME)));
+        this.executor.onPlayerTickNoHandsCheck(event,
+                (player, world) -> {
+                    for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
+                        Potion potion = this.getPotion(player.inventory.getStackInSlot(i));
 
-                if (potion == null) {
-                    continue;
-                }
+                        if (potion == null || potion == Potions.EMPTY) {
+                            continue;
+                        }
 
-                for (EffectInstance effect : potion.getEffects()) {
-                    player.addPotionEffect(new EffectInstance(effect.getPotion(), 1000, effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles()));
-                }
-            }
-        });
+                        return this.quests.get(0);
+                    }
+
+                    return null;
+                },
+                (player, world, quest) -> {
+                    for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
+                        Potion potion = this.getPotion(player.inventory.getStackInSlot(i));
+
+                        if (potion == null || potion == Potions.EMPTY) {
+                            continue;
+                        }
+
+                        potion.getEffects().forEach(player::addPotionEffect);
+                    }
+                });
     }
 }

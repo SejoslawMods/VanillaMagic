@@ -187,7 +187,25 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheck(player, quest -> consumer.accept(player, world, quest));
     }
 
-    public void craftOnAltar(PlayerInteractEvent event, List<AltarRecipe> recipes) {
+    public void onPlayerTick(TickEvent.PlayerTickEvent event,
+                             Function2<PlayerEntity, World, TQuest> check,
+                             Consumer3<PlayerEntity, World, TQuest> consumer) {
+        PlayerEntity player = event.player;
+        World world = player.world;
+
+        performCheck(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
+    }
+
+    public void onPlayerTickNoHandsCheck(TickEvent.PlayerTickEvent event,
+                                         Function2<PlayerEntity, World, TQuest> check,
+                                         Consumer3<PlayerEntity, World, TQuest> consumer) {
+        PlayerEntity player = event.player;
+        World world = player.world;
+
+        performCheckWithoutHands(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
+    }
+
+    public void craftOnAltar(PlayerInteractEvent event, List<AltarRecipe> recipes, Function2<ItemStack, ItemStack, Boolean> optionalCheck) {
         final List<ItemEntity>[] ingredientsInCauldron = new List[1];
         final AltarRecipe[] chosenRecipe = new AltarRecipe[1];
 
@@ -201,7 +219,7 @@ public final class EventExecutor<TQuest extends Quest> {
                             }
 
                             for (AltarRecipe recipe : recipes) {
-                                if (!AltarUtils.canCraftOnAltar(recipe.ingredients, ingredientsInCauldron[0])) {
+                                if (!AltarUtils.canCraftOnAltar(recipe.ingredients, ingredientsInCauldron[0], optionalCheck)) {
                                     continue;
                                 }
 
@@ -273,6 +291,16 @@ public final class EventExecutor<TQuest extends Quest> {
 
             checkQuestProgress(player, quest, consumer);
         });
+    }
+
+    private void performCheckWithoutHands(PlayerEntity player, Supplier<TQuest> check, Consumer<TQuest> consumer) {
+        TQuest quest = check.get();
+
+        if (quest == null) {
+            return;
+        }
+
+        checkQuestProgress(player, quest, consumer);
     }
 
     private void checkItemsInHands(PlayerEntity player, Consumer<TQuest> consumer) {

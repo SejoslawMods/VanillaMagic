@@ -37,7 +37,8 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
                 entries,
                 (fluid) -> new ItemStack(fluid.getFilledBucket()),
                 (fluid) -> new ItemStack(Items.NETHER_STAR),
-                "vmitem.crystallizedLiquid.namePrefix");
+                "vmitem.crystallizedLiquid.namePrefix",
+                (entry) -> entry.getValue().getDefaultState().getBlockState().getBlock().getNameTextComponent().getFormattedText());
     }
 
     @SubscribeEvent

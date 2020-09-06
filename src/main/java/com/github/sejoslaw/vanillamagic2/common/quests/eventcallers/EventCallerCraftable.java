@@ -29,7 +29,14 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
             this.fillRecipes();
         }
 
-        this.executor.craftOnAltar(event, this.recipes);
+        this.executor.craftOnAltar(event, this.recipes, this::canCraftOnAltar);
+    }
+
+    /**
+     * @return Should always return true if no additional check is required (i.e. checking for tags); otherwise false.
+     */
+    public boolean canCraftOnAltar(ItemStack requiredIngredientStack, ItemStack ingredientInCauldronStack) {
+        return true;
     }
 
     /**
@@ -39,17 +46,21 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
 
     protected <T> void fillCrystalRecipesFromRegistry(
             Set<Map.Entry<ResourceLocation, T>> entries,
-            Function<T, ItemStack> ingredient,
-            Function<T, ItemStack> result,
-            String displayNameKey) {
+            Function<T, ItemStack> getIngredient,
+            Function<T, ItemStack> getResult,
+            String displayNameKey,
+            Function<Map.Entry<ResourceLocation, T>, String> getDisplayName) {
         for (Map.Entry<ResourceLocation, T> entry : entries) {
             List<ItemStack> ingredients = new ArrayList<>();
             ingredients.add(new ItemStack(Items.NETHER_STAR));
-            ingredients.add(ingredient.apply(entry.getValue()));
+            ingredients.add(getIngredient.apply(entry.getValue()));
 
-            ItemStack stack = result.apply(entry.getValue());
+            ItemStack stack = getResult.apply(entry.getValue());
             stack.getOrCreateTag().putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, entry.getKey().toString());
-            stack.setDisplayName(TextUtils.combine(TextUtils.translate(displayNameKey), " " + entry.getKey().getPath()));
+
+            String parsedDisplayName = getDisplayName.apply(entry);
+            stack.setDisplayName(TextUtils.combine(TextUtils.translate(displayNameKey),
+                    " " + (parsedDisplayName == null ? entry.getKey().toString() : TextUtils.getFormattedText(parsedDisplayName))));
 
             List<ItemStack> results = new ArrayList<>();
             results.add(stack);
