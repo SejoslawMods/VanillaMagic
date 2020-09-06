@@ -41,4 +41,8 @@ public class VMTileBlockAbsorber extends VMTileEntity {
         this.getWorld().setBlockState(this.getPos(), Blocks.AIR.getDefaultState());
         HopperTileEntity.pullItems(hopperTileEntity);
     }
+
+    public static Block[] getValidBlocks() {
+        return BlockUtils.getValidBlocks(new ArrayList<>(ForgeRegistries.BLOCKS.getValues()));
+    }
 }
