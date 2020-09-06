@@ -26,7 +26,7 @@ public class VMTileBlockAbsorber extends VMTileEntity {
         HopperTileEntity hopperTileEntity = (HopperTileEntity) this.getWorld().getTileEntity(this.getPos().offset(Direction.DOWN));
 
         if (hopperTileEntity == null) {
-            this.remove();
+            this.removeTileEntity();
         }
 
         for (int i = 0; i < VMForgeConfig.TILE_ABSORBER_PULLING_SPEED.get(); ++i) {
