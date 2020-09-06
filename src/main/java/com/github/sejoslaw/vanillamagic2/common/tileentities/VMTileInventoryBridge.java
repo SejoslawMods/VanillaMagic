@@ -54,7 +54,7 @@ public class VMTileInventoryBridge extends VMTileEntity {
         return compound;
     }
 
-    public void tick() {
+    public void tickTileEntity() {
         if (this.destinationInv == null || this.sourceInv == null) {
             this.remove();
             return;

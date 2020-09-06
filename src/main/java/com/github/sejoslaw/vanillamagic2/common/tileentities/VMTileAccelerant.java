@@ -44,7 +44,7 @@ public class VMTileAccelerant extends VMTileEntity {
         }
     }
 
-    public void tick() {
+    public void tickTileEntity() {
         if (!this.hasCrystal()) {
             return;
         }

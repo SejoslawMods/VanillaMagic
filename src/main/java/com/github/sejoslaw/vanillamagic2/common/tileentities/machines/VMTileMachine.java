@@ -33,7 +33,7 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
         this.setModuleKey(nbt.getString(NbtUtils.NBT_MACHINE_MODULE_KEY));
     }
 
-    public void tick() {
+    public void tickTileEntity() {
         if (MachineModuleRegistry.DEFAULT_MODULES.stream().allMatch(module -> module.canExecute(this))) {
             MachineModuleRegistry.DEFAULT_MODULES.forEach(module -> module.execute(this));
         } else {

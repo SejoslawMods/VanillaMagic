@@ -27,11 +27,7 @@ public class VMTileLiquidSuppressor extends VMTileEntity {
         this.resetDuration(duration);
     }
 
-    public void tick() {
-        if (this.getWorld().isRemote()) {
-            return;
-        }
-
+    public void tickTileEntity() {
         this.ticksRemaining--;
 
         if (this.ticksRemaining <= 0) {

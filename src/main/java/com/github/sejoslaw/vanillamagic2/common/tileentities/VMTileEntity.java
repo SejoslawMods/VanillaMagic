@@ -27,4 +27,14 @@ public abstract class VMTileEntity extends TileEntity implements IVMTileEntity {
         super.onDataPacket(net, pkt);
         this.read(pkt.getNbtCompound());
     }
+
+    public void tick() {
+        if (this.getWorld().isRemote()) {
+            return;
+        }
+
+        this.tickTileEntity();
+    }
+
+    protected abstract void tickTileEntity();
 }
