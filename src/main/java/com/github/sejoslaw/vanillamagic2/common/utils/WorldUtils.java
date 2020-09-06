@@ -71,6 +71,10 @@ public final class WorldUtils {
      * Spawns VM TileEntity into the specified World on the given BlockPos.
      */
     public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(World world, BlockPos pos, TVMTileEntity tile, Consumer<TVMTileEntity> consumer) {
+        if (world.tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity.getPos().equals(pos))) {
+            return;
+        }
+
         tile.initialize(world, pos);
         consumer.accept(tile);
         tile.spawn();

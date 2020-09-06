@@ -75,7 +75,7 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     /**
      * Removes TileEntity and cleans up registry.
      */
-    default void remove() {
+    default void removeTileEntity() {
         this.getTileEntity().remove();
         this.getWorld().removeTileEntity(this.getPos());
         TextUtils.addChatMessage("block.removed");

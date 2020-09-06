@@ -25,7 +25,7 @@ public final class TileEntityRegistry {
 
     public static final RegistryObject<TileEntityType<VMTileLiquidSuppressor>> LIQUID_SUPPRESSOR = TILE_ENTITIES.register(VMTileLiquidSuppressor.class.getName().toLowerCase(), () -> buildTileEntityType(VMTileLiquidSuppressor::new, VMTileLiquidSuppressor.getValidBlocks()));
     public static final RegistryObject<TileEntityType<VMTileAccelerant>> ACCELERANT = TILE_ENTITIES.register(VMTileAccelerant.class.getName().toLowerCase(), () -> buildTileEntityType(VMTileAccelerant::new, Blocks.CAULDRON));
-    public static final RegistryObject<TileEntityType<VMTileBlockAbsorber>> BLOCK_ABSORBER = TILE_ENTITIES.register(VMTileBlockAbsorber.class.getName().toLowerCase(), () -> buildTileEntityType(VMTileBlockAbsorber::new, Blocks.AIR));
+    public static final RegistryObject<TileEntityType<VMTileBlockAbsorber>> BLOCK_ABSORBER = TILE_ENTITIES.register(VMTileBlockAbsorber.class.getName().toLowerCase(), () -> buildTileEntityType(VMTileBlockAbsorber::new, VMTileBlockAbsorber.getValidBlocks()));
     public static final RegistryObject<TileEntityType<VMTileInventoryBridge>> INVENTORY_BRIDGE = TILE_ENTITIES.register(VMTileInventoryBridge.class.getName().toLowerCase(), () -> buildTileEntityType(VMTileInventoryBridge::new, VMTileInventoryBridge.getValidBlocks()));
     public static final RegistryObject<TileEntityType<VMTileMachine>> MACHINE = TILE_ENTITIES.register(VMTileMachine.class.getName().toLowerCase(), () -> buildTileEntityType(VMTileMachine::new, Blocks.CAULDRON));
 
