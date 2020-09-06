@@ -22,7 +22,7 @@ public class EventCallerBuildAltar extends EventCaller<QuestBuildAltar> {
                             .sorted(Collections.reverseOrder())
                             .filter(quest -> state.getBlock() instanceof CauldronBlock && AltarUtils.checkAltarTier(world, pos, quest.altarTier))
                             .findFirst()
-                            .get(),
+                            .orElse(null),
                 (player, world, state, pos) -> { });
     }
 }

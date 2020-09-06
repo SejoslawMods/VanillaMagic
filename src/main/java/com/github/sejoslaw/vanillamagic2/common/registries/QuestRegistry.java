@@ -63,7 +63,7 @@ public final class QuestRegistry {
 
     public static void readQuest(IJsonService jsonService) {
         String questEventCallerKey = jsonService.getString("eventCaller");
-        QuestEventCaller caller = QUEST_EVENT_CALLERS.stream().filter(c -> c.key.equals(questEventCallerKey)).findFirst().get();
+        QuestEventCaller caller = QUEST_EVENT_CALLERS.stream().filter(c -> c.key.equals(questEventCallerKey)).findFirst().orElse(null);
 
         if (caller == null) {
             VMLogger.logError("Unknown EventCaller: " + questEventCallerKey);
