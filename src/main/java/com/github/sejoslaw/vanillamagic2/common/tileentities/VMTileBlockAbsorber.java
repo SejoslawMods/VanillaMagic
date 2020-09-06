@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -9,6 +10,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.util.Direction;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
