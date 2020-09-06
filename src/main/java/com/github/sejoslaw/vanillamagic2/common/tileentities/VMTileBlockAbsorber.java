@@ -30,14 +30,16 @@ public class VMTileBlockAbsorber extends VMTileEntity {
         }
 
         IInventory sourceInv = HopperTileEntity.getSourceInventory(hopperTileEntity);
-        HopperTileEntity.pullItems(hopperTileEntity);
+        Block block = this.getWorld().getBlockState(this.getPos()).getBlock();
 
-        if (sourceInv.isEmpty() || this.getWorld().getBlockState(this.getPos()).getBlock() == Blocks.AIR) {
+        if (sourceInv != null) {
+            HopperTileEntity.pullItems(hopperTileEntity);
             return;
         }
 
+        ItemEntity entity = new ItemEntity(this.getWorld(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), new ItemStack(block));
         this.getWorld().setBlockState(this.getPos(), Blocks.AIR.getDefaultState());
-        HopperTileEntity.captureItem(hopperTileEntity, new ItemEntity(hopperTileEntity.getWorld(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), new ItemStack(this.getBlockState().getBlock())));
+        HopperTileEntity.captureItem(hopperTileEntity, entity);
     }
 
     public static Block[] getValidBlocks() {
