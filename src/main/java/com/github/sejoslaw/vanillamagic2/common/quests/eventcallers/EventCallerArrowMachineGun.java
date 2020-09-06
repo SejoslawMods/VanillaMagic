@@ -18,7 +18,7 @@ import java.util.Random;
 public class EventCallerArrowMachineGun extends EventCaller<QuestArrowMachineGun> {
     @SubscribeEvent
     public void shootArrow(PlayerInteractEvent.RightClickItem event) {
-        this.executor.onPlayerInteract(event, (player, world, pos, face) ->
+        this.executor.onPlayerInteractNoStackSizeCheck(event, (player, world, pos, face) ->
                 this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
                     ArrowEntity arrowEntity = new ArrowEntity(world, player);
 

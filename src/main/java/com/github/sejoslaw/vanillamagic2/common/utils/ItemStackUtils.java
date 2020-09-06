@@ -112,7 +112,7 @@ public final class ItemStackUtils {
     public static float getExperienceFromStack(ItemStack stack, World world) {
         AbstractCookingRecipe cookingRecipe = (AbstractCookingRecipe) world.getRecipeManager().getRecipes()
                 .stream()
-                .filter(recipe -> (recipe.getType() == IRecipeType.SMELTING) && (recipe instanceof AbstractCookingRecipe) && areEqual(recipe.getRecipeOutput(), stack))
+                .filter(recipe -> (recipe.getType() == IRecipeType.SMELTING) && (recipe instanceof AbstractCookingRecipe) && areEqual(recipe.getRecipeOutput(), stack, true))
                 .findFirst()
                 .orElse(null);
         return cookingRecipe == null ? 0 : cookingRecipe.getExperience();
@@ -146,7 +146,13 @@ public final class ItemStackUtils {
     /**
      * @return Returns true if both stacks are the same in terms of Item and size; otherwise false.
      */
-    public static boolean areEqual(ItemStack stack1, ItemStack stack2) {
-        return stack1.getItem() == stack2.getItem() && stack1.getCount() == stack2.getCount();
+    public static boolean areEqual(ItemStack stack1, ItemStack stack2, boolean checkStackSize) {
+        boolean equalItem = stack1.getItem() == stack2.getItem();
+
+        if (checkStackSize) {
+            return equalItem && stack1.getCount() == stack2.getCount();
+        } else {
+            return equalItem;
+        }
     }
 }

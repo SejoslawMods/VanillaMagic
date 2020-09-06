@@ -30,7 +30,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
                             QuestOreMultiplier quest = this.quests.get(0);
 
                            if (!isStructureValid(world, pos) ||
-                                   !this.executor.areHeldItemsCorrect(player, quest) ||
+                                   !this.executor.areHeldItemsCorrect(player, quest, true) ||
                                    ItemStackUtils.getBurnTicks(player.getHeldItemOffhand()) <= 0) {
                                return null;
                            }

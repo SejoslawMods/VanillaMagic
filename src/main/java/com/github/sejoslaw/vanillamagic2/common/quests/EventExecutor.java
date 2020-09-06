@@ -44,11 +44,13 @@ public final class EventExecutor<TQuest extends Quest> {
         return world.getBlockState(pos).getBlock() == block ? action.get() : null;
     }
 
-    public void withHands(PlayerEntity player, Consumer2<ItemStack, ItemStack> consumer) {
+    public void withHands(PlayerEntity player,
+                          Consumer2<ItemStack, ItemStack> consumer) {
         consumer.accept(player.getHeldItemOffhand(), player.getHeldItemMainhand());
     }
 
-    public void forQuestWithCheck(Function<TQuest, Boolean> check, Consumer<TQuest> action) {
+    public void forQuestWithCheck(Function<TQuest, Boolean> check,
+                                  Consumer<TQuest> action) {
         this.caller.quests
                 .stream()
                 .filter(check::apply)
@@ -105,6 +107,13 @@ public final class EventExecutor<TQuest extends Quest> {
         PlayerEntity player = event.getPlayer();
 
         performCheck(player, (quest) -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
+    }
+
+    public void onPlayerInteractNoStackSizeCheck(PlayerInteractEvent event,
+                                 Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
+        PlayerEntity player = event.getPlayer();
+
+        performCheckNoStackSizeCheck(player, (quest) -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
     }
 
     public void onPlayerInteract(PlayerInteractEvent event,
@@ -180,7 +189,8 @@ public final class EventExecutor<TQuest extends Quest> {
                 (quest) -> consumer.accept(player, world, originalEntity, pickedStack, quest));
     }
 
-    public void onPlayerTick(TickEvent.PlayerTickEvent event, Consumer3<PlayerEntity, World, TQuest> consumer) {
+    public void onPlayerTick(TickEvent.PlayerTickEvent event,
+                             Consumer3<PlayerEntity, World, TQuest> consumer) {
         PlayerEntity player = event.player;
         World world = player.world;
 
@@ -205,7 +215,9 @@ public final class EventExecutor<TQuest extends Quest> {
         performCheckWithoutHands(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
     }
 
-    public void craftOnAltar(PlayerInteractEvent event, List<AltarRecipe> recipes, Function2<ItemStack, ItemStack, Boolean> optionalCheck) {
+    public void craftOnAltar(PlayerInteractEvent event,
+                             List<AltarRecipe> recipes,
+                             Function2<ItemStack, ItemStack, Boolean> optionalCheck) {
         final List<ItemEntity>[] ingredientsInCauldron = new List[1];
         final AltarRecipe[] chosenRecipe = new AltarRecipe[1];
 
@@ -240,7 +252,9 @@ public final class EventExecutor<TQuest extends Quest> {
                 });
     }
 
-    public void useVMItem(PlayerEntity player, String vmItemUniqueKey, Consumer<ItemStack> consumer) {
+    public void useVMItem(PlayerEntity player,
+                          String vmItemUniqueKey,
+                          Consumer<ItemStack> consumer) {
         this.withHands(player, (leftHandStack, rightHandStack) -> {
             CompoundNBT nbt = rightHandStack.getOrCreateTag();
             String key = NbtUtils.NBT_VM_ITEM_UNIQUE_NAME;
@@ -265,35 +279,45 @@ public final class EventExecutor<TQuest extends Quest> {
                         (tile) -> tile.setModuleKey(moduleKey)));
     }
 
-    public boolean areHeldItemsCorrect(PlayerEntity player, TQuest quest) {
-        if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack)) {
+    public boolean areHeldItemsCorrect(PlayerEntity player, TQuest quest, boolean checkStackSize) {
+        if (quest.leftHandStack != null && !ItemStackUtils.areEqual(player.getHeldItemOffhand(), quest.leftHandStack, checkStackSize)) {
             return false;
         }
 
-        return quest.rightHandStack == null || ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack);
+        return quest.rightHandStack == null || ItemStackUtils.areEqual(player.getHeldItemMainhand(), quest.rightHandStack, checkStackSize);
     }
 
     /*
      * -----====== Private Methods =====-----
      */
 
-    private void performCheck(PlayerEntity player, Consumer<TQuest> consumer) {
-         checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer));
+    private void performCheck(PlayerEntity player,
+                              Consumer<TQuest> consumer) {
+         checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer), true);
     }
 
-    private void performCheck(PlayerEntity player, Supplier<TQuest> check, Consumer<TQuest> consumer) {
+    private void performCheckNoStackSizeCheck(PlayerEntity player,
+                                              Consumer<TQuest> consumer) {
+        checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer), false);
+    }
+
+    private void performCheck(PlayerEntity player,
+                              Supplier<TQuest> check,
+                              Consumer<TQuest> consumer) {
         checkItemsInHands(player, (skippedQuest) -> {
             TQuest quest = check.get();
 
-            if (quest == null || !this.areHeldItemsCorrect(player, quest)) {
+            if (quest == null || !this.areHeldItemsCorrect(player, quest, true)) {
                 return;
             }
 
             checkQuestProgress(player, quest, consumer);
-        });
+        }, true);
     }
 
-    private void performCheckWithoutHands(PlayerEntity player, Supplier<TQuest> check, Consumer<TQuest> consumer) {
+    private void performCheckWithoutHands(PlayerEntity player,
+                                          Supplier<TQuest> check,
+                                          Consumer<TQuest> consumer) {
         TQuest quest = check.get();
 
         if (quest == null) {
@@ -303,9 +327,11 @@ public final class EventExecutor<TQuest extends Quest> {
         checkQuestProgress(player, quest, consumer);
     }
 
-    private void checkItemsInHands(PlayerEntity player, Consumer<TQuest> consumer) {
+    private void checkItemsInHands(PlayerEntity player,
+                                   Consumer<TQuest> consumer,
+                                   boolean checkStackSize) {
         for (TQuest quest : this.caller.quests) {
-            if (!this.areHeldItemsCorrect(player, quest)) {
+            if (!this.areHeldItemsCorrect(player, quest, checkStackSize)) {
                 continue;
             }
 
@@ -314,7 +340,9 @@ public final class EventExecutor<TQuest extends Quest> {
         }
     }
 
-    private void checkQuestProgress(PlayerEntity player, TQuest quest, Consumer<TQuest> consumer) {
+    private void checkQuestProgress(PlayerEntity player,
+                                    TQuest quest,
+                                    Consumer<TQuest> consumer) {
         String questUniqueName = quest.uniqueName;
 
         if (!PlayerQuestProgressRegistry.hasPlayerGotQuest(player, questUniqueName)) {
