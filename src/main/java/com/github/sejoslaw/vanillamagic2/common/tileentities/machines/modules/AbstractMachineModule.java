@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
  */
 public abstract class AbstractMachineModule implements IMachineModule {
     protected boolean hasKey(IVMTileMachine machine, String key) {
-        return machine.getTileData().hasUniqueId(key);
+        return machine.getTileData().keySet().contains(key);
     }
 
     protected int getInt(IVMTileMachine machine, String key) {

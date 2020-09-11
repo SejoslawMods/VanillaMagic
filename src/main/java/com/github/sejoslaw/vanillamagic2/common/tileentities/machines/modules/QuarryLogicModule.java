@@ -30,8 +30,8 @@ public class QuarryLogicModule extends AbstractLogicModule {
         Direction diamondDir = Direction.UP;
         BlockPos diamondPos = BlockPos.ZERO;
 
-        for (Direction face : Direction.values()) {
-            diamondPos = machinePos.offset(diamondDir);
+        for (Direction face : Direction.Plane.HORIZONTAL) {
+            diamondPos = machinePos.offset(face);
 
             if (machine.getWorld().getBlockState(diamondPos).getBlock() == Blocks.DIAMOND_BLOCK) {
                 diamondDir = face;
@@ -74,7 +74,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
         BlockState mineBlockState = world.getBlockState(workingPos);
 
         if (world.isAirBlock(workingPos)) {
-            while (!world.isAirBlock(workingPos)) {
+            while (world.isAirBlock(workingPos)) {
                 workingPos = workingPos.offset(Direction.DOWN);
             }
         } else if (mineBlockState.getBlock() == Blocks.BEDROCK) {
