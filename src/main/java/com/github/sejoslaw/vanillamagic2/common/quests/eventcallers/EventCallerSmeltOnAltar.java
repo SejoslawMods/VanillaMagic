@@ -1,7 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
-import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestSmeltOnAltar;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
@@ -29,7 +28,7 @@ public class EventCallerSmeltOnAltar extends EventCaller<QuestSmeltOnAltar> {
                             ItemStack leftHandStack = player.getHeldItemOffhand();
                             QuestSmeltOnAltar quest = this.quests.get(0);
 
-                            if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier)) {
+                            if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier) || world.isRemote) {
                                 return null;
                             }
 

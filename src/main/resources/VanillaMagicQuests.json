@@ -695,7 +695,7 @@
       "id": "minecraft:furnace"
     },
     "uniqueName": "smeltOnAltar",
-    "altarTier": 1,
+    "altarTier": 3,
     "oneItemSmeltCost": 800,
     "rightHandStack": {
       "id": "minecraft:stick"
