@@ -15,6 +15,7 @@ public final class NbtUtils {
 
     public static final String NBT_BLOCK = "NBT_BLOCK";
     public static final String NBT_BLOCK_STATE = "NBT_BLOCK_STATE";
+    public static final String NBT_TILE_TYPE = "NBT_TILE_TYPE";
 
     public static final String NBT_POSITION = "NBT_POSITION";
     public static final String NBT_DIMENSION = "NBT_DIMENSION";

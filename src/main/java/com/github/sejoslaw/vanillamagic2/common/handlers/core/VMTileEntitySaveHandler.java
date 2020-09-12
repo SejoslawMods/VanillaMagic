@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers.core;
 
+import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -17,14 +18,21 @@ public class VMTileEntitySaveHandler extends VMTileEntityHandler {
     public void onWorldSave(WorldEvent.Save event) {
         this.execute(event, (world, file) -> {
             try {
-                CompoundNBT nbt = new CompoundNBT();
                 ListNBT tilesNbt = new ListNBT();
 
-                WorldUtils.getVMTiles(world).forEach(tile -> tilesNbt.add(tile.write(new CompoundNBT())));
+                WorldUtils.getVMTiles(world).forEach(tile -> {
+                    CompoundNBT tileNbt = new CompoundNBT();
+                    tile.write(tileNbt);
+                    tileNbt.putString(NbtUtils.NBT_TILE_TYPE, tile.getTileEntity().getType().getRegistryName().toString());
+                    tilesNbt.add(tileNbt);
+                });
+
+                CompoundNBT nbt = new CompoundNBT();
                 nbt.put(this.key, tilesNbt);
 
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 CompressedStreamTools.writeCompressed(nbt, fileOutputStream);
+                fileOutputStream.flush();
                 fileOutputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();

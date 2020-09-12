@@ -17,11 +17,6 @@ public abstract class VMTileEntityHandler {
         World world = event.getWorld().getWorld();
         File tileEntitiesFile = VMFiles.getVMTileEntitiesFilePath(world).toFile();
         tileEntitiesFile.getParentFile().mkdirs();
-
-        if (!tileEntitiesFile.exists()) {
-            return;
-        }
-
         consumer.accept(world, tileEntitiesFile);
     }
 }

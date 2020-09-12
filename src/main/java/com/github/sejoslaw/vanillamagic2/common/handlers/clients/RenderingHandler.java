@@ -14,7 +14,7 @@ public class RenderingHandler extends EventHandler {
 
     public static void registerEntityRenderers(FMLClientSetupEvent event) {
         INSTANCE.registerRenderers(event, minecraft -> {
-            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.SPELL.get(), SpellRenderer::getRenderer);
+            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.SPELL.get(), SpellRenderer::new);
         });
     }
 }
