@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,18 +13,14 @@ import java.util.List;
  */
 public interface IVMItem {
     /**
-     * @return The array of ingredients for crafting this Custom Item.
-     */
-    default List<ItemStack> getIngredients() {
-        List<ItemStack> stacks = new ArrayList<>();
-        stacks.add(new ItemStack(this.getBaseItem()));
-        return stacks;
-    }
-
-    /**
-     * @return Base item of this Custom Item.
+     * @return Base item for this VM Item.
      */
     Item getBaseItem();
+
+    /**
+     * Sets base item.
+     */
+    void setBaseItem(Item item);
 
     /**
      * @return Custom item in a form of ItemStack.

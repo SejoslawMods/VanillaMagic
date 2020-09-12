@@ -2,9 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestMotherNatureCrystal;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IGrowable;
+import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -20,31 +18,25 @@ public class EventCallerMotherNatureCrystal extends EventCallerVMItem<QuestMothe
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
-        this.executor.onPlayerTick(event, (player, world, quest) ->
-                this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
-                    int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
-                    int verticalRange = 3;
+        this.executor.onPlayerTickNoHandsCheck(event,
+                (player, world) -> player.inventory.mainInventory.stream().anyMatch(ItemRegistry.MOTHER_NATURE_CRYSTAL::isVMItem) ? this.quests.get(0) : null,
+                (player, world, quest) ->
+                    this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
+                        int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
+                        int verticalRange = 3;
 
-                    int posX = (int) Math.round(player.getPosX() - 0.5f);
-                    int posY = (int) player.getPosY();
-                    int posZ = (int) Math.round(player.getPosZ() - 0.5f);
+                        int posX = (int) Math.round(player.getPosX() - 0.5f);
+                        int posY = (int) player.getPosY();
+                        int posZ = (int) Math.round(player.getPosZ() - 0.5f);
 
-                    for (int ix = posX - range; ix <= posX + range; ++ix) {
-                        for (int iz = posZ - range; iz <= posZ + range; ++iz) {
-                            for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy) {
-                                BlockPos pos = new BlockPos(ix, iy, iz);
-                                BlockState state = world.getBlockState(pos);
-                                Block block = state.getBlock();
-
-                                if (!(block instanceof IGrowable) && world.rand.nextInt(50) != 0) {
-                                    return;
+                        for (int ix = posX - range; ix <= posX + range; ++ix) {
+                            for (int iz = posZ - range; iz <= posZ + range; ++iz) {
+                                for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy) {
+                                    this.boneMealStack.setCount(64);
+                                    BoneMealItem.applyBonemeal(this.boneMealStack, world, new BlockPos(ix, iy, iz), player);
                                 }
-
-                                this.boneMealStack.setCount(64);
-                                BoneMealItem.applyBonemeal(this.boneMealStack, world, pos, player);
                             }
                         }
-                    }
-                }));
+                    }));
     }
 }

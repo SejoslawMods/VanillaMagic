@@ -38,6 +38,7 @@ public final class VMEvents {
 
     private static void registerListeners() {
         MinecraftForge.EVENT_BUS.addListener(ServerCommandsHandler::registerCommands);
+        MinecraftForge.EVENT_BUS.addListener(RenderingHandler::registerEntityRenderers);
     }
 
     private static void registerClientSpecificEvents() {

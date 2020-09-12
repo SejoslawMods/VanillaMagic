@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
 import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import java.util.List;
@@ -76,5 +78,10 @@ public abstract class EventHandler {
         CommandDispatcher<CommandSource> dispatcher = event.getCommandDispatcher();
 
         consumer.accept(server, dispatcher);
+    }
+
+    public void registerRenderers(FMLClientSetupEvent event, Consumer<Minecraft> consumer) {
+        Minecraft mc = event.getMinecraftSupplier().get();
+        consumer.accept(mc);
     }
 }

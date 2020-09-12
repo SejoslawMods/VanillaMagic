@@ -741,6 +741,15 @@
     },
     "leftHandStack": {
       "id": "minecraft:nether_star"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:feather",
+        "count": 16
+      }
+    ],
+    "baseItem": {
+      "id": "minecraft:nether_star"
     }
   },
   {
@@ -751,7 +760,27 @@
     "icon": {
       "id": "minecraft:nether_star"
     },
-    "uniqueName": "motherNatureCrystal"
+    "uniqueName": "motherNatureCrystal",
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:melon_slice",
+        "count": 2
+      },
+      {
+        "id": "minecraft:wheat_seeds",
+        "count": 4
+      },
+      {
+        "id": "minecraft:carved_pumpkin",
+        "count": 2
+      }
+    ],
+    "baseItem": {
+      "id": "minecraft:nether_star"
+    }
   },
   {
     "eventCaller": "craftOnAltar",
@@ -1194,6 +1223,15 @@
     "uniqueName": "liquidSuppressionCrystal",
     "rightHandStack": {
       "id": "minecraft:nether_star"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:bucket",
+        "count": 8
+      }
+    ],
+    "baseItem": {
+      "id": "minecraft:nether_star"
     }
   },
   {
@@ -1244,6 +1282,15 @@
     "uniqueName": "accelerationCrystal",
     "rightHandStack": {
       "id": "minecraft:nether_star"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:feather",
+        "count": 16
+      }
+    ],
+    "baseItem": {
+      "id": "minecraft:nether_star"
     }
   },
   {
@@ -1281,6 +1328,14 @@
     },
     "uniqueName": "inventoryBridge",
     "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:chest"
+      }
+    ],
+    "baseItem": {
       "id": "minecraft:blaze_rod"
     }
   },
@@ -1998,6 +2053,14 @@
     },
     "uniqueName": "evokerCrystal",
     "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:totem_of_undying"
+      }
+    ],
+    "baseItem": {
       "id": "minecraft:nether_star"
     }
   },

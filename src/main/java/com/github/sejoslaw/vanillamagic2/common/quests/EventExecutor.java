@@ -224,6 +224,10 @@ public final class EventExecutor<TQuest extends Quest> {
         this.onPlayerInteract(event,
                 (player, world, pos, direction) ->
                         this.click(Blocks.CAULDRON, world, pos, () -> {
+                            if (world.isRemote) {
+                                return null;
+                            }
+
                             ingredientsInCauldron[0] = WorldUtils.getItems(world, pos);
 
                             if (ingredientsInCauldron[0].size() == 0) {

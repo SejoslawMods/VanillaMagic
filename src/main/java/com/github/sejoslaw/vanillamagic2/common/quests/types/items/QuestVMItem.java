@@ -1,25 +1,27 @@
 package com.github.sejoslaw.vanillamagic2.common.quests.types.items;
 
 import com.github.sejoslaw.vanillamagic2.common.items.IVMItem;
-import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
-import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
-
-import java.util.Collection;
+import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
+import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCraftOnAltar;
+import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
+import net.minecraft.item.ItemStack;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public abstract class QuestVMItem<TVMItem extends IVMItem> extends Quest {
+public abstract class QuestVMItem<TVMItem extends IVMItem> extends QuestCraftOnAltar {
+    public void readData(IJsonService jsonService) {
+        super.readData(jsonService);
+
+        ItemStack baseItem = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("baseItem"));
+        this.getVMItem().setBaseItem(baseItem.getItem());
+
+        this.ingredients.add(baseItem);
+        this.results.add(this.getVMItem().getStack());
+    }
+
     /**
      * @return New instance of VM Item definition.
      */
     public abstract TVMItem getVMItem();
-
-    public void fillTooltip(Collection<String> lines) {
-        super.fillTooltip(lines);
-
-        IVMItem vmItem = this.getVMItem();
-        TextUtils.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(vmItem.getIngredients()));
-        TextUtils.addLine(lines, "quest.tooltip.results", this.getTooltip(vmItem.getStack()));
-    }
 }

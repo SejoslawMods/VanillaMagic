@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestAccelerationCrystal;
+import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,8 +17,10 @@ public class EventCallerAccelerationCrystal extends EventCallerVMItem<QuestAccel
 
     @SubscribeEvent
     public void useItem(PlayerInteractEvent.RightClickBlock event) {
-        this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
-                this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) ->
-                        WorldUtils.tick(world, pos, VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(), this.rand)));
+        this.executor.onPlayerInteract(event,
+                (player, world, pos, direction) -> ItemRegistry.ACCELERATION_CRYSTAL.isVMItem(player.getHeldItemMainhand()) ? this.quests.get(0) : null,
+                (player, world, pos, direction, quest) ->
+                    this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) ->
+                            WorldUtils.tick(world, pos, VMForgeConfig.ACCELERATION_CRYSTAL_UPDATE_TICKS.get(), this.rand)));
     }
 }

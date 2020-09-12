@@ -13,7 +13,8 @@ import java.util.Collections;
 public abstract class EventCallerVMItem<TQuest extends QuestVMItem<? extends IVMItem>> extends EventCallerCraftable<TQuest> {
     public void fillRecipes() {
         IVMItem vmItem = this.getVMItem();
-        this.recipes.add(new AltarRecipe(this.quests.get(0), vmItem.getIngredients(), Collections.singletonList(vmItem.getStack())));
+        TQuest quest = this.quests.get(0);
+        this.recipes.add(new AltarRecipe(quest, quest.ingredients, Collections.singletonList(vmItem.getStack())));
     }
 
     protected IVMItem getVMItem() {
