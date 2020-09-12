@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPlayerDiggingPacket;
 import net.minecraft.network.play.server.SChangeBlockPacket;
@@ -39,7 +40,7 @@ public final class BlockUtils {
         if (player.isCreative()) {
             block.onBlockHarvested(world, pos, state, player);
 
-            if (block.removedByPlayer(state, world, pos, player, false, null)) {
+            if (block.removedByPlayer(state, world, pos, player, false, Fluids.EMPTY.getDefaultState())) {
                 block.onPlayerDestroy(world, pos, state);
             }
 
@@ -53,18 +54,11 @@ public final class BlockUtils {
         stack.onBlockDestroyed(world, state, pos, player);
 
         if (!world.isRemote) {
-            int xp = ForgeHooks.onBlockBreakEvent(world, ((ServerPlayerEntity) player).interactionManager.getGameType(), (ServerPlayerEntity) player, pos);
-
-            if (xp == -1) {
-                return;
-            }
-
             TileEntity tileEntity = world.getTileEntity(pos);
 
-            if (block.removedByPlayer(state, world, pos, player, true, null)) {
+            if (block.removedByPlayer(state, world, pos, player, true, Fluids.EMPTY.getDefaultState())) {
                 block.onPlayerDestroy(world, pos, state);
                 block.harvestBlock(world, player, pos, state, tileEntity, stack);
-                block.dropXpOnBlockBreak(world, pos, xp);
             }
 
             ServerPlayerEntity mpPlayer = (ServerPlayerEntity) player;
@@ -72,7 +66,7 @@ public final class BlockUtils {
         } else {
             world.playBroadcastSound(2001, pos, Block.getStateId(state));
 
-            if (block.removedByPlayer(state, world, pos, player, true, null)) {
+            if (block.removedByPlayer(state, world, pos, player, true, Fluids.EMPTY.getDefaultState())) {
                 block.onPlayerDestroy(world, pos, state);
             }
 

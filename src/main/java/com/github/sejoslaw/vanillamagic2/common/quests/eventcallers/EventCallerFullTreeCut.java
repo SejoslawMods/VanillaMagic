@@ -22,15 +22,19 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
     @SubscribeEvent
     public void onTreeCut(BlockEvent.BreakEvent event) {
         this.executor.onBlockBreak(event,
-                (player, world, pos, state) -> isLog(world, pos) ? this.quests.get(0) : null,
+                (player, world, pos, state) -> isLog(world, pos) && isAxe(player.getHeldItemMainhand()) ? this.quests.get(0) : null,
                 (player, world, pos, state) -> {
-                    if (!isBreakingTree(world, pos)) {
+                    if (world.isRemote || !isBreakingTree(world, pos)) {
                         return;
                     }
 
                     this.executor.withHands(player, (leftHandStack, rightHandStack) ->
                             new TreeChopTask(player, world, pos, rightHandStack).execute());
                 });
+    }
+
+    private static boolean isAxe(ItemStack stack) {
+        return stack.getItem().getRegistryName().toString().toLowerCase().contains("_axe");
     }
 
     private static boolean isLog(World world, BlockPos pos) {
@@ -125,7 +129,7 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
                     }
                 }
 
-                BlockUtils.breakBlock(rightHandStack, world, player, pos);
+                BlockUtils.breakBlock(rightHandStack, world, player, current);
             }
         }
     }
