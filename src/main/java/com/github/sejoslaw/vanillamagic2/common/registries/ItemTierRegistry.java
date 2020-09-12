@@ -64,27 +64,28 @@ public final class ItemTierRegistry {
 
         if (te == null) {
             te = new TierEntry(tier, tierType, new ArrayList<>());
-            te.stacks.add(stack);
             ENTRIES.add(te);
-        } else {
-            te.stacks.add(stack);
         }
+
+        te.stacks.add(stack);
     }
 
     public static boolean isBase(ItemStack item) {
         return ENTRIES
                 .stream()
-                .anyMatch(entry -> item.getItem().getRegistryName().toString().toLowerCase().contains(entry.tierType));
+                .anyMatch(entry -> item.getItem().getRegistryName().getPath().toLowerCase().contains(entry.tierType) &&
+                                   entry.stacks.stream().noneMatch(stack -> stack.getItem() == item.getItem()));
     }
 
     public static boolean isIngredient(ItemStack item) {
-        return getTier(item) != EMPTY.tier;
+        return !isBase(item) && getTier(item) != EMPTY.tier;
     }
 
     public static int getTier(ItemStack item) {
         return ENTRIES
                 .stream()
-                .filter(entry -> entry.stacks.stream().anyMatch(stack -> stack.getItem() == item.getItem() && stack.getCount() <= item.getCount()))
+                .filter(entry -> item.getItem().getRegistryName().getPath().startsWith(entry.tierType) ||
+                                 entry.stacks.stream().anyMatch(ingredient -> ingredient.getItem() == item.getItem()))
                 .findFirst()
                 .orElse(EMPTY)
                 .tier;

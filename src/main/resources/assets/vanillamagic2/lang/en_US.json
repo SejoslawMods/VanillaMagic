@@ -315,8 +315,8 @@
   "quest.craftIronOre": "Craft Iron Ore",
   "quest.craftIronOre.desc": "Toss ingredients into the Altar and Right-click.",
 
-  "quest.toolUpgrade": "Tool Upgrade",
-  "quest.toolUpgrade.desc": "Toss ingredients into the Altar and Right-click.",
+  "quest.itemTierUpgrade": "Item Tier Upgrade",
+  "quest.itemTierUpgrade.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.itemUpgrades": "Item Upgrades",
   "quest.itemUpgrades.desc": "Toss ingredients into the Altar and Right-click.",

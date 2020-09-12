@@ -371,7 +371,7 @@
     "parent": "craftIronOre",
     "posX": 2,
     "posY": 0,
-    "uniqueName": "toolUpgrade",
+    "uniqueName": "itemTierUpgrade",
     "icon": {
       "id": "minecraft:diamond_pickaxe"
     },
@@ -381,7 +381,7 @@
   },
   {
     "eventCaller": "itemUpgrade",
-    "parent": "toolUpgrade",
+    "parent": "itemTierUpgrade",
     "posX": 2,
     "posY": 0,
     "uniqueName": "itemUpgrades",

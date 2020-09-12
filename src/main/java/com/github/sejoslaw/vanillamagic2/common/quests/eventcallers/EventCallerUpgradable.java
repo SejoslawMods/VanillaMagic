@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -27,6 +26,10 @@ public abstract class EventCallerUpgradable<TQuest extends Quest> extends EventC
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) ->
                         this.executor.click(Blocks.CAULDRON, world, pos, () -> {
+                            if (world.isRemote) {
+                                return null;
+                            }
+
                             items[0] = WorldUtils.getItems(world, pos);
                             baseItems[0] = items[0].stream().filter(entity -> isBase(entity.getItem())).collect(Collectors.toList());
                             ingredients[0] = items[0].stream().filter(entity -> isIngredient(entity.getItem())).collect(Collectors.toList());
@@ -44,14 +47,8 @@ public abstract class EventCallerUpgradable<TQuest extends Quest> extends EventC
                             return this.quests.get(0);
                         }),
                 (player, world, pos, direction, quest) -> {
-                    baseItems[0].forEach(Entity::remove);
-
-                    ingredients[0].forEach(entity -> {
-                        if (entity.getItem().getCount() <= 0) {
-                            entity.remove();
-                        }
-                    });
-
+                    baseItems[0].forEach(entity -> entity.getItem().shrink(1));
+                    ingredients[0].forEach(entity -> entity.getItem().shrink(1));
                     WorldUtils.spawnOnCauldron(world, pos, results[0], ItemStack::getCount);
                 });
     }

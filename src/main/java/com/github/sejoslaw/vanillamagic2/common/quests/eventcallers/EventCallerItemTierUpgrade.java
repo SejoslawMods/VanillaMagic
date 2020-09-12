@@ -37,6 +37,7 @@ public class EventCallerItemTierUpgrade extends EventCallerUpgradable<QuestItemT
 
             ItemStack baseStack = baseEntity.getItem();
             int tier = ItemTierRegistry.getTier(baseStack);
+            tier++;
             ItemEntity ingredient = this.getIngredient(tier, ingredients);
 
             if (ingredient == null) {
@@ -44,7 +45,6 @@ public class EventCallerItemTierUpgrade extends EventCallerUpgradable<QuestItemT
                 continue;
             }
 
-            ingredient.getItem().grow(-1);
             ItemStack result = this.buildResult(tier, baseStack);
             results.add(result);
         }
