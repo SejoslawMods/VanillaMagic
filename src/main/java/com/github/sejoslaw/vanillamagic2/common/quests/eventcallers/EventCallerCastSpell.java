@@ -25,6 +25,11 @@ public class EventCallerCastSpell<TQuest extends QuestCastSpell> extends EventCa
                             .findFirst()
                             .orElse(null);
                 },
-                (player, world, pos, direction, quest) -> quest.spell.cast(player, world, pos, direction));
+                (player, world, pos, direction, quest) -> {
+                    quest.spell.cast(player, world, pos, direction);
+
+                    this.executor.withHands(player, (leftHandStack, rightHandStack) ->
+                            leftHandStack.shrink(quest.leftHandStack.getCount()));
+                });
     }
 }
