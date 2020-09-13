@@ -1,8 +1,10 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -72,5 +74,13 @@ public final class EntityUtils {
         }
 
         return null;
+    }
+
+    public static void spawnLightningBolt(World world, LightningBoltEntity entity) {
+        if (world instanceof ClientWorld) {
+            ((ClientWorld) world).addLightning(entity);
+        } else {
+            world.addEntity(entity);
+        }
     }
 }
