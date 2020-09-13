@@ -288,7 +288,7 @@
     ],
     "results": [
       {
-        "id": "minecraft:snow"
+        "id": "minecraft:snowball"
       },
       {
         "id": "minecraft:bucket"
@@ -307,7 +307,7 @@
     "uniqueName": "craftIce",
     "ingredients": [
       {
-        "id": "minecraft:snow"
+        "id": "minecraft:snowball"
       },
       {
         "id": "minecraft:water_bucket"
@@ -1873,7 +1873,7 @@
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:snow",
+      "id": "minecraft:snowball",
       "count": 2
     }
   },
@@ -2243,7 +2243,7 @@
       "id": "minecraft:blaze_rod"
     },
     "leftHandStack": {
-      "id": "minecraft:snow"
+      "id": "minecraft:snowball"
     }
   },
   {

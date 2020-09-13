@@ -26,9 +26,14 @@ public class SpellMoveInAir extends Spell {
             if ((newPosY > 0) && world.isAirBlock(newPos) && world.isAirBlock(newPosHead)) {
                 player.setPositionAndUpdate(newPosX, newPosY, newPosZ);
                 player.fallDistance = 0.0F;
+                player.getHeldItemOffhand().grow(1);
 
                 return;
             }
+        }
+
+        if (face == null) {
+            player.getHeldItemOffhand().grow(1);
         }
     }
 }
