@@ -79,6 +79,13 @@ public final class TextUtils {
     }
 
     /**
+     * @return Input string with capitalised first letter.
+     */
+    public static String firstLetterToUpper(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
+    /**
      * Adds new formatted message line to specified collection.
      */
     public static String buildMessageLine(String key, String value) {

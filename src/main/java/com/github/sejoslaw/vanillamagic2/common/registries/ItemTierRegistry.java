@@ -5,12 +5,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,22 +29,11 @@ public final class ItemTierRegistry {
     private static final TierEntry EMPTY = new TierEntry(-1, "EMPTY", new ArrayList<>());
 
     public static void initialize() {
-        add(1, "wooden", "planks");
+        add(1, "wooden", Items.AIR);
         add(2, "stone", Blocks.STONE);
         add(3, "iron", Items.IRON_INGOT);
         add(4, "golden", Items.GOLD_INGOT);
         add(5, "diamond", Items.DIAMOND);
-    }
-
-    public static void add(int tier, String tierType, String itemType) {
-        List<Block> blocks = ForgeRegistries.BLOCKS.getValues()
-                .stream()
-                .filter(block -> block.getRegistryName().toString().toLowerCase().contains(itemType))
-                .collect(Collectors.toList());
-
-        for (Block block : blocks) {
-            add(tier, tierType, block);
-        }
     }
 
     public static void add(int tier, String tierType, Block block) {
@@ -95,6 +80,21 @@ public final class ItemTierRegistry {
         return ENTRIES
                 .stream()
                 .filter(entry -> entry.tier == tier).findFirst().orElse(EMPTY).tierType;
+    }
+
+    public static Map<Integer, List<ItemStack>> getTiers() {
+        return ENTRIES
+                .stream()
+                .collect(Collectors.toMap(entry -> entry.tier, entry -> entry.stacks));
+    }
+
+    public static List<ItemStack> getIngredients(int tier) {
+        return ENTRIES
+                .stream()
+                .filter(entry -> entry.tier == tier)
+                .findFirst()
+                .orElse(EMPTY)
+                .stacks;
     }
 
     private static TierEntry find(int tier, String tierType) {
