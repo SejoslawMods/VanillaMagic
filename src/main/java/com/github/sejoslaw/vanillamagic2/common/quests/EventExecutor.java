@@ -81,15 +81,16 @@ public final class EventExecutor<TQuest extends Quest> {
                 (quest) -> consumer.accept(world, pos, state, quest));
     }
 
-    public void onHarvestDrops(BlockEvent.HarvestDropsEvent event,
-                               Function5<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> check,
-                               Consumer6<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> consumer) {
-        PlayerEntity player = event.getHarvester();
-        List<ItemStack> drops = event.getDrops();
+    public void onBlockEventNoHandsCheck(BlockEvent event, PlayerEntity player,
+                             Function3<World, BlockPos, BlockState, TQuest> check,
+                             Consumer4<World, BlockPos, BlockState, TQuest> consumer) {
+        World world = event.getWorld().getWorld();
+        BlockPos pos = event.getPos();
+        BlockState state = event.getState();
 
-        onBlockEvent(event, player,
-                (world, pos, state) -> check.apply(player, world, pos, state, drops),
-                (world, pos, state, quest) -> consumer.accept(player, world, pos, state, drops, quest));
+        performCheckWithoutHands(player,
+                () -> check.apply(world, pos, state),
+                (quest) -> consumer.accept(world, pos, state, quest));
     }
 
     public void onBlockBreak(BlockEvent.BreakEvent event,
@@ -100,6 +101,27 @@ public final class EventExecutor<TQuest extends Quest> {
         onBlockEvent(event, player,
                 (world, pos, state) -> check.apply(player, world, pos, state),
                 (world, pos, state, quest) -> consumer.accept(player, world, pos, state));
+    }
+
+    public void onBlockBreakNoHandsCheck(BlockEvent.BreakEvent event,
+                             Function4<PlayerEntity, World, BlockPos, BlockState, TQuest> check,
+                             Consumer5<PlayerEntity, World, BlockPos, BlockState, TQuest> consumer) {
+        PlayerEntity player = event.getPlayer();
+
+        onBlockEventNoHandsCheck(event, player,
+                (world, pos, state) -> check.apply(player, world, pos, state),
+                (world, pos, state, quest) -> consumer.accept(player, world, pos, state, quest));
+    }
+
+    public void onHarvestDropsNoHandsCheck(BlockEvent.HarvestDropsEvent event,
+                               Function5<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> check,
+                               Consumer6<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> consumer) {
+        PlayerEntity player = event.getHarvester();
+        List<ItemStack> drops = event.getDrops();
+
+        onBlockEventNoHandsCheck(event, player,
+                (world, pos, state) -> check.apply(player, world, pos, state, drops),
+                (world, pos, state, quest) -> consumer.accept(player, world, pos, state, drops, quest));
     }
 
     public void onPlayerInteract(PlayerInteractEvent event,

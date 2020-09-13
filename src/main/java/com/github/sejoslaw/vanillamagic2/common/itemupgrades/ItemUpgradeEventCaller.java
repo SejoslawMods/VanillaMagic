@@ -2,6 +2,8 @@ package com.github.sejoslaw.vanillamagic2.common.itemupgrades;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.Action;
 import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.EventCallerItemUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestItemUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.core.VMEvents;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -22,5 +24,10 @@ public class ItemUpgradeEventCaller {
         }
 
         action.execute();
+    }
+
+    protected QuestItemUpgrade getQuest(PlayerEntity player) {
+        QuestItemUpgrade quest = this.eventCaller.quests.get(0);
+        return PlayerQuestProgressRegistry.hasPlayerGotQuest(player, quest.uniqueName) ? quest : null;
     }
 }

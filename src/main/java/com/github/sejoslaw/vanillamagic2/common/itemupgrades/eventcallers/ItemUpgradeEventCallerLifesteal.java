@@ -17,7 +17,7 @@ public class ItemUpgradeEventCallerLifesteal extends ItemUpgradeEventCaller {
     @SubscribeEvent
     public void onAttack(AttackEntityEvent event) {
         this.eventCaller.executor.onAttackEntity(event,
-                (player, world, entity) -> this.eventCaller.quests.get(0),
+                (player, world, entity) -> this.getQuest(player),
                 (player, world, entity, quest) ->
                     this.execute(player, () ->
                             this.eventCaller.executor.withHands(player,

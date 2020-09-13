@@ -128,7 +128,7 @@ public final class ItemStackUtils {
                 .findFirst()
                 .orElse(null);
 
-        return recipe == null ? ItemStack.EMPTY : recipe.getRecipeOutput();
+        return recipe == null ? ItemStack.EMPTY : recipe.getRecipeOutput().copy();
     }
 
     /**

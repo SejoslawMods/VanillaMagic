@@ -12,7 +12,7 @@ public class ItemUpgradeEventCallerThor extends ItemUpgradeEventCaller {
     @SubscribeEvent
     public void onAttack(AttackEntityEvent event) {
         this.eventCaller.executor.onAttackEntity(event,
-                (player, world, entity) -> this.eventCaller.quests.get(0),
+                (player, world, entity) -> this.getQuest(player),
                 (player, world, entity, quest) ->
                         this.execute(player, () ->
                                 world.addEntity(new LightningBoltEntity(world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), false))));

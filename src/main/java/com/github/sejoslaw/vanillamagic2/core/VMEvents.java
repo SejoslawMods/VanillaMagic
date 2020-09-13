@@ -47,6 +47,7 @@ public final class VMEvents {
         register(new ShowHungerTooltipHandler());
         register(new ShowSaturationTooltipHandler());
         register(new ShowDurabilityTooltipHandler());
+        register(new ShowItemUpgradesTooltipHandler());
     }
 
     private static void registerDedicatedServerSpecificEvents() {

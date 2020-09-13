@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class EventCallerItemUpgrade extends EventCallerUpgradable<QuestItemUpgrade> {
     public EventCallerItemUpgrade() {
-        ItemUpgradeRegistry.UPGRADES.forEach(handler -> handler.getItemUpgradeEventCaller().eventCaller = this);
+        ItemUpgradeRegistry.forEach(handler -> handler.getItemUpgradeEventCaller().eventCaller = this);
     }
 
     protected boolean isBase(ItemStack stack) {
@@ -42,7 +42,7 @@ public class EventCallerItemUpgrade extends EventCallerUpgradable<QuestItemUpgra
                 }
 
                 baseStack.getOrCreateTag().putString(upgrade.getUniqueTag(), upgrade.getUniqueTag());
-                ingredient.getItem().grow(-upgrade.getIngredient().getCount());
+                results.add(baseStack.copy());
             }
         }
 

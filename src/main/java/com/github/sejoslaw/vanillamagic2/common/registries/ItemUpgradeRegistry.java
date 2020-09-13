@@ -17,13 +17,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class ItemUpgradeRegistry {
-    public static final Set<ItemUpgradeProcessor> UPGRADES = new HashSet<>();
+    private static final Set<ItemUpgradeProcessor> UPGRADES = new HashSet<>();
 
     public static void initialize() {
         UPGRADES.add(new ItemUpgradeProcessor(ItemUpgradeEventCallerAutosmelt.class, AutosmeltUpgrade.class).register());
@@ -54,6 +55,18 @@ public final class ItemUpgradeRegistry {
                 .filter(proc ->
                         Arrays.stream(proc.getItemUpgradeEventCaller().itemUpgrade.getBaseItemTypes())
                         .anyMatch(procType -> procType.itemType.equals(type.itemType)))
+                .map(proc -> proc.getItemUpgradeEventCaller().itemUpgrade)
+                .collect(Collectors.toList());
+    }
+
+    public static void forEach(Consumer<ItemUpgradeProcessor> consumer) {
+        UPGRADES.forEach(consumer);
+    }
+
+    public static List<ItemUpgrade> getInstalledUpgrades(ItemStack stack) {
+        return UPGRADES
+                .stream()
+                .filter(proc -> stack.getOrCreateTag().keySet().contains(proc.getItemUpgradeEventCaller().itemUpgrade.getUniqueTag()))
                 .map(proc -> proc.getItemUpgradeEventCaller().itemUpgrade)
                 .collect(Collectors.toList());
     }
