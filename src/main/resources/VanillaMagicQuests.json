@@ -23,7 +23,7 @@
     }
   },
   {
-    "eventCaller": "castSpellInAir",
+    "eventCaller": "castSpellOnBlock",
     "parent": "craftStick",
     "posX": 0,
     "posY": -2,

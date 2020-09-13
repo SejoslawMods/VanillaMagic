@@ -16,6 +16,10 @@ import java.util.Random;
  */
 public class SpellLighter extends Spell {
     public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
+        if (world.isRemote) {
+            return;
+        }
+
         pos = pos.offset(face);
 
         if (world.isAirBlock(pos)) {
