@@ -16,7 +16,7 @@ import java.util.Collection;
 public class ItemUpgradeEventCallerLifesteal extends ItemUpgradeEventCaller {
     @SubscribeEvent
     public void onAttack(AttackEntityEvent event) {
-        this.eventCaller.executor.onAttackEntity(event,
+        this.eventCaller.executor.onAttackEntityNoHandsCheck(event,
                 (player, world, entity) -> this.getQuest(player),
                 (player, world, entity, quest) ->
                     this.execute(player, () ->

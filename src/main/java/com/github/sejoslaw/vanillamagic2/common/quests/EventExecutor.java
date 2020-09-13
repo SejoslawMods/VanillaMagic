@@ -69,6 +69,18 @@ public final class EventExecutor<TQuest extends Quest> {
                 (quest) -> consumer.accept(player, world, target, quest));
     }
 
+    public void onAttackEntityNoHandsCheck(AttackEntityEvent event,
+                               Function3<PlayerEntity, World, Entity, TQuest> check,
+                               Consumer4<PlayerEntity, World, Entity, TQuest> consumer) {
+        PlayerEntity player = event.getPlayer();
+        World world = player.getEntityWorld();
+        Entity target = event.getTarget();
+
+        performCheckNoHandsCheck(player,
+                () -> check.apply(player, world, target),
+                (quest) -> consumer.accept(player, world, target, quest));
+    }
+
     public void onBlockEvent(BlockEvent event, PlayerEntity player,
                              Function3<World, BlockPos, BlockState, TQuest> check,
                              Consumer4<World, BlockPos, BlockState, TQuest> consumer) {
@@ -88,7 +100,7 @@ public final class EventExecutor<TQuest extends Quest> {
         BlockPos pos = event.getPos();
         BlockState state = event.getState();
 
-        performCheckWithoutHands(player,
+        performCheckNoHandsCheck(player,
                 () -> check.apply(world, pos, state),
                 (quest) -> consumer.accept(world, pos, state, quest));
     }
@@ -234,7 +246,7 @@ public final class EventExecutor<TQuest extends Quest> {
         PlayerEntity player = event.player;
         World world = player.world;
 
-        performCheckWithoutHands(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
+        performCheckNoHandsCheck(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
     }
 
     public void craftOnAltar(PlayerInteractEvent event,
@@ -341,7 +353,7 @@ public final class EventExecutor<TQuest extends Quest> {
         }, true);
     }
 
-    private void performCheckWithoutHands(PlayerEntity player,
+    private void performCheckNoHandsCheck(PlayerEntity player,
                                           Supplier<TQuest> check,
                                           Consumer<TQuest> consumer) {
         TQuest quest = check.get();
