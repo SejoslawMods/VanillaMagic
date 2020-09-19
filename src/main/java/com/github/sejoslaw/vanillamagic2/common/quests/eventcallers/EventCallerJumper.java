@@ -22,11 +22,15 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
     public void saveBlockPosToBook(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
                 this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
+                    if (!player.isSneaking()) {
+                        return;
+                    }
+
                     BlockPos savePos = pos.offset(direction);
 
-                    ItemStack stack = new ItemStack(Items.ENCHANTED_BOOK);
+                    ItemStack stack = new ItemStack(Items.BOOK);
                     stack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.jumper.bookTitle"), TextUtils.getPosition(world, savePos)));
-                    stack.setTagInfo(NbtUtils.NBT_POSITION, NbtUtils.toNbt(world, savePos));
+                    stack.getOrCreateTag().put(NbtUtils.NBT_POSITION, NbtUtils.toNbt(world, savePos));
 
                     player.setHeldItem(Hand.OFF_HAND, stack);
                 }));
@@ -38,8 +42,8 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
 
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) -> {
-                    nbt[0] = player.getHeldItemMainhand().getOrCreateTag();
-                    return nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
+                    nbt[0] = player.getHeldItemOffhand().getOrCreateTag();
+                    return !world.isRemote && nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
                 },
                 (player, world, pos, direction, quest) ->
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {

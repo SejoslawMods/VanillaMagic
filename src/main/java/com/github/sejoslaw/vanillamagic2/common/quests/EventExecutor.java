@@ -57,18 +57,6 @@ public final class EventExecutor<TQuest extends Quest> {
                 .forEach(action);
     }
 
-    public void onAttackEntity(AttackEntityEvent event,
-                               Function3<PlayerEntity, World, Entity, TQuest> check,
-                               Consumer4<PlayerEntity, World, Entity, TQuest> consumer) {
-        PlayerEntity player = event.getPlayer();
-        World world = player.getEntityWorld();
-        Entity target = event.getTarget();
-
-        performCheck(player,
-                () -> check.apply(player, world, target),
-                (quest) -> consumer.accept(player, world, target, quest));
-    }
-
     public void onAttackEntityNoHandsCheck(AttackEntityEvent event,
                                Function3<PlayerEntity, World, Entity, TQuest> check,
                                Consumer4<PlayerEntity, World, Entity, TQuest> consumer) {
@@ -123,17 +111,6 @@ public final class EventExecutor<TQuest extends Quest> {
         onBlockEventNoHandsCheck(event, player,
                 (world, pos, state) -> check.apply(player, world, pos, state),
                 (world, pos, state, quest) -> consumer.accept(player, world, pos, state, quest));
-    }
-
-    public void onHarvestDropsNoHandsCheck(BlockEvent.HarvestDropsEvent event,
-                               Function5<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> check,
-                               Consumer6<PlayerEntity, World, BlockPos, BlockState, List<ItemStack>, TQuest> consumer) {
-        PlayerEntity player = event.getHarvester();
-        List<ItemStack> drops = event.getDrops();
-
-        onBlockEventNoHandsCheck(event, player,
-                (world, pos, state) -> check.apply(player, world, pos, state, drops),
-                (world, pos, state, quest) -> consumer.accept(player, world, pos, state, drops, quest));
     }
 
     public void onPlayerInteract(PlayerInteractEvent event,

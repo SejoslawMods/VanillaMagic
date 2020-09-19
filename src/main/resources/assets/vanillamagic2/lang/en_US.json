@@ -105,7 +105,7 @@
   "quest.spellTeleport.desc": "Right-click to teleport where You are pointing at.",
 
   "quest.jumper": "Jumper",
-  "quest.jumper.desc": "Shift-right-click block to save position. Shift-right-click in air to teleport.",
+  "quest.jumper.desc": "Shift-right-click block to save position. Right-click in air to teleport.",
 
   "quest.spellTeleportToNether": "Teleport to Nether",
   "quest.spellTeleportToNether.desc": "Right-click to teleport. (Pssst go higher... 60+ is safe... I think)",
