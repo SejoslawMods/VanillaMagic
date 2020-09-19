@@ -19,6 +19,10 @@ public class VillagerSummonLogic extends SummonEntityLogic {
     }
 
     public Entity getEntity(World world) {
+        if (world.isRemote) {
+            return null;
+        }
+
         Collection<VillagerProfession> professions = ForgeRegistries.PROFESSIONS.getValues();
         VillagerProfession profession = (VillagerProfession) professions.toArray()[new Random().nextInt(professions.size())];
         VillagerEntity entity = EntityType.VILLAGER.create(world);
