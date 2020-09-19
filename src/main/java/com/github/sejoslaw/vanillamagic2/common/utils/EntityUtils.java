@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -38,6 +39,14 @@ public final class EntityUtils {
                 .stream()
                 .filter(type -> type.getClassification() == classification)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Teleports Entity to the specified location on specified DimensionType.
+     */
+    public static void teleport(Entity entity, BlockPos newPos, DimensionType dimensionType) {
+        World destinationWorld = entity.getServer().getWorld(dimensionType);
+        teleport(entity, newPos, destinationWorld);
     }
 
     /**
