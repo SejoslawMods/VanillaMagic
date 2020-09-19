@@ -38,6 +38,7 @@ public final class VMForgeConfig {
 
     private static final String CATEGORY_METEOR = "Meteor";
     public static ForgeConfigSpec.IntValue METEOR_EXPLOSION_POWER;
+    public static ForgeConfigSpec.DoubleValue METEOR_ACCELERATION;
 
     private static final String CATEGORY_HOSTILE_MOBS = "HostileMobs";
     public static ForgeConfigSpec.IntValue PERCENT_FOR_SPAWN_HOSTILE_ON_HORSE;
@@ -84,6 +85,7 @@ public final class VMForgeConfig {
 
         COMMON_BUILDER.push(CATEGORY_METEOR);
         METEOR_EXPLOSION_POWER = COMMON_BUILDER.defineInRange("METEOR_EXPLOSION_POWER", 25, 1, Integer.MAX_VALUE);
+        METEOR_ACCELERATION = COMMON_BUILDER.defineInRange("METEOR_ACCELERATION", 10, 1, Double.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         COMMON_BUILDER.push(CATEGORY_HOSTILE_MOBS);

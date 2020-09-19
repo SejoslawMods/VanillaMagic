@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -15,12 +16,15 @@ public class EntityMeteor extends FireballEntity {
     }
 
     public void setupMeteor(double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ, double accelX, double accelY, double accelZ) {
-        setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
-        setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
+        this.setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
+        this.setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
+        this.setMotion(Vec3d.ZERO);
 
-        double accel = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
+        double distance = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
 
-        this.setMotion(0, accelY / accel * 0.1D, 0);
+        this.accelerationX = accelX / distance * 0.1D;
+        this.accelerationY = accelY / distance * 0.1D;
+        this.accelerationZ = accelZ / distance * 0.1D;
     }
 
     protected void onImpact(RayTraceResult result) {
