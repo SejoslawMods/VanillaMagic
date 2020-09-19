@@ -24,6 +24,10 @@ public class SpellSummonEntity extends Spell {
     public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
         Entity entity = SummonEntityLogicRegistry.getEntity(world, entityType);
 
+        if (entity == null) {
+            return;
+        }
+
         if (entity instanceof AgeableEntity) {
             ((AgeableEntity) entity).setGrowingAge(1);
         }
