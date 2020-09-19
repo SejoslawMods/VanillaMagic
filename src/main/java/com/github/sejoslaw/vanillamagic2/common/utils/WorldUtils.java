@@ -125,9 +125,10 @@ public final class WorldUtils {
      * @return Name of the currently handling World.
      */
     public static String getWorldName(World world) {
-        if (WORLD_NAME.isEmpty()) {
+        try {
             WORLD_NAME = world.getWorldInfo().getWorldName();
-        }
+        } catch (Exception ex) { }
+
         return WORLD_NAME;
     }
 }
