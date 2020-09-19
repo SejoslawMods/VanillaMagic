@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.handlers.global.VMItemTooltipHan
 import com.github.sejoslaw.vanillamagic2.common.handlers.servers.ServerCommandsHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
 /**
@@ -38,7 +39,7 @@ public final class VMEvents {
 
     private static void registerListeners() {
         MinecraftForge.EVENT_BUS.addListener(ServerCommandsHandler::registerCommands);
-        MinecraftForge.EVENT_BUS.addListener(RenderingHandler::registerEntityRenderers);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(RenderingHandler::registerEntityRenderers);
     }
 
     private static void registerClientSpecificEvents() {
