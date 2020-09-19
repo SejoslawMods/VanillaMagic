@@ -38,7 +38,7 @@ public final class SpellRegistry {
         SPELLS.put("spellWeatherThunderstorm", new SpellWeatherThunderstorm());
 
         for (Map.Entry<ResourceLocation, EntityType<?>> entry : ForgeRegistries.ENTITIES.getEntries()) {
-            String spellUniqueName = "spellSummon_" + entry.getKey().getPath();
+            String spellUniqueName = "spellSummon_" + entry.getKey().toString();
             SPELLS.put(spellUniqueName, new SpellSummonEntity(entry.getValue()));
         }
     }
