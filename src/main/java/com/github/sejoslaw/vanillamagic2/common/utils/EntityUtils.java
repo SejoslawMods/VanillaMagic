@@ -76,6 +76,9 @@ public final class EntityUtils {
         return null;
     }
 
+    /**
+     * Adds lightning bolt to the World.
+     */
     public static void spawnLightningBolt(World world, LightningBoltEntity entity) {
         if (world instanceof ClientWorld) {
             ((ClientWorld) world).addLightning(entity);
