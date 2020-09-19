@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.normal;
 
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,10 @@ import java.util.List;
  */
 public class SpellTeleportToEnd extends Spell {
     public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
+        if (world.isRemote) {
+            return;
+        }
+
         if (player.dimension == DimensionType.OVERWORLD) {
             player.changeDimension(DimensionType.THE_END);
         } else {
@@ -33,7 +38,7 @@ public class SpellTeleportToEnd extends Spell {
             if (entities.size() > 0) {
                 TextUtils.addChatMessage("vm.message.killDragon");
             } else {
-                player.changeDimension(DimensionType.OVERWORLD);
+                EntityUtils.teleport(player, player.getPosition(), DimensionType.OVERWORLD);
             }
         }
     }
