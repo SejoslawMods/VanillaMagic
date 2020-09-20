@@ -42,7 +42,8 @@ public final class EvokerSpellRegistry {
         CompoundNBT nbt = stack.getOrCreateTag();
 
         int spellId = nbt.getInt(NbtUtils.NBT_SPELL_ID);
-        nbt.putInt(NbtUtils.NBT_SPELL_ID, spellId + 1 >= SPELLS.size() ? 0 : spellId + 1);
+        spellId = spellId + 1 >= SPELLS.size() ? 0 : spellId + 1;
+        nbt.putInt(NbtUtils.NBT_SPELL_ID, spellId);
 
         String displayNamePrefix = TextUtils.getFormattedText("vmitem." + nbt.getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME) + ".displayName");
         String displayNamePostfix = TextUtils.getFormattedText(SPELLS.get(spellId).translationKey);

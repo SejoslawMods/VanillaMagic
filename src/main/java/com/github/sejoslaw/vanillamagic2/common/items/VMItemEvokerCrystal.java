@@ -1,6 +1,5 @@
 package com.github.sejoslaw.vanillamagic2.common.items;
 
-import com.github.sejoslaw.vanillamagic2.common.registries.EvokerSpellRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import net.minecraft.item.ItemStack;
 
@@ -10,8 +9,7 @@ import net.minecraft.item.ItemStack;
 public class VMItemEvokerCrystal extends VMItem {
     public ItemStack getStack() {
         ItemStack stack = super.getStack();
-        stack.getOrCreateTag().putInt(NbtUtils.NBT_SPELL_ID, 0);
-        EvokerSpellRegistry.changeSpell(stack);
+        stack.getOrCreateTag().putInt(NbtUtils.NBT_SPELL_ID, -1);
         return stack;
     }
 }

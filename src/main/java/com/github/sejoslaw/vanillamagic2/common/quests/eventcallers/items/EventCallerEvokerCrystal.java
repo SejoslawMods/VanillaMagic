@@ -15,6 +15,10 @@ public class EventCallerEvokerCrystal extends EventCallerVMItem<QuestEvokerCryst
                 (player, world, blockPos, direction) -> this.getVMItem().isVMItem(player.getHeldItemMainhand()) ? this.quests.get(0) : null,
                 (player, world, blockPos, direction, quest) ->
                     this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
+                        if (world.isRemote) {
+                            return;
+                        }
+
                         if (player.isSneaking()) {
                             EvokerSpellRegistry.changeSpell(handStack);
                         } else {

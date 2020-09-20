@@ -15,14 +15,18 @@ import java.util.List;
  */
 public class EvokerSpellWololo extends EvokerSpell {
     public void cast(World world, PlayerEntity player, Entity target) {
-        List<SheepEntity> sheeps = world.getEntitiesWithinAABB(EntityType.SHEEP, player.getBoundingBox().expand(16.0D, 4.0D, 16.0D), entity -> true);
+        List<SheepEntity> sheeps = world.getEntitiesWithinAABB(EntityType.SHEEP,
+                player.getBoundingBox()
+                        .expand(16.0D, 4.0D, 16.0D)
+                        .expand(-16.0D, -4.0D, -16.0D), entity -> true);
 
         if (sheeps.isEmpty()) {
             return;
         }
 
         SheepEntity sheep = sheeps.get(rand.nextInt(sheeps.size()));
-        sheep.setFleeceColor(DyeColor.values()[rand.nextInt(DyeColor.values().length)]);
+        DyeColor[] colors = DyeColor.values();
+        sheep.setFleeceColor(colors[rand.nextInt(colors.length)]);
         player.playSound(SoundEvents.ENTITY_EVOKER_PREPARE_WOLOLO, 1.0F, 1.0F);
     }
 }
