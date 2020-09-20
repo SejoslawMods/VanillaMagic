@@ -2,7 +2,6 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestMotherNatureCrystal;
-import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,7 +18,7 @@ public class EventCallerMotherNatureCrystal extends EventCallerVMItem<QuestMothe
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
         this.executor.onPlayerTickNoHandsCheck(event,
-                (player, world) -> player.inventory.mainInventory.stream().anyMatch(ItemRegistry.MOTHER_NATURE_CRYSTAL::isVMItem) ? this.quests.get(0) : null,
+                (player, world) -> player.inventory.mainInventory.stream().anyMatch(this.getVMItem()::isVMItem) ? this.quests.get(0) : null,
                 (player, world, quest) ->
                     this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
                         int range = VMForgeConfig.MOTHER_NATURE_CRYSTAL_RANGE.get();
