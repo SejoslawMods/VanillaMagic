@@ -21,7 +21,7 @@ public abstract class QuestVMItem<TVMItem extends IVMItem> extends QuestCraftOnA
     }
 
     /**
-     * @return New instance of VM Item definition.
+     * @return Corresponding VM Item.
      */
     public abstract TVMItem getVMItem();
 }
