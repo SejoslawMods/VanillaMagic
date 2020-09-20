@@ -65,7 +65,7 @@ public final class EntityUtils {
     }
 
     /**
-     * @return Entity at which the specified Entity is looking.
+     * @return Entity at which the specified Entity is looking; otherwise null.
      */
     public static Entity getLookingAt(Entity entity, double distance) {
         double checkingDistance = 0;
