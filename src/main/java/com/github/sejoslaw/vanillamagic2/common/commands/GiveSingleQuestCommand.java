@@ -32,6 +32,12 @@ public class GiveSingleQuestCommand extends VMCommand {
         ServerPlayerEntity player = EntityArgument.getPlayer(ctx, PLAYER_NAME);
         Quest quest = QuestArgumentType.getQuest(ctx, QUEST_UNIQUE_NAME);
         giveQuestToPlayer(player, quest);
+
+        while (!PlayerQuestProgressRegistry.hasPlayerGotQuest(player, quest.parent.uniqueName)) {
+            giveQuestToPlayer(player, quest.parent);
+            quest = quest.parent;
+        }
+
         return 0;
     }
 
