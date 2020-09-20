@@ -11,13 +11,15 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EventCallerEvokerCrystal extends EventCallerVMItem<QuestEvokerCrystal> {
     @SubscribeEvent
     public void useItem(PlayerInteractEvent event) {
-        this.executor.onPlayerInteract(event, (player, world, blockPos, direction) ->
-                this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
-                    if (player.isSneaking()) {
-                        EvokerSpellRegistry.changeSpell(handStack);
-                    } else {
-                        EvokerSpellRegistry.castSpell(world, player, handStack);
-                    }
-                }));
+        this.executor.onPlayerInteract(event,
+                (player, world, blockPos, direction) -> this.getVMItem().isVMItem(player.getHeldItemMainhand()) ? this.quests.get(0) : null,
+                (player, world, blockPos, direction, quest) ->
+                    this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
+                        if (player.isSneaking()) {
+                            EvokerSpellRegistry.changeSpell(handStack);
+                        } else {
+                            EvokerSpellRegistry.castSpell(world, player, handStack);
+                        }
+                    }));
     }
 }
