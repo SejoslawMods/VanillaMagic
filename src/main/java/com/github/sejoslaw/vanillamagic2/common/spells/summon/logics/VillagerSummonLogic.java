@@ -26,7 +26,7 @@ public class VillagerSummonLogic extends SummonEntityLogic {
         Collection<VillagerProfession> professions = ForgeRegistries.PROFESSIONS.getValues();
         VillagerProfession profession = (VillagerProfession) professions.toArray()[new Random().nextInt(professions.size())];
         VillagerEntity entity = EntityType.VILLAGER.create(world);
-        entity.setVillagerData(entity.getVillagerData().withProfession(profession));
+        entity.setVillagerData(entity.getVillagerData().withLevel(2).withProfession(profession));
         return entity;
     }
 }
