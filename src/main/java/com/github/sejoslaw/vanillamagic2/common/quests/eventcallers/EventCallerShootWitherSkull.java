@@ -43,8 +43,6 @@ public class EventCallerShootWitherSkull extends EventCaller<QuestShootWitherSku
                     entityWitherSkull.accelerationZ = accelZ / accelDelta * 0.1D;
 
                     world.addEntity(entityWitherSkull);
-
-                    leftHandStack.grow(-1);
                 }));
     }
 }
