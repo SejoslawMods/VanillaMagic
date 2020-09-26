@@ -16,6 +16,10 @@ import net.minecraft.world.World;
  */
 public class EvokerSpellFangs extends EvokerSpell {
     public void cast(World world, PlayerEntity player, Entity target) {
+        if (target == null) {
+            return;
+        }
+
         double minDifY = Math.min(target.getPosY(), player.getPosY());
         double maxDifY = Math.max(target.getPosY(), player.getPosY()) + 1.0D;
         float distance = (float) MathHelper.atan2(target.getPosZ() - player.getPosZ(), target.getPosX() - player.getPosX());

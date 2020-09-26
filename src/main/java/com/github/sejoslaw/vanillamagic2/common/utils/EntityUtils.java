@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -7,10 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
@@ -65,21 +63,11 @@ public final class EntityUtils {
     }
 
     /**
-     * @return Entity at which the specified Entity is looking; otherwise null.
+     * @return Entity which the specified Entity is looking at; otherwise null.
      */
-    public static Entity getLookingAt(Entity entity, double distance) {
-        double checkingDistance = 0;
-
-        while (checkingDistance < distance) {
-            RayTraceResult result = entity.pick(checkingDistance, 0.1F, true);
-
-            if (result instanceof BlockRayTraceResult) {
-                return null;
-            } else if (result instanceof EntityRayTraceResult) {
-                return ((EntityRayTraceResult) result).getEntity();
-            }
-
-            checkingDistance += 1.0D;
+    public static Entity getLookingAt(Entity entity) {
+        if (Minecraft.getInstance().objectMouseOver instanceof EntityRayTraceResult) {
+            return ((EntityRayTraceResult) Minecraft.getInstance().objectMouseOver).getEntity();
         }
 
         return null;

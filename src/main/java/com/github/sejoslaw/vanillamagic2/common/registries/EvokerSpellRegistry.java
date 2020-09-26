@@ -51,7 +51,7 @@ public final class EvokerSpellRegistry {
     }
 
     public static void castSpell(World world, PlayerEntity player, ItemStack stack) {
-        Entity target = EntityUtils.getLookingAt(player, 1000.0D);
+        Entity target = EntityUtils.getLookingAt(player);
         int spellId = stack.getOrCreateTag().getInt(NbtUtils.NBT_SPELL_ID);
         SPELLS.get(spellId).spell.cast(world, player, target);
     }
