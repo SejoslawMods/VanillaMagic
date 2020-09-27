@@ -4,6 +4,8 @@ import com.github.sejoslaw.vanillamagic2.common.explosions.VMExplosion;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -25,6 +27,10 @@ public class EntityMeteor extends FireballEntity {
         this.accelerationX = accelX / distance * 0.1D;
         this.accelerationY = accelY / distance * 0.1D;
         this.accelerationZ = accelZ / distance * 0.1D;
+    }
+
+    public ItemStack getItem() {
+        return new ItemStack(Items.FIRE_CHARGE);
     }
 
     protected void onImpact(RayTraceResult result) {

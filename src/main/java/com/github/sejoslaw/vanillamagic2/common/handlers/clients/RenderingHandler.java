@@ -18,8 +18,8 @@ public class RenderingHandler extends EventHandler {
 
     public static void registerEntityRenderers(FMLClientSetupEvent event) {
         INSTANCE.registerRenderers(event, minecraft -> {
-            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.SPELL.get(), manager -> new SpriteRenderer(manager, Minecraft.getInstance().getItemRenderer()));
-            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.METEOR.get(), manager -> new SpriteRenderer(manager, Minecraft.getInstance().getItemRenderer(), 6.0F, true));
+            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.SPELL.get(), manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer()));
+            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.METEOR.get(), manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer(), 8.0F, true));
         });
     }
 }

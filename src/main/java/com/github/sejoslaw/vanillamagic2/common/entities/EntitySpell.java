@@ -2,7 +2,10 @@ package com.github.sejoslaw.vanillamagic2.common.entities;
 
 import com.github.sejoslaw.vanillamagic2.common.spells.logics.EntitySpellLogic;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
@@ -11,7 +14,7 @@ import net.minecraft.world.World;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class EntitySpell extends DamagingProjectileEntity {
+public class EntitySpell extends DamagingProjectileEntity implements IRendersAsItem {
     private EntitySpellLogic logic;
 
     public EntitySpell(EntityType<? extends EntitySpell> entityType, World world) {
@@ -30,5 +33,9 @@ public class EntitySpell extends DamagingProjectileEntity {
     protected void onImpact(RayTraceResult result) {
         this.logic.execute(this, this.world, result);
         this.remove();
+    }
+
+    public ItemStack getItem() {
+        return new ItemStack(Items.AIR);
     }
 }
