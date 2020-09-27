@@ -12,7 +12,6 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
@@ -101,16 +100,43 @@ public class QuestGui extends Screen {
         }
     }
 
-    private static final int QUEST_ACHIEVED_COLOR = Color.green.getRGB();
-    private static final int QUEST_AVAILABLE_COLOR = Color.yellow.getRGB();
-    private static final int QUEST_LOCKED_COLOR = Color.gray.getRGB();
+    private static class TooltipDrawer {
+        private final QuestGui gui;
+        private QuestTreeNode node;
 
-    private final int itemStackIconSize = 18;
-    private final int questBackgroundColor = new Color(143, 137, 143).getRGB();
+        public TooltipDrawer(QuestGui gui) {
+            this.gui = gui;
+        }
+
+        public void setup(QuestTreeNode node) {
+            this.node = node;
+        }
+
+        public void draw(int mouseX, int mouseY) {
+            if (this.node == null) {
+                return;
+            }
+
+            this.gui.move(mouseX, mouseY, 0);
+
+            List<String> lines = new ArrayList<>();
+            this.node.quest.fillTooltip(lines);
+            this.gui.renderTooltip(lines, -(this.gui.itemStackIconSize / 2), 0);
+            this.node = null;
+        }
+    }
+
+    public static final int QUEST_ACHIEVED_COLOR = Color.green.getRGB();
+    public static final int QUEST_AVAILABLE_COLOR = Color.yellow.getRGB();
+    public static final int QUEST_LOCKED_COLOR = Color.gray.getRGB();
+    public static final int TEXT_COLOR = Color.white.getRGB();
+
+    public final int itemStackIconSize = 18;
+    public final int questBackgroundColor = new Color(143, 137, 143).getRGB();
 
     private QuestTreeNode rootNode;
+    private TooltipDrawer tooltipDrawer;
     private int centerX, centerY;
-    private int posX, posY;
     private double zoom;
     private boolean showQuestNames = true;
     private boolean showAllQuests = false;
@@ -126,11 +152,10 @@ public class QuestGui extends Screen {
 
     protected void init() {
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
+        this.tooltipDrawer = new TooltipDrawer(this);
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
-        this.zoom = 2;
-        this.posX = this.centerX;
-        this.posY = this.centerY;
+        this.zoom = 4;
 
         int buttonWidth = 120;
         int buttonHeight = 20;
@@ -180,8 +205,6 @@ public class QuestGui extends Screen {
         if (this.isDragging()) {
             this.centerX += deltaX;
             this.centerY += deltaY;
-            this.posX = this.centerX;
-            this.posY = this.centerY;
         }
 
         return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
@@ -192,22 +215,29 @@ public class QuestGui extends Screen {
     }
 
     public void render(int mouseX, int mouseY, float partialTicks) {
+        RenderSystem.pushMatrix();
         this.renderBackground();
-
         move((float) this.centerX, (float) this.centerY, 0);
         this.drawQuestTreeNode(this.rootNode, mouseX, mouseY);
-        move((float) -this.centerX, (float) -this.centerY, 0);
+        RenderSystem.popMatrix();
 
-        this.drawCenteredString(this.font, TextUtils.getFormattedText("vm.gui.questGui.title"), this.width / 2, 10, TextFormatting.WHITE.getColor());
+        RenderSystem.pushMatrix();
+        this.tooltipDrawer.draw(mouseX, mouseY);
+        RenderSystem.popMatrix();
+
+        this.drawCenteredString(this.font, TextUtils.getFormattedText("vm.gui.questGui.title"), this.width / 2, 10, TEXT_COLOR);
+
+        RenderSystem.pushMatrix();
         super.render(mouseX, mouseY, partialTicks);
+        RenderSystem.popMatrix();
     }
 
     /**
      * Draws Quest tree.
      */
-    private void drawQuestTreeNode(QuestTreeNode node, int mouseX, int mouseY) {
+    public void drawQuestTreeNode(QuestTreeNode node, int mouseX, int mouseY) {
         this.drawQuest(node);
-        this.drawQuestTooltip(node, mouseX, mouseY);
+        this.checkTooltip(node, mouseX, mouseY);
 
         node.children.forEach(childNode -> {
             if (childNode.color == QUEST_LOCKED_COLOR && !this.showAllQuests) {
@@ -224,31 +254,36 @@ public class QuestGui extends Screen {
     }
 
     /**
-     * Draws Quest tooltip.
+     * Setups Tooltip Drawer.
      */
-    private void drawQuestTooltip(QuestTreeNode node, int mouseX, int mouseY) {
-        if (!this.showQuestTooltip || !this.isMouseInBox(mouseX, mouseY, this.posX, this.posY, this.itemStackIconSize / 2)) {
-            return;
+    public void checkTooltip(QuestTreeNode node, int mouseX, int mouseY) {
+        int startCenterX = this.width / 2;
+        int startCenterY = this.height / 2;
+        int radius = this.itemStackIconSize / 2;
+
+        int deltaX = this.centerX - startCenterX;
+        int deltaY = this.centerY - startCenterY;
+
+        int questPosX = this.getTotalOffsetX(node);
+        int questPosY = this.getTotalOffsetY(node);
+
+        int movedMousePosX = mouseX - deltaX - startCenterX;
+        int movedMousePosY = mouseY - deltaY - startCenterY;
+
+        boolean predicate = (movedMousePosX + radius > questPosX) &&
+                            (movedMousePosX - radius < questPosX) &&
+                            (movedMousePosY + radius > questPosY) &&
+                            (movedMousePosY - radius < questPosY);
+
+        if (predicate) {
+            this.tooltipDrawer.setup(node);
         }
-
-        List<String> lines = new ArrayList<>();
-        node.quest.fillTooltip(lines);
-        this.renderTooltip(lines, -(this.itemStackIconSize / 2), 0);
-    }
-
-    /**
-     * @return True if mouse cursor is in the radius based on (x;y) coordinates.
-     */
-    private boolean isMouseInBox(int mouseX, int mouseY, int x, int y, int radius) {
-        int mouseCoordX = mouseX + this.centerX;
-        int mouseCoordY = mouseY + this.centerY;
-        return (mouseCoordX + radius > x) && (mouseCoordX - radius < x) && (mouseCoordY + radius > y) && (mouseCoordY - radius < y);
     }
 
     /**
      * Moves drawing position back to the center of parent Quest.
      */
-    private void moveBackToParent(int offsetX, int offsetY) {
+    public void moveBackToParent(int offsetX, int offsetY) {
         move(-offsetX, -offsetY, 0);
 
         boolean straightY = true;
@@ -266,7 +301,7 @@ public class QuestGui extends Screen {
     /**
      * Draws connection between the nodes.
      */
-    private void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
+    public void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
         boolean straightY = true;
 
         if (offsetX != 0) {
@@ -289,21 +324,21 @@ public class QuestGui extends Screen {
     /**
      * @return X offset by which the next node should be rendered.
      */
-    private int getOffsetX(QuestTreeNode node) {
-        return (this.itemStackIconSize * 2 * node.quest.posX) * (int) this.zoom;
+    public int getOffsetX(QuestTreeNode node) {
+        return (this.itemStackIconSize * node.quest.posX) * (int) this.zoom;
     }
 
     /**
      * @return Y offset by which the next node should be rendered.
      */
-    private int getOffsetY(QuestTreeNode node) {
-        return (this.itemStackIconSize * 2 * node.quest.posY) * (int) this.zoom;
+    public int getOffsetY(QuestTreeNode node) {
+        return (this.itemStackIconSize * node.quest.posY) * (int) this.zoom;
     }
 
     /**
      * Draws specified Quest on the current position.
      */
-    private void drawQuest(QuestTreeNode node) {
+    public void drawQuest(QuestTreeNode node) {
         float move = (float)(this.itemStackIconSize / 2);
         move(-move, -move, 0);
         fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
@@ -315,7 +350,7 @@ public class QuestGui extends Screen {
     /**
      * Draws appropriate color overlay around Quest.
      */
-    private void drawQuestOverlay(int color) {
+    public void drawQuestOverlay(int color) {
         this.vLine(0, this.itemStackIconSize, 0, color);
         this.hLine(0, this.itemStackIconSize, 0, color);
         move(this.itemStackIconSize, 0, 0);
@@ -328,7 +363,7 @@ public class QuestGui extends Screen {
     /**
      * Draws ItemStack on the specified coordinates with given text on the top-right.
      */
-    private void drawItemStack(ItemStack stack, int x, int y, String text) {
+    public void drawItemStack(ItemStack stack, int x, int y, String text) {
         this.setBlitOffset(200);
         this.itemRenderer.zLevel = 35;
         FontRenderer font = stack.getItem().getFontRenderer(stack);
@@ -347,10 +382,45 @@ public class QuestGui extends Screen {
     /**
      * Moves currently rendered point by specified coordinates.
      */
-    private void move(float deltaX, float deltaY, float deltaZ) {
+    public void move(float deltaX, float deltaY, float deltaZ) {
         RenderSystem.translatef(deltaX, deltaY, deltaZ);
+    }
 
-        this.posX += deltaX;
-        this.posY += deltaY;
+    /**
+     * @return Total X offset of the given node starting from root.
+     */
+    public int getTotalOffsetX(QuestTreeNode node) {
+        if (node.parentNode == null) {
+            return 0;
+        }
+
+        int offsetX = this.getOffsetX(node);
+        int parentOffsetX = this.getTotalOffsetX(node.parentNode);
+        int iconOffsetX = 0;
+
+        if (offsetX != 0) {
+            iconOffsetX = (offsetX < 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2));
+        }
+
+        return offsetX + parentOffsetX + iconOffsetX;
+    }
+
+    /**
+     * @return Total Y offset of the given node starting from root.
+     */
+    public int getTotalOffsetY(QuestTreeNode node) {
+        if (node.parentNode == null) {
+            return 0;
+        }
+
+        int offsetY = this.getOffsetY(node);
+        int parentOffsetY = this.getTotalOffsetY(node.parentNode);
+        int iconOffsetY = 0;
+
+        if (offsetY != 0) {
+            iconOffsetY = (offsetY < 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2));
+        }
+
+        return offsetY + parentOffsetY + iconOffsetY;
     }
 }
