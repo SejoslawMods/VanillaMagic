@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.quests;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.*;
+import com.github.sejoslaw.vanillamagic2.common.handlers.EventHandler;
 import com.github.sejoslaw.vanillamagic2.common.recipes.AltarRecipe;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.VMTileMachine;
@@ -33,7 +34,7 @@ import java.util.function.Supplier;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public final class EventExecutor<TQuest extends Quest> {
+public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     private final EventCaller<TQuest> caller;
 
     public EventExecutor(EventCaller<TQuest> caller) {
@@ -115,9 +116,9 @@ public final class EventExecutor<TQuest extends Quest> {
 
     public void onPlayerInteract(PlayerInteractEvent event,
                                  Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
-        PlayerEntity player = event.getPlayer();
-
-        performCheck(player, (quest) -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
+        super.onPlayerInteract(event, (player, world, pos, direction) ->
+                performCheck(player, (quest) ->
+                        consumer.accept(player, world, pos, direction)));
     }
 
     public void onPlayerInteractNoStackSizeCheck(PlayerInteractEvent event,

@@ -14,12 +14,14 @@ import net.minecraft.item.Food;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
@@ -83,5 +85,15 @@ public abstract class EventHandler {
     public void registerRenderers(FMLClientSetupEvent event, Consumer<Minecraft> consumer) {
         Minecraft mc = event.getMinecraftSupplier().get();
         consumer.accept(mc);
+    }
+
+    public void onPlayerInteract(PlayerInteractEvent event,
+                                 Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
+        PlayerEntity player = event.getPlayer();
+        World world = player.getEntityWorld();
+        BlockPos pos = event.getPos();
+        Direction face = event.getFace();
+
+        consumer.accept(player, world, pos, face);
     }
 }
