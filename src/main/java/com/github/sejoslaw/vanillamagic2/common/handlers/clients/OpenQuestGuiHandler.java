@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
 
 import com.github.sejoslaw.vanillamagic2.common.guis.QuestGui;
+import com.github.sejoslaw.vanillamagic2.common.guis.VMGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,7 +29,7 @@ public class OpenQuestGuiHandler {
                 Minecraft.getInstance().world != null &&
                 Minecraft.getInstance().player != null &&
                 Minecraft.getInstance().currentScreen == null) {
-            Minecraft.getInstance().displayGuiScreen(new QuestGui());
+            VMGui.displayGui(new QuestGui());
         }
     }
 }

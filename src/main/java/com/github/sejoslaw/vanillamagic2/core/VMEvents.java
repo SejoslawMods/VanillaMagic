@@ -44,6 +44,7 @@ public final class VMEvents {
 
     private static void registerClientSpecificEvents() {
         register(new OpenQuestGuiHandler());
+        register(new OpenVMTileEntityDetailsGuiHandler());
         register(new ShowDeathPointHandler());
         register(new ShowHungerTooltipHandler());
         register(new ShowSaturationTooltipHandler());

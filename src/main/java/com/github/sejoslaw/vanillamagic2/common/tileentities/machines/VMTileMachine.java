@@ -4,7 +4,11 @@ import com.github.sejoslaw.vanillamagic2.common.registries.MachineModuleRegistry
 import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -43,5 +47,9 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
         if (MachineModuleRegistry.MODULES.get(this.moduleKey).stream().allMatch(machine -> machine.canExecute(this))) {
             MachineModuleRegistry.MODULES.get(this.moduleKey).forEach(machine -> machine.execute(this));
         }
+    }
+
+    public void addInformation(List<ITextComponent> lines) {
+        TextUtils.addLine(lines, "vm.tooltip.tile.machine.type", TextUtils.firstLetterToUpper(this.moduleKey));
     }
 }

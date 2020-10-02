@@ -23,6 +23,13 @@
   "vm.gui.questGui.enableQuestTooltip": "Enable Tooltips",
   "vm.gui.questGui.disableQuestTooltip": "Disable Tooltips",
 
+  "vm.gui.vmTileEntityGui.title": "VM TileEntity Details",
+  "vm.gui.vmTileEntityGui.name": "Name:",
+  "vm.gui.vmTileEntityGui.showNbtData": "Show NBT Data",
+  "vm.gui.vmTileEntityGui.hideNbtData": "Hide NBT Data",
+
+  "vm.tooltip.tile.machine.type": "Machine Type:",
+
   "key.vm.category": "Vanilla Magic",
   "key.openQuestGui.desc": "Open Quest GUI",
 

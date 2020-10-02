@@ -23,9 +23,9 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     SUpdateTileEntityPacket getUpdatePacket();
 
     /**
-     * Adds tooltip information about the current VM TileEntity.
+     * Adds information about the current VM TileEntity.
      */
-    default void addTooltipInfo(List<ITextComponent> lines) {
+    default void addInformation(List<ITextComponent> lines) {
     }
 
     /**

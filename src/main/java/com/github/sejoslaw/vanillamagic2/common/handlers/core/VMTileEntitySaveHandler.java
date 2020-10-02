@@ -20,7 +20,7 @@ public class VMTileEntitySaveHandler extends VMTileEntityHandler {
             try {
                 ListNBT tilesNbt = new ListNBT();
 
-                WorldUtils.getVMTiles(world).forEach(tile -> {
+                WorldUtils.getVMTiles(world, vmTile -> true).forEach(tile -> {
                     CompoundNBT tileNbt = new CompoundNBT();
                     tile.write(tileNbt);
                     tileNbt.putString(NbtUtils.NBT_TILE_TYPE, tile.getTileEntity().getType().getRegistryName().toString());

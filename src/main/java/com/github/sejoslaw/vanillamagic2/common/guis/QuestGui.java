@@ -7,8 +7,6 @@ import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -25,7 +23,7 @@ import java.util.stream.Collectors;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 @OnlyIn(Dist.CLIENT)
-public class QuestGui extends Screen {
+public class QuestGui extends VMGui {
     private static class QuestTreeNode {
         public Quest quest;
         public Set<QuestTreeNode> children;
@@ -129,14 +127,12 @@ public class QuestGui extends Screen {
     public static final int QUEST_ACHIEVED_COLOR = Color.green.getRGB();
     public static final int QUEST_AVAILABLE_COLOR = Color.yellow.getRGB();
     public static final int QUEST_LOCKED_COLOR = Color.gray.getRGB();
-    public static final int TEXT_COLOR = Color.white.getRGB();
 
     public final int itemStackIconSize = 18;
     public final int questBackgroundColor = new Color(143, 137, 143).getRGB();
 
     private QuestTreeNode rootNode;
     private TooltipDrawer tooltipDrawer;
-    private int centerX, centerY;
     private double zoom;
     private boolean showQuestNames = true;
     private boolean showAllQuests = false;
@@ -151,32 +147,15 @@ public class QuestGui extends Screen {
     }
 
     protected void init() {
+        super.init();
+
         this.rootNode = QuestTreeNode.parseTree(QuestRegistry.getQuests());
         this.tooltipDrawer = new TooltipDrawer(this);
-        this.centerX = this.width / 2;
-        this.centerY = this.height / 2;
         this.zoom = 4;
 
-        int buttonWidth = 120;
-        int buttonHeight = 20;
-
-        this.addButton(new Button(10, 10, buttonWidth, buttonHeight, TextUtils.getFormattedText("vm.gui.questGui.disableQuestNames"), button -> {
-            String key = this.showQuestNames ? "vm.gui.questGui.enableQuestNames" : "vm.gui.questGui.disableQuestNames";
-            button.setMessage(TextUtils.getFormattedText(key));
-            this.showQuestNames = !this.showQuestNames;
-        }));
-
-        this.addButton(new Button(10, 40, buttonWidth, buttonHeight, TextUtils.getFormattedText("vm.gui.questGui.showAllQuests"), button -> {
-            String key = this.showAllQuests ? "vm.gui.questGui.showAllQuests" : "vm.gui.questGui.hideLockedQuests";
-            button.setMessage(TextUtils.getFormattedText(key));
-            this.showAllQuests = !this.showAllQuests;
-        }));
-
-        this.addButton(new Button(10, 70, buttonWidth, buttonHeight, TextUtils.getFormattedText("vm.gui.questGui.disableQuestTooltip"), button -> {
-            String key = this.showQuestTooltip ? "vm.gui.questGui.enableQuestTooltip" : "vm.gui.questGui.disableQuestTooltip";
-            button.setMessage(TextUtils.getFormattedText(key));
-            this.showQuestTooltip = !this.showQuestTooltip;
-        }));
+        this.addOptionButton("vm.gui.questGui.enableQuestNames", "vm.gui.questGui.disableQuestNames", "vm.gui.questGui.disableQuestNames", () -> this.showQuestNames, button -> this.showQuestNames = !this.showQuestNames);
+        this.addOptionButton("vm.gui.questGui.showAllQuests", "vm.gui.questGui.hideLockedQuests", "vm.gui.questGui.showAllQuests", () -> this.showAllQuests, button -> this.showAllQuests = !this.showAllQuests);
+        this.addOptionButton("vm.gui.questGui.enableQuestTooltip", "vm.gui.questGui.disableQuestTooltip", "vm.gui.questGui.disableQuestTooltip", () -> this.showQuestTooltip, button -> this.showQuestTooltip = !this.showQuestTooltip);
 
         GLFW.glfwSetScrollCallback(Minecraft.getInstance().getMainWindow().getHandle(), this::scroll);
     }
@@ -185,51 +164,21 @@ public class QuestGui extends Screen {
         this.rootNode.clear();
     }
 
-    public boolean mouseClicked(double mouseX, double mouseY, int keyCode) {
-        if (keyCode == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-            this.setDragging(true);
-        }
-
-        return super.mouseClicked(mouseX, mouseY, keyCode);
-    }
-
-    public boolean mouseReleased(double mouseX, double mouseY, int keyCode) {
-        if (keyCode == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-            this.setDragging(false);
-        }
-
-        return super.mouseReleased(mouseX, mouseY, keyCode);
-    }
-
-    public boolean mouseDragged(double mouseX, double mouseY, int keyCode, double deltaX, double deltaY) {
-        if (this.isDragging()) {
-            this.centerX += deltaX;
-            this.centerY += deltaY;
-        }
-
-        return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
-    }
-
     public void scroll(long window, double offsetX, double offsetY) {
         this.zoom += offsetY > 0 ? 1 : -1;
     }
 
-    public void render(int mouseX, int mouseY, float partialTicks) {
+    protected void renderInnerGui(int mouseX, int mouseY, float partialTicks) {
         RenderSystem.pushMatrix();
-        this.renderBackground();
         move((float) this.centerX, (float) this.centerY, 0);
         this.drawQuestTreeNode(this.rootNode, mouseX, mouseY);
         RenderSystem.popMatrix();
 
-        RenderSystem.pushMatrix();
-        this.tooltipDrawer.draw(mouseX, mouseY);
-        RenderSystem.popMatrix();
-
-        this.drawCenteredString(this.font, TextUtils.getFormattedText("vm.gui.questGui.title"), this.width / 2, 10, TEXT_COLOR);
-
-        RenderSystem.pushMatrix();
-        super.render(mouseX, mouseY, partialTicks);
-        RenderSystem.popMatrix();
+        if (this.showQuestTooltip) {
+            RenderSystem.pushMatrix();
+            this.tooltipDrawer.draw(mouseX, mouseY);
+            RenderSystem.popMatrix();
+        }
     }
 
     /**
@@ -377,13 +326,6 @@ public class QuestGui extends Screen {
 
         this.setBlitOffset(0);
         this.itemRenderer.zLevel = 0;
-    }
-
-    /**
-     * Moves currently rendered point by specified coordinates.
-     */
-    public void move(float deltaX, float deltaY, float deltaZ) {
-        RenderSystem.translatef(deltaX, deltaY, deltaZ);
     }
 
     /**

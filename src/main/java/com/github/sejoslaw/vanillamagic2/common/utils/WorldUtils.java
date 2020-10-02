@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -111,12 +112,22 @@ public final class WorldUtils {
     }
 
     /**
-     * @return List will all currently registered VM TileEntities on the specified World.
+     * @return Returns a VMTileEntity on specified position at specified World; otherwise null.
      */
-    public static List<IVMTileEntity> getVMTiles(World world) {
+    public static IVMTileEntity getVMTile(World world, BlockPos pos) {
+        return getVMTiles(world, vmTile -> vmTile.getPos().equals(pos))
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * @return List will all currently registered VM TileEntities on the specified World and satisfy the predicate.
+     */
+    public static List<IVMTileEntity> getVMTiles(World world, Predicate<IVMTileEntity> check) {
         return world.tickableTileEntities
                 .stream()
-                .filter(tile -> tile instanceof IVMTileEntity)
+                .filter(tile -> tile instanceof IVMTileEntity && check.test((IVMTileEntity) tile))
                 .map(tile -> (IVMTileEntity) tile)
                 .collect(Collectors.toList());
     }
