@@ -13,7 +13,7 @@ public class QuestAccelerant extends QuestAccelerationCrystal {
     public void fillTooltip(Collection<String> lines) {
         super.fillTooltip(lines);
 
-        TextUtils.addLine(lines, "quest.tooltip.ticks", String.valueOf(VMForgeConfig.TILE_ACCELERANT_TICKS.get()));
+        TextUtils.addLine(lines, "quest.tooltip.tileTicks", String.valueOf(VMForgeConfig.TILE_ACCELERANT_TICKS.get()));
         TextUtils.addLine(lines, "quest.tooltip.size", String.valueOf(VMForgeConfig.TILE_ACCELERANT_SIZE.get()));
         TextUtils.addLine(lines, "quest.tooltip.top", TextUtils.getFormattedText("quest.accelerant.desc.top"));
     }

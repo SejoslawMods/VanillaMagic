@@ -66,6 +66,7 @@
   "quest.tooltip.altarBlock.position.corner": "Corner",
   "quest.tooltip.altarBlock.distance": "Altar Block Distance",
   "quest.tooltip.ticks": "Ticks",
+  "quest.tooltip.tileTicks": "Tile Ticks",
   "quest.tooltip.size": "Size",
   "quest.tooltip.left": "Left",
   "quest.tooltip.back": "Back",
