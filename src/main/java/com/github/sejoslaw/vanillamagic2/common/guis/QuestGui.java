@@ -178,6 +178,8 @@ public class QuestGui extends VMGui {
             RenderSystem.pushMatrix();
             this.tooltipDrawer.draw(mouseX, mouseY);
             RenderSystem.popMatrix();
+        } else {
+            this.tooltipDrawer.setup(null);
         }
     }
 
