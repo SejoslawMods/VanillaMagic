@@ -8,7 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class VMTileAccelerant extends VMTileEntity {
         this.ticks = VMForgeConfig.TILE_ACCELERANT_TICKS.get();
     }
 
-    public void initialize(World world, BlockPos pos) {
+    public void initialize(IWorld world, BlockPos pos) {
         super.initialize(world, pos);
 
         this.invPos = this.getPos().offset(Direction.UP);

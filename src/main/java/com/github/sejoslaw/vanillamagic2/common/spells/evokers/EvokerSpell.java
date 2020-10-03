@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.spells.evokers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.Random;
 
@@ -15,5 +15,5 @@ public abstract class EvokerSpell {
     /**
      * Casts current Evoker Spell.
      */
-    public abstract void cast(World world, PlayerEntity player, Entity target);
+    public abstract void cast(IWorld world, PlayerEntity player, Entity target);
 }

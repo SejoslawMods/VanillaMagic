@@ -11,7 +11,7 @@ import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -63,18 +63,18 @@ public final class VMFiles {
     }
 
     /**
-     * @return Path to VanillaMagic directory in World directory.
+     * @return Path to VanillaMagic directory in IWorld directory.
      */
     public static Path getVMWorldDir(String worldName) {
         return Paths.get(FMLPaths.GAMEDIR.get().toString(), "saves", worldName, "VanillaMagic");
     }
 
     /**
-     * @return Path to file with VM Tile Entities in specified World directory.
+     * @return Path to file with VM Tile Entities in specified IWorld directory.
      */
-    public static Path getVMTileEntitiesFilePath(World world) {
+    public static Path getVMTileEntitiesFilePath(IWorld world) {
         String worldName = WorldUtils.getWorldName(world);
-        String dimensionId = String.valueOf(world.getDimension().getType().getId());
+        String dimensionId = WorldUtils.getId(world).getPath();
         return Paths.get(getVMWorldDir(worldName).toString(), dimensionId, "VanillaMagicTileEntities.dat");
     }
 
@@ -92,7 +92,7 @@ public final class VMFiles {
     }
 
     /**
-     * @return Path to JSON file with Player's quests in specified World.
+     * @return Path to JSON file with Player's quests in specified IWorld.
      */
     public static Path getPlayerQuestsFilePath(String worldName, String playerName) {
         return Paths.get(getVMWorldDir(worldName).toString(), "players_quests", playerName + ".json");

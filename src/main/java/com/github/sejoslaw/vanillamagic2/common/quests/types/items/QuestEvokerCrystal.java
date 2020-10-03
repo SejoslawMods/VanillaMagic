@@ -3,8 +3,9 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types.items;
 import com.github.sejoslaw.vanillamagic2.common.items.VMItemEvokerCrystal;
 import com.github.sejoslaw.vanillamagic2.common.registries.ItemRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import net.minecraft.util.text.ITextComponent;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -14,7 +15,7 @@ public class QuestEvokerCrystal extends QuestVMItem<VMItemEvokerCrystal> {
         return (VMItemEvokerCrystal) ItemRegistry.EVOKER_CRYSTAL;
     }
 
-    public void fillTooltip(Collection<String> lines) {
+    public void fillTooltip(List<ITextComponent> lines) {
         super.fillTooltip(lines);
 
         TextUtils.addLine(lines, "quest.tooltip.changeSpell", TextUtils.getFormattedText("quest.evokerCrystal.desc.changeSpell"));

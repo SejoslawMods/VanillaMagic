@@ -7,8 +7,10 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.server.ServerWorld;
+
+import java.util.stream.StreamSupport;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -41,12 +43,12 @@ public final class NbtUtils {
     public static final CompoundNBT EMPTY_NBT = new CompoundNBT();
 
     /**
-     * @return NBT serialized position on specified World.
+     * @return NBT serialized position on specified IWorld.
      */
-    public static CompoundNBT toNbt(World world, BlockPos pos) {
+    public static CompoundNBT toNbt(IWorld world, BlockPos pos) {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putLong(NBT_POSITION, pos.toLong());
-        nbt.putInt(NBT_DIMENSION, world.getDimension().getType().getId());
+        nbt.putString(NBT_DIMENSION, WorldUtils.getId(world).toString());
         return  nbt;
     }
 
@@ -58,12 +60,15 @@ public final class NbtUtils {
     }
 
     /**
-     * @return World from saved data.
+     * @return IWorld from saved data.
      */
-    public static World getWorld(MinecraftServer server, CompoundNBT nbt) {
-        int dimId = nbt.getInt(NBT_DIMENSION);
-        DimensionType dimensionType = DimensionType.getById(dimId);
-        return server.getWorld(dimensionType);
+    public static ServerWorld getWorld(MinecraftServer server, CompoundNBT nbt) {
+        String dimId = nbt.getString(NBT_DIMENSION);
+        return StreamSupport
+                .stream(server.getWorlds().spliterator(), false)
+                .filter(world -> world.getDimensionKey().getRegistryName().equals(dimId))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -95,6 +100,6 @@ public final class NbtUtils {
 
     private static void handleNbtEntry(String key, INBT nbt, int depth, Consumer3<Integer, String, String> consumer) {
         ITextComponent str = nbt.toFormattedComponent();
-        consumer.accept(depth, key, str.getFormattedText());
+        consumer.accept(depth, key, str.getString());
     }
 }

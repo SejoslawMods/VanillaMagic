@@ -23,7 +23,7 @@ public class EventCallerInventoryBridge extends EventCallerVMItem<QuestInventory
                     CompoundNBT nbt = handStack.getOrCreateTag();
 
                     if (nbt.getLong(NbtUtils.NBT_POSITION) == 0) {
-                        VMItemInventorySelector.setPosition(handStack, pos.toLong(), world.getDimension().getType().getId());
+                        VMItemInventorySelector.setPosition(handStack, pos.toLong(), WorldUtils.getId(world).toString());
                         TextUtils.addChatMessage("tile.inventorySelector.added");
                     } else {
                         WorldUtils.spawnVMTile(world, pos.offset(Direction.UP), new VMTileInventoryBridge(), (tile) -> tile.setSource(nbt));

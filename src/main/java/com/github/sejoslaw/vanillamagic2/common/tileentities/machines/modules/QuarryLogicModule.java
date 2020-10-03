@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
      * Performs single Quarry mining / moving operation
      */
     private void performSingleOperation(IVMTileMachine machine, int quarrySize) {
-        World world = machine.getWorld();
+        IWorld world = machine.getWorld();
         BlockPos workingPos = this.getWorkingPos(machine);
         BlockPos startPos = this.getStartPos(machine);
         Direction startPosDir = this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
@@ -103,17 +103,17 @@ public class QuarryLogicModule extends AbstractLogicModule {
 
             drops.forEach(stack -> {
                 if (outputInv == null) {
-                    Block.spawnAsEntity(world, machine.getPos().offset(Direction.UP, 2), stack);
+                    Block.spawnAsEntity(WorldUtils.asWorld(world), machine.getPos().offset(Direction.UP, 2), stack);
                 } else {
                     ItemStack leftStack = HopperTileEntity.putStackInInventoryAllSlots(null, outputInv, stack, startPosDir.rotateY());
 
                     if (leftStack != ItemStack.EMPTY && leftStack.getCount() > 0) {
-                        Block.spawnAsEntity(world, machine.getPos().offset(Direction.UP, 2), leftStack);
+                        Block.spawnAsEntity(WorldUtils.asWorld(world), machine.getPos().offset(Direction.UP, 2), leftStack);
                     }
                 }
             });
 
-            world.setBlockState(workingPos, Blocks.AIR.getDefaultState());
+            world.setBlockState(workingPos, Blocks.AIR.getDefaultState(), 1 | 2);
             workingPos = workingPos.offset(Direction.DOWN);
         }
 

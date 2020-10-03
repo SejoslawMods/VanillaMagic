@@ -7,8 +7,9 @@ import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -22,7 +23,7 @@ public class QuestBuildAltar extends Quest implements Comparable<QuestBuildAltar
         AltarUtils.BLOCKS.put(this.altarTier, altarBlock);
     }
 
-    public void fillTooltip(Collection<String> lines) {
+    public void fillTooltip(List<ITextComponent> lines) {
         super.fillTooltip(lines);
 
         TextUtils.addLine(lines, "quest.tooltip.altarBlock", this.getTooltip(AltarUtils.BLOCKS.get(this.altarTier)));

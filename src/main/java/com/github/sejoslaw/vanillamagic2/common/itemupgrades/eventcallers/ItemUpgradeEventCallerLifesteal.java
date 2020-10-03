@@ -2,8 +2,9 @@ package com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeEventCaller;
 import com.google.common.collect.Multimap;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,10 +23,8 @@ public class ItemUpgradeEventCallerLifesteal extends ItemUpgradeEventCaller {
                     this.execute(player, () ->
                             this.eventCaller.executor.withHands(player,
                                     (leftHandStack, rightHandStack) -> {
-                                        Multimap<String, AttributeModifier> attributes = rightHandStack.getItem().getAttributeModifiers(EquipmentSlotType.MAINHAND, rightHandStack);
-
-                                        String attributeName = SharedMonsterAttributes.ATTACK_DAMAGE.getName();
-                                        Collection<AttributeModifier> modifiers = attributes.get(attributeName);
+                                        Multimap<Attribute, AttributeModifier> attributes = rightHandStack.getItem().getAttributeModifiers(EquipmentSlotType.MAINHAND, rightHandStack);
+                                        Collection<AttributeModifier> modifiers = attributes.get(Attributes.ATTACK_DAMAGE);
 
                                         double amount = modifiers
                                                 .stream()

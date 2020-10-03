@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.guis;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -38,34 +39,34 @@ public class VMTileEntityDetailsGui extends VMGui {
         this.addOptionButton("vm.gui.vmTileEntityGui.showNbtData", "vm.gui.vmTileEntityGui.hideNbtData", "vm.gui.vmTileEntityGui.showNbtData", () -> this.showTileNbt, button -> this.showTileNbt = !this.showTileNbt);
     }
 
-    protected void renderInnerGui(int mouseX, int mouseY, float partialTicks) {
-        this.drawString(this.font, TextUtils.buildMessageLine("vm.gui.vmTileEntityGui.name", this.tileEntity.getClass().getSimpleName()), this.centerX, this.centerY, TEXT_COLOR);
-        this.nextLine();
-        this.renderTileInformation();
+    protected void renderInnerGui(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        drawString(matrixStack, this.font, TextUtils.buildMessageLine("vm.gui.vmTileEntityGui.name", this.tileEntity.getClass().getSimpleName()), this.centerX, this.centerY, TEXT_COLOR);
+        this.nextLine(matrixStack);
+        this.renderTileInformation(matrixStack);
 
         if (this.showTileNbt) {
-            this.nextLine();
-            this.nextLine();
-            this.renderNbtData(mouseX, mouseY);
+            this.nextLine(matrixStack);
+            this.nextLine(matrixStack);
+            this.renderNbtData(matrixStack, mouseX, mouseY);
         }
     }
 
-    private void nextLine() {
-        move(0, this.lineHeight, 0);
+    private void nextLine(MatrixStack matrixStack) {
+        move(matrixStack, 0, this.lineHeight, 0);
     }
 
-    private void renderTileInformation() {
+    private void renderTileInformation(MatrixStack matrixStack) {
         List<ITextComponent> lines = new ArrayList<>();
 
         this.tileEntity.addInformation(lines);
 
         for (ITextComponent line : lines) {
-            this.drawString(this.font, line.getFormattedText(), this.centerX, this.centerY, TEXT_COLOR);
-            this.nextLine();
+            drawString(matrixStack, this.font, line.getString(), this.centerX, this.centerY, TEXT_COLOR);
+            this.nextLine(matrixStack);
         }
     }
 
-    private void renderNbtData(int mouseX, int mouseY) {
+    private void renderNbtData(MatrixStack matrixStack, int mouseX, int mouseY) {
         CompoundNBT nbt = this.tileEntity.serializeNBT();
 
         NbtUtils.forEachEntry(nbt, (depth, key, value) -> {
@@ -77,8 +78,8 @@ public class VMTileEntityDetailsGui extends VMGui {
             }
 
             String str = tab.toString() + key + ": " + value;
-            this.drawString(this.font, str, this.centerX, this.centerY, TEXT_COLOR);
-            this.nextLine();
+            drawString(matrixStack, this.font, str, this.centerX, this.centerY, TEXT_COLOR);
+            this.nextLine(matrixStack);
         });
     }
 }

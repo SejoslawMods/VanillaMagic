@@ -25,7 +25,7 @@ public abstract class VMTileEntity extends TileEntity implements IVMTileEntity {
 
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        this.read(pkt.getNbtCompound());
+        this.read(this.getState(), pkt.getNbtCompound());
     }
 
     public void tick() {

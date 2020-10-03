@@ -1,9 +1,10 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.spells.summon.logics.*;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,7 @@ public final class SummonEntityLogicRegistry {
     public static void initialize() {
         LOGICS.add(new EndermiteSummonLogic());
         LOGICS.add(new GuardianSummonLogic());
-        LOGICS.add(new PigmanSummonLogic());
+        LOGICS.add(new PiglinSummonLogic());
         LOGICS.add(new SkeletonSummonLogic());
         LOGICS.add(new SpiderSummonLogic());
 
@@ -25,12 +26,12 @@ public final class SummonEntityLogicRegistry {
         LOGICS.add(new VillagerSummonLogic());
     }
 
-    public static Entity getEntity(World world, EntityType<? extends Entity> defaultType) {
+    public static Entity getEntity(IWorld world, EntityType<? extends Entity> defaultType) {
         SummonEntityLogic logic = find(defaultType);
-        return logic != null ? logic.getEntity(world) : defaultType.create(world);
+        return logic != null ? logic.getEntity(world) : defaultType.create(WorldUtils.asWorld(world));
     }
 
-    public static Entity getHorse(World world, EntityType<? extends Entity> defaultType) {
+    public static Entity getHorse(IWorld world, EntityType<? extends Entity> defaultType) {
         SummonEntityLogic logic = find(defaultType);
         return logic != null ? logic.getHorse(world) : null;
     }

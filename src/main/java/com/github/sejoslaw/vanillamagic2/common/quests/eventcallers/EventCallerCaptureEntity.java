@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCaptureEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -23,7 +24,7 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
     @SubscribeEvent
     public void onEntityCapture(PlayerInteractEvent.EntityInteract event) {
         this.executor.onEntityInteract(event,
-                (player, entity, world, pos) -> world.isRemote || player.getHeldItemOffhand().getItem() != Items.BOOK ? null : this.quests.get(0),
+                (player, entity, world, pos) -> WorldUtils.getIsRemote(world) || player.getHeldItemOffhand().getItem() != Items.BOOK ? null : this.quests.get(0),
                 (player, entity, world, pos) ->
                         this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
                             if (entity instanceof PlayerEntity) {
@@ -38,8 +39,8 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
 
                             stackNbt.put(NbtUtils.NBT_CAPTURED, entityTag);
                             stackNbt.putString(NbtUtils.NBT_ENTITY_TYPE, entity.getType().getRegistryName().toString());
-                            stackNbt.putString(NbtUtils.NBT_ENTITY_NAME, entity.getName().getFormattedText());
-                            leftHandStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.capturedEntity.bookTitlePrefix"), " " + entity.getName().getFormattedText()));
+                            stackNbt.putString(NbtUtils.NBT_ENTITY_NAME, entity.getName().getString());
+                            leftHandStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.capturedEntity.bookTitlePrefix"), " " + entity.getName().getString()));
 
                             entity.remove();
 
@@ -55,12 +56,12 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
                         CompoundNBT stackNbt = leftHandStack.getOrCreateTag();
 
-                        if (!stackNbt.contains(NbtUtils.NBT_CAPTURED) || world.isRemote) {
+                        if (!stackNbt.contains(NbtUtils.NBT_CAPTURED) || WorldUtils.getIsRemote(world)) {
                             return;
                         }
 
                         String type = stackNbt.getString(NbtUtils.NBT_ENTITY_TYPE);
-                        Entity entity = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(type)).create(world);
+                        Entity entity = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(type)).create(WorldUtils.asWorld(world));
                         entity.read(stackNbt.getCompound(NbtUtils.NBT_CAPTURED));
 
                         BlockPos spawnPos = pos.offset(direction);

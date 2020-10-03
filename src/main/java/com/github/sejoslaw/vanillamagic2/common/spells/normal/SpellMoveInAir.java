@@ -5,15 +5,15 @@ import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class SpellMoveInAir extends Spell {
-    public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
-        Vec3d casterLookVec = player.getLookVec();
+    public void cast(PlayerEntity player, IWorld world, BlockPos pos, Direction face) {
+        Vector3d casterLookVec = player.getLookVec();
 
         for (double i = VMForgeConfig.SPELL_MOVE_IN_AIR_DISTANCE.get(); i > 0; i -= 1.0D) {
             double newPosX = player.getPosX() + casterLookVec.getX() * i;

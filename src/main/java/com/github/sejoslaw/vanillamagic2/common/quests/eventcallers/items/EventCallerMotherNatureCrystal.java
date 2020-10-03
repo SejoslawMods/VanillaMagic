@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestMotherNatureCrystal;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -32,7 +33,7 @@ public class EventCallerMotherNatureCrystal extends EventCallerVMItem<QuestMothe
                             for (int iz = posZ - range; iz <= posZ + range; ++iz) {
                                 for (int iy = posY - verticalRange; iy <= posY + verticalRange; ++iy) {
                                     this.boneMealStack.setCount(64);
-                                    BoneMealItem.applyBonemeal(this.boneMealStack, world, new BlockPos(ix, iy, iz), player);
+                                    BoneMealItem.applyBonemeal(this.boneMealStack, WorldUtils.asWorld(world), new BlockPos(ix, iy, iz), player);
                                 }
                             }
                         }

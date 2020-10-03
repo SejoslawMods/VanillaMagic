@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestMobSpawnerDrop;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SpawnerBlock;
 import net.minecraft.entity.EntityType;
@@ -29,7 +30,7 @@ public class EventCallerMobSpawnerDrop extends EventCaller<QuestMobSpawnerDrop> 
         this.executor.onBlockBreak(event,
                 (playerEntity, world, pos, state) -> state.getBlock() instanceof SpawnerBlock ? this.quests.get(0) : null,
                 (playerEntity, world, pos, state) -> {
-                    Block.spawnAsEntity(world, pos, new ItemStack(state.getBlock()));
+                    Block.spawnAsEntity(WorldUtils.asWorld(world), pos, new ItemStack(state.getBlock()));
 
                     AbstractSpawner spawner = ((MobSpawnerTileEntity) world.getTileEntity(pos)).getSpawnerBaseLogic();
                     CompoundNBT spawnerNbt = spawner.write(new CompoundNBT());
@@ -38,11 +39,11 @@ public class EventCallerMobSpawnerDrop extends EventCaller<QuestMobSpawnerDrop> 
                     EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(entityName);
 
                     ItemStack bookStack = new ItemStack(Items.ENCHANTED_BOOK);
-                    bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.mobSpawner.bookTitlePrefix"), entityType.getName().getFormattedText()));
+                    bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.mobSpawner.bookTitlePrefix"), entityType.getName().getString()));
                     bookStack.getOrCreateTag().putString(NbtUtils.NBT_SPAWNER_ENTITY, entityName.toString());
 
-                    Block.spawnAsEntity(world, pos, bookStack);
-                    world.removeTileEntity(pos);
+                    Block.spawnAsEntity(WorldUtils.asWorld(world), pos, bookStack);
+                    WorldUtils.asWorld(world).removeTileEntity(pos);
                 });
     }
 
@@ -62,7 +63,7 @@ public class EventCallerMobSpawnerDrop extends EventCaller<QuestMobSpawnerDrop> 
                     EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(entityName);
                     ((MobSpawnerTileEntity) tile).getSpawnerBaseLogic().setEntityType(entityType);
 
-                    Block.spawnAsEntity(world, player.getPosition(), new ItemStack(Items.BOOK));
+                    Block.spawnAsEntity(WorldUtils.asWorld(world), player.getPosition(), new ItemStack(Items.BOOK));
                 }));
     }
 }

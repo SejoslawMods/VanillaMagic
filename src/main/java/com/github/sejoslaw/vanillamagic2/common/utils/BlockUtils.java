@@ -12,7 +12,7 @@ import net.minecraft.network.play.server.SChangeBlockPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.common.ForgeHooks;
 
 import java.util.List;
@@ -22,9 +22,9 @@ import java.util.List;
  */
 public final class BlockUtils {
     /**
-     * Breaks extra block on World. Each broken block affects the ItemStack durability.
+     * Breaks extra block on IWorld. Each broken block affects the ItemStack durability.
      */
-    public static void breakBlock(ItemStack stack, World world, PlayerEntity player, BlockPos pos) {
+    public static void breakBlock(ItemStack stack, IWorld world, PlayerEntity player, BlockPos pos) {
         if (world.isAirBlock(pos)) {
             return;
         }
@@ -38,39 +38,39 @@ public final class BlockUtils {
         }
 
         if (player.isCreative()) {
-            block.onBlockHarvested(world, pos, state, player);
+            block.onBlockHarvested(WorldUtils.asWorld(world), pos, state, player);
 
-            if (block.removedByPlayer(state, world, pos, player, false, Fluids.EMPTY.getDefaultState())) {
+            if (block.removedByPlayer(state, WorldUtils.asWorld(world), pos, player, false, Fluids.EMPTY.getDefaultState())) {
                 block.onPlayerDestroy(world, pos, state);
             }
 
-            if (!world.isRemote) {
+            if (!WorldUtils.getIsRemote(world)) {
                 ((ServerPlayerEntity) player).connection.sendPacket(new SChangeBlockPacket(world, pos));
             }
 
             return;
         }
 
-        stack.onBlockDestroyed(world, state, pos, player);
+        stack.onBlockDestroyed(WorldUtils.asWorld(world), state, pos, player);
 
-        if (!world.isRemote) {
+        if (!WorldUtils.getIsRemote(world)) {
             TileEntity tileEntity = world.getTileEntity(pos);
 
-            if (block.removedByPlayer(state, world, pos, player, true, Fluids.EMPTY.getDefaultState())) {
+            if (block.removedByPlayer(state, WorldUtils.asWorld(world), pos, player, true, Fluids.EMPTY.getDefaultState())) {
                 block.onPlayerDestroy(world, pos, state);
-                block.harvestBlock(world, player, pos, state, tileEntity, stack);
+                block.harvestBlock(WorldUtils.asWorld(world), player, pos, state, tileEntity, stack);
             }
 
             ServerPlayerEntity mpPlayer = (ServerPlayerEntity) player;
             mpPlayer.connection.sendPacket(new SChangeBlockPacket(world, pos));
         } else {
-            world.playBroadcastSound(2001, pos, Block.getStateId(state));
+            WorldUtils.asWorld(world).playBroadcastSound(2001, pos, Block.getStateId(state));
 
-            if (block.removedByPlayer(state, world, pos, player, true, Fluids.EMPTY.getDefaultState())) {
+            if (block.removedByPlayer(state, WorldUtils.asWorld(world), pos, player, true, Fluids.EMPTY.getDefaultState())) {
                 block.onPlayerDestroy(world, pos, state);
             }
 
-            stack.onBlockDestroyed(world, state, pos, player);
+            stack.onBlockDestroyed(WorldUtils.asWorld(world), state, pos, player);
 
             Minecraft.getInstance().getConnection().sendPacket(new CPlayerDiggingPacket(CPlayerDiggingPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.getFacingDirections(player)[0]));
         }

@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.types.items.QuestEvokerCrystal;
 import com.github.sejoslaw.vanillamagic2.common.registries.EvokerSpellRegistry;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -15,7 +16,7 @@ public class EventCallerEvokerCrystal extends EventCallerVMItem<QuestEvokerCryst
                 (player, world, blockPos, direction) -> this.getVMItem().isVMItem(player.getHeldItemMainhand()) ? this.quests.get(0) : null,
                 (player, world, blockPos, direction, quest) ->
                     this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
-                        if (world.isRemote) {
+                        if (WorldUtils.getIsRemote(world)) {
                             return;
                         }
 

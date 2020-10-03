@@ -1,12 +1,11 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.evokers;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeColor;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.List;
 
@@ -14,8 +13,8 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class EvokerSpellWololo extends EvokerSpell {
-    public void cast(World world, PlayerEntity player, Entity target) {
-        List<SheepEntity> sheeps = world.getEntitiesWithinAABB(EntityType.SHEEP,
+    public void cast(IWorld world, PlayerEntity player, Entity target) {
+        List<SheepEntity> sheeps = world.getEntitiesWithinAABB(SheepEntity.class,
                 player.getBoundingBox()
                         .expand(16.0D, 4.0D, 16.0D)
                         .expand(-16.0D, -4.0D, -16.0D), entity -> true);

@@ -11,10 +11,14 @@ import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IServerWorld;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.IServerWorldInfo;
 
 import java.util.List;
 import java.util.Random;
@@ -28,14 +32,25 @@ import java.util.stream.Collectors;
  */
 public final class WorldUtils {
     /**
-     * Cached name of the currently handling World.
+     * Cached name of the currently handling IWorld.
      */
     public static String WORLD_NAME = "";
 
     /**
+     * Performs some logic only if given World is a ServerWorld.
+     */
+    public static void forServer(IWorld world, Consumer<IServerWorld> consumer) {
+        if (!(world instanceof IServerWorld)) {
+            return;
+        }
+
+        consumer.accept((IServerWorld)world);
+    }
+
+    /**
      * @return All ItemEntities on specified position.
      */
-    public static List<ItemEntity> getItems(World world, BlockPos pos) {
+    public static List<ItemEntity> getItems(IWorld world, BlockPos pos) {
         AxisAlignedBB aabb = new AxisAlignedBB(
                 pos.getX() - 1,
                 pos.getY() - 1,
@@ -49,7 +64,7 @@ public final class WorldUtils {
     /**
      * @return All Ores on specified position.
      */
-    public static List<ItemEntity> getOres(World world, BlockPos pos) {
+    public static List<ItemEntity> getOres(IWorld world, BlockPos pos) {
         return getItems(world, pos)
                 .stream()
                 .filter(entity -> entity.getItem().getItem().getRegistryName().toString().toLowerCase().contains("ore"))
@@ -59,20 +74,20 @@ public final class WorldUtils {
     /**
      * Spawns given List of items 1 block above Cauldron.
      */
-    public static void spawnOnCauldron(World world, BlockPos pos, List<ItemStack> stacks, Function<ItemStack, Integer> stackCountModifier) {
+    public static void spawnOnCauldron(IWorld world, BlockPos pos, List<ItemStack> stacks, Function<ItemStack, Integer> stackCountModifier) {
         BlockPos spawnPos = pos.offset(Direction.UP);
 
         stacks.forEach(stack -> {
             stack.setCount(stackCountModifier.apply(stack));
-            Block.spawnAsEntity(world, spawnPos, stack);
+            Block.spawnAsEntity(WorldUtils.asWorld(world), spawnPos, stack);
         });
     }
 
     /**
-     * Spawns VM TileEntity into the specified World on the given BlockPos.
+     * Spawns VM TileEntity into the specified IWorld on the given BlockPos.
      */
-    public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(World world, BlockPos pos, TVMTileEntity tile, Consumer<TVMTileEntity> consumer) {
-        if (world.isRemote || world.tickableTileEntities.stream().anyMatch(tileEntity -> tileEntity.getPos().equals(pos))) {
+    public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(IWorld world, BlockPos pos, TVMTileEntity tile, Consumer<TVMTileEntity> consumer) {
+        if (WorldUtils.getIsRemote(world) || WorldUtils.getTickableTileEntities(world).stream().anyMatch(tileEntity -> tileEntity.getPos().equals(pos))) {
             return;
         }
 
@@ -84,8 +99,8 @@ public final class WorldUtils {
     /**
      * Performs ticking logic for the specified position.
      */
-    public static void tick(World world, BlockPos pos, int ticks, Random rand) {
-        if (world.isRemote) {
+    public static void tick(IWorld world, BlockPos pos, int ticks, Random rand) {
+        if (WorldUtils.getIsRemote(world)) {
             return;
         }
 
@@ -107,14 +122,14 @@ public final class WorldUtils {
     /**
      * @return Inventory on the specified position; null otherwise.
      */
-    public static IInventory getInventory(World world, BlockPos pos) {
-        return HopperTileEntity.getInventoryAtPosition(world, pos);
+    public static IInventory getInventory(IWorld world, BlockPos pos) {
+        return HopperTileEntity.getInventoryAtPosition(WorldUtils.asWorld(world), pos);
     }
 
     /**
-     * @return Returns a VMTileEntity on specified position at specified World; otherwise null.
+     * @return Returns a VMTileEntity on specified position at specified IWorld; otherwise null.
      */
-    public static IVMTileEntity getVMTile(World world, BlockPos pos) {
+    public static IVMTileEntity getVMTile(IWorld world, BlockPos pos) {
         return getVMTiles(world, vmTile -> vmTile.getPos().equals(pos))
                 .stream()
                 .findFirst()
@@ -122,10 +137,10 @@ public final class WorldUtils {
     }
 
     /**
-     * @return List will all currently registered VM TileEntities on the specified World and satisfy the predicate.
+     * @return List will all currently registered VM TileEntities on the specified IWorld and satisfy the predicate.
      */
-    public static List<IVMTileEntity> getVMTiles(World world, Predicate<IVMTileEntity> check) {
-        return world.tickableTileEntities
+    public static List<IVMTileEntity> getVMTiles(IWorld world, Predicate<IVMTileEntity> check) {
+        return WorldUtils.getTickableTileEntities(world)
                 .stream()
                 .filter(tile -> tile instanceof IVMTileEntity && check.test((IVMTileEntity) tile))
                 .map(tile -> (IVMTileEntity) tile)
@@ -133,13 +148,43 @@ public final class WorldUtils {
     }
 
     /**
-     * @return Name of the currently handling World.
+     * @return Name of the currently handling IWorld.
      */
-    public static String getWorldName(World world) {
-        try {
-            WORLD_NAME = world.getWorldInfo().getWorldName();
-        } catch (Exception ex) { }
+    public static String getWorldName(IWorld world) {
+        if (world instanceof ServerWorld) {
+            WORLD_NAME = ((IServerWorldInfo)world.getWorldInfo()).getWorldName();
+        }
 
         return WORLD_NAME;
+    }
+
+    /**
+     * @return Unique identifier connected with the given IWorld.
+     */
+    public static ResourceLocation getId(IWorld world) {
+        return asWorld(world).getDimensionKey().getRegistryName();
+    }
+
+    /**
+     * @return True if the given IWorld is a server world; otherwise false.
+     */
+    public static boolean getIsRemote(IWorld world) {
+        return asWorld(world).isRemote;
+    }
+
+    /**
+     * @return Returns a List of Tickable TileEntities.
+     */
+    public static List<TileEntity> getTickableTileEntities(IWorld world) {
+        return asWorld(world).tickableTileEntities;
+    }
+
+    /**
+     * This method should be called only if Minecraft really needs pure IWorld object.
+     *
+     * @return IWorld in a form of a IWorld object.
+     */
+    public static World asWorld(IWorld world) {
+        return (World)world;
     }
 }

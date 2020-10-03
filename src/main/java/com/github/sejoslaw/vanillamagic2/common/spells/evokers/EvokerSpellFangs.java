@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.evokers;
 
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,13 +10,13 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class EvokerSpellFangs extends EvokerSpell {
-    public void cast(World world, PlayerEntity player, Entity target) {
+    public void cast(IWorld world, PlayerEntity player, Entity target) {
         if (target == null) {
             return;
         }
@@ -44,7 +45,7 @@ public class EvokerSpellFangs extends EvokerSpell {
         player.playSound(SoundEvents.ENTITY_EVOKER_PREPARE_ATTACK, 1.0F, 1.0F);
     }
 
-    private void spawnFangs(World world, PlayerEntity player, double nextX, double nextZ, double minDifY, double maxDifY, float distance, int warmupDelayTicks) {
+    private void spawnFangs(IWorld world, PlayerEntity player, double nextX, double nextZ, double minDifY, double maxDifY, float distance, int warmupDelayTicks) {
         BlockPos pos = new BlockPos(nextX, maxDifY, nextZ);
         boolean flag = false;
         double maxY = 0.0D;
@@ -75,7 +76,7 @@ public class EvokerSpellFangs extends EvokerSpell {
         }
 
         if (flag) {
-            world.addEntity(new EvokerFangsEntity(world, nextX, (double) pos.getY() + maxY, nextZ, distance, warmupDelayTicks, player));
+            world.addEntity(new EvokerFangsEntity(WorldUtils.asWorld(world), nextX, (double) pos.getY() + maxY, nextZ, distance, warmupDelayTicks, player));
         }
     }
 }

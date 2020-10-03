@@ -2,13 +2,14 @@ package com.github.sejoslaw.vanillamagic2.common.spells.normal;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class SpellFusRoDah extends Spell {
-    public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
-        if (world.isRemote) {
+    public void cast(PlayerEntity player, IWorld world, BlockPos pos, Direction face) {
+        if (WorldUtils.getIsRemote(world)) {
             return;
         }
 
@@ -56,7 +57,7 @@ public class SpellFusRoDah extends Spell {
         motionX -= xRatio / (double) f * strength;
         motionZ -= zRatio / (double) f * strength;
 
-        if (entity.onGround) {
+        if (entity.isOnGround()) {
             motionY /= 2.0D;
             motionY += strength;
 

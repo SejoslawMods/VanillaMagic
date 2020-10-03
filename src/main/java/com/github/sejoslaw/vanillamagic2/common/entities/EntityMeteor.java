@@ -2,17 +2,21 @@ package com.github.sejoslaw.vanillamagic2.common.entities;
 
 import com.github.sejoslaw.vanillamagic2.common.explosions.VMExplosion;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityMeteor extends FireballEntity {
+    public PlayerEntity player;
+
     public EntityMeteor(EntityType<? extends EntityMeteor> entityType, World world) {
         super(entityType, world);
     }
@@ -20,7 +24,7 @@ public class EntityMeteor extends FireballEntity {
     public void setupMeteor(double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ, double accelX, double accelY, double accelZ) {
         this.setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
         this.setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
-        this.setMotion(Vec3d.ZERO);
+        this.setMotion(Vector3d.ZERO);
 
         double distance = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
 
@@ -36,11 +40,11 @@ public class EntityMeteor extends FireballEntity {
     protected void onImpact(RayTraceResult result) {
         super.onImpact(result);
 
-        if (this.world.isRemote) {
+        if (WorldUtils.getIsRemote(world)) {
             return;
         }
 
-        VMExplosion explosion = new VMExplosion(this.world, this.shootingEntity, this.getPosition(), VMForgeConfig.METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
+        VMExplosion explosion = new VMExplosion(this.world, this.func_234616_v_(), this.getPosition(), VMForgeConfig.METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
         explosion.doExplosion();
     }
 }

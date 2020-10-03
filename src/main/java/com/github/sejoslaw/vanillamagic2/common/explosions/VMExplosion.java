@@ -8,15 +8,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.*;
 
@@ -109,7 +110,7 @@ public class VMExplosion extends Explosion {
     }
 
     public VMExplosion(World world, Entity entity, double x, double y, double z, float power, boolean flaming, Mode mode) {
-        super(world, entity, x, y, z, power, flaming, mode);
+        super(world, entity, null, null, x, y, z, power, flaming, mode);
 
         this.world = world;
         this.exploder = entity;
@@ -183,16 +184,16 @@ public class VMExplosion extends Explosion {
 
             double motionSquare = square(entity.getMotion().getX()) + square(entity.getMotion().getY()) + square(entity.getMotion().getZ());
             double reduction = motionSquare > 3600.0D ? Math.sqrt(3600.0D / motionSquare) : 1.0D;
-            Vec3d newMotion = entity.getMotion().add(entityDamage.motionX * reduction, entityDamage.motionY * reduction, entityDamage.motionZ * reduction);
+            Vector3d newMotion = entity.getMotion().add(entityDamage.motionX * reduction, entityDamage.motionY * reduction, entityDamage.motionZ * reduction);
 
             entity.setMotion(newMotion);
         }
 
-        Random worldRandom = this.world.rand;
-        boolean doDrops = this.world.getGameRules().getBoolean(new GameRules.RuleKey<>("doTileDrops"));
+        Random worldRandom = this.world.getRandom();
+        boolean doDrops = this.world.getWorldInfo().getGameRulesInstance().getBoolean(GameRules.DO_TILE_DROPS);
         Map<PositionXZ, Map<ItemStack, DropData>> blocksToDrop = new HashMap<>();
 
-        this.world.playSound(null, this.explosionX, this.explosionY, this.explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldRandom.nextFloat() - worldRandom.nextFloat()) * 0.2F) * 0.7F);
+        this.world.playSound(null, new BlockPos(this.explosionX, this.explosionY, this.explosionZ), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldRandom.nextFloat() - worldRandom.nextFloat()) * 0.2F) * 0.7F);
 
         int realIndex;
 
@@ -217,8 +218,9 @@ public class VMExplosion extends Explosion {
                     Block block = state.getBlock();
 
                     if ((this.power >= 20.0F) || ((doDrops) && (block.canDropFromExplosion(this)) && (getAtIndex(index, bitSet, 2) == 1))) {
-                        DimensionType dimensionType = this.world.getDimension().getType();
-                        List<ItemStack> drops = state.getBlock().getDrops(state, this.world.getServer().getWorld(dimensionType), tmpPos, null);
+                        RegistryKey<World> key = this.world.getDimensionKey();
+                        ServerWorld serverWorld = this.world.getServer().getWorld(key);
+                        List<ItemStack> drops = state.getBlock().getDrops(state, serverWorld, tmpPos, null);
 
                         for (ItemStack stack : drops) {
                             if (worldRandom.nextFloat() <= this.explosionDropRate) {
@@ -352,7 +354,7 @@ public class VMExplosion extends Explosion {
             ret += 1.0D;
         } else {
             BlockState state = this.world.getBlockState(pos);
-            float resistance = block.getExplosionResistance(state, this.world, pos, this.exploder, this);
+            float resistance = block.getExplosionResistance(state, this.world, pos, this);
 
             if (resistance < 0.0F) {
                 return resistance;

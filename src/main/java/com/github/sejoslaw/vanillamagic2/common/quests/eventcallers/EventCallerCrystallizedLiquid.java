@@ -9,6 +9,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
  */
 public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCrystallizedLiquid> {
     public void fillRecipes() {
-        Set<Map.Entry<ResourceLocation, Fluid>> entries = ForgeRegistries.FLUIDS
+        Set<Map.Entry<RegistryKey<Fluid>, Fluid>> entries = ForgeRegistries.FLUIDS
                 .getEntries()
                 .stream()
                 .filter(entry -> !entry.getKey().toString().contains("flowing_"))
@@ -38,7 +39,7 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
                 (fluid) -> new ItemStack(fluid.getFilledBucket()),
                 (fluid) -> new ItemStack(Items.NETHER_STAR),
                 "vmitem.crystallizedLiquid.namePrefix",
-                (entry) -> entry.getValue().getDefaultState().getBlockState().getBlock().getNameTextComponent().getFormattedText());
+                (entry) -> entry.getValue().getDefaultState().getBlockState().getBlock().getTranslatedName().getString());
     }
 
     @SubscribeEvent
@@ -56,7 +57,7 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
                     } else if (tile instanceof IFluidTank) {
                         ((IFluidTank) tile).fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
                     } else if (fluid == Fluids.WATER && world.getBlockState(pos).getBlock() == Blocks.CAULDRON) {
-                        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 3));
+                        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 3), 1 | 2);
                     } else if (tile != null) {
                         IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction).orElse(null);
 
@@ -64,7 +65,7 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
                             fluidHandler.fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
                         }
                     } else {
-                        world.setBlockState(pos.offset(direction), fluid.getDefaultState().getBlockState());
+                        world.setBlockState(pos.offset(direction), fluid.getDefaultState().getBlockState(), 1 | 2);
                     }
                 });
             });

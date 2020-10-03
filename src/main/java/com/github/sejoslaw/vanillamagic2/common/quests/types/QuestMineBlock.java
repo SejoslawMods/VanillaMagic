@@ -4,9 +4,9 @@ import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Block;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,7 +30,7 @@ public class QuestMineBlock extends Quest {
                 .collect(Collectors.toList());
     }
 
-    public void fillTooltip(Collection<String> lines) {
+    public void fillTooltip(List<ITextComponent> lines) {
         super.fillTooltip(lines);
 
         TextUtils.addLine(lines, "quest.tooltip.blocksToMine", this.blocksToMine.stream().map(this::getTooltip).collect(Collectors.joining(", ")));

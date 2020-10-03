@@ -5,7 +5,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -17,9 +17,9 @@ public abstract class EntitySpellLogic {
         } else if (result.getType() == RayTraceResult.Type.ENTITY) {
             return ((EntityRayTraceResult) result).getEntity().getPosition();
         } else {
-            return entitySpell.shootingEntity.getPosition();
+            return entitySpell.player.getPosition();
         }
     }
 
-    public abstract void execute(EntitySpell entitySpell, World world, RayTraceResult result);
+    public abstract void execute(EntitySpell entitySpell, IWorld world, RayTraceResult result);
 }

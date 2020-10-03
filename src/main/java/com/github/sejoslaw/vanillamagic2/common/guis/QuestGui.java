@@ -4,7 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
 import com.github.sejoslaw.vanillamagic2.common.registries.QuestRegistry;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerEntity;
@@ -110,16 +110,16 @@ public class QuestGui extends VMGui {
             this.node = node;
         }
 
-        public void draw(int mouseX, int mouseY) {
+        public void draw(MatrixStack matrixStack, int mouseX, int mouseY) {
             if (this.node == null) {
                 return;
             }
 
-            this.gui.move(mouseX, mouseY, 0);
+            this.gui.move(matrixStack, mouseX, mouseY, 0);
 
-            List<String> lines = new ArrayList<>();
+            List<ITextComponent> lines = new ArrayList<>();
             this.node.quest.fillTooltip(lines);
-            this.gui.renderTooltip(lines, -(this.gui.itemStackIconSize / 2), 0);
+            this.gui.func_243308_b(matrixStack, lines, -(this.gui.itemStackIconSize / 2), 0);
             this.node = null;
         }
     }
@@ -168,16 +168,16 @@ public class QuestGui extends VMGui {
         this.zoom += offsetY > 0 ? 1 : -1;
     }
 
-    protected void renderInnerGui(int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.pushMatrix();
-        move((float) this.centerX, (float) this.centerY, 0);
-        this.drawQuestTreeNode(this.rootNode, mouseX, mouseY);
-        RenderSystem.popMatrix();
+    protected void renderInnerGui(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        matrixStack.push();
+        move(matrixStack, (float) this.centerX, (float) this.centerY, 0);
+        this.drawQuestTreeNode(matrixStack, this.rootNode, mouseX, mouseY);
+        matrixStack.pop();
 
         if (this.showQuestTooltip) {
-            RenderSystem.pushMatrix();
-            this.tooltipDrawer.draw(mouseX, mouseY);
-            RenderSystem.popMatrix();
+            matrixStack.push();
+            this.tooltipDrawer.draw(matrixStack, mouseX, mouseY);
+            matrixStack.pop();
         } else {
             this.tooltipDrawer.setup(null);
         }
@@ -186,8 +186,8 @@ public class QuestGui extends VMGui {
     /**
      * Draws Quest tree.
      */
-    public void drawQuestTreeNode(QuestTreeNode node, int mouseX, int mouseY) {
-        this.drawQuest(node);
+    public void drawQuestTreeNode(MatrixStack matrixStack, QuestTreeNode node, int mouseX, int mouseY) {
+        this.drawQuest(matrixStack, node);
         this.checkTooltip(node, mouseX, mouseY);
 
         node.children.forEach(childNode -> {
@@ -198,9 +198,9 @@ public class QuestGui extends VMGui {
             int offsetX = this.getOffsetX(childNode);
             int offsetY = this.getOffsetY(childNode);
 
-            this.drawConnection(childNode, offsetX, offsetY);
-            this.drawQuestTreeNode(childNode, mouseX, mouseY);
-            this.moveBackToParent(offsetX, offsetY);
+            this.drawConnection(matrixStack, childNode, offsetX, offsetY);
+            this.drawQuestTreeNode(matrixStack, childNode, mouseX, mouseY);
+            this.moveBackToParent(matrixStack, offsetX, offsetY);
         });
     }
 
@@ -234,41 +234,41 @@ public class QuestGui extends VMGui {
     /**
      * Moves drawing position back to the center of parent Quest.
      */
-    public void moveBackToParent(int offsetX, int offsetY) {
-        move(-offsetX, -offsetY, 0);
+    public void moveBackToParent(MatrixStack matrixStack, int offsetX, int offsetY) {
+        move(matrixStack, -offsetX, -offsetY, 0);
 
         boolean straightY = true;
 
         if (offsetX != 0) {
-            move((offsetX > 0 ? -(this.itemStackIconSize / 2) - 1 : (this.itemStackIconSize / 2) + 1), 0, 0);
+            move(matrixStack, (offsetX > 0 ? -(this.itemStackIconSize / 2) - 1 : (this.itemStackIconSize / 2) + 1), 0, 0);
             straightY = false;
         }
 
         if (offsetY != 0 && straightY) {
-            move(0, (offsetY > 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2)), 0);
+            move(matrixStack, 0, (offsetY > 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2)), 0);
         }
     }
 
     /**
      * Draws connection between the nodes.
      */
-    public void drawConnection(QuestTreeNode child, int offsetX, int offsetY) {
+    public void drawConnection(MatrixStack matrixStack, QuestTreeNode child, int offsetX, int offsetY) {
         boolean straightY = true;
 
         if (offsetX != 0) {
-            move((offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
-            this.hLine(0, offsetX, 0, child.color);
-            move(offsetX, 0, 0);
+            move(matrixStack, (offsetX > 0 ? (this.itemStackIconSize / 2) + 1 : -(this.itemStackIconSize / 2) - 1), 0, 0);
+            this.hLine(matrixStack, 0, offsetX, 0, child.color);
+            move(matrixStack, offsetX, 0, 0);
             straightY = false;
         }
 
         if (offsetY != 0) {
             if (straightY) {
-                move(0, (offsetY > 0 ? (this.itemStackIconSize / 2) : -(this.itemStackIconSize / 2)), 0);
+                move(matrixStack, 0, (offsetY > 0 ? (this.itemStackIconSize / 2) : -(this.itemStackIconSize / 2)), 0);
             }
 
-            this.vLine(0, offsetY, 0, child.color);
-            move(0, offsetY, 0);
+            this.vLine(matrixStack, 0, offsetY, 0, child.color);
+            move(matrixStack, 0, offsetY, 0);
         }
     }
 
@@ -289,26 +289,26 @@ public class QuestGui extends VMGui {
     /**
      * Draws specified Quest on the current position.
      */
-    public void drawQuest(QuestTreeNode node) {
+    public void drawQuest(MatrixStack matrixStack, QuestTreeNode node) {
         float move = (float)(this.itemStackIconSize / 2);
-        move(-move, -move, 0);
-        fill(0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
-        this.drawQuestOverlay(node.color);
+        move(matrixStack, -move, -move, 0);
+        fill(matrixStack, 0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
+        this.drawQuestOverlay(matrixStack, node.color);
         this.drawItemStack(node.quest.iconStack, 1, 1, node.quest.getDisplayName());
-        move(move, move, 0);
+        move(matrixStack, move, move, 0);
     }
 
     /**
      * Draws appropriate color overlay around Quest.
      */
-    public void drawQuestOverlay(int color) {
-        this.vLine(0, this.itemStackIconSize, 0, color);
-        this.hLine(0, this.itemStackIconSize, 0, color);
-        move(this.itemStackIconSize, 0, 0);
-        this.vLine(0, this.itemStackIconSize, 0, color);
-        move(-this.itemStackIconSize, this.itemStackIconSize, 0);
-        this.hLine(0, this.itemStackIconSize, 0, color);
-        move(0, -this.itemStackIconSize, 0);
+    public void drawQuestOverlay(MatrixStack matrixStack, int color) {
+        this.vLine(matrixStack, 0, this.itemStackIconSize, 0, color);
+        this.hLine(matrixStack, 0, this.itemStackIconSize, 0, color);
+        move(matrixStack, this.itemStackIconSize, 0, 0);
+        this.vLine(matrixStack, 0, this.itemStackIconSize, 0, color);
+        move(matrixStack, -this.itemStackIconSize, this.itemStackIconSize, 0);
+        this.hLine(matrixStack, 0, this.itemStackIconSize, 0, color);
+        move(matrixStack, 0, -this.itemStackIconSize, 0);
     }
 
     /**

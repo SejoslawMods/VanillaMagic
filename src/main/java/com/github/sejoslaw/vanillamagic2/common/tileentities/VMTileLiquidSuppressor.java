@@ -42,8 +42,8 @@ public class VMTileLiquidSuppressor extends VMTileEntity {
         return nbt;
     }
 
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
         this.ticksRemaining = compound.getInt(NbtUtils.NBT_TICKS);
         this.blockStateId = compound.getInt(NbtUtils.NBT_BLOCK_STATE);
     }

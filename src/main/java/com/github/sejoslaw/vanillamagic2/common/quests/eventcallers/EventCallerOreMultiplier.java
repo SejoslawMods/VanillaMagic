@@ -9,7 +9,7 @@ import net.minecraft.block.FurnaceBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -50,7 +50,7 @@ public class EventCallerOreMultiplier extends EventCaller<QuestOreMultiplier> {
                         stack -> stack.getCount() * quest.multiplier));
     }
 
-    private boolean isStructureValid(World world, BlockPos pos) {
+    private boolean isStructureValid(IWorld world, BlockPos pos) {
         return StreamSupport
                 .stream(Direction.Plane.HORIZONTAL.spliterator(), false)
                 .allMatch(face -> world.getBlockState(pos.offset(face)).getBlock() instanceof FurnaceBlock);

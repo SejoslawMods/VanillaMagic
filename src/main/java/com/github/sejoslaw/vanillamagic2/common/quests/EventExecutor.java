@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -41,7 +41,7 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
         this.caller = caller;
     }
 
-    public TQuest click(Block block, World world, BlockPos pos, Supplier<TQuest> action) {
+    public TQuest click(Block block, IWorld world, BlockPos pos, Supplier<TQuest> action) {
         return world.getBlockState(pos).getBlock() == block ? action.get() : null;
     }
 
@@ -59,10 +59,10 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onAttackEntityNoHandsCheck(AttackEntityEvent event,
-                               Function3<PlayerEntity, World, Entity, TQuest> check,
-                               Consumer4<PlayerEntity, World, Entity, TQuest> consumer) {
+                               Function3<PlayerEntity, IWorld, Entity, TQuest> check,
+                               Consumer4<PlayerEntity, IWorld, Entity, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
-        World world = player.getEntityWorld();
+        IWorld world = player.getEntityWorld();
         Entity target = event.getTarget();
 
         performCheckNoHandsCheck(player,
@@ -71,9 +71,9 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onBlockEvent(BlockEvent event, PlayerEntity player,
-                             Function3<World, BlockPos, BlockState, TQuest> check,
-                             Consumer4<World, BlockPos, BlockState, TQuest> consumer) {
-        World world = event.getWorld().getWorld();
+                             Function3<IWorld, BlockPos, BlockState, TQuest> check,
+                             Consumer4<IWorld, BlockPos, BlockState, TQuest> consumer) {
+        IWorld world = event.getWorld();
         BlockPos pos = event.getPos();
         BlockState state = event.getState();
 
@@ -83,9 +83,9 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onBlockEventNoHandsCheck(BlockEvent event, PlayerEntity player,
-                             Function3<World, BlockPos, BlockState, TQuest> check,
-                             Consumer4<World, BlockPos, BlockState, TQuest> consumer) {
-        World world = event.getWorld().getWorld();
+                             Function3<IWorld, BlockPos, BlockState, TQuest> check,
+                             Consumer4<IWorld, BlockPos, BlockState, TQuest> consumer) {
+        IWorld world = event.getWorld();
         BlockPos pos = event.getPos();
         BlockState state = event.getState();
 
@@ -95,8 +95,8 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onBlockBreak(BlockEvent.BreakEvent event,
-                             Function4<PlayerEntity, World, BlockPos, BlockState, TQuest> check,
-                             Consumer4<PlayerEntity, World, BlockPos, BlockState> consumer) {
+                             Function4<PlayerEntity, IWorld, BlockPos, BlockState, TQuest> check,
+                             Consumer4<PlayerEntity, IWorld, BlockPos, BlockState> consumer) {
         PlayerEntity player = event.getPlayer();
 
         onBlockEvent(event, player,
@@ -105,8 +105,8 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onBlockBreakNoHandsCheck(BlockEvent.BreakEvent event,
-                             Function4<PlayerEntity, World, BlockPos, BlockState, TQuest> check,
-                             Consumer5<PlayerEntity, World, BlockPos, BlockState, TQuest> consumer) {
+                             Function4<PlayerEntity, IWorld, BlockPos, BlockState, TQuest> check,
+                             Consumer5<PlayerEntity, IWorld, BlockPos, BlockState, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
 
         onBlockEventNoHandsCheck(event, player,
@@ -115,24 +115,24 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onPlayerInteract(PlayerInteractEvent event,
-                                 Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
+                                 Consumer4<PlayerEntity, IWorld, BlockPos, Direction> consumer) {
         super.onPlayerInteract(event, (player, world, pos, direction) ->
                 performCheck(player, (quest) ->
                         consumer.accept(player, world, pos, direction)));
     }
 
     public void onPlayerInteractNoStackSizeCheck(PlayerInteractEvent event,
-                                 Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
+                                 Consumer4<PlayerEntity, IWorld, BlockPos, Direction> consumer) {
         PlayerEntity player = event.getPlayer();
 
         performCheckNoStackSizeCheck(player, (quest) -> consumer.accept(player, player.world, event.getPos(), event.getFace()));
     }
 
     public void onPlayerInteract(PlayerInteractEvent event,
-                                 Function4<PlayerEntity, World, BlockPos, Direction, TQuest> check,
-                                 Consumer5<PlayerEntity, World, BlockPos, Direction, TQuest> consumer) {
+                                 Function4<PlayerEntity, IWorld, BlockPos, Direction, TQuest> check,
+                                 Consumer5<PlayerEntity, IWorld, BlockPos, Direction, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
-        World world = event.getWorld();
+        IWorld world = event.getWorld();
         BlockPos pos = event.getPos();
         Direction dir = event.getFace();
 
@@ -142,8 +142,8 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onEntityPlace(BlockEvent.EntityPlaceEvent event,
-                              Function4<PlayerEntity, World, BlockState, BlockPos, TQuest> check,
-                              Consumer4<PlayerEntity, World, BlockState, BlockPos> consumer) {
+                              Function4<PlayerEntity, IWorld, BlockState, BlockPos, TQuest> check,
+                              Consumer4<PlayerEntity, IWorld, BlockState, BlockPos> consumer) {
         Entity entity = event.getEntity();
         PlayerEntity player = entity instanceof PlayerEntity ? (PlayerEntity) entity : null;
 
@@ -153,8 +153,8 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onEntityInteract(PlayerInteractEvent.EntityInteract event,
-                                 Function4<PlayerEntity, Entity, World, BlockPos, TQuest> check,
-                                 Consumer4<PlayerEntity, Entity, World, BlockPos> consumer) {
+                                 Function4<PlayerEntity, Entity, IWorld, BlockPos, TQuest> check,
+                                 Consumer4<PlayerEntity, Entity, IWorld, BlockPos> consumer) {
         Entity target = event.getTarget();
 
         onPlayerInteract(event,
@@ -189,12 +189,12 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onItemPickup(PlayerEvent.ItemPickupEvent event,
-                             Function4<PlayerEntity, World, ItemEntity, ItemStack, TQuest> check,
-                             Consumer5<PlayerEntity, World, ItemEntity, ItemStack, TQuest> consumer) {
+                             Function4<PlayerEntity, IWorld, ItemEntity, ItemStack, TQuest> check,
+                             Consumer5<PlayerEntity, IWorld, ItemEntity, ItemStack, TQuest> consumer) {
         PlayerEntity player = event.getPlayer();
         ItemEntity originalEntity = event.getOriginalEntity();
         ItemStack pickedStack = event.getStack();
-        World world = player.world;
+        IWorld world = player.world;
 
         performCheck(player,
                 () -> check.apply(player, world, originalEntity, pickedStack),
@@ -202,27 +202,27 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     }
 
     public void onPlayerTick(TickEvent.PlayerTickEvent event,
-                             Consumer3<PlayerEntity, World, TQuest> consumer) {
+                             Consumer3<PlayerEntity, IWorld, TQuest> consumer) {
         PlayerEntity player = event.player;
-        World world = player.world;
+        IWorld world = player.world;
 
         performCheck(player, quest -> consumer.accept(player, world, quest));
     }
 
     public void onPlayerTick(TickEvent.PlayerTickEvent event,
-                             Function2<PlayerEntity, World, TQuest> check,
-                             Consumer3<PlayerEntity, World, TQuest> consumer) {
+                             Function2<PlayerEntity, IWorld, TQuest> check,
+                             Consumer3<PlayerEntity, IWorld, TQuest> consumer) {
         PlayerEntity player = event.player;
-        World world = player.world;
+        IWorld world = player.world;
 
         performCheck(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
     }
 
     public void onPlayerTickNoHandsCheck(TickEvent.PlayerTickEvent event,
-                                         Function2<PlayerEntity, World, TQuest> check,
-                                         Consumer3<PlayerEntity, World, TQuest> consumer) {
+                                         Function2<PlayerEntity, IWorld, TQuest> check,
+                                         Consumer3<PlayerEntity, IWorld, TQuest> consumer) {
         PlayerEntity player = event.player;
-        World world = player.world;
+        IWorld world = player.world;
 
         performCheckNoHandsCheck(player, () -> check.apply(player, world), quest -> consumer.accept(player, world, quest));
     }
@@ -236,7 +236,7 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
         this.onPlayerInteract(event,
                 (player, world, pos, direction) ->
                         this.click(Blocks.CAULDRON, world, pos, () -> {
-                            if (world.isRemote) {
+                            if (WorldUtils.getIsRemote(world)) {
                                 return null;
                             }
 
@@ -258,13 +258,13 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
                             return null;
                         }),
                 (player, world, pos, direction, quest) -> {
-                    if (world.isRemote) {
+                    if (WorldUtils.getIsRemote(world)) {
                         return;
                     }
 
                     ingredientsInCauldron[0].forEach(Entity::remove);
                     BlockPos newItemPos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-                    chosenRecipe[0].results.forEach(stack -> Block.spawnAsEntity(world, newItemPos, stack.copy()));
+                    chosenRecipe[0].results.forEach(stack -> Block.spawnAsEntity(WorldUtils.asWorld(world), newItemPos, stack.copy()));
                 });
     }
 

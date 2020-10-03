@@ -9,7 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -21,7 +21,7 @@ public class SpellSummonEntity extends Spell {
         this.entityType = entityType;
     }
 
-    public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
+    public void cast(PlayerEntity player, IWorld world, BlockPos pos, Direction face) {
         Entity entity = SummonEntityLogicRegistry.getEntity(world, entityType);
 
         if (entity == null) {

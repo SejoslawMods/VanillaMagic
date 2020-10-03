@@ -1,13 +1,14 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.normal;
 
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.Random;
 
@@ -15,8 +16,8 @@ import java.util.Random;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class SpellLighter extends Spell {
-    public void cast(PlayerEntity player, World world, BlockPos pos, Direction face) {
-        if (world.isRemote) {
+    public void cast(PlayerEntity player, IWorld world, BlockPos pos, Direction face) {
+        if (WorldUtils.getIsRemote(world)) {
             return;
         }
 

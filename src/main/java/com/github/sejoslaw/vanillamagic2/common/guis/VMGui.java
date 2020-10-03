@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.guis;
 
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -60,37 +60,37 @@ public abstract class VMGui extends Screen {
         return super.mouseDragged(mouseX, mouseY, keyCode, deltaX, deltaY);
     }
 
-    public void move(float deltaX, float deltaY, float deltaZ) {
-        RenderSystem.translatef(deltaX, deltaY, deltaZ);
+    public void move(MatrixStack matrixStack, float deltaX, float deltaY, float deltaZ) {
+        matrixStack.translate(deltaX, deltaY, deltaZ);
     }
 
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground();
-        this.drawCenteredString(this.font, this.getTitle().getFormattedText(), this.width / 2, 10, TEXT_COLOR);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(matrixStack);
+        drawCenteredString(matrixStack, this.font, this.getTitle().getString(), this.width / 2, 10, TEXT_COLOR);
 
-        RenderSystem.pushMatrix();
-        this.renderInnerGui(mouseX, mouseY, partialTicks);
-        RenderSystem.popMatrix();
+        matrixStack.push();
+        this.renderInnerGui(matrixStack, mouseX, mouseY, partialTicks);
+        matrixStack.pop();
 
-        RenderSystem.pushMatrix();
-        super.render(mouseX, mouseY, partialTicks);
-        RenderSystem.popMatrix();
+        matrixStack.push();
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        matrixStack.pop();
     }
 
     protected void addOptionButton(String trueTranslationKey, String falseTranslationKey, String defaultValueKey, Supplier<Boolean> getFlag, Consumer<Button> onClick) {
         int optionButtonWidth = 120;
         int optionButtonHeight = 20;
 
-        this.addButton(new Button(this.optionButtonOffsetX, this.optionButtonOffsetY, optionButtonWidth, optionButtonHeight, TextUtils.getFormattedText(defaultValueKey), button -> {
+        this.addButton(new Button(this.optionButtonOffsetX, this.optionButtonOffsetY, optionButtonWidth, optionButtonHeight, TextUtils.translate(defaultValueKey), button -> {
             String key = getFlag.get() ? trueTranslationKey : falseTranslationKey;
-            button.setMessage(TextUtils.getFormattedText(key));
+            button.setMessage(TextUtils.translate(key));
             onClick.accept(button);
         }));
 
         this.optionButtonOffsetY += 30;
     }
 
-    protected abstract void renderInnerGui(int mouseX, int mouseY, float partialTicks);
+    protected abstract void renderInnerGui(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks);
 
     public static void displayGui(Screen screen) {
         Minecraft.getInstance().displayGuiScreen(screen);

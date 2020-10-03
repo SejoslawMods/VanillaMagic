@@ -38,7 +38,7 @@ public class AutoplantHandler extends EventHandler {
                 return;
             }
 
-            world.setBlockState(pos, plantState);
+            world.setBlockState(pos, plantState, 1 | 2);
         });
     }
 }

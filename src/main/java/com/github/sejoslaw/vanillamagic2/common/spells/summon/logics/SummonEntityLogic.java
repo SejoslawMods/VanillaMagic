@@ -2,7 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.spells.summon.logics;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.Random;
 
@@ -16,11 +16,11 @@ public class SummonEntityLogic {
         this.entityType = entityType;
     }
 
-    public Entity getEntity(World world) {
+    public Entity getEntity(IWorld world) {
         return null;
     }
 
-    public Entity getHorse(World world) {
+    public Entity getHorse(IWorld world) {
         return null;
     }
 

@@ -7,6 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,12 +46,12 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
     public abstract void fillRecipes();
 
     protected <T> void fillCrystalRecipesFromRegistry(
-            Set<Map.Entry<ResourceLocation, T>> entries,
+            Set<Map.Entry<RegistryKey<T>, T>> entries,
             Function<T, ItemStack> getIngredient,
             Function<T, ItemStack> getResult,
             String displayNameKey,
-            Function<Map.Entry<ResourceLocation, T>, String> getDisplayName) {
-        for (Map.Entry<ResourceLocation, T> entry : entries) {
+            Function<Map.Entry<RegistryKey<T>, T>, String> getDisplayName) {
+        for (Map.Entry<RegistryKey<T>, T> entry : entries) {
             List<ItemStack> ingredients = new ArrayList<>();
             ingredients.add(new ItemStack(Items.NETHER_STAR));
             ingredients.add(getIngredient.apply(entry.getValue()));

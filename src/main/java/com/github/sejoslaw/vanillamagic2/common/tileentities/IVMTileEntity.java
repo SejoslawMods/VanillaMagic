@@ -1,14 +1,14 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraftforge.common.extensions.IForgeTileEntity;
 
 import java.util.List;
@@ -31,15 +31,15 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     /**
      * Initializes the current VM TileEntity.
      */
-    default void initialize(World world, BlockPos pos) {
-        this.getTileEntity().setWorldAndPos(world, pos);
+    default void initialize(IWorld world, BlockPos pos) {
+        this.getTileEntity().setWorldAndPos((World)world, pos);
         this.getWorld().getChunkProvider().forceChunk(this.getChunkPos(), true);
     }
 
     /**
-     * @return World of the current VM TileEntity.
+     * @return IWorld of the current VM TileEntity.
      */
-    default World getWorld() {
+    default IWorld getWorld() {
         return this.getTileEntity().getWorld();
     }
 
@@ -53,8 +53,8 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
     /**
      * @return Chunk to which the current VM TileEntity belongs.
      */
-    default Chunk getChunk() {
-        return this.getWorld().getChunkAt(this.getPos());
+    default IChunk getChunk() {
+        return this.getWorld().getChunk(this.getPos());
     }
 
     /**
@@ -75,28 +75,14 @@ public interface IVMTileEntity extends ITickableTileEntity, IForgeTileEntity {
      * Removes TileEntity and cleans up registry.
      */
     default void removeTileEntity() {
+        this.getTileEntity().getWorld().removeTileEntity(this.getPos());
         this.getTileEntity().remove();
-        this.getWorld().removeTileEntity(this.getPos());
     }
 
     /**
-     * Reads data from the given NBT object.
-     */
-    default void read(CompoundNBT nbt) {
-        this.getTileEntity().read(nbt);
-    }
-
-    /**
-     * @return NBT object with written data corresponded with this VM TileEntity.
-     */
-    default CompoundNBT write(CompoundNBT nbt) {
-        return this.getTileEntity().write(nbt);
-    }
-
-    /**
-     * Performs logic needed to add current VM TileEntity into the World.
+     * Performs logic needed to add current VM TileEntity into the IWorld.
      */
     default void spawn() {
-        this.getWorld().addTileEntity(this.getTileEntity());
+        this.getTileEntity().getWorld().addTileEntity(this.getTileEntity());
     }
 }

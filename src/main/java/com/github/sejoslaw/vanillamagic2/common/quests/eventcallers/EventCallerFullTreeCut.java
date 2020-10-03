@@ -3,13 +3,14 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestFullTreeCut;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -24,7 +25,7 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
         this.executor.onBlockBreak(event,
                 (player, world, pos, state) -> isLog(world, pos) && isAxe(player.getHeldItemMainhand()) ? this.quests.get(0) : null,
                 (player, world, pos, state) -> {
-                    if (world.isRemote || !isBreakingTree(world, pos)) {
+                    if (WorldUtils.getIsRemote(world) || !isBreakingTree(world, pos)) {
                         return;
                     }
 
@@ -37,11 +38,11 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
         return stack.getItem().getRegistryName().toString().toLowerCase().contains("_axe");
     }
 
-    private static boolean isLog(World world, BlockPos pos) {
+    private static boolean isLog(IWorld world, BlockPos pos) {
         return world.getBlockState(pos).getBlock().getRegistryName().toString().toLowerCase().contains("log");
     }
 
-    private static boolean isBreakingTree(World world, BlockPos pos) {
+    private static boolean isBreakingTree(IWorld world, BlockPos pos) {
         BlockPos currentPos = null;
         Stack<BlockPos> candidates = new Stack<>();
         candidates.add(pos);
@@ -87,14 +88,14 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
 
     private static final class TreeChopTask {
         private final PlayerEntity player;
-        private final World world;
+        private final IWorld world;
         private final BlockPos pos;
         private final ItemStack rightHandStack;
 
         public Queue<BlockPos> blocks = new LinkedList<>();
         public Set<BlockPos> visited = new HashSet<>();
 
-        public TreeChopTask(PlayerEntity player, World world, BlockPos pos, ItemStack rightHandStack) {
+        public TreeChopTask(PlayerEntity player, IWorld world, BlockPos pos, ItemStack rightHandStack) {
             this.player = player;
             this.world = world;
             this.pos = pos;

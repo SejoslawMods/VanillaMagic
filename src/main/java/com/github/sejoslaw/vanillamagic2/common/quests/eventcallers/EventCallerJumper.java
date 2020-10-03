@@ -5,12 +5,13 @@ import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestJumper;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -43,14 +44,14 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) -> {
                     nbt[0] = player.getHeldItemOffhand().getOrCreateTag();
-                    return !world.isRemote && nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
+                    return !WorldUtils.getIsRemote(world) && nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
                 },
                 (player, world, pos, direction, quest) ->
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
                         nbt[0] = nbt[0].getCompound(NbtUtils.NBT_POSITION);
                         BlockPos savedPos = NbtUtils.getPos(nbt[0]);
-                        World savedWorld = NbtUtils.getWorld(player.getServer(), nbt[0]);
-                        EntityUtils.teleport(player, savedPos, savedWorld);
+                        IWorld savedWorld = NbtUtils.getWorld(player.getServer(), nbt[0]);
+                        EntityUtils.teleport(player, savedPos, WorldUtils.asWorld(savedWorld).getDimensionKey());
                     }));
     }
 }

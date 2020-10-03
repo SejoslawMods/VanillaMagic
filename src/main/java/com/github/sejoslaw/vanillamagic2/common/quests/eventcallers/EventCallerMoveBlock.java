@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestMoveBlock;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,7 +16,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -56,7 +57,7 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
         player.setItemStackToSlot(EquipmentSlotType.OFFHAND, bookStack);
     }
 
-    private void load(World world, BlockPos pos, Direction direction, ItemStack leftHandStack) {
+    private void load(IWorld world, BlockPos pos, Direction direction, ItemStack leftHandStack) {
         CompoundNBT nbt = leftHandStack.getOrCreateTag().getCompound(NbtUtils.NBT_BLOCK);
         BlockPos spawnPos = pos.offset(direction);
 
@@ -65,7 +66,7 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
         }
 
         BlockState blockState = Block.getStateById(nbt.getInt(NbtUtils.NBT_BLOCK_STATE));
-        world.setBlockState(spawnPos, blockState);
+        world.setBlockState(spawnPos, blockState, 1 | 2);
 
         TileEntity tile = world.getTileEntity(spawnPos);
 
@@ -73,11 +74,11 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
             nbt.putInt("x", spawnPos.getX());
             nbt.putInt("y", spawnPos.getY());
             nbt.putInt("z", spawnPos.getZ());
-            tile.read(nbt);
+            tile.read(tile.getBlockState(), nbt);
         }
     }
 
-    private void save(ItemStack bookStack, World world, BlockPos pos) {
+    private void save(ItemStack bookStack, IWorld world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos);
 
         bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.block"), " " + TextUtils.getFormattedText(blockState.getBlock().getTranslationKey())));
@@ -90,13 +91,13 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
 
         if (tileEntity != null) {
             tileEntity.write(nbt);
-            bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.tileEntity"), " " + bookStack.getDisplayName().getFormattedText()));
-            world.removeTileEntity(pos);
+            bookStack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.moveBlock.tileEntity"), " " + bookStack.getDisplayName().getString()));
+            WorldUtils.asWorld(world).removeTileEntity(pos);
             nbt.remove("x");
             nbt.remove("y");
             nbt.remove("z");
         }
 
-        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        world.setBlockState(pos, Blocks.AIR.getDefaultState(), 1 | 2);
     }
 }

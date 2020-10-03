@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public final class EvokerSpellRegistry {
         stack.setDisplayName(TextUtils.toComponent(displayNamePrefix + ": " + displayNamePostfix));
     }
 
-    public static void castSpell(World world, PlayerEntity player, ItemStack stack) {
+    public static void castSpell(IWorld world, PlayerEntity player, ItemStack stack) {
         Entity target = EntityUtils.getLookingAt(player);
         int spellId = stack.getOrCreateTag().getInt(NbtUtils.NBT_SPELL_ID);
         SPELLS.get(spellId).spell.cast(world, player, target);

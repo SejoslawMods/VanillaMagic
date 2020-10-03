@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestSummonHorde;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -55,7 +56,7 @@ public class EventCallerSummonHorde extends EventCaller<QuestSummonHorde> {
                                         }
 
                                         int indexId = new Random().nextInt(monsterTypes.size());
-                                        Entity entity = monsterTypes.get(indexId).create(world);
+                                        Entity entity = monsterTypes.get(indexId).create(WorldUtils.asWorld(world));
                                         entity.setPosition(newPosX, player.getPosY(), newPosZ);
 
                                         world.addEntity(entity);

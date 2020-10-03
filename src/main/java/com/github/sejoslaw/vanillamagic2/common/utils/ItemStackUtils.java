@@ -10,7 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.common.ForgeHooks;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public final class ItemStackUtils {
      */
     public static List<ItemStack> smeltItems(PlayerEntity player, List<ItemEntity> stacksToSmelt, int smeltingCost) {
         ItemStack leftHandStack = player.getHeldItemOffhand();
-        World world = player.world;
+        IWorld world = player.world;
         final int[] ticks = {0};
 
         return stacksToSmelt
@@ -109,8 +109,8 @@ public final class ItemStackUtils {
     /**
      * @return Experience value from the given ItemStack.
      */
-    public static float getExperienceFromStack(ItemStack stack, World world) {
-        AbstractCookingRecipe cookingRecipe = (AbstractCookingRecipe) world.getRecipeManager().getRecipes()
+    public static float getExperienceFromStack(ItemStack stack, IWorld world) {
+        AbstractCookingRecipe cookingRecipe = (AbstractCookingRecipe) WorldUtils.asWorld(world).getRecipeManager().getRecipes()
                 .stream()
                 .filter(recipe -> (recipe.getType() == IRecipeType.SMELTING) && (recipe instanceof AbstractCookingRecipe) && areEqual(recipe.getRecipeOutput(), stack, true))
                 .findFirst()
@@ -121,8 +121,8 @@ public final class ItemStackUtils {
     /**
      * @return Smelting result based on given ItemStack.
      */
-    public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt, World world) {
-        IRecipe<?> recipe = world.getRecipeManager().getRecipes()
+    public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt, IWorld world) {
+        IRecipe<?> recipe = WorldUtils.asWorld(world).getRecipeManager().getRecipes()
                 .stream()
                 .filter(checkingRecipe -> (checkingRecipe.getType() == IRecipeType.SMELTING) && checkingRecipe.getIngredients().get(0).test(stackToSmelt))
                 .findFirst()
@@ -134,7 +134,7 @@ public final class ItemStackUtils {
     /**
      * @return Smeltable ItemStacks available on specified position.
      */
-    public static List<ItemEntity> getSmeltables(World world, BlockPos pos) {
+    public static List<ItemEntity> getSmeltables(IWorld world, BlockPos pos) {
         return WorldUtils.getItems(world, pos)
                 .stream()
                 .filter(itemEntity -> ItemStackUtils.getSmeltingResultAsNewStack(itemEntity.getItem(), world) != ItemStack.EMPTY)

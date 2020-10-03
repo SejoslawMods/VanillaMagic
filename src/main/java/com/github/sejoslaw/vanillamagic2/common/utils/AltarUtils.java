@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public final class AltarUtils {
      *
      * @return True if the  Altar is build correctly; otherwise false.
      */
-    public static boolean checkAltarTier(World world, BlockPos pos, int tier) {
+    public static boolean checkAltarTier(IWorld world, BlockPos pos, int tier) {
         Block block = BLOCKS.get(tier);
 
         if (tier <= 1) {
@@ -63,7 +63,7 @@ public final class AltarUtils {
         return ingredients.size() == validItemEntities.size();
     }
 
-    private static boolean checkTierNCornersOnly(World world, BlockPos pos, int distance, Block block) {
+    private static boolean checkTierNCornersOnly(IWorld world, BlockPos pos, int distance, Block block) {
         BlockPos up = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() + distance);
         BlockPos left = new BlockPos(pos.getX() - distance, pos.getY() - 1, pos.getZ());
         BlockPos down = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() - distance);
@@ -75,7 +75,7 @@ public final class AltarUtils {
                world.getBlockState(right).getBlock() == block;
     }
 
-    private static boolean checkTierNSidesOnly(World world, BlockPos pos, int distance, Block block) {
+    private static boolean checkTierNSidesOnly(IWorld world, BlockPos pos, int distance, Block block) {
         BlockPos rightUp = new BlockPos(pos.getX() + distance, pos.getY() - 1, pos.getZ() + distance);
         BlockPos leftUp = new BlockPos(pos.getX() - distance, pos.getY() - 1, pos.getZ() + distance);
         BlockPos leftDown = new BlockPos(pos.getX() - distance, pos.getY() - 1, pos.getZ() - distance);

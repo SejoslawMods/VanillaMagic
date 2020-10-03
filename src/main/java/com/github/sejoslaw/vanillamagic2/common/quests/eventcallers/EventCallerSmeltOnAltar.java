@@ -28,7 +28,7 @@ public class EventCallerSmeltOnAltar extends EventCaller<QuestSmeltOnAltar> {
                             ItemStack leftHandStack = player.getHeldItemOffhand();
                             QuestSmeltOnAltar quest = this.quests.get(0);
 
-                            if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier) || world.isRemote) {
+                            if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier) || WorldUtils.getIsRemote(world)) {
                                 return null;
                             }
 

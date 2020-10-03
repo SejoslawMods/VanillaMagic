@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.entities;
 import com.github.sejoslaw.vanillamagic2.common.spells.logics.EntitySpellLogic;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,12 +18,19 @@ import net.minecraft.world.World;
 public class EntitySpell extends DamagingProjectileEntity implements IRendersAsItem {
     private EntitySpellLogic logic;
 
+    public PlayerEntity player;
+
     public EntitySpell(EntityType<? extends EntitySpell> entityType, World world) {
         super(entityType, world);
     }
 
     public EntitySpell withLogic(EntitySpellLogic logic) {
         this.logic = logic;
+        return this;
+    }
+
+    public EntitySpell withPlayer(PlayerEntity player) {
+        this.player = player;
         return this;
     }
 

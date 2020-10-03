@@ -26,7 +26,7 @@ public abstract class EventCallerUpgradable<TQuest extends Quest> extends EventC
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) ->
                         this.executor.click(Blocks.CAULDRON, world, pos, () -> {
-                            if (world.isRemote) {
+                            if (WorldUtils.getIsRemote(world)) {
                                 return null;
                             }
 

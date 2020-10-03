@@ -12,18 +12,17 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -35,7 +34,7 @@ public abstract class EventHandler {
     protected final String squareSymbol = "\u25A0";
 
     public void onItemExpire(ItemExpireEvent event,
-                             Consumer4<ItemEntity, ItemStack, World, BlockPos> consumer) {
+                             Consumer4<ItemEntity, ItemStack, IWorld, BlockPos> consumer) {
         ItemEntity entity = event.getEntityItem();
 
         consumer.accept(entity, entity.getItem(), entity.getEntityWorld(), entity.getPosition());
@@ -75,11 +74,9 @@ public abstract class EventHandler {
         }
     }
 
-    public void onServerStarting(FMLServerStartingEvent event, Consumer2<MinecraftServer, CommandDispatcher<CommandSource>> consumer) {
-        MinecraftServer server = event.getServer();
-        CommandDispatcher<CommandSource> dispatcher = event.getCommandDispatcher();
-
-        consumer.accept(server, dispatcher);
+    public void onRegisterCommand(RegisterCommandsEvent event, Consumer<CommandDispatcher<CommandSource>> consumer) {
+        CommandDispatcher<CommandSource> dispatcher = event.getDispatcher();
+        consumer.accept(dispatcher);
     }
 
     public void registerRenderers(FMLClientSetupEvent event, Consumer<Minecraft> consumer) {
@@ -88,9 +85,9 @@ public abstract class EventHandler {
     }
 
     public void onPlayerInteract(PlayerInteractEvent event,
-                                 Consumer4<PlayerEntity, World, BlockPos, Direction> consumer) {
+                                 Consumer4<PlayerEntity, IWorld, BlockPos, Direction> consumer) {
         PlayerEntity player = event.getPlayer();
-        World world = player.getEntityWorld();
+        IWorld world = player.getEntityWorld();
         BlockPos pos = event.getPos();
         Direction face = event.getFace();
 

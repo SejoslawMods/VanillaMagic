@@ -2,6 +2,8 @@ package com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeEventCaller;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,7 +17,10 @@ public class ItemUpgradeEventCallerThor extends ItemUpgradeEventCaller {
         this.eventCaller.executor.onAttackEntityNoHandsCheck(event,
                 (player, world, entity) -> this.getQuest(player),
                 (player, world, entity, quest) ->
-                        this.execute(player, () ->
-                                EntityUtils.spawnLightningBolt(world, new LightningBoltEntity(world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), false))));
+                        this.execute(player, () -> {
+                            LightningBoltEntity lightningBoltEntity = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, WorldUtils.asWorld(world));
+                            lightningBoltEntity.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
+                            EntityUtils.spawnLightningBolt(world, lightningBoltEntity);
+                        }));
     }
 }

@@ -7,7 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.spells.weather.SpellWeatherClear
 import com.github.sejoslaw.vanillamagic2.common.spells.weather.SpellWeatherRain;
 import com.github.sejoslaw.vanillamagic2.common.spells.weather.SpellWeatherThunderstorm;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.RegistryKey;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
@@ -37,8 +37,8 @@ public final class SpellRegistry {
         SPELLS.put("spellWeatherClear", new SpellWeatherClear());
         SPELLS.put("spellWeatherThunderstorm", new SpellWeatherThunderstorm());
 
-        for (Map.Entry<ResourceLocation, EntityType<?>> entry : ForgeRegistries.ENTITIES.getEntries()) {
-            String spellUniqueName = "spellSummon_" + entry.getKey().toString();
+        for (Map.Entry<RegistryKey<EntityType<?>>, EntityType<?>> entry : ForgeRegistries.ENTITIES.getEntries()) {
+            String spellUniqueName = "spellSummon_" + entry.getKey().getLocation().toString();
             SPELLS.put(spellUniqueName, new SpellSummonEntity(entry.getValue()));
         }
     }

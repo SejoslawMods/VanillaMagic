@@ -56,7 +56,7 @@ public class EventCallerPortableCraftingTable extends EventCaller<QuestPortableC
         }
 
         public void onCraftMatrixChanged(IInventory inv) {
-            func_217066_a(this.windowId, this.player.getEntityWorld(), this.player, this.craftMatrix, this.craftResult);
+            updateCraftingResult(this.windowId, this.player.getEntityWorld(), this.player, this.craftMatrix, this.craftResult);
         }
 
         public void onContainerClosed(PlayerEntity player) {

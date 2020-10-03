@@ -6,7 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestItemMagnet;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -38,17 +38,17 @@ public class EventCallerItemMagnet extends EventCaller<QuestItemMagnet> {
                             y + quest.range,
                             z + quest.range));
 
-                    Vec3d playerVec = new Vec3d(x, y, z);
+                    Vector3d playerVec = new Vector3d(x, y, z);
 
                     for (ItemEntity itemEntity : items) {
-                        Vec3d itemEntityVec = new Vec3d(itemEntity.getPosX(), itemEntity.getPosY(), itemEntity.getPosZ());
-                        Vec3d finalVec = playerVec.subtract(itemEntityVec);
+                        Vector3d itemEntityVec = new Vector3d(itemEntity.getPosX(), itemEntity.getPosY(), itemEntity.getPosZ());
+                        Vector3d finalVec = playerVec.subtract(itemEntityVec);
 
                         if (finalVec.length() > 1) {
                             finalVec = finalVec.normalize();
                         }
 
-                        itemEntity.setMotion(new Vec3d(finalVec.getX() * itemMotion, finalVec.getY() * itemMotion, finalVec.getZ() * itemMotion));
+                        itemEntity.setMotion(new Vector3d(finalVec.getX() * itemMotion, finalVec.getY() * itemMotion, finalVec.getZ() * itemMotion));
                     }
                 });
     }

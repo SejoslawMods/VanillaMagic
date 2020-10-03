@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.registries.TileEntityRegistry;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 
@@ -32,8 +33,8 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
         return nbt;
     }
 
-    public void read(CompoundNBT nbt) {
-        super.read(nbt);
+    public void read(BlockState state, CompoundNBT nbt) {
+        super.read(state, nbt);
         this.setModuleKey(nbt.getString(NbtUtils.NBT_MACHINE_MODULE_KEY));
     }
 

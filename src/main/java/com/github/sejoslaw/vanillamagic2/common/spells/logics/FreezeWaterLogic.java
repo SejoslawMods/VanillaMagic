@@ -6,8 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ import java.util.List;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class FreezeWaterLogic extends EntitySpellLogic {
-    public void execute(EntitySpell entitySpell, World world, RayTraceResult result) {
+    public void execute(EntitySpell entitySpell, IWorld world, RayTraceResult result) {
         if (!entitySpell.isInWater()) {
             return;
         }
 
-        Vec3d hitVec = result.getHitVec();
+        Vector3d hitVec = result.getHitVec();
         BlockPos hitPos = new BlockPos(hitVec);
         List<BlockPos> blockPosToReplace = this.getBlockPos3x3x3(hitPos);
 
@@ -29,7 +29,7 @@ public class FreezeWaterLogic extends EntitySpellLogic {
             Block block = world.getBlockState(pos).getBlock();
 
             if (block instanceof FlowingFluidBlock) {
-                world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                world.setBlockState(pos, Blocks.ICE.getDefaultState(), 1 | 2);
             }
         });
     }

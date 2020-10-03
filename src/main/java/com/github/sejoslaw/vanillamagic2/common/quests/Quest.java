@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.Collection;
@@ -41,7 +42,7 @@ public class Quest {
     /**
      * Adds tooltip information to given collection.
      */
-    public void fillTooltip(Collection<String> lines) {
+    public void fillTooltip(List<ITextComponent> lines) {
         TextUtils.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + this.getDisplayName());
 
         if (this.parent != null) {
@@ -93,14 +94,14 @@ public class Quest {
      * @return Tooltip appropriate version of the given argument.
      */
     protected String getTooltip(ItemStack stack) {
-        return stack.getCount() + "x " + stack.getDisplayName().getFormattedText();
+        return stack.getCount() + "x " + stack.getDisplayName().getString();
     }
 
     /**
      * @return Tooltip appropriate version of the given argument.
      */
     protected String getTooltip(Block block) {
-        return block.getNameTextComponent().getFormattedText();
+        return TextUtils.getFormattedText(block.getTranslationKey());
     }
 
     /**

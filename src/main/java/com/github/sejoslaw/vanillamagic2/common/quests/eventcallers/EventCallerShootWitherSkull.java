@@ -2,10 +2,11 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestShootWitherSkull;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -17,15 +18,15 @@ public class EventCallerShootWitherSkull extends EventCaller<QuestShootWitherSku
     public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         this.executor.onPlayerInteract(event, (player, world, pos, face) ->
                 this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                    world.playEvent(player, 1024, new BlockPos(player), 0);
+                    world.playEvent(player, 1024, new BlockPos(player.getPosition()), 0);
 
-                    Vec3d lookingAt = player.getLookVec();
+                    Vector3d lookingAt = player.getLookVec();
                     double accelX = lookingAt.getX();
                     double accelY = lookingAt.getY();
                     double accelZ = lookingAt.getZ();
 
                     WitherSkullEntity entityWitherSkull = new WitherSkullEntity(
-                            world,
+                            WorldUtils.asWorld(world),
                             player.getPosX() + accelX,
                             player.getPosY() + 1.5D + accelY,
                             player.getPosZ() + accelZ,
@@ -33,7 +34,7 @@ public class EventCallerShootWitherSkull extends EventCaller<QuestShootWitherSku
                             accelY,
                             accelZ);
 
-                    entityWitherSkull.shootingEntity = player;
+                    entityWitherSkull.setShooter(player);
                     entityWitherSkull.setMotion(0, 0, 0);
 
                     double accelDelta = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);

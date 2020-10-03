@@ -6,7 +6,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorld;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +19,7 @@ public final class TextUtils {
      * @return Translated text component.
      */
     public static String getFormattedText(String key) {
-        return translate(key).getFormattedText();
+        return translate(key).getString();
     }
 
     /**
@@ -54,14 +54,14 @@ public final class TextUtils {
      * @return Combined component from given key with the message from the second argument.
      */
     public static ITextComponent combine(ITextComponent component, String text) {
-        return toComponent(component.getFormattedText() + text);
+        return toComponent(component.getString() + text);
     }
 
     /**
      * @return String formatted information about the specified position.
      */
-    public static String getPosition(World world, BlockPos pos) {
-        return world.getDimension().getType().getRegistryName().toString() + "[" + pos.toString() + "]";
+    public static String getPosition(IWorld world, BlockPos pos) {
+        return WorldUtils.getId(world).toString() + "[" + pos.toString() + "]";
     }
 
     /**
