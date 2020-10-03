@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.guis;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
+import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -43,6 +44,8 @@ public class VMTileEntityDetailsGui extends VMGui {
         this.renderTileInformation();
 
         if (this.showTileNbt) {
+            this.nextLine();
+            this.nextLine();
             this.renderNbtData(mouseX, mouseY);
         }
     }
@@ -57,7 +60,6 @@ public class VMTileEntityDetailsGui extends VMGui {
         this.tileEntity.addInformation(lines);
 
         for (ITextComponent line : lines) {
-            // TODO: FIX - modify drawing position, get rendering color (somehow O.o)
             this.drawString(this.font, line.getFormattedText(), this.centerX, this.centerY, TEXT_COLOR);
             this.nextLine();
         }
@@ -65,7 +67,18 @@ public class VMTileEntityDetailsGui extends VMGui {
 
     private void renderNbtData(int mouseX, int mouseY) {
         CompoundNBT nbt = this.tileEntity.serializeNBT();
-//        NodeNbt root = NodeNbt.parse(nbt);
-//        NodeNbt.forEach((depth, node) -> { });
+
+        NbtUtils.forEachEntry(nbt, (depth, key, value) -> {
+            final String singleSpace = "    ";
+            StringBuilder tab = new StringBuilder();
+
+            for (int i = 0; i < depth; ++i) {
+                tab.append(singleSpace);
+            }
+
+            String str = tab.toString() + key + ": " + value;
+            this.drawString(this.font, str, this.centerX, this.centerY, TEXT_COLOR);
+            this.nextLine();
+        });
     }
 }
