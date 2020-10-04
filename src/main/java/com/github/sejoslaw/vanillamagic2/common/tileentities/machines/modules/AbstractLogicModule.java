@@ -11,8 +11,10 @@ public abstract class AbstractLogicModule extends AbstractMachineModule {
     }
 
     public void execute(IVMTileMachine machine) {
-        this.work(machine, this.getEnergyLevel(machine));
-        this.setEnergyLevel(machine, 0);
+        this.work(machine);
+
+        int energyLevel = this.getEnergyLevel(machine);
+        this.setEnergyLevel(machine, energyLevel - 1);
     }
 
     /**
@@ -23,5 +25,5 @@ public abstract class AbstractLogicModule extends AbstractMachineModule {
     /**
      * Performs machine single cycle.
      */
-    protected abstract void work(IVMTileMachine machine, int numberOfOperations);
+    protected abstract void work(IVMTileMachine machine);
 }

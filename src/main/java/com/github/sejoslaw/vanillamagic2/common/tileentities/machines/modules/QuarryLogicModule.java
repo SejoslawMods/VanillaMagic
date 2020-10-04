@@ -7,6 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.HopperTileEntity;
@@ -55,12 +56,24 @@ public class QuarryLogicModule extends AbstractLogicModule {
         return this.hasKey(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
     }
 
-    protected void work(IVMTileMachine machine, int numberOfOperations) {
+    protected void work(IVMTileMachine machine) {
         int quarrySize = this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).rotateYCCW(), Blocks.DIAMOND_BLOCK) * VMForgeConfig.QUARRY_SIZE.get();
 
-        for (int i = 0 ; i < this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).getOpposite(), Blocks.REDSTONE_BLOCK) * numberOfOperations; ++i) {
+        for (int i = 0 ; i < this.countBlocks(machine, this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID).getOpposite(), Blocks.REDSTONE_BLOCK); ++i) {
             this.performSingleOperation(machine, quarrySize);
         }
+    }
+
+    private int countBlocks(IVMTileMachine machine, Direction dir, Block block) {
+        BlockPos machinePos = machine.getPos().offset(dir);
+        int blocksCount = 0;
+
+        while (machine.getWorld().getBlockState(machinePos).getBlock().equals(block)) {
+            blocksCount++;
+            machinePos = machinePos.offset(dir);
+        }
+
+        return blocksCount;
     }
 
     /**
@@ -73,10 +86,14 @@ public class QuarryLogicModule extends AbstractLogicModule {
         Direction startPosDir = this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
         BlockState mineBlockState = world.getBlockState(workingPos);
 
-        if (world.isAirBlock(workingPos)) {
-            while (world.isAirBlock(workingPos)) {
+        if (this.canSkipBlock(world, workingPos)) {
+            while (this.canSkipBlock(world, workingPos)) {
                 workingPos = workingPos.offset(Direction.DOWN);
             }
+
+            this.setWorkingPos(machine, workingPos);
+            this.setStartPos(machine, startPos);
+            this.performSingleOperation(machine, quarrySize);
         } else if (mineBlockState.getBlock() == Blocks.BEDROCK) {
             workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosDir);
 
@@ -84,6 +101,10 @@ public class QuarryLogicModule extends AbstractLogicModule {
                 startPos = startPos.offset(startPosDir.rotateYCCW());
                 workingPos = new BlockPos(startPos);
             }
+
+            this.setWorkingPos(machine, workingPos);
+            this.setStartPos(machine, startPos);
+            this.performSingleOperation(machine, quarrySize);
         } else {
             List<ItemStack> drops = Block.getDrops(mineBlockState, (ServerWorld) world, workingPos, machine.getTileEntity());
             IInventory mineInv = WorldUtils.getInventory(world, workingPos);
@@ -115,21 +136,13 @@ public class QuarryLogicModule extends AbstractLogicModule {
 
             world.setBlockState(workingPos, Blocks.AIR.getDefaultState(), 1 | 2);
             workingPos = workingPos.offset(Direction.DOWN);
-        }
 
-        this.setWorkingPos(machine, workingPos);
-        this.setStartPos(machine, startPos);
+            this.setWorkingPos(machine, workingPos);
+            this.setStartPos(machine, startPos);
+        }
     }
 
-    private int countBlocks(IVMTileMachine machine, Direction dir, Block block) {
-        BlockPos machinePos = machine.getPos().offset(dir);
-        int blocksCount = 0;
-
-        while (machine.getWorld().getBlockState(machinePos).getBlock().equals(block)) {
-            blocksCount++;
-            machinePos = machinePos.offset(dir);
-        }
-
-        return blocksCount;
+    private boolean canSkipBlock(IWorld world, BlockPos pos) {
+        return world.isAirBlock(pos) || world.getFluidState(pos) != Fluids.EMPTY.getDefaultState();
     }
 }
