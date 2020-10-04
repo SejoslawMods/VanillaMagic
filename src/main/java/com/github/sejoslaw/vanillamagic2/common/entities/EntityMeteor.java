@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic2.common.explosions.VMExplosion;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -15,8 +14,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityMeteor extends FireballEntity {
-    public PlayerEntity player;
-
     public EntityMeteor(EntityType<? extends EntityMeteor> entityType, World world) {
         super(entityType, world);
     }

@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.RegistryKey;
@@ -23,13 +22,6 @@ import java.util.stream.Collectors;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class EntityUtils {
-    /**
-     * @return Name of the Player.
-     */
-    public static String getPlayerName(PlayerEntity player) {
-        return TextUtils.getFormattedText(player.getName());
-    }
-
     /**
      * @return List with registered types equal with the one that is specified.
      */

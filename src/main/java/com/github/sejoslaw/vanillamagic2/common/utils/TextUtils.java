@@ -8,7 +8,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -69,13 +68,6 @@ public final class TextUtils {
      */
     public static String getPosition(IWorld world, BlockPos pos) {
         return WorldUtils.getId(world).toString() + "[" + pos.toString() + "]";
-    }
-
-    /**
-     * Adds new formatted message line to specified collection.
-     */
-    public static void addLine(Collection<String> lines, String key, String value) {
-        lines.add(buildMessageLine(key, value));
     }
 
     /**

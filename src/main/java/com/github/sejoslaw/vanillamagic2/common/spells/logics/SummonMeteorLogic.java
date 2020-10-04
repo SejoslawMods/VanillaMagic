@@ -21,7 +21,6 @@ public class SummonMeteorLogic extends EntitySpellLogic {
         }
 
         EntityMeteor meteor = new EntityMeteor(EntityRegistry.METEOR.get(), WorldUtils.asWorld(world));
-        meteor.player = entitySpell.player;
         meteor.setupMeteor(hitPos.getX(), 300, hitPos.getZ(), 0, -VMForgeConfig.METEOR_ACCELERATION.get(), 0);
 
         world.addEntity(meteor);

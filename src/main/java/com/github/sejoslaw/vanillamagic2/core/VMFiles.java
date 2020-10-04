@@ -8,7 +8,7 @@ import com.github.sejoslaw.vanillamagic2.common.handlers.core.VMTileEntityLoadHa
 import com.github.sejoslaw.vanillamagic2.common.handlers.core.VMTileEntitySaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
-import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.IWorld;
@@ -82,7 +82,7 @@ public final class VMFiles {
      * Parses Player data for Quests manipulation.
      */
     public static void parsePlayerQuests(PlayerEntity player, Consumer3<String, String, File> consumer) {
-        String playerName = EntityUtils.getPlayerName(player);
+        String playerName = TextUtils.getFormattedText(player.getName());
         String worldName = WorldUtils.getWorldName(player.getEntityWorld());
 
         Path playerQuestsPath = VMFiles.getPlayerQuestsFilePath(worldName, playerName);

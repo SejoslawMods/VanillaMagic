@@ -20,7 +20,7 @@ public abstract class AbstractForgeEnergyModule extends AbstractEnergyModule {
         }
 
         if (energyStorage.extractEnergy((int)oneOperationCost, false) == (int)oneOperationCost) {
-            this.setHasEnergy(machine, true);
+            this.setEnergyLevel(machine, 1);
             return true;
         }
 

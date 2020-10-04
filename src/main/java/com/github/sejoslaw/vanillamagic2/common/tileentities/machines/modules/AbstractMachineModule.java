@@ -19,7 +19,7 @@ public abstract class AbstractMachineModule implements IMachineModule {
     }
 
     protected Direction getDirection(IVMTileMachine machine, String key) {
-        return Direction.byIndex(machine.getTileData().getInt(key));
+        return Direction.byIndex(getInt(machine, key));
     }
 
     protected void setInt(IVMTileMachine machine, int value, String key) {
@@ -59,11 +59,15 @@ public abstract class AbstractMachineModule implements IMachineModule {
     }
 
     protected boolean getHasEnergy(IVMTileMachine machine) {
-        return machine.getTileData().getBoolean(NbtUtils.NBT_MODULE_HAS_ENERGY);
+        return getEnergyLevel(machine) > 0;
     }
 
-    protected void setHasEnergy(IVMTileMachine machine, boolean value) {
-        machine.getTileData().putBoolean(NbtUtils.NBT_MODULE_HAS_ENERGY, value);
+    protected int getEnergyLevel(IVMTileMachine machine) {
+        return getInt(machine, NbtUtils.NBT_MODULE_ENERGY_LEVEL);
+    }
+
+    protected void setEnergyLevel(IVMTileMachine machine, int energyLevel) {
+        machine.getTileData().putInt(NbtUtils.NBT_MODULE_ENERGY_LEVEL, energyLevel);
     }
 
     protected BlockPos getEnergySourcePos(IVMTileMachine machine) {
@@ -74,8 +78,12 @@ public abstract class AbstractMachineModule implements IMachineModule {
         this.setPos(machine, pos, NbtUtils.NBT_MODULE_ENERGY_SOURCE_POS);
     }
 
+    protected long getLong(IVMTileMachine machine, String key) {
+        return machine.getTileData().getLong(key);
+    }
+
     protected BlockPos getPos(IVMTileMachine machine, String key) {
-        return BlockPos.fromLong(machine.getTileData().getLong(key));
+        return BlockPos.fromLong(getLong(machine, key));
     }
 
     protected void setPos(IVMTileMachine machine, BlockPos pos, String key) {

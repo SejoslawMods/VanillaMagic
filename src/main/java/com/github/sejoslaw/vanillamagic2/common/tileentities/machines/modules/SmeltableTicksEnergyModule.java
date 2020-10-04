@@ -48,7 +48,7 @@ public class SmeltableTicksEnergyModule extends AbstractEnergyModule {
             if (ticks >= oneOperationCost) {
                 stack.setCount(stackSize);
                 slotsToRemove.forEach(inv::removeStackFromSlot);
-                this.setHasEnergy(machine, true);
+                this.setEnergyLevel(machine, (int)(ticks / oneOperationCost));
                 return true;
             }
         }
