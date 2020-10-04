@@ -162,7 +162,7 @@ public final class WorldUtils {
      * @return Unique identifier connected with the given IWorld.
      */
     public static ResourceLocation getId(IWorld world) {
-        return asWorld(world).getDimensionKey().getRegistryName();
+        return asWorld(world).getDimensionKey().getLocation();
     }
 
     /**
