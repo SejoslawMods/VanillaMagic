@@ -94,7 +94,7 @@ public class Quest {
      * @return Tooltip appropriate version of the given argument.
      */
     protected String getTooltip(ItemStack stack) {
-        return stack.getCount() + "x " + stack.getDisplayName().getString();
+        return stack.getCount() + "x " + TextUtils.getFormattedText(stack.getDisplayName());
     }
 
     /**

@@ -66,7 +66,7 @@ public abstract class VMGui extends Screen {
 
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
-        drawCenteredString(matrixStack, this.font, this.getTitle().getString(), this.width / 2, 10, TEXT_COLOR);
+        drawCenteredString(matrixStack, this.font, TextUtils.getFormattedText(this.getTitle()), this.width / 2, 10, TEXT_COLOR);
 
         matrixStack.push();
         this.renderInnerGui(matrixStack, mouseX, mouseY, partialTicks);

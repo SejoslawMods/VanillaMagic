@@ -27,7 +27,7 @@ public final class EntityUtils {
      * @return Name of the Player.
      */
     public static String getPlayerName(PlayerEntity player) {
-        return player.getName().getString();
+        return TextUtils.getFormattedText(player.getName());
     }
 
     /**

@@ -19,7 +19,14 @@ public final class TextUtils {
      * @return Translated text component.
      */
     public static String getFormattedText(String key) {
-        return translate(key).getString();
+        return getFormattedText(translate(key));
+    }
+
+    /**
+     * @return Formatted string from given component.
+     */
+    public static String getFormattedText(ITextComponent comp) {
+        return comp.getString();
     }
 
     /**
@@ -54,7 +61,7 @@ public final class TextUtils {
      * @return Combined component from given key with the message from the second argument.
      */
     public static ITextComponent combine(ITextComponent component, String text) {
-        return toComponent(component.getString() + text);
+        return toComponent(getFormattedText(component) + text);
     }
 
     /**

@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.guis;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.core.VanillaMagic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -34,7 +35,7 @@ public class VMTileEntityDetailsGui extends VMGui {
         this.centerX = this.width / 3;
         this.centerY = this.height / 5;
 
-        this.lineHeight = this.font.getWordWrappedHeight("", 10);
+        this.lineHeight = this.font.getWordWrappedHeight(VanillaMagic.MODID, 100);
 
         this.addOptionButton("vm.gui.vmTileEntityGui.showNbtData", "vm.gui.vmTileEntityGui.hideNbtData", "vm.gui.vmTileEntityGui.showNbtData", () -> this.showTileNbt, button -> this.showTileNbt = !this.showTileNbt);
     }
@@ -61,7 +62,7 @@ public class VMTileEntityDetailsGui extends VMGui {
         this.tileEntity.addInformation(lines);
 
         for (ITextComponent line : lines) {
-            drawString(matrixStack, this.font, line.getString(), this.centerX, this.centerY, TEXT_COLOR);
+            drawString(matrixStack, this.font, TextUtils.getFormattedText(line), this.centerX, this.centerY, TEXT_COLOR);
             this.nextLine(matrixStack);
         }
     }
