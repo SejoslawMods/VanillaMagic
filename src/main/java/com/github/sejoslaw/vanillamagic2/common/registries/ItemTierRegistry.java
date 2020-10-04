@@ -34,6 +34,7 @@ public final class ItemTierRegistry {
         add(3, "iron", Items.IRON_INGOT);
         add(4, "golden", Items.GOLD_INGOT);
         add(5, "diamond", Items.DIAMOND);
+        add(6, "netherite", Items.NETHERITE_INGOT);
     }
 
     public static void add(int tier, String tierType, Block block) {

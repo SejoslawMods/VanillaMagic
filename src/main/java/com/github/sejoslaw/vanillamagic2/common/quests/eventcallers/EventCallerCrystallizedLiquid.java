@@ -31,7 +31,7 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
         Set<Map.Entry<RegistryKey<Fluid>, Fluid>> entries = ForgeRegistries.FLUIDS
                 .getEntries()
                 .stream()
-                .filter(entry -> !entry.getKey().toString().contains("flowing_"))
+                .filter(entry -> !entry.getKey().getLocation().toString().contains("flowing_"))
                 .collect(Collectors.toSet());
 
         this.fillCrystalRecipesFromRegistry(

@@ -25,7 +25,7 @@ public class QuestMineBlock extends Quest {
         this.blocksToMine = ForgeRegistries.BLOCKS
                 .getEntries()
                 .stream()
-                .filter(entry -> entry.getKey().toString().toLowerCase().contains(blockName))
+                .filter(entry -> entry.getKey().getLocation().toString().toLowerCase().contains(blockName))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
     }

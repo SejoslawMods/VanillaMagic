@@ -63,7 +63,7 @@ public class EventCallerItemTierUpgrade extends EventCallerUpgradable<QuestItemT
 
         Item item = ForgeRegistries.ITEMS.getEntries()
                 .stream()
-                .filter(entry -> entry.getKey().toString().toLowerCase().split(":")[1].equals(newPath))
+                .filter(entry -> entry.getKey().getLocation().toString().toLowerCase().split(":")[1].equals(newPath))
                 .findFirst()
                 .get()
                 .getValue();
