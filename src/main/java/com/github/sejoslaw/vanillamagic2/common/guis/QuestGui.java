@@ -115,7 +115,7 @@ public class QuestGui extends VMGui {
                 return;
             }
 
-            this.gui.move(matrixStack, mouseX, mouseY, 0);
+            this.gui.move(matrixStack, mouseX, mouseY + 20, 0);
 
             List<ITextComponent> lines = new ArrayList<>();
             this.node.quest.fillTooltip(lines);
@@ -160,7 +160,7 @@ public class QuestGui extends VMGui {
         GLFW.glfwSetScrollCallback(Minecraft.getInstance().getMainWindow().getHandle(), this::scroll);
     }
 
-    public void removed() {
+    public void onClose() {
         this.rootNode.clear();
     }
 
@@ -294,7 +294,7 @@ public class QuestGui extends VMGui {
         move(matrixStack, -move, -move, 0);
         fill(matrixStack, 0, 0, this.itemStackIconSize, this.itemStackIconSize, this.questBackgroundColor);
         this.drawQuestOverlay(matrixStack, node.color);
-        this.drawItemStack(node.quest.iconStack, 1, 1, node.quest.getDisplayName());
+        this.drawItemStack(node.quest.iconStack, this.getTotalOffsetX(node), this.getTotalOffsetY(node), node.quest.getDisplayName());
         move(matrixStack, move, move, 0);
     }
 
@@ -315,8 +315,9 @@ public class QuestGui extends VMGui {
      * Draws ItemStack on the specified coordinates with given text on the top-right.
      */
     public void drawItemStack(ItemStack stack, int x, int y, String text) {
-        this.setBlitOffset(200);
-        this.itemRenderer.zLevel = 35;
+        x += this.centerX - (this.itemStackIconSize / 2) + 1;
+        y += this.centerY - (this.itemStackIconSize / 2) + 1;
+
         FontRenderer font = stack.getItem().getFontRenderer(stack);
 
         if (font == null) {
@@ -325,9 +326,6 @@ public class QuestGui extends VMGui {
 
         this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
         this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x + font.getStringWidth(text) + 3, y - 18, this.showQuestNames ? text : "");
-
-        this.setBlitOffset(0);
-        this.itemRenderer.zLevel = 0;
     }
 
     /**
@@ -343,7 +341,7 @@ public class QuestGui extends VMGui {
         int iconOffsetX = 0;
 
         if (offsetX != 0) {
-            iconOffsetX = (offsetX < 0 ? -(this.itemStackIconSize / 2) : (this.itemStackIconSize / 2));
+            iconOffsetX = (offsetX < 0 ? -(this.itemStackIconSize / 2) - 1 : (this.itemStackIconSize / 2) + 1);
         }
 
         return offsetX + parentOffsetX + iconOffsetX;
