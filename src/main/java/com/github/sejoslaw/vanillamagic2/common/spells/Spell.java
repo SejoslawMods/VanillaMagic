@@ -1,11 +1,11 @@
 package com.github.sejoslaw.vanillamagic2.common.spells;
 
 import com.github.sejoslaw.vanillamagic2.common.functions.Function3;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorld;
 
@@ -33,12 +33,7 @@ public abstract class Spell {
         projectileEntity.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), player.rotationYaw, player.rotationPitch);
         projectileEntity.setPosition(projectileEntity.getPosX(), projectileEntity.getPosY(), projectileEntity.getPosZ());
         projectileEntity.setMotion(Vector3d.ZERO);
-
-        double distance = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
-
-        projectileEntity.accelerationX = accelX / distance * 0.1D;
-        projectileEntity.accelerationY = accelY / distance * 0.1D;
-        projectileEntity.accelerationZ = accelZ / distance * 0.1D;
+        EntityUtils.setupAcceleration(projectileEntity, accelX, accelY, accelZ);
 
         world.addEntity(projectileEntity);
     }

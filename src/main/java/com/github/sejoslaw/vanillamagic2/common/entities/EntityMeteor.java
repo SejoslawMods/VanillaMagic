@@ -2,12 +2,12 @@ package com.github.sejoslaw.vanillamagic2.common.entities;
 
 import com.github.sejoslaw.vanillamagic2.common.explosions.VMExplosion;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
@@ -22,12 +22,7 @@ public class EntityMeteor extends FireballEntity {
         this.setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
         this.setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
         this.setMotion(Vector3d.ZERO);
-
-        double distance = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
-
-        this.accelerationX = accelX / distance * 0.1D;
-        this.accelerationY = accelY / distance * 0.1D;
-        this.accelerationZ = accelZ / distance * 0.1D;
+        EntityUtils.setupAcceleration(this, accelX, accelY, accelZ);
     }
 
     public ItemStack getItem() {

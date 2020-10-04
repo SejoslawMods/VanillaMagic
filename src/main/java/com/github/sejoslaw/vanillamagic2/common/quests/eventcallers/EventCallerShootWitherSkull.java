@@ -2,10 +2,10 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestShootWitherSkull;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,12 +36,7 @@ public class EventCallerShootWitherSkull extends EventCaller<QuestShootWitherSku
 
                     entityWitherSkull.setShooter(player);
                     entityWitherSkull.setMotion(0, 0, 0);
-
-                    double accelDelta = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
-
-                    entityWitherSkull.accelerationX = accelX / accelDelta * 0.1D;
-                    entityWitherSkull.accelerationY = accelY / accelDelta * 0.1D;
-                    entityWitherSkull.accelerationZ = accelZ / accelDelta * 0.1D;
+                    EntityUtils.setupAcceleration(entityWitherSkull, accelX, accelY, accelZ);
 
                     world.addEntity(entityWitherSkull);
                 }));
