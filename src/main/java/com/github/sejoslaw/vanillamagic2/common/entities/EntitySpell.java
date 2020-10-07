@@ -11,10 +11,13 @@ import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
+@OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
 public class EntitySpell extends DamagingProjectileEntity implements IRendersAsItem {
     private EntitySpellLogic logic;
 
@@ -43,6 +46,7 @@ public class EntitySpell extends DamagingProjectileEntity implements IRendersAsI
         this.remove();
     }
 
+    @OnlyIn(Dist.CLIENT)
     public ItemStack getItem() {
         return new ItemStack(Items.AIR);
     }
