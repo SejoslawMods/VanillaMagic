@@ -34,12 +34,10 @@ public final class VMEvents {
 
     private static void registerGlobalEvents() {
         register(new AutoplantHandler());
-        register(new VMItemTooltipHandler());
     }
 
     private static void registerListeners() {
         MinecraftForge.EVENT_BUS.addListener(ServerCommandsHandler::registerCommands);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(RenderingHandler::registerEntityRenderers);
     }
 
     private static void registerClientSpecificEvents() {
@@ -50,6 +48,8 @@ public final class VMEvents {
         register(new ShowSaturationTooltipHandler());
         register(new ShowDurabilityTooltipHandler());
         register(new ShowItemUpgradesTooltipHandler());
+        register(new VMItemTooltipHandler());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(RenderingHandler::registerEntityRenderers);
     }
 
     private static void registerDedicatedServerSpecificEvents() {
