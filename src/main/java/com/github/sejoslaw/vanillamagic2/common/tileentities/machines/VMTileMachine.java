@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 
@@ -39,6 +40,11 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
     }
 
     public void tickTileEntity() {
+        if (this.getWorld().getBlockState(this.getPos()).getBlock() == Blocks.AIR) {
+            this.removeTileEntity();
+            return;
+        }
+
         if (MachineModuleRegistry.DEFAULT_MODULES.stream().allMatch(module -> module.canExecute(this))) {
             MachineModuleRegistry.DEFAULT_MODULES.forEach(module -> module.execute(this));
         } else {
