@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPlayerDiggingPacket;
 import net.minecraft.network.play.server.SChangeBlockPacket;
@@ -100,5 +101,12 @@ public final class BlockUtils {
         }
 
         return blocksArray;
+    }
+
+    /**
+     * @return Block version of the specified Item.
+     */
+    public static Block getBlockFromItem(Item item) {
+        return Block.getBlockFromItem(item);
     }
 }

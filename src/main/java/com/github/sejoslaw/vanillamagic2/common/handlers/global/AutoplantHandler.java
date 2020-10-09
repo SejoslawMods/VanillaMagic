@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.handlers.global;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.handlers.EventHandler;
+import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import net.minecraft.block.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +17,7 @@ public class AutoplantHandler extends EventHandler {
     @SubscribeEvent
     public void autoplant(ItemExpireEvent event) {
         this.onItemExpire(event, (entity, stack, world, pos) -> {
-            Block block = Block.getBlockFromItem(stack.getItem());
+            Block block = BlockUtils.getBlockFromItem(stack.getItem());
 
             if (!VMForgeConfig.CAN_AUTOPLANT.get() || block == Blocks.AIR) {
                 return;

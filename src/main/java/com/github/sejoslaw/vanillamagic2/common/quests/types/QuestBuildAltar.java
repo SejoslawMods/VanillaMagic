@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.types;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.utils.AltarUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ public class QuestBuildAltar extends Quest implements Comparable<QuestBuildAltar
         super.readData(jsonService);
 
         ItemStack altarBlockStack = ItemStackUtils.getItemStackFromJson(jsonService.getItemStack("altarBlock"));
-        Block altarBlock = Block.getBlockFromItem(altarBlockStack.getItem());
+        Block altarBlock = BlockUtils.getBlockFromItem(altarBlockStack.getItem());
         AltarUtils.BLOCKS.put(this.altarTier, altarBlock);
     }
 
