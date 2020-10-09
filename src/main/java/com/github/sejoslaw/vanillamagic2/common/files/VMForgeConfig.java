@@ -21,6 +21,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.DoubleValue TILE_MACHINE_ONE_OPERATION_COST;
     public static ForgeConfigSpec.IntValue TILE_ABSORBER_PULLING_SPEED;
     public static ForgeConfigSpec.IntValue QUARRY_SIZE;
+    public static ForgeConfigSpec.IntValue FARM_SIZE;
 
     private static final String CATEGORY_ITEM = "Item";
     public static ForgeConfigSpec.IntValue ACCELERATION_CRYSTAL_UPDATE_TICKS;
@@ -65,6 +66,7 @@ public final class VMForgeConfig {
         TILE_MACHINE_ONE_OPERATION_COST = COMMON_BUILDER.defineInRange("TILE_MACHINE_ONE_OPERATION_COST", 100, 1, Double.MAX_VALUE);
         TILE_ABSORBER_PULLING_SPEED = COMMON_BUILDER.defineInRange("TILE_ABSORBER_PULLING_SPEED", 100, 1, Integer.MAX_VALUE);
         QUARRY_SIZE = COMMON_BUILDER.defineInRange("QUARRY_SIZE", 16, 1, Integer.MAX_VALUE);
+        FARM_SIZE = COMMON_BUILDER.defineInRange("FARM_SIZE", 16, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         COMMON_BUILDER.push(CATEGORY_ITEM);

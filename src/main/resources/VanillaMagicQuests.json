@@ -715,6 +715,22 @@
     }
   },
   {
+    "eventCaller": "farm",
+    "parent": "quarry",
+    "posX": 0,
+    "posY": -2,
+    "icon": {
+      "id": "minecraft:cauldron"
+    },
+    "uniqueName": "farm",
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    },
+    "leftHandStack": {
+      "id": "minecraft:wheat_seeds"
+    }
+  },
+  {
     "eventCaller": "fullTreeCut",
     "parent": "quarry",
     "posX": -2,

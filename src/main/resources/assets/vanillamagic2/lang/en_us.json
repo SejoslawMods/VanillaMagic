@@ -393,6 +393,10 @@
   "quest.quarry.desc.top": "Input Inventory with fuel (i.e. Chest) or Energy Source",
   "quest.quarry.desc.right": "Output Inventory (i.e. Chest)",
 
+  "quest.farm": "Farm",
+  "quest.farm.desc": "Right-click Cauldron to start Farm.",
+  "quest.farm.desc.top": "Inventory which will serve as input and output.",
+
   "quest.arrowMachineGun": "Arrow Machine Gun",
   "quest.arrowMachineGun.desc": "Take any Arrow and Right-click (or hold).",
 
