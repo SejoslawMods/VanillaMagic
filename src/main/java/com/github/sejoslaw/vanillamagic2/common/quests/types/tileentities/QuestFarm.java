@@ -14,5 +14,7 @@ public class QuestFarm extends Quest {
         super.fillTooltip(lines);
 
         TextUtils.addLine(lines, "quest.tooltip.top", TextUtils.getFormattedText("quest.farm.desc.top"));
+        TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest.farm.desc.diamondBlock"));
+        TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest.farm.desc.smelting"));
     }
 }
