@@ -724,7 +724,7 @@
     },
     "uniqueName": "farm",
     "rightHandStack": {
-      "id": "minecraft:blaze_rod"
+      "id": "minecraft:stick"
     },
     "leftHandStack": {
       "id": "minecraft:wheat_seeds"
