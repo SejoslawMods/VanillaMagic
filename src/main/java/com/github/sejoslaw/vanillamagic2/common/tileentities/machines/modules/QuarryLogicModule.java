@@ -91,9 +91,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
                 workingPos = workingPos.offset(Direction.DOWN);
             }
 
-            this.setWorkingPos(machine, workingPos);
-            this.setStartPos(machine, startPos);
-            this.performSingleOperation(machine, quarrySize);
+            this.updatePositions(machine, startPos, workingPos, quarrySize, true);
         } else if (mineBlockState.getBlock() == Blocks.BEDROCK) {
             workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosDir);
 
@@ -102,9 +100,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
                 workingPos = new BlockPos(startPos);
             }
 
-            this.setWorkingPos(machine, workingPos);
-            this.setStartPos(machine, startPos);
-            this.performSingleOperation(machine, quarrySize);
+            this.updatePositions(machine, startPos, workingPos, quarrySize, true);
         } else {
             List<ItemStack> drops = Block.getDrops(mineBlockState, (ServerWorld) world, workingPos, machine.getTileEntity());
             IInventory mineInv = WorldUtils.getInventory(world, workingPos);
@@ -137,12 +133,20 @@ public class QuarryLogicModule extends AbstractLogicModule {
             world.setBlockState(workingPos, Blocks.AIR.getDefaultState(), 1 | 2);
             workingPos = workingPos.offset(Direction.DOWN);
 
-            this.setWorkingPos(machine, workingPos);
-            this.setStartPos(machine, startPos);
+            this.updatePositions(machine, startPos, workingPos, quarrySize, false);
         }
     }
 
     private boolean canSkipBlock(IWorld world, BlockPos pos) {
         return world.isAirBlock(pos) || world.getFluidState(pos) != Fluids.EMPTY.getDefaultState();
+    }
+
+    private void updatePositions(IVMTileMachine machine, BlockPos startPos, BlockPos workingPos, int quarrySize, boolean shouldPerformSingleOperation) {
+        this.setWorkingPos(machine, workingPos);
+        this.setStartPos(machine, startPos);
+
+        if (shouldPerformSingleOperation) {
+            this.performSingleOperation(machine, quarrySize);
+        }
     }
 }
