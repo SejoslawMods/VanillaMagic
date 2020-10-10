@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.*;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.TreeCuttingFarmLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.PlantingFarmLogicModule;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public final class MachineModuleRegistry {
 
         // Farm
         registerModule(FARM_KEY, new PlantingFarmLogicModule());
+        registerModule(FARM_KEY, new TreeCuttingFarmLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {

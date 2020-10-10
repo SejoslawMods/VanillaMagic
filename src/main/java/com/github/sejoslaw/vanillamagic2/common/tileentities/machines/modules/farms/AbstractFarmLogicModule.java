@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.functions.Function3;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.AbstractLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
+import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.inventory.IInventory;
@@ -14,8 +15,12 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -23,6 +28,8 @@ import java.util.function.Predicate;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
+    private static GameProfile FARMER_GAME_PROFILE = new GameProfile(UUID.randomUUID(), "VM Farmer");
+
     public void setup(IVMTileMachine machine) {
         BlockPos inventoryPos = machine.getPos().offset(Direction.UP);
 
@@ -108,5 +115,9 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
                 this.useSpace(machine, pos -> check.apply(world, stack, pos), pos -> {
                     consumer.accept(world, stack, pos);
                 })));
+    }
+
+    protected FakePlayer getFarmer(IWorld world) {
+        return FakePlayerFactory.get((ServerWorld) world, FARMER_GAME_PROFILE);
     }
 }
