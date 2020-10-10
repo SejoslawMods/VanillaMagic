@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.*;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.PlantingFarmLogicModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,11 @@ public final class MachineModuleRegistry {
         DEFAULT_MODULES.add(new ForgeEnergyModule());
         DEFAULT_MODULES.add(new ForgeCapabilityEnergyModule());
 
+        // Quarry
         registerModule(QUARRY_KEY, new QuarryLogicModule());
+
+        // Farm
+        registerModule(FARM_KEY, new PlantingFarmLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {
