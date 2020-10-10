@@ -718,7 +718,7 @@
     "eventCaller": "farm",
     "parent": "quarry",
     "posX": 0,
-    "posY": -2,
+    "posY": 2,
     "icon": {
       "id": "minecraft:cauldron"
     },
