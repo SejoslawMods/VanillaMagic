@@ -34,15 +34,15 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
                 });
     }
 
-    private static boolean isAxe(ItemStack stack) {
+    public static boolean isAxe(ItemStack stack) {
         return stack.getItem().getRegistryName().toString().toLowerCase().contains("_axe");
     }
 
-    private static boolean isLog(IWorld world, BlockPos pos) {
+    public static boolean isLog(IWorld world, BlockPos pos) {
         return world.getBlockState(pos).getBlock().getRegistryName().toString().toLowerCase().contains("log");
     }
 
-    private static boolean isBreakingTree(IWorld world, BlockPos pos) {
+    public static boolean isBreakingTree(IWorld world, BlockPos pos) {
         BlockPos currentPos = null;
         Stack<BlockPos> candidates = new Stack<>();
         candidates.add(pos);
@@ -86,7 +86,7 @@ public class EventCallerFullTreeCut extends EventCaller<QuestFullTreeCut> {
         return false;
     }
 
-    private static final class TreeChopTask {
+    public static final class TreeChopTask {
         private final PlayerEntity player;
         private final IWorld world;
         private final BlockPos pos;
