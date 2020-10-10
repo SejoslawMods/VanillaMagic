@@ -63,7 +63,10 @@ public final class BlockUtils {
             }
 
             ServerPlayerEntity mpPlayer = (ServerPlayerEntity) player;
-            mpPlayer.connection.sendPacket(new SChangeBlockPacket(world, pos));
+
+            if (mpPlayer.connection != null) {
+                mpPlayer.connection.sendPacket(new SChangeBlockPacket(world, pos));
+            }
         } else {
             WorldUtils.asWorld(world).playBroadcastSound(2001, pos, Block.getStateId(state));
 
