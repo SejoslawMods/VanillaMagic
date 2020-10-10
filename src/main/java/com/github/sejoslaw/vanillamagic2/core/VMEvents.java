@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.core;
 import com.github.sejoslaw.vanillamagic2.common.handlers.clients.*;
 import com.github.sejoslaw.vanillamagic2.common.handlers.global.AutoplantHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.global.VMItemTooltipHandler;
+import com.github.sejoslaw.vanillamagic2.common.handlers.global.VMTileMachineCleanHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.servers.ServerCommandsHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +35,7 @@ public final class VMEvents {
 
     private static void registerGlobalEvents() {
         register(new AutoplantHandler());
+        register(new VMTileMachineCleanHandler());
     }
 
     private static void registerListeners() {

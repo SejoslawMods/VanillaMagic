@@ -1,10 +1,8 @@
 package com.github.sejoslaw.vanillamagic2.common.handlers;
 
-import com.github.sejoslaw.vanillamagic2.common.functions.Action;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer2;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
+import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.LivingEntity;
@@ -22,6 +20,7 @@ import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.List;
@@ -92,5 +91,15 @@ public abstract class EventHandler {
         Direction face = event.getFace();
 
         consumer.accept(player, world, pos, face);
+    }
+
+    public void onBlockBreak(BlockEvent.BreakEvent event,
+                             Consumer4<PlayerEntity, IWorld, BlockPos, BlockState> consumer) {
+        PlayerEntity player = event.getPlayer();
+        IWorld world = event.getWorld();
+        BlockPos pos = event.getPos();
+        BlockState state = event.getState();
+
+        consumer.accept(player, world, pos, state);
     }
 }
