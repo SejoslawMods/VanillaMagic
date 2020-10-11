@@ -18,6 +18,7 @@ public final class MachineModuleRegistry {
 
     public static final String QUARRY_KEY = "quarry";
     public static final String FARM_KEY = "farm";
+    public static final String KILLER_KEY = "killer";
 
     public static void initialize() {
         DEFAULT_MODULES.add(new SmeltableTicksEnergyModule());
@@ -34,6 +35,8 @@ public final class MachineModuleRegistry {
         registerModule(FARM_KEY, new TreeCuttingFarmLogicModule());
         registerModule(FARM_KEY, new FarmingFarmLogicModule());
         registerModule(FARM_KEY, new ItemCollectingFarmLogicModule());
+
+        // Killer
     }
 
     private static void registerModule(String key, IMachineModule module) {

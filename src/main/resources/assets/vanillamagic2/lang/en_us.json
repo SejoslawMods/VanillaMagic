@@ -396,8 +396,12 @@
   "quest.farm": "Farm",
   "quest.farm.desc": "Right-click Cauldron to start Farm.",
   "quest.farm.desc.top": "Inventory which will serve as input and output.",
-  "quest.farm.desc.diamondBlock": "Each Diamond Block in inventory will increase Farm radius (8 blocks by default).",
+  "quest.farm.desc.diamondBlock": "Each Diamond Block in inventory will increase it's radius (8 blocks by default).",
   "quest.farm.desc.smelting": "Will consume any smeltable from input as fuel.",
+
+  "quest.killer": "Killer",
+  "quest.killer.desc": "Put any Sword into Killer's inventory. It will operate on area of 8x8 blocks.",
+  "quest.killer.desc.diamondBlock": "Each Diamond Block in inventory will increase it's radius (8 blocks by default).",
 
   "quest.arrowMachineGun": "Arrow Machine Gun",
   "quest.arrowMachineGun.desc": "Take any Arrow and Right-click (or hold).",

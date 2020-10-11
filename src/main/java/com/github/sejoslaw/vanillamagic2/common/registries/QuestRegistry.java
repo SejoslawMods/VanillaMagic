@@ -60,6 +60,7 @@ public final class QuestRegistry {
         // Machines
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("quarry", EventCallerQuarry.class, QuestQuarry.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("farm", EventCallerFarm.class, QuestFarm.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("killer", EventCallerKiller.class, QuestKiller.class).register());
     }
 
     public static void readQuest(IJsonService jsonService) {

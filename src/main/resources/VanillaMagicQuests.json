@@ -731,6 +731,22 @@
     }
   },
   {
+    "eventCaller": "killer",
+    "parent": "farm",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:cauldron"
+    },
+    "uniqueName": "killer",
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    },
+    "leftHandStack": {
+      "id": "minecraft:iron_sword"
+    }
+  },
+  {
     "eventCaller": "fullTreeCut",
     "parent": "quarry",
     "posX": -2,
