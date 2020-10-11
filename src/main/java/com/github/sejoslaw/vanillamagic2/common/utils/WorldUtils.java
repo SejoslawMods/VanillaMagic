@@ -164,7 +164,7 @@ public final class WorldUtils {
      */
     public static void putStacksInInventoryAllSlots(IWorld world, IInventory outputInv, List<ItemStack> stacks, Direction direction, BlockPos spawnPos) {
         stacks.forEach(stack -> {
-            if (stack.getItem() == Items.AIR) {
+            if (stack.getItem() == Items.AIR || stack.getCount() <= 0) {
                 return;
             }
 

@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.f
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
@@ -17,11 +18,13 @@ public class ItemCollectingFarmLogicModule extends AbstractFarmLogicModule {
         this.executeLogic(machine,
                 (world, stack, pos) -> true,
                 (world, stack, pos) -> {
-                    List<ItemStack> stacks = WorldUtils.getItems(world, pos)
+                    List<ItemEntity> entities = WorldUtils.getItems(world, pos);
+                    List<ItemStack> stacks = entities
                             .stream()
                             .map(ItemEntity::getItem)
                             .collect(Collectors.toList());
-                    WorldUtils.putStacksInInventoryAllSlots(world, this.getInventory(machine), stacks, Direction.DOWN, machine.getPos().offset(Direction.UP, 2));
+                    WorldUtils.putStacksInInventoryAllSlots(world, this.getInventory(machine), stacks, Direction.NORTH, machine.getPos().offset(Direction.UP, 2));
+                    entities.forEach(Entity::remove);
                 });
     }
 }
