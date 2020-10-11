@@ -6,7 +6,6 @@ import com.github.sejoslaw.vanillamagic2.common.functions.Function3;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.AbstractLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
