@@ -69,8 +69,18 @@ public class VMTileInventoryBridge extends VMTileEntity {
         List<Block> blocks = ForgeRegistries.BLOCKS
                 .getValues()
                 .stream()
-                .filter(block -> block.hasTileEntity(block.getDefaultState()) &&
-                        block.createTileEntity(block.getDefaultState(), null) instanceof IInventory)
+                .filter(block -> {
+                    if (!block.hasTileEntity(block.getDefaultState())) {
+                        return false;
+                    }
+
+                    try {
+                        return block.createTileEntity(block.getDefaultState(), null) instanceof IInventory;
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        return false;
+                    }
+                })
                 .collect(Collectors.toList());
 
         return BlockUtils.getValidBlocks(blocks);
