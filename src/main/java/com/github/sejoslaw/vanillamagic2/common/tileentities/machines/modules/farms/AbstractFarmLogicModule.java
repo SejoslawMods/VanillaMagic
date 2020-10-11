@@ -73,23 +73,7 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
     protected void useSpace(IVMTileMachine machine,
                             Predicate<BlockPos> check,
                             Consumer<BlockPos> consumer) {
-        int size = this.getSize(machine);
-        int maxX = machine.getPos().getX() + size;
-        int maxZ = machine.getPos().getZ() + size;
-        BlockPos startPos = this.getFarmStartPos(machine);
         BlockPos workingPos = this.getWorkingPos(machine);
-
-        workingPos = workingPos.add(1, 0, 0);
-
-        if (workingPos.getX() > maxX) {
-            workingPos = new BlockPos(startPos.getX(), startPos.getY(), workingPos.getZ() + 1);
-        }
-
-        if (workingPos.getZ() > maxZ) {
-            workingPos = startPos;
-        }
-
-        this.setWorkingPos(machine, workingPos);
 
         if (check.test(workingPos)) {
             consumer.accept(workingPos);

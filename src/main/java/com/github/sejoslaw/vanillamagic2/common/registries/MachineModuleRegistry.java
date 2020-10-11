@@ -5,6 +5,7 @@ import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.*;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.BoneMealApplyingFarmLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.TreeCuttingFarmLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.PlantingFarmLogicModule;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.WorkingPosMoverFarmLogicModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public final class MachineModuleRegistry {
         registerModule(QUARRY_KEY, new QuarryLogicModule());
 
         // Farm
+        registerModule(FARM_KEY, new WorkingPosMoverFarmLogicModule());
         registerModule(FARM_KEY, new PlantingFarmLogicModule());
         registerModule(FARM_KEY, new BoneMealApplyingFarmLogicModule());
         registerModule(FARM_KEY, new TreeCuttingFarmLogicModule());
