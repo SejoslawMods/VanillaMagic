@@ -33,6 +33,7 @@ public final class VMEvents {
 
     private static void registerGlobalEvents() {
         register(new AutoplantHandler());
+        register(new BoneMealNetherWartHandler());
         register(new VMTileMachineCleanHandler());
     }
 

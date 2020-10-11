@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPlayerDiggingPacket;
 import net.minecraft.network.play.server.SChangeBlockPacket;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -104,6 +105,13 @@ public final class BlockUtils {
         }
 
         return blocksArray;
+    }
+
+    /**
+     * @return Maximum value available for the given IntegerProperty.
+     */
+    public static int getMaxValue(IntegerProperty prop) {
+        return prop.getAllowedValues().stream().max(Integer::compareTo).orElse(100);
     }
 
     /**

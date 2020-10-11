@@ -45,11 +45,6 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
         return world.getBlockState(pos).getBlock() == block ? action.get() : null;
     }
 
-    public void withHands(PlayerEntity player,
-                          Consumer2<ItemStack, ItemStack> consumer) {
-        consumer.accept(player.getHeldItemOffhand(), player.getHeldItemMainhand());
-    }
-
     public void forQuestWithCheck(Function<TQuest, Boolean> check,
                                   Consumer<TQuest> action) {
         this.caller.quests

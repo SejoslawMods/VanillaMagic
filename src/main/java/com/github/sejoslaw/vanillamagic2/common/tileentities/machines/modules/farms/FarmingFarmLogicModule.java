@@ -58,10 +58,6 @@ public class FarmingFarmLogicModule extends AbstractFarmLogicModule {
     }
 
     private <T extends Block> void addFarmer(Class<T> clazz, IntegerProperty prop) {
-        farmers.add(new Farmer<>(clazz, state -> state.get(prop) == this.getMaxValue(prop)));
-    }
-
-    private int getMaxValue(IntegerProperty prop) {
-        return prop.getAllowedValues().stream().max(Integer::compareTo).orElse(100);
+        farmers.add(new Farmer<>(clazz, state -> state.get(prop) == BlockUtils.getMaxValue(prop)));
     }
 }

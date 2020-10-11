@@ -18,6 +18,7 @@ import net.minecraft.world.IWorld;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -67,6 +68,11 @@ public abstract class EventHandler {
         }
     }
 
+    public void withHands(PlayerEntity player,
+                          Consumer2<ItemStack, ItemStack> consumer) {
+        consumer.accept(player.getHeldItemOffhand(), player.getHeldItemMainhand());
+    }
+
     public void forDamageable(ItemStack stack, Action action) {
         if (stack.isDamageable()) {
             action.execute();
@@ -101,5 +107,16 @@ public abstract class EventHandler {
         BlockState state = event.getState();
 
         consumer.accept(player, world, pos, state);
+    }
+
+    public void onBoneMeal(BonemealEvent event,
+                           Consumer5<PlayerEntity, IWorld, BlockPos, BlockState, ItemStack> consumer) {
+        PlayerEntity player = event.getPlayer();
+        IWorld world = event.getWorld();
+        BlockPos pos = event.getPos();
+        BlockState state = event.getBlock();
+        ItemStack stack = event.getStack();
+
+        consumer.accept(player, world, pos, state, stack);
     }
 }
