@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -163,6 +164,10 @@ public final class WorldUtils {
      */
     public static void putStacksInInventoryAllSlots(IWorld world, IInventory outputInv, List<ItemStack> stacks, Direction direction, BlockPos spawnPos) {
         stacks.forEach(stack -> {
+            if (stack.getItem() == Items.AIR) {
+                return;
+            }
+
             if (outputInv == null) {
                 Block.spawnAsEntity(WorldUtils.asWorld(world), spawnPos, stack);
             } else {

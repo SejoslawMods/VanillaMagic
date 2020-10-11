@@ -65,7 +65,7 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
 
-            if (stack.getItem() != Items.AIR && !ItemStackUtils.isFuel(stack)) {
+            if (stack.getItem() != Items.AIR) {
                 consumer.accept(stack);
             }
         }
