@@ -31,7 +31,8 @@ public class VMTileLiquidSuppressor extends VMTileEntity {
         this.ticksRemaining--;
 
         if (this.ticksRemaining <= 0) {
-            this.spawnContainedBlock();
+            this.remove();
+            this.getWorld().setBlockState(this.getPos(), Block.getStateById(this.blockStateId));
         }
     }
 
@@ -50,11 +51,6 @@ public class VMTileLiquidSuppressor extends VMTileEntity {
 
     public void resetDuration(int refresh) {
         this.ticksRemaining = refresh;
-    }
-
-    private void spawnContainedBlock() {
-        this.remove();
-        this.getWorld().setBlockState(this.getPos(), Block.getStateById(this.blockStateId));
     }
 
     public static Block[] getValidBlocks() {
