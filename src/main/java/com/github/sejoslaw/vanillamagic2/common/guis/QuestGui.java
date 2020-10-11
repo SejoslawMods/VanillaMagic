@@ -115,7 +115,7 @@ public class QuestGui extends VMGui {
                 return;
             }
 
-            this.gui.move(matrixStack, mouseX, mouseY + 20, 0);
+            this.gui.move(matrixStack, mouseX + 3, mouseY + 8, 0);
 
             List<ITextComponent> lines = new ArrayList<>();
             this.node.quest.fillTooltip(lines);
