@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.common.ForgeHooks;
@@ -61,6 +62,13 @@ public final class ItemStackUtils {
      */
     public static int getBurnTicks(ItemStack stack) {
         return ForgeHooks.getBurnTime(stack);
+    }
+
+    /**
+     * @return True if a given ItemStack contains a fuel.
+     */
+    public static boolean isFuel(ItemStack stack) {
+        return AbstractFurnaceTileEntity.isFuel(stack);
     }
 
     /**

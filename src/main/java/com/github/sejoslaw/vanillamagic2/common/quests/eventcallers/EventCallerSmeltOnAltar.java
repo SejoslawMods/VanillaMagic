@@ -8,7 +8,6 @@ import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -28,7 +27,7 @@ public class EventCallerSmeltOnAltar extends EventCaller<QuestSmeltOnAltar> {
                             ItemStack leftHandStack = player.getHeldItemOffhand();
                             QuestSmeltOnAltar quest = this.quests.get(0);
 
-                            if (!AbstractFurnaceTileEntity.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier) || WorldUtils.getIsRemote(world)) {
+                            if (!ItemStackUtils.isFuel(leftHandStack) || !AltarUtils.checkAltarTier(world, pos, quest.altarTier) || WorldUtils.getIsRemote(world)) {
                                 return null;
                             }
 

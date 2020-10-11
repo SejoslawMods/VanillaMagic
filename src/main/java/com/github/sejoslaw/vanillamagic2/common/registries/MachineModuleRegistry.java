@@ -2,10 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.*;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.BoneMealApplyingFarmLogicModule;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.TreeCuttingFarmLogicModule;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.PlantingFarmLogicModule;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.WorkingPosMoverFarmLogicModule;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +33,7 @@ public final class MachineModuleRegistry {
         registerModule(FARM_KEY, new BoneMealApplyingFarmLogicModule());
         registerModule(FARM_KEY, new TreeCuttingFarmLogicModule());
         registerModule(FARM_KEY, new FarmingFarmLogicModule());
+        registerModule(FARM_KEY, new ItemCollectingFarmLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {

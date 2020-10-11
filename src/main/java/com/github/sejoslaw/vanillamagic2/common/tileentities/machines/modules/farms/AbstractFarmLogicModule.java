@@ -6,13 +6,13 @@ import com.github.sejoslaw.vanillamagic2.common.functions.Function3;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.AbstractLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -65,7 +65,7 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
 
-            if (stack.getItem() != Items.AIR && !AbstractFurnaceTileEntity.isFuel(stack)) {
+            if (stack.getItem() != Items.AIR && !ItemStackUtils.isFuel(stack)) {
                 consumer.accept(stack);
             }
         }

@@ -10,7 +10,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -117,18 +116,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
 
             BlockPos outputInvPos = this.getOutputStoragePos(machine);
             IInventory outputInv = WorldUtils.getInventory(world, outputInvPos);
-
-            drops.forEach(stack -> {
-                if (outputInv == null) {
-                    Block.spawnAsEntity(WorldUtils.asWorld(world), machine.getPos().offset(Direction.UP, 2), stack);
-                } else {
-                    ItemStack leftStack = HopperTileEntity.putStackInInventoryAllSlots(null, outputInv, stack, startPosDir.rotateY());
-
-                    if (leftStack != ItemStack.EMPTY && leftStack.getCount() > 0) {
-                        Block.spawnAsEntity(WorldUtils.asWorld(world), machine.getPos().offset(Direction.UP, 2), leftStack);
-                    }
-                }
-            });
+            WorldUtils.putStacksInInventoryAllSlots(world, outputInv, drops, startPosDir.rotateY(), machine.getPos().offset(Direction.UP, 2));
 
             world.setBlockState(workingPos, Blocks.AIR.getDefaultState(), 1 | 2);
             workingPos = workingPos.offset(Direction.DOWN);

@@ -2,10 +2,10 @@ package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
+import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class SmeltableTicksEnergyModule extends AbstractEnergyModule {
 
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
-            double cost = AbstractFurnaceTileEntity.getBurnTimes().getOrDefault(stack.getItem(), 0);
+            double cost = ItemStackUtils.getBurnTicks(stack);
 
             if (cost == 0) {
                 continue;

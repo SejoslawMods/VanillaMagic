@@ -29,7 +29,7 @@ public final class ItemTierRegistry {
     private static final TierEntry EMPTY = new TierEntry(-1, "EMPTY", new ArrayList<>());
 
     public static void initialize() {
-        add(1, "wooden", Items.AIR);
+        add(1, "wooden", Items.STICK);
         add(2, "stone", Blocks.STONE);
         add(3, "iron", Items.IRON_INGOT);
         add(4, "golden", Items.GOLD_INGOT);

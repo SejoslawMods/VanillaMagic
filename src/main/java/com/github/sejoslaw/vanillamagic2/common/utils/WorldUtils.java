@@ -159,6 +159,23 @@ public final class WorldUtils {
     }
 
     /**
+     * Tries to put given stacks into specified inventory. Any leftover items / stacks will be spawned
+     */
+    public static void putStacksInInventoryAllSlots(IWorld world, IInventory outputInv, List<ItemStack> stacks, Direction direction, BlockPos spawnPos) {
+        stacks.forEach(stack -> {
+            if (outputInv == null) {
+                Block.spawnAsEntity(WorldUtils.asWorld(world), spawnPos, stack);
+            } else {
+                ItemStack leftStack = HopperTileEntity.putStackInInventoryAllSlots(null, outputInv, stack, direction);
+
+                if (leftStack != ItemStack.EMPTY && leftStack.getCount() > 0) {
+                    Block.spawnAsEntity(WorldUtils.asWorld(world), spawnPos, leftStack);
+                }
+            }
+        });
+    }
+
+    /**
      * @return Unique identifier connected with the given IWorld.
      */
     public static ResourceLocation getId(IWorld world) {
