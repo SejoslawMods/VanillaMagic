@@ -35,6 +35,7 @@ public final class MachineModuleRegistry {
         registerModule(FARM_KEY, new PlantingFarmLogicModule());
         registerModule(FARM_KEY, new BoneMealApplyingFarmLogicModule());
         registerModule(FARM_KEY, new TreeCuttingFarmLogicModule());
+        registerModule(FARM_KEY, new FarmingFarmLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {

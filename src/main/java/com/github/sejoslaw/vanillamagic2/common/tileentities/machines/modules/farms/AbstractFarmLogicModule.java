@@ -12,6 +12,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -64,7 +65,7 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
 
-            if (stack.getItem() != Items.AIR) {
+            if (stack.getItem() != Items.AIR && !AbstractFurnaceTileEntity.isFuel(stack)) {
                 consumer.accept(stack);
             }
         }
