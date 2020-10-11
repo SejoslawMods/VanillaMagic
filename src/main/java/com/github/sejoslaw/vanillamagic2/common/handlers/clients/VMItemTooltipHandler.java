@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic2.common.handlers.global;
+package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.handlers.EventHandler;
