@@ -1,7 +1,6 @@
-package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
+package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.AbstractFarmLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
