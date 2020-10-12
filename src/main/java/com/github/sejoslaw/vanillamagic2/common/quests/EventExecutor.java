@@ -302,40 +302,52 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
      * -----====== Private Methods =====-----
      */
 
+    private void checkRegisteredQuestsCount(Action action) {
+        if (this.caller.quests.size() <= 0) {
+            return;
+        }
+
+        action.execute();
+    }
+
     private void performCheck(PlayerEntity player,
                               Consumer<TQuest> consumer) {
-         checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer), true);
+        checkRegisteredQuestsCount(() -> checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer), true));
     }
 
     private void performCheckNoStackSizeCheck(PlayerEntity player,
                                               Consumer<TQuest> consumer) {
-        checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer), false);
+        checkRegisteredQuestsCount(() -> checkItemsInHands(player, (quest) -> checkQuestProgress(player, quest, consumer), false));
     }
 
     private void performCheck(PlayerEntity player,
                               Supplier<TQuest> check,
                               Consumer<TQuest> consumer) {
-        checkItemsInHands(player, (skippedQuest) -> {
-            TQuest quest = check.get();
 
-            if (quest == null || !this.areHeldItemsCorrect(player, quest, true)) {
-                return;
-            }
+        checkRegisteredQuestsCount(() ->
+                checkItemsInHands(player, (skippedQuest) -> {
+                    TQuest quest = check.get();
 
-            checkQuestProgress(player, quest, consumer);
-        }, true);
+                    if (quest == null || !this.areHeldItemsCorrect(player, quest, true)) {
+                        return;
+                    }
+
+                    checkQuestProgress(player, quest, consumer);
+                }, true));
     }
 
     private void performCheckNoHandsCheck(PlayerEntity player,
                                           Supplier<TQuest> check,
                                           Consumer<TQuest> consumer) {
-        TQuest quest = check.get();
+        checkRegisteredQuestsCount(() -> {
+            TQuest quest = check.get();
 
-        if (quest == null) {
-            return;
-        }
+            if (quest == null) {
+                return;
+            }
 
-        checkQuestProgress(player, quest, consumer);
+            checkQuestProgress(player, quest, consumer);
+        });
     }
 
     private void checkItemsInHands(PlayerEntity player,
