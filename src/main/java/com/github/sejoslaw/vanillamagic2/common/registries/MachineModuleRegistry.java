@@ -3,6 +3,7 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.*;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.*;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.killers.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,8 +38,8 @@ public final class MachineModuleRegistry {
         registerModule(FARM_KEY, new ItemCollectingFarmLogicModule());
 
         // Killer
-        // -- sword finding module (find and set index number)
-        // -- attacking module
+        registerModule(KILLER_KEY, new SwordFindingKillerLogicModule());
+        registerModule(KILLER_KEY, new AttackingKillerLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {

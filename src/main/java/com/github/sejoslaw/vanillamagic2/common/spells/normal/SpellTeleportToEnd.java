@@ -7,7 +7,6 @@ import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -28,15 +27,7 @@ public class SpellTeleportToEnd extends Spell {
             ServerWorld serverWorld = WorldUtils.asWorld(world).getServer().getWorld(World.THE_END);
             player.changeDimension(serverWorld);
         } else {
-            AxisAlignedBB aabb = new AxisAlignedBB(
-                    player.getPosX() - 256,
-                    player.getPosY() - 256,
-                    player.getPosZ() - 256,
-                    player.getPosX() + 256,
-                    player.getPosY() + 256,
-                    player.getPosZ() + 256);
-
-            List<EnderDragonEntity> entities = world.getEntitiesWithinAABB(EnderDragonEntity.class, aabb);
+            List<EnderDragonEntity> entities = WorldUtils.getEntities(world, EnderDragonEntity.class, player.getPosition(), 256, entity -> true);
 
             if (entities.size() > 0) {
                 TextUtils.addChatMessage("vm.message.killDragon");

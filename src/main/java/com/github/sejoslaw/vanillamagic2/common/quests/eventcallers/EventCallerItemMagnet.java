@@ -3,9 +3,9 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestItemMagnet;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,14 +29,7 @@ public class EventCallerItemMagnet extends EventCaller<QuestItemMagnet> {
                     double x = player.getPosX();
                     double y = player.getPosY() + 0.75;
                     double z = player.getPosZ();
-
-                    List<ItemEntity> items = player.world.getEntitiesWithinAABB(ItemEntity.class, new AxisAlignedBB(
-                            x - quest.range,
-                            y - quest.range,
-                            z - quest.range,
-                            x + quest.range,
-                            y + quest.range,
-                            z + quest.range));
+                    List<ItemEntity> items = WorldUtils.getEntities(player.world, ItemEntity.class, player.getPosition().add(0, 0.75, 0), quest.range, entity -> true);
 
                     Vector3d playerVec = new Vector3d(x, y, z);
 

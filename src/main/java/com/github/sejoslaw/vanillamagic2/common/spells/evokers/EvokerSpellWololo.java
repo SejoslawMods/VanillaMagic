@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.evokers;
 
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,10 +15,7 @@ import java.util.List;
  */
 public class EvokerSpellWololo extends EvokerSpell {
     public void cast(IWorld world, PlayerEntity player, Entity target) {
-        List<SheepEntity> sheeps = world.getEntitiesWithinAABB(SheepEntity.class,
-                player.getBoundingBox()
-                        .expand(16.0D, 4.0D, 16.0D)
-                        .expand(-16.0D, -4.0D, -16.0D), entity -> true);
+        List<SheepEntity> sheeps = WorldUtils.getEntities(world, SheepEntity.class, player.getPosition(), 16, entity -> true);
 
         if (sheeps.isEmpty()) {
             return;

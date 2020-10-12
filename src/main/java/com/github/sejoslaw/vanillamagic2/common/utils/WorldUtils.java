@@ -49,17 +49,18 @@ public final class WorldUtils {
     }
 
     /**
+     * @return List of all Entities which are valid in the given region.
+     */
+    public static <T extends Entity> List<T> getEntities(IWorld world, Class<T> clazz, BlockPos pos, double offset, Predicate<T> check) {
+        AxisAlignedBB aabb = new AxisAlignedBB(pos).expand(offset, offset, offset).expand(-offset, -offset, -offset);
+        return world.getEntitiesWithinAABB(clazz, aabb, check);
+    }
+
+    /**
      * @return All ItemEntities on specified position.
      */
     public static List<ItemEntity> getItems(IWorld world, BlockPos pos) {
-        AxisAlignedBB aabb = new AxisAlignedBB(
-                pos.getX() - 1,
-                pos.getY() - 1,
-                pos.getZ() - 1,
-                pos.getX() + 1,
-                pos.getY() + 1,
-                pos.getZ() + 1);
-        return world.getEntitiesWithinAABB(ItemEntity.class, aabb, Entity::isAlive);
+        return getEntities(world, ItemEntity.class, pos, 1, Entity::isAlive);
     }
 
     /**

@@ -15,10 +15,8 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -40,17 +38,11 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
     }
 
     protected boolean checkStructure(IVMTileMachine machine) {
-        return machine.getWorld().getTileEntity(this.getInputStoragePos(machine)) instanceof IInventory;
-    }
-
-    protected IInventory getInventory(IVMTileMachine machine) {
-        return (IInventory) machine.getWorld().getTileEntity(this.getInputStoragePos(machine));
+        return this.getInventory(machine) != null;
     }
 
     protected int getSize(IVMTileMachine machine) {
-        IInventory inv = this.getInventory(machine);
-        int diamondBlockCount = 1 + inv.count(Items.DIAMOND_BLOCK);
-        return diamondBlockCount * VMForgeConfig.FARM_SIZE.get();
+        return super.getSize(machine) * VMForgeConfig.FARM_SIZE.get();
     }
 
     protected void useWorld(IVMTileMachine machine, Consumer<IWorld> consumer) {
@@ -102,6 +94,6 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
     }
 
     protected FakePlayer getFarmer(IWorld world) {
-        return FakePlayerFactory.get((ServerWorld) world, FARMER_GAME_PROFILE);
+        return this.getFakePlayer(world, FARMER_GAME_PROFILE);
     }
 }
