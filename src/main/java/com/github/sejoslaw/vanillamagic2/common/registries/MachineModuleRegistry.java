@@ -37,6 +37,8 @@ public final class MachineModuleRegistry {
         registerModule(FARM_KEY, new ItemCollectingFarmLogicModule());
 
         // Killer
+        // -- sword finding module (find and set index number)
+        // -- attacking module
     }
 
     private static void registerModule(String key, IMachineModule module) {
