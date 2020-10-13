@@ -15,10 +15,10 @@ public class SwordFindingKillerLogicModule extends AbstractKillerLogicModule {
             ItemStack stack = inv.getStackInSlot(i);
 
             if (this.isSword(stack)) {
-                this.setSwordSlotId(machine, i);
+                this.setSlotId(machine, i);
             }
         }
 
-        this.setSwordSlotId(machine, 0);
+        this.setSlotId(machine, 0);
     }
 }

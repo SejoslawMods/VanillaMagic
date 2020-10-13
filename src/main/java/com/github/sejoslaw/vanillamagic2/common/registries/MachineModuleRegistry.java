@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IMachineModule;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.*;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.breeders.*;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.farms.*;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.killers.*;
 
@@ -43,8 +44,8 @@ public final class MachineModuleRegistry {
         registerModule(KILLER_KEY, new AttackingKillerLogicModule());
 
         // Breeder
-        // -- iterate over items module
-        // -- try apply item module
+        registerModule(BREEDER_KEY, new FindingBreederLogicModule());
+        registerModule(BREEDER_KEY, new UsingItemBreederLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {

@@ -17,14 +17,6 @@ public abstract class AbstractKillerLogicModule extends AbstractSimpleMachineLog
         this.setupInternals("VM Killer", () -> VMForgeConfig.KILLER_SIZE.get());
     }
 
-    protected void setSwordSlotId(IVMTileMachine machine, int slotId) {
-        this.setInt(machine, slotId, NBT_MODULE_SWORD_SLOT_ID);
-    }
-
-    protected int getSwordSlotId(IVMTileMachine machine) {
-        return this.getInt(machine, NBT_MODULE_SWORD_SLOT_ID);
-    }
-
     protected boolean isSword(ItemStack stack) {
         return stack.getItem() instanceof SwordItem || stack.getItem().getRegistryName().toString().toLowerCase().contains("_sword");
     }

@@ -1,13 +1,18 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Items;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -34,6 +39,10 @@ public abstract class AbstractLogicModule extends AbstractMachineModule {
 
     protected FakePlayer getFakePlayer(IWorld world, GameProfile profile) {
         return FakePlayerFactory.get((ServerWorld) world, profile);
+    }
+
+    protected <T extends Entity> List<T> getEntities(IVMTileMachine machine, Class<T> clazz, Predicate<T> check) {
+        return WorldUtils.getEntities(machine.getWorld(), clazz, machine.getPos(), this.getSize(machine), check);
     }
 
     /**

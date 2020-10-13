@@ -1,7 +1,10 @@
 package com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules;
 
+import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -14,6 +17,8 @@ import java.util.function.Supplier;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractSimpleMachineLogicModule extends AbstractLogicModule {
+    private static final String NBT_MODULE_SLOT_ID = "NBT_MODULE_SLOT_ID";
+
     private GameProfile gameProfile;
     private Supplier<Integer> machineSizeGetter;
 
@@ -23,6 +28,8 @@ public abstract class AbstractSimpleMachineLogicModule extends AbstractLogicModu
         this.setEnergySourcePos(machine, inventoryPos);
         this.setInputStoragePos(machine, inventoryPos);
         this.setOutputStoragePos(machine, inventoryPos);
+
+        this.setSlotId(machine, 0);
     }
 
     protected void setupInternals(String fakePlayerTypeName, Supplier<Integer> machineSizeGetter) {
@@ -40,5 +47,21 @@ public abstract class AbstractSimpleMachineLogicModule extends AbstractLogicModu
 
     protected FakePlayer getFakePlayer(IWorld world) {
         return this.getFakePlayer(world, this.gameProfile);
+    }
+
+    protected int getSlotId(IVMTileMachine machine) {
+        return this.getInt(machine, NBT_MODULE_SLOT_ID);
+    }
+
+    protected void setSlotId(IVMTileMachine machine, int slotId) {
+        this.setInt(machine, slotId, NBT_MODULE_SLOT_ID);
+    }
+
+    protected void useSlot(IVMTileMachine machine, Consumer3<IInventory, Integer, ItemStack> consumer) {
+        int slotId = this.getSlotId(machine);
+        IInventory inv = this.getInventory(machine);
+        ItemStack stack = inv.getStackInSlot(slotId);
+
+        consumer.accept(inv, slotId, stack);
     }
 }
