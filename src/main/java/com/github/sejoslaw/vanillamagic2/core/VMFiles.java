@@ -66,7 +66,7 @@ public final class VMFiles {
      * @return Path to VanillaMagic directory in World directory.
      */
     public static Path getVMWorldDir(String worldName) {
-        return Paths.get(FMLPaths.GAMEDIR.get().toString(), "saves", worldName, "VanillaMagic");
+        return Paths.get(getGameDir().toString(), "saves", worldName, "VanillaMagic");
     }
 
     /**
@@ -102,13 +102,13 @@ public final class VMFiles {
      * @return Path to the source from where the Quests file should be read.
      */
     public static Path getQuestsFileSourcePath() {
-        Path modsPath = Paths.get(VMFiles.getGameDir().toString(), "mods");
+        Path modsPath = FMLPaths.MODSDIR.get();
         File modsFile = modsPath.toFile();
 
         if (modsFile.exists()) {
             for (String modFilePath : modsFile.list()) {
                 if (modFilePath.toLowerCase().startsWith(VanillaMagic.MODID)) {
-                    return Paths.get(modFilePath);
+                    return Paths.get(modsPath.toString(), modFilePath);
                 }
             }
         }
