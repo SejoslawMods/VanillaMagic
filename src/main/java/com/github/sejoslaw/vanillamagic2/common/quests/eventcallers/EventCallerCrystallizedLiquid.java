@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCrystallizedLiquid;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CauldronBlock;
 import net.minecraft.fluid.Fluid;
@@ -39,7 +40,7 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
                 (fluid) -> new ItemStack(fluid.getFilledBucket()),
                 (fluid) -> new ItemStack(Items.NETHER_STAR),
                 "vmitem.crystallizedLiquid.namePrefix",
-                (entry) -> entry.getValue().getDefaultState().getBlockState().getBlock().getTranslatedName().getString());
+                (entry) -> TextUtils.getFormattedText(entry.getValue().getDefaultState().getBlockState().getBlock().getTranslationKey()));
     }
 
     @SubscribeEvent

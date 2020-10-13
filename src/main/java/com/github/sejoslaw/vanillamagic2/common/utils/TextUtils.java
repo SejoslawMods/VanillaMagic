@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
+import com.github.sejoslaw.vanillamagic2.core.VMEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -46,7 +47,9 @@ public final class TextUtils {
      * Adds message to the Chat window.
      */
     public static void addChatMessage(ITextComponent message) {
-        Minecraft.getInstance().ingameGUI.getChatGUI().printChatMessage(message);
+        if (VMEvents.isClient()) {
+            Minecraft.getInstance().ingameGUI.getChatGUI().printChatMessage(message);
+        }
     }
 
     /**
