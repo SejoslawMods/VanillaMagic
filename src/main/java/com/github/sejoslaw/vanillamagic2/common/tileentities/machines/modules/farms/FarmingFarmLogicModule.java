@@ -54,7 +54,7 @@ public class FarmingFarmLogicModule extends AbstractFarmLogicModule {
     protected void work(IVMTileMachine machine) {
         this.executeLogic(machine,
                 (world, stack, pos) -> farmers.stream().anyMatch(farmer -> farmer.isFullyGrown(world, pos)),
-                (world, stack, pos) -> BlockUtils.breakBlock(ItemStack.EMPTY, world, this.getFarmer(world), pos));
+                (world, stack, pos) -> BlockUtils.breakBlock(ItemStack.EMPTY, world, this.getFakePlayer(world), pos));
     }
 
     private <T extends Block> void addFarmer(Class<T> clazz, IntegerProperty prop) {

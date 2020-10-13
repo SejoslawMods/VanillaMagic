@@ -10,6 +10,6 @@ public class TreeCuttingFarmLogicModule extends AbstractFarmLogicModule {
     protected void work(IVMTileMachine machine) {
         this.executeLogic(machine,
             (world, stack, pos) -> EventCallerFullTreeCut.isLog(world, pos) && EventCallerFullTreeCut.isAxe(stack),
-            (world, stack, pos) -> new EventCallerFullTreeCut.TreeChopTask(this.getFarmer(world), world, pos, stack).execute());
+            (world, stack, pos) -> new EventCallerFullTreeCut.TreeChopTask(this.getFakePlayer(world), world, pos, stack).execute());
     }
 }

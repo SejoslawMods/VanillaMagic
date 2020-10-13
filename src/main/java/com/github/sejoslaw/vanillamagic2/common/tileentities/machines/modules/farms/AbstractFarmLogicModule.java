@@ -4,45 +4,28 @@ import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.functions.Function3;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMachine;
-import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.AbstractLogicModule;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.AbstractSimpleMachineLogicModule;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
-import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.util.FakePlayer;
 
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
-    private static GameProfile FARMER_GAME_PROFILE = new GameProfile(UUID.randomUUID(), "VM Farmer");
-
+public abstract class AbstractFarmLogicModule extends AbstractSimpleMachineLogicModule {
     public void setup(IVMTileMachine machine) {
-        BlockPos inventoryPos = machine.getPos().offset(Direction.UP);
-
-        this.setEnergySourcePos(machine, inventoryPos);
-        this.setInputStoragePos(machine, inventoryPos);
-        this.setOutputStoragePos(machine, inventoryPos);
+        super.setup(machine);
+        this.setupInternals("VM Farmer", () -> VMForgeConfig.FARM_SIZE.get());
         this.setWorkingPos(machine, this.getFarmStartPos(machine));
-    }
-
-    protected boolean checkStructure(IVMTileMachine machine) {
-        return this.getInventory(machine) != null;
-    }
-
-    protected int getSize(IVMTileMachine machine) {
-        return super.getSize(machine) * VMForgeConfig.FARM_SIZE.get();
     }
 
     protected void useWorld(IVMTileMachine machine, Consumer<IWorld> consumer) {
@@ -91,9 +74,5 @@ public abstract class AbstractFarmLogicModule extends AbstractLogicModule {
                 this.useSpace(machine, pos -> check.apply(world, stack, pos), pos -> {
                     consumer.accept(world, stack, pos);
                 })));
-    }
-
-    protected FakePlayer getFarmer(IWorld world) {
-        return this.getFakePlayer(world, FARMER_GAME_PROFILE);
     }
 }

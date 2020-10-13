@@ -12,6 +12,6 @@ public class BoneMealApplyingFarmLogicModule extends AbstractFarmLogicModule {
     protected void work(IVMTileMachine machine) {
         this.executeLogic(machine,
             (world, stack, pos) -> !world.isAirBlock(pos) && stack.getItem() == Items.BONE_MEAL,
-            (world, stack, pos) -> BoneMealItem.applyBonemeal(stack, WorldUtils.asWorld(world), pos, this.getFarmer(world)));
+            (world, stack, pos) -> BoneMealItem.applyBonemeal(stack, WorldUtils.asWorld(world), pos, this.getFakePlayer(world)));
     }
 }

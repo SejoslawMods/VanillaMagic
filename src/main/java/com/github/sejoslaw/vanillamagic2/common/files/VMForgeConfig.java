@@ -23,6 +23,7 @@ public final class VMForgeConfig {
     public static ForgeConfigSpec.IntValue QUARRY_SIZE;
     public static ForgeConfigSpec.IntValue FARM_SIZE;
     public static ForgeConfigSpec.IntValue KILLER_SIZE;
+    public static ForgeConfigSpec.IntValue BREEDER_SIZE;
 
     private static final String CATEGORY_ITEM = "Item";
     public static ForgeConfigSpec.IntValue ACCELERATION_CRYSTAL_UPDATE_TICKS;
@@ -69,6 +70,7 @@ public final class VMForgeConfig {
         QUARRY_SIZE = COMMON_BUILDER.defineInRange("QUARRY_SIZE", 16, 1, Integer.MAX_VALUE);
         FARM_SIZE = COMMON_BUILDER.defineInRange("FARM_SIZE", 8, 1, Integer.MAX_VALUE);
         KILLER_SIZE = COMMON_BUILDER.defineInRange("KILLER_SIZE", 8, 1, Integer.MAX_VALUE);
+        BREEDER_SIZE = COMMON_BUILDER.defineInRange("BREEDER_SIZE", 8, 1, Integer.MAX_VALUE);
         COMMON_BUILDER.pop();
 
         COMMON_BUILDER.push(CATEGORY_ITEM);

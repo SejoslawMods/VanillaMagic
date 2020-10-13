@@ -22,6 +22,6 @@ public class AttackingKillerLogicModule extends AbstractKillerLogicModule {
 
         IWorld world = machine.getWorld();
         WorldUtils.getEntities(world, LivingEntity.class, machine.getPos(), this.getSize(machine), entity -> true)
-                .forEach(livingEntity -> stack.hitEntity(livingEntity, this.getKiller(world)));
+                .forEach(livingEntity -> stack.hitEntity(livingEntity, this.getFakePlayer(world)));
     }
 }

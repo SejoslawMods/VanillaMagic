@@ -25,7 +25,7 @@ public class PlantingFarmLogicModule extends AbstractFarmLogicModule {
                     return;
                 }
 
-                FakePlayer fakePlayer = this.getFarmer(world);
+                FakePlayer fakePlayer = this.getFakePlayer(world);
                 BlockRayTraceResult result = BlockRayTraceResult.createMiss(Vector3d.fromPitchYaw(0, 90), Direction.DOWN, pos);
                 BlockItemUseContext fakeContext = new BlockItemUseContext(fakePlayer, Hand.MAIN_HAND, stack, result);
                 BlockItemUseContext context = BlockItemUseContext.func_221536_a(fakeContext, pos, Direction.DOWN);
