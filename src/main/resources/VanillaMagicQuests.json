@@ -747,6 +747,22 @@
     }
   },
   {
+    "eventCaller": "breeder",
+    "parent": "killer",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:cauldron"
+    },
+    "uniqueName": "breeder",
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    },
+    "leftHandStack": {
+      "id": "minecraft:porkchop"
+    }
+  },
+  {
     "eventCaller": "fullTreeCut",
     "parent": "quarry",
     "posX": -2,

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class QuestKiller extends Quest {
+public class QuestBreeder extends Quest {
     public void fillTooltip(List<ITextComponent> lines) {
         super.fillTooltip(lines);
 

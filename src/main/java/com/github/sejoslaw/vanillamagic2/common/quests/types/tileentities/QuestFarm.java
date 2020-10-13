@@ -13,8 +13,8 @@ public class QuestFarm extends Quest {
     public void fillTooltip(List<ITextComponent> lines) {
         super.fillTooltip(lines);
 
-        TextUtils.addLine(lines, "quest.tooltip.top", TextUtils.getFormattedText("quest.farm.desc.top"));
-        TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest.farm.desc.diamondBlock"));
+        TextUtils.addLine(lines, "quest.tooltip.top", TextUtils.getFormattedText("quest.desc.top"));
+        TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest.desc.diamondBlock"));
         TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest.farm.desc.smelting"));
     }
 }
