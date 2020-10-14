@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
-import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.HashSet;
@@ -24,10 +24,10 @@ public final class PlayerQuestProgressRegistry {
     /**
      * Contains data about Player Quests read from file.
      */
-    public static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
+    private static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
 
     public static PlayerQuestProgressData getPlayerData(PlayerEntity player) {
-        String playerName = TextUtils.getFormattedText(player.getName());
+        String playerName = EntityUtils.getPlayerNameFormatted(player);
         return getPlayerData(playerName);
     }
 
@@ -37,6 +37,10 @@ public final class PlayerQuestProgressRegistry {
                 .filter(data -> data.playerName.equals(playerName))
                 .findFirst()
                 .orElse(new PlayerQuestProgressData(playerName, new HashSet<>()));
+    }
+
+    public static Set<String> getPlayerQuests(PlayerEntity player) {
+        return getPlayerData(player).questUniqueNames;
     }
 
     public static Set<String> getPlayerQuests(String playerName) {
@@ -66,5 +70,9 @@ public final class PlayerQuestProgressRegistry {
 
     public static void clearData(String playerName) {
         USER_DATA.remove(getPlayerData(playerName));
+    }
+
+    public static void setupPlayerData(String playerName, Set<String> questNames) {
+        USER_DATA.add(new PlayerQuestProgressRegistry.PlayerQuestProgressData(playerName, questNames));
     }
 }

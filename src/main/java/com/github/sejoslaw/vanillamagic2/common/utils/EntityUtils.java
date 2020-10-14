@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.server.MinecraftServer;
@@ -24,6 +25,13 @@ import java.util.stream.Collectors;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class EntityUtils {
+    /**
+     * @return Formatted Player's name.
+     */
+    public static String getPlayerNameFormatted(PlayerEntity player) {
+        return TextUtils.getFormattedText(player.getName());
+    }
+
     /**
      * @return List with registered types equal with the one that is specified.
      */

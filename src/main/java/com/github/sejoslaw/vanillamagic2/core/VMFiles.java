@@ -1,14 +1,14 @@
 package com.github.sejoslaw.vanillamagic2.core;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
-import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
+import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
 import com.github.sejoslaw.vanillamagic2.common.handlers.core.PlayerQuestProgressLoadHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.core.PlayerQuestProgressSaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.core.VMTileEntityLoadHandler;
 import com.github.sejoslaw.vanillamagic2.common.handlers.core.VMTileEntitySaveHandler;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.json.JsonService;
-import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.IWorld;
@@ -33,7 +33,7 @@ public final class VMFiles {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, VMForgeConfig.COMMON_CONFIG, "VanillaMagicConfig.toml");
 
         // Quests Config
-        unzip(VMFiles.getQuestsFilePath().toFile(), VMFiles.getQuestsFileSourcePath().toFile());
+        unzip(getQuestsFilePath().toFile(), getQuestsFileSourcePath().toFile());
 
         // VM TileEntities
         VMEvents.register(new VMTileEntitySaveHandler());
@@ -66,7 +66,13 @@ public final class VMFiles {
      * @return Path to VanillaMagic directory in IWorld directory.
      */
     public static Path getVMWorldDir(String worldName) {
-        return Paths.get(getGameDir().toString(), "saves", worldName, "VanillaMagic");
+        String path = getGameDir().toString();
+
+        if (VMEvents.isClient()) {
+            path = Paths.get(path, "saves").toString();
+        }
+
+        return Paths.get(path, worldName, "VanillaMagic");
     }
 
     /**
@@ -81,14 +87,14 @@ public final class VMFiles {
     /**
      * Parses Player data for Quests manipulation.
      */
-    public static void parsePlayerQuests(PlayerEntity player, Consumer3<String, String, File> consumer) {
-        String playerName = TextUtils.getFormattedText(player.getName());
+    public static void parsePlayerQuests(PlayerEntity player, Consumer4<PlayerEntity, String, String, File> consumer) {
+        String playerName = EntityUtils.getPlayerNameFormatted(player);
         String worldName = WorldUtils.getWorldName(player.getEntityWorld());
 
-        Path playerQuestsPath = VMFiles.getPlayerQuestsFilePath(worldName, playerName);
+        Path playerQuestsPath = getPlayerQuestsFilePath(worldName, playerName);
         File playerQuestsFile = playerQuestsPath.toFile();
 
-        consumer.accept(worldName, playerName, playerQuestsFile);
+        consumer.accept(player, worldName, playerName, playerQuestsFile);
     }
 
     /**
@@ -113,7 +119,7 @@ public final class VMFiles {
             }
         }
 
-        return Paths.get(modsPath.getParent().getParent().toString(), "src", "main", "resources", VMFiles.getQuestsFileName());
+        return Paths.get(modsPath.getParent().getParent().toString(), "src", "main", "resources", getQuestsFileName());
     }
 
     /**
