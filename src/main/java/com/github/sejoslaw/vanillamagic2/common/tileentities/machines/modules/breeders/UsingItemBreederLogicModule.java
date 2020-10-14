@@ -13,6 +13,7 @@ public class UsingItemBreederLogicModule extends AbstractBreederLogicModule {
                     .forEach(entity -> {
                         if (entity.isBreedingItem(stack)) {
                             entity.setInLove(600);
+                            stack.shrink(1);
                         }
                     }));
     }
