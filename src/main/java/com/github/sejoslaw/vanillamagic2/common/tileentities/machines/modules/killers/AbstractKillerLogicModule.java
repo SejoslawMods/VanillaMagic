@@ -10,14 +10,16 @@ import net.minecraft.item.SwordItem;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractKillerLogicModule extends AbstractSimpleMachineLogicModule {
-    private static final String NBT_MODULE_SWORD_SLOT_ID = "NBT_MODULE_SWORD_SLOT_ID";
-
     public void setup(IVMTileMachine machine) {
         super.setup(machine);
         this.setupInternals("VM Killer", () -> VMForgeConfig.KILLER_SIZE.get());
     }
 
     protected boolean isSword(ItemStack stack) {
-        return stack.getItem() instanceof SwordItem || stack.getItem().getRegistryName().toString().toLowerCase().contains("_sword");
+        return stack.getItem() instanceof SwordItem;
+    }
+
+    protected float getAttackDamage(ItemStack stack) {
+        return ((SwordItem)stack.getItem()).getAttackDamage();
     }
 }
