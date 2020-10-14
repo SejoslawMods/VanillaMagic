@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.utils;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.Quest;
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
+import com.github.sejoslaw.vanillamagic2.common.registries.VMNetworkRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TextFormatting;
 
@@ -15,6 +16,7 @@ public final class PlayerQuestProgressUtils {
     public static void givePlayerQuest(PlayerEntity player, Quest quest) {
         PlayerQuestProgressRegistry.givePlayerQuest(player, quest.uniqueName);
         onQuestCompleted(quest);
+        VMNetworkRegistry.syncQuests(player);
     }
 
     /**

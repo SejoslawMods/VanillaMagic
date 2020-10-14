@@ -24,7 +24,7 @@ public final class PlayerQuestProgressRegistry {
     /**
      * Contains data about Player Quests read from file.
      */
-    public static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
+    private static final Set<PlayerQuestProgressData> USER_DATA = new HashSet<>();
 
     public static PlayerQuestProgressData getPlayerData(PlayerEntity player) {
         String playerName = EntityUtils.getPlayerName(player);
@@ -37,6 +37,10 @@ public final class PlayerQuestProgressRegistry {
                 .filter(data -> data.playerName.equals(playerName))
                 .findFirst()
                 .orElse(new PlayerQuestProgressData(playerName, new HashSet<>()));
+    }
+
+    public static Set<String> getPlayerQuests(PlayerEntity player) {
+        return getPlayerData(player).questUniqueNames;
     }
 
     public static Set<String> getPlayerQuests(String playerName) {
@@ -66,5 +70,9 @@ public final class PlayerQuestProgressRegistry {
 
     public static void clearData(String playerName) {
         USER_DATA.remove(getPlayerData(playerName));
+    }
+
+    public static void setupPlayerData(String playerName, Set<String> questNames) {
+        USER_DATA.add(new PlayerQuestProgressRegistry.PlayerQuestProgressData(playerName, questNames));
     }
 }

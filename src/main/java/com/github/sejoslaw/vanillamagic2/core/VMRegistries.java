@@ -17,5 +17,6 @@ public final class VMRegistries {
         SummonEntityLogicRegistry.initialize();
         SpellRegistry.initialize();
         QuestRegistry.initialize();
+        VMNetworkRegistry.initialize();
     }
 }
