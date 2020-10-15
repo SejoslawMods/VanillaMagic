@@ -3,14 +3,8 @@ package com.github.sejoslaw.vanillamagic2.common.registries;
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.BaseItemType;
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgrade;
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeProcessor;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerAutosmelt;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerLifesteal;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerThor;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.ItemUpgradeEventCallerWither;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.AutosmeltUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.LifestealUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.ThorUpgrade;
-import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.WitherUpgrade;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.*;
+import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.*;
 import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
@@ -31,6 +25,7 @@ public final class ItemUpgradeRegistry {
         UPGRADES.add(new ItemUpgradeProcessor(ItemUpgradeEventCallerLifesteal.class, LifestealUpgrade.class).register());
         UPGRADES.add(new ItemUpgradeProcessor(ItemUpgradeEventCallerThor.class, ThorUpgrade.class).register());
         UPGRADES.add(new ItemUpgradeProcessor(ItemUpgradeEventCallerWither.class, WitherUpgrade.class).register());
+        UPGRADES.add(new ItemUpgradeProcessor(ItemUpgradeEventCallerMining3x3.class, Mining3x3Upgrade.class).register());
     }
 
     public static boolean isBase(ItemStack stack) {
