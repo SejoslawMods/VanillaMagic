@@ -13,6 +13,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
 public class SSyncQuestsPacket implements IPacket<IClientPlayNetHandler> {
     private String playerName;
     private Set<String> playerQuests;
