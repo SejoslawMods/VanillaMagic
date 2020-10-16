@@ -49,7 +49,10 @@ public class ItemUpgradeEventCallerMining3x3 extends ItemUpgradeEventCaller {
 
                                     for (int row = 0; row < size; ++row) {
                                         for (int col = 0; col < size; ++col) {
-                                            minedPoses.add(cornerPos.add(row * -cornerVec.getX(), col * -cornerVec.getY(), row * -cornerVec.getZ()));
+                                            minedPoses.add(cornerPos.add(
+                                                    row * -cornerVec.getX(),
+                                                    col * -cornerVec.getY(),
+                                                    ((playerFacing == DOWN || playerFacing == UP) ? col : row) * -cornerVec.getZ()));
                                         }
                                     }
 
