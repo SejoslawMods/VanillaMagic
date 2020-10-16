@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers;
 
+import com.github.sejoslaw.vanillamagic2.common.functions.Function2;
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeEventCaller;
 import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import net.minecraft.util.Direction;
@@ -47,16 +48,24 @@ public class ItemUpgradeEventCallerMining3x3 extends ItemUpgradeEventCaller {
                                     Vector3i cornerVec = DIRECTIONS.get(playerFacing);
                                     BlockPos cornerPos = pos.add(cornerVec.getX() * (size / 2), cornerVec.getY() * (size / 2), cornerVec.getZ() * (size / 2));
 
-                                    for (int row = 0; row < size; ++row) {
-                                        for (int col = 0; col < size; ++col) {
-                                            minedPoses.add(cornerPos.add(
-                                                    row * -cornerVec.getX(),
-                                                    col * -cornerVec.getY(),
-                                                    ((playerFacing == DOWN || playerFacing == UP) ? col : row) * -cornerVec.getZ()));
-                                        }
+                                    if (playerFacing == DOWN || playerFacing == UP) {
+                                        this.calculateMinedPoses(size, minedPoses, cornerPos, cornerVec, (col, row) -> col);
+                                    } else {
+                                        this.calculateMinedPoses(size, minedPoses, cornerPos, cornerVec, (col, row) -> row);
                                     }
 
                                     minedPoses.forEach(minedPos -> BlockUtils.breakBlock(rightHandStack, world, player, minedPos));
                                 })));
+    }
+
+    protected void calculateMinedPoses(int size, List<BlockPos> minedPoses, BlockPos cornerPos, Vector3i cornerVec, Function2<Integer, Integer, Integer> getZ) {
+        for (int row = 0; row < size; ++row) {
+            for (int col = 0; col < size; ++col) {
+                minedPoses.add(cornerPos.add(
+                        row * -cornerVec.getX(),
+                        col * -cornerVec.getY(),
+                        getZ.apply(col, row) * -cornerVec.getZ()));
+            }
+        }
     }
 }
