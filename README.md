@@ -10,3 +10,7 @@ You won't be able to achieve the advanced recipes and powers without getting the
 Starting from Minecraft 1.15.2 Vanilla Magic has been rewritten from the ground up.
 Version 2+ introduced new Quest GUI window which can be opened by pressing (by default) 'o'. <br>
 Quest logic and data model has been split into 2 separate classes - Quest and EventCaller.
+
+Team:  
+Sejoslaw - Author, Lead Developer  
+darth pixel - Brain who invented new way of mining NxN
