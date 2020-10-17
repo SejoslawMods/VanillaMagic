@@ -21,8 +21,6 @@ public final class SummonEntityLogicRegistry {
         LOGICS.add(new PiglinSummonLogic());
         LOGICS.add(new SkeletonSummonLogic());
         LOGICS.add(new SpiderSummonLogic());
-
-        LOGICS.add(new HorseSummonLogic());
         LOGICS.add(new VillagerSummonLogic());
     }
 
