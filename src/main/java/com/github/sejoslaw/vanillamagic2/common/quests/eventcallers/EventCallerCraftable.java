@@ -26,7 +26,7 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
 
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
-        if (this.recipes.isEmpty()) {
+        if (this.quests.size() > 0 && this.recipes.isEmpty()) {
             this.fillRecipes();
         }
 
