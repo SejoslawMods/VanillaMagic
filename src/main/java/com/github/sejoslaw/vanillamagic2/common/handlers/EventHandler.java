@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.functions.*;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -15,6 +16,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IWorld;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -118,5 +121,15 @@ public abstract class EventHandler {
         ItemStack stack = event.getStack();
 
         consumer.accept(player, world, pos, state, stack);
+    }
+
+    public void onKeyPressed(InputEvent.KeyInputEvent event,
+                             Consumer4<Integer, Integer, Integer, Integer> consumer) {
+        consumer.accept(event.getKey(), event.getScanCode(), event.getAction(), event.getModifiers());
+    }
+
+    public void onScroll(GuiScreenEvent.MouseScrollEvent.Pre event,
+                         Consumer4<Screen, Double, Double, Double> consumer) {
+        consumer.accept(event.getGui(), event.getMouseX(), event.getMouseY(), event.getScrollDelta());
     }
 }
