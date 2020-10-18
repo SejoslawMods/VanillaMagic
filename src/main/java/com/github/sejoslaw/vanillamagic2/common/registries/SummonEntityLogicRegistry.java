@@ -16,12 +16,22 @@ public final class SummonEntityLogicRegistry {
     private static final Set<SummonEntityLogic> LOGICS = new HashSet<>();
 
     public static void initialize() {
-        LOGICS.add(new EndermiteSummonLogic());
-        LOGICS.add(new GuardianSummonLogic());
-        LOGICS.add(new PiglinSummonLogic());
+        // Overworld Monsters
         LOGICS.add(new SkeletonSummonLogic());
         LOGICS.add(new SpiderSummonLogic());
+        LOGICS.add(new SlimeSummonLogic());
+        LOGICS.add(new GuardianSummonLogic());
+        LOGICS.add(new VexSummonLogic());
+        LOGICS.add(new StraySummonLogic());
+
+        // Overworld Entities
         LOGICS.add(new VillagerSummonLogic());
+
+        // Nether Entities
+        LOGICS.add(new PiglinSummonLogic());
+
+        // End Entities
+        LOGICS.add(new EndermiteSummonLogic());
     }
 
     public static Entity getEntity(IWorld world, EntityType<? extends Entity> defaultType) {

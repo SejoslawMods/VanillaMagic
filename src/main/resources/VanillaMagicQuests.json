@@ -1615,6 +1615,28 @@
     }
   },
   {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftNetherStar",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "craftAncientDebris",
+    "ingredients": [
+      {
+        "id": "minecraft:nether_star",
+        "count": 1
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:ancient_debris"
+      }
+    ],
+    "altarTier": 7,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
     "eventCaller": "itemMagnet",
     "parent": "craftNetherStar",
     "posX": 0,
@@ -2145,7 +2167,7 @@
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:iron_sword"
+      "id": "minecraft:iron_axe"
     }
   },
   {
@@ -2174,6 +2196,159 @@
       "id": "minecraft:diamond_sword"
     }
   },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:iron_golem",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "spellSummon_minecraft:zombie",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:rotten_flesh",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:zombie",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:skeleton",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:bone",
+      "count": 16
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:skeleton",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:creeper",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:gunpowder",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:creeper",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:spider",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:cobweb",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:spider",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:zombie_villager",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:emerald",
+      "count": 4
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:zombie_villager",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:silverfish",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:stone_bricks",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:silverfish",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:slime",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:slime_ball",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:slime",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:vex",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:iron_sword"
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:vex",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:drowned",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:glass_bottle",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:drowned",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:husk",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:sand",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:husk",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:stray",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:bow"
+    }
+  },
+
   {
     "eventCaller": "castSpellInAir",
     "parent": "spellSmallFireball",
