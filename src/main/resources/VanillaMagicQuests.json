@@ -2515,6 +2515,48 @@
     }
   },
   {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:strider",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "spellSummon_minecraft:endermite",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:chorus_fruit",
+      "count": 8
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:endermite",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:enderman",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:chorus_fruit",
+      "count": 16
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:enderman",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:shulker",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:shulker_shell",
+      "count": 32
+    }
+  },
+  {
     "eventCaller": "castSpellInAir",
     "parent": "spellSmallFireball",
     "posX": 2,
