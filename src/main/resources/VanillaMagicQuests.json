@@ -1745,7 +1745,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSmallFireball",
     "posX": -2,
     "posY": 0,
@@ -1759,7 +1759,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:chicken",
     "posX": -2,
     "posY": 0,
@@ -1773,7 +1773,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:pig",
     "posX": -2,
     "posY": 0,
@@ -1787,7 +1787,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:cow",
     "posX": 0,
     "posY": 2,
@@ -1800,7 +1800,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:cow",
     "posX": -2,
     "posY": 0,
@@ -1814,7 +1814,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:sheep",
     "posX": -2,
     "posY": 0,
@@ -1828,7 +1828,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:chicken",
     "posX": 0,
     "posY": -2,
@@ -1842,7 +1842,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:fox",
     "posX": -2,
     "posY": 0,
@@ -1856,7 +1856,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:bat",
     "posX": -2,
     "posY": 0,
@@ -1870,7 +1870,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:ocelot",
     "posX": -2,
     "posY": 0,
@@ -1884,7 +1884,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:cat",
     "posX": -2,
     "posY": 0,
@@ -1898,7 +1898,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:squid",
     "posX": -2,
     "posY": 0,
@@ -1912,7 +1912,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:turtle",
     "posX": -2,
     "posY": 0,
@@ -1926,7 +1926,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:horse",
     "posX": -2,
     "posY": 0,
@@ -1940,7 +1940,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:llama",
     "posX": -2,
     "posY": 0,
@@ -1954,7 +1954,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:parrot",
     "posX": -2,
     "posY": 0,
@@ -1968,7 +1968,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:dolphin",
     "posX": -2,
     "posY": 0,
@@ -1982,7 +1982,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:polar_bear",
     "posX": -2,
     "posY": 0,
@@ -1996,7 +1996,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:panda",
     "posX": -2,
     "posY": 0,
@@ -2010,7 +2010,7 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:wolf",
     "posX": -2,
     "posY": 0,
@@ -2024,16 +2024,30 @@
     }
   },
   {
-    "eventCaller": "castSpellOnBlock",
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:bee",
     "posX": -2,
     "posY": 0,
-    "uniqueName": "spellSummon_minecraft:snowman",
+    "uniqueName": "spellSummon_minecraft:snow_golem",
     "rightHandStack": {
       "id": "minecraft:nether_star"
     },
     "leftHandStack": {
-      "id": "minecraft:snow_ball",
+      "id": "minecraft:snowball",
+      "count": 16
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:fox",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:iron_golem",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:iron_ingot",
       "count": 32
     }
   },

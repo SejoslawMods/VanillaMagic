@@ -9,7 +9,7 @@ import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public class QuestCastSpell extends Quest {
-    public Spell spell;
+    protected Spell spell;
 
     public void readData(IJsonService jsonService) {
         super.readData(jsonService);
@@ -19,5 +19,9 @@ public class QuestCastSpell extends Quest {
         if (this.iconStack == null) {
             this.iconStack = this.leftHandStack;
         }
+    }
+
+    public Spell getSpell() {
+        return this.spell;
     }
 }

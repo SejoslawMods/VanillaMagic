@@ -27,6 +27,7 @@ public final class QuestRegistry {
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("portableCraftingTable", EventCallerPortableCraftingTable.class, QuestPortableCraftingTable.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("castSpellInAir", EventCallerCastSpellInAir.class, QuestCastSpellInAir.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("castSpellOnBlock", EventCallerCastSpellOnBlock.class, QuestCastSpellOnBlock.class).register());
+        QUEST_EVENT_CALLERS.add(new QuestEventCaller("castSpellSummon", EventCallerCastSpellSummon.class, QuestCastSpellSummon.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("itemUpgrade", EventCallerItemUpgrade.class, QuestItemUpgrade.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("itemTierUpgrade", EventCallerItemTierUpgrade.class, QuestItemTierUpgrade.class).register());
         QUEST_EVENT_CALLERS.add(new QuestEventCaller("arrowMachineGun", EventCallerArrowMachineGun.class, QuestArrowMachineGun.class).register());

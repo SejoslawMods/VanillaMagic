@@ -94,6 +94,9 @@
   "quest.desc.top": "Inventory which will serve as input and output.",
   "quest.desc.diamondBlock": "Each Diamond Block in inventory will increase it's radius (8 blocks by default).",
 
+  "quest.summon.prefix": "Summon",
+  "quest.summon.desc": "Right-click on block.",
+
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft Stick.",
 
@@ -148,109 +151,10 @@
   "quest.spellSummonLightningBolt": "Thunder !!!",
   "quest.spellSummonLightningBolt.desc": "Right-click to summon thunder.",
 
-  "quest.spellSummon_minecraft:chicken": "Summon Chicken",
-  "quest.spellSummon_minecraft:chicken.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:squid": "Summon Squid",
-  "quest.spellSummon_minecraft:squid.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:pig": "Summon Pig",
-  "quest.spellSummon_minecraft:pig.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:cow": "Summon Cow",
-  "quest.spellSummon_minecraft:cow.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:mooshroom": "Summon Mooshroom",
-  "quest.spellSummon_minecraft:mooshroom.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:sheep": "Summon Sheep",
-  "quest.spellSummon_minecraft:sheep.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:wolf": "Summon Wolf",
-  "quest.spellSummon_minecraft:wolf.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:llama": "Summon Llama",
-  "quest.spellSummon_minecraft:llama.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:rabbit": "Summon Rabbit",
-  "quest.spellSummon_minecraft:rabbit.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:horse": "Summon Horse",
-  "quest.spellSummon_minecraft:horse.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:villager": "Summon Villager",
-  "quest.spellSummon_minecraft:villager.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:iron_golem": "Summon IronGolem",
-  "quest.spellSummon_minecraft:iron_golem.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:snowball": "Summon Snowman",
-  "quest.spellSummon_minecraft:snowball.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:endermite": "Summon Endermite",
-  "quest.spellSummon_minecraft:endermite.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:zombie": "Summon Zombie",
-  "quest.spellSummon_minecraft:zombie.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:creeper": "Summon Creeper",
-  "quest.spellSummon_minecraft:creeper.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:skeleton": "Summon Skeleton",
-  "quest.spellSummon_minecraft:skeleton.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:blaze": "Summon Blaze",
-  "quest.spellSummon_minecraft:blaze.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:magma_cube": "Summon Magma Cube",
-  "quest.spellSummon_minecraft:magma_cube.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:ghast": "Summon Ghast",
-  "quest.spellSummon_minecraft:ghast.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:enderman": "Summon Enderman",
-  "quest.spellSummon_minecraft:enderman.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:spider": "Summon Spider",
-  "quest.spellSummon_minecraft:spider.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:slime": "Summon Slime",
-  "quest.spellSummon_minecraft:slime.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:witch": "Summon Witch",
-  "quest.spellSummon_minecraft:witch.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:vindicator": "Summon Vindicator",
-  "quest.spellSummon_minecraft:vindicator.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:vex": "Summon Vex",
-  "quest.spellSummon_minecraft:vex.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:evoker": "Summon Evoker",
-  "quest.spellSummon_minecraft:evoker.desc": "Right-click on block.",
-
   "quest.evokerCrystal": "Evoker Crystal",
   "quest.evokerCrystal.desc": "Craft Evoker Crystal on Altar.",
   "quest.evokerCrystal.desc.changeSpell": "Shift-right-click",
   "quest.evokerCrystal.desc.castSpell": "Right-click",
-
-  "quest.spellSummon_minecraft:pigman": "Summon Pigman",
-  "quest.spellSummon_minecraft:pigman.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:guardian": "Summon Guardian",
-  "quest.spellSummon_minecraft:guardian.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:polar_bear": "Summon Polar Bear",
-  "quest.spellSummon_minecraft:polar_bear.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:shulker": "Summon Shulker",
-  "quest.spellSummon_minecraft:shulker.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:silverfish": "Summon Silverfish",
-  "quest.spellSummon_minecraft:silverfish.desc": "Right-click on block.",
-
-  "quest.spellSummon_minecraft:wither": "Summon Wither",
-  "quest.spellSummon_minecraft:wither.desc": "Right-click on block.",
 
   "quest.shootWitherSkull": "Shoot Wither Skull",
   "quest.shootWitherSkull.desc": "Right-click in air to shoot Wither Skull.",

@@ -43,4 +43,8 @@ public class SpellSummonEntity extends Spell {
             entity.startRiding(horse);
         }
     }
+
+    public EntityType<? extends Entity> getEntityType() {
+        return this.entityType;
+    }
 }
