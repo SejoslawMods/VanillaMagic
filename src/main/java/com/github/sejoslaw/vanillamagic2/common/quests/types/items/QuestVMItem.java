@@ -4,6 +4,7 @@ import com.github.sejoslaw.vanillamagic2.common.items.IVMItem;
 import com.github.sejoslaw.vanillamagic2.common.json.IJsonService;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestCraftOnAltar;
 import com.github.sejoslaw.vanillamagic2.common.utils.ItemStackUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -18,6 +19,14 @@ public abstract class QuestVMItem<TVMItem extends IVMItem> extends QuestCraftOnA
 
         this.ingredients.add(baseItem);
         this.results.add(this.getVMItem().getStack());
+    }
+
+    public String getDisplayName() {
+        return TextUtils.getFormattedText("quest." + this.uniqueName);
+    }
+
+    public String getDescription() {
+        return TextUtils.getFormattedText("quest." + this.uniqueName + ".desc");
     }
 
     /**

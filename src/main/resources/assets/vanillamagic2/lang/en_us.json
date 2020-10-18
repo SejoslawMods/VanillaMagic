@@ -250,7 +250,7 @@
   "quest.questMoveBlock": "Move block by Book",
   "quest.questMoveBlock.desc": "Shift-right-click on the Block to take / place it.",
 
-  "quest.captureEntity": "Capture Entity",
+  "quest.captureEntity": "Capture Entity with Book",
   "quest.captureEntity.desc": "Shift-right-click on Entity to capture / release it.",
 
   "quest.crystallizedLiquid": "Crystallized Liquid",
@@ -288,5 +288,11 @@
   "quest.oreMultiplier.desc.crafting": "Drop ores into Cauldron and Right-click it. Hold fuel in left hand.",
 
   "quest.itemMagnet": "Item Magnet",
-  "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks."
+  "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks.",
+
+  "quest.itemTierUpgrade": "Item Tier Upgrade",
+  "quest.itemTierUpgrade.desc": "Toss ingredients into the Altar and Right-click.",
+
+  "quest.itemUpgrades": "Item Upgrades",
+  "quest.itemUpgrades.desc": "Toss ingredients into the Altar and Right-click."
 }

@@ -23,4 +23,12 @@ public class QuestInventoryBridge extends QuestVMItem<VMItemInventorySelector> {
         TextUtils.addLine(lines, "quest.tooltip.create", TextUtils.getFormattedText("quest.inventoryBridge.desc.create"));
         TextUtils.addLine(lines, "quest.tooltip.clear", TextUtils.getFormattedText("quest.inventoryBridge.desc.clear"));
     }
+
+    public String getDisplayName() {
+        return TextUtils.getFormattedText("quest." + this.uniqueName);
+    }
+
+    public String getDescription() {
+        return TextUtils.getFormattedText("quest." + this.uniqueName + ".desc");
+    }
 }
