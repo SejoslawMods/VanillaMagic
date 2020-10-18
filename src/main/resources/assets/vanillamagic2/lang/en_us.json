@@ -97,6 +97,9 @@
   "quest.summon.prefix": "Summon",
   "quest.summon.desc": "Right-click on block.",
 
+  "quest.craftOnAltar.prefix": "Craft",
+  "quest.craftOnAltar.desc": "Toss ingredients into the Altar and Right-click.",
+
   "quest.craftStick": "Craft Stick",
   "quest.craftStick.desc": "Craft Stick.",
 
@@ -193,89 +196,8 @@
   "quest.buildAltarTier1": "Build Altar Tier 1",
   "quest.buildAltarTier1.desc": "Build a 3x3 circle and place a Cauldron in the middle.",
 
-  "quest.craftGunpowder": "Craft Gunpowder",
-  "quest.craftGunpowder.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSugar": "Craft Sugar",
-  "quest.craftSugar.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftDirt": "Craft Dirt",
-  "quest.craftDirt.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSand": "Craft Sand",
-  "quest.craftSand.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftGlass": "Craft Glass",
-  "quest.craftGlass.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSnow": "Craft Snow",
-  "quest.craftSnow.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftIce": "Craft Ice",
-  "quest.craftIce.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftCobblestone": "Craft Cobblestone",
-  "quest.craftCobblestone.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftGravel": "Craft Gravel",
-  "quest.craftGravel.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftLeather": "Craft Leather",
-  "quest.craftLeather.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftClay": "Craft Clay",
-  "quest.craftClay.desc": "Toss ingredients into the Altar and Right-click.",
-
   "quest.buildAltarTier2": "Build Altar Tier 2",
   "quest.buildAltarTier2.desc": "Add blocks and replace the Cauldron.",
-
-  "quest.craftIronOre": "Craft Iron Ore",
-  "quest.craftIronOre.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.itemTierUpgrade": "Item Tier Upgrade",
-  "quest.itemTierUpgrade.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.itemUpgrades": "Item Upgrades",
-  "quest.itemUpgrades.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftCactus": "Craft Cactus",
-  "quest.craftCactus.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftOakSapling": "Craft Oak Sapling",
-  "quest.craftOakSapling.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSpruceSapling": "Craft Spruce Sapling",
-  "quest.craftSpruceSapling.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftBirchSapling": "Craft Birch Sapling",
-  "quest.craftBirchSapling.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftJungleSapling": "Craft Jungle Sapling",
-  "quest.craftJungleSapling.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftAcaciaSapling": "Craft Acacia Sapling",
-  "quest.craftAcaciaSapling.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftDarkOakSapling": "Craft Dark Oak Sapling",
-  "quest.craftDarkOakSapling.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftOakSapling2": "Craft Oak Sapling",
-  "quest.craftOakSapling2.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftPumpkin": "Craft Pumpkin",
-  "quest.craftPumpkin.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftMelon": "Craft Melon",
-  "quest.craftMelon.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftVine": "Craft Vine",
-  "quest.craftVine.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftLiyPad": "Craft Lily Pad",
-  "quest.craftLiyPad.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSlimeBall": "Craft Slime Ball",
-  "quest.craftSlimeBall.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.buildAltarTier3": "Build Altar Tier 3",
   "quest.buildAltarTier3.desc": "Add blocks and replace the Cauldron.",
@@ -313,53 +235,14 @@
   "quest.arrowMachineGun": "Arrow Machine Gun",
   "quest.arrowMachineGun.desc": "Take any Arrow and Right-click (or hold).",
 
-  "quest.craftGoldIngot": "Craft Gold Ingot",
-  "quest.craftGoldIngot.desc": "Toss ingredients into the Altar and Right-click.",
-
   "quest.blockAbsorber": "Block Absorber",
   "quest.blockAbsorber.desc": "Shift-right-click the Hopper. Hopper will absorb any block from above.",
 
   "quest.buildAltarTier4": "Build Altar Tier 4",
   "quest.buildAltarTier4.desc": "Add blocks and replace the Cauldron.",
 
-  "quest.craftRottenFlesh": "Craft Rotten Flesh",
-  "quest.craftRottenFlesh.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftString": "Craft String",
-  "quest.craftString.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSpiderEye": "Craft Spider Eye",
-  "quest.craftSpiderEye.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftBone": "Craft Bone",
-  "quest.craftBone.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftArrow": "Craft Arrow",
-  "quest.craftArrow.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftEnderPearl": "Craft Ender Pearl",
-  "quest.craftEnderPearl.desc": "Toss ingredients into the Altar and Right-click.",
-
   "quest.buildAltarTier5": "Build Altar Tier 5",
   "quest.buildAltarTier5.desc": "Add blocks and replace the Cauldron.",
-
-  "quest.craftGlowstoneDust": "Craft Glowstone Dust",
-  "quest.craftGlowstoneDust.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftNetherrack": "Craft Netherrack",
-  "quest.craftNetherrack.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftSoulSand": "Craft Soul Sand",
-  "quest.craftSoulSand.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftMagmaBlock": "Craft Magma Block",
-  "quest.craftMagmaBlock.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftNetherWart": "Craft Nether Wart",
-  "quest.craftNetherWart.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftGhastTear": "Craft Ghast Tear",
-  "quest.craftGhastTear.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.pickupBlazeRod": "Pick Blaze Rod",
   "quest.pickupBlazeRod.desc": "Pick Blaze Rod.",
@@ -385,9 +268,6 @@
   "quest.crystallizedPotion.desc.results": "1x Crystallized Potion",
   "quest.crystallizedPotion.desc.usage": "Hold it in inventory to get the effect of the Potion.",
 
-  "quest.craftWitherSkeletonSkull": "Craft Wither Skeleton Skull",
-  "quest.craftWitherSkeletonSkull.desc": "Toss ingredients into the Altar and Right-click.",
-
   "quest.accelerationCrystal": "Acceleration Crystal",
   "quest.accelerationCrystal.desc": "Shift-right-click on block to speed it's ticks.",
 
@@ -400,49 +280,13 @@
   "quest.inventoryBridge.desc.create": "Right-click on Output Inventory Block (i.e. Chest) to create bridge.",
   "quest.inventoryBridge.desc.clear": "Right-click in air to clear saved position.",
 
-  "quest.craftDiamond": "Craft Diamond",
-  "quest.craftDiamond.desc": "Toss ingredients into the Altar and Right-click.",
-
   "quest.buildAltarTier7": "Build Altar Tier 7",
   "quest.buildAltarTier7.desc": "Add blocks and replace the Cauldron.",
-
-  "quest.craftGoldOre": "Craft Gold Ore",
-  "quest.craftGoldOre.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftCoalOre": "Craft 4x Coal Ore",
-  "quest.craftCoalOre.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftRedstoneOre": "Craft Redstone Ore",
-  "quest.craftRedstoneOre.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftLapisOre": "Craft Lapis Ore",
-  "quest.craftLapisOre.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftDiamondOre": "Craft Diamond Ore",
-  "quest.craftDiamondOre.desc": "Toss ingredients into the Altar and Right-click.",
 
   "quest.oreMultiplier": "Ore Multiplier",
   "quest.oreMultiplier.desc": "Place Cauldron. On each side place Furnace.",
   "quest.oreMultiplier.desc.crafting": "Drop ores into Cauldron and Right-click it. Hold fuel in left hand.",
 
-  "quest.craftEmeraldOre": "Craft Emerald Ore",
-  "quest.craftEmeraldOre.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftEmerald": "Craft Emerald",
-  "quest.craftEmerald.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftNetherStar": "Craft Nether Star",
-  "quest.craftNetherStar.desc": "Toss ingredients into the Altar and Right-click.",
-
   "quest.itemMagnet": "Item Magnet",
-  "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks.",
-
-  "quest.craftDragonEgg": "Craft Dragon Egg",
-  "quest.craftDragonEgg.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftDragonHead": "Craft Dragon Head",
-  "quest.craftDragonHead.desc": "Toss ingredients into the Altar and Right-click.",
-
-  "quest.craftEndCrystal": "Craft End Crystal",
-  "quest.craftEndCrystal.desc": "Toss ingredients into the Altar and Right-click."
+  "quest.itemMagnet.desc": "Hold 2 Nether Stars anywhere in Your inventory but as different stacks."
 }

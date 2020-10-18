@@ -46,7 +46,7 @@ public class Quest {
         TextUtils.addLine(lines, "quest.tooltip.uniqueName", TextFormatting.YELLOW + this.getDisplayName());
 
         if (this.parent != null) {
-            TextUtils.addLine(lines, "quest.tooltip.parent", TextUtils.getFormattedText("quest." + this.parent.uniqueName));
+            TextUtils.addLine(lines, "quest.tooltip.parent", this.parent.getDisplayName());
         }
 
         if (this.rightHandStack != null) {
@@ -73,7 +73,7 @@ public class Quest {
             TextUtils.addLine(lines, "quest.tooltip.oneItemSmeltCost", String.valueOf(this.oneItemSmeltCost));
         }
 
-        TextUtils.addLine(lines, "quest.tooltip.description", TextUtils.getFormattedText("quest." + this.uniqueName + ".desc"));
+        TextUtils.addLine(lines, "quest.tooltip.description", this.getDescription());
     }
 
     /**
@@ -81,6 +81,13 @@ public class Quest {
      */
     public String getDisplayName() {
         return TextUtils.getFormattedText("quest." + this.uniqueName);
+    }
+
+    /**
+     * @return Formatted description.
+     */
+    public String getDescription() {
+        return TextUtils.getFormattedText("quest." + this.uniqueName + ".desc");
     }
 
     /**

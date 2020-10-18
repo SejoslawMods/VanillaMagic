@@ -33,4 +33,12 @@ public class QuestCraftOnAltar extends Quest {
         TextUtils.addLine(lines, "quest.tooltip.ingredients", this.getTooltip(this.ingredients));
         TextUtils.addLine(lines, "quest.tooltip.results", this.getTooltip(this.results));
     }
+
+    public String getDisplayName() {
+        return TextUtils.getFormattedText("quest.craftOnAltar.prefix") + " " + TextUtils.getFormattedText(this.results.get(0).getTranslationKey());
+    }
+
+    public String getDescription() {
+        return TextUtils.getFormattedText("quest.craftOnAltar.desc");
+    }
 }
