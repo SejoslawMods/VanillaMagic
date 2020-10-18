@@ -19,7 +19,13 @@ public class PiglinSummonLogic extends SummonEntityLogic {
 
     public Entity getEntity(IWorld world) {
         PiglinEntity entity = new PiglinEntity(EntityType.PIGLIN, WorldUtils.asWorld(world));
-        entity.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+
+        if (world.getRandom().nextInt(100) > 50) {
+            entity.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+        } else {
+            entity.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.CROSSBOW));
+        }
+
         return entity;
     }
 }

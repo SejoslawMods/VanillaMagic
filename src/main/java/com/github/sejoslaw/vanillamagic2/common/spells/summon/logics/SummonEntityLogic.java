@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class SummonEntityLogic {
+public abstract class SummonEntityLogic {
     public final EntityType<? extends Entity> entityType;
 
     public SummonEntityLogic(EntityType<? extends Entity> entityType) {

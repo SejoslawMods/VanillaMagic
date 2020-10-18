@@ -1930,6 +1930,34 @@
     "parent": "spellSummon_minecraft:horse",
     "posX": -2,
     "posY": 0,
+    "uniqueName": "spellSummon_minecraft:mule",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:leather",
+      "count": 12
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:mule",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:donkey",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:leather",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:donkey",
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "spellSummon_minecraft:llama",
     "rightHandStack": {
       "id": "minecraft:nether_star"
@@ -2070,6 +2098,20 @@
     "parent": "spellSummon_minecraft:villager",
     "posX": -2,
     "posY": 0,
+    "uniqueName": "spellSummon_minecraft:wandering_trader",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:emerald",
+      "count": 16
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:wandering_trader",
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "spellSummon_minecraft:witch",
     "rightHandStack": {
       "id": "minecraft:nether_star"
@@ -2082,6 +2124,20 @@
   {
     "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:witch",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:evoker",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:emerald",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:evoker",
     "posX": -2,
     "posY": 0,
     "uniqueName": "spellSummon_minecraft:vindicator",
