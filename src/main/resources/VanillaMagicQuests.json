@@ -2040,8 +2040,8 @@
   {
     "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:fox",
-    "posX": -2,
-    "posY": 0,
+    "posX": 0,
+    "posY": -2,
     "uniqueName": "spellSummon_minecraft:iron_golem",
     "rightHandStack": {
       "id": "minecraft:nether_star"
@@ -2049,6 +2049,73 @@
     "leftHandStack": {
       "id": "minecraft:iron_ingot",
       "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:iron_golem",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:villager",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:emerald",
+      "count": 3
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:villager",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:witch",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:glowstone_dust",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:witch",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:vindicator",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:iron_sword"
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:vindicator",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:pillager",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:crossbow"
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:pillager",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:ravager",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:diamond_sword"
     }
   },
   {
