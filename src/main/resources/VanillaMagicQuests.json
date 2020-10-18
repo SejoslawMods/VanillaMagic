@@ -2348,7 +2348,172 @@
       "id": "minecraft:bow"
     }
   },
-
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:zombie",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "spellSummon_minecraft:phantom",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:phantom_membrane",
+      "count": 16
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:phantom",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:wither",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:wither_skeleton_skull",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:phantom",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "spellSummon_minecraft:strider",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:string",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:strider",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:magma_cube",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:magma_cream",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:magma_cube",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:blaze",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:blaze_rod",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:blaze",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:piglin",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:golden_sword"
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:piglin",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:zombified_piglin",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:gold_nugget",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:zombified_piglin",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:piglin_brute",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:golden_axe"
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:piglin_brute",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:hoglin",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:leather",
+      "count": 64
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:hoglin",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:zoglin",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:rotten_flesh",
+      "count": 64
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:zoglin",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:ghast",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:ghast_tear",
+      "count": 32
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:ghast",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:wither_skeleton",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:wither_skeleton_skull",
+      "count": 64
+    }
+  },
   {
     "eventCaller": "castSpellInAir",
     "parent": "spellSmallFireball",

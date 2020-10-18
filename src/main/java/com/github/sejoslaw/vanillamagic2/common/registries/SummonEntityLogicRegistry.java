@@ -29,6 +29,10 @@ public final class SummonEntityLogicRegistry {
 
         // Nether Entities
         LOGICS.add(new PiglinSummonLogic());
+        LOGICS.add(new ZombifiedPiglinSummonLogic());
+        LOGICS.add(new PiglinBruteSummonLogic());
+        LOGICS.add(new MagmaCubeSummonLogic());
+        LOGICS.add(new WitherSkeletonSummonLogic());
 
         // End Entities
         LOGICS.add(new EndermiteSummonLogic());
