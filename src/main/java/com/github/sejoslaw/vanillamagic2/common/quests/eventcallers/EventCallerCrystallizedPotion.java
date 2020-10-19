@@ -36,7 +36,11 @@ public class EventCallerCrystallizedPotion extends EventCallerCraftable<QuestCry
     }
 
     public Potion getPotion(ItemStack stack) {
-        return ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME)));
+        if (stack.getTag() == null) {
+            return null;
+        }
+
+        return ForgeRegistries.POTION_TYPES.getValue(new ResourceLocation(stack.getTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME)));
     }
 
     @SubscribeEvent

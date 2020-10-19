@@ -43,7 +43,11 @@ public interface IVMItem {
      * @return True if the specified ItemStack is current VM Item.
      */
     default boolean isVMItem(ItemStack stack) {
-        return stack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME).equals(this.getUniqueKey());
+        if (stack.getTag() == null) {
+            return false;
+        }
+
+        return stack.getTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME).equals(this.getUniqueKey());
     }
 
     /**
