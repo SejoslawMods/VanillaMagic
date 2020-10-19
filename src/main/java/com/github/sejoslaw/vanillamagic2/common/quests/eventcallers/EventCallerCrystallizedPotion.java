@@ -45,6 +45,8 @@ public class EventCallerCrystallizedPotion extends EventCallerCraftable<QuestCry
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
+        Potion[] potions = new Potion[1];
+
         this.executor.onPlayerTickNoHandsCheck(event,
                 (player, world) -> {
                     for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
@@ -54,21 +56,14 @@ public class EventCallerCrystallizedPotion extends EventCallerCraftable<QuestCry
                             continue;
                         }
 
+                        potions[0] = potion;
                         return this.quests.get(0);
                     }
 
                     return null;
                 },
                 (player, world, quest) -> {
-                    for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
-                        Potion potion = this.getPotion(player.inventory.getStackInSlot(i));
-
-                        if (potion == null || potion == Potions.EMPTY) {
-                            continue;
-                        }
-
-                        potion.getEffects().forEach(player::addPotionEffect);
-                    }
+                    potions[0].getEffects().forEach(player::addPotionEffect);
                 });
     }
 }

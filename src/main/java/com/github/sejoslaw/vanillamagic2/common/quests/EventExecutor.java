@@ -242,7 +242,8 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
                             }
 
                             for (AltarRecipe recipe : recipes) {
-                                if (!AltarUtils.canCraftOnAltar(recipe.ingredients, ingredientsInCauldron[0], optionalCheck)) {
+                                if (ingredientsInCauldron[0].size() != recipe.ingredients.size() ||
+                                    !AltarUtils.canCraftOnAltar(recipe.ingredients, ingredientsInCauldron[0], optionalCheck)) {
                                     continue;
                                 }
 

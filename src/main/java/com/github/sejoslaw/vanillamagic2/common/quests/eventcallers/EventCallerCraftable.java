@@ -57,11 +57,11 @@ public abstract class EventCallerCraftable<TQuest extends Quest> extends EventCa
             ingredients.add(getIngredient.apply(entry.getValue()));
 
             ItemStack stack = getResult.apply(entry.getValue());
-            stack.getOrCreateTag().putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, entry.getKey().toString());
+            stack.getOrCreateTag().putString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME, entry.getKey().getLocation().toString());
 
             String parsedDisplayName = getDisplayName.apply(entry);
             stack.setDisplayName(TextUtils.combine(TextUtils.translate(displayNameKey),
-                    " " + (parsedDisplayName == null ? entry.getKey().toString() : TextUtils.getFormattedText(parsedDisplayName))));
+                    " " + (parsedDisplayName == null ? entry.getKey().getLocation().toString() : TextUtils.getFormattedText(parsedDisplayName))));
 
             List<ItemStack> results = new ArrayList<>();
             results.add(stack);
