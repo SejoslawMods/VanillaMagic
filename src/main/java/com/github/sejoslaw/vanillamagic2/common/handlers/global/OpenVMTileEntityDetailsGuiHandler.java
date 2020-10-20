@@ -1,4 +1,4 @@
-package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
+package com.github.sejoslaw.vanillamagic2.common.handlers.global;
 
 import com.github.sejoslaw.vanillamagic2.common.handlers.EventHandler;
 import com.github.sejoslaw.vanillamagic2.common.registries.VMNetworkRegistry;
