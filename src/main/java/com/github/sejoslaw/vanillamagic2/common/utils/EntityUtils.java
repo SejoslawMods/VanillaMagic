@@ -29,6 +29,10 @@ public final class EntityUtils {
      * @return Formatted Player's name.
      */
     public static String getPlayerNameFormatted(PlayerEntity player) {
+        if (player == null) {
+            return null;
+        }
+
         return TextUtils.getFormattedText(player.getName());
     }
 

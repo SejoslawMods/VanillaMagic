@@ -16,6 +16,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -128,6 +130,7 @@ public abstract class EventHandler {
         consumer.accept(event.getKey(), event.getScanCode(), event.getAction(), event.getModifiers());
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void onScroll(GuiScreenEvent.MouseScrollEvent.Pre event,
                          Consumer4<Screen, Double, Double, Double> consumer) {
         consumer.accept(event.getGui(), event.getMouseX(), event.getMouseY(), event.getScrollDelta());

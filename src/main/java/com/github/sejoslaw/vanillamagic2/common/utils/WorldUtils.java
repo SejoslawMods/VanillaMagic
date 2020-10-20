@@ -8,9 +8,11 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,6 +22,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.IServerWorldInfo;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Random;
@@ -83,6 +86,22 @@ public final class WorldUtils {
             stack.setCount(stackCountModifier.apply(stack));
             Block.spawnAsEntity(WorldUtils.asWorld(world), spawnPos, stack);
         });
+    }
+
+    /**
+     * Spawns VM TileEntity into the specified IWorld read from given data.
+     */
+    public static IVMTileEntity spawnVMTile(IWorld world, CompoundNBT tileNbt) {
+        ResourceLocation tileResourceLocation = new ResourceLocation(tileNbt.getString(NbtUtils.NBT_TILE_TYPE));
+        TileEntityType<?> tileEntityType = ForgeRegistries.TILE_ENTITIES.getValue(tileResourceLocation);
+        IVMTileEntity tile = (IVMTileEntity) tileEntityType.create();
+
+        WorldUtils.spawnVMTile(world, tile.getPos(), tile, (vmTile) -> {
+            vmTile.getTileEntity().read(vmTile.getState(), tileNbt);
+            return true;
+        });
+
+        return tile;
     }
 
     /**

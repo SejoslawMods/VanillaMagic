@@ -1,10 +1,8 @@
 package com.github.sejoslaw.vanillamagic2.common.networks;
 
 import com.github.sejoslaw.vanillamagic2.common.registries.PlayerQuestProgressRegistry;
-import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
 import net.minecraft.client.network.play.IClientPlayNetHandler;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -16,19 +14,16 @@ import java.util.function.Supplier;
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
-public class SSyncQuestsPacket implements IPacket<IClientPlayNetHandler> {
-    private String playerName;
+public class SSyncQuestsPacket extends SVMPacket {
     private Set<String> playerQuests;
 
-    public SSyncQuestsPacket withPlayer(PlayerEntity player) {
-        this.playerName = EntityUtils.getPlayerNameFormatted(player);
+    public SSyncQuestsPacket(PlayerEntity player) {
+        super(player);
         this.playerQuests = PlayerQuestProgressRegistry.getPlayerQuests(player);
-
-        return this;
     }
 
     public void readPacketData(PacketBuffer buf) throws IOException {
-        this.playerName = buf.readString();
+        super.readPacketData(buf);
 
         int questsCount = buf.readInt();
         this.playerQuests = new HashSet<>();
@@ -39,7 +34,7 @@ public class SSyncQuestsPacket implements IPacket<IClientPlayNetHandler> {
     }
 
     public void writePacketData(PacketBuffer buf) throws IOException {
-        buf.writeString(this.playerName);
+        super.writePacketData(buf);
 
         buf.writeInt(this.playerQuests.size());
         this.playerQuests.forEach(buf::writeString);
@@ -58,7 +53,7 @@ public class SSyncQuestsPacket implements IPacket<IClientPlayNetHandler> {
     }
 
     public static SSyncQuestsPacket decode(PacketBuffer buf) {
-        SSyncQuestsPacket packet = new SSyncQuestsPacket();
+        SSyncQuestsPacket packet = new SSyncQuestsPacket(null);
 
         try {
             packet.readPacketData(buf);

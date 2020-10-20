@@ -35,6 +35,7 @@ public final class VMEvents {
         register(new AutoplantHandler());
         register(new BoneMealNetherWartHandler());
         register(new VMTileMachineCleanHandler());
+        register(new OpenVMTileEntityDetailsGuiHandler());
     }
 
     private static void registerListeners() {
@@ -43,7 +44,6 @@ public final class VMEvents {
 
     private static void registerClientSpecificEvents() {
         register(new OpenQuestGuiHandler());
-        register(new OpenVMTileEntityDetailsGuiHandler());
         register(new ShowDeathPointHandler());
         register(new ShowHungerTooltipHandler());
         register(new ShowSaturationTooltipHandler());

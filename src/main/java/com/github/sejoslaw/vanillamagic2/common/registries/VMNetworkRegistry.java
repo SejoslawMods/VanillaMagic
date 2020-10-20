@@ -1,6 +1,8 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
+import com.github.sejoslaw.vanillamagic2.common.networks.SOpenVMTileEntityDetailsGuiPacket;
 import com.github.sejoslaw.vanillamagic2.common.networks.SSyncQuestsPacket;
+import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.core.VanillaMagic;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -23,7 +25,9 @@ public final class VMNetworkRegistry {
 
     public static void initialize() {
         int id = 0;
+
         CHANNEL.registerMessage(id++, SSyncQuestsPacket.class, SSyncQuestsPacket::encode, SSyncQuestsPacket::decode, SSyncQuestsPacket::consume);
+        CHANNEL.registerMessage(id++, SOpenVMTileEntityDetailsGuiPacket.class, SOpenVMTileEntityDetailsGuiPacket::encode, SOpenVMTileEntityDetailsGuiPacket::decode, SOpenVMTileEntityDetailsGuiPacket::consume);
     }
 
     /**
@@ -34,6 +38,17 @@ public final class VMNetworkRegistry {
             return;
         }
 
-        CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SSyncQuestsPacket().withPlayer(player));
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SSyncQuestsPacket(player));
+    }
+
+    /**
+     * Opens VM TileEntity Details GUI for specified Player.
+     */
+    public static void openVMTileEntityDetailsGui(PlayerEntity player, IVMTileEntity tileEntity) {
+        if (!(player instanceof ServerPlayerEntity)) {
+            return;
+        }
+
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SOpenVMTileEntityDetailsGuiPacket(player, tileEntity));
     }
 }

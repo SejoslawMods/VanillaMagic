@@ -1,6 +1,5 @@
 package com.github.sejoslaw.vanillamagic2.common.guis;
 
-import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.github.sejoslaw.vanillamagic2.core.VanillaMagic;
@@ -10,7 +9,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,15 +16,19 @@ import java.util.List;
  */
 @OnlyIn(Dist.CLIENT)
 public class VMTileEntityDetailsGui extends VMGui {
-    private final IVMTileEntity tileEntity;
+    private final String simpleName;
+    private final CompoundNBT nbt;
+    private final List<ITextComponent> lines;
 
     private int lineHeight;
 
     protected boolean showTileNbt = false;
 
-    public VMTileEntityDetailsGui(IVMTileEntity tileEntity) {
+    public VMTileEntityDetailsGui(String simpleName, CompoundNBT nbt, List<ITextComponent> lines) {
         super(TextUtils.translate("vm.gui.vmTileEntityGui.title"));
-        this.tileEntity = tileEntity;
+        this.simpleName = simpleName;
+        this.nbt = nbt;
+        this.lines = lines;
     }
 
     protected void init() {
@@ -41,7 +43,7 @@ public class VMTileEntityDetailsGui extends VMGui {
     }
 
     protected void renderInnerGui(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        drawString(matrixStack, this.font, TextUtils.buildMessageLine("vm.gui.vmTileEntityGui.name", this.tileEntity.getClass().getSimpleName()), this.centerX, this.centerY, TEXT_COLOR);
+        drawString(matrixStack, this.font, TextUtils.buildMessageLine("vm.gui.vmTileEntityGui.name", this.simpleName), this.centerX, this.centerY, TEXT_COLOR);
         this.nextLine(matrixStack);
         this.renderTileInformation(matrixStack);
 
@@ -57,20 +59,14 @@ public class VMTileEntityDetailsGui extends VMGui {
     }
 
     private void renderTileInformation(MatrixStack matrixStack) {
-        List<ITextComponent> lines = new ArrayList<>();
-
-        this.tileEntity.addInformation(lines);
-
-        for (ITextComponent line : lines) {
+        for (ITextComponent line : this.lines) {
             drawString(matrixStack, this.font, TextUtils.getFormattedText(line), this.centerX, this.centerY, TEXT_COLOR);
             this.nextLine(matrixStack);
         }
     }
 
     private void renderNbtData(MatrixStack matrixStack, int mouseX, int mouseY) {
-        CompoundNBT nbt = this.tileEntity.serializeNBT();
-
-        NbtUtils.forEachEntry(nbt, (depth, key, value) -> {
+        NbtUtils.forEachEntry(this.nbt, (depth, key, value) -> {
             final String singleSpace = "    ";
             StringBuilder tab = new StringBuilder();
 
