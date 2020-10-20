@@ -11,8 +11,8 @@ public class UsingItemBreederLogicModule extends AbstractBreederLogicModule {
         this.useSlot(machine, (inv, slotId, stack) ->
             this.getEntities(machine, AnimalEntity.class, entity -> true)
                     .forEach(entity -> {
-                        if (entity.isBreedingItem(stack)) {
-                            entity.setInLove(600);
+                        if (entity.isBreedingItem(stack) && entity.canBreed() && !entity.isChild()) {
+                            entity.setInLove(null);
                             stack.shrink(1);
                         }
                     }));
