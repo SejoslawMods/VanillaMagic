@@ -31,13 +31,15 @@ public class VMTileInventoryBridge extends VMTileEntity {
         super(TileEntityRegistry.INVENTORY_BRIDGE.get());
     }
 
-    public void setSource(CompoundNBT nbt) {
+    public boolean setSource(CompoundNBT nbt) {
         this.sourcePos = nbt.getLong(NbtUtils.NBT_POSITION);
         this.sourceDimId = nbt.getString(NbtUtils.NBT_DIMENSION);
         this.destinationInv = WorldUtils.getInventory(this.getWorld(), this.getPos().offset(Direction.DOWN));
 
         ServerWorld sourceWorld = NbtUtils.getWorld(this.getWorld().getServer(), nbt);
         this.sourceInv = WorldUtils.getInventory(sourceWorld, BlockPos.fromLong(this.sourcePos));
+
+        return true;
     }
 
     public void read(BlockState state, CompoundNBT compound) {

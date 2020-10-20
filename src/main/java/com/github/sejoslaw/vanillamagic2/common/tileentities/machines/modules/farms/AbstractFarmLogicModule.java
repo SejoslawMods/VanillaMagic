@@ -22,10 +22,10 @@ import java.util.function.Predicate;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractFarmLogicModule extends AbstractSimpleMachineLogicModule {
-    public void setup(IVMTileMachine machine) {
-        super.setup(machine);
+    public boolean setup(IVMTileMachine machine) {
         this.setupInternals("VM Farmer", () -> VMForgeConfig.FARM_SIZE.get());
         this.setWorkingPos(machine, this.getFarmStartPos(machine));
+        return super.setup(machine);
     }
 
     protected void useWorld(IVMTileMachine machine, Consumer<IWorld> consumer) {

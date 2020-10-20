@@ -21,10 +21,11 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
         super(TileEntityRegistry.MACHINE.get());
     }
 
-    public void setModuleKey(String key) {
+    public boolean setModuleKey(String key) {
         this.moduleKey = key;
-        MachineModuleRegistry.DEFAULT_MODULES.forEach(module -> module.setup(this));
-        MachineModuleRegistry.MODULES.get(this.moduleKey).forEach(machine -> machine.setup(this));
+
+         return MachineModuleRegistry.DEFAULT_MODULES.stream().allMatch(module -> module.setup(this)) &&
+                MachineModuleRegistry.MODULES.get(this.moduleKey).stream().allMatch(machine -> machine.setup(this));
     }
 
     public CompoundNBT write(CompoundNBT nbt) {

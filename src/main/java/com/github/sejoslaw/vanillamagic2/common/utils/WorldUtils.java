@@ -88,14 +88,16 @@ public final class WorldUtils {
     /**
      * Spawns VM TileEntity into the specified IWorld on the given BlockPos.
      */
-    public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(IWorld world, BlockPos pos, TVMTileEntity tile, Consumer<TVMTileEntity> consumer) {
+    public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(IWorld world, BlockPos pos, TVMTileEntity tile, Predicate<TVMTileEntity> check) {
         if (WorldUtils.getIsRemote(world) || WorldUtils.getTickableTileEntities(world).stream().anyMatch(tileEntity -> tileEntity.getPos().equals(pos))) {
             return;
         }
 
         tile.initialize(world, pos);
-        consumer.accept(tile);
-        tile.spawn();
+
+        if (check.test(tile)) {
+            tile.spawn();
+        }
     }
 
     /**

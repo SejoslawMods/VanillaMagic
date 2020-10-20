@@ -8,8 +8,8 @@ import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.modules.Ab
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractBreederLogicModule extends AbstractSimpleMachineLogicModule {
-    public void setup(IVMTileMachine machine) {
-        super.setup(machine);
+    public boolean setup(IVMTileMachine machine) {
         this.setupInternals("VM Breeder", () -> VMForgeConfig.BREEDER_SIZE.get());
+        return super.setup(machine);
     }
 }

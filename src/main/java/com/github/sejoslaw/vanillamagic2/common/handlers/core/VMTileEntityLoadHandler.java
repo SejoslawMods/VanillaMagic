@@ -38,7 +38,10 @@ public class VMTileEntityLoadHandler extends VMTileEntityHandler {
                                 ResourceLocation tileResourceLocation = new ResourceLocation(tileNbt.getString(NbtUtils.NBT_TILE_TYPE));
                                 TileEntityType<?> tileEntityType = ForgeRegistries.TILE_ENTITIES.getValue(tileResourceLocation);
                                 IVMTileEntity tile = (IVMTileEntity) tileEntityType.create();
-                                WorldUtils.spawnVMTile(world, tile.getPos(), tile, (vmTile) -> vmTile.getTileEntity().read(vmTile.getState(), tileNbt));
+                                WorldUtils.spawnVMTile(world, tile.getPos(), tile, (vmTile) -> {
+                                    vmTile.getTileEntity().read(vmTile.getState(), tileNbt);
+                                    return true;
+                                });
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }

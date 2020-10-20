@@ -7,7 +7,8 @@ public interface IMachineModule {
     /**
      * Called once for all related modules before canExecute. Should be used to preconfigure VM TileMachine.
      */
-    default void setup(IVMTileMachine machine) {
+    default boolean setup(IVMTileMachine machine) {
+        return true;
     }
 
     /**

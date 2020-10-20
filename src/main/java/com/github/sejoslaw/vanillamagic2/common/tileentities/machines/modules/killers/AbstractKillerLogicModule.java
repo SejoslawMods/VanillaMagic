@@ -10,9 +10,9 @@ import net.minecraft.item.SwordItem;
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public abstract class AbstractKillerLogicModule extends AbstractSimpleMachineLogicModule {
-    public void setup(IVMTileMachine machine) {
-        super.setup(machine);
+    public boolean setup(IVMTileMachine machine) {
         this.setupInternals("VM Killer", () -> VMForgeConfig.KILLER_SIZE.get());
+        return super.setup(machine);
     }
 
     protected boolean isSword(ItemStack stack) {

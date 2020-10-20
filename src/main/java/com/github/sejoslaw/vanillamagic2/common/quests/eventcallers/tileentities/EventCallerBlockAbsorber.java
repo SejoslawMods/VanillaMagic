@@ -17,6 +17,6 @@ public class EventCallerBlockAbsorber extends EventCaller<QuestBlockAbsorber> {
     public void addVMTile(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) -> this.executor.click(Blocks.HOPPER, world, pos, () -> this.quests.get(0)),
-                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(world, pos.offset(Direction.UP), new VMTileBlockAbsorber(), (tile) -> { }));
+                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(world, pos.offset(Direction.UP), new VMTileBlockAbsorber(), (tile) -> true));
     }
 }

@@ -22,7 +22,7 @@ public abstract class AbstractSimpleMachineLogicModule extends AbstractLogicModu
     private GameProfile gameProfile;
     private Supplier<Integer> machineSizeGetter;
 
-    public void setup(IVMTileMachine machine) {
+    public boolean setup(IVMTileMachine machine) {
         BlockPos inventoryPos = machine.getPos().offset(Direction.UP);
 
         this.setEnergySourcePos(machine, inventoryPos);
@@ -30,6 +30,8 @@ public abstract class AbstractSimpleMachineLogicModule extends AbstractLogicModu
         this.setOutputStoragePos(machine, inventoryPos);
 
         this.setSlotId(machine, 0);
+
+        return true;
     }
 
     protected void setupInternals(String fakePlayerTypeName, Supplier<Integer> machineSizeGetter) {

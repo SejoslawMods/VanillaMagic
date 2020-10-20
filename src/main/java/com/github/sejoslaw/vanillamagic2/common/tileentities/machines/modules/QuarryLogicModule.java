@@ -25,7 +25,7 @@ public class QuarryLogicModule extends AbstractLogicModule {
     private static final String NBT_MODULE_QUARRY_DIAMOND_POS = "NBT_MODULE_QUARRY_DIAMOND_POS";
     private static final String NBT_MODULE_QUARRY_REDSTONE_POS = "NBT_MODULE_QUARRY_REDSTONE_POS";
 
-    public void setup(IVMTileMachine machine) {
+    public boolean setup(IVMTileMachine machine) {
         BlockPos machinePos = machine.getPos();
         Direction diamondDir = Direction.UP;
         BlockPos diamondPos = BlockPos.ZERO;
@@ -39,6 +39,10 @@ public class QuarryLogicModule extends AbstractLogicModule {
             }
         }
 
+        if (diamondDir == Direction.UP) {
+            return false;
+        }
+
         this.setPos(machine, diamondPos, NBT_MODULE_QUARRY_DIAMOND_POS);
         this.setPos(machine, machinePos.offset(diamondDir.rotateYCCW()), NBT_MODULE_QUARRY_REDSTONE_POS);
         this.setInt(machine, diamondDir.rotateY().getIndex(), NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
@@ -49,6 +53,8 @@ public class QuarryLogicModule extends AbstractLogicModule {
 
         this.setStartPos(machine, machinePos.offset(diamondDir.rotateY()));
         this.setWorkingPos(machine, machinePos.offset(diamondDir.rotateY()));
+
+        return true;
     }
 
     protected boolean checkStructure(IVMTileMachine machine) {
@@ -85,18 +91,18 @@ public class QuarryLogicModule extends AbstractLogicModule {
         Direction startPosDir = this.getDirection(machine, NBT_MODULE_QUARRY_START_POS_DIRECTION_ID);
         BlockState mineBlockState = world.getBlockState(workingPos);
 
-        if (this.canSkipBlock(world, workingPos)) {
-            while (this.canSkipBlock(world, workingPos)) {
-                workingPos = workingPos.offset(Direction.DOWN);
-            }
-
-            this.updatePositions(machine, startPos, workingPos, quarrySize, true);
-        } else if (mineBlockState.getBlock() == Blocks.BEDROCK) {
+        if ((mineBlockState.getBlock() == Blocks.BEDROCK) || (workingPos.getY() <= 1)) {
             workingPos = new BlockPos(workingPos.getX(), startPos.getY(), workingPos.getZ()).offset(startPosDir);
 
             if (BlockUtils.distanceInLine(workingPos, startPos) > quarrySize) {
                 startPos = startPos.offset(startPosDir.rotateYCCW());
                 workingPos = new BlockPos(startPos);
+            }
+
+            this.updatePositions(machine, startPos, workingPos, quarrySize, true);
+        } else if (this.canSkipBlock(world, workingPos)) {
+            while (this.canSkipBlock(world, workingPos)) {
+                workingPos = workingPos.offset(Direction.DOWN);
             }
 
             this.updatePositions(machine, startPos, workingPos, quarrySize, true);
@@ -126,7 +132,8 @@ public class QuarryLogicModule extends AbstractLogicModule {
     }
 
     private boolean canSkipBlock(IWorld world, BlockPos pos) {
-        return world.isAirBlock(pos) || world.getFluidState(pos) != Fluids.EMPTY.getDefaultState();
+        return (world.isAirBlock(pos) || (world.getFluidState(pos) != Fluids.EMPTY.getDefaultState())) &&
+               (pos.getY() > 0);
     }
 
     private void updatePositions(IVMTileMachine machine, BlockPos startPos, BlockPos workingPos, int quarrySize, boolean shouldPerformSingleOperation) {
