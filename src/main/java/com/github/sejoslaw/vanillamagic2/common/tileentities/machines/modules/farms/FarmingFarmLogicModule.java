@@ -21,17 +21,31 @@ public class FarmingFarmLogicModule extends AbstractFarmLogicModule {
     }
 
     private static class Farmer<TBlock extends Block> implements IFarmer {
-        private Class<TBlock> clazz;
-        private Predicate<BlockState> predicate;
+        private final Class<TBlock> clazz;
+        private final Predicate<BlockState> predicate;
+        private final boolean canBreak;
 
         public Farmer(Class<TBlock> clazz, Predicate<BlockState> predicate) {
+            this(clazz, predicate, true);
+        }
+
+        public Farmer(Class<TBlock> clazz, Predicate<BlockState> predicate, boolean canBreak) {
             this.clazz = clazz;
             this.predicate = predicate;
+            this.canBreak = canBreak;
         }
 
         public boolean isFullyGrown(IWorld world, BlockPos pos) {
             BlockState state = world.getBlockState(pos);
-            return this.clazz.isInstance(state.getBlock()) && predicate.test(state);
+            return this.clazz.isInstance(state.getBlock()) && this.checkPredicate(state) && this.canBreak;
+        }
+
+        public boolean checkPredicate(BlockState state) {
+            try {
+                return this.predicate.test(state);
+            } catch (Exception ex) {
+                return false;
+            }
         }
     }
 
@@ -46,9 +60,11 @@ public class FarmingFarmLogicModule extends AbstractFarmLogicModule {
         this.addFarmer(CropsBlock.class, CropsBlock.AGE);
         this.addFarmer(NetherWartBlock.class, NetherWartBlock.AGE);
         this.addFarmer(SeaPickleBlock.class, SeaPickleBlock.PICKLES);
-        this.addFarmer(StemBlock.class, StemBlock.AGE);
+        this.addFarmer(StemBlock.class, StemBlock.AGE, false);
+        this.addFarmer(StemGrownBlock.class);
         this.addFarmer(SugarCaneBlock.class, SugarCaneBlock.AGE);
         this.addFarmer(SweetBerryBushBlock.class, SweetBerryBushBlock.AGE);
+        this.addFarmer(BeetrootBlock.class, BeetrootBlock.BEETROOT_AGE);
     }
 
     protected void work(IVMTileMachine machine) {
@@ -58,6 +74,14 @@ public class FarmingFarmLogicModule extends AbstractFarmLogicModule {
     }
 
     private <T extends Block> void addFarmer(Class<T> clazz, IntegerProperty prop) {
-        farmers.add(new Farmer<>(clazz, state -> state.get(prop) == BlockUtils.getMaxValue(prop)));
+        this.addFarmer(clazz, prop, true);
+    }
+
+    private <T extends Block> void addFarmer(Class<T> clazz, IntegerProperty prop, boolean canBreak) {
+        farmers.add(new Farmer<>(clazz, state -> state.get(prop) == BlockUtils.getMaxValue(prop), canBreak));
+    }
+
+    private <T extends Block> void addFarmer(Class<T> clazz) {
+        farmers.add(new Farmer<>(clazz, state -> true));
     }
 }

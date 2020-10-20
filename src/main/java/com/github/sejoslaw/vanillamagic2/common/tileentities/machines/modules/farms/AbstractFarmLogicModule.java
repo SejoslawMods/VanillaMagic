@@ -23,9 +23,10 @@ import java.util.function.Predicate;
  */
 public abstract class AbstractFarmLogicModule extends AbstractSimpleMachineLogicModule {
     public boolean setup(IVMTileMachine machine) {
+        boolean flag = super.setup(machine);
         this.setupInternals("VM Farmer", () -> VMForgeConfig.FARM_SIZE.get());
         this.setWorkingPos(machine, this.getFarmStartPos(machine));
-        return super.setup(machine);
+        return flag;
     }
 
     protected void useWorld(IVMTileMachine machine, Consumer<IWorld> consumer) {

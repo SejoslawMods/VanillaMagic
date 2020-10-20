@@ -65,6 +65,10 @@ public abstract class VMGui extends Screen {
     }
 
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        if (this.minecraft == null || this.minecraft.world == null) { // TODO: Some weird Minecraft bug / crash O.o
+            return;
+        }
+
         this.renderBackground(matrixStack);
         drawCenteredString(matrixStack, this.font, TextUtils.getFormattedText(this.getTitle()), this.width / 2, 10, TEXT_COLOR);
 
