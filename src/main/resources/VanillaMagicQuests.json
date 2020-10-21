@@ -74,6 +74,57 @@
     "blocksToMine": "redstone"
   },
   {
+    "eventCaller": "craft",
+    "parent": "mineRedstone",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:book"
+    },
+    "uniqueName": "craftBook"
+  },
+  {
+    "eventCaller": "craft",
+    "parent": "craftBook",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:bookshelf"
+    },
+    "uniqueName": "craftBookshelf"
+  },
+  {
+    "eventCaller": "mineBlock",
+    "parent": "craftBookshelf",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:obsidian"
+    },
+    "uniqueName": "mineObsidian",
+    "blocksToMine": "obsidian"
+  },
+  {
+    "eventCaller": "craft",
+    "parent": "mineObsidian",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:enchanting_table"
+    },
+    "uniqueName": "craftEnchantingTable"
+  },
+  {
+    "eventCaller": "mobSpawnerDrop",
+    "parent": "craftEnchantingTable",
+    "posX": 2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:spawner"
+    },
+    "uniqueName": "mobSpawnerDropBlock"
+  },
+  {
     "eventCaller": "craftOnAltar",
     "parent": "buildAltarTier1",
     "posX": -2,
@@ -673,6 +724,28 @@
     }
   },
   {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftSlimeBall",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSugarCane",
+    "ingredients": [
+      {
+        "id": "minecraft:slime_ball",
+        "count": 8
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:sugar_cane"
+      }
+    ],
+    "altarTier": 2,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
     "eventCaller": "buildAltar",
     "parent": "buildAltarTier2",
     "posX": 0,
@@ -824,6 +897,28 @@
       {
         "id": "minecraft:carved_pumpkin",
         "count": 2
+      }
+    ],
+    "baseItem": {
+      "id": "minecraft:nether_star"
+    }
+  },
+  {
+    "eventCaller": "accelerationCrystal",
+    "parent": "motherNatureCrystal",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:nether_star"
+    },
+    "uniqueName": "accelerationCrystal",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "ingredients": [
+      {
+        "id": "minecraft:feather",
+        "count": 16
       }
     ],
     "baseItem": {
@@ -1030,6 +1125,116 @@
     }
   },
   {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftEnderPearl",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftPrismarineShard",
+    "ingredients": [
+      {
+        "id": "minecraft:ender_pearl",
+        "count": 2
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:prismarine_shard"
+      }
+    ],
+    "altarTier": 4,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftPrismarineShard",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "craftPrismarineCrystal",
+    "ingredients": [
+      {
+        "id": "minecraft:prismarine_shard",
+        "count": 32
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:prismarine_crystals"
+      }
+    ],
+    "altarTier": 4,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftPrismarineCrystal",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "craftNautilusShell",
+    "ingredients": [
+      {
+        "id": "minecraft:prismarine_crystals",
+        "count": 8
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:nautilus_shell"
+      }
+    ],
+    "altarTier": 4,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftPrismarineCrystal",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftTrident",
+    "ingredients": [
+      {
+        "id": "minecraft:prismarine_crystals",
+        "count": 64
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:trident"
+      }
+    ],
+    "altarTier": 4,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftPrismarineShard",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftPhantomMembrane",
+    "ingredients": [
+      {
+        "id": "minecraft:prismarine_shard",
+        "count": 8
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:phantom_membrane"
+      }
+    ],
+    "altarTier": 4,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
     "eventCaller": "buildAltar",
     "parent": "buildAltarTier4",
     "posX": 0,
@@ -1127,6 +1332,58 @@
     "parent": "craftSoulSand",
     "posX": -2,
     "posY": 0,
+    "uniqueName": "craftMagmaCream",
+    "ingredients": [
+      {
+        "id": "minecraft:glowstone_dust",
+        "count": 8
+      },
+      {
+        "id": "minecraft:coal",
+        "count": 8
+      },
+      {
+        "id": "minecraft:slime_ball",
+        "count": 8
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:magma_cream"
+      }
+    ],
+    "altarTier": 5,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftMagmaCream",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftBlazeRod",
+    "ingredients": [
+      {
+        "id": "minecraft:magma_cream",
+        "count": 32
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:blaze_rod"
+      }
+    ],
+    "altarTier": 5,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftBlazeRod",
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "craftMagmaBlock",
     "ingredients": [
       {
@@ -1201,6 +1458,30 @@
       },
       {
         "id": "minecraft:bucket"
+      }
+    ],
+    "altarTier": 5,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftGhastTear",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftWitherSkeletonSkull",
+    "ingredients": [
+      {
+        "id": "minecraft:coal_block"
+      },
+      {
+        "id": "minecraft:skeleton_skull"
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:wither_skeleton_skull"
       }
     ],
     "altarTier": 5,
@@ -1293,52 +1574,6 @@
     "uniqueName": "crystallizedPotion",
     "rightHandStack": {
       "id": "minecraft:blaze_rod"
-    }
-  },
-  {
-    "eventCaller": "craftOnAltar",
-    "parent": "pickupBlazeRod",
-    "posX": 2,
-    "posY": 0,
-    "uniqueName": "craftWitherSkeletonSkull",
-    "ingredients": [
-      {
-        "id": "minecraft:coal_block"
-      },
-      {
-        "id": "minecraft:skeleton_skull"
-      }
-    ],
-    "results": [
-      {
-        "id": "minecraft:wither_skeleton_skull"
-      }
-    ],
-    "altarTier": 5,
-    "rightHandStack": {
-      "id": "minecraft:blaze_rod"
-    }
-  },
-  {
-    "eventCaller": "accelerationCrystal",
-    "parent": "craftWitherSkeletonSkull",
-    "posX": 2,
-    "posY": 0,
-    "icon": {
-      "id": "minecraft:nether_star"
-    },
-    "uniqueName": "accelerationCrystal",
-    "rightHandStack": {
-      "id": "minecraft:nether_star"
-    },
-    "ingredients": [
-      {
-        "id": "minecraft:feather",
-        "count": 16
-      }
-    ],
-    "baseItem": {
-      "id": "minecraft:nether_star"
     }
   },
   {
@@ -1688,57 +1923,6 @@
     "rightHandStack": {
       "id": "minecraft:blaze_rod"
     }
-  },
-  {
-    "eventCaller": "craft",
-    "parent": "craftStick",
-    "posX": 2,
-    "posY": 0,
-    "icon": {
-      "id": "minecraft:book"
-    },
-    "uniqueName": "craftBook"
-  },
-  {
-    "eventCaller": "craft",
-    "parent": "craftBook",
-    "posX": 2,
-    "posY": 0,
-    "icon": {
-      "id": "minecraft:bookshelf"
-    },
-    "uniqueName": "craftBookshelf"
-  },
-  {
-    "eventCaller": "mineBlock",
-    "parent": "craftBookshelf",
-    "posX": 0,
-    "posY": 2,
-    "icon": {
-      "id": "minecraft:obsidian"
-    },
-    "uniqueName": "mineObsidian",
-    "blocksToMine": "obsidian"
-  },
-  {
-    "eventCaller": "mobSpawnerDrop",
-    "parent": "mineObsidian",
-    "posX": 2,
-    "posY": 0,
-    "icon": {
-      "id": "minecraft:spawner"
-    },
-    "uniqueName": "mobSpawnerDropBlock"
-  },
-  {
-    "eventCaller": "craft",
-    "parent": "craftBookshelf",
-    "posX": 2,
-    "posY": 0,
-    "icon": {
-      "id": "minecraft:enchanting_table"
-    },
-    "uniqueName": "craftEnchantingTable"
   },
   {
     "eventCaller": "castSpellInAir",
