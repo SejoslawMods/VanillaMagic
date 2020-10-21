@@ -746,6 +746,28 @@
     }
   },
   {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftSugarCane",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftHoneycomb",
+    "ingredients": [
+      {
+        "id": "minecraft:sugar",
+        "count": 16
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:honeycomb"
+      }
+    ],
+    "altarTier": 2,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
     "eventCaller": "buildAltar",
     "parent": "buildAltarTier2",
     "posX": 0,
