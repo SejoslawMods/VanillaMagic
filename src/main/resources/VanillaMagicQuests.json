@@ -105,6 +105,28 @@
     "blocksToMine": "obsidian"
   },
   {
+    "eventCaller": "craftOnAltar",
+    "parent": "mineObsidian",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "craftCryingObsidian",
+    "ingredients": [
+      {
+        "id": "minecraft:obsidian",
+        "count": 8
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:crying_obsidian"
+      }
+    ],
+    "altarTier": 1,
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    }
+  },
+  {
     "eventCaller": "craft",
     "parent": "mineObsidian",
     "posX": 2,
@@ -1329,6 +1351,31 @@
     "parent": "craftNetherrack",
     "posX": -2,
     "posY": 0,
+    "uniqueName": "craftBasalt",
+    "ingredients": [
+      {
+        "id": "minecraft:stone",
+        "count": 2
+      },
+      {
+        "id": "minecraft:netherrack"
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:basalt"
+      }
+    ],
+    "altarTier": 5,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftBasalt",
+    "posX": -2,
+    "posY": 0,
     "uniqueName": "craftSoulSand",
     "ingredients": [
       {
@@ -1352,6 +1399,28 @@
   {
     "eventCaller": "craftOnAltar",
     "parent": "craftSoulSand",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "craftSoulSoil",
+    "ingredients": [
+      {
+        "id": "minecraft:soul_sand",
+        "count": 4
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:soul_soil"
+      }
+    ],
+    "altarTier": 5,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftSoulSoil",
     "posX": -2,
     "posY": 0,
     "uniqueName": "craftMagmaCream",
