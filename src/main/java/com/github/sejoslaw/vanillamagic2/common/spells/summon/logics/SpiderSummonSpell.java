@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic2.common.spells.summon.SpellSummonEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.monster.CaveSpiderEntity;
 import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.world.IWorld;
 
@@ -20,9 +19,9 @@ public class SpiderSummonSpell extends SpellSummonEntity<SpiderEntity> {
 
     protected void fillEntitiesToSpawn(IWorld world, List<Entity> entities) {
         if (this.getPercent() < 70) {
-            entities.add(new SpiderEntity(EntityType.SPIDER, WorldUtils.asWorld(world)));
+            entities.add(EntityType.SPIDER.create(WorldUtils.asWorld(world)));
         } else if (this.getPercent() < 90) {
-            entities.add(new CaveSpiderEntity(EntityType.CAVE_SPIDER, WorldUtils.asWorld(world)));
+            entities.add(EntityType.CAVE_SPIDER.create(WorldUtils.asWorld(world)));
         } else {
             Entity spiderEntity = EntityType.SPIDER.create(WorldUtils.asWorld(world));
             Entity skeletonEntity = EntityType.SKELETON.create(WorldUtils.asWorld(world));

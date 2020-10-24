@@ -4,7 +4,6 @@ import com.github.sejoslaw.vanillamagic2.common.spells.summon.SpellSummonEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.monster.ElderGuardianEntity;
 import net.minecraft.entity.monster.GuardianEntity;
 import net.minecraft.world.IWorld;
 
@@ -20,9 +19,9 @@ public class GuardianSummonSpell extends SpellSummonEntity<GuardianEntity> {
 
     protected void fillEntitiesToSpawn(IWorld world, List<Entity> entities) {
         if (this.getPercent() < 30) {
-            entities.add(new ElderGuardianEntity(EntityType.ELDER_GUARDIAN, WorldUtils.asWorld(world)));
+            entities.add(EntityType.ELDER_GUARDIAN.create(WorldUtils.asWorld(world)));
         } else {
-            entities.add(new GuardianEntity(EntityType.GUARDIAN, WorldUtils.asWorld(world)));
+            entities.add(EntityType.GUARDIAN.create(WorldUtils.asWorld(world)));
         }
     }
 }
