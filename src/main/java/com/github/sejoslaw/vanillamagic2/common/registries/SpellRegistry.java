@@ -39,7 +39,7 @@ public final class SpellRegistry {
 
         for (Map.Entry<RegistryKey<EntityType<?>>, EntityType<?>> entry : ForgeRegistries.ENTITIES.getEntries()) {
             String spellUniqueName = "spellSummon_" + entry.getKey().getLocation().toString();
-            SPELLS.put(spellUniqueName, new SpellSummonEntity(entry.getValue()));
+            SPELLS.put(spellUniqueName, SpellSummonEntity.register(entry.getValue()));
         }
     }
 }

@@ -14,7 +14,7 @@ public final class VMRegistries {
         EvokerSpellRegistry.initialize();
         ItemUpgradeRegistry.initialize();
         ItemTierRegistry.initialize();
-        SummonEntityLogicRegistry.initialize();
+        SpellSummonEntityRegistry.initialize();
         SpellRegistry.initialize();
         QuestRegistry.initialize();
         VMNetworkRegistry.initialize();

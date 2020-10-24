@@ -2625,6 +2625,20 @@
   },
   {
     "eventCaller": "castSpellSummon",
+    "parent": "spellSummon_minecraft:stray",
+    "posX": -2,
+    "posY": 0,
+    "uniqueName": "spellSummon_minecraft:guardian",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:cod",
+      "count": 48
+    }
+  },
+  {
+    "eventCaller": "castSpellSummon",
     "parent": "spellSummon_minecraft:zombie",
     "posX": 0,
     "posY": -2,
