@@ -9,6 +9,7 @@ import com.github.sejoslaw.vanillamagic2.common.utils.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
@@ -75,5 +76,9 @@ public abstract class AbstractFarmLogicModule extends AbstractSimpleMachineLogic
                 this.useSpace(machine, pos -> check.apply(world, stack, pos), pos -> {
                     consumer.accept(world, stack, pos);
                 })));
+    }
+
+    protected boolean isHoe(ItemStack stack) {
+        return stack.getItem() instanceof HoeItem;
     }
 }

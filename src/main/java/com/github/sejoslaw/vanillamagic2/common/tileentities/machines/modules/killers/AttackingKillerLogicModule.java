@@ -18,7 +18,7 @@ public class AttackingKillerLogicModule extends AbstractKillerLogicModule {
             this.getEntities(machine, LivingEntity.class, entity -> !(entity instanceof PlayerEntity))
                     .forEach(livingEntity -> {
                         livingEntity.attackEntityFrom(DamageSource.GENERIC, this.getAttackDamage(stack));
-                        stack.attemptDamageItem(1, livingEntity.world.rand, this.getFakePlayer(machine.getWorld()));
+                        stack.damageItem(1, this.getFakePlayer(machine.getWorld()), fakePlayer -> { });
                     });
         });
     }

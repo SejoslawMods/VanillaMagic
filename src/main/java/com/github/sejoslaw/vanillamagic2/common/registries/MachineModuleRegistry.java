@@ -38,6 +38,8 @@ public final class MachineModuleRegistry {
         registerModule(FARM_KEY, new TreeCuttingFarmLogicModule());
         registerModule(FARM_KEY, new FarmingFarmLogicModule());
         registerModule(FARM_KEY, new ItemCollectingFarmLogicModule());
+        registerModule(FARM_KEY, new HoeFindingFarmLogicModule());
+        registerModule(FARM_KEY, new SoilShapingFarmLogicModule());
 
         // Killer
         registerModule(KILLER_KEY, new SwordFindingKillerLogicModule());
