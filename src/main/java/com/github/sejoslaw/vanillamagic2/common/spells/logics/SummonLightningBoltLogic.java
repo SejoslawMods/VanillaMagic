@@ -19,7 +19,7 @@ public class SummonLightningBoltLogic extends EntitySpellLogic {
         if (result.getType() == RayTraceResult.Type.BLOCK) {
             BlockPos pos = ((BlockRayTraceResult) result).getPos();
 
-            LightningBoltEntity entity = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, WorldUtils.asWorld(world));
+            LightningBoltEntity entity = EntityType.LIGHTNING_BOLT.create(WorldUtils.asWorld(world));
             entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
 
             EntityUtils.spawnLightningBolt(world, entity);

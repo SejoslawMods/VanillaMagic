@@ -18,7 +18,7 @@ public class ItemUpgradeEventCallerThor extends ItemUpgradeEventCaller {
                 (player, world, entity) -> this.getQuest(player),
                 (player, world, entity, quest) ->
                         this.execute(player, () -> {
-                            LightningBoltEntity lightningBoltEntity = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, WorldUtils.asWorld(world));
+                            LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(WorldUtils.asWorld(world));
                             lightningBoltEntity.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
                             EntityUtils.spawnLightningBolt(world, lightningBoltEntity);
                         }));
