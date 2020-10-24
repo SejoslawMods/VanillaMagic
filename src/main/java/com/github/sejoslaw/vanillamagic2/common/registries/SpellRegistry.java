@@ -23,6 +23,7 @@ public final class SpellRegistry {
         SPELLS.put("spellFlintAndSteel", new SpellLighter());
         SPELLS.put("spellSmallFireball", new SpellSmallFireball());
         SPELLS.put("spellLargeFireball", new SpellLargeFireball());
+        SPELLS.put("spellDragonFireball", new SpellDragonFireball());
         SPELLS.put("spellTeleport", new SpellTeleport());
         SPELLS.put("spellSummonMeteor", new SpellSummonMeteor());
         SPELLS.put("spellSummonLightningBolt", new SpellSummonLightningBolt());

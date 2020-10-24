@@ -2042,6 +2042,19 @@
     }
   },
   {
+    "eventCaller": "castSpellInAir",
+    "parent": "spellFusRoDah",
+    "posX": 0,
+    "posY": -2,
+    "uniqueName": "spellDragonFireball",
+    "rightHandStack": {
+      "id": "minecraft:nether_star"
+    },
+    "leftHandStack": {
+      "id": "minecraft:dragon_breath"
+    }
+  },
+  {
     "eventCaller": "castSpellSummon",
     "parent": "spellSmallFireball",
     "posX": -2,

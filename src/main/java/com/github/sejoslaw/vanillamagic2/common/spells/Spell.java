@@ -30,8 +30,13 @@ public abstract class Spell {
 
         DamagingProjectileEntity projectileEntity = projectileFactory.apply(accelX, accelY, accelZ);
 
-        projectileEntity.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), player.rotationYaw, player.rotationPitch);
-        projectileEntity.setPosition(projectileEntity.getPosX(), projectileEntity.getPosY(), projectileEntity.getPosZ());
+        projectileEntity.setLocationAndAngles(
+                player.getPosX() + accelX,
+                player.getPosY() + accelY + 1.5D,
+                player.getPosZ() + accelZ,
+                player.rotationYaw,
+                player.rotationPitch);
+
         projectileEntity.setMotion(Vector3d.ZERO);
         EntityUtils.setupAcceleration(projectileEntity, accelX, accelY, accelZ);
 
