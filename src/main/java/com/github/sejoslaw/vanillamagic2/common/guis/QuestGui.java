@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.util.List;
@@ -156,16 +155,14 @@ public class QuestGui extends VMGui {
         this.addOptionButton("vm.gui.questGui.enableQuestNames", "vm.gui.questGui.disableQuestNames", "vm.gui.questGui.disableQuestNames", () -> this.showQuestNames, button -> this.showQuestNames = !this.showQuestNames);
         this.addOptionButton("vm.gui.questGui.showAllQuests", "vm.gui.questGui.hideLockedQuests", "vm.gui.questGui.showAllQuests", () -> this.showAllQuests, button -> this.showAllQuests = !this.showAllQuests);
         this.addOptionButton("vm.gui.questGui.enableQuestTooltip", "vm.gui.questGui.disableQuestTooltip", "vm.gui.questGui.disableQuestTooltip", () -> this.showQuestTooltip, button -> this.showQuestTooltip = !this.showQuestTooltip);
-
-        GLFW.glfwSetScrollCallback(Minecraft.getInstance().getMainWindow().getHandle(), this::scroll);
     }
 
     public void removed() {
         this.rootNode.clear();
     }
 
-    public void scroll(long window, double offsetX, double offsetY) {
-        this.zoom += offsetY > 0 ? 1 : -1;
+    public void scroll(double scroll) {
+        this.zoom += scroll > 0 ? 1 : -1;
     }
 
     protected void renderInnerGui(int mouseX, int mouseY, float partialTicks) {

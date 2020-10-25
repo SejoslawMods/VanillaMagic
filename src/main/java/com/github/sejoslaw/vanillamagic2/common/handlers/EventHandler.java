@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.functions.Consumer3;
 import com.github.sejoslaw.vanillamagic2.common.functions.Consumer4;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -18,6 +19,10 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -95,5 +100,16 @@ public abstract class EventHandler {
         Direction face = event.getFace();
 
         consumer.accept(player, world, pos, face);
+    }
+
+    public void onKeyPressed(InputEvent.KeyInputEvent event,
+                             Consumer4<Integer, Integer, Integer, Integer> consumer) {
+        consumer.accept(event.getKey(), event.getScanCode(), event.getAction(), event.getModifiers());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void onScroll(GuiScreenEvent.MouseScrollEvent.Pre event,
+                         Consumer4<Screen, Double, Double, Double> consumer) {
+        consumer.accept(event.getGui(), event.getMouseX(), event.getMouseY(), event.getScrollDelta());
     }
 }

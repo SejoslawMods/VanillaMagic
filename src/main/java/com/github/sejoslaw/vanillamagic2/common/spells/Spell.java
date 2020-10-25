@@ -32,8 +32,13 @@ public abstract class Spell {
 
         projectileEntity.shootingEntity = player;
 
-        projectileEntity.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), player.rotationYaw, player.rotationPitch);
-        projectileEntity.setPosition(projectileEntity.getPosX(), projectileEntity.getPosY(), projectileEntity.getPosZ());
+        projectileEntity.setLocationAndAngles(
+                player.getPosX() + accelX,
+                player.getPosY() + accelY + 1.5D,
+                player.getPosZ() + accelZ,
+                player.rotationYaw,
+                player.rotationPitch);
+
         projectileEntity.setMotion(Vec3d.ZERO);
 
         double distance = MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
