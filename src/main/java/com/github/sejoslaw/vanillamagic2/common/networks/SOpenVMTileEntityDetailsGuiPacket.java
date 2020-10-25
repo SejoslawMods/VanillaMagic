@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.networks;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.common.utils.GuiUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.client.network.play.IClientPlayNetHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -46,7 +47,8 @@ public class SOpenVMTileEntityDetailsGuiPacket extends SVMPacket {
         this.lines = new ArrayList<>();
 
         for (int i = 0; i < linesCount; ++i) {
-            this.lines.add(buf.readTextComponent());
+            String comp = buf.readTextComponent().getString();
+            this.lines.add(TextUtils.parseServerSideMessage(comp));
         }
     }
 
