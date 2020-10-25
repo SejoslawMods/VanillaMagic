@@ -26,7 +26,7 @@ public class EventCallerInventoryBridge extends EventCallerVMItem<QuestInventory
                         VMItemInventorySelector.setPosition(handStack, pos.toLong(), WorldUtils.getId(world).toString());
                         TextUtils.addChatMessage("tile.inventorySelector.added");
                     } else {
-                        WorldUtils.spawnVMTile(world, pos.offset(Direction.UP), new VMTileInventoryBridge(), (tile) -> tile.setSource(nbt));
+                        WorldUtils.spawnVMTile(player, world, pos.offset(Direction.UP), new VMTileInventoryBridge(), (tile) -> tile.setSource(nbt));
                         TextUtils.addChatMessage("tile.inventorySelector.placed");
                     }
                 }));

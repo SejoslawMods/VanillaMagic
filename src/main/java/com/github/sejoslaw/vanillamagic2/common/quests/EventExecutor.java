@@ -287,7 +287,7 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
     public void addVMTileMachine(PlayerInteractEvent.RightClickBlock event, String moduleKey) {
         this.onPlayerInteract(event,
                 (player, world, pos, direction) -> this.click(Blocks.CAULDRON, world, pos, () -> this.caller.quests.get(0)),
-                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(world, pos, new VMTileMachine(),
+                (player, world, pos, direction, quest) -> WorldUtils.spawnVMTile(player, world, pos, new VMTileMachine(),
                         (tile) -> tile.setModuleKey(moduleKey)));
     }
 

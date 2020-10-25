@@ -52,6 +52,6 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
     }
 
     public void addInformation(List<ITextComponent> lines) {
-        TextUtils.addLine(lines, "vm.tooltip.tile.machine.type", TextUtils.firstLetterToUpper(this.moduleKey));
+        TextUtils.addLine(lines, "vm.tooltip.tile.machine.type", TextUtils.getFormattedText("quest." + this.moduleKey));
     }
 }

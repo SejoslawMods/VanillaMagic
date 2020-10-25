@@ -33,7 +33,7 @@ public class EventCallerLiquidSuppressionCrystal extends EventCallerVMItem<Quest
                                 BlockState state = world.getBlockState(blockPos);
 
                                 if (state.getMaterial().isLiquid() && (world.getTileEntity(blockPos) == null)) {
-                                    WorldUtils.spawnVMTile(world, blockPos, new VMTileLiquidSuppressor(), (tile) -> {
+                                    WorldUtils.spawnVMTile(player, world, blockPos, new VMTileLiquidSuppressor(), (tile) -> {
                                         tile.initialize(state, refresh);
                                         world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 1 | 2);
                                         return true;

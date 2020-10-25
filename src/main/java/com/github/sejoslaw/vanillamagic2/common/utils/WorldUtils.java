@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -96,7 +97,7 @@ public final class WorldUtils {
         TileEntityType<?> tileEntityType = ForgeRegistries.TILE_ENTITIES.getValue(tileResourceLocation);
         IVMTileEntity tile = (IVMTileEntity) tileEntityType.create();
 
-        WorldUtils.spawnVMTile(world, tile.getPos(), tile, (vmTile) -> {
+        WorldUtils.spawnVMTile(null, world, tile.getPos(), tile, (vmTile) -> {
             vmTile.getTileEntity().read(vmTile.getState(), tileNbt);
             return true;
         });
@@ -107,16 +108,22 @@ public final class WorldUtils {
     /**
      * Spawns VM TileEntity into the specified IWorld on the given BlockPos.
      */
-    public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(IWorld world, BlockPos pos, TVMTileEntity tile, Predicate<TVMTileEntity> check) {
+    public static <TVMTileEntity extends IVMTileEntity> void spawnVMTile(PlayerEntity player, IWorld world, BlockPos pos, TVMTileEntity tile, Predicate<TVMTileEntity> check) {
         if (WorldUtils.getIsRemote(world) || WorldUtils.getTickableTileEntities(world).stream().anyMatch(tileEntity -> tileEntity.getPos().equals(pos))) {
             return;
         }
 
         tile.initialize(world, pos);
 
-        if (check.test(tile)) {
-            tile.spawn();
+        if (!check.test(tile)) {
+            return;
         }
+
+        if (player != null) {
+            tile.getTileData().putString(NbtUtils.NBT_MACHINE_PLACED_BY, player.getGameProfile().getName());
+        }
+
+        tile.spawn();
     }
 
     /**

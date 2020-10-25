@@ -235,6 +235,9 @@
   "quest.breeder": "Breeder",
   "quest.breeder.desc": "Put any breeding item into inventory. It will operate on area of 8x8 blocks.",
 
+  "quest.playerInventoryAbsorber": "Player Inventory Absorber",
+  "quest.playerInventoryAbsorber.desc": "Absorbs any item from Player's main Inventory and places it in the connected Inventory. (Redstone controlled.)",
+
   "quest.arrowMachineGun": "Arrow Machine Gun",
   "quest.arrowMachineGun.desc": "Take any Arrow and Right-click (or hold).",
 

@@ -880,6 +880,22 @@
     }
   },
   {
+    "eventCaller": "playerInventoryAbsorber",
+    "parent": "breeder",
+    "posX": -2,
+    "posY": 0,
+    "icon": {
+      "id": "minecraft:cauldron"
+    },
+    "uniqueName": "playerInventoryAbsorber",
+    "rightHandStack": {
+      "id": "minecraft:stick"
+    },
+    "leftHandStack": {
+      "id": "minecraft:chest"
+    }
+  },
+  {
     "eventCaller": "fullTreeCut",
     "parent": "quarry",
     "posX": -2,

@@ -32,6 +32,7 @@ public final class NbtUtils {
     public static final String NBT_SPELL_ID = "NBT_SPELL_ID";
     public static final String NBT_TICKS = "NBT_TICKS";
     public static final String NBT_MACHINE_MODULE_KEY = "NBT_MACHINE_MODULE_KEY";
+    public static final String NBT_MACHINE_PLACED_BY = "NBT_MACHINE_PLACED_BY";
 
     public static final String NBT_MODULE_START_POS = "NBT_MODULE_START_POS";
     public static final String NBT_MODULE_WORKING_POS = "NBT_MODULE_WORKING_POS";

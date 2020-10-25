@@ -8,14 +8,12 @@ import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
@@ -51,18 +49,11 @@ public final class EntityUtils {
      * Teleports Entity to the specified location.
      */
     public static void teleport(Entity entity, BlockPos newPos, RegistryKey<World> key) {
-        World world = entity.getEntityWorld();
-        MinecraftServer server = world.getServer();
-
-        if (server == null) {
-            return;
-        }
-
-        ServerWorld serverWorld = world.getServer().getWorld(key);
-
-        if (serverWorld != null && entity instanceof ServerPlayerEntity) {
-            ((ServerPlayerEntity) entity).teleport(serverWorld, newPos.getX(), newPos.getY(), newPos.getZ(), ((ServerPlayerEntity) entity).cameraYaw, entity.rotationPitch);
-        }
+        WorldUtils.forServer(entity.getEntityWorld(), serverWorld -> {
+            if (entity instanceof ServerPlayerEntity) {
+                ((ServerPlayerEntity) entity).teleport(serverWorld.getWorld().getServer().getWorld(key), newPos.getX(), newPos.getY(), newPos.getZ(), ((ServerPlayerEntity) entity).cameraYaw, entity.rotationPitch);
+            }
+        });
     }
 
     /**

@@ -22,6 +22,7 @@ public final class MachineModuleRegistry {
     public static final String FARM_KEY = "farm";
     public static final String KILLER_KEY = "killer";
     public static final String BREEDER_KEY = "breeder";
+    public static final String PLAYER_INVENTORY_ABSORBER_KEY = "playerInventoryAbsorber";
 
     public static void initialize() {
         DEFAULT_MODULES.add(new SmeltableTicksEnergyModule());
@@ -48,6 +49,9 @@ public final class MachineModuleRegistry {
         // Breeder
         registerModule(BREEDER_KEY, new FindingBreederLogicModule());
         registerModule(BREEDER_KEY, new UsingItemBreederLogicModule());
+
+        // Player Inventory Absorber
+        registerModule(PLAYER_INVENTORY_ABSORBER_KEY, new PlayerInventoryAbsorberLogicModule());
     }
 
     private static void registerModule(String key, IMachineModule module) {
