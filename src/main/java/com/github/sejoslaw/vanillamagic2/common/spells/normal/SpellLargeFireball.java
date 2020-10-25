@@ -13,7 +13,6 @@ import net.minecraft.world.IWorld;
  */
 public class SpellLargeFireball extends Spell {
     public void cast(PlayerEntity player, IWorld world, BlockPos pos, Direction face) {
-        this.shootEntitySpell(world, player, (accelX, accelY, accelZ) ->
-                new FireballEntity(WorldUtils.asWorld(world), player.getPosX() + accelX, player.getPosY() + 1.5D + accelY, player.getPosZ() + accelZ, accelX, accelY, accelZ));
+        this.shootEntitySpell(world, player, (accelX, accelY, accelZ) -> new FireballEntity(WorldUtils.asWorld(world), player, accelX, accelY, accelZ));
     }
 }
