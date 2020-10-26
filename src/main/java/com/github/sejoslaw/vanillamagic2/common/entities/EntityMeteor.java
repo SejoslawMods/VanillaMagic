@@ -20,7 +20,6 @@ public class EntityMeteor extends FireballEntity {
 
     public void setupMeteor(double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ, double accelX, double accelY, double accelZ) {
         this.setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
-        this.setPosition(spawnMeteorX, spawnMeteorY, spawnMeteorZ);
         this.setMotion(Vector3d.ZERO);
         EntityUtils.setupAcceleration(this, accelX, accelY, accelZ);
     }
