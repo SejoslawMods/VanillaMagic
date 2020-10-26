@@ -1979,6 +1979,28 @@
     }
   },
   {
+    "eventCaller": "craftOnAltar",
+    "parent": "craftAncientDebris",
+    "posX": 2,
+    "posY": 0,
+    "uniqueName": "craftLodestone",
+    "ingredients": [
+      {
+        "id": "minecraft:ancient_debris",
+        "count": 2
+      }
+    ],
+    "results": [
+      {
+        "id": "minecraft:lodestone"
+      }
+    ],
+    "altarTier": 7,
+    "rightHandStack": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  {
     "eventCaller": "itemMagnet",
     "parent": "craftNetherStar",
     "posX": 0,
