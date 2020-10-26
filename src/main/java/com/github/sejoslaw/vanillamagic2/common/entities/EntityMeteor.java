@@ -25,7 +25,7 @@ public class EntityMeteor extends FireballEntity {
         EntityUtils.setupAcceleration(this, accelX, accelY, accelZ);
     }
 
-    public ItemStack getItem() {
+    protected ItemStack getStack() {
         return new ItemStack(Items.FIRE_CHARGE);
     }
 

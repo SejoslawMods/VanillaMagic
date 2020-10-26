@@ -2,7 +2,6 @@ package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
 
 import com.github.sejoslaw.vanillamagic2.common.handlers.EventHandler;
 import com.github.sejoslaw.vanillamagic2.common.registries.EntityRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -18,8 +17,8 @@ public class RenderingHandler extends EventHandler {
 
     public static void registerEntityRenderers(FMLClientSetupEvent event) {
         INSTANCE.registerRenderers(event, minecraft -> {
-            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.SPELL.get(), manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer()));
-            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.METEOR.get(), manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer(), 8.0F, true));
+            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.SPELL.get(), manager -> new SpriteRenderer<>(manager, minecraft.getItemRenderer()));
+            RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.METEOR.get(), manager -> new SpriteRenderer<>(manager, minecraft.getItemRenderer(), 8.0F, true));
         });
     }
 }
