@@ -13,6 +13,9 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+/**
+ * @author Sejoslaw - https://github.com/Sejoslaw
+ */
 public class EntityMeteor extends FireballEntity {
     public EntityMeteor(EntityType<? extends EntityMeteor> entityType, World world) {
         super(entityType, world);
