@@ -23,7 +23,7 @@ public class SpellTeleportToEnd extends Spell {
             return;
         }
 
-        if (player.getEntityWorld().getDimensionKey() == World.OVERWORLD) {
+        if (player.getEntityWorld().getDimensionKey().getLocation().toString().equals(World.OVERWORLD.getLocation().toString())) {
             ServerWorld serverWorld = WorldUtils.asWorld(world).getServer().getWorld(World.THE_END);
             player.changeDimension(serverWorld);
         } else {
