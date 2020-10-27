@@ -15,6 +15,6 @@ import net.minecraft.world.IWorld;
  */
 public class SpellSummonMeteor extends Spell {
     public void cast(PlayerEntity player, IWorld world, BlockPos pos, Direction face) {
-        this.shootEntitySpell(world, player, (accelX, accelY, accelZ) -> new EntitySpell(EntityRegistry.SPELL.get(), WorldUtils.asWorld(world)).withLogic(new SummonMeteorLogic()).withPlayer(player));
+        this.shootEntitySpell(world, player, (accelX, accelY, accelZ) -> new EntitySpell(EntityRegistry.SPELL.get(), WorldUtils.asWorld(world)).withLogic(new SummonMeteorLogic()).withShooter(player));
     }
 }

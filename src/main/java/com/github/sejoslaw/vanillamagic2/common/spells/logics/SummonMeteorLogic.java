@@ -16,12 +16,13 @@ public class SummonMeteorLogic extends EntitySpellLogic {
     public void execute(EntitySpell entitySpell, IWorld world, RayTraceResult result) {
         BlockPos hitPos = this.getBlockPos(entitySpell, result);
 
-        if (hitPos == entitySpell.player.getPosition()) {
+        if (hitPos == entitySpell.func_234616_v_().getPosition()) {
             return;
         }
 
         EntityMeteor meteor = new EntityMeteor(EntityRegistry.METEOR.get(), WorldUtils.asWorld(world));
         meteor.setupMeteor(hitPos.getX(), 300, hitPos.getZ(), 0, -VMForgeConfig.METEOR_ACCELERATION.get(), 0);
+        meteor.setShooter(entitySpell.func_234616_v_());
 
         world.addEntity(meteor);
     }

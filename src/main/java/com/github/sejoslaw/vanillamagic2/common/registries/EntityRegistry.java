@@ -33,8 +33,8 @@ public final class EntityRegistry {
         return EntityType.Builder
                 .create(factory, EntityClassification.MISC)
                 .setShouldReceiveVelocityUpdates(true)
-                .setTrackingRange(50)
-                .setUpdateInterval(60)
+                .setTrackingRange(500)
+                .setUpdateInterval(600)
                 .size(1.0F, 1.0F)
                 .build(new ResourceLocation(VanillaMagic.MODID, registryName).toString());
     }

@@ -11,6 +11,6 @@ import net.minecraft.world.IWorld;
  */
 public class TeleportLogic extends EntitySpellLogic {
     public void execute(EntitySpell entitySpell, IWorld world, RayTraceResult result) {
-        EntityUtils.teleport(entitySpell.player, this.getBlockPos(entitySpell, result), WorldUtils.asWorld(world).getDimensionKey());
+        EntityUtils.teleport(entitySpell.func_234616_v_(), this.getBlockPos(entitySpell, result), WorldUtils.asWorld(world).getDimensionKey());
     }
 }

@@ -17,7 +17,7 @@ public abstract class EntitySpellLogic {
         } else if (result.getType() == RayTraceResult.Type.ENTITY) {
             return ((EntityRayTraceResult) result).getEntity().getPosition();
         } else {
-            return entitySpell.player.getPosition();
+            return entitySpell.func_234616_v_().getPosition();
         }
     }
 
