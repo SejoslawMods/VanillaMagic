@@ -67,7 +67,7 @@ public final class NbtUtils {
         String dimId = nbt.getString(NBT_DIMENSION);
         return StreamSupport
                 .stream(server.getWorlds().spliterator(), false)
-                .filter(world -> world.getDimensionKey().getRegistryName().equals(dimId))
+                .filter(world -> world.getDimensionKey().getLocation().toString().equals(dimId))
                 .findFirst()
                 .orElse(null);
     }

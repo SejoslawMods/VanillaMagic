@@ -51,6 +51,7 @@ public final class EntityUtils {
     public static void teleport(Entity entity, BlockPos newPos, RegistryKey<World> key) {
         WorldUtils.forServer(entity.getEntityWorld(), serverWorld -> {
             if (entity instanceof ServerPlayerEntity) {
+                entity.fallDistance = 0;
                 ((ServerPlayerEntity) entity).teleport(serverWorld.getWorld().getServer().getWorld(key), newPos.getX(), newPos.getY(), newPos.getZ(), ((ServerPlayerEntity) entity).cameraYaw, entity.rotationPitch);
             }
         });

@@ -30,7 +30,7 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
                     BlockPos savePos = pos.offset(direction);
 
                     ItemStack stack = new ItemStack(Items.BOOK);
-                    stack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.jumper.bookTitle"), TextUtils.getPosition(world, savePos)));
+                    stack.setDisplayName(TextUtils.combine(TextUtils.translate("quest.jumper.bookTitle"), " " + TextUtils.getPosition(world, savePos)));
                     stack.getOrCreateTag().put(NbtUtils.NBT_POSITION, NbtUtils.toNbt(world, savePos));
 
                     player.setHeldItem(Hand.OFF_HAND, stack);
