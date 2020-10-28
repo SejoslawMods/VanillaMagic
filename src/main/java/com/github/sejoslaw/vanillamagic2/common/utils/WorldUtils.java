@@ -223,8 +223,15 @@ public final class WorldUtils {
     /**
      * @return True if the Worlds are equal; otherwise false;
      */
-    public static boolean areWorldsEqual(IWorld world, RegistryKey<World> key2) {
-        return getIdName(world).toString().equals(key2.getLocation().toString());
+    public static boolean areWorldsEqual(IWorld world, RegistryKey<World> key) {
+        return areWorldsEqual(world, key.getLocation().toString());
+    }
+
+    /**
+     * @return True if the Worlds are equal; otherwise false;
+     */
+    public static boolean areWorldsEqual(IWorld world, String key2) {
+        return getIdName(world).toString().equals(key2);
     }
 
     /**

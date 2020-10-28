@@ -1,5 +1,6 @@
 package com.github.sejoslaw.vanillamagic2.common.explosions;
 
+import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -218,8 +218,7 @@ public class VMExplosion extends Explosion {
                     Block block = state.getBlock();
 
                     if ((this.power >= 20.0F) || ((doDrops) && (block.canDropFromExplosion(this)) && (getAtIndex(index, bitSet, 2) == 1))) {
-                        RegistryKey<World> key = this.world.getDimensionKey();
-                        ServerWorld serverWorld = this.world.getServer().getWorld(key);
+                        ServerWorld serverWorld = WorldUtils.getServerWorld(this.world, this.world.getDimensionKey());
                         List<ItemStack> drops = state.getBlock().getDrops(state, serverWorld, tmpPos, null);
 
                         for (ItemStack stack : drops) {
