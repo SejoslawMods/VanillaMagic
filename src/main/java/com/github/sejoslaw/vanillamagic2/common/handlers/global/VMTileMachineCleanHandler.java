@@ -12,11 +12,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class VMTileMachineCleanHandler extends EventHandler {
     @SubscribeEvent
     public void cleanMachines(BlockEvent.BreakEvent event) {
-        this.onBlockBreak(event, (player, world, pos, state) -> {
-            WorldUtils.asWorld(world).tickableTileEntities
-                    .stream()
-                    .filter(tile -> tile instanceof IVMTileMachine && tile.getPos().equals(pos))
-                    .forEach(tile -> ((IVMTileMachine) tile).removeTileEntity());
-        });
+        this.onBlockBreak(event, (player, world, pos, state) ->
+                WorldUtils.getTickableTileEntities(world)
+                        .stream()
+                        .filter(tile -> tile instanceof IVMTileMachine && tile.getPos().equals(pos))
+                        .forEach(tile -> ((IVMTileMachine) tile).removeTileEntity()));
     }
 }

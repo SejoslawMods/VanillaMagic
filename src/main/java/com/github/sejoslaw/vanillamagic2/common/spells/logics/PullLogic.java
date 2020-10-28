@@ -13,7 +13,7 @@ import net.minecraft.world.IWorld;
 public class PullLogic extends EntitySpellLogic {
     public void execute(EntitySpell entitySpell, IWorld world, RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
-            EntityUtils.teleport(((EntityRayTraceResult) result).getEntity(), entitySpell.func_234616_v_().getPosition(), WorldUtils.asWorld(world).getDimensionKey());
+            EntityUtils.teleport(((EntityRayTraceResult) result).getEntity(), entitySpell.func_234616_v_().getPosition(), WorldUtils.getId(world));
         }
     }
 }

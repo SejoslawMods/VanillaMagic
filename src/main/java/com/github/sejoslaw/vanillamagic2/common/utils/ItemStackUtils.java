@@ -118,7 +118,7 @@ public final class ItemStackUtils {
      * @return Experience value from the given ItemStack.
      */
     public static float getExperienceFromStack(ItemStack stack, IWorld world) {
-        AbstractCookingRecipe cookingRecipe = (AbstractCookingRecipe) WorldUtils.asWorld(world).getRecipeManager().getRecipes()
+        AbstractCookingRecipe cookingRecipe = (AbstractCookingRecipe) WorldUtils.getRecipes(world)
                 .stream()
                 .filter(recipe -> (recipe.getType() == IRecipeType.SMELTING) && (recipe instanceof AbstractCookingRecipe) && areEqual(recipe.getRecipeOutput(), stack, true))
                 .findFirst()
@@ -130,7 +130,7 @@ public final class ItemStackUtils {
      * @return Smelting result based on given ItemStack.
      */
     public static ItemStack getSmeltingResultAsNewStack(ItemStack stackToSmelt, IWorld world) {
-        IRecipe<?> recipe = WorldUtils.asWorld(world).getRecipeManager().getRecipes()
+        IRecipe<?> recipe = WorldUtils.getRecipes(world)
                 .stream()
                 .filter(checkingRecipe -> (checkingRecipe.getType() == IRecipeType.SMELTING) && checkingRecipe.getIngredients().get(0).test(stackToSmelt))
                 .findFirst()

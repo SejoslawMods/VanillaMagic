@@ -52,7 +52,7 @@ public final class EntityUtils {
         WorldUtils.forServer(entity.getEntityWorld(), serverWorld -> {
             if (entity instanceof ServerPlayerEntity) {
                 entity.fallDistance = 0;
-                ((ServerPlayerEntity) entity).teleport(serverWorld.getWorld().getServer().getWorld(key), newPos.getX(), newPos.getY(), newPos.getZ(), ((ServerPlayerEntity) entity).cameraYaw, entity.rotationPitch);
+                ((ServerPlayerEntity) entity).teleport(WorldUtils.getServerWorld(serverWorld, key), newPos.getX(), newPos.getY(), newPos.getZ(), ((ServerPlayerEntity) entity).cameraYaw, entity.rotationPitch);
             }
         });
     }

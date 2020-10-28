@@ -49,7 +49,7 @@ public final class NbtUtils {
     public static CompoundNBT toNbt(IWorld world, BlockPos pos) {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putLong(NBT_POSITION, pos.toLong());
-        nbt.putString(NBT_DIMENSION, WorldUtils.getId(world).toString());
+        nbt.putString(NBT_DIMENSION, WorldUtils.getIdName(world).toString());
         return  nbt;
     }
 

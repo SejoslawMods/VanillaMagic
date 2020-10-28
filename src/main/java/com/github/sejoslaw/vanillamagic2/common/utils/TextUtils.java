@@ -91,7 +91,7 @@ public final class TextUtils {
      * @return String formatted information about the specified position.
      */
     public static String getPosition(IWorld world, BlockPos pos) {
-        return WorldUtils.getId(world).toString() + "[x=" + pos.getX() + ", y=" + pos.getY() + ", z=" + pos.getZ() + "]";
+        return WorldUtils.getIdName(world).toString() + "[x=" + pos.getX() + ", y=" + pos.getY() + ", z=" + pos.getZ() + "]";
     }
 
     /**

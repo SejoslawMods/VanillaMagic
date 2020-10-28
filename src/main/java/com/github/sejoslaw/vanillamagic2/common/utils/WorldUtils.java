@@ -9,12 +9,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +28,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.IServerWorldInfo;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
@@ -210,10 +214,45 @@ public final class WorldUtils {
     }
 
     /**
+     * @return Recipes for specified World.
+     */
+    public static Collection<IRecipe<?>> getRecipes(IWorld world) {
+        return asWorld(world).getRecipeManager().getRecipes();
+    }
+
+    /**
+     * @return True if the Worlds are equal; otherwise false;
+     */
+    public static boolean areWorldsEqual(IWorld world, RegistryKey<World> key2) {
+        return getIdName(world).toString().equals(key2.getLocation().toString());
+    }
+
+    /**
+     * @return Minecraft Server from World.
+     */
+    public static MinecraftServer getServer(IWorld world) {
+        return asWorld(world).getServer();
+    }
+
+    /**
+     * @return Returns Server World from server from specified World based on given key.
+     */
+    public static ServerWorld getServerWorld(IWorld world, RegistryKey<World> key) {
+        return getServer(world).getWorld(key);
+    }
+
+    /**
      * @return Unique identifier connected with the given IWorld.
      */
-    public static ResourceLocation getId(IWorld world) {
-        return asWorld(world).getDimensionKey().getLocation();
+    public static RegistryKey<World> getId(IWorld world) {
+        return asWorld(world).getDimensionKey();
+    }
+
+    /**
+     * @return Unique identifier connected with the given IWorld.
+     */
+    public static ResourceLocation getIdName(IWorld world) {
+        return getId(world).getLocation();
     }
 
     /**

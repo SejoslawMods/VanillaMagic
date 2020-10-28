@@ -23,8 +23,8 @@ public class SpellTeleportToEnd extends Spell {
             return;
         }
 
-        if (player.getEntityWorld().getDimensionKey().getLocation().toString().equals(World.OVERWORLD.getLocation().toString())) {
-            ServerWorld serverWorld = WorldUtils.asWorld(world).getServer().getWorld(World.THE_END);
+        if (WorldUtils.areWorldsEqual(player.getEntityWorld(), World.OVERWORLD)) {
+            ServerWorld serverWorld = WorldUtils.getServerWorld(world, World.THE_END);
             player.changeDimension(serverWorld);
         } else {
             List<EnderDragonEntity> entities = WorldUtils.getEntities(world, EnderDragonEntity.class, player.getPosition(), 256, entity -> true);

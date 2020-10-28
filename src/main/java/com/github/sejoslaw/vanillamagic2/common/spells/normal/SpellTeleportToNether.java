@@ -18,7 +18,7 @@ public class SpellTeleportToNether extends Spell {
             return;
         }
 
-        if (player.getEntityWorld().getDimensionKey().getLocation().toString().equals(World.OVERWORLD.getLocation().toString())) {
+        if (WorldUtils.areWorldsEqual(player.getEntityWorld(), World.OVERWORLD)) {
             EntityUtils.teleport(player, player.getPosition(), World.THE_NETHER);
         } else {
             EntityUtils.teleport(player, player.getPosition(), World.OVERWORLD);

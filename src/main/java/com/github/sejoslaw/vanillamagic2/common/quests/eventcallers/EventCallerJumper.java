@@ -51,7 +51,7 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
                         nbt[0] = nbt[0].getCompound(NbtUtils.NBT_POSITION);
                         BlockPos savedPos = NbtUtils.getPos(nbt[0]);
                         IWorld savedWorld = NbtUtils.getWorld(player.getServer(), nbt[0]);
-                        EntityUtils.teleport(player, savedPos, WorldUtils.asWorld(savedWorld).getDimensionKey());
+                        EntityUtils.teleport(player, savedPos, WorldUtils.getId(savedWorld));
                     }));
     }
 }

@@ -80,7 +80,7 @@ public final class VMFiles {
      */
     public static Path getVMTileEntitiesFilePath(IWorld world) {
         String worldName = WorldUtils.getWorldName(world);
-        String dimensionId = WorldUtils.getId(world).getPath();
+        String dimensionId = WorldUtils.getIdName(world).getPath();
         return Paths.get(getVMWorldDir(worldName).toString(), dimensionId, "VanillaMagicTileEntities.dat");
     }
 
