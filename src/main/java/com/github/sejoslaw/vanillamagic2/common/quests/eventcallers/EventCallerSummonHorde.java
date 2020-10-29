@@ -2,8 +2,8 @@ package com.github.sejoslaw.vanillamagic2.common.quests.eventcallers;
 
 import com.github.sejoslaw.vanillamagic2.common.quests.EventCaller;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.QuestSummonHorde;
+import com.github.sejoslaw.vanillamagic2.common.utils.ClientUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -25,7 +25,7 @@ public class EventCallerSummonHorde extends EventCaller<QuestSummonHorde> {
                         this.executor.forQuestWithCheck(
                                 (quest) -> quest.level == leftHandStack.getCount(),
                                 (quest) -> {
-                                    TextUtils.addChatMessage("vm.message.summonHorde");
+                                    ClientUtils.addChatMessage("vm.message.summonHorde");
                                     leftHandStack.grow(-quest.leftHandStack.getCount());
 
                                     List<EntityType<?>> monsterTypes = EntityUtils.getEntitiesByClassification(EntityClassification.MONSTER);

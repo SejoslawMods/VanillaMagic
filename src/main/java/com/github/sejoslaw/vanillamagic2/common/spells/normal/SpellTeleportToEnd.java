@@ -1,8 +1,8 @@
 package com.github.sejoslaw.vanillamagic2.common.spells.normal;
 
 import com.github.sejoslaw.vanillamagic2.common.spells.Spell;
+import com.github.sejoslaw.vanillamagic2.common.utils.ClientUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.EntityUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +30,7 @@ public class SpellTeleportToEnd extends Spell {
             List<EnderDragonEntity> entities = WorldUtils.getEntities(world, EnderDragonEntity.class, player.getPosition(), 256, entity -> true);
 
             if (entities.size() > 0) {
-                TextUtils.addChatMessage("vm.message.killDragon");
+                ClientUtils.addChatMessage("vm.message.killDragon");
             } else {
                 EntityUtils.teleport(player, player.getPosition(), World.OVERWORLD);
             }

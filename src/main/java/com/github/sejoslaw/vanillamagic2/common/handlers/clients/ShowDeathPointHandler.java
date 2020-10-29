@@ -2,6 +2,7 @@ package com.github.sejoslaw.vanillamagic2.common.handlers.clients;
 
 import com.github.sejoslaw.vanillamagic2.common.files.VMForgeConfig;
 import com.github.sejoslaw.vanillamagic2.common.handlers.EventHandler;
+import com.github.sejoslaw.vanillamagic2.common.utils.ClientUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,7 +23,7 @@ public class ShowDeathPointHandler extends EventHandler {
             }
 
             String positionMessage = " " + TextUtils.getPosition(livingEntity.getEntityWorld(), livingEntity.getPosition());
-            TextUtils.addChatMessage(TextUtils.combine(TextUtils.translate("vm.handler.deathPoint"), positionMessage));
+            ClientUtils.addChatMessage(TextUtils.combine(TextUtils.translate("vm.handler.deathPoint"), positionMessage));
         });
     }
 }

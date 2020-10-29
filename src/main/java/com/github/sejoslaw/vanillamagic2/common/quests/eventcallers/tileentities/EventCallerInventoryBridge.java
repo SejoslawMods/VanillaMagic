@@ -4,8 +4,8 @@ import com.github.sejoslaw.vanillamagic2.common.items.VMItemInventorySelector;
 import com.github.sejoslaw.vanillamagic2.common.quests.eventcallers.items.EventCallerVMItem;
 import com.github.sejoslaw.vanillamagic2.common.quests.types.tileentities.QuestInventoryBridge;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.VMTileInventoryBridge;
+import com.github.sejoslaw.vanillamagic2.common.utils.ClientUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.NbtUtils;
-import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.WorldUtils;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -24,10 +24,10 @@ public class EventCallerInventoryBridge extends EventCallerVMItem<QuestInventory
 
                     if (nbt.getLong(NbtUtils.NBT_POSITION) == 0) {
                         VMItemInventorySelector.setPosition(handStack, pos.toLong(), WorldUtils.getIdName(world).toString());
-                        TextUtils.addChatMessage("tile.inventorySelector.added");
+                        ClientUtils.addChatMessage("tile.inventorySelector.added");
                     } else {
                         WorldUtils.spawnVMTile(player, world, pos.offset(Direction.UP), new VMTileInventoryBridge(), (tile) -> tile.setSource(nbt));
-                        TextUtils.addChatMessage("tile.inventorySelector.placed");
+                        ClientUtils.addChatMessage("tile.inventorySelector.placed");
                     }
                 }));
     }
@@ -37,7 +37,7 @@ public class EventCallerInventoryBridge extends EventCallerVMItem<QuestInventory
         this.executor.onPlayerInteract(event, (player, world, blockPos, direction) ->
                 this.executor.useVMItem(player, this.getVMItem().getUniqueKey(), (handStack) -> {
                     VMItemInventorySelector.clearPosition(handStack);
-                    TextUtils.addChatMessage("tile.inventorySelector.clear");
+                    ClientUtils.addChatMessage("tile.inventorySelector.clear");
                 }));
     }
 }

@@ -27,6 +27,6 @@ public final class PlayerQuestProgressUtils {
                 TextFormatting.GREEN + TextUtils.getFormattedText("vm.message.questCompleted") +
                         TextFormatting.WHITE + " " + quest.getDisplayName();
 
-        TextUtils.addChatMessage(questAcquiredMessage);
+        ClientUtils.addChatMessage(questAcquiredMessage);
     }
 }

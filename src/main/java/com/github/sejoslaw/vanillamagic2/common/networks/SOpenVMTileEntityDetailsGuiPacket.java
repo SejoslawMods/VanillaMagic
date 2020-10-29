@@ -1,7 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.networks;
 
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
-import com.github.sejoslaw.vanillamagic2.common.utils.GuiUtils;
+import com.github.sejoslaw.vanillamagic2.common.utils.ClientUtils;
 import com.github.sejoslaw.vanillamagic2.common.utils.TextUtils;
 import net.minecraft.client.network.play.IClientPlayNetHandler;
 import net.minecraft.entity.player.PlayerEntity;
@@ -91,6 +91,6 @@ public class SOpenVMTileEntityDetailsGuiPacket extends SVMPacket {
     }
 
     private static void process(SOpenVMTileEntityDetailsGuiPacket packet) {
-        GuiUtils.displayGui(GuiUtils.VM_TILE_ENTITY_DETAILS_GUI_CLASS, packet.simpleName, packet.nbt, packet.lines);
+        ClientUtils.displayGui(ClientUtils.VM_TILE_ENTITY_DETAILS_GUI_CLASS, packet.simpleName, packet.nbt, packet.lines);
     }
 }

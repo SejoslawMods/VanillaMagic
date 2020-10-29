@@ -97,9 +97,16 @@ public abstract class VMGui extends Screen {
     protected abstract void renderInnerGui(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks);
 
     /**
-     * Used in GuiUtils to provide controllable way of opening new GUI from server side.
+     * Used in ClientUtils to provide controllable way of opening new GUI from server-side.
      */
     public static void displayGui(Screen screen) {
         Minecraft.getInstance().displayGuiScreen(screen);
+    }
+
+    /**
+     * Used in ClientUtils to provide a controllable way of adding new messages to chat from server-side.
+     */
+    public static void addChatMessage(ITextComponent component) {
+        Minecraft.getInstance().ingameGUI.getChatGUI().printChatMessage(component);
     }
 }
