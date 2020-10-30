@@ -25,7 +25,7 @@ public class EntityMeteor extends FireballEntity {
 
     public void setupMeteor(double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ, double accelX, double accelY, double accelZ) {
         this.setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
-        this.setMotion(accelX, accelY / 2, accelZ);
+        this.setMotion(accelX, accelY / 2.45D, accelZ);
         EntityUtils.setupAcceleration(this, accelX, accelY, accelZ);
     }
 
@@ -36,12 +36,12 @@ public class EntityMeteor extends FireballEntity {
     protected void onImpact(RayTraceResult result) {
         super.onImpact(result);
 
-        if (WorldUtils.getIsRemote(world)) {
-            return;
+        if (!WorldUtils.getIsRemote(world)) {
+            VMExplosion explosion = new VMExplosion(this.world, this.func_234616_v_(), this.getPosition(), VMForgeConfig.METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
+            explosion.doExplosion();
         }
 
-        VMExplosion explosion = new VMExplosion(this.world, this.func_234616_v_(), this.getPosition(), VMForgeConfig.METEOR_EXPLOSION_POWER.get(), true, Explosion.Mode.DESTROY);
-        explosion.doExplosion();
+        this.remove();
     }
 
     public static EntityMeteor create(IWorld world, double spawnMeteorX, double spawnMeteorZ, Entity shooter) {
