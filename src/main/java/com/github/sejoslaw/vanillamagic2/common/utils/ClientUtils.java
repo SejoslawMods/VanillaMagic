@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.utils;
 
 import com.github.sejoslaw.vanillamagic2.core.VMEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IWorld;
@@ -21,6 +22,7 @@ public final class ClientUtils {
     public static final String VM_TILE_ENTITY_DETAILS_GUI_CLASS = "com.github.sejoslaw.vanillamagic2.common.guis.VMTileEntityDetailsGui";
     public static final String MINECRAFT_CLASS = "net.minecraft.client.Minecraft";
     public static final String TEXT_COMPONENT_CLASS = "net.minecraft.util.text.ITextComponent";
+    public static final String CLIENT_WORLD_CLASS = "net.minecraft.client.world.ClientWorld";
 
     /**
      * @return Minecraft instance; null on server-side.
@@ -114,6 +116,21 @@ public final class ClientUtils {
             Class<?> vmGuiClass = Class.forName(VM_GUI_CLASS);
             Method addChatMessageMethod = vmGuiClass.getDeclaredMethod("addChatMessage", Class.forName(TEXT_COMPONENT_CLASS));
             addChatMessageMethod.invoke(null, message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Adds specified Entity on a Client World.
+     */
+    public static void addEntity(int entityId, Entity entity) {
+        IWorld world = getClientWorld();
+
+        try {
+            Class<?> clientWorldClass = Class.forName(CLIENT_WORLD_CLASS);
+            Method addEntityMethod = clientWorldClass.getMethod("addEntity", int.class, Entity.class);
+            addEntityMethod.invoke(world, entityId, entity);
         } catch (Exception e) {
             e.printStackTrace();
         }

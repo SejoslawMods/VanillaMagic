@@ -1,9 +1,12 @@
 package com.github.sejoslaw.vanillamagic2.common.registries;
 
+import com.github.sejoslaw.vanillamagic2.common.functions.Action;
 import com.github.sejoslaw.vanillamagic2.common.networks.SOpenVMTileEntityDetailsGuiPacket;
+import com.github.sejoslaw.vanillamagic2.common.networks.SSpawnEntityPacket;
 import com.github.sejoslaw.vanillamagic2.common.networks.SSyncQuestsPacket;
 import com.github.sejoslaw.vanillamagic2.common.tileentities.IVMTileEntity;
 import com.github.sejoslaw.vanillamagic2.core.VanillaMagic;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -28,27 +31,35 @@ public final class VMNetworkRegistry {
 
         CHANNEL.registerMessage(id++, SSyncQuestsPacket.class, SSyncQuestsPacket::encode, SSyncQuestsPacket::decode, SSyncQuestsPacket::consume);
         CHANNEL.registerMessage(id++, SOpenVMTileEntityDetailsGuiPacket.class, SOpenVMTileEntityDetailsGuiPacket::encode, SOpenVMTileEntityDetailsGuiPacket::decode, SOpenVMTileEntityDetailsGuiPacket::consume);
+        CHANNEL.registerMessage(id++, SSpawnEntityPacket.class, SSpawnEntityPacket::encode, SSpawnEntityPacket::decode, SSpawnEntityPacket::consume);
     }
 
     /**
      * Tries to sync Player's Quests with Client.
      */
     public static void syncQuests(PlayerEntity player) {
-        if (!(player instanceof ServerPlayerEntity)) {
-            return;
-        }
-
-        CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SSyncQuestsPacket(player));
+        execute(player, () -> CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SSyncQuestsPacket(player)));
     }
 
     /**
      * Opens VM TileEntity Details GUI for specified Player.
      */
     public static void openVMTileEntityDetailsGui(PlayerEntity player, IVMTileEntity tileEntity) {
+        execute(player, () -> CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SOpenVMTileEntityDetailsGuiPacket(player, tileEntity)));
+    }
+
+    /**
+     * Spawns specified Entity on the client-side.
+     */
+    public static void spawnEntity(PlayerEntity player, Entity entity) {
+        execute(player, () -> CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SSpawnEntityPacket(entity)));
+    }
+
+    private static void execute(PlayerEntity player, Action action) {
         if (!(player instanceof ServerPlayerEntity)) {
             return;
         }
 
-        CHANNEL.send(PacketDistributor.PLAYER.with(() -> ((ServerPlayerEntity) player)), new SOpenVMTileEntityDetailsGuiPacket(player, tileEntity));
+        action.execute();
     }
 }

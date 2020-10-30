@@ -24,5 +24,6 @@ public class SummonMeteorLogic extends EntitySpellLogic {
         EntityMeteor meteor = EntityMeteor.create(world, hitPos.getX(), hitPos.getZ(), shooter);
 
         world.addEntity(meteor);
+        VMNetworkRegistry.spawnEntity((PlayerEntity) shooter, meteor);
     }
 }

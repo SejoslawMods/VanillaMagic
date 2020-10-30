@@ -11,7 +11,6 @@ import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -26,7 +25,7 @@ public class EntityMeteor extends FireballEntity {
 
     public void setupMeteor(double spawnMeteorX, double spawnMeteorY, double spawnMeteorZ, double accelX, double accelY, double accelZ) {
         this.setLocationAndAngles(spawnMeteorX, spawnMeteorY, spawnMeteorZ, this.rotationYaw, this.rotationPitch);
-        this.setMotion(Vector3d.ZERO);
+        this.setMotion(accelX, accelY / 2, accelZ);
         EntityUtils.setupAcceleration(this, accelX, accelY, accelZ);
     }
 
