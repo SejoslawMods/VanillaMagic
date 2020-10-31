@@ -77,6 +77,7 @@ public abstract class VMGui extends Screen {
         matrixStack.pop();
 
         matrixStack.push();
+        this.move(matrixStack, 0, 0, 210.0F);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         matrixStack.pop();
     }
