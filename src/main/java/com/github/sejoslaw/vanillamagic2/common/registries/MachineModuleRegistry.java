@@ -10,13 +10,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
  */
 public final class MachineModuleRegistry {
-    public static final List<IMachineModule> DEFAULT_MODULES = new ArrayList<>();
-    public static final Map<String, List<IMachineModule>> MODULES = new HashMap<>();
+    private static final List<IMachineModule> DEFAULT_MODULES = new ArrayList<>();
+    private static final Map<String, List<IMachineModule>> MODULES = new HashMap<>();
 
     public static final String QUARRY_KEY = "quarry";
     public static final String FARM_KEY = "farm";
@@ -25,9 +27,9 @@ public final class MachineModuleRegistry {
     public static final String PLAYER_INVENTORY_ABSORBER_KEY = "playerInventoryAbsorber";
 
     public static void initialize() {
-        DEFAULT_MODULES.add(new SmeltableTicksEnergyModule());
-        DEFAULT_MODULES.add(new ForgeEnergyModule());
-        DEFAULT_MODULES.add(new ForgeCapabilityEnergyModule());
+        registerDefaultModule(new SmeltableTicksEnergyModule());
+        registerDefaultModule(new ForgeEnergyModule());
+        registerDefaultModule(new ForgeCapabilityEnergyModule());
 
         // Quarry
         registerModule(QUARRY_KEY, new QuarryLogicModule());
@@ -54,11 +56,49 @@ public final class MachineModuleRegistry {
         registerModule(PLAYER_INVENTORY_ABSORBER_KEY, new PlayerInventoryAbsorberLogicModule());
     }
 
-    private static void registerModule(String key, IMachineModule module) {
+    /**
+     * Registers new Default Module.
+     */
+    public static void registerDefaultModule(IMachineModule module) {
+        DEFAULT_MODULES.add(module);
+    }
+
+    /**
+     * Registers new Module for specified Machine.
+     */
+    public static void registerModule(String key, IMachineModule module) {
         if (!MODULES.containsKey(key)) {
             MODULES.put(key, new ArrayList<>());
         }
 
         MODULES.get(key).add(module);
+    }
+
+    /**
+     * @return Stream for default Modules.
+     */
+    public static Stream<IMachineModule> getDefaultModulesStream() {
+        return DEFAULT_MODULES.stream();
+    }
+
+    /**
+     * @return Stream for Modules for specified Machine.
+     */
+    public static Stream<IMachineModule> getModulesStream(String key) {
+        return MODULES.get(key).stream();
+    }
+
+    /**
+     * Executes action for each of the default Modules.
+     */
+    public static void forEachDefaultModule(Consumer<IMachineModule> consumer) {
+        getDefaultModulesStream().forEach(consumer);
+    }
+
+    /**
+     * Exexcutes action for each of the Modules for selected Machine.
+     */
+    public static void forEachModules(String key, Consumer<IMachineModule> consumer) {
+        getModulesStream(key).forEach(consumer);
     }
 }
