@@ -268,7 +268,12 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
                           String vmItemUniqueKey,
                           Consumer<ItemStack> consumer) {
         this.withHands(player, (leftHandStack, rightHandStack) -> {
-            CompoundNBT nbt = rightHandStack.getOrCreateTag();
+            CompoundNBT nbt = rightHandStack.getTag();
+
+            if (nbt == null) {
+                return;
+            }
+
             String key = NbtUtils.NBT_VM_ITEM_UNIQUE_NAME;
 
             if (nbt.contains(key) && nbt.getString(key).equals(vmItemUniqueKey)) {
@@ -276,9 +281,9 @@ public final class EventExecutor<TQuest extends Quest> extends EventHandler {
                 return;
             }
 
-            nbt = leftHandStack.getOrCreateTag();
+            nbt = leftHandStack.getTag();
 
-            if (nbt.contains(key) && nbt.getString(key).equals(vmItemUniqueKey)) {
+            if (nbt != null && nbt.contains(key) && nbt.getString(key).equals(vmItemUniqueKey)) {
                 consumer.accept(leftHandStack);
             }
         });

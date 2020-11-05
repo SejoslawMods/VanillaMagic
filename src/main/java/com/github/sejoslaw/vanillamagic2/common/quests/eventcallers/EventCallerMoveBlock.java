@@ -48,8 +48,8 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
     }
 
     private boolean canLoad(ItemStack leftHandStack) {
-        CompoundNBT nbt = leftHandStack.getOrCreateTag();
-        return nbt.contains(NbtUtils.NBT_BLOCK) && nbt.getCompound(NbtUtils.NBT_BLOCK).contains(NbtUtils.NBT_BLOCK_STATE);
+        CompoundNBT nbt = leftHandStack.getTag();
+        return nbt != null && nbt.contains(NbtUtils.NBT_BLOCK) && nbt.getCompound(NbtUtils.NBT_BLOCK).contains(NbtUtils.NBT_BLOCK_STATE);
     }
 
     private void execute(PlayerEntity player, ItemStack bookStack, Consumer<ItemStack> consumer) {
@@ -58,7 +58,13 @@ public class EventCallerMoveBlock extends EventCaller<QuestMoveBlock> {
     }
 
     private void load(IWorld world, BlockPos pos, Direction direction, ItemStack leftHandStack) {
-        CompoundNBT nbt = leftHandStack.getOrCreateTag().getCompound(NbtUtils.NBT_BLOCK);
+        CompoundNBT stackNbt = leftHandStack.getTag();
+
+        if (stackNbt == null) {
+            return;
+        }
+
+        CompoundNBT nbt = stackNbt.getCompound(NbtUtils.NBT_BLOCK);
         BlockPos spawnPos = pos.offset(direction);
 
         if (!world.isAirBlock(spawnPos)) {

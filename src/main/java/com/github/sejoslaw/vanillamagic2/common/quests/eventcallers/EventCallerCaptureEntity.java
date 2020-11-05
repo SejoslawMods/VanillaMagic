@@ -51,12 +51,15 @@ public class EventCallerCaptureEntity extends EventCaller<QuestCaptureEntity> {
     @SubscribeEvent
     public void onEntityRelease(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event,
-                (player, world, pos, direction) -> player.getHeldItemOffhand().getOrCreateTag().contains(NbtUtils.NBT_CAPTURED) ? this.quests.get(0) : null,
+                (player, world, pos, direction) -> {
+                    CompoundNBT nbt = player.getHeldItemOffhand().getTag();
+                    return nbt != null && nbt.contains(NbtUtils.NBT_CAPTURED) ? this.quests.get(0) : null;
+                },
                 (player, world, pos, direction, quest) ->
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                        CompoundNBT stackNbt = leftHandStack.getOrCreateTag();
+                        CompoundNBT stackNbt = leftHandStack.getTag();
 
-                        if (!stackNbt.contains(NbtUtils.NBT_CAPTURED) || WorldUtils.getIsRemote(world)) {
+                        if (stackNbt == null || !stackNbt.contains(NbtUtils.NBT_CAPTURED) || WorldUtils.getIsRemote(world)) {
                             return;
                         }
 

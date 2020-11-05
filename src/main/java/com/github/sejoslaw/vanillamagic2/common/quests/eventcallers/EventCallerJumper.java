@@ -43,8 +43,8 @@ public class EventCallerJumper extends EventCaller<QuestJumper> {
 
         this.executor.onPlayerInteract(event,
                 (player, world, pos, direction) -> {
-                    nbt[0] = player.getHeldItemOffhand().getOrCreateTag();
-                    return !WorldUtils.getIsRemote(world) && nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
+                    nbt[0] = player.getHeldItemOffhand().getTag();
+                    return nbt[0] != null && !WorldUtils.getIsRemote(world) && nbt[0].contains(NbtUtils.NBT_POSITION) ? this.quests.get(0) : null;
                 },
                 (player, world, pos, direction, quest) ->
                     this.executor.withHands(player, (leftHandStack, rightHandStack) -> {

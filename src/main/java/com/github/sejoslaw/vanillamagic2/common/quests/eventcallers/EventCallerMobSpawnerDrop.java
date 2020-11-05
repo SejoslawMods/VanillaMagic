@@ -51,10 +51,10 @@ public class EventCallerMobSpawnerDrop extends EventCaller<QuestMobSpawnerDrop> 
     public void onRightClickWithBook(PlayerInteractEvent.RightClickBlock event) {
         this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
                 this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                    CompoundNBT stackNbt = rightHandStack.getOrCreateTag();
+                    CompoundNBT stackNbt = rightHandStack.getTag();
                     TileEntity tile = world.getTileEntity(pos);
 
-                    if (!stackNbt.contains(NbtUtils.NBT_SPAWNER_ENTITY) || !(tile instanceof MobSpawnerTileEntity)) {
+                    if (stackNbt == null || !stackNbt.contains(NbtUtils.NBT_SPAWNER_ENTITY) || !(tile instanceof MobSpawnerTileEntity)) {
                         return;
                     }
 

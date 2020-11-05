@@ -9,6 +9,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -45,32 +46,37 @@ public class EventCallerCrystallizedLiquid extends EventCallerCraftable<QuestCry
 
     @SubscribeEvent
     public void spawnLiquid(PlayerInteractEvent.RightClickBlock event) {
-        this.executor.onPlayerInteract(event, (player, world, pos, direction) -> {
-            this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
-                String fluidKey = rightHandStack.getOrCreateTag().getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME);
+        this.executor.onPlayerInteract(event, (player, world, pos, direction) ->
+                this.executor.withHands(player, (leftHandStack, rightHandStack) -> {
+                    CompoundNBT nbt = rightHandStack.getTag();
 
-                this.executor.useVMItem(player, fluidKey, handStack -> {
-                    TileEntity tile = world.getTileEntity(pos);
-                    Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidKey));
-
-                    if (tile instanceof IFluidHandler) {
-                        ((IFluidHandler) tile).fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
-                    } else if (tile instanceof IFluidTank) {
-                        ((IFluidTank) tile).fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
-                    } else if (fluid == Fluids.WATER && world.getBlockState(pos).getBlock() == Blocks.CAULDRON) {
-                        world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 3), 1 | 2);
-                    } else if (tile != null) {
-                        IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction).orElse(null);
-
-                        if (fluidHandler != null) {
-                            fluidHandler.fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
-                        }
-                    } else {
-                        world.setBlockState(pos.offset(direction), fluid.getDefaultState().getBlockState(), 1 | 2);
+                    if (nbt == null) {
+                        return;
                     }
-                });
-            });
-        });
+
+                    String fluidKey = nbt.getString(NbtUtils.NBT_VM_ITEM_UNIQUE_NAME);
+
+                    this.executor.useVMItem(player, fluidKey, handStack -> {
+                        TileEntity tile = world.getTileEntity(pos);
+                        Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidKey));
+
+                        if (tile instanceof IFluidHandler) {
+                            ((IFluidHandler) tile).fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
+                        } else if (tile instanceof IFluidTank) {
+                            ((IFluidTank) tile).fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
+                        } else if (fluid == Fluids.WATER && world.getBlockState(pos).getBlock() == Blocks.CAULDRON) {
+                            world.setBlockState(pos, Blocks.CAULDRON.getDefaultState().with(CauldronBlock.LEVEL, 3), 1 | 2);
+                        } else if (tile != null) {
+                            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction).orElse(null);
+
+                            if (fluidHandler != null) {
+                                fluidHandler.fill(this.getFluidStackToFill(fluid), IFluidHandler.FluidAction.EXECUTE);
+                            }
+                        } else {
+                            world.setBlockState(pos.offset(direction), fluid.getDefaultState().getBlockState(), 1 | 2);
+                        }
+                    });
+        }));
     }
 
     private FluidStack getFluidStackToFill(Fluid fluid) {
