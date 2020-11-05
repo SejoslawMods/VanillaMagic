@@ -1,6 +1,7 @@
 package com.github.sejoslaw.vanillamagic2.common.itemupgrades;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 
 /**
  * @author Sejoslaw - https://github.com/Sejoslaw
@@ -25,7 +26,8 @@ public abstract class ItemUpgrade {
      * @return True if the specified ItemStack contains this items tag.
      */
     public boolean containsTag(ItemStack stack) {
-        return stack.getOrCreateTag().contains(this.getUniqueTag());
+        CompoundNBT tag = stack.getTag();
+        return tag != null && tag.contains(this.getUniqueTag());
     }
 
     public boolean isValidIngredient(ItemStack stack) {

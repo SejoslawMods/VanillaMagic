@@ -24,8 +24,8 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
     public boolean setModuleKey(String key) {
         this.moduleKey = key;
 
-         return MachineModuleRegistry.DEFAULT_MODULES.stream().allMatch(module -> module.setup(this)) &&
-                MachineModuleRegistry.MODULES.get(this.moduleKey).stream().allMatch(machine -> machine.setup(this));
+         return MachineModuleRegistry.getDefaultModulesStream().allMatch(module -> module.setup(this)) &&
+                MachineModuleRegistry.getModulesStream(this.moduleKey).allMatch(machine -> machine.setup(this));
     }
 
     public CompoundNBT write(CompoundNBT nbt) {
@@ -40,14 +40,14 @@ public class VMTileMachine extends VMTileEntity implements IVMTileMachine {
     }
 
     public void tickTileEntity() {
-        if (MachineModuleRegistry.DEFAULT_MODULES.stream().allMatch(module -> module.canExecute(this))) {
-            MachineModuleRegistry.DEFAULT_MODULES.forEach(module -> module.execute(this));
+        if (MachineModuleRegistry.getDefaultModulesStream().allMatch(module -> module.canExecute(this))) {
+            MachineModuleRegistry.forEachDefaultModule(module -> module.execute(this));
         } else {
             return;
         }
 
-        if (MachineModuleRegistry.MODULES.get(this.moduleKey).stream().allMatch(machine -> machine.canExecute(this))) {
-            MachineModuleRegistry.MODULES.get(this.moduleKey).forEach(machine -> machine.execute(this));
+        if (MachineModuleRegistry.getModulesStream(this.moduleKey).allMatch(machine -> machine.canExecute(this))) {
+            MachineModuleRegistry.forEachModules(this.moduleKey, machine -> machine.execute(this));
         }
     }
 

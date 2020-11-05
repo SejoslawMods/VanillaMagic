@@ -7,11 +7,7 @@ import com.github.sejoslaw.vanillamagic2.common.tileentities.machines.IVMTileMac
  */
 public abstract class AbstractEnergyModule extends AbstractMachineModule {
     public boolean canExecute(IVMTileMachine machine) {
-        if(this.getHasEnergy(machine)) {
-            return true;
-        }
-
-        return this.canExecuteNoEnergy(machine);
+        return this.getHasEnergy(machine) || this.canExecuteNoEnergy(machine);
     }
 
     public void execute(IVMTileMachine machine) {

@@ -6,6 +6,7 @@ import com.github.sejoslaw.vanillamagic2.common.itemupgrades.ItemUpgradeProcesso
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.eventcallers.*;
 import com.github.sejoslaw.vanillamagic2.common.itemupgrades.types.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -61,7 +62,10 @@ public final class ItemUpgradeRegistry {
     public static List<ItemUpgrade> getInstalledUpgrades(ItemStack stack) {
         return UPGRADES
                 .stream()
-                .filter(proc -> stack.getOrCreateTag().keySet().contains(proc.getItemUpgradeEventCaller().itemUpgrade.getUniqueTag()))
+                .filter(proc -> {
+                    CompoundNBT nbt = stack.getTag();
+                    return nbt != null && nbt.keySet().contains(proc.getItemUpgradeEventCaller().itemUpgrade.getUniqueTag());
+                })
                 .map(proc -> proc.getItemUpgradeEventCaller().itemUpgrade)
                 .collect(Collectors.toList());
     }
