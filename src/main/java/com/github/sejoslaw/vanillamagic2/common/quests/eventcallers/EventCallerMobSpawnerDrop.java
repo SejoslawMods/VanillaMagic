@@ -34,7 +34,7 @@ public class EventCallerMobSpawnerDrop extends EventCaller<QuestMobSpawnerDrop> 
 
                     AbstractSpawner spawner = ((MobSpawnerTileEntity) world.getTileEntity(pos)).getSpawnerBaseLogic();
                     CompoundNBT spawnerNbt = spawner.write(new CompoundNBT());
-                    String entityId = spawnerNbt.getList("SpawnPotentials", StringNBT.valueOf("").getId()).getCompound(0).getString("id");
+                    String entityId = spawnerNbt.getCompound("SpawnData").getString("id");
                     ResourceLocation entityName = new ResourceLocation(entityId);
                     EntityType<?> entityType = ForgeRegistries.ENTITIES.getValue(entityName);
 
